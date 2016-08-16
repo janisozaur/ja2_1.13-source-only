@@ -6061,7 +6061,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	gGameOptions.fGunNut = GetCurrentGunButtonSetting();
 	gGameOptions.ubGameStyle = GetCurrentGameStyleButtonSetting();
 
-	gGameOptions.ubDifficultyLevel = min( MaxDifficultySettingsValues, ( max( 1, (iCurrentDifficulty + 1)) ));
+	gGameOptions.ubDifficultyLevel = std::min( MaxDifficultySettingsValues, ( std::max( 1, (iCurrentDifficulty + 1)) ));
 
 	gGameOptions.fTurnTimeLimit = FALSE;
 
@@ -6107,10 +6107,10 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 
 
 	// SANDRO - added following:
-	gGameOptions.ubMaxIMPCharacters = min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( max( 1, iCurrentIMPNumberSetting) ));
+	gGameOptions.ubMaxIMPCharacters = std::min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( std::max( 1, int(iCurrentIMPNumberSetting)) ));
 	gGameOptions.fNewTraitSystem = GetCurrentTraitsOptionButtonSetting();
 	gGameOptions.fEnemiesDropAllItems = GetCurrentDropAllButtonSetting();
-	gGameOptions.ubProgressSpeedOfItemsChoices = min( GIO_PROGRESS_VERY_FAST, iCurrentProgressSetting );
+	gGameOptions.ubProgressSpeedOfItemsChoices = std::min( INT8(GIO_PROGRESS_VERY_FAST), iCurrentProgressSetting );
 	gGameOptions.fInventoryCostsAP = GetCurrentInventoryAPButtonSetting();
 
 	gGameOptions.fUseNCTH = GetCurrentNCTHButtonSetting();
