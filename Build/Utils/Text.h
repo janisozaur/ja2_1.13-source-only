@@ -2414,9 +2414,9 @@ enum
 	NUM_PEOPLE_IN_CREDITS,
 };
 
-STR16	gzCreditNames[];
-STR16	gzCreditNameTitle[];
-STR16	gzCreditNameFunny[];
+extern STR16	gzCreditNames[];
+extern STR16	gzCreditNameTitle[];
+extern STR16	gzCreditNameFunny[];
 
 
 extern STR16 GetWeightUnitString( void );

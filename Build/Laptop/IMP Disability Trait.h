@@ -29,6 +29,6 @@ typedef enum
 INT8 iChosenDisabilityTrait();
 INT8 iPlayersAttributePointsBonusForDisabilitySelected();
 
-STR16 gzIMPDisabilityText[];
+extern STR16 gzIMPDisabilityText[];
 
 #endif

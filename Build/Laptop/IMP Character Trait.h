@@ -45,7 +45,7 @@ typedef enum
 
 INT8 iChosenCharacterTrait();
 
-STR16 gzIMPCharacterTraitText[];
-STR16 gzIMPAttitudesText[];
+extern STR16 gzIMPCharacterTraitText[];
+extern STR16 gzIMPAttitudesText[];
 
 #endif
