@@ -1,7 +1,7 @@
 #ifndef __MAP_INTERFACE_BOTTOM
 #define __MAP_INTERFACE_BOTTOM
 
-#include "types.h"
+#include "Types.h"
 #include "Soldier Control.h"
 
 

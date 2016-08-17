@@ -5,16 +5,16 @@
 	#include "ArmsDealerInvInit.h"
 	//#include "Item Types.h"
 	#include "Arms Dealer Init.h"
-	#include "DEbug.h"
-	#include "weapons.h"
+	#include "Debug.h"
+	#include "Weapons.h"
 	#include "Campaign.h"
 	#include "GameSettings.h"
 	#include "AIInternals.h"
 	#include "LaptopSave.h"
-	#include "bobbyr.h"
+	#include "BobbyR.h"
 	#include "Random.h"
-	#include "Shopkeeper Interface.h"
-	#include "connect.h"
+	#include "ShopKeeper Interface.h"
+	#include "Connect.h"
 #endif
 
 
@@ -705,12 +705,12 @@ INT8 GetDealersMaxItemAmount( UINT8 ubDealerID, UINT16 usItemIndex )
 {
 	switch( ubDealerID )
 	{
-	
+
 #ifdef JA2UB
 		case ARMS_DEALER_BETTY:
 			return( GetMaxItemAmount( gBettyInventory, usItemIndex ) );
 			break;
-#endif			
+#endif
   // Ja25: Not in exp.
 		case ARMS_DEALER_TONY:
 			return( GetMaxItemAmount( gTonyInventory, usItemIndex ) );
@@ -731,7 +731,7 @@ INT8 GetDealersMaxItemAmount( UINT8 ubDealerID, UINT16 usItemIndex )
 		case ARMS_DEALER_RAUL:
 			return( GetMaxItemAmount( gRaulInventory, usItemIndex ) ); //
 			break;
-#else			
+#else
 		case ARMS_DEALER_PERKO:
 			return( GetMaxItemAmount( gPerkoInventory, usItemIndex ) );
 			break;
@@ -915,7 +915,7 @@ DEALER_POSSIBLE_INV *GetPointerToDealersPossibleInventory( UINT8 ubArmsDealerID 
 		case ARMS_DEALER_DEVIN:
 			return( gDevinInventory );
 			break;
-#endif			
+#endif
 		case ARMS_DEALER_ELGIN:
 			return( gElginInventory );
 			break;

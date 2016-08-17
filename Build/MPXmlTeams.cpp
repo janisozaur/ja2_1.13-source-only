@@ -3,7 +3,7 @@
 #include "FileMan.h"
 #include "expat.h"
 #include "XML.h"
-#include "random.h"
+#include "Random.h"
 #include <cstdio>
 
 MultiplayerTeams mpTeams = MultiplayerTeams();
@@ -81,7 +81,7 @@ BOOLEAN MultiplayerTeams::ReadInMPTeams(STR fileName)
 
 BOOLEAN MultiplayerTeams::ReadXMLFile(STR fileName)
 {
-	
+
 	HWFILE hFile;
 	UINT32 uiBytesRead;
 	UINT32 uiFSize;
@@ -231,7 +231,7 @@ void XMLCALL MultiplayerTeams::teamsEndElementHandler(void *userData, const XML_
 
 		pData->maxReadDepth--;
 	}
-	
+
 	pData->currentDepth--;
 
 	return;

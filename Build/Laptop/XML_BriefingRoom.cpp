@@ -9,11 +9,11 @@
 	#include "XML.h"
 	#include "Interface.h"
 	#include "LuaInitNPCs.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "InterfaceItemImages.h"
 	#include "Soldier Profile.h"
-	#include "aim.h"
-	#include "mercs.h"
+	#include "Aim.h"
+	#include "Mercs.h"
 	#include "Encrypted File.h"
 	#include "GameSettings.h"
 #endif
@@ -28,8 +28,8 @@ typedef enum
 	ENCYCLOPEDIA_ELEMENT_PROPERTY,
 	ENCYCLOPEDIA_ELEMENT_SUBLIST,
 	ENCYCLOPEDIA_ELEMENT_SUBLIST_PROPERTY,
-	
-	
+
+
 } ENCYCLOPEDIA_PARSE_STAGE;
 
 typedef struct
@@ -79,7 +79,7 @@ BOOLEAN LoadEncyclopediaMercBio( UINT8 ubIndex, STR16 pInfoString, STR16 pAddInf
 	hFile = FileOpen(AIMBIOSFILENAME, FILE_ACCESS_READ, FALSE);
 	else if ( Type == 2 )
 	hFile = FileOpen(MERCBIOSFILENAME, FILE_ACCESS_READ, FALSE);
-	
+
 	if ( !hFile )
 	{
 		return( FALSE );
@@ -98,7 +98,7 @@ BOOLEAN LoadEncyclopediaMercBio( UINT8 ubIndex, STR16 pInfoString, STR16 pAddInf
 	{
 		return( FALSE );
 	}
-	
+
 	DecodeString(pInfoString, SIZE_MERC_BIO_INFO);
 
 	// Get the additional info
@@ -124,7 +124,7 @@ BOOLEAN LoadGraphicForItem( BRIEFINGROOM_M_DATA *pEncy, UINT32 i )
 	CHAR8	 zName[ 100 ];
 //	UINT32	uiVo;
 	UINT16		ubGraphic, ubGraphicType;
-	CHAR8	zString[512]; 
+	CHAR8	zString[512];
 //	CHAR8	zString2[512];
 
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("LoadTileGraphicForItem"));
@@ -163,8 +163,8 @@ BOOLEAN LoadGraphicForItem( BRIEFINGROOM_M_DATA *pEncy, UINT32 i )
 
 	//Load item
 	sprintf( zString, "BIGITEMS\\%s%s", zName, ext );
-	
-	
+
+
 
 
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("LoadTileGraphicForItem: done"));
@@ -229,10 +229,10 @@ static void XMLCALL
 encyclopediaLocationEndElementHandle(void *userData, const XML_Char *name)
 {
 	encyclopediaLocationParseData * pData = (encyclopediaLocationParseData *)userData;
-	
+
 //	char temp;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "BRIEFINGROOM") == 0)
 		{
@@ -240,43 +240,43 @@ encyclopediaLocationEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "DATA") == 0)
 		{
-			pData->curElement = ENCYCLOPEDIA_ELEMENT_LIST;	
-			
+			pData->curElement = ENCYCLOPEDIA_ELEMENT_LIST;
+
 			if (!EncyclopediaLocation_TextOnly)
 				{
-					wcscpy(pEncy[pData->curEncyclopediaData.uiIndex].Name, pData->curEncyclopediaData.Name);	
-					
+					wcscpy(pEncy[pData->curEncyclopediaData.uiIndex].Name, pData->curEncyclopediaData.Name);
+
 					pEncy[pData->curEncyclopediaData.uiIndex].uiIndex = pData->curEncyclopediaData.uiIndex;
 					pEncy[pData->curEncyclopediaData.uiIndex].MaxPages = pData->curEncyclopediaData.MaxPages;
 					pEncy[pData->curEncyclopediaData.uiIndex].MaxImages = pData->curEncyclopediaData.MaxImages;
-					
-					//if ( pData->curEncyclopediaData.MaxImages > MAX_IMAGES ) 
+
+					//if ( pData->curEncyclopediaData.MaxImages > MAX_IMAGES )
 						//pEncy[pData->curEncyclopediaData.uiIndex].MaxImages = 0;
 
-					//if ( pData->curEncyclopediaData.MaxPages > MAX_PAGES ) 
-						//pEncy[pData->curEncyclopediaData.uiIndex].MaxPages = 0;						
-					
+					//if ( pData->curEncyclopediaData.MaxPages > MAX_PAGES )
+						//pEncy[pData->curEncyclopediaData.uiIndex].MaxPages = 0;
+
 					if (pData->curEncyclopediaData.Hidden == FALSE )
 					   pEncy[pData->curEncyclopediaData.uiIndex].Hidden = TRUE;
 					else
 					   pEncy[pData->curEncyclopediaData.uiIndex].Hidden = FALSE;
-					   
-				
+
+
 					if ( FileType == 4 ) //briefing room
 						pEncy[pData->curEncyclopediaData.uiIndex].NextMission = pData->curEncyclopediaData.NextMission;
 					else
 						pEncy[pData->curEncyclopediaData.uiIndex].NextMission = -1;
-					
+
 					pEncy[pData->curEncyclopediaData.uiIndex].MissionID = pData->curEncyclopediaData.uiIndex;
-					
+
 					pEncy[pData->curEncyclopediaData.uiIndex].sImagePositionX[0] = pData->curEncyclopediaData.sImagePositionX[0];
 					pEncy[pData->curEncyclopediaData.uiIndex].sImagePositionY[0] = pData->curEncyclopediaData.sImagePositionY[0];
-					
+
 				}
 				else
 				{
-					wcscpy(pEncy[pData->curEncyclopediaData.uiIndex].Name, pData->curEncyclopediaData.Name);	
-				}		
+					wcscpy(pEncy[pData->curEncyclopediaData.uiIndex].Name, pData->curEncyclopediaData.Name);
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -326,9 +326,9 @@ encyclopediaLocationEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ENCYCLOPEDIA_ELEMENT;
 			pData->curEncyclopediaData.NextMission	= (INT32) atol(pData->szCharData);
-		}		
-		
-		
+		}
+
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -347,7 +347,7 @@ BOOLEAN ReadInBriefingRoom(STR fileName, BOOLEAN localizedVersion, BRIEFINGROOM_
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading BriefingRoom.xml" );
 
 	EncyclopediaLocation_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -374,7 +374,7 @@ BOOLEAN ReadInBriefingRoom(STR fileName, BOOLEAN localizedVersion, BRIEFINGROOM_
 
 	memset(&pData,0,sizeof(pData));
 	XML_SetUserData(parser, &pData);
-	
+
 	pEncy = Ency;
 	FileType = FileType2;
 

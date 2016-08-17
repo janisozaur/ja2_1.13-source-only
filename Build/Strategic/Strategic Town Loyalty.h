@@ -2,7 +2,7 @@
 #define __STRATEGIC_TOWN_LOYALTY_H
 
 #include "Types.h"
-#include "mapscreen.h"
+#include "MapScreen.h"
 #include "Soldier Control.h"
 
 
@@ -88,7 +88,7 @@ extern TOWN_LOYALTY gTownLoyalty[ MAX_TOWNS ];
 // town names list
 extern INT32 pTownNamesList[];
 // town locations list
-extern INT32 pTownLocationsList[]; 
+extern INT32 pTownLocationsList[];
 // whether town maintains/displays loyalty or not
 extern BOOLEAN gfTownUsesLoyalty[ MAX_TOWNS ];
 
@@ -195,7 +195,7 @@ void SetTheFirstBattleSector( INT16 sSectorValue );
 // gte number of whole towns but exclude this one
 INT32 GetNumberOfWholeTownsUnderControlButExcludeCity( INT8 bCityToExclude );
 
-//Function assumes that mercs have retreated already.	Handles two cases, one for general merc retreat 
+//Function assumes that mercs have retreated already.	Handles two cases, one for general merc retreat
 //which slightly demoralizes the mercs, the other handles abandonment of militia forces which poses
 //as a serious loyalty penalty.
 

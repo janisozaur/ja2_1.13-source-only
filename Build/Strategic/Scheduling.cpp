@@ -2,31 +2,31 @@
 	#include "Strategic All.h"
 #else
 	#include <memory.h>
-	#include "Fileman.h"
-	#include "types.h"
+	#include "FileMan.h"
+	#include "Types.h"
 	#include "Scheduling.h"
 
-	#include "message.h"
-	#include "overhead.h"
+	#include "Message.h"
+	#include "Overhead.h"
 	#include "Game Clock.h"
 	#include "Game Event Hook.h"
-	#include "worlddef.h"
+	#include "WorldDef.h"
 	#include "Soldier Init List.h"
 	#include "Isometric Utils.h"
-	#include "ai.h"
-	#include "debug.h"
+	#include "AI.h"
+	#include "Debug.h"
 	#include "Random.h"
 	#include "Animation Data.h"
 	#include "Map Information.h"
 	#include "Keys.h"
 	#include "Structure Wrap.h"
 	#include "jascreens.h"
-	#include "strategicmap.h"
-	#include "worldman.h"
+	#include "StrategicMap.h"
+	#include "WorldMan.h"
 	#include "Animation Control.h"
 	#include "Soldier Add.h"
 	#include "Soldier Profile.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "Quests.h"
 #endif
 
@@ -655,7 +655,7 @@ BOOLEAN SortSchedule( SCHEDULENODE *pSchedule )
 	return fSorted;
 }
 
-BOOLEAN BumpAnyExistingMerc( INT32 sGridNo ) 
+BOOLEAN BumpAnyExistingMerc( INT32 sGridNo )
 {
 	UINT8						ubID;
 	SOLDIERTYPE *		pSoldier; // NB this is the person already in the location,

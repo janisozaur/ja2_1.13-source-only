@@ -4,18 +4,18 @@
 	#include "Town Militia.h"
 	#include "Militia Control.h"
 	#include "Campaign Types.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "Overhead.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Utilities.h"
-	#include "random.h"
-	#include "text.h"
+	#include "Random.h"
+	#include "Text.h"
 	#include "Map Screen Interface.h"
 	#include "Interface.h"
-	#include "Laptopsave.h"
+	#include "LaptopSave.h"
 	#include "Assignments.h"
-	#include "squads.h"
+	#include "Squads.h"
 	#include "Soldier Create.h"
 	#include "Dialogue Control.h"
 	#include "Queen Command.h"
@@ -26,7 +26,7 @@
 
 #include "GameInitOptionsScreen.h"
 
-#include "connect.h"
+#include "Connect.h"
 #include "Reinforcement.h"
 #include "MilitiaSquads.h"
 
@@ -38,7 +38,7 @@ void GetNumberOfEnemiesInFiveSectors( INT16 sSectorX, INT16 sSectorY, UINT8 *pub
 	UINT8 ubNumAdmins, ubNumTroops, ubNumElites, ubNumTanks, ubNumJeeps;
 	UINT16 pusMoveDir[4][3];	//first column in this matrix is number of sector, except for 4th row
 	UINT8 ubDirNumber, ubIndex;
-	
+
 	GetNumberOfStationaryEnemiesInSector( sSectorX, sSectorY, pubNumAdmins, pubNumTroops, pubNumElites, pubNumTanks, pubNumJeeps );
 
 	GetNumberOfMobileEnemiesInSectorWithoutRoadBlock( sSectorX, sSectorY, ENEMY_TEAM, &ubNumAdmins, &ubNumTroops, &ubNumElites, &ubNumTanks, &ubNumJeeps );
@@ -54,7 +54,7 @@ void GetNumberOfEnemiesInFiveSectors( INT16 sSectorX, INT16 sSectorY, UINT8 *pub
 
 	if ( ( GetTownIdForSector( sSectorX, sSectorY ) == OMERTA )&& ( !zDiffSetting[gGameOptions.ubDifficultyLevel].bAllowReinforcementsOmerta ) ) //Madd: skip Omerta //Lal: but not on insane ;-)
 		return;
-	
+
 	GenerateDirectionInfos( sSectorX, sSectorY, &ubDirNumber, pusMoveDir, FALSE, TRUE );
 
 	for( ubIndex = 0; ubIndex < ubDirNumber; ++ubIndex )
@@ -105,7 +105,7 @@ UINT8 NumEnemiesInFiveSectors( INT16 sMapX, INT16 sMapY )
 	UINT8 ubNumAdmins, ubNumTroops, ubNumElites, ubNumTanks, ubNumJeeps;
 
 	GetNumberOfEnemiesInFiveSectors( sMapX, sMapY, &ubNumAdmins, &ubNumTroops, &ubNumElites, &ubNumTanks, &ubNumJeeps );
-	
+
 	return ubNumAdmins + ubNumTroops + ubNumElites + ubNumTanks + ubNumJeeps;
 }
 
@@ -152,7 +152,7 @@ UINT8 CountAllMilitiaInFiveSectors(INT16 sMapX, INT16 sMapY)
 	UINT8 ubResult = 0;
 	UINT16 pusMoveDir[4][3];
 	UINT8 ubDirNumber, ubIndex;
-	
+
 	ubResult = NumNonPlayerTeamMembersInSector( sMapX, sMapY, MILITIA_TEAM );
 
 	if( !gGameExternalOptions.gfAllowReinforcements )
@@ -162,7 +162,7 @@ UINT8 CountAllMilitiaInFiveSectors(INT16 sMapX, INT16 sMapY)
 
 	for( ubIndex = 0; ubIndex < ubDirNumber; ubIndex++ )
 		ubResult += NumNonPlayerTeamMembersInSector( SECTORX( pusMoveDir[ubIndex][0] ), SECTORY( pusMoveDir[ubIndex][0] ), MILITIA_TEAM );
-	
+
 	return ubResult;
 }
 
@@ -211,7 +211,7 @@ UINT8 DoReinforcementAsPendingNonPlayer( INT16 sMapX, INT16 sMapY, UINT8 usTeam 
 	GROUP *pGroup;
 	//ENEMYGROUP *pEnemyGroup;
 	SECTORINFO *pThisSector, *pSector;
-	
+
 	if( !gGameExternalOptions.gfAllowReinforcements )
 		return 255;
 
@@ -239,7 +239,7 @@ UINT8 DoReinforcementAsPendingNonPlayer( INT16 sMapX, INT16 sMapY, UINT8 usTeam 
 			{
 				gfPendingNonPlayerTeam[ENEMY_TEAM] = TRUE;
 				ResetMortarsOnTeamCount();
-				ResetNumSquadleadersInArmyGroup(); // added by SANDRO	
+				ResetNumSquadleadersInArmyGroup(); // added by SANDRO
 			}
 			else if ( usTeam == MILITIA_TEAM )
 			{
@@ -402,12 +402,12 @@ void AddPossiblePendingMilitiaToBattle()
 		}
 	}
 
-	//	if( !PlayerMercsInSector( (UINT8)gWorldSectorX, (UINT8)gWorldSectorY, 0 ) || !CountAllMilitiaInSector( gWorldSectorX, gWorldSectorY ) 
+	//	if( !PlayerMercsInSector( (UINT8)gWorldSectorX, (UINT8)gWorldSectorY, 0 ) || !CountAllMilitiaInSector( gWorldSectorX, gWorldSectorY )
 	//		|| !NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, ENEMY_TEAM ) ) return;
-	if( (PlayerMercsInSector( (UINT8)gWorldSectorX, (UINT8)gWorldSectorY, 0 ) == 0) 
+	if( (PlayerMercsInSector( (UINT8)gWorldSectorX, (UINT8)gWorldSectorY, 0 ) == 0)
 		|| !(gTacticalStatus.uiFlags & WANT_MILITIA_REINFORCEMENTS)
 		|| (NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, ENEMY_TEAM ) == 0)
-		) 
+		)
 		return;
 
 	//gGameExternalOptions.guiMaxMilitiaSquadSize - CountAllMilitiaInSector( gWorldSectorX, gWorldSectorY );
@@ -510,7 +510,7 @@ void AddPossiblePendingMilitiaToBattle()
 			gfStrategicMilitiaChangesMade = FALSE; // Handled them here
 		}
 	}
-	
+
 	if ( ubSlots )
 	{
 		//After going through the process, we have finished with some free slots and no more enemies to add.

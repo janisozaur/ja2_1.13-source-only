@@ -3,7 +3,7 @@
 #include "Debug.h"
 #include "Items.h"
 #include "GameSettings.h"
-#include "screenids.h"
+#include "ScreenIds.h"
 #include "Action Items.h"	// added by Flugente for the ACTION_ITEM_BLOW_UP value
 #include "Random.h"			// added by Flugente
 
@@ -212,7 +212,7 @@ BOOLEAN MoveItemsToActivePockets( SOLDIERTYPE *pSoldier, std::vector<INT8>& LBES
 			if(pSoldier->inv[i].exists() == false)	// No item in this pocket.  Place the item.
 			{
 				if((i == CPACKPOCKPOS && uiHandPos == BPACKPOCKPOS) || (i == BPACKPOCKPOS && uiHandPos == CPACKPOCKPOS))
-				{	
+				{
 					//DBrot: changed to bitwise comparison
 					UINT32 newPack = LoadBearingEquipment[Item[pObj->usItem].ubClassIndex].lbeCombo;
 					UINT32 chkPack = LoadBearingEquipment[Item[pSoldier->inv[i].usItem].ubClassIndex].lbeCombo;
@@ -680,7 +680,7 @@ int OBJECTTYPE::AddObjectsToStack(OBJECTTYPE& sourceObject, int howMany, SOLDIER
 
 	//this recalcs weight too!
 	SpliceData(sourceObject, numToAdd, sourceObject.objectStack.begin());
-	
+
 	if (numToAdd && UsingNewInventorySystem() == true && pSoldier != NULL) {
 		//CHRISL: For New Inventory system.  Are we handling an LBE item FROM a soldier?
 		if(IsSlotAnLBESlot(slot) == true && allowLBETransfer == true)
@@ -1051,7 +1051,7 @@ ObjectData::ObjectData(const ObjectData& src)
 		this->sRepairThreshold = src.sRepairThreshold;
 		this->bDirtLevel = src.bDirtLevel;
 		this->sObjectFlag = src.sObjectFlag;
-		
+
 		//copy over the union
 		this->gun = src.gun;
 
@@ -1188,7 +1188,7 @@ OLD_OBJECTTYPE_101& OLD_OBJECTTYPE_101::operator=(OBJECTTYPE& src)
 			// Flugente fix: there is a severe problem with Action items. The problem is that in the above switch statement, we use the default stuff for action items.
 			// If the action item is a bomb etc. (bActionValue = 3), we want to set the bomb item. But due to EXTREME RETARDNESS, the ugYucky-struct differs on variable positions.
 			// To be precise (see in ItemTypes.h: union OLD_OBJECTTYPE_101_UNION for reference), its
-			// 
+			//
 			// ...
 			//	INT8		bGunStatus;			// status % of gun
 			//	UINT8		ubGunAmmoType;	// ammo type, as per weapons.h
@@ -1196,7 +1196,7 @@ OLD_OBJECTTYPE_101& OLD_OBJECTTYPE_101::operator=(OBJECTTYPE& src)
 			//	UINT16		usGunAmmoItem;	// the item # for the item table
 			// ...
 			//
-			// in the first struct, that is used for the default stuff, but 
+			// in the first struct, that is used for the default stuff, but
 			//
 			// ...
 			//  INT8		bBombStatus;			// % status
@@ -1205,9 +1205,9 @@ OLD_OBJECTTYPE_101& OLD_OBJECTTYPE_101::operator=(OBJECTTYPE& src)
 			//	union
 			//	{
 			// ...
-			// 
+			//
 			// in the struct that stores the bomb item.
-			// Now, if our action item has a Bombitem > 255, that value is read from UINT16		ubGunShotsLeft in OBJECT_GUN. 
+			// Now, if our action item has a Bombitem > 255, that value is read from UINT16		ubGunShotsLeft in OBJECT_GUN.
 			// In the OBJECTTYPE::data union, OBJECT_GUN and OBJECT_BOMBS_AND_OTHER both have the UINT16 that stores the usBombItem or ubGunShotsLeft at the same position. So until here it is ok...
 			// However, this value now gets written into ugYucky.ubGunShotsLeft - which is an UINT8 instead of UINT16. This means that any item number > 255 is cut down.
 			// This error seems to have always been here (13 years). It just never occured until now.
@@ -1329,7 +1329,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OBJECTTYPE& src)
 		// Flugente fix: there is a severe problem with Action items. The problem is that in the above switch statement, we use the default stuff for action items.
 		// If the action item is a bomb etc. (bActionValue = 3), we want to set the bomb item. But due to EXTREME RETARDNESS, the ugYucky-struct differs on variable positions.
 		// To be precise (see in ItemTypes.h: union OLD_OBJECTTYPE_101_UNION for reference), its
-		// 
+		//
 		// ...
 		//	INT8		bGunStatus;			// status % of gun
 		//	UINT8		ubGunAmmoType;	// ammo type, as per weapons.h
@@ -1337,7 +1337,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OBJECTTYPE& src)
 		//	UINT16		usGunAmmoItem;	// the item # for the item table
 		// ...
 		//
-		// in the first struct, that is used for the default stuff, but 
+		// in the first struct, that is used for the default stuff, but
 		//
 		// ...
 		//  INT8		bBombStatus;			// % status
@@ -1346,9 +1346,9 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OBJECTTYPE& src)
 		//	union
 		//	{
 		// ...
-		// 
+		//
 		// in the struct that stores the bomb item.
-		// Now, if our action item has a Bombitem > 255, that value is read from UINT16		ubGunShotsLeft in OBJECT_GUN. 
+		// Now, if our action item has a Bombitem > 255, that value is read from UINT16		ubGunShotsLeft in OBJECT_GUN.
 		// In the OBJECTTYPE::data union, OBJECT_GUN and OBJECT_BOMBS_AND_OTHER both have the UINT16 that stores the usBombItem or ubGunShotsLeft at the same position. So until here it is ok...
 		// However, this value now gets written into ugYucky.ubGunShotsLeft - which is an UINT8 instead of UINT16. This means that any item number > 255 is cut down.
 		// This error seems to have always been here (13 years). It just never occured until now.
@@ -1461,7 +1461,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 			(*this)[0]->data.gun.bGunAmmoStatus = 0;
 			(*this)[0]->data.gun.ubGunState = 0;
 			//Lastly, convert values from the old format to the new based on the type of object
-						
+
 			switch(Item[this->usItem].usItemClass)
 			{
 			case IC_MONEY:
@@ -1536,7 +1536,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 			// Flugente fix: there is a severe problem with Action items. The problem is that in the above switch statement, we use the default stuff for action items.
 			// If the action item is a bomb etc. (bActionValue = 3), we want to set the bomb item. But due to EXTREME RETARDNESS, the ugYucky-struct differs on variable positions.
 			// To be precise (see in ItemTypes.h: union OLD_OBJECTTYPE_101_UNION for reference), its
-			// 
+			//
 			// ...
 			//	INT8		bGunStatus;			// status % of gun
 			//	UINT8		ubGunAmmoType;	// ammo type, as per weapons.h
@@ -1544,7 +1544,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 			//	UINT16		usGunAmmoItem;	// the item # for the item table
 			// ...
 			//
-			// in the first struct, that is used for the default stuff, but 
+			// in the first struct, that is used for the default stuff, but
 			//
 			// ...
 			//  INT8		bBombStatus;			// % status
@@ -1553,9 +1553,9 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 			//	union
 			//	{
 			// ...
-			// 
+			//
 			// in the struct that stores the bomb item.
-			// Now, if our action item has a Bombitem > 255, that value is read from UINT16		ubGunShotsLeft in OBJECT_GUN. 
+			// Now, if our action item has a Bombitem > 255, that value is read from UINT16		ubGunShotsLeft in OBJECT_GUN.
 			// In the OBJECTTYPE::data union, OBJECT_GUN and OBJECT_BOMBS_AND_OTHER both have the UINT16 that stores the usBombItem or ubGunShotsLeft at the same position. So until here it is ok...
 			// However, this value now gets written into ugYucky.ubGunShotsLeft - which is an UINT8 instead of UINT16. This means that any item number > 255 is cut down.
 			// This error seems to have always been here (13 years). It just never occured until now.

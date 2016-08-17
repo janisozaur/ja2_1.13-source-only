@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "BobbyRMailOrder.h"
 	#include "BobbyR.h"
 	#include "Utilities.h"
@@ -10,27 +10,27 @@
 	#include "Cursors.h"
 	#include "Encrypted File.h"
 	#include "BobbyRGuns.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Game Clock.h"
 	#include "Game Event Hook.h"
 	#include "Random.h"
 	#include "LaptopSave.h"
 	#include "Soldier Profile.h"
-	#include "input.h"
-	#include "line.h"
+	#include "Input.h"
+	#include "Line.h"
 	#include "Text.h"
 	#include "Campaign Types.h"
 	#include "Multi Language Graphic Utils.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
-	#include "isometric utils.h"
-	#include "postalservice.h"
-	#include "english.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
+	#include "Isometric Utils.h"
+	#include "PostalService.h"
+	#include "English.h"
 	#include <list>
 #endif
 
 #include "Strategic Event Handler.h"
-#include "connect.h"
+#include "Connect.h"
 #include "GameSettings.h"
 #include <vfs/Core/vfs.h>
 #include <vfs/Core/File/vfs_file.h>
@@ -377,7 +377,7 @@ vector<PShipmentStruct> gShipmentTable;
 void BobbyRDeliveryCallback(RefToCShipmentManipulator ShipmentManipulator)
 {
 	// ScreenMsg(FONT_MCOLOR_RED, MSG_DEBUG, L"Shipment from Bobby Ray has arrived at %s!", ShipmentManipulator.GetDestination().wstrName.c_str());
-	gusCurShipmentDestinationID = ShipmentManipulator.GetDestination().usID;	
+	gusCurShipmentDestinationID = ShipmentManipulator.GetDestination().usID;
 }
 
 
@@ -589,7 +589,7 @@ BOOLEAN EnterBobbyRMailOrder()
 
 	gfRemoveItemsFromStock = FALSE;
 
-	// silversurfer: This sorts the list of items that we marked for purchase. 
+	// silversurfer: This sorts the list of items that we marked for purchase.
 	// This helps us get rid of the empty line display errors in the mail order screen.
 	SortBobbyRayPurchases();
 
@@ -886,7 +886,7 @@ void BtnBobbyRAcceptOrderCallback(GUI_BUTTON *btn,INT32 reason)
 				//if the selected destination's sector is player controlled
 				if( (gDestinationTable[gbSelectedCity]->ubMapX >= 0 ||
 					 gDestinationTable[gbSelectedCity]->ubMapY >= 0 ||
-					 gDestinationTable[gbSelectedCity]->sGridNo >= 0) &&				
+					 gDestinationTable[gbSelectedCity]->sGridNo >= 0) &&
 					 !StrategicMap[ CALCULATE_STRATEGIC_INDEX(gDestinationTable[gbSelectedCity]->ubMapX, gDestinationTable[gbSelectedCity]->ubMapY) ].fEnemyControlled || is_client)
 				//End Dealtar's Code.
 				{
@@ -897,7 +897,7 @@ void BtnBobbyRAcceptOrderCallback(GUI_BUTTON *btn,INT32 reason)
 				{
 					//else pop up a confirmation box
 					//swprintf( zTemp, BobbyROrderFormText[BOBBYR_CONFIRM_DEST],	*BobbyROrderLocations[gbSelectedCity].psCityLoc );
-					
+
 					// WANNE: Replaced hard coded town names with the externalized ones (from ShippingDestination.xml).
 					swprintf( zTemp, BobbyROrderFormText[BOBBYR_CONFIRM_DEST],	gDestinationTable[gbSelectedCity]->wstrName.c_str() );
 					DoLapTopMessageBox( MSG_BOX_LAPTOP_DEFAULT, zTemp, LAPTOP_SCREEN, MSG_BOX_FLAG_YESNO, ConfirmBobbyRPurchaseMessageBoxCallBack );
@@ -1211,7 +1211,7 @@ void DisplayPurchasedItems( BOOLEAN fCalledFromOrderPage, UINT16 usGridX, UINT16
 
 	//bottom arrow
 	BltVideoObject(FRAME_BUFFER, hArrowHandle, 0, usGridX + BOBBYR_GRID_SCROLL_DOWN_ARROW_X, usGridY + BOBBYR_GRID_SCROLL_DOWN_ARROW_Y, VO_BLT_SRCTRANSPARENCY,NULL);
-	
+
 	//Up Arrow
 	if (gfDrawGridArrowMouseRegions == FALSE)
 	{
@@ -1324,7 +1324,7 @@ void DisplayShippingCosts( BOOLEAN fCalledFromOrderPage, INT32 iSubTotal, UINT16
 		uiPackageWeight = uiPackageWeight > 20 ? uiPackageWeight : 20;
 
 		iShippingCost = (INT32)( ( uiPackageWeight / (FLOAT)10 ) * gShipmentTable[iOrderNum]->pDestinationDeliveryInfo->usDestinationFee + .5 );
-		
+
 	}
 
 
@@ -1606,7 +1606,7 @@ BOOLEAN CreateDestroyBobbyRDropDown( UINT8 ubDropDownAction )
 			/*
 			if( gbSelectedCity == -1 )
 				DrawTextToScreen( BobbyROrderFormText[BOBBYR_SELECT_DEST], BOBBYR_CITY_START_LOCATION_X+BOBBYR_CITY_NAME_OFFSET, BOBBYR_SHIPPING_LOC_AREA_T_Y+3, 0, BOBBYR_DROPDOWN_FONT, BOBBYR_ORDER_DROP_DOWN_SELEC_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED	);
-			else			
+			else
 				DrawTextToScreen( *(BobbyROrderLocations[gbSelectedCity].psCityLoc), BOBBYR_CITY_START_LOCATION_X+BOBBYR_CITY_NAME_OFFSET, BOBBYR_SHIPPING_LOC_AREA_T_Y+3, 0, BOBBYR_DROPDOWN_FONT, BOBBYR_ORDER_DROP_DOWN_SELEC_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED	);
 			*/
 
@@ -2173,7 +2173,7 @@ void SelectGridScrollColumnMovementCallBack(MOUSE_REGION * pRegion, INT32 reason
 			{
 				// silversurfer: No idea what this was supposed to do. We always have only BOBBYR_NUM_DISPLAYED_ITEMS in the list.
 				// Why should we handle scrolling up and down differently?
-/*				if( ( ubPurchaseNumber - gubPurchaseAtTopOfList ) >= BOBBYR_NUM_DISPLAYED_ITEMS )   
+/*				if( ( ubPurchaseNumber - gubPurchaseAtTopOfList ) >= BOBBYR_NUM_DISPLAYED_ITEMS )
 					gubPurchaseAtTopOfList = ubPurchaseNumber - BOBBYR_NUM_DISPLAYED_ITEMS + 1;     */
 				gubPurchaseAtTopOfList = ubPurchaseNumber;
 			}
@@ -2282,7 +2282,7 @@ void DrawOrderGoldRectangle (UINT16 usGridX, UINT16 usGridY)
 	//display the line
 	pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES );
 	SetClippingRegionAndImageWidth( uiDestPitchBYTES, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	
+
 	// draw the shadow line around the rectangle
 	LineDraw(FALSE, usPosX, usPosY, usPosX+usWidth, usPosY, Get16BPPColor( FROMRGB( 65, 49, 6) ), pDestBuf);
 	LineDraw(FALSE, usPosX, usPosY, usPosX, usPosY+usHeight, Get16BPPColor( FROMRGB( 65, 49, 6 ) ), pDestBuf);
@@ -2528,7 +2528,7 @@ void AddJohnsGunShipment()
 
 	// want to add two guns (Automags, AUTOMAG_III), and four clips of ammo.
 
-	
+
 
 
 	Temp[0].usItemIndex = AUTOMAG_III;
@@ -2536,13 +2536,13 @@ void AddJohnsGunShipment()
 	Temp[0].bItemQuality = 100;
 	Temp[0].usBobbyItemIndex = 0;// does this get used anywhere???
 	Temp[0].fUsed = FALSE;
-	
+
 //	memcpy( &(LaptopSaveInfo.BobbyRayOrdersOnDeliveryArray[ cnt ].BobbyRayPurchase[0]), &Temp, sizeof(BobbyRayPurchaseStruct) );
 
 	// WANNE: We have to check if profile 1.13 is available or not, to get the correct ammo
 	BOOLEAN isData113ProfileAvailable = FALSE;
-	if(getVFS()->getProfileStack()->getProfile(L"v1.13") != NULL)	
-		isData113ProfileAvailable = TRUE;	
+	if(getVFS()->getProfileStack()->getProfile(L"v1.13") != NULL)
+		isData113ProfileAvailable = TRUE;
 	else
 		isData113ProfileAvailable = FALSE;
 
@@ -2587,7 +2587,7 @@ void ConfirmBobbyRPurchaseMessageBoxCallBack( UINT8 bExitValue )
 void EnterInitBobbyRayOrder()
 {
 	memset(&BobbyRayPurchases, 0, sizeof(BobbyRayPurchaseStruct) * gGameExternalOptions.ubBobbyRayMaxPurchaseAmount);
-	
+
 	if (is_networked)
 		gubSelectedLight = 2; //hayden
 	else

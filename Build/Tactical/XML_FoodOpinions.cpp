@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Food.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -51,7 +51,7 @@ foodopinionStartElementHandle(void *userData, const XML_Char *name, const XML_Ch
 			pData->maxReadDepth++; //we are not skipping this element
 		}
 		else if(pData->curElement == ELEMENT &&
-				(strcmp(name, "uProfile") == 0 )) 
+				(strcmp(name, "uProfile") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 

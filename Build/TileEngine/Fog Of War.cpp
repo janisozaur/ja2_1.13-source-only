@@ -1,12 +1,12 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include "Fog Of War.h"
 	#include "Isometric Utils.h"
 	#include "Simple Render Utils.h"
-	#include "Renderworld.h"
-	#include "lighting.h"
+	#include "RenderWorld.h"
+	#include "Lighting.h"
 #endif
 
 //When line of sight reaches a gridno, and there is a light there, it turns it on.

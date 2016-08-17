@@ -1,21 +1,21 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "sgp.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "interface utils.h"
-	#include "render dirty.h"
-	#include "interface.h"
-	#include "sysutil.h"
-	#include "faces.h"
-	#include "render dirty.h"
-	#include "weapons.h"
+	#include "VObject.h"
+	#include "Interface Utils.h"
+	#include "Render Dirty.h"
+	#include "Interface.h"
+	#include "SysUtil.h"
+	#include "Faces.h"
+	#include "Render Dirty.h"
+	#include "Weapons.h"
 	#include "Overhead.h"
-	#include "Soldier macros.h"
-	#include "line.h"
+	#include "Soldier Macros.h"
+	#include "Line.h"
 	#include "WCheck.h"
 	#include "Vehicles.h"
 	#include "GameSettings.h"
@@ -76,14 +76,14 @@ STR pbCarPortraitFileNames[ ]={
 BOOLEAN LoadCarPortraitValues( void )
 {
 	VOBJECT_DESC	 VObjectDesc;
-	
+
 	/*
 	if( giCarPortraits[ 0 ] != -1 )
 	{
 		return FALSE;
 	}
 	*/
-	
+
 	for ( INT32 iCounter = 0; iCounter < NUM_PROFILES; ++iCounter )
 	{
 		// silversurfer: fixed to make sure that we only create objects for vehicles that have a face defined
@@ -95,7 +95,7 @@ BOOLEAN LoadCarPortraitValues( void )
 			CHECKF( AddVideoObject( &VObjectDesc, (UINT32 *)&giCarPortraits[ iCounter ] ) );
 		}
 	}
-	
+
 	/*
 	for( iCounter = 0; iCounter < NUMBER_CAR_PORTRAITS; iCounter++ )
 	{
@@ -115,14 +115,14 @@ void UnLoadCarPortraits( void )
 	{
 		return;
 	}
-	
+
 	for( iCounter = 0; iCounter < NUMBER_CAR_PORTRAITS; iCounter++ )
 	{
 		DeleteVideoObjectFromIndex( giCarPortraits[ iCounter ] );
 		giCarPortraits[ iCounter ] = -1;
 	}
 	*/
-	
+
 	for ( INT32 iCounter = 0; iCounter < NUM_PROFILES; ++iCounter )
 	{
 		if ( gProfilesVehicle[ iCounter ].ProfilId == iCounter )
@@ -161,13 +161,13 @@ void DrawLifeUIBarEx( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos, INT16 sWi
 
 	dStart			= sYPos;
 	dEnd			= 0;
-	
+
 	// FIRST DO MAX LIFE
 	dPercentage = (FLOAT)pSoldier->stats.bLife / (FLOAT)100;
 	FLOAT	dstart1		= dStart - dEnd;
 	dStart				= (FLOAT)( dStart - dEnd );
 	dEnd				=	dPercentage * sHeight;
-	
+
 	usLineColor = Get16BPPColor( LIFE_BAR_SHADOW );
 	RectangleDraw( TRUE, sXPos, (INT32)dStart, sXPos, (INT32)( dStart - dEnd ) , usLineColor, pDestBuf );
 
@@ -176,9 +176,9 @@ void DrawLifeUIBarEx( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos, INT16 sWi
 
 	usLineColor = Get16BPPColor( LIFE_BAR_SHADOW );
 	RectangleDraw( TRUE, sXPos+ 2, (INT32)dStart, sXPos + 2, (INT32)( dStart - dEnd ), usLineColor, pDestBuf );
-	
+
 	// NOW DO BANDAGE
-		
+
 	// Calculate bandage
 	FLOAT	dstart2		= dStart - dEnd;
 	bBandage = pSoldier->stats.bLifeMax - pSoldier->stats.bLife - pSoldier->bBleeding;
@@ -329,7 +329,7 @@ void DrawBreathUIBarEx( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos, INT16 s
 
 	usLineColor = Get16BPPColor( CURR_BREATH_BAR_SHADOW );
 	RectangleDraw( TRUE, sXPos+ 2, (INT32)dStart, sXPos + 2, (INT32)( dStart - dEnd ), usLineColor, pDestBuf );
-	
+
 	UnLockVideoSurface( uiBuffer );
 }
 
@@ -370,7 +370,7 @@ void DrawMoraleUIBarEx( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos, INT16 s
 
 	usLineColor = Get16BPPColor( MORALE_BAR_SHADOW );
 	RectangleDraw( TRUE, sXPos+ 2, (INT32)dStart, sXPos + 2, (INT32)( dStart - dEnd ), usLineColor, pDestBuf );
-	
+
 	UnLockVideoSurface( uiBuffer );
 }
 
@@ -384,10 +384,10 @@ void DrawItemUIBarEx( OBJECTTYPE *pObject, UINT8 ubStatus, INT16 sXPos, INT16 sY
 	UINT8										*pDestBuf;
 	UINT16										usLineColor;
 	INT16										sValue;
-	
+
 	if ( ubStatus >= DRAW_ITEM_STATUS_ATTACHMENT1 )
 	{
-		sValue = 0;	
+		sValue = 0;
 		OBJECTTYPE* pAttachment = (*pObject)[iter]->GetAttachmentAtIndex( ubStatus - DRAW_ITEM_STATUS_ATTACHMENT1 );
 		if (pAttachment->exists())
 		{
@@ -461,7 +461,7 @@ void DrawItemUIBarEx( OBJECTTYPE *pObject, UINT8 ubStatus, INT16 sXPos, INT16 sY
 
 	pDestBuf = LockVideoSurface( uiBuffer, &uiDestPitchBYTES );
 	SetClippingRegionAndImageWidth( uiDestPitchBYTES, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
-		
+
 	// FIRST DO BREATH
 	dPercentage = (FLOAT)sValue / (FLOAT)100;
 	dEnd				=	dPercentage * sHeight;
@@ -471,7 +471,7 @@ void DrawItemUIBarEx( OBJECTTYPE *pObject, UINT8 ubStatus, INT16 sXPos, INT16 sY
 	if ( gGameExternalOptions.fAdvRepairSystem && ubStatus != DRAW_ITEM_TEMPERATURE && Item[pObject->usItem].usItemClass & (IC_WEAPON|IC_ARMOUR) )
 	{
 		FLOAT repairthresholdend = sHeight * (FLOAT)(*pObject)[0]->data.sRepairThreshold / (FLOAT)100;
-		
+
 		usLineColor =  Get16BPPColor( FROMRGB( 57, 56, 41 ) );
 		RectangleDraw( TRUE, sXPos, (INT32)(dStart - repairthresholdend), sXPos, (INT32)( dStart - sHeight ) , usLineColor, pDestBuf );
 

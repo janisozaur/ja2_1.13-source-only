@@ -1,26 +1,26 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
-	#include <String.h>
+	#include <string.h>
 	#include "Strategic Mines.h"
 	#include "Finances.h"
 	#include "Strategic Town Loyalty.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Game Clock.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Random.h"
 	#include "Soldier Profile.h"
 	#include "Dialogue Control.h"
 	#include "Map Screen Interface.h"
 	#include "Quests.h"
 	#include "Creature Spreading.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Text.h"
 	#include "Game Event Hook.h"
 	#include "GameSettings.h"
 	#include "Strategic AI.h"
 	#include "Campaign Types.h"
-	#include "history.h"
+	#include "History.h"
 	#include "Facilities.h"
 	#include "ASD.h"		// added by Flugente
 #endif
@@ -142,7 +142,7 @@ extern UINT8			gubCurrentTalkingID;
 void InitializeMines( void )
 {
 	INT32 i;
-	
+
 	// Don't execute hardcoded logic. Leave initialization to the Lua script.
 	g_luaMines.InitializeMines();
 
@@ -226,7 +226,7 @@ void InitializeMines( void )
 
 	// HEADROCK HAM 3.1: We can now select which mine runs out, or disable mine shutdown.
 	// Make sure selection isn't 0 (no mine runs out) or invalid (San Mona, Alma)
-	if (gGameExternalOptions.bWhichMineRunsOut > 0 && 
+	if (gGameExternalOptions.bWhichMineRunsOut > 0 &&
 		gGameExternalOptions.bWhichMineRunsOut < MAX_NUMBER_OF_MINES &&
 		gGameExternalOptions.bWhichMineRunsOut-1 != MINE_SAN_MONA &&
 		gGameExternalOptions.bWhichMineRunsOut-1 != MINE_ALMA )
@@ -615,7 +615,7 @@ INT32 MineAMine( INT8 bMineIndex )
 	// will extract ore based on available workforce, and increment players income based on amount
 	INT8 bMineType = 0;
 	INT32 iAmtExtracted = 0;
-	
+
 	Assert( ( bMineIndex >= 0 ) && ( bMineIndex < MAX_NUMBER_OF_MINES ) );
 
 	// is mine is empty

@@ -2,26 +2,26 @@
 	#include "Strategic All.h"
 #else
 	#include "sgp.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "PreBattle Interface.h"
-	#include "messageboxscreen.h"
-	#include "strategicmap.h"
-	#include "fade screen.h"
-	#include "screenids.h"
+	#include "MessageBoxScreen.h"
+	#include "StrategicMap.h"
+	#include "Fade Screen.h"
+	#include "ScreenIds.h"
 	#include "jascreens.h"
-	#include "npc.h"
-	#include "game event hook.h"
-	#include "game clock.h"
-	#include "tactical save.h"
-	#include "soldier profile.h"
-	#include "overhead.h"
-	#include "dialogue control.h"
-	#include "gameloop.h"
-	#include "npc.h"
-	#include "assignments.h"
-	#include "strategic.h"
-	#include "text.h"
-	#include "interface control.h"
+	#include "NPC.h"
+	#include "Game Event Hook.h"
+	#include "Game Clock.h"
+	#include "Tactical Save.h"
+	#include "Soldier Profile.h"
+	#include "Overhead.h"
+	#include "Dialogue Control.h"
+	#include "GameLoop.h"
+	#include "NPC.h"
+	#include "Assignments.h"
+	#include "Strategic.h"
+	#include "Text.h"
+	#include "Interface Control.h"
 	#include "Interface Items.h"
 	#include "Map Information.h"
 	#include "Map Screen Interface Map.h"
@@ -31,7 +31,7 @@
 	#include "Game Events.h"
 	#include "GameSettings.h"
 	#include "Strategic AI.h"
-	#include "interface dialogue.h"
+	#include "Interface Dialogue.h"
 	#include "Quests.h"
 	#include "Campaign Types.h"
 	#include "Squads.h"
@@ -699,7 +699,7 @@ void ProcessImplicationsOfMeanwhile( void )
 	switch( gCurrentMeanwhileDef.ubMeanwhileID )
 	{
 		case END_OF_PLAYERS_FIRST_BATTLE:
-		
+
 			if( zDiffSetting[gGameOptions.ubDifficultyLevel].bStrategicAiActionWakeQueen )
 			{
 				//Wake up the queen earlier to punish the good players!

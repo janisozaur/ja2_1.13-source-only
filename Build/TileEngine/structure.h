@@ -3,7 +3,7 @@
 
 #include "Structure Internals.h"
 #include "tiledef.h"
-#include "overhead types.h"
+#include "Overhead Types.h"
 
 #define NOTHING_BLOCKING							0
 #define BLOCKING_REDUCE_RANGE					1
@@ -18,7 +18,7 @@
 
 
 // ATE: Increased to allow corpses to not collide with soldiers
-// 100 == MAX_CORPSES 
+// 100 == MAX_CORPSES
 #define	INVALID_STRUCTURE_ID					( TOTAL_SOLDIERS + 100 )
 #define IGNORE_PEOPLE_STRUCTURE_ID		(TOTAL_SOLDIERS+101)
 #define VEHICLE_IGNORE_OBSTACLES_STRUCTURE_ID		(TOTAL_SOLDIERS+102)
@@ -80,7 +80,7 @@ INT16 GetBaseTile( STRUCTURE * pStructure );
 
 void DebugStructurePage1( void );
 
-BOOLEAN AddZStripInfoToVObject( HVOBJECT hVObject, STRUCTURE_FILE_REF * pStructureFileRef, BOOLEAN fFromAnimation, INT16 sSTIStartIndex );	
+BOOLEAN AddZStripInfoToVObject( HVOBJECT hVObject, STRUCTURE_FILE_REF * pStructureFileRef, BOOLEAN fFromAnimation, INT16 sSTIStartIndex );
 
 // Flugente: return the highest structure (no person, roof or corpse) on a gridno and level
 STRUCTURE* GetTallestStructureOnGridno( INT32 sGridNo, INT8 bLevel );
@@ -102,7 +102,7 @@ enum
 	MATERIAL_PORCELAIN,
 	MATERIAL_CACTUS,
 	MATERIAL_NOTUSED1,
-	MATERIAL_NOTUSED2,	
+	MATERIAL_NOTUSED2,
 
 	MATERIAL_NOTUSED3,
 	MATERIAL_STONE,

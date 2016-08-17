@@ -43,7 +43,7 @@ void DDUnlockSurface( LPDIRECTDRAWSURFACE2 pSurface, PTR pSurfaceData );
 
 void DDRestoreSurface( LPDIRECTDRAWSURFACE2 pSurface );
 
-void DDBltFastSurface( LPDIRECTDRAWSURFACE2 pDestSurface, UINT32 uiX, UINT32 uiY, LPDIRECTDRAWSURFACE2 pSrcSurface, 
+void DDBltFastSurface( LPDIRECTDRAWSURFACE2 pDestSurface, UINT32 uiX, UINT32 uiY, LPDIRECTDRAWSURFACE2 pSrcSurface,
 							LPRECT pSrcRect, UINT32 uiTrans);
 
 void DDBltSurface( LPDIRECTDRAWSURFACE2 pDestSurface, LPRECT pDestRect, LPDIRECTDRAWSURFACE2 pSrcSurface,

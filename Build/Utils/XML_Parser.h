@@ -49,7 +49,7 @@ class IXMLParser
 public:
 	const XML_Char* ElementName;
 public:
-	IXMLParser(const XML_Char *element_name, XML_Parser* parser, IXMLParser* caller=NULL) 
+	IXMLParser(const XML_Char *element_name, XML_Parser* parser, IXMLParser* caller=NULL)
 		: _caller(caller), ElementName(element_name)
 	{
 		if(parser)

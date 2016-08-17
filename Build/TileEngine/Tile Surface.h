@@ -1,7 +1,7 @@
 #ifndef _TILE_SURFACE_H
 #define _TILE_SURFACE_H
 
-#include "worlddef.h"
+#include "WorldDef.h"
 
 extern TILE_IMAGERY		*gTileSurfaceArray[ NUMBEROFTILETYPES ];
 extern UINT8			gbDefaultSurfaceUsed[ NUMBEROFTILETYPES ];

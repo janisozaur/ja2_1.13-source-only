@@ -1,13 +1,13 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
 	#include "Strategic Town Loyalty.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Overhead.h"
 	#include "Assignments.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Queen Command.h"
 	#include "Animation Data.h"
 	#include "Quests.h"
@@ -18,10 +18,10 @@
 	#include "Tactical Save.h"
 	#include "Soldier Profile.h"
 	#include "Handle Items.h"
-	#include "random.h"
-	#include "strategic movement.h"
+	#include "Random.h"
+	#include "Strategic Movement.h"
 	#include "Strategic Pathing.h"
-	#include "vehicles.h"
+	#include "Vehicles.h"
 	#include "Game Clock.h"
 	#include "Game Event Hook.h"
 	#include "Morale.h"
@@ -29,8 +29,8 @@
 	#include "Text.h"
 	#include "MessageBoxScreen.h"
 	#include "Town Militia.h"
-	#include "history.h"
-	#include "meanwhile.h"
+	#include "History.h"
+	#include "Meanwhile.h"
 	#include "Strategic Status.h"
 	// HEADROCK HAM B1: Added include for Dynamic Roaming Militia
 	#include "MilitiaSquads.h"
@@ -684,7 +684,7 @@ void HandleMurderOfCivilian( SOLDIERTYPE *pSoldier, BOOLEAN fIntentional )
 	UINT32 uiChanceFalseAccusal = 0;
 	INT8 bKillerTeam = 0;
 	BOOLEAN fIncrement = FALSE;
-	
+
 	// ubAttacker CAN be NOBODY...	Don't treat is as murder if NOBODY killed us...
 	if ( pSoldier->ubAttackerID == NOBODY )
 	{
@@ -707,14 +707,14 @@ void HandleMurderOfCivilian( SOLDIERTYPE *pSoldier, BOOLEAN fIntentional )
 		}
 	}
 
-	// Flugente: if a civilian's group has Loyalty set to 0, there will be no morale penalty/loyalty change if he is killed. Pretty odd, but at least not as bugged as it was before. 
+	// Flugente: if a civilian's group has Loyalty set to 0, there will be no morale penalty/loyalty change if he is killed. Pretty odd, but at least not as bugged as it was before.
 	// if civilian belongs to a civilian group
 	if ( pSoldier->ubCivilianGroup != NON_CIV_GROUP && pSoldier->ubCivilianGroup < NUM_CIV_GROUPS )
 	{
 		if ( !zCivGroupName[pSoldier->ubCivilianGroup].Loyalty )
 			return;
 	}
-	
+
 	/*
 	// if civilian belongs to a civilian group
 	if ( pSoldier->ubCivilianGroup != NON_CIV_GROUP )
@@ -728,15 +728,15 @@ void HandleMurderOfCivilian( SOLDIERTYPE *pSoldier, BOOLEAN fIntentional )
 			case WARDEN_CIV_GROUP:
 				return;
 		}
-		
+
 		//New Group by Jazz
-		for( iCounter2 = UNNAMED_CIV_GROUP_15; iCounter2 < NUM_CIV_GROUPS; iCounter2++ )	
-			{	
+		for( iCounter2 = UNNAMED_CIV_GROUP_15; iCounter2 < NUM_CIV_GROUPS; iCounter2++ )
+			{
 			if (pSoldier->ubCivilianGroup == iCounter2)
-					return;		
+					return;
 			}
-		
-		
+
+
 	}
 	*/
 	// set killer team
@@ -1647,7 +1647,7 @@ void DecrementTownLoyaltyEverywhere( UINT32 uiLoyaltyDecrease )
 }
 // this applies the change to every town differently, depending on the distance from the event
 void HandleGlobalLoyaltyEvent( UINT8 ubEventType, INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ)
-{	
+{
 	INT8 bTownId = 0;
 
 	if( bSectorZ == 0 )
@@ -1661,7 +1661,7 @@ void HandleGlobalLoyaltyEvent( UINT8 ubEventType, INT16 sSectorX, INT16 sSectorY
 	{
 		return;
 	}
-			
+
 	//move to lua scripts StrategicTownLoyalty.lua
 #ifdef LUA_STRATEGY_TOWN_LOYALTY
 	LuaHandleGlobalLoyaltyEvent( ubEventType, sSectorX, sSectorY, bSectorZ, 0 );
@@ -1728,7 +1728,7 @@ void HandleGlobalLoyaltyEvent( UINT8 ubEventType, INT16 sSectorX, INT16 sSectorY
 	}
 
 	AffectAllTownsLoyaltyByDistanceFrom( iLoyaltyChange, sSectorX, sSectorY, bSectorZ);
-	
+
 #endif
 }
 
@@ -1870,7 +1870,7 @@ void CheckIfEntireTownHasBeenLiberated( INT8 bTownId, INT16 sSectorX, INT16 sSec
 		}
 
 		// even taking over non-trainable "towns" like Orta/Tixa for the first time should count as "player activity"
-		
+
 		if ( gGameOptions.ubDifficultyLevel == DIF_LEVEL_HARD || gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE)
 		//if ( gGameOptions.ubDifficultyLevel >= DIF_LEVEL_HARD )
 		{
@@ -1955,7 +1955,7 @@ void HandleLoyaltyChangeForNPCAction( UINT8 ubNPCProfileId )
 			break;
 #ifdef JA2UB
 // ja25 UB
-#else      
+#else
 		case AUNTIE:
 			// Bloodcats killed
 			IncrementTownLoyalty( ALMA, LOYALTY_BONUS_AUNTIE_WHEN_BLOODCATS_KILLED );
@@ -2051,11 +2051,11 @@ void HandleLoyaltyImplicationsOfMercRetreat( INT8 bRetreatCode, INT16 sSectorX, 
 	{
 		// if not worse than 2:1 odds, then penalize morale
 		// SANDRO - Set the odds based on difficulty level
-		
+
 		UINT8 DiffLevel = gGameOptions.ubDifficultyLevel;
 		if ( DiffLevel > DIF_LEVEL_INSANE )
 			DiffLevel = 1;
-				
+
 		if ( gTacticalStatus.fEnemyInSector && ( (PlayerStrength() * (2 + DiffLevel)) >= EnemyStrength() ) )
 		{
 			HandleMoraleEvent( NULL, MORALE_RAN_AWAY, sSectorX, sSectorY, (INT8)sSectorZ );

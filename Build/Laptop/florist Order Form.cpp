@@ -1,28 +1,28 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "florist.h"
 	#include "florist Order Form.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"
 	#include "Cursors.h"
-	#include "florist Gallery.h"
+	#include "Florist Gallery.h"
 	#include "stdio.h"
 	#include "Encrypted File.h"
 	#include "florist Cards.h"
 	#include "Text Input.h"
 	#include "Finances.h"
-	#include "Game clock.h"
-	#include "english.h"
+	#include "Game Clock.h"
+	#include "English.h"
 	#include "Text.h"
 	#include "LaptopSave.h"
 	#include "Random.h"
-	#include "postalservice.h"
+	#include "PostalService.h"
 #endif
 
-#include "meanwhile.h"
+#include "Meanwhile.h"
 
 
 #define		FLOWER_ORDER_TINY_FONT					FONT10ARIAL
@@ -1359,7 +1359,7 @@ void InitFloristOrderForm()
 		dli++;
 
 	}
-	
+
 	// Dealtar/Buggler: The following code had to be put here, because GameInitFloristOrderForm() is called
 	// before XML data is read into gPostalService due to the screen order in screens.cpp -> GameScreens[]
 	if (!gfFlowerInitialized)

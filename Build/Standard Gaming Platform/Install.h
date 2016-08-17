@@ -19,7 +19,7 @@
 //
 //**************************************************************************
 
-#include "types.h"
+#include "Types.h"
 
 //**************************************************************************
 //
@@ -42,7 +42,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 extern BOOLEAN InstallApplication( STR strAppname, STR strPath );
 
 #ifdef __cplusplus

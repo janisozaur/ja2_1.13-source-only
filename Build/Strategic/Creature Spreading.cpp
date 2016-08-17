@@ -2,8 +2,8 @@
 	#include "Strategic All.h"
 	#include "GameSettings.h"
 #else
-	#include "types.h"
-	#include "fileman.h"
+	#include "Types.h"
+	#include "FileMan.h"
 	#include "himage.h"
 	#include "Creature Spreading.h"
 	#include "Campaign Types.h"
@@ -11,23 +11,23 @@
 	#include "Game Event Hook.h"
 	#include "GameSettings.h"
 	#include "Random.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Font Control.h"
 	#include "Soldier Init List.h"
-	#include "lighting.h"
-	#include "strategicmap.h"
+	#include "Lighting.h"
+	#include "StrategicMap.h"
 	#include "Game Clock.h"
 	#include "Strategic Mines.h"
 	#include "Music Control.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "jascreens.h"
 	#include "Town Militia.h"
 	#include "Strategic Town Loyalty.h"
 	#include "PreBattle Interface.h"
 	#include "Map Edgepoints.h"
 	#include "Animation Data.h"
-	#include "opplist.h"
-	#include "meanwhile.h"
+	#include "Opplist.h"
+	#include "Meanwhile.h"
 	#include "Strategic AI.h"
 	#include "MessageBoxScreen.h"
 	#include "Map Information.h"
@@ -35,7 +35,7 @@
 #endif
 
 #include "Strategic Mines.h"
-#include "connect.h"
+#include "Connect.h"
 
 #include "GameInitOptionsScreen.h"
 
@@ -284,13 +284,13 @@ void InitLair(INT32 iChosenMine)
 	// initialize the queen sector
 	lair = NewDirective( SECTOR( gCreaturePlacements[ giLairID ].sQueenX, gCreaturePlacements[ giLairID ].sQueenY ),
 		gCreaturePlacements[ giLairID ].ubQueenZ, QUEEN_LAIR );
-	curr = lair;	
-	
+	curr = lair;
+
 	if( !curr->pLevel->ubNumCreatures )
 	{
 		curr->pLevel->ubNumCreatures = 1;	//for the queen.
 	}
-	
+
 	// initialize valid linked creature sectors
 	for (UINT8 i = 0; i < MAX_NUMBER_OF_CREATURE_SECTORS; i++)
 	{
@@ -336,7 +336,7 @@ void InitCreatureQuest()
 		fPlayMeanwhile = TRUE;
 	#endif
 
-#ifdef JA2UB 
+#ifdef JA2UB
 //Ja25 No meanwhiles && no creatures
 #else
 	if( fPlayMeanwhile && !gfCreatureMeanwhileScenePlayed && gModSettings.CreatureMeanwhileCutscene == TRUE )
@@ -347,16 +347,16 @@ void InitCreatureQuest()
 	}
 #endif
 	giHabitatedDistance = 0;
-	
+
 	giPopulationModifier = zDiffSetting[gGameOptions.ubDifficultyLevel].iCreaturePopulationModifier;
-		
+
 	//Determine which of the maps are infectible by creatures.	Infectible mines
 	//are those that are player controlled and unlimited.	We don't want the creatures to
 	//infect the mine that runs out.
 
 	//Default them all to infectible
 	memset( fMineInfectible, 1, sizeof( BOOLEAN ) * MAX_NUMBER_OF_INFECTIBLE_SITES );
-	
+
 	/* // externalize to xml data
 	if( gMineStatus[ MINE_DRASSEN ].fAttackedHeadMiner ||
 			//gMineStatus[ MINE_DRASSEN ].uiOreRunningOutPoint ||
@@ -392,7 +392,7 @@ void InitCreatureQuest()
 		fMineInfectible[ 3 ] = FALSE;
 	}
 	*/
-	
+
 	// determine mine infectible status in initmines.lua script
 	for (x = 0; x < MAX_NUMBER_OF_MINES; ++x)
 	{
@@ -415,10 +415,10 @@ void InitCreatureQuest()
 		memset( fMineInfectible, 1, sizeof( BOOLEAN ) * NUMBER_OF_INFECTIBLE_SITES );
 	}
 	#endif
-	
+
 	//// externalize to xml data
 	//iNumMinesInfectible = fMineInfectible[0] + fMineInfectible[1] + fMineInfectible[2] + fMineInfectible[3];
-	
+
 	//count actual infectible sites, use min of infectible sites defined in xml and initmines.lua script in case they do not tally
 	for (x = 0; x < min( NUMBER_OF_INFECTIBLE_SITES, iNumMinesInfectibleLUA ); ++x)
 	{
@@ -487,7 +487,7 @@ void InitCreatureQuest()
 			return;
 	}
 	*/
-	
+
 	//Now, choose a start location for the queen.
 	InitLair( iChosenMine );
 
@@ -497,10 +497,10 @@ void InitCreatureQuest()
 	curr->uiFlags |= SF_PENDING_ALTERNATE_MAP;
 
 	//Now determine how often we will spread the creatures.
-	
+
 	i = zDiffSetting[gGameOptions.ubDifficultyLevel].iQueenInitBonusSpread;
 	AddPeriodStrategicEvent( EVENT_CREATURE_SPREAD, zDiffSetting[gGameOptions.ubDifficultyLevel].iCreatureSpreadTime, 0 );
-	
+
 	//Set things up so that the creatures can plan attacks on helpless miners and civilians while
 	//they are sleeping.	They do their planning at 10PM every day, and decide to attack sometime
 	//during the night.
@@ -564,7 +564,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"CreatureSpreading1");
 			INT32 iAbsoluteMaxPopulation;
 			INT32 iMaxPopulation=-1;
 			INT32 iChanceToPopulate;
-			
+
 			/* // externalize to xml data
 			switch( node->pLevel->ubCreatureHabitat )
 			{
@@ -657,7 +657,7 @@ void SpreadCreatures()
 
 	//queen just produced a litter of creature larvae.	Let's do some spreading now.
 	UINT16 usNewCreatures = (UINT16)(zDiffSetting[gGameOptions.ubDifficultyLevel].iQueenReproductionBase + Random( 1 + zDiffSetting[gGameOptions.ubDifficultyLevel].iQueenReproductionBonus ));
-	
+
 	while( usNewCreatures-- )
 	{
 		//Note, this function can and will fail if the population gets dense.	This is a necessary
@@ -900,7 +900,7 @@ void ChooseTownSectorToAttack( UINT8 ubSectorID, BOOLEAN fOverrideTest )
 			return;
 	}
 	*/
-	
+
 	// determine the sector to attack
 	if( !fOverrideTest )
 	{
@@ -942,12 +942,12 @@ void ChooseTownSectorToAttack( UINT8 ubSectorID, BOOLEAN fOverrideTest )
 	}
 	else
 		ubAttackSectorID = ubSectorID;
-	
+
 	ubAttackSectorX = SECTORX( ubAttackSectorID );
 	ubAttackSectorY = SECTORY( ubAttackSectorID );
 
 	// determine the attack sector insertion code
-	if( ubAttackSectorID == ubSectorID )		
+	if( ubAttackSectorID == ubSectorID )
 	{
 		gsCreatureInsertionCode = INSERTION_CODE_GRIDNO;
 		gsCreatureInsertionGridNo = gCreaturePlacements[ giLairID ].iAttackSourceGridNo;
@@ -970,7 +970,7 @@ void ChooseTownSectorToAttack( UINT8 ubSectorID, BOOLEAN fOverrideTest )
 				{
 					gsCreatureInsertionCode = i;
 					break;
-				}	
+				}
 			}
 		}
 	}
@@ -992,7 +992,7 @@ void ChooseTownSectorToAttack( UINT8 ubSectorID, BOOLEAN fOverrideTest )
 				{
 					gsCreatureInsertionCode = i;
 					break;
-				}	
+				}
 			}
 		}
 	}
@@ -1014,7 +1014,7 @@ void ChooseTownSectorToAttack( UINT8 ubSectorID, BOOLEAN fOverrideTest )
 				{
 					gsCreatureInsertionCode = i;
 					break;
-				}	
+				}
 			}
 		}
 	}
@@ -1036,7 +1036,7 @@ void ChooseTownSectorToAttack( UINT8 ubSectorID, BOOLEAN fOverrideTest )
 				{
 					gsCreatureInsertionCode = i;
 					break;
-				}	
+				}
 			}
 		}
 	}
@@ -1168,7 +1168,7 @@ void ChooseCreatureQuestStartDay()
 	if( !(gGameOptions.ubGameStyle == STYLE_SCIFI) || !gGameExternalOptions.fEnableCrepitus)
 		return; //only available in science fiction mode.
 	*/
-	
+
 	//Post the event.	Once it becomes due, it will setup the queen monster's location, and
 	//begin spreading and attacking towns from there.
 	switch( gGameOptions.ubDifficultyLevel )
@@ -1317,10 +1317,10 @@ BOOLEAN MineClearOfMonsters( UINT8 ubMineIndex )
 				break;
 		}
 		*/
-		
+
 		// Buggler: use the defined underground mine sectors in lua script instead of the hardcoded ones
 		UINT32 i;
-		
+
 		for( i = 0; i < associatedMineSectors.size(); i++ )
 		{
 			if( associatedMineSectors[ i ].mineID == ubMineIndex )
@@ -1496,17 +1496,17 @@ BOOLEAN PrepareCreaturesForBattle()
 		else
 		#endif
 		SetMusicMode( MUSIC_TACTICAL_NOTHING );
-					
+
 		// externalize to xml data
 		//ubCreatureHabitat = MINE_EXIT;
-		
+
 		//assign the B1 underground habitat composition to the attacking creatures
 		for (UINT8 i = 0; i < MAX_NUMBER_OF_CREATURE_SECTORS; i++)
 		{
 			INT16 sX = gCreaturePlacements[ giLairID ].sAttackSourceX;
 			INT16 sY = gCreaturePlacements[ giLairID ].sAttackSourceY;
 			UINT8 ubZ = 1;
-			
+
 			if( sX == gCreaturePlacements[ giLairID ].Habitat[ i ].sX &&
 				sY == gCreaturePlacements[ giLairID ].Habitat[ i ].sY &&
 				ubZ == gCreaturePlacements[ giLairID ].Habitat[ i ].ubZ )
@@ -1581,7 +1581,7 @@ BOOLEAN PrepareCreaturesForBattle()
 	{
 		AssertMsg( 0, String( "Invalid creature habitat ID of %d for PrepareCreaturesForBattle.", ubCreatureHabitat ) );
 	}
-	
+
 	//queen sector
 	if( !ubCreatureHabitat )
 		fQueen = TRUE;
@@ -1666,13 +1666,13 @@ BOOLEAN PrepareCreaturesForBattle()
 void CreatureNightPlanning()
 {
 	//Check the populations of the mine exits, and factor a chance for them to attack at night.
-			
+
 	UINT8 ubSectorID = SECTOR( gCreaturePlacements[ giLairID ].sAttackSourceX, gCreaturePlacements[ giLairID ].sAttackSourceY );
 
 	// Attacksource B1 underground sector must be a valid creature habitat!
 	UINT8 ubNumCreatures = CreaturesInUndergroundSector( ubSectorID, 1 );
 
-	//10% chance for each creature with difficulty modifier to decide it's time to attack.	
+	//10% chance for each creature with difficulty modifier to decide it's time to attack.
 	if ( ubNumCreatures > 1 && ubNumCreatures * 10 + zDiffSetting[gGameOptions.ubDifficultyLevel].iCreatureTownAggressiveness > (INT32)PreRandom( 100 ) )
 	{
 		AddStrategicEvent( EVENT_CREATURE_ATTACK, GetWorldTotalMin() + 1 + PreRandom( 429 ), ubSectorID );
@@ -1688,7 +1688,7 @@ void CheckConditionsForTriggeringCreatureQuest( INT16 sSectorX, INT16 sSectorY, 
 
 	if (gGameOptions.ubGameStyle == STYLE_REALISTIC || !gGameExternalOptions.fEnableCrepitus)
 		return;
-	
+
 	/*
 	if( !(gGameOptions.ubGameStyle == STYLE_SCIFI) || !gGameExternalOptions.fEnableCrepitus)
 		return; //No scifi, no creatures...
@@ -1802,7 +1802,7 @@ BOOLEAN LoadCreatureDirectives( HWFILE hFile, UINT32 uiSavedGameVersion )
 		if( gfClearCreatureQuest && giLairID != -1 )
 		{
 			giLairID = 0;
-#ifdef JA2UB 
+#ifdef JA2UB
 // no UB
 #else
 			gfCreatureMeanwhileScenePlayed = FALSE;
@@ -1838,7 +1838,7 @@ BOOLEAN LoadCreatureDirectives( HWFILE hFile, UINT32 uiSavedGameVersion )
 			break;
 	}
 	*/
-	
+
 	//count infectible sites defined initmines.lua script
 	INT32 iNumMinesInfectibleLUA=0;
 
@@ -1853,7 +1853,7 @@ BOOLEAN LoadCreatureDirectives( HWFILE hFile, UINT32 uiSavedGameVersion )
 		//quest finished/lair doesn't exist yet -- it's okay
 	}
 	else if( giLairID <= min( NUMBER_OF_INFECTIBLE_SITES, iNumMinesInfectibleLUA ) )
-	{	
+	{
 		InitLair( giLairID );
 	}
 	else
@@ -1939,7 +1939,7 @@ BOOLEAN GetWarpOutOfMineCodes( INT16 *psSectorX, INT16 *psSectorY, INT8 *pbSecto
 	{
 		return( FALSE );
 	}
-	
+
 	/* // externalize to xml data
 	//Now make sure the mercs are in the previously infested mine
 	switch( iSwitchValue )
@@ -2023,7 +2023,7 @@ BOOLEAN GetWarpOutOfMineCodes( INT16 *psSectorX, INT16 *psSectorY, INT8 *pbSecto
 			*psInsertionGridNo = gCreaturePlacements[ iSwitchValue ].iWarpToGridNo;
 			return( TRUE );
 		}
-		
+
 		// other creature habitat sector
 		for (UINT8 i = 0; i < MAX_NUMBER_OF_CREATURE_SECTORS; i++)
 		{

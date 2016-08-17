@@ -1,30 +1,30 @@
 #ifndef __SGP_
 #define __SGP_
 
-#include "local.h"
-#include "types.h"
-#include "timer.h"
-#include "debug.h"
+#include "Local.h"
+#include "Types.h"
+#include "Timer.h"
+#include "Debug.h"
 
 #if defined( JA2 ) || defined( UTIL )
-#include "video.h"
+#include "Video.h"
 #else
 #include "video2.h"
 #endif
 
 #ifndef JA2
-#include "input.h"
-#include "memman.h"
-#include "fileman.h"
+#include "Input.h"
+#include "MemMan.h"
+#include "FileMan.h"
 #include "dbman.h"
-#include "soundman.h"
+#include "SoundMan.h"
 #include "pcx.h"
-#include "line.h"
-#include "gameloop.h"
-#include "font.h"
-#include "english.h"
+#include "Line.h"
+#include "GameLoop.h"
+#include "Font.h"
+#include "English.h"
 #include "Mutex Manager.h"
-#include "vobject.h"
+#include "VObject.h"
 #include "Random.h"
 #include "shading.h"
 #endif

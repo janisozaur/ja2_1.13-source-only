@@ -62,8 +62,8 @@ backgroundStartElementHandle(void *userData, const XML_Char *name, const XML_Cha
 		else if(pData->curElement == ELEMENT &&
 			   (strcmp(name, "uiIndex") == 0 ||
 			    strcmp(name, "szName") == 0 ||
-				strcmp(name, "szShortName") == 0 ||				
-				strcmp(name, "szDescription") == 0 ||				
+				strcmp(name, "szShortName") == 0 ||
+				strcmp(name, "szDescription") == 0 ||
 				strcmp(name, "ap_polar") == 0 ||
 				strcmp(name, "ap_desert") == 0 ||
 				strcmp(name, "ap_swamp") == 0 ||
@@ -71,7 +71,7 @@ backgroundStartElementHandle(void *userData, const XML_Char *name, const XML_Cha
 				strcmp(name, "ap_river") == 0 ||
 				strcmp(name, "ap_coastal") == 0 ||
 				strcmp(name, "ap_tropical") == 0 ||
-				strcmp(name, "ap_mountain") == 0 ||				
+				strcmp(name, "ap_mountain") == 0 ||
 				strcmp(name, "ap_height") == 0 ||
 				strcmp(name, "ap_swimming") == 0 ||
 				strcmp(name, "ap_fortify") == 0 ||
@@ -137,7 +137,7 @@ backgroundStartElementHandle(void *userData, const XML_Char *name, const XML_Cha
 				strcmp(name, "fortify_assignment" ) == 0 ||
 				strcmp(name, "hackerskill" ) == 0 ||
 				strcmp(name, "druguse") == 0 ||
-				strcmp(name, "xenophobic") == 0 ||				
+				strcmp(name, "xenophobic") == 0 ||
 				strcmp(name, "corruptionspread") == 0 ||
 				strcmp(name, "level_underground") == 0 ||
 				strcmp(name, "scrounging") == 0 ||
@@ -175,7 +175,7 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 {
 	enemyRankParseData * pData = (enemyRankParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "BACKGROUNDS") == 0)
 		{
@@ -183,8 +183,8 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "BACKGROUND") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if(pData->curBackground.uiIndex < pData->maxArraySize)
 			{
 				if ( localizedTextOnly_BG )
@@ -196,8 +196,8 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 				else
 					pData->curArray[pData->curBackground.uiIndex] = pData->curBackground;
 			}
-		
-			num_found_background = pData->curBackground.uiIndex;	
+
+			num_found_background = pData->curBackground.uiIndex;
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -207,21 +207,21 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "szName") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curBackground.szName, sizeof(pData->curBackground.szName)/sizeof(pData->curBackground.szName[0]) );
 			pData->curBackground.szName[sizeof(pData->curBackground.szName)/sizeof(pData->curBackground.szName[0]) - 1] = '\0';
 		}
 		else if(strcmp(name, "szShortName") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curBackground.szShortName, sizeof(pData->curBackground.szShortName)/sizeof(pData->curBackground.szShortName[0]) );
 			pData->curBackground.szShortName[sizeof(pData->curBackground.szShortName)/sizeof(pData->curBackground.szShortName[0]) - 1] = '\0';
 		}
 		else if(strcmp(name, "szDescription") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curBackground.szDescription, sizeof(pData->curBackground.szDescription)/sizeof(pData->curBackground.szDescription[0]) );
 			pData->curBackground.szDescription[sizeof(pData->curBackground.szDescription)/sizeof(pData->curBackground.szDescription[0]) - 1] = '\0';
 		}
@@ -364,7 +364,7 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curBackground.value[BG_TRAVEL_BOAT] = min(XML_BACKGROUND_TRAVEL_MAX, max(-XML_BACKGROUND_TRAVEL_MAX, (INT8) atol(pData->szCharData) ));
-		}		
+		}
 		else if(strcmp(name, "resistance_fear") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -419,12 +419,12 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curBackground.value[BG_PERC_SPEED_RUNNING] = min(30, max(-30, (INT16) atol(pData->szCharData) ));
-		}	
+		}
 		else if(strcmp(name, "speed_bandaging") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curBackground.value[BG_PERC_BANDAGING] = min(50, max(-50, (INT16) atol(pData->szCharData) ));
-		}		
+		}
 		else if(strcmp(name, "drink_energyregen") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -564,7 +564,7 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curBackground.value[BG_DISLIKEBG] = (INT16)atol( pData->szCharData );
-		}				
+		}
 		else if ( strcmp( name, "smoker" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
@@ -599,7 +599,7 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curBackground.uiFlags	|= (UINT16) atol(pData->szCharData) ? BACKGROUND_CORRUPTIONSPREAD : 0;
-		}		
+		}
 		else if(strcmp(name, "level_underground") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -630,7 +630,7 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curBackground.uiFlags |= (UINT16)atol( pData->szCharData ) ? BACKGROUND_GLOBALOYALITYLOSSONDEATH : 0;
 		}
-																						
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -649,7 +649,7 @@ BOOLEAN ReadInBackgrounds(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading Backgrounds.xml" );
 
 	localizedTextOnly_BG = localizedVersion;
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -719,7 +719,7 @@ BOOLEAN WriteBackgrounds( STR fileName)
 		{
 			FilePrintf(hFile,"\t<BACKGROUND>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);
-			
+
 			FilePrintf(hFile,"\t</BACKGROUND>\r\n");
 		}
 		FilePrintf(hFile,"</BACKGROUNDS>\r\n");

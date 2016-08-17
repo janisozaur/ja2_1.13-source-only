@@ -4,14 +4,14 @@
 	#include "Types.h"
 	#include "Buildings.h"
 	#include "Isometric Utils.h"
-	#include "Pathai.h"
+	#include "PathAI.h"
 	#include "Structure Wrap.h"
 	#include "Random.h"
 	#include "Overhead.h"
 	#include "Render Fun.h"
-	#include "Strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Sys Globals.h"
-	#include "worldman.h"
+	#include "WorldMan.h"
 #endif
 
 #include "AIInternals.h"
@@ -24,8 +24,8 @@ UINT8					gubNumberOfBuildings;
 
 #ifdef ROOF_DEBUG
 	extern INT16 gsCoverValue[WORLD_MAX];
-	#include "video.h"
-	#include "renderworld.h"
+	#include "Video.h"
+	#include "RenderWorld.h"
 #endif
 
 // WANNE: Overhauls new building climbing only works with A* enabled
@@ -40,14 +40,14 @@ BUILDING * CreateNewBuilding( UINT8 * pubBuilding )
 	{
 		return( NULL );
 	}
-	
+
 	// increment # of buildings
 	gubNumberOfBuildings++;
-	
+
 	// clear entry
 	gBuildings[ gubNumberOfBuildings ].ubNumClimbSpots = 0;
 	*pubBuilding = gubNumberOfBuildings;
-	
+
 	// return pointer (have to subtract 1 since we just added 1
 	return( &(gBuildings[ gubNumberOfBuildings ]) );
 }
@@ -55,7 +55,7 @@ BUILDING * CreateNewBuilding( UINT8 * pubBuilding )
 BUILDING * FindBuilding( INT32 sGridNo )
 {
 	UINT8					ubBuildingID;
-	
+
 	if ( TileIsOutOfBounds( sGridNo ) )
 	{
 		return( NULL );
@@ -122,7 +122,7 @@ BUILDING * GenerateBuilding( INT32 sDesiredSpot )
 	{
 		return( NULL );
 	}
-	
+
 	// Set reachable
 	RoofReachableTest( sDesiredSpot, ubBuildingID );
 
@@ -260,7 +260,7 @@ BUILDING * CreateNewBuilding( UINT8 * pubBuilding )
 	}
 	// increment # of buildings
 	gubNumberOfBuildings++;
-	
+
 	// clear entry
 	gBuildings[ gubNumberOfBuildings ].ubNumClimbSpots = 0;
 	*pubBuilding = gubNumberOfBuildings;
@@ -478,7 +478,7 @@ BUILDING * GenerateBuilding( INT32 sDesiredSpot )
 						fFoundWall = TRUE;
 					}
 				}
-				else 
+				else
 				{
 					if (WallExistsOfTopRightOrientation( sWallGridNo ))
 					{
@@ -496,7 +496,7 @@ BUILDING * GenerateBuilding( INT32 sDesiredSpot )
 					bSkipSpots--;
 				}
 				else if ( Random( uiChanceIn ) == 0 )
-				{					
+				{
 					pBuilding->sUpClimbSpots[ pBuilding->ubNumClimbSpots ] = sCurrGridNo;
 					pBuilding->sDownClimbSpots[ pBuilding->ubNumClimbSpots ] = sRightGridNo;
 					pBuilding->ubNumClimbSpots++;
@@ -513,7 +513,7 @@ BUILDING * GenerateBuilding( INT32 sDesiredSpot )
 					gsCoverValue[sCurrGridNo] = 99;
 #endif
 					// skip the next spot
-					bSkipSpots = 1;					
+					bSkipSpots = 1;
 				}
 				else
 				{
@@ -527,7 +527,7 @@ BUILDING * GenerateBuilding( INT32 sDesiredSpot )
 			}
 			else
 			{
-				// can't select this spot				
+				// can't select this spot
 				if ( ( !TileIsOutOfBounds(sPrevGridNo)) && (pBuilding->ubNumClimbSpots > 0) )
 				{
 					if ( pBuilding->sDownClimbSpots[ pBuilding->ubNumClimbSpots - 1 ] == sCurrGridNo )
@@ -571,7 +571,7 @@ BUILDING * GenerateBuilding( INT32 sDesiredSpot )
 BUILDING * FindBuilding( INT32 sGridNo )
 {
 	UINT8					ubBuildingID;
-	
+
 	if ( TileIsOutOfBounds( sGridNo ) )
 	{
 		return( NULL );
@@ -664,7 +664,7 @@ INT32 FindClosestClimbPoint( SOLDIERTYPE *pSoldier, INT32 sStartGridNo, INT32 sD
 	{
 		return( NOWHERE );
 	}
-	
+
 	// WANNE: Reworked climbing code from sevenfm
 	UINT8			ubNumClimbSpots;
 	INT32 *			psClimbSpots;
@@ -698,7 +698,7 @@ INT32 FindClosestClimbPoint( SOLDIERTYPE *pSoldier, INT32 sStartGridNo, INT32 sD
 			}
 		}
 	}
-	
+
 	return( sClosestSpot );
 }
 

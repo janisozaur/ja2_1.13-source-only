@@ -4,12 +4,12 @@
 #include "SaveLoadMap.h"
 #include "Structure Wrap.h"
 #include "Tactical Save.h"
-#include "laptopsave.h"
-#include "postalservice.h"
-#include "isometric utils.h"
-#include "debug.h"
-#include "game event hook.h"
-#include "game events.h"
+#include "LaptopSave.h"
+#include "PostalService.h"
+#include "Isometric Utils.h"
+#include "Debug.h"
+#include "Game Event Hook.h"
+#include "Game Events.h"
 #include <list>
 #include <string>
 #include <iostream>
@@ -35,7 +35,7 @@ typedef struct
 	UINT32	uiIndex;	// uiIndex is used as an ID number in external game data
 	UINT8	ubMapY;
 	UINT8	ubMapX;
-	UINT8	ubMapZ;	
+	UINT8	ubMapZ;
 	UINT32	sGridNo;
 	wstring wstrName;
 } DestinationStruct;
@@ -121,7 +121,7 @@ typedef struct
 	PDestinationStruct				pDestination;
 	PDestinationDeliveryInfoStruct	pDestinationDeliveryInfo;
 	INT16							sSenderID;		// For now, two senders exist: Bobby Ray(0) and John Kulba(1)
-	INT16							sReceiverID;	// Unused for now, but reserved for future projects	
+	INT16							sReceiverID;	// Unused for now, but reserved for future projects
 	UINT32							uiOrderDate;
 } ShipmentStruct;
 typedef ShipmentStruct& RefToShipmentStruct;
@@ -202,12 +202,12 @@ class CPostalService
 public:
 	// Shipment management
 	UINT16 CreateNewShipment(UINT16 usDestinationID, UINT8  ubDeliveryMethodIndex, INT16 sSenderID);
-	BOOLEAN AddPackageToShipment(UINT16 usShipmentID, UINT16 usItemIndex, UINT8 ubNumber, INT8 bItemQuality); 
+	BOOLEAN AddPackageToShipment(UINT16 usShipmentID, UINT16 usItemIndex, UINT8 ubNumber, INT8 bItemQuality);
 	BOOLEAN SendShipment(UINT16 usShipmentID);
 	BOOLEAN DeliverShipment(UINT16 usShipmentID);
 	BOOLEAN DeliverShipmentForMultiplayer(UINT16 usShipmentID);
-	BOOLEAN RegisterDeliveryCallback(INT16 sSenderID, PtrToDeliveryCallbackFunc DeliveryCallbackFunc);	
-	
+	BOOLEAN RegisterDeliveryCallback(INT16 sSenderID, PtrToDeliveryCallbackFunc DeliveryCallbackFunc);
+
 	// Interfaces
 	BOOLEAN LoadShipmentListFromSaveGameFile(HWFILE hFile);
 	BOOLEAN SaveShipmentListToSaveGameFile(HWFILE hFile);
@@ -216,14 +216,14 @@ public:
 	UINT16 GetShipmentCount(SHIPMENT_STATUS TargetedShipmentStatus);
 	RefToShipmentList LookupShipmentList(void) const;
 
-	
+
 	// Destination management
 	UINT16 AddDestination(UINT32 uiIndex, UINT8 ubMapX, UINT8 ubMapY, UINT8 ubMapZ, UINT32 sGridNo, STR16 pszName );
 	UINT16 RemoveDestination(UINT16 usDestinationID);
 	RefToDestinationStruct GetDestination(UINT16 usDestinationID) const;
 	RefToDestinationList LookupDestinationList(void) const;
-	
-	// WANNE: 
+
+	// WANNE:
 	BOOLEAN IsSectorAShipmentSector(UINT8 ubMapX, UINT8 ubMapY, UINT8 ubMapZ);
 
 	// Delivery method management
@@ -239,7 +239,7 @@ private:
 	vector<BOOLEAN> _UsedShipmentIDList;
 	DeliveryCallbackDataList _DeliveryCallbacks;
 	static OBJECTTYPE	tempObject;
-	
+
 
 	// All instances share the same set of destinations...
 	static DestinationList _Destinations;

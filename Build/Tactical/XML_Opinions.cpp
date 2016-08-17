@@ -4,8 +4,8 @@
 // This file handles all reading from Merc Profiles.XML. It offers an external
 // alternative to PROEDIT. Values that have no current use in the game were
 // EXCLUDED. If you wish to add them simply follow the example set here. You
-// can read MERCPROFILESTRUCT in the file "soldier profile type.h" to see
-// all profile data. Add the ones you want to externalize to TEMPPROFILESTRUCT 
+// can read MERCPROFILESTRUCT in the file "Soldier Profile Type.h" to see
+// all profile data. Add the ones you want to externalize to TEMPPROFILESTRUCT
 // in "Soldier Profile.h", and then add the appropriate lines where needed,
 // in this file, following my example.
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@
 	#include "sgp.h"
 	#include "Debug Control.h"
 	#include "expat.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "XML.h"
 	#include "Soldier Profile.h"
 #endif
@@ -80,7 +80,7 @@ opinionStartElementHandle(void *userData, const XML_Char *name, const XML_Char *
 			{
 				XML_Char bla[12];
 				sprintf(bla, "Opinion%d", i);
-				
+
 				if(strcmp(name, bla) == 0)
 				{
 					pData->curElement = ELEMENT_PROPERTY;
@@ -159,7 +159,7 @@ opinionEndElementHandle(void *userData, const XML_Char *name)
 			{
 				XML_Char bla[12];
 				sprintf(bla, "Opinion%d", i);
-				
+
 				if(strcmp(name, bla) == 0)
 				{
 					pData->curElement = ELEMENT;
@@ -170,7 +170,7 @@ opinionEndElementHandle(void *userData, const XML_Char *name)
 				}
 			}
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 
@@ -321,7 +321,7 @@ BOOLEAN WriteMercOpinions()
 			{
 				FilePrintf(hFile,"\t\t<Opinion%d>%d</Opinion%d>\r\n", cnt_b, gMercProfiles[ cnt ].bMercOpinion[cnt_b], cnt_b);
 			}
-			
+
 
 			FilePrintf(hFile,"\t</OPINION>\r\n");
 		}

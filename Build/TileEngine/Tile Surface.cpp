@@ -1,19 +1,19 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
-	#include "worlddef.h"
-	#include "worlddat.h"
+	#include "WorldDef.h"
+	#include "WorldDat.h"
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
 	#include "time.h"
-	#include "video.h"
-	#include "debug.h"
-	#include "sys globals.h"
-	#include "tiledat.h"
-	#include "Fileman.h"
+	#include "Video.h"
+	#include "Debug.h"
+	#include "Sys Globals.h"
+	#include "TileDat.h"
+	#include "FileMan.h"
 #endif
 
 #include "XML.h"
@@ -119,7 +119,7 @@ TILE_IMAGERY *LoadTileSurface(	STR8	cFilename )
 	strcat( cAdditionalPropertiesFilename, ADDITIONAL_TILE_PROPERTIES_EXTENSION );
 	// first in /Tilesets/XX/
 	if (FileExists( cAdditionalPropertiesFilename ))
-	{	
+	{
 		DebugMsg (TOPIC_JA2,DBG_LEVEL_3,String("LoadExternalGameplayData, fileName = %s", fileName));
 		SGP_THROW_IFFALSE(ReadInAdditionalTileProperties(cAdditionalPropertiesFilename), cAdditionalPropertiesFilename);
 	}
@@ -129,7 +129,7 @@ TILE_IMAGERY *LoadTileSurface(	STR8	cFilename )
 		cEndOfName = strrchr( cAdditionalPropertiesFilename, '\\' );
 		sprintf( cCommonAdditionalPropertiesFilename, "TILESETS\\ADDITIONALPROPERTIES%s", cEndOfName );
 		if (FileExists( cCommonAdditionalPropertiesFilename ))
-		{	
+		{
 			DebugMsg (TOPIC_JA2,DBG_LEVEL_3,String("LoadExternalGameplayData, fileName = %s", fileName));
 			SGP_THROW_IFFALSE(ReadInAdditionalTileProperties(cCommonAdditionalPropertiesFilename), cCommonAdditionalPropertiesFilename);
 		}

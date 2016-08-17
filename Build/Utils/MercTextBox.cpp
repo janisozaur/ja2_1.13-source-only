@@ -3,11 +3,11 @@
 #else
 	#include "MercTextBox.h"
 	#include "WCheck.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Font Control.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"
-	#include "vobject_blitters.h"
+	#include "VObject_blitters.h"
 	#include "Message.h"
 #endif
 
@@ -142,7 +142,7 @@ BOOLEAN InitMercPopupBox( )
 	FilenameForBPP("INTERFACE\\msgboxiconskull.sti", VObjectDesc.ImageFile);
 	if( !AddVideoObject( &VObjectDesc, &guiSkullIcons ) )
 		AssertMsg(0, "Missing INTERFACE\\msgboxiconskull.sti" );
-	
+
 	return( TRUE );
 }
 
@@ -226,7 +226,7 @@ BOOLEAN RenderMercPopupBox(INT16 sDestX, INT16 sDestY, UINT32 uiBuffer )
 //	UINT32	uiSrcPitchBYTES;
 //	UINT16	*pDestBuf;
 //	UINT16	*pSrcBuf;
-	
+
 	// will render/transfer the image from the buffer in the data structure to the buffer specified by user
 	BOOLEAN fReturnValue = TRUE;
 
@@ -235,13 +235,13 @@ BOOLEAN RenderMercPopupBox(INT16 sDestX, INT16 sDestY, UINT32 uiBuffer )
 
 	// now lock it
 //	pSrcBuf = ( UINT16* )LockVideoSurface( gPopUpTextBox->uiSourceBufferIndex, &uiSrcPitchBYTES);
-	
+
 	//check to see if we are wanting to blit a transparent background
 	if ( gPopUpTextBox->uiFlags & MERC_POPUP_PREPARE_FLAGS_TRANS_BACK )
 		BltVideoSurface( uiBuffer, gPopUpTextBox->uiSourceBufferIndex, 0, sDestX, sDestY, VS_BLT_FAST | VS_BLT_USECOLORKEY, NULL );
 	else
 		BltVideoSurface( uiBuffer, gPopUpTextBox->uiSourceBufferIndex, 0, sDestX, sDestY, VS_BLT_FAST, NULL );
-	
+
 	// blt, and grab return value
 //	fReturnValue = Blt16BPPTo16BPP(pDestBuf, uiDestPitchBYTES, pSrcBuf, uiSrcPitchBYTES, sDestX, sDestY, 0, 0, gPopUpTextBox->sWidth, gPopUpTextBox->sHeight);
 
@@ -377,7 +377,7 @@ INT32 PrepareMercPopupBox(	INT32 iBoxId, UINT8 ubBackgroundIndex, UINT8 ubBorder
 	// reset flags
 	guiFlags = 0;
 
-	usStringPixLength = WFStringPixLength( pString, TEXT_POPUP_FONT);	
+	usStringPixLength = WFStringPixLength( pString, TEXT_POPUP_FONT);
 
 	// sevenfm: change messagbebox width only if bFixedWidth = FALSE
 	if( !bFixedWidth && ( usStringPixLength < ( usWidth - ( MERC_TEXT_POPUP_WINDOW_TEXT_OFFSET_X ) * 2 ) ) )
@@ -535,7 +535,7 @@ INT32 PrepareMercPopupBox(	INT32 iBoxId, UINT8 ubBackgroundIndex, UINT8 ubBorder
 	{
 		sDispTextXPos += 30;
 	}
-	
+
 //if language represents words with a single char
 #ifdef SINGLE_CHAR_WORDS
 	{
@@ -557,7 +557,7 @@ INT32 PrepareMercPopupBox(	INT32 iBoxId, UINT8 ubBackgroundIndex, UINT8 ubBorder
 		DisplayWrappedString( sDispTextXPos, (INT16)(( MERC_TEXT_POPUP_WINDOW_TEXT_OFFSET_Y + usMarginTopY ) ), usTextWidth, 2, MERC_TEXT_FONT, ubFontColor,	pString, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 	}
 #endif
-	
+
 	SetFontDestBuffer( FRAME_BUFFER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, FALSE );
 	SetFontShadow(DEFAULT_SHADOW);
 

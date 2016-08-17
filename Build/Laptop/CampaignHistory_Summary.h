@@ -1,7 +1,7 @@
 #ifndef __CAMPAIGNHISTORY_SUMMARY_H
 #define __CAMPAIGNHISTORY_SUMMARY_H
 
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */

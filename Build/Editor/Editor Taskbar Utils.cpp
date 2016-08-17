@@ -1,30 +1,30 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
 
 #ifndef PRECOMPILEDHEADERS
 	#include <stdio.h>
-	#include "types.h"
+	#include "Types.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
 	#include "Font Control.h"
 	#include "Isometric Utils.h"
 	#include "WorldDat.h"
 	#include "Render Dirty.h"
-	#include "sysutil.h"
-	#include "wordwrap.h"
-	#include "environment.h"
+	#include "SysUtil.h"
+	#include "WordWrap.h"
+	#include "Environment.h"
 	#include "Interface Items.h"
 	#include "Soldier Find.h"
 	#include "World Items.h"
 	#include "Text.h"
 	#include "Overhead map.h"
 	#include "Cursor Modes.h"
-	#include "editscreen.h"
+	#include "EditScreen.h"
 	#include "EditorTerrain.h"
 	#include "Cursor Modes.h"
 	#include "EditorItems.h"
@@ -43,10 +43,10 @@
 	#include "Item Statistics.h"
 	#include "pits.h"
 	#include "Soldier Find.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Keys.h"
 	#include "InterfaceItemImages.h"
-	#include "renderworld.h"//dnl ch78 271113
+	#include "RenderWorld.h"//dnl ch78 271113
 #endif
 
 void RenderEditorInfo();
@@ -410,7 +410,7 @@ void DoTaskbar(void)
 			iDrawMode = DRAW_MODE_NOTHING;//dnl ch22 210909
 			ClickEditorButton( TAB_OPTIONS );
 			TerrainTileDrawMode = TERRAIN_TILES_NODRAW;
-			
+
 			if (gfResizeMapOnLoading)
 				ClickEditorButton(OPTIONS_RESIZE_MAP_ON_LOADING);
 
@@ -898,7 +898,7 @@ void RenderSelectedItemBlownUp()
 	if ( i == 1 )
 		mprintf( xp, yp, L"%d", i );
 	else
-		mprintf( xp - 6, yp, L"%d/%d", iStackIndex , i );	
+		mprintf( xp - 6, yp, L"%d/%d", iStackIndex , i );
 
 	//If the item is hidden, render a blinking H (just like DG)
 	if( gWorldItems[ gpItemPool->iItemIndex ].bVisible == HIDDEN_ITEM ||

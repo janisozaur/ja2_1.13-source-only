@@ -6,13 +6,13 @@
 typedef struct
 {
 	BOOLEAN	fGlobalLuaBool;
-	UINT32	iGlobalLuaVal; 
+	UINT32	iGlobalLuaVal;
 } LUA_GLOBAL;
 
-extern LUA_GLOBAL	gLuaGlobal[1000]; 
+extern LUA_GLOBAL	gLuaGlobal[1000];
 
 
-#define MAX_ACTION_NAMES_CHARS		30	
+#define MAX_ACTION_NAMES_CHARS		30
 
 typedef struct
 {

@@ -1,55 +1,55 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "JA2 All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "vobject_blitters.h"
-	#include "wcheck.h"
-	#include "input.h"
-	#include "font.h"
-	#include "timer.h"
+	#include "VObject.h"
+	#include "VObject_blitters.h"
+	#include "WCheck.h"
+	#include "Input.h"
+	#include "Font.h"
+	#include "Timer.h"
 	#include "mousesystem.h"
-	#include "screenids.h"
-	#include "screens.h"
+	#include "ScreenIds.h"
+	#include "Screens.h"
 	#include "Font Control.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "tiledef.h"
-	#include "worlddef.h"
-	#include "editscreen.h"
+	#include "WorldDef.h"
+	#include "EditScreen.h"
 	#include <wchar.h>
 	#include <tchar.h>
 	#include "Timer Control.h"
 	#include "Sys Globals.h"
-	#include "interface.h"
-	#include "overhead.h"
-	#include "utilities.h"
-	#include "render dirty.h"
+	#include "Interface.h"
+	#include "Overhead.h"
+	#include "Utilities.h"
+	#include "Render Dirty.h"
 	#include "jascreens.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "Event Pump.h"
-	#include "animation cache.h"
-	#include "lighting.h"
-	#include "mainmenuscreen.h"
+	#include "Animation Cache.h"
+	#include "Lighting.h"
+	#include "MainMenuScreen.h"
 	#include "Game Init.h"
-	#include "init.h"
-	#include "cursor control.h"
-	#include "utilities.h"
+	#include "Init.h"
+	#include "Cursor Control.h"
+	#include "Utilities.h"
 	#include "GameVersion.h"
-	#include "game clock.h"
-	#include "gamescreen.h"
-	#include "english.h"
+	#include "Game Clock.h"
+	#include "GameScreen.h"
+	#include "English.h"
 	#include "Random.h"
 	#include "WordWrap.h"
 	#include "Sound Control.h"
 	#include "WordWrap.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Language Defines.h"
-	#include "IniReader.h"
+	#include "INIReader.h"
 #endif
 
 #include "sgp_logger.h"
@@ -1086,7 +1086,7 @@ void PrintExceptionList()
 	UINT8*		pDestBuf;
 	UINT32		uiDestPitchBYTES;
 	SGPRect		ClipRect;
-	
+
 	ClipRect.iLeft		= 0;
 	ClipRect.iRight		= SCREEN_WIDTH;
 	ClipRect.iTop		= 0;
@@ -1099,7 +1099,7 @@ void PrintExceptionList()
 	//Blt16BPPBufferShadowRect( (UINT16*)pDestBuf, uiDestPitchBYTES, &ClipRect );
 	Blt16BPPBufferHatchRect( (UINT16*)pDestBuf, uiDestPitchBYTES, &ClipRect );
 	UnLockVideoSurface( FRAME_BUFFER );
-	
+
 	// Create string
 	SetFont( LARGEFONT1 );
 	SetFontBackground( FONT_MCOLOR_BLACK );

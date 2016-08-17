@@ -3,14 +3,14 @@
 	#include "GameSettings.h"
 #else
 	#include "sgp.h"
-	#include "message.h"
-	#include "quests.h"
-	#include "game clock.h"
+	#include "Message.h"
+	#include "Quests.h"
+	#include "Game Clock.h"
 	#include "StrategicMap.h"
-	#include "soldier profile.h"
+	#include "Soldier Profile.h"
 	#include "LaptopSave.h"
 	#include "Handle Items.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Interface Dialogue.h"
 	#include "Soldier Profile.h"
 	#include "Isometric Utils.h"
@@ -29,17 +29,17 @@
 	#include "GameSettings.h"
 	#include "Random.h"
 	#include "Assignments.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Strategic Event Handler.h"
 #endif
 
 #include "BobbyRMailOrder.h"
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2UB
-#include "email.h"
+#include "Email.h"
 #include "Strategic Merc Handler.h"
-#include "laptop.h"
+#include "Laptop.h"
 #include "Ja25 Strategic Ai.h"
 #include "ub_config.h"
 #include "Ja25_Tactical.h"
@@ -1011,7 +1011,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 			{
 				// if Skyrider, ignore low loyalty until he has monologues, and wait at least a day since the latest monologue to avoid a hot/cold attitude
 				if ( ( ubProfileID == SKYRIDER ) &&
-						( ( guiHelicopterSkyriderTalkState == 0 ) || ( ( GetWorldTotalMin() - guiTimeOfLastSkyriderMonologue ) < ( 24 * 60 ) ) || 
+						( ( guiHelicopterSkyriderTalkState == 0 ) || ( ( GetWorldTotalMin() - guiTimeOfLastSkyriderMonologue ) < ( 24 * 60 ) ) ||
 						( gHelicopterSettings.fHelicopterTownLoyaltyCheck == FALSE ) ) )
 				{
 					gubFact[usFact] = FALSE;
@@ -1055,7 +1055,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 #ifdef JA2UB
 //UB
 #else
-			gubFact[usFact] = ( ( GetNumberOfWholeTownsUnderControl() == gGameExternalOptions.ubEarlyRebelsRecruitment[1] || gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 1 
+			gubFact[usFact] = ( ( GetNumberOfWholeTownsUnderControl() == gGameExternalOptions.ubEarlyRebelsRecruitment[1] || gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 1
 								|| ( gubQuest[QUEST_FOOD_ROUTE] == QUESTDONE && gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 4 ) ) && IsTownUnderCompleteControlByPlayer( OMERTA ) );
 #endif
 			break;
@@ -1064,7 +1064,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 #ifdef JA2UB
 //UB
 #else
-			gubFact[usFact] = ( ( GetNumberOfWholeTownsUnderControl() == gGameExternalOptions.ubEarlyRebelsRecruitment[2] || gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 1 
+			gubFact[usFact] = ( ( GetNumberOfWholeTownsUnderControl() == gGameExternalOptions.ubEarlyRebelsRecruitment[2] || gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 1
 								|| ( gubQuest[QUEST_FOOD_ROUTE] == QUESTDONE && gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 4 ) ) && IsTownUnderCompleteControlByPlayer( OMERTA ) );
 #endif
 			break;
@@ -1073,7 +1073,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 #ifdef JA2UB
 //UB
 #else
-			gubFact[usFact] = ( ( GetNumberOfWholeTownsUnderControl() >= gGameExternalOptions.ubEarlyRebelsRecruitment[3] || gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 1 
+			gubFact[usFact] = ( ( GetNumberOfWholeTownsUnderControl() >= gGameExternalOptions.ubEarlyRebelsRecruitment[3] || gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 1
 								|| ( gubQuest[QUEST_FOOD_ROUTE] == QUESTDONE && gGameExternalOptions.ubEarlyRebelsRecruitment[0] == 4 ) ) && IsTownUnderCompleteControlByPlayer( OMERTA ) );
 			// silversurfer: this is the highest requirement and therefore we will automatically enable recruitment of Miguel
 			if ( gubFact[usFact] )
@@ -1171,7 +1171,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 			break;
 
 		case FACT_TONY_IN_BUILDING:
-			gubFact[usFact] = CheckNPCSector( TONY, gModSettings.ubPornShopTonySectorX, gModSettings.ubPornShopTonySectorY, gModSettings.ubPornShopTonySectorZ ) && 
+			gubFact[usFact] = CheckNPCSector( TONY, gModSettings.ubPornShopTonySectorX, gModSettings.ubPornShopTonySectorY, gModSettings.ubPornShopTonySectorZ ) &&
 				NPCInRoom( TONY, gModSettings.usPornShopRoomTony );
 			break;
 
@@ -1196,7 +1196,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 			break;
 #ifdef JA2UB
 //UB
-#else        
+#else
 		case FACT_PERKO_ALIVE:
 			gubFact[usFact] = gMercProfiles[ PERKO ].bMercStatus != MERC_IS_DEAD;
 			break;
@@ -1318,7 +1318,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 		case FACT_DIMITRI_CAN_BE_RECRUITED: // Can dimitri be recruited? should be true if already true, OR if Miguel has been recruited already OR is available for recruitment
 			gubFact[usFact] = ( gubFact[usFact] || FindSoldierByProfileID( MIGUEL, TRUE ) || gubFact[FACT_MIGUEL_AND_ALL_REBELS_CAN_BE_RECRUITED] );
 			break;
-/*			
+/*
 		case FACT_:
 			gubFact[usFact] = ;
 			break;
@@ -1326,7 +1326,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 		// anv: facts for checking if Waldo can repair helicopter
 
 		case FACT_HELI_DAMAGED_CAN_START_REPAIR:
-			gubFact[usFact] = ( gGameExternalOptions.fWaldoCanRepairHelicopter && 
+			gubFact[usFact] = ( gGameExternalOptions.fWaldoCanRepairHelicopter &&
 				!fHelicopterDestroyed && !fHelicopterIsAirBorne && gubHelicopterHitsTaken == 1 &&
 				pVehicleList[ iHelicopterVehicleId ].sSectorX == gMercProfiles[ WALDO ].sSectorX && pVehicleList[ iHelicopterVehicleId ].sSectorY == gMercProfiles[ WALDO ].sSectorY &&
 				LaptopSaveInfo.iCurrentBalance >= CalculateHelicopterRepairCost( FALSE ) &&
@@ -1334,24 +1334,24 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 			break;
 
 		case FACT_HELI_SERIOUSLY_DAMAGED_CAN_START_REPAIR:
-			gubFact[usFact] = ( gGameExternalOptions.fWaldoCanRepairHelicopter && 
+			gubFact[usFact] = ( gGameExternalOptions.fWaldoCanRepairHelicopter &&
 				!fHelicopterDestroyed && !fHelicopterIsAirBorne && gubHelicopterHitsTaken == 2 &&
-				pVehicleList[ iHelicopterVehicleId ].sSectorX == gMercProfiles[ WALDO ].sSectorX && pVehicleList[ iHelicopterVehicleId ].sSectorY == gMercProfiles[ WALDO ].sSectorY && 
+				pVehicleList[ iHelicopterVehicleId ].sSectorX == gMercProfiles[ WALDO ].sSectorX && pVehicleList[ iHelicopterVehicleId ].sSectorY == gMercProfiles[ WALDO ].sSectorY &&
 				LaptopSaveInfo.iCurrentBalance >= CalculateHelicopterRepairCost( TRUE ) &&
 				gubHelicopterHoursToRepair == 0 && CheckFact( FACT_WALDO_MET, 0 ) );
 			break;
 
 		case FACT_HELI_GIVEN_MONEY_CAN_START_REPAIR:
-			gubFact[usFact] = ( ( gGameExternalOptions.fWaldoCanRepairHelicopter && 
+			gubFact[usFact] = ( ( gGameExternalOptions.fWaldoCanRepairHelicopter &&
 				!fHelicopterDestroyed && !fHelicopterIsAirBorne && gubHelicopterHitsTaken > 0 &&
-				pVehicleList[ iHelicopterVehicleId ].sSectorX == gMercProfiles[ WALDO ].sSectorX && pVehicleList[ iHelicopterVehicleId ].sSectorY == gMercProfiles[ WALDO ].sSectorY && 
+				pVehicleList[ iHelicopterVehicleId ].sSectorX == gMercProfiles[ WALDO ].sSectorX && pVehicleList[ iHelicopterVehicleId ].sSectorY == gMercProfiles[ WALDO ].sSectorY &&
 				gubHelicopterHoursToRepair == 0 ) &&
 				( CheckFact(FACT_GIVEN_ENOUGH_TO_REPAIR_HELI, 0) || CheckFact(FACT_GIVEN_ENOUGH_TO_SERIOUSLY_REPAIR_HELI, 0) ) && CheckFact( FACT_WALDO_MET, 0 ) );
 			break;
 
 		case FACT_HELI_CANT_START_REPAIR:
 			gubFact[usFact] = ( !CheckFact(FACT_HELI_GIVEN_MONEY_CAN_START_REPAIR, 0) && !CheckFact(FACT_HELICOPTER_IN_PERFECT_CONDITION, 0));
-			break;			
+			break;
 
 		case FACT_HELICOPTER_IN_PERFECT_CONDITION:
 			gubFact[usFact] = ( gubHelicopterHitsTaken == 0 );
@@ -1364,7 +1364,7 @@ BOOLEAN CheckFact( UINT16 usFact, UINT8 ubProfileID )
 		default:
 			break;
 	}
-	
+
 //#endif
 	return( gubFact[usFact] );
 }
@@ -1484,7 +1484,7 @@ void InternalEndQuest( UINT8 ubQuest, INT16 sSectorX, INT16 sSectorY, BOOLEAN fU
 	}
 
 	if ( gubQuest[ubQuest ] == QUESTINPROGRESS )
-	{	
+	{
 		gubQuest[ubQuest] = QUESTDONE;
 
 	if ( fUpdateHistory )
@@ -1504,10 +1504,10 @@ void InternalEndQuest( UINT8 ubQuest, INT16 sSectorX, INT16 sSectorY, BOOLEAN fU
 		gMercProfiles[ MADAME ].bNPCData = 0;
 		gMercProfiles[ MADAME ].bNPCData2 = 0;
 	}
-	
+
 #endif
-	
-#ifdef JA2UB	
+
+#ifdef JA2UB
 	//if the quest is the FIX LAPTOP quest
 	if( ubQuest == QUEST_FIX_LAPTOP && gGameUBOptions.LaptopQuestEnabled == TRUE )
 	{
@@ -1679,7 +1679,7 @@ BOOLEAN LoadQuestInfoFromSavedGameFile( HWFILE hFile, UINT8 MaxQuest )
 BOOLEAN SaveLUAModderDataToSavedGameFile( HWFILE hFile )
 {
 	UINT32	uiNumBytesWritten;
-	
+
 	//Save all the states for the facts
 	FileWrite( hFile, gubModderLuaData, sizeof(INT32)* MODDER_LUA_DATA_MAX, &uiNumBytesWritten );
 	if ( uiNumBytesWritten != sizeof(INT32)* MODDER_LUA_DATA_MAX )
@@ -1729,7 +1729,7 @@ void GiveQuestRewardPoint( INT16 sQuestSectorX, INT16 sQuestsSectorY, INT8 bExpR
 					StatChange( MercPtrs[ i ], EXPERAMT, (bExpReward * gGameExternalOptions.usAwardSpecialExpForQuests), FALSE );
 			}
 		}
-	}	
+	}
 }
 
 

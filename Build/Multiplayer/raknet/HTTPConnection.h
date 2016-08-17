@@ -33,7 +33,7 @@ struct SystemAddress;
 /// Use Post() to send commands to the web server, and ProcessDataPacket() to update the connection with packets returned from TCPInterface that have the system address of the web server
 /// This class will handle connecting and reconnecting as necessary.
 ///
-/// Note that only one Post() can be handled at a time. 
+/// Note that only one Post() can be handled at a time.
 class RAK_DLL_EXPORT HTTPConnection
 {
 public:
@@ -50,7 +50,7 @@ public:
     /// \param data A NULL terminated string to submit to the server
 	/// \param contentType "Content-Type:" passed to post.
     void Post(const char *path, const char *data, const char *_contentType="application/x-www-form-urlencoded");
-    
+
     /// Get data returned by the HTTP server
     /// If IsFinished()==false then this may be empty or a partial
     /// response.
@@ -75,16 +75,16 @@ public:
     enum ResponseCodes { NoBody=1001, OK=200, Deleted=1002 };
 
 	HTTPConnection& operator=(const HTTPConnection& rhs){(void) rhs; return *this;}
-   
+
     /// Encapsulates a raw HTTP response and response code
     struct BadResponse
     {
     public:
 		BadResponse() {code=0;}
-        
+
         BadResponse(const unsigned char *_data, int _code)
             : data((const char *)_data), code(_code) {}
-        
+
         BadResponse(const char *_data, int _code)
             : data(_data), code(_code) {}
 
@@ -117,7 +117,7 @@ private:
     RakNet::RakString outgoing, incoming, path, contentType;
     DataStructures::Queue<BadResponse> badResponses;
     void Process(Packet *packet); // the workhorse
-    
+
     // this helps check the various status lists in TCPInterface
     typedef SystemAddress (TCPInterface::*StatusCheckFunction)(void);
     bool InList(StatusCheckFunction func);

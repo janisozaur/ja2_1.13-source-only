@@ -1,18 +1,18 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "AI All.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 
 	#include "Soldier Functions.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "AIInternals.h"
 	#include "Animation Control.h"
-	#include "pathai.h"
-	#include "overhead.h"
-	#include "items.h"
+	#include "PathAI.h"
+	#include "Overhead.h"
+	#include "Items.h"
 	#include "Message.h"
 	#include "Buildings.h"
-	#include "worldman.h"
+	#include "WorldMan.h"
 	#include "Assignments.h"
 	// added by SANDRO
 	#include "Soldier Profile.h"
@@ -396,7 +396,7 @@ INT8 FindBestPatient( SOLDIERTYPE * pSoldier, BOOLEAN * pfDoClimb )
 			pSoldier->aiData.usActionData = sBestAdjGridNo;
 			return( AI_ACTION_GET_CLOSER );
 		}
-	}	
+	}
 	else if (!TileIsOutOfBounds(sBestClimbGridNo))
 	{
 		*pfDoClimb = TRUE;
@@ -488,7 +488,7 @@ BOOLEAN DoctorIsPresent( SOLDIERTYPE * pPatient, BOOLEAN fOnDoctorAssignmentChec
 		if ( pPatient->ubID == pMedic->ubID )
 		{
 			// cannot make surgery on self!
-			continue; // NEXT!!!		
+			continue; // NEXT!!!
 		}
 		if ( fOnDoctorAssignmentCheck && !IS_DOCTOR(pMedic->bAssignment) )
 		{

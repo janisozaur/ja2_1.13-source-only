@@ -30,7 +30,7 @@
 #define	ANI_LAND_LEVEL					1
 #define	ANI_SHADOW_LEVEL				2
 #define	ANI_OBJECT_LEVEL				3
-#define	ANI_STRUCT_LEVEL				4	
+#define	ANI_STRUCT_LEVEL				4
 #define	ANI_ROOF_LEVEL					5
 #define	ANI_ONROOF_LEVEL				6
 #define ANI_TOPMOST_LEVEL				7
@@ -44,21 +44,21 @@ typedef struct TAG_anitile
 
 	LEVELNODE										*pLevelNode;
 	UINT8												ubLevelID;
-	INT16											sCurrentFrame;		
-	INT16												sStartFrame;	
-	INT16												sDelay;								
+	INT16											sCurrentFrame;
+	INT16												sStartFrame;
+	INT16												sDelay;
 	UINT16											usTileType;
 	UINT16											usNumFrames;
 
-	UINT16											usMissAnimationPlayed;	
-	UINT16											ubAttackerMissed;				
-	INT16												sRelativeX;							
-	INT16												sRelativeY;							
-	INT16												sRelativeZ;	
+	UINT16											usMissAnimationPlayed;
+	UINT16											ubAttackerMissed;
+	INT16												sRelativeX;
+	INT16												sRelativeY;
+	INT16												sRelativeZ;
 	INT32 sGridNo;
 	UINT16											usTileIndex;
 
-	UINT16											usCachedTileSubIndex;		// sub Index 
+	UINT16											usCachedTileSubIndex;		// sub Index
 	INT16												sCachedTileID;					// Index into cached tile ID
 
 	UINT8												ubOwner;

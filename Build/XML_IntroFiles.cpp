@@ -80,7 +80,7 @@ introNamesEndElementHandle(void *userData, const XML_Char *name)
 {
 	introNamesParseData * pData = (introNamesParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "VIDEO_FILES") == 0)
 		{
@@ -88,8 +88,8 @@ introNamesEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "FILE") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!IntroName_TextOnly)
 				{
 					wcscpy(zVideoFile[pData->curIntroNames.uiIndex].szFile, pData->curIntroNames.szFile);
@@ -97,8 +97,8 @@ introNamesEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(zVideoFile[pData->curIntroNames.uiIndex].szFile, pData->curIntroNames.szFile);
-				}		
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -133,7 +133,7 @@ BOOLEAN ReadInIntroNames(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading IntroFiles.xml" );
 
 	IntroName_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

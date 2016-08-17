@@ -2,19 +2,19 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "soldier control.h"
-	#include "soldier profile.h"
-	#include "drugs and alcohol.h"
-	#include "items.h"
-	#include "morale.h"
-	#include "points.h"
-	#include "message.h"
+	#include "Soldier Control.h"
+	#include "Soldier Profile.h"
+	#include "Drugs And Alcohol.h"
+	#include "Items.h"
+	#include "Morale.h"
+	#include "Points.h"
+	#include "Message.h"
 	#include "GameSettings.h" // SANDRO - had to add this, dammit!
 	#include "Random.h"
 	#include "Text.h"
 	#include "Interface.h"
 	#include "Food.h"			// added by Flugente
-	#include "Animation data.h"	// added by Flugente for SoldierBodyTypes
+	#include "Animation Data.h"	// added by Flugente for SoldierBodyTypes
 	#include "CampaignStats.h"	// added by Flugente
 	#include "DynamicDialogue.h"// added by Flugente
 #endif
@@ -61,7 +61,7 @@ BOOLEAN ApplyDrugs_New( SOLDIERTYPE *pSoldier, UINT16 usItem, UINT16 uStatusUsed
 
 	// we now add drug, disease, personality and disability effects
 	// every effect has a chance of happening (not entering a chance, so 0, always results in a effect for xml editing simplicity reasons)
-	
+
 	// add effects
 	std::vector<DRUG_EFFECT> vec_drug = NewDrug[drugused].drug_effects;
 
@@ -147,7 +147,7 @@ BOOLEAN ApplyDrugs_New( SOLDIERTYPE *pSoldier, UINT16 usItem, UINT16 uStatusUsed
 			}
 		}
 	}
-		
+
 	// do switch for Larry!!
 	if ( pSoldier->ubProfile == LARRY_NORMAL )
 	{
@@ -162,7 +162,7 @@ BOOLEAN ApplyDrugs_New( SOLDIERTYPE *pSoldier, UINT16 usItem, UINT16 uStatusUsed
 	{
 		HandleDynamicOpinionChange( pSoldier, OPINIONEVENT_ADDICT, TRUE, TRUE );
 	}
-	
+
 	if ( Item[usItem].alcohol > 0.0f )
 	{
 		FLOAT weight = pSoldier->GetBodyWeight( );
@@ -285,7 +285,7 @@ INT8 GetDrunkLevel( SOLDIERTYPE *pSoldier )
 	{
 		return HUNGOVER;
 	}
-	
+
 	if ( pSoldier->newdrugs.drinkstaken <= 0.01 )
 	{
 		return SOBER;
@@ -298,7 +298,7 @@ INT8 GetDrunkLevel( SOLDIERTYPE *pSoldier )
 	{
 		return BORDERLINE;
 	}
-	
+
 	return DRUNK;
 }
 
@@ -309,7 +309,7 @@ BOOLEAN DoesMercHaveDisability( SOLDIERTYPE *pSoldier, UINT8 aVal )
 	{
 		if ( gMercProfiles[pSoldier->ubProfile].bDisability == aVal )
 			return TRUE;
-		
+
 		if ( pSoldier->newdrugs.drugdisability == aVal )
 			return TRUE;
 	}
@@ -338,7 +338,7 @@ BOOLEAN DoesMercHavePersonality( SOLDIERTYPE *pSoldier, UINT8 aVal )
 void HandleAPEffectDueToDrugs( SOLDIERTYPE *pSoldier, INT16 *pubPoints )
 {
 	*pubPoints += pSoldier->newdrugs.size[DRUG_EFFECT_AP];
-	
+
 	if ( GetDrunkLevel( pSoldier ) == HUNGOVER )
 	{
 		// Reduce....
@@ -354,7 +354,7 @@ void HandleAPEffectDueToDrugs( SOLDIERTYPE *pSoldier, INT16 *pubPoints )
 void HandleBPEffectDueToDrugs( SOLDIERTYPE *pSoldier, INT16 *psPointReduction )
 {
 	*psPointReduction -= pSoldier->newdrugs.size[DRUG_EFFECT_BP];
-	
+
 	if ( GetDrunkLevel( pSoldier ) == HUNGOVER )
 	{
 		// Reduce....

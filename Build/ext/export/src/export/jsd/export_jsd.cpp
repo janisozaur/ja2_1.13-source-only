@@ -42,7 +42,7 @@ bool ja2xp::convertJSDtoXML(vfs::Path const& sSrc, vfs::Path const& sDst)
 		{
 			out_name = sDst;
 		}
-		 
+
 		std::wcout << L"Converting file \"" << it.value()->getPath().c_wcs() << L"\"" << std::endl;
 
 		vfs::COpenWriteFile wfile(out_name,true,true);

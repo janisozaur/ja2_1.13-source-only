@@ -3,34 +3,34 @@
 	#include "PreBattle Interface.h"
 #else
 	#include "sgp.h"
-	#include "air raid.h"
-	#include "game event hook.h"
-	#include "game clock.h"
-	#include "strategicmap.h"
+	#include "Air Raid.h"
+	#include "Game Event Hook.h"
+	#include "Game Clock.h"
+	#include "StrategicMap.h"
 	#include "PreBattle Interface.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "jascreens.h"
-	#include "random.h"
-	#include "overhead types.h"
+	#include "Random.h"
+	#include "Overhead Types.h"
 	#include "Sound Control.h"
-	#include "timer control.h"
-	#include "dialogue control.h"
-	#include "overhead.h"
-	#include "message.h"
-	#include "isometric utils.h"
-	#include "soldier macros.h"
-	#include "los.h"
+	#include "Timer Control.h"
+	#include "Dialogue Control.h"
+	#include "Overhead.h"
+	#include "Message.h"
+	#include "Isometric Utils.h"
+	#include "Soldier Macros.h"
+	#include "LOS.h"
 	#include "math.h"
-	#include "explosion control.h"
-	#include "interface.h"
-	#include "music control.h"
+	#include "Explosion Control.h"
+	#include "Interface.h"
+	#include "Music Control.h"
 	#include "Campaign Types.h"
 	#include "GameSettings.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Morale.h"
-	#include "Map screen helicopter.h"
-	#include "structure wrap.h"
-	#include "meanwhile.h"
+	#include "Map Screen Helicopter.h"
+	#include "Structure Wrap.h"
+	#include "Meanwhile.h"
 #endif
 
 #include "GameInitOptionsScreen.h"
@@ -359,7 +359,7 @@ INT32 PickRandomLocationAtMinSpacesAway( INT32 sGridNo, INT16 sMinValue, INT16 s
 
 	sX = CenterX( sGridNo );
 	sY = CenterY( sGridNo );
-	
+
 	while(TileIsOutOfBounds(sNewGridNo))
 	{
 		sNewX = sX + sMinValue + (INT16)Random( sRandomVar );
@@ -511,7 +511,7 @@ void AirRaidLookForDive( )
 	if ( fDoDive )
 	{
 		// If we are are beginning game, only do gun dives..
-		
+
 		if ( gAirRaidDef.uiFlags & AIR_RAID_BEGINNING_GAME && !zDiffSetting[gGameOptions.ubDifficultyLevel].bAirRaidLookForDive )
 		{
 			if ( gbNumDives == 0 )
@@ -589,7 +589,7 @@ void BeginBombing( )
 
 	// Pick location...
 	gsDiveTargetLocation = PickLocationNearAnyMercInSector( );
-	
+
 	if (TileIsOutOfBounds(gsDiveTargetLocation))
 	{
 		// TODO.WANNE: Hardcoded grid number
@@ -650,7 +650,7 @@ void BeginDive( )
 	// Pick location...
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("BeginDive: pick location"));
 	gsDiveTargetLocation = PickLocationNearAnyMercInSector( );
-	
+
 	if (TileIsOutOfBounds(gsDiveTargetLocation))
 	{
 		// TODO.WANNE: Hardcoded grid number

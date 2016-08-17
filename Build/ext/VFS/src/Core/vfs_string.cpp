@@ -1,10 +1,10 @@
-/* 
+/*
  * bfVFS : vfs/Core/vfs_string.cpp
  *  - string class that allows conversions to/from Unicode representation (uses wchar_t internally)
  *  - comparison, concatenation, stream output class/functions
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -50,7 +50,7 @@ namespace _StrCmp
 		{
 			++s1;
 			++s2;
-		}	
+		}
 	}
 	template<typename CharType>
 	static inline void AdvanceCase( const CharType*& s1, const CharType*& s2 )
@@ -59,7 +59,7 @@ namespace _StrCmp
 		{
 			++s1;
 			++s2;
-		}	
+		}
 	}
 	////////////////////////////////////////////////////////////////
 	template<typename CharType>
@@ -300,7 +300,7 @@ vfs::String::size_t vfs::String::narrow(wchar_t const* src_str, vfs::String::siz
 	}
 	return 0;
 }
-// 
+//
 std::wstring vfs::String::widen(char const* str, vfs::String::size_t length)
 {
 	std::wstring ws;

@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Tools/vfs_log.cpp
  *  - simple file logger
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -112,7 +112,7 @@ vfs::Log::~Log()
 		delete _file;
 		_file = NULL;
 	}
-	
+
 	// one extra unlock wouldn't hurt
 	_mutex.unlock();
 }
@@ -300,8 +300,8 @@ void vfs::Log::setBufferSize(vfs::UInt32 bufferSize)
 
 void vfs::Log::_test_flush(bool force)
 {
-	if( (_flush_mode == FLUSH_IMMEDIATELY) || 
-		(_flush_mode == FLUSH_BUFFER && _buffer_size > _buffer_test_size) || 
+	if( (_flush_mode == FLUSH_IMMEDIATELY) ||
+		(_flush_mode == FLUSH_BUFFER && _buffer_size > _buffer_test_size) ||
 		(/*_flush_mode == FLUSH_ON_DELETE &&*/ force == true) )
 	{
 		flush();
@@ -374,7 +374,7 @@ void vfs::Log::flush()
 		time ( &rawtime );
 		std::string datetime(ctime(&rawtime));
 		std::string s_out;
-	
+
 		vfs::size_t wloc = wfile->getWritePosition();
 		if(wloc > 0)
 		{

@@ -1,22 +1,22 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Color Choosing Skin Hair.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Color Choosing.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Portraits.h"
 	#include "WCheck.h"
 	#include "Animation Data.h"
@@ -34,7 +34,7 @@
 	L"Black Skin",
 	L"none",
 };
- 
+
 // Hair colors
 STR16 sHairTexts[]={
 	L"Brown Head",
@@ -183,7 +183,7 @@ void EnterIMPColorChoice( void )
 		if( fCharacterIsMale )
 		{
 			if ( gIMPMaleValues[ iPortraitNumber ].uiIndex == iPortraitNumber && gIMPMaleValues[ iPortraitNumber ].bSex == 0 )
-			{		
+			{
 				iCurrentSkin = gIMPMaleValues[ iPortraitNumber ].iCurrentSkin;
 				iCurrentHair = gIMPMaleValues[ iPortraitNumber ].iCurrentHair;
 				iCurrentShirt = gIMPMaleValues[ iPortraitNumber ].iCurrentShirt;
@@ -193,16 +193,16 @@ void EnterIMPColorChoice( void )
 		}
 		else
 		{
-			
+
 			if ( gIMPFemaleValues[ iPortraitNumber ].uiIndex == iPortraitNumber && gIMPFemaleValues[ iPortraitNumber ].bSex == 1 )
-			{		
+			{
 				iCurrentSkin = gIMPFemaleValues[ iPortraitNumber ].iCurrentSkin;
 				iCurrentHair = gIMPFemaleValues[ iPortraitNumber ].iCurrentHair;
 				iCurrentShirt = gIMPFemaleValues[ iPortraitNumber ].iCurrentShirt;
 				iCurrentPants = gIMPFemaleValues[ iPortraitNumber ].iCurrentPants;
 				bBigBody = gIMPFemaleValues[ iPortraitNumber ].bBigBody;
 			}
-			
+
 		}
 
 	// Based on the portrait chosen, set the default colors, when colors
@@ -339,7 +339,7 @@ void EnterIMPColorChoice( void )
 
 
 void RenderIMPColorChoice( void )
-{	
+{
 	//render the metal background graphic
 	RenderProfileBackGround();
 

@@ -2,36 +2,36 @@
 	#include "TileEngine All.h"
 #else
 	#include "sgp.h"
-	#include "lighting.h"
-	#include "environment.h"
-	#include "renderworld.h"
+	#include "Lighting.h"
+	#include "Environment.h"
+	#include "RenderWorld.h"
 	#include "Sound Control.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Game Clock.h"
-	#include "quests.h"
+	#include "Quests.h"
 	#include "Ambient Control.h"
 	#include "Strategic Event Handler.h"
 	#include "BobbyR.h"
-	#include "mercs.h"
-	#include "email.h"
+	#include "Mercs.h"
+	#include "Email.h"
 	#include "Merc Hiring.h"
-	#include "insurance Contract.h"
+	#include "Insurance Contract.h"
 	#include "Game Events.h"
-	#include "message.h"
-	#include "opplist.h"
+	#include "Message.h"
+	#include "Opplist.h"
 	#include "Random.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "GameSettings.h"
 	#include "Points.h"					// added by Flugente
 	#include "Campaign.h"				// added by Flugente
 	#include "Isometric Utils.h"		// added by Flugente
 	#include "Strategic Movement.h"		// added by Flugente
 	#include "tiledef.h"				// added by Flugente
-	#include "worldman.h"				// added by Flugente
+	#include "WorldMan.h"				// added by Flugente
 #endif
 
 #include "Text.h"
-#include "connect.h"
+#include "Connect.h"
 
 extern SECTOR_EXT_DATA	SectorExternalData[256][4];
 
@@ -176,7 +176,7 @@ void EnvironmentController( BOOLEAN fCheckForLights )
 {
 	UINT32			uiOldWorldHour;
 	UINT8			ubLightAdjustFromWeather = 0;
-	
+
 	// do none of this stuff in the basement or caves
 	if( gfBasement || gfCaves )
 	{
@@ -209,8 +209,8 @@ void EnvironmentController( BOOLEAN fCheckForLights )
 		// ONly do indooors
 		if( !gfBasement && !gfCaves )
 		{
-			if ( SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_RAIN 
-				 || SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_THUNDERSHOWERS 
+			if ( SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_RAIN
+				 || SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_THUNDERSHOWERS
 				 || SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_SANDSTORM )
 			{
 				if (gGameSettings.fOptions[ TOPTION_RAIN_SOUND ] == TRUE)
@@ -608,7 +608,7 @@ void ForecastDayEvents( )
 							helperstruct[sector].chance = SectorExternalData[sector][0].sandstormchance;
 
 						DetermineLocalizedWeatherGivenHelperArray( helperstruct );
-				
+
 						for ( UINT8 sector = 0; sector < 255; ++sector )
 						{
 							if ( helperstruct[sector].weatherhappens )
@@ -862,7 +862,7 @@ BOOLEAN LightningEndOfTurn( UINT8 ubTeam )
 		EnvDoLightning();
 		return FALSE;
 	}
-	
+
 	return TRUE;
 }
 
@@ -1106,7 +1106,7 @@ void AddSnakeAmim( INT32 sGridno, UINT8 usDirection )
 		ANITILE_PARAMS	AniParams;
 
 		memset( &AniParams, 0, sizeof(ANITILE_PARAMS) );
-		
+
 		AniParams.sGridNo = sGridno;
 		AniParams.ubLevelID = ANI_OBJECT_LEVEL;
 		AniParams.sDelay = 100;

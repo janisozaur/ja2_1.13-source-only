@@ -1,13 +1,13 @@
 #ifndef __XML_H
 #define __XML_H
 
-#include "armsdealerinvinit.h"
+#include "ArmsDealerInvInit.h"
 #include "EnemyItemDrops.h"
 #include "Loading Screen.h"
-#include "faces.h"
+#include "Faces.h"
 #include "Interface.h"
 #include "XML_SenderNameList.h"
-#include "mainmenuscreen.h"
+#include "MainMenuScreen.h"
 
 #include "ub_config.h"
 #include "Strategic Town Loyalty.h"
@@ -539,7 +539,7 @@ extern BOOLEAN WriteSoundProfile( STR fileName );
 extern BOOLEAN WriteRandomStats( STR fileName );
 extern BOOLEAN ReadInRandomStats( STR fileName );
 
-//new profiles by Jazz	
+//new profiles by Jazz
 extern BOOLEAN ReadInMercAvailability(STR fileName, BOOLEAN localizedVersion);
 extern BOOLEAN WriteMercAvailability(STR fileName);
 

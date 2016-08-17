@@ -1,11 +1,11 @@
-/** 
+/**
  * @file
  * @author feynman (bears-pit.com)
  */
 
 #include "../include/NullPlan.h"
 
-#include "../../TacticalAI/ai.h" // for EndAIGuysTurn
+#include "../../TacticalAI/AI.h" // for EndAIGuysTurn
 
 namespace AI
 {

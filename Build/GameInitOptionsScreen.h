@@ -25,7 +25,7 @@ typedef struct
 	CHAR16	szDiffName[128];
 	CHAR16 szConfirmText[255];
 	CHAR16	szPrefixXmlName[128];
-	
+
 	INT32 iStartingCash;
 	INT8 iEnemyAPBonus;
 	UINT16 iNumKillsPerProgressPoint;
@@ -44,7 +44,7 @@ typedef struct
 	BOOLEAN bAggressiveQueenAi;
 	INT32 iMaxMercDeaths;
 	UINT8 usLootStatusModifier;
-	
+
 	//Creatures Settings
 	UINT16 iCreatureSpreadTime;
 	UINT8 iQueenReproductionBase;
@@ -52,7 +52,7 @@ typedef struct
 	UINT8 iQueenInitBonusSpread;
 	INT8 iCreaturePopulationModifier;
 	INT8 iCreatureTownAggressiveness;
-	
+
 	//sectors
 	UINT8 iJ9B1NumTroops;
 	UINT8 iJ9B2NumCreatures;
@@ -61,7 +61,7 @@ typedef struct
 	UINT8 iO3B1NumTroops;
 	UINT8 iO3B1NumElites;
 	UINT8 iP3B1NumElites;
-	
+
 	BOOLEAN bStrategicAiActionWakeQueen;
 	UINT16 iUpdateLastDayOfPlayerActivity;
 	INT32 iChanceOfEnemyAmbushes;
@@ -87,16 +87,16 @@ typedef struct
 	UINT32 iGetNumberOfTurnsPowerGenFanWillBeStoppedFor; //UB
 	BOOLEAN bRadioSightings;
 	BOOLEAN bRadioSightings2;
-	
+
 	FLOAT NewDifficultySettingsBASE_DIFFICULTY;
 	FLOAT NewDifficultySettingsAIM_DIFFICULTY;
-	
+
 	BOOLEAN bEnemyMoraleWorried;
 
 	UINT8 usMaxMortarsPerTeam;
-	
+
 } DIFFICULTY_SETTINGS_VALUES;
-extern UINT8 MaxDifficultySettingsValues; 
+extern UINT8 MaxDifficultySettingsValues;
 extern DIFFICULTY_SETTINGS_VALUES zDiffSetting[MAX_DIF_LEVEL];
 
 #endif

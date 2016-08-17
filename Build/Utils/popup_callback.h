@@ -1,7 +1,7 @@
 #ifndef POPUP_CALLBACK_CLASS
 	#define POPUP_CALLBACK_CLASS
 
-	#include "sgp.h"	
+	#include "sgp.h"
 
 	class popupCallback;
 
@@ -30,7 +30,7 @@
 		popupCallbackFunction3(void);
 		popupCallbackFunction3(void * newFun, P1 param, P2 param2, P3 param3);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename R,typename P1,typename P2,typename P3>
@@ -72,7 +72,7 @@
 		popupCallbackFunction3(void);
 		popupCallbackFunction3(void * newFun, P1 param, P2 param2, P3 param3);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename P1,typename P2,typename P3>
@@ -114,7 +114,7 @@
 		popupCallbackFunction2(void);
 		popupCallbackFunction2(void * newFun, P1 param, P2 param2);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename R,typename P1,typename P2>
@@ -153,7 +153,7 @@
 		popupCallbackFunction2(void);
 		popupCallbackFunction2(void * newFun, P1 param, P2 param2);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename P1,typename P2>
@@ -192,7 +192,7 @@
 		popupCallbackFunction(void);
 		popupCallbackFunction(void * newFun, P1 param);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename R,typename P1>
@@ -227,7 +227,7 @@
 		popupCallbackFunction(void);
 		popupCallbackFunction(void * newFun, P1 param);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename P1>
@@ -250,7 +250,7 @@
 
 	template<typename P1>
 	bool popupCallbackFunction<void,P1>::call(void){
-		try { 
+		try {
 			(this->fun)(this->param_1);
 		} catch (...) {
 			return false;
@@ -267,7 +267,7 @@
 		popupCallbackFunction(void);
 		popupCallbackFunction(void * newFun);
 		virtual void bind(void * newFun);
-		virtual bool call(void);	
+		virtual bool call(void);
 	};
 
 	template<typename R>
@@ -312,13 +312,13 @@
 			this->fun = static_cast< void(*)(void)>(newFun);
 		};
 		virtual bool call(void){
-			try { 
+			try {
 				(this->fun)();
 			} catch (...) {
 				return false;
 			}
 			return true;
-		};	
+		};
 	};
 
 	class popupCallbackLua : public popupCallback{
@@ -334,7 +334,7 @@
 		};
 		virtual bool call(void){
 			return true;
-		};	
+		};
 	};
 
 #endif

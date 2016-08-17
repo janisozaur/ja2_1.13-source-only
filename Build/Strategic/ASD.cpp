@@ -8,7 +8,7 @@
 #else
 #include <math.h>
 #include "ASD.h"
-#include "strategic.h"
+#include "Strategic.h"
 #include "WCheck.h"
 #include "Utilities.h"
 #include "WordWrap.h"
@@ -18,25 +18,25 @@
 #include "Encrypted File.h"
 #include "Text.h"
 #include "Multi Language Graphic Utils.h"
-#include "random.h"
+#include "Random.h"
 #include "Interface.h"
 #include "Soldier Add.h"
 #include "Soldier Profile.h"
 #include "Overhead.h"
 #include "Map Screen Interface.h"
-#include "finances.h"
+#include "Finances.h"
 #include "Game Clock.h"
 #include "SaveLoadGame.h"
 #include "GameVersion.h"
-#include "message.h"
+#include "Message.h"
 #include "Game Event Hook.h"
-#include "militia control.h"
+#include "Militia Control.h"
 #include "Town Militia.h"
 #include "Strategic Town Loyalty.h"
-#include "map information.h"
+#include "Map Information.h"
 
 #include "Campaign.h"
-#include "random.h"
+#include "Random.h"
 #include "Explosion Control.h"
 #include "Strategic AI.h"
 #include "Strategic Mines.h"
@@ -45,12 +45,12 @@
 #include "Queen Command.h"
 #include "Map Screen Helicopter.h"
 #include "Points.h"
-#include "worldman.h"
+#include "WorldMan.h"
 #include "Map Information.h"
-#include "opplist.h"
+#include "Opplist.h"
 #include "Dialogue Control.h"
 #include "Sound Control.h"
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include "Isometric Utils.h"
 #endif
 
@@ -199,12 +199,12 @@ void UpdateASD( )
 	if ( !(gASD_Flags & ASDFACT_TANK_UNLOCKED) && HighestPlayerProgressPercentage( ) >= gGameExternalOptions.usTankMinimumProgress )
 		SetASDFlag( ASDFACT_TANK_UNLOCKED );
 
-	
+
 	// determine whether we need to buy new toys
 	ASDDecideOnPurchases();
 
 	// decide how to use helicopters
-	ASDDecideHeliOperations();	
+	ASDDecideHeliOperations();
 }
 
 void ASDDecideOnPurchases()
@@ -582,7 +582,7 @@ UINT8 ENEMY_HELI::SetHeliFlightPath( UINT8 aDest )
 void ENEMY_HELI::Destroy( )
 {
 	hp = 0;
-	
+
 	flagmask |= ENEMYHELI_DESTROYED;
 
 	// if the player knows about this heli, play a sound and leave a message
@@ -832,7 +832,7 @@ void UpdateEnemyHeli( INT16 id )
 		{
 			if ( heli.sector_current == heli.sector_waypoint )
 				heli.sector_waypoint = heli.sector_destination;
-			
+
 			heli.sector_current = GetNextEnemyHeliSector( heli.sector_current, heli.sector_waypoint );
 
 			if ( heli.fuel )
@@ -1142,7 +1142,7 @@ void EnemyHeliMANPADSCheck( INT16 id )
 
 					// determine distance from SAM to heli
 					FLOAT distance = sqrt(FLOAT(abs( heli_x - pSoldier->sSectorX ) * abs( heli_x - pSoldier->sSectorX ) + abs( heli_y - pSoldier->sSectorY ) * abs( heli_y - pSoldier->sSectorY ) ));
-					
+
 					// distance penalty
 					samcth = (samcth * (100.0f - 20 * distance)) / 100.0f;
 

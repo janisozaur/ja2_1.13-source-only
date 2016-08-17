@@ -6,27 +6,27 @@
 	#include "GameInitOptionsScreen.h"
 	#include "GameSettings.h"
 	#include "Utilities.h"
-	#include "wCheck.h"
+	#include "WCheck.h"
 	#include "Font Control.h"
 	#include "WordWrap.h"
 	#include "Render Dirty.h"
 	#include "Input.h"
 	#include "Options Screen.h"
 	#include "English.h"
-	#include "Sysutil.h"
+	#include "SysUtil.h"
 	#include "Fade Screen.h"
 	#include "Cursor Control.h"
 	#include "Music Control.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Intro.h"
 	#include "Text.h"
 	#include "_Ja25EnglishText.h"
 	#include "Soldier Profile.h"
 #endif
 
-#include "gameloop.h"
-#include "connect.h"
-#include "saveloadscreen.h"
+#include "GameLoop.h"
+#include "Connect.h"
+#include "SaveLoadScreen.h"
 
 #ifdef JA2UB
 	#include "ub_config.h"
@@ -60,11 +60,11 @@
 #define		GIO_TOGGLE_TEXT_COLOR					FONT_MCOLOR_WHITE
 
 //buttons
-#define		GIO_CANCEL_X							iScreenWidthOffset + ((320 - 115) / 2)  
+#define		GIO_CANCEL_X							iScreenWidthOffset + ((320 - 115) / 2)
 
 #define		GIO_BTN_START_X							iScreenWidthOffset + 320 + 105
 #define		GIO_BTN_START_Y							iScreenHeightOffset + 435
- 
+
 
 //main title
 #define		GIO_MAIN_TITLE_X						0
@@ -289,7 +289,7 @@
 #define		JA2SP_UB_RANDOM_MANUEL_TEXT				"RANDOM_MANUEL_TEXT"
 
 DIFFICULTY_SETTINGS_VALUES zDiffSetting[15];
-UINT8 MaxDifficultySettingsValues; 
+UINT8 MaxDifficultySettingsValues;
 
 enum
 {
@@ -303,7 +303,7 @@ enum
 enum
 {
 	GIO_TEXT_OFF,
-	GIO_TEXT_ON,	
+	GIO_TEXT_ON,
 
 	NUM_TEXT_STYLES,
 };
@@ -311,7 +311,7 @@ enum
 enum
 {
 	GIO_REALISTIC,
-	GIO_SCI_FI,	
+	GIO_SCI_FI,
 
 	NUM_GAME_STYLES,
 };
@@ -606,9 +606,9 @@ BOOLEAN SpIniExists()
 {
 	BOOLEAN exists = TRUE;
 
-	if(!getVFS()->fileExists(JA2SP_INI_FILENAME))	
-		exists = FALSE;		
-	
+	if(!getVFS()->fileExists(JA2SP_INI_FILENAME))
+		exists = FALSE;
+
 	return exists;
 }
 
@@ -626,10 +626,10 @@ UINT32	GameInitOptionsScreenInit( void )
 	gGameOptions.ubDifficultyLevel =  ((UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_DIFFICULTY_LEVEL, 1)) + 1;
 
 	// Bobby Ray Quality (Default: Great = 2)
-	gGameOptions.ubBobbyRayQuality = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUALITY, 2);		 
+	gGameOptions.ubBobbyRayQuality = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUALITY, 2);
 
 	// Bobby Ray Quantity (Default: Great = 2)
-	gGameOptions.ubBobbyRayQuantity = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUANTITY, 2);	 
+	gGameOptions.ubBobbyRayQuantity = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUANTITY, 2);
 
 	// Max. IMP Characters
 	UINT8 maxIMPCharacterCount = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_MAX_IMP_CHARACTERS, 1);
@@ -647,7 +647,7 @@ UINT32	GameInitOptionsScreenInit( void )
 
 	// Inventory Attachments (Default: New/New = 2)
 	UINT8 ubInventoryAttachmentSystem = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_INVENTORY_ATTACHMENTS, 0);
-	
+
 	// NIV is not allowed
 	if (!IsNIVModeValid(true))
 		ubInventoryAttachmentSystem = 0;
@@ -683,13 +683,13 @@ UINT32	GameInitOptionsScreenInit( void )
 
 	// Available Arsenal (Default: Tons of Guns = 1)
 	gGameOptions.fGunNut =  (BOOLEAN)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_AVAILABLE_ARSENAL, 1);
-	
+
 	// tex and john
-	gGameUBOptions.fTexAndJohn =  (BOOLEAN)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_UB_RPC_TEX_AND_JOHN, 0);	
-	
+	gGameUBOptions.fTexAndJohn =  (BOOLEAN)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_UB_RPC_TEX_AND_JOHN, 0);
+
 	// Random Manuel Text
-	gGameUBOptions.fRandomManuelText =  (BOOLEAN)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_UB_RANDOM_MANUEL_TEXT, 0);	
-	
+	gGameUBOptions.fRandomManuelText =  (BOOLEAN)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_UB_RANDOM_MANUEL_TEXT, 0);
+
 	// Squad size (Default: 6)
 	UINT8 ubSquadSize = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_SQUAD_SIZE, 6);
 
@@ -776,7 +776,7 @@ UINT32	GameInitOptionsScreenShutdown( void )
 BOOLEAN		EnterGIOScreen()
 {
 	VOBJECT_DESC	VObjectDesc, VObjectDesc2;
-	
+
 	if( gfGIOButtonsAllocated )
 		return( TRUE );
 
@@ -835,7 +835,7 @@ BOOLEAN		EnterGIOScreen()
 	giGIODifficultyButton[ 1 ] = QuickCreateButton( giGIODifficultyButtonImage[ 1 ], GIO_DIF_SETTING_X + 158, GIO_DIF_SETTING_Y ,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 										BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnGIODifficultySelectionRightCallback );
-	
+
 	// set user data
 	MSYS_SetBtnUserData(giGIODifficultyButton[0],0, 0 );
 	MSYS_SetBtnUserData(giGIODifficultyButton[1],0, 1 );
@@ -857,7 +857,7 @@ BOOLEAN		EnterGIOScreen()
 	giGIOIMPNumberButton[ 1 ] = QuickCreateButton( giGIOIMPNumberButtonImage[ 1 ], GIO_IMP_SETTING_X + 158, GIO_IMP_SETTING_Y ,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 										BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnGIOIMPNumberSelectionRightCallback );
-	
+
 	// set user data
 	MSYS_SetBtnUserData(giGIOIMPNumberButton[0],0, 0 );
 	MSYS_SetBtnUserData(giGIOIMPNumberButton[1],0, 1 );
@@ -896,7 +896,7 @@ BOOLEAN		EnterGIOScreen()
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GAME SETTING ( realistic, sci fi )
 
-	
+
 	guiGameTextTogglesImage[ GIO_TEXT_OFF ] = 	UseLoadedButtonImage( guiTraitsOptionTogglesImage[ GIO_TRAITS_OLD ], -1,1,-1,3,-1 );
 	guiGameTextToggles[ GIO_TEXT_OFF ] = CreateIconAndTextButton( guiGameTextTogglesImage[ GIO_TEXT_OFF ], gzGIOScreenText[ GIO_REALISTIC_TEXT ], GIO_TOGGLE_TEXT_FONT,
 													GIO_TOGGLE_TEXT_COLOR, NO_SHADOW,
@@ -920,9 +920,9 @@ BOOLEAN		EnterGIOScreen()
 
 	if( gGameUBOptions.fRandomManuelText )
 		ButtonList[ guiGameTextToggles[ GIO_TEXT_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	else 
-		ButtonList[ guiGameTextToggles[ GIO_TEXT_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;		
-	
+	else
+		ButtonList[ guiGameTextToggles[ GIO_TEXT_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// IRON MAN SETTING
 
@@ -950,7 +950,7 @@ BOOLEAN		EnterGIOScreen()
 	//if( gGameOptions.fIronManMode )
 	//	ButtonList[ guiGameSaveToggles[ GIO_IRON_MAN ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	//else
-	//	ButtonList[ guiGameSaveToggles[ GIO_CAN_SAVE ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+	//	ButtonList[ guiGameSaveToggles[ GIO_CAN_SAVE ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 	giGIOExtraDifficultySettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ], -1,0,-1,1,-1 );
 	giGIOExtraDifficultySettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ], -1,2,-1,3,-1 );
@@ -974,7 +974,7 @@ BOOLEAN		EnterGIOScreen()
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NUMBER OF TERRORISTS SETTING
-		
+
 	guiRpcOptionTogglesImage[ GIO_TEX_JOHN_RANDOM ] = 	UseLoadedButtonImage( guiTraitsOptionTogglesImage[ GIO_TRAITS_OLD ], -1,1,-1,3,-1 );
 	guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ] = CreateIconAndTextButton( guiRpcOptionTogglesImage[ GIO_TEX_JOHN_RANDOM ], gzGIOScreenText[ GIO_TERRORISTS_RANDOM_TEXT ], GIO_TOGGLE_TEXT_FONT,
 													GIO_TOGGLE_TEXT_COLOR, NO_SHADOW,
@@ -982,15 +982,15 @@ BOOLEAN		EnterGIOScreen()
 													TEXT_CJUSTIFIED,
 													(GIO_TERRORISTS_SETTING_X), (GIO_TERRORISTS_SETTING_Y + 10), BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 													DEFAULT_MOVE_CALLBACK, BtnGIORpcRandomCallback);
-	
+
 	guiRpcOptionTogglesImage[ GIO_TEX_AND_JOHN ] = UseLoadedButtonImage( guiTraitsOptionTogglesImage[ GIO_TRAITS_OLD ], -1,1,-1,3,-1 );
 	guiRpcOptionToggles[ GIO_TEX_AND_JOHN ] = CreateIconAndTextButton( guiRpcOptionTogglesImage[ GIO_TEX_AND_JOHN ],  gzGIOScreenText[ GIO_TERRORISTS_ALL_TEXT ], GIO_TOGGLE_TEXT_FONT,
 													GIO_TOGGLE_TEXT_COLOR, NO_SHADOW,
 													GIO_TOGGLE_TEXT_COLOR, NO_SHADOW,
 													TEXT_CJUSTIFIED,
 													(GIO_TERRORISTS_SETTING_X + 74), (GIO_TERRORISTS_SETTING_Y + 10), BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
-													DEFAULT_MOVE_CALLBACK, BtnGIORpcAllCallback );	
-																								
+													DEFAULT_MOVE_CALLBACK, BtnGIORpcAllCallback );
+
 	SpecifyButtonSoundScheme( guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ], BUTTON_SOUND_SCHEME_BIGSWITCH3 );
 	SpecifyButtonSoundScheme( guiRpcOptionToggles[ GIO_TEX_AND_JOHN ], BUTTON_SOUND_SCHEME_BIGSWITCH3 );
 	MSYS_SetBtnUserData(guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ],0, 0 );
@@ -998,12 +998,12 @@ BOOLEAN		EnterGIOScreen()
 
 	if( gGameUBOptions.fTexAndJohn )
 		ButtonList[ guiRpcOptionToggles[ GIO_TEX_AND_JOHN ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	else 
-		ButtonList[ guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ] ]->uiFlags |= BUTTON_CLICKED_ON;		
-	
+	else
+		ButtonList[ guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ] ]->uiFlags |= BUTTON_CLICKED_ON;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// BOBBY RAY SETTING
-	
+
 	giGIOBRQualitySettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ], -1,0,-1,1,-1 );
 	giGIOBRQualitySettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ], -1,2,-1,3,-1 );
 
@@ -1042,7 +1042,7 @@ BOOLEAN		EnterGIOScreen()
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ITEM PROGRESS SETTING
-	
+
 	giGIOProgressSettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ], -1,0,-1,1,-1 );
 	giGIOProgressSettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ], -1,2,-1,3,-1 );
 
@@ -1067,7 +1067,7 @@ BOOLEAN		EnterGIOScreen()
 	// OLD/NEW INVENTORY SETTING
 
 	if (IsNIVModeValid(true) == TRUE )
-	{		
+	{
 		giGIOInventorySettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ],-1,0,-1,1,-1 );
 		giGIOInventorySettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ],-1,2,-1,3,-1 );
 
@@ -1133,7 +1133,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fEnemiesDropAllItems )
 		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GUN SETTING
@@ -1180,11 +1180,11 @@ BOOLEAN		EnterGIOScreen()
 		giGIOSquadSizeButton[ 1 ] = QuickCreateButton( giGIOSquadSizeButtonImage[ 1 ], GIO_SQUAD_SIZE_SETTING_X + 158, GIO_SQUAD_SIZE_SETTING_Y ,
 											BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 											BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnGIOSquadSizeSelectionRightCallback );
-		
+
 		// set user data
 		MSYS_SetBtnUserData(giGIOSquadSizeButton[0],0, 0 );
 		MSYS_SetBtnUserData(giGIOSquadSizeButton[1],0, 1 );
-		
+
 		switch (gGameOptions.ubSquadSize)
 		{
 			case 6:
@@ -1226,7 +1226,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fInventoryCostsAP )
 		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1256,7 +1256,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fUseNCTH )
 		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// IMPROVED INTERRUPT SYSTEM ON/OFF SETTING
@@ -1285,7 +1285,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fImprovedInterruptSystem )
 		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1344,12 +1344,12 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fFoodSystem )
 		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	//Reset the exit screen
 	gubGIOExitScreen = GAME_INIT_OPTIONS_SCREEN;
 
@@ -1413,8 +1413,8 @@ void BtnGIODifficultySelectionRightCallback( GUI_BUTTON *btn,INT32 reason )
 		return;
 
 	if( reason & MSYS_CALLBACK_REASON_LBUTTON_REPEAT )
-	{	
-		if ( iCurrentDifficulty < MaxDifficultySettingsValues /*NUM_DIFF_SETTINGS*/ - 2 ) 
+	{
+		if ( iCurrentDifficulty < MaxDifficultySettingsValues /*NUM_DIFF_SETTINGS*/ - 2 )
 		{
 			PlayButtonSound( giGIODifficultyButton[1], BUTTON_SOUND_CLICKED_ON );
 
@@ -1430,7 +1430,7 @@ void BtnGIODifficultySelectionRightCallback( GUI_BUTTON *btn,INT32 reason )
 	{
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
 
-		if ( iCurrentDifficulty  < MaxDifficultySettingsValues /*NUM_DIFF_SETTINGS*/ - 2 )  //2	
+		if ( iCurrentDifficulty  < MaxDifficultySettingsValues /*NUM_DIFF_SETTINGS*/ - 2 )  //2
 		{
 			PlayButtonSound( giGIODifficultyButton[1], BUTTON_SOUND_CLICKED_ON );
 
@@ -1991,7 +1991,7 @@ void BtnGIOOldTraitsCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiTraitsOptionToggles[ GIO_TRAITS_NEW ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiTraitsOptionToggles[ GIO_TRAITS_OLD ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2014,7 +2014,7 @@ void BtnGIONewTraitsCallback(GUI_BUTTON *btn,INT32 reason)
 
 			ButtonList[ guiTraitsOptionToggles[ GIO_TRAITS_OLD ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 			btn->uiFlags|=(BUTTON_CLICKED_ON);
-				
+
 			PlayButtonSound( guiTraitsOptionToggles[ GIO_TRAITS_NEW ], BUTTON_SOUND_CLICKED_ON );
 		}
 	}
@@ -2039,7 +2039,7 @@ void BtnGIOOffStyleCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameTextToggles[ GIO_TEXT_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameTextToggles[ GIO_TEXT_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2054,7 +2054,7 @@ void BtnGIOOnStyleCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameTextToggles[ GIO_TEXT_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameTextToggles[ GIO_TEXT_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2070,7 +2070,7 @@ void BtnGIOIronManOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameSaveToggles[ GIO_IRON_MAN ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameStyleToggles[ GIO_CAN_SAVE ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2085,7 +2085,7 @@ void BtnGIOIronManOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameSaveToggles[ GIO_CAN_SAVE ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameStyleToggles[ GIO_IRON_MAN ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2101,7 +2101,7 @@ void BtnGIORpcRandomCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiRpcOptionToggles[ GIO_TEX_AND_JOHN ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2116,7 +2116,7 @@ void BtnGIORpcAllCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiRpcOptionToggles[ GIO_TEX_JOHN_RANDOM ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiRpcOptionToggles[ GIO_TEX_AND_JOHN ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2132,7 +2132,7 @@ void BtnGIODropAllOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiDropAllOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2147,7 +2147,7 @@ void BtnGIODropAllOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiDropAllOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2163,7 +2163,7 @@ void BtnGIOGunSettingReducedCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGunOptionToggles[ GIO_GUN_NUT ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGunOptionToggles[ GIO_REDUCED_GUNS ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2178,7 +2178,7 @@ void BtnGIOGunSettingToGCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGunOptionToggles[ GIO_REDUCED_GUNS ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGunOptionToggles[ GIO_GUN_NUT ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2189,7 +2189,7 @@ void BtnGIOSquadSizeSelectionLeftCallback( GUI_BUTTON *btn,INT32 reason )
 		return;
 
 	if( reason & MSYS_CALLBACK_REASON_LBUTTON_REPEAT )
-	{		
+	{
 		if ( iCurrentSquadSize > GIO_SQUAD_SIZE_6 )
 		{
 			PlayButtonSound( giGIOSquadSizeButton[0], BUTTON_SOUND_CLICKED_ON );
@@ -2322,7 +2322,7 @@ void BtnGIONCTHOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiNCTHOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2337,7 +2337,7 @@ void BtnGIONCTHOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiNCTHOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2353,7 +2353,7 @@ void BtnGIOImprovedInterruptOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2368,7 +2368,7 @@ void BtnGIOImprovedInterruptOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiImprovedInterruptOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2384,7 +2384,7 @@ void BtnGIOBackGroundOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiBackGroundOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiBackGroundOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2399,7 +2399,7 @@ void BtnGIOBackGroundOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiBackGroundOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiBackGroundOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2415,7 +2415,7 @@ void BtnGIOFoodSystemOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2430,7 +2430,7 @@ void BtnGIOFoodSystemOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiFoodSystemOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -2481,7 +2481,7 @@ BOOLEAN		ExitGIOScreen()
 	RemoveButton( giGIOProgressSettingButton[1] );
 	UnloadButtonImage( giGIOProgressSettingButtonImage[0] );
 	UnloadButtonImage( giGIOProgressSettingButtonImage[1] );
-	
+
 	// Destroy Traits setting buttons
 	for( cnt=0; cnt<NUM_TRAIT_OPTIONS; cnt++)
 	{
@@ -2489,13 +2489,13 @@ BOOLEAN		ExitGIOScreen()
 		UnloadButtonImage( guiTraitsOptionTogglesImage[ cnt ] );
 	}
 
-	// Destroy Game setting buttons	
+	// Destroy Game setting buttons
 	for( cnt=0; cnt<NUM_TEXT_STYLES; cnt++)
 	{
 		RemoveButton( guiGameTextToggles[ cnt ] );
 		UnloadButtonImage( guiGameTextTogglesImage[ cnt ] );
 	}
-	
+
 	// Destroy Iron Man setting buttons
 	//for( cnt=0; cnt<NUM_SAVE_OPTIONS; cnt++)
 	//{
@@ -2512,7 +2512,7 @@ BOOLEAN		ExitGIOScreen()
 	{
 		RemoveButton( guiRpcOptionToggles[ cnt ] );
 		UnloadButtonImage( guiRpcOptionTogglesImage[ cnt ] );
-	}		
+	}
 
 	// Destroy Inventory setting buttons
 	if(IsNIVModeValid(true) == TRUE)
@@ -2560,14 +2560,14 @@ BOOLEAN		ExitGIOScreen()
 		RemoveButton( guiNCTHOptionToggles[ cnt ] );
 		UnloadButtonImage( guiNCTHOptionTogglesImage[ cnt ] );
 	}
-	
+
 	// Destroy IIS Cost setting buttons
 	for( cnt=0; cnt<GIO_NUM_ONOFF_BUTTONS; cnt++)
 	{
 		RemoveButton( guiImprovedInterruptOptionToggles[ cnt ] );
 		UnloadButtonImage( guiImprovedInterruptOptionTogglesImage[ cnt ] );
 	}
-	
+
 	// Destroy Overheating Cost setting buttons
 	for( cnt=0; cnt<GIO_NUM_ONOFF_BUTTONS; cnt++)
 	{
@@ -2605,7 +2605,7 @@ void HandleGIOScreen()
 				gubGIOExitScreen = MAINMENU_SCREEN;
 				gfGIOScreenExit	= TRUE;
 				break;
-			
+
 			case MP_LOAD:
 				gubGIOExitScreen = SAVE_LOAD_SCREEN;
 				gfSaveGame = FALSE;
@@ -2652,7 +2652,7 @@ BOOLEAN		RenderGIOScreen()
 	RestoreExternBackgroundRect( GIO_IMP_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_IMP_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_BR_QUALITY_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_BR_QUALITY_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_BR_QUANTITY_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_BR_QUANTITY_SETTING_Y-3, 120, 20 );
-	RestoreExternBackgroundRect( GIO_PROGRESS_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_PROGRESS_SETTING_Y-3, 120, 20 );	
+	RestoreExternBackgroundRect( GIO_PROGRESS_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_PROGRESS_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_INV_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_SQUAD_SIZE_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_SQUAD_SIZE_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_IRON_MAN_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_IRON_MAN_SETTING_Y-3, 120, 20 );
@@ -2671,9 +2671,9 @@ BOOLEAN		RenderGIOScreen()
 	//Display the Dif Settings Title Text
 	RenderGIOSmallSelectionFrame( (GIO_DIF_SETTING_X + 36), (GIO_DIF_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_DIF_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_DIF_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_DIF_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_DIF_LEVEL_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	DisplayWrappedString( (UINT16)(GIO_DIF_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_DIF_SETTING_Y+6), GIO_DIF_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, zDiffSetting[ iCurrentDifficulty + 1].szDiffName, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	//Display the IMP number Title Text
 	RenderGIOSmallSelectionFrame( (GIO_IMP_SETTING_X + 36), (GIO_IMP_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_IMP_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_IMP_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_DIF_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_IMP_NUMBER_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -2747,7 +2747,7 @@ BOOLEAN		RenderGIOScreen()
 	// Display Inventory Settings text
 	RenderGIOSmallSelectionFrame( (GIO_INV_SETTING_X + 36), (GIO_INV_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_INV_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_INV_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_INV_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	DisplayWrappedString( (UINT16)(GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_INV_SETTING_Y+5), GIO_INV_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ iCurrentInventorySetting + 54 ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );	
+	DisplayWrappedString( (UINT16)(GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_INV_SETTING_Y+5), GIO_INV_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ iCurrentInventorySetting + 54 ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
 	//Display the Drop All Settings Title Text
 	DisplayWrappedString( (GIO_DROPALL_SETTING_X - 6), (UINT16)(GIO_DROPALL_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE), GIO_DROPALL_SETTING_WIDTH + 14, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_DROPALL_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -2755,14 +2755,14 @@ BOOLEAN		RenderGIOScreen()
 	//Display the Gun Settings Title Text
 	DisplayWrappedString( (GIO_GUN_SETTING_X - 6), (UINT16)(GIO_GUN_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE), GIO_GUN_SETTING_WIDTH + 14, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_GUN_OPTIONS_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
-	//Display the Squad size Title Text	
+	//Display the Squad size Title Text
 	RenderGIOSmallSelectionFrame( (GIO_SQUAD_SIZE_SETTING_X + 36), (GIO_SQUAD_SIZE_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_SQUAD_SIZE_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_SQUAD_SIZE_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_SQUAD_SIZE_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_SQUAD_SIZE_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 	DisplayWrappedString( (UINT16)(GIO_SQUAD_SIZE_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_SQUAD_SIZE_SETTING_Y+6), GIO_SQUAD_SIZE_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ iCurrentSquadSize + (GIO_SQUAD_SIZE_TITLE_TEXT + 1) ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	//Display the Inventory AP Cost Settings Title Text
 	DisplayWrappedString( (GIO_INVENTORY_AP_SETTING_X - 6), (UINT16)(GIO_INVENTORY_AP_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE), GIO_INVENTORY_AP_SETTING_WIDTH + 14, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_INVENTORY_AP_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	//Display the NCTH Settings Title Text
 	DisplayWrappedString( (GIO_NCTH_SETTING_X - 6), (UINT16)(GIO_NCTH_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE), GIO_NCTH_SETTING_WIDTH + 14, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_NCTH_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 	//Display the Improved Interrupt System Settings Title Text
@@ -3039,14 +3039,14 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 {
 	// loop through and get the status of all the buttons
 	gGameOptions.fGunNut = GetCurrentGunButtonSetting();
-		
-	gGameOptions.ubGameStyle = FALSE; 
+
+	gGameOptions.ubGameStyle = FALSE;
 	gGameUBOptions.fRandomManuelText = GetCurrentTextStyleButtonSetting();
-	
-	gGameOptions.ubDifficultyLevel = min( MaxDifficultySettingsValues-1, ( max( 1, (iCurrentDifficulty + 1)) )); 
-	
+
+	gGameOptions.ubDifficultyLevel = min( MaxDifficultySettingsValues-1, ( max( 1, (iCurrentDifficulty + 1)) ));
+
 	gGameOptions.fTurnTimeLimit = FALSE;
-		
+
 	// iron man
 	gGameOptions.fIronManMode = (BOOLEAN)iCurrentExtraDifficultySetting;//GetCurrentGameSaveButtonSetting();
 	gGameOptions.ubIronManMode = iCurrentExtraDifficultySetting;//GetCurrentGameSaveButtonSetting();
@@ -3057,7 +3057,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	// CHRISL:
 	if(IsNIVModeValid(true) == TRUE)
 	{
-		switch ( iCurrentInventorySetting)				
+		switch ( iCurrentInventorySetting)
 		{
 			case GIO_INV_OLD:
 				gGameOptions.ubInventorySystem = INVENTORY_OLD;
@@ -3095,12 +3095,12 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	// SANDRO - added following:
 	gGameOptions.ubMaxIMPCharacters = min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( max( 1, iCurrentIMPNumberSetting) ));
 	gGameOptions.fNewTraitSystem = GetCurrentTraitsOptionButtonSetting();
-		
+
 	gGameUBOptions.fTexAndJohn = GetCurrentTexAndJohnButtonSetting();
-	
-	gGameOptions.fEnemiesDropAllItems = GetCurrentDropAllButtonSetting();	
+
+	gGameOptions.fEnemiesDropAllItems = GetCurrentDropAllButtonSetting();
 	gGameOptions.ubProgressSpeedOfItemsChoices = min( GIO_PROGRESS_VERY_FAST, iCurrentProgressSetting );
-	
+
 	gGameOptions.fInventoryCostsAP = GetCurrentInventoryAPButtonSetting();
 	gGameOptions.fUseNCTH = GetCurrentNCTHButtonSetting();
 	gGameOptions.fImprovedInterruptSystem = GetCurrentIISButtonSetting();
@@ -3108,7 +3108,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	gGameOptions.fFoodSystem = GetCurrentFoodSystemButtonSetting();
 
 	gubGIOExitScreen = INIT_SCREEN;
-	
+
 	//set the fact that we should do the intro videos
 //	gbIntroScreenMode = INTRO_BEGINNING;
 #ifdef JA2TESTVERSION
@@ -3124,7 +3124,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	}
 	else
 #endif
-			
+
 	ExitGIOScreen();
 
 	gFadeInDoneCallback = DoneFadeInForExitGameInitOptionScreen;
@@ -3166,7 +3166,7 @@ void	ConfirmGioDifSettingMessageBoxCallBack( UINT8 bExitValue )
 BOOLEAN DisplayMessageToUserAboutIronManMode()
 {
 	// Madd
-	//UINT8 ubIronManMode = GetCurrentGameSaveButtonSetting(); //FALSE; 
+	//UINT8 ubIronManMode = GetCurrentGameSaveButtonSetting(); //FALSE;
 	UINT8 ubIronManMode = iCurrentExtraDifficultySetting;
 
 	//if the user has selected IRON MAN mode
@@ -3238,11 +3238,11 @@ void RenderGIOSmallSelectionFrame(INT16 sX, INT16 sY)
 #define		GIO_TOGGLE_TEXT_COLOR					FONT_MCOLOR_WHITE
 
 //buttons
-#define		GIO_CANCEL_X							iScreenWidthOffset + ((320 - 115) / 2)  
+#define		GIO_CANCEL_X							iScreenWidthOffset + ((320 - 115) / 2)
 
 #define		GIO_BTN_START_X							iScreenWidthOffset + 320 + 105
 #define		GIO_BTN_START_Y							iScreenHeightOffset + 435
- 
+
 
 //main title
 #define		GIO_MAIN_TITLE_X						0
@@ -3355,7 +3355,7 @@ void RenderGIOSmallSelectionFrame(INT16 sX, INT16 sY)
 #define		GIO_BR_QUANTITY_SETTING_WIDTH			COMBO_WIDTH
 
 #define		GIO_IIS_SETTING_X						THIRD_COLUMN_X + CHECK_X_OFFSET
-#define		GIO_IIS_SETTING_Y						GIO_BR_QUANTITY_SETTING_Y + CHECK_Y_OFFSET 
+#define		GIO_IIS_SETTING_Y						GIO_BR_QUANTITY_SETTING_Y + CHECK_Y_OFFSET
 #define		GIO_IIS_SETTING_WIDTH					CHECK_WIDTH
 
 #define		GIO_INVENTORY_AP_SETTING_X				THIRD_COLUMN_X + CHECK_X_OFFSET
@@ -3391,7 +3391,7 @@ void RenderGIOSmallSelectionFrame(INT16 sX, INT16 sY)
 #define		JA2SP_FOODSYSTEM						"FOOD_SYSTEM"
 
 DIFFICULTY_SETTINGS_VALUES zDiffSetting[MAX_DIF_LEVEL];
-UINT8 MaxDifficultySettingsValues; 
+UINT8 MaxDifficultySettingsValues;
 
 enum
 {
@@ -3405,7 +3405,7 @@ enum
 enum
 {
 	GIO_REALISTIC,
-	GIO_SCI_FI,	
+	GIO_SCI_FI,
 
 	NUM_GAME_STYLES,
 };
@@ -3679,9 +3679,9 @@ BOOLEAN SpIniExists()
 {
 	BOOLEAN exists = TRUE;
 
-	if(!getVFS()->fileExists(JA2SP_INI_FILENAME))	
-		exists = FALSE;		
-	
+	if(!getVFS()->fileExists(JA2SP_INI_FILENAME))
+		exists = FALSE;
+
 	return exists;
 }
 
@@ -3699,10 +3699,10 @@ UINT32	GameInitOptionsScreenInit( void )
 	gGameOptions.ubDifficultyLevel =  ((UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_DIFFICULTY_LEVEL, 1)) + 1;
 
 	// Bobby Ray Quality (Default: Great = 2)
-	gGameOptions.ubBobbyRayQuality = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUALITY, 2);		 
+	gGameOptions.ubBobbyRayQuality = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUALITY, 2);
 
 	// Bobby Ray Quantity (Default: Great = 2)
-	gGameOptions.ubBobbyRayQuantity = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUANTITY, 2);	 
+	gGameOptions.ubBobbyRayQuantity = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_BOBBY_RAY_QUANTITY, 2);
 
 	// Max. IMP Characters
 	UINT8 maxIMPCharacterCount = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_MAX_IMP_CHARACTERS, 1);
@@ -3720,7 +3720,7 @@ UINT32	GameInitOptionsScreenInit( void )
 
 	// Inventory Attachments (Default: New/New = 2)
 	UINT8 ubInventoryAttachmentSystem = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_INVENTORY_ATTACHMENTS, 2);
-	
+
 	// NIV is not allowed
 	if (!IsNIVModeValid(true))
 		ubInventoryAttachmentSystem = 0;
@@ -3762,7 +3762,7 @@ UINT32	GameInitOptionsScreenInit( void )
 
 	// Squad size (Default: 8)
 	UINT8 ubSquadSize = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_SQUAD_SIZE, 8);
-	
+
 	if (iResolution >= _640x480 && iResolution < _800x600)
 		ubSquadSize = 6;
 
@@ -3846,7 +3846,7 @@ UINT32	GameInitOptionsScreenShutdown( void )
 BOOLEAN		EnterGIOScreen()
 {
 	VOBJECT_DESC	VObjectDesc, VObjectDesc2;
-	
+
 	if( gfGIOButtonsAllocated )
 		return( TRUE );
 
@@ -3906,7 +3906,7 @@ BOOLEAN		EnterGIOScreen()
 	giGIODifficultyButton[ 1 ] = QuickCreateButton( giGIODifficultyButtonImage[ 1 ], GIO_DIF_SETTING_X + 158, GIO_DIF_SETTING_Y ,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 										BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnGIODifficultySelectionRightCallback );
-	
+
 	// set user data
 	MSYS_SetBtnUserData(giGIODifficultyButton[0],0, 0 );
 	MSYS_SetBtnUserData(giGIODifficultyButton[1],0, 1 );
@@ -3928,7 +3928,7 @@ BOOLEAN		EnterGIOScreen()
 	giGIOIMPNumberButton[ 1 ] = QuickCreateButton( giGIOIMPNumberButtonImage[ 1 ], GIO_IMP_SETTING_X + 158, GIO_IMP_SETTING_Y ,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 										BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnGIOIMPNumberSelectionRightCallback );
-	
+
 	// set user data
 	MSYS_SetBtnUserData(giGIOIMPNumberButton[0],0, 0 );
 	MSYS_SetBtnUserData(giGIOIMPNumberButton[1],0, 1 );
@@ -3990,8 +3990,8 @@ BOOLEAN		EnterGIOScreen()
 
 	if( gGameOptions.ubGameStyle == STYLE_SCIFI )
 		ButtonList[ guiGameStyleToggles[ GIO_SCI_FI ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	else 
-		ButtonList[ guiGameStyleToggles[ GIO_REALISTIC ] ]->uiFlags |= BUTTON_CLICKED_ON;		
+	else
+		ButtonList[ guiGameStyleToggles[ GIO_REALISTIC ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// IRON MAN SETTING
@@ -4020,7 +4020,7 @@ BOOLEAN		EnterGIOScreen()
 	//if( gGameOptions.fIronManMode )
 	//	ButtonList[ guiGameSaveToggles[ GIO_IRON_MAN ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	//else
-	//	ButtonList[ guiGameSaveToggles[ GIO_CAN_SAVE ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+	//	ButtonList[ guiGameSaveToggles[ GIO_CAN_SAVE ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 	giGIOExtraDifficultySettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ], -1,0,-1,1,-1 );
 	giGIOExtraDifficultySettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ], -1,2,-1,3,-1 );
@@ -4043,7 +4043,7 @@ BOOLEAN		EnterGIOScreen()
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// BOBBY RAY SETTING
-	
+
 	giGIOBRQualitySettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ], -1,0,-1,1,-1 );
 	giGIOBRQualitySettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ], -1,2,-1,3,-1 );
 
@@ -4081,7 +4081,7 @@ BOOLEAN		EnterGIOScreen()
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ITEM PROGRESS SETTING
-	
+
 	giGIOProgressSettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ], -1,0,-1,1,-1 );
 	giGIOProgressSettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ], -1,2,-1,3,-1 );
 
@@ -4106,7 +4106,7 @@ BOOLEAN		EnterGIOScreen()
 	// OLD/NEW INVENTORY SETTING
 
 	if (IsNIVModeValid(true) == TRUE )
-	{		
+	{
 		giGIOInventorySettingButtonImage[ 0 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 0 ],-1,0,-1,1,-1 );
 		giGIOInventorySettingButtonImage[ 1 ]=	UseLoadedButtonImage( giGIODifficultyButtonImage[ 1 ],-1,2,-1,3,-1 );
 
@@ -4173,7 +4173,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fEnemiesDropAllItems )
 		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4233,7 +4233,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fInventoryCostsAP )
 		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4252,11 +4252,11 @@ BOOLEAN		EnterGIOScreen()
 		giGIOSquadSizeButton[ 1 ] = QuickCreateButton( giGIOSquadSizeButtonImage[ 1 ], GIO_SQUAD_SIZE_SETTING_X + 158, GIO_SQUAD_SIZE_SETTING_Y ,
 											BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 											BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnGIOSquadSizeSelectionRightCallback );
-		
+
 		// set user data
 		MSYS_SetBtnUserData(giGIOSquadSizeButton[0],0, 0 );
 		MSYS_SetBtnUserData(giGIOSquadSizeButton[1],0, 1 );
-		
+
 		switch (gGameOptions.ubSquadSize)
 		{
 			case 6:
@@ -4274,27 +4274,27 @@ BOOLEAN		EnterGIOScreen()
 	#ifdef JA113DEMO
 		DisableButton (giGIOSquadSizeButton[ 0 ]);
 		DisableButton (giGIOSquadSizeButton[ 1 ]);
-		
+
 		DisableButton (giGIOIMPNumberButton[ 0 ]);
 		DisableButton (giGIOIMPNumberButton[ 1 ]);
-		
+
 		DisableButton (giGIOBRQualitySettingButton[ 0 ]);
 		DisableButton (giGIOBRQualitySettingButton[ 1 ]);
-		
+
 		DisableButton (giGIOBRQuantitySettingButton[ 0 ]);
 		DisableButton (giGIOBRQuantitySettingButton[ 1 ]);
 
 		//DisableButton (guiFastBROptionToggles[ 0 ]);
 		//DisableButton (guiFastBROptionToggles[ 1 ]);
-		
+
 		//DisableButton (guiWeaponCachesOptionToggles[ 0 ]);
 		//DisableButton (guiWeaponCachesOptionToggles[ 1 ]);
-		
+
 		//DisableButton (guiTerroristsOptionToggles[ 0 ]);
 		//DisableButton (guiTerroristsOptionToggles[ 1 ]);
-	
+
 	#endif
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NCTH ON/OFF SETTING
 
@@ -4322,7 +4322,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fUseNCTH )
 		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// IMPROVED INTERRUPT SYSTEM ON/OFF SETTING
@@ -4351,7 +4351,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fImprovedInterruptSystem )
 		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4410,7 +4410,7 @@ BOOLEAN		EnterGIOScreen()
 	if( gGameOptions.fFoodSystem )
 		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	else
-		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;	
+		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4496,7 +4496,7 @@ void BtnGIODifficultySelectionRightCallback( GUI_BUTTON *btn,INT32 reason )
 	{
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
 
-		if ( iCurrentDifficulty  < MaxDifficultySettingsValues /*NUM_DIFF_SETTINGS*/ - 1 )  //2	
+		if ( iCurrentDifficulty  < MaxDifficultySettingsValues /*NUM_DIFF_SETTINGS*/ - 1 )  //2
 		{
 			PlayButtonSound( giGIODifficultyButton[1], BUTTON_SOUND_CLICKED_ON );
 
@@ -5056,7 +5056,7 @@ void BtnGIOOldTraitsCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiTraitsOptionToggles[ GIO_TRAITS_NEW ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiTraitsOptionToggles[ GIO_TRAITS_OLD ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5079,7 +5079,7 @@ void BtnGIONewTraitsCallback(GUI_BUTTON *btn,INT32 reason)
 
 			ButtonList[ guiTraitsOptionToggles[ GIO_TRAITS_OLD ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 			btn->uiFlags|=(BUTTON_CLICKED_ON);
-				
+
 			PlayButtonSound( guiTraitsOptionToggles[ GIO_TRAITS_NEW ], BUTTON_SOUND_CLICKED_ON );
 		}
 	}
@@ -5104,7 +5104,7 @@ void BtnGIORealisticStyleCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameStyleToggles[ GIO_SCI_FI ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameStyleToggles[ GIO_REALISTIC ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5119,7 +5119,7 @@ void BtnGIOScifiStyleCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameStyleToggles[ GIO_REALISTIC ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameStyleToggles[ GIO_SCI_FI ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5135,7 +5135,7 @@ void BtnGIOIronManOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameSaveToggles[ GIO_IRON_MAN ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameStyleToggles[ GIO_CAN_SAVE ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5150,7 +5150,7 @@ void BtnGIOIronManOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGameSaveToggles[ GIO_CAN_SAVE ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGameStyleToggles[ GIO_IRON_MAN ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5166,7 +5166,7 @@ void BtnGIODropAllOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiDropAllOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5181,7 +5181,7 @@ void BtnGIODropAllOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiDropAllOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiDropAllOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5197,7 +5197,7 @@ void BtnGIOGunSettingReducedCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGunOptionToggles[ GIO_GUN_NUT ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGunOptionToggles[ GIO_REDUCED_GUNS ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5212,7 +5212,7 @@ void BtnGIOGunSettingToGCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiGunOptionToggles[ GIO_REDUCED_GUNS ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiGunOptionToggles[ GIO_GUN_NUT ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5223,7 +5223,7 @@ void BtnGIOSquadSizeSelectionLeftCallback( GUI_BUTTON *btn,INT32 reason )
 		return;
 
 	if( reason & MSYS_CALLBACK_REASON_LBUTTON_REPEAT )
-	{		
+	{
 		if ( iCurrentSquadSize > GIO_SQUAD_SIZE_6 )
 		{
 			PlayButtonSound( giGIOSquadSizeButton[0], BUTTON_SOUND_CLICKED_ON );
@@ -5324,7 +5324,7 @@ void BtnGIOInventoryAPOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiInventoryAPOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5339,7 +5339,7 @@ void BtnGIOInventoryAPOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiInventoryAPOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiInventoryAPOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5355,7 +5355,7 @@ void BtnGIONCTHOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiNCTHOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5370,7 +5370,7 @@ void BtnGIONCTHOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiNCTHOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiNCTHOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5386,7 +5386,7 @@ void BtnGIOImprovedInterruptOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5401,7 +5401,7 @@ void BtnGIOImprovedInterruptOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiImprovedInterruptOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiImprovedInterruptOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5417,7 +5417,7 @@ void BtnGIOBackGroundOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiBackGroundOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiBackGroundOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5432,7 +5432,7 @@ void BtnGIOBackGroundOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiBackGroundOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiBackGroundOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5448,7 +5448,7 @@ void BtnGIOFoodSystemOffCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_ON ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5463,7 +5463,7 @@ void BtnGIOFoodSystemOnCallback(GUI_BUTTON *btn,INT32 reason)
 
 		ButtonList[ guiFoodSystemOptionToggles[ GIO_BUTTON_OFF ] ]->uiFlags &= ~BUTTON_CLICKED_ON;
 		btn->uiFlags|=(BUTTON_CLICKED_ON);
-			
+
 		PlayButtonSound( guiFoodSystemOptionToggles[ GIO_BUTTON_ON ], BUTTON_SOUND_CLICKED_ON );
 	}
 }
@@ -5514,7 +5514,7 @@ BOOLEAN		ExitGIOScreen()
 	RemoveButton( giGIOProgressSettingButton[1] );
 	UnloadButtonImage( giGIOProgressSettingButtonImage[0] );
 	UnloadButtonImage( giGIOProgressSettingButtonImage[1] );
-	
+
 	// Destroy Traits setting buttons
 	for( cnt=0; cnt<NUM_TRAIT_OPTIONS; cnt++)
 	{
@@ -5579,28 +5579,28 @@ BOOLEAN		ExitGIOScreen()
 	//	RemoveButton( guiFastBROptionToggles[ cnt ] );
 	//	UnloadButtonImage( guiFastBROptionTogglesImage[ cnt ] );
 	//}
-	
+
 	// Destroy Inventory AP Cost setting buttons
 	for( cnt=0; cnt<GIO_NUM_ONOFF_BUTTONS; cnt++)
 	{
 		RemoveButton( guiInventoryAPOptionToggles[ cnt ] );
 		UnloadButtonImage( guiInventoryAPOptionTogglesImage[ cnt ] );
 	}
-	
+
 	// Destroy NCTH Cost setting buttons
 	for( cnt=0; cnt<GIO_NUM_ONOFF_BUTTONS; cnt++)
 	{
 		RemoveButton( guiNCTHOptionToggles[ cnt ] );
 		UnloadButtonImage( guiNCTHOptionTogglesImage[ cnt ] );
 	}
-	
+
 	// Destroy IIS Cost setting buttons
 	for( cnt=0; cnt<GIO_NUM_ONOFF_BUTTONS; cnt++)
 	{
 		RemoveButton( guiImprovedInterruptOptionToggles[ cnt ] );
 		UnloadButtonImage( guiImprovedInterruptOptionTogglesImage[ cnt ] );
 	}
-	
+
 	// Destroy Background Cost setting buttons
 	for( cnt=0; cnt<GIO_NUM_ONOFF_BUTTONS; ++cnt)
 	{
@@ -5638,7 +5638,7 @@ void HandleGIOScreen()
 				gubGIOExitScreen = MAINMENU_SCREEN;
 				gfGIOScreenExit	= TRUE;
 				break;
-			
+
 			case MP_LOAD:
 				gubGIOExitScreen = SAVE_LOAD_SCREEN;
 				gfSaveGame = FALSE;
@@ -5685,7 +5685,7 @@ BOOLEAN		RenderGIOScreen()
 	RestoreExternBackgroundRect( GIO_IMP_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_IMP_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_BR_QUALITY_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_BR_QUALITY_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_BR_QUANTITY_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_BR_QUANTITY_SETTING_Y-3, 120, 20 );
-	RestoreExternBackgroundRect( GIO_PROGRESS_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_PROGRESS_SETTING_Y-3, 120, 20 );	
+	RestoreExternBackgroundRect( GIO_PROGRESS_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_PROGRESS_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_INV_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_SQUAD_SIZE_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_SQUAD_SIZE_SETTING_Y-3, 120, 20 );
 	RestoreExternBackgroundRect( GIO_IRON_MAN_SETTING_X+GIO_OFFSET_TO_TEXT + 20, GIO_IRON_MAN_SETTING_Y-3, 120, 20 );
@@ -5704,9 +5704,9 @@ BOOLEAN		RenderGIOScreen()
 	//Display the Dif Settings Title Text
 	RenderGIOSmallSelectionFrame( (GIO_DIF_SETTING_X + 36), (GIO_DIF_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_DIF_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_DIF_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_DIF_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_DIF_LEVEL_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	DisplayWrappedString( (UINT16)(GIO_DIF_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_DIF_SETTING_Y+6), GIO_DIF_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, zDiffSetting[ iCurrentDifficulty + 1].szDiffName, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	//Display the IMP number Title Text
 	RenderGIOSmallSelectionFrame( (GIO_IMP_SETTING_X + 36), (GIO_IMP_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_IMP_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_IMP_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_DIF_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_IMP_NUMBER_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -5777,7 +5777,7 @@ BOOLEAN		RenderGIOScreen()
 	// Display Inventory Settings text
 	RenderGIOSmallSelectionFrame( (GIO_INV_SETTING_X + 36), (GIO_INV_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_INV_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_INV_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_INV_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	DisplayWrappedString( (UINT16)(GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_INV_SETTING_Y+5), GIO_INV_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ iCurrentInventorySetting + 54 ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );	
+	DisplayWrappedString( (UINT16)(GIO_INV_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_INV_SETTING_Y+5), GIO_INV_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ iCurrentInventorySetting + 54 ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
 	//Display the Drop All Settings Title Text
 	DisplayWrappedString( (GIO_DROPALL_SETTING_X - 6), (UINT16)(GIO_DROPALL_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE), GIO_DROPALL_SETTING_WIDTH + 14, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_DROPALL_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -5791,7 +5791,7 @@ BOOLEAN		RenderGIOScreen()
 	//Display the Gun Settings Title Text
 	DisplayWrappedString( (GIO_GUN_SETTING_X - 6), (UINT16)(GIO_GUN_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE), GIO_GUN_SETTING_WIDTH + 14, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_GUN_OPTIONS_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
-	//Display the Squad size Title Text	
+	//Display the Squad size Title Text
 	RenderGIOSmallSelectionFrame( (GIO_SQUAD_SIZE_SETTING_X + 36), (GIO_SQUAD_SIZE_SETTING_Y - 3) );
 	DisplayWrappedString( (UINT16)(GIO_SQUAD_SIZE_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (UINT16)(GIO_SQUAD_SIZE_SETTING_Y-GIO_GAP_BN_SETTINGS + GIO_TITLE_DISTANCE - 12), GIO_SQUAD_SIZE_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ GIO_SQUAD_SIZE_TITLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 	DisplayWrappedString( (UINT16)(GIO_SQUAD_SIZE_SETTING_X+GIO_OFFSET_TO_TEXT + 1), (GIO_SQUAD_SIZE_SETTING_Y+6), GIO_SQUAD_SIZE_SETTING_WIDTH, 2, GIO_TOGGLE_TEXT_FONT, GIO_TOGGLE_TEXT_COLOR, gzGIOScreenText[ iCurrentSquadSize + (GIO_SQUAD_SIZE_TITLE_TEXT + 1) ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -6060,11 +6060,11 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	// loop through and get the status of all the buttons
 	gGameOptions.fGunNut = GetCurrentGunButtonSetting();
 	gGameOptions.ubGameStyle = GetCurrentGameStyleButtonSetting();
-	
+
 	gGameOptions.ubDifficultyLevel = min( MaxDifficultySettingsValues, ( max( 1, (iCurrentDifficulty + 1)) ));
-	
+
 	gGameOptions.fTurnTimeLimit = FALSE;
-		
+
 	// iron man
 	gGameOptions.fIronManMode = (BOOLEAN)iCurrentExtraDifficultySetting;//GetCurrentGameSaveButtonSetting();
 	gGameOptions.ubIronManMode = iCurrentExtraDifficultySetting;//GetCurrentGameSaveButtonSetting();
@@ -6075,7 +6075,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	// CHRISL:
 	if(IsNIVModeValid(true) == TRUE)
 	{
-		switch ( iCurrentInventorySetting)				
+		switch ( iCurrentInventorySetting)
 		{
 			case GIO_INV_OLD:
 				gGameOptions.ubInventorySystem = INVENTORY_OLD;
@@ -6105,7 +6105,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 			break;
 	}
 
-	
+
 	// SANDRO - added following:
 	gGameOptions.ubMaxIMPCharacters = min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( max( 1, iCurrentIMPNumberSetting) ));
 	gGameOptions.fNewTraitSystem = GetCurrentTraitsOptionButtonSetting();
@@ -6175,7 +6175,7 @@ void	ConfirmGioDifSettingMessageBoxCallBack( UINT8 bExitValue )
 BOOLEAN DisplayMessageToUserAboutIronManMode()
 {
 	// Madd
-	//UINT8 ubIronManMode = GetCurrentGameSaveButtonSetting(); //FALSE; 
+	//UINT8 ubIronManMode = GetCurrentGameSaveButtonSetting(); //FALSE;
 	UINT8 ubIronManMode = iCurrentExtraDifficultySetting;
 
 	//if the user has selected IRON MAN mode

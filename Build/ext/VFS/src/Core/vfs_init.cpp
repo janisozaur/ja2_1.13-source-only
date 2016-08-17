@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/vfs_init.cpp
  *  - initialization functions/classes
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -129,7 +129,7 @@ bool vfs_init::initVirtualFileSystem(vfs::PropertyContainer& oVFSProps)
 		VFS_LOG_ERROR(L"no profiles specified");
 		return false;
 	}
-	
+
 	std::list<vfs::String>::const_iterator prof_cit = lProfiles.begin();
 	for(; prof_cit != lProfiles.end(); ++prof_cit)
 	{
@@ -147,7 +147,7 @@ bool vfs_init::initVirtualFileSystem(vfs::PropertyContainer& oVFSProps)
 		for(; loc_it != lLocSections.end(); ++loc_it)
 		{
 			vfs::String sLocSection = vfs::String("LOC_") + vfs::String(*loc_it);
-	
+
 			vfs_init::Location *loc = new vfs_init::Location();
 			loc->m_path = oVFSProps.getStringProperty(sLocSection,L"PATH",L"");
 			loc->m_vfs_path = oVFSProps.getStringProperty(sLocSection,L"VFS_PATH",L"");

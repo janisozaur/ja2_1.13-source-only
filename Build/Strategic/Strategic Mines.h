@@ -4,8 +4,8 @@
 // the .h to the mine management system
 
 #include "Types.h"
-#include "strategicmap.h"
-#include "mapscreen.h"
+#include "StrategicMap.h"
+#include "MapScreen.h"
 
 // the mines
 enum{
@@ -100,7 +100,7 @@ typedef struct MINE_STATUS_TYPE
 	INT16	sSectorX;						// x value of sector mine is in
 	INT16	sSectorY;						// y value of sector mine is in
 	INT8	bAssociatedTown;			// associated town of this mine
-	
+
 	UINT32 StrategicIndex() { return CALCULATE_STRATEGIC_INDEX(sSectorX, sSectorY); };
 
 	BOOLEAN fInfectible;

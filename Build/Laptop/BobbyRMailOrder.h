@@ -56,7 +56,7 @@ void DisplayPurchasedItems( BOOLEAN fCalledFromOrderPage, UINT16 usGridX, UINT16
 
 typedef struct
 {
-	BOOLEAN	fActive;							
+	BOOLEAN	fActive;
 	UINT8		ubDeliveryLoc;				// the city the shipment is going to
 	UINT8		ubDeliveryMethod;			// type of delivery: next day, 2 days ...
 	BobbyRayPurchaseStruct BobbyRayPurchase[ 100 ];
@@ -85,6 +85,6 @@ BOOLEAN NewWayOfSavingBobbyRMailOrdersToSaveGameFile( HWFILE hFile );
 
 
 
- 
+
 
 

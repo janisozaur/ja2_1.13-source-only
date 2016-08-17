@@ -1,46 +1,46 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "types.h"
-	//#include "soldier control.h"
-	#include "overhead.h"
-	#include "animation control.h"
-	#include "timer.h"
-	#include "event pump.h"
+	#include "Types.h"
+	//#include "Soldier Control.h"
+	#include "Overhead.h"
+	#include "Animation Control.h"
+	#include "Timer.h"
+	#include "Event Pump.h"
 //	#include "Sound Control.h"
-	#include "interface.h"
-	#include "Font Control.H"
-	#include "ai.h"
-	#include "interface.h"
-	#include "message.h"
-	#include "text.h"
+	#include "Interface.h"
+	#include "Font Control.h"
+	#include "AI.h"
+	#include "Interface.h"
+	#include "Message.h"
+	#include "Text.h"
 	#include "TeamTurns.h"
 	#include "Smell.h"
 	#include "Soldier Functions.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Queen Command.h"
-	#include "lighting.h"
-	#include "environment.h"
-	#include "dialogue control.h"
+	#include "Lighting.h"
+	#include "Environment.h"
+	#include "Dialogue Control.h"
 	#include "Soldier Profile Type.h"
-	#include "air raid.h"
+	#include "Air Raid.h"
 	#include "SkillCheck.h"
 	#include "AIInternals.h"
 	#include "AIList.h"
 	#ifdef DEBUG_INTERRUPTS
-		#include "debug.h"
+		#include "Debug.h"
 	#endif
-	#include "render dirty.h"
+	#include "Render Dirty.h"
 	#include "GameSettings.h"
-	#include "screenids.h"
-	#include "vsurface.h"
+	#include "ScreenIds.h"
+	#include "VSurface.h"
 	#include "math.h"
-	#include "merctextbox.h"
+	#include "MercTextBox.h"
 	#include "Video.h"
-	#include "local.h"
-	#include "line.h"
-	#include "overhead map.h"
-	#include "interface dialogue.h"
+	#include "Local.h"
+	#include "Line.h"
+	#include "Overhead Map.h"
+	#include "Interface Dialogue.h"
 #endif
 
 #include "Rain.h"
@@ -138,7 +138,7 @@ BOOLEAN IsItAllowedToRenderRain()
 	if ( !(gGameExternalOptions.gfAllowRain || gGameExternalOptions.gfAllowSandStorms || gGameExternalOptions.gfAllowSnow) )
 		return FALSE;
 
-	if ( !(GetWeatherInCurrentSector( ) == WEATHER_FORECAST_RAIN || GetWeatherInCurrentSector( ) == WEATHER_FORECAST_THUNDERSHOWERS 
+	if ( !(GetWeatherInCurrentSector( ) == WEATHER_FORECAST_RAIN || GetWeatherInCurrentSector( ) == WEATHER_FORECAST_THUNDERSHOWERS
 		|| GetWeatherInCurrentSector( ) == WEATHER_FORECAST_SANDSTORM || GetWeatherInCurrentSector( ) == WEATHER_FORECAST_SNOW ) )
 		return FALSE;
 
@@ -199,7 +199,7 @@ void GenerateRainDropsList()
 	case WEATHER_FORECAST_NORMAL:
 		guiCurrMaxAmountOfRainDrops = 0;
 		break;
-		
+
 	case WEATHER_FORECAST_THUNDERSHOWERS:
 		guiCurrMaxAmountOfRainDrops = (UINT32)(BASE_MAXIMUM_DROPS)* 2;
 		break;
@@ -467,7 +467,7 @@ void GenerateRainMaximums()
 	else
 	{
 		if( Random( 2 ) )
-		{	
+		{
 			fpMinDropAngleOfFalling = 20;
 			fpMaxDropAngleOfFalling = 70;
 		}
@@ -487,7 +487,7 @@ void GenerateRainMaximums()
 		fpMinDropLength = 1.0f;
 
 	fpMaxDropLength = fpMinDropLength + DROP_LENGTH_RANGE;
-		
+
 	fpCurrDropLength = fpMinDropLength + Random( (UINT32)(fpMaxDropLength - fpMinDropLength) );
 
 	switch ( gbCurrentWeather )
@@ -520,7 +520,7 @@ void GenerateRainMaximums()
 		SoundStop( guiRainLoop );
 		guiRainLoop = NO_SAMPLE;
 	}
-		
+
 	fpMaxDropSpeed = fpMinDropSpeed + DROP_SPEED_RANGE;
 
 	fpCurrDropSpeed = fpMinDropSpeed + Random( (UINT32)(fpMaxDropSpeed - fpMinDropSpeed) );
@@ -551,15 +551,15 @@ void UpdateRainDropsProperities()
 		fpCurrDropAngleOfFalling += Random( (UINT32)(1000 * DROP_ANGLE_CHANGE_RATE * 2) ) / 1000.0f - DROP_ANGLE_CHANGE_RATE;
 		break;
 	}
-	
+
 	fpCurrDropAngleOfFalling = max( fpMinDropAngleOfFalling, fpCurrDropAngleOfFalling );
 	fpCurrDropAngleOfFalling = min( fpMaxDropAngleOfFalling, fpCurrDropAngleOfFalling );
-	
+
 	fpCurrDropLength += Random( (UINT32)(1000 * DROP_LENGTH_CHANGE_RATE * 2 )) / 1000.0f - DROP_LENGTH_CHANGE_RATE;
 
 	fpCurrDropLength = max( fpMinDropLength, fpCurrDropLength );
 	fpCurrDropLength = min( fpMaxDropLength, fpCurrDropLength );
-	
+
 	fpCurrDropSpeed += Random( (UINT32)(1000 * DROP_SPEED_CHANGE_RATE * 2 )) / 1000.0f - DROP_SPEED_CHANGE_RATE;
 
 	fpCurrDropSpeed = max( fpMinDropSpeed, fpCurrDropSpeed );
@@ -649,7 +649,7 @@ void RenderRain()
 		ResetRain();
 		GenerateRainDropsList();
 		GenerateRainMaximums();
-		
+
 		guiCurrAmountOfDeadRainDrops = guiCurrMaxAmountOfRainDrops;
 
 		CreateRainDrops();

@@ -9,7 +9,7 @@
 	#include "XML.h"
 	#include "Interface.h"
 	#include "LuaInitNPCs.h"
-	#include "email.h"
+	#include "Email.h"
 #endif
 
 struct
@@ -112,7 +112,7 @@ EmailOtherEndElementHandle(void *userData, const XML_Char *name)
 {
 	EmailOtherParseData * pData = (EmailOtherParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "NEW_EMAIL") == 0)
 		{
@@ -120,13 +120,13 @@ EmailOtherEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "EMAIL") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!EmailOther_TextOnly)
 				{
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szSubject, pData->curEmailOther.szSubject);
                                                                                     // L"12345678901234567890123456789" <- max lenght (szMessage[30])
-					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[0],  L"1. sdssdsfs dfg fdgd fg  test" ); //pData-curEmailOther.szMessage[0]);					
+					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[0],  L"1. sdssdsfs dfg fdgd fg  test" ); //pData-curEmailOther.szMessage[0]);
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[1],  L"2. sdssdsfs dfg fgfgffds test" );
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[2],  L"3. sdssdsfsd gdfg fdfgsf test" );
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[3],  L"4. sdssdsf dgdfg dgsfdsf test" );
@@ -178,7 +178,7 @@ EmailOtherEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szSubject, pData->curEmailOther.szSubject);
-					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[0], L"sdssdsfsffdsf test" ); //pData->curEmailOther.szMessage[0]);					
+					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[0], L"sdssdsfsffdsf test" ); //pData->curEmailOther.szMessage[0]);
 				/*
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[1], pData->curEmailOther.szMessage[1]);
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[2], pData->curEmailOther.szMessage[2]);
@@ -210,7 +210,7 @@ EmailOtherEndElementHandle(void *userData, const XML_Char *name)
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[28], pData->curEmailOther.szMessage[28]);
 					wcscpy(EmailOtherText[pData->curEmailOther.uiIndex].szMessage[29], pData->curEmailOther.szMessage[29]);
 					*/
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -251,7 +251,7 @@ BOOLEAN ReadInEmailOther(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading EmailOther.xml" );
 
 	EmailOther_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

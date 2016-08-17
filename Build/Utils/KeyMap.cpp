@@ -4,9 +4,9 @@
 #include "KeyMap.h"
 #include <windows.h>
 #endif
-#include "text.h"
+#include "Text.h"
 
-static Str8EnumLookupType gKeyTable[] = 
+static Str8EnumLookupType gKeyTable[] =
 {
 	{VK_LBUTTON, "LBUTTON"},
 	{VK_RBUTTON, "RBUTTON"},
@@ -227,8 +227,8 @@ static Str8EnumLookupType gKeyTable[] =
 	{0, NULL}
 };
 
-static inline STR Trim(STR &p) { 
-	while(isspace(*p)) *p++ = 0; 
+static inline STR Trim(STR &p) {
+	while(isspace(*p)) *p++ = 0;
 	TCHAR *e = p + strlen(p) - 1;
 	while (e > p && isspace(*e)) *e-- = 0;
 	return p;

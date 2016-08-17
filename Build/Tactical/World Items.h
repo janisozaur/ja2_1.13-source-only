@@ -1,7 +1,7 @@
 #ifndef __WORLD_ITEMS
 #define __WORLD_ITEMS
 
-#include "items.h"
+#include "Items.h"
 #include "FileMan.h"
 
 
@@ -41,7 +41,7 @@ public:
 	UINT16					usFlags;
 	INT8					bRenderZHeightAboveLevel;
 	INT8					bVisible;
-	UINT8					ubNonExistChance;	
+	UINT8					ubNonExistChance;
 };
 
 // WANNE - BMP: DONE!
@@ -65,12 +65,12 @@ public:
 	INT8					bRenderZHeightAboveLevel;
 	INT8					bVisible;
 
-	//This is the chance associated with an item or a trap not-existing in the world.	The reason why 
-	//this is reversed (10 meaning item has 90% chance of appearing, is because the order that the map 
+	//This is the chance associated with an item or a trap not-existing in the world.	The reason why
+	//this is reversed (10 meaning item has 90% chance of appearing, is because the order that the map
 	//is saved, we don't know if the version is older or not until after the items are loaded and added.
 	//Because this value is zero in the saved maps, we can't change it to 100, hence the reversal method.
 	//This check is only performed the first time a map is loaded.	Later, it is entirely skipped.
-	UINT8					ubNonExistChance;	
+	UINT8					ubNonExistChance;
 	INT8					soldierID;
 	char					endOfPod;
 	OBJECTTYPE				object;
@@ -87,12 +87,12 @@ public:
 	INT8					bRenderZHeightAboveLevel;
 	INT8					bVisible;
 
-	//This is the chance associated with an item or a trap not-existing in the world.	The reason why 
-	//this is reversed (10 meaning item has 90% chance of appearing, is because the order that the map 
+	//This is the chance associated with an item or a trap not-existing in the world.	The reason why
+	//this is reversed (10 meaning item has 90% chance of appearing, is because the order that the map
 	//is saved, we don't know if the version is older or not until after the items are loaded and added.
 	//Because this value is zero in the saved maps, we can't change it to 100, hence the reversal method.
 	//This check is only performed the first time a map is loaded.	Later, it is entirely skipped.
-	UINT8					ubNonExistChance;	
+	UINT8					ubNonExistChance;
 	INT8					soldierID;
 
 	char					endOfPod;

@@ -121,7 +121,7 @@ militiaindividualEndElementHandle( void *userData, const XML_Char *name )
 		else if ( strcmp( name, "male_forename" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			CHAR16 bla[30];
 
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, bla, sizeof(bla) / sizeof(bla[0]) );

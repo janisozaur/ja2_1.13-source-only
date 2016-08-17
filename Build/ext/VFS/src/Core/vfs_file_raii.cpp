@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/vfs_file_raii.cpp
  *  - RAII classes to open files for reading/writing
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -32,11 +32,11 @@ vfs::COpenReadFile::COpenReadFile(vfs::Path const& sPath, vfs::CVirtualFile::ESe
 {
 	vfs::IBaseFile *pFile = getVFS()->getFile(sPath,eSF);
 	VFS_THROW_IFF(pFile, _BS(L"file \"") << sPath << L"\" does not exist" << _BS::wget);
-	
+
 	m_pFile = vfs::tReadableFile::cast(pFile);
-	
+
 	VFS_THROW_IFF(m_pFile, _BS(L"File \"") << sPath << L"\" is not readable" << _BS::wget);
-	
+
 	VFS_THROW_IFF(m_pFile->openRead(), _BS(L"Could not open file : ") << m_pFile->getPath() << _BS::wget);
 }
 
@@ -80,9 +80,9 @@ void vfs::COpenReadFile::release()
 
 /**************************************************************************/
 
-vfs::COpenWriteFile::COpenWriteFile(vfs::Path const& sPath, 
-									bool bCreate, 
-									bool bTruncate, 
+vfs::COpenWriteFile::COpenWriteFile(vfs::Path const& sPath,
+									bool bCreate,
+									bool bTruncate,
 									vfs::CVirtualFile::ESearchFile eSF)
 {
 	vfs::IBaseFile *pFile = getVFS()->getFile(sPath,eSF);
@@ -102,7 +102,7 @@ vfs::COpenWriteFile::COpenWriteFile(vfs::Path const& sPath,
 	m_pFile = vfs::tWritableFile::cast(pFile);
 
 	VFS_THROW_IFF(m_pFile, _BS(L"File \"") << sPath << L"\" exists, but is not writable" << _BS::wget);
-	
+
 	VFS_THROW_IFF(m_pFile->openWrite(bCreate,bTruncate), _BS(L"File \"") << sPath << L"\" could not be opened for writing" << _BS::wget);
 }
 vfs::COpenWriteFile::COpenWriteFile(vfs::tWritableFile *pFile)

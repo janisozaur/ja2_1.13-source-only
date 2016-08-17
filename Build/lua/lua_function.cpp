@@ -1,4 +1,4 @@
-#include "DEBUG.H"
+#include "Debug.h"
 #include "lua/lua_function.h"
 
 template<>

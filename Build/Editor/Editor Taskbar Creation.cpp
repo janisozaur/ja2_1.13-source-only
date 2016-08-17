@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -10,7 +10,7 @@
 	//sgp
 	#include "Button System.h"
 	#include "Font Control.h"
-	#include "debug.h"
+	#include "Debug.h"
 	//editor
 	#include "EditorDefines.h"
 	#include "Editor Callback Prototypes.h"
@@ -19,8 +19,8 @@
 	#include "EditorMapInfo.h"
 	//tactical
 	#include "Soldier Create.h"
-	#include "overhead types.h"
-	#include "local.h"
+	#include "Overhead Types.h"
+	#include "Local.h"
 	#include "Text.h"
 #endif
 

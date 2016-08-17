@@ -3,15 +3,15 @@
 #else
 	#include "Map Screen Interface Border.h"
 	#include "Types.h"
-	#include "vsurface.h"
+	#include "VSurface.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
 	#include "sgp.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
-	#include "message.h"
-	#include "sysutil.h"
-	#include "mapscreen.h"
+	#include "Message.h"
+	#include "SysUtil.h"
+	#include "MapScreen.h"
 	#include "Render Dirty.h"
 	#include "Map Screen Interface Map.h"
 	#include "Map Screen Interface Border.h"
@@ -21,21 +21,21 @@
 	#include "Text.h"
 	#include "Campaign Types.h"
 	#include "Strategic Town Loyalty.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Assignments.h"
 	// HEADROCK HAM 4: Now accepts INI settings
 	#include "GameSettings.h"
 	// Also include Town Militia for checks regarding Mobile Militia Restrictions
 	#include "Town Militia.h"
 	// Also include Quests, for checking whether a fact is true.
-	#include "Quests.h"	
+	#include "Quests.h"
 	// HEADROCK HAM 5: Required for inventory filter popup
 	#include "popup_callback.h"
 	#include "popup_class.h"
 	#include "Queen Command.h"	// added by Flugente
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2UB
 #include "ub_config.h"
@@ -309,7 +309,7 @@ BOOLEAN CreateButtonsForMapBorder( void )
 											BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH,
 											(GUI_CALLBACK)MSYS_NO_CALLBACK, (GUI_CALLBACK)BtnMobileCallback);
 	}
-			
+
 	// set up fast help text
 	SetButtonFastHelpText( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ], pMapScreenBorderButtonHelpText[ MAP_BORDER_TOWN_BTN ] );
 	SetButtonFastHelpText( giMapBorderButtons[ MAP_BORDER_MINE_BTN ], pMapScreenBorderButtonHelpText[ MAP_BORDER_MINE_BTN ] );
@@ -317,10 +317,10 @@ BOOLEAN CreateButtonsForMapBorder( void )
 	SetButtonFastHelpText( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ], pMapScreenBorderButtonHelpText[ MAP_BORDER_AIRSPACE_BTN ] );
 	SetButtonFastHelpText( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ], pMapScreenBorderButtonHelpText[ MAP_BORDER_ITEM_BTN ] );
 	SetButtonFastHelpText( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ], pMapScreenBorderButtonHelpText[ MAP_BORDER_MILITIA_BTN ] );
-		
+
 	if ( gGameExternalOptions.gfAllowMilitiaGroups && !gGameExternalOptions.fMilitiaStrategicCommand )
 		SetButtonFastHelpText( giMapBorderButtons[ MAP_BORDER_MOBILE_BTN ], pMapScreenBorderButtonHelpText[ MAP_BORDER_MOBILE_BTN ] ); // HEADROCK HAM 4: Mobile Militia button
-	
+
 	SetButtonCursor(giMapBorderButtons[ MAP_BORDER_TOWN_BTN ], MSYS_NO_CURSOR );
 	SetButtonCursor(giMapBorderButtons[ MAP_BORDER_MINE_BTN ], MSYS_NO_CURSOR );
 	SetButtonCursor(giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ], MSYS_NO_CURSOR );
@@ -330,7 +330,7 @@ BOOLEAN CreateButtonsForMapBorder( void )
 
 	if ( gGameExternalOptions.gfAllowMilitiaGroups && !gGameExternalOptions.fMilitiaStrategicCommand )
 		SetButtonCursor(giMapBorderButtons[ MAP_BORDER_MOBILE_BTN ], MSYS_NO_CURSOR ); // HEADROCK HAM 4: Mobile Militia button
-	
+
 	// Flugente: disease
 	if ( gGameExternalOptions.fDisease && gGameExternalOptions.fDiseaseStrategic )
 	{
@@ -373,73 +373,73 @@ BOOLEAN CreateButtonsForMapBorder( void )
 
 #ifdef JA2UB
     //EnableButton
-      
-	if (gGameUBOptions.BorderTown == TRUE)  
-	   { 
-	   EnableButton( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ]); 
-	   }  
-	   else
-	   {
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ]); 
-	   }
-	   
-	if (gGameUBOptions.BorderMine == TRUE)  
-	   { 
-	   EnableButton( giMapBorderButtons[ MAP_BORDER_MINE_BTN ]); 
-	   }  
-	   else
-	   {
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_MINE_BTN ]); 
-	   }
-	
-	if (gGameUBOptions.BorderTeams == TRUE)  
-	   { 
-	   EnableButton( giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ]); 
-	   }  
-	   else
-	   {
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ]); 
-	   }
-	
-	if (gGameUBOptions.BorderMilitia == TRUE)  
-	   { 
-	   EnableButton( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ]); 
-	   }  
-	   else
-	   {
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ]); 
-	   }      
-	   
-	if (gGameUBOptions.BorderAirspace == TRUE)  
-	   { 
-	   EnableButton( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ]); 
-	   }  
-	   else
-	   {
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ]); 
-	   }      
 
-	if (gGameUBOptions.BorderItem == TRUE)  
-	   { 
-	   EnableButton( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ]); 
-	   }  
+	if (gGameUBOptions.BorderTown == TRUE)
+	   {
+	   EnableButton( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ]);
+	   }
 	   else
 	   {
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ]); 
-	   }  
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ]);
+	   }
+
+	if (gGameUBOptions.BorderMine == TRUE)
+	   {
+	   EnableButton( giMapBorderButtons[ MAP_BORDER_MINE_BTN ]);
+	   }
+	   else
+	   {
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_MINE_BTN ]);
+	   }
+
+	if (gGameUBOptions.BorderTeams == TRUE)
+	   {
+	   EnableButton( giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ]);
+	   }
+	   else
+	   {
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ]);
+	   }
+
+	if (gGameUBOptions.BorderMilitia == TRUE)
+	   {
+	   EnableButton( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ]);
+	   }
+	   else
+	   {
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ]);
+	   }
+
+	if (gGameUBOptions.BorderAirspace == TRUE)
+	   {
+	   EnableButton( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ]);
+	   }
+	   else
+	   {
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ]);
+	   }
+
+	if (gGameUBOptions.BorderItem == TRUE)
+	   {
+	   EnableButton( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ]);
+	   }
+	   else
+	   {
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ]);
+	   }
 #endif
 
 #ifdef JA113DEMO
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ]); 
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_MINE_BTN ]); 
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ]); 
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ]); 
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ]); 
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ]); 
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_TOWN_BTN ]);
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_MINE_BTN ]);
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_TEAMS_BTN ]);
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_MILITIA_BTN ]);
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_AIRSPACE_BTN ]);
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_ITEM_BTN ]);
 	   DisableButton( giMapBorderButtons[ MAP_BORDER_MOBILE_BTN ]);
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_DISEASE_BTN ]); 
-	   DisableButton( giMapBorderButtons[ MAP_BORDER_WEATHER_BTN ]); 
-	   	   	   
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_DISEASE_BTN ]);
+	   DisableButton( giMapBorderButtons[ MAP_BORDER_WEATHER_BTN ]);
+
 	   fShowTownFlag = FALSE;
 #endif
 
@@ -488,7 +488,7 @@ void DeleteMapBorderButtons( void )
 
 	if ( giMapBorderButtonsImage[MAP_BORDER_WEATHER_BTN] != -1 )
 		UnloadButtonImage( giMapBorderButtonsImage[MAP_BORDER_WEATHER_BTN] );
-		
+
 	// HEADROCK HAM 4: Increased number of buttons by one.
 	for ( ubCnt = 0; ubCnt < NUM_MAP_BORDER_BTNS; ++ubCnt )
 	{
@@ -647,7 +647,7 @@ void ToggleShowTownsMode( void )
 			fShowMineFlag = FALSE;
 			MapBorderButtonOff( MAP_BORDER_MINE_BTN );
 		}
-		
+
 		if( fShowItemsFlag == TRUE )
 		{
 			fShowItemsFlag = FALSE;
@@ -679,7 +679,7 @@ void ToggleShowMinesMode( void )
 			fShowTownFlag = FALSE;
 			MapBorderButtonOff( MAP_BORDER_TOWN_BTN );
 		}
-		
+
 		if( fShowItemsFlag == TRUE )
 		{
 			fShowItemsFlag = FALSE;
@@ -713,7 +713,7 @@ void ToggleShowMilitiaMode( void )
 			fShowTeamFlag = FALSE;
 			MapBorderButtonOff( MAP_BORDER_TEAMS_BTN );
 		}
-		
+
 		if ( fShowItemsFlag == TRUE )
 		{
 			fShowItemsFlag = FALSE;
@@ -985,7 +985,7 @@ void TurnOnShowTeamsMode( void )
 			fShowMilitia = FALSE;
 			MapBorderButtonOff( MAP_BORDER_MILITIA_BTN );
 		}
-		
+
 		if( fShowItemsFlag == TRUE )
 		{
 			fShowItemsFlag = FALSE;
@@ -1064,7 +1064,7 @@ void TurnOnAirSpaceMode( void )
 
 		// WANNE: Output info text on the airspace for changing maps
 		if (is_server )
-		{			
+		{
 			STR16 pwString = MPServerMessage[ 13 ];
 
 			MapScreenMessage( FONT_MCOLOR_LTYELLOW, MSG_MAP_UI_POSITION_MIDDLE, pwString );
@@ -1112,7 +1112,7 @@ void TurnOnItemFilterMode( void )
 			fShowMilitia = FALSE;
 			MapBorderButtonOff( MAP_BORDER_MILITIA_BTN );
 		}
-		
+
 		if ( (bSelectedDestChar != -1) || fPlotForHelicopter || fPlotForMilitia )
 		{
 			AbortMovementPlottingMode( );
@@ -1147,7 +1147,7 @@ void TurnOnDiseaseFilterMode( void )
 			fShowItemsFlag = FALSE;
 			MapBorderButtonOff( MAP_BORDER_ITEM_BTN );
 		}
-		
+
 		// Turn off towns, mines, teams, militia & airspace if any are on
 		if( fShowTownFlag == TRUE )
 		{
@@ -1172,7 +1172,7 @@ void TurnOnDiseaseFilterMode( void )
 			fShowMilitia = FALSE;
 			MapBorderButtonOff( MAP_BORDER_MILITIA_BTN );
 		}
-		
+
 		if ( (bSelectedDestChar != -1) || fPlotForHelicopter || fPlotForMilitia )
 		{
 			AbortMovementPlottingMode( );
@@ -1293,14 +1293,14 @@ void TurnOnMobileFilterMode( void )
 			fShowTeamFlag = FALSE;
 			MapBorderButtonOff( MAP_BORDER_TEAMS_BTN );
 		}
-		
+
 		// Turn off items
 		if( fShowItemsFlag == TRUE )
 		{
 			fShowItemsFlag = FALSE;
 			MapBorderButtonOff( MAP_BORDER_ITEM_BTN );
 		}
-		
+
 		if ( (bSelectedDestChar != -1) || fPlotForHelicopter || fPlotForMilitia )
 		{
 			AbortMovementPlottingMode( );
@@ -1377,7 +1377,7 @@ void InitializeMapBorderButtonStates( void )
 	{
 		MapBorderButtonOff( MAP_BORDER_TEAMS_BTN );
 	}
-	
+
 	if( fShowMilitia )
 	{
 		MapBorderButtonOn( MAP_BORDER_MILITIA_BTN );

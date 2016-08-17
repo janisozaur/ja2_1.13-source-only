@@ -69,7 +69,7 @@ namespace DataStructures
 
 		// All these variables are for path finding with Dijkstra
 		// 08/23/06 Won't compile as a DLL inside this struct
-	//	struct  
+	//	struct
 	//	{
 			bool isValidPath;
 			node_type rootNode;
@@ -102,7 +102,7 @@ namespace DataStructures
 	WeightedGraph<node_type, weight_type, allow_unlinkedNodes>::WeightedGraph( const WeightedGraph& original_copy )
 	{
 		adjacencyLists=original_copy.adjacencyLists;
-		
+
 		isValidPath=original_copy.isValidPath;
 		if (isValidPath)
 		{
@@ -238,7 +238,7 @@ namespace DataStructures
 			ClearDijkstra();
 			GenerateDisjktraMatrix(startNode, INFINITE_WEIGHT);
 		}
-		
+
 		// return the results
 		bool objectExists;
 		unsigned col,row;
@@ -385,7 +385,7 @@ namespace DataStructures
 					nap2.parent=current;
 					nodesToProcess.Push(nap2);
 					current->children.Insert(nap2.node);
-				}				
+				}
 			}
 		}
 
@@ -478,7 +478,7 @@ namespace DataStructures
 			currentNodeWeight=minHeap.PeekWeight(0);
 			leastNodeArray[row]=minHeap.Pop(0);
 			currentNode=leastNodeArray[row];
-			openSet.Delete(currentNode);		
+			openSet.Delete(currentNode);
 			row++;
 		}
 

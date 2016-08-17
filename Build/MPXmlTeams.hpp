@@ -1,7 +1,7 @@
 #ifndef MPXMLTEAMS_HPP
 #define MPXMLTEAMS_HPP
 
-#include "types.h"
+#include "Types.h"
 #include "XML.h"
 #include "expat.h"
 #include <vector>
@@ -11,7 +11,7 @@
 #define RANDOM_MERC_TEAM_SIZE	7
 
 /* MPTeams.xml structure:
-	
+
 	- name attribute is optional and not used anywhere yet
 
 	<mp_teams>
@@ -56,7 +56,7 @@ private:
 	BOOLEAN ReadXMLFile(STR fileName);
 	void UseFallbackDataIfNecessary();
 	void TrashTeams();
-	
+
 	static void XMLCALL teamsStartElementHandler(void *userData, const XML_Char *name, const XML_Char **atts);
 	static void XMLCALL teamsEndElementHandler(void *userData, const XML_Char *name);
 	static void XMLCALL teamsCharacterDataHandler(void *userData, const XML_Char *s, int len);

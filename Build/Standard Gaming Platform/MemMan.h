@@ -19,7 +19,7 @@
 //
 //**************************************************************************
 
-#include "types.h"
+#include "Types.h"
 
 //**************************************************************************
 //
@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-extern UINT32	MemDebugCounter;	
+extern UINT32	MemDebugCounter;
 extern UINT32 guiMemTotal;
 extern UINT32 guiMemAlloced;
 extern UINT32 guiMemFreed;
@@ -56,7 +56,7 @@ extern void		ShutdownMemoryManager( void );
 // Creates and adds a video object to list
 #ifdef EXTREME_MEMORY_DEBUGGING
 	//This is the most effective way to debug memory leaks.	Each memory leak will be recorded in a linked
-	//list containing a string referring to the location in code the memory was allocated in addition to 
+	//list containing a string referring to the location in code the memory was allocated in addition to
 	//the number of occurrences.	The shutdown code will report all unhandled memory with exact location allocated.
 	void DumpMemoryInfoIntoFile( CHAR8 *filename, BOOLEAN fAppend );
 	BOOLEAN _AddAndRecordMemAlloc( UINT32 size, UINT32 uiLineNum, UINT8 *pSourceFile );

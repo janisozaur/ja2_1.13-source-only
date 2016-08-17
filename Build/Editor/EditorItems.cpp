@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -10,38 +10,38 @@
 	#include <windows.h>
 	#include "tiledef.h"
 	#include "edit_sys.h"
-	#include "vsurface.h"
-	#include "vobject.h"
+	#include "VSurface.h"
+	#include "VObject.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "wcheck.h"
-	#include "vsurface.h"
-	#include "input.h"
-	#include "sysutil.h"
-	#include "font.h"
+	#include "WCheck.h"
+	#include "VSurface.h"
+	#include "Input.h"
+	#include "SysUtil.h"
+	#include "Font.h"
 	#include "Font Control.h"
-	#include "editscreen.h"
+	#include "EditScreen.h"
 	#include "selectwin.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "interface panels.h"
-	#include "interface items.h"
-	#include "text.h"
-	#include "utilities.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Interface Panels.h"
+	#include "Interface Items.h"
+	#include "Text.h"
+	#include "Utilities.h"
 	#include "Action Items.h"
 	#include "World Items.h"
 	#include "EditorDefines.h"
 	#include "EditorItems.h"
 	#include "EditorMercs.h"
-	#include "weapons.h"
+	#include "Weapons.h"
 	#include "Editor Taskbar Utils.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "Item Statistics.h"
 	#include "Simple Render Utils.h"
-	#include "worldman.h"
-	#include "random.h"
+	#include "WorldMan.h"
+	#include "Random.h"
 	#include "Pits.h"
-	#include "keys.h"
+	#include "Keys.h"
 	#include "InterfaceItemImages.h"
 	#include "Editor Undo.h"//dnl ch86 220214
 #endif
@@ -577,8 +577,8 @@ void InitEditorItemsInfo(UINT32 uiItemType)
 				else
 				{
 					static vfs::Log& editorLog = *vfs::Log::create(L"EditorItems.log");
-					editorLog	<< L"Tried to access item [" 
-								<< item->ubGraphicNum << L"/" << hVObject->usNumberOfObjects 
+					editorLog	<< L"Tried to access item ["
+								<< item->ubGraphicNum << L"/" << hVObject->usNumberOfObjects
 								<< L"]" << vfs::Log::endl;
 				}
 			}
@@ -694,7 +694,7 @@ void RenderEditorItemsInfo()
 		SetFont( BLOCKFONTNARROW );
 		SetFontForeground( FONT_LTGREEN );
 		SetFontShadow( FONT_NEARBLACK );
-		
+
 		// item index no
 		mprintf( x + 12, y + 18, L"%d", eInfo.pusItemIndex[ i ] );
 
@@ -900,7 +900,7 @@ void AddSelectedItemToWorld( INT32 sGridNo )
 	if( eInfo.uiItemType == TBAR_MODE_ITEM_KEYS )
 	{
 		if ( fEditorCreateItemFromKeyboard )
-		{		
+		{
 			CreateKeyObject( &gTempObject, 1, (UINT8)usEditorTempItem );
 			fEditorCreateItemFromKeyboard = FALSE;
 		}
@@ -910,7 +910,7 @@ void AddSelectedItemToWorld( INT32 sGridNo )
 	else
 	{
 		if ( fEditorCreateItemFromKeyboard )
-		{		
+		{
 			CreateItem( usEditorTempItem, 100, &gTempObject );
 			fEditorCreateItemFromKeyboard = FALSE;
 		}

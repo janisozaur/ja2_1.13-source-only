@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author feynman (bears-pit.com)
  */
@@ -17,7 +17,7 @@ namespace AI
     {
         /**@class PlanInputData
          * @brief Wrapper class for environmental data required for plan execution
-         * 
+         *
          * Future versions might require other data types; without the wrapper, *every* Plan subclass ever created would
          * need to be changed in this event. With the wrapper, no change is required at all (see also AIInputData).
          */
@@ -45,7 +45,7 @@ namespace AI
 
         /**@class Plan
          * @brief Composite/Abstract Product. Base class for all plan compositions and components.
-         * 
+         *
          * The Plan class provides a common interface for both plan compositions and plan components. The composite
          * design pattern chosen for plan representation allows objects inheriting from this class to form trees,
          * allowing a clean and easy representation of sub- and super-plans

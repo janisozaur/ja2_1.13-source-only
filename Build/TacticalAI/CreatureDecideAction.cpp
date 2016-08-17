@@ -1,14 +1,14 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "AI All.h"
 #else
-	#include "types.h"
-	//#include "soldier control.h"
-	#include "ai.h"
+	#include "Types.h"
+	//#include "Soldier Control.h"
+	#include "AI.h"
 	#include "AIInternals.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "Items.h"
 	#include "Rotting Corpses.h"
-	#include "soldier add.h"
+	#include "Soldier Add.h"
 #endif
 
 //forward declarations of common classes to eliminate includes
@@ -216,7 +216,7 @@ INT8 CreatureDecideActionGreen( SOLDIERTYPE * pSoldier )
 		if ( /*bInWater || */ bInGas)
 		{
 			pSoldier->aiData.usActionData = FindNearestUngassedLand(pSoldier);
-			
+
 			if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 			{
 	#ifdef DEBUGDECISIONS
@@ -285,7 +285,7 @@ INT8 CreatureDecideActionGreen( SOLDIERTYPE * pSoldier )
 		if ( /*bInWater ||*/ ((INT16) PreRandom(100) < iChance))
 		{
 			pSoldier->aiData.usActionData = RandDestWithinRange(pSoldier);
-			
+
 			if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 			{
 	#ifdef DEBUGDECISIONS
@@ -458,7 +458,7 @@ INT8 CreatureDecideActionYellow( SOLDIERTYPE * pSoldier )
 	// determine the most important noise heard, and its relative value
 	sNoiseGridNo = MostImportantNoiseHeard(pSoldier,&iNoiseValue,&fClimb, &fReachable);
 	//NumMessage("iNoiseValue = ",iNoiseValue);
-	
+
 	if (TileIsOutOfBounds(sNoiseGridNo))
 	{
 		// then we have no business being under YELLOW status any more!
@@ -564,7 +564,7 @@ INT8 CreatureDecideActionYellow( SOLDIERTYPE * pSoldier )
 		if ((INT16) PreRandom(100) < iChance)
 		{
 			pSoldier->aiData.usActionData = GoAsFarAsPossibleTowards(pSoldier,sNoiseGridNo, AI_ACTION_SEEK_NOISE);
-			
+
 			if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 			{
 	#ifdef DEBUGDECISIONS
@@ -643,7 +643,7 @@ INT8 CreatureDecideActionRed(SOLDIERTYPE *pSoldier, UINT8 ubUnconsciousOK)
  if (bInGas && ubCanMove)
 	{
 	pSoldier->aiData.usActionData = FindNearestUngassedLand(pSoldier);
-	
+
 	if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 	{
 #ifdef DEBUGDECISIONS
@@ -742,7 +742,7 @@ INT8 CreatureDecideActionRed(SOLDIERTYPE *pSoldier, UINT8 ubUnconsciousOK)
 			// probably a baby bug... run away! run away!
 		// look for best place to RUN AWAY to (farthest from the closest threat)
 		pSoldier->aiData.usActionData = FindSpotMaxDistFromOpponents( pSoldier );
-		
+
 		if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 		{
 			return(AI_ACTION_RUN_AWAY);
@@ -765,7 +765,7 @@ INT8 CreatureDecideActionRed(SOLDIERTYPE *pSoldier, UINT8 ubUnconsciousOK)
 			else
 			{
 				pSoldier->aiData.usActionData = InternalGoAsFarAsPossibleTowards(pSoldier, pSoldier->aiData.sCallerGridNo, -1, AI_ACTION_SEEK_FRIEND, FLAG_STOPSHORT);
-				
+
 				if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 				{
 					#ifdef DEBUGDECISIONS
@@ -781,7 +781,7 @@ INT8 CreatureDecideActionRed(SOLDIERTYPE *pSoldier, UINT8 ubUnconsciousOK)
 
 		// get the location of the closest reachable opponent
 		sClosestDisturbance = ClosestReachableDisturbance(pSoldier,ubUnconsciousOK, &fChangeLevel);
-		// if there is an opponent reachable		
+		// if there is an opponent reachable
 		if (!TileIsOutOfBounds(sClosestDisturbance))
 		{
 			//////////////////////////////////////////////////////////////////////
@@ -791,7 +791,7 @@ INT8 CreatureDecideActionRed(SOLDIERTYPE *pSoldier, UINT8 ubUnconsciousOK)
 			// try to move towards him
 			pSoldier->aiData.usActionData = GoAsFarAsPossibleTowards(pSoldier,sClosestDisturbance,AI_ACTION_SEEK_OPPONENT);
 
-			// if it's possible			
+			// if it's possible
 			if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 			{
 				#ifdef DEBUGDECISIONS
@@ -844,7 +844,7 @@ INT8 CreatureDecideActionRed(SOLDIERTYPE *pSoldier, UINT8 ubUnconsciousOK)
 		// determine the location of the known closest opponent
 		// (don't care if he's conscious, don't care if he's reachable at all)
 		sClosestOpponent = ClosestKnownOpponent(pSoldier, NULL, NULL);
-		
+
 		if (!TileIsOutOfBounds(sClosestOpponent))
 			{
 			// determine direction from this soldier to the closest opponent
@@ -1014,7 +1014,7 @@ INT8 CreatureDecideActionBlack( SOLDIERTYPE * pSoldier )
 	{
 	 // look for best place to RUN AWAY to (farthest from the closest threat)
 	 pSoldier->aiData.usActionData = FindSpotMaxDistFromOpponents(pSoldier);
-	 
+
 	 if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 		{
 #ifdef DEBUGDECISIONS
@@ -1162,7 +1162,7 @@ INT8 CreatureDecideActionBlack( SOLDIERTYPE * pSoldier )
 								// get the location of the closest CONSCIOUS reachable opponent
 								sClosestDisturbance = ClosestReachableDisturbance(pSoldier,FALSE,&fChangeLevel);
 
-								// if we found one								
+								// if we found one
 								if (!TileIsOutOfBounds(sClosestDisturbance))
 								{
 									// don't bother checking GRENADES/KNIVES, he can't have conscious targets
@@ -1380,14 +1380,14 @@ INT8 CreatureDecideActionBlack( SOLDIERTYPE * pSoldier )
 		// determine the location of the known closest opponent
 		// (don't care if he's conscious, don't care if he's reachable at all)
 		sClosestOpponent = ClosestKnownOpponent(pSoldier, NULL, NULL);
-		// if we have a closest reachable opponent		
+		// if we have a closest reachable opponent
 		if (!TileIsOutOfBounds(sClosestOpponent))
 		{
 				if ( ubCanMove && PythSpacesAway( pSoldier->sGridNo, sClosestOpponent ) > 2 )
 				{
 					if ( bSpitIn != NO_SLOT )
 					{
-						pSoldier->aiData.usActionData = AdvanceToFiringRange( pSoldier, sClosestOpponent );						
+						pSoldier->aiData.usActionData = AdvanceToFiringRange( pSoldier, sClosestOpponent );
 						if (TileIsOutOfBounds(pSoldier->aiData.usActionData))
 						{
 							pSoldier->aiData.usActionData = GoAsFarAsPossibleTowards(pSoldier,sClosestOpponent,AI_ACTION_SEEK_OPPONENT);
@@ -1402,7 +1402,7 @@ INT8 CreatureDecideActionBlack( SOLDIERTYPE * pSoldier )
 				{
 					pSoldier->aiData.usActionData = NOWHERE;
 				}
-				
+
 				if (!TileIsOutOfBounds(pSoldier->aiData.usActionData)) // charge!
 				{
 					return( AI_ACTION_SEEK_OPPONENT );
@@ -1436,7 +1436,7 @@ INT8 CreatureDecideActionBlack( SOLDIERTYPE * pSoldier )
 		// look for best place to RUN AWAY to (farthest from the closest threat)
 		//pSoldier->aiData.usActionData = RunAway( pSoldier );
 		pSoldier->aiData.usActionData = FindSpotMaxDistFromOpponents( pSoldier );
-		
+
 		if (!TileIsOutOfBounds(pSoldier->aiData.usActionData))
 		{
 			return(AI_ACTION_RUN_AWAY);
@@ -1586,7 +1586,7 @@ void CreatureDecideAlertStatus( SOLDIERTYPE *pSoldier )
 				{
 					// if we are NOT aware of any uninvestigated noises right now
 					// and we are not currently in the middle of an action
-					// (could still be on his way heading to investigate a noise!)					
+					// (could still be on his way heading to investigate a noise!)
 					if (( TileIsOutOfBounds(MostImportantNoiseHeard(pSoldier,&iDummy,&fClimbDummy,&fReachableDummy))) && !pSoldier->aiData.bActionInProgress)
 					{
 						// then drop back to GREEN status
@@ -1603,7 +1603,7 @@ void CreatureDecideAlertStatus( SOLDIERTYPE *pSoldier )
 				}
 				else
 				{
-					// if we ARE aware of any uninvestigated noises right now					
+					// if we ARE aware of any uninvestigated noises right now
 					if ( !TileIsOutOfBounds(MostImportantNoiseHeard(pSoldier,&iDummy,&fClimbDummy,&fReachableDummy)))
 					{
 						// then move up to YELLOW status
@@ -1657,7 +1657,7 @@ void CreatureDecideAlertStatus( SOLDIERTYPE *pSoldier )
 				// force a NEW decision so that he can get some rest
 				SetNewSituation( pSoldier );
 
-				// current action will be canceled. if noise is no longer important				
+				// current action will be canceled. if noise is no longer important
 				if ((pSoldier->aiData.bAlertStatus == STATUS_YELLOW) &&
 					(TileIsOutOfBounds(MostImportantNoiseHeard(pSoldier,&iDummy,&fClimbDummy,&fReachableDummy))))
 				{

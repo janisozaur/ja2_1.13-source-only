@@ -16,22 +16,22 @@
 /// option) any later version.
 
 #ifndef __MESSAGE_IDENTIFIERS_H
-#define __MESSAGE_IDENTIFIERS_H 
+#define __MESSAGE_IDENTIFIERS_H
 
 #if defined(RAKNET_USE_CUSTOM_PACKET_IDS)
 #include "CustomPacketIdentifiers.h"
 #else
 
 /// You should not edit the file MessageIdentifiers.h as it is a part of RakNet static library
-/// To define your own message id, define an enum following the code example that follows. 
+/// To define your own message id, define an enum following the code example that follows.
 ///
 /// \code
 /// enum {
 ///   ID_MYPROJECT_MSG_1 = ID_USER_PACKET_ENUM,
-///   ID_MYPROJECT_MSG_2, 
-///    ... 
+///   ID_MYPROJECT_MSG_2,
+///    ...
 /// };
-/// \endcode 
+/// \endcode
 ///
 /// \note All these enumerations should be casted to (unsigned char) before writing them to RakNet::BitStream
 enum DefaultMessageIDTypes
@@ -42,7 +42,7 @@ enum DefaultMessageIDTypes
 	//
 	/// These types are never returned to the user.
 	/// Ping from a connected system.  Update timestamps (internal use only)
-	ID_INTERNAL_PING,  
+	ID_INTERNAL_PING,
 	/// Ping from an unconnected system.  Reply but do not update timestamps. (internal use only)
 	ID_PING,
 	/// Ping from an unconnected system.  Only reply if we have open connections. Do not update timestamps. (internal use only)
@@ -69,7 +69,7 @@ enum DefaultMessageIDTypes
 	ID_RPC_REPLY,
 	/// RakPeer - Same as ID_ADVERTISE_SYSTEM, but intended for internal use rather than being passed to the user. Second byte indicates type. Used currently for NAT punchthrough for receiver port advertisement. See ID_NAT_ADVERTISE_RECIPIENT_PORT
 	ID_OUT_OF_BAND_INTERNAL,
-	
+
 
 	//
 	// USER TYPES - DO NOT CHANGE THESE
@@ -77,7 +77,7 @@ enum DefaultMessageIDTypes
 
 	/// RakPeer - In a client/server environment, our connection request to the server has been accepted.
 	ID_CONNECTION_REQUEST_ACCEPTED,
-	/// RakPeer - Sent to the player when a connection request cannot be completed due to inability to connect. 
+	/// RakPeer - Sent to the player when a connection request cannot be completed due to inability to connect.
 	ID_CONNECTION_ATTEMPT_FAILED,
 	/// RakPeer - Sent a connect request to a system we are currently connected to.
 	ID_ALREADY_CONNECTED,
@@ -85,9 +85,9 @@ enum DefaultMessageIDTypes
 	ID_NEW_INCOMING_CONNECTION,
 	/// RakPeer - The system we attempted to connect to is not accepting new connections.
 	ID_NO_FREE_INCOMING_CONNECTIONS,
-	/// RakPeer - The system specified in Packet::systemAddress has disconnected from us.  For the client, this would mean the server has shutdown. 
+	/// RakPeer - The system specified in Packet::systemAddress has disconnected from us.  For the client, this would mean the server has shutdown.
 	ID_DISCONNECTION_NOTIFICATION,
-	/// RakPeer - Reliable packets cannot be delivered to the system specified in Packet::systemAddress.  The connection to that system has been closed. 
+	/// RakPeer - Reliable packets cannot be delivered to the system specified in Packet::systemAddress.  The connection to that system has been closed.
 	ID_CONNECTION_LOST,
 	/// RakPeer - We preset an RSA public key which does not match what the system we connected to is using.
 	ID_RSA_PUBLIC_KEY_MISMATCH,
@@ -111,7 +111,7 @@ enum DefaultMessageIDTypes
 	ID_REMOTE_NEW_INCOMING_CONNECTION,
 	// RakPeer - Downloading a large message. Format is ID_DOWNLOAD_PROGRESS (MessageID), partCount (unsigned int), partTotal (unsigned int), partLength (unsigned int), first part data (length <= MAX_MTU_SIZE). See the three parameters partCount, partTotal and partLength in OnFileProgress in FileListTransferCBInterface.h
 	ID_DOWNLOAD_PROGRESS,
-	
+
 	/// FileListTransfer plugin - Setup data
 	ID_FILE_LIST_TRANSFER_HEADER,
 	/// FileListTransfer plugin - A file
@@ -119,7 +119,7 @@ enum DefaultMessageIDTypes
 
 	/// DirectoryDeltaTransfer plugin - Request from a remote system for a download of a directory
 	ID_DDT_DOWNLOAD_REQUEST,
-	
+
 	/// RakNetTransport plugin - Transport provider message, used for remote console
 	ID_TRANSPORT_STRING,
 
@@ -262,7 +262,7 @@ enum DefaultMessageIDTypes
 	// For the user to use.  Start your first enumeration at this value.
 	ID_USER_PACKET_ENUM,
 	//-------------------------------------------------------------------------------------------------------------
- 
+
 };
 
 #endif // RAKNET_USE_CUSTOM_PACKET_IDS

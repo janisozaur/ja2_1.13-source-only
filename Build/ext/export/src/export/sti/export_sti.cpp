@@ -77,7 +77,7 @@ bool ja2xp::convertSTItoJPC(vfs::Path const& sSrc, vfs::Path const& sDst, bool b
 			continue;
 		}
 		vfs::String::str_t fname_base = fname.substr(0,fname.length()-4);
-		 
+
 		std::wcout << L"Converting file \"" << fname << L"\"" << std::endl;
 
 		if(bOnePng)
@@ -140,7 +140,7 @@ const wchar_t* ja2xp::CExportSTI::commandString = L"sti";
 
 void ja2xp::CExportSTI::handleCommand(CExportSTI::param_list_t const& params)
 {
-	bool opt_Packed = true, 
+	bool opt_Packed = true,
 		 opt_ExportOffsets = false,
 		 opt_OnePng = false,
 		 opt_Rgba = false;

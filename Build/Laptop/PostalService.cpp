@@ -1,22 +1,22 @@
 #include "SaveLoadMap.h"
 #include "Structure Wrap.h"
 #include "Tactical Save.h"
-#include "postalservice.h"
-#include "strategic.h"
-#include "strategicmap.h"
-#include "random.h"
-#include "game clock.h"
+#include "PostalService.h"
+#include "Strategic.h"
+#include "StrategicMap.h"
+#include "Random.h"
+#include "Game Clock.h"
 #include "GameSettings.h"
 #include <list>
 #include <string>
 #include <iostream>
 #include "Quests.h"
 #include "Strategic Town Loyalty.h"
-#include "email.h"
+#include "Email.h"
 #include "BobbyRMailOrder.h"
 
 // WANNE - MP: Used for multiplayer
-#include "connect.h"
+#include "Connect.h"
 #include "Strategic Event Handler.h"
 
 #ifdef JA2UB
@@ -109,7 +109,7 @@ void CPostalService::Clear(bool clearDataOnly)
 		_DeliveryCallbacks.clear();
 		_Destinations.clear();
 		_UsedDestinationIDList.clear();
-		_DeliveryMethods.clear();	
+		_DeliveryMethods.clear();
 	}
 }
 
@@ -125,7 +125,7 @@ UINT16 CPostalService::CreateNewShipment(UINT16 usDestinationID, UINT8  ubDelive
 
 	_Destinations.sort(DESTINATION_LIST_ASCENDING);
 	RefToDestinationListIterator dli = _Destinations.begin();
-	
+
 	while(DESTINATION(dli).usID != usDestinationID)
 	{
 		if(dli == _Destinations.end())
@@ -156,7 +156,7 @@ UINT16 CPostalService::CreateNewShipment(UINT16 usDestinationID, UINT8  ubDelive
 			if(!_UsedShipmentIDList[usNewID])	// Found an ID that is not assigned
 			{
 				_UsedShipmentIDList[usNewID] = TRUE;
-				break;	
+				break;
 			}
 
 			usNewID++;
@@ -240,7 +240,7 @@ BOOLEAN CPostalService::SendShipment(UINT16 usShipmentID)
 		}
 	}
 	else
-	{	
+	{
 		//JMich
 		//Jenilee: now faster shipments
 		if (!BR_FAST_SHIP)
@@ -288,7 +288,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 	{
 		return FALSE;
 	}
-	
+
 	PCShipmentManipulator ShipmentManipulator = new CShipmentManipulator(this, &SHIPMENT(sli));
 
 	// Delivery callback code goes here
@@ -306,7 +306,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 			_DeliveryCallbacks[SHIPMENT(sli).sSenderID + 1].DeliveryCallbackFunc(*ShipmentManipulator);
 		}
 	}
-	
+
 
 	if(SHIPMENT(sli).ShipmentStatus == SHIPMENT_CANCEL_DELIVERY)
 	{
@@ -331,20 +331,20 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 		return TRUE;
 	}
 
-	if( (shs.pDestination->ubMapX > 0) && 
+	if( (shs.pDestination->ubMapX > 0) &&
 		(shs.pDestination->ubMapX < MAP_WORLD_X - 1) &&
-		(shs.pDestination->ubMapY > 0) && 
-		(shs.pDestination->ubMapY < MAP_WORLD_Y - 1) ) //&& 
+		(shs.pDestination->ubMapY > 0) &&
+		(shs.pDestination->ubMapY < MAP_WORLD_Y - 1) ) //&&
 		//GridNoOnVisibleWorldTile(shs.pDestination->sGridNo) )
 		// silversurfer: wtf? This test checked if the delivery tile was valid for the currently loaded sector
 		// which is not necessarily the delivery sector
 		// if we are currently below ground it will crash the game...
 	{
-		BOOLEAN fSectorLoaded = ( gWorldSectorX == shs.pDestination->ubMapX ) && 
-								( gWorldSectorY == shs.pDestination->ubMapY ) && 
+		BOOLEAN fSectorLoaded = ( gWorldSectorX == shs.pDestination->ubMapX ) &&
+								( gWorldSectorY == shs.pDestination->ubMapY ) &&
 								( gbWorldSectorZ == shs.pDestination->ubMapZ);
 
-		
+
 		// WDS - Option to turn off stealing
 		// check for potential theft
 		if (gGameExternalOptions.fStealingDisabled ||
@@ -364,7 +364,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 			// this chance might seem high but it's only applied at most to every second item
 			uiChanceOfTheft = 12 + Random( 4 * ubShipmentsSinceNoBribes );
 		}
-	
+
 		// Shipment from John Kulba can never be lost, only from Bobby Ray
 		if (shs.sSenderID == BOBBYR_SENDER_ID)
 		{
@@ -393,7 +393,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 		}
 		else
 		{
-			ChangeStatusOfOpenableStructInUnloadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY, 
+			ChangeStatusOfOpenableStructInUnloadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY,
 															shs.pDestination->ubMapZ, shs.pDestination->sGridNo, FALSE );
 		}
 
@@ -420,14 +420,14 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 		UINT		uiCount=0;
 		UINT8		ubItemsDelivered, ubTempNumItems;
 		UINT16		usItem;
-		
+
 		// Loop through the packages of the order.
 		// A package is the sum of the same items (e.g: 5 Colts = 1 package, 2 Colts & 1 legging = 2 packages)
 		for(int i=0; i < (int)shs.ShipmentPackages.size(); i++)
 		{
 			// Wie viele items sollen geliefert werden ?
 			ubItemsDelivered = shs.ShipmentPackages[i].ubNumber;
-			
+
 			// das aktuelle item
 			usItem = shs.ShipmentPackages[i].usItemIndex;
 
@@ -456,7 +456,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 				{
 					ubTempNumItems = __min( ubItemsDelivered, ItemSlotLimit(&tempObject, STACK_SIZE_LIMIT) );
 				}
-				
+
 				// Create all the items that are grouped together
 				CreateItems( usItem, shs.ShipmentPackages[i].bItemQuality, ubTempNumItems, &tempObject );
 
@@ -507,7 +507,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 			// Successfull delivered items into the crate
 			if (uiCount > 0)
 			{
-				if( !AddItemsToUnLoadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY, 
+				if( !AddItemsToUnLoadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY,
 					shs.pDestination->ubMapZ, shs.pDestination->sGridNo, uiCount, pObject, 0, 0, 0, -1, FALSE ) )
 				{
 					Assert( 0 );
@@ -520,7 +520,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 			if (uiStolenCount > 0)
 			{
 				// Delivered items
-				if( !AddItemsToUnLoadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY, 
+				if( !AddItemsToUnLoadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY,
 					shs.pDestination->ubMapZ, PABLOS_STOLEN_DEST_GRIDNO, uiStolenCount, pStolenObject, 0, 0, 0, -1, FALSE ) )
 				{
 					Assert( 0 );
@@ -545,16 +545,16 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 		// WANNE - MP: Do not send email notification from Bobby Ray in a multiplayer game
 		if (!is_networked)
 		{
-		
+
 		StopTimeCompression();
 #ifdef JA2UB
 
-//no UB		
+//no UB
 	if ( gGameUBOptions.fBobbyRSite == TRUE )
 	{
 			// Shipment from Bobby Ray
 			if (shs.sSenderID == BOBBYR_SENDER_ID)
-				AddBobbyREmailJA2( 198, 4, BOBBY_R, GetWorldTotalMin(), -1, gusCurShipmentDestinationID, TYPE_EMAIL_BOBBY_R_EMAIL_JA2_EDT);	
+				AddBobbyREmailJA2( 198, 4, BOBBY_R, GetWorldTotalMin(), -1, gusCurShipmentDestinationID, TYPE_EMAIL_BOBBY_R_EMAIL_JA2_EDT);
 				// Shipment from John Kulba
 			//else
 			//	AddEmail( JOHN_KULBA_GIFT_IN_DRASSEN, JOHN_KULBA_GIFT_IN_DRASSEN_LENGTH, JOHN_KULBA, GetWorldTotalMin(), -1, gusCurShipmentDestinationID, TYPE_EMAIL_EMAIL_EDT);
@@ -563,7 +563,7 @@ BOOLEAN CPostalService::DeliverShipment(UINT16 usShipmentID)
 
 			// Shipment from Bobby Ray
 			if (shs.sSenderID == BOBBYR_SENDER_ID)
-				AddEmail( BOBBYR_SHIPMENT_ARRIVED, BOBBYR_SHIPMENT_ARRIVED_LENGTH, BOBBY_R, GetWorldTotalMin(), -1, gusCurShipmentDestinationID, TYPE_EMAIL_EMAIL_EDT);	
+				AddEmail( BOBBYR_SHIPMENT_ARRIVED, BOBBYR_SHIPMENT_ARRIVED_LENGTH, BOBBY_R, GetWorldTotalMin(), -1, gusCurShipmentDestinationID, TYPE_EMAIL_EMAIL_EDT);
 			// Shipment from John Kulba
 			else
 				AddEmail( JOHN_KULBA_GIFT_IN_DRASSEN, JOHN_KULBA_GIFT_IN_DRASSEN_LENGTH, JOHN_KULBA, GetWorldTotalMin(), -1, gusCurShipmentDestinationID, TYPE_EMAIL_EMAIL_EDT);
@@ -611,7 +611,7 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 	{
 		return FALSE;
 	}
-	
+
 	PCShipmentManipulator ShipmentManipulator = new CShipmentManipulator(this, &SHIPMENT(sli));
 
 	// Delivery callback code goes here
@@ -628,7 +628,7 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 			_DeliveryCallbacks[SHIPMENT(sli).sSenderID + 1].DeliveryCallbackFunc(*ShipmentManipulator);
 		}
 	}
-	
+
 
 	if(SHIPMENT(sli).ShipmentStatus == SHIPMENT_CANCEL_DELIVERY)
 	{
@@ -639,14 +639,14 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 
 	RefToShipmentStruct shs = SHIPMENT(sli);
 
-	if( (shs.pDestination->ubMapX > 0) && 
+	if( (shs.pDestination->ubMapX > 0) &&
 		(shs.pDestination->ubMapX < MAP_WORLD_X - 1) &&
-		(shs.pDestination->ubMapY > 0) && 
-		(shs.pDestination->ubMapY < MAP_WORLD_Y - 1) && 
+		(shs.pDestination->ubMapY > 0) &&
+		(shs.pDestination->ubMapY < MAP_WORLD_Y - 1) &&
 		GridNoOnVisibleWorldTile(shs.pDestination->sGridNo) )
 	{
-		BOOLEAN fSectorLoaded = ( gWorldSectorX == shs.pDestination->ubMapX ) && 
-								( gWorldSectorY == shs.pDestination->ubMapY ) && 
+		BOOLEAN fSectorLoaded = ( gWorldSectorX == shs.pDestination->ubMapX ) &&
+								( gWorldSectorY == shs.pDestination->ubMapY ) &&
 								( gbWorldSectorZ == shs.pDestination->ubMapZ);
 
 		if(fSectorLoaded)
@@ -655,7 +655,7 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 		}
 		else
 		{
-			ChangeStatusOfOpenableStructInUnloadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY, 
+			ChangeStatusOfOpenableStructInUnloadedSector(	shs.pDestination->ubMapX, shs.pDestination->ubMapY,
 															shs.pDestination->ubMapZ, shs.pDestination->sGridNo, FALSE );
 		}
 
@@ -680,7 +680,7 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 		UINT		uiCount=0;
 		UINT8		ubItemsDelivered, ubTempNumItems;
 		UINT16		usItem;
-		
+
 		for(int i=0; i < (int)shs.ShipmentPackages.size(); i++)
 		{
 			ubItemsDelivered = shs.ShipmentPackages[i].ubNumber;
@@ -698,7 +698,7 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 				{
 					ubTempNumItems = __min( ubItemsDelivered, ItemSlotLimit(&tempObject, STACK_SIZE_LIMIT) );
 				}
-				
+
 				CreateItems( usItem, shs.ShipmentPackages[i].bItemQuality, ubTempNumItems, &tempObject );
 
 				if( fSectorLoaded )
@@ -717,7 +717,7 @@ BOOLEAN CPostalService::DeliverShipmentForMultiplayer(UINT16 usShipmentID)
 
 		if( !fSectorLoaded )
 		{
-			if( !AddItemsToUnLoadedSector(	gsMercArriveSectorX, gsMercArriveSectorY, 
+			if( !AddItemsToUnLoadedSector(	gsMercArriveSectorX, gsMercArriveSectorY,
 				0, 12880, uiCount, pObject, 0, WOLRD_ITEM_FIND_SWEETSPOT_FROM_GRIDNO | WORLD_ITEM_REACHABLE, 0, 1, FALSE ) )
 			{
 				Assert( 0 );
@@ -751,7 +751,7 @@ BOOLEAN CPostalService::RegisterDeliveryCallback(INT16 sSenderID, PtrToDeliveryC
 	}
 
 	DeliveryCallbackDataStruct dcd;
-	
+
 	dcd.sSenderID=-1;
 	dcd.DeliveryCallbackFunc = NULL;
 	if(_DeliveryCallbacks.empty())
@@ -800,9 +800,9 @@ BOOLEAN CPostalService::LoadShipmentListFromSaveGameFile(HWFILE hFile)
 	{
 		return FALSE;
 	}
-		
-	ShipmentPackageStruct		sps;	
-		
+
+	ShipmentPackageStruct		sps;
+
 	for(int i = 0; i < (int)sls.uiNumberOfShipments; i++)
 	{
 		ShipmentSaveFileDataStruct	sfs;
@@ -815,9 +815,9 @@ BOOLEAN CPostalService::LoadShipmentListFromSaveGameFile(HWFILE hFile)
 		{
 			return FALSE;
 		}
-		
+
 		// WANNE: Bugfix: Fixed CTD in VS 2008 Release EXE (by birdflu) -> This leads to item duplication!!!
-		//memset(&shs, 0, sizeof(ShipmentStruct));		
+		//memset(&shs, 0, sizeof(ShipmentStruct));
 
 		// WANNE: This is the fix for the item duplication!
 		ShipmentStruct	shs;
@@ -829,7 +829,7 @@ BOOLEAN CPostalService::LoadShipmentListFromSaveGameFile(HWFILE hFile)
 		shs.sSenderID		= sfs.sSenderID;
 		shs.usID			= sfs.usID;
 		shs.uiOrderDate		= sfs.uiOrderDate;
-				
+
 		_UsedShipmentIDList.resize(sfs.usID+1);
 		_UsedShipmentIDList[sfs.usID] = TRUE;
 
@@ -842,9 +842,9 @@ BOOLEAN CPostalService::LoadShipmentListFromSaveGameFile(HWFILE hFile)
 			{
 				return FALSE;
 			}
-			shs.ShipmentPackages.push_back(sps);			
+			shs.ShipmentPackages.push_back(sps);
 		}
-		_Shipments.push_back(shs);		
+		_Shipments.push_back(shs);
 	}
 
 	return TRUE;
@@ -887,8 +887,8 @@ BOOLEAN CPostalService::SaveShipmentListToSaveGameFile(HWFILE hFile)
 		sfs.usDestinationID			= SHIPMENT(sli).pDestination->usID;
 		sfs.usID					= SHIPMENT(sli).usID;
 		sfs.uiOrderDate				= SHIPMENT(sli).uiOrderDate;
-		
-		FileWrite(hFile, &sfs, sizeof(ShipmentSaveFileDataStruct), &uiBytesWritten);		
+
+		FileWrite(hFile, &sfs, sizeof(ShipmentSaveFileDataStruct), &uiBytesWritten);
 		if(uiBytesWritten != sizeof(ShipmentSaveFileDataStruct))
 		{
 			return FALSE;
@@ -938,7 +938,7 @@ UINT16 CPostalService::AddDestination(UINT32 uiIndex, UINT8 ubMapX, UINT8 ubMapY
 			if(!_UsedDestinationIDList[usNewID])	// Found an ID that is not assigned
 			{
 				_UsedDestinationIDList[usNewID] = TRUE;
-				break;	
+				break;
 			}
 
 			usNewID++;
@@ -1029,7 +1029,7 @@ UINT16 CPostalService::GetShipmentCount(SHIPMENT_STATUS TargetedShipmentStatus)
 	}
 
 	RefToShipmentListIterator sli = _Shipments.begin();
-	
+
 	UINT16 usCnt=0;
 	while(sli != _Shipments.end())
 	{
@@ -1107,13 +1107,13 @@ UINT16 CPostalService::SetDestinationDeliveryInfo(UINT8 ubDeliveryMethodIndex, U
 	_DeliveryMethods[ubDeliveryMethodIndex].pDestinationDeliveryInfos->at(DESTINATION(dli).usID).ubParentDeliveryMethodIndex = ubDeliveryMethodIndex;
 	_DeliveryMethods[ubDeliveryMethodIndex].pDestinationDeliveryInfos->at(DESTINATION(dli).usID).usDestinationFee = usDestinationFee;
 	_DeliveryMethods[ubDeliveryMethodIndex].pDestinationDeliveryInfos->at(DESTINATION(dli).usID).bDaysAhead = bDaysAhead;
-	
+
 	return uiDestinationIndex;
 }
 
 UINT16 CPostalService::GetDestinationFee(UINT8 ubDeliveryMethodIndex, UINT16 usDestinationID)
 {
-	if(_UsedDestinationIDList.empty() || 
+	if(_UsedDestinationIDList.empty() ||
 		usDestinationID > _UsedDestinationIDList.size() ||
 		!_UsedDestinationIDList[usDestinationID])
 	{

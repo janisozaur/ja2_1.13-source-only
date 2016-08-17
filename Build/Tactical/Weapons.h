@@ -99,7 +99,7 @@ enum
 };
 
 // ARMOUR CLASSES
-enum 
+enum
 {
 	ARMOURCLASS_HELMET,
 	ARMOURCLASS_VEST,
@@ -302,15 +302,15 @@ enum
 #define AMMO_STRUCTURE_ADJUSTMENT_SAP( x ) ( x / 2 )
 
 // one quarter of punching damage is "real" rather than breath damage
-#define PUNCH_REAL_DAMAGE_PORTION 4 
+#define PUNCH_REAL_DAMAGE_PORTION 4
 
 #define AIM_BONUS_SAME_TARGET		10		// chance-to-hit bonus (in %)
 #define AIM_BONUS_PER_AP			10		// chance-to-hit bonus (in %) for aim
 #define AIM_BONUS_CROUCHING		 10
 #define AIM_BONUS_PRONE						20
-#define AIM_BONUS_TWO_HANDED_PISTOL 5 
+#define AIM_BONUS_TWO_HANDED_PISTOL 5
 #define AIM_BONUS_FIRING_DOWN				15
-#define AIM_PENALTY_ONE_HANDED_PISTOL 5 
+#define AIM_PENALTY_ONE_HANDED_PISTOL 5
 #define AIM_PENALTY_DUAL_PISTOLS		20
 #define AIM_PENALTY_SMG				5
 #define AIM_PENALTY_GASSED			50
@@ -370,7 +370,7 @@ typedef struct
  INT16	sAniDelay;			// Lesh: for burst animation delay
  UINT8	APsToReloadManually;
  UINT16 ManualReloadSound;
- BOOLEAN EasyUnjam; // Guns where each bullet has its own chamber (like revolvers) are easyer to unjam 
+ BOOLEAN EasyUnjam; // Guns where each bullet has its own chamber (like revolvers) are easyer to unjam
 
  FLOAT	bRecoilX;		// HEADROCK HAM 4: Recoil now measured in points of muzzle deviation X and Y.
  FLOAT	bRecoilY;		// Positive values indicated upwards (Y) and rightwards (X). Negatives are down (-Y) and left (-X).
@@ -388,7 +388,7 @@ typedef struct
  FLOAT usOverheatingJamThreshold;				// if a gun's temperature is above this treshold, it is increasingly prone to jamming
  FLOAT usOverheatingDamageThreshold;			// if a gun is fired while its temperature is above this value, it degrades much faster
  FLOAT usOverheatingSingleShotTemperature;		// a single shot raises a gun's temperature by this amount
- 
+
  BOOLEAN HeavyGun;	// SANDRO - a gun with this cannot be shouldered in standing position, part of shooting from hip feature
 
 } WEAPONTYPE;
@@ -421,8 +421,8 @@ typedef struct
 	UINT16		ubVolatility;		// maximum chance of accidental explosion
 	UINT16		ubAnimationID;	// Animation enum to use
 	UINT32		uiIndex;
-	UINT16		ubDuration;	
-	UINT16		ubStartRadius;	
+	UINT16		ubDuration;
+	UINT16		ubStartRadius;
 	UINT8		ubMagSize;
 	BOOLEAN		fExplodeOnImpact;	// HEADROCK HAM 5: Flag for impact explosives.
 	UINT16		usNumFragments;		// HEADROCK HAM 5.1: Fragmenting Explosive Data
@@ -436,7 +436,7 @@ typedef struct
 
 //GLOBALS
 
-extern WEAPONTYPE Weapon[ MAXITEMS ]; 
+extern WEAPONTYPE Weapon[ MAXITEMS ];
 extern ARMOURTYPE Armour[MAXITEMS+1];
 extern MAGTYPE Magazine[MAXITEMS+1];
 extern EXPLOSIVETYPE Explosive[MAXITEMS+1];

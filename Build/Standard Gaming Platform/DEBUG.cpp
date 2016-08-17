@@ -23,26 +23,26 @@
 // undefine _DEBUG or you get linker errors.
 
 
-	#include "types.h"
+	#include "Types.h"
 	#include <windows.h>
 	#include <stdio.h>
 	#include <string>
 	#include <sstream>
-	#include "debug.h"
+	#include "Debug.h"
 	#include "WizShare.h"
 
 	//Kris addition
 	#ifdef JA2
-		#include "screenids.h"
+		#include "ScreenIds.h"
 		#include "Sys Globals.h"
 		#include "jascreens.h"
-		#include "gameloop.h"
-		#include "input.h"
+		#include "GameLoop.h"
+		#include "Input.h"
 	#endif
 
 	// CJC added
 	#ifndef _NO_DEBUG_TXT
-		#include "fileman.h"
+		#include "FileMan.h"
 	#endif
 #include "GameSettings.h"
 #include "SaveLoadGame.h"
@@ -61,9 +61,9 @@ UINT32	guiProfileStart, guiExecutions, guiProfileTime;
 INT32		giProfileCount;
 
 // Had to move these outside the ifdef SGP_DEBUG below, because
-// they are required for the String() function, which is NOT a 
+// they are required for the String() function, which is NOT a
 // debug-mode only function, it's used in release-mode as well! -- DB
- 
+
 CHAR8 gubAssertString[512];
 
 #define MAX_MSG_LENGTH2 512
@@ -121,7 +121,7 @@ FILE * debugLogFile = 0;
 //
 // DbgGetLogFileName
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -157,7 +157,7 @@ bool DbgGetLogFileName( STRING512 pcName )
 //
 // DbgInitialize
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -190,7 +190,7 @@ bool DbgInitialize()
 //
 // DbgShutdown
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -281,7 +281,7 @@ void DbgClearAllTopics( void )
 //
 // DbgMessageReal
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -301,12 +301,12 @@ void DbgMessageReal(unsigned uiTopicId, unsigned uiCommand, unsigned uiDebugLeve
 		OutputDebugString ( strMessage );
 		OutputDebugString ( "\n" );
 
-//add _NO_DEBUG_TXT to your SGP preprocessor definitions to avoid this f**king huge file from 
+//add _NO_DEBUG_TXT to your SGP preprocessor definitions to avoid this f**king huge file from
 //slowly growing behind the scenes!!!!
 #ifndef _NO_DEBUG_TXT
 		if (!debugLogFile)
 			debugLogFile = fopen(debugLogFileName, "a+t");
-	    if (debugLogFile) { 
+	    if (debugLogFile) {
 			fprintf(debugLogFile, "%s\n", strMessage);
 			fflush( debugLogFile );
 		}
@@ -318,7 +318,7 @@ void DbgMessageReal(unsigned uiTopicId, unsigned uiCommand, unsigned uiDebugLeve
 //
 // DbgSetDebugLevel
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -423,14 +423,14 @@ void _FailMessage(const char* message, unsigned lineNum, const char * functionNa
 
 	//Build the output strings
 	if( message )
-		sprintf( gubAssertString, message );	
+		sprintf( gubAssertString, message );
 	else
 		sprintf( gubAssertString, "" );
 
 	//Output to debugger
 	if (gfRecordToDebugger)
 		OutputDebugString( outputString.str().c_str() );
-	
+
 	DbgMessage( TOPIC_GAME, DBG_LEVEL_1, outputString.str().c_str());
 
 	//This will actually bring up a screen that prints out the assert message
@@ -462,12 +462,12 @@ void _FailMessage(const char* message, unsigned lineNum, const char * functionNa
 			}
 			// Ok, now that we have the message, let's handle it
 			TranslateMessage(&Message);
-			DispatchMessage(&Message);      
+			DispatchMessage(&Message);
 		}
 		else
 		{ // Windows hasn't processed any messages, therefore we handle the rest
-			GameLoop();        
-			gfSGPInputReceived  =  FALSE;			
+			GameLoop();
+			gfSGPInputReceived  =  FALSE;
 		}
 	}
 
@@ -485,7 +485,7 @@ STR8 String(const STR8 String, ...)
   va_list  ArgPtr;
   UINT8    usIndex;
 
-  // Record string index. This index is used since we live in a multitasking environment. 
+  // Record string index. This index is used since we live in a multitasking environment.
   // It is still not bulletproof, but it's better than a single string
   usIndex = gubStringIndex++;
   if (gubStringIndex == 8)
@@ -549,7 +549,7 @@ sgp::Exception::Exception(sgp::WString const& msg SGP_CALLER_LOCATION_IMPL)
 
 sgp::Exception::Exception(sgp::WString const& msg, Exception& ex SGP_CALLER_LOCATION_IMPL)
 {
-	_msg.insert(_msg.end(), ex._msg.begin(), ex._msg.end()); 
+	_msg.insert(_msg.end(), ex._msg.begin(), ex._msg.end());
 
 	Excp excp;
 	excp.line		= line;
@@ -589,7 +589,7 @@ sgp::Exception::Exception(WString const& msg, std::exception& ex SGP_CALLER_LOCA
 	if(dynamic_cast<sgp::Exception*>(&ex))
 	{
 		sgp::Exception& sgp_ex = *static_cast<sgp::Exception*>(&ex);
-		_msg.insert(_msg.end(), sgp_ex._msg.begin(), sgp_ex._msg.end()); 
+		_msg.insert(_msg.end(), sgp_ex._msg.begin(), sgp_ex._msg.end());
 	}
 	else if(dynamic_cast<vfs::Exception*>(&ex))
 	{

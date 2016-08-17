@@ -1,8 +1,8 @@
 #ifndef __CAMPAIGN_TYPES_H
 #define __CAMPAIGN_TYPES_H
 
-#include "types.h"
-#include "DEBUG.H"
+#include "Types.h"
+#include "Debug.h"
 
 const int MAXIMUM_VALID_X_COORDINATE = 16;
 const int MINIMUM_VALID_X_COORDINATE = 1;
@@ -79,7 +79,7 @@ enum //strategic values for each sector
 //Special case flag used when players encounter enemies in a sector, then retreat.	The number of enemies
 //will display on mapscreen until time is compressed.	When time is compressed, the flag is cleared, and
 //a question mark is displayed to reflect that the player no longer knows.
-#define SF_PLAYER_KNOWS_ENEMIES_ARE_HERE			0x00000004	
+#define SF_PLAYER_KNOWS_ENEMIES_ARE_HERE			0x00000004
 
 #define SF_SAM_SITE									0x00000008
 #define SF_MINING_SITE								0x00000010
@@ -185,7 +185,7 @@ enum
 	FAC_TRAINER_MEDICAL,
 	FAC_TRAINER_MECHANICAL,
 	FAC_TRAINER_LEADERSHIP,
-	FAC_TRAINER_EXPLOSIVES,	
+	FAC_TRAINER_EXPLOSIVES,
 	FAC_INTERROGATE_PRISONERS,
 	FAC_PRISON_SNITCH,
 	FAC_SPREAD_PROPAGANDA,
@@ -260,7 +260,7 @@ typedef struct FACILITYASSIGNMENTTYPE
 	BOOLEAN fOnlyLocalMineAffected;		// Determines whether income modifier applies to local mine only, or all mines.
 	INT16 sCantinaFoodModifier;		// how many food points do we get when spending time in a cantina?
 	UINT16 usPrisonBaseLimit;		// for how many prisoners was this prison built?
-	
+
 	UINT8 ubMinimumStrength;		// Minimum STR Requirement to begin this assignment
 	UINT8 ubMinimumHealth;			// Minimum HLT Requirement to begin this assignment
 	UINT8 ubMinimumWisdom;			// Minimum WIS Requirement to begin this assignment
@@ -358,7 +358,7 @@ enum
 	PLAINS,				//foot 90%, truck 75%, tracked 100%
 	SAND,				//foot 70%, tracked 60%
 	SPARSE,				//foot 70%, truck 50%, tracked 60%
-	DENSE,				//foot 50% 
+	DENSE,				//foot 50%
 	SWAMP,				//foot 20%
 	WATER,				//foot 15%
 	HILLS,				//foot 50%, truck 50%, tracked 50%
@@ -400,7 +400,7 @@ enum
 	SHELTER,
 	ABANDONED_MINE,
 
-#ifdef JA2UB	
+#ifdef JA2UB
 //Ja25: New
 	FINAL_COMPLEX,
 	GUARD_POST_TYPE,
@@ -474,7 +474,7 @@ typedef struct SECTORINFO
 										//The last index represents the traversability if travelling
 										//throught the sector without entering it.
 	INT8	bNameId;
-	INT8	bUSUSED;	
+	INT8	bUSUSED;
 	INT8	bBloodCats;
 	INT8	bBloodCatPlacements;
 	INT8	UNUSEDbSAMCondition;
@@ -509,12 +509,12 @@ typedef struct SECTORINFO
 	BOOLEAN	fCustomSector;
 	BOOLEAN	fCampaignSector;
 #endif
-	
-	UINT8	uiNumberOfPrisonersOfWar[PRISONER_MAX];	
+
+	UINT8	uiNumberOfPrisonersOfWar[PRISONER_MAX];
 	UINT8	uiInterrogationHundredsLeft[PRISONER_MAX];
 
 	UINT32	uiTimeAIArtillerywasOrdered;			// Flugente: updated every time an artillery strike is ordered from the militia
-	
+
 	UINT8	ubNumTanks;
 	UINT8	ubTanksInBattle;
 
@@ -531,7 +531,7 @@ typedef struct SECTORINFO
 	// Flugente: enemy jeeps
 	UINT8	ubNumJeeps;
 	UINT8	ubJeepsInBattle;
-	
+
 	UINT8	usWorkers;
 	UINT8	ubWorkerTrainingHundredths;
 
@@ -570,11 +570,11 @@ typedef struct UNDERGROUND_SECTORINFO
 	UINT8	ubMusicMode, ubUnsed;
 
 	UINT32	uiNumberOfWorldItemsInTempFileThatCanBeSeenByPlayer;
-#ifdef JA2UB	
+#ifdef JA2UB
 	BOOLEAN	fCustomSector;
 	BOOLEAN	fCampaignSector;
 #endif
-	
+
 	UINT8	uiNumberOfPrisonersOfWar[PRISONER_MAX];
 
 	UINT8	ubNumTanks;

@@ -2,7 +2,7 @@
 	#define POPUP_CLASS
 
 	#include "popup_callback.h"
-	#include "types.h"
+	#include "Types.h"
 	#include "sgp.h"
 
 	#define MAX_POPUPS 32
@@ -17,8 +17,8 @@
 	#define POPUP_SCREEN_MASK_PRIORITY  (MSYS_PRIORITY_VERY_HIGH + 10) // MSYS priority for popup screen mask
 	#define POPUP_OPTION_PRIORITY		(MSYS_PRIORITY_VERY_HIGH + 12) // MSYS priority for popup options
 #else	// compatibility with 1.13 versions without the VERY_HIGH priority defined
-	#define POPUP_SCREEN_MASK_PRIORITY  MSYS_PRIORITY_HIGHEST 
-	#define POPUP_OPTION_PRIORITY		MSYS_PRIORITY_HIGHEST 
+	#define POPUP_SCREEN_MASK_PRIORITY  MSYS_PRIORITY_HIGHEST
+	#define POPUP_OPTION_PRIORITY		MSYS_PRIORITY_HIGHEST
 #endif
 
 	#define POPUP_CALLBACK_INIT 1	// called at the end of init
@@ -83,7 +83,7 @@
 
 		BOOLEAN HoverFunctionSet(){ return (this->hover != 0); };
 		BOOLEAN AvailabilityFunctionSet(){ return (this->avail != 0); };
-		
+
 		std::wstring name;
 		std::wstring hint;
 //	protected:
@@ -100,7 +100,7 @@
 	};
 
 
-	class POPUP_SUB_POPUP_OPTION : public POPUP_OPTION 
+	class POPUP_SUB_POPUP_OPTION : public POPUP_OPTION
 	{
 	public:
 		// constructor/destructor
@@ -286,7 +286,7 @@
 
 			// assignment menu mouse regions
 
-		MOUSE_REGION    MenuRegion[ POPUP_MAX_OPTIONS ]; 
+		MOUSE_REGION    MenuRegion[ POPUP_MAX_OPTIONS ];
 		MOUSE_REGION    ScreenMaskRegion;
 	private:
 			// Box position and size
@@ -297,6 +297,6 @@
 
 		// Subpopups
 		std::vector<POPUP_SUB_POPUP_OPTION *> subPopupOptions;
-	
+
 	};
 #endif

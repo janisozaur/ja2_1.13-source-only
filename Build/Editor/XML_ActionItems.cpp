@@ -89,7 +89,7 @@ actionItemsEndElementHandle(void *userData, const XML_Char *name)
 {
 	actionItemsParseData * pData = (actionItemsParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "ACTION_ITEM_LIST") == 0)
 		{
@@ -97,18 +97,18 @@ actionItemsEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "ACTION_ITEM") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!ActionItems_TextOnly)
 				{
 					//if ( ActionItemsValues[pData->curActionItems.uiIndex].ActionID > 0 )
 					wcscpy(ActionItemsValues[pData->curActionItems.uiIndex].szName, pData->curActionItems.szName);
-					
+
 					#ifdef JA2EDITOR
 					//if ( ActionItemsValues[pData->curActionItems.uiIndex].ActionID > 0 )
 					wcscpy(gszActionItemDesc[pData->curActionItems.uiIndex], pData->curActionItems.szName);
 					#endif
-					
+
 					// not ACTION_ITEM_BLOW_UP
 					if ( pData->curActionItems.ActionID != ACTION_ITEM_BLOW_UP )
 					{
@@ -120,21 +120,21 @@ actionItemsEndElementHandle(void *userData, const XML_Char *name)
 					{
 						ActionItemsValues[pData->curActionItems.uiIndex].ActionID = pData->curActionItems.ActionID;
 						ActionItemsValues[pData->curActionItems.uiIndex].BlowUp = pData->curActionItems.BlowUp;
-						ActionItemsValues[pData->curActionItems.uiIndex].BombItem = pData->curActionItems.BombItem;	
+						ActionItemsValues[pData->curActionItems.uiIndex].BombItem = pData->curActionItems.BombItem;
 					}
-					
+
 				}
 				else
 				{
 					//if ( ActionItemsValues[pData->curActionItems.uiIndex].ActionID > 0 )
 					wcscpy(ActionItemsValues[pData->curActionItems.uiIndex].szName, pData->curActionItems.szName);
-					
+
 					#ifdef JA2EDITOR
 					//if ( ActionItemsValues[pData->curActionItems.uiIndex].ActionID > 0 )
 					wcscpy(gszActionItemDesc[pData->curActionItems.uiIndex], pData->curActionItems.szName);
 					#endif
-				}		
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -162,7 +162,7 @@ actionItemsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curActionItems.BombItem	= (UINT16) atol(pData->szCharData);
-		}	
+		}
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -184,7 +184,7 @@ BOOLEAN ReadInActionItems(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading ActionItems.xml" );
 
 	ActionItems_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -251,10 +251,10 @@ BOOLEAN WriteInActionItems(STR fileName)
 		{
 			FilePrintf(hFile,"\t<ACTION_ITEM>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n", cnt);
-			FilePrintf(hFile,"\t\t<Name>Empty action</Name>\r\n");	
+			FilePrintf(hFile,"\t\t<Name>Empty action</Name>\r\n");
 			FilePrintf(hFile,"\t\t<ActionID>%d</ActionID>\r\n", ActionItemsValues[cnt].ActionID);
-			FilePrintf(hFile,"\t\t<Blow_up>%d</Blow_up>\r\n", ActionItemsValues[cnt].BlowUp);	
-			FilePrintf(hFile,"\t\t<BombItem>%d</BombItem>\r\n", ActionItemsValues[cnt].BombItem);				
+			FilePrintf(hFile,"\t\t<Blow_up>%d</Blow_up>\r\n", ActionItemsValues[cnt].BlowUp);
+			FilePrintf(hFile,"\t\t<BombItem>%d</BombItem>\r\n", ActionItemsValues[cnt].BombItem);
 			FilePrintf(hFile,"\t</ACTION_ITEM>\r\n");
 		}
 		FilePrintf(hFile,"</ACTION_ITEM_LIST>\r\n");

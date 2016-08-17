@@ -44,11 +44,11 @@ enum{
 };
 extern UINT8 gubCreatureBattleCode;
 
-void DetermineCreatureTownComposition( UINT8 ubNumCreatures, 
+void DetermineCreatureTownComposition( UINT8 ubNumCreatures,
 																			UINT8 *pubNumYoungMales, UINT8 *pubNumYoungFemales,
 																			UINT8 *pubNumAdultMales, UINT8 *pubNumAdultFemales );
 
-void DetermineCreatureTownCompositionBasedOnTacticalInformation( UINT8 *pubNumCreatures, 
+void DetermineCreatureTownCompositionBasedOnTacticalInformation( UINT8 *pubNumCreatures,
 																			UINT8 *pubNumYoungMales, UINT8 *pubNumYoungFemales,
 																			UINT8 *pubNumAdultMales, UINT8 *pubNumAdultFemales );
 

@@ -85,10 +85,10 @@ senderNameListEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "NAME") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			wcscpy(pSenderNameList[pData->curSenderNameList.uiIndex], pData->curSenderNameList.Name);
-			
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -124,7 +124,7 @@ BOOLEAN ReadInSenderNameList(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading SenderNameList.xml" );
 
 	SenderNameList_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

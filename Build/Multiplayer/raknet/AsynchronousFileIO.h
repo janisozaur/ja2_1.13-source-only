@@ -26,7 +26,7 @@
 #elif defined(_WIN32)
 // IP_DONTFRAGMENT is different between winsock 1 and winsock 2.  Therefore, Winsock2.h must be linked againt Ws2_32.lib
 // winsock.h must be linked against WSock32.lib.  If these two are mixed up the flag won't work correctly
-//#include <winsock2.h> 
+//#include <winsock2.h>
 //#include <windows.h>
 #endif
 #include "SimpleMutex.h"
@@ -38,46 +38,46 @@ class AsynchronousFileIO
 {
 
 public:
-	
- /// Default Constructor 
+
+ /// Default Constructor
 	AsynchronousFileIO();
-	
- /// Destructor 
+
+ /// Destructor
 	~AsynchronousFileIO();
-	
-	
+
+
 /// Associate a socket with a completion port
-/// \param[in] socket the socket used for communication 
-/// \param[in] dwCompletionKey the completion port key 
+/// \param[in] socket the socket used for communication
+/// \param[in] dwCompletionKey the completion port key
 	bool AssociateSocketWithCompletionPort( SOCKET socket, DWORD dwCompletionKey );if
-	
+
 	/// Singleton instance
 	static inline AsynchronousFileIO* Instance()
 	{
 		return & I;
 	}
 
-	/// Increase the number of users of this instance 
+	/// Increase the number of users of this instance
 	void IncreaseUserCount( void );
-	
-	/// Decrease the number of users of this instance 
+
+	/// Decrease the number of users of this instance
 	void DecreaseUserCount( void );
-	
-	/// Stop using asynchronous IO 
+
+	/// Stop using asynchronous IO
 	void Shutdown( void );
-	
-	/// Get the number of user of the instance 
+
+	/// Get the number of user of the instance
 	int GetUserCount( void );
-	
+
 	unsigned threadCount;
 	bool killThreads;
-	
+
 private:
 	HANDLE completionPort;
 	SimpleMutex userCountMutex;
 	SYSTEM_INFO systemInfo;
 	int userCount;
-	
+
 	static AsynchronousFileIO I;
 };
 

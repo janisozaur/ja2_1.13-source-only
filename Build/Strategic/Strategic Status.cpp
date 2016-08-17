@@ -7,11 +7,11 @@
 	#include "Soldier Profile.h"
 	#include "Campaign.h"
 	#include "Strategic Mines.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "Game Clock.h"
 	#include "Debug.h"
 	#include "GameSettings.h"
-	#include "history.h"
+	#include "History.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Game Init.h"			// added by Flugente
 	#include "GameVersion.h"		// added by Flugente
@@ -116,7 +116,7 @@ BOOLEAN MercThinksDeathRateTooHigh( UINT8 ubProfileID )
 		// too high - sorry
 		return(TRUE);
 	}
-		
+
 	// within tolerance
 	return(FALSE);
 }
@@ -138,7 +138,7 @@ BOOLEAN MercThinksBadReputationTooHigh( UINT8 ubProfileID )
 		// too high - sorry
 		return(TRUE);
 	}
-	
+
 	// within tolerance
 	return(FALSE);
 }
@@ -158,7 +158,7 @@ BOOLEAN MercThinksHisMoraleIsTooLow( SOLDIERTYPE *pSoldier )
 		// that obviously it CAN'T be too low...
 		return(FALSE);
 	}
-	
+
 	// morale tolerance is based directly upon reputation tolerance
 	// above 50, morale is GOOD, never below tolerance then
 	bMoraleTolerance = (100 - bRepTolerance) / 2;
@@ -180,7 +180,7 @@ BOOLEAN MercIsOwedTooMuchMoney( UINT8 ubProfileID )
 	{
 		return(TRUE);
 	}
-	
+
 	return(FALSE);
 }
 
@@ -197,13 +197,13 @@ BOOLEAN MercThinksPlayerIsInactiveTooLong( UINT8 ubProfileID )
 	}
 	if( ubTolerance == 0)
 	{
-		return(FALSE);	
+		return(FALSE);
 	}
 	if( gStrategicStatus.ubNumberOfDaysOfInactivity >= ubTolerance )
 	{
 		return(TRUE);
 	}
-	
+
 	return(FALSE);
 }
 
@@ -226,7 +226,7 @@ UINT8 iTolerance;
 		// give an EXTRA day over normal
 		return( 7 - DIF_LEVEL_MEDIUM + gStrategicStatus.ubHighestProgress / 42 );
 	}
-	
+
 		if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_EASY )
 			iTolerance = 1;
 		else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_MEDIUM )
@@ -237,11 +237,11 @@ UINT8 iTolerance;
 			iTolerance = 4;
 		else
 			iTolerance = 1;
-			
+
 	return( 6 - iTolerance + gStrategicStatus.ubHighestProgress / 42 );
 
 	//return( 6 - gGameOptions.ubDifficultyLevel + gStrategicStatus.ubHighestProgress / 42 );
-	
+
 }
 
 
@@ -252,7 +252,7 @@ void HandleEnricoEmail(void)
 	UINT8 ubHighestProgress = HighestPlayerProgressPercentage();
 
 #ifdef JA2UB
-//JA25 UB	
+//JA25 UB
 #else
 	// if creatures have attacked a mine (doesn't care if they're still there or not at the moment)
 	if (HasAnyMineBeenAttackedByMonsters() && !(gStrategicStatus.usEnricoEmailFlags & ENRICO_EMAIL_SENT_CREATURES))

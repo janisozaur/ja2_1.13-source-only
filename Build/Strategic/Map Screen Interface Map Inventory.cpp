@@ -4,10 +4,10 @@
 #else
 	#include "Map Screen Interface Map Inventory.h"
 	#include "Render Dirty.h"
-	#include "vobject.h"
+	#include "VObject.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "Map Screen Interface Border.h"
 	#include "Map Screen Interface.h"
 	#include "Map Screen Interface Map.h"
@@ -17,20 +17,20 @@
 	#include "Interface Utils.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Tactical Save.h"
 	#include "Overhead.h"
-	#include "english.h"
+	#include "English.h"
 	#include "GameSettings.h"
 	#include "Radar Screen.h"
-	#include "message.h"
-	#include "weapons.h"
-	#include "finances.h"
+	#include "Message.h"
+	#include "Weapons.h"
+	#include "Finances.h"
 	#include "Game Clock.h"
 	#include "Sound Control.h"
-	#include "interface panels.h"
-	#include "wordwrap.h"
-	#include "Soldier macros.h"
+	#include "Interface Panels.h"
+	#include "WordWrap.h"
+	#include "Soldier Macros.h"
 	#include "rt time defines.h"
 	#include "Encyclopedia_new.h" //Moa: item visibility
 	#include "Town Militia.h"	// added by Flugente
@@ -443,7 +443,7 @@ void RemoveInventoryPoolGraphic( void )
 		DeleteVideoObjectFromIndex( guiMapInventoryPoolSlot );
 		guiMapInventoryPoolSlot = 0;
 	}
-	
+
 	// HEADROCK HAM 5: Remove asterisks
 	if (guiAttachmentAsterisks)
 	{
@@ -507,7 +507,7 @@ void BlitInventoryPoolSlotGraphics( void )
 
 	// blit inventory pool graphic to the screen
 	GetVideoObject(&hHandle, guiMapInventoryPoolSlot);
-		
+
 	for( INT32 iCounter = 0; iCounter < MAP_INVENTORY_POOL_SLOT_COUNT ; iCounter++ )
 	{
 		sX = ( INT16 )( MAP_INVENTORY_POOL_SLOT_OFFSET_X + MAP_INVENTORY_POOL_SLOT_START_X + ( ( MAP_INVEN_SPACE_BTWN_SLOTS ) * ( iCounter / MAP_INV_SLOT_COLS ) ) );
@@ -515,7 +515,7 @@ void BlitInventoryPoolSlotGraphics( void )
 
 		BltVideoObject( guiSAVEBUFFER , hHandle, fMapInventoryZoom, sX, sY , VO_BLT_SRCTRANSPARENCY,NULL );
 	}
-	
+
 	return;
 }
 
@@ -592,7 +592,7 @@ BOOLEAN RenderItemInPoolSlot( INT32 iCurrentSlot, INT32 iFirstSlotOnPage )
 	if (fMapInventoryZoom)
 	{
 		// Check whether the correct graphic exists.
-		if (giMapInventoryBigItemGraphics[ iCurrentSlot ].iGraphicNum == -1 || 
+		if (giMapInventoryBigItemGraphics[ iCurrentSlot ].iGraphicNum == -1 ||
 			giMapInventoryBigItemGraphics[ iCurrentSlot ].usItem != pInventoryPoolList[ iCurrentSlot + iFirstSlotOnPage ].object.usItem )
 		{
 			UnloadMapInventoryBigItemGraphic( iCurrentSlot );
@@ -601,7 +601,7 @@ BOOLEAN RenderItemInPoolSlot( INT32 iCurrentSlot, INT32 iFirstSlotOnPage )
 		// Retest
 		if (giMapInventoryBigItemGraphics[ iCurrentSlot ].usItem > 0 && giMapInventoryBigItemGraphics[ iCurrentSlot ].iGraphicNum > -1)
 		{
-			MAPINVRenderItem( guiSAVEBUFFER, NULL, &(pInventoryPoolList[ iCurrentSlot + iFirstSlotOnPage ].object), (UINT32)giMapInventoryBigItemGraphics[ iCurrentSlot ].iGraphicNum, 
+			MAPINVRenderItem( guiSAVEBUFFER, NULL, &(pInventoryPoolList[ iCurrentSlot + iFirstSlotOnPage ].object), (UINT32)giMapInventoryBigItemGraphics[ iCurrentSlot ].iGraphicNum,
 				sX + 5, sY, MAP_INVEN_SLOT_WIDTH, MAP_INVEN_SLOT_IMAGE_HEIGHT, fOutLine, sOutLine );
 		}
 	}
@@ -1001,7 +1001,7 @@ void ClearUpTempUnSeenList( void )//dnl ch75 271013
 //	INT32 iCurrentMapSectorZ					...Current selected sector.
 //	std::vector<WORLDITEM> pInventoryPoolList	...The stash of unfiltered Items.
 // Notes:
-// The original function had set the visible and exist flag for every worlditem which had existing objects, 
+// The original function had set the visible and exist flag for every worlditem which had existing objects,
 // also it has set the WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT using TileIsOutOfBounds() but this is not
 // possible since we dont know the boundaries of a unloaded sector, occationally some data got lost. For
 // loaded maps this check was not performed...
@@ -1030,7 +1030,7 @@ void SaveSeenAndUnseenItems( void )
 		{
 			pInventoryPoolList[ i ].fExists = TRUE;
 			pInventoryPoolList[ i ].bVisible = TRUE;
-			//Check		
+			//Check
 			if(TileIsOutOfBounds( pInventoryPoolList[ i ].sGridNo) && !( pInventoryPoolList[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 			{
 				pInventoryPoolList[ i ].usFlags |= WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT;
@@ -1038,7 +1038,7 @@ void SaveSeenAndUnseenItems( void )
 			// Display warning.....
 			ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_BETAVERSION, L"Error: Trying to add item ( %d: %s ) to invalid gridno in unloaded sector. Please Report.", pInventoryPoolList[ i ].object.usItem, ItemNames[ pInventoryPoolList[ i ].object.usItem] );
 			}
-		
+
 #else
 		if ( pInventoryPoolList[i].fExists )
 		{
@@ -1198,7 +1198,7 @@ void MapInvenPoolSlotsMove( MOUSE_REGION * pRegion, INT32 iReason  )
 
 		// Find our item's location in the entire sector pool.
 		UINT16 usItemLocationInPool = iCounter + (iCurrentInventoryPoolPage * MAP_INVENTORY_POOL_SLOT_COUNT);
-		
+
 		// Which page would it be on when zoomed?
 		UINT16 usZoomedPage = usItemLocationInPool / usSlotsOnZoomedPage;
 		// Which position would it be in on that page?
@@ -1257,7 +1257,7 @@ void MapInvenPoolSlotsMove( MOUSE_REGION * pRegion, INT32 iReason  )
 			{
 				bottom = ( INT16 )( MAP_INVENTORY_POOL_SLOT_START_Y + ( MAP_INVEN_SLOT_HEIGHT * (MAP_INV_SLOT_COLS+1) ) );
 			}
-				
+
 			left = ( INT16 )( MAP_INVENTORY_POOL_SLOT_OFFSET_X + MAP_INVENTORY_POOL_SLOT_START_X + ( MAP_INVEN_SPACE_BTWN_SLOTS * x ) );
 			right = ( INT16 )( MAP_INVENTORY_POOL_SLOT_OFFSET_X + MAP_INVENTORY_POOL_SLOT_START_X + ( MAP_INVEN_SPACE_BTWN_SLOTS * (x+1) ) );
 
@@ -1308,7 +1308,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 		if (fWaitingForZoomInput)
 		{
 			CancelInventoryZoomInput( TRUE );
-			
+
 			return;
 		}
 		if(gGameExternalOptions.fSectorDesc == TRUE)
@@ -1383,7 +1383,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 
 							ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, szSMilitiaResourceText[0], Item[usItem].szItemName );
 						}
-			
+
 						if ( _KeyDown( 89 ) )
 						{
 							for ( UINT32 iNumber = 0; iNumber < pInventoryPoolList.size( ); ++iNumber )
@@ -1401,7 +1401,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 								}
 							}
 						}
-			
+
 						if ( fShowMapInventoryPool )
 							HandleButtonStatesWhileMapInventoryActive( );
 					}
@@ -1414,7 +1414,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 						{
 							DeleteItemDescriptionBox();
 						}
-						
+
 						// HEADROCK HAM 5: Sector Inventory Item Desc Box no longer accessible during combat.
 						if( !CanPlayerUseSectorInventory( &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]) ) )
 						{
@@ -1475,7 +1475,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 			CancelInventoryZoomInput( FALSE );
 			HandleMapInventoryZoom( usTargetPage, iCounter );
 
-			return;	
+			return;
 		}
 
 		// check if item in cursor, if so, then swap, and no item in curor, pick up, if item in cursor but not box, put in box
@@ -1583,7 +1583,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 				{
 					swprintf( sString, pMapInventoryErrorString[ 5 ], Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ].name );
 					DoMapMessageBox( MSG_BOX_BASIC_STYLE, sString, MAP_SCREEN, MSG_BOX_FLAG_OK, NULL );
-				}				
+				}
 				return;
 			}
 		}
@@ -1698,7 +1698,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 				// HEADROCK HAM 5: A LOT of functions rely on these flags being set. So set them!!
 				pInventoryPoolList[(iCurrentInventoryPoolPage*MAP_INVENTORY_POOL_SLOT_COUNT)+iCounter].bVisible = TRUE;
 				pInventoryPoolList[(iCurrentInventoryPoolPage*MAP_INVENTORY_POOL_SLOT_COUNT)+iCounter].fExists = TRUE;
-				
+
 				/*if(gGameExternalOptions.fEnableInventoryPoolQ)//dnl ch51 091009
 				{
 					if(!GridNoOnVisibleWorldTile(sObjectSourceGridNo))
@@ -1714,7 +1714,7 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 					if ( (sSelMapX == gWorldSectorX) && (gWorldSectorY == sSelMapY) && (gbWorldSectorZ == iCurrentMapSectorZ) )
 						sObjectSourceGridNo = gMapInformation.sCenterGridNo;
 
-					// Flugente 2016-04-09: (pInventoryPoolList[i].usFlags & WORLD_ITEM_REACHABLE) does not guarantee that an item is reachable. 
+					// Flugente 2016-04-09: (pInventoryPoolList[i].usFlags & WORLD_ITEM_REACHABLE) does not guarantee that an item is reachable.
 					// For example, a previously reachable item might now be inside a locked house. This would result in all items to be dropped inside that house!
 					// It is better so simply leave sObjectSourceGridNo at NOWHERE. This will cause WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT to be set, which in turn causes
 					// a reassignment to the (by then correct) gMapInformation.sCenterGridNo in LoadAndAddWorldItemsFromTempFile(...)
@@ -1732,10 +1732,10 @@ void MapInvenPoolSlots(MOUSE_REGION * pRegion, INT32 iReason )
 						}
 					}*/
 				}
-				
+
 				// set as reachable and set gridno
 				pInventoryPoolList[ ( iCurrentInventoryPoolPage * MAP_INVENTORY_POOL_SLOT_COUNT ) + iCounter ].usFlags |= WORLD_ITEM_REACHABLE;
-						
+
 				// nothing here before, then place here
 				if( iOldNumberOfObjects == 0 )
 				{
@@ -2073,7 +2073,7 @@ void BuildStashForSelectedSector( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 		{
 			if( IsMapScreenWorldItemVisibleInMapInventory( &gWorldItems[ i ] ) )
 			{
-				if( ( gWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(gWorldItems[ i ].sGridNo) ) && !( gWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )		
+				if( ( gWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(gWorldItems[ i ].sGridNo) ) && !( gWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 				{
 					//set the flag
 #ifndef _DEBUG
@@ -2088,15 +2088,15 @@ void BuildStashForSelectedSector( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 				fNumShown++;
 			}
 			else if ( IsMapScreenWorldItemInvisibleInMapInventory( &gWorldItems[ i ] ) )
-			{ 
-				if( ( gWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(gWorldItems[ i ].sGridNo) ) && !( gWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )		
+			{
+				if( ( gWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(gWorldItems[ i ].sGridNo) ) && !( gWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 				{
 					//set the flag
 #ifndef _DEBUG
 					gWorldItems[ i ].usFlags |= WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT;
 #endif
 					fNumFlagsSet++;
-				}				
+				}
 				// filtered? add to invisible and total list
 				fFilteredItems.push_back( gWorldItems[ i ] );
 				fWorldItems.push_back( gWorldItems[ i ] );
@@ -2124,8 +2124,8 @@ void BuildStashForSelectedSector( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 	}
 	else
 	{ // if map not loaded, use tempfile to build lists
-		
-		
+
+
 		BOOLEAN error;
 		// get total number of itemstacks from temp file...
 		error = GetNumberOfWorldItemsFromTempItemFile( sMapX, sMapY, ( INT8 )( sMapZ ), &( fNumTotal ), FALSE );
@@ -2133,7 +2133,7 @@ void BuildStashForSelectedSector( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 
 		// ...and use this number to allocate space
 		fFilteredItems.reserve( 50 ); //since we are building the stash from blank, there is probably no filter set and only few items get into fFilteredItems, was 8 changed to 50 because of bobby ray
-		
+
 		//initialize at least one element to avoid null dereference of iterator
 		fWorldItems.resize(fNumTotal+1);
 
@@ -2161,7 +2161,7 @@ void BuildStashForSelectedSector( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 
 			if( IsMapScreenWorldItemVisibleInMapInventory( &fWorldItems[ i ] ) )
 			{
-				if( ( fWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(fWorldItems[ i ].sGridNo) ) && !( fWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )		
+				if( ( fWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(fWorldItems[ i ].sGridNo) ) && !( fWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 				{
 					//set the flag
 #ifndef _DEBUG
@@ -2175,7 +2175,7 @@ void BuildStashForSelectedSector( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 			}
 			else if ( IsMapScreenWorldItemInvisibleInMapInventory( &fWorldItems[ i ] ) )
 			{
-				if( ( fWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(fWorldItems[ i ].sGridNo) ) && !( fWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )		
+				if( ( fWorldItems[i].object.exists() == true ) && ( TileIsOutOfBounds(fWorldItems[ i ].sGridNo) ) && !( fWorldItems[ i ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 				{
 					//set the flag
 #ifndef _DEBUG
@@ -2418,7 +2418,7 @@ void BeginInventoryPoolPtr( OBJECTTYPE *pInventorySlot )
 
 				if (!fShowInventoryFlag)
 					fShowInventoryFlag = TRUE;
-				
+
 				if(pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE)
 				{
 					// try to STACK the item in all existing slots
@@ -2450,9 +2450,9 @@ void BeginInventoryPoolPtr( OBJECTTYPE *pInventorySlot )
 							if(pSoldier->inv[x].exists() == false)
 							{
 								gpItemPointer->MoveThisObjectTo(pSoldier->inv[x], gpItemPointer->ubNumberOfObjects, pSoldier, x);
-								
+
 								if(gpItemPointer->ubNumberOfObjects == 0)
-								{								
+								{
 									placedAllObjects = true;
 									break;
 								}
@@ -2478,7 +2478,7 @@ void BeginInventoryPoolPtr( OBJECTTYPE *pInventorySlot )
 					fMapInventoryItem = FALSE;
 					gpItemPointer = NULL;
 				}
-				else 
+				else
 				{
 					// return leftover items back to original slot after autoplace
 					if (fShift && gpItemPointer->ubNumberOfObjects < ubInitialNumberOfObjects)
@@ -2592,7 +2592,7 @@ BOOLEAN PlaceObjectInInventoryStash( OBJECTTYPE *pInventorySlot, OBJECTTYPE *pIt
 			{
 				pInventoryPoolList[ iSrcSlot ].soldierID = (-1);
 			}
-			pInventoryPoolList[ iDestSlot ].soldierID = sObjectSourseSoldierID;		
+			pInventoryPoolList[ iDestSlot ].soldierID = sObjectSourseSoldierID;
 		}
 		// placement in an empty slot
 		pItemPtr->MoveThisObjectTo(*pInventorySlot);
@@ -2949,7 +2949,7 @@ void MapInventoryPoolFilterBtnMoveItemDisplay( GUI_BUTTON *btn, INT32 reason )
 // and the big-item inventory (which shows BigItem pics and is therefore much easier to examine in detail).
 // A click on the button initiates "zoom input" mode, allowing the player to decide which part of the small-scale
 // inventory he would like to examine more closely. While in this mode, you may flip inventory pages or close the inventory
-// altogether, but may not move the mouse outside the map inventory region. Right-click will cancel this mode 
+// altogether, but may not move the mouse outside the map inventory region. Right-click will cancel this mode
 // automatically.
 void MapInventoryPoolZoomBtn( GUI_BUTTON *btn, INT32 reason )
 {
@@ -2975,7 +2975,7 @@ void MapInventoryPoolZoomBtn( GUI_BUTTON *btn, INT32 reason )
 				UINT16 usNewPage = (UINT16)(usFirstItem / usNumSlotsOnUnzoomedPage);
 				HandleMapInventoryUnzoom( usNewPage );
 			}
-			
+
 			// Turn the button off so it can be clicked again.
 			btn->uiFlags &=~(BUTTON_CLICKED_ON);
 		}
@@ -3160,7 +3160,7 @@ void DisplayCurrentSector( void )
 void ResizeInventoryList( void )
 {
 	// If we've got no items in this sector...
-	if (pInventoryPoolList.empty() == true ) 
+	if (pInventoryPoolList.empty() == true )
 	{
 		// Resize the list to at least one page in size, containing no items.
 		giDesiredNumMapInventorySlots = __max(giDesiredNumMapInventorySlots, MAP_INVENTORY_POOL_SLOT_COUNT);
@@ -3182,17 +3182,17 @@ void ResizeInventoryList( void )
 	UINT32 iNumEmptySlots = 0;
 	UINT32 iNumEmptySlotsAtEnd = 0;
 	// Run through the entire sector inventory, collecting data.
-	for (x = 0; x < ListSize; x++) 
+	for (x = 0; x < ListSize; x++)
 	{
 		//don't test fExists because that hasn't been set yet, test object.exists
-		if (pInventoryPoolList[x].object.exists() == true) 
+		if (pInventoryPoolList[x].object.exists() == true)
 		{
 			// Item exists. Increase the count of valid items.
 			activeSlotsTotal++;
-			// Since the last item we (just now) checked exists, lets reset the count of how many 
+			// Since the last item we (just now) checked exists, lets reset the count of how many
 			// slots are empty at the end of the inventory array.
 			iNumEmptySlotsAtEnd = 0;
-			
+
 			// Now count the number of items found since the end of the "previous" page.
 			// We constantly assume that we're looking at the end of the last page. If we find more
 			// items beyond this, that means there's yet another page to check, and so on until
@@ -3211,7 +3211,7 @@ void ResizeInventoryList( void )
 		}
 		else
 		{
-			// Found an empty slot. 
+			// Found an empty slot.
 			// Increase the number of empty slots we've encountered...
 			iNumEmptySlots++;
 			// Increase the number of slots encountered since the last valid item.
@@ -3233,7 +3233,7 @@ void ResizeInventoryList( void )
 	// Calculate the minimum size of the inventory, including both valid items and empty slots between them,
 	// but not the extra slots required to make a round number of pages.
 	ListSize = activeSlotsTotal + iNumEmptySlotsWithin;
-	
+
 	// Now find out the minimal number of slots required to make a round number of pages.
 	INT32 iOptimalSizeWithExtraEmptySlots = ((ListSize / MAP_INVENTORY_POOL_SLOT_COUNT) + 1) * MAP_INVENTORY_POOL_SLOT_COUNT;
 
@@ -3242,7 +3242,7 @@ void ResizeInventoryList( void )
 
 	////////////////////////////////////////////////////////////////////////////
 	// Now we resize the inventory to its full intended size.
-	// 
+	//
 	// Note that below we use __max to make sure that we're not decreasing the number of pages while the inventory
 	// screen is open. In other words, the number of pages will not shrink unless we explicitly say it can. This
 	// can lead to having 0 items on 14 pages, for example if we delete all items from a huge sector inventory. However,
@@ -3257,7 +3257,7 @@ void ResizeInventoryList( void )
 		// Lots of empty slots at the end, so we don't need to increase the number of pages.
 		pInventoryPoolList.resize( __max(iOptimalSizeWithExtraEmptySlots, giDesiredNumMapInventorySlots) );
 	}
-	else 
+	else
 	{
 		// We want 1 extra blank page at the end, so we add the number of slots required to make that page.
 		pInventoryPoolList.resize( __max(iOptimalSizeWithExtraEmptySlots + MAP_INVENTORY_POOL_SLOT_COUNT, giDesiredNumMapInventorySlots ) );
@@ -3269,7 +3269,7 @@ void ResizeInventoryList( void )
 		// Lots of empty slots at the end, so we don't need to increase the number of pages.
 		giDesiredNumMapInventorySlots = max(iOptimalSizeWithExtraEmptySlots, giDesiredNumMapInventorySlots);
 	}
-	else 
+	else
 	{
 		// We want 1 extra blank page at the end, so we add the number of slots required to make that page.
 		giDesiredNumMapInventorySlots = max(iOptimalSizeWithExtraEmptySlots + MAP_INVENTORY_POOL_SLOT_COUNT, giDesiredNumMapInventorySlots);
@@ -3375,10 +3375,10 @@ void HandleButtonStatesWhileMapInventoryActive( void )
 
 	// Selected Merc is in sector? Or is in combat?
 	if(MercPtrs[gCharactersList[bSelectedInfoChar].usSolID]->sSectorX != sSelMapX ||
-		MercPtrs[gCharactersList[bSelectedInfoChar].usSolID]->sSectorY != sSelMapY || 
+		MercPtrs[gCharactersList[bSelectedInfoChar].usSolID]->sSectorY != sSelMapY ||
 		MercPtrs[gCharactersList[bSelectedInfoChar].usSolID]->bSectorZ != iCurrentMapSectorZ ||
 		MercPtrs[gCharactersList[bSelectedInfoChar].usSolID]->flags.fBetweenSectors ||
-		!CanPlayerUseSectorInventory( &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]) ) ) 
+		!CanPlayerUseSectorInventory( &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]) ) )
 	{
 		DisableButton( guiMapInvenSortButton[ 0 ] );
 		DisableButton( guiMapInvenSortButton[ 1 ] );
@@ -3399,10 +3399,10 @@ void DrawTextOnSectorInventory( void )
 	if(gGameExternalOptions.fEnableInventoryPoolQ && gInventoryPoolIndex != '0')//dnl ch51 081009
 		swprintf(sString, L"Inventory Pool %c", gInventoryPoolIndex);
 
-	
+
 	SetFontDestBuffer( guiSAVEBUFFER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, FALSE );
 	FindFontCenterCoordinates( (SCREEN_WIDTH - INTERFACE_WIDTH)/2 + 271, 18, xResSize - 271, GetFontHeight( FONT14ARIAL ), sString, FONT14ARIAL, &sX, &sY );
-	
+
 	SetFont( FONT14ARIAL );
 	SetFontForeground( FONT_WHITE );
 	SetFontBackground( FONT_BLACK );
@@ -3510,7 +3510,7 @@ void HandleMouseInCompatableItemForMapSectorInventory( INT32 iCurrentSlot )
 	}
 
 	//Nothing selected or out of bounds or empty slot selected; highlightings reseted already, return
-	if ( iCurrentSlot == NO_SLOT || 
+	if ( iCurrentSlot == NO_SLOT ||
 		(pInventoryPoolList.size() < (UINT32)(iCurrentSlot + ( iCurrentInventoryPoolPage * MAP_INVENTORY_POOL_SLOT_COUNT ) )) ||
 		pInventoryPoolList[ iCurrentSlot + iCurrentInventoryPoolPage * MAP_INVENTORY_POOL_SLOT_COUNT ].fExists == FALSE )
 	{
@@ -3669,7 +3669,7 @@ void CheckGridNoOfItemsInMapScreenMapInventory()
 
 	for( iCnt=0; iCnt<iTotalNumberItems; ++iCnt)
 	{
-		if( ( TileIsOutOfBounds(pInventoryPoolList[ iCnt ].sGridNo) )&& !( pInventoryPoolList[ iCnt ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )		
+		if( ( TileIsOutOfBounds(pInventoryPoolList[ iCnt ].sGridNo) )&& !( pInventoryPoolList[ iCnt ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 		{
 			//set the flag
 			pInventoryPoolList[ iCnt ].usFlags |= WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT;
@@ -3682,7 +3682,7 @@ void CheckGridNoOfItemsInMapScreenMapInventory()
 
 	//loop through all the UNSEEN items
 	for( iCnt=0; iCnt<(INT32)uiNumberOfUnSeenItems; ++iCnt)
-	{		
+	{
 		if (TileIsOutOfBounds(pUnSeenItems[ iCnt ].sGridNo) && !( pUnSeenItems[ iCnt ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 		{
 			//set the flag
@@ -3869,18 +3869,18 @@ BOOLEAN	LoadInventoryPoolQ (UINT8 ubSaveGameID)
 		else
 			MAP_INVENTORY_POOL_SLOT_COUNT = 170;
 	}
-	
+
 	ret = FALSE;
 	CreateSavedGameFileNameFromNumber(ubSaveGameID, tmpbuf);
 	strcat(tmpbuf, ".IPQ");
-	
+
 	//MM:  This check is sometimes required while debugging a save game from release mode
 	if (FileExists(tmpbuf))
 		hFile = FileOpen(tmpbuf, FILE_ACCESS_READ|FILE_OPEN_EXISTING, FALSE);
 
 	if(hFile == 0)
 		return(TRUE);
-	
+
 	MemFreeInventoryPoolQ();
 	FileRead(hFile, iCurrentInventoryPoolPageQ+1, (INVPOOLLISTNUM-1)*sizeof(INT32), &uiNumBytesRead);
 	if(uiNumBytesRead != (INVPOOLLISTNUM-1)*sizeof(INT32))
@@ -3945,7 +3945,7 @@ BOOLEAN SaveInventoryPoolQ(UINT8 ubSaveGameID)
 		else
 			MAP_INVENTORY_POOL_SLOT_COUNT = 170;
 	}
-	
+
 	ret = FALSE;
 	CreateSavedGameFileNameFromNumber(ubSaveGameID, tmpbuf);
 	strcat(tmpbuf, ".IPQ");
@@ -4652,7 +4652,7 @@ void AnimateZoomInventory ( UINT16 iLocationInPool, UINT16 iCounter, INT32 iStar
 	// STEP 1: We make our sprite. This is done by drawing a slot to the top-left corner of the EXTRABUFFER,
 	// then drawing our item on it. We'll be copying it back with every frame, at a new destination and
 	// size.
-	
+
 	// Draw a big-item slot to 0,0.
 	GetVideoObject(&hHandle, guiMapInventoryPoolSlot);
 	sX = 0;
@@ -4730,7 +4730,7 @@ void AnimateZoomInventory ( UINT16 iLocationInPool, UINT16 iCounter, INT32 iStar
 	DstRect.iBottom = DstRect.iTop + MAP_INVEN_SLOT_HEIGHT;
 
 	// Calculate Deltas
-	
+
 	// Movement of the sprite's top-left corner
 	INT32 iDeltaX = DstRect.iLeft - StartRect.iLeft;
 	INT32 iDeltaY = DstRect.iTop - StartRect.iTop;
@@ -4748,7 +4748,7 @@ void AnimateZoomInventory ( UINT16 iLocationInPool, UINT16 iCounter, INT32 iStar
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ANIMATE
-	
+
 	while( iPercentage < 100	)
 	{
 		// The animation process is quite simple, and is done in a more simple fashion than the Laptop transition
@@ -4757,7 +4757,7 @@ void AnimateZoomInventory ( UINT16 iLocationInPool, UINT16 iCounter, INT32 iStar
 		// size and position of the sprite, and blit it to the frame buffer as well.
 		// By tracking the time on the clock we can figure out where the sprite should be at any given time,
 		// how large it should be, and also use effects to make it look cooler.
-		
+
 		// First of all, blit the Map Inventory back from the SAVEBUFFER into the FRAMEBUFFER, so that it gets
 		// drawn on the screen as a background. We don't need to draw the entire screen - at least not yet...
 		BlitBufferToBuffer( guiSAVEBUFFER, FRAME_BUFFER, INVEN_POOL_X, INVEN_POOL_Y, SCREEN_WIDTH-INVEN_POOL_X, SCREEN_HEIGHT-INVEN_POOL_Y);
@@ -4817,7 +4817,7 @@ void AnimateZoomInventory ( UINT16 iLocationInPool, UINT16 iCounter, INT32 iStar
 // the program never looks at any mercs' crates-in-hand.
 void SortSectorInventoryAmmo(bool useBoxes)
 {
-	
+
 	// Declarations
 	INT32	crateItem;
 	bool	mergeSuccessful = false;
@@ -4825,7 +4825,7 @@ void SortSectorInventoryAmmo(bool useBoxes)
 	int loopCount = 0;
 
 	SOLDIERTYPE * pSoldier = &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]);
-	
+
 	AssertMsg( pSoldier != NULL, "Sector Inventory: Attempting ammo sort without valid selected soldier?" );
 
 	//MM: added for ammo boxes
@@ -4851,7 +4851,7 @@ void SortSectorInventoryAmmo(bool useBoxes)
 			{
 				continue;
 			}
-		
+
 			// Store a pointer to this object and record its item number
 			OBJECTTYPE *pCurObject = &(pInventoryPoolList[iInvCounter].object);
 			UINT16 usCurItem = pCurObject->usItem;
@@ -4863,7 +4863,7 @@ void SortSectorInventoryAmmo(bool useBoxes)
 				!(pInventoryPoolList[iInvCounter].usFlags & WORLD_ITEM_ARMED_BOMB) ) // Is not boobytrapped!
 			{
 				// We have a valid, ammo item - one or more magazines. We'll want to dump as much ammo from them
-				// as possible into crates. 
+				// as possible into crates.
 
 				// Look through all items in the game to try and find an ammocrate that can contain this kind of ammo.
 				for ( int iCrateLoop = 0; iCrateLoop < gMAXITEMS_READ; ++iCrateLoop )
@@ -4965,7 +4965,7 @@ void SortSectorInventoryAmmo(bool useBoxes)
 void SortSectorInventoryEjectAmmo()
 {
 	OBJECTTYPE gTempObject;
-	
+
 	SOLDIERTYPE * pSoldier = &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]);
 
 	for ( UINT32 uiLoop = 0; uiLoop < pInventoryPoolList.size(); uiLoop++ ) //for all items in sector
@@ -4978,7 +4978,7 @@ void SortSectorInventoryEjectAmmo()
 			if (Item[ pInventoryPoolList[uiLoop].object.usItem ].usItemClass & IC_GUN) // Is a gun?
 			{
 				// Iterate through stacks
-				for (int x = 0; x < pInventoryPoolList[uiLoop].object.ubNumberOfObjects; ++x) 
+				for (int x = 0; x < pInventoryPoolList[uiLoop].object.ubNumberOfObjects; ++x)
 				{
 					//Remove magazine
 					if ( (pInventoryPoolList[uiLoop].object[x]->data.gun.usGunAmmoItem != NONE) && (pInventoryPoolList[uiLoop].object[x]->data.gun.ubGunShotsLeft > 0) )
@@ -5015,7 +5015,7 @@ void SortSectorInventorySeparateAttachments()
 {
 
 	OBJECTTYPE gTempObject;
-	
+
 	SOLDIERTYPE * pSoldier = &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]);
 
 	for ( UINT32 uiLoop = 0; uiLoop < pInventoryPoolList.size(); uiLoop++ ) //for all items in sector
@@ -5027,7 +5027,7 @@ void SortSectorInventorySeparateAttachments()
 		{
 
 			// Iterate through stacks
-			for (int x = 0; x < pInventoryPoolList[uiLoop].object.ubNumberOfObjects; ++x) 
+			for (int x = 0; x < pInventoryPoolList[uiLoop].object.ubNumberOfObjects; ++x)
 			{
 				UINT8 size = 0, cnt = 0, uiLoopCnt = 0;
 
@@ -5079,7 +5079,7 @@ void SortSectorInventorySeparateAttachments()
 void SortSectorInventoryStackAndMerge(bool ammoOnly )
 {
 	OBJECTTYPE * StackObject;
-	
+
 	SOLDIERTYPE * pSoldier = &(Menptr[ gCharactersList[ bSelectedInfoChar ].usSolID ]);
 
 	for ( UINT32 uiLoop = 0; uiLoop < pInventoryPoolList.size(); uiLoop++ )
@@ -5120,7 +5120,7 @@ void SortSectorInventoryStackAndMerge(bool ammoOnly )
 					// Have we removed all items from the secondary stack?
 					if( pInventoryPoolList[i].object.exists() == false )
 					{
-						// Destroy it. 
+						// Destroy it.
 						DeleteObj( &(pInventoryPoolList[i].object) );
 					}
 				}
@@ -5326,7 +5326,7 @@ void RefreshSeenAndUnseenPools()
 			j--, pusi++;
 		}
 	}
-	// Move previously seen items from pInventoryPoolList to pUnSeenItems 
+	// Move previously seen items from pInventoryPoolList to pUnSeenItems
 	i = 0;
 	pipl = &pInventoryPoolList.front();
 	j = 0;
@@ -5396,10 +5396,10 @@ void CreateMapInventoryFilterMenu( )
 
 	// create a popup
 	gMapInventoryFilterPopup = new POPUP("MAP INVENTORY FILTER MENU POPUP");	// at this point the name is used mainly for debug output
-	
+
 	// add a callback that lets the keyboard handler know we're done (and ready to pop up again)
 	gMapInventoryFilterPopup->setCallback(POPUP_CALLBACK_HIDE, new popupCallbackFunction<void,void>( &MapInventoryFilterMenuPopup_Hide ) );
-	
+
 	CHAR16 pStr[300];
 
 	// Create menu to toggle groups of item classes on and off individually.
@@ -5557,7 +5557,7 @@ void CreateMapInventoryFilterMenu( )
 
 // HEADROCK HAM 5: This function alters the Map Inventory Filter, by applying the argument as a flag toggle
 // (XOR) to the current filter set.
-// As a result of the alteration, some items will disappear from view - though they are still kept in 
+// As a result of the alteration, some items will disappear from view - though they are still kept in
 // memory as "Unseen" items.
 void MapInventoryFilterMenuPopup_FilterToggle( UINT32 uiFlags )
 {
@@ -5566,7 +5566,7 @@ void MapInventoryFilterMenuPopup_FilterToggle( UINT32 uiFlags )
 	{
 		gMapInventoryFilterPopup->hide();
 	}
-	
+
 	// Alter the filter based on the flags we want. This is a XOR operation, so we're basically
 	// toggling the correct bits in the filter on-and-off. The bits correspond to the various
 	// item classes - though they are often toggled in groups (i.e. Guns + Launchers, Kits + Medkits + Camokits, etc.)
@@ -5585,7 +5585,7 @@ void MapInventoryFilterMenuPopup_FilterToggle( UINT32 uiFlags )
 
 // HEADROCK HAM 5: This function alters the Map Inventory Filter, by applying the argument as a flag set
 // (=) to the current filter set.
-// As a result of the alteration, some items will disappear from view - though they are still kept in 
+// As a result of the alteration, some items will disappear from view - though they are still kept in
 // memory as "Unseen" items.
 void MapInventoryFilterMenuPopup_FilterSet( UINT32 uiFlags )
 {
@@ -5594,7 +5594,7 @@ void MapInventoryFilterMenuPopup_FilterSet( UINT32 uiFlags )
 	{
 		gMapInventoryFilterPopup->hide();
 	}
-	
+
 	// Alter the filter based on the flags we want. This is a XOR operation, so we're basically
 	// toggling the correct bits in the filter on-and-off. The bits correspond to the various
 	// item classes - though they are often toggled in groups (i.e. Guns + Launchers, Kits + Medkits + Camokits, etc.)
@@ -5766,7 +5766,7 @@ void HandleSetFilterButtons()
 //	#ifdef _DEBUG
 	BOOLEAN fReturn = TRUE;
 //	#endif
-			
+
 	// now load these items into memory, based on fact if sector is in fact loaded
 	if( ( sMapX == gWorldSectorX )&&( gWorldSectorY == sMapY ) && (gbWorldSectorZ == sMapZ ) && guiNumWorldItems)
 	{
@@ -5796,7 +5796,7 @@ void HandleSetFilterButtons()
 		//Save the Items to the the file
 		SaveWorldItemsToTempItemFile( sMapX, sMapY, (INT8)sMapZ, uiTotalNumberOfRealItems, pTotalSectorList );
 	}
-		
+
 	HandleSectorCooldownFunctions( sMapX, sMapY, (INT8)sMapZ, pTotalSectorList, uiTotalNumberOfRealItems, TRUE );
 
 	//Save the time the player was last in the sector
@@ -5821,10 +5821,10 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 {
 	INT32 tickspassed = deltaSeconds / NUM_SEC_PER_TACTICAL_TURN;//1 tick is 5 seconds
 
-	if ( tickspassed == 0 || !itemStack->exists() || 
+	if ( tickspassed == 0 || !itemStack->exists() ||
 		!( gGameExternalOptions.fWeaponOverheating || gGameExternalOptions.fDirtSystem || gGameOptions.fFoodSystem ) )
 		return;
-	
+
 
 //original code by flugente, renamed variables to fit here, removed "min (OVERHEATING_MAX_TEMPERATURE, newValue)" for dirt to allow to go beyond maximum and deduct later the same amount if neccessary.
 	// ... if we use overheating and item is a gun, a launcher or a barrel ...
@@ -5849,7 +5849,7 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 
 			// for every objects, we also have to check whether there are weapon attachments (eg. underbarrel weapons), and cool them down too
 			attachmentList::iterator iterend = (*itemStack)[i]->attachments.end();
-			for (attachmentList::iterator iter = (*itemStack)[i]->attachments.begin(); iter != iterend; ++iter) 
+			for (attachmentList::iterator iter = (*itemStack)[i]->attachments.begin(); iter != iterend; ++iter)
 			{
 				if ( iter->exists() && Item[ iter->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) )
 				{
@@ -5900,14 +5900,14 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 			FLOAT sectorModifier = gGameExternalOptions.sFoodDecayModificator * ( isUnderground? 0.8f : 1.0f );
 
 			for( INT16 i = 0; i < itemStack->ubNumberOfObjects; ++i )			// ... there might be multiple items here (item stack), so for each one ...
-			{						
+			{
 				(*itemStack)[i]->data.bTemperature = max( 0.0f, (*itemStack)[i]->data.bTemperature - tickspassed * sectorModifier * Food[ Item[ itemStack->usItem ].foodtype ].usDecayRate );	// set new temperature
 			}
 		}
 	}//end food
 }
 
-// Flugente: handle various cooldown functions over an array of items in a specific sector. 
+// Flugente: handle various cooldown functions over an array of items in a specific sector.
 // if fWithMinutes = true, adjust cooldown for time since sector was last entered
 // otherwise its used for a turn-precise cooldown
 //Moa: code inside pWorldItem loop moved to HandleItemCooldownFunctions, added optional fUndo flag to undecay items (default = FALSE)
@@ -5944,18 +5944,18 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 
 	// get sector-specific dirt threshold
 	UINT16 sectormod = 0;
-	UINT8 ubSectorId = SECTOR(sMapX, sMapY);	
+	UINT8 ubSectorId = SECTOR(sMapX, sMapY);
 	if ( sMapZ > 0 )
 		sectormod = 100;
 	else if ( ubSectorId >= 0 && ubSectorId < 256  )
 	{
 		sectormod = SectorExternalData[ubSectorId][sMapZ].usNaturalDirt;
 	}
-	
+
 	for( UINT32 uiCount = 0; uiCount < size; ++uiCount )				// ... for all items in the world ...
 	{
 		HandleItemCooldownFunctions( &(pWorldItem[ uiCount ].object), tickspassed * ( fUndo ? -NUM_SEC_PER_TACTICAL_TURN : NUM_SEC_PER_TACTICAL_TURN ), sectormod, (sMapZ > 0) );
-		
+
 //moved to HandleItemCooldownFunctions to reuse those calculations (see SOLDIERTYPE::SoldierInventoryCoolDown())
 /*
 		if( pWorldItem[ uiCount ].fExists )										// ... if item exists ...
@@ -5986,7 +5986,7 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 
 						// for every objects, we also have to check whether there are weapon attachments (eg. underbarrel weapons), and cool them down too
 						attachmentList::iterator iterend = (*pObj)[i]->attachments.end();
-						for (attachmentList::iterator iter = (*pObj)[i]->attachments.begin(); iter != iterend; ++iter) 
+						for (attachmentList::iterator iter = (*pObj)[i]->attachments.begin(); iter != iterend; ++iter)
 						{
 							if ( iter->exists() && Item[ iter->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) )
 							{
@@ -6032,7 +6032,7 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 					if ( Food[Item[pObj->usItem].foodtype].usDecayRate > 0.0f )		// ... if the food can decay...
 					{
 						for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)			// ... there might be multiple items here (item stack), so for each one ...
-						{						
+						{
 							(*pObj)[i]->data.bTemperature = max(0.0f, (*pObj)[i]->data.bTemperature - foofdecaymod * Food[Item[pObj->usItem].foodtype].usDecayRate);	// set new temperature
 						}
 					}

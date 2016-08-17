@@ -38,7 +38,7 @@ class Connection_RM2Factory;
 /// \defgroup REPLICA_MANAGER_2_GROUP ReplicaManager2
 /// \ingroup PLUGINS_GROUP
 
-/// \brief These are the types of events that can cause network data to be transmitted. 
+/// \brief These are the types of events that can cause network data to be transmitted.
 /// \ingroup REPLICA_MANAGER_2_GROUP
 typedef int SerializationType;
 enum
@@ -203,7 +203,7 @@ public:
 	/// \pre Call SetConnectionFactory() with a derived instance of Connection_RM2Factory.
 	void SendConstruction(Replica2 *replica, BitStream *replicaData, SystemAddress recipient, RakNetTime timestamp, bool sendMessage,
 		DataStructures::OrderedList<SystemAddress,SystemAddress> &exclusionList,
-		unsigned char localClientId, SerializationType type=SEND_CONSTRUCTION_GENERIC_TO_SYSTEM, 
+		unsigned char localClientId, SerializationType type=SEND_CONSTRUCTION_GENERIC_TO_SYSTEM,
 		PacketPriority priority=NUMBER_OF_PRIORITIES, PacketReliability reliability=NUMBER_OF_RELIABILITIES, char orderingChannel=-1);
 
 	/// Sends a destruction command to one or more systems, which will be relayed throughout the network.
@@ -244,7 +244,7 @@ public:
 	/// \pre Call SetConnectionFactory() with a derived instance of Connection_RM2Factory.
 	void SendSerialize(Replica2 *replica, BitStream *replicaData, SystemAddress recipient, RakNetTime timestamp,
 		DataStructures::OrderedList<SystemAddress,SystemAddress> &exclusionList,
-		SerializationType type=SEND_SERIALIZATION_GENERIC_TO_SYSTEM, 
+		SerializationType type=SEND_SERIALIZATION_GENERIC_TO_SYSTEM,
 		PacketPriority priority=NUMBER_OF_PRIORITIES, PacketReliability reliability=NUMBER_OF_RELIABILITIES, char orderingChannel=-1);
 
 	/// Sets the visibility status of an object. which will be relayed throughout the network.
@@ -265,7 +265,7 @@ public:
 	/// \pre Call SetConnectionFactory() with a derived instance of Connection_RM2Factory.
 	void SendVisibility(Replica2 *replica, BitStream *replicaData, SystemAddress recipient, RakNetTime timestamp,
 		DataStructures::OrderedList<SystemAddress,SystemAddress> &exclusionList,
-		SerializationType type=SEND_VISIBILITY_TRUE_TO_SYSTEM, 
+		SerializationType type=SEND_VISIBILITY_TRUE_TO_SYSTEM,
 		PacketPriority priority=NUMBER_OF_PRIORITIES, PacketReliability reliability=NUMBER_OF_RELIABILITIES, char orderingChannel=-1);
 
 	/// Returns how many Replica2 instances are registered.
@@ -829,14 +829,14 @@ public:
 
 	/// Get the guid associated with this class instance.
 	RakNetGUID GetGuid(void) const;
-	
+
 protected:
 	void Deref(Replica2* replica);
 
 	void CalculateListExclusivity(
 		const DataStructures::OrderedList<Replica2*, Replica2*, ReplicaManager2::Replica2ObjectComp> &listOne,
 		const DataStructures::OrderedList<Replica2*, Replica2*, ReplicaManager2::Replica2ObjectComp> &listTwo,
-		DataStructures::OrderedList<Replica2*, Replica2*, ReplicaManager2::Replica2ObjectComp> &exclusiveToListOne, 
+		DataStructures::OrderedList<Replica2*, Replica2*, ReplicaManager2::Replica2ObjectComp> &exclusiveToListOne,
 		DataStructures::OrderedList<Replica2*, Replica2*, ReplicaManager2::Replica2ObjectComp> &exclusiveToListTwo
 		) const;
 

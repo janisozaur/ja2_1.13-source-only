@@ -2,7 +2,7 @@
 #define __VIDEO_PRIVATE_
 
 // ***********************************************************************
-// 
+//
 // PRIVATE, INTERNAL Header used by other SGP Internal modules
 //
 // Allows direct access to underlying Direct Draw Implementation

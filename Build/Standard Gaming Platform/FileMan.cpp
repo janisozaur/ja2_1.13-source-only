@@ -9,7 +9,7 @@
 //		24sep96:HJH		->creation
 //	08Apr97:ARM	->Assign return value from Push() calls back to HStack
 //					 handle, because it may possibly do a MemRealloc()
-//		29Dec97:Kris Morness 
+//		29Dec97:Kris Morness
 //									->Added functionality for setting file attributes which
 //									allows for read-only attribute overriding
 //									->Also added a simple function that clears all file attributes
@@ -34,7 +34,7 @@
 	#include <malloc.h>
 	#include <stdio.h>
 	#include <direct.h>
-	
+
 
 	#include "windows.h"
 	#include "FileMan.h"
@@ -274,7 +274,7 @@ BOOLEAN	FileExists( STR strFilename )
 	DWORD attribs = GetFileAttributes(strFilename);
 	if ( attribs != INVALID_FILE_ATTRIBUTES && !(attribs & FILE_ATTRIBUTE_DIRECTORY) )
 		return TRUE;
-	
+
 	return FALSE;
 #endif
 }
@@ -316,7 +316,7 @@ extern BOOLEAN	FileExistsNoDB( STR strFilename )
 	DWORD attribs = GetFileAttributes(strFilename);
 	if ( attribs != INVALID_FILE_ATTRIBUTES && !(attribs & FILE_ATTRIBUTE_DIRECTORY) )
 		return TRUE;
-	
+
 	return FALSE;
 #endif
 }
@@ -340,7 +340,7 @@ extern BOOLEAN	FileExistsNoDB( STR strFilename )
 //
 //		24sep96:HJH		->creation
 //
-//**************************************************************************	
+//**************************************************************************
 BOOLEAN	FileDelete( STR strFilename )
 {
 #ifdef USE_VFS
@@ -390,7 +390,7 @@ HWFILE FileOpen( STR strFilename, UINT32 uiOptions, BOOLEAN fDeleteOnClose, STR 
 		if(uiOptions & FILE_ACCESS_WRITE)
 		{
 			// 'vfs::CVirtualFile::SF_TOP' should be enough, but if for some strange reason
-			// file creation fails, we will stop at a writable profile 
+			// file creation fails, we will stop at a writable profile
 			// and won't unintentionally mess up a file from another profile
 			vfs::COpenWriteFile open_w( path, true, false, vfs::CVirtualFile::SF_STOP_ON_WRITABLE_PROFILE);
 			pFile = &open_w.file();
@@ -421,7 +421,7 @@ HWFILE FileOpen( STR strFilename, UINT32 uiOptions, BOOLEAN fDeleteOnClose, STR 
 	// instead we catch it (any exception, not just CBasicException) here and return 0
 	catch(vfs::Exception& ex) { SGP_ERROR(ex.what()); }
 	catch(...)
-	{ 
+	{
 		SGP_ERROR( "Caught undefined exception" );
 	}
 	return 0;
@@ -484,7 +484,7 @@ HWFILE FileOpen( STR strFilename, UINT32 uiOptions, BOOLEAN fDeleteOnClose, STR 
 	}
 
 	// if the file did not exist, try to open it from the database
-	else if ( gFileDataBase.fInitialized ) 
+	else if ( gFileDataBase.fInitialized )
 	{
 		//if the file is to be opened for writing, return an error cause you cant write a file that is in the database library
 		if( fDeleteOnClose )
@@ -515,7 +515,7 @@ HWFILE FileOpen( STR strFilename, UINT32 uiOptions, BOOLEAN fDeleteOnClose, STR 
 			//tried to open a file that wasnt in the database
 			if( !hLibFile )
 				return( 0 );
-			else			
+			else
 				return( hLibFile );		//return the file handle
 		}
 	}
@@ -547,7 +547,7 @@ HWFILE FileOpen( STR strFilename, UINT32 uiOptions, BOOLEAN fDeleteOnClose, STR 
 			dwCreationFlags = OPEN_ALWAYS;
 		}
 
-		
+
 		hRealFile = CreateFile( (LPCSTR) strFilename, dwAccess, 0, NULL, dwCreationFlags,
 										dwFlagsAndAttributes, NULL );
 		if ( hRealFile == INVALID_HANDLE_VALUE )
@@ -990,7 +990,7 @@ BOOLEAN _cdecl FilePrintf( HWFILE hFile, STR8	strFormatted, ... )
 	_vsnprintf( strToSend, DIM(strToSend), strFormatted, argptr ); /* made StringLen Save, Sergeant_Kolja, 2007-06-10 */
 	strToSend[ DIM(strToSend)-1 ] = 0;
 	va_end(argptr);
-	
+
 	fRetVal = FileWrite( hFile, strToSend, strlen(strToSend), NULL );
 	return( fRetVal );
 #else
@@ -1010,7 +1010,7 @@ BOOLEAN _cdecl FilePrintf( HWFILE hFile, STR8	strFormatted, ... )
 		_vsnprintf( strToSend, DIM(strToSend), strFormatted, argptr ); /* made StringLen Save, Sergeant_Kolja, 2007-06-10 */
 		strToSend[ DIM(strToSend)-1 ] = 0;
 		va_end(argptr);
-		
+
 		fRetVal = FileWrite( hFile, strToSend, strlen(strToSend), NULL );
 	}
 	else
@@ -1315,7 +1315,7 @@ void FileDebugPrint( void )
 //
 // GetHandleToRealFile
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -1356,7 +1356,7 @@ HANDLE GetHandleToRealFile( HWFILE hFile, BOOLEAN *pfDatabaseFile )
 //
 // CreateFileHandle
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -1419,7 +1419,7 @@ HWFILE CreateFileHandle( HANDLE hRealFile, BOOLEAN fDatabaseFile )
 //
 // DestroyFileHandle
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -1445,7 +1445,7 @@ void DestroyFileHandle( HWFILE hFile )
 //
 // BuildFileDirectory
 //
-//		
+//
 //
 // Parameter List :
 // Return Value :
@@ -1765,7 +1765,7 @@ BOOLEAN RemoveFileManDirectory( STRING512 pcDirectory, BOOLEAN fRecursive )
 		return( FALSE );		//Error returning from subdirectory
 	}
 
-	
+
 	// The directory MUST be empty
 	fRetval = RemoveDirectory( pcDirectory );
 	if (!fRetval)
@@ -1875,7 +1875,7 @@ BOOLEAN GetExecutableDirectory( STRING512 pcDirectory )
 }
 
 #ifdef USE_VFS
-static vfs::CVirtualFileSystem::Iterator file_iter; 
+static vfs::CVirtualFileSystem::Iterator file_iter;
 #endif
 BOOLEAN GetFileFirst( CHAR8 * pSpec, GETFILESTRUCT *pGFStruct )
 {
@@ -1892,7 +1892,7 @@ BOOLEAN GetFileFirst( CHAR8 * pSpec, GETFILESTRUCT *pGFStruct )
 		size = std::min< ::size_t>(size,260-1);
 		sprintf( pGFStruct->zFileName, s.c_str());
 		pGFStruct->zFileName[size] = 0;
-		
+
 		pGFStruct->iFindHandle = 0;
 		pGFStruct->uiFileSize = file_iter.value()->getSize();
 		pGFStruct->uiFileAttribs = ( file_iter.value()->implementsWritable() ? FILE_IS_NORMAL : FILE_IS_READONLY );
@@ -1923,7 +1923,7 @@ BOOLEAN GetFileFirst( CHAR8 * pSpec, GETFILESTRUCT *pGFStruct )
 	pGFStruct->iFindHandle = iWhich;
 
 	hFindInfoHandle[iWhich] = FindFirstFile( pSpec, &Win32FindInfo[iWhich] );
-	
+
 	if ( hFindInfoHandle[iWhich] == INVALID_HANDLE_VALUE )
 		return(FALSE);
 	fFindInfoInUse[iWhich] = TRUE;
@@ -1959,7 +1959,7 @@ BOOLEAN GetFileNext( GETFILESTRUCT *pGFStruct )
 	return FALSE;
 #else
 	CHECKF( pGFStruct != NULL );
-	
+
 	if ( FindNextFile(hFindInfoHandle[pGFStruct->iFindHandle], &Win32FindInfo[pGFStruct->iFindHandle]) )
 	{
 		W32toSGPFileFind( pGFStruct, &Win32FindInfo[pGFStruct->iFindHandle] );
@@ -2012,23 +2012,23 @@ void W32toSGPFileFind( GETFILESTRUCT *pGFStruct, WIN32_FIND_DATA *pW32Struct )
 			case FILE_ATTRIBUTE_DIRECTORY:
 				pGFStruct->uiFileAttribs |= FILE_IS_DIRECTORY;
 				break;
-			
+
 			case FILE_ATTRIBUTE_HIDDEN:
 				pGFStruct->uiFileAttribs |= FILE_IS_HIDDEN;
 				break;
-			
-			case FILE_ATTRIBUTE_NORMAL:	
+
+			case FILE_ATTRIBUTE_NORMAL:
 				pGFStruct->uiFileAttribs |= FILE_IS_NORMAL;
 				break;
-			
+
 			case FILE_ATTRIBUTE_READONLY:
 				pGFStruct->uiFileAttribs |= FILE_IS_READONLY;
 				break;
-			
+
 			case FILE_ATTRIBUTE_SYSTEM:
 				pGFStruct->uiFileAttribs |= FILE_IS_SYSTEM;
 				break;
-			
+
 			case FILE_ATTRIBUTE_TEMPORARY:
 				pGFStruct->uiFileAttribs |= FILE_IS_TEMPORARY;
 				break;
@@ -2192,7 +2192,7 @@ UINT32 FileGetAttributes( STR strFilename )
 	if( uiAttribs & FILE_ATTRIBUTE_DIRECTORY )
 		uiFileAttrib |= FILE_ATTRIBUTES_DIRECTORY;
 
-	
+
 
 	return( uiFileAttrib );
 }
@@ -2330,15 +2330,15 @@ BOOLEAN GetFileManFileTime( HWFILE hFile, SGP_FILETIME	*pCreationTime, SGP_FILET
 		//get the real file handle to the file
 		hRealFile = gFileDataBase.RealFiles.pRealFilesOpen[ uiFileNum ].hRealFileHandle;
 
-		//Gets the UTC file time for the 'real' file				
+		//Gets the UTC file time for the 'real' file
 		GetFileTime( hRealFile, &sCreationUtcFileTime, &sLastAccessedUtcFileTime, &sLastWriteUtcFileTime );
 
 		//converts the creation UTC file time to the current time used for the file
-		if(pCreationTime) 
+		if(pCreationTime)
 			FileTimeToLocalFileTime( &sCreationUtcFileTime, pCreationTime );
-		
+
 		//converts the accessed UTC file time to the current time used for the file
-		if (pLastAccessedTime) 
+		if (pLastAccessedTime)
 			FileTimeToLocalFileTime( &sLastAccessedUtcFileTime, pLastAccessedTime );
 
 		//converts the write UTC file time to the current time used for the file
@@ -2367,7 +2367,7 @@ BOOLEAN GetFileManFileTime( HWFILE hFile, SGP_FILETIME	*pCreationTime, SGP_FILET
 	return( TRUE );
 #else
 	return( FALSE );
-#endif	
+#endif
 }
 
 
@@ -2391,9 +2391,9 @@ UINT32 uiSize;
 
 	if((hFile=FileOpen(strFilename, FILE_OPEN_EXISTING | FILE_ACCESS_READ, FALSE))==0)
 		return(0);
-		
+
 	uiSize=FileGetSize(hFile);
-	FileClose(hFile);				
+	FileClose(hFile);
 
 	return(uiSize);
 #endif
@@ -2436,8 +2436,8 @@ HANDLE	GetRealFileHandleFromFileManFileHandle( HWFILE hFile )
 //
 // AddSubdirectoryToPath
 //
-//		Puts a subdirectory of the current working directory into the current 
-// task's system path. 
+//		Puts a subdirectory of the current working directory into the current
+// task's system path.
 //
 // Parameter List :
 // Return Value :
@@ -2480,7 +2480,7 @@ UINT32 uiPathLen;
 		uiPathLen--;
 	if(pPath[uiPathLen]!='\\')
 		strcat(pPath, "\\");
-	
+
 	strcat(pPath, pDirectory);
 
 	// Appends it to the path for the current task
@@ -2499,7 +2499,7 @@ UINT32 uiPathLen;
 		MemFree(pPath);
 		return(FALSE);
 	}
-	
+
 }
 
 
@@ -2519,7 +2519,7 @@ UINT32 GetFreeSpaceOnHardDriveWhereGameIsRunningFrom( )
 	_splitpath( zExecDir, zDrive, zDir, zFileName, zExt);
 
 	sprintf( zDrive, "%s\\", zDrive );
-	
+
 	uiFreeSpace = GetFreeSpaceOnHardDrive( zDrive );
 
 	return( uiFreeSpace );
@@ -2537,7 +2537,7 @@ UINT32 GetFreeSpaceOnHardDrive( STR pzDriveLetter )
 	UINT32			uiNumberOfFreeClusters=0;
 	UINT32			uiTotalNumberOfClusters=0;
 
-	if( !GetDiskFreeSpace( pzDriveLetter, (LPDWORD) &uiSectorsPerCluster, (LPDWORD) &uiBytesPerSector, 
+	if( !GetDiskFreeSpace( pzDriveLetter, (LPDWORD) &uiSectorsPerCluster, (LPDWORD) &uiBytesPerSector,
 			(LPDWORD) &uiNumberOfFreeClusters, (LPDWORD) &uiTotalNumberOfClusters ) )
 	{
 		UINT32 uiLastError = GetLastError();

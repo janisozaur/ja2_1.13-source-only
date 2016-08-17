@@ -8,7 +8,7 @@
 	#include "Interface.h"
 #endif
 
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 #include "Soldier Profile.h"
 #include "Random.h"
 
@@ -96,7 +96,7 @@ RandomStatsEndElementHandle(void *userData, const XML_Char *name)
 {
 	RandomStatsParseData * pData = (RandomStatsParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "RANDOM_STATS") == 0)
 		{
@@ -104,8 +104,8 @@ RandomStatsEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "PROFILE") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 					gRandomStatsValue[pData->curRandomStats.uiIndex].Enabled = pData->curRandomStats.Enabled;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].BaseAttribute = pData->curRandomStats.BaseAttribute;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomExpLevel = pData->curRandomStats.RandomExpLevel;
@@ -114,7 +114,7 @@ RandomStatsEndElementHandle(void *userData, const XML_Char *name)
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomDexterity = pData->curRandomStats.RandomDexterity;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomStrength = pData->curRandomStats.RandomStrength;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomLeadership = pData->curRandomStats.RandomLeadership;
-					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomWisdom = pData->curRandomStats.RandomWisdom;	
+					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomWisdom = pData->curRandomStats.RandomWisdom;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomMarksmanship = pData->curRandomStats.RandomMarksmanship;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomMechanical = pData->curRandomStats.RandomMechanical;
 					gRandomStatsValue[pData->curRandomStats.uiIndex].RandomExplosive = pData->curRandomStats.RandomExplosive;
@@ -145,12 +145,12 @@ RandomStatsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curRandomStats.RandomLife	= (BOOLEAN) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "RandomAgility") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curRandomStats.RandomAgility	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "RandomDexterity") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -165,7 +165,7 @@ RandomStatsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curRandomStats.RandomLeadership	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "RandomWisdom") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -195,7 +195,7 @@ RandomStatsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curRandomStats.RandomScientific	= (BOOLEAN) atol(pData->szCharData);
-		}			
+		}
 
 		pData->maxReadDepth--;
 	}
@@ -215,7 +215,7 @@ BOOLEAN ReadInRandomStats(STR fileName)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading RandomStats.xml" );
 
 //	RandomStats_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	//if ( !hFile )
@@ -282,19 +282,19 @@ BOOLEAN WriteRandomStats( STR fileName)
 			FilePrintf(hFile,"\t<PROFILE>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n", cnt);
 			FilePrintf(hFile,"\t\t<Enabled>%d</Enabled>\r\n",gRandomStatsValue[cnt].Enabled);
-			FilePrintf(hFile,"\t\t<BaseAttribute>%d</BaseAttribute>\r\n",gRandomStatsValue[cnt].BaseAttribute);				
-			FilePrintf(hFile,"\t\t<RandomExpLevel>%d</RandomExpLevel>\r\n",gRandomStatsValue[cnt].RandomExpLevel);		
-			FilePrintf(hFile,"\t\t<RandomLife>%d</RandomLife>\r\n",gRandomStatsValue[cnt].RandomLife);	
-			FilePrintf(hFile,"\t\t<RandomAgility>%d</RandomAgility>\r\n",gRandomStatsValue[cnt].RandomAgility);	
+			FilePrintf(hFile,"\t\t<BaseAttribute>%d</BaseAttribute>\r\n",gRandomStatsValue[cnt].BaseAttribute);
+			FilePrintf(hFile,"\t\t<RandomExpLevel>%d</RandomExpLevel>\r\n",gRandomStatsValue[cnt].RandomExpLevel);
+			FilePrintf(hFile,"\t\t<RandomLife>%d</RandomLife>\r\n",gRandomStatsValue[cnt].RandomLife);
+			FilePrintf(hFile,"\t\t<RandomAgility>%d</RandomAgility>\r\n",gRandomStatsValue[cnt].RandomAgility);
 			FilePrintf(hFile,"\t\t<RandomDexterity>%d</RandomDexterity>\r\n",gRandomStatsValue[cnt].RandomDexterity);
-			FilePrintf(hFile,"\t\t<RandomStrength>%d</RandomStrength>\r\n",gRandomStatsValue[cnt].RandomStrength);		
+			FilePrintf(hFile,"\t\t<RandomStrength>%d</RandomStrength>\r\n",gRandomStatsValue[cnt].RandomStrength);
 			FilePrintf(hFile,"\t\t<RandomLeadership>%d</RandomLeadership>\r\n",gRandomStatsValue[cnt].RandomLeadership);
 			FilePrintf(hFile,"\t\t<RandomWisdom>%d</RandomWisdom>\r\n",gRandomStatsValue[cnt].RandomWisdom);
 			FilePrintf(hFile,"\t\t<RandomMarksmanship>%d</RandomMarksmanship>\r\n",gRandomStatsValue[cnt].RandomMarksmanship);
 			FilePrintf(hFile,"\t\t<RandomMechanical>%d</RandomMechanical>\r\n",gRandomStatsValue[cnt].RandomMechanical);
 			FilePrintf(hFile,"\t\t<RandomExplosive>%d</RandomExplosive>\r\n",gRandomStatsValue[cnt].RandomExplosive);
 			FilePrintf(hFile,"\t\t<RandomMedical>%d</RandomMedical>\r\n",gRandomStatsValue[cnt].RandomMedical);
-			FilePrintf(hFile,"\t\t<RandomScientific>%d</RandomScientific>\r\n",gRandomStatsValue[cnt].RandomScientific);		
+			FilePrintf(hFile,"\t\t<RandomScientific>%d</RandomScientific>\r\n",gRandomStatsValue[cnt].RandomScientific);
 			FilePrintf(hFile,"\t</PROFILE>\r\n");
 		}
 		FilePrintf(hFile,"</RANDOM_STATS>\r\n");

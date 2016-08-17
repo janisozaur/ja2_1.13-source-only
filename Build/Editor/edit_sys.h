@@ -8,18 +8,18 @@
 #define	MEDIUMBRUSH		1
 #define	LARGEBRUSH		2
 
-#define	NO_BANKS		0 
+#define	NO_BANKS		0
 #define	DRAW_BANKS		1
 #define	DRAW_BANK_WATER 2
 #define	DRAW_ERASE		3
 
-#define	NO_CLIFFS		0 
+#define	NO_CLIFFS		0
 #define	DRAW_CLIFFS		1
 #define	DRAW_CLIFF_LAND 2
 
-extern BOOLEAN	gfWarning;	
+extern BOOLEAN	gfWarning;
 
-extern BOOLEAN	gfDoFill;	
+extern BOOLEAN	gfDoFill;
 extern UINT16	CurrentPaste;
 extern UINT16	gDebrisPaste;
 extern UINT16	gChangeElevation;
@@ -77,6 +77,6 @@ void EliminateObjectLayerRedundancy();
 
 
 
- 
+
 
 

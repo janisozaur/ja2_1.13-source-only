@@ -26,8 +26,8 @@
 #define _COMVARIANTOUT_H_
 
 /////////////////////////////////////////////////////////////////////////////
-// CComVariantOut - a class that inherits from CComVariant and adds Out() 
-//					method that should be used instead of & operator for 
+// CComVariantOut - a class that inherits from CComVariant and adds Out()
+//					method that should be used instead of & operator for
 //					'out' function parameters
 
 class CComVariantOut : public CComVariant

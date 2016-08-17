@@ -3,7 +3,7 @@
 
 #include "Types.h"
 
-extern BOOLEAN fShowTownInfo; 
+extern BOOLEAN fShowTownInfo;
 
 // display the box
 void DisplayTownInfo( INT16 sMapX, INT16 sMapY, INT8 bMapZ );

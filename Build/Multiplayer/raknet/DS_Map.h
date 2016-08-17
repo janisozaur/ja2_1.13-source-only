@@ -69,7 +69,7 @@ namespace DataStructures
 		Map( const Map& original_copy );
 		Map& operator= ( const Map& original_copy );
 
-		data_type& Get(const key_type &key) const; 
+		data_type& Get(const key_type &key) const;
 		data_type Pop(const key_type &key);
 		// Add if needed
 		void Set(const key_type &key, const data_type &data);
@@ -177,7 +177,7 @@ namespace DataStructures
 		{
 			index=mapNodeList.GetIndexFromKey(key, &objectExists);
 			RakAssert(objectExists);
-		}		
+		}
 		data_type tmp = mapNodeList[index].mapNodeData;
 		mapNodeList.RemoveAtIndex(index);
 		lastSearchIndexValid=false;
@@ -195,7 +195,7 @@ namespace DataStructures
 			mapNodeList[lastSearchIndex].mapNodeData=data;
 			return;
 		}
-		
+
 		index=mapNodeList.GetIndexFromKey(key, &objectExists);
 
 		if (objectExists)
@@ -224,10 +224,10 @@ namespace DataStructures
 			index=mapNodeList.GetIndexFromKey(key, &objectExists);
 			RakAssert(objectExists);
 			SaveLastSearch(key,index);
-		}		
+		}
 
 		mapNodeList[index].mapNodeData=data;
-	}	
+	}
 
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	void Map<key_type, data_type, key_comparison_func>::SetNew(const key_type &key, const data_type &data)
@@ -261,7 +261,7 @@ namespace DataStructures
 		if (HasSavedSearchResult(key))
 		{
 			lastSearchIndexValid=false;
-			mapNodeList.RemoveAtIndex(lastSearchIndex);   
+			mapNodeList.RemoveAtIndex(lastSearchIndex);
 			return true;
 		}
 

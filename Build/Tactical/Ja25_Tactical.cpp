@@ -1,24 +1,24 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "items.h"
-	#include "weapons.h"
+	#include "Items.h"
+	#include "Weapons.h"
 	#include "Soldier Control.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Handle UI.h"
 	#include "Animation Control.h"
 	#include "Isometric Utils.h"
 	#include "Animation Data.h"
 	#include "Random.h"
 	#include "Campaign.h"
-	#include "interface.h"
+	#include "Interface.h"
 	#include "Keys.h"
 
-	#include "soldier profile.h"
+	#include "Soldier Profile.h"
 	#include "SkillCheck.h"
-	#include "los.h"
-	#include "message.h"
-	#include "text.h"
+	#include "LOS.h"
+	#include "Message.h"
+	#include "Text.h"
 
 	#include "MessageBoxScreen.h"
 
@@ -28,28 +28,28 @@
 	#include "Auto Resolve.h"
 	#include "Interface Items.h"
 	#include "Campaign Types.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Inventory Choosing.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Smell.h"
-	#include "lighting.h"
-	#include "utilities.h"
-	#include "english.h"
-	#include "debug control.h"
+	#include "Lighting.h"
+	#include "Utilities.h"
+	#include "English.h"
+	#include "Debug Control.h"
 #endif
 
 #ifdef JA2UB
-#include "worldman.h"
+#include "WorldMan.h"
 #include "Game Clock.h"
 #include "Sound Control.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
 #include "Ja25_Tactical.h"
 #include "Dialogue Control.h"
-#include "interface Dialogue.h"
+#include "Interface Dialogue.h"
 #include "Quests.h"
 #include "SaveLoadMap.h"
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include "qarray.h"
 #include "Soldier Init List.h"
 #include "Soldier Control.h"
@@ -149,7 +149,7 @@ UINT32	VAL_SILENT_UB =333;
 UINT32	MICRO_UZI_UB = 330;
 UINT32	CALICO_950_UB = 67;
 UINT32	CALICO_900_UB = 68;
-	
+
 UINT32	CLIP_CANNON_BALL = 1354;
 UINT32	MERC_UMBRELLA = 1361;
 UINT32	HAND_CANNON = 1352;
@@ -175,7 +175,7 @@ UINT32	VAL_SILENT_UB =48;
 UINT32	MICRO_UZI_UB = 57;
 UINT32	CALICO_950_UB = 66;
 UINT32	CALICO_900_UB = 67;
-	
+
 UINT32	CLIP_CANNON_BALL = 115;
 UINT32	MERC_UMBRELLA = 70;
 UINT32	HAND_CANNON = 63;
@@ -188,8 +188,8 @@ UINT32	CHE_GUEVARA_CANTEEN = 332;
 UINT32	MERC_WRISTWATCH = 333;
 UINT32	SAM_GARVER_COMBAT_KNIFE = 69;
 UINT32	MERC_UMBRELLA_OLD = 335;
-UINT32	MORRIS_INSTRUCTION_NOTE = 336;	
-*/	
+UINT32	MORRIS_INSTRUCTION_NOTE = 336;
+*/
 
 UINT32	TEX_MOVIE_ATTACK_CLYDESDALES;
 UINT32	TEX_MOVIE_WILD_EAST;
@@ -243,7 +243,7 @@ void Old_UB_Inventory ()
 	MICRO_UZI_UB = 57;
 	CALICO_950_UB = 66;
 	CALICO_900_UB = 67;
-	
+
 	CLIP_CANNON_BALL = 115;
 	MERC_UMBRELLA = 70;
 	HAND_CANNON = 63;
@@ -272,7 +272,7 @@ void New_UB_Inventory ()
 	MICRO_UZI_UB = 330;
 	CALICO_950_UB = 67;
 	CALICO_900_UB = 68;
-	
+
 	CLIP_CANNON_BALL = 1354;
 	MERC_UMBRELLA = 1361;
 	HAND_CANNON = 1352;
@@ -304,7 +304,7 @@ UINT32  POWERGENFANSOUND_GRIDNO2 = 19749;
 UINT32  STARTFANBACKUPAGAIN_GRIDNO = 10980;
 UINT32  STOPPOWERGENFAN_GRIDNO = 10980;
 //L15-3
-UINT32  SECTOR_LAUNCH_MISSLES_X = 15; 
+UINT32  SECTOR_LAUNCH_MISSLES_X = 15;
 UINT32  SECTOR_LAUNCH_MISSLES_Y = 12;
 UINT32  SECTOR_LAUNCH_MISSLES_Z = 3;
 //J13-0
@@ -336,9 +336,9 @@ void InitGridNoUB()
 	POWERGENFANSOUND_GRIDNO2 = gGameUBOptions.PowergenFanSoundGridNo2; //= 19749;
 	STARTFANBACKUPAGAIN_GRIDNO = gGameUBOptions.StartFanbackupAgainGridNo; //= 10980;
 	STOPPOWERGENFAN_GRIDNO = gGameUBOptions.StopPowergenFanGridNo; //= 10980;
-		
+
 	//L15-3
-	SECTOR_LAUNCH_MISSLES_X = gGameUBOptions.SectorLaunchMisslesX; // 15; 
+	SECTOR_LAUNCH_MISSLES_X = gGameUBOptions.SectorLaunchMisslesX; // 15;
 	SECTOR_LAUNCH_MISSLES_Y = gGameUBOptions.SectorLaunchMisslesY; // 12;
 	SECTOR_LAUNCH_MISSLES_Z = gGameUBOptions.SectorLaunchMisslesZ; //3;
 	//J13-0
@@ -353,7 +353,7 @@ void InitGridNoUB()
 	EXIT_FOR_FAN_TO_POWER_GEN_SECTOR_X = gGameUBOptions.ExitForFanToPowerGenSectorX; //14;
 	EXIT_FOR_FAN_TO_POWER_GEN_SECTOR_Y = gGameUBOptions.ExitForFanToPowerGenSectorY; //10;
 	EXIT_FOR_FAN_TO_POWER_GEN_SECTOR_Z = gGameUBOptions.ExitForFanToPowerGenSectorZ; //1;
-	
+
 	MANUEL_UB = gGameUBOptions.ubMANUEL_UB;
 	BIGGENS_UB = gGameUBOptions.ubBIGGENS_UB;
 	JOHN_K_UB = gGameUBOptions.ubJOHN_K_UB;
@@ -366,7 +366,7 @@ void InitGridNoUB()
 	RAUL_UB = gGameUBOptions.ubRAUL_UB;
 	MORRIS_UB = gGameUBOptions.ubMORRIS_UB;
 	RUDY_UB = gGameUBOptions.ubRUDY_UB;
-	
+
 	TEX_MOVIE_ATTACK_CLYDESDALES  = gGameUBOptions.ubTEX_MOVIE_ATTACK_CLYDESDALES;
 	TEX_MOVIE_WILD_EAST  = gGameUBOptions.ubTEX_MOVIE_WILD_EAST;
 	TEX_MOVIE_HAVE_HONDA  = gGameUBOptions.ubTEX_MOVIE_HAVE_HONDA;
@@ -391,7 +391,7 @@ void InitGridNoUB()
 	CALICO_900_UB  = gGameUBOptions.ubCALICO_900_UB;
 }
 
-	
+
 BOOLEAN	IsSoldierQualifiedMerc( SOLDIERTYPE *pSoldier )
 {
 	if( pSoldier->ubProfile == 	GASTON_UB	||  ///  GASTON
@@ -400,7 +400,7 @@ BOOLEAN	IsSoldierQualifiedMerc( SOLDIERTYPE *pSoldier )
 			pSoldier->ubProfile == JOHN_K_UB || //JOHN_K		||
 			pSoldier->ubProfile == BIGGENS_UB || //BIGGENS	||
 			pSoldier->ubProfile == MANUEL_UB || //MANUEL		||
-			pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER 
+			pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER
 		)
 	{
 		return( TRUE );
@@ -434,7 +434,7 @@ BOOLEAN	IsSoldierQualifiedGunCommenterMerc( SOLDIERTYPE *pSoldier )
 	if( pSoldier->ubProfile == 	GASTON_UB	||  //  GASTON
 			pSoldier->ubProfile == 	STOGIE_UB	|| //   STOGIE
 			pSoldier->ubProfile == 	TEX_UB		||   // TEX
-			pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER 
+			pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER
 		)
 	{
 		return( TRUE );
@@ -450,7 +450,7 @@ BOOLEAN	IsSoldierQualifiedInitialHireMerc( SOLDIERTYPE *pSoldier )
 {
 	if( pSoldier->ubProfile == 	GASTON_UB	|| //  GASTON
 			pSoldier->ubProfile == 	STOGIE_UB	||  // STOGIE
-			pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER 
+			pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER
 		)
 	{
 		return( TRUE );
@@ -479,7 +479,7 @@ INT8 GetNumSoldierIdAndProfileIdOfTheNewMercsOnPlayerTeam( UINT8 *pSoldierIdArra
 
 	//Check to see if Gaston, Stogie or the PGC is on the team
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; cnt++,pSoldier++)
-	{    
+	{
 		//if the merc is alive, in sector, etc...
 		//Note: cant do the OK_CONTROLLABLE_MERC() cause it does bInSector which is not set when EnterSector is finshed ( we need it then )
 		if( pSoldier->bActive	&&
@@ -619,7 +619,7 @@ UINT8 Get3RandomQualifiedMercs( UINT8 *pSoldierId1, UINT8 *pSoldierId2, UINT8 *p
 
 	if( pSoldierId2 != NULL )
 		*pSoldierId2 = NOBODY;
-	
+
 	if( pSoldierId3 != NULL )
 		*pSoldierId3 = NOBODY;
 
@@ -671,8 +671,8 @@ void HandleWhenCertainPercentageOfEnemiesDie()
 		//get out
 		return;
 	}
-	
-	uiPercentEnemiesKilled = (UINT32)( 100 * (UINT32)(gTacticalStatus.ubArmyGuysKilled + 1) / (UINT32)( gTacticalStatus.Team[ ENEMY_TEAM ].bMenInSector + gTacticalStatus.ubArmyGuysKilled ) );	
+
+	uiPercentEnemiesKilled = (UINT32)( 100 * (UINT32)(gTacticalStatus.ubArmyGuysKilled + 1) / (UINT32)( gTacticalStatus.Team[ ENEMY_TEAM ].bMenInSector + gTacticalStatus.ubArmyGuysKilled ) );
 
 	ubSectorID = SECTOR( gWorldSectorX, gWorldSectorY );
 
@@ -758,7 +758,7 @@ void StopPowerGenFan()
 	// Get index for it...
 	GetTileIndexFromTypeSubIndex( FIFTHOSTRUCT, (INT8)( 1 ), &usTileIndex );
 	RemoveStruct( STOPPOWERGENFAN_GRIDNO, usTileIndex );
-	
+
 
 	// Add the new one
 	// Get index for it...
@@ -822,7 +822,7 @@ void StartFanBackUpAgain()
 	// Get index for it...
 	GetTileIndexFromTypeSubIndex( FIFTHOSTRUCT, (INT8)( 7 ), &usTileIndex );
 	RemoveStruct( STARTFANBACKUPAGAIN_GRIDNO, usTileIndex );
-	
+
 
 	// Add the new one
 	// Get index for it...
@@ -877,7 +877,7 @@ void HandlePowerGenAlarm()
 
 		uiLastTime = uiCurTime;
 
-	
+
 		if( uiAlarmCounter == 2 && !IsJa25GeneralFlagSet( JA_GF__BIGGENS_SAID_QUOTE_117 ) )
 		{
 			//
@@ -1032,10 +1032,10 @@ void HandleHowPlayerGotThroughFan()
 			case PGF__STOPPED:
 				gJa25SaveStruct.ubHowPlayerGotThroughFan = PG__PLAYER_STOPPED_FAN_TO_GET_THROUGH;
 				break;
-			
+
 			case PGF__BLOWN_UP:
 				gJa25SaveStruct.ubHowPlayerGotThroughFan = PG__PLAYER_BLEW_UP_FAN_TO_GET_THROUGH;
-			
+
 				//If the player blew up the fan, then the enemies can hear it in the tunnel and prepare for it.
 				gJa25SaveStruct.uiJa25GeneralFlags |= JA_GF__DID_PLAYER_MAKE_SOUND_GOING_THROUGH_TUNNEL_GATE;
 				break;
@@ -1077,7 +1077,7 @@ void HandlePlayingQuoteWhenHiringNpc( UINT8 ubProfile )
 		}
 	else if ( ubProfile == TEX_UB ) //TEX:
 			SayQuoteFromAllNewHiredMercButDoGastonLast( ubProfile, QUOTE_DEATH_RATE_RENEWAL );
- 
+
 
 }
 
@@ -1137,15 +1137,15 @@ BOOLEAN HandleNewGunComment( SOLDIERTYPE *pSoldier, INT32 iItemIndex, BOOLEAN fF
 		//if this is morris's note, handle it
 		HandlePickingUpMorrisInstructionNote( pSoldier, iItemIndex );
 	}
-	
+
 	//if the quote has already been said
 	if( HasNewGunQuoteBeenPlayedForThisGun( iItemIndex ) )
 	{
 		//get out
 		return( TRUE );
 	}
-	
-	//if we are not in tactical or map screen, 
+
+	//if we are not in tactical or map screen,
 	if( guiCurrentScreen != GAME_SCREEN && guiCurrentScreen != MAP_SCREEN )
 	{
 		//only remeber that we have picked up the gun at some point
@@ -1171,7 +1171,7 @@ BOOLEAN HandleNewGunComment( SOLDIERTYPE *pSoldier, INT32 iItemIndex, BOOLEAN fF
 	if( fNewMerc )
 	{
 		//if the item is the hand cannon
-		if( iItemIndex == HAND_CANNON )   //4498  
+		if( iItemIndex == HAND_CANNON )   //4498
 		{
 			//say the new gun quote
 			TacticalCharacterDialogue( pSoldier, QUOTE_PRECEDENT_TO_REPEATING_ONESELF_RENEW );
@@ -1185,7 +1185,7 @@ BOOLEAN HandleNewGunComment( SOLDIERTYPE *pSoldier, INT32 iItemIndex, BOOLEAN fF
 		//rememeber we have played the quote
 		SetNewGunQuoteToBePlayedForThisGun( iItemIndex );
 	}
-	
+
 	return( TRUE );
 }
 
@@ -1238,9 +1238,9 @@ BOOLEAN LoadNewGunQuotesArrayToSaveGameFile( HWFILE hFile )
 	{
 		return( FALSE );
 	}
-	
+
 	InitNewGunArray();
-	
+
 	return( TRUE );
 }
 
@@ -1265,14 +1265,14 @@ BOOLEAN IsThisGunANewJa25Gun( INT32 iItemIndex )
 {
 	//if this gun ISNT a new gun
 	if( !( iItemIndex == BARRETT_UB	||
-			iItemIndex == CALICO_960_UB	|| 
-			iItemIndex == PSG1_UB				|| 
-			iItemIndex == L85_UB					|| 
-			iItemIndex == TAR21_UB				|| 
-			iItemIndex == VAL_SILENT_UB	|| 
-			iItemIndex == MICRO_UZI_UB		|| 
+			iItemIndex == CALICO_960_UB	||
+			iItemIndex == PSG1_UB				||
+			iItemIndex == L85_UB					||
+			iItemIndex == TAR21_UB				||
+			iItemIndex == VAL_SILENT_UB	||
+			iItemIndex == MICRO_UZI_UB		||
 			iItemIndex == HAND_CANNON ||
-			iItemIndex == CALICO_950_UB	|| 
+			iItemIndex == CALICO_950_UB	||
 			iItemIndex == CALICO_900_UB ) )
 	{
 		return( FALSE );
@@ -1401,7 +1401,7 @@ void HandleDeathInPowerGenSector( SOLDIERTYPE *pSoldier )
 		UINT8		ubNumFlagedEnemiesInSector=0;
 		UINT32		sRandomSlotGridNo;
 		UINT8		uiCnt;
-		
+
 		//SOLDIERINITNODE	*pInitListSoldier;
 
 		#define NUM_ENEMIES_SLOTS			4
@@ -1451,18 +1451,18 @@ void HandleDeathInPowerGenSector( SOLDIERTYPE *pSoldier )
 					fFoundValidEnemy = TRUE;
 				}
 
-				//we are done, 
+				//we are done,
 				break;
 			}
 		}
-*/	
+*/
 		// if we found an enemy, or this is the 2nd last enemy in the sector
 		if( fFoundValidEnemy || ubNumFlagedEnemiesInSector <= 2 )
 		{
 			StopPowerGenFan();
 		}
 
-	}	
+	}
 
 }
 
@@ -1518,11 +1518,11 @@ void HandleJa25EnemyExpLevelModifier( )
 
 			//get the difference b/n the 2
 			bDifference = bPlayerExpLevel - bEnemyExpLevel;
-			
+
 			//if the players exp level is less then enemies
 			if( bDifference < 0 )
 			{
-				//if the difference 
+				//if the difference
 				if( bDifference < JA25__MAX_EXP_DECREASE )
 				{
 					bDifference = JA25__MAX_EXP_DECREASE;
@@ -1545,7 +1545,7 @@ void HandleJa25EnemyExpLevelModifier( )
 
 				//get the difference b/n the 2
 				bDifference = bPlayerExpLevel - bEnemyExpLevel;
-				
+
 				//if the players exp level is greater then enemies
 				if( bDifference > 0 )
 				{
@@ -1564,7 +1564,7 @@ void HandleJa25EnemyExpLevelModifier( )
 
 			//get the difference b/n the 2
 			bDifference = bPlayerExpLevel - bEnemyExpLevel;
-			
+
 			//if the players exp level is greater then enemies
 			if( bDifference > 0 )
 			{
@@ -1581,7 +1581,7 @@ void HandleJa25EnemyExpLevelModifier( )
 				}
 			}
 			break;
-		
+
 		default:
 			//Get the 2nd highest player exp level
 			bPlayerExpLevel = JA25SecondHighestExpLevelOnPlayersTeam( );
@@ -1591,11 +1591,11 @@ void HandleJa25EnemyExpLevelModifier( )
 
 			//get the difference b/n the 2
 			bDifference = bPlayerExpLevel - bEnemyExpLevel;
-			
+
 			//if the players exp level is less then enemies
 			if( bDifference < 0 )
 			{
-				//if the difference 
+				//if the difference
 				if( bDifference < JA25__MAX_EXP_DECREASE )
 				{
 					bDifference = JA25__MAX_EXP_DECREASE;
@@ -1603,7 +1603,7 @@ void HandleJa25EnemyExpLevelModifier( )
 
 				//Degrade all the enemies exp levels by difference
 				Ja25ScaleAllEnemiesByValue( bDifference );
-			}			
+			}
 			break;
 	}
 }
@@ -1800,7 +1800,7 @@ INT8 RandomSoldierIdForAnyMercInSector()
 		if( pSoldier->bActive && pSoldier->bInSector && ( pSoldier->stats.bLife >= CONSCIOUSNESS ) &&
 				 !( pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE ) && !AM_A_ROBOT( pSoldier ) )
 		{
-			SoldierIdArray[ ubCount++ ] = cnt;			
+			SoldierIdArray[ ubCount++ ] = cnt;
 		}
 	}
 
@@ -1835,7 +1835,7 @@ void HandleInitialEventsInHeliCrash()
 	//first, loop through all the mercs and injure them
 	cnt = gTacticalStatus.Team[ OUR_TEAM ].bFirstID;
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; cnt++,pSoldier++)
-	{    
+	{
 		//if the merc is alive
 		if( pSoldier->bActive )
 		{
@@ -1854,7 +1854,7 @@ void HandleInitialEventsInHeliCrash()
 
 
 UINT32 GetNumberOfTurnsPowerGenFanWillBeStoppedFor()
-{	
+{
 	return( zDiffSetting[gGameOptions.ubDifficultyLevel].iGetNumberOfTurnsPowerGenFanWillBeStoppedFor );
 }
 
@@ -1876,7 +1876,7 @@ void DisplayCommanderMorrisNote( SOLDIERTYPE *pSoldier )
 	//if it si the first part of the note to be displayed
 	if( gJa25SaveStruct.ubDisplayCommanderMorrisNote == DMN__NOT_TO_DISPLAY_IT )
 	{
-		gJa25SaveStruct.ubDisplayCommanderMorrisNote = DMN__DISPLAY_PART_1; 
+		gJa25SaveStruct.ubDisplayCommanderMorrisNote = DMN__DISPLAY_PART_1;
 
 		swprintf( zString, zNewTacticalMessages[ TCTL_MSG__END_GAME_POPUP_TXT_1 ], pSoldier->GetName() );
 	}
@@ -1884,7 +1884,7 @@ void DisplayCommanderMorrisNote( SOLDIERTYPE *pSoldier )
 	//if it si the second part of the note to be displayed
 	else if( gJa25SaveStruct.ubDisplayCommanderMorrisNote == DMN__DISPLAY_PART_1 )
 	{
-		gJa25SaveStruct.ubDisplayCommanderMorrisNote = DMN__DISPLAY_PART_2; 
+		gJa25SaveStruct.ubDisplayCommanderMorrisNote = DMN__DISPLAY_PART_2;
 
 		swprintf( zString, zNewTacticalMessages[ TCTL_MSG__END_GAME_POPUP_TXT_2 ], pSoldier->GetName(), pSoldier->GetName() );
 	}
@@ -1975,7 +1975,7 @@ void HandlePlayerHittingSwitchToLaunchMissles()
 	//
 	cnt = gTacticalStatus.Team[ OUR_TEAM ].bFirstID;
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; cnt++,pSoldier++)
-	{       
+	{
 		// if the soldier was in the complex
 		if( pSoldier->bActive && pSoldier->stats.bLife >= OKLIFE && pSoldier->bInSector &&
 				pSoldier->sSectorX == SECTOR_LAUNCH_MISSLES_X && pSoldier->sSectorY == SECTOR_LAUNCH_MISSLES_Y && pSoldier->bSectorZ == SECTOR_LAUNCH_MISSLES_Z )
@@ -1995,7 +1995,7 @@ void HandleFadingOutToEndGameCinematics()
 {
 	gFadeOutDoneCallback = DoneFadeOutEndCinematic;
 
-	FadeOutGameScreen( );	
+	FadeOutGameScreen( );
 
 	// UnLock UI!
 	guiPendingOverrideEvent = LU_ENDUILOCK;
@@ -2011,7 +2011,7 @@ void HandleOpenControlPanelToRevealSwitchInMorrisArea()
 		STRUCTURE *		pStructure;
 		INT32			iItemIndex;
 		ITEM_POOL *		pItemPool;
-		
+
 
 		// first, find the switch item and turn off its trap level
 

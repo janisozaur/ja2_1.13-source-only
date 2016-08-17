@@ -10,7 +10,7 @@
 enum
 {
 	L1,		//left 1 -- this is a left straight-away edge
-	R1,		//right 1 
+	R1,		//right 1
 	B1,		//bottom 1
 	T1,		//top 1
 	TTR,	//top top-right corner piece (the top part of the top-right corner)
@@ -41,13 +41,13 @@ enum
 	LE,		//left edge
 	BE,		//bottom edge
 	TE,		//top edge
-	NUM_ROAD_MACROS	
+	NUM_ROAD_MACROS
 };
 
 //The old road system used multi-tiled roads as a single image.	The new road system has taken these large
-//pieces and chopped them up into single tiled images (to mitigate lighting problems).	Some of the larger 
-//road pieces turned into 18 smaller pieces.	So this function will go analyse the world, and replaces any 
-//locations containing the original road tile information, delete it, and replace it by inserting it's 
+//pieces and chopped them up into single tiled images (to mitigate lighting problems).	Some of the larger
+//road pieces turned into 18 smaller pieces.	So this function will go analyse the world, and replaces any
+//locations containing the original road tile information, delete it, and replace it by inserting it's
 //equivalent macro.
 void ReplaceObsoleteRoads();
 

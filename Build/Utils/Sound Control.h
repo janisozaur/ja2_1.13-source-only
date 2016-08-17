@@ -175,8 +175,8 @@ enum SoundDefines
 	S_MORTAR_SHOT,
 	S_GLOCK17,
 	S_GLOCK18,
-	S_BERETTA92,	
-	S_BERETTA93,	
+	S_BERETTA92,
+	S_BERETTA93,
 	S_SWSPECIAL,
 	S_BARRACUDA,
 	S_DESERTEAGLE,
@@ -403,7 +403,7 @@ enum AmbientDefines
 	NUM_AMBIENTS
 };
 
-typedef void (*SOUND_STOP_CALLBACK)( void *pData );	
+typedef void (*SOUND_STOP_CALLBACK)( void *pData );
 
 
 extern UINT8 AmbientVols[NUM_AMBIENTS];
@@ -433,7 +433,7 @@ UINT32	GetSpeechVolume( );
 void	SetSpeechVolume( UINT32 uiNewVolume );
 
 
-//Calculates a volume based on the current Speech Volume level 
+//Calculates a volume based on the current Speech Volume level
 UINT32 CalculateSpeechVolume( UINT32 uiVolume );
 
 

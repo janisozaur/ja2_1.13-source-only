@@ -24,7 +24,7 @@ UINT32 ja2xp::UnpackETRLEImageToBuffer(UINT8 *pBuffer, image_type *pImage, UINT1
 	pCurrent = &((UINT8 *)pImage->pPixData8)[pETRLEObject->uiDataOffset];
 	unsigned int uiImageSize = pETRLEObject->usHeight * pETRLEObject->usWidth;
 
-	unsigned int uiBufferPos = 0; 
+	unsigned int uiBufferPos = 0;
 	unsigned char ubCount;
 	while(uiBufferPos < uiImageSize)
 	{
@@ -68,7 +68,7 @@ UINT32 ja2xp::UnpackETRLEImageToRGBABuffer(UINT8 *pBuffer, image_type *pImage, U
 	pCurrent = &((UINT8 *)pImage->pPixData8)[pETRLEObject->uiDataOffset];
 	unsigned int uiImageSize = pETRLEObject->usHeight * pETRLEObject->usWidth;
 
-	unsigned int uiBufferPos = 0; 
+	unsigned int uiBufferPos = 0;
 	unsigned char ubCount;
 	while(uiBufferPos < (4*uiImageSize))
 	{
@@ -180,7 +180,7 @@ bool ja2xp::CIndexedSTIImage::AddImage(UINT8 *data, UINT32 data_size, UINT32 ima
 	UINT32 compressed_size = 0;
 
 	unsigned int uiBufferPos = 0;
-	
+
 	bool bZeroRun = false;
 	UINT8 uiRunLength = 0;
 	UINT8 *uiRunStartPosition = data;
@@ -294,7 +294,7 @@ bool ja2xp::CIndexedSTIImage::WriteImage(vfs::tWritableFile* pFile)
 		memset(&aod,0,sizeof(AuxObjectData));
 		if((frames+1) % (i+1) == 0)
 		{
-			aod.ubNumberOfFrames = frames; 
+			aod.ubNumberOfFrames = frames;
 			aod.fFlags = AUX_ANIMATED_TILE;
 		}
 		pFile->write((vfs::Byte*)&aod,sizeof(AuxObjectData));
@@ -363,7 +363,7 @@ bool ja2xp::CIndexedSTIImage::WriteToHIMAGE(HIMAGE pImage)
 		if(i % frames == 0)
 		{
 			AuxObjectData &aod = *((AuxObjectData*)(&pImage->pAppData[i*sizeof(AuxObjectData)]));
-			aod.ubNumberOfFrames = frames; 
+			aod.ubNumberOfFrames = frames;
 			aod.fFlags = AUX_ANIMATED_TILE;
 		}
 	}

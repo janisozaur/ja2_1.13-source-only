@@ -1,15 +1,15 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "mercs Account.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
 	#include "Cursors.h"
 	#include "Soldier Profile.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Game Clock.h"
 	#include "Soldier Add.h"
 	#include "Overhead.h"
@@ -206,7 +206,7 @@ INT32 GetNumberOfHiredMercs()
 		// Is the merc hired?
 		if( IsMercOnTeam( (UINT8)usMercID )	|| gMercProfiles[ usMercID ].iMercMercContractLength != 0 )
 		{
-		
+
 			#ifdef JA2UB
 			uiContractCharge = gMercProfiles[ usMercID ].uiWeeklySalary * gMercProfiles[ usMercID ].iMercMercContractLength;
 			#else
@@ -346,13 +346,13 @@ void ExitMercsAccount()
 	DeleteVideoObjectFromIndex(guiAccountNumberGrid);
 
 	UnloadButtonImage( guiMercAuthorizeButtonImage );
-	
+
 	#ifdef JA2UB
 	//not UB
 	#else
 	RemoveButton( guiMercAuthorizeBoxButton );
 	#endif
-	
+
 	RemoveButton( guiMercBackBoxButton );
 
 	DeleteVideoObjectFromIndex(guiMercOrderGrid0);
@@ -512,7 +512,7 @@ void DisplayHiredMercs()
 
 	// Start
 	usMercIDStart = iCurrentAccountPage * MAX_NUMBER_MERCS_ON_PAGE;
-		
+
 	// Loop through all the mercs
 	for(i=0; i < NUMBER_OF_MERCS ; ++i)
 	{
@@ -523,7 +523,7 @@ void DisplayHiredMercs()
 		// WANNE: If we have drunken merc, then skip otherwise is will exist 2 times!
 		if (gConditionsForMercAvailability[ i ].Drunk)
 			continue;
-		
+
 		usMercID = GetMercIDFromMERCArray( i );
 
 		//is the merc on the team, or is owed money
@@ -655,13 +655,13 @@ void SettleMercAccounts()
 	}
 
 	// add the transaction to the finance page
-	
+
 	#ifdef JA2UB
 	AddTransactionToPlayersBook( PAY_SPECK_FOR_MERC, GetMercIDFromMERCArray( gubCurMercIndex ), GetWorldTotalMin(), -iPartialPayment );
 	#else
 	AddTransactionToPlayersBook( PAY_SPECK_FOR_MERC, GetMercIDFromMERCArray( gubCurMercIndex ), GetWorldTotalMin(), -iPartialPayment );
 	#endif
-	
+
 	AddHistoryToPlayersLog( HISTORY_SETTLED_ACCOUNTS_AT_MERC, GetMercIDFromMERCArray( gubCurMercIndex ), GetWorldTotalMin(), -1, -1 );
 
 	//Increment the amount of money paid to speck
@@ -807,7 +807,7 @@ UINT32	CalculateHowMuchPlayerOwesSpeck()
 		// WANNE: If we have drunken merc, then skip otherwise is will exist 2 times!
 		if (gConditionsForMercAvailability[ i ].Drunk)
 			continue;
-		
+
 		// WANNE.LARRY
 		//if it larry Roach burn advance.	( cause larry is in twice, a sober larry and a stoned larry )
 		//if( i == MERC_LARRY_ROACHBURN )

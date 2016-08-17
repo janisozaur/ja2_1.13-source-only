@@ -7,15 +7,15 @@
 #include "DynamicDialogueWidget.h"
 
 #include "WCheck.h"
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include "Font Control.h"
 #include "Utilities.h"
 #include "WordWrap.h"
 
 #include "Soldier Profile.h"
 #include "Cursors.h"
-#include "random.h"
-#include "faces.h"
+#include "Random.h"
+#include "Faces.h"
 
 extern FACETYPE *gpCurrentTalkingFace;
 
@@ -76,9 +76,9 @@ void
 DDBox::Create( UINT16 sX, UINT16 sY )
 {
 	Destroy( );
-	
+
 	Init( sX, sY );
-	
+
 	mfDisplayed = TRUE;
 }
 
@@ -92,7 +92,7 @@ DDBox::Destroy( )
 	DeleteVideoObjectFromIndex( musFaceImage );
 
 	musFaceImage = 0;
-		
+
 	mfInit = FALSE;
 	mfDisplayed = FALSE;
 	mfFaceImageExists = FALSE;
@@ -100,7 +100,7 @@ DDBox::Destroy( )
 	SetRenderFlags( RENDER_FLAG_FULL );
 
 	Refresh( );
-	
+
 	RemoveDDBox( GetID( ) );
 }
 
@@ -299,7 +299,7 @@ BOOLEAN RemoveDDBox( UINT8 aID )
 			MemFree( gDDBoxList[i] );
 
 			gDDBoxList[i] = NULL;
-			
+
 			return TRUE;
 		}
 	}
@@ -447,7 +447,7 @@ IMPDialogueChooseBox::Create( UINT16 sX, UINT16 sY )
 	Destroy( );
 
 	Init( sX, sY );
-	
+
 	sY += IMPDIALOGUECHOOSEBOX_BAR_Y_OFFSET;
 
 	UINT16 size = mEntryVector.size( );

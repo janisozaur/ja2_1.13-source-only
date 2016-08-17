@@ -6,7 +6,7 @@
 
 typedef struct{
 	BOOLEAN fGameInit;	//Used for initializing save variables the first time.
-											//This flag is initialize at 
+											//This flag is initialize at
 	BOOLEAN fKill;			//flagged for deallocation.
 	BOOLEAN fActive;		//currently active
 	UINT16 *pusItemIndex;		//a dynamic array of Item indices
@@ -24,7 +24,7 @@ typedef struct{
 	INT16	sSaveWeaponsScrollIndex, sSaveAmmoScrollIndex, sSaveArmourScrollIndex, sSaveLBEScrollIndex,
 					sSaveExplosivesScrollIndex, sSaveEquipment1ScrollIndex, sSaveEquipment2ScrollIndex,
 					sSaveEquipment3ScrollIndex, sSaveTriggersScrollIndex, sSaveKeysScrollIndex, sSaveRandomItemScrollIndex;
-	INT16	sNumWeapons, sNumAmmo, sNumArmour, sLBEGear, sNumExplosives, sNumEquipment1, sNumEquipment2, sNumEquipment3, 
+	INT16	sNumWeapons, sNumAmmo, sNumArmour, sLBEGear, sNumExplosives, sNumEquipment1, sNumEquipment2, sNumEquipment3,
 					sNumTriggers, sNumKeys, sNumRandomItems;
 }EditorItemsInfo;
 

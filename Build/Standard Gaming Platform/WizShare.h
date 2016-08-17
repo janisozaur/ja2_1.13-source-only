@@ -2,7 +2,7 @@
 //
 // Filename :	WizShare.h
 //
-//	Purpose :	
+//	Purpose :
 //
 // Modification history :
 //
@@ -19,7 +19,7 @@
 //
 //**************************************************************************
 
-#include "types.h"
+#include "Types.h"
 
 //**************************************************************************
 //
@@ -42,8 +42,8 @@ typedef struct WizSharedtag
 {
 	BOOLEAN	fMessage;
 
-	INT32		iMessageIndex;		// index to 1st message 
-	INT32		iNumMessages;		// # messages 
+	INT32		iMessageIndex;		// index to 1st message
+	INT32		iNumMessages;		// # messages
 	INT32		iLastIndex;
 
 	CHAR		cMessages[NUM_MESSAGES][MAX_MSG_LENGTH];

@@ -32,7 +32,7 @@
 #endif
 
 /// Uncomment to use RakMemoryOverride for custom memory tracking
-/// See RakMemoryOverride.h. 
+/// See RakMemoryOverride.h.
 #define _USE_RAK_MEMORY_OVERRIDE
 
 /// If defined, RakNet will automatically try to determine available bandwidth and buffer accordingly (recommended)

@@ -4,14 +4,14 @@
 //
 //	Purpose :	Display System for .flc and .fli Flic Files
 //
-//		This program is derived from the program decribed in the article "The 
-//		Flic File Format" on page 18 of the March 1993 edition of Dr. Dobb's 
-//		Journal. It was restructured from the top down to meet the 
-//		requirements of Sir-Tech. The high level routines were designed to 
-//		provided easy integration with existing applications. Except for a few 
+//		This program is derived from the program decribed in the article "The
+//		Flic File Format" on page 18 of the March 1993 edition of Dr. Dobb's
+//		Journal. It was restructured from the top down to meet the
+//		requirements of Sir-Tech. The high level routines were designed to
+//		provided easy integration with existing applications. Except for a few
 //		identifiers, the low level routines were not modified.
 //
-//		All of the code for these routines in contained in this file and the 
+//		All of the code for these routines in contained in this file and the
 //		file "flic.h".
 //
 // Modification history :
@@ -19,7 +19,7 @@
 //		06-09-94:???						- Creation
 //		???:David Smoth					- ???
 //		???:Bret Rowdon for RIO/GORGE - added 640x480 SVGA support
-//		05-11jun96:HJH						- added routines for bitmap use, and 
+//		05-11jun96:HJH						- added routines for bitmap use, and
 //												other utilities
 //	08-May-97	ARM		Adapted for Win95 Standard Gaming Platform
 //
@@ -34,8 +34,8 @@
 #include <conio.h>
 #include "flic.h"
 #include "windows.h"
-#include "types.h"
-#include "wcheck.h"
+#include "Types.h"
+#include "WCheck.h"
 
 //**************************************************************************
 //
@@ -182,7 +182,7 @@ static void oldscreen_copy_seg(FlicScreen *s, int x, int y, Pixel *pixels, int c
 //
 // Modification history :
 //
-//			01jun96:HJH		-> reversed the screen up and down so that the 
+//			01jun96:HJH		-> reversed the screen up and down so that the
 //									bitmaps wouldn't come out upside down (I put in
 //									the "s->height -")
 //
@@ -585,7 +585,7 @@ typedef void ColorOut(FlicScreen *s, int start, Colour *colors, int count);
 // Parameter List :
 //
 //		Uchar			*data			-> data to decode
-//		Flic			*flic			-> the flic 
+//		Flic			*flic			-> the flic
 //		ColorOut		*output		-> place to put decoded data
 //
 // Return Value :
@@ -1168,7 +1168,7 @@ void set_flic_origin(Flic *flic, int x, int y)
 
 int frame_check(Flic *flic)
 {
-/*	
+/*
 	char key;
 
 	if (Esc())
@@ -1216,7 +1216,7 @@ int frame_check(Flic *flic)
 //
 //		char			*filename	-> filename of flic to start processing
 //		char			*buffer		-> screen buffer to put data into
-//		Flic			*flic			-> the flic 
+//		Flic			*flic			-> the flic
 //		int			usepal		-> flag - should we use the palette? (I think)
 //
 // Return Value :
@@ -1246,7 +1246,7 @@ int FlicStart(char *filename, int width, int height, char *buffer, Flic *flic, c
 //
 // Parameter List :
 //
-//		Flic			*flic			-> the flic 
+//		Flic			*flic			-> the flic
 //
 // Return Value :
 // Modification history :
@@ -1267,7 +1267,7 @@ void FlicStop(Flic *flic)
 // Parameter List :
 //
 //		char			*filename		-> the flic filename
-//		Flic			*flic				-> the flic 
+//		Flic			*flic				-> the flic
 //		int			*piBufferSize	-> this function will fill in how large a
 //												buffer is needed to store a screen of
 //												this flick

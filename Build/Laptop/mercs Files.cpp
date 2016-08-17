@@ -2,9 +2,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "mercs Files.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
@@ -13,12 +13,12 @@
 	#include "stdio.h"
 	#include "Encrypted File.h"
 	#include "AimMembers.h"
-	#include "InterFace Items.h"
+	#include "Interface Items.h"
 	#include "Game Clock.h"
 	#include "Soldier Add.h"
-	#include "OverHead.h"
+	#include "Overhead.h"
 	#include "Game Clock.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Font.h"
 	#include "LaptopSave.h"
 	#include "Text.h"
@@ -27,17 +27,17 @@
 	#include "Quests.h"
 	#include "Assignments.h"
 	#include "Input.h"
-	#include "english.h"
-	#include "finances.h"
+	#include "English.h"
+	#include "Finances.h"
 	#include "GameSettings.h"
 	#include "Personnel.h"
 	#include "Encyclopedia_new.h"	//update encyclopedia item visibility when viewing that item
 #endif
 
 #include "Cheats.h"
-#include "connect.h"
+#include "Connect.h"
 #include "fresh_header.h"
-#include "aim.h"
+#include "Aim.h"
 
 #define		MERCBIOFILE												"BINARYDATA\\MercBios.edt"
 
@@ -386,7 +386,7 @@ BOOLEAN EnterMercsFiles()
 													DEFAULT_MOVE_CALLBACK, BtnMercFilesBackButtonCallback);
 	SetButtonCursor(guiMercBackButton, CURSOR_LAPTOP_SCREEN);
 	SpecifyDisabledButtonStyle( guiMercBackButton, DISABLED_STYLE_SHADED);
-	
+
 	//JMich_MMG: Bio/Inv button
 	if (gubCurMercFilesTogglePage + 1 == NUM_MERC_PAGES)
 	{
@@ -443,7 +443,7 @@ void SelectMercsFaceRegionCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 		else
 		{
 			if( gMercProfiles[ GetAvailableMercIDFromMERCArray( gubCurMercIndex ) ].ubMiscFlags & PROFILE_MISC_FLAG_ALREADY_USED_ITEMS )
-			{	
+			{
 				//bought gear before
 				fMercBuyEquipment = 0;
 				MercProcessHireAfterGear();
@@ -538,7 +538,7 @@ void RenderMercsFiles()
 	// Stats Box
 	GetVideoObject(&hPixHandle, guiStatsBox);
 	BltVideoObject(FRAME_BUFFER, hPixHandle, 0,MERC_FILES_STATS_BOX_X, MERC_FILES_STATS_BOX_Y, VO_BLT_SRCTRANSPARENCY,NULL);
-	
+
 	UINT8 mercID = GetAvailableMercIDFromMERCArray( gubCurMercIndex );
 
 	//JMich_MMG disabling tooltips and inventory buttons
@@ -589,7 +589,7 @@ void RenderMercsFiles()
 	}
 	if (gubCurMercFilesTogglePage + 1 == NUM_MERC_PAGES)
 	{
-		
+
 		SpecifyButtonText(guiBioInvButton, MercInfo[MERC_FILES_BIO]);
 	}
 	else
@@ -725,7 +725,7 @@ void BtnMercHireButtonCallback(GUI_BUTTON *btn,INT32 reason)
 			else
 			{
 				if( gMercProfiles[ GetAvailableMercIDFromMERCArray( gubCurMercIndex ) ].ubMiscFlags & PROFILE_MISC_FLAG_ALREADY_USED_ITEMS )
-				{	
+				{
 					//bought gear before
 					fMercBuyEquipment = 0;
 					MercProcessHireAfterGear();
@@ -904,7 +904,7 @@ void DisplayMercMemberClickOnFaceHelpText( UINT8 ubMercID )
 			INT8 bNumSkillTraits = 0;
 
 			// lets rearrange our skills to a temp array
-			// we also get the number of lines (skills) to be displayed 
+			// we also get the number of lines (skills) to be displayed
 			for ( UINT8 ubCnt = 1; ubCnt < NUM_SKILLTRAITS_NT; ubCnt++ )
 			{
 				if ( ProfileHasSkillTrait( ubMercID, ubCnt ) == 2 )
@@ -934,7 +934,7 @@ void DisplayMercMemberClickOnFaceHelpText( UINT8 ubMercID )
 		}
 		else
 		{
-			INT8 bSkill1 = 0, bSkill2 = 0; 	
+			INT8 bSkill1 = 0, bSkill2 = 0;
 			bSkill1 = gMercProfiles[ ubMercID ].bSkillTraits[0];
 			bSkill2 = gMercProfiles[ ubMercID ].bSkillTraits[1];
 
@@ -983,24 +983,24 @@ void LoadAndDisplayMercBio( UINT8 ubMercID )
 //#else
 	uiStartLoc = MERC_BIO_SIZE * ubMercID;
 //#endif
-		
+
 	LoadEncryptedDataFromFile(MERCBIOFILE, sText, uiStartLoc, MERC_BIO_INFO_TEXT_SIZE);
 
-	if( sText[0] != 0 )	
-		DisplayWrappedString(MERC_BIO_TEXT_X, MERC_BIO_TEXT_Y, MERC_BIO_WIDTH, 2, MERC_BIO_FONT, MERC_BIO_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);	
-	
+	if( sText[0] != 0 )
+		DisplayWrappedString(MERC_BIO_TEXT_X, MERC_BIO_TEXT_Y, MERC_BIO_WIDTH, 2, MERC_BIO_FONT, MERC_BIO_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
+
 	//load and display the merc's additioanl info (if any)
-//#ifdef JA2UB	
+//#ifdef JA2UB
 	//Ja25 UB
 //	if( ubMercID < 17 )
 //		uiStartLoc = MERC_BIO_SIZE * ubMercID + MERC_BIO_INFO_TEXT_SIZE;
 //	else
-//		uiStartLoc = MERC_BIO_SIZE * ( ubMercID - 7 ) + MERC_BIO_INFO_TEXT_SIZE;	
+//		uiStartLoc = MERC_BIO_SIZE * ( ubMercID - 7 ) + MERC_BIO_INFO_TEXT_SIZE;
 //#else
 	uiStartLoc = MERC_BIO_SIZE * ubMercID + MERC_BIO_INFO_TEXT_SIZE;
-//#endif	
+//#endif
 	LoadEncryptedDataFromFile(MERCBIOFILE, sText, uiStartLoc, MERC_BIO_ADD_INFO_TEXT_SIZE);
-	
+
 	if( sText[0] != 0 )
 	{
 		DrawTextToScreen( MercInfo[ MERC_FILES_ADDITIONAL_INFO ], MERC_ADD_BIO_TITLE_X, MERC_ADD_BIO_TITLE_Y, 0, MERC_TITLE_FONT, MERC_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
@@ -1109,7 +1109,7 @@ void DisplayMercsStats( UINT8 ubMercID )
 		//Gear Cost
 		usPosY = usPosY + 145;
 		DrawTextToScreen( MercInfo[MERC_FILES_GEAR], MERC_STATS_SECOND_COL_X, usPosY, 0, MERC_STATS_FONT, MERC_STATIC_STATS_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-		
+
 		if( (gMercProfiles[ ubMercID ].ubMiscFlags & PROFILE_MISC_FLAG_ALREADY_USED_ITEMS ) && (!(gMercProfiles[ ubMercID ].ubMiscFlags2 & PROFILE_MISC_FLAG2_MERC_GEARKIT_UNPAID)))
 			gMercProfiles[ ubMercID ].usOptionalGearCost = 0;
 		swprintf(NsString, L"+ ");
@@ -1241,7 +1241,7 @@ BOOLEAN MercFilesHireMerc(UINT8 ubMercID)
 		{
 			AddTransactionToPlayersBook( HIRED_MERC, ubMercID, GetWorldTotalMin(), Namount );
 		}
-		
+
 		#ifdef JA2UB
 		//add an entry in the finacial page for the hiring of the merc
 		AddTransactionToPlayersBook(PAY_SPECK_FOR_MERC, ubMercID, GetWorldTotalMin(), -(INT32)( gMercProfiles[ubMercID].uiWeeklySalary ) );
@@ -1386,7 +1386,7 @@ void HandleMercsFilesKeyBoardInput( )
 				case 'e':
 					//for no or invalid merc account, do nothing
 					if( ( LaptopSaveInfo.gubPlayersMercAccountStatus != MERC_ACCOUNT_VALID ) && ( LaptopSaveInfo.gubPlayersMercAccountStatus != MERC_ACCOUNT_SUSPENDED ) && ( LaptopSaveInfo.gubPlayersMercAccountStatus != MERC_ACCOUNT_VALID_FIRST_WARNING ) )
-					{					
+					{
 						//do nothing
 					}
 					// hire only if alive
@@ -1409,7 +1409,7 @@ void HandleMercsFilesKeyBoardInput( )
 						{
 							//bought gear before
 							if( gMercProfiles[ GetAvailableMercIDFromMERCArray( gubCurMercIndex ) ].ubMiscFlags & PROFILE_MISC_FLAG_ALREADY_USED_ITEMS )
-							{	
+							{
 								fMercBuyEquipment = 0;
 								MercProcessHireAfterGear();
 							}
@@ -1464,7 +1464,7 @@ void HandleMercsFilesKeyBoardInput( )
 									kit = 4;
 									break;
 							}
-														
+
 							for(UINT8 i=INV_START_POS; i<NUM_INV_SLOTS; ++i)
 							{
 								if(gMercProfileGear[mercId][kit].inv[i] != NONE)
@@ -1477,7 +1477,7 @@ void HandleMercsFilesKeyBoardInput( )
 						}
 					}
 					break;
-				
+
 				default:
 					HandleKeyBoardShortCutsForLapTop( InputEvent.usEvent, InputEvent.usParam, InputEvent.usKeyState );
 				break;
@@ -1619,7 +1619,7 @@ BOOLEAN DisplayMERCMercsInventory(UINT8 ubMercID)
 
 		//tais: disable Weaponbox Mouseregions to stop crashing when changing kit selection and hovering over item
 		//tooltips for weaponbox
-		for(i=0;i<MERC_WEAPONBOX_TOTAL_ITEMS;i++) 
+		for(i=0;i<MERC_WEAPONBOX_TOTAL_ITEMS;i++)
 		{
 			MSYS_DisableRegion(&gMercWeaponboxFasthelpRegion[i]);
 		}
@@ -1641,7 +1641,7 @@ BOOLEAN DisplayMERCMercsInventory(UINT8 ubMercID)
 				/*JMich_MMG: this is the original one, but g_bUsePngItemImages is set to false, so I'm skipping it
 				UINT16 usGraphicNum = g_bUsePngItemImages ? 0 : pItem->ubGraphicNum;*/
 				UINT16 usGraphicNum = pItem->ubGraphicNum;
-				
+
 				if(usGraphicNum < hVObject->usNumberOfObjects)
 				{
 					pTrav = &(hVObject->pETRLEObject[ usGraphicNum ] );
@@ -1659,9 +1659,9 @@ BOOLEAN DisplayMERCMercsInventory(UINT8 ubMercID)
 				sCenY = PosY + ( abs( MERC_WEAPONBOX_SIZE_Y_NSGI - (int)usHeight ) / 2 ) - pTrav->sOffsetY;
 
 				//blt the shadow of the item
-				if(gGameSettings.fOptions[ TOPTION_SHOW_ITEM_SHADOW ]) 
+				if(gGameSettings.fOptions[ TOPTION_SHOW_ITEM_SHADOW ])
 					BltVideoObjectOutlineShadowFromIndex( FRAME_BUFFER, GetInterfaceGraphicForItem( pItem ), usGraphicNum, sCenX-2, sCenY+2);
-				
+
 				//blt the item
 				BltVideoObjectOutlineFromIndex( FRAME_BUFFER, GetInterfaceGraphicForItem( pItem ), usGraphicNum, sCenX, sCenY, 0, FALSE );
 
@@ -1674,20 +1674,20 @@ BOOLEAN DisplayMERCMercsInventory(UINT8 ubMercID)
 
 					DrawTextToScreen( zTempStr, (UINT16)(PosX-1), (UINT16)(PosY+20), MERC_MEMBER_WEAPON_NAME_WIDTH, MERC_M_FONT_DYNAMIC_TEXT, MERC_M_WEAPON_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, RIGHT_JUSTIFIED );
 				}
-				
+
 				GetHelpTextForItemInLaptop( gzItemName, usItem );
 				SetRegionFastHelpText( &(gMercWeaponboxFasthelpRegion[ubItemCount-1]), gzItemName );
 				SetRegionHelpEndCallback( &(gMercWeaponboxFasthelpRegion[ubItemCount-1]), HelpTextDoneCallback );
 				MSYS_EnableRegion( &gMercWeaponboxFasthelpRegion[ubItemCount-1] );
 
 
-				if(ubColumnCount == MERC_WEAPONBOX_COLUMNS) 
+				if(ubColumnCount == MERC_WEAPONBOX_COLUMNS)
 				{
 					PosX = MERC_WEAPONBOX_X_NSGI+3;
 					PosY += MERC_WEAPONBOX_SIZE_Y_NSGI;
 					ubColumnCount = 0;
-				} 
-				else 
+				}
+				else
 				{
 					PosX += MERC_WEAPONBOX_SIZE_X_NSGI;
 				}
@@ -1836,7 +1836,7 @@ void MercWeaponKitSelectionUpdate(UINT8 selectedInventory)
 		}
 
 		//reset Gear Kit Price
-		gMercProfiles[ ubMercID ].usOptionalGearCost = 0;		
+		gMercProfiles[ ubMercID ].usOptionalGearCost = 0;
 
 		//tais: new tag in gearkit that sets an absolute price for gearkit that will override item value and price modifier if it's a sensible value between 0 and 32000
 		if(gMercProfileGear[ubMercID][selectedInventory].AbsolutePrice >= 0 && gMercProfileGear[ubMercID][selectedInventory].AbsolutePrice <= 32000)
@@ -1880,10 +1880,10 @@ void MercHireButtonGearYesNoCallback (UINT8 bExitValue)
 	//yes, buy gear
 	if( bExitValue == MSG_BOX_RETURN_YES )
 		fMercBuyEquipment = 1;
-	//no, no gear 
+	//no, no gear
 	else
 		fMercBuyEquipment = 0;
-	
+
 	MercProcessHireAfterGear();
 }
 
@@ -1892,7 +1892,7 @@ void MercProcessHireAfterGear()
 	//process after gear check
 	guiCurrentLaptopMode = LAPTOP_MODE_MERC;
 	gubArrivedFromMercSubSite = MERC_CAME_FROM_HIRE_PAGE;
-	
+
 	if( MercFilesHireMerc( GetAvailableMercIDFromMERCArray( gubCurMercIndex ) ) )
 	{
 		//start the merc talking

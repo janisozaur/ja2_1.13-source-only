@@ -3,22 +3,22 @@
 #else
 	#include <stdio.h>
 	#include "FileMan.h"
-	#include "debug.h"
-	#include "types.h"
-	#include "worlddef.h"
-	#include "worldman.h"
+	#include "Debug.h"
+	#include "Types.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
 	#include "smooth.h"
 	#include "Exit Grids.h"
 	#include "Editor Undo.h"
 	#include "StrategicMap.h"
 	#include "Strategic Movement.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Font Control.h"
-	#include "pathai.h"
-	#include "overhead.h"
+	#include "PathAI.h"
+	#include "Overhead.h"
 	#include "Animation Control.h"
 	#include "Sys Globals.h"
-	#include "quests.h"
+	#include "Quests.h"
 	#include "SaveLoadMap.h"
 	#include "Text.h"
 #endif
@@ -522,7 +522,7 @@ INT32 FindClosestExitGrid( SOLDIERTYPE *pSoldier, INT32 sSrcGridNo, INT16 ubRadi
 	INT32					leftmost;
 	BOOLEAN	fFound = FALSE;
 	EXITGRID	ExitGrid;
-	
+
 	sTop	= ubRadius;
 	sBottom = -ubRadius;
 	sLeft	= - ubRadius;

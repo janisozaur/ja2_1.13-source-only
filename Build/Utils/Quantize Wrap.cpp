@@ -3,7 +3,7 @@
 #endif
 
 #include <windows.h>
-#include "types.h"
+#include "Types.h"
 #include "himage.h"
 #include "Quantize.h"
 #include "Quantize Wrap.h"

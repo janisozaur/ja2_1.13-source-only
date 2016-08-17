@@ -6,27 +6,27 @@
 	#include "MPScoreScreen.h"
 	#include "GameSettings.h"
 	#include "Utilities.h"
-	#include "wCheck.h"
+	#include "WCheck.h"
 	#include "Font Control.h"
 	#include "WordWrap.h"
 	#include "Render Dirty.h"
 	#include "Input.h"
 	#include "Options Screen.h"
 	#include "English.h"
-	#include "Sysutil.h"
+	#include "SysUtil.h"
 	#include "Fade Screen.h"
 	#include "Cursor Control.h"
 	#include "Music Control.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Intro.h"
 	#include "Text.h"
 	#include "Text Input.h"
 	#include "Soldier Profile.h"
 #endif
 
-#include "gameloop.h"
+#include "GameLoop.h"
 #include "Game Init.h"
-#include "connect.h"
+#include "Connect.h"
 #include "network.h" // for client name
 
 
@@ -333,7 +333,7 @@ void			HandleMPSScreen()
 				gubMPSExitScreen = MAINMENU_SCREEN;
 				gfMPSScreenExit	= TRUE;
 				break;
-			
+
 			/*case MPJ_HOST:
 				gubMPJExitScreen = MP_HOST_SCREEN;
 				gfMPJScreenExit	= TRUE;
@@ -369,7 +369,7 @@ void			HandleMPSScreen()
 		else
 			HideButton( guiMPSContinueButton );
 	}
-	
+
 
 
 	if( gfReRenderMPSScreen )
@@ -432,7 +432,7 @@ BOOLEAN		RenderMPSScreen()
 				// Draw Player Name Column
 				memset(szPlayerName,0,30*sizeof(wchar_t));
 				mbstowcs( szPlayerName,client_names[i],30);
-				
+
 				DisplayWrappedString( MPS_LABEL_PLAYER_X, usPosY, MPS_LABEL_PLAYER_WIDTH, 2, MPS_LABEL_TEXT_FONT, MPS_LABEL_TEXT_COLOR, szPlayerName, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 
 				// Draw Kills Column
@@ -515,7 +515,7 @@ BOOLEAN		RenderMPSScreen()
 			DisplayWrappedString( MPS_BTN_CONTINUE_X, MPS_BTN_CONTINUE_Y, 100, 2, MPS_LABEL_TEXT_FONT, MPS_LABEL_TEXT_COLOR, gzMPSScreenText[MPS_WAITSERVER_TEXT], FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 	}
 
-/*	
+/*
 	// Player name text label
 	DisplayWrappedString( MPJ_LABEL_HANDLE_X, MPJ_LABEL_HANDLE_Y, MPJ_LABEL_HANDLE_WIDTH, 2, MPJ_LABEL_TEXT_FONT, MPJ_LABEL_TEXT_COLOR, gzMPJScreenText[ MPJ_HANDLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 
@@ -547,7 +547,7 @@ void GetMPSScreenUserInput()
 					gubMPSScreenHandler = MPS_CANCEL;
 					break;
 
-				case ENTER:					
+				case ENTER:
 					gubMPSScreenHandler = MPS_CONTINUE;
 					break;
 			}
@@ -560,7 +560,7 @@ void DoneFadeOutForExitMPSScreen( void )
 	// As we bypassed the GIO screen, set up some game options for multiplayer here
 	// <TODO> most things i have left as thier defaults here for testing.
 	is_networked = true;
-	
+
 	ReStartingGame();
 
 	if (is_client)
@@ -582,7 +582,7 @@ void DoneFadeOutForExitMPSScreen( void )
 		gGameOptions.fTurnTimeLimit = TRUE;
 	else
 		gGameOptions.fTurnTimeLimit = FALSE;
-	
+
 	// Bobby Rays - why would we want anything less than the best
 	gGameOptions.ubBobbyRayQuality = BR_AWESOME;
 	gGameOptions.ubBobbyRayQuantity = BR_AWESOME;

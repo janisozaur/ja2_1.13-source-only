@@ -4,7 +4,7 @@
 //
 #include "readdir.h"
 
-TReadDir::TReadDir(char const* searchPattern) 
+TReadDir::TReadDir(char const* searchPattern)
 {
 	fSearchHandle = FindFirstFile(searchPattern, &fFileInfo);
 	fFirstRequest = true;

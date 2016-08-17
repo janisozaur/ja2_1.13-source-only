@@ -2,41 +2,41 @@
 	#include "Tactical All.h"
 #else
 	#include "Vehicles.h"
-	#include "String.h"
+	#include "string.h"
 	#include "Strategic Pathing.h"
 	#include "Assignments.h"
 	#include "Strategic Movement.h"
 	#include "Squads.h"
 	#include "Map Screen Helicopter.h"
 	#include "Game Clock.h"
-	#include "overhead.h"
-	#include "soldier profile.h"
+	#include "Overhead.h"
+	#include "Soldier Profile.h"
 	#include "Sound Control.h"
-	#include "soundman.h"
-	#include "soldier add.h"
-	#include "interface panels.h"
-	#include "strategic.h"
-	#include "worlddef.h"
+	#include "SoundMan.h"
+	#include "Soldier Add.h"
+	#include "Interface Panels.h"
+	#include "Strategic.h"
+	#include "WorldDef.h"
 	#include "Isometric Utils.h"
-	#include "Mapscreen.h"
-	#include "message.h"
-	#include "interface.h"
+	#include "MapScreen.h"
+	#include "Message.h"
+	#include "Interface.h"
 	#include "Random.h"
-	#include "text.h"
-	#include "explosion control.h"
-	#include "soldier create.h"
-	#include "animation control.h"
-	#include "strategicmap.h"
+	#include "Text.h"
+	#include "Explosion Control.h"
+	#include "Soldier Create.h"
+	#include "Animation Control.h"
+	#include "StrategicMap.h"
 	#include "Interface Control.h"
 	#include "Campaign Types.h"
 	#include "Map Screen Interface.h"
 	#include "jascreens.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Quests.h"
 	#include "Tactical Save.h"
-	#include "Soldier macros.h"
-	#include "opplist.h"
-	#include "Soldier ani.h"
+	#include "Soldier Macros.h"
+	#include "Opplist.h"
+	#include "Soldier Ani.h"
 	#include "GameSettings.h"
 	#include "Queen Command.h"
 #endif
@@ -276,7 +276,7 @@ INT32 AddVehicleToList( INT16 sMapX, INT16 sMapY, INT32 sGridNo, UINT8 ubType )
 		ubNumberOfVehicles = 1;
 		iVehicleIdValue		= 0;
 	}
-	
+
 	if( ( iVehicleIdValue == -1 ) && ( iCount != 0 ) && ( fFoundEmpty == FALSE ) )
 	{
 
@@ -343,19 +343,19 @@ INT32 AddVehicleToList( INT16 sMapX, INT16 sMapY, INT32 sGridNo, UINT8 ubType )
 		pGroup->ubTransportationMask = TRUCK;
 	}
 	else
-	{	
+	{
 		// WANNE: This FIXES the bug (== instead of =), that the heli could only fly on roads!!
 		if ( gNewVehicle[ ubType ].iNewMvtTypes == 0 )
 			pGroup->ubTransportationMask = FOOT;
 		else if ( gNewVehicle[ ubType ].iNewMvtTypes == 1 )
-			pGroup->ubTransportationMask = CAR;	
+			pGroup->ubTransportationMask = CAR;
 		else if ( gNewVehicle[ ubType ].iNewMvtTypes == 2 )
-			pGroup->ubTransportationMask = TRUCK;	
+			pGroup->ubTransportationMask = TRUCK;
 		else if ( gNewVehicle[ ubType ].iNewMvtTypes == 3 )
-			pGroup->ubTransportationMask = TRACKED;			
+			pGroup->ubTransportationMask = TRACKED;
 		else if ( gNewVehicle[ ubType ].iNewMvtTypes == 4 )
-			pGroup->ubTransportationMask = AIR;				
-		else 
+			pGroup->ubTransportationMask = AIR;
+		else
 			pGroup->ubTransportationMask = CAR;
 	}
 
@@ -618,7 +618,7 @@ BOOLEAN AddSoldierToVehicle( SOLDIERTYPE *pSoldier, INT32 iId, UINT8 ubSeatIndex
 			{
 				// Flugente 2012-08-15: had very weird behaviour here. The outcommented code below failed, because the group size wasn't 0, which then threw an Assert()-error.
 				// This happened in r5468 when assinging a merc on repair duty to the truck, switching back and forth between the two
-				// I'm fixing it by using RemovePlayerFromGroup(), which seems to be intended just for that. 
+				// I'm fixing it by using RemovePlayerFromGroup(), which seems to be intended just for that.
 				// However, I am at a complete loss as to why this piece of code only throws errors now, seems to me it hasn't changed in ages. Please correct if the error is actually somewhere else
 				RemovePlayerFromGroup( pSoldier->ubGroupID, pSoldier );
 
@@ -1165,7 +1165,7 @@ BOOLEAN IsVehicle(SOLDIERTYPE *pSoldier)
 		return(TRUE);
 	else
 		return(FALSE);
-		
+
 	/*switch(pSoldier->ubProfile)
 	{
 		case PROF_HUMMER:
@@ -1469,7 +1469,7 @@ BOOLEAN HurtPassengersInHelicopter( INT32 iId )
 		{
 			if( PreRandom(100) < gHelicopterSettings.ubHelicopterPassengerHitChance )
 			{
-				if( InjurePersonInVehicle( iId , pVehicleList[ iId ].pPassengers[ iCounter ], 
+				if( InjurePersonInVehicle( iId , pVehicleList[ iId ].pPassengers[ iCounter ],
 					gHelicopterSettings.ubHelicopterPassengerHitMinDamage + PreRandom( gHelicopterSettings.ubHelicopterPassengerHitMaxDamage - gHelicopterSettings.ubHelicopterPassengerHitMinDamage ) ) == FALSE )
 				{
 					return( FALSE );
@@ -1786,7 +1786,7 @@ BOOLEAN ExitVehicle( SOLDIERTYPE *pSoldier )
 	if ( pVehicle->flags.uiStatusFlags & SOLDIER_VEHICLE )
 	{
 		sGridNo = FindGridNoFromSweetSpotWithStructDataFromSoldier( pSoldier, pSoldier->usUIMovementMode, 5, &ubDirection, 3, pVehicle );
-		
+
 		if (TileIsOutOfBounds(sGridNo))
 		{
 			// ATE: BUT we need a place, widen the search
@@ -1815,7 +1815,7 @@ BOOLEAN ExitVehicle( SOLDIERTYPE *pSoldier )
 
 		// Update visiblity.....
 		HandleSight(pSoldier,SIGHT_LOOK | SIGHT_RADIO );
-	
+
 		if( !gGameExternalOptions.fAddPassengerToAnySquad )
 		{
 			// Add to unique squad....
@@ -1854,7 +1854,7 @@ BOOLEAN ExitVehicle( SOLDIERTYPE *pSoldier )
 }
 
 BOOLEAN ChangeVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 ubSeatIndex )
-{	
+{
 	// TEST IF IT'S VALID...
 	if ( pVehicle->flags.uiStatusFlags & SOLDIER_VEHICLE )
 	{
@@ -1906,7 +1906,7 @@ BOOLEAN ChangeVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 u
 			pSoldier->EVENT_SetSoldierDesiredDirection( ( pVehicle->pathing.bDesiredDirection + ubRotation ) % NUM_WORLD_DIRECTIONS );
 
 			UpdateAllVehiclePassengersGridNo( pVehicle );
-			
+
 			return( TRUE );
 		}
 	}
@@ -1915,7 +1915,7 @@ BOOLEAN ChangeVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 u
 }
 
 BOOLEAN SwapVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 ubSeatIndex )
-{	
+{
 	// TEST IF IT'S VALID...
 	if ( pVehicle->flags.uiStatusFlags & SOLDIER_VEHICLE )
 	{
@@ -1938,7 +1938,7 @@ BOOLEAN SwapVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 ubS
 					gNewVehicle[pVehicleList[ pVehicle->bVehicleID ].ubVehicleType].VehicleSeats[ubSeatIndex].ubCompartment )
 				{
 					// different compartment!
-					ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, pVehicleSeatsStrings[1] );		
+					ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, pVehicleSeatsStrings[1] );
 					return( FALSE );
 				}
 
@@ -1974,7 +1974,7 @@ BOOLEAN SwapVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 ubS
 			pSoldier2->EVENT_SetSoldierDesiredDirection( ( pVehicle->pathing.bDesiredDirection + ubRotation ) % NUM_WORLD_DIRECTIONS );
 
 			UpdateAllVehiclePassengersGridNo( pVehicle );
-			
+
 			return( TRUE );
 		}
 		else
@@ -2531,7 +2531,7 @@ BOOLEAN LoadVehicleInformationFromSavedGameFile( HWFILE hFile, UINT32 uiSavedGam
 			// WANNE: This should make savegames before the externalized vehicles compatible.
 			if (pVehicleList[cnt].ubVehicleType != pVehicleList[cnt].ubProfileID)
 				pVehicleList[cnt].ubVehicleType = pVehicleList[cnt].ubProfileID;
-			
+
 		}
 	}
 	return( TRUE );
@@ -2637,7 +2637,7 @@ void UpdateAllVehiclePassengersGridNo( SOLDIERTYPE *pSoldier )
 					dXOffset = -10 * ( bOffsetY + bDiagonalY );
 					dYOffset = -10 * bOffsetX;
 					break;
-				case 7:				
+				case 7:
 					dX = bOffsetY;
 					dY = bOffsetY;
 					if( bOffsetX > 0 )

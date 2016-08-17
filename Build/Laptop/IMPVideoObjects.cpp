@@ -7,7 +7,7 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "Multi Language Graphic Utils.h"
 	#include "IMP Attribute Selection.h"
 #endif

@@ -96,7 +96,7 @@ bool LuaState::EvalString(const char *lua_str, size_t length, const char* id_str
 	{
 		length = strlen(lua_str);
 	}
-	error = luaL_loadbuffer(_L, lua_str, length, id_str) || 
+	error = luaL_loadbuffer(_L, lua_str, length, id_str) ||
 		lua_pcall(_L, 0, 0, 0);
 
 	if (error)

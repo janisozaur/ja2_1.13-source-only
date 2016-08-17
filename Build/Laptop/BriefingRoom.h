@@ -2,7 +2,7 @@
 #define __BRIEFINGROOM_H
 
 #include "Cursors.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 void GameInitBriefingRoom();
 BOOLEAN EnterBriefingRoom();

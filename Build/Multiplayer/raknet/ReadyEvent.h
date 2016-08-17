@@ -128,7 +128,7 @@ public:
 	/// \param[in] addressArray An address to wait for event replies from.  Pass UNASSIGNED_SYSTEM_ADDRESS for all currently connected systems. Until all systems in this list have called SetEvent with this ID and true, and have this system in the list, we won't get ID_READY_EVENT_COMPLETE
 	/// \return True on success, false on unknown eventId (this should be considered an error), or if the completion process has already started.
 	bool AddToWaitList(int eventId, SystemAddress address);
-	
+
 	/// Removes systems from the wait list, which should have been previously added with AddToWaitList
 	/// \note Systems that directly or indirectly disconnect from us are automatically removed from the wait list
 	/// \param[in] address The system to remove from the wait list. Pass UNASSIGNED_SYSTEM_ADDRESS for all currently connected systems.
@@ -140,7 +140,7 @@ public:
 	/// \param[in] The address of the system we are checking up on
 	/// \return True if this system is waiting on this event, false otherwise.
 	bool IsInWaitList(int eventId, SystemAddress address);
-	
+
 	/// Returns the total number of systems we are waiting on for this event.
 	/// Does not include yourself
 	/// \param[in] eventId A user-defined identifier
@@ -152,7 +152,7 @@ public:
 	/// \param[in] index Index into the array, from 0 to GetWaitListSize()
 	/// \return The system address of a system at a particular index, for this event.
 	SystemAddress GetFromWaitListAtIndex(int eventId, unsigned index) const;
-		
+
 	/// For a remote system, find out what their ready status is (waiting, signaled, complete).
 	/// \param[in] eventId A user-defined identifier
 	/// \param[in] address Which system we are checking up on
@@ -191,7 +191,7 @@ protected:
 	virtual PluginReceiveResult OnReceive(RakPeerInterface *peer, Packet *packet);
 	virtual void OnCloseConnection(RakPeerInterface *peer, SystemAddress systemAddress);
 	virtual void OnShutdown(RakPeerInterface *peer);
-	
+
 	void Clear(void);
 	/*
 	bool AnyWaitersCompleted(unsigned eventIndex) const;

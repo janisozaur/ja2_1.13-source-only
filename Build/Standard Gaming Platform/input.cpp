@@ -12,20 +12,20 @@
 #define _WIN32_WINNT 0x500
 
 //**
-	#include "types.h"
+	#include "Types.h"
 	#include <windows.h>
 	#include <stdio.h>
 	#include <memory.h>
-	#include "debug.h"
-	#include "input.h"
-	#include "memman.h"
-	#include "english.h"
+	#include "Debug.h"
+	#include "Input.h"
+	#include "MemMan.h"
+	#include "English.h"
 	#if defined( JA2 ) || defined( UTIL )
-		#include "video.h"
+		#include "Video.h"
 	#else
 		#include "video2.h"
 	#endif
-	#include "local.h"
+	#include "Local.h"
 #endif
 
 
@@ -146,7 +146,7 @@ LRESULT CALLBACK MouseHandler(int Code, WPARAM wParam, LPARAM lParam)
 
 	if (Code < 0) // Do not handle this message, pass it on to another window
 		return CallNextHookEx(ghMouseHook, Code, wParam, lParam);
-	
+
 	p_mhs = (MOUSEHOOKSTRUCTEX*)lParam;
 
 	mpos = ((MOUSEHOOKSTRUCT *)lParam)->pt;
@@ -162,13 +162,13 @@ LRESULT CALLBACK MouseHandler(int Code, WPARAM wParam, LPARAM lParam)
 	case WM_XBUTTONDOWN://** code is working
 		if( p_mhs->mouseData== (XBUTTON1<<16) ) 			//MessageBeep(-1);
 		{
-			gfX1ButtonState = TRUE;			
+			gfX1ButtonState = TRUE;
 			gfSGPInputReceived =	TRUE;
 			QueueEvent(X1_BUTTON_DOWN, 0, uiParam);
 		}
 		if( p_mhs->mouseData== (XBUTTON2<<16) ) 			//MessageBeep(0x00000040L);
 		{
-			gfX2ButtonState = TRUE;			
+			gfX2ButtonState = TRUE;
 			gfSGPInputReceived =	TRUE;
 			QueueEvent(X2_BUTTON_DOWN, 0, uiParam);
 		}
@@ -176,13 +176,13 @@ LRESULT CALLBACK MouseHandler(int Code, WPARAM wParam, LPARAM lParam)
 	case WM_XBUTTONUP://** code is working
 		if( p_mhs->mouseData== (XBUTTON1<<16) )
 		{
-			gfX1ButtonState = FALSE;			
+			gfX1ButtonState = FALSE;
 			gfSGPInputReceived =	TRUE;
 			QueueEvent(X1_BUTTON_UP, 0, uiParam);
 		}
 		if( p_mhs->mouseData== (XBUTTON2<<16) )
 		{
-			gfX2ButtonState = FALSE;			
+			gfX2ButtonState = FALSE;
 			gfSGPInputReceived =	TRUE;
 			QueueEvent(X2_BUTTON_UP, 0, uiParam);
 		}
@@ -204,12 +204,12 @@ LRESULT CALLBACK MouseHandler(int Code, WPARAM wParam, LPARAM lParam)
 		gfSGPInputReceived =	TRUE;
 		QueueEvent(MIDDLE_BUTTON_UP, 0, uiParam);
 		break;
-	case WM_LBUTTONDOWN: 
+	case WM_LBUTTONDOWN:
 		gfLeftButtonState = TRUE;
 		gfSGPInputReceived =	TRUE;
 		QueueEvent(LEFT_BUTTON_DOWN, 0, uiParam);
 		break;
-	case WM_LBUTTONUP: 
+	case WM_LBUTTONUP:
 		gfLeftButtonState = FALSE;
 		gfSGPInputReceived =	TRUE;
 		QueueEvent(LEFT_BUTTON_UP, 0, uiParam);
@@ -295,7 +295,7 @@ void ShutdownInputManager(void)
 	UnRegisterDebugTopic(TOPIC_INPUT, "Input Manager");
 //	UnhookWindowsHookEx(ghKeyboardHook);
 	UnhookWindowsHookEx(ghMouseHook);
-	
+
 	DeleteCriticalSection(&gcsInputQueueLock);
 }
 
@@ -694,7 +694,7 @@ void KeyChange(UINT32 usParam, UINT32 uiParam, UINT8 ufKeyState)
 				ubKey = usParam;
 			}
 			break;
-		default : 
+		default :
 			ubKey = usParam;
 			break;
 		}
@@ -778,7 +778,7 @@ void KeyChange(UINT32 usParam, UINT32 uiParam, UINT8 ufKeyState)
 						ubKey = 248;
 					}
 					else
-					{ 
+					{
 						// Is the NUM_2 key with NUM lock off
 						ubKey = 237;
 					}
@@ -1410,7 +1410,7 @@ void	RedirectToString(UINT16 usInputCharacter)
 			if (CharacterIsValid(usInputCharacter, gpCurrentStringDescriptor->pFilter) == TRUE)
 			{
 				if (gpCurrentStringDescriptor->fInsertMode == TRUE)
-				{ 
+				{
 					// Before we can shift characters for the insert, we must make sure we have the space
 					if (gpCurrentStringDescriptor->usCurrentStringLength < (gpCurrentStringDescriptor->usMaxStringLength - 1))
 					{

@@ -1,24 +1,24 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Skill Trait.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Background.h"
 	#include "IMP Skill Trait.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "_Ja25EnglishText.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Compile Character.h"
 	#include "GameSettings.h"
 	#include "Interface.h"
@@ -122,7 +122,7 @@ void		ResetDisplaySkills();
 void EnterIMPBackground( void )
 {
 	VOBJECT_DESC	VObjectDesc;
-		
+
 	//add the skill trait buttons
 	AddIMPBackgroundButtons();
 
@@ -134,7 +134,7 @@ void EnterIMPBackground( void )
 		Assert( 0 );
 		return;
 	}
-	
+
 	giIMPBackgroundFinishButtonImage =	LoadButtonImage( "LAPTOP\\button_5.sti" ,-1,0,-1,1,-1 );
 	giIMPBackgroundFinishButton = CreateIconAndTextButton( giIMPBackgroundFinishButtonImage, pImpButtonText[ 24 ], FONT12ARIAL,
 																FONT_WHITE, DEFAULT_SHADOW,
@@ -142,7 +142,7 @@ void EnterIMPBackground( void )
 																TEXT_CJUSTIFIED,
 																LAPTOP_SCREEN_UL_X +	( 350 ), LAPTOP_SCREEN_WEB_UL_Y + ( 340 ), BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 																BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnIMPBackgroundFinishCallback );
-	
+
 	SetButtonCursor( giIMPBackgroundFinishButton, CURSOR_WWW);
 
 	//if we are not DONE and are just reviewing
@@ -166,7 +166,7 @@ void EnterIMPBackground( void )
 						(IMP_BACKGROUND_COLUMN_START_X + 218), ( usPosY + 17), MSYS_PRIORITY_HIGH,
 							MSYS_NO_CURSOR, MSYS_NO_CALLBACK, NULL );
 		MSYS_AddRegion( &gMR_BackgroundHelpTextRegions[ubCnt] );
-						
+
 		usPosY += IMP_BACKGROUND__SPACE_BTN_BUTTONS;
 	}
 
@@ -201,7 +201,7 @@ void ExitIMPBackground( void )
 			RemoveButton(giIMPBackgroundAnswerButton[ iCnt ] );
 			UnloadButtonImage(giIMPBackgroundAnswerButtonImage[ iCnt ] );
 		}
-		
+
 		MSYS_RemoveRegion( &gMR_BackgroundHelpTextRegions[iCnt] );
 	}
 
@@ -224,7 +224,7 @@ void HandleIMPBackground( void )
 void AddIMPBackgroundButtons()
 {
 	UINT16 usPosX, usPosY;
-		
+
 	// next button
 	giIMPBackgroundButtonImage[0]=	LoadButtonImage( "LAPTOP\\voicearrows.sti" ,-1,1,-1,3,-1 );
 	giIMPBackgroundButton[0] = CreateIconAndTextButton( giIMPBackgroundButtonImage[0], pImpButtonText[ 13 ], FONT12ARIAL,
@@ -233,7 +233,7 @@ void AddIMPBackgroundButtons()
 														TEXT_CJUSTIFIED,
 														LAPTOP_SCREEN_UL_X +	( 383 ), LAPTOP_SCREEN_WEB_UL_Y + ( 150 ),BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 															BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnIMPBackgroundNextCallback);
-	
+
 	// previous button
 	giIMPBackgroundButtonImage[ 1 ]=	LoadButtonImage( "LAPTOP\\voicearrows.sti" ,-1,0,-1,2,-1 );
 	giIMPBackgroundButton[ 1 ] = CreateIconAndTextButton( giIMPBackgroundButtonImage[ 1 ], pImpButtonText[ 12 ], FONT12ARIAL,
@@ -248,7 +248,7 @@ void AddIMPBackgroundButtons()
 
 	usPosX = IMP_BACKGROUND_COLUMN_START_X;
 	usPosY = IMP_BACKGROUND_COLUMN_START_Y;
-	
+
 	for(UINT16 iCnt = 0; iCnt < IMP_BACKGROUND_DISPLAYED_CHOICES; ++iCnt)
 	{
 		//reset
@@ -258,13 +258,13 @@ void AddIMPBackgroundButtons()
 		if( iCurrentProfileMode != IMP__FINISH )
 		{
 			gfBackgroundQuestions[ iCnt ] = FALSE;
-		}				
+		}
 
 		if( iCnt == 0 )
 			giIMPBackgroundAnswerButtonImage[ iCnt ] =	LoadButtonImage( "LAPTOP\\button_6.sti", -1,0,-1,1,-1 );
 		else
 			giIMPBackgroundAnswerButtonImage[ iCnt ] =	UseLoadedButtonImage( giIMPBackgroundAnswerButtonImage[ 0 ], -1,0,-1,1,-1 );
-		
+
 		giIMPBackgroundAnswerButton[iCnt] = QuickCreateButton( giIMPBackgroundAnswerButtonImage[ iCnt ], usPosX, usPosY,
 									BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 3,
 									MSYS_NO_CALLBACK, (GUI_CALLBACK)BtnIMPBackgroundAnswerCallback);
@@ -325,7 +325,7 @@ void HandleIMPBackgroundAnswers( UINT16 uiSkillPressed )
 
 	//Set the skill
 	gfBackgroundQuestions[ uiSkillPressed ] = TRUE;
-		
+
 	//Play the button sound
 	if( gfBackgroundQuestions[ uiSkillPressed ] )
 	{
@@ -370,7 +370,7 @@ void IMPBackgroundDisplaySkills()
 
 	// Stats
 	GetVideoObject(&hImageHandle, guiIMPBackground_GreyGoldBox );
-	
+
 	usPosX = IMP_BACKGROUND_COLUMN_START_X + IMP_BACKGROUND__TEXT_OFFSET_X;
 	usPosY = IMP_BACKGROUND_COLUMN_START_Y + IMP_BACKGROUND__TEXT_OFFSET_Y;
 
@@ -398,9 +398,9 @@ void IMPBackgroundDisplaySkills()
 			DrawTextToScreen( pImpButtonText[ 26 ], usPosX, usPosY, 0, IMP_BACKGROUND__FONT, IMP_BACKGROUND__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 		else
 			DrawTextToScreen( zBackground[ background ].szShortName, usPosX, usPosY, 0, IMP_BACKGROUND__FONT, IMP_BACKGROUND__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
-		
+
 		AssignBackgroundHelpText( background, &(gMR_BackgroundHelpTextRegions[uiCnt]) );
-		
+
 		usPosX = IMP_BACKGROUND_COLUMN_START_X + IMP_BACKGROUND__TEXT_OFFSET_X;
 		usPosY += IMP_BACKGROUND__SPACE_BTN_BUTTONS;
 
@@ -467,7 +467,7 @@ void AssignBackgroundHelpText( UINT16 ubNumber, MOUSE_REGION* pMouseregion )
 	CHAR16	atStr[  260 ];
 
 	swprintf( apStr, L"" );
-	
+
 	if ( ubNumber )
 	{
 		swprintf(atStr, zBackground[ ubNumber ].szName );
@@ -633,7 +633,7 @@ BOOLEAN IsBackGroundAllowed( UINT16 ubNumber )
 		if ( zBackground[ ubNumber ].value[BG_PERC_CAMO] < 0 )
 			return FALSE;
 	}
-	
+
 	if ( SkillsList[0] == MARTIAL_ARTS_NT || SkillsList[1] == MARTIAL_ARTS_NT || SkillsList[2] == MARTIAL_ARTS_NT )
 	{
 		if ( zBackground[ ubNumber ].value[BG_PERC_DAMAGE_MELEE] < 0 )
@@ -669,7 +669,7 @@ BOOLEAN IsBackGroundAllowed( UINT16 ubNumber )
 		if ( zBackground[ ubNumber ].value[BG_PERC_SPEED_RUNNING] < 0 )
 			return FALSE;
 	}
-		
+
 	if ( SkillsList[0] == DEMOLITIONS_NT || SkillsList[1] == DEMOLITIONS_NT || SkillsList[2] == DEMOLITIONS_NT )
 	{
 		if ( zBackground[ ubNumber ].value[EXPLOSIVE_ASSIGN] < 0 )

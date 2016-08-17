@@ -2,9 +2,9 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead types.h"
-	#include "overhead.h"
-	#include "text.h"
+	#include "Overhead Types.h"
+	#include "Overhead.h"
+	#include "Text.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"

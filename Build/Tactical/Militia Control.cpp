@@ -8,27 +8,27 @@
 	#include "Soldier Init List.h"
 	#include "Campaign Types.h"
 	#include "Overhead.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "PreBattle Interface.h"
 	#include "Map Screen Interface.h"
 	#include "Queen Command.h"
-	#include "strategic.h"
-	#include "popupbox.h"
-	#include "interface control.h"
+	#include "Strategic.h"
+	#include "PopUpBox.h"
+	#include "Interface Control.h"
 	#include "Map Screen Interface Map.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Text.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Interface.h"
 	#include "GameSettings.h"
 	#include "Input.h"
-	#include "opplist.h"
-	#include "los.h"
+	#include "Opplist.h"
+	#include "LOS.h"
 	#include "Items.h"
 	#include "Animation Control.h"
-	#include "points.h"
+	#include "Points.h"
 	#include "Campaign.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Isometric Utils.h"
 	#include "MilitiaSquads.h"
 	#include "MilitiaIndividual.h"	// added by Flugente
@@ -62,7 +62,7 @@ INT16 gsMilitiaControlBoxesX, gsMilitiaControlBoxesY;
 
 
 // assignment menu mouse regions
-MOUSE_REGION    gMilitiaControlMenuRegion[ MAX_MILCON_STRING_COUNT ]; 
+MOUSE_REGION    gMilitiaControlMenuRegion[ MAX_MILCON_STRING_COUNT ];
 //MOUSE_REGION    gTalkToAllMenuRegion[ MAX_TRAIN_STRING_COUNT ];
 
 MOUSE_REGION    gMilitiaControlScreenMaskRegion;
@@ -149,8 +149,8 @@ void ResetMilitia()
 		// I truly hope that we remove such inane control methods from the soldier create code when we break the merc slot barrier
 		// Hacks like this really depress me.
 		UINT32 cs = guiCurrentScreen;
-		// Make sure we aren't on the AUTORESOLVE screen for this.  Even if we are.  We are removing and creating soldiers for 
-		// tactical here, not autoresolve.  In my opinion the CreateSoldierXXX and TacticalRemoveSoldierXXX functions should take 
+		// Make sure we aren't on the AUTORESOLVE screen for this.  Even if we are.  We are removing and creating soldiers for
+		// tactical here, not autoresolve.  In my opinion the CreateSoldierXXX and TacticalRemoveSoldierXXX functions should take
 		// a flag for autoresolve if different initialization or destruction is desired.
 		guiCurrentScreen = GAME_SCREEN;
 
@@ -195,7 +195,7 @@ void RemoveMilitiaFromTactical()
 	while( curr )
 	{
 		if( curr->pBasicPlacement->bTeam == MILITIA_TEAM )
-		{ 
+		{
 			curr->pSoldier = NULL;
 		}
 		curr = curr->next;
@@ -296,7 +296,7 @@ void HandleMilitiaPromotions( void )
 		if ( pTeamSoldier->bActive && pTeamSoldier->bInSector && pTeamSoldier->stats.bLife > 0 )
 		{
 			// Flugente: take care of promotions and individual militia update
-			HandlePossibleMilitiaPromotion( pTeamSoldier, FALSE );	
+			HandlePossibleMilitiaPromotion( pTeamSoldier, FALSE );
 		}
 	}
 
@@ -349,7 +349,7 @@ void MilitiaControlMenuMvtCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 {
 	// mvt callback handler for MilitiaControl region
 	INT32 iValue = -1;
-	
+
 	iValue = MSYS_GetRegionUserData( pRegion, 0 );
 
 	if (iReason & MSYS_CALLBACK_REASON_GAIN_MOUSE )
@@ -411,7 +411,7 @@ void DetermineWhichMilitiaControlMenusCanBeShown( void )
 
 		// destroy mask, if needed
 		CreateDestroyScreenMaskForMilitiaControlMenus( );
-		
+
 		// destroy menu if needed
 		CreateDestroyMouseRegionsForMilitiaControlMenu( );
 		//CreateDestroyMouseRegionsForTalkToAllMenu( );
@@ -428,7 +428,7 @@ void DetermineWhichMilitiaControlMenusCanBeShown( void )
 		//	HideBox( ghTalkToAllBox );
 		//	fTeamPanelDirty = TRUE;
 		//	gfRenderPBInterface = TRUE;
-		//}		
+		//}
 
 		// no menus, leave
 		return;
@@ -441,8 +441,8 @@ void DetermineWhichMilitiaControlMenusCanBeShown( void )
 	CreateDestroyScreenMaskForMilitiaControlMenus( );
 
 	// created assignment menu if needed
-	CreateDestroyMouseRegionsForMilitiaControlMenu( ); 
-	//CreateDestroyMouseRegionsForTalkToAllMenu( ); 
+	CreateDestroyMouseRegionsForMilitiaControlMenu( );
+	//CreateDestroyMouseRegionsForTalkToAllMenu( );
 
 	// Militia Command menu
 	if( fShowMilitiaControlMenu == TRUE )
@@ -457,7 +457,7 @@ void DetermineWhichMilitiaControlMenusCanBeShown( void )
 			HideBox( ghMilitiaControlBox );
 			fTeamPanelDirty = TRUE;
 			fMapPanelDirty = TRUE;
-			gfRenderPBInterface = TRUE;	
+			gfRenderPBInterface = TRUE;
 		}
 	}
 
@@ -474,7 +474,7 @@ void DetermineWhichMilitiaControlMenusCanBeShown( void )
 	//		HideBox( ghTalkToAllBox );
 	//		fTeamPanelDirty = TRUE;
 	//		fMapPanelDirty = TRUE;
-	//		gfRenderPBInterface = TRUE;	
+	//		gfRenderPBInterface = TRUE;
 	//	}
 	//}
 
@@ -516,7 +516,7 @@ void CreateDestroyScreenMaskForMilitiaControlMenus( void )
 void MilitiaControlScreenMaskBtnCallback(MOUSE_REGION * pRegion, INT32 iReason )
 {
 	// btn callback handler for MilitiaControl screen mask region
-	
+
 	if( ( iReason & MSYS_CALLBACK_REASON_LBUTTON_UP ) || ( iReason & MSYS_CALLBACK_REASON_RBUTTON_UP ) )
 	{
 		if( fFirstClickInMilitiaControlScreenMask == TRUE )
@@ -562,7 +562,7 @@ void CreateDestroyMouseRegionsForMilitiaControlMenu( void )
 	//	{
 	//		// dead guy handle menu stuff
 	//		fShowRemoveMenu = fShowMilitiaControlMenu | fShowContractMenu;
-	//		
+	//
 	//		CreateDestroyMouseRegionsForRemoveMenu( );
 
 	//		return;
@@ -571,7 +571,7 @@ void CreateDestroyMouseRegionsForMilitiaControlMenu( void )
 	//	{
 	//		// dead guy handle menu stuff
 	//		fShowRemoveMenu = fShowMilitiaControlMenu | fShowContractMenu;
-	//	
+	//
 	//		CreateDestroyMouseRegionsForRemoveMenu( );
 
 	//		return;
@@ -583,7 +583,7 @@ void CreateDestroyMouseRegionsForMilitiaControlMenu( void )
 	{
 		gfIgnoreScrolling = FALSE;
 
-		if( ( fShowMilitiaControlMenu ) && ( guiCurrentScreen == MAP_SCREEN ) ) 
+		if( ( fShowMilitiaControlMenu ) && ( guiCurrentScreen == MAP_SCREEN ) )
 		{
 		  SetBoxPosition( ghMilitiaControlBox, MilitiaControlPosition );
 		}
@@ -593,7 +593,7 @@ void CreateDestroyMouseRegionsForMilitiaControlMenu( void )
 		//if( pSoldier -> ubWhatKindOfMercAmI != MERC_TYPE__EPC ) //laltodo
 		{
 			// grab height of font
-			iFontHeight = GetLineSpace( ghMilitiaControlBox ) + GetFontHeight( GetBoxFont( ghMilitiaControlBox ) ); 
+			iFontHeight = GetLineSpace( ghMilitiaControlBox ) + GetFontHeight( GetBoxFont( ghMilitiaControlBox ) );
 
 			// get x.y position of box
 			GetBoxPosition( ghMilitiaControlBox, &pPosition);
@@ -610,7 +610,7 @@ void CreateDestroyMouseRegionsForMilitiaControlMenu( void )
 
 			SetCurrentBox( ghMilitiaControlBox );
 		}
-		
+
 
 		// define regions
 		for( iCounter = 0; iCounter < GetNumberOfLinesOfTextInBox( ghMilitiaControlBox ); iCounter++ )
@@ -633,7 +633,7 @@ void CreateDestroyMouseRegionsForMilitiaControlMenu( void )
 	}
 	else if( ( fShowMilitiaControlMenu == FALSE ) && ( fCreated == TRUE ) )
 	{
-		// destroy 
+		// destroy
 		for( iCounter = 0; iCounter < GetNumberOfLinesOfTextInBox( ghMilitiaControlBox ); iCounter++ )
 		{
 			MSYS_RemoveRegion( &gMilitiaControlMenuRegion[ iCounter ] );
@@ -669,7 +669,7 @@ void CreateMilitiaControlBox( void )
 
 	// create basic box
 	CreatePopUpBox(&ghMilitiaControlBox, MilitiaControlDimensions, MilitiaControlPosition, (POPUP_BOX_FLAG_CLIP_TEXT|POPUP_BOX_FLAG_CENTER_TEXT|POPUP_BOX_FLAG_RESIZE ));
- 
+
 	// which buffer will box render to
 	SetBoxBuffer(ghMilitiaControlBox, FRAME_BUFFER);
 
@@ -694,7 +694,7 @@ void CreateMilitiaControlBox( void )
 		swprintf( sString, pMilitiaControlMenuStrings[uiCounter] );
 
 		AddMonoString(&hStringHandle, sString );
-  
+
 		// make sure it is unhighlighted
 		UnHighLightLine(hStringHandle);
 	}
@@ -726,7 +726,7 @@ BOOLEAN CreateDestroyMilitiaControlPopUpBoxes( void )
 {
 	static BOOLEAN fCreated= FALSE;
 	VSURFACE_DESC		vs_desc;
-	VOBJECT_DESC    VObjectDesc; 
+	VOBJECT_DESC    VObjectDesc;
 
 
 	if( ( fShowMilitiaControlMenu == TRUE ) && ( fCreated == FALSE ) )
@@ -759,7 +759,7 @@ BOOLEAN CreateDestroyMilitiaControlPopUpBoxes( void )
 		//ghTalkToAllBox = -1;
 
 		fCreated = FALSE;
-		gfIgnoreScrolling = FALSE;		
+		gfIgnoreScrolling = FALSE;
 	}
 
 	return( TRUE );
@@ -797,10 +797,10 @@ void DetermineMilitiaControlBoxPositions( void )
 	pPoint.iX = gsMilitiaControlBoxesX;
 	pPoint.iY = gsMilitiaControlBoxesY;
 
-	
+
 	SetBoxPosition( ghMilitiaControlBox, pPoint );
 	GetBoxSize( ghMilitiaControlBox, &pDimensions );
-	
+
 
 	// hang it right beside the MilitiaControl/EPC box menu
 	pNewPoint.iX = pPoint.iX + pDimensions.iRight;
@@ -833,7 +833,7 @@ void SetTacticalPopUpMilitiaControlBoxXY( SOLDIERTYPE *pSoldier )
 
 	//get the soldier
 	//pSoldier = GetSelectedAssignSoldier( FALSE ); //gives wrong position (0,0) when cursor moved
-	
+
 	//if ( !GetSoldier( &pSoldier, gusSelectedSoldier )  )
 	//{
 	//	//ScreenMsg( FONT_WHITE, MSG_INTERFACE, L"No Soldier" );
@@ -842,22 +842,22 @@ void SetTacticalPopUpMilitiaControlBoxXY( SOLDIERTYPE *pSoldier )
 
 	// grab soldier's x,y screen position
 	GetSoldierScreenPos( pSoldier, &sX, &sY );
-	
+
 	//ScreenMsg( FONT_WHITE, MSG_INTERFACE, L"X-Position: %d", sX );
 	//ScreenMsg( FONT_WHITE, MSG_INTERFACE, L"Y-Position: %d", sY );
-	
+
 	if( sX < 0 )
 	{
 		sX = 0;
 	}
 
 	gsMilitiaControlBoxesX = sX + 30;
-	
+
 	if( sY < 0 )
 	{
 		sY = 0;
 	}
-	
+
 	gsMilitiaControlBoxesY = sY;
 
 	// ATE: Check if we are past tactical viewport....
@@ -879,7 +879,7 @@ void SetTacticalPopUpMilitiaControlBoxXY( SOLDIERTYPE *pSoldier )
 void CheckAndUpdateTacticalMilitiaControlPopUpPositions( void )
 {
 	SGPRect pDimensions2;
-	SGPPoint pPoint;	
+	SGPPoint pPoint;
 	//SOLDIERTYPE *pSoldier = NULL;
 
 
@@ -902,7 +902,7 @@ void CheckAndUpdateTacticalMilitiaControlPopUpPositions( void )
 	}
 
 	// just the MilitiaControl box
-	if( gsMilitiaControlBoxesX + pDimensions2.iRight  >= SCREEN_WIDTH ) 
+	if( gsMilitiaControlBoxesX + pDimensions2.iRight  >= SCREEN_WIDTH )
 	{
 		gsMilitiaControlBoxesX = ( INT16 ) ( SCREEN_WIDTH - 1 - ( pDimensions2.iRight  ) );
 		SetRenderFlags( RENDER_FLAG_FULL );
@@ -965,8 +965,8 @@ void PositionCursorForMilitiaControlBox( void )
 	// get dimensions..mostly for width
 	GetBoxSize( ghMilitiaControlBox, &pDimensions );
 
-	iFontHeight = GetLineSpace( ghMilitiaControlBox ) + GetFontHeight( GetBoxFont( ghMilitiaControlBox ) ); 
-	
+	iFontHeight = GetLineSpace( ghMilitiaControlBox ) + GetFontHeight( GetBoxFont( ghMilitiaControlBox ) );
+
 	if( gGameSettings.fOptions[ TOPTION_DONT_MOVE_MOUSE ] == FALSE )
 	{
 		SimulateMouseMovement( pPosition.iX + pDimensions.iRight - 6, pPosition.iY + ( iFontHeight / 2 ) + 2 );
@@ -996,7 +996,7 @@ void HandleShadingOfLinesForMilitiaControlMenu( void )
 			UnShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_COMETOME );
 			UnShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_GETDOWN );
 			UnShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_CROUCH );
-			UnShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_TAKE_COVER );		
+			UnShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_TAKE_COVER );
 		}
 		else
 		{
@@ -1034,7 +1034,7 @@ void HandleShadingOfLinesForMilitiaControlMenu( void )
 		ShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_ALL_TAKE_COVER );
 		//ShadeStringInBox( ghMilitiaControlBox, MILCON_MENU_ALL_TAKE_ITEMS );
 	}
-	
+
 	return;
 }
 
@@ -1046,7 +1046,7 @@ BOOLEAN CheckIfRadioIsEquipped( void )
 
 	// do we have a radio ?
 	//pSoldier = GetSelectedAssignSoldier( FALSE ); //do not use
-	
+
 	if ( GetSoldier( &pSoldier, gusSelectedSoldier )  )
 	{
 		// Flugente: active radio sets also count as radio
@@ -1062,7 +1062,7 @@ BOOLEAN CheckIfRadioIsEquipped( void )
 	{
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -1070,7 +1070,7 @@ BOOLEAN CheckIfRadioIsEquipped( void )
 
 //INT16	sFacingDir, sXPos, sYPos, sAPCost;
 
-//ConvertGridNoToXY( pTMilitiaSoldier->sGridNo, &sXPos, &sYPos );				
+//ConvertGridNoToXY( pTMilitiaSoldier->sGridNo, &sXPos, &sYPos );
 //sFacingDir = GetDirectionFromXY( sXPos, sYPos, pTMilitiaSoldier );
 //SendSoldierSetDesiredDirectionEvent( pTMilitiaSoldier, sFacingDir );
 //SendSoldierSetDesiredDirectionEvent( pTMilitiaSoldier, gOppositeDirection[ sFacingDir ] );
@@ -1243,8 +1243,8 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 		{
 			switch( iValue )
 			{
-				case( MILCON_MENU_ATTACK ):					
-					{					
+				case( MILCON_MENU_ATTACK ):
+					{
 						if ( (pTMilitiaSoldier->bActive) && (pTMilitiaSoldier->bInSector) && (pTMilitiaSoldier->stats.bLife >= OKLIFE) )
 						{
 							// Attack !!!
@@ -1275,8 +1275,8 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						fMapScreenBottomDirty = TRUE;
 					}
 					break;
-				
-				case( MILCON_MENU_HOLD ):						
+
+				case( MILCON_MENU_HOLD ):
 					{
 						if ( (pTMilitiaSoldier->bActive) && (pTMilitiaSoldier->bInSector) && (pTMilitiaSoldier->stats.bLife >= OKLIFE) )
 						{
@@ -1293,7 +1293,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						}
 
 						// stop showing menu
-						fShowMilitiaControlMenu = FALSE;						
+						fShowMilitiaControlMenu = FALSE;
 						giAssignHighLine = -1;
 
 						// set dirty flag
@@ -1301,7 +1301,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						fMapScreenBottomDirty = TRUE;
 					}
 					break;
-				
+
 				case( MILCON_MENU_RETREAT ):
 					{
 						if ( (pTMilitiaSoldier->bActive) && (pTMilitiaSoldier->bInSector) && (pTMilitiaSoldier->stats.bLife >= OKLIFE) )
@@ -1316,7 +1316,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 							sActionGridNo =  FindSpotMaxDistFromOpponents( pTMilitiaSoldier );
 
 							pTMilitiaSoldier->aiData.usNextActionData = sActionGridNo;
-							
+
 							if (!TileIsOutOfBounds(pTMilitiaSoldier->aiData.usNextActionData))
 							{
 								pTMilitiaSoldier->aiData.bNextAction = AI_ACTION_RUN_AWAY;
@@ -1332,7 +1332,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 								SendGetNewSoldierPathEvent( pTMilitiaSoldier, sActionGridNo, pTMilitiaSoldier->usUIMovementMode );
 							}
 						}
-						
+
 						if ( GetSoldier( &pSoldier, gusSelectedSoldier )  )
 						{
 							DeductPoints( pSoldier, APBPConstants[AP_TALK], 0 );
@@ -1350,7 +1350,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					break;
 
 				case( MILCON_MENU_COMETOME ):
-					{	
+					{
 						if ( (pTMilitiaSoldier->bActive) && (pTMilitiaSoldier->bInSector) && (pTMilitiaSoldier->stats.bLife >= OKLIFE) )
 						{
 							INT32 sActionGridNo, sGridNo, sAdjustedGridNo;
@@ -1389,7 +1389,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						}
 
 						// stop showing menu
-						fShowMilitiaControlMenu = FALSE;						
+						fShowMilitiaControlMenu = FALSE;
 						giAssignHighLine = -1;
 
 						// set dirty flag
@@ -1448,14 +1448,14 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 
 
 				case( MILCON_MENU_TAKE_COVER ):
-					{	
+					{
 						if ( (pTMilitiaSoldier->bActive) && (pTMilitiaSoldier->bInSector) && (pTMilitiaSoldier->stats.bLife >= OKLIFE) )
 						{
 							INT16 sActionGridNo;
-							INT32 iDummy;						
+							INT32 iDummy;
 
 							sActionGridNo =  FindBestNearbyCover(pTMilitiaSoldier,pTMilitiaSoldier->aiData.bAIMorale,&iDummy);
-							
+
 							if (!TileIsOutOfBounds(sActionGridNo))
 							{
 								// SEND PENDING ACTION
@@ -1492,7 +1492,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					{
 						UINT8 cnt;
 						SOLDIERTYPE *pTeamSoldier;
-						
+
 						cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1523,9 +1523,9 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 
 				case( MILCON_MENU_ALL_HOLD ):
 					{
-						UINT8 cnt;						
+						UINT8 cnt;
 						SOLDIERTYPE *pTeamSoldier;
-						
+
 						cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1558,7 +1558,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						UINT8 cnt;
 						INT16 sActionGridNo;
 						SOLDIERTYPE *pTeamSoldier;
-						
+
 						cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1575,7 +1575,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 								//if ( !TileIsOutOfBounds(pTeamSoldier->usNextActionData) )
 								//{
 								//	pTeamSoldier->bNextAction = AI_ACTION_RUN_AWAY;
-								//	pTeamSoldier->usActionData = ANIM_STAND;									
+								//	pTeamSoldier->usActionData = ANIM_STAND;
 								//}
 
 								// set up next action to run away
@@ -1586,7 +1586,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 								if ( !TileIsOutOfBounds(pTeamSoldier->aiData.usNextActionData) )
 								{
 									pTeamSoldier->aiData.bNextAction = AI_ACTION_RUN_AWAY;
-									pTeamSoldier->aiData.usActionData = ANIM_STAND;									
+									pTeamSoldier->aiData.usActionData = ANIM_STAND;
 
 									// SEND PENDING ACTION
 									pTeamSoldier->aiData.sPendingActionData2  = sActionGridNo;
@@ -1615,13 +1615,13 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						fMapScreenBottomDirty = TRUE;
 					}
 					break;
-				
+
 				case( MILCON_MENU_ALL_COMETOME ):
 					{
 						UINT8 cnt, ubDirection;
 						INT32 sActionGridNo, sGridNo, sAdjustedGridNo;
 						SOLDIERTYPE *pTeamSoldier;
-						
+
 						cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1669,7 +1669,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						fMapScreenBottomDirty = TRUE;
 					}
 					break;
-				
+
 
 				case( MILCON_MENU_ALL_SPREAD ):
 					{
@@ -1727,7 +1727,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					{
 						UINT8 cnt;
 						SOLDIERTYPE *pTeamSoldier;
-						
+
 						cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1762,7 +1762,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					{
 						UINT8 cnt;
 						SOLDIERTYPE *pTeamSoldier;
-						
+
 						cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; ++cnt, ++pTeamSoldier)
@@ -1794,7 +1794,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						//UINT8 cnt;
 						//SOLDIERTYPE *pTeamSoldier;
 						//INT32 iDummy;
-						
+
 						//cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 						//for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1802,13 +1802,13 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 						//	if ( pTeamSoldier->bActive && pTeamSoldier->bInSector && pTeamSoldier->stats.bLife > 0 )
 						//	{
 						//		pTeamSoldier->usActionData = FindBestNearbyCover(pTeamSoldier,pTeamSoldier->bAIMorale,&iDummy);
-						//								
+						//
 						//		pTeamSoldier->usNextActionData = FindBestNearbyCover(pTeamSoldier,pTeamSoldier->bAIMorale,&iDummy);
-						//		
+						//
 						//		//if ( !TileIsOutOfBounds(pTeamSoldier->usNextActionData) )
 						//		{
 						//			pTeamSoldier->bNextAction = AI_ACTION_TAKE_COVER;
-						//			pTeamSoldier->usActionData = ANIM_STAND;									
+						//			pTeamSoldier->usActionData = ANIM_STAND;
 						//		}
 						//	}
 						//}
@@ -1827,7 +1827,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 							{
 								// See if we can get there
 								sActionGridNo =  FindBestNearbyCover(pTeamSoldier,pTeamSoldier->aiData.bAIMorale,&iDummy);
-																
+
 								if (!TileIsOutOfBounds(sActionGridNo))
 								{
 									// SEND PENDING ACTION
@@ -1868,7 +1868,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					//{
 					//	UINT8 cnt;
 					//	SOLDIERTYPE *pTeamSoldier;
-					//	
+					//
 					//	cnt = gTacticalStatus.Team[ MILITIA_TEAM ].bFirstID;
 
 					//	for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ MILITIA_TEAM ].bLastID; cnt++, pTeamSoldier++)
@@ -1888,7 +1888,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					//				//if ( !TileIsOutOfBounds(pTeamSoldier->usNextActionData) )
 					//				{
 					//					pTeamSoldier->bNextAction = AI_ACTION_PICKUP_ITEM;
-					//					//pTeamSoldier->usActionData = ANIM_STAND;									
+					//					//pTeamSoldier->usActionData = ANIM_STAND;
 					//				}
 
 					//				if (pTeamSoldier->bAction == AI_ACTION_PICKUP_ITEM)
@@ -1904,7 +1904,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					//			}
 					//		}
 					//	}
-					
+
 					//if ( GetSoldier( &pSoldier, gusSelectedSoldier )  )
 					//{
 					//	DeductPoints( pSoldier, APBPConstants[AP_TALK], 0 );
@@ -1939,7 +1939,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 					break;
 			}
 		}
-		
+
 		gfRenderPBInterface = TRUE;
 	}
 	else if( iReason & MSYS_CALLBACK_REASON_RBUTTON_UP )
@@ -2031,7 +2031,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 // for(uiCounter=0; uiCounter < MAX_TTALL_STRING_COUNT; uiCounter++)
 // {
 //  AddMonoString(&hStringHandle, pTalkToAllMenuStrings[uiCounter]);
-//  
+//
 //	// make sure it is unhighlighted
 //	UnHighLightLine(hStringHandle);
 // }
@@ -2081,13 +2081,13 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //		{
 //		  SetBoxPosition( ghTalkToAllBox, TalkToAllPosition );
 //		}
-//	
+//
 //		HandleShadingOfLinesForTalkToAllMenu( );
 //
 //		CheckAndUpdateTacticalMilitiaControlPopUpPositions( );
 //
 //		// grab height of font
-//		iFontHeight = GetLineSpace( ghTalkToAllBox ) + GetFontHeight( GetBoxFont( ghTalkToAllBox ) ); 
+//		iFontHeight = GetLineSpace( ghTalkToAllBox ) + GetFontHeight( GetBoxFont( ghTalkToAllBox ) );
 //
 //		// get x.y position of box
 //		GetBoxPosition( ghTalkToAllBox, &pPosition);
@@ -2109,7 +2109,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //		for( iCounter = 0; iCounter < GetNumberOfLinesOfTextInBox( ghTalkToAllBox ); iCounter++ )
 //		{
 //			// add mouse region for each line of text..and set user data
-//		
+//
 //
 //			MSYS_DefineRegion( &gTalkToAllMenuRegion[ iCounter ], 	( INT16 )( iBoxXPosition ), ( INT16 )( iBoxYPosition + GetTopMarginSize( ghTalkToAllBox ) + ( iFontHeight ) * iCounter ), ( INT16 )( iBoxXPosition + iBoxWidth ), ( INT16 )( iBoxYPosition + GetTopMarginSize( ghTalkToAllBox ) + ( iFontHeight ) * ( iCounter + 1 ) ), MSYS_PRIORITY_HIGHEST - 3 ,
 //							 MSYS_NO_CURSOR, TalkToAllMenuMvtCallBack, TalkToAllMenuBtnCallback );
@@ -2127,7 +2127,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //	}
 //	else if( ( ( fShowMilitiaControlMenu == FALSE ) || ( fShowTalkToAllMenu == FALSE ) ) && ( fCreated == TRUE ) )
 //	{
-//		// destroy 
+//		// destroy
 //		for( iCounter = 0; iCounter < GetNumberOfLinesOfTextInBox( ghTalkToAllBox ); iCounter++ )
 //		{
 //			MSYS_RemoveRegion( &gTalkToAllMenuRegion[ iCounter ] );
@@ -2147,7 +2147,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //		fMapScreenBottomDirty = TRUE;
 //		HideBox( ghTalkToAllBox );
 //		SetRenderFlags( RENDER_FLAG_FULL );
-//		
+//
 //		// not created
 //		fCreated = FALSE;
 //
@@ -2163,7 +2163,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //{
 //	// mvt callback handler for assignment region
 //	INT32 iValue = -1;
-//	
+//
 //	iValue = MSYS_GetRegionUserData( pRegion, 0 );
 //
 //	//if( HandleAssignmentExpansionAndHighLightForTalkToAllMenu( ) == TRUE )
@@ -2212,7 +2212,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //		switch( iValue )
 //		{
 //			case( TTALL_MENU_ATTACK ):
-//			{					
+//			{
 //				// Attack !!!
 //				ScreenMsg( FONT_WHITE, MSG_INTERFACE, L"Attack" );
 //
@@ -2226,11 +2226,11 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //			}
 //			break;
 //
-//			case( TTALL_MENU_HOLD ):						
+//			case( TTALL_MENU_HOLD ):
 //			{
 //				//Hold Position !!!
 //				ScreenMsg( FONT_WHITE, MSG_INTERFACE, L"Hold Position" );
-//				
+//
 //				pTMilitiaSoldier->bOrders = STATIONARY;
 //				//pTMilitiaSoldier->bAttitude = DEFENSIVE;
 //
@@ -2245,7 +2245,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //			{
 //				// Retreat !!!
 //				ScreenMsg( FONT_WHITE, MSG_INTERFACE, L"Retreat" );
-//				
+//
 //				pTMilitiaSoldier->bOrders = FARPATROL;
 //				//pTMilitiaSoldier->bAttitude = DEFENSIVE;
 //
@@ -2287,7 +2287,7 @@ void MilitiaControlMenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 //							// OK, find an adjacent gridno....
 //							sGridNo = pSoldier->sGridNo;
 //
-//							// See if we can get there to punch	
+//							// See if we can get there to punch
 //							sActionGridNo =  FindAdjacentGridEx( pSoldier, sGridNo, &ubDirection, &sAdjustedGridNo, TRUE, FALSE );
 //							if ( sActionGridNo != -1 )
 //							{

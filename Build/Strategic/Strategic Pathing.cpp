@@ -3,13 +3,13 @@
 #else
 	#include <stdio.h>
 	#include <time.h>
-	#include "types.h"
-	#include "worlddef.h"
+	#include "Types.h"
+	#include "WorldDef.h"
 	#include "sgp.h"
-	#include "strategic.h"
-	#include "mapscreen.h"
-	#include "overhead.h"
-	#include "strategicmap.h"
+	#include "Strategic.h"
+	#include "MapScreen.h"
+	#include "Overhead.h"
+	#include "StrategicMap.h"
 	#include "Strategic Pathing.h"
 	#include "Map Screen Interface Border.h"
 	#include "Game Clock.h"
@@ -19,8 +19,8 @@
 	#include "Squads.h"
 	#include "Vehicles.h"
 	#include "Map Screen Helicopter.h"
-	#include "input.h"
-	#include "english.h"
+	#include "Input.h"
+	#include "English.h"
 	#include "Map Screen Interface.h"
 	#include "Game Event Hook.h"
 	#include "Strategic AI.h"
@@ -552,7 +552,7 @@ PathStPtr BuildAStrategicPath(PathStPtr pPath , INT16 iStartSectorNum, INT16 iEn
 				pNode->pNext=NULL;
 				MemFree(pDeleteNode);
 			}
-	 
+
 			return NULL;
 		}
 

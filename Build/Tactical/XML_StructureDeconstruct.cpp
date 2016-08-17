@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Handle Items.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -48,7 +48,7 @@ structuredeconstructStartElementHandle(void *userData, const XML_Char *name, con
 				strcmp( name, "szTileSetDisplayName" ) == 0 ||
 				strcmp( name, "szTileSetName") == 0 ||
 				strcmp( name, "dCreationCost" ) == 0 ||
-				strcmp( name, "allowedtile") == 0 )) 
+				strcmp( name, "allowedtile") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 
@@ -144,7 +144,7 @@ structuredeconstructEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			statictilevector.push_back( (UINT8) atol(pData->szCharData) );
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 
@@ -182,17 +182,17 @@ BOOLEAN ReadInStructureDeconstructStats(STR fileName)
 	lpcBuffer[uiFSize] = 0; //add a null terminator
 
 	FileClose( hFile );
-	
+
 	XML_SetElementHandler(parser, structuredeconstructStartElementHandle, structuredeconstructEndElementHandle);
 	XML_SetCharacterDataHandler(parser, structuredeconstructCharacterDataHandle);
-	
+
 	memset(&pData,0,sizeof(pData));
 	pData.curArray = gStructureDeconstruct;
 	pData.curIndex = 0;
 	pData.maxArraySize = STRUCTURE_DECONSTRUCT_MAX;
 
 	XML_SetUserData(parser, &pData);
-	
+
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
 	{
 		CHAR8 errorBuf[511];
@@ -205,9 +205,9 @@ BOOLEAN ReadInStructureDeconstructStats(STR fileName)
 	}
 
 	MemFree(lpcBuffer);
-	
+
 	XML_ParserFree(parser);
-	
+
 	return( TRUE );
 }
 

@@ -7,9 +7,9 @@
 #ifndef __BUTTON_SYSTEM_H
 #define __BUTTON_SYSTEM_H
 
-#include "vobject.h" 
+#include "VObject.h"
 #include "mousesystem.h"
-#include "soundman.h"
+#include "SoundMan.h"
 #include "Button Sound Control.h"
 
 
@@ -86,12 +86,12 @@
 
 
 // Internal use!
-#define	GUI_SND_CLK_ON									BUTTON_SOUND_CLICKED_ON						
-#define	GUI_SND_CLK_OFF									BUTTON_SOUND_CLICKED_OFF					
-#define	GUI_SND_MOV_ON									BUTTON_SOUND_MOVED_ONTO						
-#define	GUI_SND_MOV_OFF									BUTTON_SOUND_MOVED_OFF_OF					
-#define	GUI_SND_DCLK										BUTTON_SOUND_DISABLED_CLICK				
-#define	GUI_SND_DMOV										BUTTON_SOUND_DISABLED_MOVED_ONTO	
+#define	GUI_SND_CLK_ON									BUTTON_SOUND_CLICKED_ON
+#define	GUI_SND_CLK_OFF									BUTTON_SOUND_CLICKED_OFF
+#define	GUI_SND_MOV_ON									BUTTON_SOUND_MOVED_ONTO
+#define	GUI_SND_MOV_OFF									BUTTON_SOUND_MOVED_OFF_OF
+#define	GUI_SND_DCLK										BUTTON_SOUND_DISABLED_CLICK
+#define	GUI_SND_DMOV										BUTTON_SOUND_DISABLED_MOVED_ONTO
 
 extern UINT32 ButtonDestBuffer;
 
@@ -117,10 +117,10 @@ typedef struct _GUI_BUTTON {
 	INT8					bDisabledStyle;
 	//For buttons with text
 	CHAR16				*string;					//the string
-	UINT16				usFont;						//font for text 
+	UINT16				usFont;						//font for text
 	BOOLEAN				fMultiColor;			//font is a multi-color font
 	INT16					sForeColor;				//text colors if there is text
-	INT16					sShadowColor;			
+	INT16					sShadowColor;
 	INT16					sForeColorDown;		//text colors when button is down (optional)
 	INT16					sShadowColorDown;
 	INT16					sForeColorHilited;		//text colors when button is down (optional)
@@ -133,7 +133,7 @@ typedef struct _GUI_BUTTON {
 	BOOLEAN				fShiftText;
 	INT16					sWrappedWidth;
 	//For buttons with icons (don't confuse this with quickbuttons which have up to 5 states )
-	INT32					iIconID;							
+	INT32					iIconID;
 	INT16					usIconIndex;
 	INT8					bIconXOffset; //-1 means horizontally centered
 	INT8					bIconYOffset; //-1 means vertically centered
@@ -239,7 +239,7 @@ extern BOOLEAN gfRenderHilights;
 //Providing you have allocated your own image, this is a somewhat simplified function.
 INT32 QuickCreateButton(UINT32 Image, INT16 xloc, INT16 yloc, INT32 Type,INT16 Priority,GUI_CALLBACK MoveCallback,GUI_CALLBACK ClickCallback);
 
-//A hybrid of QuickCreateButton.  Takes a lot less parameters, but makes more assumptions.  It self manages the 
+//A hybrid of QuickCreateButton.  Takes a lot less parameters, but makes more assumptions.  It self manages the
 //loading, and deleting of the image.  The size of the image determines the size of the button.  It also uses
 //the default move callback which emulates Win95.  Finally, it sets the priority to normal.  The function you
 //choose also determines the type of button (toggle, notoggle, or newtoggle)
@@ -260,10 +260,10 @@ INT32 CreateIconButton(INT16 Icon,INT16 IconIndex,INT16 GenImg,INT16 xloc,INT16 
 INT32 CreateHotSpot(INT16 xloc, INT16 yloc, INT16 Width, INT16 Height,INT16 Priority,GUI_CALLBACK MoveCallback,GUI_CALLBACK ClickCallback);
 
 INT32 CreateTextButton(STR16 string, UINT32 uiFont, INT16 sForeColor, INT16 sShadowColor, INT16 GenImg, INT16 xloc, INT16 yloc, INT16 w, INT16 h, INT32 Type, INT16 Priority,GUI_CALLBACK MoveCallback, GUI_CALLBACK ClickCallback);
-INT32 CreateIconAndTextButton( INT32 Image, const STR16 string, UINT32 uiFont, 
-															 INT16 sForeColor, INT16 sShadowColor, 
-															 INT16 sForeColorDown, INT16 sShadowColorDown, 
-															 INT8 bJustification, 
+INT32 CreateIconAndTextButton( INT32 Image, const STR16 string, UINT32 uiFont,
+															 INT16 sForeColor, INT16 sShadowColor,
+															 INT16 sForeColorDown, INT16 sShadowColorDown,
+															 INT8 bJustification,
 															 INT16 xloc, INT16 yloc, INT32 Type, INT16 Priority,
 															 GUI_CALLBACK MoveCallback,GUI_CALLBACK ClickCallback);
 
@@ -319,7 +319,7 @@ void RemoveIconFromButton( INT32 iButtonID );
 //Note:  Text is always on top
 //If fShiftImage is true, then the image will shift down one pixel and right one pixel
 //just like the text does.
-BOOLEAN SpecifyButtonIcon( INT32 iButtonID, INT32 iVideoObjectID, UINT16 usVideoObjectIndex, 
+BOOLEAN SpecifyButtonIcon( INT32 iButtonID, INT32 iVideoObjectID, UINT16 usVideoObjectIndex,
 													 INT8 bXOffset, INT8 bYOffset, BOOLEAN fShiftImage );
 
 
@@ -331,7 +331,7 @@ void ResizeButton(INT32 iButtonID,INT16 w, INT16 h);
 void QuickButtonCallbackMMove(MOUSE_REGION *reg,INT32 reason);
 void QuickButtonCallbackMButn(MOUSE_REGION *reg,INT32 reason);
 
-BOOLEAN SetButtonCursor(INT32 iBtnId, UINT16 crsr); 
+BOOLEAN SetButtonCursor(INT32 iBtnId, UINT16 crsr);
 void MSYS_SetBtnUserData(INT32 iButtonNum,INT32 index,INT32 userdata);
 INT32 MSYS_GetBtnUserData(GUI_BUTTON *b,INT32 index);
 void MarkAButtonDirty( INT32 iButtonNum ); // will mark only selected button dirty

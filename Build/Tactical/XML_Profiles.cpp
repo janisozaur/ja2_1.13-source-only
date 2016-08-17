@@ -4,8 +4,8 @@
 // This file handles all reading from Merc Profiles.XML. It offers an external
 // alternative to PROEDIT. Values that have no current use in the game were
 // EXCLUDED. If you wish to add them simply follow the example set here. You
-// can read MERCPROFILESTRUCT in the file "soldier profile type.h" to see
-// all profile data. Add the ones you want to externalize to TEMPPROFILESTRUCT 
+// can read MERCPROFILESTRUCT in the file "Soldier Profile Type.h" to see
+// all profile data. Add the ones you want to externalize to TEMPPROFILESTRUCT
 // in "Soldier Profile.h", and then add the appropriate lines where needed,
 // in this file, following my example.
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@
 	#include "sgp.h"
 	#include "Debug Control.h"
 	#include "expat.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "XML.h"
 	#include "Soldier Profile.h"
 #endif
@@ -181,9 +181,9 @@ profileStartElementHandle(void *userData, const XML_Char *name, const XML_Char *
 				strcmp(name, "usApproachFactorDirect") == 0 ||
 				strcmp(name, "usApproachFactorThreaten") == 0 ||
 				strcmp(name, "usApproachFactorRecruit") == 0 ||
-				
+
 				//new tag
-				strcmp(name, "Type")  == 0 ||				
+				strcmp(name, "Type")  == 0 ||
 				strcmp(name, "sSectorX")  == 0 ||
 				strcmp(name, "sSectorY")  == 0 ||
 				strcmp(name, "sSectorZ")  == 0 ||
@@ -191,7 +191,7 @@ profileStartElementHandle(void *userData, const XML_Char *name, const XML_Char *
 				strcmp(name, "bTown")  == 0 ||
 				strcmp(name, "bTownAttachment")  == 0 ||
 				strcmp(name, "usBackground")  == 0
-												
+
 				))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
@@ -238,12 +238,12 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			{
 				// Write data into a temporary array that holds profiles. We will later copy data from that
 				// temp array into the REAL profile array, one item at a time, replacing PROF.DAT data.
-		
+
 				if (!MercProfiles_TextOnly)
 				{
-					wcscpy(tempProfiles[pData->curIndex].zName, pData->curProfile.zName); 
-					wcscpy(tempProfiles[pData->curIndex].zNickname, pData->curProfile.zNickname);		
-					
+					wcscpy(tempProfiles[pData->curIndex].zName, pData->curProfile.zName);
+					wcscpy(tempProfiles[pData->curIndex].zNickname, pData->curProfile.zNickname);
+
 					tempProfiles[pData->curIndex].ubFaceIndex = pData->curProfile.ubFaceIndex;
 					tempProfiles[pData->curIndex].usEyesX = pData->curProfile.usEyesX;
 					tempProfiles[pData->curIndex].usEyesY = pData->curProfile.usEyesY;
@@ -348,9 +348,9 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 
 					tempProfiles[pData->curIndex].bArmourAttractiveness = pData->curProfile.bArmourAttractiveness;
 					tempProfiles[pData->curIndex].bMainGunAttractiveness = pData->curProfile.bMainGunAttractiveness;
-					
+
 					tempProfiles[pData->curIndex].Type = pData->curProfile.Type;
-					
+
 					tempProfiles[pData->curIndex].sSectorX = pData->curProfile.sSectorX;
 					tempProfiles[pData->curIndex].sSectorY = pData->curProfile.sSectorY;
 					tempProfiles[pData->curIndex].bSectorZ = pData->curProfile.bSectorZ;
@@ -361,13 +361,13 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 
 					tempProfiles[pData->curIndex].fGoodGuy = pData->curProfile.fGoodGuy;
 					memcpy( &(tempProfiles[pData->curIndex].usApproachFactor), &(pData->curProfile.usApproachFactor), 4 * sizeof (UINT16));
-					
+
 				}
 				else
 				{
-					wcscpy(tempProfiles[pData->curIndex].zName, pData->curProfile.zName); 
-					wcscpy(tempProfiles[pData->curIndex].zNickname, pData->curProfile.zNickname);		
-				}	
+					wcscpy(tempProfiles[pData->curIndex].zName, pData->curProfile.zName);
+					wcscpy(tempProfiles[pData->curIndex].zNickname, pData->curProfile.zNickname);
+				}
 			}
 		}
 
@@ -518,7 +518,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bDeathRate = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bLifeMax") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -530,67 +530,67 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bLife = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bStrength") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bStrength = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bAgility") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bAgility = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bDexterity") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bDexterity = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bWisdom") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bWisdom = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bMarksmanship") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bMarksmanship = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bExplosive") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bExplosive = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bLeadership") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bLeadership = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bMedical") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bMedical = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bMechanical") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bMechanical = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bExpLevel") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bExpLevel = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bEvolution") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -603,7 +603,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bOldSkillTrait = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bOldSkillTrait2") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -614,12 +614,12 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait1 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}		
+		}
 		else if(strcmp(name, "bNewSkillTrait2") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait2 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}		
+		}
 		else if(strcmp(name, "bNewSkillTrait3") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -661,48 +661,48 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bNewSkillTrait10 = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
 		else if(strcmp(name, "bNewSkillTrait11") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait11 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait12") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait12 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait13") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait13 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait14") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait14 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait15") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait15 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait16") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait16 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait17") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait17 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait18") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait18 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait19") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait19 = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
 		else if(strcmp(name, "bNewSkillTrait20") == 0)
@@ -711,48 +711,48 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bNewSkillTrait20 = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
 		else if(strcmp(name, "bNewSkillTrait21") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait21 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait22") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait22 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait23") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait23 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait24") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait24 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait25") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait25 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait26") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait26 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait27") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait27 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait28") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait28 = (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}									 
+		}
 		else if(strcmp(name, "bNewSkillTrait29") == 0)
-		{									 
-			pData->curElement = ELEMENT;	 
+		{
+			pData->curElement = ELEMENT;
 			pData->curProfile.bNewSkillTrait29 = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
 		else if(strcmp(name, "bNewSkillTrait30") == 0)
@@ -773,37 +773,37 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bBuddy[1] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bBuddy3") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bBuddy[2] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bBuddy4") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bBuddy[3] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bBuddy5") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bBuddy[4] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bLearnToLike") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bLearnToLike = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bLearnToLikeTime") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.bLearnToLikeTime = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bHated1") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -815,7 +815,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bHatedTime[0] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bHated2") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -827,7 +827,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bHatedTime[1] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bHated3") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -839,7 +839,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bHatedTime[2] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bHated4") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -851,7 +851,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bHatedTime[3] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "bHated5") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -875,7 +875,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.bLearnToHateTime = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-				
+
 		else if(strcmp(name, "bRace") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -1034,7 +1034,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.usApproachFactor[3] = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "uiIndex") == 0)
 		{
 
@@ -1043,23 +1043,23 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			// Sets new index for writing.
 			pData->curIndex = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "Type") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.Type = (UINT32) strtoul(pData->szCharData, NULL, 0);
 		}
-		
+
 		else if(strcmp(name, "sSectorX") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.sSectorX = (UINT16) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "sSectorY") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.sSectorY = (UINT16) atol(pData->szCharData);
-		}			
+		}
 		else if(strcmp(name, "sSectorZ") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -1069,7 +1069,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curProfile.ubCivilianGroup = (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "bTown") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -1087,7 +1087,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curProfile.usBackground = (UINT16) atol(pData->szCharData);
 		}
-		
+
 
 		pData->maxReadDepth--;
 	}
@@ -1181,44 +1181,44 @@ BOOLEAN WriteMercProfiles()
 			FilePrintf(hFile,"\t<PROFILE>\r\n");
 
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",						cnt);
-			
+
 			if (cnt >= 0 && cnt < 40 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>1</Type>\r\n");
 			}
 			else if (cnt >= 40 && cnt < 51 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>2</Type>\r\n");
 			}
 			else if ( cnt >= FIRST_RPC && cnt < FIRST_NPC )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>3</Type>\r\n");
 			}
 			else if ( cnt >= FIRST_NPC && cnt < 160 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>4</Type>\r\n");
 			}
 			else if ( cnt == 169 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>4</Type>\r\n");
-			}	
+			}
 			else if ( cnt == 165 || cnt == 166 || cnt == 167 || cnt == 168 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>2</Type>\r\n");
 			}
 			else if ( cnt == 51 || cnt == 52 || cnt == 53 || cnt == 54 || cnt == 55 || cnt == 56 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>6</Type>\r\n");
 			}
 			else if ( cnt == 160 || cnt == 161 || cnt == 162 || cnt == 163 || cnt == 164 )
-			{	
+			{
 				FilePrintf(hFile,"\t\t<Type>5</Type>\r\n");
 			}
-			else 
+			else
 			{
-				FilePrintf(hFile,"\t\t<Type>0</Type>\r\n");			
+				FilePrintf(hFile,"\t\t<Type>0</Type>\r\n");
 			}
-			
+
 
 			//////////////////////////////
 			// Write Character Name
@@ -1592,7 +1592,7 @@ BOOLEAN WriteMercProfiles()
 				{
 					if ( gMercProfiles[ cnt ].bSkillTraits[ bCnt2 ] > 0 )
 						FilePrintf(hFile,"\t\t<bNewSkillTrait%d>%d</bNewSkillTrait%d>\r\n", (bCnt2+1), gMercProfiles[ cnt ].bSkillTraits[bCnt2], (bCnt2+1));
-				}					
+				}
 			}
 			else
 			{
@@ -1637,7 +1637,7 @@ BOOLEAN WriteMercProfiles()
 			FilePrintf(hFile,"\t\t<bHatedNationalityCareLevel>%d</bHatedNationalityCareLevel>\r\n",	gMercProfiles[ cnt ].bHatedNationalityCareLevel);
 			FilePrintf(hFile,"\t\t<bRacist>%d</bRacist>\r\n",										gMercProfiles[ cnt ].bRacist);
 			FilePrintf(hFile,"\t\t<bSexist>%d</bSexist>\r\n",										gMercProfiles[ cnt ].bSexist);
-			
+
 			FilePrintf(hFile,"\t\t<sSalary>%d</sSalary>\r\n", gMercProfiles[ cnt ].sSalary);
 			FilePrintf(hFile,"\t\t<uiWeeklySalary>%d</uiWeeklySalary>\r\n", gMercProfiles[ cnt ].uiWeeklySalary);
 			FilePrintf(hFile,"\t\t<uiBiWeeklySalary>%d</uiBiWeeklySalary>\r\n", gMercProfiles[ cnt ].uiBiWeeklySalary);
@@ -1654,16 +1654,16 @@ BOOLEAN WriteMercProfiles()
 			FilePrintf(hFile,"\t\t<usApproachFactorDirect>%d</usApproachFactorDirect>\r\n", gMercProfiles[ cnt ].usApproachFactor[1]);
 			FilePrintf(hFile,"\t\t<usApproachFactorThreaten>%d</usApproachFactorThreaten>\r\n", gMercProfiles[ cnt ].usApproachFactor[2]);
 			FilePrintf(hFile,"\t\t<usApproachFactorRecruit>%d</usApproachFactorRecruit>\r\n", gMercProfiles[ cnt ].usApproachFactor[3]);
-			
+
 			FilePrintf(hFile,"\t\t<sSectorX>%d</sSectorX>\r\n", gMercProfiles[ cnt ].sSectorX);
 			FilePrintf(hFile,"\t\t<sSectorY>%d</sSectorY>\r\n", gMercProfiles[ cnt ].sSectorY);
 			FilePrintf(hFile,"\t\t<sSectorZ>%d</sSectorZ>\r\n", gMercProfiles[ cnt ].bSectorZ);
-			
+
 			FilePrintf(hFile,"\t\t<ubCivilianGroup>%d</ubCivilianGroup>\r\n", gMercProfiles[ cnt ].ubCivilianGroup);
 			FilePrintf(hFile,"\t\t<bTown>%d</bTown>\r\n", gMercProfiles[ cnt ].bTown);
 			FilePrintf(hFile,"\t\t<bTownAttachment>%d</bTownAttachment>\r\n", gMercProfiles[ cnt ].bTownAttachment);
 			FilePrintf(hFile,"\t\t<usBackground>%d</usBackground>\r\n", gMercProfiles[ cnt ].usBackground);
-			
+
 
 			FilePrintf(hFile,"\t</PROFILE>\r\n");
 		}

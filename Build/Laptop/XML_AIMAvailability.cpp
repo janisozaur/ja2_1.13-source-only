@@ -6,7 +6,7 @@
 	#include "expat.h"
 	#include "XML.h"
 	#include "Interface.h"
-	#include "aim.h"
+	#include "Aim.h"
 #endif
 
 struct
@@ -80,7 +80,7 @@ aimAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 {
 	aimAvailabilityParseData * pData = (aimAvailabilityParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "AIM_AVAILABLES") == 0)
 		{
@@ -88,15 +88,15 @@ aimAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "AIM") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!AimAvailability_TextOnly)
-				{		
+				{
 					gAimAvailability[pData->curAimAvailability.uiIndex].uiIndex = pData->curAimAvailability.uiIndex;
 					gAimAvailability[pData->curAimAvailability.uiIndex].ProfilId = pData->curAimAvailability.ProfilId;
 					gAimAvailability[pData->curAimAvailability.uiIndex].ubAimArrayID = pData->curAimAvailability.uiIndex;
 					gAimAvailability[pData->curAimAvailability.uiIndex].AimBio = pData->curAimAvailability.AimBio;
-					
+
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].uiIndex = pData->curAimAvailability.uiIndex;
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].ProfilId = pData->curAimAvailability.ProfilId;
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].ubAimArrayID = pData->curAimAvailability.uiIndex;
@@ -108,12 +108,12 @@ aimAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 					gAimAvailability[pData->curAimAvailability.uiIndex].ProfilId = pData->curAimAvailability.ProfilId;
 					gAimAvailability[pData->curAimAvailability.uiIndex].ubAimArrayID = pData->curAimAvailability.uiIndex;
 					gAimAvailability[pData->curAimAvailability.uiIndex].AimBio = pData->curAimAvailability.AimBio;
-					
+
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].uiIndex = pData->curAimAvailability.uiIndex;
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].ProfilId = pData->curAimAvailability.ProfilId;
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].ubAimArrayID = pData->curAimAvailability.uiIndex;
 					gAimAvailabilityTemp[pData->curAimAvailability.uiIndex].AimBio = pData->curAimAvailability.AimBio;
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -124,13 +124,13 @@ aimAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curAimAvailability.ProfilId	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "AimBioID") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curAimAvailability.AimBio	= (UINT8) atol(pData->szCharData);
-		}	
-		
+		}
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -149,7 +149,7 @@ BOOLEAN ReadInAimAvailability(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading AimAvailability.xml" );
 
 	AimAvailability_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -221,7 +221,7 @@ BOOLEAN WriteAimAvailability(STR fileName)
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n", cnt);
 		//	FilePrintf(hFile,"\t\t<ProfilId>-1</ProfilId>\r\n");
 		//	FilePrintf(hFile,"\t\t<AIMBioID>0</AIMBioID>\r\n");
-		
+
 			FilePrintf(hFile,"\t\t<ProfilId>%d</ProfilId>\r\n", gAimAvailability[cnt].ProfilId);
 			FilePrintf(hFile,"\t\t<AIMBioID>%d</AIMBioID>\r\n", gAimAvailability[cnt].AimBio);
 			FilePrintf(hFile,"\t</AIM>\r\n");

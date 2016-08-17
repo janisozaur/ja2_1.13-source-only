@@ -1,75 +1,75 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "sysutil.h"
-	#include "overhead.h"
+	#include "VObject.h"
+	#include "SysUtil.h"
+	#include "Overhead.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "interface.h"
-	#include "vsurface.h"
-	#include "wcheck.h"
-	#include "input.h"
+	#include "Interface.h"
+	#include "VSurface.h"
+	#include "WCheck.h"
+	#include "Input.h"
 	#include "Handle UI.h"
-	#include "renderworld.h"
-	#include "cursors.h"
-	#include "radar screen.h"
+	#include "RenderWorld.h"
+	#include "Cursors.h"
+	#include "Radar Screen.h"
 	#include "Font Control.h"
-	#include "render dirty.h"
-	#include "utilities.h"
+	#include "Render Dirty.h"
+	#include "Utilities.h"
 	#include "Sound Control.h"
 	#include "Interface Panels.h"
 	#include "Animation Control.h"
 	#include "Soldier Control.h"
-	#include "pathai.h"
-	#include "weapons.h"
-	#include "lighting.h"
-	#include "faces.h"
-	#include "mapscreen.h"
-	#include "message.h"
-	#include "text.h"
+	#include "PathAI.h"
+	#include "Weapons.h"
+	#include "Lighting.h"
+	#include "Faces.h"
+	#include "MapScreen.h"
+	#include "Message.h"
+	#include "Text.h"
 	#include "Interface Items.h"
-	#include "interface control.h"
-	#include "interface utils.h"
+	#include "Interface Control.h"
+	#include "Interface Utils.h"
 	#include "Game Clock.h"
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 	#include "Soldier Macros.h"
-	#include "strategicmap.h"
-	#include "soldier functions.h"
-	#include "gamescreen.h"
+	#include "StrategicMap.h"
+	#include "Soldier Functions.h"
+	#include "GameScreen.h"
 	#include "Assignments.h"
-	#include "points.h"
+	#include "Points.h"
 	#include "Squads.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Map Screen Interface Map.h"
-	#include "overhead map.h"
+	#include "Overhead Map.h"
 	#include "Map Screen Interface.h"
 	#include "Options Screen.h"
 	#include "ShopKeeper Interface.h"
-	#include "english.h"
-	#include "keys.h"
+	#include "English.h"
+	#include "Keys.h"
 	#include "Soldier Add.h"
-	#include "vehicles.h"
-	#include "gamesettings.h"
-	#include "dialogue control.h"
+	#include "Vehicles.h"
+	#include "GameSettings.h"
+	#include "Dialogue Control.h"
 	#include "Items.h"
-	#include "drugs and alcohol.h"
-	#include "los.h"
-	#include "opplist.h"
-	#include "vobject_blitters.h"
+	#include "Drugs And Alcohol.h"
+	#include "LOS.h"
+	#include "Opplist.h"
+	#include "VObject_blitters.h"
 	#include "Finances.h"
 	#include "LaptopSave.h"
 	#include "Cursor Control.h"
 	#include "MessageBoxScreen.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "Boxing.h"
-	#include "personnel.h"
+	#include "Personnel.h"
 	// HEADROCK HAM 3.6: This is required for Stat Progress Bars
 	#include "Campaign.h"
 	#include "Food.h"	// added by Flugente
@@ -509,8 +509,8 @@ INT8		gbZipperButPos[2][2] =
 };
 
 //Legion by Jazz
-//void BtnOknoCallback(GUI_BUTTON *btn,INT32 reason); 
-//void BtnFenceCallback(GUI_BUTTON *btn,INT32 reason); 
+//void BtnOknoCallback(GUI_BUTTON *btn,INT32 reason);
+//void BtnFenceCallback(GUI_BUTTON *btn,INT32 reason);
 
 // Mouse button and region callbacks
 //void BtnPositionCallback( GUI_BUTTON *btn, INT32 reason );
@@ -806,7 +806,7 @@ void UpdateSMPanel( )
 	BOOLEAN						fNearLowerLevel;
 	INT8							bDirection;
 	UINT8							ubStanceState;
-	
+
 	//jump window by Jazz
 	//BOOLEAN						fNearLowerLevelOkno;
 	//BOOLEAN						fNearHeigherLevelOkno;
@@ -955,7 +955,7 @@ void UpdateSMPanel( )
 	}
 
 	DisableButton( iSMPanelButtons[ CLIMB_BUTTON ] );
-	
+
 	GetMercClimbDirection( gpSMCurrentMerc->ubID, &fNearLowerLevel, &fNearHeigherLevel );
 
 	if ( fNearLowerLevel || fNearHeigherLevel )
@@ -976,7 +976,7 @@ void UpdateSMPanel( )
 			}
 		}
 	}
-	
+
 	if (gGameExternalOptions.fCanClimbOnWalls == TRUE)
 	{
         if ( FindWallJumpDirection( gpSMCurrentMerc, gpSMCurrentMerc->sGridNo, gpSMCurrentMerc->ubDirection, &bDirection ) )
@@ -1467,7 +1467,7 @@ BOOLEAN InitializeSMPanelCoordsOld()
 	gSMInvPocketXY[SMALLPOCK6POS].sX = INTERFACE_START_X + 432;	gSMInvPocketXY[SMALLPOCK6POS].sY = INV_INTERFACE_START_Y + 29;	// SMALLPOCK6
 	gSMInvPocketXY[SMALLPOCK7POS].sX = INTERFACE_START_X + 432;	gSMInvPocketXY[SMALLPOCK7POS].sY = INV_INTERFACE_START_Y + 53;	// SMALLPOCK7
 	gSMInvPocketXY[SMALLPOCK8POS].sX = INTERFACE_START_X + 432;	gSMInvPocketXY[SMALLPOCK8POS].sY = INV_INTERFACE_START_Y + 77;	// SMALLPOCK8
-	
+
 	SM_ITEMDESC_START_X		= ( 214 + INTERFACE_START_X );
 	SM_ITEMDESC_START_Y		= ( 1 +	INV_INTERFACE_START_Y );
 	SM_ITEMDESC_HEIGHT		= 128;
@@ -1555,7 +1555,7 @@ BOOLEAN InitializeSMPanelCoordsOld()
 	INTERFACE_CLOCK_Y		= SCREEN_HEIGHT - 24;
 	LOCATION_NAME_X			=	xResOffset + (xResSize - 92);
 	LOCATION_NAME_Y			= ( 65	+ INTERFACE_START_Y	);
-	
+
 	SM_DONE_Y				= ( 4 + INV_INTERFACE_START_Y );
 	SM_MAPSCREEN_Y			= ( 4 + INV_INTERFACE_START_Y );
 
@@ -1629,8 +1629,8 @@ BOOLEAN InitializeSMPanelCoordsOld()
 BOOLEAN InitializeSMPanelCoordsNew()
 {
 	// int i; // unused (jonathanl)
-	/* 
-	 * now i use standard positions and i add to them starting coords of panel but 
+	/*
+	 * now i use standard positions and i add to them starting coords of panel but
 	 * we can add here function that will read coord in panel from file
 	 * that will be phase2 of making GUI more customizable
 	 * any questions? joker
@@ -1673,7 +1673,7 @@ BOOLEAN InitializeSMPanelCoordsNew()
 		gSMInvPocketXY[29].sX = INTERFACE_START_X + 416;	gSMInvPocketXY[29].sY = INV_INTERFACE_START_Y + 10;		// SMALLPOCK5
 		gSMInvPocketXY[30].sX = INTERFACE_START_X + 324;	gSMInvPocketXY[30].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK6
 		gSMInvPocketXY[31].sX = INTERFACE_START_X + 347;	gSMInvPocketXY[31].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK7
-		gSMInvPocketXY[32].sX = INTERFACE_START_X + 370;	gSMInvPocketXY[32].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK8	
+		gSMInvPocketXY[32].sX = INTERFACE_START_X + 370;	gSMInvPocketXY[32].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK8
 		gSMInvPocketXY[33].sX = INTERFACE_START_X + 393;	gSMInvPocketXY[33].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK9
 		gSMInvPocketXY[34].sX = INTERFACE_START_X + 416;	gSMInvPocketXY[34].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK10
 		gSMInvPocketXY[35].sX = INTERFACE_START_X + 291;	gSMInvPocketXY[35].sY = INV_INTERFACE_START_Y + 116;	// SMALLPOCK11
@@ -1731,7 +1731,7 @@ BOOLEAN InitializeSMPanelCoordsNew()
 		gSMInvPocketXY[29].sX = INTERFACE_START_X + 491;	gSMInvPocketXY[29].sY = INV_INTERFACE_START_Y + 10;		// SMALLPOCK5
 		gSMInvPocketXY[30].sX = INTERFACE_START_X + 347;	gSMInvPocketXY[30].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK6
 		gSMInvPocketXY[31].sX = INTERFACE_START_X + 383;	gSMInvPocketXY[31].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK7
-		gSMInvPocketXY[32].sX = INTERFACE_START_X + 419;	gSMInvPocketXY[32].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK8	
+		gSMInvPocketXY[32].sX = INTERFACE_START_X + 419;	gSMInvPocketXY[32].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK8
 		gSMInvPocketXY[33].sX = INTERFACE_START_X + 455;	gSMInvPocketXY[33].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK9
 		gSMInvPocketXY[34].sX = INTERFACE_START_X + 491;	gSMInvPocketXY[34].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK10
 		gSMInvPocketXY[35].sX = INTERFACE_START_X + 321;	gSMInvPocketXY[35].sY = INV_INTERFACE_START_Y + 116;	// SMALLPOCK11
@@ -1790,7 +1790,7 @@ BOOLEAN InitializeSMPanelCoordsNew()
 		gSMInvPocketXY[29].sX = INTERFACE_START_X + 491;	gSMInvPocketXY[29].sY = INV_INTERFACE_START_Y + 10;		// SMALLPOCK5
 		gSMInvPocketXY[30].sX = INTERFACE_START_X + 347;	gSMInvPocketXY[30].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK6
 		gSMInvPocketXY[31].sX = INTERFACE_START_X + 383;	gSMInvPocketXY[31].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK7
-		gSMInvPocketXY[32].sX = INTERFACE_START_X + 419;	gSMInvPocketXY[32].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK8	
+		gSMInvPocketXY[32].sX = INTERFACE_START_X + 419;	gSMInvPocketXY[32].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK8
 		gSMInvPocketXY[33].sX = INTERFACE_START_X + 455;	gSMInvPocketXY[33].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK9
 		gSMInvPocketXY[34].sX = INTERFACE_START_X + 491;	gSMInvPocketXY[34].sY = INV_INTERFACE_START_Y + 34;		// SMALLPOCK10
 		gSMInvPocketXY[35].sX = INTERFACE_START_X + 347;	gSMInvPocketXY[35].sY = INV_INTERFACE_START_Y + 116;	// SMALLPOCK11
@@ -1824,7 +1824,7 @@ BOOLEAN InitializeSMPanelCoordsNew()
 	SM_SELMERC_AP_Y			= ( 53 + INV_INTERFACE_START_Y );
 	SM_SELMERC_AP_HEIGHT	= 12;
 	SM_SELMERC_AP_WIDTH		= 11;
- 
+
 	SM_SELMERC_HEALTH_X		= ( 70 + INTERFACE_START_X );
 	SM_SELMERC_HEALTH_Y		= ( 48 + INV_INTERFACE_START_Y );
 	SM_SELMERC_HEALTH_WIDTH = 3;
@@ -1900,7 +1900,7 @@ BOOLEAN InitializeSMPanelCoordsNew()
 	SM_NEXTMERCB_Y			= ( 130 + INV_INTERFACE_START_Y );
 	SM_OPTIONSB_X			= ( 10 + INTERFACE_START_X );
 	SM_OPTIONSB_Y			= ( 165 + INV_INTERFACE_START_Y );
-	
+
 	// CHRISL: Backpack buttons
 	SM_DROPPACK_X			= ( 612 + INTERFACE_START_X );
 	SM_DROPPACK_Y			= ( 39 + INV_INTERFACE_START_Y );
@@ -1987,7 +1987,7 @@ BOOLEAN InitializeSMPanelCoordsNew()
 	MONEY_Y					= ( 5 + INV_INTERFACE_START_Y );
 	MONEY_WIDTH				= 30;
 	MONEY_HEIGHT			= 22;
-	
+
 	// ow ye font color they can also be customizable :P
 	STATS_TITLE_FONT_COLOR	= 6;
 	STATS_TEXT_FONT_COLOR	= 5;
@@ -2117,7 +2117,7 @@ BOOLEAN InitializeSMPanel(	)
 		InitInventoryNew();
 	else
 		InitInventoryOld();
-	
+
 	InitInvSlotInterface( gSMInvPocketXY, &gSMCamoXY, SMInvMoveCallback, SMInvClickCallback, SMInvMoveCammoCallback, SMInvClickCamoCallback, FALSE );
 
 	InitKeyRingInterface( KeyRingItemPanelButtonCallback );
@@ -2135,7 +2135,7 @@ BOOLEAN InitializeSMPanel(	)
 		// full cursor - disable, from item pickup
 		EnableSMPanelButtons( FALSE, TRUE );
 	}
-	
+
 	if( INTERFACE_START_X > 0 )
 	{
 		ColorFillVideoSurfaceArea( FRAME_BUFFER, 0, INV_INTERFACE_START_Y, SCREEN_WIDTH, SCREEN_HEIGHT, 0 );
@@ -2159,7 +2159,7 @@ BOOLEAN CreateSMPanelButtons( )
 	gfAllDisabled	= FALSE;
 
 	FilenameForBPP("INTERFACE\\inventory_buttons.sti", ubString);
-	
+
 	//-----------------------
 	// Load button Graphics
 	iSMPanelImages[ STANCEUP_IMAGES	]			= LoadButtonImage(ubString,-1,0,-1,10,-1 );
@@ -2174,9 +2174,9 @@ BOOLEAN CreateSMPanelButtons( )
 	iSMPanelImages[ LOOK_IMAGES	]					= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	] ,-1,2,-1,12,-1 );
 	iSMPanelImages[ TALK_IMAGES	]					= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	] ,-1,6,-1,16,-1 );
 	iSMPanelImages[ MUTE_IMAGES	]					= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	] ,-1,5,-1,15,-1 );
-	
+
 	iSMPanelImages[ OPTIONS_IMAGES	]				= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	] ,-1,24,-1,25,-1 );
-	
+
 	iBurstButtonImages[ WM_NORMAL ]					= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	], -1,  7, -1, -1, -1 );
 	iBurstButtonImages[ WM_BURST ]					= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	], -1, 17, -1, -1, -1 );
 	iBurstButtonImages[ WM_AUTOFIRE ]				= UseLoadedButtonImage( iSMPanelImages[ STANCEUP_IMAGES	], -1, 17, -1, -1, -1 );
@@ -2206,7 +2206,7 @@ BOOLEAN CreateSMPanelButtons( )
 
 	// SET BUTTONS TO -1
 	memset( iSMPanelButtons, -1, sizeof( iSMPanelButtons ) );
-									
+
 	iSMPanelButtons[ SM_MAP_SCREEN_BUTTON ] = QuickCreateButton( iSMPanelImages[ MAPSCREEN_IMAGES ], SM_MAPSCREEN_X, SM_MAPSCREEN_Y,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGH - 1,
 										DEFAULT_MOVE_CALLBACK, (GUI_CALLBACK)BtnMapScreenCallback );
@@ -2404,7 +2404,7 @@ void	RemoveSMPanelButtons( )
 		UnloadButtonImage( giSMStealthImages );
 	}
 	RenderBackpackButtons(UNLOAD_BUTTON);	/* CHRISL: Needed for new inventory backpack buttons */
-	
+
 	UnloadButtonImage( iBurstButtonImages[ WM_NORMAL ] );
 	UnloadButtonImage( iBurstButtonImages[ WM_BURST ] );
 	UnloadButtonImage( iBurstButtonImages[ WM_AUTOFIRE ] );
@@ -2758,7 +2758,7 @@ void RenderSMPanel( BOOLEAN *pfDirty )
 			#else
 				mprintf( SM_WEIGHT_PERCENT_X, SM_WEIGHT_PERCENT_Y, L"%%" );
 			#endif
-			
+
 			mprintf( SM_CAMMO_LABEL_X - StringPixLength( pInvPanelTitleStrings[2], BLOCKFONT2 ), SM_CAMMO_LABEL_Y, pInvPanelTitleStrings[ 2 ] );
 
 			#ifdef CHINESE
@@ -2918,7 +2918,7 @@ void RenderSMPanel( BOOLEAN *pfDirty )
 			wcscat( pStr, pStrCamo);
 			swprintf( pStrCamo, L"" );
 		}
-		
+
 		// anv: display stealth together with camo
 		INT16 wornstealth = GetWornStealth(gpSMCurrentMerc) - gpSMCurrentMerc->GetBackgroundValue(BG_PERC_STEALTH);
 		INT16 bonusstealth = gpSMCurrentMerc->GetBackgroundValue(BG_PERC_STEALTH);
@@ -2977,12 +2977,12 @@ void RenderSMPanel( BOOLEAN *pfDirty )
 			// Flugente: food info if food system is active
 			if ( gGameOptions.fFoodSystem && gpSMCurrentMerc->ubProfile != ROBOT && !IsVehicle(gpSMCurrentMerc) )
 			{
-				
+
 				swprintf( pStr, TacticalStr[ MERC_VITAL_STATS_WITH_FOOD_POPUPTEXT ], gpSMCurrentMerc->stats.bLife, gpSMCurrentMerc->stats.bLifeMax, gpSMCurrentMerc->bBreath, gpSMCurrentMerc->bBreathMax, pMoraleStr, (INT32)(100*(gpSMCurrentMerc->bDrinkLevel - FOOD_MIN) / FOOD_HALF_RANGE), L"%", (INT32)(100*(gpSMCurrentMerc->bFoodLevel - FOOD_MIN) / FOOD_HALF_RANGE), L"%" );
 			}
 			else
 			{
-				
+
 				swprintf( pStr, TacticalStr[ MERC_VITAL_STATS_POPUPTEXT ], gpSMCurrentMerc->stats.bLife, gpSMCurrentMerc->stats.bLifeMax, gpSMCurrentMerc->bBreath, gpSMCurrentMerc->bBreathMax, pMoraleStr );
 			}
 
@@ -3007,7 +3007,7 @@ void RenderSMPanel( BOOLEAN *pfDirty )
 				INT8 bNumSkillTraits = 0;
 
 				// lets rearrange our skills to a temp array
-				// we also get the number of lines (skills) to be displayed 
+				// we also get the number of lines (skills) to be displayed
 				for ( UINT8 ubCnt = 1; ubCnt < NUM_SKILLTRAITS_NT; ++ubCnt )
 				{
 					if ( ProfileHasSkillTrait( gpSMCurrentMerc->ubProfile, ubCnt ) == 2 )
@@ -3037,7 +3037,7 @@ void RenderSMPanel( BOOLEAN *pfDirty )
 			}
 			else
 			{
-				INT8 bSkill1 = 0, bSkill2 = 0; 	
+				INT8 bSkill1 = 0, bSkill2 = 0;
 				bSkill1 = gMercProfiles[ gpSMCurrentMerc->ubProfile ].bSkillTraits[0];
 				bSkill2 = gMercProfiles[ gpSMCurrentMerc->ubProfile ].bSkillTraits[1];
 
@@ -3460,7 +3460,7 @@ INT32 iLastHandPos = -1;
 #define SLOT_KNIFE		8
 #define SLOT_FACE		9
 
-STR16 uiSlotTypeName[] = 
+STR16 uiSlotTypeName[] =
 {
 	L"",				//0
 	L"Hands",			//1
@@ -3476,7 +3476,7 @@ STR16 uiSlotTypeName[] =
 	L"Small Pocket"		//11
 };
 
-INT16 uiNIVSlotType[NUM_INV_SLOTS] = { 
+INT16 uiNIVSlotType[NUM_INV_SLOTS] = {
 						2, 2, 2, //0-2
 						9, 9, //3-4
 						1, 1, //5-6
@@ -3517,7 +3517,7 @@ UINT16 GetInvMovementCost(OBJECTTYPE* pObj, INT16 old_pos, INT16 new_pos)
 		return 0;
 	INT16 src_type;
 	INT16 dst_type;
-	if (UsingNewInventorySystem() == TRUE) 
+	if (UsingNewInventorySystem() == TRUE)
 	{
 		src_type = uiNIVSlotType[old_pos];
 		dst_type = uiNIVSlotType[new_pos];
@@ -3568,7 +3568,7 @@ UINT16 GetInvMovementCost(OBJECTTYPE* pObj, INT16 old_pos, INT16 new_pos)
 	else
 		weight_modifier = 0;
 
-	INT32 cost = 0; 
+	INT32 cost = 0;
 
 	cost += uiAPCostFromSlot[src_type];
 	cost += uiAPCostToSlot[dst_type];
@@ -3583,7 +3583,7 @@ UINT16 GetInvMovementCost(OBJECTTYPE* pObj, INT16 old_pos, INT16 new_pos)
 			cost = 0;
 	}
 
-	if (cost > APBPConstants[AP_INV_MAX_COST]) 
+	if (cost > APBPConstants[AP_INV_MAX_COST])
 		cost = APBPConstants[AP_INV_MAX_COST];
 
 #ifdef _DEBUG
@@ -3669,7 +3669,7 @@ void SMInvClickCallback( MOUSE_REGION * pRegion, INT32 iReason )
 				CleanUpStack( &( gpSMCurrentMerc->inv[ uiHandPos ] ), NULL );
 				return;
 			}
-			
+
 			if((UsingNewInventorySystem() == true))
 			{
 				/*if we pick up a backpack without reactivating the drop pack button, and we have a
@@ -3733,10 +3733,10 @@ void SMInvClickCallback( MOUSE_REGION * pRegion, INT32 iReason )
 				if (INV_AP_COST)
 					//Jenilee: determine the cost of moving this item around in our inventory
 					usCostToMoveItem = GetInvMovementCost(gpItemPointer, iLastHandPos, uiHandPos);
-				
+
 				// Flugente: backgrounds
 				usCostToMoveItem = (usCostToMoveItem * (100 + gpSMCurrentMerc->GetBackgroundValue(BG_INVENTORY))) / 100;
-				
+
 				if ( ( usCostToMoveItem == 0 ) || ( gpSMCurrentMerc->bActionPoints >= usCostToMoveItem ) )
 				{
 					fOKToGo = TRUE;
@@ -3814,7 +3814,7 @@ void SMInvClickCallback( MOUSE_REGION * pRegion, INT32 iReason )
 						else // Madd: attach / merge object, merge only works on single objects for now
 						{
 							UINT8 cnt = gpSMCurrentMerc->inv[ uiHandPos ].ubNumberOfObjects;
-							if ( gpItemPointer->ubNumberOfObjects < cnt ) 
+							if ( gpItemPointer->ubNumberOfObjects < cnt )
 								cnt = gpItemPointer->ubNumberOfObjects;
 
 							for (UINT8 i = 0; i<cnt;i++)
@@ -4138,7 +4138,7 @@ BOOLEAN ChangeDropPackStatus(SOLDIERTYPE *pSoldier, BOOLEAN newStatus)
 		if(!ChangeZipperStatus(pSoldier, FALSE))
 			return FALSE;
 	}
-	
+
 	// Are we currently in combat?
 	if((gTacticalStatus.uiFlags & INCOMBAT) || (gTacticalStatus.fEnemyInSector))
 	{
@@ -4477,7 +4477,7 @@ void BtnStanceUpCallback(GUI_BUTTON *btn,INT32 reason)
 
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
 	}
-	
+
 }
 
 
@@ -4625,17 +4625,17 @@ void BtnClimbCallback(GUI_BUTTON *btn,INT32 reason)
 		{
 			gpSMCurrentMerc->BeginSoldierClimbUpRoof(	);
 		}
-		
+
 		//---------------Legion by JAzz-----------
-		
+
 		if (gGameExternalOptions.fCanClimbOnWalls == TRUE)
-		{ 
+		{
 			if ( FindWallJumpDirection( gpSMCurrentMerc, gpSMCurrentMerc->sGridNo, gpSMCurrentMerc->ubDirection, &bDirection ) )
 			{
 				gpSMCurrentMerc->BeginSoldierClimbWall(  );
 			}
 		}
-		
+
 		//------------------------------------------
 
 		if ( FindFenceJumpDirection( gpSMCurrentMerc, gpSMCurrentMerc->sGridNo, gpSMCurrentMerc->ubDirection, &bDirection ) )
@@ -5002,7 +5002,7 @@ BOOLEAN InitializeTEAMPanelCoords( )
 	INTERFACE_CLOCK_TM_Y	= ( 96	+ INTERFACE_START_Y );
 	LOCATION_NAME_TM_X		= xResOffset + (xResSize - 92 );
 	LOCATION_NAME_TM_Y		= ( 65	+ INTERFACE_START_Y	);
-		
+
 	TM_ENDTURN_Y		= ( 9 + INTERFACE_START_Y );
 	TM_ROSTERMODE_Y	= ( 45 + INTERFACE_START_Y );
 	TM_DISK_Y			= ( 81 + INTERFACE_START_Y );
@@ -5507,7 +5507,7 @@ void RenderTEAMPanel( BOOLEAN fDirty )
 						else
 						{
 							GetMoraleString( pSoldier, pMoraleStr );
-			
+
 							if ( gGameOptions.fFoodSystem && pSoldier->ubProfile != ROBOT && !IsVehicle(pSoldier) )
 							{
 								swprintf( pStr, TacticalStr[ MERC_VITAL_STATS_WITH_FOOD_POPUPTEXT ], pSoldier->stats.bLife, pSoldier->stats.bLifeMax, pSoldier->bBreath, pSoldier->bBreathMax, pMoraleStr, (INT32)(100*(pSoldier->bDrinkLevel - FOOD_MIN) / FOOD_HALF_RANGE), L"%", (INT32)(100*(pSoldier->bFoodLevel - FOOD_MIN) / FOOD_HALF_RANGE), L"%" );
@@ -5527,14 +5527,14 @@ void RenderTEAMPanel( BOOLEAN fDirty )
 							}
 
 							SetRegionFastHelpText( &(gTEAM_BarsRegions[ cnt ]), pStr );
-			
+
 							// Buggler: skills/traits tooltip on merc portrait
 							// clear pStr value
 							swprintf( pStr, L"");
-			
+
 							INT8 bSeatIndex = GetSeatIndexFromSoldier( pSoldier );
 							if( bSeatIndex != (-1) )
-							{					
+							{
 								swprintf( sTemp, L"%s\n", gNewVehicle[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ].VehicleSeats[ bSeatIndex ].zSeatName );
 								wcscat( pStr, sTemp );
 							}
@@ -5543,9 +5543,9 @@ void RenderTEAMPanel( BOOLEAN fDirty )
 							{
 								UINT8 ubTempSkillArray[30];
 								INT8 bNumSkillTraits = 0;
-			
+
 								// lets rearrange our skills to a temp array
-								// we also get the number of lines (skills) to be displayed 
+								// we also get the number of lines (skills) to be displayed
 								for ( UINT8 ubCnt = 1; ubCnt < NUM_SKILLTRAITS_NT; ubCnt++ )
 								{
 									if ( ProfileHasSkillTrait( pSoldier->ubProfile, ubCnt ) == 2 )
@@ -5559,7 +5559,7 @@ void RenderTEAMPanel( BOOLEAN fDirty )
 										bNumSkillTraits++;
 									}
 								}
-			
+
 								if ( bNumSkillTraits == 0 )
 								{
 									swprintf( sTemp, L"%s", pPersonnelScreenStrings[ PRSNL_TXT_NOSKILLS ] );
@@ -5576,10 +5576,10 @@ void RenderTEAMPanel( BOOLEAN fDirty )
 							}
 							else
 							{
-								INT8 bSkill1 = 0, bSkill2 = 0; 	
+								INT8 bSkill1 = 0, bSkill2 = 0;
 								bSkill1 = gMercProfiles[ pSoldier->ubProfile ].bSkillTraits[0];
 								bSkill2 = gMercProfiles[ pSoldier->ubProfile ].bSkillTraits[1];
-			
+
 								if ( bSkill1 == 0 && bSkill2 == 0 )
 								{
 									swprintf( pStr, L"%s", pPersonnelScreenStrings[ PRSNL_TXT_NOSKILLS ] );
@@ -6599,7 +6599,7 @@ void RenderSoldierTeamInv( SOLDIERTYPE *pSoldier, INT16 sX, INT16 sY, UINT8 ubPa
 	if ( pSoldier->bActive && !(pSoldier->flags.uiStatusFlags & SOLDIER_DEAD ) )
 	{
 		if ( pSoldier->flags.uiStatusFlags & SOLDIER_DRIVER )
-		{			
+		{
 			INVRenderSteeringWheel( guiSAVEBUFFER, guiVEHINV, pSoldier, sX, sY, TM_INV_WIDTH, TM_INV_HEIGHT, fDirty );
 		}
 		else
@@ -6880,11 +6880,11 @@ void AddPlayerToInterfaceTeamSlot( UINT8 ubID )
 
 						// Set ID to do open anim
 						MercPtrs[ ubID ]->flags.fUInewMerc = TRUE;
-	
+
 						return;
 					}
 				}
-			}	
+			}
 		}
 	}
 }
@@ -7627,7 +7627,7 @@ void DisableSMPpanelButtonsWhenInShopKeeperInterface( BOOLEAN fDontDrawButtons )
 
 		//Make sure the mapscreen button is disabled
 		ButtonList[ iSMPanelButtons[ SM_MAP_SCREEN_BUTTON ] ]->uiFlags &= ~BUTTON_ENABLED;
-	
+
 		//DisableButton
 		ButtonList[ iSMPanelButtons[ STANCEUP_BUTTON ] ]->uiFlags |= BUTTON_FORCE_UNDIRTY;
 		ButtonList[ iSMPanelButtons[ UPDOWN_BUTTON ] ]->uiFlags |= BUTTON_FORCE_UNDIRTY;

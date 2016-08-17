@@ -1,63 +1,63 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 #include "TileEngine All.h"
-#include "end game.h"
+#include "End Game.h"
 #include "Morale.h"
 #else
 #include <stdio.h>
 #include <string.h>
 #include "stdlib.h"
-#include "debug.h"
-//#include "soldier control.h"
-#include "weapons.h"
-#include "handle items.h"
-#include "worlddef.h"
-#include "worldman.h"
-#include "rotting corpses.h"
-#include "tile cache.h"
-#include "isometric utils.h"
-#include "animation control.h"
-#include "utilities.h"
-#include "game clock.h"
-#include "soldier create.h"
-#include "renderworld.h"
-#include "soldier add.h"
-#include "explosion control.h"
-#include "tile animation.h"
-#include "sound control.h"
-#include "weapons.h"
-#include "handle items.h"
-#include "world items.h"
-#include "structure wrap.h"
+#include "Debug.h"
+//#include "Soldier Control.h"
+#include "Weapons.h"
+#include "Handle Items.h"
+#include "WorldDef.h"
+#include "WorldMan.h"
+#include "Rotting Corpses.h"
+#include "Tile Cache.h"
+#include "Isometric Utils.h"
+#include "Animation Control.h"
+#include "Utilities.h"
+#include "Game Clock.h"
+#include "Soldier Create.h"
+#include "RenderWorld.h"
+#include "Soldier Add.h"
+#include "Explosion Control.h"
+#include "Tile Animation.h"
+#include "Sound Control.h"
+#include "Weapons.h"
+#include "Handle Items.h"
+#include "World Items.h"
+#include "Structure Wrap.h"
 #include "tiledef.h"
-#include "tiledat.h"
-#include "interactive tiles.h"
+#include "TileDat.h"
+#include "Interactive Tiles.h"
 #include "SaveLoadMap.h"
 #include "Message.h"
 #include "Random.h"
-#include "smokeeffects.h"
-#include "handle ui.h"
-#include "pathai.h"
-#include "campaign Types.h"
-#include "strategicmap.h"
-#include "strategic.h"
+#include "SmokeEffects.h"
+#include "Handle UI.h"
+#include "PathAI.h"
+#include "Campaign Types.h"
+#include "StrategicMap.h"
+#include "Strategic.h"
 #include "Action Items.h"
 #include "Soldier Profile.h"
 #include "Quests.h"
 #include "Interface Dialogue.h"
 #include "LightEffects.h"
 #include "AI.h"
-#include "Soldier tile.h"
-#include "lighting.h"
+#include "Soldier Tile.h"
+#include "Lighting.h"
 #include "Render Fun.h"
 #include "Opplist.h"
-#include "smell.h"
+#include "Smell.h"
 #include "GameSettings.h"
 #include "Interface.h"
-#include "end game.h"
+#include "End Game.h"
 #include "WorldDat.h"
-#include "environment.h"
+#include "Environment.h"
 #include "Buildings.h"
 #include "Keys.h"
 #include "Morale.h"
@@ -65,14 +65,14 @@
 #include "Map Information.h"
 #include "Soldier Functions.h"//dnl ch40 200909
 #include "Text.h" // added by SANDRO
-#include "campaign.h" // yet another one added
+#include "Campaign.h" // yet another one added
 #include "CampaignStats.h"		// added by Flugente
 #include "Points.h"				// added by Flugente
 #endif
 
 #include "Soldier Macros.h"
-#include "connect.h"
-#include "debug control.h"
+#include "Connect.h"
+#include "Debug Control.h"
 
 #include "LuaInitNPCs.h"
 #include "Luaglobal.h"
@@ -80,7 +80,7 @@
 
 
 #ifdef JA2UB
-#include "interface Dialogue.h"
+#include "Interface Dialogue.h"
 
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
@@ -304,7 +304,7 @@ void InternalIgniteExplosion( UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, INT32
 
 	// The ammotype used. WARNING! This will only be != 0 if ubOwner != NOBODY !
 	UINT16 ammotype = 0;
-		
+
 	// Okay, we either got an explosive or a real attacker to check for.
 	// Let's check for the attacker first.
 	if ( ubOwner != NOBODY )
@@ -347,7 +347,7 @@ void InternalIgniteExplosion( UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, INT32
 	// No explosive but an attacker with HE ammo.
 	if ( !( Item[ usItem ].usItemClass & IC_EXPLOSV ) && ubOwner != NOBODY)
 	{
-		ExpParams.ubTypeID = (INT8)Explosive[Item[AmmoTypes[ammotype].highExplosive].ubClassIndex].ubAnimationID;		
+		ExpParams.ubTypeID = (INT8)Explosive[Item[AmmoTypes[ammotype].highExplosive].ubClassIndex].ubAnimationID;
 		// return;
 	}
 	else // just normal explosives should get here
@@ -399,7 +399,7 @@ void InternalIgniteExplosion( UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, INT32
 	// sevenfm: handle explosive items from attachments
 	if( gGameExternalOptions.bAllowExplosiveAttachments )
 		HandleAttachedExplosions(ubOwner, sX, sY, sZ, sGridNo, usItem, fLocate, bLevel, ubDirection, pObj );
-	
+
 	// sevenfm: add smoke effect if not in room and not underground, only for normal explosions
 	if(!InARoom( sGridNo, &tmp ) && !gbWorldSectorZ && gGameExternalOptions.bAddSmokeAfterExplosion)
 	{
@@ -705,7 +705,7 @@ BOOLEAN ExplosiveDamageStructureAtGridNo( STRUCTURE * pCurrent, STRUCTURE **ppNe
 		ChangeO3SectorStatue( TRUE );
 		return( TRUE );
 	}
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 UB
 	//should we replace the mine entrance graphic
 	if( IsMineEntranceInSectorI13AtThisGridNo( sGridNo ) && ubOwner == NOBODY )
@@ -718,7 +718,7 @@ BOOLEAN ExplosiveDamageStructureAtGridNo( STRUCTURE * pCurrent, STRUCTURE **ppNe
 	//Handle Explosions in the tunnel sectors
 	HandleExplosionsInTunnelSector( sGridNo );
 #endif
-	
+
 	// Get xy
 	sX = CenterX( sGridNo );
 	sY = CenterY( sGridNo );
@@ -750,7 +750,7 @@ BOOLEAN ExplosiveDamageStructureAtGridNo( STRUCTURE * pCurrent, STRUCTURE **ppNe
 		if ( ( bDamageReturnVal = DamageStructure( pCurrent, (UINT8)sWoundAmt, STRUCTURE_DAMAGE_EXPLOSION, sGridNo, sX, sY, NOBODY ) ) != 0 )
 		{
 			fContinue = FALSE;
-#ifdef JA2UB			
+#ifdef JA2UB
 			//Ja25 ub
 			//are we exploding the Fan in the power gen facility
 			if( IsFanGraphicInSectorAtThisGridNo( sGridNo ) )
@@ -930,7 +930,7 @@ BOOLEAN ExplosiveDamageStructureAtGridNo( STRUCTURE * pCurrent, STRUCTURE **ppNe
 					// Use tile database for this as apposed to stuct data
 					RemoveAllStructsOfTypeRange( pBase->sGridNo, FIRSTWALLDECAL, FOURTHWALLDECAL );
 					RemoveAllStructsOfTypeRange( pBase->sGridNo, FIFTHWALLDECAL, EIGTHWALLDECAL );
-										
+
 					// Alrighty, now do this
 					// Get orientation
 					// based on orientation, go either x or y dir
@@ -1619,7 +1619,7 @@ BOOLEAN DamageSoldierFromBlast( UINT8 ubPerson, UINT8 ubOwner, INT32 sBombGridNo
 			}
 			// Heavy Weapons trait bonus damage with rocket, grenade launchers and mortar
 			else if ( HAS_SKILL_TRAIT( MercPtrs[ ubOwner ], HEAVY_WEAPONS_NT ) &&
-				Explosive[Item[usItem].ubClassIndex].ubType == EXPLOSV_NORMAL && 
+				Explosive[Item[usItem].ubClassIndex].ubType == EXPLOSV_NORMAL &&
 				((Item[usItem].usItemClass == IC_BOMB && Item[usItem].attachment &&	!Item[usItem].mine ) || // mortar shells
 				(Item[usItem].usItemClass == IC_GRENADE && (Item[usItem].glgrenade || Item[usItem].electronic) ) || // rockets for rocketlaunchers (I haven't found any other way)
 				(Item[usItem].usItemClass == IC_LAUNCHER ) || Item[usItem].rocketlauncher || Item[usItem].singleshotrocketlauncher ) )
@@ -1636,17 +1636,17 @@ BOOLEAN DamageSoldierFromBlast( UINT8 ubPerson, UINT8 ubOwner, INT32 sBombGridNo
 			if ( (( Item[usItem].usItemClass == IC_GRENADE ) || Item[usItem].glgrenade ) && !Item[usItem].electronic )
 				sNewWoundAmt = (INT16)(sNewWoundAmt * (100 - (gSkillTraitValues.bTanksDamageResistanceModifier / 2)) / 100);
 		}
-		
+
 		// Flugente: moved the damage calculation into a separate function
 		INT32 sDamageResistance = pSoldier->GetDamageResistance( FALSE, FALSE );
-		
+
 		sNewWoundAmt = max( 0, (INT16)(sNewWoundAmt * (100 - sDamageResistance) / 100) );
 
 		// Flugente: this seems a bit weird, but is consistent with the previous code - we do not receive stat damage if we have positive damage resistance
 		if ( sDamageResistance > 0 )
 			;
 		// we can loose stats due to being hit by the blast
-		else if ( gGameOptions.fNewTraitSystem && Explosive[Item[usItem].ubClassIndex].ubType == EXPLOSV_NORMAL && 
+		else if ( gGameOptions.fNewTraitSystem && Explosive[Item[usItem].ubClassIndex].ubType == EXPLOSV_NORMAL &&
 				  !AM_A_ROBOT( pSoldier ) && !(pSoldier->flags.uiStatusFlags & SOLDIER_MONSTER) && !ARMED_VEHICLE( pSoldier ) &&
 			sNewWoundAmt > 2 && sNewWoundAmt < pSoldier->stats.bLife )
 		{
@@ -1842,12 +1842,12 @@ BOOLEAN DamageSoldierFromBlast( UINT8 ubPerson, UINT8 ubOwner, INT32 sBombGridNo
 		sNewWoundAmt = max(0, sNewWoundAmt);
 	}
 	//////////////////////////////////////////////////////////////////////////////////////
-	
+
 	// SANDRO - new merc records - times wounded (blasted by explosion)
 	if ( ( sNewWoundAmt > 1 || sBreathAmt > 1000 ) && pSoldier->ubProfile != NO_PROFILE )
 		gMercProfiles[ pSoldier->ubProfile ].records.usTimesWoundedBlasted++;
 	////////////////////////////////////////////////////////////////////////////////////
-	
+
 	// Lesh: flashbang does affect on soldier or not - check it
 	if ( (Item[usItem].usItemClass & IC_EXPLOSV) && fFlashbang )
 	{
@@ -1873,10 +1873,10 @@ BOOLEAN DamageSoldierFromBlast( UINT8 ubPerson, UINT8 ubOwner, INT32 sBombGridNo
 			send_explosivedamage( ubPerson , ubOwner , sBombGridNo , sNewWoundAmt , sBreathAmt , uiDist , usItem , sSubsequent );
 		}
 	}
-	
+
 	// OJW - 20091028 - If from a remote client, use unadjusted damage amount
 	pSoldier->EVENT_SoldierGotHit( usItem, (fFromRemoteClient ? sWoundAmt : sNewWoundAmt) , sBreathAmt, ubDirection, (INT16)uiDist, ubOwner, ubSpecial, ANIM_CROUCH, sSubsequent, sBombGridNo );
-	
+
 	pSoldier->ubMiscSoldierFlags |= SOLDIER_MISC_HURT_BY_EXPLOSION;
 
 	if ( ubOwner != NOBODY && MercPtrs[ ubOwner ]->bTeam == gbPlayerNum && pSoldier->bTeam != gbPlayerNum )
@@ -1948,7 +1948,7 @@ BOOLEAN DishOutGasDamage( SOLDIERTYPE * pSoldier, EXPLOSIVETYPE * pExplosive, IN
 			//return( fRecompileMovementCosts );
 		}
 	}
-	else // 
+	else //
 		// ATE/CJC: gas stuff
 	{
 		if ( pExplosive->ubType == EXPLOSV_TEARGAS )
@@ -2086,7 +2086,7 @@ BOOLEAN DishOutGasDamage( SOLDIERTYPE * pSoldier, EXPLOSIVETYPE * pExplosive, IN
 		case EXPLOSV_TEARGAS:
 			pSoldier->flags.fHitByGasFlags |= HIT_BY_TEARGAS;
 			break;
-		case EXPLOSV_MUSTGAS:		
+		case EXPLOSV_MUSTGAS:
 			pSoldier->flags.fHitByGasFlags |= HIT_BY_MUSTARDGAS;
 			break;
 		case EXPLOSV_BURNABLEGAS:
@@ -2246,7 +2246,7 @@ BOOLEAN ExpAffect( INT32 sBombGridNo, INT32 sGridNo, UINT32 uiDist, UINT16 usIte
 	// HEADROCK HAM 3.6: Can now use negative modifier.
 	INT16 newDamage = (INT16)GetModifiedExplosiveDamage( pExplosive->ubDamage, 0 );
 	//INT16 newDamage = pExplosive->ubDamage + (INT16)(( pExplosive->ubDamage * gGameExternalOptions.ubExplosivesDamageMultiplier) / 100); //lal
-	
+
 	//DBrot: apply a modifier to confined explosions
 	if(InARoom(sBombGridNo, NULL)){
 		newDamage += (INT16)(newDamage * pExplosive->bIndoorModifier);
@@ -2331,7 +2331,7 @@ BOOLEAN ExpAffect( INT32 sBombGridNo, INT32 sGridNo, UINT32 uiDist, UINT16 usIte
 					HandleRoofDestruction( NewGridNo( sGridNo, DirectionInc( SOUTH )), sWoundAmt * 0.75f );
 				}
 			}
-			
+
 			ExplosiveDamageGridNo( sGridNo, sStructDmgAmt, uiDist, &fRecompileMovementCosts, FALSE, -1, 0 , ubOwner, bLevel );
 
 			// ATE: Look for damage to walls ONLY for next two gridnos
@@ -2893,7 +2893,7 @@ void SpreadEffect( INT32 sGridNo, UINT8 ubRadius, UINT16 usItem, UINT8 ubOwner, 
 		gfMPDebugOutputRandoms = true;
 #endif
 	}
-		
+
 
 	INT32 uiNewSpot, uiTempSpot, uiBranchSpot, cnt, branchCnt;
 	INT32	uiTempRange, ubBranchRange;
@@ -3227,7 +3227,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 
 	for (UINT32 i = ACTION_ITEM_OPEN_DOOR; i < NUM_ACTIONITEMS; /*= ACTION_ITEM_NEW;*/ i++ )
 	{
-		if ( (*pObj)[0]->data.misc.bActionValue == i ) 
+		if ( (*pObj)[0]->data.misc.bActionValue == i )
 			LetLuaPerformItemAction( i, sGridNo, 0 );
 	}
 
@@ -3563,7 +3563,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 
 
 						}
-						
+
 						if (!TileIsOutOfBounds(sDoorSpot) && !TileIsOutOfBounds(sTeleportSpot) )
 						{
 							// close the door...
@@ -3634,7 +3634,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 
 			break;
 		case ACTION_ITEM_BIGGENS_WARNING:
-			
+
 			if( ShouldThePlayerStopWhenWalkingOnBiggensActionItem( 16 ) )
 			{
 				HavePersonAtGridnoStop( sGridNo );
@@ -3642,7 +3642,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 				//Have Biggens spit out a warning about the bombs
 				TriggerNPCRecord( BIGGENS_UB, 16 ); //BIGGENS
 			}
-			
+
 			break;
 
 		case ACTION_ITEM_SEE_FORTIFIED_DOOR:
@@ -3654,7 +3654,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 			break;
 
 		case ACTION_ITEM_SEE_POWER_GEN_FAN:
-			
+
 			//if the player is in the power plant J13
 			if( gWorldSectorX == gGameUBOptions.SectorFanX && gWorldSectorY == gGameUBOptions.SectorFanY && gbWorldSectorZ == gGameUBOptions.SectorFanZ )
 			{
@@ -3665,7 +3665,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 				//The player is hitting the switch to launch the missles
 				HandlePlayerHittingSwitchToLaunchMissles();
 			}
-			
+
 			break;
 #endif
 	default:
@@ -3675,7 +3675,7 @@ void PerformItemAction( INT32 sGridNo, OBJECTTYPE * pObj )
 #endif
 		break;
 	}
-	
+
 #endif
 
 
@@ -3693,7 +3693,7 @@ void AddBombToQueue( UINT32 uiWorldBombIndex, UINT32 uiTimeStamp, BOOL fFromRemo
 	{
 		/*if (gWorldBombs[uiWorldBombIndex].bIsFromRemotePlayer && !fFromRemoteClient)
 		{
-			return; 
+			return;
 		}
 		else
 		{
@@ -3748,7 +3748,7 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 {
 	UINT32	uiTimeStamp= GetJA2Clock();
 	BOOLEAN	fFoundMine = FALSE;
-		
+
 	UINT8 feasibletripwiredirections[4] =
 	{
 		NORTH,
@@ -3763,7 +3763,7 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 		UINT8 direction = feasibletripwiredirections[i];
 		// get adjacent grid
 		UINT32 adjgrid = NewGridNo( sGridNo, DirectionInc( direction ) );
-		
+
 		// if there is a bomb at that grid and level, and it isn't disabled
 		for (UINT32 uiWorldBombIndex = 0; uiWorldBombIndex < guiNumWorldBombs; uiWorldBombIndex++)
 		{
@@ -3783,7 +3783,7 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 						// tripwire just gets activated
 						if ( Item[usBombItem].tripwire == 1 )
 						{
-							// this is important - we have to check wether the wire has already been activated 
+							// this is important - we have to check wether the wire has already been activated
 							if ( ( (*pObj)[0]->data.sObjectFlag & TRIPWIRE_ACTIVATED ) == 0 )
 							{
 								// determine this tripwire's flag
@@ -3796,7 +3796,7 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 								// the biggest flags are the hierarchy flags, so a simple comparison is enough here
 								if ( ubWireNetworkFlag <= ubFlag )
 									sameorlowerhierarchy = TRUE;
-							
+
 								if ( !sameorlowerhierarchy )
 									continue;
 
@@ -3825,18 +3825,18 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 
 									// put this bomb on the queue
 									AddBombToQueue( uiWorldBombIndex, uiTimeStamp );
-															
+
 									if ( (*pObj)[0]->data.misc.usBombItem != NOTHING && Item[ (*pObj)[0]->data.misc.usBombItem ].usItemClass & IC_EXPLOSV )
 									{
 										fFoundMine = TRUE;
 									}
-																
-									// Flugente hack: the tripwire will get removed in HandleExplosionQueue (it is still needed in there until the bomb gets called). 
+
+									// Flugente hack: the tripwire will get removed in HandleExplosionQueue (it is still needed in there until the bomb gets called).
 									// Because of this, ActivateSurroundingTripwire would normally find this wire again, thus a loop would occur.
 									// So we mark the wire with this flag
 									(*pObj)[0]->data.sObjectFlag |= TRIPWIRE_ACTIVATED;
 
-									// activate surrounding tripwires, unless tripwire is too much damaged and we are unlucky.. 
+									// activate surrounding tripwires, unless tripwire is too much damaged and we are unlucky..
 									if ( (*pObj)[0]->data.objectStatus > (INT16)Random(50) )
 										fFoundMine = ActivateSurroundingTripwire(ubID, adjgrid, bLevel, ubWireNetworkFlag);
 								}
@@ -3851,7 +3851,7 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 							// only if we blew up somebody not in our team(no achievement for blowing our guys :)), only if owner exists and have profile
 							if ( (MercPtrs[ubID]->bTeam != gbPlayerNum) && ((*pObj)[0]->data.misc.ubBombOwner > 1) )
 							{
-								if ( MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->ubProfile != NO_PROFILE && MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->bTeam == gbPlayerNum ) 
+								if ( MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->ubProfile != NO_PROFILE && MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->bTeam == gbPlayerNum )
 									gMercProfiles[ MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->ubProfile ].records.usExpDetonated++;
 							}
 
@@ -3862,7 +3862,7 @@ BOOLEAN ActivateSurroundingTripwire( UINT8 ubID, INT32 sGridNo, INT8 bLevel, UIN
 
 							// put this bomb on the queue
 							AddBombToQueue( uiWorldBombIndex, uiTimeStamp );
-							
+
 							if ( (*pObj)[0]->data.misc.usBombItem != NOTHING && Item[ (*pObj)[0]->data.misc.usBombItem ].usItemClass & IC_EXPLOSV )
 							{
 								fFoundMine = TRUE;
@@ -3902,7 +3902,7 @@ void CheckAndFireTripwireGun( OBJECTTYPE* pObj, INT32 sGridNo, INT8 bLevel, UINT
 		// this is important... if not set, the game will remain in a loop
 		gTacticalStatus.ubAttackBusyCount = 0;
 	}
-				
+
 	// add this gun to the floor
 	AddItemToPool( sGridNo, pObj, 1, bLevel, 0, -1 );
 }
@@ -3950,7 +3950,7 @@ void HandleExplosionQueue( void )
 					//RemoveItemFromPool( sGridNo, gWorldBombs[ uiWorldBombIndex ].iItemIndex, 0 );
 				}
 				else if ( (*pObj)[0]->data.misc.usBombItem == TRIP_FLARE )
-				{				
+				{
 					// sevenfm: changed pObj->usItem to Item[pObj->usItem].ubClassIndex as it should be correct explosives index
 					// NewLightEffect( sGridNo, (UINT8)Explosive[pObj->usItem].ubDuration, (UINT8)Explosive[pObj->usItem].ubStartRadius );
 					NewLightEffect( sGridNo, (UINT8)Explosive[ Item[pObj->usItem].ubClassIndex ].ubDuration, (UINT8)Explosive[ Item[pObj->usItem].ubClassIndex ].ubStartRadius );
@@ -3971,7 +3971,7 @@ void HandleExplosionQueue( void )
 
 					if ( sSoundID > NO_ALT_SOUND )
 						PlayJA2Sample( sSoundID, RATE_11025, SoundVolume( HIGHVOLUME, sGridNo ), 1, SoundDir( sGridNo ) );
-					
+
 					UINT8 ubID = WhoIsThere2( sGridNo, ubLevel );
 
 					if ( ubID != NOBODY )
@@ -4052,13 +4052,13 @@ void HandleExplosionQueue( void )
 				{
 					OBJECTTYPE newtripwireObject;
 					CreateItem( pObj->usItem, (*pObj)[0]->data.objectStatus, &newtripwireObject );
-				
+
 					// search for attached guns
 					BOOLEAN fgunfound = FALSE;
 					OBJECTTYPE* pAttGun = NULL;
 					// check all attachments
 					attachmentList::iterator iterend = (*pObj)[0]->attachments.end();
-					for (attachmentList::iterator iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter) 
+					for (attachmentList::iterator iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter)
 					{
 						if ( iter->exists() && Item[iter->usItem].usItemClass == IC_GUN )
 						{
@@ -4070,7 +4070,7 @@ void HandleExplosionQueue( void )
 
 					if ( fgunfound && pAttGun && pAttGun->exists() )
 					{
-						// Flugente 2012-06-16: I ran into a weird bug. If activating multiple guntraps, an error would occur when placing a gun on the floor. 
+						// Flugente 2012-06-16: I ran into a weird bug. If activating multiple guntraps, an error would occur when placing a gun on the floor.
 						// The problem is the function GetFreeWorldItemIndex( ) in AddItemToWorld() in World Items.cpp.
 						// It gets a free index for the item that should be placed. If there is no free index, it creates a bigger array, copies the current array into it, and then deletes the old index.
 						// For some reason still unknown to me, this corrupts the pObj-pointer. It also corrupts the pAttGun-pointer, this is the reason I create a new object.
@@ -4086,17 +4086,17 @@ void HandleExplosionQueue( void )
 						// no preplaced (owner=NOBODY) tripwire with explosive attachments allowed
 						if ( gGameExternalOptions.bAllowExplosiveAttachments && (*pObj)[0]->data.misc.ubBombOwner > 1 )
 						{
-							fAttFound=HandleAttachedExplosions( (UINT8) ((*pObj)[0]->data.misc.ubBombOwner - 2), CenterX( sGridNo ), CenterY( sGridNo ), 0, 
+							fAttFound=HandleAttachedExplosions( (UINT8) ((*pObj)[0]->data.misc.ubBombOwner - 2), CenterX( sGridNo ), CenterY( sGridNo ), 0,
 											sGridNo, (*pObj)[0]->data.misc.usBombItem, FALSE, ubLevel, (*pObj)[0]->data.ubDirection, pObj);
 						}
 					}
-				
+
 					// this is important: delete the tripwire, otherwise we get into an infinite loop if there are two piecs of tripwire....
 					RemoveItemFromPool( sGridNo, gWorldBombs[ uiWorldBombIndex ].iItemIndex, ubLevel );
-						
+
 					// if no other bomb exists here
 					CheckForBuriedBombsAndRemoveFlags( sGridNo, ubLevel );
-				
+
 					// delete the flag, otherwise wire will only work once
 					(newtripwireObject)[0]->data.sObjectFlag &= ~TRIPWIRE_ACTIVATED;
 
@@ -4110,13 +4110,13 @@ void HandleExplosionQueue( void )
 				{
 					OBJECTTYPE newtripwireObject;
 					CreateItem( (*pObj)[0]->data.misc.usBombItem, (*pObj)[0]->data.objectStatus, &newtripwireObject );
-																
+
 					// this is important: delete the tripwire, otherwise we get into an infinite loop if there are two piecs of tripwire....
 					RemoveItemFromPool( sGridNo, gWorldBombs[ uiWorldBombIndex ].iItemIndex, ubLevel );
-						
+
 					// if no other bomb exists here
 					CheckForBuriedBombsAndRemoveFlags( sGridNo, ubLevel );
-				
+
 					// delete the flag, otherwise wire will only work once
 					(newtripwireObject)[0]->data.sObjectFlag &= ~TRIPWIRE_ACTIVATED;
 
@@ -4245,7 +4245,7 @@ void DecayBombTimers( void )
 	OBJECTTYPE * pObj;
 
 	uiTimeStamp = GetJA2Clock();
-		
+
 	// Go through all the bombs in the world, and look for timed ones
 	for (uiWorldBombIndex = 0; uiWorldBombIndex < guiNumWorldBombs; uiWorldBombIndex++)
 	{
@@ -4273,7 +4273,7 @@ void DecayBombTimers( void )
 						gubPersonToSetOffExplosions = NOBODY;
 					}
 
-					
+
 					// put this bomb on the queue
 					AddBombToQueue( uiWorldBombIndex, uiTimeStamp );
 
@@ -4298,7 +4298,7 @@ void DecayBombTimers( void )
 			if ( pSoldier->bInSector && pSoldier->bActive )
 			{
 				INT8 invsize = (INT8)pSoldier->inv.size();								// remember inventorysize, so we don't call size() repeatedly
-							  
+
 				for ( INT8 bLoop = 0; bLoop < invsize; ++bLoop)							// ... for all items in our inventory ...
 			    {
 					// ... if Item is a bomb ...
@@ -4337,7 +4337,7 @@ void DecayBombTimers( void )
 				}
 			}
 		}
-	}		
+	}
 }
 
 void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
@@ -4348,7 +4348,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 
 	uiTimeStamp = GetJA2Clock();
 
-	// Flugente: The remote detonator can now detonate _or_ defuse bombs. 
+	// Flugente: The remote detonator can now detonate _or_ defuse bombs.
 	// In order for a bomb do be detonated, it must have a remote detonator attached. If a 'detonate' command was clicked, bFrequency will be out of 1 - 4.
 	// In order for a bomb do be detonated, it must have a remote defuse attached. If a 'defuse' command was clicked, bFrequency will be out of 5 - 8.
 	BOOLEAN fDetonate = TRUE;
@@ -4373,7 +4373,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 				{
 					// Found a remote bomb, so check to see if it has the same frequency
 					if ((*pObj)[0]->data.misc.bFrequency == bFrequency)
-					{					
+					{
 						// SANDRO - added merc records and some exp
 						if ( ((*pObj)[0]->data.misc.ubBombOwner) > 1 )
 						{
@@ -4382,7 +4382,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 							{
 								gMercProfiles[MercPtrs[((*pObj)[0]->data.misc.ubBombOwner - 2)]->ubProfile].records.usExpDetonated++;
 
-								StatChange( MercPtrs[((*pObj)[0]->data.misc.ubBombOwner - 2)], EXPLODEAMT, ( 5 ), FALSE );					
+								StatChange( MercPtrs[((*pObj)[0]->data.misc.ubBombOwner - 2)], EXPLODEAMT, ( 5 ), FALSE );
 							}
 						}
 
@@ -4429,7 +4429,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 							(*pObj)[0]->data.misc.bFrequency = 0;
 							(*pObj)[0]->data.misc.ubBombOwner = NOBODY;
 							(*pObj)[0]->data.misc.bDetonatorType = 0;
-						
+
 							//create a new item: copy the old item
 							OBJECTTYPE newbombitem( *pObj );
 
@@ -4458,7 +4458,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 			if ( pSoldier->bInSector && pSoldier->bActive )
 			{
 				INT8 invsize = (INT8)pSoldier->inv.size();								// remember inventorysize, so we don't call size() repeatedly
-							  
+
 				for ( INT8 bLoop = 0; bLoop < invsize; ++bLoop)							// ... for all items in our inventory ...
 			    {
 					// ... if Item is a bomb ...
@@ -4473,7 +4473,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 							{
 								// Found a remote bomb, so check to see if it has the same frequency
 								if ((*pObj)[0]->data.misc.bFrequency == bFrequency)
-								{					
+								{
 									// SANDRO - added merc records and some exp
 									if ( ((*pObj)[0]->data.misc.ubBombOwner) > 1 )
 									{
@@ -4482,7 +4482,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 										{
 											gMercProfiles[MercPtrs[((*pObj)[0]->data.misc.ubBombOwner - 2)]->ubProfile].records.usExpDetonated++;
 
-											StatChange( MercPtrs[((*pObj)[0]->data.misc.ubBombOwner - 2)], EXPLODEAMT, ( 5 ), FALSE );					
+											StatChange( MercPtrs[((*pObj)[0]->data.misc.ubBombOwner - 2)], EXPLODEAMT, ( 5 ), FALSE );
 										}
 									}
 
@@ -4509,7 +4509,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 
 										if ( (*pObj).fFlags & OBJECT_ARMED_BOMB )
 											pObj->fFlags &= ~( OBJECT_ARMED_BOMB );
-																				
+
 										// set back ubWireNetworkFlag and bDefuseFrequency, but not the direction... bomb is still aimed, it is just turned off
 										(*pObj)[0]->data.ubWireNetworkFlag = 0;
 										(*pObj)[0]->data.bDefuseFrequency = 0;
@@ -4531,7 +4531,7 @@ void SetOffBombsByFrequency( UINT8 ubID, INT8 bFrequency )
 void SetOffPanicBombs( UINT8 ubID, INT8 bPanicTrigger )
 {
 	// need to turn off gridnos & flags in gTacticalStatus
-	gTacticalStatus.sPanicTriggerGridNo[ bPanicTrigger ] = NOWHERE;	
+	gTacticalStatus.sPanicTriggerGridNo[ bPanicTrigger ] = NOWHERE;
 	if ( ( TileIsOutOfBounds(gTacticalStatus.sPanicTriggerGridNo[0])) &&
 		( TileIsOutOfBounds(gTacticalStatus.sPanicTriggerGridNo[1])) &&
 		( TileIsOutOfBounds(gTacticalStatus.sPanicTriggerGridNo[2])) )
@@ -4592,7 +4592,7 @@ BOOLEAN SetOffBombsInGridNo( UINT8 ubID, INT32 sGridNo, BOOLEAN fAllBombs, INT8 
 						if ( !(MercPtrs[ubID]->flags.uiStatusFlags & SOLDIER_VEHICLE) && !AM_A_ROBOT( MercPtrs[ubID] ) && !ARMED_VEHICLE( MercPtrs[ubID] ) )
 							continue;
 					}
-					
+
 					// Snap: if we do set off our own trap (e.g. by trying to disarm it), we pay!
 					/*if (!fAllBombs && MercPtrs[ ubID ]->bTeam != gbPlayerNum )
 					{
@@ -4612,7 +4612,7 @@ BOOLEAN SetOffBombsInGridNo( UINT8 ubID, INT32 sGridNo, BOOLEAN fAllBombs, INT8 
 					}*/
 
 					if (pObj->usItem == SWITCH)
-					{						
+					{
 						// send out a signal to detonate other bombs, rather than this which
 						// isn't a bomb but a trigger
 						SetOffBombsByFrequency( ubID, (*pObj)[0]->data.misc.bFrequency );
@@ -4629,18 +4629,18 @@ BOOLEAN SetOffBombsInGridNo( UINT8 ubID, INT32 sGridNo, BOOLEAN fAllBombs, INT8 
 
 						// put this bomb on the queue
 						AddBombToQueue( uiWorldBombIndex, uiTimeStamp );
-						
+
 						if ( (*pObj)[0]->data.misc.usBombItem != NOTHING && Item[ (*pObj)[0]->data.misc.usBombItem ].usItemClass & IC_EXPLOSV )
 						{
 							fFoundMine = TRUE;
 						}
-												
-						// Flugente hack: the tripwire will get removed in HandleExplosionQueue (it is still needed in there until the bomb gets called). 
+
+						// Flugente hack: the tripwire will get removed in HandleExplosionQueue (it is still needed in there until the bomb gets called).
 						// Because of this, ActivateSurroundingTripwire would normally find this wire again, thus a loop would occur.
 						// So we mark the wire with this flag
 						(*pObj)[0]->data.sObjectFlag |= TRIPWIRE_ACTIVATED;
 
-						// activate surrounding tripwires and tripwire-activated mines, unless tripwire is too much damaged and we are unlucky.. 
+						// activate surrounding tripwires and tripwire-activated mines, unless tripwire is too much damaged and we are unlucky..
 						if ( (*pObj)[0]->data.objectStatus > (INT16)Random(50) )
 							fFoundMine = ActivateSurroundingTripwire(ubID, sGridNo, bLevel, (*pObj)[0]->data.ubWireNetworkFlag);
 					}
@@ -4652,7 +4652,7 @@ BOOLEAN SetOffBombsInGridNo( UINT8 ubID, INT32 sGridNo, BOOLEAN fAllBombs, INT8 
 						// only if we blew up somebody not in our team(no achievement for blowing our guys :)), only if owner exists and have profile
 						if ( (MercPtrs[ubID]->bTeam != gbPlayerNum) && ((*pObj)[0]->data.misc.ubBombOwner > 1) )
 						{
-							if ( MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->ubProfile != NO_PROFILE && MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->bTeam == gbPlayerNum ) 
+							if ( MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->ubProfile != NO_PROFILE && MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->bTeam == gbPlayerNum )
 								gMercProfiles[ MercPtrs[ ((*pObj)[0]->data.misc.ubBombOwner - 2) ]->ubProfile ].records.usExpDetonated++;
 						}
 
@@ -5127,9 +5127,9 @@ void FireFragments( UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, UINT16 usItem, 
 			INT16 degree = (45 + ubDirection * 45) % 360;											// modulo 360 to prevent nonsense from nonsensical input
 			INT16 horizontalarc = Explosive[Item[usItem].ubClassIndex].ubHorizontalDegree % 360;	// modulo 360 to prevent nonsense from nonsensical input
 			INT16 halfhorizontalarc = (INT16)(horizontalarc / 2);
-			INT16 sLowHorizontalD = (360 + degree - halfhorizontalarc) % 360;	
+			INT16 sLowHorizontalD = (360 + degree - halfhorizontalarc) % 360;
 			INT16 dRandomDegreeH = (sLowHorizontalD + Random(horizontalarc) ) % 360;
-		
+
 			// transform the degree into our coordinates
 			if ( dRandomDegreeH < 90 )
 			{
@@ -5146,7 +5146,7 @@ void FireFragments( UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, UINT16 usItem, 
 				dRandomX = (FLOAT)(270 - dRandomDegreeH) / 45.0f;
 				dRandomY = (FLOAT)2.0;
 			}
-			else 
+			else
 			{
 				dRandomX = 0.0;
 				dRandomY = (FLOAT)(360 - dRandomDegreeH) / 45.0f;
@@ -5161,7 +5161,7 @@ void FireFragments( UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, UINT16 usItem, 
 			INT16 verticalarc = Explosive[Item[usItem].ubClassIndex].ubVerticalDegree % 180;	// modulo 180 to prevent nonsense from nonsensical input
 			INT16 halfverticalarc = (INT16)(verticalarc / 2);
 			INT16 sLowVerticalD = (90 - halfverticalarc) % 180;
-	
+
 			INT16 dRandomDegreeV = sLowVerticalD + Random(verticalarc);
 
 			dRandomZ = ((FLOAT)(dRandomDegreeV) / 90.0f) - 1.0f;
@@ -5224,14 +5224,14 @@ void FireFragmentsTrapGun( SOLDIERTYPE* pThrower, INT32 gridno, INT16 sZ, OBJECT
 		FLOAT dRandomX = 0;
 		FLOAT dRandomY = 0;
 		FLOAT dRandomZ = 0;
-				
+
 		// Flugente: if item is a directional explosive, determine in what direction the frags should fly
 		INT16 degree = (45 + ubDirection * 45) % 360;											// modulo 360 to prevent nonsense from nonsensical input
 		//INT16 horizontalarc = horizontalarc % 360;	// modulo 360 to prevent nonsense from nonsensical input
 		INT16 halfhorizontalarc = (INT16)(horizontalarc / 2);
-		INT16 sLowHorizontalD = (360 + degree - halfhorizontalarc) % 360;	
+		INT16 sLowHorizontalD = (360 + degree - halfhorizontalarc) % 360;
 		INT16 dRandomDegreeH = (sLowHorizontalD + Random(horizontalarc) ) % 360;
-		
+
 		// transform the degree into our coordinates
 		if ( dRandomDegreeH < 90 )
 		{
@@ -5248,7 +5248,7 @@ void FireFragmentsTrapGun( SOLDIERTYPE* pThrower, INT32 gridno, INT16 sZ, OBJECT
 			dRandomX = (FLOAT)(270 - dRandomDegreeH) / 45.0f;
 			dRandomY = (FLOAT)2.0;
 		}
-		else 
+		else
 		{
 			dRandomX = 0.0;
 			dRandomY = (FLOAT)(360 - dRandomDegreeH) / 45.0f;
@@ -5263,9 +5263,9 @@ void FireFragmentsTrapGun( SOLDIERTYPE* pThrower, INT32 gridno, INT16 sZ, OBJECT
 		//INT16 verticalarc = verticalarc % 180;	// modulo 180 to prevent nonsense from nonsensical input
 		INT16 halfverticalarc = (INT16)(verticalarc / 2);
 		INT16 sLowVerticalD = (90 - halfverticalarc) % 180;
-	
+
 		INT16 dRandomDegreeV = sLowVerticalD + Random(verticalarc);
-		
+
 		dRandomZ = ((FLOAT)(dRandomDegreeV) / 90.0f) - 1.0f;
 
 		FLOAT dDeltaX = (dRandomX * ubFragRange);
@@ -5329,24 +5329,24 @@ BOOLEAN IsFanGraphicInSectorAtThisGridNo( UINT32 sGridNo )
 	if( gWorldSectorX == gGameUBOptions.SectorFanX && gWorldSectorY == gGameUBOptions.SectorFanY && gbWorldSectorZ == gGameUBOptions.SectorFanZ )
 	{
 		//if this is the right gridno
-		/*if( sGridNo == 10978 || 
-				sGridNo == 10979 || 
-				sGridNo == 10980 || 
-				sGridNo == 10818 || 
-				sGridNo == 10819 || 
-				sGridNo == 10820 || 
-				sGridNo == 10658 || 
-				sGridNo == 10659 || 
+		/*if( sGridNo == 10978 ||
+				sGridNo == 10979 ||
+				sGridNo == 10980 ||
+				sGridNo == 10818 ||
+				sGridNo == 10819 ||
+				sGridNo == 10820 ||
+				sGridNo == 10658 ||
+				sGridNo == 10659 ||
 				sGridNo == 10660 )
 				*/
-		if( sGridNo == gGameUBOptions.FanGridNo[0] || 
-				sGridNo == gGameUBOptions.FanGridNo[1] || 
-				sGridNo == gGameUBOptions.FanGridNo[2] || 
-				sGridNo == gGameUBOptions.FanGridNo[3] || 
-				sGridNo == gGameUBOptions.FanGridNo[4] || 
-				sGridNo == gGameUBOptions.FanGridNo[5] || 
-				sGridNo == gGameUBOptions.FanGridNo[6] || 
-				sGridNo == gGameUBOptions.FanGridNo[7] || 
+		if( sGridNo == gGameUBOptions.FanGridNo[0] ||
+				sGridNo == gGameUBOptions.FanGridNo[1] ||
+				sGridNo == gGameUBOptions.FanGridNo[2] ||
+				sGridNo == gGameUBOptions.FanGridNo[3] ||
+				sGridNo == gGameUBOptions.FanGridNo[4] ||
+				sGridNo == gGameUBOptions.FanGridNo[5] ||
+				sGridNo == gGameUBOptions.FanGridNo[6] ||
+				sGridNo == gGameUBOptions.FanGridNo[7] ||
 				sGridNo == gGameUBOptions.FanGridNo[8] )
 		{
 			return( TRUE );
@@ -5498,7 +5498,7 @@ void HandleSeeingPowerGenFan( UINT32 sGridNo )
 	BOOLEAN	fSaidQuote=FALSE;
 
 	//if the fan has already been seen
-	if( IsJa25GeneralFlagSet( JA_GF__PLAYER_SEEN_FAN_BEFORE ) ) 
+	if( IsJa25GeneralFlagSet( JA_GF__PLAYER_SEEN_FAN_BEFORE ) )
 	{
 		//get out
 		return;
@@ -5579,7 +5579,7 @@ void HandleBuddyExplosions(UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, INT32 sG
 		}
 		else if ( Item[Item[usItem].usBuddyItem ].usItemClass & (IC_GRENADE|IC_BOMB) )
 		{
-			IgniteExplosion( ubOwner, sX, sY, sZ, sGridNo, Item[usItem].usBuddyItem, bLevel, ubDirection );						
+			IgniteExplosion( ubOwner, sX, sY, sZ, sGridNo, Item[usItem].usBuddyItem, bLevel, ubDirection );
 		}
 	}
 }
@@ -5593,7 +5593,7 @@ BOOLEAN HandleAttachedExplosions(UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, IN
 	attachmentList::iterator iterend;
 	attachmentList::iterator iter;
 	UINT8 direction;
-	
+
 	if(pObj==NULL)
 		return FALSE;
 
@@ -5602,10 +5602,10 @@ BOOLEAN HandleAttachedExplosions(UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, IN
 
 	// search for attached explosives
 	iterend = (*pObj)[0]->attachments.end();
-	for (iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter) 
+	for (iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter)
 	{
 		if ( iter->exists() && Item[iter->usItem].usItemClass & (IC_GRENADE|IC_BOMB) )
-		{ 			
+		{
 			// no need for binder if both item and attachment are tripwire-activated
 			if( ( Item[pObj->usItem].tripwireactivation && Item[iter->usItem].tripwireactivation ) ||
 				( binderFound && detonator && Explosive[Item[iter->usItem].ubClassIndex].ubVolatility > 0 ) )
@@ -5613,7 +5613,7 @@ BOOLEAN HandleAttachedExplosions(UINT8 ubOwner, INT16 sX, INT16 sY, INT16 sZ, IN
 				if(Item[iter->usItem].directional && ubDirection == DIRECTION_IRRELEVANT)
 					direction=Random(8);
 				else
-					direction=ubDirection;				
+					direction=ubDirection;
 				if( Item[iter->usItem].uiIndex == TRIP_KLAXON )
 				{
 					PlayJA2Sample( KLAXON_ALARM, RATE_11025, SoundVolume( MIDVOLUME, sGridNo ), 5, SoundDir( sGridNo ) );
@@ -5675,13 +5675,13 @@ UINT16 CalcTotalVolatility(OBJECTTYPE * pObj)
 	UINT8 num;
 	UINT16 usItem;
 	UINT16 classIndex;
-	
+
 	if(pObj==NULL)
 		return 0;
 
 	usItem = pObj->usItem;
 	classIndex = Item[ usItem ].ubClassIndex;
-	
+
 	totalVolatility = Explosive[ classIndex ].ubVolatility;
 	num = 1;
 
@@ -5690,10 +5690,10 @@ UINT16 CalcTotalVolatility(OBJECTTYPE * pObj)
 
 	// search for attached explosives
 	iterend = (*pObj)[0]->attachments.end();
-	for (iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter) 
+	for (iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter)
 	{
 		if ( iter->exists() && Item[iter->usItem].usItemClass & (IC_GRENADE|IC_BOMB) )
-		{ 			
+		{
 			// no need for binder if both item and attachment are tripwire-activated
 			if( ( Item[usItem].tripwireactivation && Item[iter->usItem].tripwireactivation ) ||
 				( binderFound && detonator && Explosive[Item[iter->usItem].ubClassIndex].ubVolatility > 0 ) )
@@ -5713,7 +5713,7 @@ BOOLEAN FindBinderAttachment (OBJECTTYPE * pObj)
 
 	// check all attachments, search for ELASTIC or DUCT_TAPE;
 	iterend = (*pObj)[0]->attachments.end();
-	for (iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter) 
+	for (iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter)
 	{
 		if ( iter->exists() && Item[iter->usItem].usItemClass == IC_MISC )
 		{
@@ -6098,7 +6098,7 @@ BOOLEAN DamageRoof( INT32 sGridNo, INT16 sDamage )
 			pStruct->pDBStructureRef->pDBStructure->ubHitPoints = (UINT8)max( 1, pStruct->ubHitPoints - sDamage );
 		}
 	}
-	
+
 	return FALSE;*/
 
 	// just destroy the thing
@@ -6140,7 +6140,7 @@ void HandleRoofDestruction( INT32 sGridNo, INT16 sDamage )
 				(*it).second = 0;
 		}
 	}
-		
+
 	// Nodes might have been removed, and the roof might have degenerated into several networks
 	gridnoarmournetworkmap roofnetworkmap = GetConnectedRoofNetworks( floorarmourvector );
 

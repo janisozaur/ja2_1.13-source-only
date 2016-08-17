@@ -110,7 +110,7 @@ namespace DataStructures
 				{
 					unavailablePages=curPage;
 					curPage->next=curPage;
-					curPage->prev=curPage;	
+					curPage->prev=curPage;
 				}
 				else
 				{
@@ -118,7 +118,7 @@ namespace DataStructures
 					curPage->prev=unavailablePages->prev;
 					unavailablePages->prev->next=curPage;
 					unavailablePages->prev=curPage;
-				}			
+				}
 			}
 
 			RakAssert(availablePagesSize==0 || availablePages->availableStackSize>0);
@@ -156,10 +156,10 @@ namespace DataStructures
 			// As this page is no longer totally empty, move it to the end of available pages
 			curPage->next->prev=curPage->prev;
 			curPage->prev->next=curPage->next;
-			
+
 			if (unavailablePagesSize>0 && curPage==unavailablePages)
 				unavailablePages=unavailablePages->next;
-			
+
 			if (availablePagesSize++==0)
 			{
 				availablePages=curPage;
@@ -171,7 +171,7 @@ namespace DataStructures
 				curPage->next=availablePages;
 				curPage->prev=availablePages->prev;
 				availablePages->prev->next=curPage;
-				availablePages->prev=curPage;	
+				availablePages->prev=curPage;
 			}
 		}
 		else
@@ -210,7 +210,7 @@ namespace DataStructures
 #ifdef _MSC_VER
 #pragma warning(disable:4127)   // conditional expression is constant
 #endif
-			while (true) 
+			while (true)
 			// do
 			{
 				rakFree(cur->availableStack);
@@ -225,12 +225,12 @@ namespace DataStructures
 				rakFree(freed);
 			}// while(cur!=availablePages);
 		}
-		
+
 		if (unavailablePagesSize>0)
 		{
 			cur = unavailablePages;
 			while (1)
-			//do 
+			//do
 			{
 				rakFree(cur->availableStack);
 				rakFree(cur->block);

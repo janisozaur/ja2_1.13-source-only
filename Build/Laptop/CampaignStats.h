@@ -1,31 +1,31 @@
 #ifndef __CAMPAIGNSTATS_H
 #define __CAMPAIGNSTATS_H
 
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  * @brief Define data structures for campaign statistics. These statistics are updated throughout the campaign and can be viewed in the laptop websites.
  */
 
-#include "types.h"
+#include "Types.h"
 #include "Soldier Control.h"
 
 // -------- added by Flugente: various flags for incidents --------
 // easier than adding 32 differently named variables. DO NOT CHANGE THEM, UNLESS YOU KNOW WHAT YOU ARE DOING!!!
 #define INCIDENT_ARTILLERY_ENEMY				0x00000001	//1			// side used artillery
-#define INCIDENT_ARTILLERY_PLAYERSIDE			0x00000002	//2			// 
+#define INCIDENT_ARTILLERY_PLAYERSIDE			0x00000002	//2			//
 #define INCIDENT_TANKS_ENEMY					0x00000004	//4			// side used tanks
-#define INCIDENT_TANKS_PLAYERSIDE				0x00000008	//8			// 
+#define INCIDENT_TANKS_PLAYERSIDE				0x00000008	//8			//
 
 #define INCIDENT_MUSTARDGAS_ENEMY				0x00000010	//16		// side used mustard gas
-#define INCIDENT_MUSTARDGAS_PLAYERSIDE			0x00000020	//32		// 
+#define INCIDENT_MUSTARDGAS_PLAYERSIDE			0x00000020	//32		//
 #define INCIDENT_ATTACK_ENEMY   				0x00000040	//64		// side began the attack
-#define INCIDENT_ATTACK_PLAYERSIDE				0x00000080	//128		// 
+#define INCIDENT_ATTACK_PLAYERSIDE				0x00000080	//128		//
 
 #define INCIDENT_REINFORCEMENTS_ENEMY			0x00000100	//256		// side was reinforced
-#define INCIDENT_REINFORCEMENTS_PLAYERSIDE		0x00000200	//512		// 
+#define INCIDENT_REINFORCEMENTS_PLAYERSIDE		0x00000200	//512		//
 #define INCIDENT_SNIPERS_ENEMY					0x00000400	//1024		// side used snipers
-#define INCIDENT_SNIPERS_PLAYERSIDE				0x00000800	//2048		// 
+#define INCIDENT_SNIPERS_PLAYERSIDE				0x00000800	//2048		//
 
 #define INCIDENT_AMBUSH							0x00001000	//4096		// player was ambushed
 #define INCIDENT_AIRDROP						0x00002000	//8192		// player airdropped
@@ -33,8 +33,8 @@
 #define INCIDENT_BUILDINGS_DAMAGED				0x00008000	//32768		// buildings were damaged in the fighting
 
 #define INCIDENT_ATTACKDIR_NORTH				0x00010000	//65536		// direction attackers came from
-#define INCIDENT_ATTACKDIR_WEST					0x00020000	//131072	// 
-#define INCIDENT_ATTACKDIR_SOUTH				0x00040000	//262144	// 
+#define INCIDENT_ATTACKDIR_WEST					0x00020000	//131072	//
+#define INCIDENT_ATTACKDIR_SOUTH				0x00040000	//262144	//
 #define INCIDENT_ATTACKDIR_EAST					0x00080000	//524288	//
 
 #define INCIDENT_ATTACKDIR_NORTH_ENEMY			0x00100000	//1048576	//
@@ -151,14 +151,14 @@ enum {
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_DESERT,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_FOREST,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_MOUNTAIN,
-	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_POLAR,	
+	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_POLAR,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_RIVER,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_SPARSE,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_SWAMP,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_TROPICAL,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_UNDERGROUND,
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_URBAN,
-	
+
 	CAMPAINGHISTORY_PICLIBRARY_TERRAIN_MAX,
 };
 
@@ -311,7 +311,7 @@ public:
 
 	// vector of all incidents
 	std::vector<Incident_Stats>	mIncidentVector;
-	
+
 private:
 	//Campaign_Stats*		mspSelf;
 };

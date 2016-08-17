@@ -2,10 +2,10 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 
-#include "types.h"
+#include "Types.h"
 #include <windows.h>
 #include "Quantize.h"
-#include "types.h"
+#include "Types.h"
 #include "himage.h"
 
 CQuantizer::CQuantizer (UINT nMaxColors, UINT nColorBits)

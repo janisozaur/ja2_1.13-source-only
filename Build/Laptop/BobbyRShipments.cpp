@@ -2,21 +2,21 @@
 	#include "Laptop All.h"
 	#include "BobbyRShipments.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "BobbyRShipments.h"
-	#include "bobbyr.h"
-	#include "utilities.h"
+	#include "BobbyR.h"
+	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "Text.h"
 	#include "BobbyRGuns.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "BobbyRMailOrder.h"
-	#include "wordwrap.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "WordWrap.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "PostalService.h"
-	#include "input.h"
-	#include "english.h"
+	#include "Input.h"
+	#include "English.h"
 #endif
 
 
@@ -208,7 +208,7 @@ BOOLEAN EnterBobbyRShipments()
 			iCnt++;
 		}
 	}
-	
+
 	if (gfDrawGridArrowMouseRegions == TRUE)
 	{
 		MSYS_DisableRegion( &gSelectedUpDownArrowOnGridScrollAreaRegion[0]);
@@ -302,7 +302,7 @@ void RenderBobbyRShipments()
 
 	DisplayShipmentGrid();
 
-	if(giBobbyRShipmentSelectedShipment != -1) 
+	if(giBobbyRShipmentSelectedShipment != -1)
 	{
 		RefToShipmentPackageListIterator spli = gShipmentTable[giBobbyRShipmentSelectedShipment]->ShipmentPackages.begin();
 		int j;
@@ -337,7 +337,7 @@ void RenderBobbyRShipments()
 			}
 		}
 	}
-	
+
 	/*
 	if( giBobbyRShipmentSelectedShipment != -1 &&
 			gpNewBobbyrShipments[ giBobbyRShipmentSelectedShipment ].fActive &&
@@ -362,7 +362,7 @@ void RenderBobbyRShipments()
 	{
 		DisplayPurchasedItems( FALSE, BOBBYR_SHIPMENT_ORDER_GRID_X, BOBBYR_SHIPMENT_ORDER_GRID_Y, NULL, TRUE, giBobbyRShipmentSelectedShipment );
 	}
-	
+
 
 	DisplayShipmentTitles();
 	DisplayPreviousShipments();
@@ -456,7 +456,7 @@ void DisplayPreviousShipments()
 	UINT32	uiNumberItemsInShipments = 0;
 	UINT32	uiItemCnt;
 	UINT8		ubFontColor = BOBBYR_SHIPMENT_STATIC_TEXT_COLOR;
-	
+
 	RefToShipmentListIterator sli = gPostalService.LookupShipmentList().begin();
 
 	uiNumItems = (UINT32)gPostalService.LookupShipmentList().size();

@@ -1,18 +1,18 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include "Animated ProgressBar.h"
 	#include "MemMan.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Font Control.h"
-	#include "vsurface.h"
-	#include "video.h"
+	#include "VSurface.h"
+	#include "Video.h"
 	#include "Render Dirty.h"
-	#include "music control.h"
+	#include "Music Control.h"
 	#include "Timer Control.h"
-	#include "sysutil.h"
-	#include "random.h"
+	#include "SysUtil.h"
+	#include "Random.h"
 	#include "math.h"
 	#include "WordWrap.h"
 	#include "Message.h"
@@ -67,7 +67,7 @@ void CreateLoadingScreenProgressBar(BOOLEAN resetLoadScreenHint)
 	//		CreateProgressBar(0, 259 + ((SCREEN_WIDTH - 1024) / 2), 683 + ((SCREEN_HEIGHT - 768) / 2), 767 + ((SCREEN_WIDTH - 1024) / 2), 708 + ((SCREEN_HEIGHT - 768) / 2));
 	//	}
 	//}
-	
+
 
 	CreateProgressBar(0, SCREEN_WIDTH*162/640, SCREEN_HEIGHT*427/480, SCREEN_WIDTH*480/640, SCREEN_HEIGHT*443/480);
 
@@ -256,17 +256,17 @@ void ShowLoadScreenHintInStrategicLog()
 	if (bShowLoadScreenHintInLog == TRUE && gGameExternalOptions.gfUseLoadScreenHints && usCurrentLoadScreenHint )
 	{
 		ScreenMsg( FONT_GRAY2, MSG_INTERFACE, New113Message[MSG113_HINT_TEXT], zLoadScreenHint[usCurrentLoadScreenHint].szName);
-		bShowLoadScreenHintInLog = FALSE;	
-	}		
+		bShowLoadScreenHintInLog = FALSE;
+	}
 }
 
 void ShowLoadScreenHintInTacticalLog()
-{	
+{
 	if (bShowLoadScreenHintInLog == TRUE && gGameExternalOptions.gfUseLoadScreenHints && usCurrentLoadScreenHint)
 	{
 		ScreenMsg( FONT_GRAY2, MSG_INTERFACE, New113Message[MSG113_HINT_TEXT], zLoadScreenHint[usCurrentLoadScreenHint].szName);
 		bShowLoadScreenHintInLog = FALSE;
-	}	
+	}
 }
 
 // Flugente: this function selects the next hint to display, and makes sure it is not played again during this run of the exe
@@ -283,7 +283,7 @@ void SetNewLoadScreenHint()
 		if ( !zLoadScreenHint[cnt].fAlreadyShown )
 		{
 			// we now check the flags of a hint to determine wether it can show up. It can if at least one flag is valid
-			BOOLEAN fShow = FALSE;			
+			BOOLEAN fShow = FALSE;
 			// still unsure how to check for these...
 			if ( zLoadScreenHint[cnt].usFlags & (LOADSCREEN_LORE|LOADSCREEN_WEAPON|LOADSCREEN_ITEM|LOADSCREEN_KEYBIND)  )
 				fShow = TRUE;
@@ -297,14 +297,14 @@ void SetNewLoadScreenHint()
 				fShow = TRUE;
 			else if ( zLoadScreenHint[cnt].usFlags & LOADSCREEN_COVERTOPS && gGameOptions.fNewTraitSystem )
 				fShow = TRUE;
-						
+
 			if ( fShow )
 				possiblehints[lastfnd++] = cnt;
 		}
 	}
 
 	UINT16 sel = possiblehints[ Random(lastfnd) ];
-	
+
 	// WANNE: All the loadscreen hints we have, have already been displayed. No matter, re-display a random loadscreen
 	if (sel <= 0 || sel > num_found_loadscreenhints)
 	{
@@ -387,8 +387,8 @@ void SetRelativeStartAndEndPercentage( UINT8 ubID, UINT16 uiRelStartPerc, UINT16
 
 	// Flugente: loadscreen hints
 	if (gGameExternalOptions.gfUseLoadScreenHints && usCurrentLoadScreenHint )
-	{		
-		ShowLoadScreenHintInLoadScreen(pCurr->usBarBottom + 3 - 100);		
+	{
+		ShowLoadScreenHintInLoadScreen(pCurr->usBarBottom + 3 - 100);
 	}
 }
 

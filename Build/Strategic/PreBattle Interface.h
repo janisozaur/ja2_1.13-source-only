@@ -1,7 +1,7 @@
 #ifndef __PREBATTLE_INTERFACE_H
 #define __PREBATTLE_INTERFACE_H
 
-#include "types.h"
+#include "Types.h"
 #include "Strategic Movement.h"
 
 void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI );
@@ -56,7 +56,7 @@ void ClearNonPersistantPBIInfo();
 
 //SAVE START
 
-//Using the ESC key in the PBI will get rid of the PBI and go back to mapscreen, but 
+//Using the ESC key in the PBI will get rid of the PBI and go back to mapscreen, but
 //only if the PBI isn't persistant (!gfPersistantPBI).
 extern BOOLEAN gfPersistantPBI;
 
@@ -65,7 +65,7 @@ extern BOOLEAN gfPersistantPBI;
 //dictates the header that is used at the top of the PBI.
 extern UINT8 gubEnemyEncounterCode;
 
-//The autoresolve during tactical battle option needs more detailed information than the 
+//The autoresolve during tactical battle option needs more detailed information than the
 //gubEnemyEncounterCode can provide.	The explicit version contains possibly unique codes
 //for reasons not normally used in the PBI.	For example, if we were fighting the enemy
 //in a normal situation, then shot at a civilian, the civilians associated with the victim

@@ -7,45 +7,45 @@
 	#include "Overhead.h"
 	#include "Render Fun.h"
 	#include "Random.h"
-	#include "Worldman.h"
+	#include "WorldMan.h"
 	#include "Soldier Profile.h"
 	#include "NPC.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Dialogue Control.h"
 	#include "Handle UI.h"
-	#include "end game.h"
+	#include "End Game.h"
 	#include "Intro.h"
 	#include "Exit Grids.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Quests.h"
 	#include "SaveLoadMap.h"
 	#include "Sound Control.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Isometric Utils.h"
 	#include "Music Control.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "qarray.h"
-	#include "los.h"
+	#include "LOS.h"
 	#include "Strategic AI.h"
 	#include "Squads.h"
 	#include "PreBattle Interface.h"
 	#include "Strategic Movement.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Morale.h"
 	#include "Queen Command.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Player Command.h"
 	#include "Campaign Types.h"
 	#include "Tactical Save.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 #endif
 
 #ifdef JA2UB
-#include "email.h"
+#include "Email.h"
 #include "Game Clock.h"
 #include "Ja25_Tactical.h"
 #include "Game Init.h"
-#include "interface Dialogue.h"
+#include "Interface Dialogue.h"
 #include "ub_config.h"
 
 void HandleAddingTheEndGameEmails();
@@ -412,7 +412,7 @@ void DoneFadeOutEndCinematic( void )
 void HandleDoneLastEndGameQuote( )
 {
 #ifdef JA2UB
-//Ja25 No queen	
+//Ja25 No queen
 #else
 EndQueenDeathEndgame( );
 #endif
@@ -450,11 +450,11 @@ void EndGameEveryoneSayTheirGoodByQuotes( void )
 	//
 	cnt = gTacticalStatus.Team[ gbPlayerNum ].bFirstID;
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; cnt++,pSoldier++)
-	{       
+	{
 		// Are we in this sector, On the current squad?
 		if( pSoldier->bActive && pSoldier->stats.bLife >= OKLIFE && !AM_AN_EPC( pSoldier ) && IsSoldierQualifiedMerc( pSoldier ) )
 		{
-			TacticalCharacterDialogue( pSoldier, QUOTE_RENEWING_CAUSE_BUDDY_2_ON_TEAM );	
+			TacticalCharacterDialogue( pSoldier, QUOTE_RENEWING_CAUSE_BUDDY_2_ON_TEAM );
 		}
 	}
 
@@ -463,11 +463,11 @@ void EndGameEveryoneSayTheirGoodByQuotes( void )
 	//
 	cnt = gTacticalStatus.Team[ gbPlayerNum ].bFirstID;
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; cnt++,pSoldier++)
-	{       
+	{
 		// Are we in this sector, On the current squad?
 		if ( pSoldier->bActive && pSoldier->stats.bLife >= OKLIFE && !AM_AN_EPC( pSoldier ) )
 		{
-			TacticalCharacterDialogue( pSoldier, QUOTE_END_GAME_COMMENT );	
+			TacticalCharacterDialogue( pSoldier, QUOTE_END_GAME_COMMENT );
 		}
 	}
 
@@ -513,7 +513,7 @@ void HandleAddingTheEndGameEmails()
 	{
 		AddEmail( EMAIL_CONGRATS, EMAIL_CONGRATS_LENGTH, MAIL_ENRICO,  GetWorldTotalMin(),-1 ,-1, TYPE_EMAIL_EMAIL_EDT);
 	}
-		
+
 	// email # 12b - Miguel alive, Manuel never recruited
 	else if( fMiguelAlive && !fManuelHired )
 	{
@@ -572,7 +572,7 @@ void HandleEveryoneDoneTheirEndGameQuotes()
 
 		gFadeOutDoneCallback = FadeOutToLaptopOnEndGame;
 
-		FadeOutGameScreen( );	
+		FadeOutGameScreen( );
 	}
 }
 
@@ -589,7 +589,7 @@ void HandleJa25EndGameAndGoToCreditsScreen( BOOLEAN fFromTactical )
 		gTacticalStatus.uiFlags &= ~IN_ENDGAME_SEQUENCE;
 
 		//We want to reinitialize the game
-		ReStartingGame();	
+		ReStartingGame();
 	}
 }
 
@@ -610,7 +610,7 @@ void FadeToCredits( void )
 {
 	gFadeOutDoneCallback = EndFadeToCredits;
 
-	FadeOutGameScreen( );	
+	FadeOutGameScreen( );
 }
 
 void EndFadeToCredits( void )
@@ -622,7 +622,7 @@ void EndFadeToCredits( void )
 	gTacticalStatus.uiFlags &= ~IN_ENDGAME_SEQUENCE;
 
 	//We want to reinitialize the game
-	ReStartingGame();	
+	ReStartingGame();
 }
 
 void FadeOutToLaptopOnEndGame( void )
@@ -750,9 +750,9 @@ void DoneFadeOutEndCinematic( void )
 	//
 	cnt = gTacticalStatus.Team[ gbPlayerNum ].bFirstID;
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; cnt++,pSoldier++)
-	{       
+	{
 		// if the soldier was in the complex
-		if( pSoldier->bActive && 
+		if( pSoldier->bActive &&
 				pSoldier->sSectorX == 15 && ( pSoldier->sSectorY == 11 || pSoldier->sSectorY == 12 ) )
 		{
 			if ( GetGroup( pSoldier->ubGroupID ) )

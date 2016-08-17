@@ -2,13 +2,13 @@
 	#include "TileEngine All.h"
 #else
 	#include "tiledef.h"
-	#include "worlddef.h"
+	#include "WorldDef.h"
 #endif
 
 #include "GameSettings.h"
 
 INT32 giNumberOfTiles; //Madd: new global variables to allow for a variable number of Pitems
-INT32 giNumberOfTileTypes; 
+INT32 giNumberOfTileTypes;
 
 INT16 gOpenDoorList[20] =
 {

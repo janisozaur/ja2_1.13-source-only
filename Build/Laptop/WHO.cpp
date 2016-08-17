@@ -6,9 +6,9 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Laptop All.h"
 #else
-#include "laptop.h"
+#include "Laptop.h"
 #include "insurance.h"
-#include "insurance Contract.h"
+#include "Insurance Contract.h"
 #include "WCheck.h"
 #include "Utilities.h"
 #include "WordWrap.h"
@@ -19,7 +19,7 @@
 #include "Text.h"
 #include "Multi Language Graphic Utils.h"
 #include "WHO.h"
-#include "random.h"
+#include "Random.h"
 #include "Interface.h"
 #include "Soldier Add.h"
 #include "Soldier Profile.h"
@@ -27,7 +27,7 @@
 #include "Overhead.h"
 #include "Map Screen Interface.h"
 #include "Quests.h"
-#include "finances.h"
+#include "Finances.h"
 #include "Game Clock.h"
 #endif
 
@@ -211,7 +211,7 @@ void RenderWHOMain( )
 
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = MCA_START_CONTENT_Y;
-		
+
 	for ( int i = TEXT_WHO_MAIN1; i < TEXT_WHO_CONTRACT1; ++i )
 	{
 		swprintf( sText, szWHOWebSite[i] );
@@ -219,7 +219,7 @@ void RenderWHOMain( )
 
 		usPosY += 10;
 	}
-	
+
 	SetFontShadow( DEFAULT_SHADOW );
 
 	MarkButtonsDirty( );
@@ -248,7 +248,7 @@ void SelectLinkRegionCallBack_WHO_Contract( MOUSE_REGION * pRegion, INT32 iReaso
 
 			AddTransactionToPlayersBook( WHO_SUBSCRIPTION, 0, GetWorldTotalMin( ), (-1) * (INT32)gGameExternalOptions.sDiseaseWHOSubscriptionCost );
 		}
-		
+
 		RenderWHOContract( );
 	}
 	else if ( iReason & MSYS_CALLBACK_REASON_RBUTTON_UP )
@@ -259,7 +259,7 @@ void SelectLinkRegionCallBack_WHO_Contract( MOUSE_REGION * pRegion, INT32 iReaso
 BOOLEAN EnterWHOContract( )
 {
 	InitDefaults_WHO( );
-	
+
 	RenderWHOContract( );
 
 	return(TRUE);
@@ -293,7 +293,7 @@ void RenderWHOContract( )
 
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = MCA_START_CONTENT_Y;
-	
+
 	swprintf( sText, szWHOWebSite[TEXT_WHO_CONTRACT1] );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 
@@ -315,7 +315,7 @@ void RenderWHOContract( )
 	else
 		swprintf( sText, szWHOWebSite[TEXT_WHO_CONTRACT_ACQUIRED_NOT] );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	usPosY += 10;
 
 	if ( !gLinkRegionDefined )
@@ -370,7 +370,7 @@ void RenderWHOTips( )
 
 	//Get the bullet
 	GetVideoObject( &hPixHandle, guiMercCompareBulletImage );
-	
+
 	DisplayDefaults_WHO( );
 
 	SetFontShadow( MERCOMP_FONT_SHADOW );

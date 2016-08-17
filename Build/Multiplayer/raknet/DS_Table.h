@@ -27,7 +27,7 @@ namespace DataStructures
 	class RAK_DLL_EXPORT Table
 	{
 	public:
-			
+
 		enum ColumnType
 		{
 			// Cell::i used
@@ -42,8 +42,8 @@ namespace DataStructures
 			// Cell::c holds data.  Not deallocated. Set manually by assigning ptr.
 			POINTER,
 		};
-		
-		
+
+
 		/// Holds the actual data in the table
 		struct RAK_DLL_EXPORT Cell
 		{
@@ -51,7 +51,7 @@ namespace DataStructures
 			~Cell();
 			Cell(double numericValue, char *charValue, void *ptr, ColumnType type);
 			void Clear(void);
-			
+
 			/// Numeric
 			void Set(int input);
 			void Set(unsigned int input);
@@ -117,7 +117,7 @@ namespace DataStructures
 			/// Binary
 			void UpdateCell(unsigned columnIndex, int byteLength, const char *data);
 		};
-		
+
 		// Operations to perform for cell comparison
 		enum FilterQueryType
 		{
@@ -151,7 +151,7 @@ namespace DataStructures
 			QS_INCREASING_ORDER,
 			QS_DECREASING_ORDER,
 		};
-		
+
 		// Sort on increasing or decreasing order for a particular column
 		struct RAK_DLL_EXPORT SortQuery
 		{

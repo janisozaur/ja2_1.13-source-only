@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/File/vfs_buffer_file.h
  *  - Buffer in RAM, implements File interface to unify usage of file and memory
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA

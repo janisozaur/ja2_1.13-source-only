@@ -1,70 +1,70 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <stdarg.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "sysutil.h"
-	#include "overhead.h"
+	#include "VObject.h"
+	#include "SysUtil.h"
+	#include "Overhead.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "interface.h"
-	#include "vsurface.h"
-	#include "wcheck.h"
-	#include "input.h"
+	#include "Interface.h"
+	#include "VSurface.h"
+	#include "WCheck.h"
+	#include "Input.h"
 	#include "Handle UI.h"
 	#include "Animation Control.h"
 	#include "Animation Data.h"
-	#include "renderworld.h"
-	#include "sys globals.h"
-	#include "cursors.h"
-	#include "radar screen.h"
-	#include "worldman.h"
+	#include "RenderWorld.h"
+	#include "Sys Globals.h"
+	#include "Cursors.h"
+	#include "Radar Screen.h"
+	#include "WorldMan.h"
 	#include "Font Control.h"
-	#include "render dirty.h"
-	#include "utilities.h"
-	#include "interface cursors.h"
+	#include "Render Dirty.h"
+	#include "Utilities.h"
+	#include "Interface Cursors.h"
 	#include "Sound Control.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Interface Panels.h"
-	#include "pathai.h"
-	#include "vobject_blitters.h"
-	#include "faces.h"
+	#include "PathAI.h"
+	#include "VObject_blitters.h"
+	#include "Faces.h"
 	#include "Handle UI Plan.h"
-	#include "interface control.h"
-	#include "interface items.h"
-	#include "soldier profile.h"
+	#include "Interface Control.h"
+	#include "Interface Items.h"
+	#include "Soldier Profile.h"
 	#include "MercTextBox.h"
-	#include "soldier functions.h"
-	#include "cursor control.h"
-	#include "handle doors.h"
-	#include "keys.h"
-	#include "text.h"
-	#include "points.h"
-	#include "soldier macros.h"
-	#include "game clock.h"
-	#include "physics.h"
+	#include "Soldier Functions.h"
+	#include "Cursor Control.h"
+	#include "Handle Doors.h"
+	#include "Keys.h"
+	#include "Text.h"
+	#include "Points.h"
+	#include "Soldier Macros.h"
+	#include "Game Clock.h"
+	#include "Physics.h"
 	#include "Map Screen Interface Map.h"
-	#include "line.h"
+	#include "Line.h"
 	#include "Vehicles.h"
-	#include "messageboxscreen.h"
-	#include "gamesettings.h"
+	#include "MessageBoxScreen.h"
+	#include "GameSettings.h"
 	#include "Squads.h"
-	#include "message.h"
-    #include "strategicmap.h"
+	#include "Message.h"
+    #include "StrategicMap.h"
 	#include "Queen Command.h"
 	// HEADROCK HAM 4: Included for new CTH indicator
-	#include "weapons.h"
+	#include "Weapons.h"
 	#include "Map Screen Interface.h"	// added by Flugente for SquadNames
-	#include "environment.h"
+	#include "Environment.h"
 	#include "SkillCheck.h"				// added by Flugente
 	#include "Drugs And Alcohol.h"		// sevenfm
-	#include "english.h"				// sevenfm
+	#include "English.h"				// sevenfm
 #endif
 
 #include "InterfaceItemImages.h"
@@ -73,13 +73,13 @@
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
-#include "mercs.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
+#include "Mercs.h"
 #include "ub_config.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 //const UINT32 INTERFACE_START_X			= 0;
 //const UINT32 INTERFACE_START_Y			= ( SCREEN_HEIGHT - INTERFACE_HEIGHT );
 //const UINT32 INV_INTERFACE_START_Y		= ( SCREEN_HEIGHT - INV_INTERFACE_HEIGHT );
@@ -120,7 +120,7 @@ INT32		giMenuAnchorX, giMenuAnchorY;
 //*ddd
 //#define PROG_BAR_START_Y			2
 
-//**ddd{ 
+//**ddd{
 //assign 0 to define if using large progress bar
 //#define fSmallSizeProgressbar 1
 INT32 HEIGHT_PROGRESSBAR, PROG_BAR_START_Y;
@@ -315,7 +315,7 @@ BOOLEAN InitializeFaceGearGraphics()
 	char fileName[500];
 
 	for ( UINT32 iCounter2 = 1; iCounter2 < gMAXITEMS_READ; ++iCounter2 )
-	{		
+	{
 		if ( zNewFaceGear[iCounter2].Type > 0 )
 		{
 			{
@@ -348,39 +348,39 @@ BOOLEAN InitializeTacticalPortraits(	)
 
 	//CHRISL: Moved from InitializeTacticalInterface so we can reinitialize portait graphics as we need to
 	//legion 2 jazz
-	if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_ICONS ] == TRUE) 
+	if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_ICONS ] == TRUE)
 	{
 		//additional face icons (legion 2)
-		if (gGameExternalOptions.bTacticalFaceIconStyle == 0) 
-		{	
+		if (gGameExternalOptions.bTacticalFaceIconStyle == 0)
+		{
 			FilenameForBPP("INTERFACE\\portraiticons_a.sti", VObjectDesc.ImageFile);
 
 			if( !AddVideoObject( &VObjectDesc, &guiPORTRAITICONS ) )
 				AssertMsg(0, "Missing INTERFACE\\portraiticons_a.sti" );
-		}	
-		else if (gGameExternalOptions.bTacticalFaceIconStyle == 1) 
-		{	
+		}
+		else if (gGameExternalOptions.bTacticalFaceIconStyle == 1)
+		{
 			FilenameForBPP("INTERFACE\\portraiticons_b.sti", VObjectDesc.ImageFile);
 
 			if( !AddVideoObject( &VObjectDesc, &guiPORTRAITICONS ) )
 				AssertMsg(0, "Missing INTERFACE\\portraiticons_b.sti" );
-		}	
-		else if (gGameExternalOptions.bTacticalFaceIconStyle == 2) 
+		}
+		else if (gGameExternalOptions.bTacticalFaceIconStyle == 2)
 		{
 			FilenameForBPP("INTERFACE\\portraiticons_c.sti", VObjectDesc.ImageFile);
 
 			if( !AddVideoObject( &VObjectDesc, &guiPORTRAITICONS ) )
 				AssertMsg(0, "Missing INTERFACE\\portraiticons_c.sti" );
 		}
-		else if (gGameExternalOptions.bTacticalFaceIconStyle == 3) 
+		else if (gGameExternalOptions.bTacticalFaceIconStyle == 3)
 		{
 			FilenameForBPP("INTERFACE\\portraiticons_d.sti", VObjectDesc.ImageFile);
 
 			if( !AddVideoObject( &VObjectDesc, &guiPORTRAITICONS ) )
 				AssertMsg(0, "Missing INTERFACE\\portraiticons_d.sti" );
-		}		
+		}
 	}
-	else 
+	else
 	{
 		// JA2 classic face icons
 		FilenameForBPP("INTERFACE\\portraiticons.sti", VObjectDesc.ImageFile);
@@ -402,9 +402,9 @@ BOOLEAN InitializeTacticalInterface(	)
 {
 	VSURFACE_DESC		vs_desc;
 	VOBJECT_DESC	VObjectDesc;
-	
+
 	//UINT32 iCounter2;
-	
+
 	// CHRISL: Setup default interface coords based on inventory system in use
 	if((UsingNewInventorySystem() == true))
 	{
@@ -417,7 +417,7 @@ BOOLEAN InitializeTacticalInterface(	)
 		InitializeSMPanelCoordsOld();
 	}
 
-//*ddd{ 
+//*ddd{
 	if( gGameExternalOptions.fSmallSizeProgressbar )
 	{
 		HEIGHT_PROGRESSBAR	= 7;
@@ -435,7 +435,7 @@ BOOLEAN InitializeTacticalInterface(	)
  */
 	InitializeViewPort( );
 	InitializeTEAMPanelCoords( );
-	
+
 	// Load button Interfaces
 	iIconImages[ WALK_IMAGES	]			= LoadButtonImage("INTERFACE\\newicons3.sti", -1,3,4,5,-1 );
 	iIconImages[ SNEAK_IMAGES ]			= UseLoadedButtonImage(iIconImages[ WALK_IMAGES	], -1, 6, 7, 8, -1 );
@@ -555,12 +555,12 @@ BOOLEAN InitializeTacticalInterface(	)
 	InitializeTacticalPortraits();
 
 	InitializeFaceGearGraphics();
-	
+
 	// LOAD RADIO
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("INTERFACE\\radio.sti", VObjectDesc.ImageFile);
 
-	if( !AddVideoObject( &VObjectDesc, &guiRADIO ) )	
+	if( !AddVideoObject( &VObjectDesc, &guiRADIO ) )
 		AssertMsg(0, "Missing INTERFACE\\radio.sti" );
 
 	// LOAD RADIO2
@@ -1638,7 +1638,7 @@ void DrawCTHPixelToBuffer( UINT16 *pBuffer, UINT32 uiPitch, INT16 sLeft, INT16 s
 	// This is a specialized drawing function that's used for the CTH indicator. It makes sure that the
 	// pixel is drawn only within the allowed region (the Tactical Viewport), and never drawn in regions
 	// reserved for other parts of the CTH indicator.
- 
+
 	if (sPixelX < sLeft || sPixelX > sRight || sPixelY < sTop || sPixelY > (sBottom-1))
 	{
 		return;
@@ -1673,7 +1673,7 @@ void DrawCTHPixelToBuffer( UINT16 *pBuffer, UINT32 uiPitch, INT16 sLeft, INT16 s
 	{
 		return;
 	}
-	
+
 	pBuffer[sPixelX + uiPitch*sPixelY] = usColor;
 }
 
@@ -1700,7 +1700,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 	{
 		return;
 	}
-	
+
 	if (TileIsOutOfBounds(pSoldier->sGridNo))
 	{
 		return;
@@ -1797,7 +1797,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 		if ( TIMECOUNTERDONE( pSoldier->timeCounters.BlinkSelCounter, 320 ) )
 		{
 			RESETTIMECOUNTER( pSoldier->timeCounters.BlinkSelCounter, 320 );
-			
+
 			// Update frame
 			pSoldier->sLocatorFrame++;
 
@@ -1812,7 +1812,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 		{
 				pSoldier->flags.fShowLocator = FALSE;
 		}
-		
+
 		if ( gGameExternalOptions.ubShowHealthBarsOnHead )
 		{
 			// Render the beastie
@@ -1892,7 +1892,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 	{
 		return;
 	}
-	
+
 	// anv: if soldier is in vehicle, draw above middle of the vehicle
 	if( !(pSoldier->flags.uiStatusFlags & ( SOLDIER_DRIVER | SOLDIER_PASSENGER ) ) )
 	{
@@ -1903,12 +1903,12 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 		SOLDIERTYPE *pVehicle = GetSoldierStructureForVehicle( pSoldier->iVehicleId );
 		GetSoldierAboveGuyPositions( pVehicle, &sXPos, &sYPos, FALSE );
 	}
-	
+
 	// Display name
 	SetFont( TINYFONT1 );
 	SetFontBackground( FONT_MCOLOR_BLACK );
 	SetFontForeground( FONT_MCOLOR_WHITE );
-	
+
 	// sevenfm: improved UI
 	if( gGameExternalOptions.fImprovedTacticalUI )
 	{
@@ -2019,7 +2019,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 			{
 				swprintf( NameStr, zGrod[0] );
 			}
-			//Legion	
+			//Legion
 			else if ( ARMED_VEHICLE( pSoldier ) )
 			{
 				if ( pSoldier->bVehicleID >= 0 && pVehicleList )
@@ -2043,8 +2043,8 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 		}
 
 //		if ( pSoldier->ubProfile < FIRST_RPC || pSoldier->ubProfile >= GASTON || RPC_RECRUITED( pSoldier ) || AM_AN_EPC( pSoldier ) || ( pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE ) )
-		//new profiles by Jazz	
-		if ( gProfilesIMP[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || gProfilesAIM[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || gProfilesMERC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || RPC_RECRUITED( pSoldier ) || AM_AN_EPC( pSoldier ) || ( pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE ))			
+		//new profiles by Jazz
+		if ( gProfilesIMP[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || gProfilesAIM[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || gProfilesMERC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || RPC_RECRUITED( pSoldier ) || AM_AN_EPC( pSoldier ) || ( pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE ))
 		{
 			if ( gGameExternalOptions.ubShowHealthBarsOnHead )
 			{
@@ -2061,7 +2061,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 					DrawBarsInUIBox( pSoldier,	(INT16)(sXPos), (INT16)(sYPos), 20, 1, 2 );
 
 					// show AP only in turnbased combat, only during our turn
-					if( gGameExternalOptions.ubShowHealthBarsOnHead > 2 && 
+					if( gGameExternalOptions.ubShowHealthBarsOnHead > 2 &&
 						(gTacticalStatus.uiFlags & TURNBASED ) && (gTacticalStatus.uiFlags & INCOMBAT) &&
 						gTacticalStatus.ubCurrentTeam == OUR_TEAM)
 					{
@@ -2140,15 +2140,15 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 				FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 10 ), (INT16)(80 ), 1, pStr, TINYFONT1, &sX, &sY );
 				gprintfdirty( sX, sY, pStr );
 				mprintf( sX, sY, pStr );
-			
-				//-----------------	
+
+				//-----------------
 				if ( pSoldier->bInSector && pSoldier->ubProfile == NO_PROFILE )
 				{
 					if ( pSoldier->bTeam == ENEMY_TEAM )
 					{
 						// Flugente: soldier profiles
 						if ( gGameExternalOptions.fSoldierProfiles_Enemy && pSoldier->usSoldierProfile )
-						{					
+						{
 							swprintf(NameStr, pSoldier->GetName());
 
 							SetFontForeground( FONT_YELLOW );
@@ -2168,12 +2168,12 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 										swprintf(NameStr, zEnemyName[iCounter2].szCurGroup);
 
 										SetFontForeground( FONT_YELLOW );
-					
+
 										//legion2
 										FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 										gprintfdirty( sX, sY, NameStr );
 										mprintf( sX, sY, NameStr );
-				
+
 										break;
 									}
 								}
@@ -2184,13 +2184,13 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 							for( iCounter2 = 1; iCounter2 < 11; ++iCounter2 )
 							{
 								if (zEnemyRank[iCounter2].Enabled == 1)
-								{		
-									if ( zEnemyRank[iCounter2].Stats == 0 && pSoldier->stats.bExpLevel == zEnemyRank[iCounter2].ExpLevel )  
+								{
+									if ( zEnemyRank[iCounter2].Stats == 0 && pSoldier->stats.bExpLevel == zEnemyRank[iCounter2].ExpLevel )
 									{
 										swprintf(NameStr, zEnemyRank[iCounter2].szCurRank);
 
 										SetFontForeground( FONT_YELLOW );
-								
+
 										//legion2
 										FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 										gprintfdirty( sX, sY, NameStr );
@@ -2199,13 +2199,13 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 										break;
 									}
 								}
-							}				
+							}
 						}
 					}
 					// Flugente: soldier profiles
 					else if ( pSoldier->bTeam == MILITIA_TEAM && ((gGameExternalOptions.fSoldierProfiles_Militia && pSoldier->usSoldierProfile) || pSoldier->usIndividualMilitiaID) )
 					{
-						// get a proper chaos name							
+						// get a proper chaos name
 						swprintf(NameStr, pSoldier->GetName());
 
 						SetFontForeground( FONT_YELLOW );
@@ -2217,11 +2217,11 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 					else if (gGameExternalOptions.fCivGroupName == TRUE && pSoldier->ubCivilianGroup > 0 )
 					{
 						if (zCivGroupName[pSoldier->ubCivilianGroup].Enabled == 1)
-						{	
+						{
 							swprintf(NameStr, zCivGroupName[pSoldier->ubCivilianGroup].szCurGroup);
 
 							SetFontForeground( FONT_YELLOW );
-								
+
 							//legion2
 							FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 							gprintfdirty( sX, sY, NameStr );
@@ -2267,17 +2267,17 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 		FindFontCenterCoordinates( sXPos, sYPos, (INT16)(80 ), 1, pStr, TINYFONT1, &sX, &sY );
 		gprintfdirty( sX, sY, pStr );
 		mprintf( sX, sY, pStr );
-		
-		//-----------------	
+
+		//-----------------
 		if ( pSoldier->bInSector && pSoldier->ubProfile == NO_PROFILE )
 		{
 			if ( pSoldier->IsZombie() )
 			{
 				swprintf(NameStr, pSoldier->name);
-							
+
 				// Display name
 				SetFontForeground( FONT_MCOLOR_WHITE );
-								
+
 				//legion2
 				FindFontCenterCoordinates( sXPos, (INT16)( sYPos -10 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 				gprintfdirty( sX, sY, NameStr );
@@ -2288,14 +2288,14 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 				// Flugente: soldier profiles
 				if ( gGameExternalOptions.fSoldierProfiles_Enemy && pSoldier->usSoldierProfile )
 				{
-					// get a proper chaos name							
+					// get a proper chaos name
 					swprintf(NameStr, pSoldier->GetName());
 
 					SetFontForeground( FONT_YELLOW );
 
 					FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 					gprintfdirty( sX, sY, NameStr );
-					mprintf( sX, sY, NameStr );	
+					mprintf( sX, sY, NameStr );
 				}
 				else if (gGameExternalOptions.fEnemyNames == TRUE)
 				{
@@ -2308,12 +2308,12 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 								swprintf(NameStr, zEnemyName[iCounter2].szCurGroup);
 
 								SetFontForeground( FONT_YELLOW );
-								
+
 								//legion2
 								FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 								gprintfdirty( sX, sY, NameStr );
 								mprintf( sX, sY, NameStr );
-		
+
 								break;
 							}
 						}
@@ -2326,7 +2326,7 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 					{
 						if (zEnemyRank[iCounter2].Enabled == 1)
 						{
-							if ( zEnemyRank[iCounter2].Stats == 0 && pSoldier->stats.bExpLevel == zEnemyRank[iCounter2].ExpLevel )  
+							if ( zEnemyRank[iCounter2].Stats == 0 && pSoldier->stats.bExpLevel == zEnemyRank[iCounter2].ExpLevel )
 							{
 								swprintf(NameStr, zEnemyRank[iCounter2].szCurRank);
 
@@ -2353,28 +2353,28 @@ void DrawSelectedUIAboveGuy( UINT16 usSoldierID )
 
 				// sevenfm: show weapon name and additional info
 				ShowEnemyWeapon( sX, sY, pSoldier );
-				ShowEnemyHealthBar( sX, sY, pSoldier );				
+				ShowEnemyHealthBar( sX, sY, pSoldier );
 			}
 			// Flugente: soldier profiles
 			else if ( pSoldier->bTeam == MILITIA_TEAM && ((gGameExternalOptions.fSoldierProfiles_Militia && pSoldier->usSoldierProfile) || pSoldier->usIndividualMilitiaID) )
 			{
-				// get a proper name							
+				// get a proper name
 				swprintf(NameStr, pSoldier->GetName());
 
 				SetFontForeground( FONT_YELLOW );
 
 				FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 				gprintfdirty( sX, sY, NameStr );
-				mprintf( sX, sY, NameStr );	
+				mprintf( sX, sY, NameStr );
 			}
 			else if (gGameExternalOptions.fCivGroupName == TRUE && pSoldier->ubCivilianGroup > 0 )
 			{
 				if (zCivGroupName[pSoldier->ubCivilianGroup].Enabled == 1)
-				{	
+				{
 					swprintf(NameStr, zCivGroupName[pSoldier->ubCivilianGroup].szCurGroup);
 
 					SetFontForeground( FONT_YELLOW );
-								
+
 					//legion2
 					FindFontCenterCoordinates( sXPos, (INT16)( sYPos + 20 ), (INT16)(80 ), 1, NameStr, TINYFONT1, &sX, &sY );
 					gprintfdirty( sX, sY, NameStr );
@@ -2448,7 +2448,7 @@ BOOLEAN DrawCTHIndicator()
 	// As explained above, the most important part of the new indicator is the Aperture circle/crosshairs.
 	// These indicate the size of the "margin of error" for our current shot. The more accurate we are,
 	// the smaller the circle will be.
-	// 
+	//
 	// The player uses this to determine whether the shot has a good likelyhood to hit the target.
 	// If the circle is the same size or smaller than the target itself, then hit probability is 100%.
 	// The larger it gets, the less hit probability there will be. When adding extra aiming clicks,
@@ -2458,7 +2458,7 @@ BOOLEAN DrawCTHIndicator()
 	// Shot aperture is calculated using the CTH formula (CalcChanceToHitGun). Scopes and lasers
 	// can help decrease the size of the aperture further.
 	/////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	/////////////////////////////////
 	// Define colors
 	UINT8 ColorsRed[10] = { 255, 255, 255, 255, 255, 255, 255, 255, 173, 0 };
@@ -2502,11 +2502,11 @@ BOOLEAN DrawCTHIndicator()
 	// Now we calculate the Aperture size. This is done using the same method as the shooting formula uses.
 
 	// Calculate the size of a "normal" aperture. This is how wide a shot can go at 1x Normal Distance.
-	FLOAT iBasicAperture = CalcBasicAperture() * 2; // The *2 compensates for the difference between CellXY and ScreenXY 
+	FLOAT iBasicAperture = CalcBasicAperture() * 2; // The *2 compensates for the difference between CellXY and ScreenXY
 
 	// sevenfm: moved declarations out of codeblock, will use them later for laser dot plotting
-	FLOAT fLaserBonus = 0;	
-	FLOAT fBrightnessModifier = 1;	
+	FLOAT fLaserBonus = 0;
+	FLOAT fBrightnessModifier = 1;
 	FLOAT fEffectiveLaserRatio = 1;
 
 	// silversurfer: New functionality for iron sights - There have been many complaints that iron sights lose their usefulness
@@ -2524,7 +2524,7 @@ BOOLEAN DrawCTHIndicator()
 		iBasicAperture = iBasicAperture * (FLOAT)( (100 - gGameCTHConstants.IRON_SIGHT_PERFORMANCE_BONUS) / 100);
 
 	// laser pointers can provide a percentage bonus to base aperture
-	if ( gCTHDisplay.iBestLaserRange > 0 
+	if ( gCTHDisplay.iBestLaserRange > 0
 		&& ( gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE != 0) )
 	{
 		INT8 bLightLevel = LightTrueLevel(gCTHDisplay.iTargetGridNo, gsInterfaceLevel );
@@ -2568,7 +2568,7 @@ BOOLEAN DrawCTHIndicator()
 	///////////////////////////////////////////////////////////////
 	// To make things easier for us, we now calculate the Magnification Factor for this shot. A Mag Factor
 	// is a divisor to the sway of the muzzle. It's about the same as multiplying CTH by a certain amount.
-	// Note that both optical magnification devices (like scopes) and dot-projection devices (like lasers and 
+	// Note that both optical magnification devices (like scopes) and dot-projection devices (like lasers and
 	// reflex sights) provide this sort of bonus.
 	FLOAT iMagFactor = CalcMagFactor( pSoldier, pWeapon, d2DDistance, gCTHDisplay.iTargetGridNo, (UINT8)pSoldier->aiData.bAimTime );
 
@@ -2590,10 +2590,10 @@ BOOLEAN DrawCTHIndicator()
 	UINT16 sEffRange = Weapon[Item[pSoldier->inv[pSoldier->ubAttackingHand].usItem].ubClassIndex].usRange + GetRangeBonus(&(pSoldier->inv[ pSoldier->ubAttackingHand ]));
 	FLOAT iRangeRatio = __max(1.0f, (FLOAT)(d2DDistance / sEffRange));
 	FLOAT iDistanceRatio = (FLOAT)(d2DDistance / gGameCTHConstants.NORMAL_SHOOTING_DISTANCE);
-	
+
 	/////////////////////////////////////////////
 	// Factor in Gun Accuracy.
-	
+
 	INT16 sAccuracy = GetGunAccuracy( &(pSoldier->inv[ pSoldier->ubAttackingHand ]) );
 
 	sAccuracy = __max(0, sAccuracy);
@@ -2646,7 +2646,7 @@ BOOLEAN DrawCTHIndicator()
 
 	POINT	MousePos;
 	GetCursorPos(&MousePos);
-	ScreenToClient(ghWindow, &MousePos); // In window coords!	
+	ScreenToClient(ghWindow, &MousePos); // In window coords!
 
 	sStartScreenX = (INT16)MousePos.x - 1;	// sevenfm: fix (-1) for cursor mismatch
 	sStartScreenY = (INT16)MousePos.y - 1;
@@ -2814,7 +2814,7 @@ BOOLEAN DrawCTHIndicator()
 		MagRect.left = sCenter - (usTotalWidth / 2);
 		MagRect.right = sCenter + (usTotalWidth / 2);
 	}
-	
+
 #ifdef JA2BETAVERSION
 	/////////////// SHOT APERTURE SIZE
 	{
@@ -2888,7 +2888,7 @@ BOOLEAN DrawCTHIndicator()
 
 			// How many bullets are left in the gun?
 			UINT32 uiBulletsLeft = pSoldier->inv[ pSoldier->ubAttackingHand ][0]->data.gun.ubGunShotsLeft;
-			if (pSoldier->IsValidSecondHandBurst()) 
+			if (pSoldier->IsValidSecondHandBurst())
 			{
 				uiBulletsLeft = min( (pSoldier->inv[ SECONDHANDPOS ][0]->data.gun.ubGunShotsLeft), uiBulletsLeft );
 			}
@@ -2922,8 +2922,8 @@ BOOLEAN DrawCTHIndicator()
 
 			// Display no more than X bullets on screen!
 			// sevenfm: limit displayed number of bullets to 10
-			if( gGameExternalOptions.ubImprovedNCTHCursor > 1 )	
-				uiMaxBulletsToDisplay = __min(uiMaxAutofire, 10); 
+			if( gGameExternalOptions.ubImprovedNCTHCursor > 1 )
+				uiMaxBulletsToDisplay = __min(uiMaxAutofire, 10);
 			else
 				uiMaxBulletsToDisplay = __min(uiMaxAutofire, 15);
 
@@ -2970,7 +2970,7 @@ BOOLEAN DrawCTHIndicator()
 
 				// Offset adds up the number of bullets and spaces we've already drawn.
 				INT16 sCurOffset = ubBulletWidth * (x+usNumSpacesShown);
-				
+
 				// Draw a bullet here!
 				BltVideoObjectFromIndex( FRAME_BUFFER, guiCTHImage, 8, sLeft + sCurOffset, sTop, VO_BLT_SRCTRANSPARENCY, NULL );
 
@@ -3156,7 +3156,7 @@ BOOLEAN DrawCTHIndicator()
 				}
 				else
 				{
-					if (pSoldier->IsValidAlternativeFireMode( pSoldier->aiData.bShownAimTime, gCTHDisplay.iTargetGridNo ) && 
+					if (pSoldier->IsValidAlternativeFireMode( pSoldier->aiData.bShownAimTime, gCTHDisplay.iTargetGridNo ) &&
 						ubAllowedLevels - abs((ubAllowedLevels-(x+1))) <= GetNumberAltFireAimLevels( pSoldier, gCTHDisplay.iTargetGridNo ) )
 					{
 						// yellow empty tick
@@ -3243,7 +3243,7 @@ BOOLEAN DrawCTHIndicator()
 	// the size of the Cursor Buffer is quite limited (~35x35 pixels) and is governed by the size of the STIs used
 	// for the mouse cursor itself. After much trial and error, it became obvious that it was impossible to draw
 	// a large indicator (as required by the NCTH system) directly onto the mouse buffer.
-	// 
+	//
 	// Fortunately, I found out that it was possible to draw into the Frame Buffer instead, without leaving
 	// graphical glitches behind. I could also dynamically define the area to draw into as I pleased. Furthermore,
 	// I managed to make this drawing behave the same as a mouse cursor would, by having it follow the mouse
@@ -3411,7 +3411,7 @@ BOOLEAN DrawCTHIndicator()
 
 	// sevenfm: draw laser dot
 	NCTHDrawLaserDot( ptrBuf, uiPitch, sLeft, sTop, sRight, sBottom, sStartScreenX, sStartScreenY, fLaserBonus, fBrightnessModifier, fEffectiveLaserRatio, zOffset );
-	
+
 	// Unlock the Frame Buffer.
 	UnLockVideoSurface( FRAME_BUFFER );
 
@@ -3507,7 +3507,7 @@ void DrawBarsInUIBox( SOLDIERTYPE *pSoldier , INT16 sXPos, INT16 sYPos, INT16 sW
 	if( gGameExternalOptions.ubShowHealthBarsOnHead > 1 )
 	{
 		DrawBar( sXPos+2, sYPos, sWidth + 2, 1 + interval*3, COLOR_BLACK, Get16BPPColor( FROMRGB( 0, 0, 0	) ), pDestBuf );
-		// draw border: light brown for stealth mode, grey for regular		
+		// draw border: light brown for stealth mode, grey for regular
 		if(pSoldier->bStealthMode)
 		{
 			color8 = COLOR_BROWN;
@@ -3528,7 +3528,7 @@ void DrawBarsInUIBox( SOLDIERTYPE *pSoldier , INT16 sXPos, INT16 sYPos, INT16 sW
 
 	// get amt bandaged
 	bBandage = pSoldier->stats.bLifeMax - pSoldier->stats.bLife - pSoldier->bBleeding;
-	
+
 	// NOW DO BLEEDING
 	if ( pSoldier->bBleeding )
 	{
@@ -3536,25 +3536,25 @@ void DrawBarsInUIBox( SOLDIERTYPE *pSoldier , INT16 sXPos, INT16 sYPos, INT16 sW
 		dWidth			=	dPercentage * sWidth;
 		DrawBar( sXPos + 3, sYPos + 1, (INT32)dWidth, sHeight, COLOR_RED, Get16BPPColor( FROMRGB( 240,	240, 20	) ), pDestBuf );
 	}
-		
+
 	if( bBandage )
 	{
 		dPercentage = (FLOAT)( pSoldier->stats.bLife + bBandage ) / (FLOAT)100;
 		dWidth			=	dPercentage * sWidth;
 		DrawBar( sXPos + 3, sYPos + 1, (INT32)dWidth, sHeight, COLOR_RED, Get16BPPColor( FROMRGB( 222, 132, 132	) ), pDestBuf );
 	}
-		
+
 	dPercentage = (FLOAT)pSoldier->stats.bLife / (FLOAT)100;
 	dWidth			=	dPercentage * sWidth;
 	DrawBar( sXPos + 3, sYPos + 1, (INT32)dWidth, sHeight, COLOR_RED, Get16BPPColor( FROMRGB( 200, 0, 0	) ), pDestBuf );
-		
+
 	dPercentage = (FLOAT)( pSoldier->bBreathMax ) / (FLOAT)100;
 	dWidth			=	dPercentage * sWidth;
 	DrawBar( sXPos + 3, sYPos + 1 + interval, (INT32)dWidth, sHeight, COLOR_BLUE, Get16BPPColor( FROMRGB( 20, 20, 150	) ), pDestBuf );
 
 	dPercentage = (FLOAT)( pSoldier->bBreath ) / (FLOAT)100;
 	dWidth			=	dPercentage * sWidth;
-	DrawBar( sXPos + 3, sYPos + 1 + interval, (INT32)dWidth, sHeight, COLOR_BLUE, Get16BPPColor( FROMRGB( 100, 100, 220 ) ), pDestBuf );	
+	DrawBar( sXPos + 3, sYPos + 1 + interval, (INT32)dWidth, sHeight, COLOR_BLUE, Get16BPPColor( FROMRGB( 100, 100, 220 ) ), pDestBuf );
 
 	/*
 	// morale
@@ -4152,7 +4152,7 @@ void BtnDoorMenuCallback(GUI_BUTTON *btn,INT32 reason)
 		{
 			// OK, set cancle code!
 			gOpenDoorMenu.fMenuHandled = 2;
-#ifdef JA2UB			
+#ifdef JA2UB
 			//Handle someone trying to open the door in the tunnel gate`
 			HandlePlayerSayingQuoteWhenFailingToOpenGateInTunnel( gOpenDoorMenu.pSoldier, FALSE ); //Ja25 UB
 #endif
@@ -4161,7 +4161,7 @@ void BtnDoorMenuCallback(GUI_BUTTON *btn,INT32 reason)
 		// Switch on command....
 		if ( uiBtnID == iActionIcons[ OPEN_DOOR_ICON ] )
 		{
-#ifdef JA2UB		
+#ifdef JA2UB
 			//Handle someone trying to open the door in the tunnel gate`
 			if( HandlePlayerSayingQuoteWhenFailingToOpenGateInTunnel( gOpenDoorMenu.pSoldier, TRUE ) ) //Ja25 UB
 			{
@@ -4347,7 +4347,7 @@ void BtnDoorMenuCallback(GUI_BUTTON *btn,INT32 reason)
 
 		if ( uiBtnID == iActionIcons[ USE_CROWBAR_ICON ] )
 		{
-#ifdef JA2UB		
+#ifdef JA2UB
 			//Handle someone trying to open the door in the tunnel gate`
 			if( HandlePlayerSayingQuoteWhenFailingToOpenGateInTunnel( gOpenDoorMenu.pSoldier, TRUE ) ) //JA25 UB
 			{
@@ -4641,19 +4641,19 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 	UINT32			uiBarToUseInUpDate=0;
 	BOOLEAN			fDoLimitBar = FALSE;
 	FLOAT			dNumStepsPerEnemy, dLength, dCurSize;
-	INT16			iProgBarLength; 
+	INT16			iProgBarLength;
 	STR fn;
-	
+
 	memset( &VObjectDesc, 0, sizeof( VObjectDesc ) );
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
-	
+
 	if (iResolution >= _640x480 && iResolution < _800x600)
 	{
 		iProgBarLength = 640 - 13;
 		if (gGameExternalOptions.fSmallSizeProgressbar)
 			fn = "INTERFACE\\rect_Thin.sti";
 		else
-			fn = "INTERFACE\\rect.sti";		
+			fn = "INTERFACE\\rect.sti";
 	}
 	else if (iResolution < _1024x768)
 	{
@@ -4661,7 +4661,7 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 		if (gGameExternalOptions.fSmallSizeProgressbar)
 			fn = "INTERFACE\\rect_800x600Thin.sti";
 		else
-			fn = "INTERFACE\\rect_800x600.sti";			
+			fn = "INTERFACE\\rect_800x600.sti";
 	}
 	else
 	{
@@ -4673,13 +4673,13 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 	}
 
 	FilenameForBPP(fn, VObjectDesc.ImageFile);
-	
-	if( !AddVideoObject( &VObjectDesc, &uiBAR ) )	
-	{ 
+
+	if( !AddVideoObject( &VObjectDesc, &uiBAR ) )
+	{
 		sprintf(fn, "Missing %s", fn);
-		AssertMsg(0, fn );	
+		AssertMsg(0, fn );
 	}
-	
+
 	if (iResolution >= _640x480 && iResolution < _800x600)
 	{
 		if (gGameExternalOptions.fSmallSizeProgressbar)
@@ -4704,11 +4704,11 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 
 	FilenameForBPP(fn, VObjectDesc.ImageFile);
 	if( !AddVideoObject( &VObjectDesc, &uiPLAYERBAR ) )
-	{ 
+	{
 		sprintf(fn, "Missing %s", fn);
-		AssertMsg(0, fn );	
+		AssertMsg(0, fn );
 	}
-	
+
 	if (iResolution >= _640x480 && iResolution < _800x600)
 	{
 		if (gGameExternalOptions.fSmallSizeProgressbar)
@@ -4732,13 +4732,13 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 	}
 
 	FilenameForBPP(fn, VObjectDesc.ImageFile);
-	
+
 	if( !AddVideoObject( &VObjectDesc, &uiINTBAR ) )
-	{ 
+	{
 		sprintf(fn, "Missing %s", fn);
-		AssertMsg(0, fn );	
-	}		
-	
+		AssertMsg(0, fn );
+	}
+
 	SetFontDestBuffer( uiSurface , 0, 0, SCREEN_WIDTH , HEIGHT_PROGRESSBAR, FALSE );
 	SetFont( TINYFONT1 );
 
@@ -4749,7 +4749,7 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 		case MILITIA_INTERRUPT_MESSAGE:
 		case AIR_RAID_TURN_MESSAGE:
 
-			// Render rect into surface	
+			// Render rect into surface
 			BltVideoObjectFromIndex( uiSurface, uiBAR, 0, xResOffset, 0, VO_BLT_SRCTRANSPARENCY, NULL );
 
 			SetFontBackground( FONT_MCOLOR_BLACK );
@@ -4760,7 +4760,7 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 
 		case PLAYER_INTERRUPT_MESSAGE:
 
-			// Render rect into surface	
+			// Render rect into surface
 			BltVideoObjectFromIndex( uiSurface, uiINTBAR, 0, xResOffset, 0, VO_BLT_SRCTRANSPARENCY, NULL );
 
 			SetFontBackground( FONT_MCOLOR_BLACK );
@@ -4771,7 +4771,7 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 
 		case PLAYER_TURN_MESSAGE:
 
-			// Render rect into surface	
+			// Render rect into surface
 			BltVideoObjectFromIndex( uiSurface, uiPLAYERBAR, 0, xResOffset, 0, VO_BLT_SRCTRANSPARENCY, NULL );
 
 			SetFontBackground( FONT_MCOLOR_BLACK );
@@ -4780,7 +4780,7 @@ void CreateTopMessage( UINT32 uiSurface, UINT8 ubType, STR16 psString )
 			uiBarToUseInUpDate = uiPLAYERBAR;
 			break;
 	}
-	
+
 	if ( gGameOptions.fTurnTimeLimit )
 	{
 		if ( ubType == PLAYER_TURN_MESSAGE || ubType == PLAYER_INTERRUPT_MESSAGE )
@@ -4930,7 +4930,7 @@ void HandleTopMessages( )
 				{
 					gTacticalStatus.usTactialTurnLimitCounter = ( ( gubProgCurEnemy ) * PLAYER_TEAM_TIMER_TICKS_PER_ENEMY );
 				}
-				
+
 				}
 
 				CreateTopMessage( gTopMessage.uiSurface, gTacticalStatus.ubTopMessageType, gTacticalStatus.zTopMessageString );
@@ -5191,7 +5191,7 @@ void InitPlayerUIBar( BOOLEAN fInterrupt )
 
 	if (is_networked)
 		gTacticalStatus.usTactialTurnLimitMax = 0;//hayden , cheap hack, always calc time...
-	
+
 	// OK, calculate time....
 	if ( !fInterrupt || gTacticalStatus.usTactialTurnLimitMax == 0 )
 	{
@@ -5270,7 +5270,7 @@ STR16 GetSoldierHealthString( SOLDIERTYPE *pSoldier )
 	{
 		return L"";
 	}
-	else	
+	else
 	{
 		// Flugente: display if we are a prisoner of war
 		if ( pSoldier->usSoldierFlagMask & SOLDIER_POW )
@@ -5781,7 +5781,7 @@ void DrawItemPic(INVTYPE *pItem, INT16 sX, INT16 sY )
 {
 	UINT16			usGraphicNum;
 
-	usGraphicNum = g_bUsePngItemImages ? 0 : pItem->ubGraphicNum;	
+	usGraphicNum = g_bUsePngItemImages ? 0 : pItem->ubGraphicNum;
 
 	HVOBJECT		hVObject;
 	ETRLEObject     *pTrav;
@@ -5797,12 +5797,12 @@ void GetItemDimensions( INVTYPE *pItem, INT16 &sWidth, INT16 &sHeight )
 	ETRLEObject     *pTrav;
 	UINT16			usGraphicNum;
 
-	usGraphicNum = g_bUsePngItemImages ? 0 : pItem->ubGraphicNum;	
+	usGraphicNum = g_bUsePngItemImages ? 0 : pItem->ubGraphicNum;
 	GetVideoObject( &hVObject, GetInterfaceGraphicForItem( pItem ) );
 	pTrav = &(hVObject->pETRLEObject[ usGraphicNum ] );
 
 	sWidth = (UINT32)(pTrav->usWidth);
-	sHeight = (UINT32)(pTrav->usHeight);	
+	sHeight = (UINT32)(pTrav->usHeight);
 }
 
 BOOLEAN ShowExactInfo( SOLDIERTYPE* pSoldier, SOLDIERTYPE* pTargetSoldier )
@@ -5819,7 +5819,7 @@ BOOLEAN ShowExactInfo( SOLDIERTYPE* pSoldier, SOLDIERTYPE* pTargetSoldier )
 	maxExactWeaponDistance = (INT32)( pSoldier->GetMaxDistanceVisible( pTargetSoldier->sGridNo, 0, CALC_FROM_WANTED_DIR) ) / 2 ;
 
 	// apply experience level factor
-	maxExactWeaponDistance = (INT32)( maxExactWeaponDistance * ( 1 + FLOAT( EffectiveExpLevel( pSoldier ) ) / 10.0f ) ); 
+	maxExactWeaponDistance = (INT32)( maxExactWeaponDistance * ( 1 + FLOAT( EffectiveExpLevel( pSoldier ) ) / 10.0f ) );
 
 	if ( maxExactWeaponDistance >= range )
 		return TRUE;
@@ -5830,7 +5830,7 @@ BOOLEAN ShowExactInfo( SOLDIERTYPE* pSoldier, SOLDIERTYPE* pTargetSoldier )
 void DrawNCTHCursorItemPics( INT16 sStartScreenX, INT16 sStartScreenY  )
 {
 	// find target soldier
-	SOLDIERTYPE *pSoldier;	
+	SOLDIERTYPE *pSoldier;
 	SOLDIERTYPE		*pTargetSoldier;
 	INT32			usItemID = 0;
 	INT16			sX, sY, sWidth, sHeight;
@@ -5843,7 +5843,7 @@ void DrawNCTHCursorItemPics( INT16 sStartScreenX, INT16 sStartScreenY  )
 	RightRect.left = 0;		RightRect.top = 0;		RightRect.right = 0;		RightRect.bottom = 0;
 	LeftRect.left = 0;		LeftRect.top = 0;		LeftRect.right = 0;			LeftRect.bottom = 0;
 	LeftRect2.left = 0;		LeftRect2.top = 0;		LeftRect2.right = 0;		LeftRect2.bottom = 0;
-	
+
 	if( gGameExternalOptions.ubAdditionalNCTHCursorInfo &&
 		gfUIBodyHitLocation &&
 		pSoldier->ubBodyType <= REGFEMALE &&
@@ -5876,7 +5876,7 @@ void DrawNCTHCursorItemPics( INT16 sStartScreenX, INT16 sStartScreenY  )
 			RightRect.top = sY;
 			RightRect.right = sX + sWidth;
 			RightRect.bottom = sY + sHeight;
-		}			
+		}
 
 		if( gGameExternalOptions.ubAdditionalNCTHCursorInfo > 1 )
 		{
@@ -5915,9 +5915,9 @@ void DrawNCTHCursorItemPics( INT16 sStartScreenX, INT16 sStartScreenY  )
 				}
 
 				if( pTargetSoldier->inv[HEAD1POS].exists() )
-				{					
+				{
 					usItemID = pTargetSoldier->inv[HEAD1POS].usItem;
-					GetItemDimensions( &(Item[ usItemID ]), sWidth, sHeight );					
+					GetItemDimensions( &(Item[ usItemID ]), sWidth, sHeight );
 					sX = sStartScreenX - 25 - sWidth;
 					sY = sStartScreenY - 3;
 					if( pTargetSoldier->inv[HEAD2POS].exists() )
@@ -5940,7 +5940,7 @@ void GetEnemyInfoString( SOLDIERTYPE* pSelectedSoldier, SOLDIERTYPE* pTargetSold
 	// if ALT pressed - show armour instead of weapon
 	if( gfUIBodyHitLocation &&
 		_KeyDown( ALT ) )
-	{						
+	{
 		SetFontForeground( FONT_YELLOW );
 		// show armour
 		usItemID = 0;
@@ -5981,12 +5981,12 @@ void GetEnemyInfoString( SOLDIERTYPE* pSelectedSoldier, SOLDIERTYPE* pTargetSold
 					swprintf( NameStr, L"%s", gzTooltipStrings[STR_TT_LEGGINGS] );
 					//swprintf( NameStr, L"%s", L"Leggings" );
 					break;
-				}								
+				}
 			}
 		}
 	}
 	else
-	{						
+	{
 		if( gfUIBodyHitLocation &&
 			pSelectedSoldier->bAimShotLocation == AIM_SHOT_HEAD )
 		{
@@ -6004,7 +6004,7 @@ void GetEnemyInfoString( SOLDIERTYPE* pSelectedSoldier, SOLDIERTYPE* pTargetSold
 						wcscat( NameStr, TacticalStr[ GENERAL_INFO_MASK ] );
 					else if( Item[pTargetSoldier->inv[HEAD1POS].usItem].nightvisionrangebonus || Item[pTargetSoldier->inv[HEAD1POS].usItem].cavevisionrangebonus )
 						wcscat( NameStr, TacticalStr[ GENERAL_INFO_NVG ] );
-				}				
+				}
 			}
 			if( pTargetSoldier->inv[HEAD2POS].exists() )
 			{
@@ -6065,7 +6065,7 @@ void GetEnemyInfoString( SOLDIERTYPE* pSelectedSoldier, SOLDIERTYPE* pTargetSold
 			else
 			{
 				if( showExactInfo )
-				{							
+				{
 					if( pTargetSoldier->inv[ HANDPOS ].usItem )
 						swprintf( NameStr, L"%s", Item[ pTargetSoldier->inv[ HANDPOS ].usItem ].szItemName );
 					else
@@ -6077,7 +6077,7 @@ void GetEnemyInfoString( SOLDIERTYPE* pSelectedSoldier, SOLDIERTYPE* pTargetSold
 						swprintf( NameStr, L"%s", TacticalStr[ GENERAL_INFO_ITEM ] );
 					else
 						swprintf( NameStr, L"%s", L"" );
-				}								
+				}
 			}
 		}
 	}
@@ -6117,13 +6117,13 @@ void ShowEnemyWeapon( INT16 sX, INT16 sY, SOLDIERTYPE* pTargetSoldier )
 	if ( gGameExternalOptions.fShowEnemyWeapon && gTacticalStatus.ubCurrentTeam == OUR_TEAM && pTargetSoldier->ubBodyType <= REGFEMALE )
 	{
 		SetFont( TINYFONT1 );
-		SetFontBackground( FONT_MCOLOR_BLACK );		
+		SetFontBackground( FONT_MCOLOR_BLACK );
 
 		swprintf( NameStr, L"" );
 		GetEnemyInfoString( pSelectedSoldier, pTargetSoldier, showExactInfo, NameStr );
 		usTotalWidth = StringPixLength ( NameStr, TINYFONT1 );
 		sX -= usTotalWidth/2;
-		
+
 		// print item name
 		gprintfdirty( sX, sY + 10, NameStr );
 		mprintf( sX, sY + 10, NameStr );
@@ -6142,7 +6142,7 @@ void ShowEnemyHealthBar( INT16 sX, INT16 sY, SOLDIERTYPE* pSoldier )
 		pSelectedSoldier = MercPtrs[ gusSelectedSoldier ];
 	else
 		return;
-	
+
 	if ( pSelectedSoldier->aiData.bOppList[pSoldier->ubID] != SEEN_CURRENTLY )
 		return;
 
@@ -6368,7 +6368,7 @@ void NCTHImprovedAPColor( SOLDIERTYPE* pSoldier, OBJECTTYPE* pWeapon )
 	if( gGameExternalOptions.ubImprovedNCTHCursor > 0 )
 	{
 		// compare Aps needed to shoot with shooter's APs
-		INT16 sRemainingAP = pSoldier->bActionPoints - gsCurrentActionPoints;			
+		INT16 sRemainingAP = pSoldier->bActionPoints - gsCurrentActionPoints;
 		INT16 sModifiedReloadAP = Weapon[Item[pWeapon->usItem].ubClassIndex].APsToReloadManually;
 		if( sModifiedReloadAP > 0 )
 		{
@@ -6473,11 +6473,11 @@ void NCTHDrawScopeModeIcon( SOLDIERTYPE* pSoldier, INT16 sNewX, INT16 sNewY )
 			GetScopeLists(pSoldier, &pSoldier->inv[HANDPOS], ObjList);
 
 			if ( pSoldier->bScopeMode == USE_ALT_WEAPON_HOLD )
-			{		
+			{
 				BltVideoObjectFromIndex( FRAME_BUFFER, uiItemInfoAdvancedIcon, 56, sNewX, sNewY+1, VO_BLT_TRANSSHADOW, NULL );
 			}
 			else if (ObjList[pSoldier->bScopeMode] != NULL && IsAttachmentClass(ObjList[pSoldier->bScopeMode]->usItem, AC_SCOPE ) )
-			{					
+			{
 				BltVideoObjectFromIndex( FRAME_BUFFER, uiItemInfoAdvancedIcon, 54, sNewX, sNewY+1, VO_BLT_TRANSSHADOW, NULL );
 			}
 			// improved iron sights are attachable iron sights (the 'normal' iron sight is the gun itself)
@@ -6492,7 +6492,7 @@ void NCTHDrawScopeModeIcon( SOLDIERTYPE* pSoldier, INT16 sNewX, INT16 sNewY )
 			else
 			{
 				BltVideoObjectFromIndex( FRAME_BUFFER, uiItemInfoAdvancedIcon, 52, sNewX, sNewY-1, VO_BLT_TRANSSHADOW, NULL );
-			}								
+			}
 		}
 	}
 }
@@ -6509,7 +6509,7 @@ void NCTHShowAimLevels( SOLDIERTYPE* pSoldier, INT16 curX, INT16 curY )
 		SetFontBackground( FONT_MCOLOR_BLACK );
 		if( ubAllowedLevels == 0 )
 			SetFontForeground( FONT_MCOLOR_LTGRAY );
-		else if ( pSoldier->aiData.bShownAimTime == ubAllowedLevels )		
+		else if ( pSoldier->aiData.bShownAimTime == ubAllowedLevels )
 			SetFontForeground( FONT_MCOLOR_LTYELLOW );
 		else
 			SetFontForeground( FONT_MCOLOR_LTGRAY );
@@ -6538,7 +6538,7 @@ void NCTHShowMounted( SOLDIERTYPE* pSoldier, UINT16* ptrBuf, UINT32 uiPitch, INT
 		UINT16 usCMountedBar	= Get16BPPColor( FROMRGB( 192, 0, 0 ) );
 		UINT16 usCMountedBorder	= Get16BPPColor( FROMRGB( 10, 10, 10 ) );
 		if ( gGameExternalOptions.fWeaponResting && !gfCannotGetThrough && pItem->usItemClass & (IC_GUN | IC_LAUNCHER) && pSoldier->IsWeaponMounted() )
-		{			
+		{
 			for(INT32 cnt=-5;cnt<=5;cnt++)
 			{
 				DrawCTHPixelToBuffer( ptrBuf, uiPitch, sLeft, sTop, sRight, sBottom, sStartScreenX+cnt, sStartScreenY+8+(INT16)zOffset, usCMountedBorder );

@@ -3,23 +3,23 @@
 	#include "Loading Screen.h"
 	#include "INIReader.h"
 #else
-	#include "vsurface.h"
-	#include "mapscreen.h"
+	#include "VSurface.h"
+	#include "MapScreen.h"
 	#include "Loading Screen.h"
 	#include "Campaign Types.h"
 	#include "Game Clock.h"
 	#include "GameSettings.h"
 	#include "Random.h"
 	#include "Debug.h"
-	#include "local.h"
+	#include "Local.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "render dirty.h"
+	#include "Font.h"
+	#include "Render Dirty.h"
 #endif
 #include "Strategic Movement.h"
 #include "UndergroundInit.h"
 #include <string>
-#include "strategicmap.h"
+#include "StrategicMap.h"
 
 extern HVSURFACE ghFrameBuffer;
 extern BOOLEAN gfSchedulesHosed;
@@ -131,7 +131,7 @@ UINT8 GetLoadScreenID(INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ)
 
 		else
 			return fNight ? NIGHT : DAY;
-		
+
 	} /* WANNE: User made System - END */
 
 	/* WANNE: Sir-Tech System - BEGIN */
@@ -254,7 +254,7 @@ UINT8 GetLoadScreenID(INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ)
 			switch( ubSectorID )
 			{
 				case SEC_K15:
-				{	
+				{
 					//if we are going up stairs, else traversing at same level
 					if( gJa25SaveStruct.ubLoadScreenStairTraversal == LS__GOING_UP_STAIRS )
 						return LOADINGSCREEN_UP_STAIRS;
@@ -330,7 +330,7 @@ UINT8 GetLoadScreenID(INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ)
 				Assert( FALSE );
 				return fNight ? LOADINGSCREEN_NIGHTGENERIC : LOADINGSCREEN_DAYGENERIC;
 		}
-	
+
 	} /* WANNE: Sir-Tech System - END */
 }
 
@@ -361,7 +361,7 @@ void DisplayLoadScreenWithID( UINT8 ubLoadScreenID )
 
 	szSector = szSectorMap [gWorldSectorY][gWorldSectorX];
 	const BOOLEAN fExternalLS = (szSector != NULL && szSector != "N") && ((DAY <= ubLoadScreenID && ubLoadScreenID <= NIGHT_ALT) || (ubLoadScreenID == UNDERGROUND));
-	
+
 	if (fExternalLS)
 	{
 		// Get the image path
@@ -428,15 +428,15 @@ void DisplayLoadScreenWithID( UINT8 ubLoadScreenID )
 
 		BuildLoadscreenFilename(strImage, imagePath.c_str(), 0, imageFormat.c_str());
 		strImage.copy(vs_desc.ImageFile, sizeof(vs_desc.ImageFile)-1);
-		
-		
+
+
 		if ( !FileExists(vs_desc.ImageFile) )
 		{
 			std::string strImage("LOADSCREENS\\");
-			
+
 			BuildLoadscreenFilename(strImage, LoadScreenNames[1], 0, imageFormat.c_str());
 
-			strImage.copy(vs_desc.ImageFile, sizeof(vs_desc.ImageFile)-1);		
+			strImage.copy(vs_desc.ImageFile, sizeof(vs_desc.ImageFile)-1);
 		}
 	}
 	else
@@ -469,24 +469,24 @@ void DisplayLoadScreenWithID( UINT8 ubLoadScreenID )
 		if (FileExists(vs_desc.ImageFile) && AddVideoSurface(&vs_desc, &uiLoadScreen))
 		{
 			SGPRect SrcRect, DstRect;
-									
+
 			//Blit the background image
 			GetVideoSurface(&hVSurface, uiLoadScreen);
-			
+
 			// Stretch the background image
 			SrcRect.iLeft = 0;
 			SrcRect.iTop = 0;
 			SrcRect.iRight = hVSurface->usWidth;
 			SrcRect.iBottom = hVSurface->usHeight;
-			
+
 			DstRect.iLeft = 0;
 			DstRect.iTop = 0;
 			DstRect.iRight = SCREEN_WIDTH;
 			DstRect.iBottom = SCREEN_HEIGHT;
-			
+
 			BltStretchVideoSurface( FRAME_BUFFER, uiLoadScreen, 0, 0, 0, &SrcRect, &DstRect );
-						
-			DeleteVideoSurfaceFromIndex( uiLoadScreen );			
+
+			DeleteVideoSurfaceFromIndex( uiLoadScreen );
 		}
 		else
 		{

@@ -20,7 +20,7 @@ extern BOOLEAN	gfInChatBox;
 // uiExitScreen		The screen to exit to
 // ubFlags				Some flags for button style
 // ReturnCallback	Callback for return. Can be NULL. Returns any above return value
-// pCenteringRect	Rect to send if MSG_BOX_FLAG_USE_CENTERING_RECT set. Can be NULL 
+// pCenteringRect	Rect to send if MSG_BOX_FLAG_USE_CENTERING_RECT set. Can be NULL
 ////////////////////////////////
 
 INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen, MSGBOX_CALLBACK ReturnCallback, SGPRect *pCenteringRect );

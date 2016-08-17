@@ -449,7 +449,7 @@ protected:
 	ParticipantStruct* GetParticipantBySystemAddress(const SystemAddress systemAddress) const;
 
 	// Callback pointers.
-	
+
 	// Required callback to handle construction calls
 	ReceiveConstructionInterface *_constructionCB;
 

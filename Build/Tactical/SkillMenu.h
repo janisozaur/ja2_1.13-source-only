@@ -1,7 +1,7 @@
 #ifndef _SKILL_MENU_
 #define _SKILL_MENU_
 
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */
@@ -21,7 +21,7 @@ public:
 	  fInitialized(FALSE), usPosX(0), gPopup(NULL)
 	{
 	}
-	  	
+
 	virtual void Cancel()
 	{
 		// Hide the Filter Menu pop-up.

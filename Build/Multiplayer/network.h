@@ -1,6 +1,6 @@
 #pragma once
 
-#include "random.h"
+#include "Random.h"
 
 //this one just for structs, variables and functions used between the client and server scripts...
 extern char cClientName[30];
@@ -66,22 +66,22 @@ typedef struct
 	INT32	startingCash;
 	UINT8	disableBobbyRay;
 	UINT8	disableMercEquipment;
-	BOOLEAN sofGunNut;	
+	BOOLEAN sofGunNut;
 	UINT8	soubGameStyle;
 	UINT8	soubDifficultyLevel;
 	UINT8	soubSkillTraits;
 	BOOLEAN	sofTurnTimeLimit;
 	BOOLEAN	sofIronManMode;
-	UINT8	soubBobbyRayQuality;	
-	UINT8	soubBobbyRayQuantity;	
+	UINT8	soubBobbyRayQuality;
+	UINT8	soubBobbyRayQuantity;
 	UINT8	maxMercs;
 	UINT8	client_num;
 	char	client_name[30];
-	char	client_names[4][30];	
+	char	client_names[4][30];
 	int		client_edges[5];
 	int		client_teams[4];
-	char	server_name[30];	
-	int		team;	
+	char	server_name[30];
+	int		team;
 	char	kitBag[100];
 	UINT8	disableMorale;
 	UINT8	reportHiredMerc;
@@ -102,7 +102,7 @@ typedef struct
 // WANNE: FILE TRANSFER
 typedef struct
 {
-	STRING512 fileTransferDirectory;	
+	STRING512 fileTransferDirectory;
 	int syncClientsDirectory;			// Does the server want to sync files to the clients
 	char serverName[30];				// The name of the server. This is used on the client side as a folder inside the client transfer directory
 	long totalTransferBytes;

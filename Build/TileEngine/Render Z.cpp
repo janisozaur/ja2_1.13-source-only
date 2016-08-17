@@ -1,6 +1,6 @@
 #include "Render Z.h"
-#include "worlddef.h"
-#include "renderworld.h"
+#include "WorldDef.h"
+#include "RenderWorld.h"
 #include "Isometric Utils.h"
 
 INT16 gsRScreenCenterX, gsRScreenCenterY;
@@ -14,7 +14,7 @@ INT16 GetMapXYWorldY( INT16 sWorldCellX, INT16 sWorldCellY )
 	gsRScreenCenterY = gsRDistToCenterX + gsRDistToCenterY;
 
 	return (gsRScreenCenterY + gsCY - gsTLY);
-}	
+}
 
 INT16 GetMapXYWorldYFromCellCoords( INT16 sWorldCellX, INT16 sWorldCellY )
 {
@@ -24,7 +24,7 @@ INT16 GetMapXYWorldYFromCellCoords( INT16 sWorldCellX, INT16 sWorldCellY )
 	gsRScreenCenterY = gsRDistToCenterX + gsRDistToCenterY;
 
 	return gsRScreenCenterY + gsCY - gsTLY;
-}	
+}
 
 
 INT16 LandZLevel( INT16 sMapX, INT16 sMapY )

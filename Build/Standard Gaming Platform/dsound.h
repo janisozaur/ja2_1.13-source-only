@@ -44,9 +44,9 @@ struct IDirectSound;
 struct IDirectSoundBuffer;
 #endif
 
-typedef struct IDirectSound			*LPDIRECTSOUND;		
-typedef struct IDirectSoundBuffer	 *LPDIRECTSOUNDBUFFER;	
-typedef struct IDirectSoundBuffer	**LPLPDIRECTSOUNDBUFFER;	
+typedef struct IDirectSound			*LPDIRECTSOUND;
+typedef struct IDirectSoundBuffer	 *LPDIRECTSOUNDBUFFER;
+typedef struct IDirectSoundBuffer	**LPLPDIRECTSOUNDBUFFER;
 
 
 typedef struct _DSCAPS
@@ -79,7 +79,7 @@ typedef struct _DSCAPS
 
 typedef struct _DSBCAPS
 {
-	
+
 	DWORD		dwSize;
 	DWORD		dwFlags;
 	DWORD		dwBufferBytes;
@@ -316,11 +316,11 @@ DECLARE_INTERFACE_( IDirectSoundBuffer, IUnknown )
 #define DSBPLAY_LOOPING		 0x00000001
 
 
-			
+
 #define DSBSTATUS_PLAYING			0x00000001
 #define DSBSTATUS_BUFFERLOST		0x00000002
 #define DSBSTATUS_LOOPING			0x00000004
-		 
+
 
 #define DSBLOCK_FROMWRITECURSOR		 0x00000001
 

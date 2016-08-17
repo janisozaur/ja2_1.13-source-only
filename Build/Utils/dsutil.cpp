@@ -7,7 +7,7 @@
 	#include <mmsystem.h>
 	#include <dsound.h>
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include <windows.h>
 	#include <mmsystem.h>
 	#include <dsound.h>

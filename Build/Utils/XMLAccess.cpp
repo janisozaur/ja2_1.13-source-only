@@ -20,7 +20,7 @@ struct
 	WEAPONTYPE		curWeapon;
 	WEAPONTYPE *	curWeaponList;
 	UINT32			maxWeapons;
-	
+
 	UINT32			currentDepth;
 	UINT32			maxReadDepth;
 }
@@ -93,7 +93,7 @@ weaponCharacterDataHandle(void *userData, const char *str, int len)
 {
 	weaponParseData * pData = (weaponParseData *)userData;
 
-	if( (pData->currentDepth <= pData->maxReadDepth) && 
+	if( (pData->currentDepth <= pData->maxReadDepth) &&
 		(strlen(pData->szCharData) < MAX_CHAR_DATA_LENGTH)
 	  ){
 		strncat(pData->szCharData,str,__min((unsigned int)len,MAX_CHAR_DATA_LENGTH-strlen(pData->szCharData)));
@@ -265,7 +265,7 @@ BOOLEAN ReadInWeaponStats()
 	UINT32		uiFSize;
 	CHAR8 *		lpcBuffer;
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	weaponParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading weapons.dat" );
@@ -274,7 +274,7 @@ BOOLEAN ReadInWeaponStats()
 	hFile = FileOpen( WEAPONSFILENAME, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -289,15 +289,15 @@ BOOLEAN ReadInWeaponStats()
 
 	FileClose( hFile );
 
-	
+
 	XML_SetElementHandler(parser, weaponStartElementHandle, weaponEndElementHandle);
 	XML_SetCharacterDataHandler(parser, weaponCharacterDataHandle);
 
-	
+
 	memset(&pData,0,sizeof(pData));
 	pData.curWeaponList = Weapon;
-	pData.maxWeapons = MAXITEMS; 
-	
+	pData.maxWeapons = MAXITEMS;
+
 	XML_SetUserData(parser, &pData);
 
 
@@ -320,7 +320,7 @@ BOOLEAN ReadInWeaponStats()
 	hFile = FileOpen( "TABLEDATA\\~Weapons.dat", FILE_ACCESS_WRITE | FILE_CREATE_ALWAYS, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	{
 		UINT32 cnt;
 
@@ -337,7 +337,7 @@ BOOLEAN ReadInWeaponStats()
 			{
 				UINT32 uiCharLoc = strcspn(szRemainder,"&<>\'\"\0");
 				INT8 invChar = szRemainder[uiCharLoc];
-				
+
 				if(uiCharLoc)
 				{
 					szRemainder[uiCharLoc] = '\0';

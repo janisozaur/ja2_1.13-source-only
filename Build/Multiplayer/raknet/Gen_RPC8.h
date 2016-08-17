@@ -444,7 +444,7 @@ typedef unsigned long long NaturalWord;
 
 #endif // AUTO_RPC_ALLOC_SEPARATE_FLOATS
 
-/// \internal 
+/// \internal
 /// Writes number of parameters to push on the stack
 void SerializeHeader(char *&out, unsigned int numParams);
 

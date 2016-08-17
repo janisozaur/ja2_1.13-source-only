@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/File/vfs_lib_file.cpp
  *  - read/read-write files for usage in vfs locations (libraries)
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -29,8 +29,8 @@
 
 vfs::ObjBlockAllocator<vfs::CLibFile>* vfs::CLibFile::_lfile_pool = NULL;
 
-vfs::CLibFile* vfs::CLibFile::create(vfs::Path const& filename, 
-									 tLocation *location, 
+vfs::CLibFile* vfs::CLibFile::create(vfs::Path const& filename,
+									 tLocation *location,
 									 ILibrary *library,
 									 vfs::ObjBlockAllocator<vfs::CLibFile>* allocator)
 {
@@ -59,7 +59,7 @@ vfs::CLibFile* vfs::CLibFile::create(vfs::Path const& filename,
 }
 
 vfs::CLibFile::CLibFile()
-: tBaseClass(L""), 
+: tBaseClass(L""),
 	m_isOpen_read(false),
 	m_library(NULL),
 	m_location(NULL)
@@ -121,7 +121,7 @@ vfs::size_t vfs::CLibFile::read(vfs::Byte* data, vfs::size_t bytesToRead)
 	{
 		VFS_RETHROW(ERROR_FILE(L"read error"), ex);
 	}
-}	
+}
 
 vfs::size_t vfs::CLibFile::getReadPosition()
 {

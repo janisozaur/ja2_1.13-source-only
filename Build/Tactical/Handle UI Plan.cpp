@@ -2,17 +2,17 @@
 	#include "Tactical All.h"
 #else
 	#include "Handle UI Plan.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Isometric Utils.h"
-	#include "pathai.h"
+	#include "PathAI.h"
 	#include "Handle UI.h"
-	#include "points.h"
-	#include "weapons.h"
-	#include "renderworld.h"
+	#include "Points.h"
+	#include "Weapons.h"
+	#include "RenderWorld.h"
 	#include "Animation Control.h"
-	#include "message.h"
-	#include "soldier create.h"
-	#include "interface.h"
+	#include "Message.h"
+	#include "Soldier Create.h"
+	#include "Interface.h"
 #endif
 
 UINT8						gubNumUIPlannedMoves			= 0;

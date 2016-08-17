@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/os_functions.cpp
  *  - abstractions for OS dependant code
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -49,7 +49,7 @@ vfs::OS::CIterateDirectory::CIterateDirectory(vfs::Path const& sPath, vfs::Strin
 	{
 		fSearchHandle = FindFirstFileW((sPath+searchPattern).c_wcs().c_str(), &fFileInfoW);
 	}
-	if (fSearchHandle == INVALID_HANDLE_VALUE) 
+	if (fSearchHandle == INVALID_HANDLE_VALUE)
 	{
 		DWORD error = GetLastError();
 		VFS_THROW(_BS(L"Error accessing path [") << (sPath+searchPattern) << L"],  error code : " << error << _BS::wget);
@@ -66,8 +66,8 @@ vfs::OS::CIterateDirectory::CIterateDirectory(vfs::Path const& sPath, vfs::Strin
 	fFirstRequest = true;
 }
 
-vfs::OS::CIterateDirectory::~CIterateDirectory() 
-{ 
+vfs::OS::CIterateDirectory::~CIterateDirectory()
+{
 #ifdef WIN32
 	FindClose(fSearchHandle);
 #else
@@ -86,7 +86,7 @@ bool vfs::OS::CIterateDirectory::nextFile(vfs::String &fileName, CIterateDirecto
 	{
 		if(!vfs::Settings::getUseUnicode())
 		{
-			if( !FindNextFileA(fSearchHandle, &fFileInfoA) ) 
+			if( !FindNextFileA(fSearchHandle, &fFileInfoA) )
 			{
 				return false;
 			}
@@ -173,7 +173,7 @@ bool vfs::OS::createRealDirectory(vfs::Path const& sDir)
 #ifdef WIN32
 	BOOL success;
 	vfs::String::str_t const& str = sDir.c_wcs();
-	success = vfs::Settings::getUseUnicode() ? 
+	success = vfs::Settings::getUseUnicode() ?
 		CreateDirectoryW(sDir.c_str(),NULL) :
 		CreateDirectoryA( vfs::String::narrow( str.c_str(), str.length() ).c_str(), NULL );
 	if(success == 0)
@@ -227,7 +227,7 @@ bool vfs::OS::FileAttributes::getFileAttributes(vfs::Path const& sDir, vfs::UInt
 			case FILE_ATTRIBUTE_HIDDEN:
 				uiAttribs |= ATTRIB_HIDDEN;
 				break;
-			case FILE_ATTRIBUTE_NORMAL:	
+			case FILE_ATTRIBUTE_NORMAL:
 				uiAttribs |= ATTRIB_NORMAL;
 				break;
 			case FILE_ATTRIBUTE_READONLY:
@@ -255,7 +255,7 @@ bool vfs::OS::FileAttributes::getFileAttributes(vfs::Path const& sDir, vfs::UInt
 bool vfs::OS::deleteRealFile(vfs::Path const& sDir)
 {
 #ifdef WIN32
-	BOOL del = vfs::Settings::getUseUnicode() ? 
+	BOOL del = vfs::Settings::getUseUnicode() ?
 		DeleteFileW( sDir.c_str() ) :
 		DeleteFileA( vfs::String::narrow(sDir.c_str(), sDir.length()).c_str() );
 	if(!del)
@@ -295,7 +295,7 @@ void vfs::OS::getExecutablePath(vfs::Path& sDir, vfs::Path& sFile)
 	if(error == 0)
 	{
 		DWORD code = GetLastError();
-		VFS_THROW(_BS(L"Could not get current directory [") << 
+		VFS_THROW(_BS(L"Could not get current directory [") <<
 			(!vfs::Settings::getUseUnicode() ? L"no unicode" : L"unicode") <<
 			L"],  error code : " << code << _BS::wget);
 	}
@@ -381,7 +381,7 @@ bool vfs::OS::getEnv(vfs::String const& key, vfs::String& value)
 {
 #ifdef _MSC_VER
 	wchar_t *val_buf = NULL;
-	::size_t buf_len; 
+	::size_t buf_len;
 	errno_t err = _wdupenv_s(&val_buf,&buf_len, key.c_str());
 	if(err == 0 && val_buf)
 	{

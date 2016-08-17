@@ -22,8 +22,8 @@ public:
 
 	void	ExecuteAStarLogic(const CSmallPoint& StartCity,
 							const CSmallPoint& BestNode,
-				
-							
+
+
 							const vector<AStarHeap>& acceptableDestCities,
 							const ePlayer player);
 

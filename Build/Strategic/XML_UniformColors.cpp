@@ -12,7 +12,7 @@
 	#include "Strategic All.h"
 	#include "XML.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "XML.h"
 	#include "expat.h"
@@ -21,7 +21,7 @@
 	#include "FileMan.h"
 	#include "MemMan.h"
 	#include "Debug Control.h"
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 #endif
 
 #define MAX_CHAR_DATA_LENGTH			500
@@ -82,7 +82,7 @@ UniformStartElementHandle(void *userData, const XML_Char *name, const char **att
 		}
 
 		else if(pData->curElement == UNIFORM_ELEMENT_LIST &&
-			(strcmp(name, "ENEMY_ADMIN") == 0 || 
+			(strcmp(name, "ENEMY_ADMIN") == 0 ||
 			strcmp(name, "ENEMY_TROOP") == 0 ||
 			strcmp(name, "ENEMY_ELITE") == 0 ||
 			strcmp(name, "MILITIA_ROOKIE") == 0 ||
@@ -168,7 +168,7 @@ UniformEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = UNIFORM_ELEMENT_NONE;
 		}
 
-		else if(strcmp(name, "ENEMY_ADMIN") == 0 || 
+		else if(strcmp(name, "ENEMY_ADMIN") == 0 ||
 			strcmp(name, "ENEMY_TROOP") == 0 ||
 			strcmp(name, "ENEMY_ELITE") == 0 ||
 			strcmp(name, "MILITIA_ROOKIE") == 0 ||

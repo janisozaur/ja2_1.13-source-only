@@ -26,8 +26,8 @@
 #define _COMBSTROUT_H_
 
 /////////////////////////////////////////////////////////////////////////////
-// CComBSTROut - a class that inherits from	CComBSTR and adds Out() method 
-//				that should be used instead of & operator for 'out' 
+// CComBSTROut - a class that inherits from	CComBSTR and adds Out() method
+//				that should be used instead of & operator for 'out'
 //				function parameters
 
 class CComBSTROut : public CComBSTR
@@ -57,12 +57,12 @@ public:
 	CComBSTROut(LPCSTR pSrc) : CComBSTR(pSrc)
 	{
 	}
-	
+
 	CComBSTROut(int nSize, LPCSTR sz) : CComBSTR(nSize, sz)
 	{
 	}
 #endif
-	
+
 	~CComBSTROut()
 	{
 		CComBSTR::~CComBSTR();

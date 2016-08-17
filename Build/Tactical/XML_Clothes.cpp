@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -52,7 +52,7 @@ clothesStartElementHandle(void *userData, const XML_Char *name, const XML_Char *
 				(strcmp(name, "uiIndex") == 0 ||
 				strcmp(name, "szName") == 0 ||
 				strcmp(name, "Vest") == 0 ||
-				strcmp(name, "Pants") == 0 )) 
+				strcmp(name, "Pants") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 

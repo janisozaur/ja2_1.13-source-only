@@ -1,54 +1,54 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Tactical All.h"
 #else
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include <stdio.h>
 #include <memory.h>
 
-#include "types.h"
+#include "Types.h"
 
-#include "strategicmap.h"
-#include "overhead.h"
-#include "isometric utils.h"
+#include "StrategicMap.h"
+#include "Overhead.h"
+#include "Isometric Utils.h"
 
-#include "soldier add.h"
-#include "soldier create.h"
+#include "Soldier Add.h"
+#include "Soldier Create.h"
 #include "Soldier Init List.h"
-#include "debug.h"
+#include "Debug.h"
 #include "Random.h"
-#include "items.h"
+#include "Items.h"
 #include "GameSettings.h"
 
 
 #include "Map Information.h"
-#include "soldier profile.h"
+#include "Soldier Profile.h"
 #include "Sys Globals.h"
 #include "EditorMercs.h"
 #include "Animation Data.h"
-#include "message.h"
+#include "Message.h"
 #include "Font Control.h"
 #include "Sound Control.h"
 #include "Quests.h"
 #include "Render Fun.h"
-#include "meanwhile.h"
+#include "Meanwhile.h"
 #include "Map Screen Interface Map.h"
-#include "mapscreen.h"
+#include "MapScreen.h"
 #include "Debug Control.h"
 #include "Inventory Choosing.h"
 #include "Strategic AI.h"
-#include "strategic.h"
+#include "Strategic.h"
 #include "Campaign Types.h"
-#include "ai.h"
+#include "AI.h"
 #include "NPC.h"
 #include "Scheduling.h"
-#include "opplist.h"
+#include "Opplist.h"
 #include "MessageBoxScreen.h"
-#include "screenids.h"
+#include "ScreenIds.h"
 #include "SaveLoadScreen.h"
 #include "Rotting Corpses.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include "Map Edgepoints.h"
 #include "Queen Command.h"
 
@@ -58,7 +58,7 @@
 #include "Town Militia.h"		// added by Flugente
 #include "PreBattle Interface.h"	// added by Flugente
 #include "LuaInitNPCs.h"		// added by Flugente
-#include "Soldier macros.h"		// added by Flugente
+#include "Soldier Macros.h"		// added by Flugente
 
 BOOLEAN gfOriginalList = TRUE;
 
@@ -622,7 +622,7 @@ BOOLEAN AddPlacementToWorld( SOLDIERINITNODE *curr, GROUP *pGroup = NULL )
 				gMercProfiles[ ubProfile ].ubMiscFlags & (PROFILE_MISC_FLAG_RECRUITED | PROFILE_MISC_FLAG_EPCACTIVE) ||
 				//				gMercProfiles[ ubProfile ].ubMiscFlags2 & PROFILE_MISC_FLAG2_DONT_ADD_TO_SECTOR ||
 				!gMercProfiles[ ubProfile ].bLife	||
-				gMercProfiles[ ubProfile ].fUseProfileInsertionInfo 
+				gMercProfiles[ ubProfile ].fUseProfileInsertionInfo
 				)
 			{
 				return FALSE;
@@ -804,12 +804,12 @@ BOOLEAN AddPlacementToWorld( SOLDIERINITNODE *curr, GROUP *pGroup = NULL )
 	}
 
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("AddPlacementToWorld: create soldier"));
-	
+
 	if ( is_networked && (ARMED_VEHICLE( (&tempDetailedPlacement) ) || tempDetailedPlacement.fOnRoof) )
 		return TRUE;
-		
+
 	pSoldier = TacticalCreateSoldier( &tempDetailedPlacement, &ubID );
-	
+
 	if( pSoldier )
 	{
 		curr->pSoldier = pSoldier;
@@ -835,12 +835,12 @@ BOOLEAN AddPlacementToWorld( SOLDIERINITNODE *curr, GROUP *pGroup = NULL )
 		{
 				if ( gGameOptions.ubInventorySystem == INVENTORY_OLD && gGameOptions.ubAttachmentSystem == ATTACHMENT_OLD )
 				{
-					if( pSoldier->inv[ iCnt ].usItem == 97 || pSoldier->inv[ iCnt ].usItem == 1346 || pSoldier->inv[ iCnt ].usItem == 99 
+					if( pSoldier->inv[ iCnt ].usItem == 97 || pSoldier->inv[ iCnt ].usItem == 1346 || pSoldier->inv[ iCnt ].usItem == 99
 						|| pSoldier->inv[ iCnt ].usItem == 1347 || pSoldier->inv[ iCnt ].usItem == 584 || pSoldier->inv[ iCnt ].usItem == 551 ) //43
-						pSoldier->inv[ iCnt ].usItem = 129; //335		
+						pSoldier->inv[ iCnt ].usItem = 129; //335
 				}
-		}	
-		#endif	
+		}
+		#endif
 		*/
 		return TRUE;
 	}
@@ -1362,7 +1362,7 @@ void AddSoldierInitListEnemyDefenceSoldiers( UINT8 ubTotalAdmin, UINT8 ubTotalTr
 			}
 			else if( iRandom < ubTotalElite + ubTotalTroops + ubTotalAdmin + ubTotalTanks )
 			{
-				curr->pBasicPlacement->ubSoldierClass = SOLDIER_CLASS_TANK;				
+				curr->pBasicPlacement->ubSoldierClass = SOLDIER_CLASS_TANK;
 				curr->pBasicPlacement->ubBodyType = TANK_NW;
 				ubTotalTanks--;
 			}
@@ -1905,7 +1905,7 @@ void AddSoldierInitListMilitia( UINT8 ubNumGreen, UINT8 ubNumRegs, UINT8 ubNumEl
 }
 
 void AddSoldierInitListCreatures( BOOLEAN fQueen, UINT8 ubNumLarvae, UINT8 ubNumInfants,
-								 UINT8 ubNumYoungMales, UINT8 ubNumYoungFemales, UINT8 ubNumAdultMales, 
+								 UINT8 ubNumYoungMales, UINT8 ubNumYoungFemales, UINT8 ubNumAdultMales,
 								 UINT8 ubNumAdultFemales )
 {
 	SOLDIERINITNODE *curr;
@@ -2331,7 +2331,7 @@ void AddSoldierInitListBloodcats()
 			// HEADROCK HAM 3.5: This "solution" is extremely silly, as it prevents legal placement of bloodcats
 			// on the map if any discrepancy is encountered, which limits modders severely. Also, because the
 			// pSector->bBloodCatPlacements value is hardcoded, there is virtually no way for modders to increase
-			// the number of bloodcats on their own. 
+			// the number of bloodcats on their own.
 			//pSector->bBloodCatPlacements = bBloodCatPlacements;
 			//pSector->bBloodCats = -1;
 			// A better solution is to limit the number of bloodcats on the map based on whichever is lower - the
@@ -2469,10 +2469,10 @@ void AddProfilesUsingProfileInsertionData()
 	//new profiles by Jazz
 	for( i = 0; i < NUM_PROFILES; i++ )
 	{
-	
-	if ( gProfilesRPC[i].ProfilId == i || gProfilesNPC[i].ProfilId == i ) 
+
+	if ( gProfilesRPC[i].ProfilId == i || gProfilesNPC[i].ProfilId == i )
 	{
-	
+
 		//Perform various checks to make sure the soldier is actually in the same sector, alive, and so on.
 		//More importantly, the flag to use profile insertion data must be set.
 		if( gMercProfiles[ i ].sSectorX != gWorldSectorX ||
@@ -2829,10 +2829,10 @@ void AddSoldierInitListMilitiaOnEdge( UINT8 ubStrategicInsertionCode, UINT8 ubNu
 	// Flugente: if militia picks up equipment from sectors, it is necessary to know from where it comes
 	INT16 sX = gWorldSectorX;
 	INT16 sY = gWorldSectorY;
-	
+
 	switch( ubStrategicInsertionCode )
 	{
-	case INSERTION_CODE_NORTH:	
+	case INSERTION_CODE_NORTH:
 		bDesiredDirection = SOUTHEAST;
 		--sY;
 		break;
@@ -2848,7 +2848,7 @@ void AddSoldierInitListMilitiaOnEdge( UINT8 ubStrategicInsertionCode, UINT8 ubNu
 		bDesiredDirection = NORTHEAST;
 		--sX;
 		break;
-	default:	
+	default:
 		AssertMsg( 0, "Illegal direction passed to AddSoldierInitListMilitiaOnEdge()" );
 		break;
 	}
@@ -2986,7 +2986,7 @@ void AddSoldierInitListMilitiaOnEdge( UINT8 ubStrategicInsertionCode, UINT8 ubNu
 			}
 			UpdateMercInSector( pSoldier, gWorldSectorX, gWorldSectorY, 0 );
 		}
-		
+
 		// HEADROCK HAM 3.2: Experimental, militia reinforcements arrive with 0 APs.
 		if (gGameExternalOptions.ubReinforcementsFirstTurnFreeze == 1 || gGameExternalOptions.ubReinforcementsFirstTurnFreeze == 3)
 		{
@@ -3047,7 +3047,7 @@ void SectorAddAssassins( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 	if ( numberofcivs >= gGameExternalOptions.ubGameMaximumNumberOfCivilians )
 		return;
 
-	// now count militia, and which type (green, regular, elite) is most numerous - that will be the best type to blend in	
+	// now count militia, and which type (green, regular, elite) is most numerous - that will be the best type to blend in
 	UINT8 militiacnt = MilitiaInSectorOfRank( sMapX, sMapY, GREEN_MILITIA );
 	UINT8 militiadisguise = GREEN_MILITIA;
 	if ( MilitiaInSectorOfRank( sMapX, sMapY, REGULAR_MILITIA ) > militiacnt )
@@ -3060,7 +3060,7 @@ void SectorAddAssassins( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 	{
 		militiadisguise = ELITE_MILITIA;
 	}
-		
+
 	// the bigger the militia, the more likely infiltration
 	// if militia is at maximum, there is a 10% chance of infiltration
 	UINT32 resultrange = gGameExternalOptions.ubGameMaximumNumberOfRebels * 10;
@@ -3085,7 +3085,7 @@ void SectorAddPrisonersofWar( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 	// this needs to be turned on on
 	if ( !gGameExternalOptions.fAllowPrisonerSystem )
 		return;
-	
+
 	// not in underground sectors
 	if ( sMapZ > 0 )
 		return;
@@ -3100,7 +3100,7 @@ void SectorAddPrisonersofWar( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 	UINT16 numprisoners = GetNumberOfPrisoners( pSector, aPrisoners );
 	if ( !numprisoners )
 		return;
-		
+
 	// count current number of civilians and already placed pows
 	UINT16 numberofcivs = 0;
 	UINT16 numberofpows = 0;

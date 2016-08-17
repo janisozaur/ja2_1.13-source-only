@@ -18,7 +18,7 @@ extern	CHAR16		zTrackingNumber[16];
 
 //ADB:	I needed these here so I moved them, and why put them in *.cpp anyways?
 //
-//		Keeps track of the saved game version.	Increment the saved game version whenever 
+//		Keeps track of the saved game version.	Increment the saved game version whenever
 //	you will invalidate the saved game file
 
 #define			LUA_MODDERDATA									171 // Flugente: modders can set and use data in an exclusive array
@@ -62,7 +62,7 @@ extern	CHAR16		zTrackingNumber[16];
 #define			FOOD_CHANGES									133	// changes for food system
 #define			ZOMBIE_CHANGES									132	// Included some changes for Zombies
 #define			JA25_UB_INTEGRATION								131	// Before this, the JA25 Unfinished Business code was not integrated (see "Builddefines.h" JA2UB)
-#define			IMPROVED_INTERRUPT_SYSTEM						130	
+#define			IMPROVED_INTERRUPT_SYSTEM						130
 #define			ENCYCLOPEDIA_SAVEGAME_CHANGE					129	// Added encyclopedia
 #define			HIDDENTOWN_DATATYPE_CHANGE						128
 #define			NEW_EMAIL_SAVE_GAME								127
@@ -85,7 +85,7 @@ extern	CHAR16		zTrackingNumber[16];
 #define			BUGFIX_NPC_DATA_FOR_BIG_MAPS					110 // Before this, we had a bug in the NPC Data for Big Maps (this fix was introduced in the Closed Beta)
 #define			STRATEGIC_MINES_DATATYPE_CHANGE					109 // Before this, we did not have strategic mines initialization via lua script
 #define			HIDE_NPC_NAMES_FOR_UNKNOWN_PERSONS				108	// Before this, we did not have hiding of npc names for unknown persons included (by jazz)
-#define			BIG_MAPS_PROJECT_SAVEGAME_DATATYPE_CHANGE		107	// Before this, we did not have big maps project 
+#define			BIG_MAPS_PROJECT_SAVEGAME_DATATYPE_CHANGE		107	// Before this, we did not have big maps project
 #define			AIRPORT_SAVEGAME_DATATYPE_CHANGE				106	// Before this, we did not have airport externalized
 #define			AP100_SAVEGAME_DATATYPE_CHANGE					105	// Before this, we didn't have the 100AP structure changes
 #define			NIV_SAVEGAME_DATATYPE_CHANGE					102	// Before this, we used the old structure system

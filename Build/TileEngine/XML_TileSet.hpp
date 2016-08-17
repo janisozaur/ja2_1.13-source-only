@@ -84,7 +84,7 @@ public:
 		SGP_THROW_IFFALSE( vfs::convertTo<int>(char_data, tmp),
 			_BS(L"Could not convert to int : ") << char_data << _BS::wget );
 		P_DATA->_current_tileset->ubAmbientID = tmp;
-			
+
 	}
 	FINISH_TRANSITION;
 

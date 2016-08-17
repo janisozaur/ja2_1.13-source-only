@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "AimSort.h"
 	#include "Aim.h"
 	#include "WCheck.h"
@@ -11,8 +11,8 @@
 	#include "stdlib.h"
 	#include "Text.h"
 	#include "Multi Language Graphic Utils.h"
-	#include "english.h"
-	#include "sysutil.h"
+	#include "English.h"
+	#include "SysUtil.h"
 #endif
 
 //#define
@@ -519,7 +519,7 @@ void RenderAimSort()
 	DrawTextToScreen(AimSortText[MERCENARY_FILES], AIM_SORT_MERC_STATS_TEXT_X, AIM_SORT_MERC_STATS_TEXT_Y, 0, AIM_SORT_FONT_SORT_TEXT, AIM_SORT_LINK_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED	);
 	DrawTextToScreen(AimSortText[ALUMNI_GALLERY], AIM_SORT_ALUMNI_TEXT_X, AIM_SORT_ALUMNI_TEXT_Y, 0, AIM_SORT_FONT_SORT_TEXT, AIM_SORT_LINK_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED	);
 
-	// pre-render unchecked box	
+	// pre-render unchecked box
 	DrawSelectLight(0, AIM_SORT_OFF);
 	DrawSelectLight(1, AIM_SORT_OFF);
 	DrawSelectLight(2, AIM_SORT_OFF);
@@ -535,7 +535,7 @@ void RenderAimSort()
 	DrawSelectLight(12, AIM_SORT_OFF);
 	DrawSelectLight(AIM_ASCEND, AIM_SORT_OFF);
 	DrawSelectLight(AIM_DESCEND, AIM_SORT_OFF);
-	
+
 	// highlight checked box
 	DrawSelectLight(gubCurrentSortMode, AIM_SORT_ON);
 	DrawSelectLight(gubCurrentListMode, AIM_SORT_ON);
@@ -893,7 +893,7 @@ void SelectNameBoxRegionCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 			gubOldSortMode = gubCurrentSortMode;
 
 			// Name sort in descending order only
-			if(gubCurrentListMode != AIM_DESCEND) 
+			if(gubCurrentListMode != AIM_DESCEND)
 			{
 				gubCurrentListMode = AIM_DESCEND;
 				DrawSelectLight(gubCurrentListMode, AIM_SORT_ON);
@@ -941,7 +941,7 @@ void SelectDescendBoxRegionCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 	}
 	else if(iReason & MSYS_CALLBACK_REASON_LBUTTON_UP)
 	{
-		if(gubCurrentListMode != AIM_DESCEND) 
+		if(gubCurrentListMode != AIM_DESCEND)
 		{
 			gubCurrentListMode = AIM_DESCEND;
 			DrawSelectLight(gubCurrentListMode, AIM_SORT_ON);

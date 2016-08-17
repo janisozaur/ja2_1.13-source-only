@@ -1,60 +1,60 @@
 #ifdef PRECOMPILEDHEADERS
 #include "AI All.h"
-#include "sound control.h"
+#include "Sound Control.h"
 #include "Debug Control.h"
 #else
 #include "sgp.h"
-#include "ai.h"
+#include "AI.h"
 #include "Isometric Utils.h"
-#include "overhead.h"
+#include "Overhead.h"
 #include "math.h"
 #include "Event Pump.h"
 #include "Soldier Control.h"
 #include "Overhead Types.h"
-#include "opplist.h"
-#include "animation control.h"
-#include "font control.h"
-#include "interface.h"
-#include "screenids.h"
-#include "worldman.h"
-#include "pathai.h"
-#include "points.h"
-#include "weapons.h"
-#include "items.h"
+#include "Opplist.h"
+#include "Animation Control.h"
+#include "Font Control.h"
+#include "Interface.h"
+#include "ScreenIds.h"
+#include "WorldMan.h"
+#include "PathAI.h"
+#include "Points.h"
+#include "Weapons.h"
+#include "Items.h"
 #include "Handle Items.h"
 #include "AIInternals.h"
-#include "animation data.h"
-#include "los.h"
-#include "message.h"
+#include "Animation Data.h"
+#include "LOS.h"
+#include "Message.h"
 #include "TeamTurns.h"
 #include "NPC.h"
 #include "Dialogue Control.h"
 #include "Soldier Profile.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 #include "Tactical Save.h"
 #include "Soldier Create.h"
 #include "Explosion Control.h"
 #include "Interactive Tiles.h"
-#include "interface dialogue.h"
+#include "Interface Dialogue.h"
 #include "Vehicles.h"
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include "AIList.h"
-#include "Soldier macros.h"
+#include "Soldier Macros.h"
 #include "Bullets.h"
-#include "physics.h"
+#include "Physics.h"
 #include "GameSettings.h"
 #include "Debug Control.h"
-#include "interface panels.h"
+#include "Interface Panels.h"
 #include "Sound Control.h"
-#include "civ quotes.h"
+#include "Civ Quotes.h"
 #include "Quests.h"
 #include "Campaign Types.h"
 #include "Queen Command.h"
-#include "points.h"
+#include "Points.h"
 #include "Soldier Functions.h" // added by SANDRO
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 // needed to use the modularized tactical AI:
 #include "ModularizedTacticalAI/include/Plan.h"
 #include "ModularizedTacticalAI/include/PlanFactoryLibrary.h"
@@ -175,7 +175,7 @@ BOOLEAN AimingGun(SOLDIERTYPE *pSoldier)
 void HandleSoldierAI( SOLDIERTYPE *pSoldier ) // FIXME - this function is named inappropriately
 {
 	// ATE
-	// Bail if we are engaged in a NPC conversation/ and/or sequence ... or we have a pause because 
+	// Bail if we are engaged in a NPC conversation/ and/or sequence ... or we have a pause because
 	// we just saw someone... or if there are bombs on the bomb queue
 	if ( pSoldier->flags.uiStatusFlags & SOLDIER_ENGAGEDINACTION || gTacticalStatus.fEnemySightingOnTheirTurn || (gubElementsOnExplosionQueue != 0) )
 	{
@@ -508,7 +508,7 @@ void HandleSoldierAI( SOLDIERTYPE *pSoldier ) // FIXME - this function is named 
 		if (pSoldier->aiData.bAction >= FIRST_MOVEMENT_ACTION && pSoldier->aiData.bAction <= LAST_MOVEMENT_ACTION && !pSoldier->flags.fDelayedMovement)
 		{
 			if (pSoldier->pathing.usPathIndex == pSoldier->pathing.usPathDataSize)
-			{				
+			{
 				if (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 				{
 					if ( !ACTING_ON_SCHEDULE( pSoldier ) &&  SpacesAway( pSoldier->sGridNo, pSoldier->sAbsoluteFinalDestination ) < 4 )
@@ -800,7 +800,7 @@ void StartNPCAI(SOLDIERTYPE *pSoldier)
 	// If we are not in an interrupt situation!
 	if ( (( gTacticalStatus.uiFlags & TURNBASED ) && ( gTacticalStatus.uiFlags & INCOMBAT )) && gubOutOfTurnPersons == 0 )
 	{
-#ifdef JA2UB	
+#ifdef JA2UB
 			//JA25 UB
 				//if this is Morris
 			if( pSoldier->ubProfile == MORRIS_UB  ) //MORRIS
@@ -811,7 +811,7 @@ void StartNPCAI(SOLDIERTYPE *pSoldier)
 					TriggerNPCRecord( MORRIS_UB, 6 ); //MORRIS
 				}
 			}
-#endif						
+#endif
 		if( ( ( pSoldier->bVisible != -1 && pSoldier->stats.bLife) || ( gTacticalStatus.uiFlags & SHOW_ALL_MERCS ) ) && ( fInValidSoldier == FALSE ) )
 		{
 			// If we are on a roof, set flag for rendering...
@@ -1255,7 +1255,7 @@ void CancelAIAction(SOLDIERTYPE *pSoldier, UINT8 ubForce)
 
 INT16 ActionInProgress(SOLDIERTYPE *pSoldier)
 {
-	// if NPC has a desired destination, but isn't currently going there	
+	// if NPC has a desired destination, but isn't currently going there
 	if ((!TileIsOutOfBounds(pSoldier->pathing.sFinalDestination)) && (pSoldier->pathing.sDestination != pSoldier->pathing.sFinalDestination))
 	{
 		// return success (TRUE) if we successfully resume the movement
@@ -1291,7 +1291,7 @@ void TurnBasedHandleNPCAI(SOLDIERTYPE *pSoldier)
 	if ( pSoldier == pLastDecisionSoldier )
 	{
 		// we will only end our turn this way if this function was called over 100 times with same soldier without ending a turn.
-		// so many actions in a single turn smell of an endless clock. 
+		// so many actions in a single turn smell of an endless clock.
 		// If we end a turn normally, the counter will be set back to 0, so this wont be a problem if you have a single soldier left for multiple turns
 		if ( lastdecisioncount >= 100 )
 		{
@@ -1412,7 +1412,7 @@ void TurnBasedHandleNPCAI(SOLDIERTYPE *pSoldier)
 				// the item pool index was stored in the special data field
 				pSoldier->aiData.uiPendingActionData1 = pSoldier->iNextActionSpecialData;
 			}
-		}		
+		}
 		else if (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 		{
 			if ( ACTING_ON_SCHEDULE( pSoldier ) )
@@ -1466,7 +1466,7 @@ void TurnBasedHandleNPCAI(SOLDIERTYPE *pSoldier)
 
 			// perform the chosen action
 			pSoldier->aiData.bActionInProgress = ExecuteAction(pSoldier); // if started, mark us as busy
-			
+
 			if ( !pSoldier->aiData.bActionInProgress && !TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 			{
 				// turn based... abort this guy's turn
@@ -1707,7 +1707,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
 			if (!is_networked)
 			{
 				// SANDRO - ENEMY TAUNTS
-				if (gGameSettings.fOptions[TOPTION_ALLOW_TAUNTS] == TRUE && 
+				if (gGameSettings.fOptions[TOPTION_ALLOW_TAUNTS] == TRUE &&
 					( ( pSoldier->bTeam == ENEMY_TEAM && SOLDIER_CLASS_ENEMY( pSoldier->ubSoldierClass ) && pSoldier->bVisible != -1 ) ||
 					( pSoldier->bTeam == MILITIA_TEAM && SOLDIER_CLASS_MILITIA( pSoldier->ubSoldierClass ) && pSoldier->bVisible != -1 ) ) )
 				{
@@ -1740,11 +1740,11 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
             }
 
             if ( gfTurnBasedAI && pSoldier->aiData.bAlertStatus <= STATUS_BLACK )
-            {			
+            {
                 if (TileIsOutOfBounds(pSoldier->sLastTwoLocations[0]))
                 {
                     pSoldier->sLastTwoLocations[0] = pSoldier->sGridNo;
-                }			
+                }
                 else if (TileIsOutOfBounds(pSoldier->sLastTwoLocations[1]))
                 {
                     pSoldier->sLastTwoLocations[1] = pSoldier->sGridNo;
@@ -1785,7 +1785,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
 
             // optimization - Ian (if up-to-date path is known, do not check again)
             if (!pSoldier->pathing.bPathStored)
-            {			
+            {
                 if ( (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination) || gTacticalStatus.fAutoBandageMode) && !(gTacticalStatus.uiFlags & INCOMBAT) )
                 {
                     // NPC system move, allow path through
@@ -1807,7 +1807,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
                 // if we STILL don't have a path
                 if ( !pSoldier->pathing.bPathStored )
                 {
-                    // Check if we were told to move by NPC stuff				
+                    // Check if we were told to move by NPC stuff
                     if ( !TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination) && !(gTacticalStatus.uiFlags & INCOMBAT) )
                     {
                         //ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_ERROR, L"AI %s failed to get path for dialogue-related move!", pSoldier->name );
@@ -2052,7 +2052,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
 				// sevenfm: if it's not initial RED ALERT and we are informing others
 				PossiblyStartEnemyTaunt( pSoldier, TAUNT_INFORM_ABOUT );
 			}
-            
+
             //ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_BETAVERSION, L"Debug: AI radios your position!" );
             // DROP THROUGH HERE!
         case AI_ACTION_YELLOW_ALERT:          // tell friends opponent(s) heard
@@ -2064,7 +2064,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
             SendNetData(ALL_NODES);
             */
             DeductPoints(pSoldier,APBPConstants[AP_RADIO],APBPConstants[BP_RADIO], AFTERACTION_INTERRUPT); // pay for it!
-            
+
             RadioSightings(pSoldier,EVERYBODY,pSoldier->bTeam);      // about everybody
             // action completed immediately, cancel it right away
 
@@ -2073,7 +2073,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
 
 			// SANDRO - ENEMY TAUNTS
 			if (pSoldier->aiData.bAction == AI_ACTION_YELLOW_ALERT )
-				PossiblyStartEnemyTaunt( pSoldier, TAUNT_SUSPICIOUS );				
+				PossiblyStartEnemyTaunt( pSoldier, TAUNT_SUSPICIOUS );
 
             break;
 
@@ -2253,7 +2253,7 @@ INT8 ExecuteAction(SOLDIERTYPE *pSoldier)
         /////////////////////////////////////////////////////////////
         // SANDRO - added a possibility for enemies to try to steal your gun
         case AI_ACTION_STEAL_MOVE:            // preparing to steal opponents weapon
-            
+
             pSoldier->aiData.ubPendingAction		= NO_PENDING_ACTION;
             pSoldier->usUIMovementMode = DetermineMovementMode( pSoldier, AI_ACTION_KNIFE_MOVE );
             usSoldierIndex = WhoIsThere2( pSoldier->aiData.usActionData, pSoldier->bTargetLevel);
@@ -2337,7 +2337,7 @@ void CheckForChangingOrders(SOLDIERTYPE *pSoldier)
 	{
 	case STATUS_GREEN:
 		if ( !CREATURE_OR_BLOODCAT( pSoldier ) )
-		{			
+		{
 			if ( pSoldier->bTeam == CIV_TEAM && pSoldier->ubProfile != NO_PROFILE && pSoldier->aiData.bNeutral && !TileIsOutOfBounds(gMercProfiles[ pSoldier->ubProfile ].sPreCombatGridNo) && pSoldier->ubCivilianGroup != QUEENS_CIV_GROUP )
 			{
 				// must make them uncower first, then return to start location

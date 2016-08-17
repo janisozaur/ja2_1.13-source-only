@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include <Windows.h>
 
 #include "MemMan.h"

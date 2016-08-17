@@ -1,21 +1,21 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
-	#include "finances.h"
-	#include "Game clock.h"
+	#include "Laptop.h"
+	#include "Finances.h"
+	#include "Game Clock.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Soldier Profile.h"
 	#include "Text.h"
 	#include "Strategic Mines.h"
 	#include "LaptopSave.h"
 	#include "Campaign Types.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	// HEADROCK HAM 3.6: Added facilities for calculating hourly expenses
 	#include "Facilities.h"
 	// HEADROCK HAM 3.6: Militia upkeep
@@ -421,7 +421,7 @@ INT32 GetProjectedTotalDailyIncome( void )
 	// had these mines how much more would we get?
 
 	// HEADROCK HAM 3.6: Facilities can make you money, and this is figured into your daily income.
-	
+
 	INT32 iRate = 0;
 	iRate = PredictIncomeFromPlayerMines(TRUE) + (15 * GetTotalFacilityHourlyCosts( TRUE )); // 15 hours is the average time a merc can work per day
 
@@ -432,7 +432,7 @@ INT32 GetProjectedTotalDailyIncome( void )
 INT32 GetProjectedExpenses( void )
 {
 	INT32 iTotalExpenses = 0;
-	
+
 	INT32 iFacilityExpenses = GetTotalFacilityHourlyCosts( FALSE );
 	INT32 iContractExpenses = GetTotalContractExpenses();
 
@@ -1312,7 +1312,7 @@ void CreateFinanceButtons( void )
 	giFinanceButton[LAST_PAGE_BUTTON] = QuickCreateButton( giFinanceButtonImage[LAST_PAGE_BUTTON], LAST_PAGE_X, BTN_Y,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 										BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnFinanceFirstLastPageCallBack);
-	
+
 	MSYS_SetBtnUserData( giFinanceButton[LAST_PAGE_BUTTON], 0, 1 );
 
 	// set buttons
@@ -1928,7 +1928,7 @@ BOOLEAN LoadInRecords( UINT32 uiPage )
 
 		AssertMsg( iBytesRead, "Failed To Read Data Entry");
 
-		// WANNE: Do not add the fix + 1 day here, because otherwise we have a day + 1 offset 
+		// WANNE: Do not add the fix + 1 day here, because otherwise we have a day + 1 offset
 		// WANNE: Fix uiDate (add 1 day!)!
 		//uiDate += 1500;
 

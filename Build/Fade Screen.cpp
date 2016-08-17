@@ -2,16 +2,16 @@
 	#include "JA2 All.h"
 #else
 	#include "sgp.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Timer Control.h"
-	#include "sys globals.h"
-	#include "fade screen.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
-	#include "cursor control.h"
-	#include "music control.h"
+	#include "Sys Globals.h"
+	#include "Fade Screen.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
+	#include "Cursor Control.h"
+	#include "Music Control.h"
 	#include "Render Dirty.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 #endif
 
 #define	SQUARE_STEP			8

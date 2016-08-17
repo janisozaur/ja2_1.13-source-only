@@ -11,7 +11,7 @@
 #endif
 
 #else
-	//Wizardry 
+	//Wizardry
 //#define ENABLE_EXCEPTION_HANDLING
 #endif
 

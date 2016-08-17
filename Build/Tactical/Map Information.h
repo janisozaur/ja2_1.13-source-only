@@ -1,7 +1,7 @@
 #ifndef __MAP_INFORMATION_H
 #define __MAP_INFORMATION_H
 
-#include "types.h"
+#include "Types.h"
 
 extern FLOAT gdMajorMapVersion;
 extern UINT8 gubMinorMapVersion;
@@ -18,9 +18,9 @@ enum //for use with MAPCREATE_STRUCT.ubEditorSmoothingType
 typedef struct
 {
 	//These are the mandatory entry points for a map.	If any of the values are -1, then that means that
-	//the point has been specifically not used and that the map is not traversable to or from an adjacent 
-	//sector in that direction.	The >0 value points must be validated before saving the map.	This is 
-	//done by simply checking if those points are sittable by mercs, and that you can plot a path from 
+	//the point has been specifically not used and that the map is not traversable to or from an adjacent
+	//sector in that direction.	The >0 value points must be validated before saving the map.	This is
+	//done by simply checking if those points are sittable by mercs, and that you can plot a path from
 	//these points to each other.	These values can only be set by the editor : mapinfo tab
 	INT16 sNorthGridNo;
 	INT16 sEastGridNo;

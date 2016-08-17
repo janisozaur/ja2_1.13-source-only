@@ -2,51 +2,51 @@
 	#include "Tactical All.h"
 	#include "language defines.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "sysutil.h"
-	#include "overhead.h"
+	#include "VObject.h"
+	#include "SysUtil.h"
+	#include "Overhead.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "interface.h"
-	#include "vsurface.h"
-	#include "wcheck.h"
-	#include "input.h"
+	#include "Interface.h"
+	#include "VSurface.h"
+	#include "WCheck.h"
+	#include "Input.h"
 	#include "Handle UI.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Font Control.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Interface Panels.h"
 	#include "Animation Control.h"
 	#include "Soldier Control.h"
-	#include "weapons.h"
-	#include "lighting.h"
-	#include "faces.h"
-	#include "mapscreen.h"
-	#include "message.h"
-	#include "text.h"
+	#include "Weapons.h"
+	#include "Lighting.h"
+	#include "Faces.h"
+	#include "MapScreen.h"
+	#include "Message.h"
+	#include "Text.h"
 	#include "Interface Items.h"
 	#include "Font Control.h"
 	#include "Cursor Control.h"
-	#include "interface utils.h"
-	#include "interface items.h"
-	#include "wordwrap.h"
-	#include "vobject_blitters.h"
-	#include "world items.h"
-	#include "points.h"
-	#include "physics.h"
-	#include "handle ui.h"
+	#include "Interface Utils.h"
+	#include "Interface Items.h"
+	#include "WordWrap.h"
+	#include "VObject_blitters.h"
+	#include "World Items.h"
+	#include "Points.h"
+	#include "Physics.h"
+	#include "Handle UI.h"
 	#include "ShopKeeper Interface.h"
-	#include "english.h"
-	#include "keys.h"
-	#include "Strategicmap.h"
-	#include "soldier macros.h"
-	#include "squads.h"
+	#include "English.h"
+	#include "Keys.h"
+	#include "StrategicMap.h"
+	#include "Soldier Macros.h"
+	#include "Squads.h"
 	#include "MessageBoxScreen.h"
 	#include "Language Defines.h"
 	#include "GameSettings.h"
@@ -54,7 +54,7 @@
 	#include "Quests.h"
 	#include "Map Screen Interface.h"
 	#include "Campaign Types.h"
-	#include "los.h"
+	#include "LOS.h"
 	#include "Map Screen Interface Map.h"
 	#include "Food.h"	// added by Flugente
 #endif
@@ -137,7 +137,7 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 
 		INT16 UDBOffsetX;
 		INT16 UDBOffsetY;
-		
+
 		UDBOffsetX = gsInvDescX;
 		UDBOffsetY = gsInvDescY;
 
@@ -230,19 +230,19 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 		// HEADROCK HAM 4: UDB General Page - Index Locations
 
 		// "Primary" index
-		gItemDescGenIndexRegions[0][0].sLeft = 12 + UDBOffsetX;		gItemDescGenIndexRegions[0][0].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[0][0].sRight = 61 + UDBOffsetX;	gItemDescGenIndexRegions[0][0].sBottom = 146 + UDBOffsetY;	
+		gItemDescGenIndexRegions[0][0].sLeft = 12 + UDBOffsetX;		gItemDescGenIndexRegions[0][0].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[0][0].sRight = 61 + UDBOffsetX;	gItemDescGenIndexRegions[0][0].sBottom = 146 + UDBOffsetY;
 		gItemDescGenIndexRegions[0][1].sLeft = 63 + UDBOffsetX;		gItemDescGenIndexRegions[0][1].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[0][1].sRight = 84 + UDBOffsetX;	gItemDescGenIndexRegions[0][1].sBottom = 146 + UDBOffsetY;
 		gItemDescGenIndexRegions[0][2].sLeft = 86 + UDBOffsetX;		gItemDescGenIndexRegions[0][2].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[0][2].sRight = 105 + UDBOffsetX;	gItemDescGenIndexRegions[0][2].sBottom = 146 + UDBOffsetY;
 		gItemDescGenIndexRegions[0][3].sLeft = 107 + UDBOffsetX;	gItemDescGenIndexRegions[0][3].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[0][3].sRight = 127 + UDBOffsetX;	gItemDescGenIndexRegions[0][3].sBottom = 146 + UDBOffsetY;
 
 		// "Secondary" index
-		gItemDescGenIndexRegions[1][0].sLeft = 130 + UDBOffsetX;	gItemDescGenIndexRegions[1][0].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[1][0].sRight = 179 + UDBOffsetX;	gItemDescGenIndexRegions[1][0].sBottom = 146 + UDBOffsetY;	
+		gItemDescGenIndexRegions[1][0].sLeft = 130 + UDBOffsetX;	gItemDescGenIndexRegions[1][0].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[1][0].sRight = 179 + UDBOffsetX;	gItemDescGenIndexRegions[1][0].sBottom = 146 + UDBOffsetY;
 		gItemDescGenIndexRegions[1][1].sLeft = 181 + UDBOffsetX;	gItemDescGenIndexRegions[1][1].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[1][1].sRight = 202 + UDBOffsetX;	gItemDescGenIndexRegions[1][1].sBottom = 146 + UDBOffsetY;
 		gItemDescGenIndexRegions[1][2].sLeft = 204 + UDBOffsetX;	gItemDescGenIndexRegions[1][2].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[1][2].sRight = 223 + UDBOffsetX;	gItemDescGenIndexRegions[1][2].sBottom = 146 + UDBOffsetY;
 		gItemDescGenIndexRegions[1][3].sLeft = 225 + UDBOffsetX;	gItemDescGenIndexRegions[1][3].sTop = 134 + UDBOffsetY;	gItemDescGenIndexRegions[1][3].sRight = 245 + UDBOffsetX;	gItemDescGenIndexRegions[1][3].sBottom = 146 + UDBOffsetY;
 
 		// "Tertiary" index (for weapons only)
-		gItemDescGenIndexRegions[2][0].sLeft = 130 + UDBOffsetX;	gItemDescGenIndexRegions[2][0].sTop = 245 + UDBOffsetY;	gItemDescGenIndexRegions[2][0].sRight = 179 + UDBOffsetX;	gItemDescGenIndexRegions[2][0].sBottom = 257 + UDBOffsetY;	
+		gItemDescGenIndexRegions[2][0].sLeft = 130 + UDBOffsetX;	gItemDescGenIndexRegions[2][0].sTop = 245 + UDBOffsetY;	gItemDescGenIndexRegions[2][0].sRight = 179 + UDBOffsetX;	gItemDescGenIndexRegions[2][0].sBottom = 257 + UDBOffsetY;
 		gItemDescGenIndexRegions[2][1].sLeft = 181 + UDBOffsetX;	gItemDescGenIndexRegions[2][1].sTop = 245 + UDBOffsetY;	gItemDescGenIndexRegions[2][1].sRight = 202 + UDBOffsetX;	gItemDescGenIndexRegions[2][1].sBottom = 257 + UDBOffsetY;
 		gItemDescGenIndexRegions[2][2].sLeft = 204 + UDBOffsetX;	gItemDescGenIndexRegions[2][2].sTop = 245 + UDBOffsetY;	gItemDescGenIndexRegions[2][2].sRight = 223 + UDBOffsetX;	gItemDescGenIndexRegions[2][2].sBottom = 257 + UDBOffsetY;
 		gItemDescGenIndexRegions[2][3].sLeft = 225 + UDBOffsetX;	gItemDescGenIndexRegions[2][3].sTop = 245 + UDBOffsetY;	gItemDescGenIndexRegions[2][3].sRight = 245 + UDBOffsetX;	gItemDescGenIndexRegions[2][3].sBottom = 257 + UDBOffsetY;
@@ -255,136 +255,136 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 		// own coordinate arrays as they are used to display non-tabulated information.
 
 		// Left Column, row 1
-		gItemDescGenRegions[0][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[0][0].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[0][0].sBottom = 162 + UDBOffsetY;	
-		gItemDescGenRegions[0][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[0][1].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[0][1].sBottom = 162 + UDBOffsetY;	
-		gItemDescGenRegions[0][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[0][2].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[0][2].sBottom = 162 + UDBOffsetY;	
+		gItemDescGenRegions[0][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[0][0].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[0][0].sBottom = 162 + UDBOffsetY;
+		gItemDescGenRegions[0][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[0][1].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[0][1].sBottom = 162 + UDBOffsetY;
+		gItemDescGenRegions[0][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[0][2].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[0][2].sBottom = 162 + UDBOffsetY;
 		gItemDescGenRegions[0][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[0][3].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[0][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[0][3].sBottom = 162 + UDBOffsetY;
 
 		// Left Column, row 2
-		gItemDescGenRegions[1][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[1][0].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[1][0].sBottom = 175 + UDBOffsetY;	
-		gItemDescGenRegions[1][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[1][1].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[1][1].sBottom = 175 + UDBOffsetY;	
-		gItemDescGenRegions[1][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[1][2].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[1][2].sBottom = 175 + UDBOffsetY;	
+		gItemDescGenRegions[1][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[1][0].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[1][0].sBottom = 175 + UDBOffsetY;
+		gItemDescGenRegions[1][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[1][1].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[1][1].sBottom = 175 + UDBOffsetY;
+		gItemDescGenRegions[1][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[1][2].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[1][2].sBottom = 175 + UDBOffsetY;
 		gItemDescGenRegions[1][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[1][3].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[1][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[1][3].sBottom = 175 + UDBOffsetY;
 
 		// Left Column, row 3
-		gItemDescGenRegions[2][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[2][0].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[2][0].sBottom = 188 + UDBOffsetY;	
-		gItemDescGenRegions[2][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[2][1].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[2][1].sBottom = 188 + UDBOffsetY;	
-		gItemDescGenRegions[2][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[2][2].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[2][2].sBottom = 188 + UDBOffsetY;	
+		gItemDescGenRegions[2][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[2][0].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[2][0].sBottom = 188 + UDBOffsetY;
+		gItemDescGenRegions[2][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[2][1].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[2][1].sBottom = 188 + UDBOffsetY;
+		gItemDescGenRegions[2][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[2][2].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[2][2].sBottom = 188 + UDBOffsetY;
 		gItemDescGenRegions[2][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[2][3].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[2][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[2][3].sBottom = 188 + UDBOffsetY;
 
 		// Left Column, row 4
-		gItemDescGenRegions[3][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[3][0].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[3][0].sBottom = 201 + UDBOffsetY;	
-		gItemDescGenRegions[3][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[3][1].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[3][1].sBottom = 201 + UDBOffsetY;	
-		gItemDescGenRegions[3][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[3][2].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[3][2].sBottom = 201 + UDBOffsetY;	
+		gItemDescGenRegions[3][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[3][0].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[3][0].sBottom = 201 + UDBOffsetY;
+		gItemDescGenRegions[3][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[3][1].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[3][1].sBottom = 201 + UDBOffsetY;
+		gItemDescGenRegions[3][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[3][2].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[3][2].sBottom = 201 + UDBOffsetY;
 		gItemDescGenRegions[3][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[3][3].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[3][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[3][3].sBottom = 201 + UDBOffsetY;
 
 		// Left Column, row 5
-		gItemDescGenRegions[4][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[4][0].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[4][0].sBottom = 214 + UDBOffsetY;	
-		gItemDescGenRegions[4][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[4][1].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[4][1].sBottom = 214 + UDBOffsetY;	
-		gItemDescGenRegions[4][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[4][2].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[4][2].sBottom = 214 + UDBOffsetY;	
+		gItemDescGenRegions[4][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[4][0].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[4][0].sBottom = 214 + UDBOffsetY;
+		gItemDescGenRegions[4][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[4][1].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[4][1].sBottom = 214 + UDBOffsetY;
+		gItemDescGenRegions[4][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[4][2].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[4][2].sBottom = 214 + UDBOffsetY;
 		gItemDescGenRegions[4][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[4][3].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[4][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[4][3].sBottom = 214 + UDBOffsetY;
 
 		// Left Column, row 6
-		gItemDescGenRegions[5][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[5][0].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[5][0].sBottom = 227 + UDBOffsetY;	
-		gItemDescGenRegions[5][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[5][1].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[5][1].sBottom = 227 + UDBOffsetY;	
-		gItemDescGenRegions[5][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[5][2].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[5][2].sBottom = 227 + UDBOffsetY;	
+		gItemDescGenRegions[5][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[5][0].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[5][0].sBottom = 227 + UDBOffsetY;
+		gItemDescGenRegions[5][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[5][1].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[5][1].sBottom = 227 + UDBOffsetY;
+		gItemDescGenRegions[5][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[5][2].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[5][2].sBottom = 227 + UDBOffsetY;
 		gItemDescGenRegions[5][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[5][3].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[5][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[5][3].sBottom = 227 + UDBOffsetY;
 
 		// Left Column, row 7
-		gItemDescGenRegions[6][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[6][0].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[6][0].sBottom = 242 + UDBOffsetY;	
-		gItemDescGenRegions[6][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[6][1].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[6][1].sBottom = 242 + UDBOffsetY;	
-		gItemDescGenRegions[6][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[6][2].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[6][2].sBottom = 242 + UDBOffsetY;	
+		gItemDescGenRegions[6][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[6][0].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[6][0].sBottom = 242 + UDBOffsetY;
+		gItemDescGenRegions[6][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[6][1].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[6][1].sBottom = 242 + UDBOffsetY;
+		gItemDescGenRegions[6][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[6][2].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[6][2].sBottom = 242 + UDBOffsetY;
 		gItemDescGenRegions[6][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[6][3].sTop = 228 + UDBOffsetY;	gItemDescGenRegions[6][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[6][3].sBottom = 242 + UDBOffsetY;
 
 		// Left Column, row 8
-		gItemDescGenRegions[7][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[7][0].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[7][0].sBottom = 255 + UDBOffsetY;	
-		gItemDescGenRegions[7][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[7][1].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[7][1].sBottom = 255 + UDBOffsetY;	
-		gItemDescGenRegions[7][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[7][2].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[7][2].sBottom = 255 + UDBOffsetY;	
+		gItemDescGenRegions[7][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[7][0].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[7][0].sBottom = 255 + UDBOffsetY;
+		gItemDescGenRegions[7][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[7][1].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[7][1].sBottom = 255 + UDBOffsetY;
+		gItemDescGenRegions[7][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[7][2].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[7][2].sBottom = 255 + UDBOffsetY;
 		gItemDescGenRegions[7][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[7][3].sTop = 243 + UDBOffsetY;	gItemDescGenRegions[7][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[7][3].sBottom = 255 + UDBOffsetY;
 
 		// Left Column, row 9
-		gItemDescGenRegions[8][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[8][0].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[8][0].sBottom = 268 + UDBOffsetY;	
-		gItemDescGenRegions[8][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[8][1].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[8][1].sBottom = 268 + UDBOffsetY;	
-		gItemDescGenRegions[8][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[8][2].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[8][2].sBottom = 268 + UDBOffsetY;	
+		gItemDescGenRegions[8][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[8][0].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[8][0].sBottom = 268 + UDBOffsetY;
+		gItemDescGenRegions[8][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[8][1].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[8][1].sBottom = 268 + UDBOffsetY;
+		gItemDescGenRegions[8][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[8][2].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[8][2].sBottom = 268 + UDBOffsetY;
 		gItemDescGenRegions[8][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[8][3].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[8][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[8][3].sBottom = 268 + UDBOffsetY;
 
 		// Left Column, row 10
-		gItemDescGenRegions[9][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[9][0].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[9][0].sBottom = 281 + UDBOffsetY;	
-		gItemDescGenRegions[9][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[9][1].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[9][1].sBottom = 281 + UDBOffsetY;	
-		gItemDescGenRegions[9][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[9][2].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[9][2].sBottom = 281 + UDBOffsetY;	
+		gItemDescGenRegions[9][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[9][0].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][0].sRight = 61 + UDBOffsetX;		gItemDescGenRegions[9][0].sBottom = 281 + UDBOffsetY;
+		gItemDescGenRegions[9][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[9][1].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][1].sRight = 84 + UDBOffsetX;		gItemDescGenRegions[9][1].sBottom = 281 + UDBOffsetY;
+		gItemDescGenRegions[9][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[9][2].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[9][2].sBottom = 281 + UDBOffsetY;
 		gItemDescGenRegions[9][3].sLeft = 107 + UDBOffsetX;		gItemDescGenRegions[9][3].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[9][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[9][3].sBottom = 281 + UDBOffsetY;
 
 		// Left Column, row 11
-		gItemDescGenRegions[10][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[10][0].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][0].sRight = 61 + UDBOffsetX;	gItemDescGenRegions[10][0].sBottom = 294 + UDBOffsetY;	
-		gItemDescGenRegions[10][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[10][1].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][1].sRight = 84 + UDBOffsetX;	gItemDescGenRegions[10][1].sBottom = 294 + UDBOffsetY;	
-		gItemDescGenRegions[10][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[10][2].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[10][2].sBottom = 294 + UDBOffsetY;	
+		gItemDescGenRegions[10][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[10][0].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][0].sRight = 61 + UDBOffsetX;	gItemDescGenRegions[10][0].sBottom = 294 + UDBOffsetY;
+		gItemDescGenRegions[10][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[10][1].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][1].sRight = 84 + UDBOffsetX;	gItemDescGenRegions[10][1].sBottom = 294 + UDBOffsetY;
+		gItemDescGenRegions[10][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[10][2].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[10][2].sBottom = 294 + UDBOffsetY;
 		gItemDescGenRegions[10][3].sLeft = 107 + UDBOffsetX;	gItemDescGenRegions[10][3].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[10][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[10][3].sBottom = 294 + UDBOffsetY;
 
 		// Left Column, row 12
-		gItemDescGenRegions[11][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[11][0].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][0].sRight = 61 + UDBOffsetX;	gItemDescGenRegions[11][0].sBottom = 307 + UDBOffsetY;	
-		gItemDescGenRegions[11][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[11][1].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][1].sRight = 84 + UDBOffsetX;	gItemDescGenRegions[11][1].sBottom = 307 + UDBOffsetY;	
-		gItemDescGenRegions[11][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[11][2].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[11][2].sBottom = 307 + UDBOffsetY;	
+		gItemDescGenRegions[11][0].sLeft = 12 + UDBOffsetX;		gItemDescGenRegions[11][0].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][0].sRight = 61 + UDBOffsetX;	gItemDescGenRegions[11][0].sBottom = 307 + UDBOffsetY;
+		gItemDescGenRegions[11][1].sLeft = 63 + UDBOffsetX;		gItemDescGenRegions[11][1].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][1].sRight = 84 + UDBOffsetX;	gItemDescGenRegions[11][1].sBottom = 307 + UDBOffsetY;
+		gItemDescGenRegions[11][2].sLeft = 86 + UDBOffsetX;		gItemDescGenRegions[11][2].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][2].sRight = 105 + UDBOffsetX;	gItemDescGenRegions[11][2].sBottom = 307 + UDBOffsetY;
 		gItemDescGenRegions[11][3].sLeft = 107 + UDBOffsetX;	gItemDescGenRegions[11][3].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[11][3].sRight = 127 + UDBOffsetX;	gItemDescGenRegions[11][3].sBottom = 307 + UDBOffsetY;
 
 		// Right Column, row 1
-		gItemDescGenRegions[13][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[13][0].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[13][0].sBottom = 162 + UDBOffsetY;	
-		gItemDescGenRegions[13][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[13][1].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[13][1].sBottom = 162 + UDBOffsetY;	
-		gItemDescGenRegions[13][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[13][2].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[13][2].sBottom = 162 + UDBOffsetY;	
+		gItemDescGenRegions[13][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[13][0].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[13][0].sBottom = 162 + UDBOffsetY;
+		gItemDescGenRegions[13][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[13][1].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[13][1].sBottom = 162 + UDBOffsetY;
+		gItemDescGenRegions[13][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[13][2].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[13][2].sBottom = 162 + UDBOffsetY;
 		gItemDescGenRegions[13][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[13][3].sTop = 150 + UDBOffsetY;	gItemDescGenRegions[13][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[13][3].sBottom = 162 + UDBOffsetY;
 
 		// Right Column, row 2
-		gItemDescGenRegions[14][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[14][0].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[14][0].sBottom = 175 + UDBOffsetY;	
-		gItemDescGenRegions[14][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[14][1].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[14][1].sBottom = 175 + UDBOffsetY;	
-		gItemDescGenRegions[14][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[14][2].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[14][2].sBottom = 175 + UDBOffsetY;	
+		gItemDescGenRegions[14][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[14][0].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[14][0].sBottom = 175 + UDBOffsetY;
+		gItemDescGenRegions[14][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[14][1].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[14][1].sBottom = 175 + UDBOffsetY;
+		gItemDescGenRegions[14][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[14][2].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[14][2].sBottom = 175 + UDBOffsetY;
 		gItemDescGenRegions[14][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[14][3].sTop = 163 + UDBOffsetY;	gItemDescGenRegions[14][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[14][3].sBottom = 175 + UDBOffsetY;
 
 		// Right Column, row 3
-		gItemDescGenRegions[15][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[15][0].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[15][0].sBottom = 188 + UDBOffsetY;	
-		gItemDescGenRegions[15][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[15][1].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[15][1].sBottom = 188 + UDBOffsetY;	
-		gItemDescGenRegions[15][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[15][2].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[15][2].sBottom = 188 + UDBOffsetY;	
+		gItemDescGenRegions[15][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[15][0].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[15][0].sBottom = 188 + UDBOffsetY;
+		gItemDescGenRegions[15][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[15][1].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[15][1].sBottom = 188 + UDBOffsetY;
+		gItemDescGenRegions[15][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[15][2].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[15][2].sBottom = 188 + UDBOffsetY;
 		gItemDescGenRegions[15][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[15][3].sTop = 176 + UDBOffsetY;	gItemDescGenRegions[15][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[15][3].sBottom = 188 + UDBOffsetY;
 
 		// Right Column, row 4
-		gItemDescGenRegions[16][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[16][0].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[16][0].sBottom = 201 + UDBOffsetY;	
-		gItemDescGenRegions[16][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[16][1].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[16][1].sBottom = 201 + UDBOffsetY;	
-		gItemDescGenRegions[16][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[16][2].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[16][2].sBottom = 201 + UDBOffsetY;	
+		gItemDescGenRegions[16][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[16][0].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[16][0].sBottom = 201 + UDBOffsetY;
+		gItemDescGenRegions[16][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[16][1].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[16][1].sBottom = 201 + UDBOffsetY;
+		gItemDescGenRegions[16][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[16][2].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[16][2].sBottom = 201 + UDBOffsetY;
 		gItemDescGenRegions[16][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[16][3].sTop = 189 + UDBOffsetY;	gItemDescGenRegions[16][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[16][3].sBottom = 201 + UDBOffsetY;
 
 		// Right Column, row 5
-		gItemDescGenRegions[17][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[17][0].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[17][0].sBottom = 214 + UDBOffsetY;	
-		gItemDescGenRegions[17][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[17][1].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[17][1].sBottom = 214 + UDBOffsetY;	
-		gItemDescGenRegions[17][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[17][2].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[17][2].sBottom = 214 + UDBOffsetY;	
+		gItemDescGenRegions[17][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[17][0].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[17][0].sBottom = 214 + UDBOffsetY;
+		gItemDescGenRegions[17][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[17][1].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[17][1].sBottom = 214 + UDBOffsetY;
+		gItemDescGenRegions[17][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[17][2].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[17][2].sBottom = 214 + UDBOffsetY;
 		gItemDescGenRegions[17][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[17][3].sTop = 202 + UDBOffsetY;	gItemDescGenRegions[17][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[17][3].sBottom = 214 + UDBOffsetY;
 
 		// Right Column, row 6
-		gItemDescGenRegions[18][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[18][0].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[18][0].sBottom = 227 + UDBOffsetY;	
-		gItemDescGenRegions[18][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[18][1].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[18][1].sBottom = 227 + UDBOffsetY;	
-		gItemDescGenRegions[18][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[18][2].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[18][2].sBottom = 227 + UDBOffsetY;	
+		gItemDescGenRegions[18][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[18][0].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[18][0].sBottom = 227 + UDBOffsetY;
+		gItemDescGenRegions[18][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[18][1].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[18][1].sBottom = 227 + UDBOffsetY;
+		gItemDescGenRegions[18][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[18][2].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[18][2].sBottom = 227 + UDBOffsetY;
 		gItemDescGenRegions[18][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[18][3].sTop = 215 + UDBOffsetY;	gItemDescGenRegions[18][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[18][3].sBottom = 227 + UDBOffsetY;
 
 		// NOTE a skip of Y here - these belong to the "tertiary" column, which is below the "secondary" column, separated by an index and header.
 		// Right Column, row 7
-		gItemDescGenRegions[19][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[19][0].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[19][0].sBottom = 268 + UDBOffsetY;	
-		gItemDescGenRegions[19][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[19][1].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[19][1].sBottom = 268 + UDBOffsetY;	
-		gItemDescGenRegions[19][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[19][2].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[19][2].sBottom = 268 + UDBOffsetY;	
+		gItemDescGenRegions[19][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[19][0].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[19][0].sBottom = 268 + UDBOffsetY;
+		gItemDescGenRegions[19][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[19][1].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[19][1].sBottom = 268 + UDBOffsetY;
+		gItemDescGenRegions[19][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[19][2].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[19][2].sBottom = 268 + UDBOffsetY;
 		gItemDescGenRegions[19][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[19][3].sTop = 256 + UDBOffsetY;	gItemDescGenRegions[19][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[19][3].sBottom = 268 + UDBOffsetY;
 
 		// Right Column, row 8
-		gItemDescGenRegions[20][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[20][0].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[20][0].sBottom = 281 + UDBOffsetY;	
-		gItemDescGenRegions[20][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[20][1].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[20][1].sBottom = 281 + UDBOffsetY;	
-		gItemDescGenRegions[20][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[20][2].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[20][2].sBottom = 281 + UDBOffsetY;	
+		gItemDescGenRegions[20][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[20][0].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[20][0].sBottom = 281 + UDBOffsetY;
+		gItemDescGenRegions[20][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[20][1].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[20][1].sBottom = 281 + UDBOffsetY;
+		gItemDescGenRegions[20][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[20][2].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[20][2].sBottom = 281 + UDBOffsetY;
 		gItemDescGenRegions[20][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[20][3].sTop = 269 + UDBOffsetY;	gItemDescGenRegions[20][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[20][3].sBottom = 281 + UDBOffsetY;
 
 		// Right Column, row 9
-		gItemDescGenRegions[21][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[21][0].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[21][0].sBottom = 294 + UDBOffsetY;	
-		gItemDescGenRegions[21][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[21][1].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[21][1].sBottom = 294 + UDBOffsetY;	
-		gItemDescGenRegions[21][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[21][2].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[21][2].sBottom = 294 + UDBOffsetY;	
+		gItemDescGenRegions[21][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[21][0].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[21][0].sBottom = 294 + UDBOffsetY;
+		gItemDescGenRegions[21][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[21][1].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[21][1].sBottom = 294 + UDBOffsetY;
+		gItemDescGenRegions[21][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[21][2].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[21][2].sBottom = 294 + UDBOffsetY;
 		gItemDescGenRegions[21][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[21][3].sTop = 282 + UDBOffsetY;	gItemDescGenRegions[21][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[21][3].sBottom = 294 + UDBOffsetY;
 
 		// Right Column, row 10
-		gItemDescGenRegions[22][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[22][0].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[22][0].sBottom = 307 + UDBOffsetY;	
-		gItemDescGenRegions[22][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[22][1].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[22][1].sBottom = 307 + UDBOffsetY;	
-		gItemDescGenRegions[22][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[22][2].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[22][2].sBottom = 307 + UDBOffsetY;	
+		gItemDescGenRegions[22][0].sLeft = 130 + UDBOffsetX;		gItemDescGenRegions[22][0].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][0].sRight = 179 + UDBOffsetX;	gItemDescGenRegions[22][0].sBottom = 307 + UDBOffsetY;
+		gItemDescGenRegions[22][1].sLeft = 181 + UDBOffsetX;		gItemDescGenRegions[22][1].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][1].sRight = 202 + UDBOffsetX;	gItemDescGenRegions[22][1].sBottom = 307 + UDBOffsetY;
+		gItemDescGenRegions[22][2].sLeft = 204 + UDBOffsetX;		gItemDescGenRegions[22][2].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][2].sRight = 223 + UDBOffsetX;	gItemDescGenRegions[22][2].sBottom = 307 + UDBOffsetY;
 		gItemDescGenRegions[22][3].sLeft = 225 + UDBOffsetX;		gItemDescGenRegions[22][3].sTop = 295 + UDBOffsetY;	gItemDescGenRegions[22][3].sRight = 245 + UDBOffsetX;	gItemDescGenRegions[22][3].sBottom = 307 + UDBOffsetY;
 
 		///////////////////////////////////////////////////////////////////////////////////
@@ -444,70 +444,70 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 		gItemDescAdvIndexRegions[0][2].sLeft = 160 + UDBOffsetX;	gItemDescAdvIndexRegions[0][2].sTop = 119 + UDBOffsetY;		gItemDescAdvIndexRegions[0][2].sRight = 189 + UDBOffsetX;	gItemDescAdvIndexRegions[0][2].sBottom = 132 + UDBOffsetY;
 		gItemDescAdvIndexRegions[0][3].sLeft = 193 + UDBOffsetX;	gItemDescAdvIndexRegions[0][3].sTop = 119 + UDBOffsetY;		gItemDescAdvIndexRegions[0][3].sRight = 220 + UDBOffsetX;	gItemDescAdvIndexRegions[0][3].sBottom = 132 + UDBOffsetY;
 
-		gItemDescAdvRegions[0][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[0][0].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[0][0].sBottom = 150 + UDBOffsetY; 
-		gItemDescAdvRegions[0][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[0][1].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[0][1].sBottom = 150 + UDBOffsetY; 
-		gItemDescAdvRegions[0][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[0][2].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[0][2].sBottom = 150 + UDBOffsetY; 
-		gItemDescAdvRegions[0][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[0][3].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[0][3].sBottom = 150 + UDBOffsetY; 
+		gItemDescAdvRegions[0][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[0][0].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[0][0].sBottom = 150 + UDBOffsetY;
+		gItemDescAdvRegions[0][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[0][1].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[0][1].sBottom = 150 + UDBOffsetY;
+		gItemDescAdvRegions[0][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[0][2].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[0][2].sBottom = 150 + UDBOffsetY;
+		gItemDescAdvRegions[0][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[0][3].sTop = 138 + UDBOffsetY;	gItemDescAdvRegions[0][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[0][3].sBottom = 150 + UDBOffsetY;
 
-		gItemDescAdvRegions[1][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[1][0].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[1][0].sBottom = 163 + UDBOffsetY; 
-		gItemDescAdvRegions[1][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[1][1].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[1][1].sBottom = 163 + UDBOffsetY; 
-		gItemDescAdvRegions[1][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[1][2].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[1][2].sBottom = 163 + UDBOffsetY; 
-		gItemDescAdvRegions[1][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[1][3].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[1][3].sBottom = 163 + UDBOffsetY; 
+		gItemDescAdvRegions[1][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[1][0].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[1][0].sBottom = 163 + UDBOffsetY;
+		gItemDescAdvRegions[1][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[1][1].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[1][1].sBottom = 163 + UDBOffsetY;
+		gItemDescAdvRegions[1][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[1][2].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[1][2].sBottom = 163 + UDBOffsetY;
+		gItemDescAdvRegions[1][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[1][3].sTop = 151 + UDBOffsetY;	gItemDescAdvRegions[1][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[1][3].sBottom = 163 + UDBOffsetY;
 
-		gItemDescAdvRegions[2][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[2][0].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[2][0].sBottom = 176 + UDBOffsetY; 
-		gItemDescAdvRegions[2][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[2][1].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[2][1].sBottom = 176 + UDBOffsetY; 
-		gItemDescAdvRegions[2][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[2][2].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[2][2].sBottom = 176 + UDBOffsetY; 
-		gItemDescAdvRegions[2][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[2][3].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[2][3].sBottom = 176 + UDBOffsetY; 
+		gItemDescAdvRegions[2][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[2][0].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[2][0].sBottom = 176 + UDBOffsetY;
+		gItemDescAdvRegions[2][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[2][1].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[2][1].sBottom = 176 + UDBOffsetY;
+		gItemDescAdvRegions[2][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[2][2].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[2][2].sBottom = 176 + UDBOffsetY;
+		gItemDescAdvRegions[2][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[2][3].sTop = 164 + UDBOffsetY;	gItemDescAdvRegions[2][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[2][3].sBottom = 176 + UDBOffsetY;
 
-		gItemDescAdvRegions[3][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[3][0].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[3][0].sBottom = 189 + UDBOffsetY; 
-		gItemDescAdvRegions[3][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[3][1].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[3][1].sBottom = 189 + UDBOffsetY; 
-		gItemDescAdvRegions[3][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[3][2].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[3][2].sBottom = 189 + UDBOffsetY; 
-		gItemDescAdvRegions[3][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[3][3].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[3][3].sBottom = 189 + UDBOffsetY; 
+		gItemDescAdvRegions[3][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[3][0].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[3][0].sBottom = 189 + UDBOffsetY;
+		gItemDescAdvRegions[3][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[3][1].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[3][1].sBottom = 189 + UDBOffsetY;
+		gItemDescAdvRegions[3][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[3][2].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[3][2].sBottom = 189 + UDBOffsetY;
+		gItemDescAdvRegions[3][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[3][3].sTop = 177 + UDBOffsetY;	gItemDescAdvRegions[3][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[3][3].sBottom = 189 + UDBOffsetY;
 
-		gItemDescAdvRegions[4][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[4][0].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[4][0].sBottom = 202 + UDBOffsetY; 
-		gItemDescAdvRegions[4][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[4][1].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[4][1].sBottom = 202 + UDBOffsetY; 
-		gItemDescAdvRegions[4][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[4][2].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[4][2].sBottom = 202 + UDBOffsetY; 
-		gItemDescAdvRegions[4][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[4][3].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[4][3].sBottom = 202 + UDBOffsetY; 
+		gItemDescAdvRegions[4][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[4][0].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[4][0].sBottom = 202 + UDBOffsetY;
+		gItemDescAdvRegions[4][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[4][1].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[4][1].sBottom = 202 + UDBOffsetY;
+		gItemDescAdvRegions[4][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[4][2].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[4][2].sBottom = 202 + UDBOffsetY;
+		gItemDescAdvRegions[4][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[4][3].sTop = 190 + UDBOffsetY;	gItemDescAdvRegions[4][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[4][3].sBottom = 202 + UDBOffsetY;
 
-		gItemDescAdvRegions[5][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[5][0].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[5][0].sBottom = 215 + UDBOffsetY; 
-		gItemDescAdvRegions[5][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[5][1].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[5][1].sBottom = 215 + UDBOffsetY; 
-		gItemDescAdvRegions[5][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[5][2].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[5][2].sBottom = 215 + UDBOffsetY; 
-		gItemDescAdvRegions[5][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[5][3].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[5][3].sBottom = 215 + UDBOffsetY; 
+		gItemDescAdvRegions[5][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[5][0].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[5][0].sBottom = 215 + UDBOffsetY;
+		gItemDescAdvRegions[5][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[5][1].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[5][1].sBottom = 215 + UDBOffsetY;
+		gItemDescAdvRegions[5][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[5][2].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[5][2].sBottom = 215 + UDBOffsetY;
+		gItemDescAdvRegions[5][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[5][3].sTop = 203 + UDBOffsetY;	gItemDescAdvRegions[5][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[5][3].sBottom = 215 + UDBOffsetY;
 
-		gItemDescAdvRegions[6][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[6][0].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[6][0].sBottom = 228 + UDBOffsetY; 
-		gItemDescAdvRegions[6][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[6][1].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[6][1].sBottom = 228 + UDBOffsetY; 
-		gItemDescAdvRegions[6][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[6][2].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[6][2].sBottom = 228 + UDBOffsetY; 
-		gItemDescAdvRegions[6][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[6][3].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[6][3].sBottom = 228 + UDBOffsetY; 
+		gItemDescAdvRegions[6][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[6][0].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[6][0].sBottom = 228 + UDBOffsetY;
+		gItemDescAdvRegions[6][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[6][1].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[6][1].sBottom = 228 + UDBOffsetY;
+		gItemDescAdvRegions[6][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[6][2].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[6][2].sBottom = 228 + UDBOffsetY;
+		gItemDescAdvRegions[6][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[6][3].sTop = 216 + UDBOffsetY;	gItemDescAdvRegions[6][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[6][3].sBottom = 228 + UDBOffsetY;
 
-		gItemDescAdvRegions[7][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[7][0].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[7][0].sBottom = 241 + UDBOffsetY; 
-		gItemDescAdvRegions[7][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[7][1].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[7][1].sBottom = 241 + UDBOffsetY; 
-		gItemDescAdvRegions[7][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[7][2].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[7][2].sBottom = 241 + UDBOffsetY; 
-		gItemDescAdvRegions[7][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[7][3].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[7][3].sBottom = 241 + UDBOffsetY; 
+		gItemDescAdvRegions[7][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[7][0].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[7][0].sBottom = 241 + UDBOffsetY;
+		gItemDescAdvRegions[7][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[7][1].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[7][1].sBottom = 241 + UDBOffsetY;
+		gItemDescAdvRegions[7][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[7][2].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[7][2].sBottom = 241 + UDBOffsetY;
+		gItemDescAdvRegions[7][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[7][3].sTop = 229 + UDBOffsetY;	gItemDescAdvRegions[7][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[7][3].sBottom = 241 + UDBOffsetY;
 
-		gItemDescAdvRegions[8][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[8][0].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[8][0].sBottom = 254 + UDBOffsetY; 
-		gItemDescAdvRegions[8][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[8][1].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[8][1].sBottom = 254 + UDBOffsetY; 
-		gItemDescAdvRegions[8][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[8][2].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[8][2].sBottom = 254 + UDBOffsetY; 
-		gItemDescAdvRegions[8][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[8][3].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[8][3].sBottom = 254 + UDBOffsetY; 
+		gItemDescAdvRegions[8][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[8][0].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[8][0].sBottom = 254 + UDBOffsetY;
+		gItemDescAdvRegions[8][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[8][1].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[8][1].sBottom = 254 + UDBOffsetY;
+		gItemDescAdvRegions[8][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[8][2].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[8][2].sBottom = 254 + UDBOffsetY;
+		gItemDescAdvRegions[8][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[8][3].sTop = 242 + UDBOffsetY;	gItemDescAdvRegions[8][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[8][3].sBottom = 254 + UDBOffsetY;
 
-		gItemDescAdvRegions[9][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[9][0].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[9][0].sBottom = 267 + UDBOffsetY; 
-		gItemDescAdvRegions[9][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[9][1].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[9][1].sBottom = 267 + UDBOffsetY; 
-		gItemDescAdvRegions[9][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[9][2].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[9][2].sBottom = 267 + UDBOffsetY; 
-		gItemDescAdvRegions[9][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[9][3].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[9][3].sBottom = 267 + UDBOffsetY; 
+		gItemDescAdvRegions[9][0].sLeft = 12 + UDBOffsetX;		gItemDescAdvRegions[9][0].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[9][0].sBottom = 267 + UDBOffsetY;
+		gItemDescAdvRegions[9][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[9][1].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[9][1].sBottom = 267 + UDBOffsetY;
+		gItemDescAdvRegions[9][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[9][2].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[9][2].sBottom = 267 + UDBOffsetY;
+		gItemDescAdvRegions[9][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[9][3].sTop = 255 + UDBOffsetY;	gItemDescAdvRegions[9][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[9][3].sBottom = 267 + UDBOffsetY;
 
-		gItemDescAdvRegions[10][0].sLeft = 12 + UDBOffsetX;			gItemDescAdvRegions[10][0].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[10][0].sBottom = 280 + UDBOffsetY; 
-		gItemDescAdvRegions[10][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[10][1].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[10][1].sBottom = 280 + UDBOffsetY; 
-		gItemDescAdvRegions[10][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[10][2].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[10][2].sBottom = 280 + UDBOffsetY; 
-		gItemDescAdvRegions[10][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[10][3].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[10][3].sBottom = 280 + UDBOffsetY; 
+		gItemDescAdvRegions[10][0].sLeft = 12 + UDBOffsetX;			gItemDescAdvRegions[10][0].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[10][0].sBottom = 280 + UDBOffsetY;
+		gItemDescAdvRegions[10][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[10][1].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[10][1].sBottom = 280 + UDBOffsetY;
+		gItemDescAdvRegions[10][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[10][2].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[10][2].sBottom = 280 + UDBOffsetY;
+		gItemDescAdvRegions[10][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[10][3].sTop = 268 + UDBOffsetY;	gItemDescAdvRegions[10][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[10][3].sBottom = 280 + UDBOffsetY;
 
-		gItemDescAdvRegions[11][0].sLeft = 12 + UDBOffsetX;			gItemDescAdvRegions[11][0].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[11][0].sBottom = 293 + UDBOffsetY; 
-		gItemDescAdvRegions[11][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[11][1].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[11][1].sBottom = 293 + UDBOffsetY; 
-		gItemDescAdvRegions[11][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[11][2].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[11][2].sBottom = 293 + UDBOffsetY; 
-		gItemDescAdvRegions[11][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[11][3].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[11][3].sBottom = 293 + UDBOffsetY; 
+		gItemDescAdvRegions[11][0].sLeft = 12 + UDBOffsetX;			gItemDescAdvRegions[11][0].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[11][0].sBottom = 293 + UDBOffsetY;
+		gItemDescAdvRegions[11][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[11][1].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[11][1].sBottom = 293 + UDBOffsetY;
+		gItemDescAdvRegions[11][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[11][2].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[11][2].sBottom = 293 + UDBOffsetY;
+		gItemDescAdvRegions[11][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[11][3].sTop = 281 + UDBOffsetY;	gItemDescAdvRegions[11][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[11][3].sBottom = 293 + UDBOffsetY;
 
-		gItemDescAdvRegions[12][0].sLeft = 12 + UDBOffsetX;			gItemDescAdvRegions[12][0].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[12][0].sBottom = 306 + UDBOffsetY; 
-		gItemDescAdvRegions[12][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[12][1].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[12][1].sBottom = 306 + UDBOffsetY; 
-		gItemDescAdvRegions[12][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[12][2].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[12][2].sBottom = 306 + UDBOffsetY; 
-		gItemDescAdvRegions[12][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[12][3].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[12][3].sBottom = 306 + UDBOffsetY; 
+		gItemDescAdvRegions[12][0].sLeft = 12 + UDBOffsetX;			gItemDescAdvRegions[12][0].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][0].sRight = 126 + UDBOffsetX;		gItemDescAdvRegions[12][0].sBottom = 306 + UDBOffsetY;
+		gItemDescAdvRegions[12][1].sLeft = 130 + UDBOffsetX;		gItemDescAdvRegions[12][1].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][1].sRight = 157 + UDBOffsetX;		gItemDescAdvRegions[12][1].sBottom = 306 + UDBOffsetY;
+		gItemDescAdvRegions[12][2].sLeft = 162 + UDBOffsetX;		gItemDescAdvRegions[12][2].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][2].sRight = 189 + UDBOffsetX;		gItemDescAdvRegions[12][2].sBottom = 306 + UDBOffsetY;
+		gItemDescAdvRegions[12][3].sLeft = 194 + UDBOffsetX;		gItemDescAdvRegions[12][3].sTop = 294 + UDBOffsetY;	gItemDescAdvRegions[12][3].sRight = 221 + UDBOffsetX;		gItemDescAdvRegions[12][3].sBottom = 306 + UDBOffsetY;
 	}
 	else // ODB
 	{
@@ -543,7 +543,7 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 
 			// Second Data Row (Weight)
 			gODBItemDescRegions[1][0].sLeft = 52 + gsInvDescX; gODBItemDescRegions[1][0].sTop = 108 + gsInvDescY + sOffsetY; gODBItemDescRegions[1][0].sRight = 167 + gsInvDescX; gODBItemDescRegions[1][0].sBottom = 116 + gsInvDescY + sOffsetY;
- 
+
 			// Third Data Row (Usually basic Gun Statistics)
 				// Left Side
 				gODBItemDescRegions[2][0].sLeft = 52 + gsInvDescX; gODBItemDescRegions[2][0].sTop = 124 + gsInvDescY + sOffsetY;
@@ -568,10 +568,10 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 			gItemDescTextRegions[0].sLeft = 23 + gsInvDescX;	gItemDescTextRegions[0].sTop = 170 + gsInvDescY + sOffsetY;	gItemDescTextRegions[0].sRight = 233 + gsInvDescX;
 
 			// PROS/CONS areas
-			gItemDescTextRegions[3].sLeft = 23 + gsInvDescX;	gItemDescTextRegions[3].sTop = 230 + gsInvDescY + sOffsetY;	gItemDescTextRegions[3].sRight = 233 + gsInvDescX;	gItemDescTextRegions[3].sBottom = 238 + gsInvDescY + sOffsetY; 
-			gItemDescTextRegions[4].sLeft = 59 + gsInvDescX;	gItemDescTextRegions[4].sTop = 230 + gsInvDescY + sOffsetY;	gItemDescTextRegions[4].sRight = 233 + gsInvDescX;	gItemDescTextRegions[4].sBottom = 238 + gsInvDescY + sOffsetY; 
-			gItemDescTextRegions[5].sLeft = 23 + gsInvDescX;	gItemDescTextRegions[5].sTop = 240 + gsInvDescY + sOffsetY;	gItemDescTextRegions[5].sRight = 233 + gsInvDescX;	gItemDescTextRegions[5].sBottom = 250 + gsInvDescY + sOffsetY; 
-			gItemDescTextRegions[6].sLeft = 59 + gsInvDescX;	gItemDescTextRegions[6].sTop = 240 + gsInvDescY + sOffsetY;	gItemDescTextRegions[6].sRight = 233 + gsInvDescX;	gItemDescTextRegions[6].sBottom = 250 + gsInvDescY + sOffsetY; 
+			gItemDescTextRegions[3].sLeft = 23 + gsInvDescX;	gItemDescTextRegions[3].sTop = 230 + gsInvDescY + sOffsetY;	gItemDescTextRegions[3].sRight = 233 + gsInvDescX;	gItemDescTextRegions[3].sBottom = 238 + gsInvDescY + sOffsetY;
+			gItemDescTextRegions[4].sLeft = 59 + gsInvDescX;	gItemDescTextRegions[4].sTop = 230 + gsInvDescY + sOffsetY;	gItemDescTextRegions[4].sRight = 233 + gsInvDescX;	gItemDescTextRegions[4].sBottom = 238 + gsInvDescY + sOffsetY;
+			gItemDescTextRegions[5].sLeft = 23 + gsInvDescX;	gItemDescTextRegions[5].sTop = 240 + gsInvDescY + sOffsetY;	gItemDescTextRegions[5].sRight = 233 + gsInvDescX;	gItemDescTextRegions[5].sBottom = 250 + gsInvDescY + sOffsetY;
+			gItemDescTextRegions[6].sLeft = 59 + gsInvDescX;	gItemDescTextRegions[6].sTop = 240 + gsInvDescY + sOffsetY;	gItemDescTextRegions[6].sRight = 233 + gsInvDescX;	gItemDescTextRegions[6].sBottom = 250 + gsInvDescY + sOffsetY;
 
 		}
 		else
@@ -630,10 +630,10 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 				gItemDescTextRegions[0].sLeft = 265 + gsInvDescX;	gItemDescTextRegions[0].sTop = 70 + gsInvDescY;	gItemDescTextRegions[0].sRight = 415 + gsInvDescX;
 
 				// PROS/CONS areas
-				gItemDescTextRegions[3].sLeft = 265 + gsInvDescX;	gItemDescTextRegions[3].sTop = 170 + gsInvDescY;	gItemDescTextRegions[3].sRight = 415 + gsInvDescX;	gItemDescTextRegions[3].sBottom = 188 + gsInvDescY; 
-				gItemDescTextRegions[4].sLeft = 295 + gsInvDescX;	gItemDescTextRegions[4].sTop = 170 + gsInvDescY;	gItemDescTextRegions[4].sRight = 415 + gsInvDescX;	gItemDescTextRegions[4].sBottom = 188 + gsInvDescY; 
-				gItemDescTextRegions[5].sLeft = 265 + gsInvDescX;	gItemDescTextRegions[5].sTop = 180 + gsInvDescY;	gItemDescTextRegions[5].sRight = 415 + gsInvDescX;	gItemDescTextRegions[5].sBottom = 200 + gsInvDescY; 
-				gItemDescTextRegions[6].sLeft = 295 + gsInvDescX;	gItemDescTextRegions[6].sTop = 180 + gsInvDescY;	gItemDescTextRegions[6].sRight = 415 + gsInvDescX;	gItemDescTextRegions[6].sBottom = 200 + gsInvDescY; 
+				gItemDescTextRegions[3].sLeft = 265 + gsInvDescX;	gItemDescTextRegions[3].sTop = 170 + gsInvDescY;	gItemDescTextRegions[3].sRight = 415 + gsInvDescX;	gItemDescTextRegions[3].sBottom = 188 + gsInvDescY;
+				gItemDescTextRegions[4].sLeft = 295 + gsInvDescX;	gItemDescTextRegions[4].sTop = 170 + gsInvDescY;	gItemDescTextRegions[4].sRight = 415 + gsInvDescX;	gItemDescTextRegions[4].sBottom = 188 + gsInvDescY;
+				gItemDescTextRegions[5].sLeft = 265 + gsInvDescX;	gItemDescTextRegions[5].sTop = 180 + gsInvDescY;	gItemDescTextRegions[5].sRight = 415 + gsInvDescX;	gItemDescTextRegions[5].sBottom = 200 + gsInvDescY;
+				gItemDescTextRegions[6].sLeft = 295 + gsInvDescX;	gItemDescTextRegions[6].sTop = 180 + gsInvDescY;	gItemDescTextRegions[6].sRight = 415 + gsInvDescX;	gItemDescTextRegions[6].sBottom = 200 + gsInvDescY;
 			}
 			else
 			{
@@ -687,10 +687,10 @@ void InitEDBCoords(OBJECTTYPE * pObject)
 				gItemDescTextRegions[0].sLeft = 11 + gsInvDescX;	gItemDescTextRegions[0].sTop = 80 + gsInvDescY;	gItemDescTextRegions[0].sRight = 300 + gsInvDescX;
 
 				// PROS/CONS areas
-				gItemDescTextRegions[3].sLeft = 11 + gsInvDescX;	gItemDescTextRegions[3].sTop = 110 + gsInvDescY;	gItemDescTextRegions[3].sRight = 300 + gsInvDescX;	gItemDescTextRegions[3].sBottom = 118 + gsInvDescY; 
-				gItemDescTextRegions[4].sLeft = 47 + gsInvDescX;	gItemDescTextRegions[4].sTop = 110 + gsInvDescY;	gItemDescTextRegions[4].sRight = 300 + gsInvDescX;	gItemDescTextRegions[4].sBottom = 118 + gsInvDescY; 
-				gItemDescTextRegions[5].sLeft = 11 + gsInvDescX;	gItemDescTextRegions[5].sTop = 120 + gsInvDescY;	gItemDescTextRegions[5].sRight = 300 + gsInvDescX;	gItemDescTextRegions[5].sBottom = 130 + gsInvDescY; 
-				gItemDescTextRegions[6].sLeft = 47 + gsInvDescX;	gItemDescTextRegions[6].sTop = 120 + gsInvDescY;	gItemDescTextRegions[6].sRight = 300 + gsInvDescX;	gItemDescTextRegions[6].sBottom = 130 + gsInvDescY; 
+				gItemDescTextRegions[3].sLeft = 11 + gsInvDescX;	gItemDescTextRegions[3].sTop = 110 + gsInvDescY;	gItemDescTextRegions[3].sRight = 300 + gsInvDescX;	gItemDescTextRegions[3].sBottom = 118 + gsInvDescY;
+				gItemDescTextRegions[4].sLeft = 47 + gsInvDescX;	gItemDescTextRegions[4].sTop = 110 + gsInvDescY;	gItemDescTextRegions[4].sRight = 300 + gsInvDescX;	gItemDescTextRegions[4].sBottom = 118 + gsInvDescY;
+				gItemDescTextRegions[5].sLeft = 11 + gsInvDescX;	gItemDescTextRegions[5].sTop = 120 + gsInvDescY;	gItemDescTextRegions[5].sRight = 300 + gsInvDescX;	gItemDescTextRegions[5].sBottom = 130 + gsInvDescY;
+				gItemDescTextRegions[6].sLeft = 47 + gsInvDescX;	gItemDescTextRegions[6].sTop = 120 + gsInvDescY;	gItemDescTextRegions[6].sRight = 300 + gsInvDescX;	gItemDescTextRegions[6].sBottom = 130 + gsInvDescY;
 			}
 		}
 
@@ -719,24 +719,24 @@ void SetupItemDescAttachmentsXY(UINT8 ID, INT16 sX, INT16 sY, INT16 sHeight, INT
 }
 
 void InitDescStatCoords(OBJECTTYPE *pObject)
-{	
+{
 	std::vector<UINT16>	usAttachmentSlotIndexVector = GetItemSlots(pObject);
 	memset(gItemDescAttachmentsXY, 0, MAX_ATTACHMENTS);
 	if( guiCurrentScreen == MAP_SCREEN )
-	{	
+	{
 		//WarmSteel - If we're using the new attachment system and the item in question does not have an empty attachment list.
 		if(UsingNewAttachmentSystem()==true && !usAttachmentSlotIndexVector.empty() && UseNASDesc(pObject))
 		{
 			//Loop throught the attachments and get their slot id's
 			for (UINT8 x = 0; x < usAttachmentSlotIndexVector.size(); x++){
 				//WarmSteel - Tell this slot where it's supposed to be.
-				
+
 				if(AttachmentSlots[usAttachmentSlotIndexVector[x]].fBigSlot){
 					SetupItemDescAttachmentsXY(x, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosX, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosY, SM_INV_SLOT_HEIGHT, ATTACH_SLOT_BIG_WIDTH, INV_BAR_DX-9, INV_BAR_DY);
 				} else {
 					SetupItemDescAttachmentsXY(x, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosX, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosY, SM_INV_SLOT_HEIGHT, ATTACH_SLOT_WIDTH, INV_BAR_DX-9, INV_BAR_DY);
 				}
-				
+
 			}
 		}
 		//Not a valid item for NAS, use default
@@ -747,7 +747,7 @@ void InitDescStatCoords(OBJECTTYPE *pObject)
 			SetupItemDescAttachmentsXY(2, 175, 37, SM_INV_SLOT_HEIGHT, ATTACH_SLOT_WIDTH, INV_BAR_DX-9, INV_BAR_DY);
 			SetupItemDescAttachmentsXY(3, 213, 37, SM_INV_SLOT_HEIGHT, ATTACH_SLOT_WIDTH, INV_BAR_DX-9, INV_BAR_DY);
 		}
-		
+
 	}
 	else
 	{
@@ -756,13 +756,13 @@ void InitDescStatCoords(OBJECTTYPE *pObject)
 		{
 			for (UINT8 x = 0; x < usAttachmentSlotIndexVector.size(); x++){
 				//WarmSteel - Tell this slot where it's supposed to be.
-				
+
 				if(AttachmentSlots[usAttachmentSlotIndexVector[x]].fBigSlot){
 					SetupItemDescAttachmentsXY(x, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosX, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosY, SM_INV_SLOT_HEIGHT, ATTACH_SLOT_BIG_WIDTH, INV_BAR_DX-9, INV_BAR_DY);
 				} else {
 					SetupItemDescAttachmentsXY(x, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosX, AttachmentSlots[usAttachmentSlotIndexVector[x]].usDescPanelPosY, SM_INV_SLOT_HEIGHT, ATTACH_SLOT_WIDTH, INV_BAR_DX-9, INV_BAR_DY);
 				}
-				
+
 			}
 		}
 		//Not a valid item for NAS, use default
@@ -908,7 +908,7 @@ void InitLBECoords()
 			gLBEStats[18].sX = 694;	gLBEStats[18].sY = 33;	gLBEStats[18].sValDx = 0;	//Vest 7
 			gLBEStats[19].sX = 730;	gLBEStats[19].sY = 33;	gLBEStats[19].sValDx = 0;	//Vest 8
 			gLBEStats[20].sX = 766;	gLBEStats[20].sY = 33;	gLBEStats[20].sValDx = 0;	//Vest 9
-			
+
 			if (iResolution >= _1024x768)
 			{
 				gLBEStats[16].sX = 802;	gLBEStats[16].sY = 9;	gLBEStats[16].sValDx = 0;	//Vest 5
@@ -973,7 +973,7 @@ void InitLBECoords()
 			gLBEStats[19].sX = 669;	gLBEStats[19].sY = 33;	gLBEStats[19].sValDx = 0;	//Vest 8
 			gLBEStats[20].sX = 705;	gLBEStats[20].sY = 33;	gLBEStats[20].sValDx = 0;	//Vest 9
 			gLBEStats[21].sX = 741;	gLBEStats[21].sY = 33;	gLBEStats[21].sValDx = 0;	//Vest 10
-			
+
 			if (iResolution >= _1024x768)
 			{
 				gLBEStats[22].sX = 777;	gLBEStats[22].sY = 9;	gLBEStats[22].sValDx = 0;	//Vest 11
@@ -1230,7 +1230,7 @@ void InitItemDescriptionBoxOffsets(OBJECTTYPE * pObject)
 					ITEMDESC_AMMO_Y = (99 + sY);
 				}
 			} else {
-			
+
 				//WarmSteel - LBE and money do not get a NAS discription box.
 				if(!UseNASDesc(pObject)){
 					ITEMDESC_CALIBER_X		= (16 + sX); // Gun Caliber string location, Tactical, money or LBE
@@ -1448,11 +1448,11 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 						(INT16)(gItemDescGenIndexRegions[cnt][cnt2].sRight),
 						(INT16)(gItemDescGenIndexRegions[cnt][cnt2].sBottom),
 						MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-		
+
 						MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 						SetRegionFastHelpText( &(gUDBFasthelpRegions[ iRegionsCreated ]), gzUDBGenIndexTooltipText[ cnt2 ] );
 						SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
-		
+
 						iRegionsCreated++;
 				}
 			}
@@ -1469,7 +1469,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					if(UsingNewCTHSystem() == true)
 					{
@@ -1507,7 +1507,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					if(UsingNewCTHSystem() == true)
 						swprintf( pStr, L"%s%s", szUDBGenWeaponsStatsTooltipText[ cnt ], szUDBGenWeaponsStatsExplanationsTooltipText[ cnt ]);
@@ -1529,7 +1529,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					if(UsingNewCTHSystem() == true)
 						swprintf( pStr, L"%s%s", szUDBGenWeaponsStatsTooltipText[ cnt ], szUDBGenWeaponsStatsExplanationsTooltipText[ cnt ]);
@@ -1577,14 +1577,14 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				{
 					ubRegionOffset = 0;
 				}
-				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + ubRegionOffset ] );			
+				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + ubRegionOffset ] );
 			}
 
 			/////////////////// GUN HANDLING
 			if ( UsingNewCTHSystem() == TRUE && Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) )
 			{
 				ubRegionOffset = 3;
-				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + ubRegionOffset ] );	
+				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + ubRegionOffset ] );
 			}
 
 			/////////////////// AIMING LEVELS
@@ -1598,11 +1598,11 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				{
 					ubRegionOffset = 3;
 				}
-				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + ubRegionOffset ] );			
+				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + ubRegionOffset ] );
 			}
 
 			/////////////////// OCTH AIMING BONUS
-			if ( UsingNewCTHSystem() == false && 
+			if ( UsingNewCTHSystem() == false &&
 				(GetFlatAimBonus( gpItemDescObject ) != 0 || Item[gpItemDescObject->usItem].aimbonus != 0) )
 			{
 				ubRegionOffset = 4;
@@ -1617,7 +1617,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			/////////////////// OCTH MINIMUM RANGE FOR AIMING BONUS
-			if( UsingNewCTHSystem() == false && 
+			if( UsingNewCTHSystem() == false &&
 				( Item[gpItemDescObject->usItem].minrangeforaimbonus > 0 || GetMinRangeForAimBonus( NULL, gpItemDescObject ) > 0 ) )
 			{
 				ubRegionOffset = 5;
@@ -1636,7 +1636,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			/////////////////// OCTH TO=HIT BONUS
-			if (UsingNewCTHSystem() == false && 
+			if (UsingNewCTHSystem() == false &&
 				(Item[gpItemDescObject->usItem].tohitbonus != 0 || GetFlatToHitBonus( gpItemDescObject ) != 0) )
 			{
 				ubRegionOffset = 6;
@@ -1644,7 +1644,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			/////////////////// OCTH BEST LASER RANGE
-			if (UsingNewCTHSystem() == false && 
+			if (UsingNewCTHSystem() == false &&
 				(Item[gpItemDescObject->usItem].bestlaserrange > 0 || GetAverageBestLaserRange( gpItemDescObject ) > 0 ) )
 			{
 				ubRegionOffset = 7;
@@ -1710,7 +1710,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			{
 				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + 13 ] );
 			}
-			
+
 			/////////////////// AP TO SINGLE ATTACK
 			{
 				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + 14 ] );
@@ -1806,11 +1806,11 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sRight),
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-		
+
 				MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					SetRegionFastHelpText( &(gUDBFasthelpRegions[ iRegionsCreated ]), gzUDBGenIndexTooltipText[ cnt ] );
 					SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
-	
+
 					iRegionsCreated++;
 			}
 
@@ -1826,7 +1826,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					if ( cnt == 3 && gGameExternalOptions.fAdvRepairSystem && !gSkillTraitValues.fTETraitsCanRestoreItemThreshold )
 						swprintf( pStr, L"%s%s", szUDBGenArmorStatsTooltipText[ cnt ], szUDBGenArmorStatsExplanationsTooltipText[ 4 ]);
@@ -1891,11 +1891,11 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sRight),
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-		
+
 				MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					SetRegionFastHelpText( &(gUDBFasthelpRegions[ iRegionsCreated ]), gzUDBGenIndexTooltipText[ cnt ] );
 					SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
-	
+
 					iRegionsCreated++;
 			}
 
@@ -1911,7 +1911,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					swprintf( pStr, L"%s%s", szUDBGenAmmoStatsTooltipText[ cnt ], szUDBGenAmmoStatsExplanationsTooltipText[ cnt ]);
 					SetRegionFastHelpText( &(gUDBFasthelpRegions[ iRegionsCreated ]), pStr );
@@ -1930,7 +1930,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			{
 				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + 1 ] );
 			}
-			
+
 			//////////////////// PRE-ARMOR EXPLOSION
 			{
 				MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + 2 ] );
@@ -1938,7 +1938,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 
 			// Flugente
 			if ( gGameExternalOptions.fWeaponOverheating )
-			{	
+			{
 				//////////////////// TEMPERATURE MODIFICATOR
 				{
 					MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + 3 ] );
@@ -1946,7 +1946,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			if ( gGameExternalOptions.fDirtSystem )	// Flugente
-			{	
+			{
 				//////////////////// DIRT MODIFICATOR
 				{
 					MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + 5 ] );
@@ -1981,7 +1981,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 
 					iRegionsCreated++;
 			}
-			
+
 			////////////////// INDEX
 			for (cnt = 0; cnt < 4; cnt++)
 			{
@@ -1991,11 +1991,11 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sRight),
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-		
+
 				MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					SetRegionFastHelpText( &(gUDBFasthelpRegions[ iRegionsCreated ]), gzUDBGenIndexTooltipText[ cnt ] );
 					SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
-	
+
 					iRegionsCreated++;
 			}
 
@@ -2011,7 +2011,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
 					MSYS_DisableRegion( &gUDBFasthelpRegions[ iRegionsCreated ] );
@@ -2045,8 +2045,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// BLAST RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
-				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType != 5 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
+				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType != 5
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType != 1 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 3 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 3 ]);
@@ -2055,7 +2055,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// STUN BLAST RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 1 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 4 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 4 ]);
@@ -2064,7 +2064,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// NOISE BLAST RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 5 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 5 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 5 ]);
@@ -2073,7 +2073,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// TEARGAS START RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 2 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 6 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 6 ]);
@@ -2082,7 +2082,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// MUSTARD GAS START RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 3 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 7 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 7 ]);
@@ -2091,7 +2091,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// LIGHT START RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 4 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 8 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 8 ]);
@@ -2100,7 +2100,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// SMOKE START RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 6 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 9 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 9 ]);
@@ -2109,7 +2109,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// INCENDIARY START RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 8 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 10 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 10 ]);
@@ -2118,7 +2118,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// TEARGAS END RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 2 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 11 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 11 ]);
@@ -2127,7 +2127,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// MUSTARD GAS END RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 3 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 12 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 12 ]);
@@ -2136,7 +2136,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// LIGHT END RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 4 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 13 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 13 ]);
@@ -2145,7 +2145,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// SMOKE END RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 6 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 14 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 14 ]);
@@ -2154,7 +2154,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 
 			//////////////////// NAPALM END RADIUS
-			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 				&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 8 )
 			{
 				swprintf( pStr, L"%s%s", szUDBGenExplosiveStatsTooltipText[ 15 ], szUDBGenExplosiveStatsExplanationsTooltipText[ 15 ]);
@@ -2245,7 +2245,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 
 					iRegionsCreated++;
 			}
-			
+
 			////////////////// INDEX
 			for (cnt = 0; cnt < 4; cnt++)
 			{
@@ -2255,11 +2255,11 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sRight),
 					(INT16)(gItemDescGenIndexRegions[0][cnt].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-		
+
 				MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					SetRegionFastHelpText( &(gUDBFasthelpRegions[ iRegionsCreated ]), gzUDBGenIndexTooltipText[ cnt ] );
 					SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
-	
+
 					iRegionsCreated++;
 			}
 
@@ -2275,7 +2275,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 					(INT16)(gItemDescGenRegions[cnt][0].sRight),
 					(INT16)(gItemDescGenRegions[cnt][0].sBottom),
 					MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 					MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 					SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
 					MSYS_DisableRegion( &gUDBFasthelpRegions[ iRegionsCreated ] );
@@ -2311,13 +2311,13 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 		}
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////
 	// SECONDARY PROPERTIES TOOLTIPS
 	// These are item-flags, shown as large icons on the right hand column of the General
 	// UDB page. They appear only for non-weapon items (no room in the weapon page).
 
-	if (gubDescBoxPage == 1 && 
+	if (gubDescBoxPage == 1 &&
 		( !(Item[ gpItemDescObject->usItem ].usItemClass & IC_WEAPON || Item[ gpItemDescObject->usItem ].usItemClass & IC_PUNCH ) || gubDescGenPage == 1 ) )
 	{
 		iFirstDataRegion = iRegionsCreated;
@@ -2331,7 +2331,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				(INT16)(gItemDescGenSecondaryRegions[cnt].sRight),
 				(INT16)(gItemDescGenSecondaryRegions[cnt].sBottom),
 				MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 				MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 				SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
 				MSYS_DisableRegion( &gUDBFasthelpRegions[ iRegionsCreated ] );
@@ -2433,7 +2433,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + cnt ] );
 			cnt++;
 		}
- 
+
 		//////////////////// ELECTRONIC
 		if (Item[ gpItemDescObject->usItem ].electronic)
 		{
@@ -2442,7 +2442,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + cnt ] );
 			cnt++;
 		}
-		
+
 		//////////////////// GAS MASK
 		if (Item[ gpItemDescObject->usItem ].gasmask)
 		{
@@ -2721,7 +2721,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 
 	//////////////////////////////////////////////////////
 	// ADVANCED PROPERTY TOOLTIPS
-	
+
 	if (gubDescBoxPage == 2)
 	{
 		INT16 sFirstLine = gubDescBoxLine;
@@ -2764,7 +2764,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				(INT16)(gItemDescAdvRegions[cnt][0].sRight),
 				(INT16)(gItemDescAdvRegions[cnt][0].sBottom),
 				MSYS_PRIORITY_HIGHEST, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, ItemDescCallback );
-	
+
 				MSYS_AddRegion( &gUDBFasthelpRegions[ iRegionsCreated ]);
 				SetRegionHelpEndCallback( &(gUDBFasthelpRegions[ iRegionsCreated ]), HelpTextDoneCallback );
 				MSYS_DisableRegion( &gUDBFasthelpRegions[ iRegionsCreated ] );
@@ -2796,8 +2796,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 			}
 		}
 		///////////////////// FLAT BASE MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATBASE ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATBASE ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATBASE ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATBASE ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_FLATBASE ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -2820,8 +2820,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// PERCENT BASE MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTBASE ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTBASE ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTBASE ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTBASE ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTBASE ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -2844,8 +2844,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// FLAT AIM MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATAIM ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATAIM ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATAIM ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATAIM ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_FLATAIM ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -2868,8 +2868,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// PERCENT AIM MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTAIM ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTAIM ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTAIM ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTAIM ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTAIM ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -2893,7 +2893,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 
 		///////////////////// AIMING LEVELS MODIFIER
 		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_AIMLEVELS ) != 0
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_AIMLEVELS ) != 0 
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_AIMLEVELS ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_AIMLEVELS ) != 0 )
 		{
 			if (cnt >= sFirstLine && cnt < sLastLine)
@@ -2945,7 +2945,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		///////////////////// TO-HIT MODIFIER
 		if(UsingNewCTHSystem() == false)
 		{
-			if ( GetToHitBonus( gpItemDescObject, 100, 1, FALSE ) != 0 
+			if ( GetToHitBonus( gpItemDescObject, 100, 1, FALSE ) != 0
 				|| GetToHitBonus( gpItemDescObject, 100, 1, TRUE ) != 0 )
 			{
 				if (cnt >= sFirstLine && cnt < sLastLine)
@@ -2970,8 +2970,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// CTH CAP MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTCAP ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTCAP ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTCAP ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTCAP ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTCAP ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -2994,8 +2994,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// GUN HANDLING MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTHANDLING ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTHANDLING ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTHANDLING ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTHANDLING ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTHANDLING ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -3018,8 +3018,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// DROP COMPENSATION MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_DROPCOMPENSATION ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_DROPCOMPENSATION ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_DROPCOMPENSATION ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_DROPCOMPENSATION ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_DROPCOMPENSATION ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -3042,8 +3042,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// TARGET TRACKING MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_TRACKING ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_TRACKING ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_TRACKING ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_TRACKING ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_TRACKING ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -3271,8 +3271,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 
 		// HEADROCK HAM 5: Moved here because it makes more sense.
 		///////////////////// MAX COUNTER FORCE
-		if ((CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_STAND ) != 0 
-			|| CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH ) != 0 
+		if ((CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_STAND ) != 0
+			|| CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH ) != 0
 			|| CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE ) != 0 ) )
 		{
 			if( UsingNewCTHSystem() == true && Item[gpItemDescObject->usItem].usItemClass == IC_GUN )
@@ -3295,8 +3295,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// MAX COUNTER FORCE MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEMAX ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEMAX ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true ) //&& Item[gpItemDescObject->usItem].usItemClass == IC_GUN )
@@ -3319,8 +3319,8 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 		}
 
 		///////////////////// COUNTER FORCE ACCURACY MODIFIER
-		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 
-			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 
+		if ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0
+			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0
 			|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 )
 		{
 			if( UsingNewCTHSystem() == true )
@@ -3973,7 +3973,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				if (!fDrawGenIndexes) fDrawGenIndexes = ++cnt;		// new index line here?
 				///////////////////// COOLDOWN FACTOR
 				if (cnt >= sFirstLine && cnt < sLastLine)
-				{					
+				{
 					swprintf( pStr, L"%s%s", szUDBAdvStatsTooltipText[ 49 ], szUDBAdvStatsExplanationsTooltipText[ 49 ]);
 					SetRegionFastHelpText( &(gUDBFasthelpRegions[ iFirstDataRegion + (cnt-sFirstLine) ]), pStr );
 					MSYS_EnableRegion( &gUDBFasthelpRegions[ iFirstDataRegion + (cnt-sFirstLine) ] );
@@ -4034,7 +4034,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				}
 			}
 		}
-				
+
 		if ( gGameExternalOptions.fDirtSystem )
 		{
 			///////////////////// DIRT MODIFICATOR
@@ -4100,7 +4100,7 @@ void InternalInitEDBTooltipRegion( OBJECTTYPE * gpItemDescObject, UINT32 guiCurr
 				}
 				cnt++;
 			}
-			
+
 			////////////////////// MORAL MODIFIER
 			if ( FoodOpinions[gpItemDescSoldier->ubProfile].sFoodOpinion[foodtype] != 0 )
 			{
@@ -4253,7 +4253,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// GUN HANDLING
-		if ( ( UsingNewCTHSystem() == TRUE && Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) ) || 
+		if ( ( UsingNewCTHSystem() == TRUE && Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) ) ||
 			( fComparisonMode && UsingNewCTHSystem() == TRUE && Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) ) )
 		{
 			ubNumLine = 3;
@@ -4276,9 +4276,9 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// OCTH AIMING BONUS
-		if ( ( UsingNewCTHSystem() == false && 
+		if ( ( UsingNewCTHSystem() == false &&
 			(GetFlatAimBonus( gpItemDescObject ) != 0 || Item[gpItemDescObject->usItem].aimbonus != 0) ) ||
-			( fComparisonMode && UsingNewCTHSystem() == false && 
+			( fComparisonMode && UsingNewCTHSystem() == false &&
 			(GetFlatAimBonus( gpComparedItemDescObject ) != 0 || Item[gpComparedItemDescObject->usItem].aimbonus != 0) ) )
 		{
 			ubNumLine = 4;
@@ -4294,9 +4294,9 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// OCTH MINIMUM RANGE FOR AIMING BONUS
-		if( (UsingNewCTHSystem() == false && 
+		if( (UsingNewCTHSystem() == false &&
 			( Item[gpItemDescObject->usItem].minrangeforaimbonus > 0 || GetMinRangeForAimBonus( NULL, gpItemDescObject ) > 0 ) ) ||
-			( fComparisonMode &&UsingNewCTHSystem() == false && 
+			( fComparisonMode &&UsingNewCTHSystem() == false &&
 			( Item[gpComparedItemDescObject->usItem].minrangeforaimbonus > 0 || GetMinRangeForAimBonus( NULL, gpComparedItemDescObject ) > 0 ) ) )
 		{
 			ubNumLine = 5;
@@ -4305,11 +4305,11 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 
 		//////////////////// PROJECTION FACTOR
 		// with the reworked NCTH code and the laser performance factor we will display BestLaserRange instead of ProjectionFactor but we use the same icon
-		if ( (UsingNewCTHSystem() == true && 
+		if ( (UsingNewCTHSystem() == true &&
 			( (Item[gpItemDescObject->usItem].projectionfactor > 1.0 || GetProjectionFactor( gpItemDescObject ) > 1.0) ||
 			( GetBestLaserRange( gpItemDescObject ) > 0
 			&& (gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE != 0) ) ) ) ||
-			( fComparisonMode && UsingNewCTHSystem() == true && 
+			( fComparisonMode && UsingNewCTHSystem() == true &&
 			( (Item[gpComparedItemDescObject->usItem].projectionfactor > 1.0 || GetProjectionFactor( gpComparedItemDescObject ) > 1.0) ||
 			( GetBestLaserRange( gpComparedItemDescObject ) > 0
 			&& (gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE != 0) ) ) ) )
@@ -4319,9 +4319,9 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// OCTH TO=HIT BONUS
-		if ( (UsingNewCTHSystem() == false && 
+		if ( (UsingNewCTHSystem() == false &&
 			(Item[gpItemDescObject->usItem].tohitbonus != 0 || GetFlatToHitBonus( gpItemDescObject ) != 0) ) ||
-			( fComparisonMode && UsingNewCTHSystem() == false && 
+			( fComparisonMode && UsingNewCTHSystem() == false &&
 			(Item[gpComparedItemDescObject->usItem].tohitbonus != 0 || GetFlatToHitBonus( gpComparedItemDescObject ) != 0) ) )
 		{
 			ubNumLine = 6;
@@ -4329,9 +4329,9 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// OCTH BEST LASER RANGE
-		if ( (UsingNewCTHSystem() == false && 
+		if ( (UsingNewCTHSystem() == false &&
 			(Item[gpItemDescObject->usItem].bestlaserrange > 0 || GetAverageBestLaserRange( gpItemDescObject ) > 0 ) ) ||
-			( fComparisonMode && UsingNewCTHSystem() == false && 
+			( fComparisonMode && UsingNewCTHSystem() == false &&
 			(Item[gpComparedItemDescObject->usItem].bestlaserrange > 0 || GetAverageBestLaserRange( gpComparedItemDescObject ) > 0 ) ) )
 		{
 			ubNumLine = 7;
@@ -4392,7 +4392,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 				ubNumLine = 11;
 			}
 
-			if ( !Item[gpItemDescObject->usItem].repairable || 
+			if ( !Item[gpItemDescObject->usItem].repairable ||
 				( fComparisonMode && !Item[gpComparedItemDescObject->usItem].repairable ) )
 			{
 				BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoWeaponIcon, 35, gItemDescGenRegions[ubNumLine][0].sLeft + sOffsetX, gItemDescGenRegions[ubNumLine][0].sTop + sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4409,7 +4409,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// DRAW COST
-		if ( ( Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpItemDescObject->usItem].rocketlauncher ) || 
+		if ( ( Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpItemDescObject->usItem].rocketlauncher ) ||
 			( fComparisonMode && Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem].rocketlauncher ) )
 		{
 			ubNumLine = 13;
@@ -4417,7 +4417,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		//////////////////// SINGLE SHOT COST - GUN
-		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpItemDescObject->usItem].rocketlauncher && !fComparisonMode ) || 
+		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpItemDescObject->usItem].rocketlauncher && !fComparisonMode ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpComparedItemDescObject->usItem].rocketlauncher ) )
 		{
 			ubNumLine = 14;
@@ -4432,7 +4432,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		/////////////////// SINGLE SHOT COST - ROCKET
-		if ( ( Item[gpItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) && Item[gpItemDescObject->usItem].rocketlauncher && !fComparisonMode ) || 
+		if ( ( Item[gpItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) && Item[gpItemDescObject->usItem].rocketlauncher && !fComparisonMode ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) && Item[gpComparedItemDescObject->usItem].rocketlauncher ) )
 		{
 			ubNumLine = 14;
@@ -4442,7 +4442,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 
 		/////////////////// SINGLE SHOT COST - GRENADE LAUNCHER
 		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_LAUNCHER && !Item[gpItemDescObject->usItem].rocketlauncher
-			&& !Weapon[gpItemDescObject->usItem].NoSemiAuto && !fComparisonMode ) || 
+			&& !Weapon[gpItemDescObject->usItem].NoSemiAuto && !fComparisonMode ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass == IC_LAUNCHER && !Item[gpComparedItemDescObject->usItem].rocketlauncher
 			&& !Weapon[gpComparedItemDescObject->usItem].NoSemiAuto ) )
 		{
@@ -4459,7 +4459,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		/////////////////// SINGLE SHOT COST - STABBING KNIFE
-		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_BLADE && !fComparisonMode ) || 
+		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_BLADE && !fComparisonMode ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass == IC_BLADE ) )
 		{
 			ubNumLine = 14;
@@ -4467,7 +4467,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		/////////////////// SINGLE SHOT COST - BLUNT WEAPON
-		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_PUNCH && !fComparisonMode ) || 
+		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_PUNCH && !fComparisonMode ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass == IC_PUNCH ) )
 		{
 			ubNumLine = 14;
@@ -4475,7 +4475,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		/////////////////// BURST COST - GUN
-		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpItemDescObject->usItem].rocketlauncher ) || 
+		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpItemDescObject->usItem].rocketlauncher ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpComparedItemDescObject->usItem].rocketlauncher ) )
 		{
 			ubNumLine = 15;
@@ -4492,9 +4492,9 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 			}
 		}
 		////////////////// BURST COST - GRENADE LAUNCHER
-		else if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_LAUNCHER && !Item[gpItemDescObject->usItem].rocketlauncher 
-			&& GetShotsPerBurst(gpItemDescObject)> 0 ) || 
-			( fComparisonMode && Item[gpItemDescObject->usItem].usItemClass == IC_LAUNCHER && !Item[gpItemDescObject->usItem].rocketlauncher 
+		else if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_LAUNCHER && !Item[gpItemDescObject->usItem].rocketlauncher
+			&& GetShotsPerBurst(gpItemDescObject)> 0 ) ||
+			( fComparisonMode && Item[gpItemDescObject->usItem].usItemClass == IC_LAUNCHER && !Item[gpItemDescObject->usItem].rocketlauncher
 			&& GetShotsPerBurst(gpItemDescObject)> 0 ) )
 		{
 			ubNumLine = 15;
@@ -4502,7 +4502,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////// AUTOFIRE COST
-		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpItemDescObject->usItem].rocketlauncher ) || 
+		if ( ( Item[gpItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpItemDescObject->usItem].rocketlauncher ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass == IC_GUN && !Item[gpComparedItemDescObject->usItem].rocketlauncher ) )
 		{
 			ubNumLine = 16;
@@ -4527,11 +4527,11 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 			ubNumLine = 17;
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoWeaponIcon, 2, gItemDescGenRegions[ubNumLine][0].sLeft+sOffsetX, gItemDescGenRegions[ubNumLine][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
 		}
-			
+
 		////////////////// MANUAL RELOAD COST
-		if ( ( Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpItemDescObject->usItem ].singleshotrocketlauncher 
-			&& Weapon[gpItemDescObject->usItem].APsToReloadManually > 0 ) || 
-			(  fComparisonMode && Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem ].singleshotrocketlauncher 
+		if ( ( Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpItemDescObject->usItem ].singleshotrocketlauncher
+			&& Weapon[gpItemDescObject->usItem].APsToReloadManually > 0 ) ||
+			(  fComparisonMode && Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem ].singleshotrocketlauncher
 			&& Weapon[gpComparedItemDescObject->usItem].APsToReloadManually > 0 ) )
 		{
 			ubNumLine = 18;
@@ -4543,7 +4543,7 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		{
 			ubNumLine = 20;
 			if ( ( Item[ gpItemDescObject->usItem ].usItemClass == IC_GUN && !Item[ gpItemDescObject->usItem].rocketlauncher
-				&& ( GetShotsPerBurst(gpItemDescObject)> 0 || GetAutofireShotsPerFiveAPs(gpItemDescObject) > 0 ) ) || 
+				&& ( GetShotsPerBurst(gpItemDescObject)> 0 || GetAutofireShotsPerFiveAPs(gpItemDescObject) > 0 ) ) ||
 				( fComparisonMode && Item[ gpComparedItemDescObject->usItem ].usItemClass == IC_GUN && !Item[ gpComparedItemDescObject->usItem].rocketlauncher
 				&& ( GetShotsPerBurst(gpComparedItemDescObject)> 0 || GetAutofireShotsPerFiveAPs(gpComparedItemDescObject) > 0 ) ) )
 			{
@@ -4554,13 +4554,13 @@ void DrawWeaponStats( OBJECTTYPE * gpItemDescObject )
 		}
 		else	///////////////// BIPOD & BURST PENALTY
 		{
-			if( ( GetBurstPenalty(gpItemDescObject) > 0 ) || 
+			if( ( GetBurstPenalty(gpItemDescObject) > 0 ) ||
 				( fComparisonMode && GetBurstPenalty(gpComparedItemDescObject) > 0  ) )
 			{
 				ubNumLine = 19;
 				BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoWeaponIcon, 30, gItemDescGenRegions[ubNumLine][0].sLeft+sOffsetX, gItemDescGenRegions[ubNumLine][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
 			}
-			if( ( GetBipodBonus(gpItemDescObject) > 0 && !fComparisonMode ) || 
+			if( ( GetBipodBonus(gpItemDescObject) > 0 && !fComparisonMode ) ||
 				( fComparisonMode && GetBipodBonus(gpComparedItemDescObject) > 0  ) )
 			{
 				ubNumLine = 20;
@@ -4671,7 +4671,7 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// DAMAGE
-		if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDamage > 0 || 
+		if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDamage > 0 ||
 			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDamage > 0 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 0, gItemDescGenRegions[0][0].sLeft+sOffsetX, gItemDescGenRegions[0][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4693,9 +4693,9 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// SOUND BLAST
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 5 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 5 ) )
 
 		{
@@ -4703,29 +4703,29 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// STUN BLAST
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 1 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 1 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 5, gItemDescGenRegions[3][0].sLeft+sOffsetX, gItemDescGenRegions[3][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
 		}
 
 		////////////////////// OTHER BLASTS
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
-			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType != 1 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
+			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType != 1
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType != 5 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration == 0 
-			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType != 1 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration == 0
+			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType != 1
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType != 5 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 4, gItemDescGenRegions[3][0].sLeft+sOffsetX, gItemDescGenRegions[3][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
 		}
 
 		////////////////////// START+END RADIUS: TEAR GAS
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 2 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 2 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 9, gItemDescGenRegions[3][0].sLeft+sOffsetX, gItemDescGenRegions[3][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4733,9 +4733,9 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// START+END RADIUS: MUSTARD GAS
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 3 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 3 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 13, gItemDescGenRegions[3][0].sLeft+sOffsetX, gItemDescGenRegions[3][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4743,9 +4743,9 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// START+END RADIUS: LIGHT
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 4 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 4 ) )
 		{
 			// Note light is reversed (large to small)
@@ -4754,9 +4754,9 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// START+END RADIUS: SMOKE
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 6 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 6 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 11, gItemDescGenRegions[3][0].sLeft+sOffsetX, gItemDescGenRegions[3][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4764,9 +4764,9 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// START+END RADIUS: NAPALM
-		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+		if ( ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpItemDescObject->usItem].ubClassIndex ].ubType == 8 && !fComparisonMode ) ||
-			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 
+			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0
 			&& Explosive[Item[ gpComparedItemDescObject->usItem].ubClassIndex ].ubType == 8 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 15, gItemDescGenRegions[3][0].sLeft+sOffsetX, gItemDescGenRegions[3][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4774,7 +4774,7 @@ void DrawExplosiveStats( OBJECTTYPE * gpItemDescObject )
 		}
 
 		////////////////////// DURATION
-		if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 || 
+		if ( Explosive[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 ||
 			( fComparisonMode && Explosive[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubDuration > 0 ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoExplosiveIcon, 7, gItemDescGenRegions[5][0].sLeft+sOffsetX, gItemDescGenRegions[5][0].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -4960,7 +4960,7 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 					if( Armour[ Item[ gpItemDescObject->usItem ].ubClassIndex ].ubArmourClass == Armour[ Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubArmourClass )
 						fComparisonMode = TRUE;
 				}
-				else 
+				else
 					fComparisonMode = TRUE;
 			}
 			if( Item[ gpComparedItemDescObject->usItem ].usItemClass & IC_EXPLOSV && Item[ gpItemDescObject->usItem ].usItemClass & IC_EXPLOSV )
@@ -4979,17 +4979,17 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 			if (cnt >= sFirstLine && cnt < sLastLine)
 			{
 				BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoAdvancedIcon, 0, gItemDescAdvRegions[cnt-sFirstLine][0].sLeft + sOffsetX, gItemDescAdvRegions[cnt-sFirstLine][0].sTop + sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
-			}	
+			}
 			cnt++;
 		}
 	}
 
 	///////////////////// FLAT BASE MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATBASE ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATBASE ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATBASE ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATBASE ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_FLATBASE ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATBASE ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATBASE ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATBASE ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATBASE ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_FLATBASE ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5003,11 +5003,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// PERCENT BASE MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTBASE ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTBASE ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTBASE ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTBASE ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTBASE ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTBASE ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTBASE ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTBASE ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTBASE ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTBASE ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5021,11 +5021,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// FLAT AIM MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATAIM ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATAIM ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATAIM ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATAIM ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_FLATAIM ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATAIM ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATAIM ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_FLATAIM ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_FLATAIM ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_FLATAIM ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5039,11 +5039,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// PERCENT AIM MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTAIM ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTAIM ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTAIM ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTAIM ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTAIM ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTAIM ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTAIM ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTAIM ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTAIM ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTAIM ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5058,10 +5058,10 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 
 	///////////////////// AIM LEVELS MODIFIER
 	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_AIMLEVELS ) != 0
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_AIMLEVELS ) != 0 
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_AIMLEVELS ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_AIMLEVELS ) != 0 ) ||
 		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_AIMLEVELS ) != 0
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_AIMLEVELS ) != 0 
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_AIMLEVELS ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_AIMLEVELS ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() )
@@ -5092,9 +5092,9 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	///////////////////// TO-HIT MODIFIER
 	if(UsingNewCTHSystem() == false)
 	{
-		if ( ( GetToHitBonus( gpItemDescObject, 100, 1, FALSE ) != 0 
+		if ( ( GetToHitBonus( gpItemDescObject, 100, 1, FALSE ) != 0
 			|| GetToHitBonus( gpItemDescObject, 100, 1, TRUE ) != 0 ) ||
-			( fComparisonMode && ( GetToHitBonus( gpComparedItemDescObject, 100, 1, FALSE ) != 0 
+			( fComparisonMode && ( GetToHitBonus( gpComparedItemDescObject, 100, 1, FALSE ) != 0
 			|| GetToHitBonus( gpComparedItemDescObject, 100, 1, TRUE ) != 0 ) ) )
 		{
 			if (cnt >= sFirstLine && cnt < sLastLine)
@@ -5106,11 +5106,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// CTH CAP MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTCAP ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTCAP ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTCAP ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTCAP ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTCAP ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTCAP ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTCAP ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTCAP ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTCAP ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTCAP ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5124,11 +5124,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// GUN HANDLING MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTHANDLING ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTHANDLING ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTHANDLING ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTHANDLING ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTHANDLING ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTHANDLING ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTHANDLING ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_PERCENTHANDLING ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_PERCENTHANDLING ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_PERCENTHANDLING ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5142,11 +5142,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// DROP COMPENSATION MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_DROPCOMPENSATION ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_DROPCOMPENSATION ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_DROPCOMPENSATION ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_DROPCOMPENSATION ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_DROPCOMPENSATION ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_DROPCOMPENSATION ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_DROPCOMPENSATION ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_DROPCOMPENSATION ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_DROPCOMPENSATION ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_DROPCOMPENSATION ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5159,11 +5159,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 		}
 	}
 	///////////////////// TARGET TRACKING MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_TRACKING ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_TRACKING ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_TRACKING ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_TRACKING ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_TRACKING ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_TRACKING ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_TRACKING ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_TRACKING ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_TRACKING ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_TRACKING ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5295,11 +5295,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 
 	///////////////////// MAX COUNTER FORCE
 	// HEADROCK HAM 5: Moved here because it makes more sense.
-	if ( (CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_STAND ) != 0 
-		|| CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH ) != 0 
+	if ( (CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_STAND ) != 0
+		|| CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH ) != 0
 		|| CalcCounterForceMax( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE ) != 0 ) ||
-		( fComparisonMode && (CalcCounterForceMax( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND ) != 0 
-		|| CalcCounterForceMax( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH ) != 0 
+		( fComparisonMode && (CalcCounterForceMax( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND ) != 0
+		|| CalcCounterForceMax( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH ) != 0
 		|| CalcCounterForceMax( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true && Item[gpItemDescObject->usItem].usItemClass == IC_GUN )
@@ -5313,11 +5313,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// MAX COUNTER FORCE MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEMAX ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEMAX ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEMAX ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEMAX ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_COUNTERFORCEMAX ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true ) //&& Item[gpItemDescObject->usItem].usItemClass == IC_GUN )
@@ -5331,11 +5331,11 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 	}
 
 	///////////////////// COUNTER FORCE ACCURACY MODIFIER
-	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 
+	if ( ( GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpItemDescObject, ANIM_PRONE, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 ) ||
-		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 
-		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 
+		( fComparisonMode && ( GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_STAND, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0
+		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_CROUCH, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0
 		|| GetObjectModifier( gpItemDescSoldier, gpComparedItemDescObject, ANIM_PRONE, ITEMMODIFIER_COUNTERFORCEACCURACY ) != 0 ) ) )
 	{
 		if( UsingNewCTHSystem() == true )
@@ -5628,7 +5628,7 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 
 	// Flugente
 	if ( gGameExternalOptions.fWeaponOverheating )
-	{		
+	{
 		if( ( Item[gpItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) )
 		{
@@ -5720,7 +5720,7 @@ void DrawAdvancedStats( OBJECTTYPE * gpItemDescObject )
 			}
 		}
 	}
-	
+
 	if ( gGameExternalOptions.fDirtSystem )
 	{
 		if ( ( Item[gpItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) ||
@@ -5836,7 +5836,7 @@ void DrawMiscStats( OBJECTTYPE * gpItemDescObject )
 		// not for weapons. They have this one their primary page
 		if ( !(Item[ gpItemDescObject->usItem ].usItemClass & IC_WEAPON || Item[ gpItemDescObject->usItem ].usItemClass & IC_PUNCH) )
 		{
-			if ( !Item[gpItemDescObject->usItem].repairable && !fComparisonMode || 
+			if ( !Item[gpItemDescObject->usItem].repairable && !fComparisonMode ||
 				( fComparisonMode && !Item[gpComparedItemDescObject->usItem].repairable ) )
 			{
 				BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoWeaponIcon, 35, gItemDescGenRegions[0][0].sLeft + sOffsetX, gItemDescGenRegions[0][0].sTop + sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -5907,7 +5907,7 @@ void DrawSecondaryStats( OBJECTTYPE * gpItemDescObject )
 					if( Armour[ Item[ gpItemDescObject->usItem ].ubClassIndex ].ubArmourClass == Armour[ Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubArmourClass )
 						fComparisonMode = TRUE;
 				}
-				else 
+				else
 					fComparisonMode = TRUE;
 			}
 			if( Item[ gpComparedItemDescObject->usItem ].usItemClass & IC_EXPLOSV && Item[ gpItemDescObject->usItem ].usItemClass & IC_EXPLOSV )
@@ -5924,7 +5924,7 @@ void DrawSecondaryStats( OBJECTTYPE * gpItemDescObject )
 	if (Item[ gpItemDescObject->usItem ].usItemClass & (IC_ARMOUR))
 	{
 		////////////////// FLAK JACKET
-		if ( ( Item[ gpItemDescObject->usItem ].flakjacket && !fComparisonMode ) || 
+		if ( ( Item[ gpItemDescObject->usItem ].flakjacket && !fComparisonMode ) ||
 			( fComparisonMode && Item[ gpComparedItemDescObject->usItem ].flakjacket ))
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoSecondaryIcon, 5, gItemDescGenSecondaryRegions[cnt].sLeft+sOffsetX, gItemDescGenSecondaryRegions[cnt].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -5957,7 +5957,7 @@ void DrawSecondaryStats( OBJECTTYPE * gpItemDescObject )
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoSecondaryIcon, 2, gItemDescGenSecondaryRegions[cnt].sLeft+sOffsetX, gItemDescGenSecondaryRegions[cnt].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
 			cnt++;
 		}
-		
+
 		/////////////////// ACIDIC AMMO
 		if ( ( AmmoTypes[Magazine[Item[ gpItemDescObject->usItem ].ubClassIndex].ubAmmoType].acidic && !fComparisonMode ) ||
 			( fComparisonMode && AmmoTypes[Magazine[Item[ gpComparedItemDescObject->usItem ].ubClassIndex].ubAmmoType].acidic ) )
@@ -6154,10 +6154,10 @@ void DrawSecondaryStats( OBJECTTYPE * gpItemDescObject )
 	UINT32 comparedfoodtype = 0;
 	if ( fComparisonMode )
 		comparedfoodtype = Item[gpComparedItemDescObject->usItem].foodtype;
-	if ( ( foodtype > 0 && !fComparisonMode ) || 
+	if ( ( foodtype > 0 && !fComparisonMode ) ||
 		( fComparisonMode || comparedfoodtype > 0 ) )
 	{
-		if ( ( Food[foodtype].bDrinkPoints > 0 && !fComparisonMode ) || 
+		if ( ( Food[foodtype].bDrinkPoints > 0 && !fComparisonMode ) ||
 			( fComparisonMode && Food[comparedfoodtype].bDrinkPoints ) )
 		{
 			BltVideoObjectFromIndex( guiSAVEBUFFER, guiItemInfoSecondaryIcon, 26, gItemDescGenSecondaryRegions[cnt].sLeft+sOffsetX, gItemDescGenSecondaryRegions[cnt].sTop+sOffsetY, VO_BLT_SRCTRANSPARENCY, NULL );
@@ -6331,10 +6331,10 @@ void DrawPropertyValueInColour( INT16 iValue, UINT8 ubNumLine, UINT8 ubNumRegion
 			swprintf( pStr, L"=" );
 		}
 	}
-	
+
 	if( fPercentSign && wcscmp( pStr, L"--" ) != 0 && wcscmp( pStr, L"=" ) != 0 )
 	{
-		wcscat( pStr, L"%" );	
+		wcscat( pStr, L"%" );
 	}
 
 	FindFontCenterCoordinates( sLeft, sTop, sWidth, sHeight, pStr, BLOCKFONT2, &usX, &usY);
@@ -6373,7 +6373,7 @@ void DrawPropertyTextInColour( CHAR16	pText[ 100 ], UINT8 ubNumLine, UINT8 ubNum
 		SetFontForeground( uiOverwriteColour );
 
 	swprintf( pStr, pText );
-			
+
 	FindFontCenterCoordinates( sLeft, sTop, sWidth, sHeight, pStr, BLOCKFONT2, &usX, &usY);
 	mprintf( usX, usY, pStr );
 
@@ -6459,7 +6459,7 @@ void DrawPropertyValueInColourFloat( FLOAT fValue, UINT8 ubNumLine, UINT8 ubNumR
 			swprintf( pStr, L"=" );
 		}
 	}
-			
+
 	FindFontCenterCoordinates( sLeft, sTop, sWidth, sHeight, pStr, BLOCKFONT2, &usX, &usY);
 	mprintf( usX, usY, pStr );
 
@@ -6498,7 +6498,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 	if (gubDescBoxPage == 1)
 	{
 		////////////////////////////////////////////////// HEADERS
-		
+
 		SetFontForeground( FONT_MCOLOR_WHITE );
 
 		// anv: if ctrl is pressed in map inventory, show comparison with selected weapon
@@ -6603,7 +6603,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			{
 				ubNumLine = 2;
 			}
-			
+
 			// Get accuracy value
 			INT8 iAccuracyValue = (UsingNewCTHSystem() == true ? Weapon[ gpItemDescObject->usItem ].nAccuracy : Weapon[ gpItemDescObject->usItem ].bAccuracy);
 
@@ -6813,7 +6813,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 		}
 
 		/////////////// GUN HANDLING
-		if ( UsingNewCTHSystem() == TRUE && 
+		if ( UsingNewCTHSystem() == TRUE &&
 			Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) )
 		{
 			// Set line to draw into
@@ -6863,7 +6863,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				DrawPropertyValueInColour( iComparedFinalHandlingValue - iFinalHandlingValue, ubNumLine, 3, fComparisonMode, FALSE, FALSE );
 			}
 		}
-		else if( fComparisonMode && UsingNewCTHSystem() == TRUE && 
+		else if( fComparisonMode && UsingNewCTHSystem() == TRUE &&
 				Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) )
 		{
 			// Set line to draw into
@@ -6899,7 +6899,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			{
 				ubNumLine = 3;
 			}
-			
+
 			// Get Final Aiming Levels
 			UINT16 iFinalAimLevelsValue = GetAllowedAimingLevelsForItem( gpItemDescSoldier, gpItemDescObject, ANIM_STAND );
 
@@ -6996,7 +6996,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			}
 		}
 		//////////////// OCTH AIMING BONUS
-		if ( UsingNewCTHSystem() == false && 
+		if ( UsingNewCTHSystem() == false &&
 			(GetFlatAimBonus( gpItemDescObject ) != 0 || Item[gpItemDescObject->usItem].aimbonus != 0) )
 		//if ( UsingNewCTHSystem() == false && GetAimBonus( gpItemDescSoldier, gpItemDescObject, 100, 1 ) != 0 )
 		{
@@ -7053,7 +7053,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			DrawPropertyValueInColour( iFinalAimBonusValue, ubNumLine, 3, fComparisonMode, FALSE, TRUE );
 		}
 
-		//////////////// SCOPE MAGNIFICATION FACTOR 
+		//////////////// SCOPE MAGNIFICATION FACTOR
 		if ( UsingNewCTHSystem() == true && Item[ gpItemDescObject->usItem ].usItemClass & IC_GUN )
 		{
 			// Set line to draw into
@@ -7074,12 +7074,12 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				if( iScopeMagValue > 1.0f )
 					DrawPropertyValueInColourFloat( iScopeMagValue, ubNumLine, 1, fComparisonMode, FALSE, TRUE, 5 );
 				else
-					DrawPropertyTextInColour( L"--", ubNumLine, 1 ); 
+					DrawPropertyTextInColour( L"--", ubNumLine, 1 );
 				// Print modifier
 				if (iScopeMagModifier > 1.0f && iScopeMagModifier > iScopeMagValue)
 					DrawPropertyValueInColourFloat( iScopeMagModifier, ubNumLine, 2, fComparisonMode, TRUE, TRUE  );
 				else
-					DrawPropertyTextInColour( L"--", ubNumLine, 2 ); 
+					DrawPropertyTextInColour( L"--", ubNumLine, 2 );
 				// Print final value
 				DrawPropertyValueInColourFloat( iFinalScopeMagValue, ubNumLine, 3, fComparisonMode, FALSE, TRUE, FONT_MCOLOR_WHITE );
 			}
@@ -7118,18 +7118,18 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			if( iScopeMagValue > 1.0f )
 				DrawPropertyValueInColourFloat( iScopeMagValue, ubNumLine, 1, fComparisonMode, FALSE, TRUE );
 			else
-				DrawPropertyTextInColour( L"=", ubNumLine, 1 ); 
+				DrawPropertyTextInColour( L"=", ubNumLine, 1 );
 			// Print modifier
 			if (iScopeMagModifier > 1.0f && iScopeMagModifier > iScopeMagValue)
 				DrawPropertyValueInColourFloat( iScopeMagModifier, ubNumLine, 2, fComparisonMode, TRUE, TRUE  );
 			else
-				DrawPropertyTextInColour( L"=", ubNumLine, 2 ); 
+				DrawPropertyTextInColour( L"=", ubNumLine, 2 );
 			// Print final value
 			DrawPropertyValueInColourFloat( iFinalScopeMagValue - 1.0f, ubNumLine, 3, fComparisonMode, FALSE, TRUE );
 		}
 
 		/////////////////// OCTH MINIMUM RANGE FOR AIMING BONUS
-		if( UsingNewCTHSystem() == false && 
+		if( UsingNewCTHSystem() == false &&
 			( Item[gpItemDescObject->usItem].minrangeforaimbonus > 0 || GetMinRangeForAimBonus( NULL, gpItemDescObject ) > 0 ) )
 		{
 			// Set line to draw into
@@ -7169,7 +7169,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				DrawPropertyValueInColour( iComparedFinalMinRangeForAimBonusValue - iFinalMinRangeForAimBonusValue, ubNumLine, 3, fComparisonMode, FALSE, TRUE );
 			}
 		}
-		else if( fComparisonMode && UsingNewCTHSystem() == false && 
+		else if( fComparisonMode && UsingNewCTHSystem() == false &&
 				( Item[gpComparedItemDescObject->usItem].minrangeforaimbonus > 0 || GetMinRangeForAimBonus( NULL, gpComparedItemDescObject ) > 0 ) )
 		{
 			ubNumLine = 5;
@@ -7184,12 +7184,12 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			// Print modifier
 			DrawPropertyValueInColour( iMinRangeForAimBonusModifier, ubNumLine, 2, fComparisonMode, TRUE, FALSE );
 			// Print final value
-			DrawPropertyValueInColour( iFinalMinRangeForAimBonusValue, ubNumLine, 3, fComparisonMode, FALSE, FALSE, ITEMDESC_FONTNEGATIVE );	
+			DrawPropertyValueInColour( iFinalMinRangeForAimBonusValue, ubNumLine, 3, fComparisonMode, FALSE, FALSE, ITEMDESC_FONTNEGATIVE );
 		}
 
 		///////////////// (LASER) PROJECTION FACTOR
 		// with the reworked NCTH code and the laser performance factor we will display BestLaserRange instead of ProjectionFactor
-		if (UsingNewCTHSystem() == true && 
+		if (UsingNewCTHSystem() == true &&
 			( (Item[gpItemDescObject->usItem].projectionfactor > 1.0 || GetProjectionFactor( gpItemDescObject ) > 1.0) ||
 			( GetBestLaserRange( gpItemDescObject ) > 0
 			&& (gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE != 0) ) ) )
@@ -7222,7 +7222,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				// Get final Projection value
 				iFinalProjectionValue = __max( iProjectionValue, iProjectionModifier );
 			}
-	
+
 			if( !fComparisonMode )
 			{
 				if ( bNewCode )
@@ -7287,7 +7287,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				DrawPropertyValueInColourFloat( iComparedFinalProjectionValue - iFinalProjectionValue, ubNumLine, 3, fComparisonMode, FALSE, TRUE );
 			}
 		}
-		else if( fComparisonMode && UsingNewCTHSystem() == true && 
+		else if( fComparisonMode && UsingNewCTHSystem() == true &&
 				( (Item[gpComparedItemDescObject->usItem].projectionfactor > 1.0 || GetProjectionFactor( gpComparedItemDescObject ) > 1.0) ||
 				( GetBestLaserRange( gpItemDescObject ) > 0
 				&& (gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE != 0) ) ) )
@@ -7351,7 +7351,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			}
 		}
 		///////////////// OCTH TO-HIT BONUS
-		if (UsingNewCTHSystem() == false && 
+		if (UsingNewCTHSystem() == false &&
 			(Item[gpItemDescObject->usItem].tohitbonus != 0 || GetFlatToHitBonus( gpItemDescObject ) != 0) )
 		{
 			// Set line to draw into
@@ -7390,7 +7390,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			}
 
 		}
-		else if( fComparisonMode && UsingNewCTHSystem() == false && 
+		else if( fComparisonMode && UsingNewCTHSystem() == false &&
 				(Item[gpComparedItemDescObject->usItem].tohitbonus != 0 || GetFlatToHitBonus( gpComparedItemDescObject ) != 0) )
 		{
 			ubNumLine = 6;
@@ -7409,7 +7409,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 		}
 
 		///////////////// OCTH BEST LASER RANGE
-		if (UsingNewCTHSystem() == false && 
+		if (UsingNewCTHSystem() == false &&
 			( Item[gpItemDescObject->usItem].bestlaserrange > 0 || GetAverageBestLaserRange( gpItemDescObject ) > 0 ) )
 		{
 			// Set line to draw into
@@ -7447,7 +7447,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				DrawPropertyValueInColour( iComparedFinalBestLaserRangeValue - iFinalBestLaserRangeValue, ubNumLine, 3, fComparisonMode, FALSE, TRUE );
 			}
 		}
-		else if( fComparisonMode && UsingNewCTHSystem() == false && 
+		else if( fComparisonMode && UsingNewCTHSystem() == false &&
 				( Item[gpComparedItemDescObject->usItem].bestlaserrange > 0 || GetAverageBestLaserRange( gpComparedItemDescObject ) > 0 ) )
 		{
 			// Set line to draw into
@@ -7483,7 +7483,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			BOOLEAN iFlashValue = Item[ gpItemDescObject->usItem ].hidemuzzleflash;
 
 			if( !fComparisonMode )
-			{		
+			{
 				if ( iFlashValue )
 				{
 					// Print base value
@@ -7498,7 +7498,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 					DrawPropertyTextInColour( L"--", ubNumLine, 1 );
 					// Print modifier
 					DrawPropertyTextInColour( L"Y", ubNumLine, 2, ITEMDESC_FONTPOSITIVE );
-				}			
+				}
 				// Print final value
 				DrawPropertyTextInColour( L"Y", ubNumLine, 3, FONT_MCOLOR_WHITE );
 			}
@@ -7549,7 +7549,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 					DrawPropertyTextInColour( L"--", ubNumLine, 1 );
 					// Print modifier
 					DrawPropertyTextInColour( L"N", ubNumLine, 2, ITEMDESC_FONTNEGATIVE );
-				}			
+				}
 				// Print final value
 				DrawPropertyTextInColour( L"N", ubNumLine, 3, ITEMDESC_FONTNEGATIVE );
 			}
@@ -7575,7 +7575,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				DrawPropertyTextInColour( L"=", ubNumLine, 1 );
 				// Print modifier
 				DrawPropertyTextInColour( L"Y", ubNumLine, 2, ITEMDESC_FONTPOSITIVE );
-			}			
+			}
 			// Print final value
 			DrawPropertyTextInColour( L"Y", ubNumLine, 3, ITEMDESC_FONTPOSITIVE );
 		}
@@ -7944,7 +7944,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			// Print final value
 			DrawPropertyValueInColour( iFinalBurstAPCost, ubNumLine, 3, FALSE, FALSE, FALSE, ITEMDESC_FONTPOSITIVE );
 		}
-		
+
 		////////////////// AUTO AP
 		if ( GetAutofireShotsPerFiveAPs(gpItemDescObject) > 0 )
 		{
@@ -8027,13 +8027,13 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			{
 				// pistols and revolvers
 				if( Weapon[ gpItemDescObject->usItem ].ubWeaponType == GUN_PISTOL || Weapon[ gpItemDescObject->usItem ].ubWeaponType == GUN_M_PISTOL )
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost 
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
 										* max(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0f + 0.5f );
 				// shotguns
 				else if( Weapon[ gpItemDescObject->usItem ].ubWeaponType == GUN_SHOTGUN && Weapon[gpItemDescObject->usItem].swapClips != 1 )
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost 
-										* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT ) 
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
+										* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0 + 0.5f );
 				// ambidextrous reload bullets
 				else if( Weapon[gpItemDescObject->usItem].swapClips != 1 )
@@ -8053,7 +8053,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 
 			// Get Reload Cost Modifier
 			INT16 iReloadAPCostModifier = iFinalReloadAPCost - iReloadAPCost;
-	
+
 			if( !fComparisonMode )
 			{
 				// Print base value
@@ -8072,13 +8072,13 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				{
 					// pistols and revolvers
 					if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_PISTOL || Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_M_PISTOL )
-						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost 
+						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost
 											* max(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
 											- gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0f + 0.5f );
 					// shotguns
 					else if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_SHOTGUN && Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
-						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost 
-											* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT ) 
+						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost
+											* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
 											- gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0 + 0.5f );
 					// ambidextrous reload bullets
 					else if( Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
@@ -8121,13 +8121,13 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			{
 				// pistols and revolvers
 				if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_PISTOL || Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_M_PISTOL )
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost 
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
 										* max(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0f + 0.5f );
 				// shotguns
 				else if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_SHOTGUN && Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost 
-										* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT ) 
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
+										* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0 + 0.5f );
 				// ambidextrous reload bullets
 				else if( Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
@@ -8155,7 +8155,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 		}
 
 		///////////////////// MANUAL RELOAD AP
-		if ( Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpItemDescObject->usItem ].singleshotrocketlauncher 
+		if ( Item[ gpItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpItemDescObject->usItem ].singleshotrocketlauncher
 			&& Weapon[gpItemDescObject->usItem].APsToReloadManually > 0 )
 		{
 			// Set line to draw into
@@ -8195,7 +8195,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				// Print final value
 				DrawPropertyValueInColour( iFinalManualReloadAPCost, ubNumLine, 3, fComparisonMode, FALSE, FALSE, FONT_MCOLOR_WHITE );
 			}
-			else if( Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem ].singleshotrocketlauncher 
+			else if( Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem ].singleshotrocketlauncher
 					&& Weapon[gpComparedItemDescObject->usItem].APsToReloadManually > 0  )
 			{
 				// Get final Manual Reload Cost
@@ -8237,7 +8237,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				DrawPropertyTextInColour( L"-", ubNumLine, 3, ITEMDESC_FONTPOSITIVE );
 			}
 		}
-		else if( fComparisonMode && ( Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem ].singleshotrocketlauncher 
+		else if( fComparisonMode && ( Item[ gpComparedItemDescObject->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) && !Item[ gpComparedItemDescObject->usItem ].singleshotrocketlauncher
 					&& Weapon[gpComparedItemDescObject->usItem].APsToReloadManually > 0 ) )
 		{
 			ubNumLine = 18;
@@ -8282,7 +8282,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			{
 				// HEADROCK HAM 5: One value to rule them all.
 				// Set line to draw into
-				ubNumLine = 20;				
+				ubNumLine = 20;
 
 				FLOAT iFinalRecoilX = 0;
 				FLOAT iFinalRecoilY = 0;
@@ -8357,7 +8357,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 					DrawPropertyTextInColour( L"-", ubNumLine, 2, ITEMDESC_FONTNEGATIVE );
 					DrawPropertyTextInColour( L"-", ubNumLine, 3, ITEMDESC_FONTNEGATIVE );
 				}
-				
+
 				/*
 				// RECOIL Y
 
@@ -8419,8 +8419,8 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				&& GetShotsPerBurst(gpComparedItemDescObject)> 0 || GetAutofireShotsPerFiveAPs(gpComparedItemDescObject) ) )
 			{
 
-				ubNumLine = 20;	
-						
+				ubNumLine = 20;
+
 				FLOAT iFinalRecoilX = 0;
 				FLOAT iFinalRecoilY = 0;
 
@@ -8517,7 +8517,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			}
 			else if( fComparisonMode && GetBurstPenalty(gpComparedItemDescObject) > 0 )
 			{
-				ubNumLine = 19;	
+				ubNumLine = 19;
 				// Get base Burst Penalty value
 				INT16 iBurstValue = Weapon[gpComparedItemDescObject->usItem].ubBurstPenalty * (gGameExternalOptions.bAimedBurstEnabled?gGameExternalOptions.uAimedBurstPenalty:1);
 				// Get final Burst Penalty value
@@ -8584,7 +8584,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			}
 			else if( fComparisonMode && GetBipodBonus(gpComparedItemDescObject) > 0)
 			{
-				ubNumLine = 20;	
+				ubNumLine = 20;
 				// Get base Reliability value
 				INT16 iBipodValue = Item[gpComparedItemDescObject->usItem].bipod;
 				// Get final Reliability value
@@ -8646,7 +8646,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 		else if( fComparisonMode && ( Item[ gpComparedItemDescObject->usItem ].usItemClass == IC_GUN && !Item[ gpComparedItemDescObject->usItem].rocketlauncher
 			&& GetAutofireShotsPerFiveAPs(gpComparedItemDescObject) > 0 ) )
 		{
-			ubNumLine = 21;	
+			ubNumLine = 21;
 			// Get final B/5AP
 			INT16 iFinalB5AP = GetAutofireShotsPerFiveAPs( gpComparedItemDescObject );
 			// Get base B/5AP Cost
@@ -8656,7 +8656,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			// Print modifier
 			DrawPropertyTextInColour( L"=", ubNumLine, 2 );
 			// Print final value
-			DrawPropertyValueInColour( iFinalB5AP, ubNumLine, 3, fComparisonMode, FALSE, TRUE, ITEMDESC_FONTPOSITIVE );		
+			DrawPropertyValueInColour( iFinalB5AP, ubNumLine, 3, fComparisonMode, FALSE, TRUE, ITEMDESC_FONTPOSITIVE );
 		}
 
 		/////////////////// AUTOFIRE PENALTY
@@ -8731,7 +8731,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 		}
 		else if( fComparisonMode && UsingNewCTHSystem() == false && GetAutoPenalty(gpComparedItemDescObject) > 0 )
 		{
-			ubNumLine = 22;	
+			ubNumLine = 22;
 			// Get base Auto Penalty value
 			INT16 iAutoValue = Weapon[gpComparedItemDescObject->usItem].AutoPenalty * (gGameExternalOptions.bAimedBurstEnabled?gGameExternalOptions.uAimedBurstPenalty:1);
 			// Get final Auto Penalty value
@@ -8978,7 +8978,7 @@ void DrawAmmoValues( OBJECTTYPE * gpItemDescObject, int shotsLeft )
 				DrawPropertyValueInColourFloat( Comparedfinalvalue - finalvalue, ubNumLine, 3, fComparisonMode, FALSE, FALSE, 0, 0.0f, 2  );
 			}
 		}
-		
+
 		if ( gGameExternalOptions.fDirtSystem )	// Flugente
 		{
 			///////////////////// DIRT MODIFICATOR
@@ -9621,7 +9621,7 @@ void DrawExplosiveValues( OBJECTTYPE * gpItemDescObject )
 			DrawPropertyTextInColour( L"=", ubNumLine, 2 );
 			// Print final value
 			DrawPropertyValueInColour( iFinalVolatility, ubNumLine, 3, fComparisonMode, FALSE, FALSE );
-			
+
 		}
 
 		//////////////////// REPAIR EASE
@@ -9737,13 +9737,13 @@ void DrawArmorValues( OBJECTTYPE * gpItemDescObject )
 		{
 			// Set line to draw into
 			ubNumLine = 0;
-			
+
 			// Get protection value
 			UINT16 iProtectionValue = Armour[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubProtection;
 
 			// Get Final Protection value
 			UINT16 iFinalProtectionValue = iProtectionValue;
-			for (attachmentList::iterator iter = (*gpItemDescObject)[0]->attachments.begin(); iter != (*gpItemDescObject)[0]->attachments.end(); ++iter) 
+			for (attachmentList::iterator iter = (*gpItemDescObject)[0]->attachments.begin(); iter != (*gpItemDescObject)[0]->attachments.end(); ++iter)
 			{
 				if (Item[ iter->usItem ].usItemClass == IC_ARMOUR)
 				{
@@ -9769,7 +9769,7 @@ void DrawArmorValues( OBJECTTYPE * gpItemDescObject )
 				UINT16 iComparedProtectionValue = Armour[Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubProtection;
 				// Get Final Protection value
 				UINT16 iComparedFinalProtectionValue = iComparedProtectionValue;
-				for (attachmentList::iterator iter = (*gpComparedItemDescObject)[0]->attachments.begin(); iter != (*gpComparedItemDescObject)[0]->attachments.end(); ++iter) 
+				for (attachmentList::iterator iter = (*gpComparedItemDescObject)[0]->attachments.begin(); iter != (*gpComparedItemDescObject)[0]->attachments.end(); ++iter)
 				{
 					if (Item[ iter->usItem ].usItemClass == IC_ARMOUR)
 					{
@@ -9791,7 +9791,7 @@ void DrawArmorValues( OBJECTTYPE * gpItemDescObject )
 		{
 			// Set line to draw into
 			ubNumLine = 1;
-			
+
 			// Get Coverage value
 			UINT8 iCoverageValue = Armour[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubCoverage;
 
@@ -9826,7 +9826,7 @@ void DrawArmorValues( OBJECTTYPE * gpItemDescObject )
 		{
 			// Set line to draw into
 			ubNumLine = 2;
-			
+
 			// Get Degrade value
 			UINT8 iDegradeValue = Armour[Item[ gpItemDescObject->usItem ].ubClassIndex ].ubDegradePercent;
 
@@ -9944,7 +9944,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 					if( Armour[ Item[ gpItemDescObject->usItem ].ubClassIndex ].ubArmourClass == Armour[ Item[ gpComparedItemDescObject->usItem ].ubClassIndex ].ubArmourClass )
 						fComparisonMode = TRUE;
 				}
-				else 
+				else
 					fComparisonMode = TRUE;
 			}
 			if( Item[ gpComparedItemDescObject->usItem ].usItemClass & IC_EXPLOSV && Item[ gpItemDescObject->usItem ].usItemClass & IC_EXPLOSV )
@@ -10050,7 +10050,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10108,7 +10108,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10178,7 +10178,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10236,7 +10236,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10307,7 +10307,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				// Print Values
 				for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10367,7 +10367,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				// Print Values
 				for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10441,7 +10441,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				// Print Values
 				for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10515,7 +10515,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10585,7 +10585,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10655,7 +10655,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10725,7 +10725,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10869,7 +10869,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10908,7 +10908,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				mprintf( usX, usY, pStr );
 			}
 		}
-		
+
 		cnt++;
 	}
 
@@ -10928,7 +10928,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -10986,7 +10986,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11060,7 +11060,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11104,7 +11104,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11177,7 +11177,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11233,7 +11233,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11291,7 +11291,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11348,7 +11348,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11417,7 +11417,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11485,7 +11485,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11543,7 +11543,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11613,7 +11613,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11683,7 +11683,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11753,7 +11753,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11823,7 +11823,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11893,7 +11893,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -11951,7 +11951,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12009,7 +12009,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12072,7 +12072,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12142,7 +12142,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12203,7 +12203,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12261,7 +12261,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12331,7 +12331,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12401,7 +12401,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12471,7 +12471,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12541,7 +12541,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12611,7 +12611,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12639,7 +12639,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				}
 				else if (iModifier[cnt2] < 0)
 				{
-					SetFontForeground( ITEMDESC_FONTNEGATIVE );			
+					SetFontForeground( ITEMDESC_FONTNEGATIVE );
 					swprintf( pStr, L"%d", iModifier[cnt2] );
 					wcscat( pStr, L"%" );
 					FindFontCenterCoordinates( sLeft, sTop, sWidth, sHeight, pStr, BLOCKFONT2, &usX, &usY);
@@ -12681,7 +12681,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12751,7 +12751,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12821,7 +12821,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12891,7 +12891,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -12961,7 +12961,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -13031,7 +13031,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		{
 			// Set Y coordinates
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 			// Print Values
 			for (UINT8 cnt2 = 0; cnt2 < 3; cnt2++)
@@ -13084,24 +13084,24 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 		}
 		cnt++;
 	}
-	
-	// Flugente: draw a new description line 
+
+	// Flugente: draw a new description line
 	// Moa: only if required
 	INT16 fDrawGenIndexes = FALSE;
 
-	// Flugente	
+	// Flugente
 	if ( gGameExternalOptions.fWeaponOverheating )
-	{	
+	{
 		if ( ( Item[gpItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) )
-		{			
+		{
 			if (!fDrawGenIndexes) fDrawGenIndexes = ++cnt;		// insert Indexes here?
 			///////////////////// SINGLE SHOT TEMPERATURE
 			if (cnt >= sFirstLine && cnt < sLastLine)
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = Weapon[ gpItemDescObject->usItem ].usOverheatingSingleShotTemperature;
 				if ( Item[gpItemDescObject->usItem].usItemClass & IC_GUN )
@@ -13134,7 +13134,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						iFloatModifier[cnt2] = iComparedFloatModifier[cnt2] - iFloatModifier[cnt2];
 					}
 					if (iFloatModifier[cnt2] > 0)
-					{						
+					{
 						if ( cnt2 == 1 )
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
 
@@ -13173,13 +13173,13 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				}
 			}
 			cnt++;
-		
-			///////////////////// COOLDOWN FACTOR		
+
+			///////////////////// COOLDOWN FACTOR
 			if (cnt >= sFirstLine && cnt < sLastLine)
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = Item[gpItemDescObject->usItem].usOverheatingCooldownFactor;
 				if ( Item[gpItemDescObject->usItem].usItemClass & IC_GUN )
@@ -13256,7 +13256,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = Weapon[ gpItemDescObject->usItem ].usOverheatingJamThreshold;
 				if ( Item[gpItemDescObject->usItem].usItemClass & IC_GUN )
@@ -13333,7 +13333,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = Weapon[ gpItemDescObject->usItem ].usOverheatingDamageThreshold;
 				if ( Item[gpItemDescObject->usItem].usItemClass & IC_GUN )
@@ -13405,17 +13405,17 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			}
 			cnt++;
 
-		} 
+		}
 		else if ( ( Item[gpItemDescObject->usItem].barrel == TRUE )	||	// display for barrel items
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].barrel == TRUE ) )
 		{
 			if (!fDrawGenIndexes) fDrawGenIndexes = ++cnt;		// insert Indexes here?
-			///////////////////// COOLDOWN FACTOR		
+			///////////////////// COOLDOWN FACTOR
 			if (cnt >= sFirstLine && cnt < sLastLine)
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = Item[gpItemDescObject->usItem].usOverheatingCooldownFactor;
 				iFloatModifier[1] = GetItemCooldownFactor(gpItemDescObject) - iFloatModifier[0];
@@ -13489,7 +13489,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = -1.0f - Item[gpItemDescObject->usItem].overheatTemperatureModificator;
 				iFloatModifier[1] = GetTemperatureModifier( gpItemDescObject ) - iFloatModifier[0];
@@ -13513,7 +13513,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						iFloatModifier[cnt2] = iComparedFloatModifier[cnt2] - iFloatModifier[cnt2];
 					}
 					if (iFloatModifier[cnt2] > 0)
-					{						
+					{
 						if ( cnt2 == 1 )
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
 
@@ -13555,12 +13555,12 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			///////////////////// TEMPERATURE MODIFIER
 
 			///////////////////// COOLDOWN MODIFIER
-			if ( ( Item[gpItemDescObject->usItem].overheatCooldownModificator != 0.0 || ( fComparisonMode && Item[gpComparedItemDescObject->usItem].overheatCooldownModificator != 0.0 ) ) 
+			if ( ( Item[gpItemDescObject->usItem].overheatCooldownModificator != 0.0 || ( fComparisonMode && Item[gpComparedItemDescObject->usItem].overheatCooldownModificator != 0.0 ) )
 				&& cnt >= sFirstLine && cnt < sLastLine)
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = Item[gpItemDescObject->usItem].overheatCooldownModificator;
 				iFloatModifier[1] = GetItemCooldownModificator( gpItemDescObject ) - iFloatModifier[0];
@@ -13584,7 +13584,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						iFloatModifier[cnt2] = iComparedFloatModifier[cnt2] - iFloatModifier[cnt2];
 					}
 					if (iFloatModifier[cnt2] > 0)
-					{						
+					{
 						if ( cnt2 == 1 )
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
 
@@ -13626,12 +13626,12 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			///////////////////// COOLDOWN MODIFIER
 
 			///////////////////// JAM THRESHOLD MODIFIER
-			if ( ( Item[gpItemDescObject->usItem].overheatJamThresholdModificator != 0.0 || ( fComparisonMode && Item[gpComparedItemDescObject->usItem].overheatJamThresholdModificator != 0.0 ) ) 
+			if ( ( Item[gpItemDescObject->usItem].overheatJamThresholdModificator != 0.0 || ( fComparisonMode && Item[gpComparedItemDescObject->usItem].overheatJamThresholdModificator != 0.0 ) )
 				&& cnt >= sFirstLine && cnt < sLastLine)
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = -1.0f - Item[gpItemDescObject->usItem].overheatJamThresholdModificator;
 				iFloatModifier[1] = GetOverheatJamThresholdModifier( gpItemDescObject ) - iFloatModifier[0];
@@ -13655,7 +13655,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						iFloatModifier[cnt2] = iComparedFloatModifier[cnt2] - iFloatModifier[cnt2];
 					}
 					if (iFloatModifier[cnt2] > 0)
-					{						
+					{
 						if ( cnt2 == 1 )
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
 
@@ -13697,12 +13697,12 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			///////////////////// JAM THRESHOLD MODIFIER
 
 			///////////////////// DAMAGE THRESHOLD MODIFIER
-			if ( ( Item[gpItemDescObject->usItem].overheatDamageThresholdModificator != 0.0 || ( fComparisonMode && Item[gpComparedItemDescObject->usItem].overheatDamageThresholdModificator != 0.0 ) ) 
+			if ( ( Item[gpItemDescObject->usItem].overheatDamageThresholdModificator != 0.0 || ( fComparisonMode && Item[gpComparedItemDescObject->usItem].overheatDamageThresholdModificator != 0.0 ) )
 				&& cnt >= sFirstLine && cnt < sLastLine)
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
 				iFloatModifier[0] = -1.0f - Item[gpItemDescObject->usItem].overheatDamageThresholdModificator;
 				iFloatModifier[1] = GetOverheatDamageThresholdModifier( gpItemDescObject ) - iFloatModifier[0];
@@ -13726,7 +13726,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						iFloatModifier[cnt2] = iComparedFloatModifier[cnt2] - iFloatModifier[cnt2];
 					}
 					if (iFloatModifier[cnt2] > 0)
-					{						
+					{
 						if ( cnt2 == 1 )
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
 
@@ -13768,9 +13768,9 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			///////////////////// DAMAGE THRESHOLD MODIFIER
 		}
 	}
-		
+
 	if ( gGameExternalOptions.fDirtSystem )
-	{	
+	{
 		if ( ( Item[gpItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) ||
 			( fComparisonMode && Item[gpComparedItemDescObject->usItem].usItemClass & (IC_GUN|IC_LAUNCHER) ) )
 		{
@@ -13780,15 +13780,15 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				// Set Y coordinates
 				sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
-				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;		
+				sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 
-				iFloatModifier[0] = Item[ gpItemDescObject->usItem ].dirtIncreaseFactor * gGameExternalOptions.iDirtGlobalModifier;				
+				iFloatModifier[0] = Item[ gpItemDescObject->usItem ].dirtIncreaseFactor * gGameExternalOptions.iDirtGlobalModifier;
 				iFloatModifier[2] = GetItemDirtIncreaseFactor( gpItemDescObject, TRUE );
 				iFloatModifier[1] = iFloatModifier[2] - iFloatModifier[0];
 
 				if( fComparisonMode )
 				{
-					iComparedFloatModifier[0] = Item[ gpComparedItemDescObject->usItem ].dirtIncreaseFactor * gGameExternalOptions.iDirtGlobalModifier;	
+					iComparedFloatModifier[0] = Item[ gpComparedItemDescObject->usItem ].dirtIncreaseFactor * gGameExternalOptions.iDirtGlobalModifier;
 					iComparedFloatModifier[2] = GetItemDirtIncreaseFactor( gpComparedItemDescObject, TRUE );
 					iComparedFloatModifier[1] = iComparedFloatModifier[2] - iComparedFloatModifier[0];
 				}
@@ -13804,7 +13804,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						iFloatModifier[cnt2] = iComparedFloatModifier[cnt2] - iFloatModifier[cnt2];
 					}
 					if (iFloatModifier[cnt2] > 0)
-					{						
+					{
 						if ( cnt2 == 1 || fComparisonMode)
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
 
@@ -13884,7 +13884,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 					{
 						iComparedFloatModifier[0] = min( 1.0f, iComparedFloatModifier[0] / OVERHEATING_MAX_TEMPERATURE );
 						iComparedModifier[0] = 0;
-						//FOOD_BAD_THRESHOLD		
+						//FOOD_BAD_THRESHOLD
 						if ( iComparedFloatModifier[0] < 0.5f )
 						{
 							iComparedModifier[1] = (INT16)( max( Food[fComparedFoodtype].bFoodPoints, Food[fComparedFoodtype].bDrinkPoints ) * (1.0 - iComparedFloatModifier[0]) * 0.025 );//Poison formula coppied from food.cpp
@@ -13899,7 +13899,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 					for ( UINT8 cnt2 = 0; cnt2 < 3; cnt2++ )
 					{
 						sLeft = gItemDescAdvRegions[cnt-sFirstLine][cnt2+1].sLeft;
-						sWidth = gItemDescAdvRegions[cnt-sFirstLine][cnt2+1].sRight - sLeft;					
+						sWidth = gItemDescAdvRegions[cnt-sFirstLine][cnt2+1].sRight - sLeft;
 						if ( fComparisonMode && iModifier[cnt2] > 0 )
 						{
 							SetFontForeground( ITEMDESC_FONTNEGATIVE );
@@ -14010,7 +14010,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			iFloatModifier[0] = ( (FLOAT) Food[fFoodtype].bDrinkPoints )/1000;
 			if( fComparisonMode )
 			{
-				iComparedFloatModifier[0] = ( (FLOAT) Food[fComparedFoodtype].bDrinkPoints )/1000;		
+				iComparedFloatModifier[0] = ( (FLOAT) Food[fComparedFoodtype].bDrinkPoints )/1000;
 			}
 			sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
 			sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
@@ -14077,7 +14077,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				if (cnt >= sFirstLine && cnt < sLastLine)
 				{
 					if( fComparisonMode )
-					{					
+					{
 						if ( iModifier[0] < 0 )
 							SetFontForeground( ITEMDESC_FONTPOSITIVE );
 						else if ( iModifier[0] > 0 )
@@ -14098,14 +14098,14 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						else if ( fComparisonMode && iModifier[0] < 0 )
 							swprintf( pStr, L"%d", iModifier[0] );
 						else if ( fComparisonMode )
-							swprintf( pStr, L"=" );	
+							swprintf( pStr, L"=" );
 						else
 							swprintf( pStr, L"%d", iModifier[0] );
 
 						FindFontCenterCoordinates( sLeft, sTop, sWidth, sHeight, pStr, BLOCKFONT2, &usX, &usY );
 						if( !( fComparisonMode && iModifier[0] == 0 ) )
 						{
-							wcscat( pStr, L"%" );							
+							wcscat( pStr, L"%" );
 #ifdef CHINESE
 							wcscat( pStr, ChineseSpecString1 );
 #else
@@ -14132,7 +14132,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				if (cnt >= sFirstLine && cnt < sLastLine)
 				{
 					if( fComparisonMode )
-					{					
+					{
 						if ( iModifier[0] > 0 )
 							SetFontForeground( ITEMDESC_FONTPOSITIVE );
 						else
@@ -14151,7 +14151,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 						else if ( fComparisonMode && iModifier[0] < 0 )
 							swprintf( pStr, L"%d", iModifier[0] );
 						else if ( fComparisonMode )
-							swprintf( pStr, L"=" );	
+							swprintf( pStr, L"=" );
 						else
 							swprintf( pStr, L"%d", iModifier[0] );
 
@@ -14176,7 +14176,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				if ( cnt >= sFirstLine && cnt < sLastLine )
 				{
 					if( fComparisonMode )
-					{					
+					{
 						if ( iFloatModifier[0] < 0.0f )
 							SetFontForeground( ITEMDESC_FONTPOSITIVE );
 						else if ( iFloatModifier[0] > 0.0f )
@@ -14208,7 +14208,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 	//Moa: moved indexes here to avoid doublicates of the index
 	///////////////////// ADDITIONAL GENERAL INDEX (if required: cnt was allready increased)
 	if ( fDrawGenIndexes )
-	{	
+	{
 		if (fDrawGenIndexes >= sFirstLine && fDrawGenIndexes < sLastLine)
 		{
 			SetFontForeground( FONT_MCOLOR_WHITE );
@@ -14224,7 +14224,7 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 				swprintf(pStr, L"%s", gzItemDescGenIndexes[ i ]);
 
 				sLeft = gItemDescAdvRegions[fDrawGenIndexes-sFirstLine-1][i].sLeft;
-				sWidth = gItemDescAdvRegions[fDrawGenIndexes-sFirstLine-1][i].sRight - sLeft;			
+				sWidth = gItemDescAdvRegions[fDrawGenIndexes-sFirstLine-1][i].sRight - sLeft;
 
 				FindFontCenterCoordinates( sLeft, sTop, sWidth, sHeight, pStr, BLOCKFONT2, &usX, &usY);
 
@@ -14406,7 +14406,7 @@ void DrawMiscValues( OBJECTTYPE * gpItemDescObject )
 					// Print difference in base value
 					DrawPropertyValueInColour( iComparedAvailableVolume - iAvailableVolume, ubNumLine, 1, fComparisonMode, FALSE, TRUE );
 					// Print difference in modifier
-					DrawPropertyTextInColour( L"--", ubNumLine, 2 ); 
+					DrawPropertyTextInColour( L"--", ubNumLine, 2 );
 					// Print difference in final value
 					DrawPropertyValueInColour( iComparedFinalAvailableVolume - iFinalAvailableVolume, ubNumLine, 3, fComparisonMode, FALSE, TRUE );
 				}
@@ -14467,7 +14467,7 @@ void DrawMiscValues( OBJECTTYPE * gpItemDescObject )
 					// Print difference in base value
 					DrawPropertyValueInColour( iComparedPocketVolume - iPocketVolume, ubNumLine, 1, fComparisonMode, FALSE, FALSE );
 					// Print difference in modifier
-					DrawPropertyTextInColour( L"--", ubNumLine, 2 ); 
+					DrawPropertyTextInColour( L"--", ubNumLine, 2 );
 					// Print difference in final value
 					DrawPropertyValueInColour( iComparedFinalPocketVolume - iFinalPocketVolume, ubNumLine, 3, fComparisonMode, FALSE, FALSE );
 				}

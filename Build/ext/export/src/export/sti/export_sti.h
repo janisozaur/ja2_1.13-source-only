@@ -12,7 +12,7 @@ namespace ja2xp
 	{
 	public:
 		typedef IExporterBase::param_list_t param_list_t;
-		
+
 		static const wchar_t* commandString;// = L"sti";
 
 		virtual void handleCommand(param_list_t const& params);

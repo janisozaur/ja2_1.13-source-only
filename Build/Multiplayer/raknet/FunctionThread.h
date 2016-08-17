@@ -53,7 +53,7 @@ public:
 	/// Add a functor to the incoming stream of functors
 	/// \note functor MUST be a valid pointer until Functor::HandleResult() is called, at which point the pointer is returned to you.
 	/// \note For practical purposes this means the instance of functor you pass to this function has to be allocated using new and delete.
-	/// \note You should deallocate the pointer inside Functor::HandleResult() 
+	/// \note You should deallocate the pointer inside Functor::HandleResult()
 	/// \param[in] functor A pointer to an implemented Functor class
 	/// \param[in] If there is some context to this functor you want to look up to cancel it, you can set it here. Returned back to you in Functor::HandleResult
 	void Push(Functor *functor, void *context=0);
@@ -69,7 +69,7 @@ public:
 
 	/// If you want to automatically do some kind of processing on every functor after Functor::HandleResult is called, set it here.
 	/// Useful to cleanup FunctionThread::Push::context
-	/// \param[in] postResult pointer to a C function to do post-processing 
+	/// \param[in] postResult pointer to a C function to do post-processing
 	void SetPostResultFunction(void (*postResult)(FunctorAndContext func));
 
 

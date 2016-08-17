@@ -5,7 +5,7 @@
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
-	#include "mainmenuscreen.h"
+	#include "MainMenuScreen.h"
 #endif
 
 struct
@@ -91,7 +91,7 @@ mainMenuEndElementHandle(void *userData, const XML_Char *name)
 	char temp;
 	mainMenuParseData * pData = (mainMenuParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "MAINMENU") == 0)
 		{
@@ -115,14 +115,14 @@ mainMenuEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			if (pData->curMainMenu.uiIndex == 0 ) pData->curMainMenu.Visible	= 0;
-			 
+
 			else pData->curMainMenu.Visible	= (BOOLEAN) atol(pData->szCharData);
 		}
 		else if(strcmp(name, "FileName") == 0 && pData->curMainMenu.uiIndex > 0)
-		{	
-		
+		{
+
 			pData->curElement = ELEMENT;
-			
+
 			if(MAX_MAIN_MENU_CHARS >= strlen(pData->szCharData))
 				strcpy(pData->curMainMenu.FileName,pData->szCharData);
 			else
@@ -135,51 +135,51 @@ mainMenuEndElementHandle(void *userData, const XML_Char *name)
 				temp = pData->szCharData[i];
 				pData->curMainMenu.FileName[i] = temp;
 				//DebugMsg (TOPIC_JA2,DBG_LEVEL_3,String("itemEndElementHandle: szLocation[%d] = %s, temp = %s",i,&pData->curSectorLoadscreens.szLocation[i],&temp));
-			}				
+			}
 		}
 		else if(strcmp(name, "FitToScreen") == 0)
 		{
 			pData->curElement = ELEMENT;
 			if (pData->curMainMenu.uiIndex == 0 ) pData->curMainMenu.FitToScreen	= 0;
-			 
+
 			else pData->curMainMenu.FitToScreen	= (BOOLEAN) atol(pData->szCharData);
 		}
 		else if(strcmp(name, "StretchImage") == 0)
 		{
 			pData->curElement = ELEMENT;
 			if (pData->curMainMenu.uiIndex == 0 ) pData->curMainMenu.StretchImage	= 0;
-			 
+
 			else pData->curMainMenu.StretchImage = (BOOLEAN) atol(pData->szCharData);
 		}
 		else if(strcmp(name, "CenterImage") == 0)
 		{
 			pData->curElement = ELEMENT;
 			if (pData->curMainMenu.uiIndex == 0 ) pData->curMainMenu.CenterImage	= 0;
-			 
+
 			else pData->curMainMenu.CenterImage = (BOOLEAN) atol(pData->szCharData);
 		}
 		else if(strcmp(name, "ImagePositionRelative") == 0)
 		{
 			pData->curElement = ELEMENT;
 			if (pData->curMainMenu.uiIndex == 0 ) pData->curMainMenu.ImagePositionRelative	= 0;
-			 
+
 			else pData->curMainMenu.ImagePositionRelative	= (BOOLEAN) atol(pData->szCharData);
 		}
 		else if(strcmp(name, "ImagePositionX") == 0 && pData->curMainMenu.uiIndex > 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curMainMenu.ImagePositionX	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "ImagePositionY") == 0 && pData->curMainMenu.uiIndex > 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curMainMenu.ImagePositionY	= (INT32) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "MainMenuY") == 0 && pData->curMainMenu.uiIndex == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curMainMenu.MAINMENU_Y	=  (UINT32) strtoul(pData->szCharData, NULL, 0);
-		}		
+		}
 		else if(strcmp(name, "MainMenuX") == 0 && pData->curMainMenu.uiIndex == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -257,7 +257,7 @@ BOOLEAN ReadInMainMenu(MAIN_MENU_VALUES *pMainMenu, STR fileName)
 
 
 	XML_ParserFree(parser);
-	
+
 
 	return( TRUE );
 }

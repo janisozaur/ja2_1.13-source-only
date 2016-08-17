@@ -141,7 +141,7 @@ bool ja2xp::ConvertStructure(vfs::tReadableFile* pStructureFile, vfs::tWritableF
 		for(unsigned int i = 0; i < usNumberOfStructuresStored; ++i)
 		{
 			if (p_current + sizeof( DB_STRUCTURE ) > p_end)
-			{	
+			{
 				// gone past end of file block?!
 				// freeing of memory will occur outside of the function
 				break;
@@ -151,7 +151,7 @@ bool ja2xp::ConvertStructure(vfs::tReadableFile* pStructureFile, vfs::tWritableF
 			p_current += sizeof( DB_STRUCTURE );
 
 			//xmlw.addAttributeToNextValue("index", i);
-			xmlw.addAttributeToNextValue("index", (int)structure->usStructureNumber);			
+			xmlw.addAttributeToNextValue("index", (int)structure->usStructureNumber);
 			xmlw.openNode("STRUCTURE");
 
 				//xmlw.addValue("usStructureNumber",	(int)structure->usStructureNumber);

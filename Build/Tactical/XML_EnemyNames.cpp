@@ -81,7 +81,7 @@ enemyNamesEndElementHandle(void *userData, const XML_Char *name)
 {
 	enemyNamesParseData * pData = (enemyNamesParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "ENEMY_NAMES") == 0)
 		{
@@ -89,8 +89,8 @@ enemyNamesEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "NAME") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!EnemyName_TextOnly)
 				{
 					wcscpy(zEnemyName[pData->curEnemyNames.uiIndex].szCurGroup, pData->curEnemyNames.szCurGroup);
@@ -101,8 +101,8 @@ enemyNamesEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(zEnemyName[pData->curEnemyNames.uiIndex].szCurGroup, pData->curEnemyNames.szCurGroup);
-				}		
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -155,7 +155,7 @@ BOOLEAN ReadInEnemyNames(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading EnemyNames.xml" );
 
 	EnemyName_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

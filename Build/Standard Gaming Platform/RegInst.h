@@ -23,7 +23,7 @@
 #include <tchar.h>
 #include <assert.h>
 
-#include "types.h"
+#include "Types.h"
 
 //**************************************************************************
 //
@@ -46,7 +46,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 // call once per execution of application:
 extern BOOLEAN InitializeRegistryKeys(STR strAppName, STR strRegistryKey);
 

@@ -3,29 +3,29 @@
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 #include "WIZ8 SGP ALL.H"
 #else
-#include "types.h"
+#include "Types.h"
 #include "Video.h"
-#include "vobject_blitters.h"
+#include "VObject_blitters.h"
 #include "sgp.h"
 #include <stdio.h>
 #include <io.h>
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include "Render Dirty.h"
-#include "fade screen.h"
+#include "Fade Screen.h"
 #include "impTGA.h"
-#include "timer control.h"
-#include "Fileman.h"
+#include "Timer Control.h"
+#include "FileMan.h"
 #include "Input.h"
 #include "GameSettings.h"
 #include "sgp_logger.h"
 #endif
 
-#include "resource.h"
+#include "Resource.h"
 #include <vfs/Core/vfs.h>
 #include <vfs/Core/vfs_file_raii.h>
 
 #include "Local.h"
-#include "text.h"
+#include "Text.h"
 
 
 #ifndef _MT
@@ -187,7 +187,7 @@ BOOLEAN						gfPrintFrameBuffer;
 UINT32						guiPrintFrameBufferIndex;
 
 // DX Loop Error Count Limiter
-const INT32					iMaxDXLoopCount = 10; 
+const INT32					iMaxDXLoopCount = 10;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -307,7 +307,7 @@ BOOLEAN InitializeVideoManager(HINSTANCE hInstance, UINT16 usCommandShow, void *
 			MessageBoxW( NULL, sString, APPLICATION_NAMEW, MB_ICONEXCLAMATION);
 			PostQuitMessage(1);
 			return FALSE;
-		}		
+		}
 		else
 			hWindow = CreateWindowEx(WS_EX_TOPMOST, (LPCSTR) ClassName, "Jagged Alliance 2", WS_POPUP | WS_VISIBLE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, NULL, NULL, hInstance, NULL);
 	}
@@ -1099,7 +1099,7 @@ void ScrollJA2Background(UINT32 uiDirection, INT16 sScrollXIncrement, INT16 sScr
 	INT16					sShiftX, sShiftY;
 	INT32					uiCountY;
 	UINT32					uiDestPitchBYTES;
-	INT32 iDXLoopCount = 0; 
+	INT32 iDXLoopCount = 0;
 
 
 	GetCurrentVideoSettings( &usWidth, &usHeight, &ubBitDepth );
@@ -1688,7 +1688,7 @@ void RefreshScreen(void *DummyVariable)
 	static POINT	MousePos;
 	static BOOLEAN fFirstTime = TRUE;
 	UINT32						uiTime;
-	INT32 iDXLoopCount = 0; 
+	INT32 iDXLoopCount = 0;
 
 	usScreenWidth = usScreenHeight = 0;
 

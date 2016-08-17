@@ -1,7 +1,7 @@
 #ifndef _MAP_INTERFACE_MAP_INVEN_H
 #define _MAP_INTERFACE_MAP_INVEN_H
 
-#include "types.h"
+#include "Types.h"
 #include "World Items.h"
 
 // this is how close one has to be in the loaded sector to pickup an item
@@ -62,7 +62,7 @@ extern BOOLEAN fMapInventoryItemCompatable[ ];
 extern BOOLEAN gfCheckForCursorOverMapSectorInventoryItem;
 // HEADROCK HAM 5: Same idea as above, this flags items as being candidates for appearing in Zoomed mode.
 extern BOOLEAN gfMapInventoryItemToZoom[ ];
-extern INT32 MAP_INVENTORY_POOL_SLOT_COUNT; 
+extern INT32 MAP_INVENTORY_POOL_SLOT_COUNT;
 
 BOOLEAN IsMapScreenWorldItemInvisibleInMapInventory( WORLDITEM *pWorldItem );
 BOOLEAN IsMapScreenWorldItemVisibleInMapInventory( WORLDITEM *pWorldItem );
@@ -83,7 +83,7 @@ BOOLEAN	SwitchToInventoryPoolQ(UINT8 newidx);
 // Flugente: handle various cooldown functions in a sector
 //void SectorInventoryCooldownFunctions( INT16 sMapX, INT16 sMapY, INT16 sMapZ );
 
-// Flugente: handle various cooldown functions over an array of items in a specific sector. 
+// Flugente: handle various cooldown functions over an array of items in a specific sector.
 // if fWithMinutes = true, adjust cooldown for time since sector was last entered
 // otherwise its used for a turn-precise cooldown
 void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::vector<WORLDITEM>& pWorldItem, UINT32 size, BOOLEAN fWithMinutes, BOOLEAN fUndo = FALSE);//dnl ch75 271013

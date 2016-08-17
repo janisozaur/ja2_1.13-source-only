@@ -1,7 +1,7 @@
 #ifndef NPC_H
 #define NPC_H
 
-#include "mapscreen.h"
+#include "MapScreen.h"
 #include "FileMan.h"
 
 #define NUM_NPC_QUOTE_RECORDS 50
@@ -71,7 +71,7 @@ typedef struct
 	UINT16	usSetFactTrue;
 	UINT16	usGiftItem;			// item NPC gives to merc after saying quote
 	UINT16	usGoToGridno;
-	INT16		sActionData;		// special action value	
+	INT16		sActionData;		// special action value
 
 //SB: unify structure for all versions
 //#if !defined( CRIPPLED_VERSION ) && !defined( RUSSIAN )
@@ -111,7 +111,7 @@ public:
 	UINT16		usSetFactTrue;
 	UINT16		usGiftItem;			// item NPC gives to merc after saying quote
 	UINT16		usUnused;
-	INT16		sActionData;		// special action value	
+	INT16		sActionData;		// special action value
 
 	INT32		sRequiredGridNo;		// location for NPC req'd to say quote
 	INT32		usGoToGridNo;
@@ -148,10 +148,10 @@ typedef enum
 	APPROACH_SECTOR_NOT_SAFE,
 	APPROACH_DONE_SLAPPED,	// 20
 
-	APPROACH_DONE_PUNCH_0,				
+	APPROACH_DONE_PUNCH_0,
 	APPROACH_DONE_PUNCH_1,
 	APPROACH_DONE_PUNCH_2,
-	APPROACH_DONE_OPEN_STRUCTURE,	
+	APPROACH_DONE_OPEN_STRUCTURE,
 	APPROACH_DONE_GET_ITEM,					// 25
 
 	APPROACH_DONE_GIVING_ITEM,

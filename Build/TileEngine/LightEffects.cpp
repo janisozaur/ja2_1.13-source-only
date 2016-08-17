@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
@@ -6,21 +6,21 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
-	//#include "soldier control.h"
-	#include "weapons.h"
-	#include "handle items.h"
-	#include "worlddef.h"
-	#include "animation control.h"
-	#include "handle items.h"
-	#include "lighteffects.h"
-	#include "message.h"
-	#include "isometric utils.h"
-	#include "renderworld.h"
+	#include "Debug.h"
+	//#include "Soldier Control.h"
+	#include "Weapons.h"
+	#include "Handle Items.h"
+	#include "WorldDef.h"
+	#include "Animation Control.h"
+	#include "Handle Items.h"
+	#include "LightEffects.h"
+	#include "Message.h"
+	#include "Isometric Utils.h"
+	#include "RenderWorld.h"
 	#include "Random.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Game Clock.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "Campaign Types.h"
 	#include "Tactical Save.h"
 #endif
@@ -567,11 +567,11 @@ void RemovePersonalLights( UINT8 ubID )
 	{
 		pLight = &gLightEffectData[ cnt ];
 
-		if ( pLight->iLight != (-1) && pLight->flags & LIGHTEFFECT_FLASHLIGHT && pLight->ubOwner == ubID && pLight->fAllocated )			
+		if ( pLight->iLight != (-1) && pLight->flags & LIGHTEFFECT_FLASHLIGHT && pLight->ubOwner == ubID && pLight->fAllocated )
 		{
 			pLight->fAllocated = FALSE;
 			pLight->flags &= ~LIGHTEFFECT_FLASHLIGHT;
-			
+
 			LightSpriteDestroy( pLight->iLight );
 		}
 	}

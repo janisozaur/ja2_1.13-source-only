@@ -1,15 +1,15 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
 	#include <stdio.h>
-	#include "types.h"
-	#include "lighting.h"
+	#include "Types.h"
+	#include "Lighting.h"
 	#include "Shade Table Util.h"
-	#include "video.h"
+	#include "Video.h"
 	#include "WorldDat.h"
-	#include "Fileman.h"
+	#include "FileMan.h"
 #endif
 
 #include <vfs/Core/vfs.h>
@@ -140,7 +140,7 @@ void DetermineRGBDistributionSettings()
 
 	// BF : current directory was reset above
 	//SetFileManCurrentDirectory( DataDir );
-	
+
 	//We're done, so restore the executable directory to JA2\Data.
 	//sprintf( DataDir, "%s\\Data", ExecDir );
 	//SetFileManCurrentDirectory( DataDir );
@@ -157,11 +157,11 @@ BOOLEAN LoadShadeTable( HVOBJECT pObj, UINT32 uiTileTypeIndex )
 	//We are assuming that the uiTileTypeIndex is referring to the correct file
 	//stored in the TileSurfaceFilenames[].	If it isn't, then that is a huge problem
 	//and should be fixed.	Also assumes that the directory is set to Data\ShadeTables.
-	
+
 	//BF
 	//strcpy( ShadeFileName, TileSurfaceFilenames[ uiTileTypeIndex ] );
 	sprintf( ShadeFileName, "%s\\%s", SHADE_TABLE_DIR, TileSurfaceFilenames[ uiTileTypeIndex ] );
-	
+
 	ptr = strstr( ShadeFileName, "." );
 	if( !ptr )
 	{
@@ -211,7 +211,7 @@ BOOLEAN SaveShadeTable( HVOBJECT pObj, UINT32 uiTileTypeIndex )
 	//We are assuming that the uiTileTypeIndex is referring to the correct file
 	//stored in the TileSurfaceFilenames[].	If it isn't, then that is a huge problem
 	//and should be fixed.	Also assumes that the directory is set to Data\ShadeTables.
-	
+
 	// BF
 	//strcpy( ShadeFileName, TileSurfaceFilenames[ uiTileTypeIndex ] );
 	sprintf_s( ShadeFileName, "%s\\%s", SHADE_TABLE_DIR, TileSurfaceFilenames[ uiTileTypeIndex ] );

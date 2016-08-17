@@ -3,41 +3,41 @@
 	#include "Encrypted File.h"
 #else
 	#include "sgp.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Timer Control.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
 	#include "MercTextBox.h"
-	#include "cursors.h"
-	#include "font control.h"
-	#include "mainmenuscreen.h"
-	#include "cursor control.h"
-	#include "render dirty.h"
-	#include "music control.h"
+	#include "Cursors.h"
+	#include "Font Control.h"
+	#include "MainMenuScreen.h"
+	#include "Cursor Control.h"
+	#include "Render Dirty.h"
+	#include "Music Control.h"
 	#include "GameSettings.h"
 	#include "SaveLoadScreen.h"
 	#include "SaveLoadGame.h"
 	#include "Options Screen.h"
 	#include	"English.h"
-	#include	"Gameloop.h"
+	#include	"GameLoop.h"
 	#include	"Game Init.h"
 	#include	"Utilities.h"
 	#include	"WordWrap.h"
 	#include "Font Control.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Multi Language Graphic Utils.h"
 	#include "Encrypted File.h"
-	#include "ja2 splash.h"
+	#include "JA2 Splash.h"
 	#include "GameVersion.h"
 #endif
 
-#include "gamesettings.h"
-#include "connect.h"
-#include "strategic.h"
-#include "strategic movement.h"
-#include "overhead.h"
-#include "init.h"
-#include "xml.h"
+#include "GameSettings.h"
+#include "Connect.h"
+#include "Strategic.h"
+#include "Strategic Movement.h"
+#include "Overhead.h"
+#include "Init.h"
+#include "XML.h"
 #include <vfs/Core/vfs.h>
 #include <vfs/Core/vfs_profile.h>
 
@@ -124,7 +124,7 @@ UINT32	MainMenuScreenHandle( )
 		return MAINMENU_SCREEN;	//The splash screen hasn't been up long enough yet.
 	}
 	if( guiSplashFrameFade )
-	{ 
+	{
 		uiTime = GetJA2Clock();
 		if( guiSplashFrameFade > 2 )
 			ShadowVideoSurfaceRectUsingLowPercentTable( FRAME_BUFFER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
@@ -243,14 +243,14 @@ void HandleMainMenuScreen()
 
 BOOLEAN InitMainMenu( )
 {
-	//VOBJECT_DESC	VObjectDesc;	
+	//VOBJECT_DESC	VObjectDesc;
 	VSURFACE_DESC		vs_desc = {};
 
 	//main Menu by JAzz
-	UINT16 iCounter2; 
+	UINT16 iCounter2;
 
 	if(is_networked)
-	{	
+	{
 		is_networked = FALSE;
 
 #ifdef USE_VFS
@@ -277,51 +277,51 @@ BOOLEAN InitMainMenu( )
 	CreateDestroyBackGroundMouseMask( TRUE );
 
 	CreateDestroyMainMenuButtons( TRUE );
-		
-	// load background graphic and add it	
+
+	// load background graphic and add it
 	//Main Menu by Jazz
 	for( iCounter2 = 1; iCounter2 < MAX_ELEMENT; iCounter2++ )
 	{
-		//VObjectDesc.fCreateFlags = VSURFACE_CREATE_FROMFILE;		
+		//VObjectDesc.fCreateFlags = VSURFACE_CREATE_FROMFILE;
 		vs_desc.fCreateFlags = VSURFACE_CREATE_FROMFILE | VSURFACE_SYSTEM_MEM_USAGE | VSURFACE_CREATE_FROMPNG_FALLBACK;
 
 		if (gMainMenulayout[iCounter2].Visible == 1)
 		{
 			strcpy(vs_desc.ImageFile, gMainMenulayout[iCounter2].FileName);
-			
+
 			if( !AddVideoSurface( &vs_desc, &gMainMenulayout[iCounter2].uiIndex ) )
-			AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName ) );	
+			AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName ) );
 
 
 			//if (iResolution >= _640x480 && iResolution < _800x600)
-			//{				
+			//{
 			//	strcpy(VObjectDesc.ImageFile, gMainMenulayout[iCounter2].FileName);
 
 			//	if( !AddVideoObject( &VObjectDesc, &gMainMenulayout[iCounter2].uiIndex ) )
-			//		AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName ) );				
+			//		AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName ) );
 			//}
 			//else if (iResolution < _1024x768)
-			//{		
+			//{
 			//	strcpy(VObjectDesc.ImageFile, gMainMenulayout[iCounter2].FileName800x600);
 
 			//	if( !AddVideoObject( &VObjectDesc, &gMainMenulayout[iCounter2].uiIndex ) )
-			//		AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName800x600 ) );				
+			//		AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName800x600 ) );
 			//}
 			//else
-			//{		
+			//{
 			//	strcpy(VObjectDesc.ImageFile, gMainMenulayout[iCounter2].FileName1024x768);
 
 			//	if( !AddVideoObject( &VObjectDesc, &gMainMenulayout[iCounter2].uiIndex ) )
-			//		AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName1024x768 ) );				
+			//		AssertMsg(0, String( "Missing %s", gMainMenulayout[iCounter2].FileName1024x768 ) );
 			//}
 		}
 	}
-	
+
 	//if there are no saved games, disable the button
 	if( !IsThereAnySavedGameFiles() )
 		DisableButton( iMenuButtons[ LOAD_GAME ] );
-		
-		
+
+
 	#ifdef JA113DEMO
 		DisableButton( iMenuButtons[ NEW_MP_GAME ] );
 	#endif
@@ -346,18 +346,18 @@ void ExitMainMenu( )
 	CreateDestroyMainMenuButtons( FALSE );
 
 	for( iCounter2 = 1; iCounter2 < MAX_ELEMENT; iCounter2++ )
-	{			
+	{
 		if (gMainMenulayout[iCounter2].Visible == 1)
 		{
 			// WANNE: This is a dirty fix. I don't know when that was introduced, but when clicking on "Multiplayer Game", the game crashes when trying to call DeleteVideoSurfaceFromIndex()
 			if (is_networked && iCounter2 == 1)
-				continue;		
+				continue;
 
 //			DeleteVideoObjectFromIndex( gMainMenulayout[iCounter2].uiIndex );
 			DeleteVideoSurfaceFromIndex( gMainMenulayout[iCounter2].uiIndex );
 		}
 	}
-	
+
 	gMsgBox.uiExitScreen = MAINMENU_SCREEN;
 }
 
@@ -369,7 +369,7 @@ void InitDependingGameStyleOptions()
 	InitStrategicEngine();
 	InitStrategicMovementCosts();
 	InitializeFaceGearGraphics();
-	
+
 	// WANNE: Initialize again, because if differs from SP to MP game!
 	LoadGameSettings();
 
@@ -400,7 +400,7 @@ void InitDependingGameStyleOptions()
 
 	InitSightRange(); //lal
 
-	ReStartingGame();	
+	ReStartingGame();
 }
 
 
@@ -420,7 +420,7 @@ void MenuButtonCallback(GUI_BUTTON *btn,INT32 reason)
 		gbHandledMainMenu = bID;
 		RenderMainMenu();
 
-		HandleMainMenuInput();		
+		HandleMainMenuInput();
 
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
 	}
@@ -546,7 +546,7 @@ void HandleMainMenuInput()
 		case LOAD_GAME:
 			giMAXIMUM_NUMBER_OF_PLAYER_SLOTS = CODE_MAXIMUM_NUMBER_OF_PLAYER_SLOTS;
 			if(is_networked)
-			{	
+			{
 				is_networked = FALSE;
 				// Snap: UN-Init MP save game directory
 				if ( !InitSaveDir() )
@@ -639,7 +639,7 @@ BOOLEAN CreateDestroyMainMenuButtons( BOOLEAN fCreate )
 	SGPFILENAME filename;
 	SGPFILENAME filenameMP;
 	INT16 sSlot;
-	
+
 	MAINMENU_X = SCREEN_WIDTH * gMainMenulayout[0].MAINMENU_X / 640;
 	MAINMENU_Y = SCREEN_HEIGHT * gMainMenulayout[0].MAINMENU_Y / 480;
 	MAINMENU_Y_SPACE = gMainMenulayout[0].MAINMENU_Y_SPACE;
@@ -681,7 +681,7 @@ BOOLEAN CreateDestroyMainMenuButtons( BOOLEAN fCreate )
 #else
 		iMenuImages[ NEW_GAME ]	= LoadButtonImage( filename, 0,0, 1, 2 ,-1 );
 #endif
-			
+
 		iMenuImages[ NEW_MP_GAME ] = LoadButtonImage( filenameMP, 0, 0, 1, 2, -1 );
 
 		sSlot = 0;
@@ -707,7 +707,7 @@ BOOLEAN CreateDestroyMainMenuButtons( BOOLEAN fCreate )
 			iMenuButtons[ cnt ] = QuickCreateButton( iMenuImages[ cnt ], (INT16)(MAINMENU_X - gusMainMenuButtonWidths[cnt]/2), (INT16)( 0 + ( cnt * 18 ) ), //(INT16)((SCREEN_WIDTH / 2) - gusMainMenuButtonWidths[cnt]/2)
 												BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST,
 												DEFAULT_MOVE_CALLBACK, MenuButtonCallback );
-#else			
+#else
 			iMenuButtons[ cnt ] = QuickCreateButton( iMenuImages[ cnt ], (INT16)(MAINMENU_X - gusMainMenuButtonWidths[cnt]/2), (INT16)( MAINMENU_Y + ( cnt * MAINMENU_Y_SPACE ) ),
 												BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST,
 												DEFAULT_MOVE_CALLBACK, MenuButtonCallback );
@@ -717,7 +717,7 @@ BOOLEAN CreateDestroyMainMenuButtons( BOOLEAN fCreate )
 				return( FALSE );
 			}
 
-			ButtonList[ iMenuButtons[ cnt ] ]->UserData[0] = cnt;			
+			ButtonList[ iMenuButtons[ cnt ] ]->UserData[0] = cnt;
 		}
 
 		fButtonsCreated = TRUE;
@@ -742,29 +742,29 @@ BOOLEAN CreateDestroyMainMenuButtons( BOOLEAN fCreate )
 
 void RenderMainMenu()
 {
-	HVSURFACE hVSurface;	
+	HVSURFACE hVSurface;
 	UINT32 iCounter2;
-		
+
 	//Get and display the background image
 	for( iCounter2 = 1; iCounter2 < MAX_ELEMENT; iCounter2++ )
-	{	
+	{
 		if (gMainMenulayout[iCounter2].Visible == 1)
 		{
 			SGPRect SrcRect, DstRect;
 			INT32 iPosX = 0, iPosY = 0;
 
 			GetVideoSurface(&hVSurface, gMainMenulayout[iCounter2].uiIndex);
-			
+
 			SrcRect.iLeft = 0;
 			SrcRect.iTop = 0;
 			SrcRect.iRight = hVSurface->usWidth;
 			SrcRect.iBottom = hVSurface->usHeight;
-			
+
 			//DstRect.iLeft = 0;
 			//DstRect.iTop = 0;
 			//DstRect.iRight = hVSurface->usWidth;
 			//DstRect.iBottom = hVSurface->usHeight;
-			
+
 			//Stretch the background image to screen size
 			if(gMainMenulayout[iCounter2].FitToScreen == 1)
 			{
@@ -809,23 +809,23 @@ void RenderMainMenu()
 			BltStretchVideoSurface( FRAME_BUFFER, gMainMenulayout[iCounter2].uiIndex, 0, 0, VO_BLT_SRCTRANSPARENCY, &SrcRect, &DstRect );
 			BltStretchVideoSurface( guiSAVEBUFFER, gMainMenulayout[iCounter2].uiIndex, 0, 0, VO_BLT_SRCTRANSPARENCY, &SrcRect, &DstRect );
 
-			
+
 
 
 			//if (iResolution >= _640x480 && iResolution < _800x600)
-			//{	
+			//{
 			//	GetVideoObject(&hPixHandle, gMainMenulayout[iCounter2].uiIndex);
 			//	BltVideoObject( guiSAVEBUFFER, hPixHandle, 0, gMainMenulayout[iCounter2].ImagePositionX + xResOffset, gMainMenulayout[iCounter2].ImagePositionY + yResOffset, VO_BLT_SRCTRANSPARENCY,NULL);
 			//	BltVideoObject( FRAME_BUFFER, hPixHandle, 0, gMainMenulayout[iCounter2].ImagePositionX + xResOffset, gMainMenulayout[iCounter2].ImagePositionY + yResOffset, VO_BLT_SRCTRANSPARENCY,NULL);
 			//}
 			//else if (iResolution < _1024x768)
-			//{	
+			//{
 			//	GetVideoObject(&hPixHandle, gMainMenulayout[iCounter2].uiIndex);
 			//	BltVideoObject( guiSAVEBUFFER, hPixHandle, 0, gMainMenulayout[iCounter2].ImagePosition800x600X + xResOffset, gMainMenulayout[iCounter2].ImagePosition800x600Y + yResOffset, VO_BLT_SRCTRANSPARENCY,NULL);
 			//	BltVideoObject( FRAME_BUFFER, hPixHandle, 0, gMainMenulayout[iCounter2].ImagePosition800x600X + xResOffset, gMainMenulayout[iCounter2].ImagePosition800x600Y + yResOffset, VO_BLT_SRCTRANSPARENCY,NULL);
 			//}
 			//else
-			//{	
+			//{
 			//	GetVideoObject(&hPixHandle, gMainMenulayout[iCounter2].uiIndex);
 			//	BltVideoObject( guiSAVEBUFFER, hPixHandle, 0, gMainMenulayout[iCounter2].ImagePosition1024x768X + xResOffset, gMainMenulayout[iCounter2].ImagePosition1024x768Y + yResOffset, VO_BLT_SRCTRANSPARENCY,NULL);
 			//	BltVideoObject( FRAME_BUFFER, hPixHandle, 0, gMainMenulayout[iCounter2].ImagePosition1024x768X + xResOffset, gMainMenulayout[iCounter2].ImagePosition1024x768Y + yResOffset, VO_BLT_SRCTRANSPARENCY,NULL);
@@ -890,9 +890,9 @@ void RestoreButtonBackGrounds()
 	//	MAINMENU_X =  gMainMenulayout[0].MAINMENU_1024x768X;
 	//	MAINMENU_Y_SPACE = gMainMenulayout[0].MAINMENU_Y_SPACE;
 	//}
-			
+
 	for ( cnt = 0; cnt < NUM_MENU_ITEMS; cnt++ )
-	{		
+	{
 		RestoreExternBackgroundRect( (UINT16)(MAINMENU_X - gusMainMenuButtonWidths[cnt]/2), (INT16)( MAINMENU_Y + ( cnt * MAINMENU_Y_SPACE )-1), (UINT16)(gusMainMenuButtonWidths[cnt]+1), 23 );
 	}
 

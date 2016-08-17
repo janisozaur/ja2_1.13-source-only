@@ -11,13 +11,13 @@
 #define	FADE_IN_SQUARE						11
 #define FADE_IN_REALFADE					12
 
-typedef void (*FADE_HOOK)( void );	
+typedef void (*FADE_HOOK)( void );
 
 extern FADE_HOOK		gFadeInDoneCallback;
 extern FADE_HOOK		gFadeOutDoneCallback;
 
 
-typedef void (*FADE_FUNCTION)( void );	
+typedef void (*FADE_FUNCTION)( void );
 
 
 extern BOOLEAN						gfFadeInitialized;

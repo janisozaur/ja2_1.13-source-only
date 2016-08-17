@@ -702,16 +702,16 @@ png_write_IDAT(png_structp png_ptr, png_bytep data, png_size_t length)
    else
    {
       png_byte buf[4];
-      
+
       png_write_chunk_start(png_ptr, (png_bytep)png_fdAT, 4 + length);
-      
+
       png_save_uint_32(buf, png_ptr->next_seq_num);
       png_write_chunk_data(png_ptr, buf, 4);
-      
+
       png_write_chunk_data(png_ptr, data, length);
-      
+
       png_write_chunk_end(png_ptr);
-      
+
       png_ptr->next_seq_num++;
    }
 #endif
@@ -1792,45 +1792,45 @@ png_write_acTL(png_structp png_ptr,
     PNG_acTL;
 #endif
     png_byte data[16];
-    
+
     png_debug(1, "in png_write_acTL");
-    
+
     png_ptr->num_frames_to_write = num_frames;
-    
+
     if (png_ptr->apng_flags & PNG_FIRST_FRAME_HIDDEN)
         num_frames--;
-    
+
     png_save_uint_32(data, num_frames);
     png_save_uint_32(data + 4, num_plays);
-    
+
     png_write_chunk(png_ptr, (png_bytep)png_acTL, data, (png_size_t)8);
 }
 
 void /* PRIVATE */
-png_write_fcTL(png_structp png_ptr, png_uint_32 width, png_uint_32 height, 
+png_write_fcTL(png_structp png_ptr, png_uint_32 width, png_uint_32 height,
     png_uint_32 x_offset, png_uint_32 y_offset,
-    png_uint_16 delay_num, png_uint_16 delay_den, png_byte dispose_op, 
+    png_uint_16 delay_num, png_uint_16 delay_den, png_byte dispose_op,
     png_byte blend_op)
 {
 #ifdef PNG_USE_LOCAL_ARRAYS
     PNG_fcTL;
 #endif
     png_byte data[26];
-    
+
     png_debug(1, "in png_write_fcTL");
-    
+
     if (png_ptr->num_frames_written == 0 && (x_offset != 0 || y_offset != 0))
         png_error(png_ptr, "x and/or y offset for the first frame aren't 0");
-    if (png_ptr->num_frames_written == 0 && 
-        (width != png_ptr->first_frame_width || 
+    if (png_ptr->num_frames_written == 0 &&
+        (width != png_ptr->first_frame_width ||
          height != png_ptr->first_frame_height))
         png_error(png_ptr, "width and/or height in the first frame's fcTL "
                            "don't match the ones in IHDR");
-    
+
     /* more error checking */
-    png_ensure_fcTL_is_valid(png_ptr, width, height, x_offset, y_offset, 
+    png_ensure_fcTL_is_valid(png_ptr, width, height, x_offset, y_offset,
                              delay_num, delay_den, dispose_op, blend_op);
-    
+
     png_save_uint_32(data, png_ptr->next_seq_num);
     png_save_uint_32(data + 4, width);
     png_save_uint_32(data + 8, height);
@@ -1840,9 +1840,9 @@ png_write_fcTL(png_structp png_ptr, png_uint_32 width, png_uint_32 height,
     png_save_uint_16(data + 22, delay_den);
     data[24] = dispose_op;
     data[25] = blend_op;
-    
+
     png_write_chunk(png_ptr, (png_bytep)png_fcTL, data, (png_size_t)26);
-    
+
     png_ptr->next_seq_num++;
 }
 #endif /* PNG_WRITE_APNG_SUPPORTED */
@@ -2245,7 +2245,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
    png_uint_32 row_bytes = row_info->rowbytes;
 #ifdef PNG_WRITE_WEIGHTED_FILTER_SUPPORTED
    int num_p_filters = (int)png_ptr->num_prev_filters;
-#endif 
+#endif
 
    png_debug(1, "in png_write_find_filter");
 
@@ -2255,7 +2255,7 @@ png_write_find_filter(png_structp png_ptr, png_row_infop row_info)
       /* These will never be selected so we need not test them. */
       filter_to_do &= ~(PNG_FILTER_UP | PNG_FILTER_PAETH);
   }
-#endif 
+#endif
 
    /* Find out how many bytes offset each pixel is */
    bpp = (row_info->pixel_depth + 7) >> 3;
@@ -2933,24 +2933,24 @@ png_write_reset(png_structp png_ptr)
 }
 
 void /* PRIVATE */
-png_write_reinit(png_structp png_ptr, png_infop info_ptr, 
+png_write_reinit(png_structp png_ptr, png_infop info_ptr,
                  png_uint_32 width, png_uint_32 height)
 {
-    if (png_ptr->num_frames_written == 0 && 
-        (width != png_ptr->first_frame_width || 
+    if (png_ptr->num_frames_written == 0 &&
+        (width != png_ptr->first_frame_width ||
          height != png_ptr->first_frame_height))
         png_error(png_ptr, "width and/or height in the first frame's fcTL "
                            "don't match the ones in IHDR");
-    if (width > png_ptr->first_frame_width || 
+    if (width > png_ptr->first_frame_width ||
         height > png_ptr->first_frame_height)
         png_error(png_ptr, "width and/or height for a frame greater than"
                            "the ones in IHDR");
-    
-    png_set_IHDR(png_ptr, info_ptr, width, height, 
-                 info_ptr->bit_depth, info_ptr->color_type, 
+
+    png_set_IHDR(png_ptr, info_ptr, width, height,
+                 info_ptr->bit_depth, info_ptr->color_type,
                  info_ptr->interlace_type, info_ptr->compression_type,
                  info_ptr->filter_type);
-   
+
     png_ptr->width = width;
     png_ptr->height = height;
     png_ptr->rowbytes = PNG_ROWBYTES(png_ptr->pixel_depth, width);

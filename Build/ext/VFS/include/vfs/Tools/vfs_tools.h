@@ -1,10 +1,10 @@
-/* 
+/*
  * bfVFS : vfs/Tools/vfs_tools.h
- *  - simple from/to string (list) conversion functions, 
+ *  - simple from/to string (list) conversion functions,
  *  - remove leading/trailing whitspace characters in a string
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -33,7 +33,7 @@
 namespace vfs
 {
 	template<typename CharType, typename ValueType>
-	std::basic_string<CharType> toString(ValueType const& rVal) 
+	std::basic_string<CharType> toString(ValueType const& rVal)
 	{
 		std::basic_stringstream<CharType> tss;
 		if( !(tss << std::fixed << rVal))

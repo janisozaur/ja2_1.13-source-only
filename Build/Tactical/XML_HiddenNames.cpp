@@ -104,7 +104,7 @@ hiddenNamesEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curHiddenNames.Hidden	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		pData->maxReadDepth--;
 	}
 
@@ -211,9 +211,9 @@ BOOLEAN WriteHiddenNamesStats(HIDDEN_NAMES_VALUES *pHiddenNames, STR fileName)
 void LoadHiddenNames()
 {
 	char fileName[MAX_PATH];
-	
+
 	strcpy(fileName, TABLEDATA_DIRECTORY);
 	strcat(fileName, HIDDENNAMESFILENAME);
 	DebugMsg (TOPIC_JA2,DBG_LEVEL_3,String("LoadExternalGameplayData, fileName = %s", fileName));
-	SGP_THROW_IFFALSE(ReadInHiddenNamesStats(zHiddenNames,fileName), HIDDENNAMESFILENAME);	
+	SGP_THROW_IFFALSE(ReadInHiddenNamesStats(zHiddenNames,fileName), HIDDENNAMESFILENAME);
 }

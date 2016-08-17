@@ -193,8 +193,8 @@ enum QuadCoords
 #endif
 
 
-// getLE() converts from little-endian word to native byte-order word 
-// getBE() converts from big-endian word to native byte-order word 
+// getLE() converts from little-endian word to native byte-order word
+// getBE() converts from big-endian word to native byte-order word
 
 #if defined(LITTLE_ENDIAN)
 

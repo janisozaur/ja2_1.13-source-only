@@ -2,23 +2,23 @@
 	#include "TileEngine All.h"
 #else
 	#include "tiledef.h"
-	#include "worlddef.h"
+	#include "WorldDef.h"
 	#include <stdio.h>
 	#include <string.h>
-	#include "wcheck.h"
+	#include "WCheck.h"
 	#include "stdlib.h"
 	#include "time.h"
-	#include "video.h"
-	#include "debug.h"
-	#include "worldman.h"
-	#include "gameloop.h"
+	#include "Video.h"
+	#include "Debug.h"
+	#include "WorldMan.h"
+	#include "GameLoop.h"
 	#include "edit_sys.h"
-	#include "pathai.h"
-	#include "tile surface.h"
+	#include "PathAI.h"
+	#include "Tile Surface.h"
 	#include "Tactical Save.h"
 #endif
 
-//#include "editscreen.h"
+//#include "EditScreen.h"
 
 
 // GLobals

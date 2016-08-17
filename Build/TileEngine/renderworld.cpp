@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
@@ -7,20 +7,20 @@
 	#include <stdio.h>
 	#include <errno.h>
 
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "vsurface.h"
-	#include "input.h"
-	#include "sysutil.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "VSurface.h"
+	#include "Input.h"
+	#include "SysUtil.h"
 	#include "wchar.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "debug.h"
-	#include "wcheck.h"
-	#include "worldman.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Debug.h"
+	#include "WCheck.h"
+	#include "WorldMan.h"
 	#include "jascreens.h"
 	#include "Isometric Utils.h"
-	#include "line.h"
+	#include "Line.h"
 	#include "Animation Control.h"
 	#include "Animation Data.h"
 	#include "Timer Control.h"
@@ -29,22 +29,22 @@
 	#include "Font Control.h"
 	#include "Sys Globals.h"
 	#include "Render Dirty.h"
-	#include "lighting.h"
-	#include "Overhead types.h"
+	#include "Lighting.h"
+	#include "Overhead Types.h"
 	#include "Overhead.h"
-	#include "weapons.h"
-	#include "ai.h"
-	#include "vobject.h"
-	#include "render fun.h"
-	#include "los.h"
-	#include "interactive tiles.h"
-	#include "rotting corpses.h"
-	#include "tile cache.h"
-	#include "tile animation.h"
+	#include "Weapons.h"
+	#include "AI.h"
+	#include "VObject.h"
+	#include "Render Fun.h"
+	#include "LOS.h"
+	#include "Interactive Tiles.h"
+	#include "Rotting Corpses.h"
+	#include "Tile Cache.h"
+	#include "Tile Animation.h"
 	#include "English.h"
-	#include "world items.h"
+	#include "World Items.h"
 	#include "GameSettings.h"
-	#include "interface control.h"
+	#include "Interface Control.h"
 	#include "Sound Control.h"
 #endif
 
@@ -955,7 +955,7 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 					uiTileIndex = iTileMapPos[ uiMapPosIndex ];
 					uiMapPosIndex++;
 
-					//if ( 0 )					
+					//if ( 0 )
 					if (!TileIsOutOfBounds(uiTileIndex))
 					{
 						// OK, we're searching through this loop anyway, might as well check for mouse position
@@ -1647,7 +1647,7 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 										ubShadeLevel = (pNode->ubShadeLevel&0x0f);
 										ubShadeLevel=__max(ubShadeLevel-2, DEFAULT_SHADE_LEVEL);
 										ubShadeLevel|=(pNode->ubShadeLevel&0x30);
-										
+
 										if ( pSoldier->flags.fBeginFade )
 										{
 											pShadeTable = pSoldier->pCurrentShade = pSoldier->pShades[ pSoldier->ubFadeLevel ];
@@ -1828,7 +1828,7 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 										// ATE: Artificially increase z=level...
 										sZLevel += 2;
 									}
-									
+
 									usImageIndex = pSoldier->usAniFrame;
 
 									// Flugente: frozen soldiers don't move
@@ -2572,7 +2572,7 @@ void RenderTiles(UINT32 uiFlags, INT32 iStartPointX_M, INT32 iStartPointY_M, INT
 							{
 								if(!(uiFlags&TILES_DIRTY))
 									UnLockVideoSurface( FRAME_BUFFER );
-								ColorFillVideoSurfaceArea( FRAME_BUFFER, iTempPosX_S, iTempPosY_S, (iTempPosX_S + 40), 
+								ColorFillVideoSurfaceArea( FRAME_BUFFER, iTempPosX_S, iTempPosY_S, (iTempPosX_S + 40),
 									( min( iTempPosY_S + 20, INTERFACE_START_Y )), Get16BPPColor( FROMRGB( 0, 0, 0 ) ) );
 								if(!(uiFlags&TILES_DIRTY))
 									pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES );
@@ -3596,7 +3596,7 @@ void ScrollWorld( )
 
 		if ( gfIgnoreScrolling != 3 )
 		{
-			// Check for sliding			
+			// Check for sliding
 			if (!TileIsOutOfBounds(gTacticalStatus.sSlideTarget))
 			{
 				 // Ignore all input...
@@ -4218,7 +4218,7 @@ BOOLEAN ApplyScrolling( INT16 sTempRenderCenterX, INT16 sTempRenderCenterY, BOOL
 				sTempRenderCenterY = sTempPosY_W;
 				fScrollGood = TRUE;
 			}
-			
+
 			if ( fOutTop )
 			{
 				// Adjust screen coordinates on the Y!

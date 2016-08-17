@@ -45,7 +45,7 @@ enum
 	OPINIONEVENT_DRINKBUDDIES_WORSE,
 	// events from dialogue
 	OPINIONEVENT_AGAINST_US,		// other guy was against us in dialogue
-	OPINIONEVENT_FOR_US,			// other guy was for us in dialogue	
+	OPINIONEVENT_FOR_US,			// other guy was for us in dialogue
 	OPINIONEVENT_AGAINST_ENEMY,		// other guy was against our dialogue enemy in dialogue
 
 	OPINIONEVENT_FOR_ENEMY,			// other guy was for our dialogue enemy in dialogue
@@ -139,7 +139,7 @@ extern DynamicOpinionEvent gDynamicOpinionEvent[OPINIONEVENT_MAX];
 #define OPINIONFLAG_STAGE3_ANNOYINGDISABILITY  						0x00000040	//64
 #define OPINIONFLAG_STAGE4_ANNOYINGDISABILITY						0x00000080	//128
 
-#define OPINIONFLAG_STAGE1_ADDICT									0x00000100	//256		// is taking drugs 
+#define OPINIONFLAG_STAGE1_ADDICT									0x00000100	//256		// is taking drugs
 #define OPINIONFLAG_STAGE2_ADDICT									0x00000200	//512
 #define OPINIONFLAG_STAGE3_ADDICT									0x00000400	//1024
 #define OPINIONFLAG_STAGE4_ADDICT									0x00000800	//2048
@@ -463,7 +463,7 @@ INT8 GetDynamicOpinion( UINT8 usProfileA, UINT8 usProfileB, UINT8 usEvent );
 // daily rollover of opinions
 void HandleDynamicOpinionsDailyRefresh( );
 
-// a day has passed, 'age' opinions 
+// a day has passed, 'age' opinions
 void RolloverDynamicOpinions( UINT8 usProfileA );
 
 // check wether other people are friends with someone else we hate. All persons must be in Arulco

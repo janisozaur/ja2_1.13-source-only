@@ -21,7 +21,7 @@ extern BOOLEAN fFirstClickInMilitiaControlScreenMask;
 // figure out the assignment menu pop up box positions
 void DetermineMilitiaControlBoxPositions( void );
 
-// set x,y position in tactical 
+// set x,y position in tactical
 void SetTacticalPopUpMilitiaControlBoxXY( SOLDIERTYPE *pSoldier );
 
 BOOLEAN CreateDestroyMilitiaControlPopUpBoxes( void );

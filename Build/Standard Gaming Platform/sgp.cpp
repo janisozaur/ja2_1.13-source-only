@@ -3,25 +3,25 @@
 #ifdef JA2_PRECOMPILED_HEADERS
 	#include "JA2 SGP ALL.H"
 	#include "JA2 Splash.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 	#include "WIZ8 SGP ALL.H"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include <windows.h>
 	#include <stdio.h>
 	#include <stdarg.h>
 	#include <string.h>
 	#include "sgp.h"
 	#include "RegInst.h"
-	#include "vobject.h"
-	#include "font.h"
-	#include "local.h"
-	#include "Fileman.h"
-	#include "input.h"
+	#include "VObject.h"
+	#include "Font.h"
+	#include "Local.h"
+	#include "FileMan.h"
+	#include "Input.h"
 	#include "Random.h"
-	#include "gameloop.h"
-	#include "soundman.h"
+	#include "GameLoop.h"
+	#include "SoundMan.h"
 	#ifdef JA2
 		#include "JA2 Splash.h"
 		#include "Timer Control.h"
@@ -30,11 +30,11 @@
 		#include "GameData.h"				// for MoveTimer() [Wizardry specific]
 	#endif
 	#include "LibraryDataBase.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 #endif
 
 #include "GameSettings.h"
-#include "input.h"
+#include "Input.h"
 #include "zmouse.h"
 
 #include <vfs/Aspects/vfs_settings.h>
@@ -61,8 +61,8 @@
 #include "INIReader.h"
 #include "Console.h"
 #include "Lua Interpreter.h"
-#include "connect.h"
-#include "english.h"
+#include "Connect.h"
+#include "English.h"
 
 #ifdef JA2
 	#include "BuildDefines.h"
@@ -243,7 +243,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 		return 0L;
 	}
 	BOOL visible = IsWindowVisible(hWindow);
-	
+
 	if(gfIgnoreMessages)
 		return(DefWindowProc(hWindow, Message, wParam, lParam));
 
@@ -256,7 +256,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 
 
 
- 
+
 	switch(Message)
 	{
 	case WM_CLOSE:
@@ -268,7 +268,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 //				QueueEvent(MOUSE_WHEEL, wParam, lParam);
 //				break;
 //			}
-*/		
+*/
 #ifdef JA2
 	case WM_MOVE:
 		// if( 1==iScreenMode )
@@ -279,7 +279,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 			rcWindow.bottom = SCREEN_HEIGHT;
 			ClientToScreen(hWindow, (LPPOINT)&rcWindow);
 			ClientToScreen(hWindow, (LPPOINT)&rcWindow+1);
-			int xPos = (int)(short) LOWORD(lParam); 
+			int xPos = (int)(short) LOWORD(lParam);
 			int yPos = (int)(short) HIWORD(lParam);
 			BOOL needchange = FALSE;
 			if (xPos < 0)
@@ -385,7 +385,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 //				lpWindow->bottom = iY + iHeight/2;
 				lpWindow->bottom = lpWindow->top + iHeight;
 			}
-	
+
 /*
 			switch(wParam)
 			{
@@ -436,8 +436,8 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 
 	case WM_SIZE:
 		{
-			UINT16 nWidth = LOWORD(lParam);	// width of client area 
-			UINT16 nHeight = HIWORD(lParam); // height of client area 
+			UINT16 nWidth = LOWORD(lParam);	// width of client area
+			UINT16 nHeight = HIWORD(lParam); // height of client area
 
 			if(nWidth && nHeight)
 			{
@@ -472,11 +472,11 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 #endif
 		if (gfApplicationActive)
 		{
-			GameLoop();		
-		} 
+			GameLoop();
+		}
 		break;
 
-	case WM_ACTIVATEAPP: 
+	case WM_ACTIVATEAPP:
 		switch(wParam)
 		{
 		case TRUE: // We are restarting DirectDraw
@@ -511,7 +511,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 				//PauseTime( TRUE );
 				SuspendVideoManager();
 #else
-#ifndef UTIL 
+#ifndef UTIL
 				if(!VideoInspectorIsEnabled())
 				{
 					SuspendVideoManager();
@@ -536,7 +536,7 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 		CreateStandardGamingPlatform(hWindow);
 		break;
 
-	case WM_DESTROY: 
+	case WM_DESTROY:
 		ShutdownStandardGamingPlatform();
 //		ShowCursor(TRUE);
 		PostQuitMessage(0);
@@ -628,11 +628,11 @@ INT32 FAR PASCAL WindowProcedure(HWND hWindow, UINT16 Message, WPARAM wParam, LP
 						cout << "> ";
 
 						// Reset the pressed keys
-						gfKeyState[ ALT ] = FALSE;						
+						gfKeyState[ ALT ] = FALSE;
 						gfKeyState[ 219 ] = FALSE;	// "\"
 #endif
 					}
-				}				
+				}
 			}
 			break;
 
@@ -746,7 +746,7 @@ BOOLEAN InitializeStandardGamingPlatform(HINSTANCE hInstance, int sCommandShow)
 	// Initialize Video Surface Manager
 	FastDebugMsg("Initializing Video Surface Manager");
 	if ( !InitializeVideoSurfaceManager( ) )
-	{ 
+	{
 		FastDebugMsg("FAILED : Initializing Video Surface Manager");
 		return FALSE;
 	}
@@ -755,7 +755,7 @@ BOOLEAN InitializeStandardGamingPlatform(HINSTANCE hInstance, int sCommandShow)
 	//vfs::Path exe_dir, exe_file;
 	//os::getExecutablePath(exe_dir, exe_file);
 
-	//// set current directory to exe's directory 
+	//// set current directory to exe's directory
 	//os::setCurrectDirectory(exe_dir);
 
 	SGP_THROW_IFFALSE( vfs_init::initVirtualFileSystem( vfs_config_ini ), L"Initializing Virtual File System failed");
@@ -783,7 +783,7 @@ BOOLEAN InitializeStandardGamingPlatform(HINSTANCE hInstance, int sCommandShow)
 
 #ifdef USE_CODE_PAGE
 	charSet::InitializeCharSets();
-	
+
 	if(!s_CodePage.empty())
 	{
 		try
@@ -1164,7 +1164,7 @@ int PASCAL HandledWinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR pC
 	// Use this one ONLY if you're having memory corruption issues that can be repeated in a short time
 	// Otherwise it will just run out of memory.
 	//_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF | _CRTDBG_CHECK_ALWAYS_DF);
-	
+
 	/****************************************************************************************************/
 	/*                                                                                                  */
 	/*               DEBUG MEMORY ALLOCATION ON THE HEAP :  uncomment when required                     */
@@ -1191,7 +1191,7 @@ int PASCAL HandledWinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR pC
 
 	// Mem Usage
 	giStartMem = MemGetFree(	) / 1024;
-	
+
 
 #ifdef JA2
 	// Handle Check for CD
@@ -1255,7 +1255,7 @@ int PASCAL HandledWinMain(HINSTANCE hInstance,	HINSTANCE hPrevInstance, LPSTR pC
 
 	FastDebugMsg("Running Game");
 
-	// At this point the SGP is set up, which means all I/O, Memory, tools, etc... are available. All we need to do is 
+	// At this point the SGP is set up, which means all I/O, Memory, tools, etc... are available. All we need to do is
 	// attend to the gaming mechanics themselves
 	Message.wParam = 0;
 
@@ -1384,7 +1384,7 @@ void SGPExit(void)
 void GetRuntimeSettings( )
 {
 	int		iMaximize;
-	
+
 #ifndef USE_VFS
 	CHAR8	zMaximize[ 50 ];
 	CHAR8	zWindowedMode[ 50 ];
@@ -1392,7 +1392,7 @@ void GetRuntimeSettings( )
 	// Runtime settings - for now use INI file - later use registry
 	STRING512		INIFile;		// Path to the ini file
 	CHAR8			zScreenResolution[ 50 ];
-	
+
 	// Get Executable Directory
 	GetExecutableDirectory( INIFile );
 
@@ -1403,7 +1403,7 @@ void GetRuntimeSettings( )
 	oProps.initFromIniFile(GAME_INI_FILE);
 	PopulateSectionFromCommandLine(oProps, "Ja2 Settings");
 #endif
-	
+
 #ifndef USE_VFS
 	if (GetPrivateProfileString( "Ja2 Settings","SCREEN_RESOLUTION", "", zScreenResolution, 50, INIFile ))
 	{
@@ -1412,11 +1412,11 @@ void GetRuntimeSettings( )
 	if (GetPrivateProfileString( "Ja2 Settings","SCREEN_MODE_WINDOWED_MAXIMIZE", "", zMaximize, 50, INIFile ))
 	{
 		iMaximize = atoi(zMaximize);
-	}	
+	}
 	if (GetPrivateProfileString( "Ja2 Settings","SCREEN_MODE_WINDOWED", "", zWindowedMode, 50, INIFile ))
 	{
 		iWindowedMode = atoi(zWindowedMode);
-	}	
+	}
 #else
 	vfs::String loc = oProps.getStringProperty("Ja2 Settings", L"LOCALE");
 	if(!loc.empty())
@@ -1425,11 +1425,11 @@ void GetRuntimeSettings( )
 	}
 
 	iResolution = (int)oProps.getIntProperty(L"Ja2 Settings", L"SCREEN_RESOLUTION", -1);
-	
+
 	// WANNE: Always enable
 	//iMaximize = (int)oProps.getIntProperty(L"Ja2 Settings", L"SCREEN_MODE_WINDOWED_MAXIMIZE", -1);
 	iMaximize = 1;
-	
+
 	iWindowedMode = (int)oProps.getIntProperty(L"Ja2 Settings", L"SCREEN_MODE_WINDOWED", -1);
 
 	vfs::Settings::setUseUnicode( !oProps.getBoolProperty(L"Ja2 Settings", L"VFS_NO_UNICODE", false) );
@@ -1467,7 +1467,7 @@ void GetRuntimeSettings( )
 			CIniReader::RegisterFileForMerging(*it);
 		}
 	}
-	
+
 	std::list<vfs::String> merge_list_ub;
 	if(oProps.getStringListProperty(L"Ja2 Settings", L"MERGE_INI_FILES_UB", merge_list_ub, L""))
 	{
@@ -1482,11 +1482,11 @@ void GetRuntimeSettings( )
 	extern bool g_bUsePngItemImages;
 	g_bUsePngItemImages		= oProps.getBoolProperty(L"Ja2 Settings", L"USE_PNG_ITEM_IMAGES", false);
 	g_bUseXML_Structures	= oProps.getBoolProperty(L"Ja2 Settings", L"USE_XML_STRUCTURES", false);
-	
+
 	// WANNE: Always use XML tilesets (ja2Set.dat.xml), because now we have P4-P9 items integrated. The old method (ja2set.dat) will not work anymore!
-	// To generate ja2Set.dat.xml, set "USE_XML_TILESETS = 1" in ja2.ini then start the game with the official (4870) ja2 1.13 executable. 
+	// To generate ja2Set.dat.xml, set "USE_XML_TILESETS = 1" in ja2.ini then start the game with the official (4870) ja2 1.13 executable.
 	// Yes, you have to start a game with an older executable where p4-p9 is not integrated (see: TileDat.h -> enum TileTypeDefines)
-	// Once the game reaches the main menu, the ja2Set.dat.xml file will be 
+	// Once the game reaches the main menu, the ja2Set.dat.xml file will be
 	// available in the "Profiles" folder of the MOD
 	//g_bUseXML_Tilesets = true;
 
@@ -1507,7 +1507,7 @@ void GetRuntimeSettings( )
 		iResolution = atoi(zScreenResolution);
 	}
 #else
-	iResolution = (int)oProps.getIntProperty("Ja2 Settings","EDITOR_SCREEN_RESOLUTION", -1); 
+	iResolution = (int)oProps.getIntProperty("Ja2 Settings","EDITOR_SCREEN_RESOLUTION", -1);
 #endif
 #endif
 
@@ -1678,7 +1678,7 @@ void GetRuntimeSettings( )
 	if (iResolution >= _640x480 && iResolution < _800x600)
 	{
 		xResOffset = ((SCREEN_WIDTH - 640) / 2);
-		yResOffset = ((SCREEN_HEIGHT - 480) / 2);	
+		yResOffset = ((SCREEN_HEIGHT - 480) / 2);
 	}
 	else if (iResolution < _1024x768)
 	{
@@ -1716,7 +1716,7 @@ void GetRuntimeSettings( )
 
 	// WANNE: Highspeed Timer always ON (no more optional in the ja2.ini)
 	// get timer/clock initialization state
-	//SetHiSpeedClockMode( oProps.getBoolProperty("Ja2 Settings", "HIGHSPEED_TIMER", false) ? TRUE : FALSE );	
+	//SetHiSpeedClockMode( oProps.getBoolProperty("Ja2 Settings", "HIGHSPEED_TIMER", false) ? TRUE : FALSE );
 	SetHiSpeedClockMode( TRUE );
 
 #endif
@@ -1725,14 +1725,14 @@ void GetRuntimeSettings( )
 
 void SafeSGPExit(void)
 {
-	// SGPExit tends to use resources that are already uninitialized so handle 
+	// SGPExit tends to use resources that are already uninitialized so handle
 	__try
 	{
 		SGPExit();
 	}
 	__except( EXCEPTION_EXECUTE_HANDLER )
 	{
-		// The application is in exit and best effort to clean up 
+		// The application is in exit and best effort to clean up
 		//  has failed so just ignore and continue silently
 	}
 }

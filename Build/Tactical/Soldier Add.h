@@ -28,7 +28,7 @@ INT32 FindRandomGridNoFromSweetSpotExcludingSweetSpot( SOLDIERTYPE *pSoldier, IN
 // Flugente: returns random gridno in a circle around sCenterGridNo with radius uOuterRadius that is not inside the circle with radius uInnerRadius
 INT32 FindRandomGridNoBetweenCircles( INT32 sCenterGridNo, UINT8 uInnerRadius, UINT8 uOuterRadius, UINT8& urDirection );
 
-// Adds a soldier ( already created in mercptrs[] array )! 
+// Adds a soldier ( already created in mercptrs[] array )!
 // Finds a good placement based on data in the loaded sector and if they are enemy's or not, etc...
 BOOLEAN AddSoldierToSector( UINT8 ubID );
 

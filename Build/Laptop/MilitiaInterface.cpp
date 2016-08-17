@@ -6,15 +6,15 @@
 #include "MilitiaInterface.h"
 
 #include "Font.h"
-#include "laptop.h"
+#include "Laptop.h"
 #include "Cursors.h"
 #include "Utilities.h"
-#include "vobject.h"
+#include "VObject.h"
 #include "WCheck.h"
-#include "line.h"
+#include "Line.h"
 #include "WordWrap.h"
-#include "input.h"		// for gfLeftButtonState
-#include "personnel.h"
+#include "Input.h"		// for gfLeftButtonState
+#include "Personnel.h"
 #include "Animation Data.h"
 #include "Text.h"
 #include "MilitiaWebsite.h"
@@ -60,7 +60,7 @@ MilitiaServiceRecordTable::Destroy( )
 {
 	if ( !IsInit( ) )
 		return;
-	
+
 	BaseTable::Destroy( );
 }
 
@@ -73,12 +73,12 @@ MilitiaServiceRecordTable::Display( )
 	DestroyMouseRegions( );
 
 	SetFontShadow( NO_SHADOW );
-	
+
 	CHAR16	sText[800];
 	swprintf( sText, L"" );
 	UINT16 usPosX = GetX( ) + 10;
 	UINT16 usPosY = GetY( ) + 10;
-	
+
 	MILITIA militia;
 	if ( GetMilitia( mMilitiaId, &militia ) )
 	{
@@ -142,7 +142,7 @@ MilitiaPersonalDataTableFireConfirmationCallback( UINT8 val )
 				if ( type > -1 )
 				{
 					StrategicRemoveMilitiaFromSector( SECTORX( militia.sector ), SECTORY( militia.sector ), (UINT8)type, 1 );
-				
+
 					ResetMilitia();
 				}
 
@@ -201,7 +201,7 @@ MilitiaPersonalDataTable::Display( )
 		return;
 
 	DestroyMouseRegions( );
-	
+
 	MILITIA militia;
 	if ( GetMilitia( mMilitiaId, &militia ) )
 	{
@@ -216,7 +216,7 @@ MilitiaPersonalDataTable::Display( )
 			HVOBJECT hHandle;
 			UINT32 uiGraphicHandle;
 			BOOLEAN success = TRUE;
-		
+
 			// load it
 			VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
 
@@ -269,7 +269,7 @@ MilitiaPersonalDataTable::Display( )
 		usPosX += 120;
 
 		SetFontShadow( NO_SHADOW );
-				
+
 		if ( militia.flagmask & MILITIAFLAG_DEAD )
 		{
 			swprintf( sText, szIdividualMilitiaWebsiteText[5] );
@@ -288,22 +288,22 @@ MilitiaPersonalDataTable::Display( )
 			DrawTextToScreen( sText, usPosX, usPosY + 5, GetWidth( ), FONT12ARIAL, FONT_MCOLOR_LTGREEN, FONT_MCOLOR_BLACK, FALSE, 0 );
 			usPosY += 20;
 		}
-		
+
 		if ( gGameExternalOptions.fIndividualMilitia_ManageHealth )
 		{
 			swprintf( sText, szIdividualMilitiaWebsiteText[15], militia.healthratio );
-			
+
 			DrawTextToScreen( sText, usPosX, usPosY + 5, GetWidth( ), FONT12ARIAL, 2, FONT_MCOLOR_BLACK, FALSE, 0 );
 			usPosY += 20;
 		}
-		
+
 		swprintf( sText, szIdividualMilitiaWebsiteText[3], militia.GetWage( ), militia.age );
 		DrawTextToScreen( sText, usPosX, usPosY + 5, GetWidth( ), FONT12ARIAL, 2, FONT_MCOLOR_BLACK, FALSE, 0 );
 		usPosY += 20;
 
 		swprintf( sText, szIdividualMilitiaWebsiteText[4], militia.kills, militia.assists );
 		DrawTextToScreen( sText, usPosX, usPosY + 5, GetWidth( ), FONT12ARIAL, 2, FONT_MCOLOR_BLACK, FALSE, 0 );
-		usPosY += 20;		
+		usPosY += 20;
 
 		usPosY += 4;
 		usPosX -= 2;
@@ -423,7 +423,7 @@ MilitiaPersonalInventoryTable::Display( )
 
 			if ( pObj == NULL || pObj->ubNumberOfObjects == NOTHING || pObj->usItem == NOTHING )
 				continue;
-						
+
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, usPosX, usPosY, usPosX + 60, usPosY + 23, Get16BPPColor( FROMRGB( 255, 255, 255 ) ) );
 
 			// do not use the pSoldier-pointer, as the displays look ugly (and some images might not be initialised here)
@@ -499,12 +499,12 @@ MilitiaInidividualMainWidget::Create( UINT16 sX, UINT16 sY, UINT16 sX_End, UINT1
 	Init( sX, sY, sX_End, sY_End );
 
 	TabBoxTemplate<1>::getInstance( ).Create( sX, sY + 30, sX_End, sY_End );
-	
+
 	mPersonalDataPanel.Create( sX, sY + 50, sX_End, sY_End );
 	mPersonalDataPanel.SetName( szIdividualMilitiaWebsiteText[9] );
 	mPersonalData.Create( sX, sY + 50, sX_End, sY_End );
 	mPersonalDataPanel.RegisterMemberThingy( &mPersonalData );
-	
+
 	mServiceRecordPanel.Create( sX, sY + 50, sX_End, sY_End );
 	mServiceRecordPanel.SetName( szIdividualMilitiaWebsiteText[10] );
 	mServiceRecord.Create( sX, sY + 50, sX_End, sY_End );
@@ -514,7 +514,7 @@ MilitiaInidividualMainWidget::Create( UINT16 sX, UINT16 sY, UINT16 sX_End, UINT1
 	mItemPanel.SetName( szIdividualMilitiaWebsiteText[11] );
 	mItemsTable.Create( sX, sY + 50, sX_End, sY_End );
 	mItemPanel.RegisterMemberThingy( &mItemsTable );
-	
+
 	TabBoxTemplate<1>::getInstance( ).RegisterMemberThingy( &mPersonalDataPanel );
 	TabBoxTemplate<1>::getInstance( ).RegisterMemberThingy( &mServiceRecordPanel );
 	TabBoxTemplate<1>::getInstance( ).RegisterMemberThingy( &mItemPanel );
@@ -529,7 +529,7 @@ MilitiaInidividualMainWidget::Destroy( )
 {
 	if ( !IsInit( ) )
 		return;
-	
+
 	BaseTable::Destroy( );
 }
 
@@ -540,11 +540,11 @@ MilitiaInidividualMainWidget::Display( )
 		return;
 
 	DestroyMouseRegions( );
-	
+
 	TestPanel::Display( );
 
 	SetFontShadow( NO_SHADOW );
-	
+
 	MILITIA militia;
 	if ( GetMilitia( mMilitiaId, &militia ) )
 	{

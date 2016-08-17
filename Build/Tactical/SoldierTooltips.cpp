@@ -2,29 +2,29 @@
 #include "Tactical All.h"
 #else
 #include "Types.h"
-#include "Windows.h"
+#include <windows.h>
 //#include "Soldier Control.h"
 #include "Input.h"
-#include "english.h"
+#include "English.h"
 #include "Isometric Utils.h"
 #include "GameSettings.h"
 #include "Overhead.h"
 #include "Game Clock.h"
 #include "Text.h"
-#include "lighting.h"
+#include "Lighting.h"
 #include "Interface.h"
-#include "weapons.h"
-#include "renderworld.h"
+#include "Weapons.h"
+#include "RenderWorld.h"
 #include "Font Control.h"
-#include "font.h"
-#include "local.h"
-#include "vsurface.h"
-#include "line.h"
-#include "los.h"
+#include "Font.h"
+#include "Local.h"
+#include "VSurface.h"
+#include "Line.h"
+#include "LOS.h"
 // added by SANDRO
 #include "SkillCheck.h"
-#include "soldier profile type.h"
-#include "Soldier macros.h"
+#include "Soldier Profile Type.h"
+#include "Soldier Macros.h"
 #include "Encyclopedia_new.h"	///< Encyclopedia item visibility
 #endif
 
@@ -158,7 +158,7 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 					// if night reduce max tooltip viewing distance by a factor of 4 if merc is not wearing NVG
 					uiMaxTooltipDistance >>= 2;
 				}
-		}				
+		}
 		//SCORE: Dynamic detail, otherwise do what we usually do
 		// SANDRO - don't use this if detail set to debug!
 		if ( gGameExternalOptions.gfAllowUDTDetail && gGameExternalOptions.ubSoldierTooltipDetailLevel != DL_Debug && !(gTacticalStatus.uiFlags & SHOW_ALL_MERCS) )
@@ -203,7 +203,7 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 		}
 		//} // fMercIsUsingScope is false
 		// gGameExternalOptions.fEnableDynamicSoldierTooltips
-		
+
 
 
 		// WANNE: Check if enemy soldier is in line of sight but only if player has not choosen debug details
@@ -252,7 +252,7 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 				swprintf( pStrInfo, gzTooltipStrings[STR_TT_CAT_SUPPRESION], pStrInfo, pSoldier->ubLastSuppression );
 			// sevenfm: show additional suppression info
 			if ( gGameExternalOptions.fEnableSoldierTooltipSuppressionInfo )
-			{				 
+			{
 				swprintf( pStrInfo, gzTooltipStrings[STR_TT_SUPPRESSION_AP], pStrInfo, pSoldier->ubAPsLostToSuppression );
 				swprintf( pStrInfo, gzTooltipStrings[STR_TT_SUPPRESSION_TOLERANCE], pStrInfo, CalcSuppressionTolerance( pSoldier ) );
 				swprintf( pStrInfo, gzTooltipStrings[STR_TT_EFFECTIVE_SHOCK], pStrInfo, CalcEffectiveShockLevel( pSoldier ) );
@@ -261,12 +261,12 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 			//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// Added by SANDRO - show enemy skills
 			if ( gGameExternalOptions.fEnableSoldierTooltipTraits )
-			{				
+			{
 				if ( gGameOptions.fNewTraitSystem )
 				{
 					if (( pSoldier->stats.ubSkillTraits[0] == pSoldier->stats.ubSkillTraits[1] ) && pSoldier->stats.ubSkillTraits[0] != 0 )
 					{
-						CHAR16 pStrAux[50]; 
+						CHAR16 pStrAux[50];
 						swprintf( pStrAux, L"(%s)", gzMercSkillTextNew[ pSoldier->stats.ubSkillTraits[0] ]);
 						swprintf( pStrInfo, gzTooltipStrings[STR_TT_SKILL_TRAIT_1], pStrInfo, pStrAux );
 						swprintf( pStrInfo, gzTooltipStrings[STR_TT_SKILL_TRAIT_2], pStrInfo, gzMercSkillTextNew[ pSoldier->stats.ubSkillTraits[1] + NEWTRAIT_MERCSKILL_EXPERTOFFSET ] );
@@ -275,7 +275,7 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 					}
 					else if (( pSoldier->stats.ubSkillTraits[1] == pSoldier->stats.ubSkillTraits[2] ) && pSoldier->stats.ubSkillTraits[1] != 0 )
 					{
-						CHAR16 pStrAux[50]; 
+						CHAR16 pStrAux[50];
 						swprintf( pStrAux, L"(%s)", gzMercSkillTextNew[ pSoldier->stats.ubSkillTraits[1] ]);
 						swprintf( pStrInfo, gzTooltipStrings[STR_TT_SKILL_TRAIT_1], pStrInfo, pStrAux );
 						swprintf( pStrInfo, gzTooltipStrings[STR_TT_SKILL_TRAIT_2], pStrInfo, gzMercSkillTextNew[ pSoldier->stats.ubSkillTraits[2] + NEWTRAIT_MERCSKILL_EXPERTOFFSET ] );
@@ -283,7 +283,7 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 					}
 					else if (( pSoldier->stats.ubSkillTraits[0] == pSoldier->stats.ubSkillTraits[2] ) && pSoldier->stats.ubSkillTraits[0] != 0 )
 					{
-						CHAR16 pStrAux[50]; 
+						CHAR16 pStrAux[50];
 						swprintf( pStrAux, L"(%s)", gzMercSkillTextNew[ pSoldier->stats.ubSkillTraits[0] ]);
 						swprintf( pStrInfo, gzTooltipStrings[STR_TT_SKILL_TRAIT_1], pStrInfo, pStrAux );
 						swprintf( pStrInfo, gzTooltipStrings[STR_TT_SKILL_TRAIT_2], pStrInfo, gzMercSkillTextNew[ pSoldier->stats.ubSkillTraits[2] + NEWTRAIT_MERCSKILL_EXPERTOFFSET ] );

@@ -5,16 +5,16 @@
 
 #include "MilitiaIndividual.h"
 
-#include "random.h"
-#include "text.h"
+#include "Random.h"
+#include "Text.h"
 #include "Overhead Types.h"
 #include "Game Clock.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 #include "GameVersion.h"
 #include "SaveLoadGame.h"
 #include "CampaignStats.h"
 #include "Town Militia.h"
-#include "message.h"
+#include "Message.h"
 #include "Auto Resolve.h"		// added for IndividualMilitiaInUse_AutoResolve(...)
 
 MilitiaOriginData gMilitiaOriginData[MO_MAX];
@@ -31,7 +31,7 @@ BOOLEAN
 MILITIA::Save( HWFILE hFile )
 {
 	UINT32 uiNumBytesWritten = 0;
-	
+
 	if ( !FileWrite( hFile, this, SIZEOF_MILITIA_POD, &uiNumBytesWritten ) )
 		return(FALSE);
 
@@ -56,7 +56,7 @@ MILITIA::Load( HWFILE hwFile )
 	if ( guiCurrentSaveGameVersion >= INDIVIDUAL_MILITIA )
 	{
 		UINT32 numBytesRead = 0;
-				
+
 		numBytesRead = ReadFieldByField( hwFile, &id, sizeof(id), sizeof(UINT32), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &flagmask, sizeof(flagmask), sizeof(UINT32), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &origin, sizeof(origin), sizeof(UINT8), numBytesRead );
@@ -69,13 +69,13 @@ MILITIA::Load( HWFILE hwFile )
 		numBytesRead = ReadFieldByField( hwFile, &hair, sizeof(hair), sizeof(UINT8), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &forename, sizeof(forename), sizeof(UINT16), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &surname, sizeof(surname), sizeof(UINT16), numBytesRead );
-		numBytesRead = ReadFieldByField( hwFile, &callsign, sizeof(callsign), sizeof(UINT16), numBytesRead );	
+		numBytesRead = ReadFieldByField( hwFile, &callsign, sizeof(callsign), sizeof(UINT16), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &healthratio, sizeof(healthratio), sizeof(FLOAT), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &kills, sizeof(kills), sizeof(UINT16), numBytesRead);
 		numBytesRead = ReadFieldByField( hwFile, &assists, sizeof(assists), sizeof(UINT16), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &promotionpoints, sizeof(promotionpoints), sizeof(UINT16), numBytesRead );
 		numBytesRead = ReadFieldByField( hwFile, &filler1, sizeof(filler1), sizeof(UINT16), numBytesRead );
-		
+
 		if ( numBytesRead != SIZEOF_MILITIA_POD )
 			return(FALSE);
 
@@ -87,7 +87,7 @@ MILITIA::Load( HWFILE hwFile )
 			MILITIA_BATTLEREPORT data;
 			if ( !FileRead( hwFile, &data, sizeof(MILITIA_BATTLEREPORT), &numBytesRead ) )
 				return(FALSE);
-			
+
 			history.push_back( data );
 		}
 	}
@@ -115,7 +115,7 @@ STR16	MILITIA::GetName()
 			swprintf( gMilitiaNameText, L"%s %s", gMilitiaOriginData[origin].szMale_Forename[forename].c_str( ), gMilitiaOriginData[origin].szMale_Surname[surname].c_str( ) );
 		}
 	}
-	
+
 	return gMilitiaNameText;
 }
 
@@ -123,7 +123,7 @@ static CHAR16	gMilitiaSectorText[100];
 STR16	MILITIA::GetSector( )
 {
 	swprintf( gMilitiaSectorText, L"NAME NOT FOUND" );
-	
+
 	GetShortSectorString( SECTORX( sector ), SECTORY( sector ), gMilitiaSectorText );
 
 	return gMilitiaSectorText;
@@ -163,7 +163,7 @@ UINT16	MILITIA::GetWage( )
 		type = REGULAR_MILITIA;
 	else if ( soldierclass == SOLDIER_CLASS_ELITE_MILITIA )
 		type = ELITE_MILITIA;
-	
+
 	return gMilitiaOriginData[origin].dailycost[type];
 }
 
@@ -182,7 +182,7 @@ void	MILITIA::Fire( )
 BOOLEAN SaveIndividualMilitiaData( HWFILE hwFile )
 {
 	UINT32 uiNumBytesWritten = 0;
-		
+
 	// in order to save a vector, we first save its size and then its content
 	UINT32 size = gIndividualMilitiaVector.size( );
 	if ( !FileWrite( hwFile, &size, sizeof(UINT32), &uiNumBytesWritten ) )
@@ -208,7 +208,7 @@ BOOLEAN LoadIndividualMilitiaData( HWFILE hwFile )
 	InitIndividualMilitiaData();
 
 	UINT32 numBytesRead = 0;
-	
+
 	UINT32 size = 0;
 	numBytesRead = ReadFieldByField( hwFile, &size, sizeof(size), sizeof(UINT32), numBytesRead );
 
@@ -309,7 +309,7 @@ void HandleHourlyMilitiaHealing( )
 	INT32 cnt = gTacticalStatus.Team[MILITIA_TEAM].bFirstID;
 	INT32 lastid = gTacticalStatus.Team[MILITIA_TEAM].bLastID;
 	SOLDIERTYPE* pSoldier = NULL;
-	
+
 	std::vector<MILITIA>::iterator itend = gIndividualMilitiaVector.end( );
 	for ( std::vector<MILITIA>::iterator it = gIndividualMilitiaVector.begin( ); it != itend; ++it )
 	{
@@ -322,7 +322,7 @@ void HandleHourlyMilitiaHealing( )
 			{
 				for ( pSoldier = MercPtrs[cnt]; cnt < lastid; ++cnt, ++pSoldier )
 				{
-					if ( pSoldier && pSoldier->bActive && (*it).id == pSoldier->usIndividualMilitiaID && 
+					if ( pSoldier && pSoldier->bActive && (*it).id == pSoldier->usIndividualMilitiaID &&
 						 gWorldSectorX == pSoldier->sSectorX && gWorldSectorY == pSoldier->sSectorY && !pSoldier->bSectorZ &&
 						 pSoldier->stats.bLifeMax > 0  )
 					{
@@ -331,7 +331,7 @@ void HandleHourlyMilitiaHealing( )
 						FLOAT currenthealthratio = 100.0f * oldlife / pSoldier->stats.bLifeMax;
 
 						currenthealthratio = min( 100.0f, currenthealthratio + gGameExternalOptions.dIndividualMilitiaHourlyHealthPercentageGain );
-						
+
 						pSoldier->stats.bLife = min( pSoldier->stats.bLifeMax, (currenthealthratio / 100.0f) * pSoldier->stats.bLifeMax );
 
 						// healing done will be displayed the next time the player sees this soldier
@@ -357,7 +357,7 @@ UINT32 CreateRandomIndividualMilitia( UINT8 aSoldierClass, UINT8 aOrigin, UINT8 
 	if ( GetMilitia( militiaid, &newmilitia ) )
 	{
 		newmilitia.healthratio = (OKLIFE + Random( 85 ));
-		
+
 		newmilitia.AddKills( Random( 5 ), Random( 10 ) );
 
 		// make up some history
@@ -489,7 +489,7 @@ UINT32 CreateNewIndividualMilitia( UINT8 aSoldierClass, UINT8 aOrigin, UINT8 aSe
 	}
 
 	newmilitia.flagmask = 0;
-	
+
 	newmilitia.healthratio = 100.0f;
 
 	newmilitia.kills = 0;
@@ -503,7 +503,7 @@ UINT32 CreateNewIndividualMilitia( UINT8 aSoldierClass, UINT8 aOrigin, UINT8 aSe
 	MILITIA_BATTLEREPORT report;
 	report.flagmask |= MILITIA_BATTLEREPORT_FLAG_RECRUITED;
 	report.id = GetWorldTotalMin( );
-	
+
 	newmilitia.history.push_back( report );
 
 	gIndividualMilitiaVector.push_back( newmilitia );

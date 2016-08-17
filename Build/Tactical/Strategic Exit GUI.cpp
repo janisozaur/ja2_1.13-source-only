@@ -3,34 +3,34 @@
 	#include "PreBattle Interface.h"
 	#include "creature spreading.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "Button System.h"
 	#include "mousesystem.h"
 	#include "jascreens.h"
-	#include "gamescreen.h"
-	#include "strategicmap.h"
+	#include "GameScreen.h"
+	#include "StrategicMap.h"
 	#include "Game Clock.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "Font Control.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "PopUpBox.h"
 	#include "Cursors.h"
 	#include "Strategic Exit GUI.h"
 	#include "MercTextBox.h"
-	#include "renderworld.h"
-	#include "overhead.h"
-	#include "cursor control.h"
-	#include "input.h"
-	#include "english.h"
-	#include "text.h"
+	#include "RenderWorld.h"
+	#include "Overhead.h"
+	#include "Cursor Control.h"
+	#include "Input.h"
+	#include "English.h"
+	#include "Text.h"
 	#include "Strategic Movement.h"
 	#include "Squads.h"
 	#include "Assignments.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Map Screen Interface Map.h"
 	#include "PreBattle Interface.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "MessageBoxScreen.h"
 	#include "Quests.h"
 	#include "Creature Spreading.h"
@@ -236,9 +236,9 @@ BOOLEAN InternalInitSectorExitMenu( UINT8 ubDirection, INT32 sAdditionalData )//
 		if( !pSoldier->flags.fBetweenSectors &&
 				pSoldier->sSectorX == gWorldSectorX && pSoldier->sSectorY == gWorldSectorY && pSoldier->bSectorZ == gbWorldSectorZ &&
 				pSoldier->stats.bLife >= OKLIFE &&
-				( pSoldier->bAssignment != MercPtrs[ gusSelectedSoldier ]->bAssignment || 
+				( pSoldier->bAssignment != MercPtrs[ gusSelectedSoldier ]->bAssignment ||
 				( pSoldier->bAssignment == VEHICLE && pSoldier->iVehicleId != MercPtrs[ gusSelectedSoldier ]->iVehicleId ) ) &&
-				pSoldier->bAssignment != ASSIGNMENT_POW && pSoldier->bAssignment != IN_TRANSIT && pSoldier->bAssignment != ASSIGNMENT_DEAD 
+				pSoldier->bAssignment != ASSIGNMENT_POW && pSoldier->bAssignment != IN_TRANSIT && pSoldier->bAssignment != ASSIGNMENT_DEAD
 				&& !(pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE) )
 		{ //KM:	We need to determine if there are more than one squad (meaning other concious mercs in a different squad or assignment)
 			//		These conditions were done to the best of my knowledge, so if there are other situations that require modification,
@@ -782,7 +782,7 @@ void RemoveSectorExitMenu( BOOLEAN fOk )
 
 		if ( fOk )
 		{
-#ifdef JA2UB		
+#ifdef JA2UB
 			//ja25 ub
 			//If this is the sector with the power fan
 			if( gWorldSectorX == 13 && gWorldSectorY == 10 && gbWorldSectorZ == 0 )
@@ -790,7 +790,7 @@ void RemoveSectorExitMenu( BOOLEAN fOk )
 				//Remeber how the player got through
 				HandleHowPlayerGotThroughFan();
 			}
-#endif			
+#endif
 			// Handle the effects here!
 			if ( gExitDialog.fAllMove && gExitDialog.fGotoSector && gExitDialog.fGotoSectorText )
 			{

@@ -100,7 +100,7 @@ struct RAK_DLL_EXPORT ThreadPool
 	/// Lock the output buffer before calling the functions OutputSize, OutputAtIndex, and RemoveOutputAtIndex
 	/// It is only necessary to lock the input or output while the threads are running
 	void LockOutput(void);
-	
+
 	/// Unlock the output buffer after you are done with the functions OutputSize, GetOutputAtIndex, and RemoveOutputAtIndex
 	void UnlockOutput(void);
 
@@ -145,7 +145,7 @@ protected:
 	ThreadDataInterface *threadDataInterface;
 	void *tdiContext;
 
-	
+
 	template <class ThreadInputType, class ThreadOutputType>
 	friend RAK_THREAD_DECLARATION(WorkerThread);
 
@@ -225,7 +225,7 @@ void* WorkerThread( void* arguments )
 				threadPool->quitAndIncomingDataEvents,
 				false,
 				INFINITE);
-		}		
+		}
 #endif
 
 		threadPool->runThreadsMutex.Lock();
@@ -258,7 +258,7 @@ void* WorkerThread( void* arguments )
 				threadPool->outputQueueMutex.Lock();
 				threadPool->outputQueue.Push(callbackOutput);
 				threadPool->outputQueueMutex.Unlock();
-			}			
+			}
 		}
 
 		threadPool->workingThreadCountMutex.Lock();

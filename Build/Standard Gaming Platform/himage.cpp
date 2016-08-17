@@ -3,22 +3,22 @@
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 	#include "WIZ8 SGP ALL.H"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <math.h>
 	#include <stdlib.h>
-	#include "types.h"
+	#include "Types.h"
 	#include "string.h"
-	#include "debug.h"
-	#include "fileman.h"
+	#include "Debug.h"
+	#include "FileMan.h"
 	#include "himage.h"
 	#include "impTGA.h"
 	#include "pcx.h"
 	#include "STCI.h"
 	#include "PngLoader.h"
-	#include "wcheck.h"
+	#include "WCheck.h"
 	#include "Compression.h"
-	#include "vobject.h"
-	#include "vobject_blitters.h"
+	#include "VObject.h"
+	#include "VObject_blitters.h"
 #endif
 
 #include <vfs/Core/vfs.h>
@@ -131,8 +131,8 @@ namespace ImageFileType
 
 HIMAGE CreateImage( SGPFILENAME ImageFile, UINT16 fContents, ImageFileType::TestOrder order )
 {
-	HIMAGE			hImage = NULL;	
-	CHAR8			ExtensionSep[] = ".";	
+	HIMAGE			hImage = NULL;
+	CHAR8			ExtensionSep[] = ".";
 	UINT32			iFileLoader;
 
 #if 0
@@ -355,7 +355,7 @@ BOOLEAN LoadImageData( HIMAGE hImage, UINT16 fContents )
 		case JPC_FILE_READER:
 			fReturnVal = LoadJPCFileToImage( hImage, fContents );
 			break;
-		
+
 		default:
 
 			DbgMessage( TOPIC_HIMAGE, DBG_LEVEL_2, "Unknown image loader was specified." );

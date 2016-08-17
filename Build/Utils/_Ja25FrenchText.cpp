@@ -1,4 +1,4 @@
-﻿// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
+// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
 //#pragma setlocale("FRENCH")
 
 #ifdef PRECOMPILEDHEADERS
@@ -7,8 +7,8 @@
 #else
 	#include "Language Defines.h"
 	#ifdef FRENCH
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 	#endif
 #endif
 
@@ -247,7 +247,7 @@ STR16 gzIMPMajorTraitsHelpTextsDoctor[]=
 	L" (un maximum de %d bonus par secteur)",
 
 };
-STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=		
+STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 {
 	L"Peut se déguiser en civil ou en soldat pour se glisser derrière les lignes ennemies\n",
 	L"Sera détecté(e) par des actions suspectes ou un paquetage douteux\nou d'être près d'un cadavre encore chaud\n",
@@ -258,9 +258,9 @@ STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 	L"Le nombre de PA pour se déguiser, est réduit de %d%s\n",
 };
 
-STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]= 
+STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]=
 {
-	L"Peut utiliser du matériel de communication\n", 
+	L"Peut utiliser du matériel de communication\n",
 	L"Peut demander des tirs d'artillerie alliés des secteurs voisins.\n",
 	L"Via l'assignation 'Balayer les fréquences', les patrouilles ennemies seront localisées.\n",
 	L"Les communications peuvent être brouillées à l'échelle d'un secteur.\n",

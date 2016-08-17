@@ -3,19 +3,19 @@
 #include <sstream>
 #include <string>
 
-#include "DEBUG.H"
+#include "Debug.h"
 #include "Dialogue Control.h"
 #include "FileMan.h"
 #include "GameSettings.h"
 #include "Soldier Profile.h"
-#include "strategic.h"
-#include "strategicmap.h"
+#include "Strategic.h"
+#include "StrategicMap.h"
 #include "Strategic Mines.h"
 #include "Strategic Mines LUA.h"
 #include "UndergroundInit.h"
 #include <vfs/Core/vfs_debug.h>	// for CBasicException
 
-#include "connect.h"
+#include "Connect.h"
 
 using namespace std;
 
@@ -139,7 +139,7 @@ void LuaMines::InitializeMines()
 	Reset();
 
 	m_log << "Calling 'InitializeMines'" << vfs::Log::endl;
-	
+
 	// WANNE: Init mines in a multiplayer game, only if we already received the server game difficulty level (ubDifficultyLevel > 0)!!
 	// set global, maybe pass as parameter instead?
 	if (!is_networked || gGameOptions.ubDifficultyLevel > 0)
@@ -176,7 +176,7 @@ void LuaMines::InitializeMines()
 			// load table
 			lua_pushinteger(m_L, currentTable);
 			lua_gettable(m_L, -2);
-	        
+
 			if (lua_isnil(m_L, -1))
 				// done, no more tables
 				break;
@@ -185,15 +185,15 @@ void LuaMines::InitializeMines()
 			lua_getfield(m_L, -1, "Location");
 			string loc = lua_tostring(m_L, -1);
 			lua_pop(m_L, 1);
-	        
+
 			lua_getfield(m_L, -1, "Type");
 			mineStatus.ubMineType = lua_tointeger(m_L, -1);
 			lua_pop(m_L, 1);
-	        
+
 			lua_getfield(m_L, -1, "MaxRemovalRate");
 			mineStatus.uiMaxRemovalRate = lua_tointeger(m_L, -1);
 			lua_pop(m_L, 1);
-	        
+
 			lua_getfield(m_L, -1, "RemainingOreSupply");
 			mineStatus.uiRemainingOreSupply = lua_tointeger(m_L, -1);
 			lua_pop(m_L, 1);
@@ -250,7 +250,7 @@ void LuaMines::InitializeMines()
 				// be running out (in which case the calculation below applies)
 				// TODO: see if this works for all mines
 				mineStatus.uiOreRunningOutPoint = mineStatus.uiRemainingOreSupply / 4;
-				
+
 				// gather associated town id from sector coordinates
 				int index = CALCULATE_STRATEGIC_INDEX(mineStatus.sSectorX, mineStatus.sSectorY);
 				mineStatus.bAssociatedTown = StrategicMap[index].bNameId;
@@ -348,7 +348,7 @@ BOOLEAN LuaMines::InitializeHeadMiners(UINT8 firstMineID)
 		// get this element of result array
 		lua_pushinteger(m_L, currentTable);
         lua_gettable(m_L, -2);
-    
+
 	    if (lua_isnil(m_L, -1))
 			// done, no more elements in result
 		    break;
@@ -418,7 +418,7 @@ BOOLEAN LuaMines::InitializeHeadMiners(UINT8 firstMineID)
 		lua_pop(m_L, 1);	// pop current element of result table
 		currentTable++;
 	}
-	
+
 	lua_pop(m_L, 1);	// pop nil value
 
 	lua_pop(m_L, 1);	// pop return value
@@ -555,7 +555,7 @@ static bool locationStrToCoords(string str, INT16* x, INT16* y)
 	if (yy < 'a' || yy > 'p')
 		return false;
 	*y = yy - 'a' + 1;
-	
+
 	str = str.substr(1);
 	stringstream ss;
 	ss << str;

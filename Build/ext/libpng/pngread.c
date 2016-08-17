@@ -347,10 +347,10 @@ void PNGAPI
 png_read_info(png_structp png_ptr, png_infop info_ptr)
 {
    png_debug(1, "in png_read_info");
- 
+
    if (png_ptr == NULL || info_ptr == NULL)
       return;
- 
+
    /* If we haven't checked all of the PNG signature bytes, do so now. */
    if (png_ptr->sig_bytes < 8)
    {
@@ -573,22 +573,22 @@ void PNGAPI
 png_read_frame_head(png_structp png_ptr, png_infop info_ptr)
 {
     png_byte have_chunk_after_DAT; /* after IDAT or after fdAT */
-    
+
     png_debug(0, "Reading frame head");
-    
+
     if (!(png_ptr->mode & PNG_HAVE_acTL))
         png_error(png_ptr, "attempt to png_read_frame_head() but "
                            "no acTL present");
-    
+
     /* do nothing for the main IDAT */
     if (png_ptr->num_frames_read == 0)
         return;
-    
+
     png_crc_finish(png_ptr, 0); /* CRC from last IDAT or fdAT chunk */
-    
+
     png_read_reset(png_ptr);
     png_ptr->mode &= ~PNG_HAVE_fcTL;
-    
+
     have_chunk_after_DAT = 0;
     for (;;)
     {
@@ -599,13 +599,13 @@ png_read_frame_head(png_structp png_ptr, png_infop info_ptr)
 #endif
         png_byte chunk_length[4];
         png_uint_32 length;
-        
+
         png_read_data(png_ptr, chunk_length, 4);
         length = png_get_uint_31(png_ptr, chunk_length);
-        
+
         png_reset_crc(png_ptr);
         png_crc_read(png_ptr, png_ptr->chunk_name, 4);
-        
+
         if (!png_memcmp(png_ptr->chunk_name, png_IDAT, 4))
         {
             /* discard trailing IDATs for the first frame */
@@ -621,7 +621,7 @@ png_read_frame_head(png_structp png_ptr, png_infop info_ptr)
         else if (!png_memcmp(png_ptr->chunk_name, png_fdAT, 4))
         {
             png_ensure_sequence_number(png_ptr, length);
-            
+
             /* discard trailing fdATs for frames other than the first */
             if (!have_chunk_after_DAT && png_ptr->num_frames_read > 1)
                 png_crc_finish(png_ptr, length - 4);
@@ -629,7 +629,7 @@ png_read_frame_head(png_structp png_ptr, png_infop info_ptr)
             {
                 png_ptr->idat_size = length - 4;
                 png_ptr->mode |= PNG_HAVE_IDAT;
-                
+
                 break;
             }
             else
@@ -650,7 +650,7 @@ void PNGAPI
 png_read_update_info(png_structp png_ptr, png_infop info_ptr)
 {
    png_debug(1, "in png_read_update_info");
- 
+
    if (png_ptr == NULL)
       return;
    if (!(png_ptr->flags & PNG_FLAG_ROW_INIT))
@@ -672,7 +672,7 @@ void PNGAPI
 png_start_read_image(png_structp png_ptr)
 {
    png_debug(1, "in png_start_read_image");
- 
+
    if (png_ptr == NULL)
       return;
    if (!(png_ptr->flags & PNG_FLAG_ROW_INIT))
@@ -693,10 +693,10 @@ png_read_row(png_structp png_ptr, png_bytep row, png_bytep dsp_row)
       0xff};
    PNG_CONST int png_pass_mask[7] = {0x80, 0x08, 0x88, 0x22, 0xaa, 0x55, 0xff};
    int ret;
- 
+
    if (png_ptr == NULL)
       return;
- 
+
    png_debug2(1, "in png_read_row (row %lu, pass %d)",
       png_ptr->row_number, png_ptr->pass);
 
@@ -825,12 +825,12 @@ png_read_row(png_structp png_ptr, png_bytep row, png_bytep dsp_row)
       if (!(png_ptr->zstream.avail_in))
       {
          png_uint_32 bytes_to_skip = 0;
-         
+
          while (!png_ptr->idat_size || bytes_to_skip != 0)
          {
             png_crc_finish(png_ptr, bytes_to_skip);
             bytes_to_skip = 0;
-            
+
             png_ptr->idat_size = png_read_chunk_header(png_ptr);
 #ifdef PNG_READ_APNG_SUPPORTED
             if (png_ptr->num_frames_read == 0)
@@ -851,9 +851,9 @@ png_read_row(png_structp png_ptr, png_bytep row, png_bytep dsp_row)
                   bytes_to_skip = png_ptr->idat_size;
                   continue;
                }
-               
+
                png_ensure_sequence_number(png_ptr, png_ptr->idat_size);
-               
+
                png_ptr->idat_size -= 4;
             }
 #endif
@@ -982,7 +982,7 @@ png_read_rows(png_structp png_ptr, png_bytepp row,
    png_bytepp dp;
 
    png_debug(1, "in png_read_rows");
- 
+
    if (png_ptr == NULL)
       return;
    rp = row;
@@ -1033,7 +1033,7 @@ png_read_image(png_structp png_ptr, png_bytepp image)
    png_bytepp rp;
 
    png_debug(1, "in png_read_image");
- 
+
    if (png_ptr == NULL)
       return;
 
@@ -1071,7 +1071,7 @@ void PNGAPI
 png_read_end(png_structp png_ptr, png_infop info_ptr)
 {
    png_debug(1, "in png_read_end");
- 
+
    if (png_ptr == NULL)
       return;
    png_crc_finish(png_ptr, 0); /* Finish off CRC from last IDAT chunk */
@@ -1266,7 +1266,7 @@ png_destroy_read_struct(png_structpp png_ptr_ptr, png_infopp info_ptr_ptr,
 #endif
 
    png_debug(1, "in png_destroy_read_struct");
- 
+
    if (png_ptr_ptr != NULL)
       png_ptr = *png_ptr_ptr;
    if (png_ptr == NULL)
@@ -1342,7 +1342,7 @@ png_read_destroy(png_structp png_ptr, png_infop info_ptr,
 #endif
 
    png_debug(1, "in png_read_destroy");
- 
+
    if (info_ptr != NULL)
       png_info_destroy(png_ptr, info_ptr);
 

@@ -7,7 +7,7 @@
 
 typedef struct
 {
-	UINT32	uiIndex; 
+	UINT32	uiIndex;
 	CHAR16	Message[MAX_MESSAGE_NAMES_CHARS];
 
 } LANGUAGE_LOCATION;

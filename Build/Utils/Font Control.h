@@ -1,8 +1,8 @@
 #ifndef __FONT_CONTROL_H
 #define __FONT_CONTROL_H
 
-#include "builddefines.h"
-#include "font.h"
+#include "BuildDefines.h"
+#include "Font.h"
 
 extern		BOOLEAN	 gfUseWinFonts;
 extern		INT32		giCurWinFont;
@@ -154,11 +154,11 @@ extern BOOLEAN					gfFontsInit;
 
 //Grayscale font colors
 #define	FONT_WHITE				208	//lightest color
-#define	FONT_GRAY1				133	
+#define	FONT_GRAY1				133
 #define	FONT_GRAY2				134	//light gray
 #define	FONT_GRAY3				135
 #define	FONT_GRAY4				136	//gray
-#define	FONT_GRAY5				137	
+#define	FONT_GRAY5				137
 #define	FONT_GRAY6				138
 #define	FONT_GRAY7				139	//dark gray
 #define	FONT_GRAY8				140

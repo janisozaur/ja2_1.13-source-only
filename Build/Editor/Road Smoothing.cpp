@@ -1,17 +1,17 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
 
 #ifndef PRECOMPILEDHEADERS
-	#include "types.h"
+	#include "Types.h"
 	#include "Road Smoothing.h"
-	#include "tiledat.h"
-	#include "worlddef.h"
-	#include "worldman.h"
+	#include "TileDat.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
 	#include "Editor Undo.h"
 #endif
 

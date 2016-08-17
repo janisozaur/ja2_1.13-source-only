@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Arms Dealer Init.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -66,7 +66,7 @@ merchantStartElementHandle(void *userData, const XML_Char *name, const XML_Char 
 				strcmp(name, "daysDelayMax") == 0 ||
 				strcmp(name, "useBRSetting") == 0 ||
 				strcmp(name, "allInventoryAlwaysAvailable" ) == 0 ||
-				strcmp(name, "nonprofile_loyaltyrequired") == 0 )) 
+				strcmp(name, "nonprofile_loyaltyrequired") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 
@@ -143,7 +143,7 @@ merchantEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "ubShopKeeperID") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curMerchant.ubShopKeeperID	= (UINT8) atol(pData->szCharData);						
+			pData->curMerchant.ubShopKeeperID	= (UINT8) atol(pData->szCharData);
 		}
 		else if(strcmp(name, "ubTypeOfArmsDealer") == 0)
 		{
@@ -267,10 +267,10 @@ BOOLEAN ReadInMerchantStats(STR fileName)
 	lpcBuffer[uiFSize] = 0; //add a null terminator
 
 	FileClose( hFile );
-	
+
 	XML_SetElementHandler(parser, merchantStartElementHandle, merchantEndElementHandle);
 	XML_SetCharacterDataHandler(parser, merchantCharacterDataHandle);
-	
+
 	ARMS_DEALER_INFO Merchants[NUM_ARMS_DEALERS];	// exists solely for this xml
 
 	memset(&pData,0,sizeof(pData));
@@ -278,7 +278,7 @@ BOOLEAN ReadInMerchantStats(STR fileName)
 	pData.maxArraySize = NUM_ARMS_DEALERS;
 
 	XML_SetUserData(parser, &pData);
-		
+
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
 	{
 		CHAR8 errorBuf[511];
@@ -289,7 +289,7 @@ BOOLEAN ReadInMerchantStats(STR fileName)
 		MemFree(lpcBuffer);
 		return FALSE;
 	}
-	
+
 	MemFree(lpcBuffer);
 
 	// now fill the internal merchant vector
@@ -341,7 +341,7 @@ BOOLEAN WriteMerchantStats()
 			FilePrintf(hFile,"\t\t<allInventoryAlwaysAvailable>%d</allInventoryAlwaysAvailable>\r\n",	armsDealerInfo[cnt].allInventoryAlwaysAvailable	);
 			FilePrintf(hFile,"\t\t<nonprofile_loyaltyrequired>%d</nonprofile_loyaltyrequired>\r\n",		armsDealerInfo[cnt].nonprofile_loyaltyrequired );
 
-			FilePrintf(hFile,"\t</MERCHANT>\r\n");						
+			FilePrintf(hFile,"\t</MERCHANT>\r\n");
 		}
 		FilePrintf(hFile,"</MERCHANTSLIST>\r\n");
 	}

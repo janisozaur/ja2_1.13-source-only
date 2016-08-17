@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Handle Items.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -181,7 +181,7 @@ structureconstructEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			staticwesttilevector.push_back( (UINT8)atol( pData->szCharData ) );
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 
@@ -273,7 +273,7 @@ BOOLEAN WriteStructureConstructStats()
 			FilePrintf(hFile,"\t\t<szTileSetName>%s</szTileSetName>\r\n", gStructureConstruct[cnt].szTileSetName );
 			FilePrintf(hFile,"\t\t<dCreationCost>%d</dCreationCost>\r\n",		gStructureConstruct[cnt].dCreationCost );
 			FilePrintf(hFile,"\t\t<fFortifyAdjacentAdjustment>%d</fFortifyAdjacentAdjustment>\r\n", gStructureConstruct[cnt].fFortifyAdjacentAdjustment );
-			
+
 			FilePrintf(hFile,"\t</STRUCTURE>\r\n");
 		}
 		FilePrintf(hFile,"</STRUCTURESLIST>\r\n");

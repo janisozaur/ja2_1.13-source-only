@@ -11,20 +11,20 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Finish.h"
 	#include "IMP Text System.h"
 	#include "Text Input.h"
-	#include "messageboxscreen.h"
+	#include "MessageBoxScreen.h"
 	#include "Soldier Profile Type.h"
 	#include "IMP Portraits.h"
 	#include "IMP Attribute Selection.h"
-	#include "english.h"
-	#include "line.h"
+	#include "English.h"
+	#include "Line.h"
 	#include "Merc Hiring.h"
-	#include "strategic.h"
-	#include "text.h"
+	#include "Strategic.h"
+	#include "Text.h"
 	#include "LaptopSave.h"
 #endif
 
@@ -574,7 +574,7 @@ void HandleBeginScreenTextEvent( UINT32 uiKey )
 		DWORD layout = (DWORD)GetKeyboardLayout( threadId ) & 0xFFFF;
 		if( layout == 0x419 ) // Russian
 		{
-			unsigned char TranslationTable[] = 
+			unsigned char TranslationTable[] =
 				" #İ####ı####á-ş.0123456789ÆæÁ#Ş,#ÔÈÑÂÓÀÏĞØÎËÄÜÒÙÇÉÊÛÅÃÌÖ×Íßõ#ú#_¸ôèñâóàïğøîëäüòùçéêûåãìö÷íÿÕ#Ú¨";
 
 			uiKey = TranslateKey( uiKey, TranslationTable );
@@ -582,7 +582,7 @@ void HandleBeginScreenTextEvent( UINT32 uiKey )
 		}
 		else if( layout == 0x423 ) // Belarussian
 		{
-			unsigned char TranslationTable[] = 
+			unsigned char TranslationTable[] =
 				" #İ####ı####á-ş.0123456789ÆæÁ#Ş,#Ô²ÑÂÓÀÏĞØÎËÄÜÒ¡ÇÉÊÛÅÃÌÖ×Íßõ#'#_¸ô³ñâóàïğøîëäüò¢çéêûåãìö÷íÿÕ#'¨";
 
 			uiKey = TranslateKey( uiKey, TranslationTable );

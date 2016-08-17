@@ -82,7 +82,7 @@ aimOldArchivesEndElementHandle(void *userData, const XML_Char *name)
 {
 	aimOldArchivesParseData * pData = (aimOldArchivesParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "OLD_MERC") == 0)
 		{
@@ -90,10 +90,10 @@ aimOldArchivesEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "MERC") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!AimOldArchives_TextOnly)
-				{		
+				{
 					gAimOldArchives[pData->curAimOldArchives.uiIndex].uiIndex = pData->curAimOldArchives.uiIndex;
 					gAimOldArchives[pData->curAimOldArchives.uiIndex].FaceID = pData->curAimOldArchives.FaceID;
 					wcscpy(gAimOldArchives[pData->curAimOldArchives.uiIndex].szBio, pData->curAimOldArchives.szBio);
@@ -104,11 +104,11 @@ aimOldArchivesEndElementHandle(void *userData, const XML_Char *name)
 				{
 				//	gAimOldArchives[pData->curAimOldArchives.uiIndex].uiIndex = pData->curAimOldArchives.uiIndex;
 				//	gAimOldArchives[pData->curAimOldArchives.uiIndex].FaceID = pData->curAimOldArchives.FaceID;
-					
+
 					wcscpy(gAimOldArchives[pData->curAimOldArchives.uiIndex].szBio, pData->curAimOldArchives.szBio);
 					wcscpy(gAimOldArchives[pData->curAimOldArchives.uiIndex].szName, pData->curAimOldArchives.szName);
 					wcscpy(gAimOldArchives[pData->curAimOldArchives.uiIndex].szNickName, pData->curAimOldArchives.szNickName);
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -117,37 +117,37 @@ aimOldArchivesEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "NickName") == 0)
 		{
-		
+
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curAimOldArchives.szNickName, sizeof(pData->curAimOldArchives.szNickName)/sizeof(pData->curAimOldArchives.szNickName[0]) );
 			pData->curAimOldArchives.szNickName[sizeof(pData->curAimOldArchives.szNickName)/sizeof(pData->curAimOldArchives.szNickName[0]) - 1] = '\0';
 
-		}	
+		}
 		else if(strcmp(name, "Name") == 0)
 		{
-		
+
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curAimOldArchives.szName, sizeof(pData->curAimOldArchives.szName)/sizeof(pData->curAimOldArchives.szName[0]) );
 			pData->curAimOldArchives.szName[sizeof(pData->curAimOldArchives.szName)/sizeof(pData->curAimOldArchives.szName[0]) - 1] = '\0';
 
-		}	
+		}
 		else if(strcmp(name, "Bio") == 0)
 		{
-		
+
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curAimOldArchives.szBio, sizeof(pData->curAimOldArchives.szBio)/sizeof(pData->curAimOldArchives.szBio[0]) );
 			pData->curAimOldArchives.szBio[sizeof(pData->curAimOldArchives.szBio)/sizeof(pData->curAimOldArchives.szBio[0]) - 1] = '\0';
 
-		}	
+		}
 		else if(strcmp(name, "FaceID") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curAimOldArchives.FaceID	= (INT16) atol(pData->szCharData);
-		}	
-		
+		}
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -166,7 +166,7 @@ BOOLEAN ReadInAimOldArchive(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading OldAIMArchive.xml" );
 
 	AimOldArchives_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

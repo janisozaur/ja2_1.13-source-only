@@ -1,40 +1,40 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
-	//#include "soldier control.h"
+	#include "Debug.h"
+	//#include "Soldier Control.h"
 	// HEADROCK HAM 3.5: Strange that this wasn't included.
 	#include "GameSettings.h"
-	#include "weapons.h"
-	#include "handle items.h"
-	#include "worlddef.h"
-	#include "rotting corpses.h"
-	#include "tile cache.h"
-	#include "isometric utils.h"
-	#include "animation control.h"
-	#include "utilities.h"
-	#include "game clock.h"
-	#include "soldier create.h"
-	#include "renderworld.h"
-	#include "tile animation.h"
+	#include "Weapons.h"
+	#include "Handle Items.h"
+	#include "WorldDef.h"
+	#include "Rotting Corpses.h"
+	#include "Tile Cache.h"
+	#include "Isometric Utils.h"
+	#include "Animation Control.h"
+	#include "Utilities.h"
+	#include "Game Clock.h"
+	#include "Soldier Create.h"
+	#include "RenderWorld.h"
+	#include "Tile Animation.h"
 	#include "merc entering.h"
 	#include "Sound Control.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "Handle UI.h"
-	#include "squads.h"
-	#include "english.h"
-	#include "cursor control.h"
+	#include "Squads.h"
+	#include "English.h"
+	#include "Cursor Control.h"
 	#include "Merc Hiring.h"
 	#include "Font Control.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Text.h"
-	#include "strategic turns.h"
-	#include "ai.h"
+	#include "Strategic Turns.h"
+	#include "AI.h"
 	#include "Dialogue Control.h"
 	#include "Music Control.h"
 	#include "Tactical Save.h"
@@ -428,7 +428,7 @@ void SetHelicopterDropDirection( UINT8 usDirection )
 void StartHelicopterRun()
 {
 	INT16 sX, sY;
-	
+
 	if ( gbNumHeliSeatsOccupied == 0 )
 	{
 		return;
@@ -491,7 +491,7 @@ void HandleHeliDrop( BOOLEAN fPlayer )
 
 	if ( !fPlayer )
 		return HandleEnemyAirdrop();
-	
+
 	if ( gfHandleHeli )
 	{
 		if ( gCurrentUIMode != LOCKUI_MODE )
@@ -699,7 +699,7 @@ void HandleHeliDrop( BOOLEAN fPlayer )
 						if ( gbCurDrop < bEndVal )
 						{
 							// Flugente: it is now possible to use airdrops with soldiers after they have arrived in Arulco. In that case, they might have an animation that breaks EVENT_InitNewSoldierAnim prematurely.
-							// In the worst case, this can cause the game to be unable to finish the airdrop. For that reason, we set all those soldiers to the STANDING aniamtion. 
+							// In the worst case, this can cause the game to be unable to finish the airdrop. For that reason, we set all those soldiers to the STANDING aniamtion.
 							MercPtrs[ gusHeliSeats[ gbCurDrop ] ]->usAnimState = STANDING;
 							MercPtrs[ gusHeliSeats[ gbCurDrop ] ]->EVENT_InitNewSoldierAnim( HELIDROP, 0 , FALSE );
 
@@ -720,7 +720,7 @@ void HandleHeliDrop( BOOLEAN fPlayer )
 							ScreenMsg( FONT_MCOLOR_WHITE, MSG_INTERFACE, TacticalStr[ MERC_HAS_ARRIVED_STR ], MercPtrs[ gusHeliSeats[ gbCurDrop ] ]->GetName() );
 
 							++gbCurDrop;
-						
+
 							gfIngagedInDrop = TRUE;
 						}
 						else
@@ -963,7 +963,7 @@ void BeginMercEntering( SOLDIERTYPE *pSoldier, INT32 sGridNo )
 	ResetHeliSeats( );
 
 	AddMercToHeli( pSoldier->ubID );
-	
+
 	StartHelicopterRun();
 
 	// Make sure AI does nothing.....
@@ -991,7 +991,7 @@ void HandleFirstHeliDropOfGame( )
 		{
 			// Say quote.....
 			SayQuoteFromAnyBodyInSector( QUOTE_ENEMY_PRESENCE );
-			
+
 			// Start music
 			UseCreatureMusic(HostileZombiesPresent());
 
@@ -1038,7 +1038,7 @@ UINT8 SpawnAirDropElite( INT32 sGridNo )
 	if ( !IsLocationSittable( sGridNo, 0 ) )
 		return NOBODY;
 
-	// Flugente hack		
+	// Flugente hack
 	pSoldier = TacticalCreateEliteEnemy( );
 
 	//Add soldier strategic info, so it doesn't break the counters!
@@ -1192,7 +1192,7 @@ void HandleEnemyAirdrop( )
 						if ( gbCurDrop < bEndVal )
 						{
 							// Flugente: it is now possible to use airdrops with soldiers after they have arrived in Arulco. In that case, they might have an animation that breaks EVENT_InitNewSoldierAnim prematurely.
-							// In the worst case, this can cause the game to be unable to finish the airdrop. For that reason, we set all those soldiers to the STANDING aniamtion. 
+							// In the worst case, this can cause the game to be unable to finish the airdrop. For that reason, we set all those soldiers to the STANDING aniamtion.
 							//MercPtrs[ gusHeliSeats[ gbCurDrop ] ]->usAnimState = STANDING;
 							MercPtrs[gusHeliSeats[gbCurDrop]]->EVENT_InitNewSoldierAnim( HELIDROP, 0, FALSE );
 

@@ -5,14 +5,14 @@
 
 #include "BaseTable.h"
 #include "Font.h"
-#include "laptop.h"
+#include "Laptop.h"
 #include "Cursors.h"
 #include "Utilities.h"
-#include "vobject.h"
+#include "VObject.h"
 #include "WCheck.h"
-#include "line.h"
+#include "Line.h"
 #include "WordWrap.h"
-#include "input.h"		// for gfLeftButtonState
+#include "Input.h"		// for gfLeftButtonState
 #include "insurance.h"	// for DisplaySmallColouredLineWithShadow
 
 BaseTable::BaseTable( )
@@ -69,7 +69,7 @@ BaseTable::Destroy( )
 
 	mRegisteredMembers.clear( );
 
-	SetInit(FALSE);	
+	SetInit(FALSE);
 
 	SetRefresh( );
 }
@@ -79,7 +79,7 @@ BaseTable::Display( )
 {
 	if ( !IsInit() )
 		return;
-	
+
 	for ( std::vector<BaseTable*>::iterator it = mRegisteredMembers.begin( ); it != mRegisteredMembers.end( ); ++it )
 	{
 		if ( (*it) && (*it)->IsActive() )
@@ -101,7 +101,7 @@ BaseTable::DestroyMouseRegions( )
 }
 
 STR16 cdp_string_func_dummy( UINT32 aNum )
-{ 
+{
 	return L"nothing found";
 }
 
@@ -158,7 +158,7 @@ ColumnDataProvider::RegionClickCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 	else if ( iReason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		CDP_CALLBACKTYPE chosenentry = (CDP_CALLBACKTYPE)(pRegion->UserData[0]);
-		
+
 		// do stuff
 		switch ( chosenentry )
 		{
@@ -216,7 +216,7 @@ TestPanel::Display( )
 	SetColorMarked(Get16BPPColor( FROMRGB( 200, 169, 87 ) ));
 	SetColorHighLight(Get16BPPColor( FROMRGB( 235, 222, 171 )) );
 
-	//Display the background 
+	//Display the background
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, GetX( ), GetY( ), GetX( ) + GetWidth( ), GetY( ) + GetHeight( ), GetColorMarked( ) );
 
 	// framework
@@ -258,7 +258,7 @@ TabBox::Init( UINT16 sX, UINT16 sY, UINT16 sX_End, UINT16 sY_End )
 	SetColorLineShadow( Get16BPPColor( FROMRGB( 255, 255, 255 ) ) );
 	SetColorMarked( Get16BPPColor( FROMRGB( 200, 169, 87 ) ) );
 	SetColorHighLight( Get16BPPColor( FROMRGB( 235, 222, 171 ) ) );
-		
+
 	BaseTable::Init( sX, sY, sX_End, sY_End );
 }
 
@@ -320,7 +320,7 @@ TabBox::Display( )
 {
 	if ( !IsInit( ) )
 		return;
-	
+
 	DestroyMouseRegions();
 
 	CHAR16	sText[800];
@@ -333,7 +333,7 @@ TabBox::Display( )
 	UINT16 selectedwidth = 0;
 
 	SetFontShadow( NO_SHADOW );
-	
+
 	for ( std::vector<TestPanelButtonStruct>::iterator it = mRegisteredTables.begin( ); it != mRegisteredTables.end( ); ++it )
 	{
 		if ( IsActive() )
@@ -358,7 +358,7 @@ TabBox::Display( )
 											usPosX + textwidth, GetY( ) + TESTTABLE_OFFSET_ROW,
 											GetColorHighLight() );
 			}
-			
+
 			// framework
 			// top
 			Display2Line2ShadowHorizontal( usPosX, GetY( ), usPosX + textwidth, GetColorLine( ), GetColorLineShadow( ) );
@@ -368,7 +368,7 @@ TabBox::Display( )
 
 			// right
 			Display2Line2ShadowVertical( usPosX + textwidth - 3, GetY( ) + GetFrameWorkSpace( ) / 2, GetY( ) + TESTTABLE_OFFSET_ROW, GetColorLineShadow( ), GetColorLine( ) );
-		
+
 			swprintf( sText, (*it).mTestPanel->GetName( ) );
 			DrawTextToScreen( sText, usPosX + 7, GetY( ) + 7, GetWidth( ), TESTTABLE_FONT_MED, TESTTABLE_FONT_COLOR_REGULAR, FONT_MCOLOR_BLACK, FALSE, 0 );
 
@@ -397,7 +397,7 @@ TabBox::Display( )
 							   selectedx + GetFrameWorkSpace( ), GetY( ) + TESTTABLE_OFFSET_ROW,
 							   selectedx + selectedwidth - 3, GetY( ) + TESTTABLE_OFFSET_ROW + GetFrameWorkSpace( ),
 							   GetColorMarked( ) );
-	
+
 	// left
 	Display2Line2ShadowVertical( selectedx, GetY( ) + TESTTABLE_OFFSET_ROW - 3, GetY( ) + TESTTABLE_OFFSET_ROW + 1, GetColorLine( ), GetColorLineShadow( ) );
 
@@ -477,7 +477,7 @@ TestTable::Init( UINT16 sX, UINT16 sY, UINT16 sX_End, UINT16 sY_End )
 
 	SetHeight( sY_End - sY );
 	SetWidth( sX_End - sX );
-	
+
 	CalcRows( );
 
 	SetInit( TRUE );
@@ -567,7 +567,7 @@ TestTable::Display( )
 			usPosX = GetX( );
 
 			DisplaySmallColouredLineWithShadow( usPosX, usPosY - 2, usPosX + GetWidth( ) - SCROLLARROW_WIDTH, usPosY - 2, FROMRGB( 0, 255, 0 ) );
-			
+
 			std::vector<ColumnDataProvider>::iterator itend = mColumnDataProviderVector.end( );
 			for ( std::vector<ColumnDataProvider>::iterator it = mColumnDataProviderVector.begin( ); it != itend; ++it )
 			{
@@ -624,10 +624,10 @@ TestTable::Display( )
 				}
 
 				if ( i - mFirstEntryShown < COLUMNDATAPROVIDER_MOUSEREGIONS && IsMouseRegionActive( ) )
-				{				
+				{
 					MSYS_DefineRegion( &it->mMouseRegion[i - mFirstEntryShown],
 									   usPosX, usPosY, usPosX + it->GetRequiredLength( ), usPosY + heightperrow,
-									   MSYS_PRIORITY_HIGHEST, CURSOR_WWW, 
+									   MSYS_PRIORITY_HIGHEST, CURSOR_WWW,
 									   MSYS_NO_CALLBACK, (*it).RegionClickCallBack );
 					MSYS_AddRegion( &it->mMouseRegion[i - mFirstEntryShown] );
 
@@ -736,7 +736,7 @@ TestTable::RegionMoveCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 				UINT32 scrollbarheigth = GetHeight( ) - 2 * SCROLLARROW_HEIGTH;
 
 				if ( scrollbarheigth > 0  )
-				{					
+				{
 					FLOAT rate = (FLOAT)(pRegion->MouseYPos - GetY( ) + SCROLLARROW_HEIGTH) / (FLOAT)(scrollbarheigth);
 
 					mLastEntryShown = rate * GetNumberOfDataRows();
@@ -876,15 +876,15 @@ TestTable::CreateScrollAreaButtons( )
 			if ( hArrowHandle )
 			{
 				// top arrow
-				BltVideoObject( FRAME_BUFFER, hArrowHandle, 10, 
-								GetX( ) + GetWidth( ) - SCROLLARROW_WIDTH - 2, 
-								GetY( ), 
+				BltVideoObject( FRAME_BUFFER, hArrowHandle, 10,
+								GetX( ) + GetWidth( ) - SCROLLARROW_WIDTH - 2,
+								GetY( ),
 								VO_BLT_SRCTRANSPARENCY, NULL );
 
 				// down arrow
-				BltVideoObject( FRAME_BUFFER, hArrowHandle, 17, 
+				BltVideoObject( FRAME_BUFFER, hArrowHandle, 17,
 								GetX( ) + GetWidth( ) - SCROLLARROW_WIDTH - 2,
-								GetY( ) + GetHeight( ) - SCROLLARROW_HEIGTH - 2, 
+								GetY( ) + GetHeight( ) - SCROLLARROW_HEIGTH - 2,
 								VO_BLT_SRCTRANSPARENCY, NULL );
 			}
 		}
@@ -925,7 +925,7 @@ TestTable::GetNumberOfDataRowsShown( )
 		return 0;
 
 	totalheighttodistribute -= TESTTABLE_OFFSET_ROW;
-	
+
 	UINT32 rows = GetNumberOfDataRows( );
 
 	if ( !rows )

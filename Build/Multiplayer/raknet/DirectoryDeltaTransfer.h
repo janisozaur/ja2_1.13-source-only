@@ -117,7 +117,7 @@ public:
 	/// \param[in] _incrementalReadInterface If a file in \a fileList has no data, filePullInterface will be used to read the file in chunks of size \a chunkSize
 	/// \param[in] _chunkSize How large of a block of a file to send at once
 	void SetDownloadRequestIncrementalReadInterface(IncrementalReadInterface *_incrementalReadInterface, unsigned int _chunkSize);
-	
+
 	/// \internal For plugin handling
 	virtual void OnAttach(RakPeerInterface *peer);
 	/// \internal For plugin handling

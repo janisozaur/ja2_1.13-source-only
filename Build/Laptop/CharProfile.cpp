@@ -2,8 +2,8 @@
 	#include "Laptop All.h"
 	#include "IMP Skill Trait.h"
 #else
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "CharProfile.h"
 	#include "IMP AboutUs.h"
 	#include "IMP Attribute Entrance.h"
@@ -23,7 +23,7 @@
 	#include "IMP Personality Finish.h"
 	#include "IMPVideoObjects.h"
 	#include "IMP Confirm.h"
-	#include "messageboxscreen.h"
+	#include "MessageBoxScreen.h"
 	#include "LaptopSave.h"
 	// These 5 added - SANDRO
 	#include "IMP Character and Disability Entrance.h"
@@ -182,7 +182,7 @@ void HandleCharProfile()
 		{
 			//make sure we are not hosing memory
 			Assert( iCurrentImpPage < IMP_NUM_PAGES );
-			
+
 			fFastLoadFlag = HasTheCurrentIMPPageBeenVisited( );
 			fVisitedIMPSubPages[ iCurrentImpPage ] = TRUE;
 			fConnectingToSubPage = TRUE;
@@ -634,7 +634,7 @@ void ResetCharacterStats( void )
 
 	// attitude
 	iAttitude = 0;
-	
+
 	// Flugente: background
 	usBackground = 0;
 

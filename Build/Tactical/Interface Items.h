@@ -1,7 +1,7 @@
 #ifndef __INTERFACE_ITEMS_H
 #define __INTERFACE_ITEMS_H
 
-#include "items.h"
+#include "Items.h"
 #include "Handle Items.h"
 #include "popup_class.h"
 
@@ -22,7 +22,7 @@
 #define		NUM_UDB_GEN_LINES	12
 #define		NUM_UDB_ADV_LINES	13			// Flugente FTW 1.1: 12->13
 #define		GEN_SEC_REGION_ENTRIES 24		// 6 lines x 4 icons
- 
+
 // HEADROCK HAM 4: These rectangle definitions are used in UDB to determine locations for icons, data, and tooltip
 // regions. They replace the plethora of region data provided in EDB.
 typedef struct
@@ -220,7 +220,7 @@ BOOLEAN HandleCompatibleAmmoUI( SOLDIERTYPE *pSoldier, INT8 bInvPos, BOOLEAN fOn
 // sX, sY, Width, Height,	- Will Center it in the Width
 // fDirtyLevel	if == DIRTYLEVEL2 will render everything
 //							if == DIRTYLEVEL1 will render bullets and status only
-// 
+//
 //	pubHighlightCounter - if not null, and == 2 - will display name above item
 //											-	if == 1 will only dirty the name space and then set counter to 0
 //	Last parameter used mainly for when mouse is over item
@@ -347,7 +347,7 @@ void PocketPopupDefault( SOLDIERTYPE *pSoldier, INT16 sPocket );	// displays onl
 
 POPUP * createPopupForPocket( SOLDIERTYPE *pSoldier, INT16 sPocket );	// creates a popup positioned next to the pocket
 
-// THE_BOB 
+// THE_BOB
 extern UINT16 gsPocketUnderCursor;
 
 

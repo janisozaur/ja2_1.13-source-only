@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */
@@ -6,9 +6,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "insurance.h"
-	#include "insurance Contract.h"
+	#include "Insurance Contract.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"
@@ -59,7 +59,7 @@ BOOLEAN EnterCampaignHistory()
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("LAPTOP\\bullet.sti", VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &guiCampaignBulletImage));
-	
+
 	RenderCampaignHistory();
 
 	return(TRUE);
@@ -91,7 +91,7 @@ void RenderCampaignHistory()
 	DisplayCampaignHistoryDefaults();
 
 	SetFontShadow( CAMPHIS_FONT_SHADOW );
-		
+
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = LAPTOP_SCREEN_WEB_UL_Y + 80;
 
@@ -115,7 +115,7 @@ void RenderCampaignHistory()
 			default:
 				swprintf(sText, szCampaignHistoryWebSite[i] );
 		}
-		
+
 		DrawTextToScreen( sText, usPosX + 25, usPosY, LAPTOP_SCREEN_LR_X-LAPTOP_SCREEN_UL_X, CAMPHIS_FONT_MED, CAMPHIS_FONT_COLOR, FONT_MCOLOR_BLACK, FALSE, 0 );
 
 		usPosY += 15;
@@ -137,7 +137,7 @@ BOOLEAN InitCampaignHistoryDefaults()
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("LAPTOP\\BackGroundTile.sti", VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &guiInsuranceBackGround));
-	
+
 	// load the red bar on the side of the page and add it
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("LAPTOP\\LargeBar.sti", VObjectDesc.ImageFile);
@@ -178,11 +178,11 @@ void DisplayCampaignHistoryDefaults()
 	//Display the title slogan
 	GetCampaignHistoryText( TEXT_CAMPAIGNHISTORY_NAME_PRESSORGANISATION, sText );
 	DrawTextToScreen( sText, CAMPAIGN_HISTORY_BIG_TITLE_X, CAMPAIGN_HISTORY_BIG_TITLE_Y, LAPTOP_SCREEN_LR_X-LAPTOP_SCREEN_UL_X, CAMPHIS_FONT_BIG, CAMPHIS_FONT_COLOR, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	//Display the subtitle slogan
 	GetCampaignHistoryText( TEXT_CAMPAIGNHISTORY_NAME_PRESSORGANISATION_SUBTITLE, sText );
 	DrawTextToScreen( sText, CAMPAIGN_HISTORY_SUBTITLE_X, CAMPAIGN_HISTORY_SUBTITLE_Y, 0, CAMPHIS_FONT_BIG, CAMPHIS_FONT_COLOR, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	usPosX = CAMPAIGN_HISTORY_LINK_START_X;
 	usPosY = CAMPAIGN_HISTORY_LINK_START_Y;
 	for(int i=0; i<4; ++i)
@@ -210,7 +210,7 @@ void RemoveCampaignHistoryDefaults()
 {
 	DeleteVideoObjectFromIndex( guiInsuranceBackGround );
 	DeleteVideoObjectFromIndex( guiInsuranceBigRedLineImage );
-	
+
 	for(int i=0; i<4; ++i)
 		MSYS_RemoveRegion( &gCampaignHistoryLinkRegion[i]);
 }
@@ -222,7 +222,7 @@ void GetCampaignHistoryText( UINT8 ubNumber, STR16 pString )
 
 	if ( ubNumber >= TEXT_CAMPAIGNHISTORY_MAX )
 		wcscpy(	pString, L"bla" );
-		
+
 	switch( ubNumber )
 	{
 		case TEXT_CAMPAIGNHISTORY_NAME_PRESSORGANISATION:

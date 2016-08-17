@@ -4,24 +4,24 @@
 	#include "Cinematics.h"
 #else
 	#include "sgp.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
-	#include "font control.h"
-	#include "cursor control.h"
-	#include "render dirty.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
+	#include "Font Control.h"
+	#include "Cursor Control.h"
+	#include "Render Dirty.h"
 	#include	"Text.h"
 	#include	"Utilities.h"
 	#include	"WordWrap.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Line.h"
 	#include "Intro.h"
 	#include "Cinematics.h"
 	#include "Cinematics Bink.h"
-	#include "mainmenuscreen.h"
+	#include "MainMenuScreen.h"
 	#include "Music Control.h"
 	#include "LibraryDataBase.h"
-	#include "english.h"
-	#include "soldier profile type.h"
+	#include "English.h"
+	#include "Soldier Profile Type.h"
 	#include "MessageBoxScreen.h"
 	#include "sgp_logger.h"
 #include "INIReader.h"
@@ -31,7 +31,7 @@
 
 #include "Luaglobal.h"
 #ifdef JA2UB
-#include "strategicmap.h"
+#include "StrategicMap.h"
 #include "Map Screen Interface Map.h"
 #include "Map Screen Interface.h"
 #include "End Game.h"
@@ -99,7 +99,7 @@ public:
 		{
 			return SmkPollFlics() != 0;
 		}
-		else if(_current == VT_BINK && !_smk && _bink) 
+		else if(_current == VT_BINK && !_smk && _bink)
 		{
 			return BinkPollFlics() != 0;
 		}
@@ -109,7 +109,7 @@ public:
 		}
 		SGP_THROW(L"Invalid Video Player state : last video was not properly stopped ");
 	}
-	
+
 	void stopVideo()
 	{
 		if(_current == VT_SMK && _smk && !_bink)
@@ -139,7 +139,7 @@ public:
 		{
 			return false;
 		}
-		
+
 		/// check file extension
 		std::string ext;
 		std::string::size_type pos = filename.find_last_of(".");
@@ -307,7 +307,7 @@ UINT32	IntroScreenInit( void )
 	gfIntroScreenEntry = TRUE;
 
 	CIniReader inireader("IntroVideos.ini");
-	
+
 	// BF: If NO_DEFAULT_VALUES is set to true, then only the explicitely used videos will be shown.
 	BOOLEAN no_defaults                        = inireader.ReadBoolean("INTRO", "NO_DEFAULT_VALUES", false);
 
@@ -331,7 +331,7 @@ UINT32	IntroScreenInit( void )
 	s_VFN[INTRO_HELI_CRASH_SCENE_1]		= inireader.ReadString("INTRO_BEGINNING","INTRO_HELI_CRASH_SCENE",    no_defaults ? "" : "INTRO\\Intro");
 	s_VFN[INTRO_END_SCENE_1]			= inireader.ReadString("INTRO_ENDING","INTRO_END_SCENE",    no_defaults ? "" : "INTRO\\MissileEnding");
 #endif
-	
+
 
 	//there are no more videos shown for the endgame
 

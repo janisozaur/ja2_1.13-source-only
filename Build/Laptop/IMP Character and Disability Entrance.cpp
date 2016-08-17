@@ -9,10 +9,10 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Text System.h"
-	#include "text.h"
+	#include "Text.h"
 
 #endif
 
@@ -91,7 +91,7 @@ void CreateIMPCharacterAndDisabilityEntranceButtons( void )
 }
 
 void WriteIMPCharacterAndDisabilityEntranceText( void )
-{	
+{
 	//Display the title
 	DrawTextToScreen( pCharacterTraitBeginIMPStrings[ 0 ], LAPTOP_SCREEN_UL_X - 111, LAPTOP_TITLE_Y, LAPTOP_TEXT_WIDTH, FONT14ARIAL, FONT_MCOLOR_WHITE, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 

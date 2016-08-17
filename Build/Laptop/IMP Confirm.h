@@ -17,7 +17,7 @@ typedef struct
 	UINT16 uiMouthXPositions;
 	UINT16 uiMouthYPositions;
 	UINT16 uiIndex;
-	UINT16 FaceIndex; 
+	UINT16 FaceIndex;
 	UINT16 PortraitId;
 	BOOLEAN bSex;
 	INT32 iCurrentSkin;
@@ -36,13 +36,13 @@ typedef struct
 {
 	UINT16 uiIndexIMP;
 	BOOLEAN Enabled;
-	
+
 	UINT16 uiEyeXPositions;
 	UINT16 uiEyeYPositions;
 	UINT16 uiMouthXPositions;
 	UINT16 uiMouthYPositions;
 	UINT16 uiIndex;
-	UINT16 FaceIndex; 
+	UINT16 FaceIndex;
 	UINT16 PortraitId;
 	BOOLEAN bSex;
 	INT32 iCurrentSkin;
@@ -51,20 +51,20 @@ typedef struct
 	INT32 iCurrentPants;
 	BOOLEAN bBigBody;
 	BOOLEAN bBadAss;
-	
+
 } IMP_MALE_VALUES;
 
 typedef struct
 {
 	UINT16 uiIndexIMP;
 	BOOLEAN Enabled;
-	
+
 	UINT16 uiEyeXPositions;
 	UINT16 uiEyeYPositions;
 	UINT16 uiMouthXPositions;
 	UINT16 uiMouthYPositions;
 	UINT16 uiIndex;
-	UINT16 FaceIndex; 
+	UINT16 FaceIndex;
 	UINT16 PortraitId;
 	BOOLEAN bSex;
 	INT32 iCurrentSkin;

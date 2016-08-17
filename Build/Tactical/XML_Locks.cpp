@@ -45,7 +45,7 @@ lockStartElementHandle(void *userData, const XML_Char *name, const XML_Char **at
 			pData->curElement = ELEMENT;
 
 			memset(&pData->curLock,0,sizeof(LOCK));
-				
+
 			pData->maxReadDepth++; //we are not skipping this element
 		}
 		else if(pData->curElement == ELEMENT &&
@@ -84,7 +84,7 @@ lockEndElementHandle(void *userData, const XML_Char *name)
 {
 	lockParseData * pData = (lockParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "LOCKS") == 0)
 		{
@@ -92,14 +92,14 @@ lockEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "LOCK") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			//if(pData->curLock.uiIndex < pData->maxArraySize)
 			if(num_found_lock < pData->maxArraySize)
 			{
 				pData->curArray[pData->curIndex] = pData->curLock;
 				num_found_lock++;
-			}	
+			}
 		}
 		else if(strcmp(name, "ubLockID") == 0)
 		{
@@ -112,7 +112,7 @@ lockEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "ubEditorName") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			strcpy( (CHAR8*)pData->curLock.ubEditorName, pData->szCharData );
 		}
 		else if(strcmp(name, "usKeyItem") == 0)

@@ -1,4 +1,4 @@
-#include "laptop.h"
+#include "Laptop.h"
 #include "GunEmporium.h"
 
 void GameInitGunEmporium()
@@ -28,6 +28,6 @@ void RenderGunEmporium()
 
 
 
- 
+
 
 

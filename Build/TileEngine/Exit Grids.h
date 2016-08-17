@@ -1,8 +1,8 @@
 #ifndef __EXIT_GRIDS_H
 #define __EXIT_GRIDS_H
 
-#include "Fileman.h"
-#include "Worlddef.h"
+#include "FileMan.h"
+#include "WorldDef.h"
 
 //dnl ch42 250909
 typedef struct

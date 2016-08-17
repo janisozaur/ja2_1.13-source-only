@@ -107,7 +107,7 @@ public:
 			vfs::PropertyContainer::TagMap& tagmap,
 			XML_Parser &parser,
 			IXMLParser* caller = NULL)
-		: IXMLParser("",&parser,caller), 
+		: IXMLParser("",&parser,caller),
 		_container(container),
 		_tagmap(tagmap),
 		current_state(DO_ELEMENT_NONE) // doesn't matter where we come from, we start fresh
@@ -215,7 +215,7 @@ bool vfs::PropertyContainer::initFromXMLFile(vfs::Path const& sFileName, vfs::Pr
 	{
 		std::wstringstream wss;
 		wss << L"XML Parser Error in Groups.xml: "
-			<< vfs::String::as_utf16(XML_ErrorString(XML_GetErrorCode(parser))) 
+			<< vfs::String::as_utf16(XML_ErrorString(XML_GetErrorCode(parser)))
 			<< L" at line "
 			<< XML_GetCurrentLineNumber(parser);
 		SGP_THROW(wss.str().c_str());

@@ -4,22 +4,22 @@
 #define __ITEM_STATISTICS_H
 
 //enumerations for all of the different action items.	Used by the popup menu for
-//changing the type of action item.	When modified, an equivalent text array must be 
-//changed as well. 
+//changing the type of action item.	When modified, an equivalent text array must be
+//changed as well.
 enum
 {
 	ACTIONITEM_TRIP_KLAXON,
 	ACTIONITEM_FLARE,
 	ACTIONITEM_TEARGAS,
 	ACTIONITEM_STUN,
-	ACTIONITEM_SMOKE,		
+	ACTIONITEM_SMOKE,
 	ACTIONITEM_MUSTARD,
 	ACTIONITEM_MINE,
 	ACTIONITEM_OPEN,
 	ACTIONITEM_CLOSE,
 	ACTIONITEM_SMPIT,
 	ACTIONITEM_LGPIT,
-	ACTIONITEM_SMALL,		//grenade	
+	ACTIONITEM_SMALL,		//grenade
 	ACTIONITEM_MEDIUM,	//TNT
 	ACTIONITEM_LARGE,		//C4
 	ACTIONITEM_TOGGLE_DOOR,
@@ -69,7 +69,7 @@ class SOLDIERTYPE;
 //Handles the dynamic changing of text input fields and button modes depending on the currently edited
 //item.	Both the merc's inventory panel, and the items tab use the same code to accomplish this.
 
-//Set if we are editing items from the items tab.	Otherwise, it is assumed that we are 
+//Set if we are editing items from the items tab.	Otherwise, it is assumed that we are
 //editing items from the merc's inventory panel.
 extern BOOLEAN gfItemEditingMode;
 

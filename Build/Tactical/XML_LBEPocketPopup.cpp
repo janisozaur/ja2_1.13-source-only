@@ -19,7 +19,7 @@ namespace POPUP_PARSE {
 
 		POCKET,
 		POCKET_PROPERTY,	// for reading pocket id
-		
+
 		POPUP,
 		POPUP_PROPERTY,	// unused
 		// for root-level popup
@@ -109,7 +109,7 @@ static UINT16 mapGeneratorNameToId( CHAR8 * name ){
 
 // maps option callback name strings found in XML to callback IDs used by the function that binds them
 static UINT16 mapCallbackNameToId( CHAR8 * name ){
-	
+
 	if( strcmp(name,"dummy") == 0 ){
 		return 1;
 	}  else return 0; // includes 'none'
@@ -118,7 +118,7 @@ static UINT16 mapCallbackNameToId( CHAR8 * name ){
 
 // maps option availability check function name strings found in XML to their IDs used by the function that binds them
 static UINT16 mapAvailNameToId( CHAR8 * name ){
-	
+
 	if( strcmp(name,"dummy") == 0 ){
 		return 1;
 	}  else return 0; // includes 'none'
@@ -169,8 +169,8 @@ pocketPopupStartElementHandle(void *userData, const XML_Char *name, const XML_Ch
 			pData->maxReadDepth++; //we are not skipping this element
 		}
 		else if(pData->curElement == POPUP_PARSE::OPTION &&		// popup option attributes (not in submenu)
-			   (  strcmp(name, "name") == 0 
-			   || strcmp(name, "action") == 0  
+			   (  strcmp(name, "name") == 0
+			   || strcmp(name, "action") == 0
 			   || strcmp(name, "availCheck") == 0 ))
 		{
 			pData->curElement = POPUP_PARSE::OPTION_PROPERTY;
@@ -227,8 +227,8 @@ pocketPopupStartElementHandle(void *userData, const XML_Char *name, const XML_Ch
 			pData->maxReadDepth++; //we are not skipping this element
 		}
 		else if(pData->curElement == POPUP_PARSE::SUBMENU_OPTION &&		// popup option attributes (submenu)
-			   (  strcmp(name, "name") == 0 
-			   || strcmp(name, "action") == 0  
+			   (  strcmp(name, "name") == 0
+			   || strcmp(name, "action") == 0
 			   || strcmp(name, "availCheck") == 0 ))
 		{
 			pData->curElement = POPUP_PARSE::SUBMENU_OPTION_PROPERTY;
@@ -276,7 +276,7 @@ pocketPopupEndElementHandle(void *userData, const XML_Char *name)
 {
 	pocketPopupParseData * pData = (pocketPopupParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "POCKETPOPUPS") == 0)
 		{
@@ -284,11 +284,11 @@ pocketPopupEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "POCKET") == 0)
 		{
-			pData->curElement = POPUP_PARSE::POCKET_LIST;	
-			
+			pData->curElement = POPUP_PARSE::POCKET_LIST;
+
 			// done with the pocket
 			// nothing to do because we already saved the popup when closing <popup> tag
-		
+
 		}
 		else if(strcmp(name, "pIndex") == 0)
 		{
@@ -303,7 +303,7 @@ pocketPopupEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "subMenu") == 0)
 		{
-			
+
 			// done with the subpopup definition
 
 			// rename the current option, we should've collected a name for it by now
@@ -431,7 +431,7 @@ BOOLEAN ReadInLBEPocketPopups(STR fileName)
 	UINT32		uiFSize;
 	CHAR8 *		lpcBuffer;
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	pocketPopupParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading pocketPopups.xml" );
@@ -439,7 +439,7 @@ BOOLEAN ReadInLBEPocketPopups(STR fileName)
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -454,14 +454,14 @@ BOOLEAN ReadInLBEPocketPopups(STR fileName)
 
 	FileClose( hFile );
 
-	
+
 	XML_SetElementHandler(parser, pocketPopupStartElementHandle, pocketPopupEndElementHandle);
 	XML_SetCharacterDataHandler(parser, pocketPopupCharacterDataHandle);
 
-	
+
 	memset(&pData,0,sizeof(pData));
 	XML_SetUserData(parser, &pData);
-	
+
 	XML_SetUserData(parser, &pData);
 
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))

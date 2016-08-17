@@ -1,14 +1,14 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include "Music Control.h"
-	#include "soundman.h"
+	#include "SoundMan.h"
 	#include "Random.h"
 	#include "jascreens.h"
-	#include "overhead.h"
-	#include "timer control.h"
-	#include "strategicmap.h"
+	#include "Overhead.h"
+	#include "Timer Control.h"
+	#include "StrategicMap.h"
 #endif
 
 #include "Overhead Types.h"
@@ -159,49 +159,49 @@ BOOLEAN MusicPlay(UINT32 uiNum)
 	else if ( NewSound == TRUE )
 	{
 		//sprintf( zFileName, szMusicList[15] );
-		if ( MusicMode == MUSIC_TACTICAL_NOTHING ) 
+		if ( MusicMode == MUSIC_TACTICAL_NOTHING )
 		{
 			sprintf( zFileName, "%s\\NOTHING_%d.ogg", szMusicList[15], uiNum);
 			if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\NOTHING_%d.wav", szMusicList[15], uiNum );
 		}
-		else if ( MusicMode == MUSIC_TACTICAL_ENEMYPRESENT ) 
+		else if ( MusicMode == MUSIC_TACTICAL_ENEMYPRESENT )
 		{
 			sprintf( zFileName, "%s\\TENSOR_%d.ogg", szMusicList[15], uiNum);
 			if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\TENSOR_%d.wav", szMusicList[15], uiNum );
 		}
-		else if ( MusicMode == MUSIC_TACTICAL_BATTLE ) 
+		else if ( MusicMode == MUSIC_TACTICAL_BATTLE )
 		{
 			sprintf( zFileName, "%s\\BATTLE_%d.ogg", szMusicList[15], uiNum);
 			if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\BATTLE_%d.wav", szMusicList[15], uiNum );
 		}
-		else if ( MusicMode == MUSIC_TACTICAL_VICTORY ) 
+		else if ( MusicMode == MUSIC_TACTICAL_VICTORY )
 		{
 			sprintf( zFileName, "%s\\TRIUMPH_%d.ogg", szMusicList[15], uiNum);
 		if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\TRIUMPH_%d.wav", szMusicList[15], uiNum );
 		}
-		else if ( MusicMode == MUSIC_TACTICAL_BATTLE_MUSIC ) 
+		else if ( MusicMode == MUSIC_TACTICAL_BATTLE_MUSIC )
 		{
 			sprintf( zFileName, "%s\\CREATURE_BATTLE_%d.ogg", szMusicList[15], uiNum);
 			if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\CREATURE_BATTLE_%d.wav", szMusicList[15], uiNum );
 		}
-		else if ( MusicMode == MUSIC_TACTICAL_CREEPY_MUSIC ) 
+		else if ( MusicMode == MUSIC_TACTICAL_CREEPY_MUSIC )
 		{
 			sprintf( zFileName, "%s\\CREEPY_%d.ogg", szMusicList[15], uiNum);
 			if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\CREEPY_%d.wav", szMusicList[15], uiNum );
 		}
-		else if ( MusicMode == OTHER_MUSIC_TACTICAL ) 
+		else if ( MusicMode == OTHER_MUSIC_TACTICAL )
 		{
 			sprintf( zFileName, "%s\\%d.ogg", szMusicList[15], uiNum);
 			if ( !FileExists( zFileName ) )
 				sprintf( zFileName, "%s\\%d.wav", szMusicList[15], uiNum );
 		}
-		
+
 	}
 #endif
 	uiMusicHandle = SoundPlayStreamedFile(zFileName, &spParms);
@@ -447,17 +447,17 @@ BOOLEAN MusicPoll(BOOLEAN /*fForce*/)
 static BOOLEAN SetMusicModeID(UINT8 ubMusicMode, INT32 SoundID, BOOLEAN fForce)
 {
 	static INT8 bPreviousMode = 0;
-	
+
 	static INT32 bPreviousMusic = 0;
-	
+
 	// OK, check if we want to restore
 	if (ubMusicMode == MUSIC_RESTORE)
 	{
 		if (bPreviousMode == MUSIC_TACTICAL_VICTORY || bPreviousMode == MUSIC_TACTICAL_DEATH)
 		{
 			bPreviousMode = MUSIC_TACTICAL_NOTHING;
-		}	
-		
+		}
+
 		ubMusicMode = bPreviousMode;
 		SoundID = bPreviousMusic;
 		GlobalSoundID  = SoundID;
@@ -490,7 +490,7 @@ static BOOLEAN SetMusicModeID(UINT8 ubMusicMode, INT32 SoundID, BOOLEAN fForce)
 			MusicFadeOut();
 		}
 		else
-		{		
+		{
 			// Change music!
 			StartMusicBasedOnMode();
 		}
@@ -510,9 +510,9 @@ static BOOLEAN SetMusicMode(UINT8 ubMusicMode, BOOLEAN fForce)
 	#ifdef NEWMUSIC
 	SetSoundID = FALSE;
 	//GlobalSoundID  = -1;
-	
+
 	if ( SetSoundID == FALSE )
-		NewSoundID = -1;	
+		NewSoundID = -1;
 	#endif
 
 	// OK, check if we want to restore
@@ -522,24 +522,24 @@ static BOOLEAN SetMusicMode(UINT8 ubMusicMode, BOOLEAN fForce)
 		{
 			bPreviousMode = MUSIC_TACTICAL_NOTHING;
 		}
-		
+
 		#ifdef NEWMUSIC
 		if ( GlobalSoundID == -1 )
 		{
 			SetSoundID = FALSE;
 			GlobalSoundID  = -1;
-			NewSoundID = -1;	
+			NewSoundID = -1;
 		}
 		else if ( GlobalSoundID != -1)
 		{
 			SetSoundID = TRUE;
-			NewSoundID = gubOldMusicMode2;	
+			NewSoundID = gubOldMusicMode2;
 			GlobalSoundID  = NewSoundID;
 		}
 		#endif
 		ubMusicMode = bPreviousMode;
-			
-		
+
+
 	}
 	else
 	{
@@ -638,8 +638,8 @@ static BOOLEAN StartMusicBasedOnMode(void)
 				{
 					SetSoundID = TRUE;
 					MusicPlay(NewSoundID,MUSIC_TACTICAL_NOTHING,TRUE);
-				}				
-				
+				}
+
 				bNothingModeSong = (INT8) (NOTHING_A_MUSIC + Random(4));
 			}
 			break;

@@ -3,7 +3,7 @@
 
 
 
-enum	
+enum
 {
 	LOADINGSCREEN_NOTHING,
 	LOADINGSCREEN_DAYGENERIC,
@@ -54,7 +54,7 @@ enum
 	DAY_ALT,
 	NIGHT_ALT,
 	UNDERGROUND,
-#ifdef JA2UB	
+#ifdef JA2UB
 	LOADINGSCREEN_HELI_CRASH,
 
 	LOADINGSCREEN_DAY_SNOW,
@@ -74,7 +74,7 @@ enum
 
 	LOADINGSCREEN_COMPLEX_TOP_LEVEL_DAY,
 	LOADINGSCREEN_COMPLEX_TOP_LEVEL_NIGHT,
-	
+
 	LOADINGSCREEN_TUNNELS,
 #endif
 };
@@ -87,7 +87,7 @@ extern UINT8 gubLastLoadingScreenID;
 //returns the UINT8 ID for the specified sector.
 UINT8 GetLoadScreenID( INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ );
 
-//sets up the loadscreen with specified ID, and draws it to the FRAME_BUFFER, 
+//sets up the loadscreen with specified ID, and draws it to the FRAME_BUFFER,
 //and refreshing the screen with it.
 void DisplayLoadScreenWithID( UINT8 ubLoadScreenID );
 

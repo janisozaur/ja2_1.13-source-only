@@ -1,29 +1,29 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Skill Trait.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Skill Trait.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "_Ja25EnglishText.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Compile Character.h"
 	#include "GameSettings.h" // added by SANDRO
 	#include "IMP Color Choosing.h" // added by SANDRO
 	#include "IMP Minor Trait.h"
 	#include "Soldier Profile.h"
-	#include "personnel.h"		// added by Flugente
+	#include "Personnel.h"		// added by Flugente
 #endif
 
 
@@ -155,7 +155,7 @@ void EnterIMPSkillTrait( void )
 		Assert( 0 );
 		return;
 	}
-	
+
 	giIMPSkillTraitFinsihButtonImage =	LoadButtonImage( "LAPTOP\\button_5.sti" ,-1,0,-1,1,-1 );
 	giIMPSkillTraitFinsihButton = CreateIconAndTextButton( giIMPSkillTraitFinsihButtonImage, pImpButtonText[ 24 ], FONT12ARIAL,
 																FONT_WHITE, DEFAULT_SHADOW,
@@ -163,7 +163,7 @@ void EnterIMPSkillTrait( void )
 																TEXT_CJUSTIFIED,
 																LAPTOP_SCREEN_UL_X +	( 350 ), LAPTOP_SCREEN_WEB_UL_Y + ( 340 ), BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 																BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnIMPSkillTraitFinishCallback );
-	
+
 	SetButtonCursor( giIMPSkillTraitFinsihButton, CURSOR_WWW);
 
 	//if we are not DONE and are just reviewing
@@ -203,7 +203,7 @@ void EnterIMPSkillTrait( void )
 						(usPosX + 156), ( usPosY + 17), MSYS_PRIORITY_HIGH,
 							MSYS_NO_CURSOR, MSYS_NO_CALLBACK, NULL );
 		MSYS_AddRegion( &gMR_SkillTraitHelpTextRegions[uiCnt] );
-		
+
 		//Determine the next x location
 		if( uiCnt < (UINT8)(gGameOptions.fNewTraitSystem ? 4 : 6) )
 			usPosX = IMP_SKILL_TRAIT__LEFT_COLUMN_START_X + 62;
@@ -379,7 +379,7 @@ void AddImpSkillTraitButtons()
 			usPosY = IMP_SKILL_TRAIT__NONE_BTN_LOC_Y;
 		}
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////
 	// SECOND COLUMN OF BUTTONS
 
@@ -528,7 +528,7 @@ void HandleIMPSkillTraitAnswers( UINT32 uiSkillPressed, BOOLEAN fSecondTrait )
 		}
 		else
 		{
-			// if the other trait has not been set yet, we rather set it now, 
+			// if the other trait has not been set yet, we rather set it now,
 			// instead of deselecting the already set one
 			if( gfSkillTraitQuestions2[ uiCntMax-1 ] == TRUE && gfSkillTraitQuestions[ uiCntMax-1 ] == FALSE && (uiSkillPressed != (uiCntMax-1)) )
 			{
@@ -567,7 +567,7 @@ void HandleIMPSkillTraitAnswers( UINT32 uiSkillPressed, BOOLEAN fSecondTrait )
 							{
 								gfSkillTraitQuestions[ GetLastSelectedSkill() ] = FALSE;
 							}
-							else 
+							else
 							{
 								gfSkillTraitQuestions2[ GetLastSelectedSkill() ] = FALSE;
 							}
@@ -604,7 +604,7 @@ void HandleIMPSkillTraitAnswers( UINT32 uiSkillPressed, BOOLEAN fSecondTrait )
 				}
 			}
 		}
-		
+
 		//Play the button sound
 		if( gfSkillTraitQuestions[ uiSkillPressed ] )
 		{
@@ -642,7 +642,7 @@ void HandleIMPSkillTraitAnswers( UINT32 uiSkillPressed, BOOLEAN fSecondTrait )
 		}
 		else
 		{
-			// if the other trait has not been set yet, we rather set it now, 
+			// if the other trait has not been set yet, we rather set it now,
 			// instead of deselecting the already set one
 			if( gfSkillTraitQuestions[ uiCntMax-1 ] == TRUE && gfSkillTraitQuestions2[ uiCntMax-1 ] == FALSE && (uiSkillPressed != (uiCntMax-1)) )
 			{
@@ -681,7 +681,7 @@ void HandleIMPSkillTraitAnswers( UINT32 uiSkillPressed, BOOLEAN fSecondTrait )
 							{
 								gfSkillTraitQuestions2[ GetLastSelectedSkill() ] = FALSE;
 							}
-							else 
+							else
 							{
 								gfSkillTraitQuestions[ GetLastSelectedSkill() ] = FALSE;
 							}
@@ -718,7 +718,7 @@ void HandleIMPSkillTraitAnswers( UINT32 uiSkillPressed, BOOLEAN fSecondTrait )
 				}
 			}
 		}
-		
+
 		//Play the button sound
 		if( gfSkillTraitQuestions2[ uiSkillPressed ] )
 		{
@@ -760,7 +760,7 @@ INT8	CountNumSkillTraitsSelected( BOOLEAN fIncludeNoneSkill )
 		if( gfSkillTraitQuestions2[ uiCnt ] )
 		{
 			++iNumberSkills;
-		} 
+		}
 	}
 
 	return( iNumberSkills );
@@ -805,7 +805,7 @@ void IMPSkillTraitDisplaySkills()
 	UINT16 usBoxPosX, usBoxPosY;
 	INT16 usSpaceBetweenButtons;
 	UINT8 uiNumSkillsToStartRightColumn;
-	HVOBJECT	hImageHandle;	
+	HVOBJECT	hImageHandle;
 
 	if ( gGameOptions.fNewTraitSystem )
 	{
@@ -866,7 +866,7 @@ void IMPSkillTraitDisplaySkills()
 		{
 			if ( gfSkillTraitQuestions[ uiCnt ] && gfSkillTraitQuestions2[ uiCnt ] && uiCnt != IMP_SKILL_TRAITS_NEW_MAJOR_NONE )
 				DrawTextToScreen( gzIMPSkillTraitsTextNewMajor[ uiCnt+12 ], usPosX, usPosY, 0, IMP_SKILL_TRAIT__FONT, IMP_SKILL_TRAIT__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
-			else 
+			else
 				DrawTextToScreen( gzIMPSkillTraitsTextNewMajor[ uiCnt ], usPosX, usPosY, 0, IMP_SKILL_TRAIT__FONT, IMP_SKILL_TRAIT__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 		}
 		else
@@ -925,7 +925,7 @@ void BtnIMPSkillTraitFinishCallback(GUI_BUTTON *btn,INT32 reason)
 		if( gGameOptions.fNewTraitSystem )
 		{
 			iCurrentImpPage = IMP_MINOR_TRAITS_PAGE;
-			fButtonPendingFlag = TRUE;		
+			fButtonPendingFlag = TRUE;
 		}
 		else
 		{
@@ -947,7 +947,7 @@ void BtnIMPSkillTraitFinishCallback(GUI_BUTTON *btn,INT32 reason)
 					//We are finished on this page
 					iCurrentProfileMode = IMP__ATTRIBUTES;
 				}
-			}		
+			}
 		}
 	}
 }
@@ -979,11 +979,11 @@ INT32	DoesPlayerHaveExtraAttibutePointsToDistributeBasedOnSkillSelection()
 		// add selected minor traits
 		bNumSkills += CountNumMinorTraitsSelected( FALSE );
 
-		iExtraPoints = (max( 0, 3 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken); 
+		iExtraPoints = (max( 0, 3 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken);
 	}
 	else
 	{
-		iExtraPoints = (max( 0, 2 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken); 
+		iExtraPoints = (max( 0, 2 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken);
 	}
 
 	return( iExtraPoints );
@@ -1031,7 +1031,7 @@ void AddSelectedSkillsToSkillsList()
 					case IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS:
 						AddSkillToSkillList( HEAVY_WEAPONS_NT );
 						break;
-	
+
 					case IMP_SKILL_TRAITS_NEW_PROF_SNIPER:
 						AddSkillToSkillList( SNIPER_NT );
 						break;
@@ -1150,7 +1150,7 @@ void AddSelectedSkillsToSkillsList()
 					case IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS:
 						AddSkillToSkillList( HEAVY_WEAPONS_NT );
 						break;
-	
+
 					case IMP_SKILL_TRAITS_NEW_PROF_SNIPER:
 						AddSkillToSkillList( SNIPER_NT );
 						break;
@@ -1250,7 +1250,7 @@ void AddSelectedSkillsToSkillsList()
 					case IMP_SKILL_TRAITS__MARTIAL_ARTS:
 						AddSkillToSkillList( MARTIALARTS_OT );
 						break;
-						
+
 					default:
 						break;
 				}
@@ -1275,7 +1275,7 @@ void HandleLastSelectedTraits( INT8 bNewTrait )
 				break;
 			}
 		}
-		
+
 	}
 	else
 	{

@@ -77,11 +77,11 @@ additionalTilePropertyEndElementHandle(void *userData, const XML_Char *name)
 {
 	additionalTilePropertyParseData * pData = (additionalTilePropertyParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "ADDITIONALTILEPROPERTIES") == 0)
 		{
-			pData->curElement = ELEMENT;	
+			pData->curElement = ELEMENT;
 		}
 		else if(strcmp(name, "ubTerrainID") == 0)
 		{
@@ -150,7 +150,7 @@ BOOLEAN ReadInAdditionalTileProperties(STR fileName)
 	additionalTilePropertyParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading AdditionalTilePropertys.xml" );
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -213,7 +213,7 @@ BOOLEAN WriteAdditionalTileProperties( STR fileName)
 		{
 			FilePrintf(hFile,"\t<TILESET>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);
-			
+
 			FilePrintf(hFile,"\t</TILESET>\r\n");
 		}
 		FilePrintf(hFile,"</additionalTilePropertyS>\r\n");

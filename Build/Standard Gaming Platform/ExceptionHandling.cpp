@@ -266,7 +266,7 @@ STR	GetExceptionString( DWORD uiExceptionCode )
 		case EXCEPTION_NONCONTINUABLE_EXCEPTION:
  			return( "The thread tried to continue execution after a noncontinuable exception occurred.");
 		case EXCEPTION_PRIV_INSTRUCTION:
- 			return( "The thread tried to execute an instruction whose operation is not allowed in the current machine mode."); 
+ 			return( "The thread tried to execute an instruction whose operation is not allowed in the current machine mode.");
 		case EXCEPTION_SINGLE_STEP:
  			return( "A trace trap or other single-instruction mechanism signaled that one instruction has been executed.");
 		case EXCEPTION_STACK_OVERFLOW:
@@ -320,7 +320,7 @@ BOOLEAN GetAndDisplayModuleAndSystemInfo( HWFILE hFile, CONTEXT *pContext )
 	if (GetFileManFileTime(hFile, 0, 0, &LastWriteTime))
 	{
 		PrintTime( zString, LastWriteTime);
-	
+
 		ErrorLog( hFile, "\tFile created on: %s\r\n", zString );
 	}
 
@@ -404,7 +404,7 @@ BOOLEAN DisplayStack( HWFILE hFile, CONTEXT	*pContext	)
 				Suffix = "\r\n";
 			output += wsprintf(output, "%08x%s", *pStack, Suffix);
 			pStack++;
-	
+
 			// Check for when the buffer is almost full, and flush it to disk.
 			if (output > nearend)
 			{
@@ -636,7 +636,7 @@ BOOL __stdcall IsNT ( void )
 typedef DWORD (__stdcall *FVN_GetFileVersionInfoSize)(LPCTSTR, LPDWORD );
 static FVN_GetFileVersionInfoSize g_GetFileVersionInfoSize = NULL;
 
-static DWORD __stdcall 
+static DWORD __stdcall
 ERGetFileVersionInfoSize(LPCTSTR lptstrFilename, LPDWORD lpdwHandle)
 {
 	if (g_GetFileVersionInfoSize)
@@ -651,7 +651,7 @@ typedef BOOL (__stdcall *FVN_GetFileVersionInfo)(LPCTSTR, DWORD, DWORD, LPVOID);
 static FVN_GetFileVersionInfo g_GetFileVersionInfo = NULL;
 
 static BOOL __stdcall
-ERGetFileVersionInfo(LPCTSTR lptstrFilename, DWORD dwHandle, 
+ERGetFileVersionInfo(LPCTSTR lptstrFilename, DWORD dwHandle,
 						  DWORD dwLen, LPVOID lpData)
 {
 	if (g_GetFileVersionInfo)
@@ -665,7 +665,7 @@ typedef BOOL (__stdcall *FVN_VerQueryValue)(const LPVOID, LPTSTR, LPVOID *, PUIN
 static FVN_VerQueryValue g_VerQueryValue = NULL;
 
 static BOOL __stdcall
-ERVerQueryValue(const LPVOID pBlock, LPTSTR lpSubBlock, 
+ERVerQueryValue(const LPVOID pBlock, LPTSTR lpSubBlock,
 			  	            LPVOID *lplpBuffer, PUINT puLen)
 {
 	if (g_VerQueryValue)
@@ -726,28 +726,28 @@ static BOOL __stdcall ERSymCleanup(HANDLE hProcess)
 	return 0;
 }
 
-typedef BOOL (__stdcall *FVN_StackWalk)(DWORD, HANDLE, HANDLE, LPSTACKFRAME, PVOID, 
+typedef BOOL (__stdcall *FVN_StackWalk)(DWORD, HANDLE, HANDLE, LPSTACKFRAME, PVOID,
 			  PREAD_PROCESS_MEMORY_ROUTINE,  PFUNCTION_TABLE_ACCESS_ROUTINE ,
 			  PGET_MODULE_BASE_ROUTINE, PTRANSLATE_ADDRESS_ROUTINE);
 static FVN_StackWalk g_StackWalk = NULL;
 
 static BOOL __stdcall ERStackWalk(
-  DWORD MachineType, 
-  HANDLE hProcess, 
-  HANDLE hThread, 
-  LPSTACKFRAME StackFrame, 
-  PVOID ContextRecord, 
-  PREAD_PROCESS_MEMORY_ROUTINE ReadMemoryRoutine,  
+  DWORD MachineType,
+  HANDLE hProcess,
+  HANDLE hThread,
+  LPSTACKFRAME StackFrame,
+  PVOID ContextRecord,
+  PREAD_PROCESS_MEMORY_ROUTINE ReadMemoryRoutine,
   PFUNCTION_TABLE_ACCESS_ROUTINE FunctionTableAccessRoutine,
-  PGET_MODULE_BASE_ROUTINE GetModuleBaseRoutine, 
-  PTRANSLATE_ADDRESS_ROUTINE TranslateAddress 
+  PGET_MODULE_BASE_ROUTINE GetModuleBaseRoutine,
+  PTRANSLATE_ADDRESS_ROUTINE TranslateAddress
 )
 {
 	if (g_StackWalk)
 	{
-		return (*g_StackWalk)(MachineType, hProcess, hThread, StackFrame, 
-				ContextRecord, ReadMemoryRoutine,  FunctionTableAccessRoutine, 
-				GetModuleBaseRoutine, TranslateAddress 
+		return (*g_StackWalk)(MachineType, hProcess, hThread, StackFrame,
+				ContextRecord, ReadMemoryRoutine,  FunctionTableAccessRoutine,
+				GetModuleBaseRoutine, TranslateAddress
 			);
 	}
 	return 0;
@@ -756,7 +756,7 @@ static BOOL __stdcall ERStackWalk(
 typedef LPVOID (__stdcall *FVN_SymFunctionTableAccess)(HANDLE,  DWORD);
 static FVN_SymFunctionTableAccess g_SymFunctionTableAccess = NULL;
 
-static LPVOID __stdcall 
+static LPVOID __stdcall
 ERSymFunctionTableAccess(HANDLE hProcess,  DWORD AddrBase)
 {
 	if (g_SymFunctionTableAccess)
@@ -769,7 +769,7 @@ ERSymFunctionTableAccess(HANDLE hProcess,  DWORD AddrBase)
 typedef BOOL (__stdcall *FVN_SymGetModuleBase)(HANDLE, DWORD);
 static FVN_SymGetModuleBase g_SymGetModuleBase = NULL;
 
-static DWORD __stdcall 
+static DWORD __stdcall
 ERSymGetModuleBase(HANDLE hProcess, DWORD dwAddr)
 {
 	if (g_SymGetModuleBase)
@@ -782,7 +782,7 @@ ERSymGetModuleBase(HANDLE hProcess, DWORD dwAddr)
 typedef BOOL (__stdcall *FVN_SymGetModuleInfo)(HANDLE, DWORD, PIMAGEHLP_MODULE);
 static FVN_SymGetModuleInfo g_SymGetModuleInfo = NULL;
 
-static BOOL __stdcall 
+static BOOL __stdcall
 ERSymGetModuleInfo(HANDLE hProcess, DWORD dwAddr, PIMAGEHLP_MODULE ModuleInfo)
 {
 	if (g_SymGetModuleInfo)
@@ -795,7 +795,7 @@ ERSymGetModuleInfo(HANDLE hProcess, DWORD dwAddr, PIMAGEHLP_MODULE ModuleInfo)
 typedef BOOL (__stdcall *FVN_SymGetSymFromAddr)(HANDLE, DWORD, PDWORD, PIMAGEHLP_SYMBOL);
 static FVN_SymGetSymFromAddr g_SymGetSymFromAddr = NULL;
 
-static BOOL __stdcall 
+static BOOL __stdcall
 ERSymGetSymFromAddr(HANDLE hProcess, DWORD Address, PDWORD Displacement, PIMAGEHLP_SYMBOL Symbol)
 {
 	if (g_SymGetSymFromAddr)
@@ -807,7 +807,7 @@ ERSymGetSymFromAddr(HANDLE hProcess, DWORD Address, PDWORD Displacement, PIMAGEH
 
 typedef BOOL (__stdcall *FVN_SymGetLineFromAddr)(HANDLE, DWORD64, PDWORD, PER_IMAGEHLP_LINE64);
 static FVN_SymGetLineFromAddr g_SymGetLineFromAddr = NULL;
-static BOOL __stdcall 
+static BOOL __stdcall
 	ERSymGetLineFromAddr(HANDLE hProcess, DWORD64 Address, PDWORD Displacement, PER_IMAGEHLP_LINE64 Line)
 {
 	if (g_SymGetLineFromAddr)
@@ -828,7 +828,7 @@ static FVN_MiniDumpWriteDump g_MiniDumpWriteDump = NULL;
 
 static CRITICAL_SECTION g_miniCritSec;
 
-static BOOL __stdcall 
+static BOOL __stdcall
 	ERMiniDumpWriteDump(HANDLE hProcess,
 	DWORD dwPid,
 	HANDLE hFile,
@@ -874,9 +874,9 @@ static BOOL ERLoadImageHlpDLL()
 			g_MiniDumpWriteDump = (FVN_MiniDumpWriteDump)GetProcAddress(g_ImgHlpMod, "MiniDumpWriteDump");
 		}
 	}
-	if (g_ImgHlpMod && 
-		g_SymInitialize    && g_SymCleanup && 
-		g_StackWalk        && g_SymFunctionTableAccess && 
+	if (g_ImgHlpMod &&
+		g_SymInitialize    && g_SymCleanup &&
+		g_StackWalk        && g_SymFunctionTableAccess &&
 		g_SymGetModuleBase && g_SymGetModuleInfo &&
 		g_SymGetSymFromAddr)
 		return TRUE;
@@ -893,7 +893,7 @@ static BOOL ERLoadImageHlpDLL()
 typedef BOOL (__stdcall *FVN_EnumProcessModules)(HANDLE, HMODULE *, DWORD , LPDWORD );
 static FVN_EnumProcessModules g_EnumProcessModules = NULL;
 
-static BOOL __stdcall 
+static BOOL __stdcall
 EREnumProcessModules(HANDLE hProcess, HMODULE *lphModule, DWORD cb, LPDWORD lpcbNeeded)
 {
 	if (g_EnumProcessModules)
@@ -906,7 +906,7 @@ EREnumProcessModules(HANDLE hProcess, HMODULE *lphModule, DWORD cb, LPDWORD lpcb
 typedef BOOL (__stdcall *FVN_GetModuleInformation)(HANDLE, HMODULE, LPMODULEINFO, DWORD);
 static FVN_GetModuleInformation g_GetModuleInformation = NULL;
 
-static BOOL __stdcall 
+static BOOL __stdcall
 ERGetModuleInformation(HANDLE hProcess, HMODULE hModule, LPMODULEINFO lpmodinfo, DWORD cb)
 {
 	if (g_GetModuleInformation)
@@ -979,7 +979,7 @@ static BOOL EREnablePriv(LPCTSTR pszPriv, HANDLE hToken, TOKEN_PRIVILEGES* ptpOl
 
 static BOOL ERRestorePriv(HANDLE hToken, TOKEN_PRIVILEGES* ptpOld)
 {
-	BOOL bOk = AdjustTokenPrivileges(hToken, FALSE, ptpOld, 0, 0, 0);	
+	BOOL bOk = AdjustTokenPrivileges(hToken, FALSE, ptpOld, 0, 0, 0);
 	return (bOk && (ERROR_NOT_ALL_ASSIGNED != GetLastError()));
 }
 
@@ -999,9 +999,9 @@ static BOOL ERGenerateMiniDump(CHAR *szFileName, PEXCEPTION_POINTERS pExceptionI
 	}
 
 	// Create the dump file
-	hDumpFile = CreateFileA(szFileName, 
-		GENERIC_READ | GENERIC_WRITE, 
-		FILE_SHARE_WRITE | FILE_SHARE_READ, 
+	hDumpFile = CreateFileA(szFileName,
+		GENERIC_READ | GENERIC_WRITE,
+		FILE_SHARE_WRITE | FILE_SHARE_READ,
 		0, CREATE_ALWAYS, 0, 0);
 	if(hDumpFile == INVALID_HANDLE_VALUE)
 	{
@@ -1032,7 +1032,7 @@ static BOOL ERGenerateMiniDump(CHAR *szFileName, PEXCEPTION_POINTERS pExceptionI
 		// Restore the privilege
 		ERRestorePriv(hImpersonationToken, &tp);
 	}
-	
+
 	CloseHandle(hDumpFile);
 	CloseHandle(hImpersonationToken);
 
@@ -1064,7 +1064,7 @@ LONG __stdcall ERCrashDumpExceptionFilterEx(const CHAR *pAppName, const CHAR* pP
 			lstrcat(szPathName, "\\");
 
 		// Create filename
-		GetLocalTime(&stTime); 
+		GetLocalTime(&stTime);
 
 		if (pAppName == NULL)
 		{
@@ -1084,7 +1084,7 @@ LONG __stdcall ERCrashDumpExceptionFilterEx(const CHAR *pAppName, const CHAR* pP
 
 		// Generate proper mini dump
 		ERGenerateMiniDump(szPathName, pExPtrs);
-	}	
+	}
 	__except ( EXCEPTION_EXECUTE_HANDLER )
 	{
 		lRet = EXCEPTION_CONTINUE_SEARCH ;
@@ -1105,8 +1105,8 @@ LONG __stdcall ERGetVersionStringA(LPCSTR szModName, LPSTR szVersion, int maxlen
 #ifdef _USE_VERSIONING_
 	if (ERLoadVersionDLL())
 	{
-		UINT  dwBytes = 0;     
-		LPVOID lpBuffer = 0; 
+		UINT  dwBytes = 0;
+		LPVOID lpBuffer = 0;
 		LPVOID lpData;
 		DWORD dwSize;
 
@@ -1194,7 +1194,7 @@ static void ERLogStackWalk(HWFILE fdump, EXCEPTION_POINTERS* pExPtrs)
 
     ErrorLog(fdump, "FramePtr ReturnAd Param#1  Param#2  Param#3  Param#4  Function Name\r\n");
 
-    for (i=0; i<15; i++) 
+    for (i=0; i<15; i++)
 	{
         if (!ERStackWalk( IMAGE_FILE_MACHINE_I386,
 						hProc,
@@ -1204,11 +1204,11 @@ static void ERLogStackWalk(HWFILE fdump, EXCEPTION_POINTERS* pExPtrs)
                         NULL,
 						ERSymFunctionTableAccess,
 						ERSymGetModuleBase,
-                        NULL)) 
+                        NULL))
 		{
             break;
         }
-		
+
         if (ERSymGetSymFromAddr(hProc, stFrame.AddrPC.Offset, &dwDisplacement, g_sym)) {
             szSymName = g_sym->Name;
         }
@@ -1236,19 +1236,19 @@ static void ERLogStackWalk(HWFILE fdump, EXCEPTION_POINTERS* pExPtrs)
             ErrorLog(fdump, "[omap] " );
         }
 
-        if (stFrame.FuncTableEntry) 
+        if (stFrame.FuncTableEntry)
 		{
             PFPO_DATA pFpoData = (PFPO_DATA)stFrame.FuncTableEntry;
-            switch (pFpoData->cbFrame) 
+            switch (pFpoData->cbFrame)
 			{
                 case FRAME_FPO:
-                    if (pFpoData->fHasSEH) 
+                    if (pFpoData->fHasSEH)
 					{
                         ErrorLog(fdump, "(FPO: [SEH])" );
-                    } else 
+                    } else
 					{
                         ErrorLog(fdump, " (FPO:" );
-                        if (pFpoData->fUseBP) 
+                        if (pFpoData->fUseBP)
 						{
                             ErrorLog(fdump, " [EBP 0x%08x]", SAVE_EBP(stFrame) );
                         }
@@ -1291,7 +1291,7 @@ static void ERLogStackWalk(HWFILE fdump, EXCEPTION_POINTERS* pExPtrs)
 //************************************
 // Method:    ERLogStackWalk
 // FullName:  ERLogStackWalk
-// Access:    public static 
+// Access:    public static
 // Returns:   LPCSTR  (Free with LocalFree)
 // Qualifier:
 // Parameter: EXCEPTION_POINTERS * pExPtrs
@@ -1331,7 +1331,7 @@ LPCSTR ERStackWalk(EXCEPTION_POINTERS* pExPtrs)
 	stFrame.AddrFrame.Offset    = Context.Ebp ;
 	stFrame.AddrFrame.Mode      = AddrModeFlat                ;
 
-	for (i=0; i<100; i++) 
+	for (i=0; i<100; i++)
 	{
 		if (!ERStackWalk( IMAGE_FILE_MACHINE_I386,
 			hProc,
@@ -1341,7 +1341,7 @@ LPCSTR ERStackWalk(EXCEPTION_POINTERS* pExPtrs)
 			NULL,
 			ERSymFunctionTableAccess,
 			ERSymGetModuleBase,
-			NULL)) 
+			NULL))
 		{
 			break;
 		}
@@ -1393,7 +1393,7 @@ LPCSTR ERStackWalk(EXCEPTION_POINTERS* pExPtrs)
 //************************************
 // Method:    ERGetFirstModuleException
 // FullName:  ERGetFirstModuleException
-// Access:    public 
+// Access:    public
 // Returns:   BOOL
 // Qualifier:
 // Parameter: EXCEPTION_POINTERS * pExPtrs
@@ -1445,7 +1445,7 @@ BOOL ERGetFirstModuleException(
 	stFrame.AddrFrame.Offset    = Context.Ebp ;
 	stFrame.AddrFrame.Mode      = AddrModeFlat                ;
 
-	for (i=0; i<15; i++) 
+	for (i=0; i<15; i++)
 	{
 		if (!ERStackWalk( IMAGE_FILE_MACHINE_I386,
 			hProc,
@@ -1455,7 +1455,7 @@ BOOL ERGetFirstModuleException(
 			NULL,
 			ERSymFunctionTableAccess,
 			ERSymGetModuleBase,
-			NULL)) 
+			NULL))
 		{
 			break;
 		}
@@ -1468,7 +1468,7 @@ BOOL ERGetFirstModuleException(
 		}
 		memset(&mi, 0, sizeof(mi));
 		mi.SizeOfStruct = sizeof(mi);
-		if (!ERSymGetModuleInfo(hProc, stFrame.AddrPC.Offset, &mi )) 
+		if (!ERSymGetModuleInfo(hProc, stFrame.AddrPC.Offset, &mi ))
 			continue;
 
 		if (mi.BaseOfImage != (DWORD)hModule)
@@ -1556,8 +1556,8 @@ void ERLogModules(HWFILE fdump)
 #ifdef _USE_VERSIONING_
 						if (bVerOK)
 						{
-							UINT  dwBytes = 0;     
-							LPVOID lpBuffer = 0; 
+							UINT  dwBytes = 0;
+							LPVOID lpBuffer = 0;
 							LPVOID lpData;
 							DWORD dwSize;
 
@@ -1594,7 +1594,7 @@ void ERLogModules(HWFILE fdump)
 		}
 	}
 	ERSymCleanup(hProc);
-#endif	
+#endif
 }
 
 #endif

@@ -19,9 +19,9 @@
 //
 //**************************************************************************
 
-#include "types.h"
+#include "Types.h"
 
-#include "Windows.h"
+#include <windows.h>
 
 #include "FileCat.h"
 

@@ -34,7 +34,7 @@
 
 	BOOL popupDef::addOption(std::wstring* name, UINT16 callbackId, UINT16 availId){
 		// TODO: check for vaid callbacl/avail ID
-		
+
 		this->content.push_back( new popupDefOption(name,callbackId,availId) );
 
 		return TRUE;
@@ -45,7 +45,7 @@
 		popupDefSubPopupOption * sub = new popupDefSubPopupOption(name);
 
 		this->content.push_back( sub );
-	
+
 		return sub->getSubDef();
 	}
 
@@ -78,7 +78,7 @@
 //////////////////////////////////////
 
 	static BOOL setPopupDefCallback( POPUP_OPTION * opt, UINT16 callbackId ){
-	
+
 		// TODO
 		opt->setAction(NULL);
 
@@ -87,7 +87,7 @@
 	}
 
 	static BOOL setPopupDefAvail( POPUP_OPTION * opt, UINT16 callbackId ){
-	
+
 		// TODO
 		opt->setAvail(NULL);
 
@@ -105,18 +105,18 @@
 	~popupDefOption::popupDefOption(){}
 	*/
 	BOOL popupDefOption::addToBox(POPUP * popup){
-	
+
 		POPUP_OPTION * opt = new POPUP_OPTION();
 
 		opt->setName( this->name );
-		if (	!setPopupDefCallback(opt, this->callbackId) 
+		if (	!setPopupDefCallback(opt, this->callbackId)
 			||	!setPopupDefAvail(opt, this->availId) )
 		{
 			delete opt;
 			return false;
 		}
-		
-	
+
+
 		return popup->addOption(*opt);
 	}
 
@@ -127,11 +127,11 @@
 	/* defined in header file
 	popupDefSubPopupOption::popupDefSubPopupOption(){}
 	popupDefSubPopupOption::popupDefSubPopupOption( std::wstring* name ){}
-	
+
 	popupDefSubPopupOption::~popupDefSubPopupOption(){}
 	*/
 	BOOL popupDefSubPopupOption::addToBox(POPUP * popup){
-	
+
 		POPUP_SUB_POPUP_OPTION * sub = new POPUP_SUB_POPUP_OPTION( this->name );
 
 		if( !this->content->applyToBox( sub->subPopup ) ){
@@ -139,9 +139,9 @@
 			return false;
 		}
 
-		return popup->addSubMenuOption(sub);	
+		return popup->addSubMenuOption(sub);
 	}
-	
+
 
 //////////////////////////////////////
 //	popupDefContentGenerator helpers
@@ -214,7 +214,7 @@
 		}
 
 		return TRUE;
-		
+
 	}
 
 //////////////////////////////////////
@@ -223,13 +223,12 @@
 	/* defined in header file
 	popupDefContentGenerator::popupDefContentGenerator(){}
 	popupDefContentGenerator::popupDefContentGenerator( UINT16 generatorId ){}
-	
+
 	popupDefContentGenerator::~popupDefContentGenerator(){}
 	*/
 
 	BOOL popupDefContentGenerator::addToBox(POPUP * popup){
-	
+
 		return applyPopupContentGenerator( popup, this->generatorId );
-	
+
 	}
-	

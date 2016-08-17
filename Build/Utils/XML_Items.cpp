@@ -2,23 +2,23 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead types.h"
+	#include "Overhead Types.h"
 	#include "Soldier Control.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Event Pump.h"
-	#include "weapons.h"
+	#include "Weapons.h"
 	#include "Animation Control.h"
 	#include "Handle UI.h"
 	#include "Isometric Utils.h"
 	#include "math.h"
-	#include "ai.h"
-	#include "los.h"
-	#include "renderworld.h"
-	#include "interface.h"
-	#include "message.h"
-	#include "campaign.h"
-	#include "items.h"
-	#include "text.h"
+	#include "AI.h"
+	#include "LOS.h"
+	#include "RenderWorld.h"
+	#include "Interface.h"
+	#include "Message.h"
+	#include "Campaign.h"
+	#include "Items.h"
+	#include "Text.h"
 	#include "Soldier Profile.h"
 	#include "Dialogue Control.h"
 	#include "SkillCheck.h"
@@ -26,16 +26,16 @@
 	#include "Physics.h"
 	#include "Random.h"
 	#include "Vehicles.h"
-	#include "bullets.h"
-	#include "morale.h"
+	#include "Bullets.h"
+	#include "Morale.h"
 	#include "SkillCheck.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "SaveLoadMap.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
-	#include "utilities.h"
-	#include "store inventory.h"
+	#include "Utilities.h"
+	#include "Store Inventory.h"
 #endif
 
 // Flugente: in order not to loop over MAXITEMS items if we only have a few thousand, remember the actual number of items in the xml
@@ -50,7 +50,7 @@ struct
 	INVTYPE *	curArray;
 	UINT32			maxArraySize;
 	INT8		curStance;
-	
+
 	UINT32			currentDepth;
 	UINT32			maxReadDepth;
 }
@@ -61,7 +61,7 @@ BOOLEAN localizedTextOnly;
 // HEADROCK HAM 4: Inherits data between stance-based modifiers
 void InheritStanceModifiers( itemParseData *pData );
 
-static void XMLCALL 
+static void XMLCALL
 itemStartElementHandle(void *userData, const XML_Char *name, const XML_Char **atts)
 {
 	itemParseData * pData = (itemParseData *)userData;
@@ -276,7 +276,7 @@ itemStartElementHandle(void *userData, const XML_Char *name, const XML_Char **at
 				strcmp(name, "DisarmModifier") == 0 ||
 				strcmp(name, "RepairModifier") == 0 ||
 				strcmp(name, "usHackingModifier" ) == 0 ||
-				
+
 				strcmp(name, "usActionItemFlag") == 0 ||
 				strcmp(name, "clothestype") == 0 ||
 				strcmp(name, "randomitem") == 0 ||
@@ -322,7 +322,7 @@ itemStartElementHandle(void *userData, const XML_Char *name, const XML_Char **at
 
 			pData->maxReadDepth++;
 		}
-		
+
 		// HEADROCK HAM 4: Read stance-based variables
 		else if(pData->curElement == ELEMENT_SUBLIST &&
 				(strcmp(name, "FlatBase") == 0 ||
@@ -355,7 +355,7 @@ itemCharacterDataHandle(void *userData, const XML_Char *str, int len)
 {
 	itemParseData * pData = (itemParseData *)userData;
 
-	if( (pData->currentDepth <= pData->maxReadDepth) && 
+	if( (pData->currentDepth <= pData->maxReadDepth) &&
 		(strlen(pData->szCharData) < MAX_CHAR_DATA_LENGTH)
 	  ){
 		strncat(pData->szCharData,str,__min((unsigned int)len,MAX_CHAR_DATA_LENGTH-strlen(pData->szCharData)));
@@ -381,7 +381,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT_LIST;
 
-			if(pData->curItem.uiIndex < pData->maxArraySize) 
+			if(pData->curItem.uiIndex < pData->maxArraySize)
 			{
 				if ( pData->curItem.usItemClass != 0 )
 				{
@@ -1499,7 +1499,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 			if ( val )
 				pData->curItem.usItemFlag |= DISEASEPROTECTION_2;
 		}
-										
+
 		--pData->maxReadDepth;
 	}
 
@@ -1517,18 +1517,18 @@ BOOLEAN ReadInItemStats(STR fileName, BOOLEAN localizedVersion )
 	CHAR8 *		lpcBuffer;
 
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	itemParseData pData;
-	
+
 	localizedTextOnly = localizedVersion;
-	
+
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading Items.xml" );
 
 	// Open items file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( localizedVersion );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -1542,14 +1542,14 @@ BOOLEAN ReadInItemStats(STR fileName, BOOLEAN localizedVersion )
 	lpcBuffer[uiFSize] = 0; //add a null terminator
 
 	FileClose( hFile );
-	
+
 	XML_SetElementHandler(parser, itemStartElementHandle, itemEndElementHandle);
 	XML_SetCharacterDataHandler(parser, itemCharacterDataHandle);
-	
+
 	memset(&pData,0,sizeof(pData));
 	pData.curArray = Item;
-	pData.maxArraySize = MAXITEMS; 
-	
+	pData.maxArraySize = MAXITEMS;
+
 	XML_SetUserData(parser, &pData);
 
     if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
@@ -1562,7 +1562,7 @@ BOOLEAN ReadInItemStats(STR fileName, BOOLEAN localizedVersion )
 		MemFree(lpcBuffer);
 		return FALSE;
 	}
-	
+
 	// item read was x -> x+1 items
 	++gMAXITEMS_READ;
 
@@ -1582,7 +1582,7 @@ BOOLEAN WriteItemStats()
 	hFile = FileOpen( "TABLEDATA\\Items out.xml", FILE_ACCESS_WRITE | FILE_CREATE_ALWAYS, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	{
 		UINT32 cnt;
 		CHAR16 str[100];
@@ -1604,7 +1604,7 @@ BOOLEAN WriteItemStats()
 			{
 				UINT32 uiCharLoc = wcscspn(szRemainder, L"&<>\'\"\0");
 				CHAR16 invChar = szRemainder[uiCharLoc];
-				
+
 				if(uiCharLoc)
 				{
 					szRemainder[uiCharLoc] = '\0';
@@ -1647,7 +1647,7 @@ BOOLEAN WriteItemStats()
 
 			LoadItemInfo( (UINT16)cnt, str,strDesc );
 
-			szRemainder = str; 
+			szRemainder = str;
 			DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"writeitemstats: longitemname");
 
 
@@ -1656,7 +1656,7 @@ BOOLEAN WriteItemStats()
 			{
 				UINT32 uiCharLoc = wcscspn(szRemainder, L"&<>\'\"\0");
 				CHAR16 invChar = szRemainder[uiCharLoc];
-				
+
 				if(uiCharLoc)
 				{
 					szRemainder[uiCharLoc] = '\0';
@@ -1707,9 +1707,9 @@ BOOLEAN WriteItemStats()
 			{
 				UINT32 uiCharLoc = wcscspn(szRemainder, L"&<>\'\"\0");
 				CHAR16 invChar = szRemainder[uiCharLoc];
-				
+
 				//DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"writeitemstats: characters set");
-	
+
 				if(uiCharLoc)
 				{
 					//DebugMsg (TOPIC_JA2,DBG_LEVEL_3,String("writeitemstats: setting remainder[%d] to \0",uiCharLoc));
@@ -1778,7 +1778,7 @@ BOOLEAN WriteItemStats()
 			{
 				UINT32 uiCharLoc = wcscspn(szRemainder,L"&<>\'\"\0");
 				CHAR16 invChar = szRemainder[uiCharLoc];
-				
+
 				if(uiCharLoc)
 				{
 					szRemainder[uiCharLoc] = '\0';
@@ -1834,7 +1834,7 @@ BOOLEAN WriteItemStats()
 			{
 				UINT32 uiCharLoc = wcscspn(szRemainder,L"&<>\'\"\0");
 				CHAR16 invChar = szRemainder[uiCharLoc];
-				
+
 				if(uiCharLoc)
 				{
 					szRemainder[uiCharLoc] = '\0';
@@ -1975,7 +1975,7 @@ BOOLEAN WriteItemStats()
 			FilePrintf(hFile,"\t\t<DiscardedLauncherItem>%d</DiscardedLauncherItem>\r\n",			Item[cnt].discardedlauncheritem  );
 			FilePrintf(hFile,"\t\t<RocketRifle>%d</RocketRifle>\r\n",								Item[cnt].rocketrifle);
 			FilePrintf(hFile,"\t\t<Cannon>%d</Cannon>\r\n",											Item[cnt].cannon);
-			
+
 			for(UINT8 cnt2 = 0; cnt2 < MAX_DEFAULT_ATTACHMENTS; cnt2++){
 				if(Item[cnt].defaultattachments[cnt2] != 0){
 					FilePrintf(hFile,"\t\t<DefaultAttachment>%d</DefaultAttachment>\r\n",						Item[cnt].defaultattachments[cnt2]  );
@@ -2102,18 +2102,18 @@ BOOLEAN WriteItemStats()
 			FilePrintf(hFile,"\t\t<DrugType>%d</DrugType>\r\n",											Item[cnt].drugtype  );
 
 			FilePrintf(hFile,"\t\t<BlockIronSight>%d</BlockIronSight>\r\n",								Item[cnt].blockironsight  );
-			
+
 			FilePrintf(hFile,"\t\t<ItemFlag>%d</ItemFlag>\r\n",											Item[cnt].usItemFlag  );
 
 			FilePrintf(hFile,"\t\t<FoodType>%d</FoodType>\r\n",											Item[cnt].foodtype  );
-			
+
 			//JMich_SkillModifiers: Adding the values here as well
 			FilePrintf(hFile, "\t\t<LockPickModifier>%d</LockPickModifier>\r\n",						Item[cnt].LockPickModifier );
 			FilePrintf(hFile, "\t\t<CrowbarModifier>%d</CrowbarModifier>\r\n",							Item[cnt].CrowbarModifier );
 			FilePrintf(hFile, "\t\t<DisarmModifier>%d</DisarmModifier>\r\n",							Item[cnt].DisarmModifier );
 			FilePrintf(hFile, "\t\t<RepairModifier>%d</RepairModifier>\r\n",							Item[cnt].RepairModifier );
 			FilePrintf(hFile, "\t\t<usHackingModifier>%d</usHackingModifier>\r\n",						Item[cnt].usHackingModifier );
-			
+
 			FilePrintf(hFile,"\t\t<DamageChance>%d</DamageChance>\r\n",									Item[cnt].usDamageChance  );
 			FilePrintf(hFile,"\t\t<DirtIncreaseFactor>%4.2f</DirtIncreaseFactor>\r\n",					Item[cnt].dirtIncreaseFactor  );
 
@@ -2192,8 +2192,8 @@ void InheritStanceModifiers( itemParseData *pData )
 		for (INT8 X = 0; X < 3; X++)
 		{
 			if (TempArray[arrcount][X] == -10000)
-			{ 
-				TempArray[arrcount][X] = 0; 
+			{
+				TempArray[arrcount][X] = 0;
 			}
 		}
 	}

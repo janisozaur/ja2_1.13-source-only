@@ -2,7 +2,7 @@
 	#include "Strategic All.h"
 	#include "XML.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "XML.h"
 	#include "expat.h"

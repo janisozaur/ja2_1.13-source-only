@@ -216,7 +216,7 @@ bool LuaTable::setValue<std::string>(const char* index, std::string const& value
 	if(is_valid())
 	{
 		lua_State* L = _L();
-		
+
 		lua_pushstring(L, index);
 		lua_pushstring(L, value.c_str());
 		lua_rawset(L, _off < 0 ? _off-2 : _off);
@@ -231,7 +231,7 @@ bool LuaTable::setValue<double>(const char* index, double const& value)
 	if(is_valid())
 	{
 		lua_State* L = _L();
-		
+
 		lua_pushstring(L, index);
 		lua_pushnumber(L, value);
 		lua_rawset(L, _off < 0 ? _off-2 : _off);
@@ -257,7 +257,7 @@ bool LuaTable::setValue<bool>(const char* index, bool const& value)
 	if(is_valid())
 	{
 		lua_State* L = _L();
-		
+
 		lua_pushstring(L, index);
 		lua_pushboolean(L, value);
 		lua_rawset(L, _off < 0 ? _off-2 : _off);
@@ -268,13 +268,13 @@ bool LuaTable::setValue<bool>(const char* index, bool const& value)
 
 /////////////////////////////////////
 
-template<> 
+template<>
 bool LuaTable::setValue<std::string>(int index, std::string const& value)
 {
 	if(is_valid())
 	{
 		lua_State* L = _L();
-		
+
 		lua_pushinteger(L, index);
 		lua_pushstring(L, value.c_str());
 		lua_rawset(L, _off < 0 ? _off-2 : _off);
@@ -289,7 +289,7 @@ bool LuaTable::setValue<double>(int index, double const& value)
 	if(is_valid())
 	{
 		lua_State* L = _L();
-		
+
 		lua_pushinteger(L, index);
 		lua_pushnumber(L, value);
 		lua_rawset(L, _off < 0 ? _off-2 : _off);
@@ -315,7 +315,7 @@ bool LuaTable::setValue<bool>(int index, bool const& value)
 	if(is_valid())
 	{
 		lua_State* L = _L();
-		
+
 		lua_pushinteger(L, index);
 		lua_pushboolean(L, value);
 		lua_rawset(L, _off < 0 ? _off-2 : _off);

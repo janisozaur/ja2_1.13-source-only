@@ -17,7 +17,7 @@ public:
 		STATE_HEADER,
 		STATE_HEADER_id,
 		STATE_HEADER_num_structures,
-		STATE_HEADER_num_images, 
+		STATE_HEADER_num_images,
 		STATE_HEADER_struct_stored,
 		STATE_HEADER_tile_locs_stores,
 		STATE_HEADER_data_size,
@@ -378,7 +378,7 @@ public:
 		P_DATA->current_structure->structure.ubWallOrientation = atoi(char_data.c_str());
 	}
 	FINISH_TRANSITION;
-	
+
 	/**********************************************************************/
 	DEFINE_TRANSITION(TR_Structure_destr_partner, _myt, true);
 	TRANSITION_LEAVE{
@@ -570,7 +570,7 @@ public:
 					}
 				}
 				x++;
-			}			
+			}
 		}
 	}
 	FINISH_TRANSITION;
@@ -580,11 +580,11 @@ public:
 
 	STRUCTURE_FILE_REF*		pStructureFileRef;
 	STRUCTURE_FILE_HEADER	oHeader;
-	CStructureDataReader(STRUCTURE_FILE_REF* sfr) 
+	CStructureDataReader(STRUCTURE_FILE_REF* sfr)
 		: pStructureFileRef(sfr), current_structure(NULL), current_str_tile(NULL), current_aux(NULL)
 	{
 		SGP_THROW_IFFALSE(sfr, L"");
-		
+
 		TR_PASS  (STATE_NONE,				"STRUCTURE_FILE",					STATE_STRUCTURE_FILE);
 		// HEADER
 		TR_HANDLE( STATE_STRUCTURE_FILE,	"HEADER",							STATE_HEADER,					TR_Header );

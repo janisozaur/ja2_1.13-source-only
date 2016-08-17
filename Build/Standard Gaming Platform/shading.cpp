@@ -5,15 +5,15 @@
 #else
 	#include "DirectDraw Calls.h"
 	#include <stdio.h>
-	#include "debug.h"
+	#include "Debug.h"
 	#if defined( JA2 ) || defined( UTIL )
-		#include "video.h"
+		#include "Video.h"
 	#else
 		#include "video2.h"
 	#endif
 	#include "himage.h"
-	#include "vobject.h"
-	#include "vobject_blitters.h"
+	#include "VObject.h"
+	#include "VObject_blitters.h"
 	#include "shading.h"
 #endif
 

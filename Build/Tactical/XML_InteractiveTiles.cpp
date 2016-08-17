@@ -9,7 +9,7 @@
 #include "sgp.h"
 #include "Debug Control.h"
 #include "expat.h"
-#include "gamesettings.h"
+#include "GameSettings.h"
 #include "XML.h"
 #include "FileMan.h"
 #include "Handle Items.h"
@@ -67,7 +67,7 @@ interactiveactionsStartElementHandle( void *userData, const XML_Char *name, cons
 
 			pData->maxReadDepth++; //we are not skipping this element
 		}
-		
+
 		pData->szCharData[0] = '\0';
 	}
 
@@ -106,7 +106,7 @@ interactiveactionsEndElementHandle( void *userData, const XML_Char *name )
 		else if ( strcmp( name, "ACTION" ) == 0 )
 		{
 			pData->curElement = ELEMENT_LIST;
-			
+
 			if ( pData->curIndex < pData->maxArraySize )
 			{
 				// for whatever reasons the game crashes in VS2008 Release builds when copying over the tilevector
@@ -219,10 +219,10 @@ BOOLEAN ReadInInteractiveActionsStats( STR fileName )
 	lpcBuffer[uiFSize] = 0; //add a null terminator
 
 	FileClose( hFile );
-	
+
 	XML_SetElementHandler( parser, interactiveactionsStartElementHandle, interactiveactionsEndElementHandle );
 	XML_SetCharacterDataHandler( parser, interactiveactionsDataHandle );
-	
+
 	memset( &pData, 0, sizeof(pData) );
 	pData.maxArraySize = INTERACTIVE_STRUCTURE_MAX;
 	pData.curIndex = 0;

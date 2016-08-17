@@ -28,7 +28,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // Console.cpp - console class implementation
-#include "builddefines.h"
+#include "BuildDefines.h"
 #undef CINTERFACE
 
 //#include "stdafx.h"
@@ -42,7 +42,7 @@
 #include <fcntl.h>
 #include <iostream>
 
-#include "resource.h"
+#include "Resource.h"
 #include "FileStream.h"
 //#include "ComBSTROut.h"
 //#include "ComVariantOut.h"

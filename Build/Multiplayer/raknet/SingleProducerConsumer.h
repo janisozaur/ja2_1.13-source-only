@@ -262,7 +262,7 @@ namespace DataStructures
 		bool SingleProducerConsumer<SingleProducerConsumerType>::ReadIsLocked(void) const
 	{
 		return readAheadPointer!=readPointer;
-	}	
+	}
 }
 
 #endif

@@ -1,10 +1,10 @@
-/* 
- * bfVFS : vfs/Core/Location/vfs_uncompressed_lib_base.h 
+/*
+ * bfVFS : vfs/Core/Location/vfs_uncompressed_lib_base.h
  *  - partially implements library interface for uncompressed archive files
  *  - initialization is done in format-specific sub-classes
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -44,7 +44,7 @@ namespace vfs
 			vfs::size_t _fileSize, _fileOffset, _currentReadPosition;
 		};
 		typedef std::map<tFileType*, SFileData> tFileData;
-		
+
 		class IterImpl;
 	public:
 		CUncompressedLibraryBase(vfs::tReadableFile *libraryFile, vfs::Path const& mountPoint, bool ownFile = false);

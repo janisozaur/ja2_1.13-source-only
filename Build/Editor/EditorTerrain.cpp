@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -10,28 +10,28 @@
 	#include <windows.h>
 	#include "tiledef.h"
 	#include "edit_sys.h"
-	#include "vsurface.h"
-	#include "vobject.h"
+	#include "VSurface.h"
+	#include "VObject.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "wcheck.h"
-	#include "vsurface.h"
-	#include "input.h"
-	#include "sysutil.h"
-	#include "font.h"
+	#include "WCheck.h"
+	#include "VSurface.h"
+	#include "Input.h"
+	#include "SysUtil.h"
+	#include "Font.h"
 	#include "Font Control.h"
-	#include "editscreen.h"
+	#include "EditScreen.h"
 	#include "selectwin.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "interface panels.h"
-	#include "utilities.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Interface Panels.h"
+	#include "Utilities.h"
 	#include "World Items.h"
 	#include "EditorDefines.h"
 	#include "EditorTerrain.h"
 	#include "Editor Taskbar Utils.h"
 	#include "Cursor Modes.h"
-	#include "english.h"
+	#include "English.h"
 #endif
 
 BOOLEAN gfShowTerrainTileButtons;

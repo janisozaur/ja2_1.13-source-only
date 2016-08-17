@@ -1,18 +1,18 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 #else
-	#include "builddefines.h"
-	#include "bullets.h"
+	#include "BuildDefines.h"
+	#include "Bullets.h"
 	#include <stdio.h>
 	#include <string.h>
-	#include "wcheck.h"
+	#include "WCheck.h"
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "math.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "RenderWorld.h"
 	#include "Assignments.h"
 	#include "Soldier Control.h"
 	#include "Animation Control.h"
@@ -20,28 +20,28 @@
 	#include "Isometric Utils.h"
 	#include "Event Pump.h"
 	#include "Timer Control.h"
-	#include "Render Fun.h" 
+	#include "Render Fun.h"
 	#include "Render Dirty.h"
 	#include "mousesystem.h"
-	#include "interface.h"
-	#include "sysutil.h"
+	#include "Interface.h"
+	#include "SysUtil.h"
 	#include "FileMan.h"
-	#include "points.h"
+	#include "Points.h"
 	#include "Random.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Interactive Tiles.h"
-	#include "soldier ani.h"
-	#include "english.h"
-	#include "overhead.h"
+	#include "Soldier Ani.h"
+	#include "English.h"
+	#include "Overhead.h"
 	#include "Soldier Profile.h"
 	#include "Game Clock.h"
-	#include "soldier create.h"
+	#include "Soldier Create.h"
 	#include "Merc Hiring.h"
 	#include "Game Event Hook.h"
-	#include "message.h"
-	#include "strategicmap.h"
-	#include "strategic.h"
-	#include "items.h"
+	#include "Message.h"
+	#include "StrategicMap.h"
+	#include "Strategic.h"
+	#include "Items.h"
 	#include "Soldier Add.h"
 	#include "History.h"
 	#include "Squads.h"
@@ -49,12 +49,12 @@
 	#include "Dialogue Control.h"
 	#include "Map Screen Interface.h"
 	#include "Map Screen Interface Map.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "jascreens.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Merc Contract.h"
 	#include "LaptopSave.h"
-	#include "personnel.h"
+	#include "Personnel.h"
 	#include "Auto Resolve.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Quests.h"
@@ -66,9 +66,9 @@
 	#include "BobbyRMailOrder.h"
 	#include "Finances.h"
 	#include "TeamTurns.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "Options Screen.h"
-#include "physics.h"
+#include "Physics.h"
 #include "Explosion Control.h"
 #include "SmokeEffects.h"
 #include "MPChatScreen.h"
@@ -94,16 +94,16 @@
 #include <cstdio>
 #include <cstring>
 #include <stdlib.h>
-#include "music control.h"
-#include "map edgepoints.h"
+#include "Music Control.h"
+#include "Map Edgepoints.h"
 
 #include "fresh_header.h"
 #include "network.h"
-#include "opplist.h"
+#include "Opplist.h"
 
-#include "tactical placement gui.h"
-#include "prebattle interface.h"
-#include "mapscreen.h"
+#include "Tactical Placement GUI.h"
+#include "PreBattle Interface.h"
+#include "MapScreen.h"
 
 #include "MessageBoxScreen.h"
 
@@ -115,25 +115,25 @@
 #include <vfs/Core/File/vfs_file.h>
 #include "transfer_rules.h"
 
-#include "keys.h"
+#include "Keys.h"
 #include "new.h"
 #include "Types.h"
-#include "connect.h"
-#include "message.h"
-#include "Event pump.h"
+#include "Connect.h"
+#include "Message.h"
+#include "Event Pump.h"
 #include "Soldier Init List.h"
 #include "Overhead.h"
-#include "weapons.h"
+#include "Weapons.h"
 #include "Merc Hiring.h"
-#include "soldier profile.h"
-#include "environment.h"
-#include "lighting.h"
-#include "laptop.h"
-#include "interface panels.h"
-#include "game init.h"
+#include "Soldier Profile.h"
+#include "Environment.h"
+#include "Lighting.h"
+#include "Laptop.h"
+#include "Interface Panels.h"
+#include "Game Init.h"
 #include "Debug Control.h"
 #include "MPConnectScreen.h"
-#include "IniReader.h"
+#include "INIReader.h"
 #include "Map Screen Interface Border.h"
 
 extern CHAR16 gzFileTransferDirectory[100];
@@ -218,7 +218,7 @@ class ClientTransferCB : public FileListTransferCBInterface
 			}
 
 			strcpy(gCurrentTransferFilename,onFileStruct->fileName);
-			
+
 			try
 			{
 				vfs::COpenWriteFile wfile(fileName,true,true);
@@ -227,7 +227,7 @@ class ClientTransferCB : public FileListTransferCBInterface
 			catch(vfs::Exception& ex)
 			{
 				SGP_ERROR(ex.what());
-				ScreenMsg( FONT_BCOLOR_BLUE, MSG_CHAT, MPClientMessage[70], targetFileName);				
+				ScreenMsg( FONT_BCOLOR_BLUE, MSG_CHAT, MPClientMessage[70], targetFileName);
 			}
 
 			/*
@@ -348,7 +348,7 @@ class ClientTransferCB : public FileListTransferCBInterface
 		}
 
 	private:
-		char *ExtractFilename(char *pathname) 
+		char *ExtractFilename(char *pathname)
 		{
 			char *s;
 
@@ -407,7 +407,7 @@ typedef struct
 } gui_dir;
 
 typedef struct
-{	
+{
 	UINT8 tsnetbTeam;
 	UINT8 tsubNextTeam;
 } turn_struct;
@@ -679,7 +679,7 @@ void NetworkAutoStart()
 	if (!is_networked)
 		return; // not networked, bad call
 
-	if (!is_host || is_server) 
+	if (!is_host || is_server)
 	{
 		// is pure client or the server has been started
 		// so do client connection checking...though probably not needed for the server client. cant hurt.
@@ -708,7 +708,7 @@ void NetworkAutoStart()
 			// next rety time is set in client_packet()
 		}
 	}
-	else 
+	else
 	{
 		// is host and server isnt started so start it
 		start_server();
@@ -719,7 +719,7 @@ void InvalidClientSettingsOkBoxCallback( UINT8 bExitValue )
 {
 	// yes, load the game
 	if( bExitValue == MSG_BOX_RETURN_OK )
-	{		
+	{
 		// gracefully disconnect to the main menu
 		client_disconnect();
 		guiPendingScreen = MP_JOIN_SCREEN;
@@ -788,15 +788,15 @@ void send_path (  SOLDIERTYPE *pSoldier, INT32 sDestGridNo, UINT16 usMovementAni
 			SNetPath.usSoldierID = (pSoldier->ubID)+ubID_prefix;
 		else
 			SNetPath.usSoldierID = pSoldier->ubID;
-	
+
 		SNetPath.sAtGridNo=pSoldier->sGridNo;
-				
+
 		SNetPath.ubNewState=usMovementAnim;
 		SNetPath.usCurrentPathIndex=pSoldier->pathing.usPathIndex;
 		memcpy(SNetPath.usPathData, pSoldier->pathing.usPathingData, sizeof(UINT16)*30);
 		SNetPath.usPathDataSize=pSoldier->pathing.usPathDataSize;
 		SNetPath.sDestGridNo=sDestGridNo;
-			
+
 		client->RPC("sendPATH",(const char*)&SNetPath, (int)sizeof(EV_S_SENDPATHTONETWORK)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 	}
 }
@@ -804,7 +804,7 @@ void send_path (  SOLDIERTYPE *pSoldier, INT32 sDestGridNo, UINT16 usMovementAni
 void recievePATH(RPCParameters *rpcParameters)
 {
 	//ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, L"Recieving new path," );
-				
+
 	EV_S_SENDPATHTONETWORK* SNetPath = (EV_S_SENDPATHTONETWORK*)rpcParameters->input;
 
 	SOLDIERTYPE *pSoldier = MercPtrs[ SNetPath->usSoldierID ];
@@ -817,22 +817,22 @@ void recievePATH(RPCParameters *rpcParameters)
 	pSoldier->pathing.usPathIndex=SNetPath->usCurrentPathIndex;
 	pSoldier->pathing.usPathDataSize=SNetPath->usPathDataSize;
 
-	SendGetNewSoldierPathEvent( pSoldier, SNetPath->sDestGridNo, SNetPath->ubNewState );	
+	SendGetNewSoldierPathEvent( pSoldier, SNetPath->sDestGridNo, SNetPath->ubNewState );
 
-	INT16 sCellX, sCellY;	
-	
+	INT16 sCellX, sCellY;
+
 	sCellX = CenterX( SNetPath->sAtGridNo );
 	sCellY = CenterY( SNetPath->sAtGridNo );
-	
+
 	if (( gAnimControl[ pSoldier->usAnimState ].uiFlags & ( ANIM_MOVING | ANIM_SPECIALMOVE ) ) && !(pSoldier->flags.fNoAPToFinishMove ) )
 	{
 	}
 	else
 	{
-		pSoldier->EVENT_InternalSetSoldierPosition( sCellX, sCellY ,FALSE, FALSE, FALSE );		
+		pSoldier->EVENT_InternalSetSoldierPosition( sCellX, sCellY ,FALSE, FALSE, FALSE );
 	}
 
-	if(pSoldier)pSoldier->EVENT_InitNewSoldierAnim( SNetPath->ubNewState, 0, FALSE );			
+	if(pSoldier)pSoldier->EVENT_InitNewSoldierAnim( SNetPath->ubNewState, 0, FALSE );
 }
 
 
@@ -845,7 +845,7 @@ void send_stance ( SOLDIERTYPE *pSoldier, UINT8 ubDesiredStance )
 
 		SChangeStance.ubNewStance   = ubDesiredStance;
 		//SChangeStance.usSoldierID  = pSoldier->ubID;
-		
+
 
 		if(pSoldier->ubID < 20)
 			SChangeStance.usSoldierID = (pSoldier->ubID)+ubID_prefix;
@@ -858,7 +858,7 @@ void send_stance ( SOLDIERTYPE *pSoldier, UINT8 ubDesiredStance )
 		SChangeStance.uiUniqueId = pSoldier -> uiUniqueSoldierIdValue;
 
 		//ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, L"change stance: %d",ubDesiredStance );
-	
+
 		client->RPC("sendSTANCE",(const char*)&SChangeStance, (int)sizeof(EV_S_CHANGESTANCE)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 	}
 }
@@ -869,9 +869,9 @@ void recieveSTANCE(RPCParameters *rpcParameters)
 
 
 		EV_S_CHANGESTANCE* SChangeStance = (EV_S_CHANGESTANCE*)rpcParameters->input;
-	
+
 		SOLDIERTYPE *pSoldier = MercPtrs[ SChangeStance->usSoldierID ];
-	
+
 		pSoldier->ChangeSoldierStance( SChangeStance->ubNewStance );
 
 		//SendChangeSoldierStanceEvent( pSoldier, SChangeStance->ubNewStance );
@@ -890,14 +890,14 @@ void send_dir ( SOLDIERTYPE *pSoldier, UINT16 usDesiredDirection )
 		EV_S_SETDESIREDDIRECTION	SSetDesiredDirection;
 
 		//SSetDesiredDirection.usSoldierID = pSoldier->ubID;
-			
+
 
 		if(pSoldier->ubID < 20)
 			SSetDesiredDirection.usSoldierID = (pSoldier->ubID)+ubID_prefix;
 		else
 			SSetDesiredDirection.usSoldierID = pSoldier->ubID;
 
-	
+
 
 		SSetDesiredDirection.usDesiredDirection = usDesiredDirection;
 		SSetDesiredDirection.uiUniqueId = pSoldier -> uiUniqueSoldierIdValue;
@@ -910,8 +910,8 @@ void send_dir ( SOLDIERTYPE *pSoldier, UINT16 usDesiredDirection )
 void recieveDIR(RPCParameters *rpcParameters)
 {
 
-		EV_S_SETDESIREDDIRECTION* SSetDesiredDirection = (EV_S_SETDESIREDDIRECTION*)rpcParameters->input;			
-			
+		EV_S_SETDESIREDDIRECTION* SSetDesiredDirection = (EV_S_SETDESIREDDIRECTION*)rpcParameters->input;
+
 
 		SOLDIERTYPE *pSoldier = MercPtrs[ SSetDesiredDirection->usSoldierID ];
 
@@ -925,11 +925,11 @@ void send_fire( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo )
 {
 	if(pSoldier->ubID < 120)
 	{
-	
+
 	EV_S_BEGINFIREWEAPON SBeginFireWeapon;
 
 
-		
+
 
 	if(pSoldier->ubID < 20)
 		SBeginFireWeapon.usSoldierID = (pSoldier->ubID)+ubID_prefix;
@@ -941,14 +941,14 @@ void send_fire( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo )
 	SBeginFireWeapon.bTargetLevel = pSoldier->bTargetLevel;
 	SBeginFireWeapon.bTargetCubeLevel = pSoldier->bTargetCubeLevel;
 	SBeginFireWeapon.uiUniqueId = pSoldier->usAttackingWeapon;
-		
+
 
 	client->RPC("sendFIRE",(const char*)&SBeginFireWeapon, (int)sizeof(EV_S_BEGINFIREWEAPON)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 	}
 }
 
 void recieveFIRE(RPCParameters *rpcParameters)
-{		
+{
 	EV_S_BEGINFIREWEAPON* SBeginFireWeapon = (EV_S_BEGINFIREWEAPON*)rpcParameters->input;
 	//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"SendBeginFireWeaponEvent" );
 
@@ -957,8 +957,8 @@ void recieveFIRE(RPCParameters *rpcParameters)
 	pSoldier->sTargetGridNo = SBeginFireWeapon->sTargetGridNo;
 	pSoldier->bTargetLevel = SBeginFireWeapon->bTargetLevel;
 	pSoldier->bTargetCubeLevel = SBeginFireWeapon->bTargetCubeLevel;
-	pSoldier->usAttackingWeapon = SBeginFireWeapon->uiUniqueId; //cheap hack to pass wep id. 
-					
+	pSoldier->usAttackingWeapon = SBeginFireWeapon->uiUniqueId; //cheap hack to pass wep id.
+
 	SendBeginFireWeaponEvent( pSoldier, SBeginFireWeapon->sTargetGridNo );
 }
 
@@ -970,24 +970,24 @@ void send_hit(  EV_S_WEAPONHIT *SWeaponHit  )
 	//EV_S_WEAPONHIT* pWeaponHit =  (EV_S_WEAPONHIT*)pEventData;
 	//SOLDIERTYPE *pSoldier = MercPtrs[ usSoldierID ];
 
-	EV_S_WEAPONHIT weaphit_struct;				
-			
+	EV_S_WEAPONHIT weaphit_struct;
+
 	memcpy( &weaphit_struct , SWeaponHit, sizeof( EV_S_WEAPONHIT ));
-	
+
 	UINT16  usSoldierID=weaphit_struct.usSoldierID;
 
 	if(SWeaponHit->usSoldierID < 20)weaphit_struct.usSoldierID = weaphit_struct.usSoldierID+ubID_prefix;
 	if(SWeaponHit->ubAttackerID < 20)weaphit_struct.ubAttackerID = weaphit_struct.ubAttackerID+ubID_prefix;
-		
+
 	client->RPC("sendHIT",(const char*)&weaphit_struct, (int)sizeof(EV_S_WEAPONHIT)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
 void recieveHIT(RPCParameters *rpcParameters)
 {
 	//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"recieveHIT" );
-		
+
 	EV_S_WEAPONHIT* SWeaponHit = (EV_S_WEAPONHIT*)rpcParameters->input;
-	
+
 	SOLDIERTYPE *pSoldier = MercPtrs[ SWeaponHit->usSoldierID ];
 	UINT16 usSoldierID;
 	UINT8 ubAttackerID;
@@ -1008,12 +1008,12 @@ void recieveHIT(RPCParameters *rpcParameters)
 	{
 		INT8 bTeam=pSoldier->bTeam;
 		INT32 iBullet = bTable[bTeam][SWeaponHit->iBullet].local_id;
-				
+
 		StopBullet( iBullet );
 		RemoveBullet(iBullet);
 
-		//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"removed bullet" );	
-	}		
+		//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"removed bullet" );
+	}
 }
 
 
@@ -1038,7 +1038,7 @@ void send_hire( UINT8 iNewIndex, UINT8 ubCurrentSoldier, INT16 iTotalContractLen
 	SOLDIERTYPE *pSoldier = MercPtrs[ iNewIndex ];
 
 	UINT8 sectorEdge = cStartingSectorEdge;
-	
+
 	// WANNE - MP: Center
 	if (sectorEdge == MP_EDGE_CENTER)
 		sectorEdge = INSERTION_CODE_CENTER;
@@ -1054,7 +1054,7 @@ void send_hire( UINT8 iNewIndex, UINT8 ubCurrentSoldier, INT16 iTotalContractLen
 	ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[44], pSoldier->name);
 
 	AddCharacterToAnySquad( pSoldier );
-	
+
 	//add recruited flag
 	gMercProfiles[ pSoldier->ubProfile ].ubMiscFlags |= PROFILE_MISC_FLAG_RECRUITED;
 
@@ -1094,7 +1094,7 @@ void recieveHIRE(RPCParameters *rpcParameters)
 
 	SOLDIERCREATE_STRUCT		MercCreateStruct;
 	BOOLEAN fReturn = FALSE;
-	
+
 	MercCreateStruct.ubProfile						= sHireMerc->ubProfileID;
 	MercCreateStruct.fPlayerMerc					= 0;
 	MercCreateStruct.sSectorX							= gsMercArriveSectorX;
@@ -1108,7 +1108,7 @@ void recieveHIRE(RPCParameters *rpcParameters)
 	pSoldier = &Menptr[iNewIndex];
 	pSoldier->flags.uiStatusFlags |= SOLDIER_PC;
 	gMercProfiles[ pSoldier->ubProfile ].ubMiscFlags |= PROFILE_MISC_FLAG_RECRUITED;
-	
+
 	if(!cSameMercAllowed)
 		gMercProfiles[ pSoldier->ubProfile ].bMercStatus = MERC_WORKING_ELSEWHERE;
 
@@ -1123,8 +1123,8 @@ void recieveHIRE(RPCParameters *rpcParameters)
 	{
 		pSoldier->ubBodyType = REGMALE;
 		gMercProfiles[ pSoldier->ubProfile ].ubBodyType = REGMALE;
-	}	
-	
+	}
+
 	if(cGameType==MP_TYPE_DEATHMATCH)//all vs all only
 	{
 		pSoldier->bSide=1;
@@ -1152,10 +1152,10 @@ void recieveHIRE(RPCParameters *rpcParameters)
 	AddSoldierToSector( iNewIndex );
 
 	if(cReportHiredMerc == 1)
-	{	
+	{
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[5],MercCreateStruct.bTeam-5,client_names[MercCreateStruct.bTeam-6],pSoldier->name );
 	}
-	else 
+	else
 	{
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[6],MercCreateStruct.bTeam-5,client_names[MercCreateStruct.bTeam-6] );
 	}
@@ -1166,7 +1166,7 @@ void send_gui_pos(SOLDIERTYPE *pSoldier,  FLOAT dNewXPos, FLOAT dNewYPos)
 	gui_pos gnPOS;
 
 	gnPOS.usSoldierID = (pSoldier->ubID)+ubID_prefix;
-	
+
 	gnPOS.dNewXPos = dNewXPos;
 	gnPOS.dNewYPos = dNewYPos;
 
@@ -1190,12 +1190,12 @@ void recieveguiPOS(RPCParameters *rpcParameters)
 }
 
 void send_gui_dir(SOLDIERTYPE *pSoldier, UINT16	usNewDirection)
-{	
+{
 	gui_dir gnDIR;
 
 	gnDIR.usSoldierID = (pSoldier->ubID)+ubID_prefix;
 	gnDIR.usNewDirection = usNewDirection;
-	
+
 	client->RPC("sendguiDIR",(const char*)&gnDIR, (int)sizeof(gui_dir)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -1204,7 +1204,7 @@ void recieveguiDIR(RPCParameters *rpcParameters)
 	gui_dir* gnDIR = (gui_dir*)rpcParameters->input;
 
 	SOLDIERTYPE *pSoldier = MercPtrs[ gnDIR->usSoldierID ];
-	
+
 	pSoldier->EVENT_SetSoldierDirection( gnDIR->usNewDirection );
 }
 
@@ -1216,7 +1216,7 @@ void send_EndTurn( UINT8 ubNextTeam )
 		// translate next team id for clients
 		ubNextTeam=netbTeam;
 	}
-	
+
 	turn_struct tStruct;
 
 	if(is_server)
@@ -1224,7 +1224,7 @@ void send_EndTurn( UINT8 ubNextTeam )
 
 	tStruct.tsnetbTeam = netbTeam;
 	tStruct.tsubNextTeam = ubNextTeam;
-	
+
 	client->RPC("sendEndTurn",(const char*)&tStruct, (int)sizeof(turn_struct)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -1235,17 +1235,17 @@ void recieveEndTurn(RPCParameters *rpcParameters)
 	UINT8 ubTeam;
 	sender_bTeam=tStruct->tsnetbTeam;
 	ubTeam=tStruct->tsubNextTeam;
-	
+
 	if(is_server)
 		Sawarded=false;
-	
+
 	// if the message was recieved from the server..
 	if(is_server || sender_bTeam==6)
 	{
 		// if not the server and we're not in combat...
 		if (!is_server && !(gTacticalStatus.uiFlags & INCOMBAT))
 		{
-			EnterCombatMode(0); 
+			EnterCombatMode(0);
 		}
 
 		if(ubTeam==netbTeam)ubTeam=0;
@@ -1277,7 +1277,7 @@ UINT8 numenemyLAN( UINT8 ubSectorX, UINT8 ubSectorY )
 			{
 				ubNumEnemies++;
 			}
-		}	
+		}
 	}
 
 	return ubNumEnemies;
@@ -1292,7 +1292,7 @@ void send_AI( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *pubID )
 	{
 		send_inv.slot[x] = pCreateStruct->Inv[x];
 	}
-	
+
 	client->RPC("sendAI",(const char*)&send_inv, (int)sizeof(AI_STRUCT)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -1378,7 +1378,7 @@ void send_ready ( void )
 		info.ready_stage = 0;
 		if(status==0)
 		{
-			info.status = 1; 
+			info.status = 1;
 			status=1;
 			numready = numready+1;
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[7],numready,cMaxClients );
@@ -1388,16 +1388,16 @@ void send_ready ( void )
 		}
 		else
 		{
-			info.status = 0; 
+			info.status = 0;
 			status=0;
 			numready = numready-1;
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[8],numready,cMaxClients );
 			// OJW - 20081204
 			client_ready[info.client_num-1]=0;
 			fDrawCharacterList = true; // set the character list to be redrawn
-		}	
+		}
 	}
-			
+
 	if(is_server && numready == cMaxClients) //all ready. and server tells all to load...
 	{
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[9] );
@@ -1406,9 +1406,9 @@ void send_ready ( void )
 		readystage=1;
 
 		info.ready_stage = 1;
-		info.status = 1; 					
-	}	
-			
+		info.status = 1;
+	}
+
 	client->RPC("sendREADY",(const char*)&info, (int)sizeof(ready_struct)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 
 	if(is_server && numready == cMaxClients)
@@ -1451,7 +1451,7 @@ void recieveREADY (RPCParameters *rpcParameters)
 			client_ready[info->client_num-1]=0;
 			fDrawCharacterList = true; // set the character list to be redrawn
 		}
-		
+
 		if(is_server && numready == cMaxClients) //all ready. and server tells all to load...and loads himself
 		{
 			goahead=1;
@@ -1504,20 +1504,20 @@ void send_donegui ( UINT8 ubResult )
 {
 	if(ubResult==1 && status==0)
 		return;//avoid double remove callback response from final message box removal
-		
+
 	ready_struct info;
 	info.client_num = CLIENT_NUM;
-	
+
 	if(ubResult==1)
 		DialogRemoved(1);//cleanup msgbox after not ready
-	
+
 	if(status==0)//now ready
 	{
 		status=1;
 		numready++;
 		info.ready_stage = 3;//done placing mercs
 		info.status=1;
-		
+
 		SGPRect CenterRect = { 100 + xResOffset, 100 + yResOffset, SCREEN_WIDTH - 100 - xResOffset, 300 + yResOffset };
 		DoMessageBox( MSG_BOX_BASIC_STYLE, MPClientMessage[12],  guiCurrentScreen, MSG_BOX_FLAG_OK | MSG_BOX_FLAG_USE_CENTERING_RECT, send_donegui,  &CenterRect );
 
@@ -1644,7 +1644,7 @@ void StartBattleChatBoxClosedCallback(void)
 }
 
 void start_battle ( void )
-{ 
+{
 	if(!is_client)
 	{
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[14] );
@@ -1696,7 +1696,7 @@ void start_battle ( void )
 
 				// notify the server that the teams are not different for the choosen team-deathmatch
 				ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[68] );
-			}	
+			}
 		}
 
 		// Go to "ready" state!
@@ -1713,14 +1713,14 @@ void start_battle ( void )
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[15] );
 		}
 		else if(goahead==1)
-		{	
+		{
 			goahead=0; // this ensures that we dont reload the sector again the next time this function is called
 
 			if (is_game_started)
 				return; // 20090317 - OJW - there is a bug or out of sync condition that rarely somestimes causes a client to reach here
 						// twice, and reload the sector, which causes an assertion failure on line 1782 of strategicmap.cpp in SetCurrentWorldSector()
 						// therefore i'm adding this to make sure if they client loaded the map once, it wont do it again
-			
+
 			status=0;//reset
 			numready=0;
 
@@ -1740,7 +1740,7 @@ void start_battle ( void )
 			UINT8 ubGroupID = pSoldier->ubGroupID;
 
 			GROUP *pGroup;
-			pGroup = GetGroup( ubGroupID ); 
+			pGroup = GetGroup( ubGroupID );
 			gpBattleGroup = pGroup;
 			gubPBSectorX = gpBattleGroup->ubSectorX;
 			gubPBSectorY = gpBattleGroup->ubSectorY;
@@ -1752,7 +1752,7 @@ void start_battle ( void )
 
 			UINT32	i;
 			for(i=0; i<4;i++)
-			{	
+			{
 				CHAR16 name[30];
 				int nm = mbstowcs( name, client_names[i], sizeof (char)*30 );
 				//copy in client specified name for the player turn bar :)
@@ -1891,7 +1891,7 @@ void send_stop (EV_S_STOP_MERC *SStopMerc) // used to stop a merc when he spots 
 		stop_struct.sGridNo=SStopMerc->sGridNo;
 		stop_struct.ubDirection=SStopMerc->ubDirection;
 		stop_struct.fset=SStopMerc->fset;
-		
+
 		if(stop_struct.fset==FALSE)
 		{
 			return;
@@ -1906,13 +1906,13 @@ void send_stop (EV_S_STOP_MERC *SStopMerc) // used to stop a merc when he spots 
 void recieveSTOP (RPCParameters *rpcParameters)
 {
 	EV_S_STOP_MERC* SStopMerc =(EV_S_STOP_MERC*)rpcParameters->input;
-	
+
 	SOLDIERTYPE *pSoldier = MercPtrs[ SStopMerc->usSoldierID ];
-		
+
 	pSoldier->EVENT_InternalSetSoldierPosition( SStopMerc->sXPos, SStopMerc->sYPos,FALSE, FALSE, FALSE );
 	pSoldier->EVENT_SetSoldierDirection( SStopMerc->ubDirection );
 	pSoldier->AdjustNoAPToFinishMove( SStopMerc->fset );
-	pSoldier->flags.bTurningFromPronePosition = FALSE;	
+	pSoldier->flags.bTurningFromPronePosition = FALSE;
 }
 
 void send_interrupt (SOLDIERTYPE *pSoldier)
@@ -1923,7 +1923,7 @@ void send_interrupt (SOLDIERTYPE *pSoldier)
 	INT.bTeam = pSoldier->bTeam;
 	memcpy(INT.gubOutOfTurnOrder, gubOutOfTurnOrder, sizeof(UINT8) * MAXMERCS);
 	INT.gubOutOfTurnPersons = gubOutOfTurnPersons;
-	
+
 	INT.Interrupted=gusSelectedSoldier+ubID_prefix;
 
 	if(INT.bTeam==0)
@@ -1939,10 +1939,10 @@ void send_interrupt (SOLDIERTYPE *pSoldier)
 			INT.gubOutOfTurnOrder[i]=INT.gubOutOfTurnOrder[i]+ubID_prefix;
 		}
 	}
-	
-	if(INT.bTeam !=netbTeam) 
+
+	if(INT.bTeam !=netbTeam)
 		gTacticalStatus.ubCurrentTeam=INT.bTeam;
-	
+
 	client->RPC("sendINTERRUPT",(const char*)&INT, (int)sizeof(INT_STRUCT)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -2036,7 +2036,7 @@ void send_interrupt (SOLDIERTYPE *pSoldier)
 			if(	INT->bTeam != 0)//not for our team - hayden
 			{
 				//stop moving merc who was interrupted and init UI bar
-				SOLDIERTYPE* pMerc = MercPtrs[ INT->ubID ];	
+				SOLDIERTYPE* pMerc = MercPtrs[ INT->ubID ];
 				pMerc->HaultSoldierFromSighting(TRUE);
 				FreezeInterfaceForEnemyTurn();
 				InitEnemyUIBar( 0, 0 );
@@ -2095,9 +2095,9 @@ void send_interrupt (SOLDIERTYPE *pSoldier)
 		// WANNE - MP: This seems to cause the HANG on AI interrupt where we have to press ALT + E on the server!
 		if(	INT->bTeam != 0)//not for our team - hayden
 		{
-			
+
 			//stop moving merc who was interrupted and init UI bar
-			SOLDIERTYPE* pMerc = MercPtrs[ INT->ubID ];	
+			SOLDIERTYPE* pMerc = MercPtrs[ INT->ubID ];
 			pMerc->HaultSoldierFromSighting(TRUE);
 			FreezeInterfaceForEnemyTurn();
 			InitEnemyUIBar( 0, 0 );
@@ -2131,7 +2131,7 @@ void intAI (SOLDIERTYPE *pSoldier )
 {
 	//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"intAI with %s", TeamNameStrings[pSoldier->bTeam] );//was MPClientMessage[17], can be reconnected if text updated and translated
 	AddTopMessage( COMPUTER_INTERRUPT_MESSAGE, TeamTurnString[ pSoldier->bTeam ] );
-	gTacticalStatus.fInterruptOccurred = TRUE;		
+	gTacticalStatus.fInterruptOccurred = TRUE;
 }
 
 void end_interrupt ( BOOLEAN fMarkInterruptOccurred )
@@ -2159,7 +2159,7 @@ void end_interrupt ( BOOLEAN fMarkInterruptOccurred )
 			INT.gubOutOfTurnOrder[i]=INT.gubOutOfTurnOrder[i]+ubID_prefix;
 		}
 	}
-	
+
 	client->RPC("endINTERRUPT",(const char*)&INT, (int)sizeof(INT_STRUCT)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -2169,7 +2169,7 @@ void resume_turn(RPCParameters *rpcParameters)
 
 	if(is_server)
 		Sawarded=false;
-	
+
 	if(INT->bTeam==netbTeam || (INT->bTeam==1 && is_server))//may need working //its for us or we are the server and its for the AI
 	{
 		ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Resumed turn after interrupt of %s", TeamNameStrings[INT->bTeam] );//was MPClientMessage[18], can be reconnected if text updated and translated
@@ -2201,7 +2201,7 @@ void grid_display ( void ) //print mouse coordinates, helpfull for crate placeme
 
 	GetMouseXY( &sGridX, &sGridY );
 	usMapPos = MAPROWCOLTOPOS( sGridY, sGridX );
-	
+
 	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, MPClientMessage[19] );
 	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, MPClientMessage[20], sGridX, sGridY );
 	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, MPClientMessage[21], usMapPos );
@@ -2217,7 +2217,7 @@ void overide_callback( UINT8 ubResult )
 		}
 
 		if(ubResult==2)//overide stop #1 (awaiting client ready for launch/load)
-		{	
+		{
 			goahead=0;
 			status=0;//reset
 			numready=0;
@@ -2225,7 +2225,7 @@ void overide_callback( UINT8 ubResult )
 			UINT8 ubGroupID = pSoldier->ubGroupID;
 
 			GROUP *pGroup;
-			pGroup = GetGroup( ubGroupID ); 
+			pGroup = GetGroup( ubGroupID );
 			gpBattleGroup = pGroup;
 			gubPBSectorX = gpBattleGroup->ubSectorX;
 			gubPBSectorY = gpBattleGroup->ubSectorY;
@@ -2237,16 +2237,16 @@ void overide_callback( UINT8 ubResult )
 			ready_struct info; //send
 			info.client_num = CLIENT_NUM;
 			info.ready_stage = 1;
-			info.status = 1; 		
-			
+			info.status = 1;
+
 			client->RPC("sendREADY",(const char*)&info, (int)sizeof(ready_struct)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
-	
+
 			status=0;//reset
 			numready=0;
-		
+
 			SetCurrentWorldSector( gubPBSectorX, gubPBSectorY, gubPBSectorZ ); //load
 		}
-		
+
 		if(ubResult==3)
 		{
 			lockui(1);//unlock ui paused while wainting for loaders
@@ -2275,7 +2275,7 @@ void overide_callback( UINT8 ubResult )
 
 			client->RPC("sendGUI",(const char*)&info, (int)sizeof(ready_struct)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 		}
-	
+
 		goahead = 0;
 		numready = 0;
 		readystage = 0;
@@ -2324,7 +2324,7 @@ void requestSETID(RPCParameters *rpcParameters)
 			if (!fClientReceivedAllFiles)
 			{
 				serverAddr = rpcParameters->sender;
-				
+
 				SGPRect CenteringRect= {0 + xResOffset, 0 + yResOffset, SCREEN_WIDTH - xResOffset, SCREEN_HEIGHT - yResOffset };
 				DoMessageBox( MSG_BOX_BASIC_STYLE , MPClientMessage[64] , guiCurrentScreen, MSG_BOX_FLAG_YESNO | MSG_BOX_FLAG_USE_CENTERING_RECT, allowDownloadCallback, &CenteringRect );
 			}
@@ -2361,7 +2361,7 @@ void recieveDOWNLOADSTATUS(RPCParameters *rpcParameters)
 
 	client_downloading[i] = prog->downloading;
 	client_progress[i] = prog->progress;
-	
+
 	fDrawCharacterList = true;
 }
 
@@ -2369,7 +2369,7 @@ void recieveDOWNLOADSTATUS(RPCParameters *rpcParameters)
 void recieveFILE_TRANSFER_SETTINGS (RPCParameters *rpcParameters)
 {
 	if (!is_server && recieved_transfer_settings == 0)
-	{		
+	{
 		filetransfersettings_struct* fts = (filetransfersettings_struct*)rpcParameters->input;
 
 		gCurrentTransferBytes = 0;
@@ -2422,7 +2422,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		ubID_prefix = gTacticalStatus.Team[ netbTeam ].bFirstID;//over here now
 
 		memcpy( client_names , cl_lan->client_names, sizeof( char ) * 4 * 30 );
-		
+
 		strcpy(client_names[cl_lan->client_num-1],szDefault);
 
 		// OJW - 20081204
@@ -2439,29 +2439,29 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		}
 
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[2] );
-		
+
 
 		cMaxClients=cl_lan->maxClients;
 		memcpy( cKitBag, cl_lan->kitBag, sizeof(char)*100);
-		
+
 		int cnt;
 		int numnum = 0;
 		int kitnum = 0;
 		char tempstring[4];
 		memset( &kit, 0, sizeof( int )*20 );
-	
+
 		if (strcmp(cKitBag, "") != 0)
 		{
 			for(cnt=0;  cnt < 100; cnt++)
 			{
 				char tempc = cKitBag[cnt];
-				
+
 				if( _strnicmp(&tempc, "[",1) == 0)
 				{
-					
+
 					continue;
 				}
-				
+
 				else if( _strnicmp(&tempc, ",",1) == 0)
 				{
 					numnum=0;
@@ -2473,7 +2473,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 					kitnum++;
 					continue;
 				}
-			
+
 				else if( _strnicmp(&tempc, "]",1) == 0)
 				{
 					kit[kitnum]=atoi(tempstring);
@@ -2489,7 +2489,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 
 		cDamageMultiplier=cl_lan->damageMultiplier;
 		cSameMercAllowed=cl_lan->sameMercAllowed;
-		
+
 
 		gsMercArriveSectorX = gGameExternalOptions.ubDefaultArrivalSectorX = cl_lan->gsMercArriveSectorX;
 		gsMercArriveSectorY = gGameExternalOptions.ubDefaultArrivalSectorY = cl_lan->gsMercArriveSectorY;
@@ -2503,7 +2503,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		ChangeSelectedMapSector( gsMercArriveSectorX, gsMercArriveSectorY, 0 );
 		CHAR16 str[128];
 		GetSectorIDString( gsMercArriveSectorX, gsMercArriveSectorY, 0, str, TRUE );
-	
+
 		// WANNE - MP: If time set to 0, then no time turns
 		INT32 secs_per_tick;
 		if (cl_lan->secondsPerTick == 0)
@@ -2516,7 +2516,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 			gGameOptions.fTurnTimeLimit=cl_lan->sofTurnTimeLimit;
 			secs_per_tick=cl_lan->secondsPerTick;
 		}
-		
+
 		PLAYER_TEAM_TIMER_SEC_PER_TICKS=secs_per_tick;
 
 		INT32 clstarting_balance=cl_lan->startingCash;//set starting balance
@@ -2530,7 +2530,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 			AddTransactionToPlayersBook( TRANSACTION_FEE, 0, GetWorldTotalMin(), clstarting_balance-LaptopSaveInfo.iCurrentBalance );
 		}
 
-		gGameOptions.fGunNut=cl_lan->sofGunNut;	
+		gGameOptions.fGunNut=cl_lan->sofGunNut;
 		gGameOptions.ubGameStyle=cl_lan->soubGameStyle;
 		gGameOptions.ubDifficultyLevel=cl_lan->soubDifficultyLevel;
 		gGameOptions.fNewTraitSystem = cl_lan->soubSkillTraits;
@@ -2555,14 +2555,14 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		if(!cl_lan->disableMercEquipment)
 			cAllowMercEquipment = 1;
 
-		cMaxMercs = cl_lan->maxMercs;		
+		cMaxMercs = cl_lan->maxMercs;
 		cReportHiredMerc = cl_lan->reportHiredMerc;
 
 		// WANNE: Removed
 		/*
-		ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[24],str,cMaxClients,cMaxMercs,cGameType,cSameMercAllowed,cDamageMultiplier,gGameOptions.fTurnTimeLimit,secs_per_tick,cl_lan->disableBobbyRay,cl_lan->disableMercEquipment,cDisableMorale,0);		
+		ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[24],str,cMaxClients,cMaxMercs,cGameType,cSameMercAllowed,cDamageMultiplier,gGameOptions.fTurnTimeLimit,secs_per_tick,cl_lan->disableBobbyRay,cl_lan->disableMercEquipment,cDisableMorale,0);
 		*/
-	
+
 		// WANNE - MP: I just added the NUM_SEC_IN_DAY so the game starts at Day 1 instead of Day 0
 		gGameExternalOptions.iGameStartingTime= NUM_SEC_IN_DAY + int(cl_lan->startingTime*3600);
 		// WANNE - MP: In mulitplayer the hired merc arrive immediatly, so iFirstArrivalDelay must be set to 0
@@ -2579,7 +2579,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		// Disable Real-Time Mode
 		// SANDRO - huh? real-time sneak is in preferences
 		//gGameExternalOptions.fAllowRealTimeSneak = false;
-		
+
 		gGameSettings.fOptions[TOPTION_ALLOW_REAL_TIME_SNEAK] = false;
 		gGameExternalOptions.fQuietRealTimeSneak = false;
 
@@ -2594,9 +2594,9 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		// if game starting time + first arrival delay >= 21:00 (162000) -> we arrive after the sun goes down
 		if( (gGameExternalOptions.iGameStartingTime + gGameExternalOptions.	iFirstArrivalDelay) < 111600 ||
 			(gGameExternalOptions.iGameStartingTime + gGameExternalOptions.iFirstArrivalDelay >= 162000))
-		{ 
+		{
 			// Default: Night
-			gubEnvLightValue = 12; 
+			gubEnvLightValue = 12;
 		}
 		else
 		{
@@ -2604,13 +2604,13 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 			gubEnvLightValue = 3;
 		}
 
-		LightSetBaseLevel(gubEnvLightValue); 
+		LightSetBaseLevel(gubEnvLightValue);
 
 		InitNewGameClock( );
-					
+
 		cWeaponReadyBonus = cl_lan->weaponReadyBonus;
 		cDisableSpectatorMode = cl_lan->disableSpectatorMode;
-		
+
 		// -----------------
 		// RW: Inventory
 		switch (cl_lan->inventoryAttachment)
@@ -2630,7 +2630,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 		}
 
 		gGameOptions.ubSquadSize = 6;
-		
+
 		//gGameOptions.fBobbyRayFastShipments = FALSE;
 		gGameOptions.fInventoryCostsAP = FALSE;
 
@@ -2663,7 +2663,7 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 				InitializeSMPanelCoordsOld();
 				InitializeInvPanelCoordsOld();
 			}
-			
+
 			// WANNE - MP: We also have to reinitialize the merc profiles because
 			// they depend on the inventory!
 			LoadMercProfiles();
@@ -2671,27 +2671,27 @@ void recieveSETTINGS (RPCParameters *rpcParameters) //recive settings from serve
 			InitializeFaceGearGraphics();
 
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[26],cl_lan->client_num,szDefault );
-			
+
 			fDrawCharacterList = true; // set the character list to be redrawn
-	
+
 			strcpy(client_names[cl_lan->client_num-1],szDefault);
 
 			// OJW - 20091024 - extract random table
 			if (!is_server)
-				memcpy(guiPreRandomNums,cl_lan->random_table,sizeof(UINT32)*MAX_PREGENERATED_NUMS);			
+				memcpy(guiPreRandomNums,cl_lan->random_table,sizeof(UINT32)*MAX_PREGENERATED_NUMS);
 
 			// WANNE: Turn on airspace mode (to switch maps) for the server!
-			if (is_server)			
-				TurnOnAirSpaceMode();			
+			if (is_server)
+				TurnOnAirSpaceMode();
 		}
 	}
-	else 
+	else
 	{
 		fDrawCharacterList = true; // set the character list to be redrawn
 
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[26],cl_lan->client_num,szDefault );
-			
-		strcpy(client_names[cl_lan->client_num-1],szDefault);				
+
+		strcpy(client_names[cl_lan->client_num-1],szDefault);
 	}
 }
 
@@ -2705,11 +2705,11 @@ void reapplySETTINGS()
 	//here some nifty little tweaks
 	LaptopSaveInfo.guiNumberOfMercPaymentsInDays += 20;
 	LaptopSaveInfo.gubLastMercIndex = LAST_MERC_ID;
-	
+
 	LaptopSaveInfo.ubLastMercAvailableId = 7;
 	gGameExternalOptions.fEnableSlayForever	=1;
 	LaptopSaveInfo.gubPlayersMercAccountStatus = 4;
-		
+
 	// WANNE: This should fix the bug playing a "tilt" sound and showing the mini laptop graphic on the screen, when opening the laptop / option screen from map screen
 	gfDontStartTransitionFromLaptop = TRUE;
 
@@ -2731,7 +2731,7 @@ void reapplySETTINGS()
 	ChangeSelectedMapSector( gsMercArriveSectorX, gsMercArriveSectorY, 0 );
 	CHAR16 str[128];
 	GetSectorIDString( gsMercArriveSectorX, gsMercArriveSectorY, 0, str, TRUE );
-	
+
 	// WANNE - MP: If time set to 0, then no time turns
 	INT32 secs_per_tick;
 	if (gMPServerSettings.secondsPerTick == 0)
@@ -2744,7 +2744,7 @@ void reapplySETTINGS()
 		gGameOptions.fTurnTimeLimit=gMPServerSettings.sofTurnTimeLimit;
 		secs_per_tick=gMPServerSettings.secondsPerTick;
 	}
-	
+
 	PLAYER_TEAM_TIMER_SEC_PER_TICKS=secs_per_tick;
 
 	INT32 clstarting_balance=gMPServerSettings.startingCash;//set starting balance
@@ -2758,7 +2758,7 @@ void reapplySETTINGS()
 		AddTransactionToPlayersBook( TRANSACTION_FEE, 0, GetWorldTotalMin(), clstarting_balance-LaptopSaveInfo.iCurrentBalance );
 	}
 
-	gGameOptions.fGunNut=gMPServerSettings.sofGunNut;	
+	gGameOptions.fGunNut=gMPServerSettings.sofGunNut;
 	gGameOptions.ubGameStyle=gMPServerSettings.soubGameStyle;
 	gGameOptions.ubDifficultyLevel=gMPServerSettings.soubDifficultyLevel;
 	gGameOptions.fNewTraitSystem = gMPServerSettings.soubSkillTraits;
@@ -2783,7 +2783,7 @@ void reapplySETTINGS()
 	if(!gMPServerSettings.disableMercEquipment)
 		cAllowMercEquipment = 1;
 
-	cMaxMercs = gMPServerSettings.maxMercs;	
+	cMaxMercs = gMPServerSettings.maxMercs;
 	cReportHiredMerc = gMPServerSettings.reportHiredMerc;
 
 	// WANNE - MP: I just added the NUM_SEC_IN_DAY so the game starts at Day 1 instead of Day 0
@@ -2817,9 +2817,9 @@ void reapplySETTINGS()
 	// if game starting time + first arrival delay >= 21:00 (162000) -> we arrive after the sun goes down
 	if( (gGameExternalOptions.iGameStartingTime + gGameExternalOptions.	iFirstArrivalDelay) < 111600 ||
 		(gGameExternalOptions.iGameStartingTime + gGameExternalOptions.iFirstArrivalDelay >= 162000))
-	{ 
+	{
 		// Default: Night
-		gubEnvLightValue = 12; 
+		gubEnvLightValue = 12;
 	}
 	else
 	{
@@ -2827,13 +2827,13 @@ void reapplySETTINGS()
 		gubEnvLightValue = 3;
 	}
 
-	LightSetBaseLevel(gubEnvLightValue); 
+	LightSetBaseLevel(gubEnvLightValue);
 
 	InitNewGameClock( );
-				
+
 	cWeaponReadyBonus = gMPServerSettings.weaponReadyBonus;
 	cDisableSpectatorMode = gMPServerSettings.disableSpectatorMode;
-	
+
 	// -----------------
 	// RW: Inventory
 	switch (gMPServerSettings.inventoryAttachment)
@@ -2882,7 +2882,7 @@ void reapplySETTINGS()
 	LoadMercProfiles();
 
 	InitializeFaceGearGraphics();
-	
+
 	fDrawCharacterList = true; // set the character list to be redrawn
 }
 
@@ -2898,7 +2898,7 @@ void recieveTEAMCHANGE( RPCParameters *rpcParameters )
 	else
 	{
 		// redraw the character list on the map screen
-		fTeamPanelDirty = true; 
+		fTeamPanelDirty = true;
 		fDrawCharacterList = true;
 		client_teams[cl_lan->client_num-1] = cl_lan->newteam;
 		if (cl_lan->client_num == CLIENT_NUM)
@@ -3012,7 +3012,7 @@ void recieveGRENADE (RPCParameters *rpcParameters)
 	if (pThrower != NULL)
 	{
 		guiPreRandomIndex = gren->uiPreRandomIndex;
-		
+
 		// grenade wasnt thrown by one of our guys, so we should do it on the client
 		if (!IsOurSoldier(pThrower) && (pThrower->bTeam != 1 || !is_server))
 		{
@@ -3231,7 +3231,7 @@ void recievePLANTEXPLOSIVE (RPCParameters *rpcParameters)
 			(*pObj)[0]->data.ubDirection = DIRECTION_IRRELEVANT;
 			(*pObj)[0]->data.ubWireNetworkFlag = (TRIPWIRE_NETWORK_OWNER_ENEMY|TRIPWIRE_NETWORK_NET_1|TRIPWIRE_NETWORK_LVL_1);
 			(*pObj)[0]->data.bDefuseFrequency = 0;
-			
+
 			// save old clients WorldID if we can
 			// loop through world bombs and find the one linked to the item we just created
 			UINT32 uiCount;
@@ -3297,8 +3297,8 @@ void send_detonate_explosive (UINT32 uiWorldIndex, UINT8 ubID)
 			{
 				detonate_struct det;
 				det.ubID = ubID;
-										
-				if ( gWorldBombs[ uiBombIndex ].bIsFromRemotePlayer ) 
+
+				if ( gWorldBombs[ uiBombIndex ].bIsFromRemotePlayer )
 				{
 					// it is possible for players from other teams to set off a bomb that does not belong to them if they fail disarming it
 					// but we must send the ID for the world item of the bomb that all the other clients recognise
@@ -3362,7 +3362,7 @@ void recieveDETONATEEXPLOSIVE (RPCParameters *rpcParameters)
 				// we could be recieving a message that a player from another team has detonated our bomb (while disarming), in this case we would check the local ids
 				// otherwise we check MPCreatorID's like normal
 				ubWorldIndexToCheck = (det->ubMPTeamIndex == netbTeam ? gWorldBombs[ uiCount ].iItemIndex : gWorldBombs[ uiCount ].iMPWorldItemIndex);
-				if ( gWorldBombs[ uiCount ].fExists == TRUE && 
+				if ( gWorldBombs[ uiCount ].fExists == TRUE &&
 					 ubWorldIndexToCheck == det->uiWorldItemIndex &&
 					 (gWorldBombs[ uiCount ].ubMPTeamIndex == det->ubMPTeamIndex || det->ubMPTeamIndex == netbTeam) )
 				{
@@ -3448,7 +3448,7 @@ void send_disarm_explosive(UINT32 sGridNo, UINT32 uiWorldItem, UINT8 ubID)
 
 void recieveDISARMEXPLOSIVE (RPCParameters *rpcParameters)
 {
-	disarm_struct* disarm = (disarm_struct*)rpcParameters->input; 
+	disarm_struct* disarm = (disarm_struct*)rpcParameters->input;
 
 	disarm->ubID = MPDecodeSoldierID(disarm->ubID);
 
@@ -3473,7 +3473,7 @@ void recieveDISARMEXPLOSIVE (RPCParameters *rpcParameters)
 			for(uiCount=0; uiCount < guiNumWorldBombs; uiCount++)
 			{
 				ubWorldIndexToCheck = (disarm->ubMPTeamIndex == netbTeam ? gWorldBombs[ uiCount ].iItemIndex : gWorldBombs[ uiCount ].iMPWorldItemIndex);
-				if ( gWorldBombs[ uiCount ].fExists == TRUE && 
+				if ( gWorldBombs[ uiCount ].fExists == TRUE &&
 					 disarm->uiWorldItemIndex == ubWorldIndexToCheck &&
 					 (gWorldBombs[ uiCount ].ubMPTeamIndex == disarm->ubMPTeamIndex || disarm->ubMPTeamIndex == netbTeam) )
 				{
@@ -3637,7 +3637,7 @@ void recieveNEWSMOKEEFFECT (RPCParameters *rpcParameters)
 
 			// start new smoke effect
 			INT32 iNewSmokeIndex = NewSmokeEffect( sef->sGridNo , sef->usItem , sef->bLevel , sef->ubOwner , TRUE );
-			
+
 			// attach remote id to local smoke effect
 			gSmokeEffectData[iNewSmokeIndex].iMPTeamIndex = pSoldier->bTeam;
 			gSmokeEffectData[iNewSmokeIndex].iMPSmokeEffectID = sef->iSmokeEffectID;
@@ -3750,7 +3750,7 @@ void recieveEXPLOSIONDAMAGE (RPCParameters *rpcParameters)
 
 
 void send_bullet(  BULLET * pBullet,UINT16 usHandItem )
-{	
+{
 	netb_struct netb;
 	netb.net_bullet=*pBullet;
 	netb.usHandItem=usHandItem;
@@ -3759,8 +3759,8 @@ void send_bullet(  BULLET * pBullet,UINT16 usHandItem )
 
 	if(pBullet->ubTargetID < 20)netb.net_bullet.ubTargetID = netb.net_bullet.ubTargetID+ubID_prefix;
 	if(pBullet->ubFirerID < 20)netb.net_bullet.ubFirerID = netb.net_bullet.ubFirerID+ubID_prefix;
-				
-	
+
+
 	client->RPC("sendBULLET",(const char*)&netb, (int)sizeof(netb_struct)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 
 }
@@ -3782,7 +3782,7 @@ void recieveBULLET(RPCParameters *rpcParameters)
 	BULLET * pBullet;
 
 	INT32 iBullet = CreateBullet( netb->net_bullet.ubFirerID, 0, netb->net_bullet.usFlags,netb->usHandItem );
-			
+
 #ifdef BETAVERSION
 	if (iBullet == -1)
 	{
@@ -3793,10 +3793,10 @@ void recieveBULLET(RPCParameters *rpcParameters)
 	//add bullet to bullet table for translation
 	bTable[bTeam][net_iBullet].remote_id = net_iBullet;
 	bTable[bTeam][net_iBullet].local_id = iBullet;
-		
+
 	pBullet = GetBulletPtr( iBullet );
 
-	//ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, L"Created Bullet Id: %d",iBullet);		
+	//ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, L"Created Bullet Id: %d",iBullet);
 
 	pBullet->fCheckForRoof=netb->net_bullet.fCheckForRoof;
 	pBullet->qIncrX=netb->net_bullet.qIncrX;
@@ -3827,7 +3827,7 @@ void send_changestate (EV_S_CHANGESTATE * SChangeState)
 
 	if(new_state.usSoldierID < 20)
 		new_state.usSoldierID = new_state.usSoldierID+ubID_prefix;
-	
+
 	client->RPC("sendSTATE",(const char*)&new_state, (int)sizeof(EV_S_CHANGESTATE)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -3884,7 +3884,7 @@ void send_death( SOLDIERTYPE *pSoldier )
 
 	// Translate soldier id for other clients if the soldier was one of ours
 	if(pSoldier->ubID<20)nDeath.soldier_id=nDeath.soldier_id+ubID_prefix;
-	
+
 	// if soldier died from bleeding
 	if(pSoldier->ubAttackerID==NULL || pSoldier->ubAttackerID == NOBODY)
 	{
@@ -3918,7 +3918,7 @@ void send_death( SOLDIERTYPE *pSoldier )
 
 			nDeath.attacker_id = pAttacker->ubID;
 		}
-	
+
 		// Translate attacker id for other clients if attacker was one of ours
 		if(pAttacker->ubID<20)nDeath.attacker_id=pAttacker->ubID+ubID_prefix;
 
@@ -3945,7 +3945,7 @@ void send_death( SOLDIERTYPE *pSoldier )
 	{
 		pS_bTeam=pSoldier->bTeam;
 		memcpy(pS_name,pSoldier->name,sizeof(CHAR16)*10);
-		if(pS_bTeam==1 && cGameType==MP_TYPE_COOP) 
+		if(pS_bTeam==1 && cGameType==MP_TYPE_COOP)
 		{
 			// CO-OP Death of an enemy ai
 			pS_bTeam = 5; // the server subtracts 1 from these numbers to score in scoreboard, AI is index 4
@@ -3966,11 +3966,11 @@ void send_death( SOLDIERTYPE *pSoldier )
 
 	// notify other clients of death
 	client->RPC("sendDEATH",(const char*)&nDeath, (int)sizeof(death_struct)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
-	
-	// print kill notice to screen	
-	if (pSoldier && pSoldier->bTeam==1)  
-		ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[67]);	
-	else  
+
+	// print kill notice to screen
+	if (pSoldier && pSoldier->bTeam==1)
+		ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[67]);
+	else
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[28],pS_name,(pS_bTeam),client_names[(pS_bTeam-1)],pA_name,(pA_bTeam),client_names[(pA_bTeam-1)] );
 
 #ifdef JA2BETAVERSION
@@ -3979,12 +3979,12 @@ void send_death( SOLDIERTYPE *pSoldier )
 	    char a_name[10];
 	    WideCharToMultiByte(CP_UTF8,0,pS_name,-1, s_name,10,NULL,NULL);
 	    WideCharToMultiByte(CP_UTF8,0,pA_name,-1, a_name,10,NULL,NULL);
-	
-	    if (pSoldier->bTeam==1) 
+
+	    if (pSoldier->bTeam==1)
 		    MPDebugMsg( String ( "MPDEBUG SEND - Enemy AI #%d was killed by ('%s' - %d) (client %d - '%s')\n",nDeath.soldier_id,a_name,nDeath.attacker_id,pA_bTeam,client_names[pA_bTeam-1]) );
-	    else if (pAttacker->bTeam==1) 
+	    else if (pAttacker->bTeam==1)
 		    MPDebugMsg( String ( "MPDEBUG SEND - '%s' (client %d - '%S') was killed by '%s' (client %d - '%s')\n",s_name,pS_bTeam,client_names[(pS_bTeam-1)],a_name,pA_bTeam,"Queens Army") );
-	    else 
+	    else
 		    MPDebugMsg( String ( "MPDEBUG SEND - '%s' (client %d - '%S') was killed by '%s' (client %d - '%s')\n",s_name,pS_bTeam,client_names[(pS_bTeam-1)],a_name,pA_bTeam,client_names[(pA_bTeam-1)]) );
     }
 #endif
@@ -4011,7 +4011,7 @@ void recieveDEATH (RPCParameters *rpcParameters)
 	{
 		pA_bTeam=pAttacker->bTeam;
 		memcpy(pA_name,pAttacker->name,sizeof(CHAR16)*10);
-		
+
 		if(pA_bTeam>5)
 			pA_bTeam=pA_bTeam-5;
 		if(pA_bTeam==0)
@@ -4022,44 +4022,44 @@ void recieveDEATH (RPCParameters *rpcParameters)
 	{
 		pS_bTeam=pSoldier->bTeam;
 		memcpy(pS_name,pSoldier->name,sizeof(CHAR16)*10);
-		
+
 		if(pS_bTeam>5)
 			pS_bTeam=pS_bTeam-5;
 		if(pS_bTeam==0)
 			pS_bTeam=CLIENT_NUM;
 	}
-			
+
 	if(pSoldier->bActive)
 	{
 		pSoldier->usAnimState=50;
 
 		#ifdef JA2BETAVERSION
-			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, L"made merc corpse/dead");	
+			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, L"made merc corpse/dead");
 		#endif
 
 		RemoveManAsTarget(pSoldier);
 		TurnSoldierIntoCorpse( pSoldier, TRUE, TRUE );
-	
+
 
 		if ( CheckForEndOfBattle( FALSE ) )
 		{
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[72]);
 		}
 
-		if (pSoldier->bTeam==1)  
-			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[67]);	
-		else 
+		if (pSoldier->bTeam==1)
+			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[67]);
+		else
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[28],pS_name,(pS_bTeam),client_names[(pS_bTeam-1)],pA_name,(pA_bTeam),client_names[(pA_bTeam-1)] );
 	}
 	else
 	{
 		#ifdef JA2BETAVERSION
-			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, L"merc already corpse/dead");	
+			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, L"merc already corpse/dead");
 		#endif
 
-		if (pSoldier->bTeam==1) 
-			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[67]);	
-		
+		if (pSoldier->bTeam==1)
+			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[67]);
+
 		CheckForEndOfBattle( FALSE );
 	}
 
@@ -4068,12 +4068,12 @@ void recieveDEATH (RPCParameters *rpcParameters)
 	char a_name[10];
 	WideCharToMultiByte(CP_UTF8,0,pS_name,-1, s_name,10,NULL,NULL);
 	WideCharToMultiByte(CP_UTF8,0,pA_name,-1, a_name,10,NULL,NULL);
-	
-	if (pSoldier->bTeam==1) 
+
+	if (pSoldier->bTeam==1)
 		MPDebugMsg( String ( "MPDEBUG RECV - Enemy AI #%d was killed by ('%s' - #%d) (client %d - '%s')\n",nDeath->soldier_id,a_name,nDeath->attacker_id,pA_bTeam,client_names[pA_bTeam-1]) );
-	else if (pAttacker->bTeam==1) 
+	else if (pAttacker->bTeam==1)
 		MPDebugMsg( String ( "MPDEBUG RECV - '%s' (client %d - '%s') was killed by '%s' (client %d - '%s')\n",s_name,pS_bTeam,client_names[(pS_bTeam-1)],a_name,pA_bTeam,"Queens Army") );
-	else 
+	else
 		MPDebugMsg( String ( "MPDEBUG RECV - '%s' (client %d - '%s') was killed by '%s' (client %d - '%s')\n",s_name,pS_bTeam,client_names[(pS_bTeam-1)],a_name,pA_bTeam,client_names[(pA_bTeam-1)]) );
 #endif
 }
@@ -4083,7 +4083,7 @@ void send_hitstruct(EV_S_STRUCTUREHIT	*	SStructureHit)
 	EV_S_STRUCTUREHIT struct_hit;
 	memcpy( &struct_hit , SStructureHit, sizeof( EV_S_STRUCTUREHIT ));
 	if(SStructureHit->ubAttackerID <20)struct_hit.ubAttackerID = SStructureHit->ubAttackerID+ubID_prefix;
-			
+
 	client->RPC("sendhitSTRUCT",(const char*)&struct_hit, (int)sizeof(EV_S_STRUCTUREHIT)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -4091,10 +4091,10 @@ void send_hitwindow(EV_S_WINDOWHIT * SWindowHit)
 {
 	EV_S_WINDOWHIT window_hit;
 	memcpy( &window_hit , SWindowHit, sizeof( EV_S_WINDOWHIT ));
-	
+
 	if(SWindowHit->ubAttackerID <20)
 		window_hit.ubAttackerID = SWindowHit->ubAttackerID+ubID_prefix;
-			
+
 	client->RPC("sendhitWINDOW",(const char*)&window_hit, (int)sizeof(EV_S_WINDOWHIT)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -4102,10 +4102,10 @@ void send_miss(EV_S_MISS * SMiss)
 {
 	EV_S_MISS shot_miss;
 	memcpy( &shot_miss , SMiss, sizeof( EV_S_MISS ));
-	
+
 	if(SMiss->ubAttackerID <20)
 		shot_miss.ubAttackerID = SMiss->ubAttackerID+ubID_prefix;
-			
+
 	client->RPC("sendMISS",(const char*)&shot_miss, (int)sizeof(EV_S_MISS)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -4118,9 +4118,9 @@ void recievehitSTRUCT  (RPCParameters *rpcParameters)
 
 	if(struct_hit->fStopped)
 		StopBullet( iBullet );
-	
+
 	StructureHit( iBullet, struct_hit->usWeaponIndex, struct_hit->bWeaponStatus, struct_hit->ubAttackerID, struct_hit->sXPos, struct_hit->sYPos, struct_hit->sZPos, struct_hit->usStructureID, struct_hit->iImpact, struct_hit->fStopped );
-	
+
 	if(struct_hit->fStopped)
 		RemoveBullet(iBullet);
 }
@@ -4148,7 +4148,7 @@ BOOLEAN check_status (void)// any 'enemies' and clients left to fight ??
 	int cnt;
 	int soldiers= 0 ;
 	int numActiveSides = 0;
-	
+
 	int dm_teams[4] = {0 , 0 , 0 , 0};
 
 	for(int x=0;x < MAXTEAMS; x++)
@@ -4190,7 +4190,7 @@ BOOLEAN check_status (void)// any 'enemies' and clients left to fight ??
 	}
 
 	if( (gTacticalStatus.Team[ 0 ].bTeamActive == 0) && wiped==0)//server's team has been knocked out
-	{		
+	{
 		wiped=1;
 		ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[40] );
 		if(!cDisableSpectatorMode)
@@ -4198,7 +4198,7 @@ BOOLEAN check_status (void)// any 'enemies' and clients left to fight ??
 			gTacticalStatus.uiFlags |= SHOW_ALL_MERCS;//hayden
 			ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[41] );
 		}
-		else 
+		else
 		{
 			ScreenMsg( FONT_LTBLUE, MSG_MPSYSTEM, MPClientMessage[73]);
 		}
@@ -4229,12 +4229,12 @@ BOOLEAN check_status (void)// any 'enemies' and clients left to fight ??
 	else if (cGameType == MP_TYPE_COOP)
 	{
 		// check for game end for CO-OP
-		// If any player team is alive && the number of enemies > 0 then continue game (true), else quit (false) 
+		// If any player team is alive && the number of enemies > 0 then continue game (true), else quit (false)
 		return ((gTacticalStatus.Team[ 0 ].bTeamActive==1 || gTacticalStatus.Team[ 6 ].bTeamActive==1 || gTacticalStatus.Team[ 7 ].bTeamActive==1 || gTacticalStatus.Team[ 8 ].bTeamActive==1 || gTacticalStatus.Team[ 9 ].bTeamActive==1  )&& NumEnemyInSector() > 0);
 	}
 
 	// dont stop the game by default
-	return true;	
+	return true;
 }
 
 void UpdateSoldierToNetwork ( SOLDIERTYPE *pSoldier )
@@ -4256,10 +4256,10 @@ void UpdateSoldierToNetwork ( SOLDIERTYPE *pSoldier )
 			EV_S_UPDATENETWORKSOLDIER SUpdateNetworkSoldier;
 
 			SUpdateNetworkSoldier.usSoldierID=pSoldier->ubID;
-			
+
 			if(pSoldier->ubID < 20)
 				SUpdateNetworkSoldier.usSoldierID=pSoldier->ubID+ubID_prefix;
-			
+
 			SUpdateNetworkSoldier.sAtGridNo=pSoldier->sGridNo;
 			SUpdateNetworkSoldier.bBreath=pSoldier->bBreath;
 			SUpdateNetworkSoldier.ubDirection=pSoldier->ubDirection;
@@ -4267,7 +4267,7 @@ void UpdateSoldierToNetwork ( SOLDIERTYPE *pSoldier )
 			SUpdateNetworkSoldier.bLife=pSoldier->stats.bLife;
 			SUpdateNetworkSoldier.bBleeding=pSoldier->bBleeding;
 			SUpdateNetworkSoldier.ubNewStance= gAnimControl[ pSoldier->usAnimState ].ubEndHeight;
-			
+
 			if((gTacticalStatus.ubTopMessageType == PLAYER_TURN_MESSAGE || gTacticalStatus.ubTopMessageType == PLAYER_INTERRUPT_MESSAGE || ((gTacticalStatus.ubTopMessageType == COMPUTER_INTERRUPT_MESSAGE || gTacticalStatus.ubTopMessageType == COMPUTER_TURN_MESSAGE )&& is_server)) && (gTacticalStatus.uiFlags & TURNBASED) && (gTacticalStatus.uiFlags & INCOMBAT))//update progress bar, not supporting coop yet...
 			{
 				SUpdateNetworkSoldier.usTactialTurnLimitCounter = gTacticalStatus.usTactialTurnLimitCounter;
@@ -4275,7 +4275,7 @@ void UpdateSoldierToNetwork ( SOLDIERTYPE *pSoldier )
 			}
 			else
 				SUpdateNetworkSoldier.usTactialTurnLimitCounter = 9999;
-			
+
 			client->RPC("updatenetworksoldier",(const char*)&SUpdateNetworkSoldier, (int)sizeof(EV_S_UPDATENETWORKSOLDIER)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 		}
 	}
@@ -4291,7 +4291,7 @@ void UpdateSoldierFromNetwork  (RPCParameters *rpcParameters)
 
 	INT16  sCellX, sCellY;
 	sCellX = CenterX( SUpdateNetworkSoldier->sAtGridNo );
-	sCellY = CenterY( SUpdateNetworkSoldier->sAtGridNo );	
+	sCellY = CenterY( SUpdateNetworkSoldier->sAtGridNo );
 
 	if( pSoldier->sGridNo != SUpdateNetworkSoldier->sAtGridNo)
 	{
@@ -4306,7 +4306,7 @@ void UpdateSoldierFromNetwork  (RPCParameters *rpcParameters)
 	{
 		pSoldier->ChangeSoldierStance( SUpdateNetworkSoldier->ubNewStance );
 	}
-		
+
 	pSoldier->bBleeding=SUpdateNetworkSoldier->bBleeding;
 
 	if( (SUpdateNetworkSoldier->usTactialTurnLimitCounter != 9999) && (gTacticalStatus.ubTopMessageType != PLAYER_TURN_MESSAGE) && (gTacticalStatus.ubTopMessageType != PLAYER_INTERRUPT_MESSAGE))
@@ -4320,46 +4320,46 @@ void UpdateSoldierFromNetwork  (RPCParameters *rpcParameters)
 void kick_player (void)
 {
 	if(is_server)
-	{		
+	{
 		CHAR16 Cmsg[255];
 
 		if (cMaxClients == 2)
 			swprintf(Cmsg, MPClientMessage[74], client_names[1],"<?>","<?>");
 		else if (cMaxClients == 3)
 			swprintf(Cmsg, MPClientMessage[74], client_names[1],client_names[2],"<?>");
-		else 
+		else
 			swprintf(Cmsg, MPClientMessage[74], client_names[1],client_names[2],client_names[3]);
-		
+
 		SGPRect CenterRect = { 100 + xResOffset, 100 + yResOffset, SCREEN_WIDTH - xResOffset, 300 + yResOffset };
 
 		DoMessageBox( MSG_BOX_BASIC_STYLE, Cmsg,  guiCurrentScreen, MSG_BOX_FLAG_FOUR_NUMBERED_BUTTONS | MSG_BOX_FLAG_USE_CENTERING_RECT, kick_callback,  &CenterRect );
 	}
-	else	
+	else
 		ScreenMsg( FONT_LTGREEN, MSG_INTERFACE, MPClientMessage[22] );
-	
+
 }
 
 void kick_callback (UINT8 ubResult)
-{	
+{
 	if (is_server)
 	{
 		// Pressed '1'
 		if(ubResult ==1)
 		{
-			// WANNE: Nothing should happen			
+			// WANNE: Nothing should happen
 		}
-		else 
+		else
 		{
 			if (ubResult <= cMaxClients)
 			{
 				kickR kick;
 				kick.ubResult=ubResult+5;
-				
+
 				client->RPC("Snull_team",(const char*)&kick, (int)sizeof(kickR)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 
 				// If the team that should be kicked has the turn, give the turn to the server
 				if (gTacticalStatus.ubCurrentTeam == kick.ubResult)
-				{					
+				{
 					EndTurn(0);
 				}
 			}
@@ -4367,7 +4367,7 @@ void kick_callback (UINT8 ubResult)
 			{
 				// The client to which we should give the turn doe not exists. Do nothinig!
 			}
-		}		
+		}
 	}
 }
 
@@ -4377,10 +4377,10 @@ void null_team (RPCParameters *rpcParameters)
 	ScreenMsg( FONT_LTGREEN, MSG_INTERFACE, MPClientMessage[29],(kick->ubResult-5),client_names[kick->ubResult-6] );
 	int fID = gTacticalStatus.Team[ kick->ubResult ].bFirstID;
 	int lID = gTacticalStatus.Team[ kick->ubResult ].bLastID;
-	
+
 	if(kick->ubResult==netbTeam)
 		fID=0,lID=19;
-	
+
 	int cnt;
 	for ( cnt=fID ; cnt <= lID; cnt++ )
 	{
@@ -4388,10 +4388,10 @@ void null_team (RPCParameters *rpcParameters)
 	}
 
 	if (kick->ubResult==netbTeam)
-	{		
+	{
 		gTacticalStatus.uiFlags |= SHOW_ALL_MERCS;//hayden
 		ScreenMsg( FONT_YELLOW, MSG_MPSYSTEM, MPClientMessage[41] );
-	}	
+	}
 }
 
 void overide_turn (void)
@@ -4400,38 +4400,38 @@ void overide_turn (void)
 	{
 		//manual overide command for server
 		CHAR16 Cmsg[255];
-		
+
 		if (cMaxClients == 2)
 			swprintf(Cmsg, MPClientMessage[30], client_names[1],"<?>","<?>");
 		else if (cMaxClients == 3)
 			swprintf(Cmsg, MPClientMessage[30], client_names[1],client_names[2],"<?>");
-		else 
+		else
 			swprintf(Cmsg, MPClientMessage[30], client_names[1],client_names[2],client_names[3]);
-			
+
 		SGPRect CenterRect = { 100 + xResOffset, 100 + yResOffset, SCREEN_WIDTH - 100 - xResOffset, 300 + yResOffset };
-		
+
 		DoMessageBox( MSG_BOX_BASIC_STYLE, Cmsg,  guiCurrentScreen, MSG_BOX_FLAG_FOUR_NUMBERED_BUTTONS | MSG_BOX_FLAG_USE_CENTERING_RECT | MSG_BOX_FLAG_OK, turn_callback,  &CenterRect );
 	}
-	else	
+	else
 		ScreenMsg( FONT_LTGREEN, MSG_INTERFACE, MPClientMessage[22] );
 }
 
 void turn_callback (UINT8 ubResult)
 {
 	if(is_server)
-	{				
+	{
 		// Pressed '1'
 		if(ubResult ==1)
 		{
 			// WANNE: Nothing should happen. Do not give the turn to the server!
 			//EndTurn( 0 );
 		}
-		else 
+		else
 		{
 			if (ubResult <= cMaxClients)
 			{
 				ScreenMsg( FONT_LTGREEN, MSG_INTERFACE, MPClientMessage[31],ubResult );
-	
+
 				if(!( gTacticalStatus.uiFlags & INCOMBAT ))
 				{
 					gTacticalStatus.uiFlags |= INCOMBAT;
@@ -4483,7 +4483,7 @@ void send_door ( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fNoAnimations )
 		sDoor.ubID=pSoldier->ubID;
 		sDoor.sGridNo=sGridNo;
 		sDoor.fNoAnimations=fNoAnimations;
-		
+
 		client->RPC("sendDOOR",(const char*)&sDoor, (int)sizeof(doors)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 	}
 }
@@ -4575,7 +4575,7 @@ void recieveDISCONNECT(RPCParameters* rpcParameters)
 		// if it was that teams turn then end it
 		if(is_server)
 		{
-			if(gTacticalStatus.ubCurrentTeam==iNetbTeam)EndTurn( iNetbTeam+1 );	
+			if(gTacticalStatus.ubCurrentTeam==iNetbTeam)EndTurn( iNetbTeam+1 );
 		}
 	}
 }
@@ -4698,14 +4698,14 @@ void gotoRT(RPCParameters *rpcParameters)
 	{
 		ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, MPClientMessage[33] );
 	}
-	
+
 	getReal=false;
 }
 
 void startCombat(UINT8 ubStartingTeam)
 {
 	sc_struct data;
-	
+
 	if(ubStartingTeam==0)
 		ubStartingTeam=netbTeam;
 
@@ -4742,7 +4742,7 @@ void recieve_wipe (RPCParameters *rpcParameters)
 	ScreenMsg( FONT_LTGREEN, MSG_INTERFACE, MPClientMessage[75], TeamNameStrings[data->ubStartingTeam] );
 	if(is_server)
 	{
-		if(gTacticalStatus.ubCurrentTeam==data->ubStartingTeam)EndTurn( data->ubStartingTeam+1 );	
+		if(gTacticalStatus.ubCurrentTeam==data->ubStartingTeam)EndTurn( data->ubStartingTeam+1 );
 
 		// end the co-op game if all player teams have wiped
 		if (cGameType==MP_TYPE_COOP)
@@ -4793,7 +4793,7 @@ void requestAIint(SOLDIERTYPE *pSoldier )
 #ifdef BETAVERSION
 	ScreenMsg( FONT_LTGREEN, MSG_INTERFACE, L"interrupt requested" );
 #endif
-		
+
 	client->RPC("rINT",(const char*)&data, (int)sizeof(AIint)*8, HIGH_PRIORITY, RELIABLE, 0, UNASSIGNED_SYSTEM_ADDRESS, true, 0, UNASSIGNED_NETWORK_ID,0);
 }
 
@@ -4816,7 +4816,7 @@ void game_over()
 	// wait 3 seconds then notify all clients
 	// reset
 	isOwnTeamWipedOut = false;
-	
+
 	is_game_over = true;
 	iScoreScreenTime = guiBaseJA2NoPauseClock + 5000;
 }
@@ -4861,7 +4861,7 @@ void connect_client ( void )
 	if(!is_client)
 	{
 		ScreenMsg( FONT_BEIGE, MSG_MPSYSTEM, MPClientMessage[0] );
-			
+
 		client = RakNetworkFactory::GetRakPeerInterface();
 		bool b = client->Startup(1,30,&SocketDescriptor(), 1);
 
@@ -4916,19 +4916,19 @@ void connect_client ( void )
 		REGISTER_STATIC_RPC(client, requestSETID);
 		REGISTER_STATIC_RPC(client, recieveDISCONNECTREASON);
 		//***
-		
+
 		if (b)
 		{
 			is_client=true;
 		}
 		else
-		{ 
+		{
 			ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[76]);
 		}
-			
+
 		is_connected=false;
-	}	
-	
+	}
+
 	//reconnect/connect
 	if( !is_connected && !is_connecting)
 	{
@@ -4964,7 +4964,7 @@ void connect_client ( void )
 		vfs::PropertyContainer props;
 		props.initFromIniFile(JA2MP_INI_FILENAME);
 		UINT16 serverPort = (UINT16)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_SERVER_PORT, 60005);
-			
+
 		// ----------------------------
 		// Save to global values
 		// ----------------------------
@@ -4980,7 +4980,7 @@ void connect_client ( void )
 		wiped=0;
 		//disable cheating
 		gubCheatLevel = 0;
-		cMaxClients = 0;	//reset server only set settings.			
+		cMaxClients = 0;	//reset server only set settings.
 		cDamageMultiplier=0;
 		cSameMercAllowed=0;
 		cDisableSpectatorMode=0;
@@ -4996,10 +4996,10 @@ void connect_client ( void )
 		LaptopSaveInfo.ubLastMercAvailableId = 7;
 		gGameExternalOptions.fEnableSlayForever	= 1;
 		LaptopSaveInfo.gubPlayersMercAccountStatus = 4;
-				
+
 		// WANNE: This should fix the bug playing a "tilt" sound and showing the mini laptop graphic on the screen, when opening the laptop / option screen from map screen from map screen
 		gfDontStartTransitionFromLaptop = TRUE;
-										
+
 		//**********************
 
 		// WANNE: FILE TRANSFER: Build the absolut file transfer directory path for the client
@@ -5012,14 +5012,14 @@ void connect_client ( void )
 		// WANNE: FILE TRANSFER
 		client->AttachPlugin(&fltClient);
 		client->SetSplitMessageProgressInterval(1);
-		
+
 		CHAR16 tmpMessage[512];
 		swprintf( tmpMessage, MPClientMessage[1],serverIP );
 		ScreenMsg( FONT_BEIGE, MSG_MPSYSTEM, tmpMessage); // we are connecting
 		SetConnectScreenSubMessageW( tmpMessage );
 
 		client->Connect(serverIP, serverPort, 0,0);
-		is_connecting = true;	
+		is_connecting = true;
 	}
 	else if (is_connecting)
 	{
@@ -5032,7 +5032,7 @@ void connect_client ( void )
 }
 
 void client_packet ( void )
-{	
+{
 	Packet* p;
 
 	if (is_client)
@@ -5043,7 +5043,7 @@ void client_packet ( void )
 		{
 			// We got a packet, get the identifier with our handy function
 			packetIdentifier = GetPacketIdentifier(p);
-			
+
 			// Check if this is a network message packet
 			switch (packetIdentifier)
 			{
@@ -5102,7 +5102,7 @@ void client_packet ( void )
 					// Couldn't deliver a reliable packet - i.e. the other system was abnormally
 					// terminated
 					ScreenMsg( FONT_BEIGE, MSG_MPSYSTEM, L"ID_CONNECTION_LOST");
-					
+
 					is_connected=false;
 					//OJW - 20081223
 					//Gracefully notify and disconnect the client
@@ -5190,12 +5190,12 @@ void client_disconnect (void)
 		is_client = false;
 		is_connected=false;
 		is_connecting=false;
-		
+
 		fileTransferProgress = 0;
 		allowlaptop=false;
 
-		TEAM=0;	
-		
+		TEAM=0;
+
 		// clear local client cache
 		memset(client_names,0,sizeof(char)*4*30);
 		memset(client_edges,0,sizeof(int)*5);
@@ -5204,7 +5204,7 @@ void client_disconnect (void)
 		memset(gMPPlayerStats,0,sizeof(player_stats)*5);
 		memset(random_mercs,0,sizeof(int)*7);
 		memset ( &client_downloading,0,sizeof(int)*4);
-		memset ( &client_progress,0,sizeof(int)*4);	
+		memset ( &client_progress,0,sizeof(int)*4);
 
 		// We're done with the network
 		RakNetworkFactory::DestroyRakPeerInterface(client);
@@ -5278,7 +5278,7 @@ void send_teamchange(int newteam)
 bool can_teamchange()
 {
 	bool isGeneralTeamchangeValid = (is_game_started != 1 && client_ready[CLIENT_NUM-1] == 0 && !allowlaptop);
-	
+
 	if (isGeneralTeamchangeValid && cGameType == MP_TYPE_TEAMDEATMATCH)
 		return TRUE;
 	else
@@ -5289,7 +5289,7 @@ bool can_teamchange()
 void StartScoreScreen( void )
 {
 	// pause game
-	
+
 	// set main screen as score screen
 	LeaveTacticalScreen( MP_SCORE_SCREEN );
 }

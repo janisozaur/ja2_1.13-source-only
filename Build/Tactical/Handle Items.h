@@ -43,17 +43,17 @@
 // MACRO FOR DEFINING OF ITEM IS VISIBLE
 #define ITEMPOOL_VISIBLE( pItemPool )			( ( pItemPool->bVisible >= 1 ) || (gTacticalStatus.uiFlags&SHOW_ALL_ITEMS) )
 
-typedef void ( *ITEM_POOL_LOCATOR_HOOK )( void );	
+typedef void ( *ITEM_POOL_LOCATOR_HOOK )( void );
 
 
 class WORLDITEM;
 struct LEVELNODE;
 
 typedef struct TAG_ITEM_POOL
-{	
+{
 	struct TAG_ITEM_POOL	*pNext;
 	struct TAG_ITEM_POOL	*pPrev;
-	
+
 	INT32		iItemIndex;
 	INT8		bVisible;
 	INT8		bFlashColor;
@@ -66,7 +66,7 @@ typedef struct TAG_ITEM_POOL
 
 } ITEM_POOL;
 
-typedef struct 
+typedef struct
 {
 	ITEM_POOL								*pItemPool;
 
@@ -133,7 +133,7 @@ typedef enum
 typedef struct INTERACTIVE_STRUCTURE {
 	INTERACTIVE_STRUCTURE()
 	: sector( -1 ), sectorlevel( -1 ), sLevel( -1 ), sActionType( INTERACTIVE_STRUCTURE_NO_ACTION ), difficulty( 0 ), luaactionid( -1 ) {}
-		
+
 	INT16	sector;
 	INT8	sectorlevel;						// whether this is on the surface (0) or below (1-3)
 	char	szTileSetName[20];					// name of the tileset

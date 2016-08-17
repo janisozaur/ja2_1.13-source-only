@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Drugs And Alcohol.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -70,7 +70,7 @@ drugsStartElementHandle(void *userData, const XML_Char *name, const XML_Char **a
 			pData->drug_effects.duration = 0;
 			pData->drug_effects.size = 0;
 			pData->drug_effects.chance = 100;
-				
+
 			pData->maxReadDepth++;
 		}
 		else if ( pData->curElement == ELEMENT &&
@@ -146,7 +146,7 @@ drugsStartElementHandle(void *userData, const XML_Char *name, const XML_Char **a
 
 			pData->maxReadDepth++; //we are not skipping this element
 		}
-			
+
 		pData->szCharData[0] = '\0';
 	}
 

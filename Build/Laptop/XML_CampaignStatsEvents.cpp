@@ -52,7 +52,7 @@ CSEStartElementHandle(void *userData, const XML_Char *name, const XML_Char **att
 			pData->maxReadDepth++; //we are not skipping this element
 		}
 		else if(pData->curElement == ELEMENT &&
-			   (strcmp(name, "uiIndex") == 0 ||		
+			   (strcmp(name, "uiIndex") == 0 ||
 				strcmp(name, "szText0") == 0 ||
 				strcmp(name, "szText1") == 0 ||
 				strcmp(name, "szText2") == 0 ||
@@ -93,7 +93,7 @@ CSEEndElementHandle(void *userData, const XML_Char *name)
 {
 	CSEParseData * pData = (CSEParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "CAMPAIGNSTATSEVENTS") == 0)
 		{
@@ -101,8 +101,8 @@ CSEEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "EVENT") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if(pData->curItem.uiIndex < pData->maxArraySize)
 			{
 				if ( localizedTextOnly_CSE )
@@ -112,7 +112,7 @@ CSEEndElementHandle(void *userData, const XML_Char *name)
 					for (int i = 0; i < MAX_CAMPAIGNSTATSEVENTS_TEXTS; i++)
 					{
 						wcscpy(zCampaignStatsEvent[pData->curItem.uiIndex].szText[i], pData->curItem.szText[i]);
-					}					
+					}
 				}
 				else
 				{
@@ -140,7 +140,7 @@ CSEEndElementHandle(void *userData, const XML_Char *name)
 				if(strcmp(name, txt) == 0 )
 				{
 					pData->curElement = ELEMENT;
-			
+
 					MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curItem.szText[i], sizeof(pData->curItem.szText[i])/sizeof(pData->curItem.szText[i][0]) );
 					pData->curItem.szText[i][sizeof(pData->curItem.szText[i])/sizeof(pData->curItem.szText[i][0]) - 1] = '\0';
 
@@ -167,7 +167,7 @@ BOOLEAN ReadInCampaignStatsEvents(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading CampaignStatsEvents.xml" );
 
 	localizedTextOnly_CSE = localizedVersion;
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -237,7 +237,7 @@ BOOLEAN WriteCampaignStatsEvents( STR fileName)
 		{
 			FilePrintf(hFile,"\t<EVENT>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);
-			
+
 			FilePrintf(hFile,"\t</EVENT>\r\n");
 		}
 		FilePrintf(hFile,"</CAMPAIGNSTATSEVENTS>\r\n");

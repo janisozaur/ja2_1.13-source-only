@@ -23,7 +23,7 @@ class MilitiaServiceRecordTable : public BaseTable
 {
 public:
 	MilitiaServiceRecordTable( );
-		
+
 	/*
 	* Initialise variables. Called after each creation which allows moving a dropdown
 	*/
@@ -55,7 +55,7 @@ public:
 	virtual void SetRefresh( );
 
 	void SetId( UINT32 usId )	{ mMilitiaId = usId; }
-	
+
 private:
 	// declare but don't define
 	MilitiaServiceRecordTable( MilitiaServiceRecordTable const& );

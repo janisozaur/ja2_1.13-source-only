@@ -204,7 +204,7 @@ public:
 		BinaryHeap[index].data = data;
 		BinaryHeap[index].key = key;
 		return (heapCount++);
-		
+
 		/*
 		if (heapCount > maxSize) {
 			return 0;

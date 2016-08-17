@@ -9,13 +9,13 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Compile Character.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Text System.h"
-	#include "input.h"
-	#include "english.h"
+	#include "Input.h"
+	#include "English.h"
 #endif
 
 

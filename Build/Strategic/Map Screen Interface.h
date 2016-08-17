@@ -139,7 +139,7 @@ enum {
 // snitch menu defines
 enum{
 	SNITCH_MENU_TOGGLE = 0,
-	SNITCH_MENU_SECTOR,	
+	SNITCH_MENU_SECTOR,
 	SNITCH_MENU_CANCEL,
 	MAX_SNITCH_MENU_STRING_COUNT,
 };
@@ -329,7 +329,7 @@ extern BOOLEAN fLockOutMapScreenInterface;
 // The character data structure
 typedef struct {
 
-	UINT16 usSolID;// soldier ID in MenPtrs 
+	UINT16 usSolID;// soldier ID in MenPtrs
 	BOOLEAN fValid;// is the current soldier a valid soldier
 
 } MapScreenCharacterSt;
@@ -488,7 +488,7 @@ void DisableTeamInfoPanels( void );
 
 // enable team info panels
 void EnableTeamInfoPanels( void );
- 
+
 // activate pop up for soldiers in the pre battle interface
 void ActivateSoldierPopup( SOLDIERTYPE *pSoldier, UINT8 ubPopupType, INT16 xp, INT16 yp );
 
@@ -594,7 +594,7 @@ void HandleMinerEvent( UINT8 ubHeadMinerIndex, INT16 sSectorX, INT16 sSectorY, I
 // set up the event of animating a mine sector
 void SetUpAnimationOfMineSectors( INT32 iEvent );
 
-// display map screen 
+// display map screen
 void DisplayMapScreenFastHelpList( void );
 
 // handle display of fast help

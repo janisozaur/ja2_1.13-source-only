@@ -2,8 +2,8 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -18,7 +18,7 @@ struct
 	POCKETTYPE		curLBEPocket;
 //	POCKETTYPE *	curArray;
 //	UINT32			maxArraySize;
-	
+
 	UINT32			currentDepth;
 	UINT32			maxReadDepth;
 }
@@ -70,7 +70,7 @@ BOOLEAN lbepocketStartElementHandleLoop(const XML_Char *name, lbepocketParseData
 	}
 	return false;
 }*/
-static void XMLCALL 
+static void XMLCALL
 lbepocketStartElementHandle(void *userData, const XML_Char *name, const XML_Char **atts)
 {
 	lbepocketParseData * pData = (lbepocketParseData *)userData;
@@ -94,7 +94,7 @@ lbepocketStartElementHandle(void *userData, const XML_Char *name, const XML_Char
 
 			pData->maxReadDepth++; //we are not skipping this element
 		}//DBrot: MOLLE added tag
-		else if(pData->curElement == ELEMENT &&	
+		else if(pData->curElement == ELEMENT &&
 				(strcmp(name, "pIndex") == 0 ||
 				strcmp(name, "pName") == 0 ||
 				strcmp(name, "pSilhouette") == 0 ||
@@ -156,7 +156,7 @@ lbepocketCharacterDataHandle(void *userData, const XML_Char *str, int len)
 {
 	lbepocketParseData * pData = (lbepocketParseData *)userData;
 
-	if( (pData->currentDepth <= pData->maxReadDepth) && 
+	if( (pData->currentDepth <= pData->maxReadDepth) &&
 		(strlen(pData->szCharData) < MAX_CHAR_DATA_LENGTH)
 	  ){
 		strncat(pData->szCharData,str,__min((unsigned int)len,MAX_CHAR_DATA_LENGTH-strlen(pData->szCharData)));
@@ -467,7 +467,7 @@ BOOLEAN ReadInLBEPocketStats(STR fileName, BOOLEAN localizedVersion)
 	UINT32		uiFSize;
 	CHAR8 *		lpcBuffer;
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	lbepocketParseData pData;
 
 	onlyLocalizedText = localizedVersion;
@@ -480,7 +480,7 @@ BOOLEAN ReadInLBEPocketStats(STR fileName, BOOLEAN localizedVersion)
 	//	to load if all we're missing are the localized xml files.
 	if ( !hFile )
 		return( localizedVersion );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -495,15 +495,15 @@ BOOLEAN ReadInLBEPocketStats(STR fileName, BOOLEAN localizedVersion)
 
 	FileClose( hFile );
 
-	
+
 	XML_SetElementHandler(parser, lbepocketStartElementHandle, lbepocketEndElementHandle);
 	XML_SetCharacterDataHandler(parser, lbepocketCharacterDataHandle);
 
-	
+
 	memset(&pData,0,sizeof(pData));
 	//pData.curArray = LBEPocketType;
-	//pData.maxArraySize = MAXITEMS; 
-	
+	//pData.maxArraySize = MAXITEMS;
+
 	XML_SetUserData(parser, &pData);
 
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
@@ -536,7 +536,7 @@ BOOLEAN WriteLBEPocketEquipmentStats()
 	hFile = FileOpen( "TABLEDATA\\Pocket out.xml", FILE_ACCESS_WRITE | FILE_CREATE_ALWAYS, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	{
 		UINT32 cnt;
 

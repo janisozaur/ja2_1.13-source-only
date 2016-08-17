@@ -3,8 +3,8 @@
 #include <windowsx.h>
 #include <mmsystem.h>
 #include <dsound.h>
-#include "dsutil.h"    
-#include "debug.h"    
+#include "dsutil.h"
+#include "Debug.h"
 
 #include "sgp.h"
 
@@ -39,7 +39,7 @@ void PlayQuickSound( INT16 sSound )
 }
 
 #define NUM_SOUND_EFFECTS				NUM_SAMPLES
-		
+
 LPDIRECTSOUND           lpDS = NULL;
 LPDIRECTSOUNDBUFFER     lpSoundEffects[NUM_SOUND_EFFECTS];
 
@@ -108,7 +108,7 @@ BOOL DSEnable( HWND hwnd )
         return FALSE;
     }
 
-		
+
     dsrval = IDirectSound_SetCooperativeLevel(lpDS, hwnd, DSSCL_NORMAL);
 
 		DebugMsg( TOPIC_JA2, DBG_LEVEL_3, "Sound INIT OK");
@@ -224,7 +224,7 @@ BOOL InitSound( HWND hwndOwner )
 BOOL DestroySound( void )
 {
     DWORD       idxKill;
-    
+
     for( idxKill = 0; idxKill < NUM_SOUND_EFFECTS; idxKill++ )
     {
         SoundDestroyEffect( (EFFECT)idxKill );
@@ -274,7 +274,7 @@ BOOL SoundLoadEffect( EFFECT sfx )
 /*
  * SoundPlayEffect
  *
- * Plays the sound effect specified.  
+ * Plays the sound effect specified.
  * Returns TRUE if succeeded.
  */
 BOOL SoundPlayEffect( EFFECT sfx )
@@ -286,7 +286,7 @@ BOOL SoundPlayEffect( EFFECT sfx )
     {
         return FALSE;
     }
-    
+
 
 
     /*

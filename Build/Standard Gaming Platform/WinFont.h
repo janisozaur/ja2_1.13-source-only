@@ -19,10 +19,10 @@ UINT32	WinFont_mprintf( INT32 iFont, INT32 x, INT32 y, STR16 pFontString, ...);
 
 //if you cahnge this enum, you must change FontInfo struct in WinFont.cpp too.
 enum {
-WIN_LARGEFONT1 = 0, 
+WIN_LARGEFONT1 = 0,
 WIN_SMALLFONT1,
-WIN_TINYFONT1, 
-WIN_12POINTFONT1, 
+WIN_TINYFONT1,
+WIN_12POINTFONT1,
 WIN_COMPFONT,
 WIN_SMALLCOMPFONT,
 WIN_10POINTROMAN,

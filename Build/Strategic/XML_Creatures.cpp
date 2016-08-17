@@ -74,7 +74,7 @@ typedef struct
 	UINT32					uiHighestIndex;
 	UINT32					uiCompHighestIndex;
 	UINT32					curHabitat;
-	
+
 	UINT32					currentDepth;
 	UINT32					maxReadDepth;
 } CreatureParseData;
@@ -158,7 +158,7 @@ creatureplacementStartElementHandle(void *userData, const XML_Char *name, const 
 		{
 			pData->curElement = CREATURE_ELEMENT_PLACEMENTLIST;
 			pData->maxReadDepth++; //we are not skipping this element
-			
+
 			// Initiate Array by setting all values to 0
 			for (UINT16 x = 0; x < MAX_NUMBER_OF_INFECTIBLE_SITES + 1; x++)
 			{
@@ -316,7 +316,7 @@ creatureplacementEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "COMPOSITION_LIST") == 0 && pData->curElement == CREATURE_ELEMENT_COMPOSITIONLIST)
 		{
 			pData->curElement = CREATURE_ELEMENT_CREATUREINFO;
-			
+
 			// CompIndex starts at 0
 			NUMBER_OF_CREATURE_COMPOSITIONS = pData->uiCompHighestIndex + 1;
 		}
@@ -434,7 +434,7 @@ creatureplacementEndElementHandle(void *userData, const XML_Char *name)
 					pData->curPlacementInfo.Habitat[y].ubZ		= 0;
 					pData->curPlacementInfo.Habitat[y].ubComposition	= 0;
 					pData->curPlacementInfo.Habitat[y].fValid	= 0;
-				}			
+				}
 			}
 		}
 		else if(strcmp(name, "Index") == 0 && pData->curElement == CREATURE_ELEMENT_INDEX)
@@ -572,7 +572,7 @@ creatureplacementEndElementHandle(void *userData, const XML_Char *name)
 			{
 				pData->curPlacementInfo.Habitat[pData->curHabitat].sX = x;
 				pData->curPlacementInfo.Habitat[pData->curHabitat].sY = y;
-			}			
+			}
 			SGP_THROW_IFFALSE( (SECTOR(x,y) >= 0 && SECTOR(x,y) < 256) , L"Illegal sector number in CreaturePlacements.XML" );
 		}
 		else if(strcmp(name, "SectorZ") == 0 && pData->curElement == CREATURE_ELEMENT_HABITAT_Z)
@@ -586,7 +586,7 @@ creatureplacementEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = CREATURE_ELEMENT_HABITAT;
 
 			pData->curPlacementInfo.Habitat[pData->curHabitat].ubComposition = (UINT8) atol(pData->szCharData);
-			
+
 			// valid creature habitat if using other than queen habitat
 			if ( pData->curPlacementInfo.Habitat[pData->curHabitat].ubComposition )
 				pData->curPlacementInfo.Habitat[pData->curHabitat].fValid = TRUE;

@@ -1,11 +1,11 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "AI All.h"
 #else
-	#include "ai.h"
+	#include "AI.h"
 	#include "AIInternals.h"
-	#include "Isometric utils.h"
-	#include "overhead.h"
-	#include "soldier add.h"
+	#include "Isometric Utils.h"
+	#include "Overhead.h"
+	#include "Soldier Add.h"
 	#include "Soldier Profile Type.h"
 	#include "Items.h"
 	#include "Weapons.h"
@@ -156,7 +156,7 @@ void RTHandleAI( SOLDIERTYPE * pSoldier )
 					// the item pool index was stored in the special data field
 					pSoldier->aiData.uiPendingActionData1 = pSoldier->iNextActionSpecialData;
 				}
-			}			
+			}
 			else if (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 			{
 				if ( ACTING_ON_SCHEDULE( pSoldier ) )

@@ -10,7 +10,7 @@
 #include "Video.h"
 #else
 #include "video2.h"
-#endif	
+#endif
 
 #ifdef __cplusplus
 extern "C" {

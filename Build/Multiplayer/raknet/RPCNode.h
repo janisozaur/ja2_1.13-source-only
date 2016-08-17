@@ -26,20 +26,20 @@
 class RakPeerInterface;
 
 
-/// \defgroup RAKNET_RPC Remote Procedure Call Subsystem 
+/// \defgroup RAKNET_RPC Remote Procedure Call Subsystem
 /// \brief A system to call C or object member procudures on other systems, and even to return return values.
 
-/// \ingroup RAKNET_RPC 
+/// \ingroup RAKNET_RPC
 /// \internal
-/// 
-/// \brief Map registered procedure inside of a peer.  
-/// 
+///
+/// \brief Map registered procedure inside of a peer.
+///
 struct RAK_DLL_EXPORT RPCNode
 {
- 
+
  	/// String identifier of the RPC
 	char *uniqueIdentifier;
-	
+
  /// Force casting of member functions to void *
 	union
 	{
@@ -52,7 +52,7 @@ struct RAK_DLL_EXPORT RPCNode
 
 		void *functionPointer;
 	};
-	
+
 	/// Is this a member function pointer?  True if so.  If false it's a regular C function.
 	bool isPointerToMember;
 };

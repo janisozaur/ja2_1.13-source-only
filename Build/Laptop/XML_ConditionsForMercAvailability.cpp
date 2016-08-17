@@ -6,7 +6,7 @@
 	#include "expat.h"
 	#include "XML.h"
 	#include "Interface.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 #endif
 
 struct
@@ -87,7 +87,7 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 {
 	mercAvailabilityParseData * pData = (mercAvailabilityParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "MERC_AVAILABLES") == 0)
 		{
@@ -95,10 +95,10 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "MERC") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!MercAvailability_TextOnly)
-				{		
+				{
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].uiIndex = pData->curMercAvailability.uiIndex;
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].ProfilId = pData->curMercAvailability.ProfilId;
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].usMoneyPaid = pData->curMercAvailability.usMoneyPaid;
@@ -109,7 +109,7 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].MercBio = pData->curMercAvailability.MercBio;
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].Drunk = pData->curMercAvailability.Drunk;
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].uiAlternateIndex = pData->curMercAvailability.uiAlternateIndex;
-					
+
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].uiIndex = pData->curMercAvailability.uiIndex;
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].ProfilId = pData->curMercAvailability.ProfilId;
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].usMoneyPaid = pData->curMercAvailability.usMoneyPaid;
@@ -133,7 +133,7 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].MercBio = pData->curMercAvailability.MercBio;
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].Drunk = pData->curMercAvailability.Drunk;
 					gConditionsForMercAvailability[pData->curMercAvailability.uiIndex].uiAlternateIndex = pData->curMercAvailability.uiAlternateIndex;
-					
+
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].uiIndex = pData->curMercAvailability.uiIndex;
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].ProfilId = pData->curMercAvailability.ProfilId;
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].usMoneyPaid = pData->curMercAvailability.usMoneyPaid;
@@ -145,7 +145,7 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].Drunk = pData->curMercAvailability.Drunk;
 					gConditionsForMercAvailabilityTemp[pData->curMercAvailability.uiIndex].uiAlternateIndex = pData->curMercAvailability.uiAlternateIndex;
 
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -171,17 +171,17 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curMercAvailability.NewMercsAvailable	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "StartMercsAvailable") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curMercAvailability.StartMercsAvailable	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "MercBioID") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curMercAvailability.MercBio	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "Drunk") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -192,7 +192,7 @@ mercAvailabilityEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curMercAvailability.uiAlternateIndex	= (UINT8) atol(pData->szCharData);
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -211,7 +211,7 @@ BOOLEAN ReadInMercAvailability(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading MercAvailability.xml" );
 
 	MercAvailability_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

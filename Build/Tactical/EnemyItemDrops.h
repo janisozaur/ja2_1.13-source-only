@@ -43,8 +43,8 @@ typedef struct
 	UINT32		uiIndex;
 } MISC_DROPS;
 
-extern WEAPON_DROPS gEnemyWeaponDrops[MAX_DROP_ITEMS]; 
-extern AMMO_DROPS gEnemyAmmoDrops[MAX_DROP_ITEMS]; 
+extern WEAPON_DROPS gEnemyWeaponDrops[MAX_DROP_ITEMS];
+extern AMMO_DROPS gEnemyAmmoDrops[MAX_DROP_ITEMS];
 extern EXPLOSIVE_DROPS gEnemyExplosiveDrops[MAX_DROP_ITEMS];
 extern ARMOUR_DROPS gEnemyArmourDrops[MAX_DROP_ITEMS];
 extern MISC_DROPS gEnemyMiscDrops[MAX_DROP_ITEMS];

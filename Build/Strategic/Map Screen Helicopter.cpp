@@ -7,35 +7,35 @@
 	#include "Finances.h"
 	#include "Quests.h"
 	#include "Game Clock.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Queen Command.h"
 	#include "Strategic Pathing.h"
 	#include "Random.h"
 	#include "Game Event Hook.h"
-	#include "String.h"
+	#include "string.h"
 	#include "Dialogue Control.h"
 	#include "Message.h"
 	#include "Strategic Movement.h"
 	#include "Soldier Profile.h"
 	#include "Assignments.h"
 	#include "PreBattle Interface.h"
-	#include "strategicmap.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "tiledat.h"
+	#include "StrategicMap.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "TileDat.h"
 	#include "Map Screen Interface.h"
 	#include "Text.h"
 	#include "Squads.h"
 	#include "Player Command.h"
 	#include "Sound Control.h"
 	#include "GameSettings.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Map Screen Interface Border.h"
 	#include "Strategic Event Handler.h"
 	#include "Overhead.h"
 	#include "Soldier Create.h"
-	#include "renderworld.h"
-	#include "soundman.h"
+	#include "RenderWorld.h"
+	#include "SoundMan.h"
 	#include "Isometric Utils.h"
 	#include "Scheduling.h"
 	// HEADROCK HAM 3.5: Added facility-based skyrider costs modifier
@@ -48,7 +48,7 @@
 
 #include "Vehicles.h"
 #include "NPC.h"
-#include "history.h"
+#include "History.h"
 
 // the amounts of time to wait for hover stuff
 // externalised, use gHelicopterSettings.ubHelicopterTimeDelayForHoverWait instead
@@ -65,7 +65,7 @@
 
 // total number of sectors one can go
 // externalised, use gHelicopterSettings.ubHelicopterDistanceWithoutRefuel instead
-//#define MAX_HELICOPTER_DISTANCE 25 
+//#define MAX_HELICOPTER_DISTANCE 25
 
 // maximum chance out of a hundred per unsafe sector that a SAM site in decent working condition will hit Skyrider
 // externalised, use gHelicopterSettings.ubHelicopterSAMSiteAccuracy instead
@@ -382,7 +382,7 @@ helisiteEndElementHandle(void *userData, const XML_Char *name)
 
 			if ( pData->curHeliInfo.uiIndex != INVALID_REFUELSITE_INDEX )
 			{
-				pData->curHeliInfo.uiIndex--;	
+				pData->curHeliInfo.uiIndex--;
 				sRefuelSectorX [ pData->curHeliInfo.uiIndex ]			= pData->curHeliInfo.refuelSectorX;
 				sRefuelSectorY [ pData->curHeliInfo.uiIndex ]			= pData->curHeliInfo.refuelSectorY;
 				fRefuelingSiteKnown [ pData->curHeliInfo.uiIndex ]		= !pData->curHeliInfo.refuelHidden;
@@ -747,12 +747,12 @@ BOOLEAN HandleHeliEnteringSector( INT16 sX, INT16 sY )
 		{
 			// Say quote: "Gonna have to abort.	Enemies below"
 			//CHRISL: Whether skyrider is set to silent or not, we should still say this if we aren't allowing landing in a hot lz.
-			//if(gGameSettings.fOptions[ TOPTION_SILENT_SKYRIDER ] == FALSE) 
+			//if(gGameSettings.fOptions[ TOPTION_SILENT_SKYRIDER ] == FALSE)
 			if(gGameExternalOptions.ubSkyriderHotLZ == 0)
 				HeliCharacterDialogue( pSkyRider, ARRIVED_IN_HOSTILE_SECTOR );
 			else
 				HeliCharacterDialogue( pSkyRider, HELI_HOT_DROP );
-			
+
 			if( gGameExternalOptions.fPaySkyriderInBase == FALSE || CheckForArrivalAtRefuelPoint( ) )
 				PaySkyriderBill();
 			StopTimeCompression();
@@ -842,7 +842,7 @@ INT32 LocationOfNearestRefuelPoint( BOOLEAN fNotifyPlayerIfNoSafeLZ, UINT8 ubRet
 	{
 		if( fNotifyPlayerIfNoSafeLZ )
 		{
-			switch( ubReturnReason ) 
+			switch( ubReturnReason )
 			{
 				case HELICOPTER_RETURN_REASON_LOW_FUEL:
 					// no refueling sites available, might wanna warn player about this
@@ -961,11 +961,11 @@ void ReFuelHelicopterForAMinute( void )
 		gubHelicopterTimeToFullRefuel = 0;
 		iTotalHeliDistanceSinceRefuel = 0;
 		ScreenMsg( FONT_GRAY2, MSG_INTERFACE, L"%s", pHelicopterRepairRefuelStrings[ STR_HELI_RR_REFUEL_FINISHED ]);
-		
+
 	}
 	else
 	{
-		gubHelicopterTimeToFullRefuel--;	
+		gubHelicopterTimeToFullRefuel--;
 		iTotalHeliDistanceSinceRefuel =  ( gubHelicopterTimeToFullRefuel * gHelicopterSettings.ubHelicopterDistanceWithoutRefuel ) / gHelicopterSettings.ubHelicopterRefuelTime ;
 
 		AddStrategicEvent( EVENT_HELICOPTER_REFUEL_FOR_A_MINUTE, GetWorldTotalMin() + 1, 0 );
@@ -984,7 +984,7 @@ void OfferHelicopterRepair( void )
 	if( CheckFact(FACT_HELI_DAMAGED_CAN_START_REPAIR, 0 ) == TRUE )
 	{
 		if( gGameSettings.fOptions[ TOPTION_SILENT_SKYRIDER ] == FALSE )
-		{		
+		{
 			CharacterDialogue( WALDO, WALDO_REPAIR_PROPOSITION, uiExternalStaticNPCFaces[ WALDO_EXTERNAL_FACE ], DIALOGUE_EXTERNAL_NPC_UI, FALSE, FALSE );
 			// popup will be called from HandleDialogueEnd()
 		}
@@ -998,7 +998,7 @@ void OfferHelicopterRepair( void )
 	else if( CheckFact(FACT_HELI_SERIOUSLY_DAMAGED_CAN_START_REPAIR, 0 ) == TRUE )
 	{
 		if( gGameSettings.fOptions[ TOPTION_SILENT_SKYRIDER ] == FALSE )
-		{		
+		{
 			CharacterDialogue( WALDO, WALDO_SERIOUS_REPAIR_PROPOSITION, uiExternalStaticNPCFaces[ WALDO_EXTERNAL_FACE ], DIALOGUE_EXTERNAL_NPC_UI, FALSE, FALSE );
 		}
 		else
@@ -1064,13 +1064,13 @@ UINT16 CalculateHelicopterRepairCost( BOOLEAN fSeriousRepair )
 		{
 			return min( gHelicopterSettings.usHelicopterBasicRepairCost, gHelicopterSettings.usHelicopterBasicRepairCostMax );
 		}
-				
+
 	}
 }
 
 void StartHelicopterRepair( BOOLEAN fInStrategic, BOOLEAN fCalledByGivingMoney )
 {
-	MoveAllInHelicopterToFootMovementGroup( );	
+	MoveAllInHelicopterToFootMovementGroup( );
 	if( CheckFact( FACT_HELI_DAMAGED_CAN_START_REPAIR, 0 ) == TRUE )
 	{
 		gubHelicopterHoursToRepair = min( max( 1, ( gHelicopterSettings.ubHelicopterBasicRepairTime - gHelicopterSettings.ubHelicopterBasicRepairTimeVariation + 2*Random(gHelicopterSettings.ubHelicopterBasicRepairTimeVariation) ) ), 255 );
@@ -1357,7 +1357,7 @@ void HandleHeliHoverForAMinute( void )
 		{
 			iTotalAccumulatedCostByPlayer += gGameExternalOptions.usHelicopterHoverCostOnRedTile;
 		}
-		
+
 		if( CheckIfHelicopterHasEnoughFuelToReturn( sX, sY ) == TRUE )
 		{
 			// since now heli can stay hovering longer, reminder every 10 minutes would get irritating
@@ -1365,7 +1365,7 @@ void HandleHeliHoverForAMinute( void )
 				// inform player
 				HeliCharacterDialogue( pSkyRider, HOVERING_A_WHILE );
 		}
-	
+
 	}
 	AddStrategicEvent( EVENT_HELICOPTER_HOVER_FOR_A_MINUTE, GetWorldTotalMin() + 1, 0 );
 }
@@ -1698,7 +1698,7 @@ UINT8 MoveAllInHelicopterToFootMovementGroup( INT8 bNewSquad )
 				pSoldier->ubStrategicInsertionCode = ubInsertionCode;
 				pSoldier->usStrategicInsertionData = usInsertionData;
 			}
-				
+
 			// Flugente: we are leaving the helicopter and instantly deploy into combat - this must be an airdrop
 			pSoldier->usSoldierFlagMask |= (SOLDIER_AIRDROP_TURN|SOLDIER_AIRDROP);
 		}

@@ -13,12 +13,12 @@
 	#endif
 
 
-#endif 
+#endif
 
 
 // build defines header....
-#include "builddefines.h"
-	
+#include "BuildDefines.h"
+
 
 
 
@@ -69,7 +69,7 @@ typedef CHAR8						STRING512[512];
 typedef UINT32					HWFILE;
 
 #define SGPFILENAME_LEN 100
-typedef CHAR8 SGPFILENAME[SGPFILENAME_LEN];	
+typedef CHAR8 SGPFILENAME[SGPFILENAME_LEN];
 
 // *** SIR-TECH TYPE DEFINITIONS ***
 
@@ -96,7 +96,7 @@ typedef CHAR8 SGPFILENAME[SGPFILENAME_LEN];
 #endif
 
 typedef struct
-{ 
+{
 	INT32 iLeft;
 	INT32 iTop;
 	INT32 iRight;

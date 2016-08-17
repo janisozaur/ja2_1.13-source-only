@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "insurance.h"
-	#include "insurance Contract.h"
+	#include "Insurance Contract.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"

@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "AimFacialIndex.h"
 	#include "WordWrap.h"
 	#include "Utilities.h"
@@ -9,13 +9,13 @@
 	#include "stdio.h"
 	#include "Aim.h"
 	#include "Soldier Profile.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "Text.h"
-	#include "aimsort.h"
+	#include "AimSort.h"
 	#include "Assignments.h"
 	#include "GameSettings.h"
-	#include "english.h"
-	#include "sysutil.h"
+	#include "English.h"
+	#include "SysUtil.h"
 #endif
 
 
@@ -90,7 +90,7 @@ void GameInitAimFacialIndex()
 
 /// Calculates the needed string for the page button based on number of mercs
 /// and currently displayed page.
-static STR16 GetPageButtonText() 
+static STR16 GetPageButtonText()
 {
 	const int MERCS_PER_PAGE = AIM_FI_NUM_MUGSHOTS_X * AIM_FI_NUM_MUGSHOTS_Y;
 
@@ -128,7 +128,7 @@ void BtnNewProfilesButtonCallback(GUI_BUTTON *btn,INT32 reason)
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
 			UINT32 i;
-			
+
 			btn->uiFlags &= (~BUTTON_CLICKED_ON );
 
 			for(i=0; i<MAX_NUMBER_MERCS; i++)
@@ -139,7 +139,7 @@ void BtnNewProfilesButtonCallback(GUI_BUTTON *btn,INT32 reason)
 			if ( START_MERC == 0 )
 			{
 				START_MERC = 40;
-			}	
+			}
 			else if ( START_MERC == 40 )
 			{
 				if ( MAX_NUMBER_MERCS > 80 )
@@ -172,7 +172,7 @@ BOOLEAN EnterAimFacialIndex()
 	UINT16		usPosX, usPosY, x,y;
 	STR				sFaceLoc = "FACES\\";
 	char			sTemp[100];
-	
+
 	UINT8 p = 0;
 
 	for(i=0; i<MAX_NUMBER_MERCS; i++)
@@ -184,10 +184,10 @@ BOOLEAN EnterAimFacialIndex()
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("LAPTOP\\MugShotBorder3.sti", VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &guiMugShotBorder));
-	
+
 	//Page button
 	guiPreviousNewProfilesNextButtonImage =	LoadButtonImage("LAPTOP\\BottomButtons2.sti", -1,0,-1,1,-1 ); //New profiles
-	
+
 	STR16 buttonText = GetPageButtonText();
 	PAGE_BUTTON = CreateIconAndTextButton( guiPreviousNewProfilesNextButtonImage, buttonText, FONT14ARIAL,
 														FONT_MCOLOR_DKWHITE, DEFAULT_SHADOW,
@@ -196,7 +196,7 @@ BOOLEAN EnterAimFacialIndex()
 														IMAGE_OFFSET_X + 6, IMAGE_OFFSET_Y + 35, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 														DEFAULT_MOVE_CALLBACK, BtnNewProfilesButtonCallback);
 	SetButtonCursor(PAGE_BUTTON, CURSOR_WWW );
-	
+
 	usPosX = AIM_FI_FIRST_MUGSHOT_X;
 	usPosY = AIM_FI_FIRST_MUGSHOT_Y;
 	i=0;
@@ -204,10 +204,10 @@ BOOLEAN EnterAimFacialIndex()
 	{
 		for(x=0; x<AIM_FI_NUM_MUGSHOTS_X; x++)
 		{
-		
+
 			if ( gAimProfiles[i+START_MERC] == TRUE ) //new profiles
 			{
-			
+
 				MSYS_DefineRegion( &gMercFaceMouseRegions[ i ], usPosX, usPosY, (INT16)(usPosX + AIM_FI_PORTRAIT_WIDTH), (INT16)(usPosY + AIM_FI_PORTRAIT_HEIGHT), MSYS_PRIORITY_HIGH,
 									CURSOR_WWW, SelectMercFaceMoveRegionCallBack, SelectMercFaceRegionCallBack);
 				// Add region
@@ -231,7 +231,7 @@ BOOLEAN EnterAimFacialIndex()
 			if( !AddVideoObject(&VObjectDesc, &guiAimFiFace[i]) )
 				return( FALSE );
 			}
-			
+
 			usPosX += AIM_FI_PORTRAIT_WIDTH + AIM_FI_MUGSHOT_GAP_X;
 			i++;
 		}
@@ -270,10 +270,10 @@ void ExitAimFacialIndex()
 			MSYS_RemoveRegion( &gMercFaceMouseRegions[ i ]);
 		}
 	}
-	
+
 	RemoveButton( PAGE_BUTTON );
-	
-	
+
+
 	ExitAimMenuBar();
 
 	MSYS_RemoveRegion( &gScreenMouseRegions);
@@ -292,7 +292,7 @@ BOOLEAN RenderAimFacialIndex()
 	UINT16		usPosX, usPosY, x,y;
 	CHAR16		sString[150];
 	UINT8			i;
-	
+
 	SpecifyButtonText( PAGE_BUTTON, GetPageButtonText() );
 
 	if ( MAX_NUMBER_MERCS > 40 )
@@ -314,7 +314,7 @@ BOOLEAN RenderAimFacialIndex()
 
 	if(gGameExternalOptions.gfUseNewStartingGearInterface) DrawTextToScreen(sString, AIM_FI_MEMBER_TEXT_X, AIM_FI_MEMBER_TEXT_Y_NSGI, AIM_FI_MEMBER_TEXT_WIDTH, AIM_MAINTITLE_FONT, AIM_MAINTITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED	);
 	else DrawTextToScreen(sString, AIM_FI_MEMBER_TEXT_X, AIM_FI_MEMBER_TEXT_Y, AIM_FI_MEMBER_TEXT_WIDTH, AIM_MAINTITLE_FONT, AIM_MAINTITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED	);
-	
+
 
 	//Draw the mug shot border and face
 	usPosX = AIM_FI_FIRST_MUGSHOT_X;
@@ -427,7 +427,7 @@ void SelectMercFaceMoveRegionCallBack(MOUSE_REGION * pRegion, INT32 reason )
 		DrawMercsFaceToScreen(ubMercNum, usPosX, usPosY, 0);
 		InvalidateRegion(pRegion->RegionTopLeftX, pRegion->RegionTopLeftY, pRegion->RegionBottomRightX, pRegion->RegionBottomRightY);
 	}
-	
+
 	}
 }
 
@@ -439,8 +439,8 @@ BOOLEAN DrawMercsFaceToScreen(UINT8 ubMercID, UINT16 usPosX, UINT16 usPosY, UINT
 
 	//pSoldier = FindSoldierByProfileID( AimMercArray[ubMercID], TRUE );
 	pSoldier = FindSoldierByProfileID( gAimAvailability[AimMercArray[ubMercID + START_MERC]].ProfilId, TRUE );
-	
-	
+
+
 
 
 	//Blt the portrait background
@@ -487,7 +487,7 @@ BOOLEAN DrawMercsFaceToScreen(UINT8 ubMercID, UINT16 usPosX, UINT16 usPosY, UINT
 
 	//if the merc is away, shadow his/her face and blit 'away' over top
 	//else if( !IsMercHireable( AimMercArray[ubMercID] ) )
-	else if( !IsMercHireable( gAimAvailability[AimMercArray[ubMercID + START_MERC ]].ProfilId ) )	
+	else if( !IsMercHireable( gAimAvailability[AimMercArray[ubMercID + START_MERC ]].ProfilId ) )
 	{
 		ShadowVideoSurfaceRect( FRAME_BUFFER, usPosX+AIM_FI_FACE_OFFSET, usPosY+AIM_FI_FACE_OFFSET, usPosX + 48+AIM_FI_FACE_OFFSET, usPosY + 43+AIM_FI_FACE_OFFSET);
 		DrawTextToScreen( AimFiText[AIM_FI_DEAD+1], (UINT16)(usPosX+AIM_FI_AWAY_TEXT_OFFSET_X), (UINT16)(usPosY+AIM_FI_AWAY_TEXT_OFFSET_Y), AIM_FI_AWAY_TEXT_OFFSET_WIDTH, FONT10ARIAL, 145, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED	);
@@ -533,7 +533,7 @@ void HandleAimFacialIndexKeyBoardInput()
 						if ( START_MERC == 40 )
 						{
 							START_MERC = 0;
-						}	
+						}
 						else if ( START_MERC == 0 )
 						{
 							if ( MAX_NUMBER_MERCS > 80 )
@@ -545,7 +545,7 @@ void HandleAimFacialIndexKeyBoardInput()
 						{
 							START_MERC = 40;
 						}
-					
+
 						ExitAimFacialIndex();
 						EnterAimFacialIndex();
 					}
@@ -563,7 +563,7 @@ void HandleAimFacialIndexKeyBoardInput()
 						if ( START_MERC == 0 )
 						{
 							START_MERC = 40;
-						}	
+						}
 						else if ( START_MERC == 40 )
 						{
 							if ( MAX_NUMBER_MERCS > 80 )
@@ -575,7 +575,7 @@ void HandleAimFacialIndexKeyBoardInput()
 						{
 							START_MERC = 0;
 						}
-					
+
 						ExitAimFacialIndex();
 						EnterAimFacialIndex();
 					}

@@ -2,7 +2,7 @@
 
 #define COMPRESSION_H
 
-#include "types.h"
+#include "Types.h"
 
 // Notes on how to use these functions without getting your hands dirty:
 
@@ -37,9 +37,9 @@ void DecompressFini( PTR pDecompPtr );
 // buffer for compressed data, and the length of that buffer.	If the
 // buffer is not large enough to hold all of the compressed data,
 // Compress() will fill it completely, and you can call Compress() again
-// with a new or emptied buffer to continue your compression later.	You 
-// can call CompressedBufferSize() to determine the largest buffer size you 
-// should need for a certain number of bytes.	Ccompress() returns the number 
+// with a new or emptied buffer to continue your compression later.	You
+// can call CompressedBufferSize() to determine the largest buffer size you
+// should need for a certain number of bytes.	Ccompress() returns the number
 // of bytes of output.
 //
 // 3) call CompressFini() with the compression pointer when you're done

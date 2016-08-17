@@ -11,7 +11,7 @@
 	#include "Overhead.h"
 	#include "Squads.h"
 	#include "Sound Control.h"
-	#include "Soundman.h"
+	#include "SoundMan.h"
 	#include "Message.h"
 	#include "PopUpBox.h"
 	#include "Game Clock.h"
@@ -22,50 +22,50 @@
 	#include "Game Event Hook.h"
 	#include "Tactical Save.h"
 	#include "Quests.h"
-	#include "Strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Soldier Profile.h"
 	#include "Strategic Movement.h"
 	#include "Dialogue Control.h"
 	#include "Map Screen Interface Border.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Vehicles.h"
-	#include "LINE.H"
+	#include "Line.h"
 	#include "Text.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "Map Screen Helicopter.h"
 	#include "PreBattle Interface.h"
 	#include "WordWrap.h"
-	#include "interface control.h"
+	#include "Interface Control.h"
 	#include "GameSettings.h"
 	#include "Campaign Types.h"
 	#include "Map Screen Interface Map Inventory.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Keys.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Militia Control.h"
 	#include "Random.h"
 	#include "Cursor Control.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Game Init.h"
 	#include "Strategic Mines.h"
-	#include "finances.h"
-	#include "strategic.h"
+	#include "Finances.h"
+	#include "Strategic.h"
 	#include "Air Raid.h"
 	#include "Queen Command.h"
 	#include "Render Fun.h"
 	#include "Food.h"
 	#include "Personnel.h"
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
 
 // marke strogg more mercs
-extern UINT8 FIRSTmercTOdisplay = 0 ; 
+extern UINT8 FIRSTmercTOdisplay = 0 ;
 extern UINT8 maxNumberOfMercVisibleInStrategyList = 0;	// WANNE: Max merc displayed in the list depends on the resolution
 
 // inventory pool position on screen
@@ -1175,7 +1175,7 @@ BOOLEAN IsCharacterSelectedForSleep( INT16 sCharNumber )
 	{
 		return( FALSE );
 	}
- 
+
 	// marke strogg more mercs
 	// is the character a valid one?
 	if( gCharactersList[ sCharNumber + FIRSTmercTOdisplay ].fValid == FALSE )
@@ -1471,10 +1471,10 @@ void HandleDisplayOfSelectedMercArrows( void )
 	BltVideoObject( guiSAVEBUFFER , hHandle, 0,selectedCharArrowX, sYPosition , VO_BLT_SRCTRANSPARENCY,NULL );
 
 	// now run through the selected list of guys, an arrow for each
-	
+
 	// marke strogg more mercs
 	for( ubCount = 0; ubCount < maxNumberOfMercVisibleInStrategyList; ubCount++ )
-	{ 
+	{
 		// marke strogg more mercs
 		if( gCharactersList[ ubCount + FIRSTmercTOdisplay ].fValid == TRUE )
 		{
@@ -1614,7 +1614,7 @@ void HandleLeavingOfEquipmentInCurrentSector( UINT32 uiMercId )
 
 	if( Menptr[ uiMercId ].sSectorX != gWorldSectorX || Menptr[ uiMercId ].sSectorY != gWorldSectorY || Menptr[ uiMercId ].bSectorZ != gbWorldSectorZ )
 	{
-		// ATE: Use insertion gridno if not nowhere and insertion is gridno		
+		// ATE: Use insertion gridno if not nowhere and insertion is gridno
 		if ( Menptr[ uiMercId ].ubStrategicInsertionCode == INSERTION_CODE_GRIDNO && !TileIsOutOfBounds(Menptr[ uiMercId ].usStrategicInsertionData) )
 		{
 			sGridNo = Menptr[ uiMercId ].usStrategicInsertionData;
@@ -1630,16 +1630,16 @@ void HandleLeavingOfEquipmentInCurrentSector( UINT32 uiMercId )
 		// ATE: Mercs can have a gridno of NOWHERE.....
 		sGridNo = Menptr[ uiMercId ].sGridNo;
 
-		if (TileIsOutOfBounds(sGridNo))	
+		if (TileIsOutOfBounds(sGridNo))
 		{
 			sGridNo = RandomGridNo();
 
 			sTempGridNo = FindNearestAvailableGridNoForItem( sGridNo, 5 );
-							
+
 			if(TileIsOutOfBounds(sTempGridNo))
 				sTempGridNo = FindNearestAvailableGridNoForItem( sGridNo, 15 );
 			else
-			{		
+			{
 				sGridNo = sTempGridNo;
 			}
 		}
@@ -1790,7 +1790,7 @@ void HandleEquipmentLeftInDrassen( UINT32 uiSlotIndex )
 		if( gWorldSectorX	!= AIRPORT_X || gWorldSectorY != AIRPORT_Y || gbWorldSectorZ != 0 )
 		{
 			// given this slot value, add to sector item list
-			AddItemsToUnLoadedSector( AIRPORT_X, AIRPORT_Y, 0, 
+			AddItemsToUnLoadedSector( AIRPORT_X, AIRPORT_Y, 0,
 				gModSettings.iAirportDropOff, 1, &( pItem->object ) , 0, WORLD_ITEM_REACHABLE, 0, 1, FALSE ); //10433
 		}
 		else
@@ -2017,14 +2017,14 @@ void UpdateCharRegionHelpText( void )
 				{
 					// person (health/energy/morale)
 					GetMoraleString( pSoldier, pMoraleStr );
-									
+
 					{
 						swprintf( sString, L"%s: %d/%d, %s: %d/%d, %s: %s",
 														pMapScreenStatusStrings[ 0 ], pSoldier->stats.bLife, pSoldier->stats.bLifeMax,
 														pMapScreenStatusStrings[ 1 ], pSoldier->bBreath, pSoldier->bBreathMax,
 														pMapScreenStatusStrings[ 2 ], pMoraleStr );
 					}
-						
+
 					pSoldier->PrintFoodDesc( sString, TRUE );
 
 					pSoldier->PrintDiseaseDesc( sString, TRUE );
@@ -2057,7 +2057,7 @@ void UpdateCharRegionHelpText( void )
 				INT8 bNumSkillTraits = 0;
 
 				// lets rearrange our skills to a temp array
-				// we also get the number of lines (skills) to be displayed 
+				// we also get the number of lines (skills) to be displayed
 				for ( UINT8 ubCnt = 1; ubCnt < NUM_SKILLTRAITS_NT; ++ubCnt )
 				{
 					if ( ProfileHasSkillTrait( pSoldier->ubProfile, ubCnt ) == 2 )
@@ -2087,7 +2087,7 @@ void UpdateCharRegionHelpText( void )
 			}
 			else
 			{
-				INT8 bSkill1 = 0, bSkill2 = 0; 	
+				INT8 bSkill1 = 0, bSkill2 = 0;
 				bSkill1 = gMercProfiles[ pSoldier->ubProfile ].bSkillTraits[0];
 				bSkill2 = gMercProfiles[ pSoldier->ubProfile ].bSkillTraits[1];
 
@@ -2241,7 +2241,7 @@ void UpdateMapScreenAssignmentPositions( void )
 		// do nothing
 	}
 	else
-	{ 
+	{
 		// marke strogg more mercs
 		giBoxY = ( Y_START + ( bSelectedAssignChar - FIRSTmercTOdisplay ) * ( Y_SIZE + 2 ) );
 	}
@@ -4968,27 +4968,27 @@ void AddSoldierToUpdateBox( SOLDIERTYPE *pSoldier )
 		{
 			// add to box
 			pUpdateSoldierBox[ iCounter ] = pSoldier;
-			
-			
-			
+
+
+
 		if ( ( gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex < 100 ) && ( gProfilesIMP[ pSoldier->ubProfile ].ProfilId == pSoldier->ubProfile ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
-		} 
+		}
 		else if ( ( gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex > 99 ) && ( gProfilesIMP[ pSoldier->ubProfile ].ProfilId == pSoldier->ubProfile ) )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%03d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
 		}
 		else if( gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex < 100 )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
 		}
 		else if( gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex > 99 )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%03d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
 		}
-			
-			
+
+
 /*
 			if( gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex < 100 )
 			{
@@ -5524,17 +5524,17 @@ void RenderSoldierSmallFaceForUpdatePanel( INT32 iIndex, INT32 iX, INT32 iY )
 	iStartY = iY + 29 - 27*pSoldier->stats.bLifeMax/100;
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+36, iStartY, iX+37, iY+29, Get16BPPColor( FROMRGB( 107, 107, 57 ) ) );
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+37, iStartY, iX+38, iY+29, Get16BPPColor( FROMRGB( 222, 181, 115 ) ) );
-		
+
 	//pink one for bandaged.
 	iStartY = iY + 29 - 27*(pSoldier->stats.bLifeMax - pSoldier->bBleeding)/100;
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+36, iStartY, iX+37, iY+29, Get16BPPColor( FROMRGB( 156, 57, 57 ) ) );
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+37, iStartY, iX+38, iY+29, Get16BPPColor( FROMRGB( 222, 132, 132 ) ) );
-		
+
 	//red one for actual health
 	iStartY = iY + 29 - 27*pSoldier->stats.bLife/100;
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+36, iStartY, iX+37, iY+29, Get16BPPColor( FROMRGB( 107, 8, 8 ) ) );
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+37, iStartY, iX+38, iY+29, Get16BPPColor( FROMRGB( 206, 0, 0 ) ) );
-		
+
 	//BREATH BAR
 	iStartY = iY + 29 - 27*pSoldier->bBreathMax/100;
 	ColorFillVideoSurfaceArea( guiSAVEBUFFER, iX+39, iStartY, iX+40, iY+29, Get16BPPColor( FROMRGB( 8, 8, 132 ) ) );
@@ -5618,7 +5618,7 @@ void SetTixaAsFound( void )
 	// set the town of Tixa as found by the player
 	fFoundTixa = TRUE;
 	gfHiddenTown[ TIXA ] = TRUE;
-	gfDrawHiddenTown[ TIXA ] = TRUE; 
+	gfDrawHiddenTown[ TIXA ] = TRUE;
 	fMapPanelDirty = TRUE;
 }
 
@@ -5627,7 +5627,7 @@ void SetOrtaAsFound( void )
 	// set the town of Orta as found by the player
 	fFoundOrta = TRUE;
 	gfHiddenTown[ ORTA ] = TRUE;
-	gfDrawHiddenTown[ ORTA ] = TRUE; 
+	gfDrawHiddenTown[ ORTA ] = TRUE;
 	fMapPanelDirty = TRUE;
 }
 
@@ -5705,7 +5705,7 @@ void CreateDestroyInsuranceMouseRegionForMercs( BOOLEAN fCreate )
 						MSYS_PRIORITY_HIGH - 1, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
 
 		MSYS_DefineRegion( &gDepositIconRegion, CHAR_ICON_X + xResOffset, CHAR_ICON_CONTRACT_Y + ( 2 * CHAR_ICON_SPACING ) + yResOffset, CHAR_ICON_X + xResOffset + CHAR_ICON_WIDTH, CHAR_ICON_CONTRACT_Y + ( 2 * CHAR_ICON_SPACING )  + yResOffset + CHAR_ICON_HEIGHT,
-						MSYS_PRIORITY_HIGH - 1, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );  
+						MSYS_PRIORITY_HIGH - 1, MSYS_NO_CURSOR, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
 
 		fCreated = TRUE;
 	}
@@ -5737,7 +5737,7 @@ BOOLEAN HandleTimeCompressWithTeamJackedInAndGearedToGo( void )
 		// select starting sector (A9 - Omerta)
 		// HEADROCK HAM 3.5: Externalized.
 		ChangeSelectedMapSector( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY, startingZ );
-	
+
 	if (is_networked)
 	{
 		// load starting sector
@@ -5761,7 +5761,7 @@ BOOLEAN HandleTimeCompressWithTeamJackedInAndGearedToGo( void )
 		gubPBSectorX = (UINT8)gGameExternalOptions.ubDefaultArrivalSectorX;
 		gubPBSectorY = (UINT8)gGameExternalOptions.ubDefaultArrivalSectorY;
 	}
-	gubPBSectorZ = 0;	
+	gubPBSectorZ = 0;
 
 	//Setup variables in the PBI for this first battle.  We need to support the
 	//non-persistant PBI in case the user goes to mapscreen.
@@ -5900,15 +5900,15 @@ BOOLEAN NotifyPlayerWhenEnemyTakesControlOfImportantSector( INT16 sSectorX, INT1
 	{
 #ifdef JA2UB
 	// no UB
-#else	
+#else
 		if( bTownId == SAN_MONA )
 		{ //San Mona isn't important.
 			return( TRUE );
 		}
-#endif			
+#endif
 		swprintf( sStringB, pMapErrorString[ 25 ], sString );
 
-#ifdef JA2UB		
+#ifdef JA2UB
 		HandleDisplayingOfPlayerLostDialogue( );
 #endif
 		// put up the message informing the player of the event
@@ -5998,10 +5998,10 @@ BOOLEAN CanCharacterMoveInStrategic( SOLDIERTYPE *pSoldier, INT8 *pbErrorNumber 
 	// valid soldier?
 	Assert( pSoldier );
 	Assert( pSoldier->bActive);
-	
+
 	// NOTE: Check for the most permanent conditions first, and the most easily remedied ones last!
 	// In case several cases apply, only the reason found first will be given, so make it a good one!
-	
+
 	// still in transit?
 	if( IsCharacterInTransit( pSoldier ) == TRUE )
 	{
@@ -6065,7 +6065,7 @@ BOOLEAN CanCharacterMoveInStrategic( SOLDIERTYPE *pSoldier, INT8 *pbErrorNumber 
 			return( FALSE );
 		}
 	}
-	
+
 	// if merc is in a particular sector, not somewhere in between
 	if ( pSoldier->flags.fBetweenSectors == FALSE )
 	{
@@ -6227,7 +6227,7 @@ BOOLEAN CanEntireMovementGroupMercIsInMove( SOLDIERTYPE *pSoldier, INT8 *pbError
 		// failed no point checking anyone else
 		return( FALSE );
 	}
-	
+
 	// now check anybody who would be travelling with him
 
 	// does character have group?
@@ -6306,7 +6306,7 @@ BOOLEAN CanEntireMovementGroupMercIsInMove( SOLDIERTYPE *pSoldier, INT8 *pbError
 void ReportMapScreenMovementError( INT8 bErrorNumber )
 {
 	CHAR16 sString[ 1024 ];
-	
+
 	switch( bErrorNumber )
 	{
 		case -99:

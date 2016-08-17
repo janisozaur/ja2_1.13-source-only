@@ -26,7 +26,7 @@ enum
 	// infection by contact with lifeforms
 	INFECTION_TYPE_CONTACT_HUMAN,			// infection by human interaction
 	INFECTION_TYPE_CONTACT_CORPSE,			// infection by interacting with corpses
-	
+
 	// infections when taking damage
 	INFECTION_TYPE_WOUND_ANIMAL,			// wounded by an animal (bloodcat)
 	INFECTION_TYPE_WOUND_OPEN,				// we have a new non-bandaged wound

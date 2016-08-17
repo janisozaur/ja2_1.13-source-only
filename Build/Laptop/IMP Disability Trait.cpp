@@ -1,21 +1,21 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Disability Trait.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Disability Trait.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "_Ja25EnglishText.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
 	#include "GameSettings.h"
 #endif
@@ -144,7 +144,7 @@ void EnterIMPDisabilityTrait( void )
 	}
 
 	HandleDisabilityTraitButtonStates( );
-	
+
 	// add regions for help texts
 	UINT16 usPosX = IMP_DISABILITY_COLUMN_START_X + 62;
 	UINT16 usPosY = IMP_DISABILITY_COLUMN_START_Y + 8;
@@ -154,7 +154,7 @@ void EnterIMPDisabilityTrait( void )
 						(usPosX + 156), ( usPosY + 17), MSYS_PRIORITY_HIGH,
 							MSYS_NO_CURSOR, MSYS_NO_CALLBACK, NULL );
 		MSYS_AddRegion( &gMR_DisabilityHelpTextRegions[ubCnt] );
-		
+
 		//Determine the next x location
 		if( ubCnt < IMP_DISABILITY_TRAIT_NUMBER_TO_START_2ND_COLUMN )
 			usPosX = IMP_DISABILITY_COLUMN_START_X + 62;
@@ -171,7 +171,7 @@ void EnterIMPDisabilityTrait( void )
 
 
 void RenderIMPDisabilityTrait( void )
-{	
+{
 	//render the metal background graphic
 	RenderProfileBackGround();
 
@@ -406,7 +406,7 @@ void BtnIMPDisabilityTraitFinishCallback(GUI_BUTTON *btn,INT32 reason)
 
 	if (!(btn->uiFlags & BUTTON_ENABLED))
 		return;
-		
+
 	if( reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags|=(BUTTON_CLICKED_ON);

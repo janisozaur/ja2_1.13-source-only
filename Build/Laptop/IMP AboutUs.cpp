@@ -8,8 +8,8 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Text System.h"
 #endif
 

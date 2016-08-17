@@ -6,7 +6,7 @@
 #include "Morale.h"
 #include "GameInitOptionsScreen.h"
 #include "Campaign Types.h"
-#include "environment.h"
+#include "Environment.h"
 
 #define				GAME_INI_FILE					"Ja2.ini"
 
@@ -67,7 +67,7 @@ enum
 	// HEADROCK HAM 3.6:
 	TOPTION_STAT_PROGRESS_BARS,
 
-	
+
 
 	// HEADROCK HAM 4:
 	TOPTION_ALT_MAP_COLOR,
@@ -79,8 +79,8 @@ enum
 	//TOPTION_USE_NCTH,
 	//Jenilee's Merc Ranks
 	TOPTION_SHOW_MERC_RANKS,
-	
-	// WANNE:	
+
+	// WANNE:
 	TOPTION_SHOW_TACTICAL_FACE_GEAR,
 	TOPTION_SHOW_TACTICAL_FACE_ICONS,
 
@@ -88,10 +88,10 @@ enum
 	TOPTION_QUIET_TRAINING,						//Madd: mercs don't say gained experience quote while training
 	TOPTION_QUIET_REPAIRING,					//Madd: mercs don't say gained experience quote while repairing items
 	TOPTION_QUIET_DOCTORING,					//Madd: mercs don't say gained experience quote while doctoring
-	
+
 	TOPTION_AUTO_FAST_FORWARD_MODE,				// automatically fast forward through AI turns
 
-	TOPTION_ZOMBIES,							// Flugente Zombies: allow zombies	
+	TOPTION_ZOMBIES,							// Flugente Zombies: allow zombies
 
 	TOPTION_ENABLE_INVENTORY_POPUPS,			// the_bob : enable popups for picking items from sector inv
 
@@ -106,20 +106,20 @@ enum
 	TOPTION_CHEAT_MODE_OPTIONS_HEADER,
 	TOPTION_FORCE_BOBBY_RAY_SHIPMENTS,			// force all pending Bobby Ray shipments
 	TOPTION_CHEAT_MODE_OPTIONS_END,
-	TOPTION_DEBUG_MODE_OPTIONS_HEADER,			// an example options screen options header (pure text)        
-	
+	TOPTION_DEBUG_MODE_OPTIONS_HEADER,			// an example options screen options header (pure text)
+
 	// HEADROCK HAM 4:
 	TOPTION_REPORT_MISS_MARGIN,
-	
-	TOPTION_SHOW_RESET_ALL_OPTIONS,				// failsafe show/hide option to reset all options 
-	TOPTION_RESET_ALL_OPTIONS,					// a do once and reset self option (button like effect)                                                         
+
+	TOPTION_SHOW_RESET_ALL_OPTIONS,				// failsafe show/hide option to reset all options
+	TOPTION_RESET_ALL_OPTIONS,					// a do once and reset self option (button like effect)
 	TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE,	// allow debug options that were set in debug.exe to continue in a rel.exe (debugging release can be beneficial)
-	TOPTION_DEBUG_MODE_RENDER_OPTIONS_GROUP,	// an example option that will show/hide other options                                                          
-	TOPTION_RENDER_MOUSE_REGIONS,				// an example of a DEBUG build option                                                                           
+	TOPTION_DEBUG_MODE_RENDER_OPTIONS_GROUP,	// an example option that will show/hide other options
+	TOPTION_RENDER_MOUSE_REGIONS,				// an example of a DEBUG build option
 	TOPTION_DEBUG_MODE_OPTIONS_END,				// an example options screen options divider (pure text)
 
 	// this is THE LAST option that exists (intended for debugging the options screen, doesnt do anything, except exist)
-	TOPTION_LAST_OPTION, 
+	TOPTION_LAST_OPTION,
 	NUM_GAME_OPTIONS,							// Toggles prior to this will be able to be toggled by the player
 
 	//These options will NOT be toggable by the Player
@@ -131,12 +131,12 @@ enum
 	TOPTION_TRACKING_MODE,
 
 	NUM_ALL_GAME_OPTIONS,
-};	
+};
 
 
 typedef struct
 {
-	INT32				bLastSavedGameSlot;					// The last saved game number goes in here	
+	INT32				bLastSavedGameSlot;					// The last saved game number goes in here
 
 	UINT8				ubMusicVolumeSetting;               // Volume Setting
 	UINT8				ubSoundEffectsVolume;               // Volume Setting
@@ -149,7 +149,7 @@ typedef struct
 
 	BOOLEAN				fHideHelpInAllScreens;              // Controls Help "do not show help again" checkbox
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25UB
 	BOOLEAN			fPlayerFinishedTheGame;
 #endif
@@ -159,7 +159,7 @@ typedef struct
                      // The number of grids the player designates thru "End    + '=' or '-'"
 #ifdef JA2UB
 	UINT8		ubFiller[17];
-#endif	
+#endif
 }	GAME_SETTINGS;
 
 // CHRISL: New Enums to track inventory system
@@ -185,7 +185,7 @@ enum
 
 enum
 {
-	BR_GOOD = 1, 
+	BR_GOOD = 1,
 	BR_GREAT = 2,
 	BR_EXCELLENT = 4,
 	BR_AWESOME = 10,
@@ -267,9 +267,9 @@ typedef struct
 	BOOLEAN fFoodSystem;				// ubFiler:		From 496 to 495
 
 	UINT8	ubIronManMode;				// ubFiler:		From 495 to 494
-	
+
 	// WANNE: Decrease this filler by 1, for each new UINT8 / BOOLEAN variable, so we can maintain savegame compatibility!!
-	UINT8	ubFiller[494];		
+	UINT8	ubFiller[494];
 
 } GAME_OPTIONS;
 
@@ -281,8 +281,8 @@ BOOLEAN IsNIVModeValid(bool checkRes = true);
 // Snap: Options read from an INI file in the default of custom Data directory
 typedef struct
 {
-	UINT32 iGameStartingTime; //Lalien: game starting time	
-	UINT32 iFirstArrivalDelay; 
+	UINT32 iGameStartingTime; //Lalien: game starting time
+	UINT32 iFirstArrivalDelay;
 
 	BOOLEAN fSellAll;
 	INT16 iPriceModifier;
@@ -325,7 +325,7 @@ typedef struct
 
 	BOOLEAN fMercDayOne;
 	BOOLEAN fAllMercsAvailable;
-	
+
 	// tais: Any AIM merc on assignment?
 	UINT8 fMercsOnAssignment;
 	// tais: Soldiers wear any armour
@@ -343,7 +343,7 @@ typedef struct
 	INT8 sEnemyRegularEquipmentQualityModifier;
 	INT8 sEnemyEliteEquipmentQualityModifier;
 
-	INT8 sEnemyAdminDamageResistance;	
+	INT8 sEnemyAdminDamageResistance;
 	INT8 sEnemyRegularDamageResistance;
 	INT8 sEnemyEliteDamageResistance;
 
@@ -379,7 +379,7 @@ typedef struct
 	UINT8 sMercsAutoresolveDeffenseBonus;
 
 	// Flugente: more ambush options
-	BOOLEAN fEnableChanceOfEnemyAmbushes; 
+	BOOLEAN fEnableChanceOfEnemyAmbushes;
 	INT8 bChanceModifierEnemyAmbushes;
 	BOOLEAN fAmbushSpreadMercs;
 	UINT16 usAmbushSpreadRadiusMercs;
@@ -404,13 +404,13 @@ typedef struct
 	BOOLEAN gfEnableEmergencyButton_SkipStrategicEvents;
 
 
-	//Video settings	
+	//Video settings
 	BOOLEAN gfVSync;
 
 	// Flugente: zombie settings
 	INT8	sZombieRiseBehaviour;
 	BOOLEAN fZombieSpawnWaves;
-	INT8	sZombieRiseWaveFrequency;	
+	INT8	sZombieRiseWaveFrequency;
 	BOOLEAN fZombieCanClimb;
 	BOOLEAN fZombieCanJumpWindows;
 	BOOLEAN fZombieExplodingCivs;
@@ -424,7 +424,7 @@ typedef struct
 	// Flugente: corpse settings
 	UINT32	usCorpseDelayUntilRotting;
 	UINT32	usCorpseDelayUntilDoneRotting;
-		
+
 	// Flugente: fortification settings
 	BOOLEAN fFortificationAllowInHostileSector;
 
@@ -443,10 +443,10 @@ typedef struct
 	FLOAT	sFoodDigestionAssignment;
 	FLOAT	sFoodDigestionOnDuty;
 	FLOAT	sFoodDigestionCombat;
-		
+
 	BOOLEAN fFoodDecayInSectors;
 	FLOAT	sFoodDecayModificator;
-	
+
 	BOOLEAN fFoodEatingSounds;
 
 	// Flugente: disease settings
@@ -454,7 +454,7 @@ typedef struct
 	BOOLEAN fDiseaseStrategic;
 	INT32	sDiseaseWHOSubscriptionCost;
 	BOOLEAN fDiseaseContaminatesItems;
-	
+
 	//Animation settings
 	FLOAT giPlayerTurnSpeedUpFactor;
 	FLOAT giEnemyTurnSpeedUpFactor;
@@ -472,7 +472,7 @@ typedef struct
 	// WANNE: Externalize chance of shipment package lost
 	UINT32	gubChanceOfShipmentLost;
 
-	// Militia Settings	
+	// Militia Settings
 	BOOLEAN fAllowTacticalMilitiaCommand;
 	BOOLEAN gfTrainVeteranMilitia;
 	BOOLEAN gfAllowMilitiaGroups;
@@ -486,10 +486,10 @@ typedef struct
 
 	// Flugente: militia movement
 	BOOLEAN fMilitiaStrategicCommand;
-	
+
 	BOOLEAN gfAllowReinforcements;
 	BOOLEAN gfAllowReinforcementsOnlyInCity;
-	
+
 	UINT32	guiAllowMilitiaGroupsDelay;
 	UINT32	guiTrainVeteranMilitiaDelay;
 	UINT32	guiCreateEachNHours;
@@ -506,7 +506,7 @@ typedef struct
 	INT8	bGreenMilitiaAPsBonus;
 	INT8	bRegularMilitiaAPsBonus;
 	INT8	bVeteranMilitiaAPsBonus;
-	INT16	sGreenMilitiaCtHBonusPercent;	
+	INT16	sGreenMilitiaCtHBonusPercent;
 	INT16	sRegularMilitiaCtHBonusPercent;
 	INT16	sVeteranMilitiaCtHBonusPercent;
 	INT8	bGreenMilitiaDamageResistance;
@@ -546,7 +546,7 @@ typedef struct
 	FLOAT fMilitiaResources_ItemClassMod_Attachment_Low;
 	FLOAT fMilitiaResources_ItemClassMod_Attachment_Medium;
 	FLOAT fMilitiaResources_ItemClassMod_Attachment_High;
-	
+
 	FLOAT fMilitiaResources_WeaponMod[GUN_TYPES_MAX];
 
 	// Flugente - allow accessing other mercs inventory via 'stealing'
@@ -562,7 +562,7 @@ typedef struct
 
 	// WDS - Smart goggle switching
 	BOOLEAN smartGoggleSwitch;
-	
+
 	// WDS - Automatically flag mines
 	BOOLEAN automaticallyFlagMines;
 
@@ -595,7 +595,7 @@ typedef struct
 	UINT32 gusRainMinLength;
 	UINT32 gusRainMaxLength;
 	UINT32 guiMaxRainDrops;
-		
+
 	// Thunder settings
 	BOOLEAN gfAllowLightning;
 	UINT32 guiMinLightningInterval;
@@ -685,7 +685,7 @@ typedef struct
 	// Flugente: enemy heli
 	BOOLEAN fEnemyHeliActive;
 	UINT8 usEnemyHeliMinimumProgress;
-	
+
 	UINT16 gEnemyHeliMaxHP;
 	UINT16 gEnemyHeliTimePerHPRepair;
 	INT32  gEnemyHeliCostPerRepair1HP;
@@ -697,7 +697,7 @@ typedef struct
 	UINT16 gEnemyHeliSAMDamage_Var;
 	UINT16 gEnemyHeliMANPADSDamage_Base;
 	UINT16 gEnemyHeliMANPADSDamage_Var;
-	
+
 	INT32 ubEnemiesItemDrop;
 
 	BOOLEAN	gfUseExternalLoadscreens;
@@ -821,8 +821,8 @@ typedef struct
 	// HEADROCK: Enhanced Item Description Box ON/OFF
 	// WANNE: Changed from BOOLEAN to INT32!
 	INT32 iEnhancedDescriptionBox;
-	
-	//WarmSteel - New Attachment System?	
+
+	//WarmSteel - New Attachment System?
 	BOOLEAN fUseDefaultSlots;
 	UINT32	usAttachmentDropRate;
 	INT16   iMaxEnemyAttachments;
@@ -851,7 +851,7 @@ typedef struct
 	// anv: hide stuff on roof in explored rooms at ground level view (sandbags and other crap)
 	BOOLEAN fHideExploredRoomRoofStructures;
 	//enable ext mouse key
-	BOOLEAN bAltAimEnabled;	
+	BOOLEAN bAltAimEnabled;
 	BOOLEAN bAimedBurstEnabled;
 	INT16 uAimedBurstPenalty;
 	BOOLEAN	bWeSeeWhatMilitiaSeesAndViceVersa;
@@ -933,7 +933,7 @@ typedef struct
 	UINT8 ubLBEEffectiveness;
 	UINT8 ubMovementEffectiveness;
 	UINT16 ubCoverDisplayUpdateWait;//Moa: changed to UINT16 to allow values 500ms to 10000ms, see ini file and DisplayCover( BOOLEAN ), DisplayMines( BOOLEAN )
-	
+
 	// anv: additional tile properties
 	BOOLEAN fAdditionalTileProperties;
 	// static shadows decrease brightness
@@ -948,7 +948,7 @@ typedef struct
 
 	// HEADROCK HAM B1: Allows changing the maximum CTH possible, for any attack 0-100
 	UINT8 ubMaximumCTH;
-	
+
 	// HEADROCK HAM B1: Allows changing the minimum CTH possible, for any attack 0-100
 	UINT8 ubMinimumCTH;
 
@@ -1171,10 +1171,10 @@ typedef struct
 	// HEADROCK HAM 3.3: Minimum distance (in METERS) at which character suffer from friendly suppression.
 	UINT16 usMinDistanceFriendlySuppression;
 
-	// HEADROCK HAM 3.3: If enabled, Roaming Militia can automatically reinforce city garrisons. 
+	// HEADROCK HAM 3.3: If enabled, Roaming Militia can automatically reinforce city garrisons.
 	BOOLEAN fAllowMobileReinforceCities;
 
-	// HEADROCK HAM 3.3: If enabled, Roaming Militia can automatically reinforce city garrisons. 
+	// HEADROCK HAM 3.3: If enabled, Roaming Militia can automatically reinforce city garrisons.
 	BOOLEAN fAllowMobileReinforceSAM;
 
 	// HEADROCK HAM 3.4: This controls the intensity of Hiding the Bullet Count during combat. The higher it is, the more intense the effect. Negative values reduce the effect.
@@ -1262,7 +1262,7 @@ typedef struct
 
 	//legion by Jazz
 	BOOLEAN fCanJumpThroughWindows;
-	BOOLEAN fCanJumpThroughClosedWindows;	
+	BOOLEAN fCanJumpThroughClosedWindows;
 	BOOLEAN fCanClimbOnWalls;
 
 	//JMich.BackpackClimb
@@ -1278,24 +1278,24 @@ typedef struct
 
 	// Flugente: display NPCs we know of in a different colour on the sector and radar map
 	BOOLEAN fKnownNPCsUseDifferentColour;
-	
+
 	//SAveGame Slot by Jazz
 	BOOLEAN fSaveGameSlot;
 
 	//dnl ch51 081009 JA2 Debug Settings
 	BOOLEAN fEnableInventoryPoolQ;
-	
+
 	//legion by Jazz
 	//BOOLEAN fShowTacticalFaceGear; //legion 2
 	//BOOLEAN fShowTacticalFaceIcons; //legion 2
 	INT8 bTacticalFaceIconStyle;
-	
+
 	//Enemy Names Group Legion 2 by Jazz
 	BOOLEAN fEnemyNames;
-	
+
 	//Civ Names Group Legion 2 by Jazz
 	BOOLEAN fCivGroupName;
-	
+
 	//Enemy Rank Legion 2 by Jazz
 	BOOLEAN fEnemyRank;
 
@@ -1305,7 +1305,7 @@ typedef struct
 	// Flugente: soldier profiles
 	BOOLEAN	fSoldierProfiles_Enemy;
 	BOOLEAN	fSoldierProfiles_Militia;
-	
+
 	BOOLEAN fShowCamouflageFaces;
 
 	//BOOLEAN fHideEnemyHealthText;
@@ -1340,9 +1340,9 @@ typedef struct
 	BOOLEAN fShowSkillsInHirePage;
 
 	UINT8 ubMercRandomStats;
-	
+
 	BOOLEAN fMercRandomBellDistribution;
-	
+
 	UINT8 ubMercRandomStatsRange;
 
 	BOOLEAN fMercRandomGearKits;
@@ -1358,7 +1358,7 @@ typedef struct
 	BOOLEAN fGridExitInTurnBased;
 
 	BOOLEAN fStandUpAfterBattle;
-	
+
 	INT32 iInitialMercArrivalLocation;
 
 	// Keyboard shortcut (as VK) for fastforward key.  See Utils/KeyMap
@@ -1381,7 +1381,7 @@ typedef struct
 	BOOLEAN fDisplayOverheatJamPercentage;			// Should we display temperature/jam threshold (true) or temperature/damage threshold (false)?
 	UINT8	ubOverheatThermometerRedOffset;			// amount of red colour while temperature is below threshold
 	FLOAT   iCooldownModificatorLonelyBarrel;		// Cooldown modificator for barrels left alone in the landscape ;-)
-	
+
 	// Flugente: Weapon Mounting
 	BOOLEAN	fWeaponResting;							// Should it be possible to rest your weapon on structures in crouched position?
 	BOOLEAN fDisplayWeaponRestingIndicator;			// Should a little indicator show if the weapon is currently rested on something?
@@ -1395,7 +1395,7 @@ typedef struct
 	UINT8	usSpotterPreparationTurns;
 	UINT16	usSpotterRange;
 	UINT16	usSpotterMaxCTHBoost;
-	
+
 	// Flugente: External Feeding
 	UINT8	ubExternalFeeding;						// allow external feeding of guns (0 = no, 1 = only for others, 2 = we can also fed ourselves)
 
@@ -1419,7 +1419,7 @@ typedef struct
 	UINT8	ubPrisonerProcessInfoDirectionChance;
 	UINT16	ubPrisonerInterrogationPoints[8];		// points needed to interrogate a prisoner of a specific type
 	UINT8	ubPrisonerInterrogationEnemyGeneralInfoChance[8];		// chance that when getting info from interrogation, this prisoner will tell us about general we do not yet know about
-	
+
 	// Flugente: sexism/racism/etc.
 	INT8	sMoraleModAppearance;
 	INT8	sMoraleModRefinement;
@@ -1468,7 +1468,7 @@ typedef struct
 	UINT16 usIndividualMilitia_PromotionPoints_To_Elite;
 	BOOLEAN fIndividualMilitia_ManageHealth;
 	FLOAT dIndividualMilitiaHourlyHealthPercentageGain;
-	
+
 	// Sandro: Alternative weapon holding (rifles fired from hip / pistols fired one-handed)
 	UINT8 ubAllowAlternativeWeaponHolding;
 	UINT8 ubToAltWeaponHoldReadyAPsPerc;
@@ -1646,7 +1646,7 @@ typedef struct
 {
 	UINT8 ubMaxNumberOfTraits;
 	UINT8 ubNumberOfMajorTraitsAllowed;
-	
+
 	UINT8 ubMaxNumberOfTraitsForIMP;
 	UINT8 ubNumberOfMajorTraitsAllowedForIMP;
 
@@ -1722,7 +1722,7 @@ typedef struct
 	UINT8 ubSNDamageBonusFromNumClicks;
 	UINT8 ubSNChamberRoundAPsReduction;
 	UINT8 ubSNAimClicksAdded;
-	
+
 	// RANGER
 	UINT8 ubRABonusCtHRifles;
 	UINT8 ubRABonusCtHShotguns;
@@ -1918,7 +1918,7 @@ typedef struct
 	INT8  sVOListeningHearingBonus;
 	BOOLEAN fVOJammingBlocksRemoteBombs;
 	BOOLEAN fVOEnemyVOSetsOffRemoteBombs;
-	
+
 	// SNITCH
 	UINT8 ubSNTBaseChance;						// Base chance that snitch will inform about certain event (in percents)
 	FLOAT fSNTMercOpinionAboutSnitchBonusModifier;	// How much chance is influenced by relation between snitch and target
@@ -2072,7 +2072,7 @@ typedef struct
 	//AI
 	UINT8 ubSAISpawnSectorX;
 	UINT8 ubSAISpawnSectorY;
-	
+
 	//defines the basement and the bottom of the stairs
 	UINT8 ubHideoutSectorX;
 	UINT8 ubHideoutSectorY;
@@ -2085,15 +2085,15 @@ typedef struct
 	INT32 iHideoutEntryGrid;
 	//where your mercs land when entering the basement, added some for 10 man squads
 	INT32 iBasementEntry[10];
-	
+
 	//where your mercs land when leaving the basement, again added some
 	INT32 iBasementExit[12];
-	
+
 	//this moves the crate to reveal the entrance
 	INT32 iFinalCrateGrid;
 	UINT16 usCrateTileDef;
 	UINT16 usTrapdoorTileDef;
-	
+
 	//Leave Stuff
 	UINT8 ubOmertaDropOffX;
 	UINT8 ubOmertaDropOffY;
@@ -2105,7 +2105,7 @@ typedef struct
 	UINT8 ubAirportX;
 	UINT8 ubAirportY;
 	INT32 iHeliSquadDropOff;
-	
+
 	UINT8 ubAirport2X;
 	UINT8 ubAirport2Y;
 
@@ -2128,7 +2128,7 @@ typedef struct
 
 	//[Alma]
 	INT32 sRocketRifleGridNo;
-	
+
 	//POW stuff for QUEST_HELD_IN_ALMA
 	UINT8 ubInitialPOWSectorX;
 	UINT8 ubInitialPOWSectorY;
@@ -2173,7 +2173,7 @@ typedef struct
 
 	//Brothel Quests
 	UINT16 usLeatherShop;
-	
+
 	UINT8 ubBrothelSectorX;
 	UINT8 ubBrothelSectorY;
 	INT32  iCarlaDoorGridNo;
@@ -2195,7 +2195,7 @@ typedef struct
 	UINT16 usKingpinRoomRangeStart;
 	UINT16 usKingpinRoomRangeEnd;
 	INT32 iKingpinRingTile;
-	
+
 	//Kingpin Private Stash
 	UINT8 ubKingpinMoneySectorX;
 	UINT8 ubKingpinMoneySectorY;
@@ -2276,13 +2276,13 @@ typedef struct
 	UINT8 ubMeanwhileAddMadlabSector3Y;
 	UINT8 ubMeanwhileAddMadlabSector4X;
 	UINT8 ubMeanwhileAddMadlabSector4Y;
-	
+
 	//[End Game]
 	//victory celebration stuff
 	UINT8 ubEndGameVictorySectorX;
 	UINT8 ubEndGameVictorySectorY;
 	INT32 iEndGameVictoryGridNo;
-	
+
 	//enable meanwhile cutscene
 	BOOLEAN AllMeanwhileCutscene;
 	BOOLEAN CreatureMeanwhileCutscene;
@@ -2377,7 +2377,7 @@ extern GAME_SETTINGS		gGameSettings;
 extern GAME_OPTIONS		gGameOptions;
 
 // Snap: Options read from an INI file in the default of custom Data directory
-extern GAME_EXTERNAL_OPTIONS gGameExternalOptions; 
+extern GAME_EXTERNAL_OPTIONS gGameExternalOptions;
 
 extern SKILL_TRAIT_VALUES gSkillTraitValues;  // SANDRO - added this one
 

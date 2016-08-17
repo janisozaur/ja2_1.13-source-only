@@ -26,7 +26,7 @@ typedef void ( *SLIDER_CHANGE_CALLBACK )	(INT32);
 
 /*
 
-ubStyle								
+ubStyle
 usPosX
 usPosY
 usWidth

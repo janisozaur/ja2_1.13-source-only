@@ -7,8 +7,8 @@
 #endif
 
 #else
-	#include "laptop.h"
-	#include "mercs.h"
+	#include "Laptop.h"
+	#include "Mercs.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
@@ -18,7 +18,7 @@
 	#include "Email.h"
 	#include "Game Clock.h"
 	#include "Faces.h"
-	#include "dialogue control.h"
+	#include "Dialogue Control.h"
 	#include "MercTextBox.h"
 	#include "Merc Hiring.h"
 	#include "Random.h"
@@ -39,7 +39,7 @@
 #include "Speck Quotes.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 UINT8	NUMBER_OF_MERCS = 0;
 UINT8	LAST_MERC_ID = -1;
@@ -401,7 +401,7 @@ void RevaluateMercArray()
 	NUMBER_OF_MERCS = 0;
 	LAST_MERC_ID = -1;
 	NUMBER_OF_BAD_MERCS = -1;
-	
+
 	// first clear gubMercArray
 	for ( i=0; i<NUM_PROFILES; i++)
 	{
@@ -418,7 +418,7 @@ void RevaluateMercArray()
 			gubMercArray[ i ] = gConditionsForMercAvailability[i].ProfilId;
 		}
 	}
-	
+
 	// check how many mercs are supposed to be available
 	for(i=0; i<NUM_PROFILES; i++)
 	{
@@ -469,7 +469,7 @@ BOOLEAN CanMercBeAvailableDuringInit( UINT8 ubMercToCheck )// anv: for all mercs
 		return ( FALSE );
 	if( gGameExternalOptions.fEnableRecruitableJA1Natives == FALSE )
 	{
-		if( gConditionsForMercAvailability[ubMercToCheck].ProfilId == ELIO || 
+		if( gConditionsForMercAvailability[ubMercToCheck].ProfilId == ELIO ||
 			gConditionsForMercAvailability[ubMercToCheck].ProfilId == JUAN ||
 			gConditionsForMercAvailability[ubMercToCheck].ProfilId == WAHAN  )
 			return ( FALSE );
@@ -496,7 +496,7 @@ void GameInitMercs()
 	NUMBER_OF_MERCS = 0;
 	LAST_MERC_ID = -1;
 	NUMBER_OF_BAD_MERCS = -1;
-	
+
 	for(i=0; i<NUM_PROFILES; i++)
 	{
 		if ( gConditionsForMercAvailability[i].ProfilId != 0 )
@@ -506,13 +506,13 @@ void GameInitMercs()
 			gubMercArray[ i ] = gConditionsForMercAvailability[i].ProfilId;
 		}
 	}
-	
+
 	for(i=0; i<NUM_PROFILES; i++)
 	{
 		if ( gConditionsForMercAvailability[i].StartMercsAvailable == TRUE && gConditionsForMercAvailability[i].NewMercsAvailable == FALSE )
 			NUMBER_OF_BAD_MERCS = NUMBER_OF_BAD_MERCS + 1;
 	}
-	
+
 	// anv: if all merc should be availabe, then set their availability info
 	if(gGameExternalOptions.fAllMercsAvailable == TRUE)
 	{
@@ -547,8 +547,8 @@ void GameInitMercs()
 	{
 		LaptopSaveInfo.gubLastMercIndex =	LAST_MERC_ID; //NUMBER_OF_BAD_MERCS;
 	}
-	
-#ifdef JA2UB	
+
+#ifdef JA2UB
 	//Ja25.  create an account immediately
 	{
 		//open an account
@@ -1026,7 +1026,7 @@ void DailyUpdateOfMercSite( UINT16 usDate)
 			}
 
 #ifdef JA2UB
-//JA25:  MERC does a 1 time fee, no longer pay as you go 
+//JA25:  MERC does a 1 time fee, no longer pay as you go
 #else
 
 			//Get the longest time
@@ -1264,7 +1264,7 @@ UINT8 GetAvailableMercIndex(UINT8 gubCurMercIndex)
 			ID++;
 			if( gConditionsForMercAvailability[ ID ].StartMercsAvailable == TRUE )
 				availableID++;
-			
+
 		}
 		returnID =  ID;
 	}
@@ -1287,7 +1287,7 @@ UINT8 GetAvailableMercIndex(UINT8 gubCurMercIndex)
 		}
 		else
 		{
-			// Normal Larry (Normal Profile is one 
+			// Normal Larry (Normal Profile is one
 			returnID = gConditionsForMercAvailability[ returnID ].uiAlternateIndex;
 		}
 	}
@@ -1320,7 +1320,7 @@ UINT8 GetMercIDFromMERCArray(UINT8 ubMercID)
 		}
 		else
 		{
-			// Normal Larry (Normal Profile is one 
+			// Normal Larry (Normal Profile is one
 			return( gubMercArray[ gConditionsForMercAvailability[ ubMercID ].uiAlternateIndex ] );
 		}
 	}
@@ -2004,7 +2004,7 @@ BOOLEAN	GetSpeckConditionalOpening( BOOLEAN fJustEnteredScreen )
 		StartSpeckTalking( SPECK_QUOTE_2ND_INTRO_LAPTOP_WORKING_AGAIN_4 );
 		StartSpeckTalking( SPECK_QUOTE_2ND_INTRO_LAPTOP_WORKING_AGAIN_5 );
 		StartSpeckTalking( SPECK_QUOTE_2ND_INTRO_LAPTOP_WORKING_AGAIN_6 );
-	} 	
+	}
 #else
 	//if its the players second visit
 	else if( LaptopSaveInfo.ubPlayerBeenToMercSiteStatus == MERC_SITE_SECOND_VISIT )
@@ -2018,7 +2018,7 @@ BOOLEAN	GetSpeckConditionalOpening( BOOLEAN fJustEnteredScreen )
 	{
 		//if the player has not hired any MERC mercs before
 		// CJC Dec 1 2002: fixing this, so near-bankrupt msg will play
-#ifdef JA2UB		
+#ifdef JA2UB
 		if( !IsAnyMercMercsHired( ) && CalcMercDaysServed() == 0)
 			StartSpeckTalking( SPECK_QUOTE_DEFAULT_INTRO_HAVENT_HIRED_MERCS );
 		else
@@ -2458,18 +2458,18 @@ void HandlePlayerHiringMerc( UINT8 ubHiredMercID )
 	{
 	#ifdef JA2UB
 		//Gaston is hired
-		if ( ubHiredMercID == GASTON_UB ) 	
+		if ( ubHiredMercID == GASTON_UB )
 			{
 				//if biff is available, advertise for biff
 				if( IsMercMercAvailable( FLO ) )
 					StartSpeckTalking( SPECK_QUOTE_PLAYER_HIRES_GASTON );
 			}
-		//Stogie is hired	
-		else if ( ubHiredMercID == STOGIE_UB )	
+		//Stogie is hired
+		else if ( ubHiredMercID == STOGIE_UB )
 			{
 				//if biff is available, advertise for biff
 				if( IsMercMercAvailable( BIFF ) )
-					StartSpeckTalking( SPECK_QUOTE_PLAYER_HIRES_STOGIE );	
+					StartSpeckTalking( SPECK_QUOTE_PLAYER_HIRES_STOGIE );
 			}
 	#endif
 		//determine which quote to say based on the merc that was hired
@@ -2541,7 +2541,7 @@ void HandlePlayerHiringMerc( UINT8 ubHiredMercID )
 					StartSpeckTalking( SPECK_QUOTE_PLAYER_HIRES_SPECK );
 				break;
 #endif
-			
+
 		}
 	}
 
@@ -2589,7 +2589,7 @@ BOOLEAN ShouldSpeckStartTalkingDueToActionOnSubPage()
 				StartSpeckTalking( SPECK_QUOTE_BETTER_STARTING_EQPMNT_TAG_ON );
 			}
 #endif
-			//get speck to say the thank you 
+			//get speck to say the thank you
 			if( Random( 100 ) > 50 )
 				StartSpeckTalking( SPECK_QUOTE_GENERIC_THANKS_FOR_HIRING_MERCS_1 );
 			else
@@ -2618,13 +2618,13 @@ BOOLEAN ShouldSpeckStartTalkingDueToActionOnSubPage()
 BOOLEAN IsSpeckComAvailable() // anv: Prevent Speck from talking if his playable version is out of reach
 {
 	//he's hired, travelling, dead or POW, he cant' talk
-	if( ( ( IsMercOnTeam( SPECK_PLAYABLE ) 
-		|| gMercProfiles[ SPECK_PLAYABLE ].bMercStatus == MERC_IS_DEAD  
+	if( ( ( IsMercOnTeam( SPECK_PLAYABLE )
+		|| gMercProfiles[ SPECK_PLAYABLE ].bMercStatus == MERC_IS_DEAD
 		|| gMercProfiles[ SPECK_PLAYABLE ].bMercStatus == MERC_RETURNING_HOME
 		|| gMercProfiles[ SPECK_PLAYABLE ].bMercStatus == MERC_FIRED_AS_A_POW ) )
 
 		//he still can talk if he was just hired, so he can say his recruitment quote
-		&& ( GetAvailableMercIDFromMERCArray( gubCurMercIndex ) != SPECK_PLAYABLE 
+		&& ( GetAvailableMercIDFromMERCArray( gubCurMercIndex ) != SPECK_PLAYABLE
 		||  gusMercVideoSpeckSpeech == SPECK_QUOTE_PLAYER_TRIES_TO_HIRE_ALREADY_HIRED_MERC
 		||  gusMercVideoSpeckSpeech == SPECK_QUOTE_BIFF_UNAVALIABLE
 		||  gusMercVideoSpeckSpeech == SPECK_QUOTE_SPECK_UNAVAILABLE
@@ -2636,7 +2636,7 @@ BOOLEAN IsSpeckComAvailable() // anv: Prevent Speck from talking if his playable
 }
 
 void HandleSpeckWitnessingEmployeeDeath( SOLDIERTYPE* pSoldier )  // anv: handle playable Speck witnessing his employee death
-{	
+{
 	if(pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__MERC)
 	{
 		// first blood
@@ -2793,7 +2793,7 @@ void HandleSpeckIdleConversation( BOOLEAN fReset )
 			{
 				IncreaseMercRandomQuoteValue( (UINT8)sLeastSaidQuote, 1 );
 			}
-#ifdef JA2UB			
+#ifdef JA2UB
 			//if its the biff is dead quote, only say the quote once
 			else if( sLeastSaidQuote == SPECK_QUOTE_BIFF_DEAD_WHEN_IMPORTING )
 				IncreaseMercRandomQuoteValue( (UINT8)sLeastSaidQuote, 255 );
@@ -3077,7 +3077,7 @@ BOOLEAN AreAnyOfTheNewMercsAvailable()
 		if ( gConditionsForMercAvailability[i].NewMercsAvailable == FALSE && gProfilesMERC[i].ProfilId != 0 )
 		{
 			ubMercID = GetMercIDFromMERCArray( i );
-			if( IsMercMercAvailable( ubMercID ) ) 
+			if( IsMercMercAvailable( ubMercID ) )
 				return( TRUE );
 		}
 	}
@@ -3086,7 +3086,7 @@ BOOLEAN AreAnyOfTheNewMercsAvailable()
 }
 
 void ShouldAnyNewMercMercBecomeAvailable()
-{	
+{
 	//Kaiden: Added this if test to make sure that the "New Mercs Available"
 	// e-mail doesn't show up and no unneccessary checks are made when you
 	// have the ALL_MERCS_AT_MERC set to TRUE in the INI file.
@@ -3104,7 +3104,7 @@ void ShouldAnyNewMercMercBecomeAvailable()
 					AddStrategicEvent( EVENT_MERC_SITE_NEW_MERC_AVAILABLE, GetMidnightOfFutureDayInMinutes( 1 ) + 420 + Random( 3 * 60 ), 0 );
 				}
 			}
-		}	
+		}
 	}
 }
 
@@ -3138,16 +3138,16 @@ BOOLEAN CanMercBeAvailableYet( UINT8 ubMercToCheck )
 		}
 		else
 		{
-			return( FALSE );	
-		}	
+			return( FALSE );
+		}
 	}
 
 	// anv: if JA1 natives are turned off, prevent them from being be available
 	if(gGameExternalOptions.fEnableRecruitableJA1Natives == FALSE)
 	{
-		if( gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == ELIO || 
-			gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == JUAN || 
-			gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == WAHAN ) 
+		if( gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == ELIO ||
+			gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == JUAN ||
+			gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == WAHAN )
 		{
 			return( FALSE );
 		}
@@ -3158,12 +3158,12 @@ BOOLEAN CanMercBeAvailableYet( UINT8 ubMercToCheck )
 	{
 		if( gConditionsForMercAvailability[ ubMercToCheck ].ProfilId == SPECK_PLAYABLE )
 		{
-			return( FALSE );		
+			return( FALSE );
 		}
 	}
 
 #endif
-	
+
 	//if player has paid enough money for the merc to be available, and the it is after the current day
 	if( gConditionsForMercAvailability[ ubMercToCheck ].usMoneyPaid <= LaptopSaveInfo.uiTotalMoneyPaidToSpeck &&
 			gConditionsForMercAvailability[ ubMercToCheck ].usDay <= GetWorldDay() )
@@ -3177,13 +3177,13 @@ BOOLEAN CanMercBeAvailableYet( UINT8 ubMercToCheck )
 void NewMercsAvailableAtMercSiteCallBack( )
 {
 	for(UINT8 i=0; i<NUM_PROFILES; i++)
-	{			
+	{
 		if ( gConditionsForMercAvailability[i].ProfilId != 0 && gConditionsForMercAvailability[i].NewMercsAvailable == FALSE && gConditionsForMercAvailability[i].StartMercsAvailable == FALSE )
 		{
 			if( CanMercBeAvailableYet( gConditionsForMercAvailability[i].uiIndex ) )
 			{
 				gConditionsForMercAvailability[i].NewMercsAvailable = TRUE;
-			
+
 				//if ( gConditionsForMercAvailability[ gConditionsForMercAvailability[i].uiIndex ].Drunk == TRUE )
 				if ( gConditionsForMercAvailability[i].Drunk == TRUE )
 				{
@@ -3192,9 +3192,9 @@ void NewMercsAvailableAtMercSiteCallBack( )
 				else
 				{
 					// If Previous merc has alternate index
-					if (i > 0 && gConditionsForMercAvailability[ gConditionsForMercAvailability[i - 1].uiIndex ].uiAlternateIndex != 255)					
+					if (i > 0 && gConditionsForMercAvailability[ gConditionsForMercAvailability[i - 1].uiIndex ].uiAlternateIndex != 255)
 					{
-						// Previous merc has alternate (drunk) merc, skip his one!						
+						// Previous merc has alternate (drunk) merc, skip his one!
 						//LaptopSaveInfo.gubLastMercIndex = LaptopSaveInfo.gubLastMercIndex + 2;
 						LaptopSaveInfo.gubLastMercIndex = LaptopSaveInfo.gubLastMercIndex++;
 					}

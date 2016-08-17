@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
@@ -7,28 +7,28 @@
 	#include <time.h>
 	#include "sgp.h"
 	#include "Radar Screen.h"
-	#include "line.h"
-	#include "renderworld.h"
+	#include "Line.h"
+	#include "RenderWorld.h"
 	#include "Isometric Utils.h"
 	#include "Interface.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Soldier Control.h"
-	#include "lighting.h"
-	#include "wcheck.h"
-	#include "sysutil.h"
-	#include "render dirty.h"
-	#include "overhead map.h"
+	#include "Lighting.h"
+	#include "WCheck.h"
+	#include "SysUtil.h"
+	#include "Render Dirty.h"
+	#include "Overhead Map.h"
 	#include "Squads.h"
 	#include "mousesystem.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "vobject.h"
+	#include "VObject.h"
 	#include "Utilities.h"
 	#include "Interface Control.h"
 	#include "Game Clock.h"
 	#include "Map Screen Interface Map Inventory.h"
-	#include "meanwhile.h"
-	#include "strategicmap.h"
+	#include "Meanwhile.h"
+	#include "StrategicMap.h"
 	#include "Animation Data.h"
 	#include "GameSettings.h"
 	#include "Map Screen Interface.h"	// added by Flugente
@@ -37,7 +37,7 @@
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
-#include "connect.h"
+#include "Connect.h"
 
 extern INT32 iCurrentMapSectorZ;
 
@@ -109,7 +109,7 @@ BOOLEAN InitRadarScreen( )
 		// CHRISL: Move screen coord setup to it's own function
 		InitRadarScreenCoords();
 		// Add region for radar
-		MSYS_DefineRegion( &gRadarRegion, RADAR_WINDOW_TM_X, RADAR_WINDOW_TM_Y, 
+		MSYS_DefineRegion( &gRadarRegion, RADAR_WINDOW_TM_X, RADAR_WINDOW_TM_Y,
 											RADAR_WINDOW_TM_X + RADAR_WINDOW_WIDTH,
 											RADAR_WINDOW_TM_Y + RADAR_WINDOW_HEIGHT,
 											MSYS_PRIORITY_HIGHEST, 0,
@@ -227,10 +227,10 @@ void MoveRadarScreen()
 
 	// Add region for radar
 	// CHRISL:
-	MSYS_DefineRegion( &gRadarRegion, (UINT16) (gsRadarX), (UINT16)(gsRadarY), 
+	MSYS_DefineRegion( &gRadarRegion, (UINT16) (gsRadarX), (UINT16)(gsRadarY),
 										 (UINT16) (gsRadarX + RADAR_WINDOW_WIDTH),
 										 (UINT16)(gsRadarY + RADAR_WINDOW_HEIGHT),
-										 MSYS_PRIORITY_HIGHEST, 0, 
+										 MSYS_PRIORITY_HIGHEST, 0,
 										 RadarRegionMoveCallback,
 										 RadarRegionButtonCallback );
 
@@ -463,7 +463,7 @@ void RenderRadarScreen( )
 
 
 	pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES );
-	
+
 	// CHRISL:
 	SetClippingRegionAndImageWidth( uiDestPitchBYTES, gsRadarX, gsRadarY, ( gsRadarX + RADAR_WINDOW_WIDTH - 1 ), ( gsRadarY + RADAR_WINDOW_HEIGHT - 1 ) );
 
@@ -636,7 +636,7 @@ void RenderRadarScreen( )
 					else
 					{
 						usLineColor = Get16BPPColor( gTacticalStatus.Team[ pSoldier->bTeam ].RadarColor );
-						
+
 						if ( pSoldier->bTeam == CIV_TEAM )
 						{
 							// Override civ team with red if hostile...
@@ -905,7 +905,7 @@ void RenderSquadList( void )
 
 			if( sCounter < NUMBER_OF_SQUADS / 2 )
 			{
-				sX = RADAR_WINDOW_TM_X + 2; 
+				sX = RADAR_WINDOW_TM_X + 2;
 			}
 			else
 			{

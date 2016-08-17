@@ -75,7 +75,7 @@ typedef struct
 	BOOLEAN							fVisitedBookmarkAlready[20];			// have we visitied this site already?
 	INT32							iBookMarkList[MAX_BOOKMARKS];
 
-	
+
 	INT32							iCurrentBalance;									// current players balance
 
 
@@ -198,6 +198,6 @@ BOOLEAN SaveLaptopInfoToSavedGame( HWFILE hFile );
 
 
 
- 
+
 
 

@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/File/vfs_file.cpp
  *  - File with read/read-write access
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -113,7 +113,7 @@ static inline void copyAttributes(vfs::UInt32 osFileAttributes, vfs::UInt32& vfs
 #endif
 
 template<typename WriteType>
-vfs::TFile<WriteType>::TFile(vfs::Path const& filename) 
+vfs::TFile<WriteType>::TFile(vfs::Path const& filename)
 : tBaseClass(filename), m_isOpen_read(false), m_file(0)
 {
 }
@@ -198,7 +198,7 @@ bool vfs::TFile<WriteType>::_internalOpenRead(vfs::Path const& path)
 	if( m_isOpen_read )
 		return true;
 #ifdef WIN32
-	m_file = vfs::Settings::getUseUnicode() ? 
+	m_file = vfs::Settings::getUseUnicode() ?
 		CreateFileW(path.c_str(),GENERIC_READ,FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL) :
 		CreateFileA(vfs::String::narrow(path.c_str(),path.length()).c_str(),GENERIC_READ,FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
 	DWORD err = GetLastError();
@@ -341,7 +341,7 @@ void vfs::TFile<WriteType>::setReadPosition(vfs::offset_t offsetInBytes, IBaseFi
 /********************************************************************************/
 
 
-vfs::CFile::CFile(vfs::Path const& filename) 
+vfs::CFile::CFile(vfs::Path const& filename)
 : tBaseClass(filename), m_isOpen_write(false)
 {
 }
@@ -395,14 +395,14 @@ bool vfs::CFile::_internalOpenWrite(vfs::Path const& path, bool createWhenNotExi
 		Mode |= TRUNCATE_EXISTING;
 	}
 
-	m_file = vfs::Settings::getUseUnicode() ? 
+	m_file = vfs::Settings::getUseUnicode() ?
 		CreateFileW(path.c_str(),GENERIC_WRITE,FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,NULL,Mode,FILE_ATTRIBUTE_NORMAL,NULL) :
 		CreateFileA(vfs::String::narrow(path.c_str(),path.length()).c_str(),GENERIC_WRITE,FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,NULL,Mode,FILE_ATTRIBUTE_NORMAL,NULL);
 	DWORD err = GetLastError();
 	if(truncate && err == ERROR_FILE_NOT_FOUND)
 	{
 		Mode = CREATE_ALWAYS;
-		m_file = vfs::Settings::getUseUnicode() ? 
+		m_file = vfs::Settings::getUseUnicode() ?
 			CreateFileW(path.c_str(),GENERIC_WRITE,FILE_SHARE_READ | FILE_SHARE_WRITE,NULL,Mode,FILE_ATTRIBUTE_NORMAL,NULL) :
 			CreateFileA(vfs::String::narrow(path.c_str(),path.length()).c_str(),GENERIC_WRITE,FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,NULL,Mode,FILE_ATTRIBUTE_NORMAL,NULL);
 		err = GetLastError();
@@ -457,7 +457,7 @@ vfs::size_t vfs::CFile::write(const vfs::Byte* data, vfs::size_t bytesToWrite)
 
 #endif
 	return (vfs::size_t)has_written;
-}	
+}
 
 vfs::size_t vfs::CFile::getWritePosition()
 {
@@ -592,7 +592,7 @@ vfs::size_t vfs::TFile<T>::getSize()
 
 	VFS_THROW_IFF( m_isOpen_read || this->openRead(), ERROR_FILE(L"could not open file") )
 
-	// save current position 
+	// save current position
 	long int current_position = ftell(m_file);
 
 	// move to end of the file

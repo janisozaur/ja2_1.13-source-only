@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "funeral.h"
 	#include "WCheck.h"
 	#include "Utilities.h"

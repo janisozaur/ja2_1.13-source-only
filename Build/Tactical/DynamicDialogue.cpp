@@ -12,21 +12,21 @@
 #include "Text.h"
 #include "MercTextBox.h"
 #include "Meanwhile.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 #include "Soldier Profile.h"
 #include "Interface.h"
 #include "CampaignStats.h"
 #include "Drugs And Alcohol.h"
 #include "Overhead.h"
 #include "Food.h"
-#include "finances.h"
-#include "message.h"
-#include "Soldier macros.h"
+#include "Finances.h"
+#include "Message.h"
+#include "Soldier Macros.h"
 #include "Dialogue Control.h"
 #include "Soldier Add.h"
-#include "random.h"
-#include "strategicmap.h"
-#include "connect.h"
+#include "Random.h"
+#include "StrategicMap.h"
+#include "Connect.h"
 #include "Campaign.h"
 #include "Points.h"
 
@@ -38,7 +38,7 @@ UINT32 gDynamicDialogueEventCounter = 0;
 // has to be saved/loaded/reset
 DynamicOpinionSpeechEvent_EventData gCurrentDynamicDialogueEventData;
 
-// when we add an event, we add it to this vector. 
+// when we add an event, we add it to this vector.
 // we create speech from this and add it to gDynamicOpinionSpeechEventVector
 // has to be saved/loaded/reset
 std::vector<DynamicOpinionSpeechEvent> gDynamicOpinionSpeechEventArchiveVector;
@@ -247,7 +247,7 @@ INT8	SoldierRelation( UINT8 usProfileA, UINT8 usProfileB )
 }
 
 
-// it could happen that we load events incorrectly. To detect that early, we write an extra eyecacher befoer and after the list of events. Should we fail to read it correctly, we will knowm where to look. 
+// it could happen that we load events incorrectly. To detect that early, we write an extra eyecacher befoer and after the list of events. Should we fail to read it correctly, we will knowm where to look.
 UINT32 gDynDiaSaveCheck = 0xF123456F;
 BOOLEAN SaveDynamicDialogue( HWFILE hwFile )
 {
@@ -350,7 +350,7 @@ void AddDynamicOpinionEvent_New( OpinionEvent aEvent )
 
 	// get the profile of a merc that can interjet. Pick an IMP if possible.
 	UINT8 impprofile = GetFittingInterjectorProfile( aEvent.ubEventId, aEvent.ubProfileComplainant, aEvent.ubProfileCause );
-	
+
 	if ( impprofile != NO_PROFILE )
 		data.ubProfileINTERJECTOR = impprofile;
 
@@ -368,7 +368,7 @@ void AddDynamicOpinionEvent_New( OpinionEvent aEvent )
 
 void AddDynamicOpinionEvent_Continue( DynamicOpinionSpeechEvent aEvent )
 {
-	// If this event already has an Id that is already used in our list of current events, then this must be a reaction from one of our mercs in an ongoing dialogue. 
+	// If this event already has an Id that is already used in our list of current events, then this must be a reaction from one of our mercs in an ongoing dialogue.
 	// In this case, don't add it to the archive, but continue the dialogue
 	if ( aEvent.data.usId > 0 && (aEvent.data.event.ubEventId == gCurrentDynamicDialogueEventData.event.ubEventId) && (aEvent.data.usId == gCurrentDynamicDialogueEventData.usId) )
 	{
@@ -411,7 +411,7 @@ void CreateSpeechEventsFromDynamicOpinionEvent( DynamicOpinionSpeechEvent aEvent
 	{
 		// cause either denies or agrees with complainant
 
-		UINT32 chancetoagree = 0;	
+		UINT32 chancetoagree = 0;
 
 		// the more we dislike the other guy, the higher the chance we disagree
 		// personality also influences this
@@ -760,7 +760,7 @@ void HandleDynamicOpinionSpeechEvents( )
 			{
 				DynamicOpinionSpeechEvent event = (*it);
 
-				// if this is the current event, delete it 
+				// if this is the current event, delete it
 				if ( (event.data.event.ubEventId == gCurrentDynamicDialogueEventData.event.ubEventId) && (event.data.usId == gCurrentDynamicDialogueEventData.usId) )
 				{
 					gDynamicOpinionSpeechEventArchiveVector.erase( it );
@@ -931,7 +931,7 @@ BOOLEAN DynamicOpinionTacticalCharacterDialogue( DynamicOpinionSpeechEvent& aEve
 	if ( pSoldier->ubProfile == NO_PROFILE )
 		return(FALSE);
 
-#if (defined JA2UB) 
+#if (defined JA2UB)
 	//Ja25 no meanwhiles
 #else
 	if ( AreInMeanwhile( ) )
@@ -990,8 +990,8 @@ BOOLEAN DynamicOpinionTacticalCharacterDialogue( DynamicOpinionSpeechEvent& aEve
 		// yep, same dialogue
 		wcscpy( gzQuoteStr, szDynamicDialogueText_DOST_VICTIM_TO_INTERJECTOR_AGREE[Random( 17 )] );
 		break;
-		
-		
+
+
 		// interjector decides to say nothing
 	case DOST_INTERJECTOR_NOTHING:
 		wcscpy( gzQuoteStr, L"I don't want to say anything, but a bug forces me to! Help! Inform Flugente!" );
@@ -1025,7 +1025,7 @@ BOOLEAN DynamicOpinionTacticalCharacterDialogue( DynamicOpinionSpeechEvent& aEve
 	ReplaceTextWithOtherText( gzQuoteStr, L"$CAUSE_PRONOUN$", (gMercProfiles[aEvent.data.event.ubProfileCause].bSex == MALE) ? szDynamicDialogueText_GenderText[2] : szDynamicDialogueText_GenderText[3] );
 	ReplaceTextWithOtherText( gzQuoteStr, L"$INTERJECTOR_GENDER$", (gMercProfiles[aEvent.data.ubProfileINTERJECTOR].bSex == MALE) ? szDynamicDialogueText_GenderText[0] : szDynamicDialogueText_GenderText[1] );
 	ReplaceTextWithOtherText( gzQuoteStr, L"$INTERJECTOR_PRONOUN$", (gMercProfiles[aEvent.data.ubProfileINTERJECTOR].bSex == MALE) ? szDynamicDialogueText_GenderText[2] : szDynamicDialogueText_GenderText[3] );
-	
+
 	pDDBox->SetText( gzQuoteStr );
 	pDDBox->SetEvent( aEvent );
 	pDDBox->Create( sX, sY );
@@ -1214,7 +1214,7 @@ void AddOpinionEvent( UINT8 usProfileA, UINT8 usProfileB, UINT8 usEvent, BOOLEAN
 	case OPINIONEVENT_BATTLE_ASSIST:				gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] |= OPINIONFLAG_STAGE1_BATTLE_ASSIST;	break;
 	case OPINIONEVENT_BATTLE_TOOK_PRISONER:			gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] |= OPINIONFLAG_STAGE1_BATTLE_TOOK_PRISONER;	break;
 	case OPINIONEVENT_CIV_ATTACKER:					gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] |= OPINIONFLAG_STAGE1_CIV_ATTACKER;	break;
-		
+
 	default:		break;
 	}
 
@@ -1548,7 +1548,7 @@ INT8 GetDynamicOpinion( UINT8 usProfileA, UINT8 usProfileB, UINT8 usEvent )
 		if ( gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] & OPINIONFLAG_STAGE3_TEACHER )	++numflags;
 		if ( gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] & OPINIONFLAG_STAGE4_TEACHER )	++numflags;
 		break;
-		
+
 	case OPINIONEVENT_BESTCOMMANDEREVER:
 		if ( gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] & OPINIONFLAG_STAGE1_BESTCOMMANDEREVER )	++numflags;
 		if ( gMercProfiles[usProfileA].usDynamicOpinionFlagmask[usProfileB][4] & OPINIONFLAG_STAGE2_BESTCOMMANDEREVER )	++numflags;
@@ -1623,7 +1623,7 @@ void HandleDynamicOpinionsDailyRefresh( )
 
 				// add this to our long-term memory
 				gMercProfiles[usProfileA].sDynamicOpinionLongTerm[usProfileB] += oldday3opinion;
-			}								
+			}
 		}
 
 		// each profile has its opinions on everyone else renewed
@@ -1651,7 +1651,7 @@ void HandleDynamicOpinionsDailyRefresh( )
 	}
 }
 
-// a day has passed, 'age' opinions 
+// a day has passed, 'age' opinions
 void RolloverDynamicOpinions( UINT8 usProfileA )
 {
 	for ( UINT8 usProfileB = 0; usProfileB < NUM_PROFILES; ++usProfileB )
@@ -1779,7 +1779,7 @@ void HandleDynamicOpinionBattleFinished( BOOLEAN fBattleWon )
 	UINT32 enemylosses = 0;
 	UINT32 oursidesize = 0;
 	UINT32 enemysidesize = 0;
-	
+
 	// pick the 'leader' who gets all the praise (or blame, depending on how this went)
 	UINT8 leaderid = GetBestMercLeaderInSector( SECTORX( gCurrentIncident.usSector ), SECTORY( gCurrentIncident.usSector ), (INT8)gCurrentIncident.usLevel );
 
@@ -2043,7 +2043,7 @@ UINT8 GetFittingInterjectorProfile( UINT8 usEvent, UINT8 usProfileVictim, UINT8 
 		// exclude victim and cause
 		if ( pTeamSoldier->ubProfile == usProfileVictim || pTeamSoldier->ubProfile == usProfileCause )
 			continue;
-				
+
 		profilevector.push_back( pTeamSoldier->ubProfile );
 
 		if ( pTeamSoldier->ubWhatKindOfMercAmI == MERC_TYPE__PLAYER_CHARACTER )
@@ -2294,7 +2294,7 @@ void HandleDynamicOpinionChange( SOLDIERTYPE* pSoldier, UINT8 usEvent, BOOLEAN f
 			case OPINIONEVENT_TEACHER:
 			case OPINIONEVENT_BESTCOMMANDEREVER:
 				break;
-				
+
 			case OPINIONEVENT_FRAGTHIEF:
 				// we care if we were going for the same target at the same location
 				if ( pTeamSoldier->ubTargetID == pSoldier->ubTargetID && pTeamSoldier->sTargetGridNo == pSoldier->sTargetGridNo )

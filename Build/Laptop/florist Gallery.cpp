@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "florist.h"
-	#include "florist Gallery.h"
+	#include "Florist Gallery.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"

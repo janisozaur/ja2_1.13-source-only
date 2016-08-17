@@ -14,8 +14,8 @@
 #include "Debug.h"
 #include "WordWrap.h"
 #include "Encrypted File.h"
-#include "cursors.h"
-#include "laptop.h"
+#include "Cursors.h"
+#include "Laptop.h"
 #include "IMP Text System.h"
 #include "Text.h"
 #endif
@@ -51,7 +51,7 @@ void RenderIMPGearEntrance( void )
 	RenderProfileBackGround( );
 
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, LAPTOP_SCREEN_UL_X + 50, LAPTOP_SCREEN_WEB_UL_Y + 50, LAPTOP_SCREEN_LR_X - 50, LAPTOP_SCREEN_WEB_UL_Y + 200, Get16BPPColor( FROMRGB( 100, 100, 100 ) ) );
-	
+
 	UINT16 usY = DisplayWrappedString( LAPTOP_SCREEN_UL_X + 60, LAPTOP_SCREEN_WEB_UL_Y + 60, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X - 120, 2, FONT14ARIAL, FONT_WHITE,
 									   szIMPGearWebSiteText[0], FONT_MCOLOR_BLACK, FALSE, 0 );
 	usY += DisplayWrappedString( LAPTOP_SCREEN_UL_X + 60, LAPTOP_SCREEN_WEB_UL_Y + 60 + usY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X - 120, 2, FONT14ARIAL, FONT_WHITE,
@@ -75,7 +75,7 @@ void CreateIMPGearEntranceButtons( void )
 {
 	// the begin button
 	giIMPGearEntranceButtonImage[0] = LoadButtonImage( "LAPTOP\\button_2.sti", -1, 0, -1, 1, -1 );
-		
+
 	giIMPGearEntranceButton[0] = CreateIconAndTextButton( giIMPGearEntranceButtonImage[0], szIMPGearWebSiteText[3], FONT12ARIAL,
 															   FONT_WHITE, DEFAULT_SHADOW,
 															   FONT_WHITE, DEFAULT_SHADOW,
@@ -116,7 +116,7 @@ void BtnIMPGearBeginCallbackOld( GUI_BUTTON *btn, INT32 reason )
 		if ( btn->uiFlags & BUTTON_CLICKED_ON )
 		{
 			btn->uiFlags &= ~(BUTTON_CLICKED_ON);
-			
+
 			iCurrentImpPage = IMP_FINISH;
 			iCurrentProfileMode = IMP__FINISH;
 

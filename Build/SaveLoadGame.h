@@ -28,7 +28,7 @@ class SOLDIERTYPE;
 #define		SAVE__ASSERTION_FAILURE				247//97
 
 #define     SAVE__TIMED_AUTOSAVE_SLOT1				1 //19	// WANNE: This slot does not show up in the load/save screen because it is > 18
-#define     SAVE__TIMED_AUTOSAVE_SLOT2				2 
+#define     SAVE__TIMED_AUTOSAVE_SLOT2				2
 #define     SAVE__TIMED_AUTOSAVE_SLOT3				3
 #define     SAVE__TIMED_AUTOSAVE_SLOT4				4
 #define     SAVE__TIMED_AUTOSAVE_SLOT5				5

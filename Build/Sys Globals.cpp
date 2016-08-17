@@ -1,14 +1,14 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "JA2 All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdarg.h>
 	#include <stdio.h>
 	#include <wchar.h>
-	#include "types.h"
-	#include "screenids.h"
+	#include "Types.h"
+	#include "ScreenIds.h"
 	#include "Sys Globals.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 #endif
 
 
@@ -39,9 +39,9 @@ BOOLEAN	SET_ERROR( const STR8 String, ...)
 	return( FALSE );
 }
 
-//create a varible that can be tested outside the pre-compiler convention. 
+//create a varible that can be tested outside the pre-compiler convention.
 // also see its "Sys Globals.h" declaration
-#ifdef JA2BETAVERSION 
+#ifdef JA2BETAVERSION
 BOOLEAN JA2BETAVERSION_FLAG = 1;
 #else
 BOOLEAN JA2BETAVERSION_FLAG = 0;

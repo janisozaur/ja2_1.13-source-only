@@ -37,7 +37,7 @@ DEFINE_GUID( IID_IDirectDrawSurface2,			0x57805885,0x6eec,0x11cf,0x94,0x41,0xa8,
 
 DEFINE_GUID( IID_IDirectDrawPalette,			0x6C14DB84,0xA733,0x11CE,0xA5,0x21,0x00,0x20,0xAF,0x0B,0xE5,0x60 );
 DEFINE_GUID( IID_IDirectDrawClipper,			0x6C14DB85,0xA733,0x11CE,0xA5,0x21,0x00,0x20,0xAF,0x0B,0xE5,0x60 );
-				 
+
 #endif
 
 /*============================================================================
@@ -108,9 +108,9 @@ typedef HRESULT (FAR PASCAL * LPDDENUMSURFACESCALLBACK)(LPDIRECTDRAWSURFACE, LPD
  */
 typedef struct _DDCOLORKEY
 {
-	DWORD		dwColorSpaceLowValue;	// low boundary of color space that is to 
+	DWORD		dwColorSpaceLowValue;	// low boundary of color space that is to
 										// be treated as Color Key, inclusive
-	DWORD		dwColorSpaceHighValue;	// high boundary of color space that is 
+	DWORD		dwColorSpaceHighValue;	// high boundary of color space that is
 										// to be treated as Color Key, inclusive
 } DDCOLORKEY;
 
@@ -179,7 +179,7 @@ typedef struct _DDSCAPS
 	DWORD		dwCaps;		 // capabilities of surface wanted
 } DDSCAPS;
 
-typedef DDSCAPS FAR* LPDDSCAPS; 
+typedef DDSCAPS FAR* LPDDSCAPS;
 
 /*
  * DDCAPS
@@ -345,7 +345,7 @@ typedef DWORD	(FAR PASCAL *LPSURFACESTREAMINGCALLBACK)(DWORD);
  */
 
 /*
- * IDirectDraw 
+ * IDirectDraw
  */
 #if defined( _WIN32 ) && !defined( _NO_COM )
 #undef INTERFACE
@@ -821,7 +821,7 @@ typedef struct _DDSURFACEDESC
 
 
 /*
- * All input fields are valid. 
+ * All input fields are valid.
  */
 #define DDSD_ALL				0x0007f9eel
 
@@ -831,7 +831,7 @@ typedef struct _DDSURFACEDESC
  * Direct Draw Capability Flags
  *
  * These flags are used to describe the capabilities of a given Surface.
- * All flags are bit flags. 
+ * All flags are bit flags.
  *
  *==========================================================================*/
 
@@ -912,9 +912,9 @@ typedef struct _DDSURFACEDESC
 
 /*
  * Indicates that this surface is an overlay.	It may or may not be directly visible
- * depending on whether or not it is currently being overlayed onto the primary 
- * surface.	DDSCAPS_VISIBLE can be used to determine whether or not it is being 
- * overlayed at the moment. 
+ * depending on whether or not it is currently being overlayed onto the primary
+ * surface.	DDSCAPS_VISIBLE can be used to determine whether or not it is being
+ * overlayed at the moment.
  */
 #define DDSCAPS_OVERLAY						 0x00000080l
 
@@ -952,7 +952,7 @@ typedef struct _DDSURFACEDESC
 
 /*
  * Indicates that a surface may be a destination for 3D rendering.	This
- * bit must be set in order to query for a Direct3D Device Interface 
+ * bit must be set in order to query for a Direct3D Device Interface
  * from this surface.
  */
 #define DDSCAPS_3DDEVICE						0x00002000l
@@ -963,15 +963,15 @@ typedef struct _DDSURFACEDESC
 #define DDSCAPS_VIDEOMEMORY					 0x00004000l
 
 /*
- * Indicates that changes made to this surface are immediately visible.	
+ * Indicates that changes made to this surface are immediately visible.
  * It is always set for the primary surface and is set for overlays while
  * they are being overlayed and texture maps while they are being textured.
  */
 #define DDSCAPS_VISIBLE						 0x00008000l
 
 /*
- * Indicates that only writes are permitted to the surface.	Read accesses 
- * from the surface may or may not generate a protection fault, but the 
+ * Indicates that only writes are permitted to the surface.	Read accesses
+ * from the surface may or may not generate a protection fault, but the
  * results of a read from this surface will not be meaningful.	READ ONLY.
  */
 #define DDSCAPS_WRITEONLY						0x00010000l
@@ -979,7 +979,7 @@ typedef struct _DDSURFACEDESC
 /*
  * Indicates that this surface is a z buffer. A z buffer does not contain
  * displayable information.	Instead it contains bit depth information that is
- * used to determine which pixels are visible and which are obscured. 
+ * used to determine which pixels are visible and which are obscured.
  */
 #define DDSCAPS_ZBUFFER						 0x00020000l
 
@@ -1042,7 +1042,7 @@ typedef struct _DDSURFACEDESC
 #define DDCAPS_ALIGNBOUNDARYDEST		0x00000002l
 
 /*
- * Indicates that DirectDraw will support only source rectangles	whose sizes in 
+ * Indicates that DirectDraw will support only source rectangles	whose sizes in
  * BYTEs are DIRECTDRAWCAPS.dwAlignSizeDest multiples, respectively.	READ ONLY.
  */
 #define DDCAPS_ALIGNSIZEDEST			0x00000004l
@@ -1054,13 +1054,13 @@ typedef struct _DDSURFACEDESC
 #define DDCAPS_ALIGNBOUNDARYSRC		 0x00000008l
 
 /*
- * Indicates that DirectDraw will support only source rectangles	whose sizes in 
+ * Indicates that DirectDraw will support only source rectangles	whose sizes in
  * BYTEs are DIRECTDRAWCAPS.dwAlignSizeSrc multiples, respectively.	READ ONLY.
  */
 #define DDCAPS_ALIGNSIZESRC			 0x00000010l
 
 /*
- * Indicates that DirectDraw will create video memory surfaces that have a stride 
+ * Indicates that DirectDraw will create video memory surfaces that have a stride
  * alignment equal to DIRECTDRAWCAPS.dwAlignStride.	READ ONLY.
  */
 #define DDCAPS_ALIGNSTRIDE				0x00000020l
@@ -1128,7 +1128,7 @@ typedef struct _DDSURFACEDESC
 #define DDCAPS_READSCANLINE			 0x00020000l
 
 /*
- * Display hardware has stereo vision capabilities.	DDSCAPS_PRIMARYSURFACELEFT 
+ * Display hardware has stereo vision capabilities.	DDSCAPS_PRIMARYSURFACELEFT
  * can be created.
  */
 #define DDCAPS_STEREOVIEW				0x00040000l
@@ -1230,7 +1230,7 @@ typedef struct _DDSURFACEDESC
 #define DDFXALPHACAPS_BLTALPHAEDGEBLEND		 0x00000001l
 
 /*
- * Supports alpha information in the pixel format.	The bit depth of alpha 
+ * Supports alpha information in the pixel format.	The bit depth of alpha
  * information in the pixel format can be 1,2,4, or 8.	The alpha value becomes
  * more opaque as the alpha value increases.	(0 is transparent.)
  * For Blt.
@@ -1238,9 +1238,9 @@ typedef struct _DDSURFACEDESC
 #define DDFXALPHACAPS_BLTALPHAPIXELS			0x00000002l
 
 /*
- * Supports alpha information in the pixel format.	The bit depth of alpha 
- * information in the pixel format can be 1,2,4, or 8.	The alpha value 
- * becomes more transparent as the alpha value increases.	(0 is opaque.) 
+ * Supports alpha information in the pixel format.	The bit depth of alpha
+ * information in the pixel format can be 1,2,4, or 8.	The alpha value
+ * becomes more transparent as the alpha value increases.	(0 is opaque.)
  * This flag can only be set if DDCAPS_ALPHA is set.
  * For Blt.
  */
@@ -1255,7 +1255,7 @@ typedef struct _DDSURFACEDESC
 #define DDFXALPHACAPS_BLTALPHASURFACES			0x00000008l
 
 /*
- * The depth of the alpha channel data can range can be 1,2,4, or 8.	
+ * The depth of the alpha channel data can range can be 1,2,4, or 8.
  * The NEG suffix indicates that this alpha channel becomes more transparent
  * as the alpha value increases. (0 is opaque.)	This flag can only be set if
  * DDCAPS_ALPHA is set.
@@ -1270,7 +1270,7 @@ typedef struct _DDSURFACEDESC
 #define DDFXALPHACAPS_OVERLAYALPHAEDGEBLEND	 0x00000020l
 
 /*
- * Supports alpha information in the pixel format.	The bit depth of alpha 
+ * Supports alpha information in the pixel format.	The bit depth of alpha
  * information in the pixel format can be 1,2,4, or 8.	The alpha value becomes
  * more opaque as the alpha value increases.	(0 is transparent.)
  * For Overlays.
@@ -1278,9 +1278,9 @@ typedef struct _DDSURFACEDESC
 #define DDFXALPHACAPS_OVERLAYALPHAPIXELS		0x00000040l
 
 /*
- * Supports alpha information in the pixel format.	The bit depth of alpha 
- * information in the pixel format can be 1,2,4, or 8.	The alpha value 
- * becomes more transparent as the alpha value increases.	(0 is opaque.) 
+ * Supports alpha information in the pixel format.	The bit depth of alpha
+ * information in the pixel format can be 1,2,4, or 8.	The alpha value
+ * becomes more transparent as the alpha value increases.	(0 is opaque.)
  * This flag can only be set if DDCAPS_ALPHA is set.
  * For Overlays.
  */
@@ -1295,7 +1295,7 @@ typedef struct _DDSURFACEDESC
 #define DDFXALPHACAPS_OVERLAYALPHASURFACES		0x00000100l
 
 /*
- * The depth of the alpha channel data can range can be 1,2,4, or 8.	
+ * The depth of the alpha channel data can range can be 1,2,4, or 8.
  * The NEG suffix indicates that this alpha channel becomes more transparent
  * as the alpha value increases. (0 is opaque.)	This flag can only be set if
  * DDCAPS_ALPHA is set.
@@ -1356,13 +1356,13 @@ typedef struct _DDSURFACEDESC
 
 /*
  * DirectDraw supports arbitrary shrinking of a surface along the
- * y axis (horizontal direction) for blts.	
+ * y axis (horizontal direction) for blts.
  */
 #define DDFXCAPS_BLTSHRINKY			 0x00001000l
 
 /*
  * DirectDraw supports integer shrinking (1x,2x,) of a surface
- * along the y axis (vertical direction) for blts.	
+ * along the y axis (vertical direction) for blts.
  */
 #define DDFXCAPS_BLTSHRINKYN			0x00002000l
 
@@ -1380,26 +1380,26 @@ typedef struct _DDSURFACEDESC
 
 /*
  * DirectDraw supports arbitrary stretching of a surface along the
- * y axis (horizontal direction) for blts.	
+ * y axis (horizontal direction) for blts.
  */
 #define DDFXCAPS_BLTSTRETCHY			0x00010000l
 
 /*
  * DirectDraw supports integer stretching (1x,2x,) of a surface
- * along the y axis (vertical direction) for blts.	
+ * along the y axis (vertical direction) for blts.
  */
 #define DDFXCAPS_BLTSTRETCHYN			0x00020000l
 
 /*
- * Uses arithmetic operations to stretch and shrink surfaces during 
- * overlay rather than pixel doubling techniques.	Along the Y axis 
+ * Uses arithmetic operations to stretch and shrink surfaces during
+ * overlay rather than pixel doubling techniques.	Along the Y axis
  * for overlays.
  */
 #define DDFXCAPS_OVERLAYARITHSTRETCHY	0x00040000l
 
 /*
- * Uses arithmetic operations to stretch surfaces during 
- * overlay rather than pixel doubling techniques.	Along the Y axis 
+ * Uses arithmetic operations to stretch surfaces during
+ * overlay rather than pixel doubling techniques.	Along the Y axis
  * for overlays. Only works for x1, x2, etc.
  */
 #define DDFXCAPS_OVERLAYARITHSTRETCHYN	0x00000008l
@@ -1418,13 +1418,13 @@ typedef struct _DDSURFACEDESC
 
 /*
  * DirectDraw supports arbitrary shrinking of a surface along the
- * y axis (horizontal direction) for overlays.	
+ * y axis (horizontal direction) for overlays.
  */
 #define DDFXCAPS_OVERLAYSHRINKY		 0x00200000l
 
 /*
  * DirectDraw supports integer shrinking (1x,2x,) of a surface
- * along the y axis (vertical direction) for overlays.	
+ * along the y axis (vertical direction) for overlays.
  */
 #define DDFXCAPS_OVERLAYSHRINKYN		0x00400000l
 
@@ -1442,13 +1442,13 @@ typedef struct _DDSURFACEDESC
 
 /*
  * DirectDraw supports arbitrary stretching of a surface along the
- * y axis (horizontal direction) for overlays.	
+ * y axis (horizontal direction) for overlays.
  */
 #define DDFXCAPS_OVERLAYSTRETCHY		0x02000000l
 
 /*
  * DirectDraw supports integer stretching (1x,2x,) of a surface
- * along the y axis (vertical direction) for overlays.	
+ * along the y axis (vertical direction) for overlays.
  */
 #define DDFXCAPS_OVERLAYSTRETCHYN		0x04000000l
 
@@ -1669,7 +1669,7 @@ typedef struct _DDSURFACEDESC
  ****************************************************************************/
 
 /*
- * Supports transparent blting using a color key to identify the replaceable 
+ * Supports transparent blting using a color key to identify the replaceable
  * bits of the destination surface for RGB colors.
  */
 #define DDCKEYCAPS_DESTBLT						0x00000001l
@@ -1687,7 +1687,7 @@ typedef struct _DDSURFACEDESC
 #define DDCKEYCAPS_DESTBLTCLRSPACEYUV			0x00000004l
 
 /*
- * Supports transparent blting using a color key to identify the replaceable 
+ * Supports transparent blting using a color key to identify the replaceable
  * bits of the destination surface for YUV colors.
  */
 #define DDCKEYCAPS_DESTBLTYUV					0x00000008l
@@ -1715,7 +1715,7 @@ typedef struct _DDSURFACEDESC
 #define DDCKEYCAPS_DESTOVERLAYONEACTIVE		 0x00000080l
 
 /*
- * Supports overlaying using colorkeying of the replaceable bits of the 
+ * Supports overlaying using colorkeying of the replaceable bits of the
  * surface being overlayed for YUV colors.
  */
 #define DDCKEYCAPS_DESTOVERLAYYUV				0x00000100l
@@ -1832,7 +1832,7 @@ typedef struct _DDSURFACEDESC
  * The surface will accept RGB data and translate it during
  * the write to YUV data.	The format of the data to be written
  * will be contained in the pixel format structure.	The DDPF_RGB
- * flag will be set. 
+ * flag will be set.
  */
 #define DDPF_RGBTOYUV							0x00000100l
 
@@ -1923,7 +1923,7 @@ typedef struct _DDSURFACEDESC
 #define DDSCL_FULLSCREEN						0x00000001l
 
 /*
- * allow CTRL_ALT_DEL to work while in fullscreen exclusive mode 
+ * allow CTRL_ALT_DEL to work while in fullscreen exclusive mode
  */
 #define DDSCL_ALLOWREBOOT						0x00000002l
 
@@ -2006,7 +2006,7 @@ typedef struct _DDSURFACEDESC
 
 /*
  * Use the lpDDSAlphaSrc field in the DDBLTFX structure as the alpha channel
- * for the source for this blt. 
+ * for the source for this blt.
  */
 #define DDBLT_ALPHASRCSURFACEOVERRIDE			0x00000100l
 
@@ -2158,7 +2158,7 @@ typedef struct _DDSURFACEDESC
 
 /*
  * The NEG suffix indicates that the destination surface becomes more
- * transparent as the alpha value increases. 
+ * transparent as the alpha value increases.
  */
 #define DDOVER_ALPHADESTNEG					 0x00000004l
 
@@ -2267,7 +2267,7 @@ typedef struct _DDSURFACEDESC
 
 /*
  * Set to indicate that Lock should wait until it can obtain a valid memory
- * pointer before returning.	If this bit is set, Lock will never return 
+ * pointer before returning.	If this bit is set, Lock will never return
  * DDERR_WASSTILLDRAWING.
  */
 #define DDLOCK_WAIT							 0x00000001L
@@ -2575,7 +2575,7 @@ typedef struct _DDSURFACEDESC
 #define DDERR_HEIGHTALIGN						MAKE_DDHRESULT( 90 )
 
 /*
- * Unable to match primary surface creation request with existing 
+ * Unable to match primary surface creation request with existing
  * primary surface.
  */
 #define DDERR_INCOMPATIBLEPRIMARY				MAKE_DDHRESULT( 95 )
@@ -2828,7 +2828,7 @@ typedef struct _DDSURFACEDESC
 
 /*
  * Access to this surface is being refused because the surface is gone.
- * The DIRECTDRAWSURFACE object representing this surface should 
+ * The DIRECTDRAWSURFACE object representing this surface should
  * have Restore called on it.
  */
 #define DDERR_SURFACELOST						MAKE_DDHRESULT( 450 )
@@ -2994,7 +2994,7 @@ typedef struct _DDSURFACEDESC
  * returned when an overlay member is called for a non-overlay surface
  */
 #define DDERR_NOTAOVERLAYSURFACE				MAKE_DDHRESULT( 580 )
- 
+
 /*
  * An attempt was made to set the cooperative level when it was already
  * set to exclusive.
@@ -3066,7 +3066,7 @@ typedef struct _DDSURFACEDESC
 
 
 /*
- * A DC has already been returned for this surface. Only one DC can be 
+ * A DC has already been returned for this surface. Only one DC can be
  * retrieved per surface.
  */
 #define DDERR_DCALREADYCREATED					MAKE_DDHRESULT( 620 )

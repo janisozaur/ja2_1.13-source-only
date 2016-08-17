@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */
@@ -6,24 +6,24 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Skill Trait.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Prejudice.h"
 	#include "IMP Skill Trait.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "_Ja25EnglishText.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Compile Character.h"
 	#include "GameSettings.h"
 	#include "Interface.h"
@@ -93,7 +93,7 @@ template<>	void	DropDownTemplate<DROPDOWNNR_RACISTFEATURE>::SetRefresh()		{ gfIM
 void EnterIMPPrejudice( void )
 {
 	RenderProfileBackGround();
-				
+
 	giIMPPrejudiceFinishButtonImage =	LoadButtonImage( "LAPTOP\\button_5.sti" ,-1,0,-1,1,-1 );
 	giIMPPrejudiceFinishButton = CreateIconAndTextButton( giIMPPrejudiceFinishButtonImage, pImpButtonText[ 24 ], FONT12ARIAL,
 																FONT_WHITE, DEFAULT_SHADOW,
@@ -101,7 +101,7 @@ void EnterIMPPrejudice( void )
 																TEXT_CJUSTIFIED,
 																LAPTOP_SCREEN_UL_X +	( 350 ), LAPTOP_SCREEN_WEB_UL_Y + ( 340 ), BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 																BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnIMPPrejudiceFinishCallback );
-	
+
 	SetButtonCursor( giIMPPrejudiceFinishButton, CURSOR_WWW);
 
 	UINT16 usX = LAPTOP_SCREEN_UL_X + 5 + StringPixLength ( szPersonalityDisplayText[PERSONALITYTEXT_YOULOOK], FONT12ARIAL ) + 10;
@@ -110,7 +110,7 @@ void EnterIMPPrejudice( void )
 	std::vector<std::pair<INT16, STR16> > entryvecDropDown_Appearance;
 	for(UINT8 i = 0; i < NUM_APPEARANCES; ++i)
 		entryvecDropDown_Appearance.push_back( std::make_pair(i, szAppearanceText[i]) );
-	
+
 	DropDownTemplate<DROPDOWNNR_APPEARANCE>::getInstance().SetEntries(entryvecDropDown_Appearance);
 	DropDownTemplate<DROPDOWNNR_APPEARANCE>::getInstance().SetHelpText( szPersonalityHelpText[DROPDOWNNR_APPEARANCE] );
 	DropDownTemplate<DROPDOWNNR_APPEARANCE>::getInstance().Create(usX, usY);
@@ -121,7 +121,7 @@ void EnterIMPPrejudice( void )
 	std::vector<std::pair<INT16, STR16> > entryvecDropDown_AppearanceCare;
 	for(UINT8 i = 0; i < NUM_CARELEVELS; ++i)
 		entryvecDropDown_AppearanceCare.push_back( std::make_pair(i, szCareLevelText[i]) );
-	
+
 	DropDownTemplate<DROPDOWNNR_APPEARANCECARE>::getInstance().SetEntries(entryvecDropDown_AppearanceCare);
 	DropDownTemplate<DROPDOWNNR_APPEARANCECARE>::getInstance().SetHelpText( szPersonalityHelpText[DROPDOWNNR_APPEARANCECARE] );
 	DropDownTemplate<DROPDOWNNR_APPEARANCECARE>::getInstance().SetColorLine( Get16BPPColor( FROMRGB( 38, 191, 60 ) ) );
@@ -235,7 +235,7 @@ void RenderIMPPrejudice( void )
 	RenderProfileBackGround();
 
 	IMPPrejudiceDisplay();
-	
+
 	// reversed order - lower boxes first. It is otherwise possible that open boxes are overlayed by closed boxes
 	DropDownTemplate<DROPDOWNNR_SEXIST>::getInstance().Display();
 	DropDownTemplate<DROPDOWNNR_RACE>::getInstance().Display();
@@ -281,7 +281,7 @@ void HandleIMPPrejudice( void )
 
 void IMPPrejudiceDisplay()
 {
-	UINT16 usPosX, usPosY;	
+	UINT16 usPosX, usPosY;
 
 	//Display the title
 	DrawTextToScreen( szPersonalityTitleText[0], IMP_PREJUDICE__TITLE_X, LAPTOP_TITLE_Y, LAPTOP_TEXT_WIDTH, FONT14ARIAL, IMP_PREJUDICE__COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -293,7 +293,7 @@ void IMPPrejudiceDisplay()
 	{
 		usPosX = LAPTOP_SCREEN_UL_X + 5;
 		usPosY = LAPTOP_SCREEN_WEB_UL_Y + 50;
-		
+
 		// Appearance
 		DrawTextToScreen( szPersonalityDisplayText[PERSONALITYTEXT_YOULOOK], usPosX, usPosY, 0, IMP_PREJUDICE__FONT, IMP_PREJUDICE__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 
@@ -302,7 +302,7 @@ void IMPPrejudiceDisplay()
 
 		usPosX = 10 + DropDownTemplate<DROPDOWNNR_APPEARANCECARE>::getInstance().GetLastX();
 		DrawTextToScreen( szPersonalityDisplayText[PERSONALITYTEXT_IMPORTANTTOYOU], usPosX, usPosY, 0, IMP_PREJUDICE__FONT, IMP_PREJUDICE__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
-				
+
 		// Refinement
 		usPosX = LAPTOP_SCREEN_UL_X + 5;
 		usPosY += DROPDOWN_MARKUP_Y;
@@ -349,7 +349,7 @@ void BtnIMPPrejudiceFinishCallback(GUI_BUTTON *btn,INT32 reason)
 	// btn callback for IMP personality quiz answer button
 	if (!(btn->uiFlags & BUTTON_ENABLED))
 		return;
-		
+
 	if( reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags|=(BUTTON_CLICKED_ON);

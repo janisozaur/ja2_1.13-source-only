@@ -2,16 +2,16 @@
 	#include "Tactical All.h"
 #else
 	#include <stdio.h>
-	#include "debug.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "structure wrap.h"
-	#include "isometric utils.h"
-	#include "worldman.h"
-	#include "overhead.h"
-	#include "renderworld.h"
-	#include "strategicmap.h"
-	#include "rotting corpses.h"
+	#include "Debug.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "Structure Wrap.h"
+	#include "Isometric Utils.h"
+	#include "WorldMan.h"
+	#include "Overhead.h"
+	#include "RenderWorld.h"
+	#include "StrategicMap.h"
+	#include "Rotting Corpses.h"
 	#include "WorldDat.h"	// added by Flugente
 #endif
 
@@ -26,7 +26,7 @@ BOOLEAN	IsJumpableWindowPresentAtGridNo( INT32 sGridNo, INT8 direction2, BOOLEAN
 	STRUCTURE * pStructure;
 
 	pStructure = FindStructure( sGridNo, STRUCTURE_WALLNWINDOW );
-	
+
 	if ( pStructure )
 	{
 		// anv: additional tile properties hook
@@ -40,13 +40,13 @@ BOOLEAN	IsJumpableWindowPresentAtGridNo( INT32 sGridNo, INT8 direction2, BOOLEAN
 					return( FALSE );
 			}
 		}
-		
+
 		if ( ( direction2 == SOUTH || direction2 == NORTH ) && (pStructure->ubWallOrientation == OUTSIDE_TOP_LEFT || pStructure->ubWallOrientation == INSIDE_TOP_LEFT ) && pStructure->fFlags & STRUCTURE_WALLNWINDOW && !(pStructure->fFlags & STRUCTURE_SPECIAL) )
 	    {
 			if ( fIntactWindowsAlso || ( pStructure->fFlags & STRUCTURE_OPEN ) )
          		return( TRUE );
 	    }
-	                            	
+
         if ( ( direction2 == EAST || direction2 == WEST ) && ( pStructure->ubWallOrientation == OUTSIDE_TOP_RIGHT || pStructure->ubWallOrientation == INSIDE_TOP_RIGHT ) && pStructure->fFlags & STRUCTURE_WALLNWINDOW && !(pStructure->fFlags & STRUCTURE_SPECIAL) )
 		{
 			if ( fIntactWindowsAlso || ( pStructure->fFlags & STRUCTURE_OPEN ) )
@@ -72,7 +72,7 @@ BOOLEAN	IsOknoFencePresentAtGridno( INT32 sGridNo )
 			return( TRUE );
 		}
 	}
-	
+
 /*	STRUCTURE * pStructure;
 	STRUCTURE * pStructure2;
 
@@ -87,11 +87,11 @@ BOOLEAN	IsOknoFencePresentAtGridno( INT32 sGridNo )
 		{
 			return( TRUE );
 		}
-		
+
 	//	}
-		
+
 	}
-	
+
 	*/
 	return( FALSE );
 }
@@ -104,8 +104,8 @@ BOOLEAN	IsLegionWallPresentAtGridno( INT32 sGridNo )
 
 	if ( pStructure )
 	{
-		
-		if ( pStructure->fFlags & STRUCTURE_FENCE && pStructure->fFlags & STRUCTURE_SPECIAL && pStructure->fFlags & STRUCTURE_WALL ) 
+
+		if ( pStructure->fFlags & STRUCTURE_FENCE && pStructure->fFlags & STRUCTURE_SPECIAL && pStructure->fFlags & STRUCTURE_WALL )
 		{
 			return( TRUE );
 		}
@@ -608,7 +608,7 @@ UINT16 InteractiveActionPossibleAtGridNo( INT32 sGridNo, UINT8 usLevel, UINT16& 
 		}
 
 		LEVELNODE* pNode = FindLevelNodeBasedOnStructure( pStruct->sGridNo, pStruct );
-		
+
 		if ( pNode )
 		{
 			UINT16 usIndex = pNode->usIndex;

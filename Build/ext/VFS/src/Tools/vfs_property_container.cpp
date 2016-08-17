@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Tools/vfs_property_container.cpp
  *  - <string,string> key-value map with capability to convert values to other types
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -235,7 +235,7 @@ bool vfs::PropertyContainer::initFromIniFile(vfs::tReadableFile *pFile)
 						}
 						else
 						{
-							VFS_LOG_WARNING(_BS(L"ERROR : could not find section [") << sCurrentSection 
+							VFS_LOG_WARNING(_BS(L"ERROR : could not find section [") << sCurrentSection
 								<< L"] in container" << _BS::wget);
 						}
 					}
@@ -462,7 +462,7 @@ bool vfs::PropertyContainer::writeToIniFile(vfs::Path const& sFilename, bool bCr
 			std::stringstream ss;
 			m_mapProps[*it].print(outbuffer);
 		}
-		
+
 		try
 		{
 			vfs::COpenWriteFile wfile(sFilename,true,true);

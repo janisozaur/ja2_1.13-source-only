@@ -9,7 +9,7 @@
 // These functions are used for the individual militia feature
 
 #include "Assignments.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 #include "Animation Data.h"
 #include "Soldier Create.h"
 
@@ -57,7 +57,7 @@ enum MilitiaOrigin
 };
 
 // This struct defines necessary data for a pool of militia origins.
-// For example, if you want PMC militia to resemble eastern european buff guys, you only need to define the specific fore- and surnames, 
+// For example, if you want PMC militia to resemble eastern european buff guys, you only need to define the specific fore- and surnames,
 // set the chance for huge male bodytpes high, and give according skin colour chances
 typedef struct
 {
@@ -81,7 +81,7 @@ extern MilitiaOriginData gMilitiaOriginData[MO_MAX];
 
 class MILITIA
 {
-public: 
+public:
 	MILITIA();
 
 	BOOLEAN		Save( HWFILE hFile );
@@ -102,7 +102,7 @@ public:
 	UINT8	originsector;	// sector militia was first created in
 	UINT8	sector;			// sector militia currently is in
 	UINT8	age;
-	
+
 	// visuals
 	UINT8	soldierclass;	// green/veteran/elite
 	UINT8	bodytype;		// male/bigmale1/bigmale2/female
@@ -113,7 +113,7 @@ public:
 	UINT16	forename;
 	UINT16	surname;
 	UINT16	callsign;
-		
+
 	// As stats are highly dependent of game progress and current sector, storing the stats themselves is ill-advised.
 	// We thus only store the current HP percentage.
 	FLOAT	healthratio;
@@ -121,14 +121,14 @@ public:
 	UINT16	kills;
 	UINT16	assists;
 
-	// we don't store the experience level, we store the amount of points in regard to promotion. 
+	// we don't store the experience level, we store the amount of points in regard to promotion.
 	// While this is made up of kills and assists, we need this, as we have to account for militia initially starting at regular level
 	UINT16	promotionpoints;
 
 	UINT16	filler1;		// necessary for padding - fill up so that SIZEOF_MILITIA_POD is doubly even
 
 	char endOfPOD;	// marker for end of POD (plain old data)
-	
+
 	std::vector<MILITIA_BATTLEREPORT>	history;	// reports on all battles this militia took part in
 };
 

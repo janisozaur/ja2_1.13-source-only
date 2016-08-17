@@ -6,26 +6,26 @@
 
 #ifdef JA2EDITOR
 #include "Screens.h"
-#include "Maputility.h"
-#include "worlddef.h"
-#include "overhead.h"
-#include "fileman.h"
+#include "MapUtility.h"
+#include "WorldDef.h"
+#include "Overhead.h"
+#include "FileMan.h"
 #include "loadscreen.h"
-#include "overhead map.h"
-#include "radar screen.h"
-#include "vobject_blitters.h"
+#include "Overhead Map.h"
+#include "Radar Screen.h"
+#include "VObject_blitters.h"
 #include "sticonvert.h"
-#include "font control.h"
-#include "worlddat.h"
-#include "english.h"
-#include "map information.h"
-#include "line.h"
+#include "Font Control.h"
+#include "WorldDat.h"
+#include "English.h"
+#include "Map Information.h"
+#include "Line.h"
 #include "quantize wrap.h"
 //dnl ch77 131113
 #include "Editor Taskbar Utils.h"
 #include "Text Input.h"
 #include "Cursor Control.h"//dnl ch78 271113
-#include "lighting.h"//dnl ch79 301113
+#include "Lighting.h"//dnl ch79 301113
 
 #define MINIMAP_X_SIZE	88//RADAR_WINDOW_WIDTH
 #define MINIMAP_Y_SIZE	44//RADAR_WINDOW_HEIGHT
@@ -242,7 +242,7 @@ UINT32 MapUtilScreenHandle(void)
 			{
 				for ( iWindowY = iSubY1; iWindowY < iSubY2; iWindowY++ )
 				{
-					//Buggler: interim code for radar map sti creation <= 360x360 based on DBrot bigger overview code					
+					//Buggler: interim code for radar map sti creation <= 360x360 based on DBrot bigger overview code
 					if ( iWindowX >= iOffsetHorizontal && iWindowX < (iOffsetHorizontal + (640 * WORLD_COLS / OLD_WORLD_COLS)) && iWindowY >= iOffsetVertical && iWindowY < (iOffsetVertical + (320 * WORLD_ROWS / OLD_WORLD_ROWS)) )
 					{
 						s16BPPSrc = pSrcBuf[ ( iWindowY * (uiSrcPitchBYTES/2) ) + iWindowX ];
@@ -346,8 +346,8 @@ UINT32 MapUtilScreenShutdown(void)
 
 #else //non-editor version
 
-#include "types.h"
-#include "screenids.h"
+#include "Types.h"
+#include "ScreenIds.h"
 
 UINT32	MapUtilScreenInit( )
 {

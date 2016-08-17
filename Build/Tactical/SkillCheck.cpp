@@ -7,11 +7,11 @@
 	#include "Items.h"
 	#include "Dialogue Control.h"
 	#include "Overhead.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Isometric Utils.h"
 	#include "Morale.h"
-	#include "drugs and alcohol.h"
-	#include "strategicmap.h"
+	#include "Drugs And Alcohol.h"
+	#include "StrategicMap.h"
 	// added by SANDRO
 	#include "GameSettings.h"
 	#include "Animation Data.h"
@@ -217,7 +217,7 @@ INT8 EffectiveExpLevel( SOLDIERTYPE * pSoldier )
 		diseaseeffect += Disease[i].sEffStat[INFST_EXP] * pSoldier->GetDiseaseMagnitude( i );
 
 	iEffExpLevel += diseaseeffect + pSoldier->bExtraExpLevel;
-		
+
 	if (iEffExpLevel > 10)
 	{
 		// can't go over 10 - SANDRO
@@ -459,7 +459,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 
 			// SANDRO - normal(exploding) traps should be based at least a little on mechanical skill as well
 			if ( gGameOptions.fNewTraitSystem)
-			{ 
+			{
 				// It is impossible without both skills
 				if ( (EffectiveMechanical( pSoldier ) <= 0) || (EffectiveExplosive( pSoldier ) <= 0) )
 				{
@@ -518,7 +518,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 
 			// SANDRO - electronic traps are based more on mechanical skill
 			if ( gGameOptions.fNewTraitSystem)
-			{ 
+			{
 				// It is impossible without both skills
 				if ( (EffectiveMechanical( pSoldier ) <= 0) || (EffectiveExplosive( pSoldier ) <= 0) )
 				{
@@ -578,7 +578,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 
 			// SANDRO - electronic traps are based more on mechanical skill
 			if ( gGameOptions.fNewTraitSystem)
-			{ 
+			{
 				// It is impossible without both skills
 				if ( (EffectiveMechanical( pSoldier ) <= 0) || (EffectiveStrength( pSoldier, FALSE ) <= 0) )
 				{
@@ -729,7 +729,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 	// character traits influence
 	// Sociable - better performance in groups
 	if ( DoesMercHavePersonality( pSoldier, CHAR_TRAIT_SOCIABLE ) )
-	{	
+	{
 		INT8 bNumMercs = CheckMercsNearForCharTraits( pSoldier->ubProfile, CHAR_TRAIT_SOCIABLE );
 		if ( bNumMercs > 2 )
 			iChance += 5;
@@ -738,7 +738,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 	}
 	// Loner - better performance when alone
 	else if ( DoesMercHavePersonality( pSoldier, CHAR_TRAIT_LONER ) )
-	{	
+	{
 		INT8 bNumMercs = CheckMercsNearForCharTraits( pSoldier->ubProfile, CHAR_TRAIT_LONER );
 		if ( bNumMercs == 0 )
 			iChance += 5;
@@ -747,7 +747,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 	}
 	// Aggressive - penalty for actions needing patience
 	else if ( DoesMercHavePersonality( pSoldier, CHAR_TRAIT_AGGRESSIVE ) )
-	{	
+	{
 		switch ( bReason )
 		{
 			case LOCKPICKING_CHECK:
@@ -766,7 +766,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 	}
 	// Phlegmatic - bonus for actions needing patience
 	else if ( DoesMercHavePersonality( pSoldier, CHAR_TRAIT_PHLEGMATIC ) )
-	{	
+	{
 		switch ( bReason )
 		{
 			case LOCKPICKING_CHECK:
@@ -785,7 +785,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 	}
 	// Show-off - better performance if some babes around to impress
 	else if ( DoesMercHavePersonality( pSoldier, CHAR_TRAIT_SHOWOFF ) )
-	{	
+	{
 		INT8 bNumMercs = CheckMercsNearForCharTraits( pSoldier->ubProfile, CHAR_TRAIT_SHOWOFF );
 		if ( bNumMercs > 1 )
 			iChance += 5;
@@ -800,7 +800,7 @@ INT32 SkillCheck( SOLDIERTYPE * pSoldier, INT8 bReason, INT8 bChanceMod )
 		iChance = 0;
 
 	// silversurfer: moved this down here where it belongs
-	// if this wasn't the last check a merc with certain disability modifiers would never completely fail 
+	// if this wasn't the last check a merc with certain disability modifiers would never completely fail
 	// to do something and would never do his speech telling that he can't do this
 	switch (bReason)
 	{

@@ -11,7 +11,7 @@
 #define NORTH_MOVE -18
 #define EAST_MOVE	1
 #define WEST_MOVE	-1
-#define SOUTH_MOVE	18 
+#define SOUTH_MOVE	18
 
 
 // Movement speed defines

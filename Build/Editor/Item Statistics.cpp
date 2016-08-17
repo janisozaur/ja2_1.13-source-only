@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -9,10 +9,10 @@
 #ifndef PRECOMPILEDHEADERS
 	#include <memory.h>
 	#include <stdio.h>
-	#include "types.h"
+	#include "Types.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "font control.h"
+	#include "Font Control.h"
 	#include "EditorDefines.h"
 	#include "Editor Taskbar Utils.h"
 	#include "EditorMercs.h"
@@ -20,11 +20,11 @@
 	#include "Item Statistics.h"
 	#include "Text Input.h"
 	#include "Action Items.h"
-	#include "video.h"
+	#include "Video.h"
 	#include "Simple Render Utils.h"
 	#include "Weapons.h"
 	#include "Items.h"
-	#include "editscreen.h"
+	#include "EditScreen.h"
 	#include "Random.h"
 	#include "Handle Items.h"
 	#include "World Items.h"
@@ -33,7 +33,7 @@
 	#include "Text.h"
 #endif
 
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 #include "LuaInitNPCs.h"
 
 INT32 giBothCheckboxButton = -1;
@@ -97,7 +97,7 @@ const STR16 GetActionItemName( OBJECTTYPE *pItem )
 	if( !pItem || pItem->usItem != ACTION_ITEM )
 		return NULL;
 
-		
+
 	if( (*pItem)[0]->data.misc.bActionValue != ACTION_ITEM_BLOW_UP )
 	{
 		for (i= ACTIONITEM_TRIP_KLAXON; i< NUM_ACTIONITEMS; /*=ACTIONITEM_NEW;*/ ++i )
@@ -136,8 +136,8 @@ const STR16 GetActionItemName( OBJECTTYPE *pItem )
 		return ActionItemsValues[ o ].szName;
 	/*
 
-	
-		
+
+
 		if ( (*pItem)[0]->data.misc.usBombItem == STUN_GRENADE )
 				o = ACTIONITEM_STUN;
 		else if ( (*pItem)[0]->data.misc.usBombItem == SMOKE_GRENADE )
@@ -162,17 +162,17 @@ const STR16 GetActionItemName( OBJECTTYPE *pItem )
 				o = ACTIONITEM_BIG_TEAR_GAS;
 
 		return ActionItemsValues[ o ].szName;
-		
+
 		*/
 	}
-	
+
 /*
 	if( !pItem || pItem->usItem != ACTION_ITEM )
 		return NULL;
-		
+
 	if( (*pItem)[0]->data.misc.bActionValue != ACTION_ITEM_BLOW_UP )
 	{
-	
+
 
 		switch( (*pItem)[0]->data.misc.bActionValue )
 		{
@@ -224,7 +224,7 @@ const STR16 GetActionItemName( OBJECTTYPE *pItem )
 		case BIG_TEAR_GAS:			return gszActionItemDesc[ ACTIONITEM_BIG_TEAR_GAS ];
 		default:								return NULL;
 	}
-	
+
 */
 }
 
@@ -585,13 +585,13 @@ void UpdateItemStatsPanel()
 	SetFontForeground( FONT_GRAY2 );
 	SetFontShadow( FONT_NEARBLACK );
 	SetFontBackground( FONT_BLACK );
-	
+
 	if( gpItem && iCurrentTaskbar == TASK_ITEMS &&
 			gbEditingMode != EDITING_TRIGGERS && gbEditingMode != EDITING_ACTIONITEMS )
 	{
 		mprintf( iScreenWidthOffset + 500, 2 * iScreenHeightOffset + 366, pUpdateItemStatsPanelText[0] );
 	}
-	
+
 	SetFontForeground( FONT_YELLOW );
 
 	if( gpItem && iCurrentTaskbar == TASK_ITEMS )
@@ -1230,7 +1230,7 @@ void SetupOwnershipGUI()
 		ownerProfileId = NO_PROFILE;
 		_itow(ownerProfileId, str, 10);
 	}
-	
+
 	AddTextInputField( iScreenWidthOffset + 485, 2 * iScreenHeightOffset + 380, 25, 15, MSYS_PRIORITY_NORMAL, str, 3, INPUTTYPE_NUMERICSTRICT );
 	giOwnershipGroupButton =
 		CreateTextButton( gszCivGroupNames[ (*gpItem)[0]->data.owner.ubOwnerCivGroup ], SMALLCOMPFONT, FONT_YELLOW, FONT_BLACK, BUTTON_USE_DEFAULT,
@@ -1526,7 +1526,7 @@ void ChangeActionItem( OBJECTTYPE *pItem, /*INT8*/ INT16 bActionItemIndex )
 	for (i= ACTIONITEM_TRIP_KLAXON; i< NUM_ACTIONITEMS; ++i) //=ACTIONITEM_NEW; i++ )
 	{
 		pItem->usItem = ACTION_ITEM;
-					
+
 		if ( bActionItemIndex == i && ActionItemsValues[ i ].BlowUp == 1 )
 		{
 			(*pItem)[0]->data.misc.bActionValue = ACTION_ITEM_BLOW_UP;
@@ -1706,7 +1706,7 @@ void ChangeActionItem( OBJECTTYPE *pItem, /*INT8*/ INT16 bActionItemIndex )
 			break;
 #endif
 	}
-	
+
 	*/
 }
 

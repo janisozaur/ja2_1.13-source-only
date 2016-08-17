@@ -1,9 +1,9 @@
 #ifndef __TEXT_H
 #define __TEXT_H
 
-#include "items.h"
-#include "types.h"
-#include "mapscreen.h"
+#include "Items.h"
+#include "Types.h"
+#include "MapScreen.h"
 #include "XML_Language.h"
 
 #define STRING_LENGTH 255
@@ -257,7 +257,7 @@ extern STR16 pTransactionAlternateText[];
 extern STR16 pMoralStrings[];
 extern STR16 pSkyriderText[];
 extern STR16 pMercFellAsleepString[];
-extern STR16 pLeftEquipmentString[]; 
+extern STR16 pLeftEquipmentString[];
 extern STR16 pMapScreenStatusStrings[];
 extern STR16 pMapScreenPrevNextCharButtonHelpText[];
 extern STR16 pEtaString[];
@@ -333,7 +333,7 @@ extern STR16 gzCWStrings[];
 
 extern STR16 gzTooltipStrings[];
 
-// These have been added - SANDRO 
+// These have been added - SANDRO
 extern STR16 pSkillTraitBeginIMPStrings[];
 extern STR16 sgAttributeSelectionText[];
 extern STR16 pCharacterTraitBeginIMPStrings[];
@@ -486,7 +486,7 @@ enum
 	MSG_SAVE_AUTOSAVE_SLOT,					// 101
 	MSG_SAVE_AUTOSAVE_ENDTURN_SLOT,			// 102
 	MSG_SAVE_NORMAL_SLOT,					// 103
-	
+
 	MSG_WINDOWED_MODE_LOCK_MOUSE,			// 104
 	MSG_WINDOWED_MODE_RELEASE_MOUSE,		// 105
 	MSG_FORMATIONS_ON,						// 106
@@ -578,23 +578,23 @@ enum
 	STR_NO_SEMI_AUTO,
 	STR_NO_MORE_ITEMS_TO_STEAL,
 	STR_NO_MORE_ITEM_IN_HAND,
-	
-	//add new camo text 
+
+	//add new camo text
 	STR_DESERT_WORN_OFF,
-	STR_DESERT_WASHED_OFF,	
-	
+	STR_DESERT_WASHED_OFF,
+
 	STR_JUNGLE_WORN_OFF,
 	STR_JUNGLE_WASHED_OFF,
-	
+
 	STR_URBAN_WORN_OFF,
 	STR_URBAN_WASHED_OFF,
 
 	STR_SNOW_WORN_OFF,
-	STR_SNOW_WASHED_OFF,		
+	STR_SNOW_WASHED_OFF,
 
 	STR_CANNOT_ATTACH_SLOT,
 	STR_CANNOT_ATTACH_ANY_SLOT,
-	
+
 	STR_NO_SPACE_FOR_POCKET,
 
 	STR_REPAIRED_PARTIAL,
@@ -785,7 +785,7 @@ enum
 	STR_COVERT_NOT_ENOUGH_APS,
 	STR_COVERT_BAD_PALETTE,
 	STR_COVERT_NO_SKILL,
-	STR_COVERT_NO_UNIFORM_FOUND,	
+	STR_COVERT_NO_UNIFORM_FOUND,
 	STR_COVERT_DISGUISED_AS_CIVILIAN,
 	STR_COVERT_DISGUISED_AS_SOLDIER,
 	STR_COVERT_UNIFORM_NOORDER,
@@ -1014,7 +1014,7 @@ enum
 	CIV_TEAM_MERC_NAME,
 	ZOMBIE_TEAM_MERC_NAME,
 	POW_TEAM_MERC_NAME,
-	
+
 	//The text for the 'exiting sector' gui
 	EXIT_GUI_TITLE_STR,
 	OK_BUTTON_TEXT_STR,
@@ -1318,7 +1318,7 @@ extern		STR16			sFloristText[];
 //Florist Order Form
 enum
 {
-	FLORIST_ORDER_BACK,		
+	FLORIST_ORDER_BACK,
 	FLORIST_ORDER_SEND,
 	FLORIST_ORDER_CLEAR,
 	FLORIST_ORDER_GALLERY,
@@ -1690,7 +1690,7 @@ enum
 	AIM_FI_AIM_MEMBERS_SORTED_ASCENDING,
 	AIM_FI_AIM_MEMBERS_SORTED_DESCENDING,
 	AIM_FI_LEFT_CLICK,
-	AIM_FI_TO_SELECT,			
+	AIM_FI_TO_SELECT,
 	AIM_FI_RIGHT_CLICK,
 	AIM_FI_TO_ENTER_SORT_PAGE,
 	AIM_FI_AWAY,
@@ -2067,7 +2067,7 @@ enum
 	GIO_GUN_OPTIONS_TEXT,
 	GIO_GUN_NUT_TEXT,
 	GIO_REDUCED_GUNS_TEXT,
-	
+
 	GIO_DIF_LEVEL_TEXT,
 	GIO_EASY_TEXT,
 	GIO_MEDIUM_TEXT,
@@ -2136,7 +2136,7 @@ enum
 
 	//Inventory AP Cost
 	GIO_INVENTORY_AP_TITLE_TEXT,
-	
+
 	GIO_NCTH_TITLE_TEXT,
 	GIO_IIS_TITLE_TEXT,
 	GIO_BACKGROUND_TITLE_TEXT,
@@ -2155,7 +2155,7 @@ extern STR16	gzGIOScreenText[];
 
 // OJW - 20081129
 // Multiplayer Join Screen
-enum 
+enum
 {
 	MPJ_TITLE_TEXT,
 	MPJ_JOIN_TEXT,
@@ -2172,7 +2172,7 @@ enum
 	MPJ_PING_TEXT,
 	MPJ_HANDLE_INVALID,
 	MPJ_SERVERIP_INVALID,
-	MPJ_SERVERPORT_INVALID,	
+	MPJ_SERVERPORT_INVALID,
 	TEXT_NUM_MPJ_TEXT
 };
 
@@ -2225,7 +2225,7 @@ enum
 	MPH_5,
 	MPH_6,
 	MPH_YES,
-	MPH_NO,	
+	MPH_NO,
 	MPH_MORNING,
 	MPH_AFTERNOON,
 	MPH_NIGHT,

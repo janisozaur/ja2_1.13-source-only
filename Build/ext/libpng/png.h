@@ -1222,7 +1222,7 @@ typedef void (PNGAPI *png_progressive_end_ptr) PNGARG((png_structp, png_infop));
 typedef void (PNGAPI *png_progressive_row_ptr) PNGARG((png_structp, png_bytep,
    png_uint_32, int));
 #ifdef PNG_APNG_SUPPORTED
-typedef void (PNGAPI *png_progressive_frame_ptr) PNGARG((png_structp, 
+typedef void (PNGAPI *png_progressive_frame_ptr) PNGARG((png_structp,
    png_uint_32));
 #endif
 #endif
@@ -1941,14 +1941,14 @@ extern PNG_EXPORT(void,png_write_image) PNGARG((png_structp png_ptr,
 extern PNG_EXPORT (void,png_write_frame_head) PNGARG((png_structp png_ptr,
    png_infop png_info, png_bytepp row_pointers,
    png_uint_32 width, png_uint_32 height,
-   png_uint_32 x_offset, png_uint_32 y_offset, 
+   png_uint_32 x_offset, png_uint_32 y_offset,
    png_uint_16 delay_num, png_uint_16 delay_den, png_byte dispose_op,
    png_byte blend_op));
 
 extern PNG_EXPORT (void,png_write_frame_tail) PNGARG((png_structp png_ptr,
    png_infop png_info));
 #endif
-   
+
 /* Writes the end of the PNG file. */
 extern PNG_EXPORT(void,png_write_end) PNGARG((png_structp png_ptr,
    png_infop info_ptr));
@@ -2650,21 +2650,21 @@ extern PNG_EXPORT(void,png_set_sCAL_s) PNGARG((png_structp png_ptr,
 #ifdef PNG_APNG_SUPPORTED
 extern PNG_EXPORT(png_uint_32,png_get_acTL) PNGARG((png_structp png_ptr,
    png_infop info_ptr, png_uint_32 *num_frames, png_uint_32 *num_plays));
-extern PNG_EXPORT(png_uint_32,png_set_acTL) PNGARG((png_structp png_ptr, 
+extern PNG_EXPORT(png_uint_32,png_set_acTL) PNGARG((png_structp png_ptr,
    png_infop info_ptr, png_uint_32 num_frames, png_uint_32 num_plays));
 extern PNG_EXPORT(png_uint_32,png_get_num_frames) PNGARG((png_structp png_ptr,
    png_infop info_ptr));
-extern PNG_EXPORT(png_uint_32,png_get_num_plays) 
+extern PNG_EXPORT(png_uint_32,png_get_num_plays)
    PNGARG((png_structp png_ptr, png_infop info_ptr));
 
-extern PNG_EXPORT(png_uint_32,png_get_next_frame_fcTL) 
-   PNGARG((png_structp png_ptr, png_infop info_ptr, png_uint_32 *width, 
-   png_uint_32 *height, png_uint_32 *x_offset, png_uint_32 *y_offset, 
+extern PNG_EXPORT(png_uint_32,png_get_next_frame_fcTL)
+   PNGARG((png_structp png_ptr, png_infop info_ptr, png_uint_32 *width,
+   png_uint_32 *height, png_uint_32 *x_offset, png_uint_32 *y_offset,
    png_uint_16 *delay_num, png_uint_16 *delay_den, png_byte *dispose_op,
    png_byte *blend_op));
-extern PNG_EXPORT(png_uint_32,png_set_next_frame_fcTL) 
-   PNGARG((png_structp png_ptr, png_infop info_ptr, png_uint_32 width, 
-   png_uint_32 height, png_uint_32 x_offset, png_uint_32 y_offset, 
+extern PNG_EXPORT(png_uint_32,png_set_next_frame_fcTL)
+   PNGARG((png_structp png_ptr, png_infop info_ptr, png_uint_32 width,
+   png_uint_32 height, png_uint_32 x_offset, png_uint_32 y_offset,
    png_uint_16 delay_num, png_uint_16 delay_den, png_byte dispose_op,
    png_byte blend_op));
 extern PNG_EXPORT(void,png_ensure_fcTL_is_valid)
@@ -3529,9 +3529,9 @@ PNG_EXTERN void png_write_sCAL_s PNGARG((png_structp png_ptr,
 PNG_EXTERN void png_write_acTL PNGARG((png_structp png_ptr,
    png_uint_32 num_frames, png_uint_32 num_plays)) PNG_PRIVATE;
 
-PNG_EXTERN void png_write_fcTL PNGARG((png_structp png_ptr, 
-   png_uint_32 width, png_uint_32 height, 
-   png_uint_32 x_offset, png_uint_32 y_offset, 
+PNG_EXTERN void png_write_fcTL PNGARG((png_structp png_ptr,
+   png_uint_32 width, png_uint_32 height,
+   png_uint_32 x_offset, png_uint_32 y_offset,
    png_uint_16 delay_num, png_uint_16 delay_den,
    png_byte dispose_op, png_byte blend_op)) PNG_PRIVATE;
 #endif
@@ -3598,7 +3598,7 @@ PNG_EXTERN void png_progressive_read_reset PNGARG((png_structp png_ptr)) PNG_PRI
 #ifdef PNG_WRITE_APNG_SUPPORTED
 /* Private, reset some things to become ready for writing next frame */
 PNG_EXTERN void png_write_reset PNGARG((png_structp png_ptr)) PNG_PRIVATE;
-PNG_EXTERN void png_write_reinit PNGARG((png_structp png_ptr, 
+PNG_EXTERN void png_write_reinit PNGARG((png_structp png_ptr,
    png_infop info_ptr, png_uint_32 width, png_uint_32 height)) PNG_PRIVATE;
 #endif
 
@@ -3833,7 +3833,7 @@ PNG_EXTERN void png_handle_fcTL PNGARG((png_structp png_ptr, png_infop info_ptr,
 PNG_EXTERN void png_have_info PNGARG((png_structp png_ptr, png_infop info_ptr));
 PNG_EXTERN void png_handle_fdAT PNGARG((png_structp png_ptr, png_infop info_ptr,
    png_uint_32 length)) PNG_PRIVATE;
-PNG_EXTERN void png_ensure_sequence_number PNGARG((png_structp png_ptr, 
+PNG_EXTERN void png_ensure_sequence_number PNGARG((png_structp png_ptr,
    png_uint_32 length)) PNG_PRIVATE;
 #endif
 

@@ -1,41 +1,41 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include "math.h"
 	#include <stdio.h>
 	#include <errno.h>
 
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "vsurface.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "VSurface.h"
 	#include "Render Dirty.h"
-	#include "sysutil.h"
-	#include "container.h"
-	#include "wcheck.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "faces.h"
-	#include "utilities.h"
-	#include "overhead.h"
-	#include "gap.h"
+	#include "SysUtil.h"
+	#include "Container.h"
+	#include "WCheck.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Faces.h"
+	#include "Utilities.h"
+	#include "Overhead.h"
+	#include "Gap.h"
 	#include "Soldier Profile.h"
 	#include "Sound Control.h"
-	#include "teamturns.h"
-	#include "soldier macros.h"
-	#include "dialogue control.h"
-	#include "font control.h"
+	#include "TeamTurns.h"
+	#include "Soldier Macros.h"
+	#include "Dialogue Control.h"
+	#include "Font Control.h"
 	#include "Assignments.h"
 	#include "Random.h"
-	#include "line.h"
+	#include "Line.h"
 	#include	"GameSettings.h"
-	#include "squads.h"
-	#include "interface.h"
+	#include "Squads.h"
+	#include "Interface.h"
 	#include "Quests.h"
-	#include "animation control.h"
-	#include "drugs and alcohol.h"
+	#include "Animation Control.h"
+	#include "Drugs And Alcohol.h"
 	#include "Interface Items.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Map Screen Interface.h"
 	// HEADROCK HAM 3.2: Added two includes so that a function can read values of the Gun Range/hospital location
 	#include "Campaign Types.h"
@@ -186,24 +186,24 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 	// Check if we are a big-face....
 	if ( uiInitFlags & FACE_BIGFACE )
 	{
-	
+
 		if ( ( iFaceFileID < 100 ) && ( gProfilesIMP[ usMercProfileID ].ProfilId == usMercProfileID ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "IMPFACES\\b%02d.sti", iFaceFileID );
-		} 
+		}
 		else if ( ( iFaceFileID > 99 ) && ( gProfilesIMP[ usMercProfileID ].ProfilId == usMercProfileID ) )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "IMPFACES\\b%03d.sti", iFaceFileID );
 		}
 		else if( iFaceFileID < 100 )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "FACES\\b%02d.sti", iFaceFileID );
 		}
 		else if( iFaceFileID > 99 )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "FACES\\b%03d.sti", iFaceFileID );
 		}
-	
+
 		/*
 		// The filename is the profile ID!
 		if( iFaceFileID < 100 )
@@ -285,12 +285,12 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 
 		if (gGameExternalOptions.fShowCamouflageFaces == TRUE )
 		{
-		
-		
+
+
 		if ( ( iFaceFileID < 100 ) && ( gProfilesIMP[ usMercProfileID ].ProfilId == usMercProfileID ) )
 		{
-					sprintf( VObjectDesc.ImageFile, "IMPFACES\\%02d.sti", iFaceFileID );	
-				
+					sprintf( VObjectDesc.ImageFile, "IMPFACES\\%02d.sti", iFaceFileID );
+
 				if ( gCamoFace[usMercProfileID].gCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\WoodCamo\\%02d.sti", iFaceFileID );
@@ -298,7 +298,7 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				else if ( gCamoFace[usMercProfileID].gUrbanCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\UrbanCamo\\%02d.sti", iFaceFileID );
-				}	
+				}
 				else if ( gCamoFace[usMercProfileID].gDesertCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\DesertCamo\\%02d.sti", iFaceFileID );
@@ -309,12 +309,12 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				}
 
 					if (!FileExists(VObjectDesc.ImageFile))
-						sprintf( VObjectDesc.ImageFile, "IMPFACES\\%02d.sti", iFaceFileID );	
-		} 
+						sprintf( VObjectDesc.ImageFile, "IMPFACES\\%02d.sti", iFaceFileID );
+		}
 		else if ( ( iFaceFileID > 99 ) && ( gProfilesIMP[ usMercProfileID ].ProfilId == usMercProfileID ) )
-		{			
+		{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\%03d.sti", iFaceFileID );
-					
+
 				if ( gCamoFace[usMercProfileID].gCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\Woodcamo\\%03d.sti", iFaceFileID );
@@ -322,7 +322,7 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				else if ( gCamoFace[usMercProfileID].gUrbanCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\UrbanCamo\\%03d.sti", iFaceFileID );
-				}	
+				}
 				else if ( gCamoFace[usMercProfileID].gDesertCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\DesertCamo\\%03d.sti", iFaceFileID );
@@ -331,14 +331,14 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				{
 					sprintf( VObjectDesc.ImageFile, "IMPFACES\\SnowCamo\\%03d.sti", iFaceFileID );
 				}
-				
+
 					if (!FileExists(VObjectDesc.ImageFile))
-						sprintf( VObjectDesc.ImageFile, "IMPFACES\\%03d.sti", iFaceFileID );	
+						sprintf( VObjectDesc.ImageFile, "IMPFACES\\%03d.sti", iFaceFileID );
 		}
 		else if( iFaceFileID < 100 )
-		{			
-					sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );	
-				
+		{
+					sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );
+
 				if ( gCamoFace[usMercProfileID].gCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\WoodCamo\\%02d.sti", iFaceFileID );
@@ -346,7 +346,7 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				else if ( gCamoFace[usMercProfileID].gUrbanCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\UrbanCamo\\%02d.sti", iFaceFileID );
-				}	
+				}
 				else if ( gCamoFace[usMercProfileID].gDesertCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\DesertCamo\\%02d.sti", iFaceFileID );
@@ -357,12 +357,12 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				}
 
 					if (!FileExists(VObjectDesc.ImageFile))
-						sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );	
+						sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );
 		}
 		else if( iFaceFileID > 99 )
-		{			
+		{
 					sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );
-					
+
 				if ( gCamoFace[usMercProfileID].gCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\Woodcamo\\%03d.sti", iFaceFileID );
@@ -370,7 +370,7 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				else if ( gCamoFace[usMercProfileID].gUrbanCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\UrbanCamo\\%03d.sti", iFaceFileID );
-				}	
+				}
 				else if ( gCamoFace[usMercProfileID].gDesertCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\DesertCamo\\%03d.sti", iFaceFileID );
@@ -379,17 +379,17 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\SnowCamo\\%03d.sti", iFaceFileID );
 				}
-				
+
 					if (!FileExists(VObjectDesc.ImageFile))
-						sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );		
+						sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );
 		}
-		
+
 		/*
 			if( iFaceFileID < 100 )
 			{
 				// The filename is the profile ID!
-					sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );	
-				
+					sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );
+
 				if ( gCamoFace[usMercProfileID].gCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\WoodCamo\\%02d.sti", iFaceFileID );
@@ -397,7 +397,7 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				else if ( gCamoFace[usMercProfileID].gUrbanCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\UrbanCamo\\%02d.sti", iFaceFileID );
-				}	
+				}
 				else if ( gCamoFace[usMercProfileID].gDesertCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\DesertCamo\\%02d.sti", iFaceFileID );
@@ -408,13 +408,13 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				}
 
 					if (!FileExists(VObjectDesc.ImageFile))
-						sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );								
+						sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );
 			}
 			else
 			{
-			
+
 					sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );
-					
+
 				if ( gCamoFace[usMercProfileID].gCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\Woodcamo\\%03d.sti", iFaceFileID );
@@ -422,7 +422,7 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				else if ( gCamoFace[usMercProfileID].gUrbanCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\UrbanCamo\\%03d.sti", iFaceFileID );
-				}	
+				}
 				else if ( gCamoFace[usMercProfileID].gDesertCamoface == TRUE )
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\DesertCamo\\%03d.sti", iFaceFileID );
@@ -431,33 +431,33 @@ INT32	InternalInitFace( UINT8 usMercProfileID, UINT8 ubSoldierID, UINT32 uiInitF
 				{
 					sprintf( VObjectDesc.ImageFile, "FACES\\SnowCamo\\%03d.sti", iFaceFileID );
 				}
-				
+
 					if (!FileExists(VObjectDesc.ImageFile))
-						sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );	
-				
+						sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );
+
 			}
 		*/
 		}
 		else if (gGameExternalOptions.fShowCamouflageFaces == FALSE )
 		{
-		
+
 		if ( ( iFaceFileID < 100 ) && ( gProfilesIMP[ usMercProfileID ].ProfilId == usMercProfileID ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "IMPFACES\\%02d.sti", iFaceFileID );
-		} 
+		}
 		else if ( ( iFaceFileID > 99 ) && ( gProfilesIMP[ usMercProfileID ].ProfilId == usMercProfileID ) )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "IMPFACES\\%03d.sti", iFaceFileID );
 		}
 		else if( iFaceFileID < 100 )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "FACES\\%02d.sti", iFaceFileID );
 		}
 		else if( iFaceFileID > 99 )
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "FACES\\%03d.sti", iFaceFileID );
 		}
-		
+
 		/*
 			if( iFaceFileID < 100 )
 			{
@@ -664,8 +664,8 @@ void GetFaceRelativeCoordinates( FACETYPE *pFace, UINT16 *pusEyesX, UINT16 *pusE
 	usEyesY				= gMercProfiles[ usMercProfileID ].usEyesY;
 	usMouthY			=	gMercProfiles[ usMercProfileID ].usMouthY;
 	usMouthX			= gMercProfiles[ usMercProfileID ].usMouthX;
-	
-#ifdef JA2UB	
+
+#ifdef JA2UB
 
   		if ( gGameOptions.fNewTraitSystem )
 		{
@@ -687,7 +687,7 @@ void GetFaceRelativeCoordinates( FACETYPE *pFace, UINT16 *pusEyesX, UINT16 *pusE
 			usMouthY			= 55;
 			}
 		}
-	
+
 #endif
 
 	// Use some other values for x,y, base on if we are a RPC!
@@ -695,16 +695,16 @@ void GetFaceRelativeCoordinates( FACETYPE *pFace, UINT16 *pusEyesX, UINT16 *pusE
 	{
 		// Loop through all values of availible merc IDs to find ours!
 		for ( cnt = 0; cnt < ubRPCNumSmallFaceValues; cnt++ )
-		{			
+		{
 			// We've found one!
 			if (gRPCSmallFaceValues[ cnt ].FaceIndex == usMercProfileID &&
 				gRPCSmallFaceValues[ cnt ].uiIndex != 65535)
-			{					
+			{
 				usEyesX				= gRPCSmallFaceValues[ cnt ].bEyesX;
 				usEyesY				= gRPCSmallFaceValues[ cnt ].bEyesY;
 				usMouthY			= gRPCSmallFaceValues[ cnt ].bMouthY;
-				usMouthX			= gRPCSmallFaceValues[ cnt ].bMouthX;				
-			}						
+				usMouthX			= gRPCSmallFaceValues[ cnt ].bMouthX;
+			}
 		}
 	}
 
@@ -940,7 +940,7 @@ BOOLEAN SetCamoFace(SOLDIERTYPE * pSoldier)
 	wornCamo[1] = pSoldier->wornUrbanCamo;
 	wornCamo[2] = pSoldier->wornDesertCamo;
 	wornCamo[3] = pSoldier->wornSnowCamo;*/
-	
+
 	for(INT8 loop = 0; loop < 4; loop ++)
 	{
 //		if(wornCamo[loop] > 50)
@@ -949,7 +949,7 @@ BOOLEAN SetCamoFace(SOLDIERTYPE * pSoldier)
 			applied = loop;
 	}
 
-	
+
 	BOOLEAN isCamoFace = FALSE;
 
 	if(applied != -1)	// && worn != -1)
@@ -966,7 +966,7 @@ BOOLEAN SetCamoFace(SOLDIERTYPE * pSoldier)
 				gCamoFace[pSoldier->ubProfile].gDesertCamoface = TRUE;
 			if(applied == 3)
 				gCamoFace[pSoldier->ubProfile].gSnowCamoface = TRUE;
-		
+
 			return TRUE;
 		}
 /*		else
@@ -1347,8 +1347,8 @@ void HandleTalkingAutoFace( INT32 iFaceIndex )
 				if ( !SoundIsPlaying( pFace->uiSoundID ) && !pFace->fFinishTalking )
 				{
 					if( subsequentsounds.ubMaxSndCounter != 0 && subsequentsounds.ubSndCounter < subsequentsounds.ubMaxSndCounter )
-					{	
-						
+					{
+
 						pFace->uiSoundID = PlayJA2GapSample( subsequentsounds.zSoundFiles[subsequentsounds.ubSndCounter], RATE_11025, HIGHVOLUME, 1, MIDDLEPAN, &(pFace->GapList ) );
 						subsequentsounds.ubSndCounter++;
 					}
@@ -1456,7 +1456,7 @@ void GetXYForIconPlacement_legion( FACETYPE *pFace, UINT16 ubIndex, INT16 sFaceX
 
 	sX = sFaceX + pFace->usFaceWidth - usWidth - 1;
 	sY = sFaceY + pFace->usFaceHeight - usHeight - 1;
-	
+
 	*psX = sX;
 	*psY = sY;
 }
@@ -1468,7 +1468,7 @@ void GetXYForRightIconPlacement_legion_NV( FACETYPE *pFace, UINT16 ubIndex, INT1
 	UINT16 usWidth, usHeight;
 	ETRLEObject						*pTrav;
 	HVOBJECT							hVObject;
-	
+
 	// Get height, width of icon...
 	if (isIMP)
 		GetVideoObject( &hVObject, guiPORTRAITICONS_NV_IMP );
@@ -1488,7 +1488,7 @@ void GetXYForRightIconPlacement_legion_NV( FACETYPE *pFace, UINT16 ubIndex, INT1
 
 void DoRightIcon_legion_NV( UINT32 uiRenderBuffer, FACETYPE *pFace, INT16 sFaceX, INT16 sFaceY, INT8 bNumIcons, UINT8 sIconIndex, BOOLEAN isIMP )
 {
-	INT16						sIconX, sIconY;	
+	INT16						sIconX, sIconY;
 
 	GetXYForRightIconPlacement_legion_NV( pFace, sIconIndex, sFaceX, sFaceY, &sIconX, &sIconY, bNumIcons, isIMP );
 
@@ -1505,7 +1505,7 @@ void GetXYForRightIconPlacement_legion_GAS_MASK( FACETYPE *pFace, UINT16 ubIndex
 	UINT16 usWidth, usHeight;
 	ETRLEObject						*pTrav;
 	HVOBJECT							hVObject;
-	
+
 	// Get height, width of icon...
 	if (isIMP)
 		GetVideoObject( &hVObject, guiPORTRAITICONS_GAS_MASK_IMP );
@@ -1526,7 +1526,7 @@ void DoRightIcon_legion_GAS_MASK( UINT32 uiRenderBuffer, FACETYPE *pFace, INT16 
 {
 	INT16						sIconX, sIconY;
 
-	// Find X, y for placement	
+	// Find X, y for placement
 	GetXYForRightIconPlacement_legion_GAS_MASK( pFace, sIconIndex, sFaceX, sFaceY, &sIconX, &sIconY, bNumIcons, isIMP );
 
 	if (isIMP)
@@ -1542,13 +1542,13 @@ void GetXYForRightIconPlacement_FaceGera( FACETYPE *pFace, UINT16 ubIndex, INT16
 	UINT16 usWidth, usHeight;
 	ETRLEObject						*pTrav;
 	HVOBJECT							hVObject;
-	
+
 	// Get height, width of icon...
 	if (isIMP)
 		GetVideoObject( &hVObject, zNewFaceGearIMP[uIDFaceGear].uiIndex );
 	else
 		GetVideoObject( &hVObject, zNewFaceGear[uIDFaceGear].uiIndex );
-		
+
 	pTrav = &(hVObject->pETRLEObject[ ubIndex ] );
 	usHeight				= pTrav->usHeight;
 	usWidth					= pTrav->usWidth;
@@ -1564,8 +1564,8 @@ void DoRightIcon_FaceGear( UINT32 uiRenderBuffer, FACETYPE *pFace, INT16 sFaceX,
 {
 	INT16						sIconX, sIconY;
 
-	// Find X, y for placement	
-	
+	// Find X, y for placement
+
 	if (isIMP)
 	{
 		GetXYForRightIconPlacement_FaceGera( pFace, sIconIndex, sFaceX, sFaceY, &sIconX, &sIconY, bNumIcons , uIDFaceGear,isIMP);
@@ -1656,7 +1656,7 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 	UINT8						*pDestBuf;
 	UINT16					usLineColor;
 	INT8			bNumRightIcons = 0;
-	
+
 	BOOLEAN			fDoIcon_legion = FALSE; //legion
 	INT16			sIconIndex_legion =-1; //legion
 	INT8			bNumRightIcons_legion = 0;
@@ -1664,7 +1664,7 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 	UINT32 uiFaceItemOne=0;
 	UINT32 uiFaceItemTwo=0;
 	UINT8  ubFaceItemsCombined=0;
-	
+
 	UINT32 uiFaceOne=0;
 	UINT32 uiFaceTwo=0;
 
@@ -1842,28 +1842,28 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 				sIconIndex = 4;
 				fDoIcon		= TRUE;
 		}
-	
+
 		//------------------------------------Legion 2 by jazz--------------------------------
 
 		UINT8 faceProfileId = MercPtrs[ pFace->ubSoldierID ]->ubProfile;
 		BOOLEAN isIMP = FALSE;
-		
+
 		//IMP
 		if ( gProfilesIMP[ MercPtrs[ pFace->ubSoldierID ]->ubProfile ].ProfilId == MercPtrs[ pFace->ubSoldierID ]->ubProfile )
 		{
-			faceProfileId = gMercProfiles[MercPtrs[ pFace->ubSoldierID ]->ubProfile].ubFaceIndex;	
+			faceProfileId = gMercProfiles[MercPtrs[ pFace->ubSoldierID ]->ubProfile].ubFaceIndex;
 			isIMP = TRUE;
 		}
 
 		// rewritten by silversurfer
-		// this section chooses the icons for face gear if the ini setting "SHOW_TACTICAL_FACE_ICONS" is TRUE 
+		// this section chooses the icons for face gear if the ini setting "SHOW_TACTICAL_FACE_ICONS" is TRUE
 		// and the merc actually wears something to be shown
-		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_ICONS ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0 && 
-			( MercPtrs[ pFace->ubSoldierID ]->inv[HEAD1POS].usItem + MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem ) > 0 ) 
+		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_ICONS ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0 &&
+			( MercPtrs[ pFace->ubSoldierID ]->inv[HEAD1POS].usItem + MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem ) > 0 )
 		{
 			uiFaceItemOne=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD1POS].usItem;
 			uiFaceItemTwo=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem;
-	
+
 			//MM: fixing the hardcoded craziness here...
 			// check first face slot
 			if ( uiFaceItemOne != NONE )
@@ -1879,7 +1879,7 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 				else
 					uiFaceItemOne = 0;
 			}
-		
+
 			// check second face slot
 			if ( uiFaceItemTwo != NONE )
 			{
@@ -1898,7 +1898,7 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 			// Now select the correct icon. This uses a matrix from uiFaceOneItem and uiFaceTwoItem (simple addition)
 			// the numbers on the outer border are used if that is the only item worn in that slot
 			//
-			//								21			42			63				84	
+			//								21			42			63				84
 			//	 face slot 1 \ slot 2	gas mask | NV goggles | sun goggles | extended ear
 			// 1	gas mask				--			43			64				85
 			// 2	NV goggles				23			--			--				86
@@ -1907,7 +1907,7 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 			//
 			// this matrix leaves room for expansion
 			ubFaceItemsCombined = uiFaceItemOne + uiFaceItemTwo;
-		
+
 			switch( ubFaceItemsCombined )
 			{
 				// gas mask only
@@ -1968,22 +1968,22 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 					break;
 			}
 		}
-    
-		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_GEAR ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0 && 
+
+		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_GEAR ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0 &&
 			( MercPtrs[ pFace->ubSoldierID ]->inv[HELMETPOS].usItem > 0 ) )
 		{
-	
+
 			uiFaceItemOne=MercPtrs[ pFace->ubSoldierID ]->inv[HELMETPOS].usItem;
-			
+
 			if ( uiFaceItemOne != NONE && zNewFaceGear[uiFaceItemOne].Type == 1 ) //back
 			{
 				DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceItemOne, isIMP);
-			}		
+			}
 		}
-    
+
 		// this section chooses the pictures for gas mask and NV goggles if the ini setting "SHOW_TACTICAL_FACE_GEAR" is TRUE
 		// and the merc actually wears something to be shown
-		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_GEAR ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0 && 
+		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_GEAR ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0 &&
 			( MercPtrs[ pFace->ubSoldierID ]->inv[HEAD1POS].usItem + MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem ) > 0 )
 		{
 			// WANNE: Removed the limitation
@@ -1993,43 +1993,43 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 
 				uiFaceItemOne=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD1POS].usItem;
 				uiFaceItemTwo=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem;
-			
+
 				uiFaceOne=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD1POS].usItem;
-				uiFaceTwo=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem;		
-			
+				uiFaceTwo=MercPtrs[ pFace->ubSoldierID ]->inv[HEAD2POS].usItem;
+
 				// check first face slot
 				if ( uiFaceItemOne != NONE )
 				{
-					if ( zNewFaceGear[uiFaceOne].Type == 3 ) 
+					if ( zNewFaceGear[uiFaceOne].Type == 3 )
 						{
 							uiFaceItemOne = 1;
 						}
-					else if ( zNewFaceGear[uiFaceOne].Type == 4 ) 
+					else if ( zNewFaceGear[uiFaceOne].Type == 4 )
 						{
 							uiFaceItemOne = 2;
 						}
-					else uiFaceItemOne = 0;	
+					else uiFaceItemOne = 0;
 				}
-			
+
 				// check second face slot
 				if ( uiFaceItemTwo != NONE )
 				{
-					if ( zNewFaceGear[uiFaceTwo].Type == 3 ) 
+					if ( zNewFaceGear[uiFaceTwo].Type == 3 )
 						{
 							uiFaceItemTwo = 21;
 						}
-					else if ( zNewFaceGear[uiFaceTwo].Type == 4 ) 
+					else if ( zNewFaceGear[uiFaceTwo].Type == 4 )
 						{
 							uiFaceItemTwo = 42;
 						}
-					else uiFaceItemTwo = 0;	
+					else uiFaceItemTwo = 0;
 				}
-			
-			
+
+
 				// Now select the correct picture. This uses a matrix from uiFaceOneItem and uiFaceTwoItem (simple addition)
 				// the numbers on the outer border are used if that is the only item worn in that slot
 				//
-				//								21			42			63				84	
+				//								21			42			63				84
 				//	 face slot 1 \ slot 2	gas mask | NV goggles | sun goggles | extended ear
 				// 1	gas mask				--			43			64				85
 				// 2	NV goggles				23			--			--				86
@@ -2045,114 +2045,114 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 			// silversurfer: we don't want to display icons for gas mask or NV goggles because you can actually see the merc wearing the gear
 			// in case of gas mask together with NV we display the picture of the item in face slot 1 and the icon of the item
 			// in face slot 2 (if icons are allowed)
-		
+
 			//Type : 3 - gas mask ; 4 - NV googles
 			// gas mask only
 
 			if ( ubFaceItemsCombined == 1 || ubFaceItemsCombined == 21 )
 			{
-				if ( zNewFaceGear[uiFaceOne].Type == 3 ) 
+				if ( zNewFaceGear[uiFaceOne].Type == 3 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
-				}	
-				else if ( zNewFaceGear[uiFaceTwo].Type == 3 ) 
+				}
+				else if ( zNewFaceGear[uiFaceTwo].Type == 3 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
-				}	
+				}
 			}
-			
+
 			// NV goggles only
 			if ( ubFaceItemsCombined == 2 || ubFaceItemsCombined == 42 )
 			{
-				if ( zNewFaceGear[uiFaceOne].Type == 4 )  
+				if ( zNewFaceGear[uiFaceOne].Type == 4 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
-				}	
-				else if ( zNewFaceGear[uiFaceTwo].Type == 4 ) 
+				}
+				else if ( zNewFaceGear[uiFaceTwo].Type == 4 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
-				}	
+				}
 			}
-			
+
 			// NV goggles + gas mask
 			if ( ubFaceItemsCombined == 23 )
 			{
-				if ( zNewFaceGear[uiFaceOne].Type == 4 &&  zNewFaceGear[uiFaceTwo].Type == 3 ) 
+				if ( zNewFaceGear[uiFaceOne].Type == 4 &&  zNewFaceGear[uiFaceTwo].Type == 3 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
-					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);	
-				}	
+					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
+				}
 			}
-			
+
 			// gas mask + NV goggles
 			if ( ubFaceItemsCombined == 43 )
 			{
-				if ( zNewFaceGear[uiFaceOne].Type == 3 && zNewFaceGear[uiFaceTwo].Type == 4 )   
+				if ( zNewFaceGear[uiFaceOne].Type == 3 && zNewFaceGear[uiFaceTwo].Type == 4 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
 				}
 			}
-			
+
 			// gas mask + extended ear
 			if ( ubFaceItemsCombined == 24 || ubFaceItemsCombined == 64 )
 			{
-				if ( zNewFaceGear[uiFaceOne].Type == 3 ) 
+				if ( zNewFaceGear[uiFaceOne].Type == 3 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
-				}	
-				else if ( zNewFaceGear[uiFaceTwo].Type == 3 )  
-				{
-					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
-				}	
-			}	
-			
-			// gas mask + extended ear
-			if ( ubFaceItemsCombined == 25 || ubFaceItemsCombined == 85 )
-			{
-				if ( zNewFaceGear[uiFaceOne].Type == 3 )   
-				{
-					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
-				}	
-				else if ( zNewFaceGear[uiFaceTwo].Type == 3 )    
+				}
+				else if ( zNewFaceGear[uiFaceTwo].Type == 3 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
 				}
 			}
-			
+
+			// gas mask + extended ear
+			if ( ubFaceItemsCombined == 25 || ubFaceItemsCombined == 85 )
+			{
+				if ( zNewFaceGear[uiFaceOne].Type == 3 )
+				{
+					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
+				}
+				else if ( zNewFaceGear[uiFaceTwo].Type == 3 )
+				{
+					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
+				}
+			}
+
 			// NV goggles + extended ear
 			if ( ubFaceItemsCombined == 46 || ubFaceItemsCombined == 86 )
 			{
-				if ( zNewFaceGear[uiFaceOne].Type == 4 ) 
+				if ( zNewFaceGear[uiFaceOne].Type == 4 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceOne, isIMP);
-				}	
-				else if ( zNewFaceGear[uiFaceTwo].Type == 4 )  
+				}
+				else if ( zNewFaceGear[uiFaceTwo].Type == 4 )
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceTwo, isIMP);
-				}	
+				}
 			}
 		}
-		
+
 		if (gGameSettings.fOptions[ TOPTION_SHOW_TACTICAL_FACE_GEAR ] == TRUE && MercPtrs[ pFace->ubSoldierID ]->stats.bLife  > 0  &&
-			( MercPtrs[ pFace->ubSoldierID ]->inv[HELMETPOS].usItem > 0 ) 
+			( MercPtrs[ pFace->ubSoldierID ]->inv[HELMETPOS].usItem > 0 )
 			// dirty hack for IMPs because they don't have pictures for face gear
-			/* && ( MercPtrs[ pFace->ubSoldierID ]->ubProfile < 51 || MercPtrs[ pFace->ubSoldierID ]->ubProfile > 56 ) */ ) 
+			/* && ( MercPtrs[ pFace->ubSoldierID ]->ubProfile < 51 || MercPtrs[ pFace->ubSoldierID ]->ubProfile > 56 ) */ )
 		{
 			uiFaceItemOne=MercPtrs[ pFace->ubSoldierID ]->inv[HELMETPOS].usItem;
-		
+
 			if ( uiFaceItemOne != NONE )
 			{
 				if ( uiFaceItemOne != NONE && zNewFaceGear[uiFaceItemOne].Type == 2 ) //front
 				{
 					DoRightIcon_FaceGear( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons_legion,  faceProfileId ,uiFaceItemOne, isIMP);
-				}	
+				}
 			}
 		}
-				
+
 		//------------------------------------end of tactical face gear-----------------------------
 
-		{	
+		{
 			// If blind...
 			if ( MercPtrs[ pFace->ubSoldierID ]->bBlindedCounter > 0 )
 			{
@@ -2179,9 +2179,9 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 				if ( MercPtrs[ pFace->ubSoldierID ]->bDrinkLevel < FoodMoraleMods[FOOD_MERC_START_SHOW_HUNGER_SYMBOL].bThreshold )
 				{
 					DoRightIcon( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons, 9 );
-					bNumRightIcons++;	
+					bNumRightIcons++;
 				}
-		
+
 				if ( MercPtrs[ pFace->ubSoldierID ]->bFoodLevel < FoodMoraleMods[FOOD_MERC_START_SHOW_HUNGER_SYMBOL].bThreshold )
 				{
 					DoRightIcon( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons, 10 );
@@ -2259,7 +2259,7 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 				DoRightIcon( uiRenderBuffer, pFace, sFaceX, sFaceY, bNumRightIcons, 28 );
 				bNumRightIcons++;
 			}
-			
+
 			switch( pSoldier->bAssignment )
 			{
 				CASE_DOCTOR:
@@ -2348,14 +2348,14 @@ void HandleRenderFaceAdjustments( FACETYPE *pFace, BOOLEAN fDisplayBuffer, BOOLE
 					{
 						sIconIndex_Assignment		= 15;
 						fDoIcon_Assignment			= TRUE;
-					
+
 						GetShortSectorString( SECTORX(pSoldier->usItemMoveSectorID), SECTORY(pSoldier->usItemMoveSectorID), wShortText );
 
 						fShowNumber		= TRUE;
 						fShowMaximum	= TRUE;
 					}
 					break;
-									
+
 				case FACILITY_INTERROGATE_PRISONERS:
 					sIconIndex_Assignment		= 13;
 					fDoIcon_Assignment			= TRUE;
@@ -2812,7 +2812,7 @@ void HandleAutoFaces( )
 				{
 					pFace->uiFlags &= ( ~FACE_SHOW_WHITE_HILIGHT );
 				}
-				
+
 				if ( pSoldier->sGridNo != pSoldier->pathing.sFinalDestination && !TileIsOutOfBounds(pSoldier->sGridNo))
 				{
 					pFace->uiFlags |= FACE_SHOW_MOVING_HILIGHT;
@@ -2969,7 +2969,7 @@ void HandleAutoFaces( )
 						}
 					}
 				}
-					
+
 				// CHECK IF WE WERE WAITING FOR GETTING HIT TO FINISH!
 				if ( !pSoldier->flags.fGettingHit && pSoldier->flags.fFlashPortrait == FLASH_PORTRAIT_WAITING )
 				{
@@ -3123,7 +3123,7 @@ BOOLEAN SetFaceTalking( INT32 iFaceIndex, CHAR8 *zSoundFile, STR16 zTextString,
 
 
 
-BOOLEAN SetFaceTalkingMultipleSounds( INT32 iFaceIndex, CHAR8 zSoundFiles[][64], UINT8 ubMaxSoundsCount, 
+BOOLEAN SetFaceTalkingMultipleSounds( INT32 iFaceIndex, CHAR8 zSoundFiles[][64], UINT8 ubMaxSoundsCount,
 	STR16 zTextString, UINT32 usRate, UINT32 ubVolume, UINT32 ubLoops, UINT32 uiPan )
 {
 	CHAR8 zExistingSoundFiles[10][64];

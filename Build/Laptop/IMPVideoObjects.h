@@ -1,7 +1,7 @@
 #ifndef __IMP_VIDEO_H
 #define __IMP_VIDEO_H
 
-#include "types.h"
+#include "Types.h"
 
 // the functions
 
@@ -179,6 +179,6 @@ extern UINT32 guiSLIDERBAR;
 
 
 
- 
+
 
 

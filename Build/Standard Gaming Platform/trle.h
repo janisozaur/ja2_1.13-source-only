@@ -17,10 +17,10 @@ typedef struct
 {
 	UINT32			uiHeightEach;
 	UINT32			uiTotalElements;
-	TRLEObject		*pTRLEObject;			
+	TRLEObject		*pTRLEObject;
 	PTR							pPixData;
 	UINT32					uiSizePixDataElem;
-	
+
 } TRLEData;
 
 

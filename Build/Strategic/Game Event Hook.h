@@ -1,7 +1,7 @@
 #ifndef __GAME_EVENT_HOOK_H
 #define __GAME_EVENT_HOOK_H
 
-#include "types.h"
+#include "Types.h"
 
 enum
 {
@@ -13,8 +13,8 @@ enum
 	EVENT_AIM_RESET_MERC_ANNOYANCE,
 	EVENT_BOBBYRAY_PURCHASE,	// WANNE: Unused (old Bobby Ray Shipment EVENT)
 	EVENT_DAILY_UPDATE_BOBBY_RAY_INVENTORY,
-	EVENT_UPDATE_BOBBY_RAY_INVENTORY,	
-	EVENT_DAILY_UPDATE_OF_MERC_SITE,	
+	EVENT_UPDATE_BOBBY_RAY_INVENTORY,
+	EVENT_DAILY_UPDATE_OF_MERC_SITE,
 	EVENT_DAY3_ADD_EMAIL_FROM_SPECK,
 	EVENT_DELAYED_HIRING_OF_MERC,
 	EVENT_HANDLE_INSURED_MERCS,
@@ -108,7 +108,7 @@ enum
 	!! new event into the gEventName[] at the top of Game Events.c.							!!
 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	*/
-	
+
 	EVENT_HELICOPTER_HOVER_FOR_A_MINUTE,
 	EVENT_HELICOPTER_REFUEL_FOR_A_MINUTE,
 
@@ -133,7 +133,7 @@ enum
 	EVENT_SAMSITE_REPAIRED,						// Flugente: have a SAM site be fully repaired
 
 	EVENT_MILITIAROSTER_EMAIL,					// Flugente: we get an email giving us the bookmark to the militia roster webpage
-	
+
 	EVENT_WEATHER_NORMAL,						// Flugente: localized weather
 	EVENT_WEATHER_SHOWERS,
 	EVENT_WEATHER_THUNDERSHOWERS,
@@ -149,9 +149,9 @@ enum
 #define NPC_SYSTEM_EVENT_ACTION_PARAM_BONUS 10000
 
 //One Time Events
-//These events are scheduled to happen, and when their time is up, they are processed 
-//once, and deleted.	The first prototype requires the actual world time in minutes 
-//included the current day, and the additional ones are wrappers which calculate the 
+//These events are scheduled to happen, and when their time is up, they are processed
+//once, and deleted.	The first prototype requires the actual world time in minutes
+//included the current day, and the additional ones are wrappers which calculate the
 //actual world time for you.
 BOOLEAN AddStrategicEvent( UINT8 ubCallbackID, UINT32 uiMinStamp, UINT32 uiParam );
 BOOLEAN AddSameDayStrategicEvent( UINT8 ubCallbackID, UINT32 uiMinStamp, UINT32 uiParam );
@@ -162,12 +162,12 @@ BOOLEAN AddSameDayStrategicEventUsingSeconds( UINT8 ubCallbackID, UINT32 uiSecon
 BOOLEAN AddFutureDayStrategicEventUsingSeconds( UINT8 ubCallbackID, UINT32 uiSecondStamp, UINT32 uiParam, UINT32 uiNumDaysFromPresent );
 
 //Ranged Events
-//In certain cases, you may wish to create an event that has a start time and an end 
-//time.	If this is used, then the execution of the event will happen once at the 
-//beginning of the event and once at the expiration time of the event.	A flag, 
-//pEvent->fEndEvent is set for the second call.	It is up to you process it 
-//separately.	An example use of ranged events would be for ambient sounds.	The 
-//start time would be called to define the sounds for use within the game.	The end 
+//In certain cases, you may wish to create an event that has a start time and an end
+//time.	If this is used, then the execution of the event will happen once at the
+//beginning of the event and once at the expiration time of the event.	A flag,
+//pEvent->fEndEvent is set for the second call.	It is up to you process it
+//separately.	An example use of ranged events would be for ambient sounds.	The
+//start time would be called to define the sounds for use within the game.	The end
 //time would be used to remove the sound from the system.
 BOOLEAN AddRangedStrategicEvent( UINT8 ubCallbackID, UINT32 uiStartMin, UINT32 uiLengthMin, UINT32 uiParam );
 BOOLEAN AddSameDayRangedStrategicEvent( UINT8 ubCallbackID, UINT32 uiStartMin, UINT32 uiLengthMin, UINT32 uiParam);
@@ -177,16 +177,16 @@ BOOLEAN AddSameDayRangedStrategicEventUsingSeconds( UINT8 ubCallbackID, UINT32 u
 BOOLEAN AddFutureDayRangedStrategicEventUsingSeconds( UINT8 ubCallbackID, UINT32 uiStartSeconds, UINT32 uiLengthSeconds, UINT32 uiParam, UINT32 uiNumDaysFromPresent );
 
 //EveryDay Events
-//A second special case event, this event will get processed automatically at the 
-//same time every day.	Time of day lighting is a perfect example.	Other events 
-//such as checking for quests, can also be automated using this system.	NOTE:	
+//A second special case event, this event will get processed automatically at the
+//same time every day.	Time of day lighting is a perfect example.	Other events
+//such as checking for quests, can also be automated using this system.	NOTE:
 //Only specify the time of day in minutes (don't add the actual day to this value)
 BOOLEAN AddEveryDayStrategicEvent( UINT8 ubCallbackID, UINT32 uiStartMin, UINT32 uiParam );
 BOOLEAN AddEveryDayStrategicEventUsingSeconds( UINT8 ubCallbackID, UINT32 uiStartSeconds, UINT32 uiParam );
 
 //Periodic Events
 //Event will get processed automatically once every X minutes.	The period is added to the current time for
-//the time stamp.	
+//the time stamp.
 BOOLEAN AddPeriodStrategicEvent( UINT8 ubCallbackID, UINT32 uiOnceEveryXMinutes, UINT32 uiParam );
 BOOLEAN AddPeriodStrategicEventUsingSeconds( UINT8 ubCallbackID, UINT32 uiOnceEveryXSeconds, UINT32 uiParam );
 //Hybrids that aren't based from the current time.	They are offsetted from the current time first.

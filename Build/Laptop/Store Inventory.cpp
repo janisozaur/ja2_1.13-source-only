@@ -8,7 +8,7 @@
 	#include "Debug.h"
 	#include "LaptopSave.h"
 	#include "ShopKeeper Interface.h"
-	#include "armsdealerinvinit.h"
+	#include "ArmsDealerInvInit.h"
 	#include "GameSettings.h"
 #endif
 
@@ -835,7 +835,7 @@ BOOLEAN DoesGunOfSameClassExistInInventory( UINT8 ubItemIndex, UINT8 ubDealerID 
 	pInventoryArray = GetPtrToStoreInventory( ubDealerID );
 	if( pInventoryArray == NULL )
 		return( FALSE );
-	
+
 	//go through all of the guns
 	for ( UINT16 i = 0; i<gMAXITEMS_READ; ++i )
 	{

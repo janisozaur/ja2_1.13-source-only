@@ -1,7 +1,7 @@
 #ifndef _INTERFACE_H
 #define _INTERFACE_H
 
-#include "handle UI.h"
+#include "Handle UI.h"
 #include "mousesystem.h"
 #include "structure.h"
 #include "Assignments.h"		// added by Flugente for the stat-enums
@@ -52,10 +52,10 @@ extern HIDDEN_NAMES_VALUES zHiddenNames[500];
 
 typedef struct
 {
-	UINT16		uiIndex; 
-	BOOLEAN		Enabled; 
-	UINT16 		ExpLevel; 
-	UINT16 		Stats; 
+	UINT16		uiIndex;
+	BOOLEAN		Enabled;
+	UINT16 		ExpLevel;
+	UINT16 		Stats;
 	UINT16		StatsMin;
 	UINT16		StatsMax;
 	CHAR16	szCurRank[MAX_ENEMY_NAMES_CHARS];
@@ -97,7 +97,7 @@ typedef struct
 	UINT8		uiBodyType;
 	UINT8		uiHair;
 	UINT8		uiSkin;
-	UINT8		uiTrait[3];	
+	UINT8		uiTrait[3];
 	UINT32		uiFlags;
 } SOLDIER_PROFILE_VALUES;
 
@@ -193,7 +193,7 @@ enum {
 	BG_TRACKER_ABILITY,
 	BG_AMBUSH_RADIUS,
 	BG_SNAKEDEFENSE,
-	
+
 	BG_DISLIKEBG,			// dislike any other background that has the negative of this value set
 	BG_SMOKERTYPE,			// 0: doesnt care about smoking 1: will consume cigarettes, dislikes non-smokers 2: will refuse to smoke, dislikes smokers
 	BG_CROUCHEDDEFENSE,		// lowers enemy cth if they fire at us while we are crouched against cover in the direction the shots come from
@@ -210,7 +210,7 @@ typedef struct
 	CHAR16		szShortName[20];				// abbreviated name for laptop display
 	CHAR16		szDescription[256];				// description of background, should explain the abilities
 
-	UINT64		uiFlags;						// this flagmask defines what special properties this background has (on/off behaviour)	
+	UINT64		uiFlags;						// this flagmask defines what special properties this background has (on/off behaviour)
 	INT16		value[BG_MAX];					// property values
 } BACKGROUND_VALUES;
 
@@ -309,7 +309,7 @@ extern		int INV_INTERFACE_START_Y;	//			( SCREEN_HEIGHT - INV_INTERFACE_HEIGHT )
 #define		FLASH_PORTRAIT_DELAY			150
 
 // FLASH PORTRAIT PALETTE IDS
-#define		FLASH_PORTRAIT_NOSHADE			0	
+#define		FLASH_PORTRAIT_NOSHADE			0
 #define		FLASH_PORTRAIT_STARTSHADE		1
 #define		FLASH_PORTRAIT_ENDSHADE			2
 #define		FLASH_PORTRAIT_DARKSHADE		3

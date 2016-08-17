@@ -40,6 +40,6 @@ void TempHiringOfMercs( UINT8 ubNumberOfMercs, BOOLEAN fReset );
 
 
 
- 
+
 
 

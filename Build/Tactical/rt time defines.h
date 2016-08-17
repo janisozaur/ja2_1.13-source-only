@@ -19,7 +19,7 @@
 
 #define		NUM_SEC_PER_STRATEGIC_TURN					( NUM_SEC_IN_MIN * 15 )	// Every fifteen minutes
 #define		NUM_SEC_PER_TACTICAL_TURN					5
-#define		RT_COMPRESSION_TACTICAL_TURN_MODIFIER			10										
+#define		RT_COMPRESSION_TACTICAL_TURN_MODIFIER			10
 
 
 #endif

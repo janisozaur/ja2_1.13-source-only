@@ -5,32 +5,32 @@
 	#include "MPConnectScreen.h"
 	#include "GameSettings.h"
 	#include "Utilities.h"
-	#include "wCheck.h"
+	#include "WCheck.h"
 	#include "Font Control.h"
 	#include "WordWrap.h"
 	#include "Render Dirty.h"
 	#include "Input.h"
 	#include "Options Screen.h"
 	#include "English.h"
-	#include "Sysutil.h"
+	#include "SysUtil.h"
 	#include "Fade Screen.h"
 	#include "Cursor Control.h"
 	#include "Music Control.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Text.h"
 	#include "Text Input.h"
 	#include "Soldier Profile.h"
 	#include "Animated ProgressBar.h"
-	#include "mainmenuscreen.h"
+	#include "MainMenuScreen.h"
 #endif
 
-#include "gameloop.h"
+#include "GameLoop.h"
 #include "Game Init.h"
-#include "connect.h"
+#include "Connect.h"
 #include "network.h" // for client name
-#include "message.h"
-#include "init.h"
-#include "xml.h"
+#include "Message.h"
+#include "Init.h"
+#include "XML.h"
 
 
 ////////////////////////////////////////////
@@ -315,7 +315,7 @@ void			HandleMPCScreen()
 				// disconnect the client
 				client_disconnect();
 				break;
-			
+
 			case MPC_CONTINUE:
 			{
 				//if we are already fading out, get out of here
@@ -351,19 +351,19 @@ BOOLEAN		RenderMPCScreen()
 
 	//Get the main background screen graphic and blt it
 	GetVideoObject(&hPixHandle, guiMPCMainBackGroundImage );
-	
+
 		BltVideoObject(FRAME_BUFFER, hPixHandle, 0,(SCREEN_WIDTH - xResSize)/2,(SCREEN_HEIGHT - yResSize)/2, VO_BLT_SRCTRANSPARENCY,NULL);
 
 	//Shade the background
 	//ShadowVideoSurfaceRect( FRAME_BUFFER, iScreenWidthOffset, iScreenHeightOffset, iScreenWidthOffset + 640, iScreenHeightOffset + 480 );
 
-	UINT8 iProgress = 0;	
+	UINT8 iProgress = 0;
 
 	if (is_connecting)
 	{
 		iProgress = (UINT8)(100 * (float)((MAX_CONNECT_RETRIES-(float)giNumTries)/MAX_CONNECT_RETRIES));
 		SetProgressBarColor(0,150,0,0);
-		
+
 		SetConnectScreenHeadingW(gzMPCScreenText[ MPC_CONNECTING_TEXT ]);
 	}
 	else if (is_connected)
@@ -400,7 +400,7 @@ BOOLEAN		RenderMPCScreen()
 
 	SetProgressBarRenderBuffer(0,FRAME_BUFFER);
 	RenderProgressBar(0,iProgress);
-	
+
 	return( TRUE );
 } // end of RenderMPCScreen()
 
@@ -437,16 +437,16 @@ void			GetMPCScreenUserInput()
 void DoneFadeOutForExitMPCScreen( void )
 {
 	// ------------------------------------------
-	// Now Initialize the client again with all the files from the "_MULTIPLAYER" profile!!!	
+	// Now Initialize the client again with all the files from the "_MULTIPLAYER" profile!!!
 	LoadExternalGameplayData(TABLEDATA_DIRECTORY);
 	LoadAllExternalText();
 	InitDependingGameStyleOptions();
 	InitNewGame(false);
-	
+
 	// Overwrite some client settings with values from the server (cash, ...)
 	reapplySETTINGS();
 	// ------------------------------------------
-	
+
 	gubMPCExitScreen = MAP_SCREEN;
 	ExitMPCScreen(); // cleanup please, if we called a fadeout then we didnt do it above
 	SetCurrentCursorFromDatabase( VIDEO_NO_CURSOR );
@@ -528,7 +528,7 @@ void ja2::mp::InitializeMultiplayerProfile(vfs::Path const& profileRoot)
 	if(!vfs::OS::checkRealDirectory(profileRoot))
 	{
 		// OK, directory did not exist, probably a new profile
-		SGP_THROW_IFFALSE( vfs::OS::createRealDirectory(profileRoot), 
+		SGP_THROW_IFFALSE( vfs::OS::createRealDirectory(profileRoot),
 			_BS(L"Could not create directory : ") << profileRoot << _BS::wget );
 	}
 

@@ -1113,11 +1113,11 @@ typedef HASISTREAM (AILCALL FAR *ASI_STREAM_OPEN) (U32		   user,			  // User val
 
 //
 // Translate data in stream, returning # of bytes actually decoded or encoded
-// 
-// Any number of bytes may be requested.  Requesting more data than is 
+//
+// Any number of bytes may be requested.  Requesting more data than is
 // available in the codec's internal buffer will cause the AILASIFETCHCB
 // handler to be called to fetch more data from the stream.
-// 
+//
 
 typedef S32  (AILCALL FAR *ASI_STREAM_PROCESS) (HASISTREAM  stream,			  // Handle of stream
 												void FAR   *buffer,			  // Destination for processed data
@@ -1133,7 +1133,7 @@ typedef S32  (AILCALL FAR *ASI_STREAM_PROCESS) (HASISTREAM  stream,			  // Handl
 // At next ASI_stream_process() call, decoder will seek to the closest possible
 // point in the stream which occurs at or after the specified position
 //
-// This function has no effect for decoders which do not support random 
+// This function has no effect for decoders which do not support random
 // seeks on a given stream type
 //
 // Warning: some decoders may need to implement seeking by reparsing
@@ -1223,19 +1223,19 @@ typedef S32	   (AILCALL FAR *M3D_SET_PROVIDER_PREFERENCE)(HATTRIB preference,
 typedef M3DRESULT  (AILCALL FAR * M3D_ACTIVATE)(S32 enable);
 
 typedef H3DSAMPLE  (AILCALL FAR * M3D_ALLOCATE_3D_SAMPLE_HANDLE)(void);
-									   
+
 
 typedef void	   (AILCALL FAR * M3D_RELEASE_3D_SAMPLE_HANDLE)(H3DSAMPLE samp);
-									   
+
 
 typedef void	   (AILCALL FAR * M3D_START_3D_SAMPLE)(H3DSAMPLE samp);
 
 
 typedef void	   (AILCALL FAR * M3D_STOP_3D_SAMPLE)(H3DSAMPLE samp);
-									   
+
 
 typedef void	   (AILCALL FAR * M3D_RESUME_3D_SAMPLE)(H3DSAMPLE samp);
-									  
+
 typedef void	   (AILCALL FAR * M3D_END_3D_SAMPLE)(H3DSAMPLE samp);
 
 typedef S32		(AILCALL FAR * M3D_SET_3D_SAMPLE_DATA)(H3DSAMPLE		 samp,
@@ -1243,7 +1243,7 @@ typedef S32		(AILCALL FAR * M3D_SET_3D_SAMPLE_DATA)(H3DSAMPLE		 samp,
 
 typedef void	   (AILCALL FAR * M3D_SET_3D_SAMPLE_VOLUME)(H3DSAMPLE samp,
 															S32	   volume);
-										
+
 typedef void	   (AILCALL FAR * M3D_SET_3D_SAMPLE_PLAYBACK_RATE)(H3DSAMPLE samp,
 																   S32	   playback_rate);
 
@@ -1894,7 +1894,7 @@ typedef struct _SAMPLE		   // Sample instance
    F32	  reverb_reflect_time;	// Reflect time in milliseconds
    F32	  reverb_decay_time;	  // Decay time [0.1, 20.0]
    S32	  base_scale;			 // Original 12-bit volume scalar
-} 
+}
 SAMPLE;
 
 #ifdef IS_WINDOWS
@@ -3635,7 +3635,7 @@ typedef C8 FAR *  (AILCALL FAR *FLT_ERROR)(void);
 typedef S32	   (AILCALL FAR *FLT_SET_PROVIDER_PREFERENCE)(HATTRIB preference,
 															 void FAR*   value);
 
-typedef HDRIVERSTATE (AILCALL FAR *FLT_OPEN_DRIVER) (HDIGDRIVER dig, 
+typedef HDRIVERSTATE (AILCALL FAR *FLT_OPEN_DRIVER) (HDIGDRIVER dig,
 													 S32 FAR   *build_buffer,
 													 S32		build_buffer_size);
 
@@ -3651,12 +3651,12 @@ typedef void		 (AILCALL FAR *FLT_POSTMIX_PROCESS) (HDRIVERSTATE driver);
 //##																		##
 //############################################################################
 
-typedef HSAMPLESTATE (AILCALL FAR * FLTSMP_OPEN_SAMPLE) (HDRIVERSTATE driver, 
+typedef HSAMPLESTATE (AILCALL FAR * FLTSMP_OPEN_SAMPLE) (HDRIVERSTATE driver,
 														 HSAMPLE	  S);
 
 typedef FLTRESULT	(AILCALL FAR * FLTSMP_CLOSE_SAMPLE) (HSAMPLESTATE state);
 
-typedef S32		  (AILCALL FAR * FLTSMP_SAMPLE_PROCESS) (HSAMPLESTATE	state,  
+typedef S32		  (AILCALL FAR * FLTSMP_SAMPLE_PROCESS) (HSAMPLESTATE	state,
 															void FAR * FAR *orig_src,
 															U32  FAR *	  orig_src_fract,
 															void FAR *	  orig_src_end,
@@ -3786,7 +3786,7 @@ DXDEC S32		AILCALL AIL_enumerate_3D_provider_attributes
 													  RIB_INTERFACE_ENTRY FAR *  dest);
 
 DXDEC void	   AILCALL AIL_3D_provider_attribute   (HPROVIDER   lib,
-													  C8 FAR *	name, 
+													  C8 FAR *	name,
 													  void FAR *  val);
 
 DXDEC void	   AILCALL AIL_set_3D_provider_preference(HPROVIDER   lib,

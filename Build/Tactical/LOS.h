@@ -8,7 +8,7 @@
 
 // WANNE - BMP: BUGFIX: Replaced INT32 with INT64, because otherwise we would get an overflow on big maps!
 //typedef INT32 FIXEDPT;
-typedef INT64 FIXEDPT;			
+typedef INT64 FIXEDPT;
 
 
 
@@ -219,7 +219,7 @@ typedef struct SpreadPattern_struct
 	int  method;
 	//List of statically defined spread angles.
 	//These get used first.
-	INT32	iCount;					
+	INT32	iCount;
 	DOUBLE  *x;
 	DOUBLE  *y;
 } t_SpreadPattern;

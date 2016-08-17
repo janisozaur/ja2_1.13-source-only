@@ -153,8 +153,8 @@ namespace big
 
 	/*
 	 * Multiply two large numbers using the Schoolbook method
-	 * Only produces the low y_limbs of the result 
-	 * 
+	 * Only produces the low y_limbs of the result
+	 *
 	 * The product buffer may not be pointed to by x or y
 	 */
 	void HalfSchoolbookMultiply(
@@ -166,7 +166,7 @@ namespace big
 
 	/*
 	 * Multiply two large numbers using the Schoolbook method
-	 * 
+	 *
 	 * The product buffer may not be pointed to by x or y
 	 */
 	void SchoolbookMultiply(
@@ -214,7 +214,7 @@ namespace big
 	/*
 	 * 'A' is overwritten with the quotient of the operation
 	 * Returns the remainder of 'A' / divisor for a 32-bit divisor
-	 * 
+	 *
 	 * Does not check for divide-by-zero
 	 */
     uint32_t Divide32(
@@ -227,9 +227,9 @@ namespace big
 
 	/*
 	 * Schoolbook division algorithm
-	 * 
+	 *
 	 * Returns true on success and false on failure (like divide by 0)
-	 * 
+	 *
 	 * Quotient and Remainder pointers can be the same as any other
 	*/
 	bool SchoolbookDivide(
@@ -251,7 +251,7 @@ namespace big
 	 * Computes: result = (n ^ -1) (Mod modulus)
 	 * Such that: result * n (Mod modulus) = 1
 	 * Using Extended Euclid's Algorithm (GCDe)
-	 * 
+	 *
 	 * This is not always possible, so it will return false iff not possible.
 	 */
 	bool InvMod(
@@ -263,7 +263,7 @@ namespace big
 
 	/*
 	 * Computes: result = GCD(a, b)  (greatest common divisor)
-	 * 
+	 *
 	 * Length of result is the length of the smallest argument
 	 */
 	void GCD(

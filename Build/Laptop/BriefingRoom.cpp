@@ -4,14 +4,14 @@
 	#include "Laptop All.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
-	#include "timer control.h"
+	#include "Timer Control.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "Game Clock.h"
 	#include "Text.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 #endif
 
 #include "BriefingRoom_Data.h"
@@ -48,7 +48,7 @@
 #define BRIEFINGROOM_CONTENTBUTTON_Y		BRIEFINGROOM_SUBTITLE_Y
 #define BRIEFINGROOM_TOC_X					BRIEFINGROOM_CONTENTBUTTON_X
 #define BRIEFINGROOM_TOC_Y					5
-#define	BRIEFINGROOM_TOC_GAP_Y				25	
+#define	BRIEFINGROOM_TOC_GAP_Y				25
 
 UINT32		guiRustBriefingRoomBackGround;
 UINT32		guiRustBriefingRoomLogoAim;
@@ -122,7 +122,7 @@ void GameInitBriefingRoom()
 BOOLEAN EnterBriefingRoom()
 {
 	VOBJECT_DESC    VObjectDesc;
-  
+
     //-----------------------------------------
 	// upon entry to Imp home page
 	memset(pPlayerBriefingRoomActivationString, 0, sizeof(pPlayerBriefingRoomActivationString));
@@ -140,7 +140,7 @@ BOOLEAN EnterBriefingRoom()
 	LaptopInitBriefingRoom();
 
 	InitBriefingRoomDefaults();
-	
+
 	// load the Rust bacground graphic and add it
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	//FilenameForBPP("LAPTOP\\rustbackground.sti", VObjectDesc.ImageFile);
@@ -151,28 +151,28 @@ BOOLEAN EnterBriefingRoom()
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("BriefingRoom\\CONTENTBUTTON.sti", VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &guiContentButtonBriefingRoom));
-*/	
+*/
 	// this procedure will load the activation indent into memory
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("LAPTOP\\ActivationIndent.sti", VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &guiBRIEFINGROOMACTIVATIONINDENT));
 
 	//** Mouse Regions **
-/*	
+/*
 	usPosY = BRIEFINGROOM_CONTENTBUTTON_Y + 120;
 	for(i=0; i<BRIEFINGROOM_BUTTONS_DEF; i++)
 	{
 			if ( i == 0 )
 		MSYS_DefineRegion( &gSelectedBriefingRoomTocMenuRegion[i], BRIEFINGROOM_TOC_X, usPosY, (UINT16)(BRIEFINGROOM_TOC_X + BRIEFINGROOM_BUTTON_SIZE_X), (UINT16)(usPosY + BRIEFINGROOM_BUTTON_SIZE_Y), MSYS_PRIORITY_HIGH,
-									CURSOR_WWW, MSYS_NO_CALLBACK, SelectBriefingRoomLocationButton);												
-									
+									CURSOR_WWW, MSYS_NO_CALLBACK, SelectBriefingRoomLocationButton);
+
 		MSYS_AddRegion(&gSelectedBriefingRoomTocMenuRegion[i]);
-		
+
 		usPosY += BRIEFINGROOM_TOC_GAP_Y;
 	}
 */
 	fFirstTimeInBriefingRoom = FALSE;
-	
+
 	RenderBriefingRoom();
 
 	return( TRUE );
@@ -184,12 +184,12 @@ void LaptopInitBriefingRoom()
 }
 
 void ExitBriefingRoom()
-{	
+{
 	RemoveBriefingRoomDefaults();
 
 	//DeleteVideoObjectFromIndex(guiContentButtonBriefingRoom);
 	DeleteVideoObjectFromIndex(guiRustBriefingRoomLogoAim);
-	
+
 	// remove activation indent symbol
 	DeleteVideoObjectFromIndex( guiBRIEFINGROOMACTIVATIONINDENT );
 }
@@ -213,24 +213,24 @@ void HandleBriefingRoom()
 void RenderBriefingRoom()
 {
 	UINT16		usWidth=0;
-	
+
 	HVOBJECT hHandle;
-	
+
 	DrawBriefingRoomDefaults();
-	
+
 	DrawBriefingRoomLogoAim();
-	
+
 	// get the video object
 	GetVideoObject(&hHandle, guiBRIEFINGROOMACTIVATIONINDENT);
 	// blt to sX, sY relative to upper left corner
 	BltVideoObject(FRAME_BUFFER, hHandle, 0, LAPTOP_SCREEN_UL_X + 200, LAPTOP_SCREEN_WEB_UL_Y + 260 , VO_BLT_SRCTRANSPARENCY,NULL);
-	
+
 	DisplayBriefingRoomSlogan();
 
 	DisplayBriefingRoomCopyright();
 
-	RenderWWWProgramTitleBar( );	
-	
+	RenderWWWProgramTitleBar( );
+
 	// render the	activation string
 	//-------------
 	DisplayPlayerActivationBriefingRoomString( );
@@ -240,7 +240,7 @@ void RenderBriefingRoom()
 }
 
 void SelectBriefingRoomLocationButton(MOUSE_REGION * pRegion, INT32 iReason )
-{ 
+{
 	if (iReason & MSYS_CALLBACK_REASON_INIT)
 	{
 
@@ -248,11 +248,11 @@ void SelectBriefingRoomLocationButton(MOUSE_REGION * pRegion, INT32 iReason )
 	else if(iReason & MSYS_CALLBACK_REASON_LBUTTON_UP)
 	{
 		bBriefingRoom  = TRUE;
-		if(!fFirstTimeInBriefingRoom) guiCurrentLaptopMode = LAPTOP_MODE_BRIEFING_ROOM;	
+		if(!fFirstTimeInBriefingRoom) guiCurrentLaptopMode = LAPTOP_MODE_BRIEFING_ROOM;
 	}
 	else if (iReason & MSYS_CALLBACK_REASON_RBUTTON_UP)
 	{
-	} 
+	}
 }
 
 BOOLEAN InitBriefingRoomDefaults()
@@ -287,7 +287,7 @@ BOOLEAN DrawBriefingRoomLogoAim()
 
 BOOLEAN DrawBriefingRoomDefaults()
 {
-	HVOBJECT hRustBackGroundHandle;	
+	HVOBJECT hRustBackGroundHandle;
 
 	// Blt the rust background
 	GetVideoObject(&hRustBackGroundHandle, guiRustBriefingRoomBackGround);
@@ -554,18 +554,18 @@ void ProcessPlayerInputActivationBriefingRoomString( void )
 
 	if( ( ( wcscmp(pPlayerBriefingRoomActivationString, L"SN5631") == 0 ) || ( wcscmp(pPlayerBriefingRoomActivationString, L"sn5631") == 0 ) ) ) //&&( LaptopSaveInfo.gfNewGameLaptop < 2 ) )
 	{
-	
+
 		//bEncyclopediaLocation = FALSE;
 		//bEncyclopediaCharacter = FALSE;
 		//bEncyclopediaInventory = FALSE;
 		//bEncyclopediaQuests  = FALSE;
 		//bBriefingRoom  = FALSE;
 		//bBriefingRoomSpecialMission = TRUE;
-		
+
 		ResetTemp();
 		CopyToTemp (gBriefingRoomData, TRUE, 0 , -1, FALSE );
-		
-		if(!fFirstTimeInBriefingRoom) guiCurrentLaptopMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;	
+
+		if(!fFirstTimeInBriefingRoom) guiCurrentLaptopMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;
 
 		//	DoLapTopMessageBox( MSG_BOX_LAPTOP_DEFAULT, AimPopUpText[ AIM_MEMBER_ALREADY_HAVE_MAX_MERCS ], LAPTOP_SCREEN, MSG_BOX_FLAG_OK, NULL);
 	}

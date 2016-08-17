@@ -9,10 +9,10 @@
 	#include "XML.h"
 	#include "Interface.h"
 	#include "LuaInitNPCs.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "InterfaceItemImages.h"
 	#include "Soldier Profile.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 	#include "Encrypted File.h"
 	#include "GameSettings.h"
 	#include "Text.h"
@@ -28,8 +28,8 @@ typedef enum
 	LANGUAGE_ELEMENT_PROPERTY,
 	LANGUAGE_ELEMENT_SUBLIST,
 	LANGUAGE_ELEMENT_SUBLIST_PROPERTY,
-	
-	
+
+
 } LANGUAGE_PARSE_STAGE;
 
 LANGUAGE_LOCATION zlanguageText[1000];
@@ -106,7 +106,7 @@ languageLocationEndElementHandle(void *userData, const XML_Char *name)
 {
 	languageLocationParseData * pData = (languageLocationParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "MESSAGES") == 0)
 		{
@@ -114,20 +114,20 @@ languageLocationEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "TEXT") == 0)
 		{
-			pData->curElement = LANGUAGE_ELEMENT_LIST;	
-			
+			pData->curElement = LANGUAGE_ELEMENT_LIST;
+
 			if (!LanguageLocation_TextOnly )
 				{
 					pLang[pData->curLanguageData.uiIndex].uiIndex = pData->curLanguageData.uiIndex;
-					
+
 					if ( FileTypeXml == 0 )
-						wcscpy(XMLTacticalMessages[pData->curLanguageData.uiIndex], pData->curLanguageData.Message);	
+						wcscpy(XMLTacticalMessages[pData->curLanguageData.uiIndex], pData->curLanguageData.Message);
 				}
 				else
 				{
 					if ( FileTypeXml == 0 )
 						wcscpy(XMLTacticalMessages[pData->curLanguageData.uiIndex], pData->curLanguageData.Message);
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -141,7 +141,7 @@ languageLocationEndElementHandle(void *userData, const XML_Char *name)
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curLanguageData.Message, sizeof(pData->curLanguageData.Message)/sizeof(pData->curLanguageData.Message[0]) );
 			pData->curLanguageData.Message[sizeof(pData->curLanguageData.Message)/sizeof(pData->curLanguageData.Message[0]) - 1] = '\0';
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -160,7 +160,7 @@ BOOLEAN ReadInLanguageLocation(STR fileName, BOOLEAN localizedVersion, LANGUAGE_
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading NewTacticalMessages.xml" );
 
 	LanguageLocation_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -187,7 +187,7 @@ BOOLEAN ReadInLanguageLocation(STR fileName, BOOLEAN localizedVersion, LANGUAGE_
 
 	memset(&pData,0,sizeof(pData));
 	XML_SetUserData(parser, &pData);
-	
+
 	pLang = Lang;
 	FileTypeXml = FileType2;
 

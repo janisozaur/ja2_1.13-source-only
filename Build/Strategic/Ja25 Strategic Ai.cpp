@@ -1,87 +1,87 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
-	#include "strategicmap.h"
-	#include "strategic.h"
+	#include "StrategicMap.h"
+	#include "Strategic.h"
 	#include "Strategic Mines.h"
-	#include "types.h"
+	#include "Types.h"
 	#include "memory.h"
 	#include <stdio.h>
 	#include <stdarg.h>
 	#include <math.h>
 	#include <time.h>
 	#include "jascreens.h"
-	#include "worlddef.h"
+	#include "WorldDef.h"
 	#include "Soldier Control.h"
-	#include "overhead.h"
-	#include "isometric utils.h"
-	#include "worlddef.h"
-	#include "worlddat.h"
-	#include "text.h"
-	#include "Soldier add.h"
-	#include "soldier macros.h"
+	#include "Overhead.h"
+	#include "Isometric Utils.h"
+	#include "WorldDef.h"
+	#include "WorldDat.h"
+	#include "Text.h"
+	#include "Soldier Add.h"
+	#include "Soldier Macros.h"
 	#include "Strategic Pathing.h"
-	#include "soldier create.h"
-	#include "handle UI.h"
-	#include "faces.h"
-	#include "renderworld.h"
+	#include "Soldier Create.h"
+	#include "Handle UI.h"
+	#include "Faces.h"
+	#include "RenderWorld.h"
 	#include "Map Information.h"
 	#include "Assignments.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Game Events.h"
-	#include "quests.h"
+	#include "Quests.h"
 	#include "FileMan.h"
-	#include "animated progressbar.h"
+	#include "Animated ProgressBar.h"
 	#include "Strategic Movement.h"
 	#include "Campaign Types.h"
 	#include "Exit Grids.h"
 	#include "Tactical Save.h"
-	#include "animation control.h"
-	#include "squads.h"
+	#include "Animation Control.h"
+	#include "Squads.h"
 	#include "Overhead.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Queen Command.h"
-	#include "cursor control.h"
+	#include "Cursor Control.h"
 	#include "PreBattle Interface.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "Random.h"
-	#include "ai.h"
-	#include "keys.h"
+	#include "AI.h"
+	#include "Keys.h"
 	#include "Tactical Placement GUI.h"
 	#include "Map Screen Helicopter.h"
 	#include "Player Command.h"
 	#include "Event Pump.h"
-	#include "air raid.h"
+	#include "Air Raid.h"
 	#include "Strategic Mines.h"
 	#include "SaveLoadMap.h"
 	#include "Militia Control.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "Town Militia.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "Debug Control.h"
 	#include "Queen Command.h"
 	#include "Strategic Event Handler.h"
 	#include "MessageBoxScreen.h"
-	#include "interface dialogue.h"
+	#include "Interface Dialogue.h"
 	#include "Map Screen Interface.h"
 	#include "Bullets.h"
-	#include "physics.h"
+	#include "Physics.h"
 	#include "Auto Resolve.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 #endif
 
 #ifdef JA2UB
 #include "Soldier Init List.h"
 #include "Dialogue Control.h"
 #include "Game Clock.h"
-#include "opplist.h"
+#include "Opplist.h"
 #include "Ja25Update.h"
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
+#include "Email.h"
 #include "SaveLoadGame.h"
 #include "Campaign.h"
 #include "Strategic Status.h"
@@ -245,7 +245,7 @@ void InitJa25StrategicAi()
 
 	//Init the Ja215 Stratigic AI
 	InitJa25StrategicSectorAI( TRUE );
-	
+
 	gStrategicStatus.ubHighestProgress = CurrentPlayerProgressPercentage();
 
 	//InitJohnKulbaInitialSector(); // wy³¹czone, skrypt lua
@@ -255,8 +255,8 @@ void InitJa25StrategicAi()
 BOOLEAN ShouldEnemiesBeAddedToInitialSector()
 {
 	//if there are still players in the first sector
-	if( gfWorldLoaded && 
-			gWorldSectorX == JA2_5_START_SECTOR_X && 
+	if( gfWorldLoaded &&
+			gWorldSectorX == JA2_5_START_SECTOR_X &&
 			gWorldSectorY == JA2_5_START_SECTOR_Y &&
 			AreAnyPlayerMercsStillInSector( JA2_5_START_SECTOR_X, JA2_5_START_SECTOR_Y, 0 ) )
 	{
@@ -313,7 +313,7 @@ BOOLEAN	AddEnemiesToInitialSectorH7()
 
 	//deduct the # that are moving from the # in the guard post sector
 //	SetNumberJa25EnemiesInSurfaceSector( SEC_H8, (UINT8)(ubNumAdmins-ubNumRemovedAdmins), (UINT8)(ubNumTroops-ubNumRemovedTroops), (UINT8)(ubNumElites-ubNumRemovedElites) );
-	SetNumberJa25EnemiesInSector( 8, MAP_ROW_H, 0, (UINT8)(ubNumAdmins-ubNumRemovedAdmins), (UINT8)(ubNumTroops-ubNumRemovedTroops), (UINT8)(ubNumElites-ubNumRemovedElites), 
+	SetNumberJa25EnemiesInSector( 8, MAP_ROW_H, 0, (UINT8)(ubNumAdmins-ubNumRemovedAdmins), (UINT8)(ubNumTroops-ubNumRemovedTroops), (UINT8)(ubNumElites-ubNumRemovedElites),
 								  (UINT8)(ubNumTanks-ubNumRemovedTanks), (UINT8)(ubNumJeeps-ubNumRemovedJeeps) );
 
 	uiWorldMin = GetWorldTotalMin();
@@ -412,7 +412,7 @@ void InitJa25UnderGroundSectors()
 void SetNumberJa25EnemiesInSector( INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ, UINT8 ubNumAdmins, UINT8 ubNumTroops, UINT8 ubNumElites, UINT8 ubNumTanks, UINT8 ubNumJeeps )
 {
 	//if its a ground level
-	
+
 	if( bSectorZ == 0 )
 	{
 		SetNumberJa25EnemiesInSurfaceSector( SECTOR( sSectorX, sSectorY ), ubNumAdmins, ubNumTroops, ubNumElites, ubNumTanks, ubNumJeeps );
@@ -423,7 +423,7 @@ void SetNumberJa25EnemiesInSector( INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ
 	{
 		SetNumberJa25EnemiesInUnderGroundSector( sSectorX, sSectorY, bSectorZ, ubNumAdmins, ubNumTroops, ubNumElites, ubNumTanks, ubNumJeeps );
 	}
-	
+
 }
 
 void SetNumberJa25EnemiesInSurfaceSector( INT32 iSectorID, UINT8 ubNumAdmins, UINT8 ubNumTroops, UINT8 ubNumElites, UINT8 ubNumTanks, UINT8 ubNumJeeps )
@@ -1092,7 +1092,7 @@ BOOLEAN SaveJa25SaveInfoToSaveGame( HWFILE hFile )
 	//
 
 	FileWrite( hFile, &gJa25AiSectorStruct, sizeof( JA25_SECTOR_AI ) * CUSTOMSECTOR , &uiNumBytesWritten ); //NUM_CAMPAIGN_JA25_SECTORS
-	if( uiNumBytesWritten != sizeof( JA25_SECTOR_AI ) * CUSTOMSECTOR  ) //NUM_CAMPAIGN_JA25_SECTORS 
+	if( uiNumBytesWritten != sizeof( JA25_SECTOR_AI ) * CUSTOMSECTOR  ) //NUM_CAMPAIGN_JA25_SECTORS
 	{
 		return( FALSE );
 	}
@@ -1153,7 +1153,7 @@ BOOLEAN LoadJa25SaveInfoFromSavedGame( HWFILE hFile )
 	//
 	// Sector Info
 	//
-	
+
 	// Init array for campaign sectors
 //	giNumJA25Sectors = NUM_CAMPAIGN_JA25_SECTORS;
 ///	gJa25AiSectorStruct = MemAlloc( giNumJA25Sectors * sizeof( JA25_SECTOR_AI ) );
@@ -1359,7 +1359,7 @@ UINT8 NumEnemiesToAttackFirstTunnelSector( UINT8 *pAdmins, UINT8 *pTroops, UINT8
 	UINT8	ubNumElites=0;
 	UINT8	ubNumTanks=0;
 	UINT8	ubNumJeeps=0;
-	
+
 	//if the player blew up the fan, add a ton of enemies to the sector
 	//1st Tunnel Sector
 	switch( gGameOptions.ubDifficultyLevel )
@@ -1406,7 +1406,7 @@ UINT8 NumEnemiesToAttackSecondTunnelSector( UINT8 *pAdmins, UINT8 *pTroops, UINT
 	UINT8	ubNumElites=0;
 	UINT8	ubNumTanks=0;
 	UINT8	ubNumJeeps=0;
-	
+
 	//if the player blew up the fan, add a ton of enemies to the sector
 	//1st Tunnel Sector
 	//2nd Tunnel Sector
@@ -1467,11 +1467,11 @@ BOOLEAN InitJa25StrategicSectorAI( BOOLEAN fReset )
 		//Clear out the structures first
 		memset( &gJa25StrategicAi, 0, sizeof( JA25_SECTOR_AI_MANAGER ) );
 /*
-		MemFree( gJa25AiSectorStruct ); 
+		MemFree( gJa25AiSectorStruct );
 		giNumJA25Sectors = NUM_CAMPAIGN_JA25_SECTORS;
 		gJa25AiSectorStruct = MemAlloc( sizeof( JA25_SAVE_INFO ) * giNumJA25Sectors );
 		memset( gJa25AiSectorStruct, 0, sizeof( JA25_SAVE_INFO ) * giNumJA25Sectors );
-*/		
+*/
 	}
 
 	//Init the sector values
@@ -1520,7 +1520,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 		gJa25AiSectorStruct[ ubCnt ].fPlayerControlled = FALSE;
 		gJa25AiSectorStruct[ ubCnt ].fPlayerHasLiberatedSectorBefore = FALSE;
 	}
-	
+
 	gJa25AiSectorStruct[ JA25_H7 ].iSectorID = SEC_H7;
 	gJa25AiSectorStruct[ JA25_H7 ].bSectorZ = 0;
 
@@ -1558,7 +1558,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 	gJa25AiSectorStruct[ JA25_H9 ].ubMinimumProbabiltyBeforeAttack = 15;
 
 	//
-	// H10:	
+	// H10:
 	//
 	gJa25AiSectorStruct[ JA25_H10 ].iSectorID = SEC_H10;
 	gJa25AiSectorStruct[ JA25_H10 ].bSectorZ = 0;
@@ -1595,7 +1595,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 	gJa25AiSectorStruct[ JA25_I10 ].bProbabilityOfAttacking = 10;
 	gJa25AiSectorStruct[ JA25_I10 ].bMaxProbabilityForAttackingSector = 60;
 	gJa25AiSectorStruct[ JA25_I10 ].ubMinimumProbabiltyBeforeAttack = 0;
-	
+
 	//
 	// I11:	Varrez, Second Part
 	//
@@ -1649,7 +1649,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 	gJa25AiSectorStruct[ JA25_I13_1 ].ubMinimumProbabiltyBeforeAttack = 0;
 
 	//
-	// J11:	
+	// J11:
 	//
 	gJa25AiSectorStruct[ JA25_J11 ].iSectorID = SEC_J11;
 	gJa25AiSectorStruct[ JA25_J11 ].bSectorZ = 0;
@@ -1662,7 +1662,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 	gJa25AiSectorStruct[ JA25_J11 ].ubMinimumProbabiltyBeforeAttack = 0;
 
 	//
-	// J12:	
+	// J12:
 	//
 	gJa25AiSectorStruct[ JA25_J12 ].iSectorID = SEC_J12;
 	gJa25AiSectorStruct[ JA25_J12 ].bSectorZ = 0;
@@ -1790,9 +1790,9 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 	gJa25AiSectorStruct[ JA25_L15_3 ].bProbabilityOfAttacking = 0;
 	gJa25AiSectorStruct[ JA25_L15_3 ].bMaxProbabilityForAttackingSector = 60;
 	gJa25AiSectorStruct[ JA25_L15_3 ].ubMinimumProbabiltyBeforeAttack = 0;
-	
+
 }
-	
+
 	return( TRUE );
 };
 
@@ -1867,7 +1867,7 @@ void Ja25_UpdateTimeOfEndOfLastBattle( INT16 sSectorX, INT16 sSectorY, INT8 bSec
 
 	gJa25SaveStruct.fEnemyShouldImmediatelySeekThePlayer = FALSE;
 	gJa25SaveStruct.bSectorTheEnemyWillSeekEnemy = -1;
-	
+
 }
 
 
@@ -1898,7 +1898,7 @@ INT8	GetTheFurthestSectorPlayerOwns()
 	INT8	bCnt;
 	BOOLEAN	fFoundLatest=FALSE;
 	INT8	bSector=-1;
-	
+
 if ( gGameUBOptions.pJA2UB == TRUE )
 {
 	//Loop through from the end of the list
@@ -1921,7 +1921,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 				//break;
 		//}
 	}
-		
+
 }
 	//There is no sector
 	return( bSector );
@@ -1974,10 +1974,10 @@ void SetJa25SectorOwnedStatus( INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ, BO
 
 	//if this is sector H8
 	if( sSectorX == 8 && sSectorY == MAP_ROW_H && bSectorZ == 0 )
-	{		
+	{
 		AddStrategicEvent( EVENT_SECTOR_H8_DONT_WAIT_IN_SECTOR, GetWorldTotalMin() + ( 5 * 60 ), 0 );
 	}
-	
+
 	}
 
 }
@@ -1987,7 +1987,7 @@ INT16 GetJA25SectorID( INT16 sSectorX, INT16 sSectorY, INT8 bSectorZ )
 {
 	INT8 bCnt=0;
 	INT16	sSector = 0;
-	
+
 if ( gGameUBOptions.pJA2UB == TRUE )
 {
 
@@ -2194,7 +2194,7 @@ BOOLEAN HandleAddEnemiesToSectorPlayerIsntIn( INT16 sSaiSector, UINT8 ubNumEnemi
 	INT16 sSectorX = SECTORX( gJa25AiSectorStruct[ sSaiSector ].iSectorID );
 	INT16 sSectorY = SECTORY( gJa25AiSectorStruct[ sSaiSector ].iSectorID );
 	INT8	bSectorZ = gJa25AiSectorStruct[ sSaiSector ].bSectorZ;
-	
+
 	if ( gGameUBOptions.pJA2UB == TRUE )
 	{
 
@@ -2273,7 +2273,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 
 		//the enemies should arrive at a spcific gridno
 		bAttackDirection = INSERTION_CODE_GRIDNO;
-		
+
 		//Determine which level the enemies should be created at
 		Ja25SAI_DetermineWhichLevelToAttackFrom( sSaiSector, &sSector, &bLevel );
 
@@ -2354,7 +2354,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 
 	cnt = gTacticalStatus.Team[ ENEMY_TEAM ].bFirstID;
   for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ ENEMY_TEAM ].bLastID; cnt++, pSoldier++)
-	{	
+	{
 		if( pSoldier->stats.bLife >= OKLIFE && pSoldier->bActive && pSoldier->bInSector )
 		{
 			// send soldier to centre of map, roughly
@@ -2404,7 +2404,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 			}
 
 			break;
-	}	
+	}
 }
 	return( sGridNo );
 }
@@ -2439,7 +2439,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 			sSector = gJa25AiSectorStruct[ sSaiSector ].iSectorID;
 			bLevel = gJa25AiSectorStruct[ sSaiSector ].bSectorZ;
 			break;
-	}	
+	}
 
 	*psSector = sSector;
 	*pbLevel = bLevel;
@@ -2455,7 +2455,7 @@ BOOLEAN AreAllPlayerMercTraversingBetweenSectors()
 
 	cnt = gTacticalStatus.Team[ OUR_TEAM ].bFirstID;
   for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; cnt++, pSoldier++)
-	{	
+	{
 		if( pSoldier->bActive )
 		{
 			pGroup = GetGroup( pSoldier->ubGroupID );
@@ -2464,7 +2464,7 @@ BOOLEAN AreAllPlayerMercTraversingBetweenSectors()
 			{
 				//if the group is NOT between sector
 				if( pGroup->fBetweenSectors == FALSE )
-				{					
+				{
 					return( FALSE );
 				}
 			}
@@ -2497,7 +2497,7 @@ BOOLEAN RecordJa25StrategicAiDecisions( INT16 sSectorAttacked, UINT8 ubNumEnemie
 	OutputJA25SaiString( hFile, "\n\n---  Strategic Ai Attack ---\n" );
 
 	//Sector
-	sprintf( zOutputString, "Sector Attacked:         %c%d: Level %d\n", 
+	sprintf( zOutputString, "Sector Attacked:         %c%d: Level %d\n",
 															'A' + SECTORY( gJa25AiSectorStruct[ sSectorAttacked ].iSectorID ) - 1,
 															SECTORX( gJa25AiSectorStruct[ sSectorAttacked ].iSectorID ),
 															gJa25AiSectorStruct[ sSectorAttacked ].bSectorZ );
@@ -2596,7 +2596,7 @@ UINT32 GetMinimumTimeBetweenAttacks()
 	//Add a random time to calculation
 	uiTime += Random( JA25_SAI_RANDOM_TIME );
 
-	return( uiTime );	
+	return( uiTime );
 }
 
 void InitJohnKulbaInitialSector()
@@ -2622,17 +2622,17 @@ void HandleSayingDontStayToLongWarningInSectorH8()
 	INT32			cnt;
 
 	//if the player has advance passed this sector, leave
-	
+
 	if( gJa25AiSectorStruct[ JA25_H9 ].fPlayerControlled && gGameUBOptions.pJA2UB == TRUE )
 	{
 		return;
 	}
-	
+
 	if ( SectorInfo[ (UINT8)SECTOR( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY ) ].fSurfaceWasEverPlayerControlled == TRUE && gGameUBOptions.pJA2UB == FALSE )
 	{
 		return;
-	} 
-	
+	}
+
 	//if there are no enemies in the sector, leave
 	if ( NumNonPlayerTeamMembersInSector( 8, 8, ENEMY_TEAM ) > 0 )
 	{
@@ -2655,7 +2655,7 @@ void HandleSayingDontStayToLongWarningInSectorH8()
 
 	//Check to see if Gaston, Stogie or the PGC is on the team
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; cnt++,pSoldier++)
-	{    
+	{
 		//if the merc is alive, in this sector, etc...
 		if( pSoldier->bActive	&&
 				pSoldier->sSectorX == 8 &&
@@ -2688,7 +2688,7 @@ void FixEnemyCounterInSectorBug()
 	INT32 iSectorCnt;
 	SECTORINFO *pSector;
 
-	//loop through all the sector and see if there has been 
+	//loop through all the sector and see if there has been
 	for( iSectorCnt=0; iSectorCnt<256 ; iSectorCnt++ )
 	{
 		//if the sector can never be rreached
@@ -2739,7 +2739,7 @@ if ( gGameUBOptions.pJA2UB == TRUE )
 		//Toast the ENEMIES init links
 		RemoveAllEnemySoldierInitListLinks();
 	}
-}	
+}
 }
 
 void RemoveAllEnemySoldierInitListLinks()
@@ -2753,7 +2753,7 @@ void RemoveAllEnemySoldierInitListLinks()
 	{
 		// if this soldier is using detailed placement information, AND he is an enemy
 		if( curr->pDetailedPlacement && curr->pDetailedPlacement->bTeam == ENEMY_TEAM )
-		{ 
+		{
 			MemFree( curr->pDetailedPlacement );
 			curr->pDetailedPlacement = NULL;
 			curr->pBasicPlacement->fDetailedPlacement = FALSE;
@@ -2768,7 +2768,7 @@ void Ja25HandleStartingAnyBattlesInOtherSectors()
 	UINT8 ubNumPlayers=0;
 	INT8 bCnt;
 	INT8	bSectorX, bSectorY, bSectorZ;
-	
+
 if  ( gGameUBOptions.pJA2UB == TRUE )
 {
 
@@ -2886,7 +2886,7 @@ if (gGameUBOptions.pJA2UB == TRUE )
 	{
 		return( TRUE );
 	}
-}	
+}
 else if (gGameUBOptions.pJA2UB == FALSE )
 {
 	//if the player has liberated K15 level 1
@@ -2898,7 +2898,7 @@ else if (gGameUBOptions.pJA2UB == FALSE )
 	{
 		return( TRUE );
 	}
-	
+
 }
 
 	return( FALSE );

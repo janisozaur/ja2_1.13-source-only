@@ -1,19 +1,19 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
-	#include "interface control.h"
+	#include "Interface Control.h"
 #else
 	#include <windows.h>
 	#include <mmsystem.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Timer Control.h"
-	#include "overhead.h"
-	#include "handle items.h"
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "interface control.h"
-	#include "keymap.h"
+	#include "Overhead.h"
+	#include "Handle Items.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "Interface Control.h"
+	#include "KeyMap.h"
 
 #endif
 
@@ -22,7 +22,7 @@
 #endif
 
 #include "Soldier Control.h"
-#include "connect.h"
+#include "Connect.h"
 
 // Base resolution of callback timer
 static INT32 BASETIMESLICE = 10;
@@ -287,11 +287,11 @@ BOOLEAN IsTimerActive(void)
 	return GetNextCounterDoneTime() <= FASTFORWARDTIMESLICE ? TRUE : FALSE;
 }
 
-DWORD WINAPI JA2ClockThread( LPVOID lpParam ) 
+DWORD WINAPI JA2ClockThread( LPVOID lpParam )
 {
 	__try
 	{
-		for(;;) 
+		for(;;)
 		{
 			TimeProc(0, 0, 0, 0, 0);
 
@@ -303,7 +303,7 @@ DWORD WINAPI JA2ClockThread( LPVOID lpParam )
 			// Sleep for a couple of milliseconds if not in fast forward mode
 			if (!IsFastForwardMode())
 				Sleep( TIME_US_TO_MS( GetNextCounterDoneTime() ) );
-		} 
+		}
 	}
 	__except( EXCEPTION_EXECUTE_HANDLER  )
 	{
@@ -312,10 +312,10 @@ DWORD WINAPI JA2ClockThread( LPVOID lpParam )
 	return 0L;
 }
 
-DWORD WINAPI JA2NotifyThread( LPVOID lpParam ) 
+DWORD WINAPI JA2NotifyThread( LPVOID lpParam )
 {
 	HANDLE waitHandles[] = {ghClockThreadShutdown, ghNotifyThreadEvent};
-	for(;;) 
+	for(;;)
 	{
 		DWORD dwResult = WaitForSingleObject(ghClockThreadShutdown, 0);
 		if (dwResult == WAIT_OBJECT_0 || dwResult == WAIT_ABANDONED)
@@ -338,7 +338,7 @@ DWORD WINAPI JA2NotifyThread( LPVOID lpParam )
 		{
 			// unexpected failure
 		}
-	} 
+	}
 	SetEvent(ghNotifyThreadShutdownComplete);
 	return 0L;
 }
@@ -384,20 +384,20 @@ BOOLEAN InitializeJA2Clock()
 		ghClockThreadShutdown = CreateEvent(NULL, TRUE, FALSE, NULL);
 		ghNotifyThreadEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 		ghNotifyThreadShutdownComplete = CreateEvent(NULL, TRUE, FALSE, NULL);
-		ghClockThread = CreateThread( 
+		ghClockThread = CreateThread(
 			NULL,              // default security attributes
-			0,                 // use default stack size  
-			JA2ClockThread,    // thread function 
-			NULL,              // argument to thread function 
-			0,                 // use default creation flags 
-			&gdwClockThreadId);// returns the thread identifier 
-		ghNotifyThread = CreateThread( 
+			0,                 // use default stack size
+			JA2ClockThread,    // thread function
+			NULL,              // argument to thread function
+			0,                 // use default creation flags
+			&gdwClockThreadId);// returns the thread identifier
+		ghNotifyThread = CreateThread(
 			NULL,              // default security attributes
-			0,                 // use default stack size  
-			JA2NotifyThread,    // thread function 
-			NULL,              // argument to thread function 
-			0,                 // use default creation flags 
-			&gdwNotifyThreadId);// returns the thread identifier 
+			0,                 // use default stack size
+			JA2NotifyThread,    // thread function
+			NULL,              // argument to thread function
+			0,                 // use default creation flags
+			&gdwNotifyThreadId);// returns the thread identifier
 	}
 	else
 	{
@@ -629,7 +629,7 @@ void AddTimerNotifyCallback( TIMER_NOTIFY_CALLBACK callback, PTR state )
 void RemoveTimerNotifyCallback( TIMER_NOTIFY_CALLBACK callback, PTR state )
 {
 	EnterCriticalSection(&gcsNotifyLock);
-	for ( TIMER_NOTIFY_ITEM_ITERATOR itr = glNotifyCallbacks.begin(); itr != glNotifyCallbacks.end(); ) 
+	for ( TIMER_NOTIFY_ITEM_ITERATOR itr = glNotifyCallbacks.begin(); itr != glNotifyCallbacks.end(); )
 	{
 		if ( callback == (*itr).callback && state == (*itr).state )
 			itr = glNotifyCallbacks.erase(itr);

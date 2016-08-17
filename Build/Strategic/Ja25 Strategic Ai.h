@@ -22,15 +22,15 @@ typedef struct
 
 	BOOLEAN		fNpcHasBeenAdded;													// True if manuel has been added to sector H10 or i9
 
-	BOOLEAN		fShowMercDestinationDialogWhenHiringMerc;	// 
+	BOOLEAN		fShowMercDestinationDialogWhenHiringMerc;	//
 
 	BOOLEAN		fHaveAimandMercOffferItems;								// TRUE when MERC and AIM are giving away 'gifts' to the mercs that get hired
 
 	BOOLEAN		fBiffWasKilledWhenImportingSave;					//TRUE is biff was killed when we imported the save
 
-	UINT8			ubImportantSpeckQuotesSaidBefore;					
+	UINT8			ubImportantSpeckQuotesSaidBefore;
 
-	BOOLEAN		fShouldMsgBoxComeUpSayingSomeoneImportantIsInSector;		
+	BOOLEAN		fShouldMsgBoxComeUpSayingSomeoneImportantIsInSector;
 
 	UINT8			ubStateOfFanInPowerGenSector;
 
@@ -121,7 +121,7 @@ enum
 	PG__PLAYER_STOPPED_FAN_TO_GET_THROUGH,
 };
 
-//The following flags are used with uiJa25GeneralFlags.  
+//The following flags are used with uiJa25GeneralFlags.
 #define		JA_GF__POWER_GEN_FAN_HAS_BEEN_STOPPED																			0x00000001
 #define		JA_GF__BIGGENS_SAID_QUOTE_117																							0x00000002
 #define		JA_GF__DID_PLAYER_MAKE_SOUND_GOING_THROUGH_TUNNEL_GATE										0x00000004

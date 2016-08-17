@@ -1,22 +1,22 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "JA2 All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "vobject_blitters.h"
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "input.h"
-	#include "font.h"
-	#include "screenids.h"
-	#include "container.h"
-	#include "overhead.h"
-	#include "sysutil.h"
+	#include "VObject.h"
+	#include "VObject_blitters.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "Input.h"
+	#include "Font.h"
+	#include "ScreenIds.h"
+	#include "Container.h"
+	#include "Overhead.h"
+	#include "SysUtil.h"
 	#include "Font Control.h"
 	#include "Animation Control.h"
 	#include "Animation Data.h"
@@ -26,9 +26,9 @@
 	#include "Interface.h"
 	#include <wchar.h>
 	#include <tchar.h>
-	#include "english.h"
-	#include "Fileman.h"
-	#include "messageboxscreen.h"
+	#include "English.h"
+	#include "FileMan.h"
+	#include "MessageBoxScreen.h"
 #endif
 
 //forward declarations of common classes to eliminate includes

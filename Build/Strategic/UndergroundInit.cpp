@@ -16,7 +16,7 @@ extern "C" {
 #include "lua_state.h"
 #include "lua_table.h"
 #include "lua_function.h"
-#include "connect.h"
+#include "Connect.h"
 
 // externals
 UNDERGROUND_SECTORINFO* NewUndergroundNode( UINT8 ubSectorX, UINT8 ubSectorY, UINT8 ubSectorZ );
@@ -59,15 +59,15 @@ BOOLEAN LuaUnderground::InitializeSectorList()
 		LuaState L = GetLuaState();
 
 		LuaFunction initsectorlist_func(L, "BuildUndergroundSectorList");
-		
+
 		initsectorlist_func
 			.TableOpen()
 			.TParam("difficultyLevel", int(gGameOptions.ubDifficultyLevel))
 			.TParam("gameStyle", int(gGameOptions.ubGameStyle))
-			.TableClose();		
-		
+			.TableClose();
+
 		SGP_THROW_IFFALSE(initsectorlist_func.Call(1), "call to lua function BuildUndergroundSectorList failed");
-		
+
 		LuaTable result(L, -1);
 		if (result.is_valid())
 		{
@@ -126,7 +126,7 @@ BOOLEAN LuaUnderground::InitializeSectorList()
 					else
 						m_log << "WARNING: ignoring invalid location ID: '" << location << "'" << LF;
 
-					m_log.Flush();				
+					m_log.Flush();
 				}
 
 				lua_pop(L(), 1);  // sectorData
@@ -175,7 +175,7 @@ void LuaUnderground::GetLoadscreen(INT16 x, INT16 y, INT16 z, std::string& loads
 			m_log << "ERROR: GetLoadscreen('" << strSector << "'): return value #1 is not a valid string object" << LF;
 		lua_pop(L(), 1);
 	}
-	
+
 	return;
 }
 
@@ -189,7 +189,7 @@ void LuaUnderground::GetSectorName(INT16 x, INT16 y, INT16 z, const UNDERGROUND_
 	LuaState L = GetLuaState();
 
 	LuaFunction getSectorName_func(L, "GetSectorName");
-	
+
 	getSectorName_func
 		.Param(coords)
 		.TableOpen()
@@ -256,7 +256,7 @@ void LuaUnderground::LoadScript(const char * langPrefix)
 	// we don't use L.EvalFile because the lua parser dislikes UTF-8 BOMs (gonna strip them first)
 	RunScript(L, sectornames.c_str());
 	RunScript(L, initunderground);
-	
+
 	// TODO: see if we can make this better
 	{
 		lua_getglobal(L(), "logging");
@@ -295,7 +295,7 @@ bool LuaUnderground::RunScript(LuaState& L, const char * szFileName)
 		m_log.Flush();
 
 		//throw sgp::Exception(msg.c_str(), __LINE__, _FUNCTION_FORMAT_, __FILE__);
-		SGP_THROW(msg);		
+		SGP_THROW(msg);
 	}
 
 	size = FileSize(filename);
@@ -331,11 +331,11 @@ LuaUnderground::~LuaUnderground()
 BOOLEAN locationStringToCoordinates(std::string loc, UINT8* x, UINT8* y, UINT8* z)
 {
 	int length = loc.length();
-	
+
 	// gather row
 	if (length < 4 || length > 5)
 		return false;
-	
+
 	char row = loc[0];
 	if (row >= 'A' && row <= 'P')
 		*y = row - 'A' + 1;
@@ -343,7 +343,7 @@ BOOLEAN locationStringToCoordinates(std::string loc, UINT8* x, UINT8* y, UINT8* 
 		*y = row - 'a' + 1;
 	else
 		return false;
-	
+
 	// gather column
 	loc = loc.substr(1);
 	std::stringstream ss;
@@ -363,14 +363,14 @@ BOOLEAN locationStringToCoordinates(std::string loc, UINT8* x, UINT8* y, UINT8* 
 		*x = col;
 	else
 		return false;
-	
+
 	// gather level
 	char lvl = loc[loc.length() - 1];
 	if (lvl >= '1' && lvl <= '3')
 		*z = lvl - '0';
 	else
 		return false;
-	
+
 	return true;
 }
 

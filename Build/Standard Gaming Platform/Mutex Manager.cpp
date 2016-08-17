@@ -4,7 +4,7 @@
 	#include "WIZ8 SGP ALL.H"
 #else
 	#include "Mutex Manager.h"
-	#include "debug.h"
+	#include "Debug.h"
 #endif
 //#define __MUTEX_TYPE
 

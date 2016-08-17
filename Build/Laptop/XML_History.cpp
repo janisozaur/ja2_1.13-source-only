@@ -8,7 +8,7 @@
 	#include "Interface.h"
 	#include "Soldier Profile.h"
 	#include "Text.h"
-	#include "history.h"
+	#include "History.h"
 #endif
 
 struct
@@ -50,7 +50,7 @@ mercHistoryStartElementHandle(void *userData, const XML_Char *name, const XML_Ch
 		}
 		else if(pData->curElement == ELEMENT &&
 			   (strcmp(name, "uiIndex") == 0 ||
-				strcmp(name, "sHistory") == 0 
+				strcmp(name, "sHistory") == 0
 				))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
@@ -83,7 +83,7 @@ mercHistoryEndElementHandle(void *userData, const XML_Char *name)
 {
 	mercHistoryParseData * pData = (mercHistoryParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "STRINGS") == 0)
 		{
@@ -91,19 +91,19 @@ mercHistoryEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "TEXT") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!MercHistory_TextOnly)
 				{
-					wcscpy(HistoryName[pData->curMercHistorys.uiIndex].sHistory, pData->curMercHistorys.sHistory);	
+					wcscpy(HistoryName[pData->curMercHistorys.uiIndex].sHistory, pData->curMercHistorys.sHistory);
 					//wcscpy(pHistoryStrings[pData->curMercHistorys.uiIndex], pData->curMercHistorys.sHistory);
 				}
 				else
 				{
 					wcscpy(HistoryName[pData->curMercHistorys.uiIndex].sHistory, pData->curMercHistorys.sHistory);
-					//wcscpy(pHistoryStrings[pData->curMercHistorys.uiIndex], pData->curMercHistorys.sHistory);					
-				}		
-		
+					//wcscpy(pHistoryStrings[pData->curMercHistorys.uiIndex], pData->curMercHistorys.sHistory);
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -138,7 +138,7 @@ BOOLEAN ReadInHistorys(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading History.xml" );
 
 	MercHistory_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

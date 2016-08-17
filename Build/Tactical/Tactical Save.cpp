@@ -4,7 +4,7 @@
 #else
 	#include "Types.h"
 	#include "MemMan.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Items.h"
 	#include "Handle Items.h"
 	#include "StrategicMap.h"
@@ -13,37 +13,37 @@
 	#include "Campaign Types.h"
 	#include "SaveLoadGame.h"
 	#include "WorldDef.h"
-	#include "rotting corpses.h"
-	#include "OverHead.h"
+	#include "Rotting Corpses.h"
+	#include "Overhead.h"
 	#include "Keys.h"
 	#include "Soldier Create.h"
 	#include "Soldier Profile.h"
 	#include "Isometric Utils.h"
 	#include "Soldier Add.h"
-	#include "Npc.h"
-	#include "Ai.h"
+	#include "NPC.h"
+	#include "AI.h"
 	#include "Game Clock.h"
 	#include "Animation Control.h"
 	#include "Map Information.h"
 	#include "SaveLoadMap.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Random.h"
-	#include "quests.h"
+	#include "Quests.h"
 	#include "Animated ProgressBar.h"
 	#include "Text.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Enemy Soldier Save.h"
 	#include "SmokeEffects.h"
 	#include "LightEffects.h"
-	#include "PATHAI.H"
+	#include "PathAI.h"
 	#include "GameVersion.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Map Screen Interface Map.h"
 	#include "Strategic Status.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "sgp.h"
 	#include "MessageBoxScreen.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Queen Command.h"
 	#include "Map Screen Interface Map Inventory.h"
 #endif
@@ -461,7 +461,7 @@ BOOLEAN	LoadMapTempFilesFromSavedGameFile( HWFILE hFile )
 				if ( !RetrieveTempFileFromSavedGame( hFile, SF_LIGHTING_EFFECTS_TEMP_FILE_EXISTS, sMapX, sMapY, 0 ) )
 					return FALSE;
 			}
-			
+
 			//if any other file is to be saved
 
 			++iCounter;
@@ -472,7 +472,7 @@ BOOLEAN	LoadMapTempFilesFromSavedGameFile( HWFILE hFile )
 			RenderProgressBar( 0, uiPercentage );
 		}
 	}
-	
+
 	//then look throught all the underground sectors
 	while( TempNode )
 	{
@@ -805,7 +805,7 @@ BOOLEAN AddItemsToUnLoadedSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ, INT32 sG
 	std::vector<WORLDITEM> pWorldItems;//dnl ch75 271013
 	UINT32	cnt;
 	UINT32	uiLoop1=0;
-	
+
 	if ( uiNumberOfItemsToAdd == 0 && fReplaceEntireFile == FALSE )
 	{
 		//Moa: nothing to do, so get out of here!
@@ -889,7 +889,7 @@ BOOLEAN AddItemsToUnLoadedSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ, INT32 sG
 		pWorldItems[ cnt ].bRenderZHeightAboveLevel = bRenderZHeightAboveLevel;
 
 
-		//Check		
+		//Check
 		if(TileIsOutOfBounds(sGridNo) && !( pWorldItems[ cnt ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 		{
 			pWorldItems[ cnt ].usFlags |= WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT;
@@ -1549,10 +1549,10 @@ BOOLEAN LoadAndAddWorldItemsFromTempFile( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 			if( pWorldItems[cnt].usFlags & WOLRD_ITEM_FIND_SWEETSPOT_FROM_GRIDNO )
 			{
 				sNewGridNo = FindNearestAvailableGridNoForItem( pWorldItems[cnt].sGridNo, 5 );
-								
+
 				if(TileIsOutOfBounds(sNewGridNo))
 				  sNewGridNo = FindNearestAvailableGridNoForItem( pWorldItems[cnt].sGridNo, 15 );
-				
+
 				if (!TileIsOutOfBounds(sNewGridNo))
 				{
 					pWorldItems[cnt].sGridNo = sNewGridNo;
@@ -1799,7 +1799,7 @@ BOOLEAN LoadRottingCorpsesFromTempCorpseFile( INT16 sMapX, INT16 sMapY, INT8 bMa
 		FileClose( hFile );
 		return( FALSE );
 	}
-	
+
 	// WANNE: If we get wrong data (very high value) from the temp file, we assume we have wrong value and therefore set corpses to 0 which will not crash the game!
 	if (uiNumberOfCorpses > 10000)
 		uiNumberOfCorpses = 0;
@@ -1825,7 +1825,7 @@ BOOLEAN LoadRottingCorpsesFromTempCorpseFile( INT16 sMapX, INT16 sMapY, INT8 bMa
 		if( def.usFlags & ROTTING_CORPSE_FIND_SWEETSPOT_FROM_GRIDNO )
 		{
 			def.sGridNo = FindNearestAvailableGridNoForCorpse( &def, 5 );
-			
+
 			if(TileIsOutOfBounds(def.sGridNo))
 				def.sGridNo = FindNearestAvailableGridNoForCorpse( &def, 15 );
 
@@ -1984,7 +1984,7 @@ BOOLEAN AddWorldItemsToUnLoadedSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ, INT
 		pWorldItems[ uiLastItemPos ].bRenderZHeightAboveLevel = pWorldItem[ uiLoop ].bRenderZHeightAboveLevel;
 
 
-		//Check		
+		//Check
 		if(TileIsOutOfBounds(pWorldItem[ uiLoop ].sGridNo) && !( pWorldItems[ uiLastItemPos ].usFlags & WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT ) )
 		{
 			pWorldItems[ uiLastItemPos ].usFlags |= WORLD_ITEM_GRIDNO_NOT_SET_USE_ENTRY_POINT;
@@ -2726,7 +2726,7 @@ BOOLEAN SetSectorFlag( INT16 sMapX, INT16 sMapY, UINT8 bMapZ, UINT32 uiFlagToSet
 				}
 			}
 		}*/
-		
+
 
 		// HEADROCK HAM 3.4: Externalized.
 		/*
@@ -3324,7 +3324,7 @@ void	SetNumberOfVisibleWorldItemsInSectorStructureForSector( INT16 sMapX, INT16 
 	}
 }
 
-//Moa 09/19/13: changed loop upperbound from uiTotalNumberOfRealItems to uiTotalNumberOfItems, 
+//Moa 09/19/13: changed loop upperbound from uiTotalNumberOfRealItems to uiTotalNumberOfItems,
 // this effectivly removes one entire loop in GetNumberOfActiveWorldItemsFromTempFile and 2 file reads.
 // also changed type of iCounter from INT32 to UINT32 and for in if-clauses from true to TRUE to get rid of unneccessary casts.
 void SynchronizeItemTempFileVisbleItemsToSectorInfoVisbleItems( INT16 sMapX, INT16 sMapY, INT8 bMapZ, BOOLEAN fLoadingGame )
@@ -3369,8 +3369,8 @@ void SynchronizeItemTempFileVisbleItemsToSectorInfoVisbleItems( INT16 sMapX, INT
 				uiItemCount += pTotalSectorList[iCounter].object.ubNumberOfObjects;
 			}
 		}
-		
-		// Flugente: if we load a game, we would save the data again in UpdateWorldItemsTempFile. 
+
+		// Flugente: if we load a game, we would save the data again in UpdateWorldItemsTempFile.
 		// But that function simply loads the data again and writes it. If we do the saving here, we can at least save the entire 'load it again' part
 		if ( fLoadingGame && guiCurrentSaveGameVersion != SAVE_GAME_VERSION )
 		{
@@ -3380,7 +3380,7 @@ void SynchronizeItemTempFileVisbleItemsToSectorInfoVisbleItems( INT16 sMapX, INT
 			guiCurrentSaveGameVersion = backup;
 		}
 	}
-		
+
 #ifdef JA2BETAVERSION
 	if( fLoadingGame && guiCurrentSaveGameVersion >= 86 )
 	{

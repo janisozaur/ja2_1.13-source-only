@@ -5,8 +5,8 @@
 
 	#include "Strategic Merc Handler.h"
 	#include "History.h"
-	#include "Game clock.h"
-	#include "insurance Contract.h"
+	#include "Game Clock.h"
+	#include "Insurance Contract.h"
 	#include "Soldier Profile.h"
 	#include "Game Event Hook.h"
 	#include "Assignments.h"
@@ -17,27 +17,27 @@
 	#include "Random.h"
 	#include "Morale.h"
 	#include "Mercs.h"
-	#include "Mapscreen.h"
-	#include "weapons.h"
+	#include "MapScreen.h"
+	#include "Weapons.h"
 	#include "Personnel.h"
 	#include "Strategic Movement.h"
 	#include "LaptopSave.h"
 	#include "Message.h"
 	#include "Text.h"
 	#include "Interface.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "Strategic Status.h"
-	#include "aim.h"
-	#include "email.h"
+	#include "Aim.h"
+	#include "Email.h"
 	#include "Map Screen Interface.h"
 	#include "Campaign.h"
 	#include "Soldier Add.h"
-	#include "screenids.h"
-	#include "gameloop.h"
+	#include "ScreenIds.h"
+	#include "GameLoop.h"
 	#include "jascreens.h"
-	#include "Soldier macros.h"
-	#include "finances.h"
+	#include "Soldier Macros.h"
+	#include "Finances.h"
 	#include "GameSettings.h"
 	#include "Quests.h"
 	// HEADROCK HAM B1: Additional Include for Dynamic Roaming Restrictions
@@ -407,9 +407,9 @@ void MercDailyUpdate()
 			}
 		}
 	}
-	
+
 	// WANNE: Only send mails from the original 1.13 merc, and not from the wildfire merc,
-	// otherwise we get wrong mails cause of hardcoded Email.edt structure!!!!!	
+	// otherwise we get wrong mails cause of hardcoded Email.edt structure!!!!!
 	UINT16 numOriginalProfiles = 255;
 	for( cnt = 0; cnt < numOriginalProfiles; cnt++)
 	{
@@ -482,21 +482,21 @@ void MercDailyUpdate()
 						UINT8 pMerc = 0;
 						UINT8 iMerc = 0;
 						UINT8 oMerc = 0;
-						
+
 					if ( ReadXMLEmail == TRUE )
 					{
 						oMerc = cnt;
 						iMerc = oMerc * 1;
-						
+
 						if ( oMerc != 0 )
 							pMerc = oMerc + 1;
 						else
 							pMerc = 0;
 						if ( gProfilesAIM[cnt].ProfilId == cnt )
 							AddEmailTypeXML( pMerc, iMerc, iMerc, GetWorldTotalMin(), -1 , TYPE_EMAIL_AIM_AVAILABLE);
-					}	
-					else	 
-					{	
+					}
+					else
+					{
 						// Read from Email.edt and sender (nickname) from MercProfiles.xml
 						if (cnt < 170)
 						{
@@ -511,7 +511,7 @@ void MercDailyUpdate()
 								UINT16 iMsgLength = cnt;
 
 								// Fake Barry Unger mail, but with the msgLength of the WF merc ID -> Correct in PreProcessEmail()
-								AddEmailWFMercAvailable( ( UINT8 )( iOffset + 0 * AIM_REPLY_LENGTH_BARRY ), iMsgLength, cnt, GetWorldTotalMin(), -1 , TYPE_EMAIL_EMAIL_EDT_NAME_MERC);							
+								AddEmailWFMercAvailable( ( UINT8 )( iOffset + 0 * AIM_REPLY_LENGTH_BARRY ), iMsgLength, cnt, GetWorldTotalMin(), -1 , TYPE_EMAIL_EMAIL_EDT_NAME_MERC);
 							}
 							// Generic mail
 							else
@@ -520,10 +520,10 @@ void MercDailyUpdate()
 								UINT16 iMsgLength = cnt;
 
 								// Fake Barry Unger mail, but with the msgLength of the WF merc ID -> Correct in PreProcessEmail()
-								AddEmailWFMercAvailable( ( UINT8 )( iOffset + 0 * AIM_REPLY_LENGTH_BARRY ), iMsgLength, cnt, GetWorldTotalMin(), -1 , TYPE_EMAIL_EMAIL_EDT_NAME_MERC);							
+								AddEmailWFMercAvailable( ( UINT8 )( iOffset + 0 * AIM_REPLY_LENGTH_BARRY ), iMsgLength, cnt, GetWorldTotalMin(), -1 , TYPE_EMAIL_EMAIL_EDT_NAME_MERC);
 							}
 						}
-					
+
 					}
 						// WANNE: Should we stop time compression. I don't know.
 						//StopTimeCompression();
@@ -1070,25 +1070,25 @@ void UpdateBuddyAndHatedCounters( void )
 												{
 													TacticalCharacterDialogue( pSoldier, QUOTE_HATED_MERC_ONE );
 												}
-												else if (iLoop == 1) 
+												else if (iLoop == 1)
 												{
 													TacticalCharacterDialogue( pSoldier, QUOTE_HATED_MERC_TWO );
 												}
-												else if (iLoop == 2) 
+												else if (iLoop == 2)
 												{
 													if( pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__AIM_MERC )
 														TacticalCharacterDialogue( pSoldier, QUOTE_AIM_HATED_MERC_THREE );
 													else
 														TacticalCharacterDialogue( pSoldier, QUOTE_NON_AIM_HATED_MERC_THREE );
 												}
-												else if (iLoop == 3) 
+												else if (iLoop == 3)
 												{
 													if( pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__AIM_MERC )
 														TacticalCharacterDialogue( pSoldier, QUOTE_AIM_HATED_MERC_FOUR );
 													else
 														TacticalCharacterDialogue( pSoldier, QUOTE_NON_AIM_HATED_MERC_FOUR );
 												}
-												else if (iLoop == 4) 
+												else if (iLoop == 4)
 												{
 													if( pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__AIM_MERC )
 														TacticalCharacterDialogue( pSoldier, QUOTE_AIM_HATED_MERC_FIVE );
@@ -1123,25 +1123,25 @@ void UpdateBuddyAndHatedCounters( void )
 											{
 												TacticalCharacterDialogue( pSoldier, QUOTE_HATED_MERC_ONE );
 											}
-											else if (iLoop == 1) 
+											else if (iLoop == 1)
 											{
 												TacticalCharacterDialogue( pSoldier, QUOTE_HATED_MERC_TWO );
 											}
-											else if (iLoop == 2) 
+											else if (iLoop == 2)
 											{
 												if( pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__AIM_MERC )
 													TacticalCharacterDialogue( pSoldier, QUOTE_AIM_HATED_MERC_THREE );
 												else
 													TacticalCharacterDialogue( pSoldier, QUOTE_NON_AIM_HATED_MERC_THREE );
 											}
-											else if (iLoop == 3) 
+											else if (iLoop == 3)
 											{
 												if( pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__AIM_MERC )
 													TacticalCharacterDialogue( pSoldier, QUOTE_AIM_HATED_MERC_FOUR );
 												else
 													TacticalCharacterDialogue( pSoldier, QUOTE_NON_AIM_HATED_MERC_FOUR );
 											}
-											else if (iLoop == 4) 
+											else if (iLoop == 4)
 											{
 												if( pSoldier->ubWhatKindOfMercAmI == MERC_TYPE__AIM_MERC )
 													TacticalCharacterDialogue( pSoldier, QUOTE_AIM_HATED_MERC_FIVE );
@@ -1470,7 +1470,7 @@ void HourlyCamouflageUpdate( void )
 				{
 					pSoldier->CreateSoldierPalettes( );
 				}
-				
+
 				DirtyMercPanelInterface( pSoldier, DIRTYLEVEL2 );
 				camoWoreOff = FALSE;
 			}
@@ -1523,16 +1523,16 @@ void HandleAddingAnyAimAwayEmailsWhenLaptopGoesOnline()
 
 					//remove the Flag, so if the merc goes on another assignment, the player can leave an email.
 					pProfile->ubMiscFlags3 &= ~PROFILE_MISC_FLAG3_PLAYER_LEFT_MSG_FOR_MERC_AT_AIM;
-					
+
 						UINT8 pMerc = 0;
 						UINT8 iMerc = 0;
 						UINT8 oMerc = 0;
-						
+
 					if ( ReadXMLEmail == TRUE )
 					{
 						oMerc = cnt;
 						iMerc = oMerc * 1;
-						
+
 						if ( oMerc != 0 )
 							pMerc = oMerc + 1;
 						else

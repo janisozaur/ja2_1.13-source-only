@@ -46,7 +46,7 @@ inline void WriteFlags(XMLWriter &xmlw, std::string const& sNodeName, FlagType f
 	xmlw.addAttributeToNextValue("value",(int)flags);
 	xmlw.openNode(sNodeName);
 
-	/*0x01*/ if(_FLAG(flags, (FlagType)AUX_FULL_TILE))			xmlw.addValue("AUX_FULL_TILE");				
+	/*0x01*/ if(_FLAG(flags, (FlagType)AUX_FULL_TILE))			xmlw.addValue("AUX_FULL_TILE");
 	/*0x02*/ if(_FLAG(flags, (FlagType)AUX_ANIMATED_TILE))		xmlw.addValue("AUX_ANIMATED_TILE");
 	/*0x04*/ if(_FLAG(flags, (FlagType)AUX_DYNAMIC_TILE))		xmlw.addValue("AUX_DYNAMIC_TILE");
 	/*0x08*/ if(_FLAG(flags, (FlagType)AUX_INTERACTIVE_TILE))	xmlw.addValue("AUX_INTERACTIVE_TILE");
@@ -66,12 +66,12 @@ inline void WriteFlags(XMLWriter &xmlw, std::string const& sNodeName, FlagType f
  *
 //File information header
 //provides general information about the file
-typedef struct tagBITMAPFILEHEADER { 
-	unsigned short		bfType; 
-	unsigned int		bfSize; 
-	unsigned short		bfReserved1; 
-	unsigned short		bfReserved2; 
-	unsigned int		bfOffBits; 
+typedef struct tagBITMAPFILEHEADER {
+	unsigned short		bfType;
+	unsigned int		bfSize;
+	unsigned short		bfReserved1;
+	unsigned short		bfReserved2;
+	unsigned int		bfOffBits;
 } BITMAPFILEHEADER, *PBITMAPFILEHEADER;
 /*typedef struct tagBITMAPFILEHEADER {
         WORD    bfType;
@@ -83,17 +83,17 @@ typedef struct tagBITMAPFILEHEADER {
 //Bitmap information header
 //provides information specific to the image data
 typedef struct tagBITMAPINFOHEADER{
-	unsigned int	biSize; 
-	long			biWidth; 
-	long			biHeight; 
-	unsigned short  biPlanes; 
-	unsigned short  biBitCount; 
-	unsigned int	biCompression; 
-	unsigned int	biSizeImage; 
-	long			biXPelsPerMeter; 
-	long			biYPelsPerMeter; 
-	unsigned int	biClrUsed; 
-	unsigned int	biClrImportant; 
+	unsigned int	biSize;
+	long			biWidth;
+	long			biHeight;
+	unsigned short  biPlanes;
+	unsigned short  biBitCount;
+	unsigned int	biCompression;
+	unsigned int	biSizeImage;
+	long			biXPelsPerMeter;
+	long			biYPelsPerMeter;
+	unsigned int	biClrUsed;
+	unsigned int	biClrImportant;
 } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
 /*typedef struct tagBITMAPINFOHEADER{
         DWORD      biSize;
@@ -111,18 +111,18 @@ typedef struct tagBITMAPINFOHEADER{
 
 //Colour palette
 typedef struct tagRGBQUAD {
-	unsigned char    rgbBlue; 
-	unsigned char    rgbGreen; 
-	unsigned char    rgbRed; 
-	unsigned char    rgbReserved; 
+	unsigned char    rgbBlue;
+	unsigned char    rgbGreen;
+	unsigned char    rgbRed;
+	unsigned char    rgbReserved;
 } RGBQUAD; */
 
 /******************************************************************************************/
 
 
 
-ja2xp::CImage::CImage(vfs::Path const& sFileName) 
-: m_eImageType(IT_NONE), m_pRawImage(NULL), m_bImageLoaded(false) 
+ja2xp::CImage::CImage(vfs::Path const& sFileName)
+: m_eImageType(IT_NONE), m_pRawImage(NULL), m_bImageLoaded(false)
 {
 	m_pImageFile = getVFS()->getReadFile(sFileName);
 	if(!m_pImageFile )
@@ -131,8 +131,8 @@ ja2xp::CImage::CImage(vfs::Path const& sFileName)
 	}
 };
 
-ja2xp::CImage::CImage(vfs::tReadableFile *pFile) 
-: m_pImageFile(pFile), m_eImageType(IT_NONE), m_pRawImage(NULL), m_bImageLoaded(false) 
+ja2xp::CImage::CImage(vfs::tReadableFile *pFile)
+: m_pImageFile(pFile), m_eImageType(IT_NONE), m_pRawImage(NULL), m_bImageLoaded(false)
 {
 };
 
@@ -179,7 +179,7 @@ UINT32 ja2xp::CImage::GetNumberOfSubImages()
 	}
 	return 0;
 }
-	
+
 bool ja2xp::CImage::LoadData()
 {
 	if(m_bImageLoaded && m_pRawImage == NULL)
@@ -292,7 +292,7 @@ bool ja2xp::CImage::GetPosition(UINT32 uiSubImage, INT32 &iX, INT32 &iY)
 	}
 	return true;
 }
-		
+
 void* ja2xp::CImage::GetDataPointer(UINT32 &uiSize)
 {
 	if(m_eImageType == IT_BITMAP)
@@ -323,7 +323,7 @@ UINT32 ja2xp::CImage::FillData(UINT32 uiSubImage, UINT8* pData, UINT32 uiMaxSize
 	}
 	else if(m_eImageType == IT_COMPRESSED)
 	{
-		if( (uiSubImage < m_pRawImage->usNumberOfObjects) )//&& 
+		if( (uiSubImage < m_pRawImage->usNumberOfObjects) )//&&
 			//(uiMaxSize > m_pRawImage->pETRLEObject[uiSubImage].uiDataLength) )
 		{
 			UINT32 written = 0;
@@ -335,7 +335,7 @@ UINT32 ja2xp::CImage::FillData(UINT32 uiSubImage, UINT8* pData, UINT32 uiMaxSize
 			{
 				written = UnpackETRLEImageToBuffer((UINT8*)pData,m_pRawImage,uiSubImage);
 			}
-			// TODO : 
+			// TODO :
 			return written;
 		}
 	}
@@ -418,7 +418,7 @@ bool CImage::WriteAsBMPs(vfs_string sOutPathName)
 
 	//SplitPath(m_pImageFile->GetFileName(),path,sFileName);
 	SplitPath(m_pImageFile->GetFileName()(),path,sFileName);
-	
+
 	for(int i=0; i<m_pRawImage->usNumberOfObjects; ++i)
 	{
 		ETRLEObject &image = m_pRawImage->pETRLEObject[i];
@@ -480,14 +480,14 @@ bool CImage::WriteAsBMPs(vfs_string sOutPathName)
 			}
 			UINT32 written_bytes;
 			// file header
-			if(!pWriteFile->Write(&bmp_header,sizeof(BITMAPFILEHEADER),&written_bytes) || 
+			if(!pWriteFile->Write(&bmp_header,sizeof(BITMAPFILEHEADER),&written_bytes) ||
 				written_bytes != sizeof(BITMAPFILEHEADER) )
 			{
 				pWriteFile->Close();
 				return false;
 			}
 			// info header
-			if(!pWriteFile->Write(&bmp_infoheader,sizeof(BITMAPINFOHEADER),&written_bytes) || 
+			if(!pWriteFile->Write(&bmp_infoheader,sizeof(BITMAPINFOHEADER),&written_bytes) ||
 				written_bytes != sizeof(BITMAPINFOHEADER) )
 			{
 				pWriteFile->Close();
@@ -503,7 +503,7 @@ bool CImage::WriteAsBMPs(vfs_string sOutPathName)
 				palette[i].rgbRed  = pal[i].peRed;
 				palette[i].rgbReserved = pal[i].peFlags;
 			}
-			if(!pWriteFile->Write(palette,sizeof(RGBQUAD)*256,&written_bytes) || 
+			if(!pWriteFile->Write(palette,sizeof(RGBQUAD)*256,&written_bytes) ||
 				written_bytes != sizeof(RGBQUAD)*256 )
 			{
 				pWriteFile->Close();
@@ -515,7 +515,7 @@ bool CImage::WriteAsBMPs(vfs_string sOutPathName)
 			for(int j=bmp_infoheader.biHeight-1; j>=0; --j)
 			{
 				memcpy(scanline,&data[j*bmp_infoheader.biWidth],bmp_infoheader.biWidth);
-				if(!pWriteFile->Write(scanline,scanline_size,&written_bytes) || 
+				if(!pWriteFile->Write(scanline,scanline_size,&written_bytes) ||
 					written_bytes != scanline_size )
 				{
 					pWriteFile->Close();
@@ -525,7 +525,7 @@ bool CImage::WriteAsBMPs(vfs_string sOutPathName)
 			delete[] scanline;
 			pWriteFile->Close();
 		}
-		delete[] data; 
+		delete[] data;
 	}
 
 	return true;
@@ -574,10 +574,10 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 	png::png_error_ptr user_error_fn   = NULL;
 	png::png_error_ptr user_warning_fn = NULL;
 
-	png::png_structp png_ptr = png_create_write_struct( 
+	png::png_structp png_ptr = png_create_write_struct(
 		PNG_LIBPNG_VER_STRING,
 		(png::png_voidp)user_error_ptr,
-		user_error_fn, 
+		user_error_fn,
 		user_warning_fn );
 	if (!png_ptr)
 	{
@@ -610,7 +610,7 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 		image.usWidth,				// - holds the width of the image in pixels (up to 2^31).
 		image.usHeight,				//   holds the height of the image in pixels (up to 2^31).
 		bit_depth,					// - holds the bit depth of one of the image channels.
-									//   (valid values are 1, 2, 4, 8, 16 and depend also on the color_type.  
+									//   (valid values are 1, 2, 4, 8, 16 and depend also on the color_type.
 									//   See also significant bits (sBIT) below).
 		color_type,					// - describes which color/alpha channels are present.
 									//   PNG_COLOR_TYPE_GRAY (bit depths 1, 2, 4, 8, 16)
@@ -638,21 +638,21 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 			pngpal[p].green = stipal[p].peGreen;
 			pngpal[p].blue  = stipal[p].peBlue;
 		}
-		png_set_PLTE(png_ptr, info_ptr, 
+		png_set_PLTE(png_ptr, info_ptr,
 			pngpal,						// the palette for the file (array of png_color)
 			PALETTE_SIZE				// number of entries in the palette
 		);
 	}
 
-	//png_set_gAMA(png_ptr, info_ptr, 
+	//png_set_gAMA(png_ptr, info_ptr,
 	//	gamma						// - the gamma the image was created at (PNG_INFO_gAMA)
 	//);
 
-	//png_set_sRGB(png_ptr, info_ptr, 
+	//png_set_sRGB(png_ptr, info_ptr,
 	//	srgb_intent					// - the rendering intent (PNG_INFO_sRGB) The presence of
-	//								//   the sRGB chunk means that the pixel data is in the sRGB 
-	//								//   color space. This chunk also implies specific values 
-	//								//   of gAMA and cHRM.  Rendering intent is the CSS-1 property 
+	//								//   the sRGB chunk means that the pixel data is in the sRGB
+	//								//   color space. This chunk also implies specific values
+	//								//   of gAMA and cHRM.  Rendering intent is the CSS-1 property
 	//								//   that has been defined by the International Color Consortium
 	//								//   (http://www.color.org/).
 	//								// 	 It can be one of PNG_sRGB_INTENT_SATURATION,
@@ -663,12 +663,12 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 
 	//png_set_sRGB_gAMA_and_cHRM(png_ptr, info_ptr,
 	//   srgb_intent					// - the rendering intent (PNG_INFO_sRGB) The presence of the
-	//								//   sRGB chunk means that the pixel data is in the sRGB color 
-	//								//   space. This function also causes gAMA and cHRM chunks with 
+	//								//   sRGB chunk means that the pixel data is in the sRGB color
+	//								//   space. This function also causes gAMA and cHRM chunks with
 	//								//   the specific values that are consistent with sRGB to be written.
 	//);
 
-	//png_set_iCCP(png_ptr, info_ptr, 
+	//png_set_iCCP(png_ptr, info_ptr,
 	//	name,						// - The profile name.
 	//	compression_type,			// - The compression type; always PNG_COMPRESSION_TYPE_BASE for PNG 1.0.
 	//								//   You may give NULL to this argument to gnore it.
@@ -676,38 +676,38 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 	//	proflen						// - length of profile data in bytes.
 	//);
 
-	//png_set_sBIT(png_ptr, info_ptr, 
-	//	sig_bit						// - the number of significant bits for (PNG_INFO_sBIT) each of the 
-	//								//   gray, red, green, and blue channels, whichever are appropriate 
+	//png_set_sBIT(png_ptr, info_ptr,
+	//	sig_bit						// - the number of significant bits for (PNG_INFO_sBIT) each of the
+	//								//   gray, red, green, and blue channels, whichever are appropriate
 	//								//   for the given color type (png_color_16)
 	//);
 
-	//png_set_tRNS(png_ptr, info_ptr, 
+	//png_set_tRNS(png_ptr, info_ptr,
 	//	trans,						// - array of transparent entries for palette (PNG_INFO_tRNS)
-	//	num_trans,					// - graylevel or color sample values of the single transparent 
+	//	num_trans,					// - graylevel or color sample values of the single transparent
 	//								//   color for non-paletted images (PNG_INFO_tRNS)
 	//	trans_values				// - number of transparent entries (PNG_INFO_tRNS)
 	//);
 
-	//png_set_hIST(png_ptr, info_ptr, 
+	//png_set_hIST(png_ptr, info_ptr,
 	//	hist						// - histogram of palette (array of png_uint_16)
 	//);
 
-	//png_set_tIME(png_ptr, info_ptr, 
+	//png_set_tIME(png_ptr, info_ptr,
 	//	mod_time					// - time image was last modified (PNG_VALID_tIME)
 	//);
 
-	//png_set_bKGD(png_ptr, info_ptr, 
+	//png_set_bKGD(png_ptr, info_ptr,
 	//	background					// - background color (PNG_VALID_bKGD)
 	//);
 
-	//png_set_text(png_ptr, info_ptr, 
+	//png_set_text(png_ptr, info_ptr,
 	//	text_ptr,					// - array of png_text holding image comments
 	//	num_text					// - number of comments
 	//);
 	/*****
 		text_ptr[i].compression		// - type of compression used on "text" PNG_TEXT_COMPRESSION_NONE
-									//   PNG_TEXT_COMPRESSION_zTXt 
+									//   PNG_TEXT_COMPRESSION_zTXt
 									//   PNG_ITXT_COMPRESSION_NONE
 									//	 PNG_ITXT_COMPRESSION_zTXt
 		text_ptr[i].key				// - keyword for comment.  Must contain 1-79 characters.
@@ -719,37 +719,37 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 									// - keyword in UTF-8 (NULL or empty for unknown).
 	*****/
 
-	//png_set_sPLT(png_ptr, info_ptr, 
-	//	&palette_ptr,				// - array of png_sPLT_struct structures to be added to the list 
+	//png_set_sPLT(png_ptr, info_ptr,
+	//	&palette_ptr,				// - array of png_sPLT_struct structures to be added to the list
 	//								//   of palettes in the info structure.
 	//	num_spalettes				// - number of palette structures to be added.
 	//);
 
-	png_set_oFFs(png_ptr, info_ptr, 
+	png_set_oFFs(png_ptr, info_ptr,
 		image.sOffsetX,				// - positive offset from the left edge of the screen
 		image.sOffsetY,				// - positive offset from the top edge of the screen
 		PNG_OFFSET_PIXEL			// - PNG_OFFSET_PIXEL, PNG_OFFSET_MICROMETER
 	);
 
-	//png_set_pHYs(png_ptr, info_ptr, 
+	//png_set_pHYs(png_ptr, info_ptr,
 	//	res_x,						// - pixels/unit physical resolution in x direction
 	//	res_y,						// - pixels/unit physical resolution in y direction
 	//	unit_type					// - PNG_RESOLUTION_UNKNOWN, PNG_RESOLUTION_METER
 	//);
 
-	//png_set_sCAL(png_ptr, info_ptr, 
+	//png_set_sCAL(png_ptr, info_ptr,
 	//	unit,						// - physical scale units (an integer)
 	//	width,						// - width of a pixel in physical scale units
 	//	height						// - height of a pixel in physical scale units (width and height are doubles)
 	//);
 
-	//png_set_sCAL_s(png_ptr, info_ptr, 
+	//png_set_sCAL_s(png_ptr, info_ptr,
 	//	unit,						// - physical scale units (an integer)
-	//	width,						// - width of a pixel in physical scale units 
+	//	width,						// - width of a pixel in physical scale units
 	//	height						// - height of a pixel in physical scale units (width and height are strings like "2.54")
 	//);
 
-	//png_set_unknown_chunks(png_ptr, info_ptr, 
+	//png_set_unknown_chunks(png_ptr, info_ptr,
 	//	&unknowns,					// - array of png_unknown_chunk structures holding unknown chunks
 	//	num_unknowns
 	//);
@@ -776,7 +776,7 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 		PNG_TRANSFORM_SWAP_ENDIAN      - Byte-swap 16-bit samples PNG_TRANSFORM_STRIP_FILLER  Strip out filler bytes.
 	*****/
 	UINT32 png_transforms = PNG_TRANSFORM_IDENTITY;
-	
+
 	UINT32 num_values = image.usWidth * image.usHeight * (rgba ? 4 : 1);
 	sgp::AutoArray<UINT8> image_data(num_values);
 	UINT32 fill_size = num_values * sizeof(UINT8);
@@ -793,7 +793,7 @@ bool ja2xp::CImage::writeSubImageToPNGFile(int i, vfs::tWritableFile* file, bool
 		rows[j] = &image_data[j * line_skip];
 	}
 	png::png_set_rows(png_ptr,info_ptr, rows());
-	
+
 	if(file)
 	{
 		vfs::COpenWriteFile wfile(file);
@@ -815,7 +815,7 @@ bool ja2xp::CImage::writeImageToPNGFile(vfs::tWritableFile* file, bool rgba)
 	png::png_error_ptr	user_error_fn = NULL;
 	png::png_error_ptr	user_warning_fn = NULL;
 
-	png::png_structp png_ptr = png::png_create_write_struct( 
+	png::png_structp png_ptr = png::png_create_write_struct(
 		PNG_LIBPNG_VER_STRING,
 		(png::png_voidp)user_error_ptr,
 		user_error_fn,
@@ -850,7 +850,7 @@ bool ja2xp::CImage::writeImageToPNGFile(vfs::tWritableFile* file, bool rgba)
 		m_pRawImage->usWidth,			// - holds the width of the image in pixels (up to 2^31).
 		m_pRawImage->usHeight,			//   holds the height of the image in pixels (up to 2^31).
 		8,								// - holds the bit depth of one of the image channels.
-										//   (valid values are 1, 2, 4, 8, 16 and depend also on the color_type.  
+										//   (valid values are 1, 2, 4, 8, 16 and depend also on the color_type.
 										//   See also significant bits (sBIT) below).
 		PNG_COLOR_TYPE_RGB,				// - describes which color/alpha channels are present.
 										//   PNG_COLOR_TYPE_GRAY (bit depths 1, 2, 4, 8, 16)
@@ -867,14 +867,14 @@ bool ja2xp::CImage::writeImageToPNGFile(vfs::tWritableFile* file, bool rgba)
 										//   be embedded in a MNG datastream, can also be PNG_INTRAPIXEL_DIFFERENCING)
 	);
 
-	png_set_oFFs(png_ptr, info_ptr, 
+	png_set_oFFs(png_ptr, info_ptr,
 		0,							// - positive offset from the left edge of the screen
 		0,							// - positive offset from the top edge of the screen
 		PNG_OFFSET_PIXEL			// - PNG_OFFSET_PIXEL, PNG_OFFSET_MICROMETER
 	);
 
 	UINT32 png_transforms = PNG_TRANSFORM_IDENTITY;
-		
+
 	std::vector<UINT8> image_data;
 	image_data.resize(3*m_pRawImage->usHeight*m_pRawImage->usWidth);
 	sgp::AutoArray<png::png_bytep> rows(m_pRawImage->usHeight);
@@ -886,7 +886,7 @@ bool ja2xp::CImage::writeImageToPNGFile(vfs::tWritableFile* file, bool rgba)
 			rows[j] = (UINT8*)&image_data[3*j*m_pRawImage->usWidth];
 		}
 		png_set_rows(png_ptr,info_ptr, rows());
-	}			
+	}
 	else if(m_pRawImage->ubBitDepth == 8)
 	{
 		UINT8 *image_data = (UINT8*)m_pRawImage->pImageData;
@@ -895,8 +895,8 @@ bool ja2xp::CImage::writeImageToPNGFile(vfs::tWritableFile* file, bool rgba)
 			rows[j] = &image_data[j*m_pRawImage->usWidth];
 		}
 		png_set_rows(png_ptr,info_ptr, rows());
-	}			
-		
+	}
+
 	if(file)
 	{
 		vfs::COpenWriteFile wfile(file);
@@ -965,9 +965,9 @@ bool ja2xp::CImage::WriteAsPNGs(vfs::tWritableFile* outFile, bool bWriteOffsets,
 
 	vfs::CCreateUncompressed7zLibrary outLib;
 	vfs::Path sFileName,path;
-	
+
 	m_pImageFile->getName().splitLast(path,sFileName);
-	
+
 	if(m_pRawImage->usNumberOfObjects)
 	{
 		for(int i=0; i<m_pRawImage->usNumberOfObjects; ++i)
@@ -998,10 +998,10 @@ bool ja2xp::CImage::WriteAsPNGs(vfs::tWritableFile* outFile, bool bWriteOffsets,
 			for(int i=0; i<m_pRawImage->usNumberOfObjects; ++i)
 			{
 				AuxObjectData *pAOD = (AuxObjectData*)(&(m_pRawImage->pAppData[i*16]));
-				if(pAOD && (pAOD->fFlags || 
-							pAOD->ubCurrentFrame || 
-							pAOD->ubNumberOfFrames || 
-							pAOD->ubNumberOfTiles || 
+				if(pAOD && (pAOD->fFlags ||
+							pAOD->ubCurrentFrame ||
+							pAOD->ubNumberOfFrames ||
+							pAOD->ubNumberOfTiles ||
 							pAOD->ubWallOrientation ||
 							pAOD->usTileLocIndex) )
 				{
@@ -1030,15 +1030,15 @@ bool ja2xp::CImage::WriteAsPNGs(vfs::Path outpath, bool bWriteOffsets, bool rgba
 	}
 
 	vfs::Path sFileName,path;
-	
+
 	m_pImageFile->getName().splitLast(path,sFileName);
-	
+
 	if(m_pRawImage->usNumberOfObjects)
 	{
 		for(int i=0; i<m_pRawImage->usNumberOfObjects; ++i)
 		{
 			vfs::Path filename = CreateFileName(outpath, sFileName, i, m_pRawImage->usNumberOfObjects, L"png");
-			
+
 			vfs::COpenWriteFile file(filename, true, true);
 			this->writeSubImageToPNGFile(i, &file.file(), rgba);
 		}
@@ -1059,10 +1059,10 @@ bool ja2xp::CImage::WriteAsPNGs(vfs::Path outpath, bool bWriteOffsets, bool rgba
 			for(int i=0; i<m_pRawImage->usNumberOfObjects; ++i)
 			{
 				AuxObjectData *pAOD = (AuxObjectData*)(&(m_pRawImage->pAppData[i*16]));
-				if(pAOD && (pAOD->fFlags || 
-							pAOD->ubCurrentFrame || 
-							pAOD->ubNumberOfFrames || 
-							pAOD->ubNumberOfTiles || 
+				if(pAOD && (pAOD->fFlags ||
+							pAOD->ubCurrentFrame ||
+							pAOD->ubNumberOfFrames ||
+							pAOD->ubNumberOfTiles ||
 							pAOD->ubWallOrientation ||
 							pAOD->usTileLocIndex) )
 				{
@@ -1145,19 +1145,19 @@ bool CImage::WriteAsSTIs(vfs_string sOutPathName)
 	}
 
 	vfs_string sFileName,path;
-	
+
 	//SplitPath(m_pImageFile->GetFileName(),path,sFileName);
 	SplitPath(m_pImageFile->GetFileName()(),path,sFileName);
-	
+
 	for(int i=0; i<m_pRawImage->usNumberOfObjects; ++i)
 	{
 		ETRLEObject &image = m_pRawImage->pETRLEObject[i];
 
 		IndexedSTIImage stiimg;
 		stiimg.AddCompressedImage(&m_pRawImage->p8BPPData[image.uiDataOffset], image.uiDataLength, image.usWidth, image.usHeight, image.sOffsetX, image.sOffsetY);
-		
-		stiimg.SetPalette(this->GetPalette(), 256);		
-		
+
+		stiimg.SetPalette(this->GetPalette(), 256);
+
 		ChompSlash(sOutPathName);
 		vfs_string filename = CreateFileName(sOutPathName, sFileName, i, m_pRawImage->usNumberOfObjects, L"sti");
 		vfs::tWriteableFile *pFile = GetWriteFile(filename);

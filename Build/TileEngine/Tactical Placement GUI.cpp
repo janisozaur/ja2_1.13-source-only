@@ -1,54 +1,54 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 // WANNE 2 <changed some lines>
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 	#include "PreBattle Interface.h"
-	#include "vehicles.h"
+	#include "Vehicles.h"
 #else
 	//sgp
-	#include "types.h"
+	#include "Types.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "input.h"
-	#include "english.h"
-	#include "debug.h"
-	#include "vsurface.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "line.h"
+	#include "Input.h"
+	#include "English.h"
+	#include "Debug.h"
+	#include "VSurface.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Line.h"
 
 	//ja2
 	#include "Tactical Placement GUI.h"
 	#include "Overhead Map.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Interface.h"
 	#include "Font Control.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Render Dirty.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "PreBattle Interface.h"
 	#include "Soldier Profile.h"
 	#include "Map Edgepoints.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
-	#include "gameloop.h"
-	#include "message.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
+	#include "GameLoop.h"
+	#include "Message.h"
 	#include "Map Information.h"
 	#include "Soldier Add.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Cursor Control.h"
 	#include "MessageBoxScreen.h"
-	#include "assignments.h"
-	#include "text.h"
+	#include "Assignments.h"
+	#include "Text.h"
 	#include "WordWrap.h"
 	#include "Game Clock.h"
 #endif
-#include "connect.h"
-#include "saveloadscreen.h"
+#include "Connect.h"
+#include "SaveLoadScreen.h"
 #include "Map Edgepoints.h"
-#include "renderworld.h"//dnl ch45 051009
+#include "RenderWorld.h"//dnl ch45 051009
 #include "merc entering.h"
 #include "CampaignStats.h"		// added by Flugente
 
@@ -405,14 +405,14 @@ void InitTacticalPlacementGUI()
 			gMercPlacement[ giPlacements ].pSoldier = MercPtrs[ i ];
 			gMercPlacement[ giPlacements ].ubStrategicInsertionCode = MercPtrs[ i ]->ubStrategicInsertionCode;
 			gMercPlacement[ giPlacements ].fPlaced = FALSE;
-			
+
 			// WANNE: We always want to have edgepoints
 			CheckForValidMapEdge( &MercPtrs[ i ]->ubStrategicInsertionCode );
-			
+
 			// Flugente: campaign stats
 			switch( MercPtrs[ i ]->ubStrategicInsertionCode )
 			{
-				case INSERTION_CODE_NORTH:					
+				case INSERTION_CODE_NORTH:
 					gCurrentIncident.usIncidentFlags |= INCIDENT_ATTACKDIR_NORTH;
 					break;
 				case INSERTION_CODE_EAST:
@@ -430,7 +430,7 @@ void InitTacticalPlacementGUI()
 			if (is_networked && MercPtrs[ i ]->ubStrategicInsertionCode == INSERTION_CODE_CENTER)
 			{
 				gfCenter = TRUE;
-			}	
+			}
 
 			++giPlacements;
 		}
@@ -443,17 +443,17 @@ void InitTacticalPlacementGUI()
 		//Load the faces
 		{
 			ubFaceIndex = gMercProfiles[ gMercPlacement[ i ].pSoldier->ubProfile ].ubFaceIndex;
-			
+
 		if ( ( ubFaceIndex < 100 ) && ( gProfilesIMP[ gMercPlacement[ i ].pSoldier->ubProfile ].ProfilId == gMercPlacement[ i ].pSoldier->ubProfile ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", ubFaceIndex );
-		} 
+		}
 		else if ( ( ubFaceIndex > 99 ) && ( gProfilesIMP[ gMercPlacement[ i ].pSoldier->ubProfile ].ProfilId == gMercPlacement[ i ].pSoldier->ubProfile ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%03d.sti", ubFaceIndex );
 		}
 		else if( ubFaceIndex < 100 )
-		{	
+		{
 			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", ubFaceIndex );
 		}
 		else if( ubFaceIndex > 99 )
@@ -555,7 +555,7 @@ UINT8 GetValidInsertionDirectionForMP(UINT8	currentInsertionPoint)
 			foundValidDirection = true;
 			validInsertionDirection = INSERTION_CODE_CHOPPER;
 			break;
-	}		
+	}
 
 	// Find alternate insertion direction by looping through all directions (N, S, E, W)
 	if (!foundValidDirection)
@@ -628,7 +628,7 @@ void RenderTacticalPlacementGUI()
 	UINT16 usHatchColor;
 	CHAR16 str[ 128 ];
 	UINT8 *pDestBuf;
-	UINT8 ubColor;	
+	UINT8 ubColor;
 
 	if( gfTacticalPlacementFirstTime )
 	{
@@ -676,7 +676,7 @@ void RenderTacticalPlacementGUI()
 		{
 			//Render the mercs
 			pSoldier = gMercPlacement[ i ].pSoldier;
-			
+
 			xp = xResOffset + 95 + (i / 2) * 54;
 
 			if (i % 2)
@@ -702,17 +702,17 @@ void RenderTacticalPlacementGUI()
 			iStartY = yp + 29 - 27*pSoldier->stats.bLifeMax/100;
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+36, iStartY, xp+37, yp+29, Get16BPPColor( FROMRGB( 107, 107, 57 ) ) );
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+37, iStartY, xp+38, yp+29, Get16BPPColor( FROMRGB( 222, 181, 115 ) ) );
-						
+
 			//pink one for bandaged.
 			iStartY = yp + 29 - 27*(pSoldier->stats.bLifeMax - pSoldier->bBleeding)/100;
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+36, iStartY, xp+37, yp+29, Get16BPPColor( FROMRGB( 156, 57, 57 ) ) );
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+37, iStartY, xp+38, yp+29, Get16BPPColor( FROMRGB( 222, 132, 132 ) ) );
-						
+
 			//red one for actual health
 			iStartY = yp + 29 - 27*pSoldier->stats.bLife/100;
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+36, iStartY, xp+37, yp+29, Get16BPPColor( FROMRGB( 107, 8, 8 ) ) );
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+37, iStartY, xp+38, yp+29, Get16BPPColor( FROMRGB( 206, 0, 0 ) ) );
-						
+
 			//BREATH BAR
 			iStartY = yp + 29 - 27*pSoldier->bBreathMax/100;
 			ColorFillVideoSurfaceArea( FRAME_BUFFER, xp+39, iStartY, xp+40, yp+29, Get16BPPColor( FROMRGB( 8, 8, 132 ) ) );
@@ -769,7 +769,7 @@ void RenderTacticalPlacementGUI()
 			gTPClipRect.iBottom = iOffsetVertical + 318;
 			gTPClipRect.iRight = iOffsetHorizontal + 634;
 		}
-	
+
 		if( gbCursorMercID == -1 )
 		{
 			if ( gubEnemyEncounterCode == ENEMY_AMBUSH_DEPLOYMENT_CODE )
@@ -948,9 +948,9 @@ void RenderTacticalPlacementGUI()
 			{
 				INT16 sCellX = 0;
 				INT16 sCellY = 0;
-				
+
 				GetOverheadScreenXYFromGridNo( gMapInformation.sCenterGridNo, &sCellX, &sCellY );
-				
+
 				// Left black border
 				gTPClipRectCenterLeft.iLeft = iOffsetHorizontal;
 				gTPClipRectCenterLeft.iTop = iOffsetVertical + 3;
@@ -1032,7 +1032,7 @@ void RenderTacticalPlacementGUI()
 		}
 
 		pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES );
-		
+
 		if (!gfCenter || (gGameExternalOptions.ubSkyriderHotLZ == 3 && gbSelectedMercID >= 0 && !(gMercPlacement[ gbSelectedMercID ].pSoldier->usSoldierFlagMask & SOLDIER_AIRDROP)) )
 			Blt16BPPBufferLooseHatchRectWithColor( (UINT16*)pDestBuf, uiDestPitchBYTES, &gTPClipRect, usHatchColor );
 		// WANNE - MP: Center
@@ -1055,7 +1055,7 @@ void RenderTacticalPlacementGUI()
 			RectangleDraw( TRUE, gTPClipRectCenterRight.iLeft, gTPClipRectCenterRight.iTop, gTPClipRectCenterRight.iRight, gTPClipRectCenterRight.iBottom, usHatchColor, pDestBuf );
 			RectangleDraw( TRUE, gTPClipRectCenterBottom.iLeft, gTPClipRectCenterBottom.iTop, gTPClipRectCenterBottom.iRight, gTPClipRectCenterBottom.iBottom, usHatchColor, pDestBuf );
 		}
-		
+
 		UnLockVideoSurface( FRAME_BUFFER );
 	}
 
@@ -1259,7 +1259,7 @@ void TacticalPlacementHandle()
 		}
 
 		// WANNE - MP: Center
-		if ( gfCenter && (is_networked || 
+		if ( gfCenter && (is_networked ||
 			gubEnemyEncounterCode == ENEMY_AMBUSH_DEPLOYMENT_CODE ||
 			( gGameExternalOptions.ubSkyriderHotLZ == 3 && gMercPlacement[gbSelectedMercID].pSoldier->usSoldierFlagMask & SOLDIER_AIRDROP )) )
 		{
@@ -1421,7 +1421,7 @@ void ChooseRandomEdgepoints()
 			{
 				gMercPlacement[ i ].pSoldier->usStrategicInsertionData = ChooseMapEdgepoint( &gMercPlacement[ i ].ubStrategicInsertionCode, lastValidICode );
 			}
-			
+
 			if( !TileIsOutOfBounds(gMercPlacement[ i ].pSoldier->usStrategicInsertionData))
 			{
 				gMercPlacement[ i ].pSoldier->ubStrategicInsertionCode = INSERTION_CODE_GRIDNO;
@@ -1648,7 +1648,7 @@ void HandleTacticalPlacementClicksInOverheadMap( MOUSE_REGION *reg, INT32 reason
 							if( gMercPlacement[ i ].pSoldier->ubGroupID == gubSelectedGroupID )
 							{
 								gMercPlacement[ i ].pSoldier->usStrategicInsertionData = SearchForClosestPrimaryMapEdgepoint( sGridNo, gMercPlacement[ i ].ubStrategicInsertionCode, lastValidICode, &gMercPlacement[ i ].ubStrategicInsertionCode );
-								
+
 								if(TileIsOutOfBounds(gMercPlacement[ i ].pSoldier->usStrategicInsertionData))
 								{
 									fInvalidArea = TRUE;
@@ -1674,7 +1674,7 @@ void HandleTacticalPlacementClicksInOverheadMap( MOUSE_REGION *reg, INT32 reason
 					else
 					{ //This is a single merc placement.	If valid, then place him, else report error.
 						gMercPlacement[ gbSelectedMercID ].pSoldier->usStrategicInsertionData = SearchForClosestPrimaryMapEdgepoint( sGridNo, gMercPlacement[ gbSelectedMercID ].ubStrategicInsertionCode );
-						
+
 						if( !TileIsOutOfBounds(gMercPlacement[ gbSelectedMercID ].pSoldier->usStrategicInsertionData))
 						{
 							gMercPlacement[ gbSelectedMercID ].pSoldier->ubStrategicInsertionCode = INSERTION_CODE_GRIDNO;
@@ -1777,7 +1777,7 @@ void PutDownMercPiece( INT32 iPlacement )
 		PickUpMercPiece( iPlacement );
 
 	sGridNo = FindGridNoFromSweetSpot( pSoldier, pSoldier->sInsertionGridNo, 4, &ubDirection );
-	
+
 	if(!TileIsOutOfBounds(sGridNo))
 	{
 		// Flugente: initiate airdrop, place merc on roof if necessary
@@ -1796,7 +1796,7 @@ void PutDownMercPiece( INT32 iPlacement )
 		}
 
 		ConvertGridNoToCellXY( sGridNo, &sCellX, &sCellY );
-		
+
 		FLOAT scX = (FLOAT)sCellX;
 		FLOAT scY = (FLOAT)sCellY;//hayden
 		if (is_networked)
@@ -1812,7 +1812,7 @@ void PutDownMercPiece( INT32 iPlacement )
 		{
 			ubDirection = (UINT8)GetDirectionToGridNoFromGridNo( gMapInformation.sCenterGridNo, sGridNo ) + 100;
 		}
-		
+
 		pSoldier->EVENT_SetSoldierDirection( ubDirection );
 		pSoldier->ubInsertionDirection = pSoldier->ubDirection;
 

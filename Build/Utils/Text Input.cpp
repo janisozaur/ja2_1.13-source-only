@@ -1,21 +1,21 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <math.h>
 	#include <stdio.h>
 	#include <time.h>
 	#include <wchar.h>
-	#include "input.h"
-	#include "font.h"
-	#include "english.h"
-	#include "vsurface.h"
-	#include "video.h"
-	#include "debug.h"
-	#include "cursors.h"
+	#include "Input.h"
+	#include "Font.h"
+	#include "English.h"
+	#include "VSurface.h"
+	#include "Video.h"
+	#include "Debug.h"
+	#include "Cursors.h"
 	#include "Text Input.h"
 	#include "Timer Control.h"
-	#include "vobject_blitters.h"
+	#include "VObject_blitters.h"
 	#include "Font Control.h"
 	#include "Sound Control.h"
 #endif
@@ -761,7 +761,7 @@ BOOLEAN HandleTextInput( InputAtom *Event )
 		if( Event->usParam == 'c' || Event->usParam == 'C' )
 		{
 			ExecuteCopyCommand();
-			
+
 			// only swallow key if we did anything
 			if (szClipboard && wcslen(szClipboard)>0)
 				return TRUE;
@@ -771,7 +771,7 @@ BOOLEAN HandleTextInput( InputAtom *Event )
 		else if( Event->usParam == 'x' || Event->usParam == 'X' )
 		{
 			ExecuteCutCommand();
-			
+
 			// only swallow key if we did anything
 			if (szClipboard && wcslen(szClipboard)>0)
 				return TRUE;
@@ -1339,7 +1339,7 @@ void RenderActiveTextField()
 			if (visPixLengthToCursor > regionXLen)
 			{
 				// shift the visble string right
-				
+
 				// find out how many characters to shift the parked character right by
 				UINT16 diff = visPixLengthToCursor - regionXLen;
 				UINT16 j = 0; // the number of characters
@@ -1974,6 +1974,6 @@ void CopyToClipboard( void )
 		}
 
 		// finish up
-		CloseClipboard();	
+		CloseClipboard();
 	}
 }

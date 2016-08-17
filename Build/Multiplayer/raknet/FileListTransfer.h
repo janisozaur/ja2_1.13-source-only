@@ -50,7 +50,7 @@ class RAK_DLL_EXPORT FileListTransfer : public PluginInterface
 public:
 	FileListTransfer();
 	virtual ~FileListTransfer();
-	
+
 	/// Allows one corresponding Send() call from another system to arrive.
 	/// \param[in] handler The class to call on each file
 	/// \param[in] deleteHandler True to delete the handler when it is no longer needed.  False to not do so.

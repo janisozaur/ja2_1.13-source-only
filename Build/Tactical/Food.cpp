@@ -3,12 +3,12 @@
 #else
 	#include <math.h>
 	#include "sgp.h"
-	#include "soldier profile.h"
+	#include "Soldier Profile.h"
 	#include "Food.h"
-	#include "items.h"
-	#include "morale.h"
-	#include "points.h"
-	#include "message.h"
+	#include "Items.h"
+	#include "Morale.h"
+	#include "Points.h"
+	#include "Message.h"
 	#include "GameSettings.h" // SANDRO - had to add this, dammit!
 	#include "Random.h"
 	#include "Text.h"
@@ -20,11 +20,11 @@
 	#include "Isometric Utils.h"
 	#include "Campaign Types.h"
 	#include "Drugs And Alcohol.h"
-	#include "environment.h"
+	#include "Environment.h"
 	#include "WorldDat.h"
 	#include "Facilities.h"
-	#include "Soldier macros.h"
-	#include "strategicmap.h"
+	#include "Soldier Macros.h"
+	#include "StrategicMap.h"
 	#include "DynamicDialogue.h"			// added by Flugente
 #endif
 
@@ -176,7 +176,7 @@ BOOLEAN ApplyFood( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObject, UINT16 usPointsTo
 	// if not a food item, nothing to see here
 	if ( foodtype == 0 || foodtype > FOOD_TYPE_MAX )
 		return( FALSE);
-		
+
 	// workaround: canteens with 1% status are treated as 'empty'. They cannot be consumed, but refilled
 	if ( Item[pObject->usItem].canteen == TRUE && (*pObject)[0]->data.objectStatus == 1 )
 		return( FALSE);
@@ -185,16 +185,16 @@ BOOLEAN ApplyFood( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObject, UINT16 usPointsTo
 	UINT8 type = AP_EAT;
 	if ( Food[foodtype].bDrinkPoints > Food[foodtype].bFoodPoints )
 		type = AP_DRINK;
-	
+
 	// we have to determine wether the food is rotten, that might influence its condition and poison us
 	FLOAT foodcondition = (*pObject)[0]->data.bTemperature / OVERHEATING_MAX_TEMPERATURE;
-	
+
 	// food in bad condition is harmful!
 	if ( foodcondition < FOOD_BAD_THRESHOLD )
-	{	
+	{
 		// determine the max nutritional value
 		INT32 maxpts = max(Food[foodtype].bFoodPoints, Food[foodtype].bDrinkPoints);
-		
+
 		// we might get a disease from this...
 		FLOAT modifier = 1.0f - 2 * foodcondition;
 		HandlePossibleInfection( pSoldier, NULL, type == AP_EAT ? INFECTION_TYPE_BADFOOD : INFECTION_TYPE_BADWATER, modifier );
@@ -220,7 +220,7 @@ BOOLEAN ApplyFood( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObject, UINT16 usPointsTo
 	// if food is rotting, we get a morale penalty
 	if ( foodcondition < FOOD_BAD_THRESHOLD )
 		moralemod -= (FOOD_BAD_THRESHOLD - foodcondition) * 10;
-	
+
 	if ( moralemod > 0 )
 	{
 		while ( moralemod > 0 && moralemod >= gMoraleSettings.bValues[MORALE_GOOD_FOOD] )
@@ -263,7 +263,7 @@ BOOLEAN ApplyFood( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObject, UINT16 usPointsTo
 	// if object is infected, infect the victim
 	else if ( (*pObject)[0]->data.sObjectFlag & INFECTED && gGameExternalOptions.fDiseaseContaminatesItems )
 		pSoldier->Infect( 0 );
-	
+
 	INT32 sBPAdjustment = 0;
 	// if the food is more of a drink, we also restore breath points
 	if ( Food[foodtype].bDrinkPoints > Food[foodtype].bFoodPoints )
@@ -338,7 +338,7 @@ void FoodNeedForSleepModifiy( SOLDIERTYPE *pSoldier, UINT8* pubNeedForSleep )
 	UINT8 foodsituation;
 	UINT8 watersituation;
 	GetFoodSituation( pSoldier, &foodsituation, &watersituation );
-	
+
 	(*pubNeedForSleep) = max(1, (INT16)((*pubNeedForSleep) + FoodMoraleMods[foodsituation].bSleepModifier + FoodMoraleMods[watersituation].bSleepModifier ));
 }
 
@@ -386,7 +386,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 		activitymodifier = gGameExternalOptions.sFoodDigestionAssignment;
 	else if ( (gTacticalStatus.uiFlags & INCOMBAT) )
 		activitymodifier = gGameExternalOptions.sFoodDigestionCombat;
-		
+
 	// for some odd reason, the time isn't even needed here, so we just use 0 :-)
 	INT8 sectortemperaturemod = SectorTemperature( 0, pSoldier->sSectorX, pSoldier->sSectorY, pSoldier->bSectorZ );
 
@@ -395,7 +395,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 		++sectortemperaturemod;
 
 	FLOAT  temperaturemodifier  = (FLOAT)(3 + sectortemperaturemod)/3;
-	
+
 	FLOAT specialfoodmodifier  = 100.0 + pSoldier->GetBackgroundValue( BG_PERC_FOOD );
 	FLOAT specialdrinkmodifier = 100.0 + pSoldier->GetBackgroundValue( BG_PERC_WATER );
 
@@ -413,7 +413,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 
 	specialfoodmodifier /= 100.0;
 	specialdrinkmodifier /= 100.0;
-	
+
 	// due to digestion, reduce our food and drink levels
 	pSoldier->bFoodLevel  = max(pSoldier->bFoodLevel  - (INT32) (specialfoodmodifier  * activitymodifier * gGameExternalOptions.usFoodDigestionHourlyBaseFood), FOOD_MIN);
 	pSoldier->bDrinkLevel = max(pSoldier->bDrinkLevel - (INT32) (specialdrinkmodifier * activitymodifier * temperaturemodifier * gGameExternalOptions.usFoodDigestionHourlyBaseDrink), FOOD_MIN);
@@ -425,7 +425,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 
 	// we do this separately. first for food
 	UINT8 statdamagechance = FoodMoraleMods[foodsituation].ubStatDamageChance;
-	
+
 	if ( statdamagechance > 0 )
 	{
 		// these reductions can be healed, but only if we are in a sufficient food situation again
@@ -436,7 +436,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 			// if starving, we lose stats a LOT faster
 			if ( foodsituation == FOOD_STARVING )
 				numberofreduces += Random(2);
-						
+
 			INT8 oldval = pSoldier->stats.bStrength;
 			pSoldier->stats.bStrength = max(1, pSoldier->stats.bStrength - numberofreduces);
 			pSoldier->usStarveDamageStrength += oldval - pSoldier->stats.bStrength;
@@ -468,7 +468,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 			pSoldier->stats.bLifeMax = max(2, pSoldier->stats.bLifeMax - numberofreduces);
 			pSoldier->stats.bLife = min(pSoldier->stats.bLife, pSoldier->stats.bLifeMax);
 			pSoldier->bBleeding = min(pSoldier->bBleeding, pSoldier->stats.bLifeMax);
-			
+
 			pSoldier->usStarveDamageHealth += oldlife - pSoldier->stats.bLifeMax;
 
 			// Update Profile
@@ -481,7 +481,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 				ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, szFoodTextStr[STR_FOOD_HEALTH_DAMAGE_FOOD_TOO_LESS], pSoldier->GetName() );
 
 			// if we fall below OKLIFE, we start bleeding...
-			// Reason for this is that 
+			// Reason for this is that
 			if ( pSoldier->stats.bLife < OKLIFE )
 			{
 				pSoldier->bBleeding = max(1, pSoldier->stats.bLife - 1);
@@ -496,13 +496,13 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 
 			// make stat RED for a while...
 			pSoldier->timeChanges.uiChangeStrengthTime = GetJA2Clock();
-			pSoldier->usValueGoneUp &= ~( HEALTH_INCREASE );						
+			pSoldier->usValueGoneUp &= ~( HEALTH_INCREASE );
 		}
 	}
 
 	// now for water
 	statdamagechance = FoodMoraleMods[watersituation].ubStatDamageChance;
-	
+
 	if ( statdamagechance > 0 )
 	{
 		// these reductions can be healed, but only if we are in a sufficient food situation again
@@ -515,7 +515,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 			//if ( foodsituation == FOOD_STARVING )
 			if ( watersituation == FOOD_STARVING )
 				numberofreduces += Random(2);
-						
+
 			INT8 oldval = pSoldier->stats.bStrength;
 			pSoldier->stats.bStrength = max(1, pSoldier->stats.bStrength - numberofreduces);
 			pSoldier->usStarveDamageStrength += oldval - pSoldier->stats.bStrength;
@@ -549,20 +549,20 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 			pSoldier->stats.bLifeMax = max(2, pSoldier->stats.bLifeMax - numberofreduces);
 			pSoldier->stats.bLife = min(pSoldier->stats.bLife, pSoldier->stats.bLifeMax);
 			pSoldier->bBleeding = min(pSoldier->bBleeding, pSoldier->stats.bLifeMax);
-			
+
 			pSoldier->usStarveDamageHealth += oldlife - pSoldier->stats.bLifeMax;
 
 			// Update Profile
 			gMercProfiles[ pSoldier->ubProfile ].bLifeMax	= pSoldier->stats.bLifeMax;
 			gMercProfiles[ pSoldier->ubProfile ].records.usTimesStatDamaged++;
-			
+
 			if ( watersituation < FOOD_NORMAL )
 				ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, szFoodTextStr[STR_FOOD_HEALTH_DAMAGE_DRINK_TOO_MUCH], pSoldier->GetName() );
 			else
 				ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, szFoodTextStr[STR_FOOD_HEALTH_DAMAGE_DRINK_TOO_LESS], pSoldier->GetName() );
 
 			// if we fall below OKLIFE, we start bleeding...
-			// Reason for this is that 
+			// Reason for this is that
 			if ( pSoldier->stats.bLife < OKLIFE )
 			{
 				pSoldier->bBleeding = max(1, pSoldier->stats.bLife - 1);
@@ -577,7 +577,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 
 			// make stat RED for a while...
 			pSoldier->timeChanges.uiChangeStrengthTime = GetJA2Clock();
-			pSoldier->usValueGoneUp &= ~( HEALTH_INCREASE );						
+			pSoldier->usValueGoneUp &= ~( HEALTH_INCREASE );
 		}
 	}
 }
@@ -622,7 +622,7 @@ void HourlyFoodAutoDigestion( SOLDIERTYPE *pSoldier )
 				if (gFacilityTypes[cnt].AssignmentData[FAC_FOOD].sCantinaFoodModifier > 0)
 				{
 					if (cnt == (UINT16)pSoldier->sFacilityTypeOperated && // Soldier is operating this facility
-						GetSoldierFacilityAssignmentIndex( pSoldier ) != -1) 
+						GetSoldierFacilityAssignmentIndex( pSoldier ) != -1)
 					{
 						eatinginfacility = TRUE;
 						INT16 cantinafoodadd = gFacilityTypes[cnt].AssignmentData[FAC_FOOD].sCantinaFoodModifier;
@@ -649,7 +649,7 @@ void HourlyFoodAutoDigestion( SOLDIERTYPE *pSoldier )
 
 		// dynamic opinions: if we're still really hungry  an someone in this sector has food, we get a lwoer opinion of him, as he obviously doesn't share
 		HandleDynamicOpinionChange( pSoldier, OPINIONEVENT_NOSHARINGFOOD, FALSE, FALSE );
-	}	
+	}
 }
 
 // eat stuff from the inventory. if fcanteensonly = TRUE, only drink from canteen items
@@ -708,7 +708,7 @@ void EatFromInventory( SOLDIERTYPE *pSoldier, BOOLEAN fcanteensonly )
 						if ( pSoldier->bFoodLevel > FoodMoraleMods[FOOD_MERC_START_CONSUME].bThreshold && pSoldier->bDrinkLevel > FoodMoraleMods[FOOD_MERC_START_CONSUME].bThreshold )
 							return;
 					}
-				}					
+				}
 			}
 		}
 	}
@@ -724,7 +724,7 @@ void EatFromInventory( SOLDIERTYPE *pSoldier, BOOLEAN fcanteensonly )
 			if ( pObj != NULL )													// ... if pointer is not obviously useless ...
 			{
 				UINT32 foodtype = Item[pObj->usItem].foodtype;
-				
+
 				// if fcanteensonly is TRUE, omit everything that is not a canteen
 				if ( fcanteensonly )
 				{
@@ -761,7 +761,7 @@ void HourlyFoodUpdate( void )
 	{
 		//if the merc is active, and in Arulco
 		if ( pSoldier && pSoldier->bActive && !AM_AN_EPC(pSoldier) && pSoldier->ubProfile != ROBOT && !IsVehicle(pSoldier) && !(pSoldier->bAssignment == IN_TRANSIT || pSoldier->bAssignment == ASSIGNMENT_DEAD ) )
-		{			
+		{
 			// digestion
 			HourlyFoodSituationUpdate( pSoldier );
 
@@ -844,7 +844,7 @@ void SectorFillCanteens( void )
 								UINT16 status = (*pObj)[i]->data.objectStatus;
 								UINT16 statusmmissing = max(0, 100 - status);
 								FLOAT temperature = (*pObj)[i]->data.bTemperature;
-																
+
 								(*pObj)[i]->data.objectStatus = 100;						// refill canteen
 								(*pObj)[i]->data.bTemperature = (status * temperature + statusmmissing * addtemperature)/100;
 							}
@@ -852,7 +852,7 @@ void SectorFillCanteens( void )
 					}
 				}
 
-				// it would be pretty pointless to fill our canteens and then not to drink from them even though we are hungry. If there is an unlimited water source in this sector, drink from our 
+				// it would be pretty pointless to fill our canteens and then not to drink from them even though we are hungry. If there is an unlimited water source in this sector, drink from our
 				// freshly filled canteens. Thus calling this function repeatedly will cause us to drink till we're full, and restore our canteens to full level
 				if ( gGameOptions.fFoodSystem )
 					EatFromInventory( pSoldier, TRUE );
@@ -876,7 +876,7 @@ void SectorFillCanteens( void )
 							UINT16 status = (*pObj)[i]->data.objectStatus;
 							UINT16 statusmmissing = max(0, 100 - status);
 							FLOAT temperature = (*pObj)[i]->data.bTemperature;
-																
+
 							(*pObj)[i]->data.objectStatus = 100;						// refill canteen
 							(*pObj)[i]->data.bTemperature = (status * temperature + statusmmissing * addtemperature)/100;
 						}
@@ -925,14 +925,14 @@ void SectorFillCanteens( void )
 									if ( ptsneeded < ptsinwaterdrum )
 									{
 										(*pObj)[i]->data.objectStatus = 100;
-										
+
 										(*pWaterDrum)[i]->data.objectStatus = max(1, (INT16)((100 * ( ptsinwaterdrum - ptsneeded )) / drumsize) );
 									}
 									else
 									{
 										(*pObj)[i]->data.objectStatus += (INT16)((100 * ptsinwaterdrum) / canteensize);
 
-										(*pWaterDrum)[i]->data.objectStatus = 1;																				
+										(*pWaterDrum)[i]->data.objectStatus = 1;
 									}
 
 									(*pObj)[i]->data.bTemperature = ((*pObj)[i]->data.bTemperature + (*pWaterDrum)[0]->data.bTemperature) / 2;	// water now has mixed freshness
@@ -980,14 +980,14 @@ void SectorFillCanteens( void )
 									if ( ptsneeded < ptsinwaterdrum )
 									{
 										(*pObj)[i]->data.objectStatus = 100;
-										
+
 										(*pWaterDrum)[i]->data.objectStatus = max(1, (INT16)((100 * ( ptsinwaterdrum - ptsneeded )) / drumsize) );
 									}
 									else
 									{
 										(*pObj)[i]->data.objectStatus += (INT16)((100 * ptsinwaterdrum) / canteensize);
 
-										(*pWaterDrum)[i]->data.objectStatus = 1;																				
+										(*pWaterDrum)[i]->data.objectStatus = 1;
 									}
 
 									(*pObj)[0]->data.bTemperature = ((*pObj)[0]->data.bTemperature + (*pWaterDrum)[0]->data.bTemperature) / 2;	// water now has mixed freshness
@@ -1059,7 +1059,7 @@ void SoldierAutoFillCanteens(SOLDIERTYPE *pSoldier)
 		// the temperature of the water in this sector (temperature reflects the quality)
 		FLOAT addtemperature = OVERHEATING_MAX_TEMPERATURE;
 
-		// first step: fill all canteens in inventories	
+		// first step: fill all canteens in inventories
 		INT8 invsize = (INT8)pSoldier->inv.size();									// remember inventorysize, so we don't call size() repeatedly
 		for ( INT8 bLoop = 0; bLoop < invsize; ++bLoop)								// ... for all items in our inventory ...
 		{
@@ -1075,7 +1075,7 @@ void SoldierAutoFillCanteens(SOLDIERTYPE *pSoldier)
 						UINT16 status = (*pObj)[i]->data.objectStatus;
 						UINT16 statusmmissing = max(0, 100 - status);
 						FLOAT temperature = (*pObj)[i]->data.bTemperature;
-																
+
 						(*pObj)[i]->data.objectStatus = 100;						// refill canteen
 						(*pObj)[i]->data.bTemperature = (status * temperature + statusmmissing * addtemperature)/100;
 					}
@@ -1132,16 +1132,16 @@ void DrinkFromWaterTap( SOLDIERTYPE* pSoldier )
 	if ( gGameOptions.fFoodSystem )
 	{
 		INT32 watertoadd = max( 0, FoodMoraleMods[FOOD_NORMAL].bThreshold - pSoldier->bDrinkLevel );
-		
+
 		if ( watertoadd > 0 )
 		{
 			AddFoodpoints( pSoldier->bDrinkLevel, watertoadd );
 		}
 	}
-	
+
 	if ( GetWaterQuality( gWorldSectorX, gWorldSectorY, gbWorldSectorZ ) == WATER_POISONOUS )
 		HandlePossibleInfection( pSoldier, NULL, INFECTION_TYPE_BADWATER );
-	
+
 	INT32 bpadded = 100 * min( 20, 100 - pSoldier->bBreath );
 
 	DeductPoints( pSoldier, 20, -bpadded );

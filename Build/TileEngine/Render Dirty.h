@@ -24,7 +24,7 @@
 typedef void (*OVERLAY_CALLBACK)(struct _VIDEO_OVERLAY * );
 
 // Struct for backgrounds
-typedef struct 
+typedef struct
 {
 	BOOLEAN		fAllocated;
 	BOOLEAN		fFilled;

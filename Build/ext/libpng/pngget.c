@@ -848,7 +848,7 @@ png_get_acTL(png_structp png_ptr, png_infop info_ptr,
              png_uint_32 *num_frames, png_uint_32 *num_plays)
 {
     png_debug1(1, "in %s retrieval function", "acTL");
-    
+
     if (png_ptr != NULL && info_ptr != NULL &&
         (info_ptr->valid & PNG_INFO_acTL) &&
         num_frames != NULL && num_plays != NULL)
@@ -857,7 +857,7 @@ png_get_acTL(png_structp png_ptr, png_infop info_ptr,
         *num_plays = info_ptr->num_plays;
         return (1);
     }
-    
+
     return (0);
 }
 
@@ -865,7 +865,7 @@ png_uint_32 PNGAPI
 png_get_num_frames(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_num_frames()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->num_frames);
     return (0);
@@ -875,7 +875,7 @@ png_uint_32 PNGAPI
 png_get_num_plays(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_num_plays()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->num_plays);
     return (0);
@@ -889,11 +889,11 @@ png_get_next_frame_fcTL(png_structp png_ptr, png_infop info_ptr,
              png_byte *dispose_op, png_byte *blend_op)
 {
     png_debug1(1, "in %s retrieval function", "fcTL");
-    
+
     if (png_ptr != NULL && info_ptr != NULL &&
         (info_ptr->valid & PNG_INFO_fcTL) &&
-        width != NULL && height != NULL && 
-        x_offset != NULL && x_offset != NULL && 
+        width != NULL && height != NULL &&
+        x_offset != NULL && x_offset != NULL &&
         delay_num != NULL && delay_den != NULL &&
 	dispose_op != NULL && blend_op != NULL)
     {
@@ -907,7 +907,7 @@ png_get_next_frame_fcTL(png_structp png_ptr, png_infop info_ptr,
         *blend_op = info_ptr->next_frame_blend_op;
         return (1);
     }
-    
+
     return (0);
 }
 
@@ -915,7 +915,7 @@ png_uint_32 PNGAPI
 png_get_next_frame_width(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_width()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_width);
     return (0);
@@ -925,7 +925,7 @@ png_uint_32 PNGAPI
 png_get_next_frame_height(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_height()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_height);
     return (0);
@@ -935,7 +935,7 @@ png_uint_32 PNGAPI
 png_get_next_frame_x_offset(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_x_offset()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_x_offset);
     return (0);
@@ -945,7 +945,7 @@ png_uint_32 PNGAPI
 png_get_next_frame_y_offset(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_y_offset()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_y_offset);
     return (0);
@@ -955,7 +955,7 @@ png_uint_16 PNGAPI
 png_get_next_frame_delay_num(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_delay_num()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_delay_num);
     return (0);
@@ -965,7 +965,7 @@ png_uint_16 PNGAPI
 png_get_next_frame_delay_den(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_delay_den()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_delay_den);
     return (0);
@@ -975,7 +975,7 @@ png_byte PNGAPI
 png_get_next_frame_dispose_op(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_dispose_op()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_dispose_op);
     return (0);
@@ -985,7 +985,7 @@ png_byte PNGAPI
 png_get_next_frame_blend_op(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_get_next_frame_blend_op()");
-    
+
     if (png_ptr != NULL && info_ptr != NULL)
         return (info_ptr->next_frame_blend_op);
     return (0);
@@ -995,10 +995,10 @@ png_byte PNGAPI
 png_get_first_frame_is_hidden(png_structp png_ptr, png_infop info_ptr)
 {
     png_debug(1, "in png_first_frame_is_hidden()");
-    
+
     if (png_ptr != NULL)
        return (png_byte)(png_ptr->apng_flags & PNG_FIRST_FRAME_HIDDEN);
-    
+
     return 0;
 }
 #endif /* PNG_APNG_SUPPORTED */

@@ -1,7 +1,7 @@
 #ifndef __STRATEGIC_STATUS_H
 #define __STRATEGIC_STATUS_H
 
-#include "types.h"
+#include "Types.h"
 //#include "Item Types.h"
 #include "Soldier Control.h"
 
@@ -108,7 +108,7 @@ typedef struct STRATEGIC_STATUS
 	UINT8			ubHighestProgress;			// the highest level of progress player has attained thus far in the game (0-100)
 
 	UINT8			ubStandardArmyGunIndex[ARMY_GUN_LEVELS];		// type of gun in each group that Queen's army is using this game
-	BOOLEAN		fWeaponDroppedAlready[MAXITEMS];				// flag that tracks whether this weapon type has been dropped before 
+	BOOLEAN		fWeaponDroppedAlready[MAXITEMS];				// flag that tracks whether this weapon type has been dropped before
 
 	UINT8			ubMercDeaths;						// how many soldiers have bit it while in the player's employ (0-100)
 	UINT32		uiManDaysPlayed;				// once per day, # living mercs on player's team is added to this running total

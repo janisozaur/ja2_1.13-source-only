@@ -1,30 +1,30 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include "math.h"
 	#include <stdio.h>
 	#include <errno.h>
 
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "vsurface.h"
-	#include "sysutil.h"
-	#include "container.h"
-	#include "wcheck.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "faces.h"
-	#include "utilities.h"
-	#include "overhead.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "VSurface.h"
+	#include "SysUtil.h"
+	#include "Container.h"
+	#include "WCheck.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Faces.h"
+	#include "Utilities.h"
+	#include "Overhead.h"
 	#include "Soldier Profile.h"
 	#include "Bullets.h"
-	#include "los.h"
-	#include "worldman.h"
-	#include "random.h"
+	#include "LOS.h"
+	#include "WorldMan.h"
+	#include "Random.h"
 	#include "GameSettings.h"
 	#include "FileMan.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Buildings.h"
 #endif
 
@@ -365,7 +365,7 @@ void UpdateBullets( )
 						ManLooksForOtherTeams(gBullets[ uiCount ].pFirer);
 					}
 					*/
-					
+
 					else
 					{
 						pNode = AddStructToTail( gBullets[ uiCount ].sGridNo, BULLETTILE1 );
@@ -377,21 +377,21 @@ void UpdateBullets( )
 						pNode->sRelativeZ = (INT16) CONVERT_HEIGHTUNITS_TO_PIXELS( FIXEDPT_TO_INT32( gBullets[ uiCount ].qCurrZ ) );
 
 						//afp-start - add new tail /tracer
-						// HEADROCK HAM 5: No tail for fragments.				
-						if (gGameSettings.fOptions[TOPTION_ALTERNATE_BULLET_GRAPHICS] && gBullets[ uiCount ].fFragment == false)	
+						// HEADROCK HAM 5: No tail for fragments.
+						if (gGameSettings.fOptions[TOPTION_ALTERNATE_BULLET_GRAPHICS] && gBullets[ uiCount ].fFragment == false)
 						{
   							if ((lastX != 0)  || (lastY != 0))
 							{
 								// qIncrX can be used to calculate slope and make the tracer longer if necessary
 								PointsPath((INT16) FIXEDPT_TO_INT32( gBullets[ uiCount ].qCurrX),
-									(INT16) FIXEDPT_TO_INT32( gBullets[ uiCount ].qCurrY), 
-									(INT16) FIXEDPT_TO_INT32( lastX), 
+									(INT16) FIXEDPT_TO_INT32( gBullets[ uiCount ].qCurrY),
+									(INT16) FIXEDPT_TO_INT32( lastX),
 									(INT16) FIXEDPT_TO_INT32( lastY));
 
 								// compute valid points allong the fire line
 								int pointsCount = 0;
 								for (int i = 0; i < BULLET_TRACER_MAX_LENGTH; i++)
-								{	
+								{
 									pointsCount = i;
 									if (gXPATH[i] == 0)
 										if (gYPATH[i] == 0)
@@ -406,7 +406,7 @@ void UpdateBullets( )
 									if (gXPATH[i] == 0)
 										if (gYPATH[i] == 0)
 											break;
-									
+
 									// add all points along the path between bullets as bullets
 									pNode = AddStructToTail( gBullets[ uiCount ].sGridNo, BULLETTILE1 );
 									pNode->ubShadeLevel=DEFAULT_SHADE_LEVEL;
@@ -416,7 +416,7 @@ void UpdateBullets( )
 									pNode->sRelativeY	= gYPATH[i];
 									FIXEDPT relativeZ = lastZ - ((i + 1) * ((gBullets[ uiCount ].qCurrZ - lastZ) / (pointsCount)));
 									pNode->sRelativeZ = (INT16) CONVERT_HEIGHTUNITS_TO_PIXELS( FIXEDPT_TO_INT32( relativeZ));
-									
+
 									// store structure pointer to clear image at the next bullet position
 									gBullets[uiCount].pNodes[i] = pNode;
 								}
@@ -425,7 +425,7 @@ void UpdateBullets( )
 						//afp-end
 						// Display shadow
 						// afp - no more shadow if tracer enabled
-						if (!gGameSettings.fOptions[TOPTION_ALTERNATE_BULLET_GRAPHICS])	
+						if (!gGameSettings.fOptions[TOPTION_ALTERNATE_BULLET_GRAPHICS])
 						{
 							pNode = AddStructToTail( gBullets[ uiCount ].sGridNo, BULLETTILE2 );
 							pNode->ubShadeLevel=DEFAULT_SHADE_LEVEL;
@@ -682,9 +682,9 @@ void DeleteAllBullets( )
 	RecountBullets( );
 
 }
-//afp-start adapted function, no much time for cosmetics 
-void PointsPath(int sx1, int sy1, int ex2, int ey2) 
-{ 
+//afp-start adapted function, no much time for cosmetics
+void PointsPath(int sx1, int sy1, int ex2, int ey2)
+{
 	for (int i = 0; i < BULLET_TRACER_MAX_LENGTH; i++)
 	{
 		gXPATH[i] = 0;
@@ -695,78 +695,78 @@ void PointsPath(int sx1, int sy1, int ex2, int ey2)
 	gXPATH[counter] = sx1;
 	gYPATH[counter] = sy1;
 
-	int x0 = sx1; 
-	int y0 = sy1; 
-	int x1 = ex2; 
-	int y1 = ey2; 
-	int dy = y1 - y0; 
-	int dx = x1 - x0; 
-	int stepx, stepy; 
-	int gridX, gridY; 
+	int x0 = sx1;
+	int y0 = sy1;
+	int x1 = ex2;
+	int y1 = ey2;
+	int dy = y1 - y0;
+	int dx = x1 - x0;
+	int stepx, stepy;
+	int gridX, gridY;
 
-	if (dy < 0) 
-	{ 
-		dy = -dy; 
-		stepy = -1; 
-	} 
-	else 
-		stepy = 1; 
+	if (dy < 0)
+	{
+		dy = -dy;
+		stepy = -1;
+	}
+	else
+		stepy = 1;
 
-	if (dx < 0) 
-	{ 
-		dx = -dx; 
-		stepx = -1; 
-	} 
-	else 
-		stepx = 1; 
+	if (dx < 0)
+	{
+		dx = -dx;
+		stepx = -1;
+	}
+	else
+		stepx = 1;
 
-	dy <<= 1; 
-	dx <<= 1; 
-	gridX = x0 >> 3; 
-	gridY = y0 >> 3; 
+	dy <<= 1;
+	dx <<= 1;
+	gridX = x0 >> 3;
+	gridY = y0 >> 3;
 
 	if ((sx1==ex2) &&(sy1=ey2))
 		return;
 
-	if (dx > dy) 
-	{ 
-		int fraction = dy - (dx >> 1); 
-		while (x0 != x1) 
-		{ 
-			if (fraction >= 0) 
-			{ 
-				y0 += stepy; 
-				fraction -= dx; 
-			} 
-			x0 += stepx; 
-			fraction += dy; 
+	if (dx > dy)
+	{
+		int fraction = dy - (dx >> 1);
+		while (x0 != x1)
+		{
+			if (fraction >= 0)
+			{
+				y0 += stepy;
+				fraction -= dx;
+			}
+			x0 += stepx;
+			fraction += dy;
 
 			counter++;
 			if (counter >= BULLET_TRACER_MAX_LENGTH)
 				return;
 			gXPATH[counter] = x0;
 			gYPATH[counter] = y0;
-		} 
-	} 
-	else 
-	{ 
-		int fraction = dx - (dy >> 1); 
-		while (y0 != y1) 
-		{ 
-			if (fraction >= 0) 
-			{ 
-				x0 += stepx; 
-				fraction -= dy; 
-			} 
-			y0 += stepy; 
-			fraction += dx; 
+		}
+	}
+	else
+	{
+		int fraction = dx - (dy >> 1);
+		while (y0 != y1)
+		{
+			if (fraction >= 0)
+			{
+				x0 += stepx;
+				fraction -= dy;
+			}
+			y0 += stepy;
+			fraction += dx;
 			counter++;
 			if (counter >= BULLET_TRACER_MAX_LENGTH)
 				return;
 			gXPATH[counter] = x0;
 			gYPATH[counter] = y0;
-		} 
-	} 
+		}
+	}
 	return;
 }
 //afp-end

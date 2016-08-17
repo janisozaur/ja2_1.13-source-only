@@ -131,7 +131,7 @@ enum
 
 	ACTION_GET_ROOM,
 	ACTION_NEW_MAP,
-	
+
 	//using the selection method for getting objects for buildings
 	ACTION_GET_WALL,
 	ACTION_GET_DOOR,
@@ -214,7 +214,7 @@ enum
 
 	DRAW_MODE_SCHEDULEACTION,
 	DRAW_MODE_SCHEDULECONFIRM,
-	
+
 	DRAW_MODE_EXITGRID,
 	DRAW_MODE_EXITGRID_QUEUE,
 	DRAW_MODE_NORTHPOINT,
@@ -266,7 +266,7 @@ extern BOOLEAN gfShowItemStatsPanel;
 
 
 
- 
+
 
 
 

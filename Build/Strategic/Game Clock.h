@@ -19,7 +19,7 @@ extern			INT16								INTERFACE_CLOCK_TM_Y;
 
 #define			NUM_SEC_IN_DAY						86400
 #define			NUM_SEC_IN_HOUR						3600
-#define			NUM_SEC_IN_MIN						60					
+#define			NUM_SEC_IN_MIN						60
 #define			ROUNDTO_MIN								5
 
 #define			NUM_MIN_IN_DAY						1440
@@ -33,7 +33,7 @@ extern			INT16								INTERFACE_CLOCK_TM_Y;
 //This does pose potential problems in modes such as the editor, or similar where time shouldn't pass, and
 //isn't currently handled.	The best thing to do in these cases is call the PauseGame() function when entering
 //such a mode, and UnPauseGame() when finished.	Everything will be restored just the way you left it.	This
-//is much simpler to handle in the overall scheme of things.	
+//is much simpler to handle in the overall scheme of things.
 
 //PAUSE FEATURES
 //Pauses and unpauses the game.	It sets and clears a flag which preserves the time rate.
@@ -64,7 +64,7 @@ BOOLEAN IsTimeCompressionOn( void );		// returns TRUE if the player currently wa
 //Allows the setting/changing/access of time rate via predefined compression values.
 //These functions change the index in giTimeCompressSpeeds which aren't in any
 //particular mathematical pattern.	The higher the index, the faster the time is processed
-//per frame.	These functions have their limits, so game time will also be between 
+//per frame.	These functions have their limits, so game time will also be between
 //TIME_COMPRESS_X1 to TIME_COMPRESS_X8 based in the laptop time compression.
 void SetGameTimeCompressionLevel( UINT32 uiCompressionRate );
 void DecreaseGameTimeCompressionRate();
@@ -133,7 +133,7 @@ extern	UINT32			guiHour;
 extern	UINT32			guiMin;
 
 //Advanced function used by certain event callbacks.	In the case where time is warped, certain event
-//need to know how much time was warped since the last query to the event list.	
+//need to know how much time was warped since the last query to the event list.
 //This function returns that value
 extern UINT32 guiTimeOfLastEventQuery;
 

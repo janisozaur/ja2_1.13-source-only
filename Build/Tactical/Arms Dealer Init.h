@@ -33,7 +33,7 @@ enum
 
 	ARMS_DEALER_ARNIE,
 	ARMS_DEALER_FREDO,
-	
+
 #ifdef JA2UB
 	ARMS_DEALER_RAUL,
 #else
@@ -151,7 +151,7 @@ enum
 typedef struct
 {
 	// added for xml externalisation by Flugente 2012-12-18
-	UINT16		uiIndex;	
+	UINT16		uiIndex;
 	CHAR16		szName[80];					// name of this merchant (used in xml, not used ingame)
 
 	union
@@ -221,7 +221,7 @@ public:
 	BOOLEAN fRepairDelayBeenUsed;		// Set when a repairman has missed his repair time estimate & given his excuse for it
 	BOOLEAN	fUnusedKnowsPlayer;			// Set if the shopkeeper has met with the player before [UNUSED]
 	UINT32	uiTimePlayerLastInSKI;		// game time (in total world minutes) when player last talked to this dealer in SKI
-	
+
 	BOOLEAN	fHasSoldSomethingToPlayer;	//If set, the player has at some point sold something to the player
 
 	UINT16	ubStrayAmmo[MAXITEMS];			// partially-depleted ammo mags are stored here as #bullets, and can be converted to full packs

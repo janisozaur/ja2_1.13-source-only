@@ -4,12 +4,12 @@
 
 #include "World Items.h"
 #include "WorldDef.h"
-#include "rotting corpses.h"
+#include "Rotting Corpses.h"
 
 #include "Soldier Profile Type.h"
 
 
-#define		MAPS_DIR		"Temp\\"	
+#define		MAPS_DIR		"Temp\\"
 
 
 
@@ -23,7 +23,7 @@ enum
 
 
 
-// Add 
+// Add
 BOOLEAN AddMapModification( INT16 sMapX, INT16 sMapY, INT8 bMapZ );
 
 
@@ -54,7 +54,7 @@ BOOLEAN SaveWorldItemsToTempItemFile( INT16 sMapX, INT16 sMapY, INT8 bMapZ, UINT
 //When the savegame version changes, load the temp files, then immediately save them again in the new format
 BOOLEAN UpdateWorldItemsTempFile( INT16 sMapX, INT16 sMapY, INT8 bMapZ );
 
-//  Adds an array of Item Objects to the specified location on a unloaded map.  
+//  Adds an array of Item Objects to the specified location on a unloaded map.
 //  If you want to overwrite all the items in the array set fReplaceEntireFile to TRUE.
 BOOLEAN AddItemsToUnLoadedSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ, INT32 sGridNo, UINT32 uiNumberOfItems, OBJECTTYPE *pObject, UINT8 ubLevel, UINT16 usFlags, INT8 bRenderZHeightAboveLevel, INT8 bVisible, BOOLEAN fReplaceEntireFile );
 
@@ -85,7 +85,7 @@ BOOLEAN AddRottingCorpseToUnloadedSectorsRottingCorpseFile( INT16 sMapX, INT16 s
 
 
 
-//Pass in the sector to add the dead soldier to. 
+//Pass in the sector to add the dead soldier to.
 //The gridno if you are passing in either of the flags ADD_DEAD_SOLDIER_USE_GRIDNO, or the ADD_DEAD_SOLDIER_TO_SWEETSPOT
 //
 // This function DOES NOT remove the soldier from the soldier struct.  YOU must do it.

@@ -4,7 +4,7 @@
 	#include "Types.h"
 	#include "stdlib.h"
 	#include "Arms Dealer Init.h"
-	#include "String.h"
+	#include "string.h"
 	#include "Debug.h"
 	#include "Random.h"
 	#include "Weapons.h"
@@ -12,7 +12,7 @@
 	#include "Game Clock.h"
 	#include "ArmsDealerInvInit.h"
 	#include "Message.h"
-	#include "soldier profile.h"
+	#include "Soldier Profile.h"
 	#include "Handle Items.h"
 	#include "Quests.h"
 	#include "Scheduling.h"
@@ -25,8 +25,8 @@
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
 #include "ub_config.h"
 #endif
 
@@ -363,13 +363,13 @@ void SimulateArmsDealerCustomer()
 		{
 			if ( Item[usItemIndex].usItemClass	== 0 )
 				break;
-#ifdef JA2UB			
-			//JA25 UB//			
+#ifdef JA2UB
+			//JA25 UB//
 			if( !CanThisItemBeSoldToSimulatedCustomer( ubArmsDealer, usItemIndex ) )
 			{
 				continue;
 			}
-#endif			
+#endif
 			//if there are some of these in stock
 			if( numPerfectItems[usItemIndex] > 0)
 			{
@@ -457,15 +457,15 @@ void DailyCheckOnItemQuantities()
 					{
 						iter->ubQtyOnOrder = 0;
 						iter->uiOrderArrivalTime = 0;
-#ifdef JA2UB						
+#ifdef JA2UB
 						//JA25 UB if the dealer is RAUL
 						if( ubArmsDealer == ARMS_DEALER_RAUL )
 						{
 							//set the fact the raul refreshed his inventory
 							SetFactTrue( FACT_RAULS_INVENTORY_CHANGED_SINCE_LAST_VISIT );
 						}
-#endif						
-						
+#endif
+
 					}
 				}
 			}
@@ -490,7 +490,7 @@ void DailyCheckOnItemQuantities()
 						{
 							// figure out how many items to reorder (items are reordered an entire batch at a time)
 							ubNumItems = HowManyItemsToReorder( ubMaxSupply, numTotalItems[ usItemIndex ] );
-#ifdef JA2UB							
+#ifdef JA2UB
 							//if the dealer is betty, and we are to ADD the stuff instantly
 							if( ubArmsDealer == ARMS_DEALER_BETTY && fInstallyHaveItemsAppear &&
 									( usItemIndex == MEDICKIT || usItemIndex == FIRSTAIDKIT ) )
@@ -507,7 +507,7 @@ void DailyCheckOnItemQuantities()
 							}
 							else
 							{
-#ifdef JA2UB							
+#ifdef JA2UB
 								if( fInstallyHaveItemsAppear )
 								{
 									ubReorderDays = 0;
@@ -516,7 +516,7 @@ void DailyCheckOnItemQuantities()
 								{
 									ubReorderDays = ( UINT8) ( armsDealerInfo[ ubArmsDealer ].daysDelayMin + Random( armsDealerInfo[ ubArmsDealer ].daysDelayMax - armsDealerInfo[ ubArmsDealer ].daysDelayMin ) );
 								}
-								
+
 #else
 									ubReorderDays = ( UINT8) ( armsDealerInfo[ ubArmsDealer ].daysDelayMin + Random( armsDealerInfo[ ubArmsDealer ].daysDelayMax - armsDealerInfo[ ubArmsDealer ].daysDelayMin ) );
 #endif
@@ -633,8 +633,8 @@ BOOLEAN AdjustCertainDealersInventory( )
 	}
 #ifdef JA2UB
 	//------------UB---------------------
-	
-	
+
+
 	//if Raul hasnt yet sold the barret
 	if( !( gArmsDealerStatus[ ARMS_DEALER_RAUL ].ubSpecificDealerFlags & ARMS_DEALER_FLAG__RAUL_HAS_SOLD_BARRETT_TO_PLAYER ) )
 	{
@@ -645,7 +645,7 @@ BOOLEAN AdjustCertainDealersInventory( )
 	/*
 		moved to Quest.lua
 
-	//if the player hasnt done the "killed the annoying bloodcats" quest for betty, 
+	//if the player hasnt done the "killed the annoying bloodcats" quest for betty,
 	if( gubQuest[ QUEST_FIX_LAPTOP ] != QUESTDONE && gGameUBOptions.LaptopQuestEnabled == TRUE )
 	{
 		GuaranteeAtLeastXItemsOfIndex( ARMS_DEALER_BETTY, LAPTOP_TRANSMITTER , 1 ); //4500
@@ -655,12 +655,12 @@ BOOLEAN AdjustCertainDealersInventory( )
 		GuaranteeAtMostNumOfItemsForItem( ARMS_DEALER_BETTY, LAPTOP_TRANSMITTER, 0 ); //4500
 	}
 	*/
-	
+
 	if( gGameUBOptions.LaptopQuestEnabled == FALSE )
 	{
 		GuaranteeAtMostNumOfItemsForItem( ARMS_DEALER_BETTY, LAPTOP_TRANSMITTER, 0 ); //4500
 	}
-	
+
 
 	if( gubQuest[ QUEST_GET_RID_BLOODCATS_AT_BETTYS ] != QUESTDONE )
 	{
@@ -1152,7 +1152,7 @@ BOOLEAN IsMercADealer( UINT8 ubMercID )
 	{
 		return(FALSE);
 	}
-	
+
 	//loop through the list of arms dealers
 	for ( UINT8 cnt = 0; cnt<NUM_ARMS_DEALERS; ++cnt )
 	{
@@ -1295,8 +1295,8 @@ BOOLEAN CanDealerRepairItem( UINT8 ubArmsDealer, UINT16 usItemIndex )
 	{
 		return(FALSE);
 	}
-	
-//#ifdef JA2UB	
+
+//#ifdef JA2UB
 //Ja25: TEMP!!!
 //	return( FALSE );
 //#endif
@@ -1305,9 +1305,9 @@ BOOLEAN CanDealerRepairItem( UINT8 ubArmsDealer, UINT16 usItemIndex )
 		case ARMS_DEALER_ARNIE:
 #ifdef JA2UB
 //Ja25 neither in exp.
-#else		
+#else
 		case ARMS_DEALER_PERKO:
-#endif		
+#endif
 			// repairs ANYTHING non-electronic
 //			if ( !( uiFlags & ITEM_ELECTRONIC ) )
 			if ( !( Item[ usItemIndex ].electronic ) )
@@ -1500,9 +1500,9 @@ void AddObjectToArmsDealerInventory( UINT8 ubArmsDealer, OBJECTTYPE *pObject )
 			{
 				// add this particular attachment (they can't be imprinted, or themselves have attachments!)
 				AddObjectToArmsDealerInventory( ubArmsDealer, &(*iter) );
-				
+
 				iter = pData->RemoveAttachmentAtIter(iter);
-					
+
 				if(UsingNewAttachmentSystem()==true)
 					++iter;
 
@@ -1788,7 +1788,7 @@ BOOLEAN AddDeadArmsDealerItemsToWorld( UINT8 usProfileID, UINT8 aMercID )
 		// not a dealer, that's ok, we get called for every dude that croaks.
 		return( FALSE );
 	}
-	
+
 	// mark the dealer as being out of business!
 	gArmsDealerStatus[ bArmsDealer ].fOutOfBusiness = TRUE;
 
@@ -1816,7 +1816,7 @@ BOOLEAN AddDeadArmsDealerItemsToWorld( UINT8 usProfileID, UINT8 aMercID )
 	}
 
 	gArmsDealersInventory[bArmsDealer].clear();
-	
+
 	//if the dealer has money
 	if( gArmsDealerStatus[ bArmsDealer ].uiArmsDealersCash > 0 )
 	{

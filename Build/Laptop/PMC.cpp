@@ -6,9 +6,9 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Laptop All.h"
 #else
-#include "laptop.h"
+#include "Laptop.h"
 #include "insurance.h"
-#include "insurance Contract.h"
+#include "Insurance Contract.h"
 #include "WCheck.h"
 #include "Utilities.h"
 #include "WordWrap.h"
@@ -19,7 +19,7 @@
 #include "Text.h"
 #include "Multi Language Graphic Utils.h"
 #include "PMC.h"
-#include "random.h"
+#include "Random.h"
 #include "Interface.h"
 #include "Soldier Add.h"
 #include "Soldier Profile.h"
@@ -27,15 +27,15 @@
 #include "Overhead.h"
 #include "Map Screen Interface.h"
 #include "Quests.h"
-#include "finances.h"
+#include "Finances.h"
 #include "Game Clock.h"
 #include "Animation Data.h"
 
 #include "SaveLoadGame.h"
 #include "GameVersion.h"
-#include "message.h"
+#include "Message.h"
 #include "Game Event Hook.h"
-#include "militia control.h"
+#include "Militia Control.h"
 #include "Town Militia.h"
 #include "Strategic Town Loyalty.h"
 #include "MilitiaIndividual.h"
@@ -305,7 +305,7 @@ void InitPMCData( )
 	pmcdata[0].usPants = 4;
 
 	pmcdata[0].usToHire = 0;
-	
+
 	pmcdata[1].usBodyType = Random( ADULTFEMALEMONSTER );
 	pmcdata[1].usHair = Random( 5 );
 	pmcdata[1].usSkin = Random( 4 );
@@ -322,7 +322,7 @@ BOOLEAN EnterPMCContract( )
 	InitDefaults_PMC( );
 
 	InitPMCData();
-		
+
 	UINT8 count = 0;
 	std::vector<std::pair<INT16, STR16> > dropdownvector;
 
@@ -343,7 +343,7 @@ BOOLEAN EnterPMCContract( )
 						{
 							GetSectorIDString( sX, sY, 0, gPMCSectorNamesstr[count], TRUE );
 							gPMCSectorNamesstr[count][63] = '/0';
-						
+
 							dropdownvector.push_back( std::make_pair( SECTOR( sX, sY ), gPMCSectorNamesstr[count] ) );
 
 							++count;
@@ -397,7 +397,7 @@ void ExitPMCContract( )
 		RemoveButton( gPMCHireButton );
 		gPMCHireButtonCreated = FALSE;
 	}
-	
+
 	RemoveDefaults_PMC( );
 }
 
@@ -536,7 +536,7 @@ void PMCTeamHireCallback( GUI_BUTTON *btn, INT32 reason )
 		if ( pmcdata[0].usToHire || pmcdata[1].usToHire )
 		{
 			AddTransactionToPlayersBook( PMC_CONTRACT, 0, GetWorldTotalMin( ), (-1) * (INT32)(pmcdata[0].usToHire * GetMilitiaCostPMC( REGULAR_MILITIA ) + pmcdata[1].usToHire * GetMilitiaCostPMC( ELITE_MILITIA )) );
-		
+
 			PMCReinforcesHireEvent hiringevent;
 
 			// look for a free ID
@@ -576,13 +576,13 @@ void PMCTeamHireCallback( GUI_BUTTON *btn, INT32 reason )
 			// The ETA is, well, just an ETA - randomise it a bit
 			UINT32 realarrivaltime = hiringevent.usTimeToArrive - 60 + Random(180);
 			AddStrategicEvent( EVENT_PMC_REINFORCEMENT_ARRIVAL, realarrivaltime, hiringevent.usId );
-		
+
 			gPMCData.usRegularsAvailable -= pmcdata[0].usToHire;
 			pmcdata[0].usToHire = 0;
 
 			gPMCData.usVeteransAvailable -= pmcdata[1].usToHire;
-			pmcdata[1].usToHire = 0;		
-				
+			pmcdata[1].usToHire = 0;
+
 			CHAR16 sString[256];
 			swprintf( sString, szPMCWebSite[TEXT_PMC_CONFIRMATION], ((GetWorldTotalMin( ) + 1440) % 1440) / 60, ((GetWorldTotalMin( ) + 1440) % 1440) % 60 );
 
@@ -600,13 +600,13 @@ void RenderPMCContract( )
 	DisplayDefaults_PMC( );
 
 	SetFontShadow( MERCOMP_FONT_SHADOW );
-	
+
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = MCA_START_CONTENT_Y;
 
 	swprintf( sText, szPMCWebSite[TEXT_PMC_CONTRACT_TEAM_INTRO] );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	// show example pics of militia
 	RenderMilitiaExamples( );
 
@@ -630,7 +630,7 @@ void RenderPMCContract( )
 	// regulars
 	usPosX = LAPTOP_SCREEN_UL_X + 120;
 	usPosY = MCA_START_CONTENT_Y + 20;
-	
+
 	swprintf( sText, szPMCWebSite[TEXT_PMC_REGULAR] );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 
@@ -651,7 +651,7 @@ void RenderPMCContract( )
 
 	swprintf( sText, szPMCWebSite[TEXT_PMC_DETAIL + 2], pmcdata[0].usToHire * GetMilitiaCostPMC( REGULAR_MILITIA ) );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-		
+
 	// veterans
 	usPosX = LAPTOP_SCREEN_UL_X + 370;
 	usPosY = MCA_START_CONTENT_Y + 20;
@@ -676,7 +676,7 @@ void RenderPMCContract( )
 
 	swprintf( sText, szPMCWebSite[TEXT_PMC_DETAIL + 2], pmcdata[1].usToHire * GetMilitiaCostPMC( ELITE_MILITIA ) );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-		
+
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = MCA_START_CONTENT_Y + 158;
 
@@ -687,7 +687,7 @@ void RenderPMCContract( )
 
 	swprintf( sText, szPMCWebSite[TEXT_PMC_TOTALCOST], pmcdata[0].usToHire * GetMilitiaCostPMC( REGULAR_MILITIA ) + pmcdata[1].usToHire * GetMilitiaCostPMC( ELITE_MILITIA ) );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-		
+
 	swprintf( sText, szPMCWebSite[TEXT_PMC_ETA], ((GetWorldTotalMin( ) + 1440) % 1440) / 60, ((GetWorldTotalMin( ) + 1440) % 1440) % 60 );
 	usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 
@@ -708,7 +708,7 @@ void RenderPMCContract( )
 		swprintf( sText, szPMCWebSite[TEXT_PMC_NODROPOFF] );
 		usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 	}
-	
+
 	usPosY += 50;
 
 	// if we hired personnel and they are inbound, show the next deployment
@@ -759,7 +759,7 @@ void HandlePMCArrival( UINT8 usId )
 			StrategicAddMilitiaToSector( SECTORX( (*it).usSectorToArrive ), SECTORY( (*it).usSectorToArrive ), REGULAR_MILITIA, (*it).usRegulars );
 			StrategicAddMilitiaToSector( SECTORX( (*it).usSectorToArrive ), SECTORY( (*it).usSectorToArrive ), ELITE_MILITIA, (*it).usVeterans );
 
-			// Flugente: create individual militia			
+			// Flugente: create individual militia
 			for ( int i = 0; i < (*it).usRegulars; ++i )
 				CreateNewIndividualMilitia( REGULAR_MILITIA, MO_PMC, (*it).usSectorToArrive );
 
@@ -786,7 +786,7 @@ void HandlePMCArrival( UINT8 usId )
 	}
 }
 
-// it could happen that we load events incorrectly. To detect that early, we write an extra eyecacher befoer and after the list of events. Should we fail to read it correctly, we will knowm where to look. 
+// it could happen that we load events incorrectly. To detect that early, we write an extra eyecacher befoer and after the list of events. Should we fail to read it correctly, we will knowm where to look.
 UINT32 gPMCSaveCheck = 0xF123456F;
 BOOLEAN SavePMC( HWFILE hwFile )
 {

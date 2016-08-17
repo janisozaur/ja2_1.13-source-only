@@ -4,51 +4,51 @@
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "himage.h"
-	#include "vobject.h"
-	#include "sysutil.h"
-	#include "overhead.h"
+	#include "VObject.h"
+	#include "SysUtil.h"
+	#include "Overhead.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "interface.h"
-	#include "vsurface.h"
-	#include "input.h"
+	#include "Interface.h"
+	#include "VSurface.h"
+	#include "Input.h"
 	#include "Handle UI.h"
 	#include "Animation Control.h"
 	#include "Animation Data.h"
-	#include "renderworld.h"
-	#include "cursors.h"
-	#include "radar screen.h"
-	#include "worldman.h"
+	#include "RenderWorld.h"
+	#include "Cursors.h"
+	#include "Radar Screen.h"
+	#include "WorldMan.h"
 	#include "Font Control.h"
-	#include "render dirty.h"
-	#include "utilities.h"
-	#include "interface cursors.h"
-	#include "lighting.h"
+	#include "Render Dirty.h"
+	#include "Utilities.h"
+	#include "Interface Cursors.h"
+	#include "Lighting.h"
 	#include "Interface Panels.h"
-	#include "pathai.h"
-	#include "vobject_blitters.h"
-	#include "faces.h"
+	#include "PathAI.h"
+	#include "VObject_blitters.h"
+	#include "Faces.h"
 	#include "Handle UI Plan.h"
-	#include "interface control.h"
-	#include "interface items.h"
-	#include "interface dialogue.h"
-	#include "interactive tiles.h"
+	#include "Interface Control.h"
+	#include "Interface Items.h"
+	#include "Interface Dialogue.h"
+	#include "Interactive Tiles.h"
 	#include "Game Clock.h"
 	#include "Strategic Exit GUI.h"
 	#include "PopUpBox.h"
 	#include "Assignments.h"
-	#include "spread burst.h"
-	#include "squads.h"
-	#include "line.h"
+	#include "Spread burst.h"
+	#include "Squads.h"
+	#include "Line.h"
 	#include "Militia Control.h"
 	#include "Map Screen Interface.h"
-	#include "civ quotes.h"
+	#include "Civ Quotes.h"
 	#include "GameSettings.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include "Text.h"
 
 #ifdef JA2UB
@@ -419,7 +419,7 @@ void ResetInterface( )
 
 	// Reset int tile cursor stuff
 	if ( gfUIShowCurIntTile )
-	{		
+	{
 		if (!TileIsOutOfBounds(gsUICurIntTileEffectGridNo))
 		{
 			//Find our tile!
@@ -827,7 +827,7 @@ void RenderTopmostTacticalInterface( )
 						{
 							sActionGridNo = sIntTileGridNo;
 						}
-					
+
 						bZLevel = GetLargestZLevelOfItemPool( pItemPool );
 
 						if ( AnyItemsVisibleOnLevel( pItemPool, bZLevel ) )
@@ -885,7 +885,7 @@ void RenderTopmostTacticalInterface( )
 	{
 		RemoveMouseRegionForPauseOfClock( );
 	}
-	
+
 	if ( !(guiTacticalInterfaceFlags & INTERFACE_NORENDERBUTTONS ) )
 	{
 		// If we want to rederaw whole screen, dirty all buttons!
@@ -893,7 +893,7 @@ void RenderTopmostTacticalInterface( )
 		{
 			MarkButtonsDirty( );
 		}
-		
+
 		RenderButtons( );
 		RenderPausedGameBox( );
 	}
@@ -1144,7 +1144,7 @@ void DrawCounters( SOLDIERTYPE *pSoldier )
 	INT16 sMercScreenX, sMercScreenY, sOffsetX, sOffsetY, sDamageX, sDamageY;
 
 	// sevenfm: added for suppression counters
-	INT16 sSuppressionX, sSuppressionY;				
+	INT16 sSuppressionX, sSuppressionY;
 	UINT16 widthDamage = 0;							// print damage counters one after another in one line
 	UINT16 widthSuppression = 0;					// print suppression counters (not moving) one after another in one line above soldier
 	BOOLEAN printSuppression = FALSE;               // determines if any value is printed above soldier (only for new suppression counters)
@@ -1178,7 +1178,7 @@ void DrawCounters( SOLDIERTYPE *pSoldier )
 
 			if ( sSuppressionY < gsVIEWPORT_WINDOW_START_Y )
 				sSuppressionY = ( sMercScreenY - sOffsetY );
-		}		
+		}
 		// coordinates for damage counter
 		if ( pSoldier->ubBodyType == QUEENMONSTER )
 		{
@@ -1202,7 +1202,7 @@ void DrawCounters( SOLDIERTYPE *pSoldier )
 		}
 		// print current ubSuppressionPoints counter
 		if( gGameExternalOptions.ubShowSuppressionCountAlt && pSoldier->stats.bLife >= OKLIFE )
-		{                               
+		{
 			if( pSoldier->ubSuppressionPoints >0 )
 			{
 				PrintCounter( sSuppressionX, sSuppressionY, pSoldier->ubSuppressionPoints, widthSuppression, FONT_MCOLOR_LTGRAY,
@@ -1224,7 +1224,7 @@ void DrawCounters( SOLDIERTYPE *pSoldier )
 				hitCount = gGameExternalOptions.ubEnemyHitCount;
 
 			if( pSoldier->sDamage < 0 )
-			{								
+			{
 				// Flugente: it is possible that someone might regain negative damage as zombies can regenerate health through bleeding
 				SetFontForeground( FONT_MCOLOR_LTGREEN );
 				swprintf( pStr, L"+%d ", -pSoldier->sDamage );
@@ -1290,7 +1290,7 @@ void DrawCounters( SOLDIERTYPE *pSoldier )
 				if( gGameExternalOptions.ubShowSuppressionCountAlt && gGameExternalOptions.ubShowSuppressionCount == 2 && pSoldier->ubLastSuppression > 0 )
 					widthSuppression = 0;
 				// display suppression from last attack
-				PrintSuppressionCounter( sDamageX, sDamageY, sSuppressionX, sSuppressionY, pSoldier->ubLastSuppression, widthDamage, widthSuppression, 
+				PrintSuppressionCounter( sDamageX, sDamageY, sSuppressionX, sSuppressionY, pSoldier->ubLastSuppression, widthDamage, widthSuppression,
 										FONT_MCOLOR_LTGRAY, PRINT_SCALE_ASTERISK_SUPPRESSION, gGameExternalOptions.ubShowSuppressionCount );
 				// display shock from last attack
 				PrintSuppressionCounter( sDamageX, sDamageY, sSuppressionX, sSuppressionY, pSoldier->ubLastShock + pSoldier->ubLastShockFromHit, widthDamage, widthSuppression,
@@ -1299,10 +1299,10 @@ void DrawCounters( SOLDIERTYPE *pSoldier )
 				PrintSuppressionCounter( sDamageX, sDamageY, sSuppressionX, sSuppressionY, pSoldier->ubLastMorale + pSoldier->ubLastMoraleFromHit, widthDamage, widthSuppression,
 										FONT_MCOLOR_LTGREEN, PRINT_SCALE_ASTERISK_MORALE, gGameExternalOptions.ubShowMoraleCount );
 				// display AP loss from last attack
-				PrintSuppressionCounter( sDamageX, sDamageY, sSuppressionX, sSuppressionY, pSoldier->ubLastAP + pSoldier->ubLastAPFromHit, widthDamage, widthSuppression, 
+				PrintSuppressionCounter( sDamageX, sDamageY, sSuppressionX, sSuppressionY, pSoldier->ubLastAP + pSoldier->ubLastAPFromHit, widthDamage, widthSuppression,
 										FONT_MCOLOR_LTBLUE, PRINT_SCALE_ASTERISK_AP, gGameExternalOptions.ubShowAPCount );
 			}
-		} 
+		}
 	}
 }
 

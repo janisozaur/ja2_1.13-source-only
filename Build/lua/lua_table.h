@@ -7,7 +7,7 @@ class LuaTable
 {
 public:
 	/**
-	 * Create new table 
+	 * Create new table
 	 */
 	LuaTable(LuaState L);
 
@@ -28,7 +28,7 @@ public:
 
 	/**
 	 * Bind to table value 'index' of table 'table'
-	 */ 
+	 */
 	LuaTable(LuaTable& table, int index);
 
 	////////////////////////////////////////////////////////////////////////
@@ -65,14 +65,14 @@ public:
 	}
 
 	/**
-	 * set value at given index 
+	 * set value at given index
 	 * @return false if table object is invalid, true otherwise
 	 */
 	template<typename T>
 	bool setValue(const char* index, T const& value);
 
 	/**
-	 * set value at given index 
+	 * set value at given index
 	 * @return false if table object is invalid, true otherwise
 	 */
 	template<typename T>
@@ -82,7 +82,7 @@ public:
 
 	/**
 	 * is it a table at offset '_off'
-	 */ 
+	 */
 	bool is_valid();
 
 	/**

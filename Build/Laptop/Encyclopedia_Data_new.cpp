@@ -11,22 +11,22 @@
 	#include "Interface Items.h"	//item: load item graphic
 	#include "Weapons.h"			//item
 	#include "Queen Command.h"		//location: Sectorinfo
-	#include "strategic.h"			//location: townIds
+	#include "Strategic.h"			//location: townIds
 	#include "PostalService.h"		//location: airport
 	#include "Campaign Types.h"		//location: facility types, descriptions
 	#include "Soldier Profile.h"	//char: names, flags and IDs
 	#include "Vehicles.h"			//char: vehicle image
 	#include "LocalizedStrings.h"
 	#include "Encrypted File.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 	#include "Overhead.h"			//char: menpointer for ubWhatKindofMercAmI
-	#include "aim.h"				//char: aim availability
+	#include "Aim.h"				//char: aim availability
 	#include "QuestText.h"			//quest: name
-	#include "laptop.h"				//ui positions
+	#include "Laptop.h"				//ui positions
 	#include "Utilities.h"
 	#include "Utils/Cursors.h"
-	#include "sysutil.h"			//extra Buffer for scaling image
-	#include "vsurface.h"			//fill extra buffer with black color
+	#include "SysUtil.h"			//extra Buffer for scaling image
+	#include "VSurface.h"			//fill extra buffer with black color
 	#include "Text.h"
 	#include "WordWrap.h"
     #include "Quests.h"
@@ -106,7 +106,7 @@ enum ENC_DATA_FILTER_ITEM {
 	ENC_DATA_FILTER_I_MISC			///< Everything else, has multiple subfilters
 } geEncyclopediaDataFilterItem;		///< Current item filter
 
-/// @brief Various filters for quests.@details Only filtered quests are shown. Subfilters, if any, are handled by callback function. 
+/// @brief Various filters for quests.@details Only filtered quests are shown. Subfilters, if any, are handled by callback function.
 enum ENC_DATA_FILTER_QUEST {
 	ENC_DATA_FILTER_Q_ALL = 0,		///< All active and completed quests are visible.
 	ENC_DATA_FILTER_Q_ACTIVE,		///< Only started, but not completed quests are shown.
@@ -197,7 +197,7 @@ BOOLEAN GetEncyclopediaLocationIDFromSectorCoords( UINT16 sSectorX, UINT16 sSect
 	CHECKF( sSectorX >= MINIMUM_VALID_X_COORDINATE && sSectorX <= MAXIMUM_VALID_X_COORDINATE );
 	CHECKF( sSectorY >= MINIMUM_VALID_Y_COORDINATE && sSectorY <= MAXIMUM_VALID_Y_COORDINATE );
 	CHECKF( sSectorZ >= MINIMUM_VALID_Z_COORDINATE && sSectorZ <= MINIMUM_VALID_Z_COORDINATE );
-	
+
 	encLocationID = ((sSectorX-1) + (sSectorY-1) * 16) * 4 + sSectorZ;
 	return (TRUE);
 }
@@ -352,7 +352,7 @@ INT16 GetNextPreviousCharacter( INT16 curChar, BOOLEAN next, ENC_DATA_FILTER_CHA
 		if( !gMercProfiles[ i ].ubMiscFlags && !gMercProfiles[ i ].ubMiscFlags2 && !(gMercProfiles[ i ].ubMiscFlags3 & ~(PROFILE_MISC_FLAG3_GOODGUY | PROFILE_MISC_FLAG3_TOWN_DOESNT_CARE_ABOUT_DEATH)))
 			continue;
 
-		
+
 /** @details
 * Resources to gather data from:
 *| variable name										| Type									|Index = person?					|Usage
@@ -765,7 +765,7 @@ BOOLEAN CreateData( INT16 newID )
 			}
 			else if( gstEncyclopediaDataEntry.uiTextPage == 2 )
 			{//2: debug text misc flag
-				STR16 dbgText = { L"PROFILE=%d, FLAG_RECRUITED=%d, FLAG_HAVESEENCREATURE=%d, FLAG_FORCENPCQUOTE=%d, FLAG_WOUNDEDBYPLAYER=%d, FLAG_TEMP_NPC_QUOTE_DATA_EXISTS=%d, FLAG_SAID_HOSTILE_QUOTE=%d, FLAG_EPCACTIVE=%d, FLAG_ALREADY_USED_ITEMS=%d" }; 
+				STR16 dbgText = { L"PROFILE=%d, FLAG_RECRUITED=%d, FLAG_HAVESEENCREATURE=%d, FLAG_FORCENPCQUOTE=%d, FLAG_WOUNDEDBYPLAYER=%d, FLAG_TEMP_NPC_QUOTE_DATA_EXISTS=%d, FLAG_SAID_HOSTILE_QUOTE=%d, FLAG_EPCACTIVE=%d, FLAG_ALREADY_USED_ITEMS=%d" };
 				swprintf( gstEncyclopediaDataEntry.sDescr, dbgText, newID,
 					gMercProfiles[newID].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED,
 					gMercProfiles[newID].ubMiscFlags & PROFILE_MISC_FLAG_HAVESEENCREATURE,
@@ -778,7 +778,7 @@ BOOLEAN CreateData( INT16 newID )
 			}
 			else if( gstEncyclopediaDataEntry.uiTextPage == 3 )
 			{//3: debug text misc flag2
-				STR16 dbgText = { L"PROFILE=%d, FLAG2_DONT_ADD_TO_SECTOR=%d, FLAG2_LEFT_COUNTRY=%d, FLAG2_BANDAGED_TODAY=%d, FLAG2_SAID_FIRSTSEEN_QUOTE=%d, FLAG2_NEEDS_TO_SAY_HOSTILE_QUOTE=%d, FLAG2_MARRIED_TO_HICKS=%d, FLAG2_ASKED_BY_HICKS=%d, FLAG2_MERC_GEARKIT_UNPAID=%d" }; 
+				STR16 dbgText = { L"PROFILE=%d, FLAG2_DONT_ADD_TO_SECTOR=%d, FLAG2_LEFT_COUNTRY=%d, FLAG2_BANDAGED_TODAY=%d, FLAG2_SAID_FIRSTSEEN_QUOTE=%d, FLAG2_NEEDS_TO_SAY_HOSTILE_QUOTE=%d, FLAG2_MARRIED_TO_HICKS=%d, FLAG2_ASKED_BY_HICKS=%d, FLAG2_MERC_GEARKIT_UNPAID=%d" };
 				swprintf( gstEncyclopediaDataEntry.sDescr, dbgText, newID,
 					gMercProfiles[newID].ubMiscFlags2 & PROFILE_MISC_FLAG2_DONT_ADD_TO_SECTOR,
 					gMercProfiles[newID].ubMiscFlags2 & PROFILE_MISC_FLAG2_LEFT_COUNTRY,
@@ -791,7 +791,7 @@ BOOLEAN CreateData( INT16 newID )
 			}
 			else if( gstEncyclopediaDataEntry.uiTextPage == 4 )
 			{//4: debug text misc flag3
-				STR16 dbgText = { L"PROFILE=%d, FLAG3_PLAYER_LEFT_MSG_FOR_MERC_AT_AIM=%d, FLAG3_PERMANENT_INSERTION_CODE=%d, FLAG3_PLAYER_HAD_CHANCE_TO_HIRE=%d, FLAG3_HANDLE_DONE_TRAVERSAL=%d, FLAG3_NPC_PISSED_OFF=%d, FLAG3_MERC_MERC_IS_DEAD_AND_QUOTE_SAID=%d, FLAG3_TOWN_DOESNT_CARE_ABOUT_DEATH=%d, FLAG3_GOODGUY=%d" }; 
+				STR16 dbgText = { L"PROFILE=%d, FLAG3_PLAYER_LEFT_MSG_FOR_MERC_AT_AIM=%d, FLAG3_PERMANENT_INSERTION_CODE=%d, FLAG3_PLAYER_HAD_CHANCE_TO_HIRE=%d, FLAG3_HANDLE_DONE_TRAVERSAL=%d, FLAG3_NPC_PISSED_OFF=%d, FLAG3_MERC_MERC_IS_DEAD_AND_QUOTE_SAID=%d, FLAG3_TOWN_DOESNT_CARE_ABOUT_DEATH=%d, FLAG3_GOODGUY=%d" };
 				swprintf( gstEncyclopediaDataEntry.sDescr, dbgText, newID,
 					gMercProfiles[newID].ubMiscFlags3 & PROFILE_MISC_FLAG3_PLAYER_LEFT_MSG_FOR_MERC_AT_AIM,
 					gMercProfiles[newID].ubMiscFlags3 & PROFILE_MISC_FLAG3_PERMANENT_INSERTION_CODE,
@@ -826,7 +826,7 @@ BOOLEAN CreateData( INT16 newID )
 			//FilenameForBPP( vObjDesc.ImageFile, fileName); removed: no faces with [ID]_8.sti
 			sprintf( vObjDesc.ImageFile, "faces\\BIGFACES\\%s", fileName );
 			vObjDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
-		
+
 			if( !AddVideoObject(&vObjDesc, &gstEncyclopediaDataEntry.uiImageID) )
 			{
 				//try with prefix 'B'
@@ -995,7 +995,7 @@ void BtnEncyclopedia_Data_FilterBtnCallBack( GUI_BUTTON *btn, INT32 reason )
 					default :
 						guiEncyclopediaDataSubFilter = 0;
 					}
-					
+
 					MSYS_SetBtnUserData( btn->IDNum, 2, guiEncyclopediaDataSubFilter );
 					nextData = GetNextPreviousLocation( ENC_DATA_NO_DATA, ENC_DATA_NEXT, geEncyclopediaDataFilterLocation, guiEncyclopediaDataSubFilter );
 					break;
@@ -1085,7 +1085,7 @@ void BtnEncyclopedia_Data_FilterBtnCallBack( GUI_BUTTON *btn, INT32 reason )
 							guiEncyclopediaDataSubFilter = BOBBYR_FILTER_MISC_MISC;
 						else
 							guiEncyclopediaDataSubFilter++;
-						SpecifyButtonText( btn->IDNum, (guiEncyclopediaDataSubFilter == 0? pEncyclopediaFilterItemText[6] : 
+						SpecifyButtonText( btn->IDNum, (guiEncyclopediaDataSubFilter == 0? pEncyclopediaFilterItemText[6] :
 							(guiEncyclopediaDataSubFilter == BOBBYR_FILTER_MISC_MISC? pEncyclopediaSubFilterItemText[ 47 ] : pEncyclopediaSubFilterItemText[ guiEncyclopediaDataSubFilter + 14 ]) ) );
 						break;
 					}
@@ -1367,7 +1367,7 @@ void GameInitEncyclopediaData_NEW(  )
 		case ENC_QUESTS :
 			pText = pEncyclopediaSubFilterQuestText;
 			break;
-		default : 
+		default :
 			AssertMsg(0, "Unrecognized DataPage in GameInitEncyclopediaData()");
 			return;
 		}
@@ -1601,7 +1601,7 @@ BOOLEAN ExitEncyclopediaData_NEW(  )
 	geEncyclopediaDataFilterCharacter = ENC_DATA_FILTER_C_ALL;
 	geEncyclopediaDataFilterItem = ENC_DATA_FILTER_I_ALL;
 	geEncyclopediaDataFilterQuest = ENC_DATA_FILTER_Q_ALL;
-	
+
 	// Reset data and remove data image
 	success &= CreateData( -1 );
 

@@ -1,19 +1,19 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdlib.h>
 	#include <memory.h>
 	#include "Strategic Movement.h"
 	#include "MemMan.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Campaign Types.h"
 	#include "Game Event Hook.h"
 	#include "Game Clock.h"
 
 	#include "Queen Command.h"
-	#include "overhead.h"
-	#include "strategicmap.h"
+	#include "Overhead.h"
+	#include "StrategicMap.h"
 	#include "jascreens.h"
 	#include "Strategic Pathing.h"
 	#include "Map Screen Interface Map.h"
@@ -22,9 +22,9 @@
 	#include "Assignments.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "message.h"
-	#include "mapscreen.h"
-	#include "dialogue control.h"
+	#include "Message.h"
+	#include "MapScreen.h"
+	#include "Dialogue Control.h"
 	#include "Soldier Add.h"
 	#include "Game Events.h"
 	#include "Vehicles.h"
@@ -32,7 +32,7 @@
 	#include "Map Screen Interface.h"
 	#include "Squads.h"
 	#include "Random.h"
-	#include "soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Map Information.h"
 	#include "Tactical Save.h"
 	#include "Player Command.h"
@@ -41,7 +41,7 @@
 	#include "Music Control.h"
 	#include "Campaign.h"
 	#include "Isometric Utils.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Inventory Choosing.h"
 	#include "Map Screen Interface Border.h"
 	#include "Auto Resolve.h"
@@ -67,7 +67,7 @@
 
 #include "GameInitOptionsScreen.h"
 
-#include "connect.h"
+#include "Connect.h"
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
@@ -1874,7 +1874,7 @@ void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNe
 			FindMovementGroupInSector( (UINT8)gWorldSectorX, (UINT8)gWorldSectorY, OUR_TEAM ) &&
 		(pGroup->ubNextX != gWorldSectorX || pGroup->ubNextY != gWorldSectorY || gbWorldSectorZ > 0 ) ||
 		#ifdef JA2UB
-			//Ja25: NO meanwhiles		
+			//Ja25: NO meanwhiles
 		#else
 			AreInMeanwhile() ||
 		#endif
@@ -1989,11 +1989,11 @@ void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNe
 		{
 			// check for discovering secret locations
 			INT8 bTownId = GetTownIdForSector( pGroup->ubSectorX, pGroup->ubSectorY );
-			
+
 			if ( gfHiddenTown[ bTownId ] == FALSE )
 				{
 					gfHiddenTown[ bTownId ] = TRUE;
-					
+
 					if ( gfIconTown[ bTownId ] == TRUE )
 						gfDrawHiddenTown[ bTownId ] = TRUE;
 				}
@@ -2005,7 +2005,7 @@ void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNe
 				SetTixaAsFound();
 			else if( bTownId == ORTA )
 				SetOrtaAsFound();
-			else 
+			else
 			*/
 			if( IsThisSectorASAMSector( pGroup->ubSectorX, pGroup->ubSectorY, 0 ) )
 				SetSAMSiteAsFound( GetSAMIdFromSector( pGroup->ubSectorX, pGroup->ubSectorY, 0 ) );
@@ -2325,12 +2325,12 @@ void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNe
 				// once militia have arrived, move them from the group to the sector
 				DissolveMilitiaGroup( pGroup->ubGroupID );
 			}
-			
+
 			// for safety, reset if necessary
 			ResetMilitia( );
 		}
 	}
-	
+
 #ifdef JA2UB
 /*
 //if the enemy group is at its final destination
@@ -2362,9 +2362,9 @@ void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNe
 		}
 */
 	//}
-	
+
 #endif
-	
+
 	gfWaitingForInput = FALSE;
 }
 
@@ -2374,7 +2374,7 @@ void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNe
 void HandleNonCombatGroupArrival( GROUP *pGroup, BOOLEAN fMainGroup, BOOLEAN fNeverLeft )
 {
 	// if any mercs are actually in the group
-	
+
 #ifdef JA2UB
 	//Ja25 No strategic ai
 #else
@@ -2732,7 +2732,7 @@ void InitiateGroupMovementToNextSector( GROUP *pGroup )
 	if ( wp->x < 1 || wp->x > 16 || wp->y < 1 || wp->y > 16 )
 	{
 		ScreenMsg( FONT_YELLOW, MSG_ERROR, L"Group %d has corrupted waypoints. Cancelling movement!", pGroup->ubGroupID );
-		
+
 		RemovePGroupWaypoints( pGroup );
 
 		return;
@@ -3234,7 +3234,7 @@ INT32 CalculateTravelTimeOfGroup( GROUP *pGroup )
 		// not going anywhere...return current time
 		return( uiEtaTime );
 	}
-	
+
 	// if already on the road
 	if ( pGroup->fBetweenSectors )
 	{
@@ -3514,9 +3514,9 @@ INT32 GetSectorMvtTimeForGroup( UINT8 ubSector, UINT8 ubDirection, GROUP *pGroup
 		while( curr )
 		{
 			pSoldier = curr->pSoldier;
-			
+
 			ubSurvivalistHere += NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT );
-			
+
 			// Flugente: backgrounds
 			ustravelbackground_foot = max(ustravelbackground_foot, pSoldier->GetBackgroundValue(BG_TRAVEL_FOOT));
 			ustravelbackground_car  = max(ustravelbackground_car,  pSoldier->GetBackgroundValue(BG_TRAVEL_CAR));
@@ -3827,8 +3827,8 @@ BOOLEAN PlayersBetweenTheseSectors( INT16 sSource, INT16 sDest, INT32 *iCountEnt
 
 						ubMercsInGroup = curr->ubGroupSize;
 
-						if (((SECTOR(curr->ubSectorX, curr->ubSectorY) == sSource) && 
-							 (SECTOR(curr->ubNextX, curr->ubNextY) == sDest)) || 
+						if (((SECTOR(curr->ubSectorX, curr->ubSectorY) == sSource) &&
+							 (SECTOR(curr->ubNextX, curr->ubNextY) == sDest)) ||
 							(fMayRetreatFromBattle)) {
 							// if it's a valid vehicle, but not the helicopter (which can fly empty)
 							if ( curr->fVehicle && !fHelicopterGroup && ( GivenMvtGroupIdFindVehicleId( curr->ubGroupID ) != -1 ) ) {
@@ -3843,7 +3843,7 @@ BOOLEAN PlayersBetweenTheseSectors( INT16 sSource, INT16 sDest, INT32 *iCountEnt
 							}
 						}
 						else if ((SECTOR( curr->ubSectorX, curr->ubSectorY ) == sDest) &&
-							     (SECTOR( curr->ubNextX, curr->ubNextY ) == sSource) || 
+							     (SECTOR( curr->ubNextX, curr->ubNextY ) == sSource) ||
 								 (fRetreatingFromBattle)) {
 							// if it's a valid vehicle, but not the helicopter (which can fly empty)
 							if ( curr->fVehicle && !fHelicopterGroup && ( GivenMvtGroupIdFindVehicleId( curr->ubGroupID ) != -1 ) ) {
@@ -4030,7 +4030,7 @@ BOOLEAN SaveStrategicMovementGroupsToSaveGameFile( HWFILE hFile )
 
 		//Save the waypoint list for the group, if they have one
 		SaveWayPointList( hFile, pGroup );
-		
+
 		pGroup = pGroup->next;
 	}
 
@@ -4075,7 +4075,7 @@ BOOLEAN LoadStrategicMovementGroupsFromSavedGameFile( HWFILE hFile )
 	}
 
 	pGroup = gpGroupList;
-	
+
 	//loop through all the nodes and add them to the LL
 	for( cnt=0; cnt< uiNumberOfGroups; ++cnt )
 	{
@@ -4097,7 +4097,7 @@ BOOLEAN LoadStrategicMovementGroupsFromSavedGameFile( HWFILE hFile )
 		// As a result, no other team could have any travelling groups (militia, civilians, creatures...)
 		// I've changed this - instead of BOOLEAN fPlayer; there now is UINT8 usGroupTeam;
 		// This doesn't mess with the struct size, as BOOLEAN has the same size as UINT8 here.
-		// However, 
+		// However,
 		if ( guiCurrentSaveGameVersion < STRATEGIC_TEAM_GROUPS )
 		{
 			// TODO
@@ -4130,7 +4130,7 @@ BOOLEAN LoadStrategicMovementGroupsFromSavedGameFile( HWFILE hFile )
 
 		//Save the waypoint list for the group, if they have one
 		LoadWayPointList( hFile, pTemp );
-		
+
 		pTemp->next = NULL;
 
 		//add the node to the list
@@ -4679,7 +4679,7 @@ GROUP* FindMovementGroupInSector( UINT8 ubSectorX, UINT8 ubSectorY, UINT8 ubTeam
 			else
 				return pGroup;
 		}
-				
+
 		pGroup = pGroup->next;
 	}
 	return NULL;
@@ -4770,7 +4770,7 @@ void ResetMovementForNonPlayerGroup( GROUP *pGroup )
 
 	if( !pGroup->fBetweenSectors || !pGroup->ubNextX || !pGroup->ubNextY )
 	{ //Reset the group's assignment by moving it to the group's original sector as it's pending group.
-	
+
 #ifdef JA2UB
 		//Ja25 No strategic ai
 #else
@@ -5249,7 +5249,7 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 		else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_HARD )
 			ubDifficulty = 2;
 		else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE )
-			ubDifficulty = 3;	
+			ubDifficulty = 3;
 		else
 			ubDifficulty = 0;
 
@@ -5259,7 +5259,7 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 	// Read chance from XML data, based on difficulty.
 	ubChance = gBloodcatPlacements[ ubSectorID ][ ubDifficulty ].ubAmbushChance;
 	iHoursElapsed = __max(0,(GetWorldTotalMin() - pSector->uiTimeCurrentSectorWasLastLoaded) / 60);
-	// Decrease chance to 0% if sector has been visited this hour. Every hour after that, increase the chance by 1% 
+	// Decrease chance to 0% if sector has been visited this hour. Every hour after that, increase the chance by 1%
 	// until it reaches the default value again.
 	ubChance = (UINT8)__min((INT32)ubChance, iHoursElapsed);
 	ubChance = __max(0,ubChance);
@@ -5269,10 +5269,10 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 
 	// At lair?
 	if( PlacementType == BLOODCAT_PLACEMENT_LAIR )
-	{ 
+	{
 		// Bloodcats still exist here, but aren't at the optimal number?
 		if( pSector->bBloodCats > 0 && pSector->bBloodCats < pSector->bBloodCatPlacements )
-		{ 
+		{
 			//Slowly have them recuperate if we haven't been here for a long time. The population will
 			//come back up to the maximum if left long enough.
 			INT32 iBloodCatDiff;
@@ -5284,7 +5284,7 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 
 	// At ambush sector?
 	else if( PlacementType == BLOODCAT_PLACEMENT_AMBUSH )
-	{ 
+	{
 		//If there's any chance of ambush in this sector, and we beat that chance...
 		if( ubChance && (gfAutoAmbush || PreChance( ubChance )) )
 		{
@@ -5312,9 +5312,9 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 
 			// SET NUMBER OF CATS THAT WILL APPEAR
 			pSector->bBloodCats = ubRandomCats;
-			
+
 			if( gGameOptions.ubDifficultyLevel < DIF_LEVEL_HARD )
-			{ 
+			{
 				//At NOVICE/EXPERIENCED difficulty, ensure cats never outnumber mercs by a factor of more than 2.
 				bNumMercMaxCats = (INT8)(PlayerMercsInSector( pGroup->ubSectorX, pGroup->ubSectorY, pGroup->ubSectorZ ) * 2);
 				pSector->bBloodCats = (INT8)min( pSector->bBloodCats, bNumMercMaxCats );
@@ -5348,12 +5348,12 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 			// We know about the lair
 			if( gubFact[ FACT_PLAYER_KNOWS_ABOUT_BLOODCAT_LAIR ] )
 			{
-				gubEnemyEncounterCode = ENTERING_BLOODCAT_LAIR_CODE;				
+				gubEnemyEncounterCode = ENTERING_BLOODCAT_LAIR_CODE;
 			}
 			else
 			{
 				if ( gGameOptions.fNewTraitSystem && ScoutIsPresentInSquad( pGroup->ubSectorX, pGroup->ubSectorY ) && gSkillTraitValues.fSCPreventsBloodcatsAmbushes)
-				{	
+				{
 					// Ha..! We've found the lair, safely
 					if ( gSkillTraitValues.fSCThrowMessageIfAmbushPrevented )
 						ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, New113Message[MSG113_BLOODCATS_AMBUSH_PREVENTED] );
@@ -5373,7 +5373,7 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 		else
 		{
 			if ( gGameOptions.fNewTraitSystem && ScoutIsPresentInSquad( pGroup->ubSectorX, pGroup->ubSectorY ) && gSkillTraitValues.fSCPreventsBloodcatsAmbushes)
-			{	
+			{
 				// We are safe
 				if ( gSkillTraitValues.fSCThrowMessageIfAmbushPrevented )
 					ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, New113Message[MSG113_BLOODCATS_AMBUSH_PREVENTED] );
@@ -5471,7 +5471,7 @@ void SetGroupArrivalTime( GROUP *pGroup, UINT32 uiArrivalTime )
 
 	// Also note that non-chopper groups can currently be delayed such that this assetion would fail - enemy groups by
 	// DelayEnemyGroupsIfPathsCross(), and player groups via PrepareGroupsForSimultaneousArrival(). So we skip the assert.
-	
+
 	if ( IsGroupTheHelicopterGroup( pGroup ) )
 	{
 		// make sure it's valid (NOTE: the correct traverse time must be set first!)
@@ -5617,7 +5617,7 @@ BOOLEAN HandlePlayerGroupEnteringSectorToCheckForNPCsOfNote( GROUP *pGroup )
 
 	// get the strategic sector value
 	sStrategicSector = sSectorX + MAP_WORLD_X * sSectorY;
-#ifdef JA2UB	
+#ifdef JA2UB
 	// ATE: if this is a custom map, return Ja25 UB
 	if ( SectorInfo[ SECTOR( sSectorY, sSectorX ) ].fCustomSector )
 	{
@@ -5677,13 +5677,13 @@ BOOLEAN WildernessSectorWithAllProfiledNPCsNotSpokenWith( INT16 sSectorX, INT16 
 	MERCPROFILESTRUCT *		pProfile;
 	BOOLEAN fFoundSomebody = FALSE;
 
-	
+
 	//for ( ubProfile = FIRST_RPC; ubProfile < GASTON; ubProfile++ )
 	//new profiles by Jazz
 	for ( ubProfile = 0; ubProfile < NUM_PROFILES; ubProfile++ )
 	{
-	
-		if ( gProfilesRPC[ubProfile].ProfilId == ubProfile || gProfilesNPC[ubProfile].ProfilId == ubProfile || gProfilesVehicle[ubProfile].ProfilId == ubProfile)	
+
+		if ( gProfilesRPC[ubProfile].ProfilId == ubProfile || gProfilesNPC[ubProfile].ProfilId == ubProfile || gProfilesVehicle[ubProfile].ProfilId == ubProfile)
 		{
 			pProfile = &gMercProfiles[ ubProfile ];
 
@@ -5982,7 +5982,7 @@ void CheckCombatInSectorDueToUnusualEnemyArrival( UINT8 aTeam, INT16 sX, INT16 s
 	BOOLEAN fMilitiaPresent = FALSE;
 	BOOLEAN fCombatAbleMerc = FALSE;
 	BOOLEAN fBloodCatAmbush = FALSE;
-	
+
 	gubEnemyEncounterCode = ENEMY_INVASION_CODE;
 
 	gubSectorIDOfCreatureAttack = SECTOR(sX, sY);
@@ -6092,7 +6092,7 @@ void CheckCombatInSectorDueToUnusualEnemyArrival( UINT8 aTeam, INT16 sX, INT16 s
 		//then we will go straight to autoresolve, where the enemy will likely annihilate them or capture them.
 		//If there are no alive mercs, then there is nothing anybody can do. The enemy will completely ignore
 		//this, and continue on.
-		
+
 		StopTimeCompression( );
 
 		if ( gubNumGroupsArrivedSimultaneously )

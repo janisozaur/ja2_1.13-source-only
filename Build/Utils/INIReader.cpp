@@ -1,9 +1,9 @@
-#include "builddefines.h"
-#include "IniReader.h"
+#include "BuildDefines.h"
+#include "INIReader.h"
 #include "FileMan.h"
-#include "debug.h"
+#include "Debug.h"
 #include "Font Control.h"
-#include "message.h"
+#include "Message.h"
 #include <stdio.h>
 #include <string.h>
 #include <sstream>
@@ -20,7 +20,7 @@ std::stack<std::string> iniErrorMessages;
 template<typename ValueType>
 void PushErrorMessage(std::string const& filename,
 					  std::string const& section,
-					  std::string const& key, 
+					  std::string const& key,
 					  ValueType value, ValueType used_value,
 					  ValueType minVal, ValueType maxVal)
 {
@@ -90,7 +90,7 @@ CIniReader::CIniReader(const STR8	szFileName, BOOLEAN Force_Custom_Data_Path)
 	// ary-05/05/2009 : force custom data path for potential non existing file -or- force default data path
 	//       : Also, flag file detection to allow functions to determine course of action for case of file [not found/is found].
 #ifndef USE_VFS
-	if ( Force_Custom_Data_Path ) 
+	if ( Force_Custom_Data_Path )
 	{
 		if ( gCustomDataCat.FindFile(szFileName) )
 		{
@@ -102,7 +102,7 @@ CIniReader::CIniReader(const STR8	szFileName, BOOLEAN Force_Custom_Data_Path)
 		}
 		sprintf(m_szFileName, "%s\\%s", gCustomDataCat.GetRootDir().c_str(), szFileName);
 	}
-	else 
+	else
 	{
 		if ( gDefaultDataCat.FindFile(szFileName) )
 		{
@@ -175,7 +175,7 @@ int CIniReader::ReadInteger(const STR8 szSection, const STR8 szKey, int defaultV
 	{
 		PushErrorMessage(this->m_szFileName, szSection, szKey, iniValueReadFromFile, minValue, minValue, maxValue);
 		return minValue;
-	} 
+	}
 	else if (iniValueReadFromFile > maxValue)
 	{
 		PushErrorMessage(this->m_szFileName, szSection, szKey, iniValueReadFromFile, maxValue, minValue, maxValue);
@@ -240,7 +240,7 @@ FLOAT CIniReader::ReadFloat(const STR8 szSection, const STR8 szKey, FLOAT defaul
 	//AssertGE(iniValueReadFromFile, minValue);
 	//AssertLE(iniValueReadFromFile, maxValue);
 
-	if (iniValueReadFromFile < minValue) 
+	if (iniValueReadFromFile < minValue)
 	{
 		PushErrorMessage(this->m_szFileName, szSection, szKey, iniValueReadFromFile, minValue, minValue, maxValue);
 		return minValue;
@@ -353,7 +353,7 @@ UINT32 CIniReader::ReadUINT32(const STR8 szSection, const STR8 szKey, UINT32 def
 }
 
 UINT32 CIniReader::ReadUINT(const STR8 szSection, const STR8 szKey, UINT32 defaultValue, UINT32 minValue, UINT32 maxValue )
-{ 
+{
 	UINT32 iniValueReadFromFile;
 #ifndef USE_VFS
 	STR8	szResult = new char[255];
@@ -372,12 +372,12 @@ UINT32 CIniReader::ReadUINT(const STR8 szSection, const STR8 szKey, UINT32 defau
 	//AssertGE(iniValueReadFromFile, minValue);
 	//AssertLE(iniValueReadFromFile, maxValue);
 
-	if (iniValueReadFromFile < minValue) 
+	if (iniValueReadFromFile < minValue)
 	{
 		PushErrorMessage(this->m_szFileName, szSection, szKey, iniValueReadFromFile, minValue, minValue, maxValue);
 		iniValueReadFromFile = minValue;
-	} 
-	else if (iniValueReadFromFile > maxValue) 
+	}
+	else if (iniValueReadFromFile > maxValue)
 	{
 		PushErrorMessage(this->m_szFileName, szSection, szKey, iniValueReadFromFile, maxValue, minValue, maxValue);
 		iniValueReadFromFile = maxValue;

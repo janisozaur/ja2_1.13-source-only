@@ -1,7 +1,7 @@
 #ifndef _LEGION_CFG_H
 #define _LEGION_CFG_H
 
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 extern void LoadGameLegionOptions();
 
@@ -13,7 +13,7 @@ typedef struct
     BOOLEAN BorderMilitia;
     BOOLEAN BorderAirspace;
     BOOLEAN BorderItem;
-	   	
+
 	BOOLEAN EnemyXML;
 	BOOLEAN EventAttackInitialSectorIfPlayerStillThere;
 	BOOLEAN HandleAddingEnemiesToTunnelMaps;
@@ -29,35 +29,35 @@ typedef struct
 	UINT32	LOCATEGRIDNO;
 	BOOLEAN LaptopIMPPassJA2;
 	BOOLEAN LaptopIMPPassUB;
-	
+
 	UINT8 ubDefaultArrivalSectorX;
 	UINT8 ubDefaultArrivalSectorY;
-	
+
 	INT32	iStartingCashNovice;
 	INT32	iStartingCashExperienced;
 	INT32	iStartingCashExpert;
 	INT32	iStartingCashInsane;
-	
+
 	BOOLEAN TEX_AND_JOHN;
-	
+
 	BOOLEAN Random_Manuel_Text;
-	
+
 	BOOLEAN RISRAPORT;
-	
+
 	BOOLEAN LaptopQuestEnabled;
-	
+
 	BOOLEAN InGameHeliCrash;
-	
+
 	BOOLEAN InGameHeli;
-	
+
 	UINT32 LOCATEGRIDNO2;
-	
+
 	BOOLEAN JerryQuotes;
-	
+
 	BOOLEAN InJerry;
-	
+
 	UINT32 JerryGridNo;
-	
+
 	UINT32  SwitchInMorrisAreaGridNo;
 	UINT32  SwitchToLaunchMisslesGridNo1;
 	UINT32  SwitchToLaunchMisslesGridNo2;
@@ -72,29 +72,29 @@ typedef struct
 	UINT32  PowergenFanSoundGridNo2;
 	UINT32  StartFanbackupAgainGridNo;
 	UINT32  StopPowergenFanGridNo;
-	
+
 	BOOLEAN TestUB;
-	
+
 	BOOLEAN LaptopLinkInsurance;
 	BOOLEAN LaptopLinkFuneral;
 	BOOLEAN LaptopLinkBobby;
-	
+
 	UINT32 FanGridNo[9];
-	
+
 	UINT8 ubEndDefaultSectorX;
 	UINT8 ubEndDefaultSectorY;
 	UINT8 ubEndDefaultSectorZ;
-	
+
 	BOOLEAN pJA2UB;
-	
+
 	BOOLEAN fBobbyRSite;
 	BOOLEAN fDeadMerc;
-	
+
 	BOOLEAN OLDUBInventory;
-       
+
 } GAME_LEGION_OPTIONS;
 
-extern GAME_LEGION_OPTIONS gGameLegionOptions; 
+extern GAME_LEGION_OPTIONS gGameLegionOptions;
 
 #ifdef JA2UB
 extern void RandomAddEnemy( UINT8 SectorX, UINT8 SectorY, UINT8 Level );

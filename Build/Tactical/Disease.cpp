@@ -6,21 +6,21 @@
 #include "Disease.h"
 
 #include "Overhead.h"
-#include "random.h"
+#include "Random.h"
 #include "Assignments.h"
-#include "message.h"
+#include "Message.h"
 #include "Soldier Profile.h"
 #include "Map Screen Interface Map.h"
 #include "Queen Command.h"
 #include "Quests.h"
-#include "finances.h"
+#include "Finances.h"
 #include "Game Clock.h"
 #include "LaptopSave.h"
-#include "strategic.h"
+#include "Strategic.h"
 #include "DynamicDialogue.h"
 #include <math.h>
 #include "Drugs And Alcohol.h"	// for DoesMercHaveDisability( ... )
-#include "environment.h"
+#include "Environment.h"
 
 //GLOBALS
 DISEASE Disease[NUM_DISEASES];
@@ -95,11 +95,11 @@ void HandleDisease()
 			// loop over all other soldiers and determine the chance that they will infect us
 			SOLDIERTYPE *pTeamSoldier = NULL;
 			UINT32 uiCnt2 = 0;
-						
+
 			// chance for infection due to proximity to other mercs
 			for ( uiCnt2 = 0, pTeamSoldier = MercPtrs[uiCnt2]; uiCnt2 <= gTacticalStatus.Team[gbPlayerNum].bLastID; ++uiCnt2, ++pTeamSoldier )
 			{
-				if ( pTeamSoldier->bActive && pTeamSoldier != pSoldier 
+				if ( pTeamSoldier->bActive && pTeamSoldier != pSoldier
 					 && pTeamSoldier->sSectorX == pSoldier->sSectorX && pTeamSoldier->sSectorY == pSoldier->sSectorY && pTeamSoldier->bSectorZ == pSoldier->bSectorZ
 					 && pTeamSoldier->stats.bLife > 0 )
 				{
@@ -168,7 +168,7 @@ void HandleDisease()
 
 									pSectorInfo->fInfectionSeverity = (pSectorInfo->fInfectionSeverity * pSectorInfo->usInfected + infectedseverity * 1) / (pSectorInfo->usInfected + 1);
 									++pSectorInfo->usInfected;
-								}																								
+								}
 							}
 						}
 					}
@@ -178,8 +178,8 @@ void HandleDisease()
 			// if we are infected, this might disgust other people, but only if it's visisble to them (we assume doctors dont mention this to others)
 			for ( int i = 0; i < NUM_DISEASES; ++i )
 			{
-				if ( (Disease[i].usDiseaseProperties & DISEASE_PROPERTY_DISGUSTING) && 
-					 (pSoldier->sDiseaseFlag[i] & SOLDIERDISEASE_DIAGNOSED) && 
+				if ( (Disease[i].usDiseaseProperties & DISEASE_PROPERTY_DISGUSTING) &&
+					 (pSoldier->sDiseaseFlag[i] & SOLDIERDISEASE_DIAGNOSED) &&
 					 (pSoldier->sDiseaseFlag[i] & SOLDIERDISEASE_OUTBREAK) )
 				{
 					HandleDynamicOpinionChange( pSoldier, OPINIONEVENT_DISEASE_DISGUSTING, TRUE, TRUE );
@@ -293,7 +293,7 @@ void HandleDisease()
 								++newinfected;
 						}
 					}
-					
+
 					if ( lefttoinfect - newinfected > 0 )
 					{
 						// there is also the chance to be infected by bad food, sex, contact with animals etc.
@@ -307,7 +307,7 @@ void HandleDisease()
 						// if there was a fight here in the last 48 hours, then corpses will still be here - increase chance of infection
 						if ( pSectorInfo->uiTimeLastPlayerLiberated && pSectorInfo->uiTimeLastPlayerLiberated + (48 * 3600) > GetWorldTotalSeconds( ) )
 							chance_corpse = Disease[0].dInfectionChance[INFECTION_TYPE_CONTACT_CORPSE] * populationpercentage;
-						
+
 						// chances can be smaller than 1%, so we use a trick here by altering our 'chance function'. This allows to have much smaller chances, as for diseases, 1% can be way too high.
 						if ( Random( 10000 ) < chance_sex * 100 )
 							++newinfected;
@@ -344,7 +344,7 @@ void HandleDisease()
 							}
 						}
 					}
-					
+
 					if ( pSectorInfo->usInfected + newinfected > 0 && Disease[0].sInfectionPtsFull )
 					{
 						FLOAT infectedseverity = (FLOAT)Disease[0].sInfectionPtsInitial / (FLOAT)Disease[0].sInfectionPtsFull;
@@ -363,7 +363,7 @@ void HandleDisease()
 				{
 					pSectorInfo->usInfectionFlag |= (SECTORDISEASE_OUTBREAK | SECTORDISEASE_DIAGNOSED_WHO);
 				}
-				
+
 				// if disease is known and doctoring isn't inhibited, use doctoring to remove disease
 				// doctors (civilian and military) can fight the disease
 				if ( (pSectorInfo->usInfectionFlag & (SECTORDISEASE_DIAGNOSED_WHO | SECTORDISEASE_DIAGNOSED_PLAYER)) && !pSectorInfo->usDiseaseDoctoringDelay)
@@ -385,7 +385,7 @@ void HandleDisease()
 					// if the disease escalates, increase doctor power!
 					if ( infectedpercentage > GetSectorDiseaseOverFlowThreshold( ) + 0.1f )
 						doctorpower += doctors * 0.3f * GetPopulationDoctorPoints();
-					
+
 					HealSectorPopulation( sX, sY, doctorpower );
 				}
 			}
@@ -409,7 +409,7 @@ void HandlePossibleInfection( SOLDIERTYPE *pSoldier, SOLDIERTYPE* pOtherSoldier,
 {
 	if ( !gGameExternalOptions.fDisease )
 		return;
-	
+
 	// only for living mercs with a profile with a valid infection method
 	if ( !pSoldier || pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE || pSoldier->ubProfile == NO_PROFILE || aInfectionType >= INFECTION_TYPE_MAX )
 		return;
@@ -615,7 +615,7 @@ void PopulationMove( INT16 sXA, INT16 sYA, INT16 sXB, INT16 sYB, UINT16 usAmount
 						// new infection severity is the mean of old and new infected times their infection ratios
 						pSectorInfoB->fInfectionSeverity = (pSectorInfoB->fInfectionSeverity * pSectorInfoB->usInfected + pSectorInfoA->fInfectionSeverity * movinginfected) / (pSectorInfoB->usInfected + movinginfected);
 						pSectorInfoB->usInfected += movinginfected;
-					
+
 						// disease moves before population moves, so we have to add those too
 						UINT16 populationB = GetSectorPopulation( sXB, sYB ) + movinginfected;
 
@@ -693,7 +693,7 @@ UINT32 HealSectorPopulation( INT16 sX, INT16 sY, UINT32 uHealpts )
 		return 0;
 
 	UINT32 ptsused = uHealpts;
-	
+
 	// the amount of points needed to cure a single patient
 	UINT32 ptsneededforcure = pSectorInfo->fInfectionSeverity * Disease[0].sInfectionPtsFull;
 
@@ -709,7 +709,7 @@ UINT32 HealSectorPopulation( INT16 sX, INT16 sY, UINT32 uHealpts )
 	{
 		UINT32 totaldiseasepoints = pSectorInfo->usInfected * ptsneededforcure;
 		totaldiseasepoints = max( 0, totaldiseasepoints - uHealpts );
-		
+
 		pSectorInfo->fInfectionSeverity = (FLOAT)totaldiseasepoints / (FLOAT)(pSectorInfo->usInfected * Disease[0].sInfectionPtsFull);
 	}
 

@@ -24,37 +24,37 @@ typedef struct TEAMSUMMARY
 typedef struct
 {
 	//start version 1
-	UINT8 ubSummaryVersion;									
-	UINT8 ubSpecial;									
-	UINT16 usNumItems;								
-	UINT16 usNumLights;								
-	_OLD_MAPCREATE_STRUCT MapInfo;					
-	TEAMSUMMARY EnemyTeam;						
-	TEAMSUMMARY CreatureTeam;					
-	TEAMSUMMARY RebelTeam;						
-	TEAMSUMMARY CivTeam;							
-	UINT8 ubNumDoors;									
-	UINT8 ubNumDoorsLocked;						
-	UINT8 ubNumDoorsTrapped;					
-	UINT8 ubNumDoorsLockedAndTrapped;	
+	UINT8 ubSummaryVersion;
+	UINT8 ubSpecial;
+	UINT16 usNumItems;
+	UINT16 usNumLights;
+	_OLD_MAPCREATE_STRUCT MapInfo;
+	TEAMSUMMARY EnemyTeam;
+	TEAMSUMMARY CreatureTeam;
+	TEAMSUMMARY RebelTeam;
+	TEAMSUMMARY CivTeam;
+	UINT8 ubNumDoors;
+	UINT8 ubNumDoorsLocked;
+	UINT8 ubNumDoorsTrapped;
+	UINT8 ubNumDoorsLockedAndTrapped;
 	//start version 2
-	UINT8	ubTilesetID;								
-	UINT8 ubNumRooms;									
-	//start version	3									
-	UINT8 ubNumElites;								
-	UINT8 ubNumAdmins;								
-	UINT8 ubNumTroops;								
-	//start version 4				
-	UINT8 ubEliteDetailed;						
-	UINT8 ubAdminDetailed;						
-	UINT8 ubTroopDetailed;						
-	//start version 5									
-	UINT8 ubEliteProfile;							
-	UINT8 ubAdminProfile;							
-	UINT8 ubTroopProfile;							
-	//start version 6									
-	UINT8	ubEliteExistance;						
-	UINT8 ubAdminExistance;						
+	UINT8	ubTilesetID;
+	UINT8 ubNumRooms;
+	//start version	3
+	UINT8 ubNumElites;
+	UINT8 ubNumAdmins;
+	UINT8 ubNumTroops;
+	//start version 4
+	UINT8 ubEliteDetailed;
+	UINT8 ubAdminDetailed;
+	UINT8 ubTroopDetailed;
+	//start version 5
+	UINT8 ubEliteProfile;
+	UINT8 ubAdminProfile;
+	UINT8 ubTroopProfile;
+	//start version 6
+	UINT8	ubEliteExistance;
+	UINT8 ubAdminExistance;
 	UINT8 ubTroopExistance;
 	//start version 7
 	FLOAT	dMajorMapVersion;
@@ -89,7 +89,7 @@ typedef struct
 	UINT32 uiEnemyPlacementPosition;	//		4
 																		//-----
 																		//	236
-	
+
 
 	UINT8 ubPadding[164];							//	164
 	//																//-----
@@ -157,5 +157,5 @@ BOOLEAN ReEvaluateWorld( const STR8	puiFilename );
 void ApologizeOverrideAndForceUpdateEverything();
 void ClearSummaryInfo();
 
-#endif 
+#endif
 #endif

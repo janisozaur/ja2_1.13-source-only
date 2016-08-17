@@ -1,7 +1,7 @@
 #include "PngLoader.h"
 #include "FileMan.h"
-#include "DEBUG.H"
-#include "vobject.h"
+#include "Debug.h"
+#include "VObject.h"
 #include "STIConvert.h"
 #include "MemMan.h"
 
@@ -42,7 +42,7 @@ class IndexedSTIImage
 public:
 	IndexedSTIImage();
 	~IndexedSTIImage();
-	
+
 	bool setPalette(SGPPaletteEntry *pPal, int iSize);
 	bool setPalette(png::png_colorp pPal, int iSize);
 	bool addImage(UINT8 *data, UINT32 data_size, UINT32 image_width, UINT32 image_height, INT32 image_offset_x, INT32 image_offset_y, UINT8 *original_compressed=NULL, UINT32 original_compressed_size=0);
@@ -181,7 +181,7 @@ bool IndexedSTIImage::addImage(UINT8 *data, UINT32 data_size, UINT32 image_width
 
 #if 0
 	unsigned int uiBufferPos = 0;
-	
+
 	bool bZeroRun = false;
 	UINT8 uiRunLength = 0;
 	UINT8 *uiRunStartPosition = data;
@@ -270,7 +270,7 @@ class CAppDataParser : public IXMLParser
 	};
 public:
 	CAppDataParser(XML_Parser &parser, IXMLParser* caller=NULL)
-		: IXMLParser("ImageData", &parser, caller), 
+		: IXMLParser("ImageData", &parser, caller),
 		current_state(DO_ELEMENT_NONE),
 		m_hImage(NULL),
 		m_iCurrentIndex(-1)
@@ -308,7 +308,7 @@ private:
 		} offset;
 	};
 	std::vector<SubImage>		m_vAppData;
-	int							m_iCurrentIndex;			
+	int							m_iCurrentIndex;
 };
 
 void CAppDataParser::onStartElement(const XML_Char* name, const XML_Char** atts)
@@ -326,7 +326,7 @@ void CAppDataParser::onStartElement(const XML_Char* name, const XML_Char** atts)
 		{
 			m_vAppData.resize(index+1);
 		}
-		current_state = DO_ELEMENT_SubImage; 
+		current_state = DO_ELEMENT_SubImage;
 	}
 	else if(current_state == DO_ELEMENT_SubImage && strcmp(name, "offset") == 0)
 	{
@@ -341,11 +341,11 @@ void CAppDataParser::onStartElement(const XML_Char* name, const XML_Char** atts)
 			m_vAppData[m_iCurrentIndex].offset.y = offset_y;
 			m_vAppData[m_iCurrentIndex].offset._override = true;
 		}
-		current_state = DO_ELEMENT_offset; 
+		current_state = DO_ELEMENT_offset;
 	}
 	else if(current_state == DO_ELEMENT_SubImage && strcmp(name, "AuxObjectData") == 0)
 	{
-		current_state = DO_ELEMENT_AuxData; 
+		current_state = DO_ELEMENT_AuxData;
 	}
 	else if(current_state == DO_ELEMENT_AuxData && strcmp(name, "flags") == 0)
 	{
@@ -355,8 +355,8 @@ void CAppDataParser::onStartElement(const XML_Char* name, const XML_Char** atts)
 	{
 		setFlag(m_vAppData[m_iCurrentIndex].aux.fFlags, name);
 	}
-	else if(current_state == DO_ELEMENT_AuxData && 
-				(	strcmp(name, "ubCurrentFrame") == 0 || 
+	else if(current_state == DO_ELEMENT_AuxData &&
+				(	strcmp(name, "ubCurrentFrame") == 0 ||
 					strcmp(name, "ubNumberOfFrames") == 0 ||
 					strcmp(name, "ubNumberOfTiles") == 0 ||
 					strcmp(name, "ubWallOrientation") == 0 ||
@@ -484,9 +484,9 @@ bool IndexedSTIImage::readAppDataFromXMLFile(HIMAGE hImage, vfs::tReadableFile* 
 		if(!XML_Parse(parser, &vBuffer[0], uiSize, TRUE))
 		{
 			std::wstringstream wss;
-			wss << L"XML Parser Error in Groups.xml: " 
+			wss << L"XML Parser Error in Groups.xml: "
 				<< vfs::String(XML_ErrorString(XML_GetErrorCode(parser))).c_wcs()
-				<< L" at line " 
+				<< L" at line "
 				<< XML_GetCurrentLineNumber(parser);
 			SGP_THROW(wss.str().c_str());
 		}
@@ -562,7 +562,7 @@ bool IndexedSTIImage::writeToHIMAGE(HIMAGE pImage)
 	//	if(i % frames == 0)
 	//	{
 	//		AuxObjectData &aod = *((AuxObjectData*)(&pImage->pAppData[i*sizeof(AuxObjectData)]));
-	//		aod.ubNumberOfFrames = frames; 
+	//		aod.ubNumberOfFrames = frames;
 	//		aod.fFlags = AUX_ANIMATED_TILE;
 	//	}
 	//}
@@ -613,7 +613,7 @@ public:
 			png_destroy_read_struct(&_struct, &_info, (png::png_infopp)NULL);
 			return false;
 		}
-		
+
 		// push file handle
 		png_set_read_fn(_struct, _file, user_read_data);
 
@@ -686,7 +686,7 @@ bool LoadPNGFileToImage(HIMAGE hImage, UINT16 fContents)
 	else
 	{
 		std::wstringstream wss;
-		wss << L"Unknown image datatype : channels = " << (int)(fpng.Info()->channels) 
+		wss << L"Unknown image datatype : channels = " << (int)(fpng.Info()->channels)
 			<< L", bit depth = " << (int)(fpng.Info()->bit_depth);
 		SGP_THROW(wss.str().c_str());
 	}
@@ -768,7 +768,7 @@ bool LoadJPCFileToImage(HIMAGE hImage, UINT16 fContents)
 			LoadPngFile lpng( vfs::tReadableFile::cast(vFiles[0]) );
 
 			bool bLoadS = lpng.Load();
-	
+
 			if(bLoadS)
 			{
 				if(lpng.Info()->channels == 4 && lpng.Info()->bit_depth == 8)
@@ -819,7 +819,7 @@ bool LoadJPCFileToImage(HIMAGE hImage, UINT16 fContents)
 
 //				LoadPngFile lpng( vfs::tReadableFile::cast(*fit) );
 				LoadPngFile lpng( vfs::tReadableFile::cast(&oTempFile) );
-	
+
 				bool bLoadS = lpng.Load();
 				if(bLoadS)
 				{
@@ -874,17 +874,17 @@ void Load32bppPNGImage(HIMAGE hImage, png::png_bytepp rows, png::png_infop info)
 	}
 	memset(hImage->pETRLEObject, 0, sizeof(ETRLEObject));
 	hImage->usNumberOfObjects = 1;
-	
+
 	hImage->pETRLEObject[0].usHeight = (UINT16)info->height;
 	hImage->pETRLEObject[0].usWidth  = (UINT16)info->width;
-	
+
 	hImage->pETRLEObject[0].sOffsetX = (INT16)info->x_offset;
 	hImage->pETRLEObject[0].sOffsetY = (INT16)info->y_offset;
-	
+
 	hImage->usHeight   = (UINT16)info->height;
 	hImage->usWidth    = (UINT16)info->width;
 	hImage->ubBitDepth = 32;
-	
+
 	UINT32 SIZE = info->height * info->width * sizeof(UINT32);
 	hImage->p32BPPData = (UINT32*)MemAlloc(SIZE);
 	if(!hImage->p32BPPData)
@@ -947,17 +947,17 @@ void Load24bppPNGImage(HIMAGE hImage, png::png_bytepp rows, png::png_infop info)
 	}
 	memset(hImage->pETRLEObject, 0, sizeof(ETRLEObject));
 	hImage->usNumberOfObjects = 1;
-	
+
 	hImage->pETRLEObject[0].usHeight = (UINT16)info->height;
 	hImage->pETRLEObject[0].usWidth  = (UINT16)info->width;
-	
+
 	hImage->pETRLEObject[0].sOffsetX = (UINT16)info->x_offset;
 	hImage->pETRLEObject[0].sOffsetY = (UINT16)info->y_offset;
-	
+
 	hImage->usHeight   = (UINT16)info->height;
 	hImage->usWidth    = (UINT16)info->width;
 	hImage->ubBitDepth = 16;
-	
+
 	UINT32 SIZE = info->height * info->width * sizeof(UINT16);
 	hImage->p16BPPData = (UINT16*)MemAlloc(SIZE);
 	if(!hImage->p16BPPData)
@@ -1037,7 +1037,7 @@ void LoadPalettedPNGImage(HIMAGE hImage, png::png_bytepp rows, png::png_infop in
 	subim.sOffsetY = subimage.sOffsetY;
 #if 0
 	unsigned int uiBufferPos = 0;
-	
+
 	bool bZeroRun = false;
 	UINT8 uiRunLength = 0;
 	UINT8 *uiRunStartPosition = data;
@@ -1107,7 +1107,7 @@ void LoadPalettedPNGImage(HIMAGE hImage, png::png_bytepp rows, png::png_infop in
 
 	hImage->fFlags |= IMAGE_TRLECOMPRESSED;
 	hImage->fFlags |= IMAGE_BITMAPDATA;
-	
+
 	// palette
 	SGP_THROW_IFFALSE(info->num_palette == 256, L"palette has size != 256");
 

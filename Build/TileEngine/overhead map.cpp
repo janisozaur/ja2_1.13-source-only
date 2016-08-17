@@ -1,47 +1,47 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
 	#include "stdio.h"
 	#include "sgp.h"
-	#include "vobject.h"
+	#include "VObject.h"
 	#include "tiledef.h"
-	#include "utilities.h"
-	#include "worlddef.h"
-	#include "isometric utils.h"
-	#include "renderworld.h"
-	#include "worlddat.h"
-	#include "vobject_blitters.h"
-	#include "overhead map.h"
-	#include "interface.h"
-	#include "interface control.h"
-	#include "overhead.h"
-	#include "radar screen.h"
-	#include "cursors.h"
+	#include "Utilities.h"
+	#include "WorldDef.h"
+	#include "Isometric Utils.h"
+	#include "RenderWorld.h"
+	#include "WorldDat.h"
+	#include "VObject_blitters.h"
+	#include "Overhead Map.h"
+	#include "Interface.h"
+	#include "Interface Control.h"
+	#include "Overhead.h"
+	#include "Radar Screen.h"
+	#include "Cursors.h"
 	#include "Sys Globals.h"
-	#include "render dirty.h"
-	#include "soldier find.h"
-	#include "font control.h"
+	#include "Render Dirty.h"
+	#include "Soldier Find.h"
+	#include "Font Control.h"
 	#include "Game Clock.h"
-	#include "interface panels.h"
-	#include "english.h"
-	#include "line.h"
-	#include "map information.h"
+	#include "Interface Panels.h"
+	#include "English.h"
+	#include "Line.h"
+	#include "Map Information.h"
 	#include "Tactical Placement GUI.h"
-	#include "world items.h"
-	#include "message.h"
-	#include "faces.h"
+	#include "World Items.h"
+	#include "Message.h"
+	#include "Faces.h"
 	#include "Squads.h"
 	#include "Interactive Tiles.h"
-	#include "gameloop.h"
-	#include "sysutil.h"
-	#include "tile surface.h"
+	#include "GameLoop.h"
+	#include "SysUtil.h"
+	#include "Tile Surface.h"
 	#include "GameSettings.h"
 	#include <vector>
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2EDITOR
 #include "Soldier Init List.h"
@@ -81,7 +81,7 @@ BOOLEAN						gfOverItemPool = FALSE;
 INT32							gsOveritemPoolGridNo;
 
 UINT16 iOffsetHorizontal;	// Horizontal start postion of the overview map
-UINT16 iOffsetVertical;	// Vertical start position of the overview map	
+UINT16 iOffsetVertical;	// Vertical start position of the overview map
 //DBrot: keep track if we should use a bigger version of the overview map for big maps
 //for now, this is a custom solution applicable in 1920x1080
 BOOLEAN		gfUseBiggerOverview = FALSE;
@@ -179,14 +179,14 @@ void InitNewOverheadDB( UINT8 ubTilesetID )
 				// TRY loading from default directory
 				FilenameForBPP( gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[ uiLoop ], cFileBPP);
 				// Adjust for tileset position
-				sprintf( cAdjustedFile, "TILESETS\\0\\T\\%s", cFileBPP );	
+				sprintf( cAdjustedFile, "TILESETS\\0\\T\\%s", cFileBPP );
 			}
 			else
 			{
 				// TRY loading from default directory
 				FilenameForBPP( gTilesets[ DEFAULT_JA25_TILESET ].TileSurfaceFilenames[ uiLoop ], cFileBPP);
 				// Adjust for tileset position
-				sprintf( cAdjustedFile, "TILESETS\\50\\T\\%s", cFileBPP );	
+				sprintf( cAdjustedFile, "TILESETS\\50\\T\\%s", cFileBPP );
 			}
 			#else
 				// TRY loading from default directory
@@ -528,7 +528,7 @@ void HandleOverheadMap( )
 				{
 					sActionGridNo = sIntTileGridNo;
 				}
-				
+
 				bZLevel = GetLargestZLevelOfItemPool( pItemPool );
 
 				if ( AnyItemsVisibleOnLevel( pItemPool, bZLevel ) )
@@ -682,7 +682,7 @@ void GoIntoOverheadMap( )
 	}
 	gusGridFrameX = WORLD_COLS * 4;
 	gusGridFrameY = WORLD_ROWS * 2;
-	
+
 	MSYS_DefineRegion( &OverheadBackgroundRegion, 0, 0 , SCREEN_WIDTH, SCREEN_HEIGHT, MSYS_PRIORITY_HIGH,
 						CURSOR_NORMAL, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
 
@@ -1416,7 +1416,7 @@ void RenderOverheadOverlays()
 	BOOLEAN marklastenemy = FALSE;
 	if ( gGameSettings.fOptions[TOPTION_SHOW_LAST_ENEMY] && gGameExternalOptions.ubMarkerMode && gTacticalStatus.Team[ ENEMY_TEAM ].bMenInSector <= gGameExternalOptions.ubSoldiersLeft )
 		marklastenemy = TRUE;
-	
+
 	for( i = 0; i < end; ++i )
 	{
 		//First, check to see if the soldier exists and is in the sector.
@@ -1427,7 +1427,7 @@ void RenderOverheadOverlays()
 
 		if(!GetOverheadScreenXYFromGridNo(pSoldier->sGridNo, &sX, &sY))//dnl ch45 041009
 			continue;
-		
+
 		//DBrot: mark his general area as hostile
 		// Flugente: also do that if the we scanned a jamming person
 		if(!gfEditMode && (showjammers || marklastenemy ) )
@@ -1435,17 +1435,17 @@ void RenderOverheadOverlays()
 			if ( ( marklastenemy && pSoldier->bTeam == ENEMY_TEAM ) || ( showjammers && pSoldier->IsJamming() ) )
 			{
 				UINT8 ubGridSquareX, ubGridSquareY;
-				
+
 				ubGridSquareX = sX / (gusGridFrameX / gubGridDivisor); 	//( pSoldier->sGridNo / WORLD_COLS ) / ( WORLD_COLS / ubResolutionTable[gGameExternalOptions.ubGridResolution]);
 				ubGridSquareY = sY / (gusGridFrameY / gubGridDivisor);	//( pSoldier->sGridNo - ( ( pSoldier->sGridNo / WORLD_COLS ) * WORLD_COLS ) ) / ( WORLD_COLS / ubResolutionTable[gGameExternalOptions.ubGridResolution]);
-								
+
 				HostileArea.iLeft = iOffsetHorizontal + (((gusGridFrameX / gubGridDivisor) * ubGridSquareX));
 				HostileArea.iTop = iOffsetVertical + (((gusGridFrameY / gubGridDivisor) * ubGridSquareY));
 				HostileArea.iRight = iOffsetHorizontal + (((gusGridFrameX / gubGridDivisor) * (ubGridSquareX + 1)));
 				HostileArea.iBottom = iOffsetVertical + (((gusGridFrameY / gubGridDivisor) * (ubGridSquareY + 1)));
 				if(gGameExternalOptions.ubMarkerMode == SHARPBORDER)
 					RectangleDraw(TRUE, HostileArea.iLeft, HostileArea.iTop, HostileArea.iRight, HostileArea.iBottom, 255, pDestBuf);
-					
+
 				if(gGameExternalOptions.ubMarkerMode == HATCHED)
 				{
 					UINT16 colour = 0xF000;
@@ -1463,7 +1463,7 @@ void RenderOverheadOverlays()
 		sX += 2;
 		sY -= 5;
 		//sScreenY -= 7;	//height of doll
-		
+
 		if( !gfTacticalPlacementGUIActive && pSoldier->bLastRenderVisibleValue == -1 && !(gTacticalStatus.uiFlags&SHOW_ALL_MERCS) )
 		{
 
@@ -1480,7 +1480,7 @@ void RenderOverheadOverlays()
 #endif
 
 		}
-		
+
 		if (TileIsOutOfBounds(pSoldier->sGridNo))
 		{
 			continue;
@@ -1568,7 +1568,7 @@ void RenderOverheadOverlays()
 						Blt8BPPDataTo16BPPBufferTransparent((UINT16*)pDestBuf, uiDestPitchBYTES, hVObject, sX, sY, personIndex );
 					}
 				}
-				else 
+				else
 					// Color depends on the bTeam
 					Blt8BPPDataTo16BPPBufferTransparent((UINT16*)pDestBuf, uiDestPitchBYTES, hVObject, sX, sY, pSoldier->bTeam );
 			}
@@ -1621,7 +1621,7 @@ void RenderOverheadOverlays()
 						Blt8BPPDataTo16BPPBufferTransparent((UINT16*)pDestBuf, uiDestPitchBYTES, hVObject, sX, sY, personIndex );
 					}
 				}
-				else 
+				else
 					// Color depends on the bTeam
 					Blt8BPPDataTo16BPPBufferTransparent((UINT16*)pDestBuf, uiDestPitchBYTES, hVObject, sX, sY, pSoldier->bTeam );
 			}
@@ -1981,7 +1981,7 @@ BOOLEAN GetOverheadScreenXYFromGridNo(INT32 sGridNo, INT16* psScreenX, INT16* ps
 	//DBrot: big maps
 	if(gfUseBiggerOverview){
 		//there must be proper values to check for a 360² map, but I have no idea what they are
-		//for now, we just pray that it works and only catch negatives 
+		//for now, we just pray that it works and only catch negatives
 		if(sWorldScreenX < 0 || /*sWorldScreenX > NORMAL_MAP_SCREEN_WIDTH ||*/ sWorldScreenY < 0 /*|| sWorldScreenY > NORMAL_MAP_SCREEN_HEIGHT*/)
 		return(FALSE);
 	}else{

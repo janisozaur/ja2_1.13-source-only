@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */
@@ -9,9 +9,9 @@
 #include "Text.h"
 #include "Isometric Utils.h"
 #include "DisplayCover.h"
-#include "worldman.h"
+#include "WorldMan.h"
 #include "Queen Command.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 
 // sevenfm: need this for correct calculation of traits menu position
 extern INT16 gsInterfaceLevel;
@@ -38,7 +38,7 @@ SkillMenuItem::SetupPopup(CHAR* name)
 {
 	// create a popup
 	gPopup = new POPUP(name);
-	
+
 	// add a callback that lets the keyboard handler know we're done (and ready to pop up again)
 	gPopup->setCallback(POPUP_CALLBACK_HIDE, new popupCallbackFunction<void, void>( &Hide ) );
 }
@@ -117,7 +117,7 @@ TraitSelection::Setup( UINT32 aVal )
 	SetupPopup("TraitSelection");
 
 	POPUP_OPTION *pOption;
-	
+
 	CHAR16 pStr[300];
 
 	// create entries for the sub-menus for each trait
@@ -145,17 +145,17 @@ TraitSelection::Setup( UINT32 aVal )
 	swprintf( pStr, pSkillMenuStrings[SKILLMENU_CANCEL] );
 	pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void,UINT32>( &Wrapper_Cancel_TraitSelection, 0 ) );
 	GetPopup()->addOption( *pOption );
-		
+
 	// grab soldier's x,y screen position
 	INT16 sX, sY;
 	// sevenfm: changed TraitsMenu position from soldier to mouse
 	//GetSoldierScreenPos( pSoldier, &sX, &sY );
 	GetGridNoScreenPos( sTraitsMenuTargetGridNo, (UINT8)gsInterfaceLevel, &sX, &sY );
-		
+
 	if( sX < 0 ) sX = 0;
 	if( sY < 0 ) sY = 0;
 
-	usTraitMenuPosX = sX + 30;		
+	usTraitMenuPosX = sX + 30;
 	usTraitMenuPosY = sY;
 
 	if ( ( usTraitMenuPosX + 400 ) > SCREEN_WIDTH )
@@ -185,7 +185,7 @@ SkillSelection::Setup( UINT32 aVal )
 	if ( HAS_SKILL_TRAIT(pSoldier, aVal) )
 	{
 		SetupPopup("SkillSelection");
-		
+
 		POPUP_OPTION *pOption;
 
 		CHAR16 pStr[300];
@@ -215,7 +215,7 @@ SkillSelection::Setup( UINT32 aVal )
 						// Set this option off.
 						pOption->setAvail(new popupCallbackFunction<bool,void*>( &Popup_OptionOff, NULL ));
 					}
-					
+
 					GetPopup()->addOption( *pOption );
 				}
 			}
@@ -235,7 +235,7 @@ SkillSelection::Setup( UINT32 aVal )
 						// Set this option off.
 						pOption->setAvail(new popupCallbackFunction<bool,void*>( &Popup_OptionOff, NULL ));
 					}
-					
+
 					GetPopup()->addOption( *pOption );
 				}
 
@@ -244,11 +244,11 @@ SkillSelection::Setup( UINT32 aVal )
 				ToggleTraitRangeView(TRUE);
 			}
 			break;
-		
+
 		default:
 			break;
 		}
-				
+
 		// cancel option
 		swprintf( pStr, pSkillMenuStrings[SKILLMENU_CANCEL] );
 		pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void,UINT32>( &Wrapper_Cancel_SkillSelection, 0 ) );
@@ -295,11 +295,11 @@ SkillSelection::Functions( UINT32 aVal )
 
 	if ( pSoldier == NULL )
 		return;
-	
+
 	UINT8 ubID = WhoIsThere2(sTraitsMenuTargetGridNo, 0 );
 
 	pSoldier->UseSkill(aVal, sTraitsMenuTargetGridNo, ubID);
-		
+
 	Cancel();
 	gTraitSelection.Cancel();
 }
@@ -321,11 +321,11 @@ ArtillerySector::Setup( UINT32 aVal )
 	if ( pSoldier->CanUseSkill(SKILLS_RADIO_ARTILLERY) )
 	{
 		SetupPopup("ArtillerySector");
-		
+
 		POPUP_OPTION *pOption;
-			
+
 		CHAR16 pStr[300];
-				
+
 		// check wether we can call artillery from the 4 adjacent sectors
 		for (UINT8 i = 0; i < 4; ++i)
 		{
@@ -341,7 +341,7 @@ ArtillerySector::Setup( UINT32 aVal )
 				continue;
 
 			UINT32 sectornr = (UINT32)SECTOR( loopX, loopY );
-		
+
 			swprintf( pStr, L"%c%d", loopY + 'A' - 1, loopX );
 
 			pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void, UINT32>( &Wrapper_Setup_ArtilleryTeam, sectornr ) );
@@ -385,19 +385,19 @@ ArtilleryTeam::Setup( UINT32 aVal )
 		return;
 
 	if ( pSoldier->CanUseSkill(SKILLS_RADIO_ARTILLERY) && pSoldier->bSectorZ == 0)
-	{		
+	{
 		usSector = aVal;
-		
+
 		SetupPopup("ArtilleryTeam");
 
 		POPUP_OPTION *pOption;
-			
+
 		CHAR16 pStr[300];
 
 		// determine sector coordinates
 		INT16 sSectorX = SECTORX(usSector);
 		INT16 sSectorY = SECTORY(usSector);
-				
+
 		// order artillery from militia
 		swprintf( pStr, pSkillMenuStrings[SKILLMENU_MILITIA] );
 
@@ -423,7 +423,7 @@ ArtilleryTeam::Setup( UINT32 aVal )
 			pOption->setAvail(new popupCallbackFunction<bool,void*>( &Popup_OptionOff, NULL ));
 		}
 		GetPopup()->addOption( *pOption );
-		
+
 		// cancel option
 		swprintf( pStr, pSkillMenuStrings[SKILLMENU_CANCEL] );
 		pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void,UINT32>( &Wrapper_Cancel_ArtilleryTeam, 0 ) );
@@ -450,7 +450,7 @@ ArtilleryTeam::Functions( UINT32 aVal )
 
 	if ( pSoldier == NULL || !pSoldier->CanUseSkill(SKILLS_RADIO_ARTILLERY) )
 		return;
-	
+
 	pSoldier->OrderArtilleryStrike(usSector, sTraitsMenuTargetGridNo, (UINT8)(aVal));
 
 	Cancel();
@@ -476,11 +476,11 @@ ReinforcementSector::Setup( UINT32 aVal )
 	if ( pSoldier->CanUseSkill(aVal) )
 	{
 		SetupPopup("Reinforcements sector");
-		
+
 		POPUP_OPTION *pOption;
 
 		CHAR16 pStr[300];
-				
+
 		// check wether we can call artillery from the 4 adjacent sectors
 		for (UINT8 i = 0; i < 4; ++i)
 		{
@@ -496,7 +496,7 @@ ReinforcementSector::Setup( UINT32 aVal )
 				continue;
 
 			UINT32 sectornr = (UINT32)SECTOR( loopX, loopY );
-		
+
 			swprintf( pStr, L"%c%d", loopY + 'A' - 1, loopX );
 
 			pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void, UINT32>( &Wrapper_Setup_ReinforcementNumber, sectornr ) );
@@ -539,17 +539,17 @@ ReinforcementNumber::Setup( UINT32 aVal )
 		usSector = aVal;
 
 		SetupPopup("Reinforcements number submenu");
-	
+
 		POPUP_OPTION *pOption;
 
 		CHAR16 pStr[300];
-		
+
 		UINT8 numberofmilitia = NumNonPlayerTeamMembersInSector( SECTORX( usSector ), SECTORY( usSector ), MILITIA_TEAM );
-		
+
 		// 5 militia option
 		swprintf( pStr, pSkillMenuStrings[SKILLMENU_X_MILITIA], 5 );
 		pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void, UINT32>( &Wrapper_Function_ReinforcementNumber, 5 ) );
-		
+
 		if ( numberofmilitia < 5 )
 		{
 			// Set this option off.
@@ -638,10 +638,10 @@ ReinforcementNumber::Functions( UINT32 aVal )
 	SOLDIERTYPE * pSoldier = NULL;
 
 	GetSoldier( &pSoldier, gusSelectedSoldier );
-		
+
 	if ( pSoldier == NULL || !pSoldier->CanUseSkill(SKILLS_RADIO_CALLREINFORCEMENTS) )
 		return;
-	
+
 	pSoldier->RadioCallReinforcements(usSector, aVal);
 
 	Cancel();
@@ -656,7 +656,7 @@ void
 SoldierSelection::Setup( UINT32 aVal )
 {
 	Destroy();
-	
+
 	SOLDIERTYPE * pSoldier = NULL;
 
 	GetSoldier( &pSoldier, gusSelectedSoldier );
@@ -669,9 +669,9 @@ SoldierSelection::Setup( UINT32 aVal )
 		usSkill = aVal;
 
 		SetupPopup("SoldierSelection");
-		
+
 		POPUP_OPTION *pOption;
-	
+
 		CHAR16 pStr[300];
 
 		// pretty simple: we find every soldier in a radius around the target position and add him to the list

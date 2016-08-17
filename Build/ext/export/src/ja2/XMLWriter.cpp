@@ -14,7 +14,7 @@ void XMLWriter::addValue(vfs::String const& key)
 
 void XMLWriter::addComment(vfs::String const& comment)
 {
-	m_ssBuffer << indent() << "<!-- " << comment.utf8() << " -->\n"; 
+	m_ssBuffer << indent() << "<!-- " << comment.utf8() << " -->\n";
 }
 
 void XMLWriter::addFlag(UINT32 const& flags, UINT32 const& flag, vfs::String strFlag)

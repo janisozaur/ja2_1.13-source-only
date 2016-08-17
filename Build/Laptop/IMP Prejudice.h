@@ -1,7 +1,7 @@
 #ifndef __IMP_PREJUDICE__H_
 #define __IMP_PREJUDICE__H_
 
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */

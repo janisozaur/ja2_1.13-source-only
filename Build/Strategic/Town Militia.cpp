@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
@@ -7,29 +7,29 @@
 	#include "Town Militia.h"
 	#include "Militia Control.h"
 	#include "Campaign Types.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "Overhead.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Utilities.h"
-	#include "random.h"
-	#include "text.h"
+	#include "Random.h"
+	#include "Text.h"
 	#include "Map Screen Interface.h"
 	#include "Interface.h"
-	#include "Laptopsave.h"
-	#include "finances.h"
+	#include "LaptopSave.h"
+	#include "Finances.h"
 	#include "Game Clock.h"
 	#include "Assignments.h"
-	#include "squads.h"
+	#include "Squads.h"
 	#include "Soldier Create.h"
 	#include "Dialogue Control.h"
 	#include "GameSettings.h"
 	#include "Queen Command.h"
 	#include "PreBattle Interface.h"
 	#include "Map Screen Interface Border.h"
-	#include "interface control.h"
+	#include "Interface Control.h"
 	#include "Map Screen Interface Map.h"
-	#include "laptop.h"							// added by Flugente
+	#include "Laptop.h"							// added by Flugente
 	#include "Game Event Hook.h"				// added by Flugente
 	#include "MilitiaIndividual.h"				// added by Flugente
 	#include "Campaign.h"						// added by Flugente
@@ -40,7 +40,7 @@
 // of trained troops.
 #include "SkillCheck.h"
 #include "Soldier Control.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 #include "MilitiaSquads.h"
 #define SIZE_OF_MILITIA_COMPLETED_TRAINING_LIST 50
@@ -263,7 +263,7 @@ void TownMilitiaTrainingCompleted( SOLDIERTYPE *pTrainer, INT16 sMapX, INT16 sMa
 	// if we can't train as many militia as we should due to lack of volunteers, the excess training goes into promoting militia
 	UINT8 promotionsfromvolunteers = iTrainingSquadSize;
 	iTrainingSquadSize = min( iTrainingSquadSize, GetVolunteerPool( ) );
-	
+
 	if ( gGameExternalOptions.fMilitiaResources && !gGameExternalOptions.fMilitiaUseSectorInventory )
 	{
 		FLOAT val_gun, val_armour, val_misc;
@@ -295,7 +295,7 @@ void TownMilitiaTrainingCompleted( SOLDIERTYPE *pTrainer, INT16 sMapX, INT16 sMa
 	// 3) If not enough room anywhere in town, promote a number of GREENs in this sector into regulars
 	// 4) If not enough GREENS there to promote, promote GREENs in other sectors.
 	// 5) If all friendly sectors of this town are completely filled with REGULAR militia, then training effect is wasted
-	
+
 	// Kaiden: Roaming Militia Training:
 	// If we're not training roaming militia,
 	// then we will handle everything as normal.
@@ -304,7 +304,7 @@ void TownMilitiaTrainingCompleted( SOLDIERTYPE *pTrainer, INT16 sMapX, INT16 sMa
 	if( pTrainer->bAssignment == TRAIN_MOBILE )
 	{
 		CreateMilitiaSquads(sMapX, sMapY );
-		
+
 		// the trainer announces to player that he's finished his assignment.	Make his sector flash!
 		AssignmentDone( pTrainer, TRUE, FALSE );
 
@@ -520,7 +520,7 @@ void StrategicPromoteMilitiaInSector(INT16 sMapX, INT16 sMapY, UINT8 ubCurrentRa
 	// determine how many static and  - if necessary - group-based militia we have to remove
 	UINT8 reducestatic = min( stationary, ubHowMany );
 	UINT8 reducegroups = min( ingroups, ubHowMany - reducestatic );
-	
+
 	pSectorInfo->ubNumberOfCivsAtLevel[ubCurrentRank] -= reducestatic;
 	pSectorInfo->ubNumberOfCivsAtLevel[ubCurrentRank + 1] += reducestatic;
 
@@ -546,7 +546,7 @@ void StrategicPromoteMilitiaInSector(INT16 sMapX, INT16 sMapY, UINT8 ubCurrentRa
 		}
 		pGroup = pGroup->next;
 	}
-	
+
 	if (ubHowMany && sMapX == gWorldSectorX && sMapY == gWorldSectorY )
 	{
 		gfStrategicMilitiaChangesMade = TRUE;
@@ -623,7 +623,7 @@ void StrategicRemoveAllStaticMilitiaFromSector( INT16 sMapX, INT16 sMapY, UINT8 
 {
 	if ( ubRank < MAX_MILITIA_LEVELS )
 		SectorInfo[SECTOR( sMapX, sMapY )].ubNumberOfCivsAtLevel[ubRank] = 0;
-	
+
 	if ( sMapX == gWorldSectorX && sMapY == gWorldSectorY )
 		gfStrategicMilitiaChangesMade = TRUE;
 
@@ -906,7 +906,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia2");
 		gfAreWeTrainingMobile = FALSE;
 	}
 	// Mobile
-	else 
+	else
 	{
 		giTotalCostOfTraining = (iMilitiaTrainingCost*gGameExternalOptions.iMilitiaCostModifier) * iNumberOfSectors;
 		Assert( giTotalCostOfTraining > 0 );
@@ -1112,10 +1112,10 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia3");
 
 					pSectorInfo = &( SectorInfo[ SECTOR(sCurrentX, sCurrentY) ] );
 					// if sector has enemies or hasn't already been taken at least once, then
-					if ( !SectorInfo[ SECTOR(sCurrentX, sCurrentY) ].fSurfaceWasEverPlayerControlled || 
+					if ( !SectorInfo[ SECTOR(sCurrentX, sCurrentY) ].fSurfaceWasEverPlayerControlled ||
 						NumNonPlayerTeamMembersInSector( sCurrentX, sCurrentY, ENEMY_TEAM ) > 0 )
 					{
-						// skip the rest. This sector cannot generate militia anyway. 
+						// skip the rest. This sector cannot generate militia anyway.
 						iCounter++;
 						continue;
 					}
@@ -1146,7 +1146,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia3");
 		UINT8 uiDirNumber = 0;
 		BOOLEAN fFoundValidSector = FALSE;
 
-		
+
 		INT8 bTownId = GetTownIdForSector( pSoldier->sSectorX, pSoldier->sSectorY );
 		GenerateDirectionInfosForTraining( pSoldier->sSectorX, pSoldier->sSectorY, &uiDirNumber, pMoveDir );
 		// Found at least one suitable place to put Mobiles?
@@ -1158,7 +1158,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia3");
 		else
 		{
 			INT32 iCounter = 0;
-			
+
 			// Go through each city in the game
 			while( pTownNamesList[ iCounter ] != 0 )
 			{
@@ -1169,10 +1169,10 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia3");
 					INT16 sCurrentY = GET_Y_FROM_STRATEGIC_INDEX( pTownLocationsList[ iCounter ] );
 
 					// if sector has enemies or hasn't already been taken at least once, then
-					if ( !SectorInfo[ SECTOR(sCurrentX, sCurrentY) ].fSurfaceWasEverPlayerControlled || 
+					if ( !SectorInfo[ SECTOR(sCurrentX, sCurrentY) ].fSurfaceWasEverPlayerControlled ||
 						 NumNonPlayerTeamMembersInSector( sCurrentX, sCurrentY, ENEMY_TEAM ) > 0 )
 					{
-						// skip the rest. This sector cannot generate militia anyway. 
+						// skip the rest. This sector cannot generate militia anyway.
 						iCounter++;
 						continue;
 					}
@@ -1191,7 +1191,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia3");
 		}
 
 		// Couldn't find at least one sector to place Mobiles. Report "No room!"
-		if (!fFoundValidSector) 
+		if (!fFoundValidSector)
 		{
 			swprintf( sString, New113HAMMessage[ 8 ], pTownNames[ bTownId ], iMinLoyaltyToTrain );
 			DoContinueMilitiaTrainingMessageBox( sSectorX, sSectorY, sString, MSG_BOX_FLAG_OK, CantTrainMobileMilitiaOkBoxCallback );
@@ -1409,11 +1409,11 @@ BOOLEAN CanSomeoneNearbyScoutThisSector( INT16 sSectorX, INT16 sSectorY, BOOLEAN
 			if (fScoutTraitCheck && gGameOptions.fNewTraitSystem && ScoutIsPresentInSquad( sCounterA, sCounterB ))
 			{
 				// if diagonal sector and not allowed
-				if (!gSkillTraitValues.fSCDetectionInDiagonalSectors && 
+				if (!gSkillTraitValues.fSCDetectionInDiagonalSectors &&
 					((sCounterA - 1 == sSectorX && sCounterB + 1 == sSectorY) ||
 					 (sCounterA - 1 == sSectorX && sCounterB - 1 == sSectorY) ||
 					 (sCounterA + 1 == sSectorX && sCounterB + 1 == sSectorY) ||
-					 (sCounterA + 1 == sSectorX && sCounterB - 1 == sSectorY))) 
+					 (sCounterA + 1 == sSectorX && sCounterB - 1 == sSectorY)))
 				{
 					continue;
 				}
@@ -1930,7 +1930,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Militia6");
 		gfAreWeTrainingMobile = FALSE;
 		ubMilitiaType = MOBILE_MILITIA;
 	}
-	else 
+	else
 	{
 		Assert( SectorInfo[ ubSector ].fMilitiaTrainingPaid == FALSE );
 		if ( gfAreWePromotingGreen)
@@ -2112,7 +2112,7 @@ UINT8 FindBestMilitiaTrainingLeadershipInSector ( INT16 sMapX, INT16 sMapY, INT8
 	// HEADROCK HAM 3.3: Add search for best trainer in sector
 	for ( pCheckedTrainer = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; cnt++, pCheckedTrainer++)
 	{
-		if (pCheckedTrainer->bActive && pCheckedTrainer->stats.bLife >= OKLIFE && 
+		if (pCheckedTrainer->bActive && pCheckedTrainer->stats.bLife >= OKLIFE &&
 			((ubMilitiaType == TOWN_MILITIA && pCheckedTrainer->bAssignment == TRAIN_TOWN) ||
 			(ubMilitiaType == MOBILE_MILITIA && pCheckedTrainer->bAssignment == TRAIN_MOBILE) ) )
 		{
@@ -2148,7 +2148,7 @@ UINT8 FindBestMilitiaTrainingLeadershipInSector ( INT16 sMapX, INT16 sMapY, INT8
 			}
 		}
 	}
-	
+
 	return(ubBestLeadership);
 }
 
@@ -2163,7 +2163,7 @@ UINT8 CalcNumMilitiaTrained(UINT8 ubBestLeadership, BOOLEAN fMobile)
 
 	// Result value
 	UINT8 ubMilitiaToTrain = 0;
-	
+
 
 	// Garrison Training
 	if (!fMobile)
@@ -2181,18 +2181,18 @@ UINT8 CalcNumMilitiaTrained(UINT8 ubBestLeadership, BOOLEAN fMobile)
 
 			// We make sure our effective leadership isn't above or below the limits. If so, reset to limits.
 			// If there is a minimum required to train militia, we're ASSUMING that the character has enough leadership
-			// otherwise they wouldn't even be here. But just in case he's skipped the check somehow, this will raise 
+			// otherwise they wouldn't even be here. But just in case he's skipped the check somehow, this will raise
 			// leadership to the minimum to avoid problems.
 			ubBestLeadership = __max(ubBestLeadership, ubMinLeadershipForTraining);
 			ubBestLeadership = __min(ubBestLeadership, ubReqLeadershipForFull);
-			
+
 			// Find out by how much we've beaten the skill check
 			ubBestLeadership = ubBestLeadership - ubMinLeadershipForTraining;
 
 			// Find the range between the minimum and maximum.
 			ubLeadershipRange = ubReqLeadershipForFull - ubMinLeadershipForTraining;
 
-			// Squad Size is determined by the relative value of the leadership within the range. Anyone meeting or 
+			// Squad Size is determined by the relative value of the leadership within the range. Anyone meeting or
 			// exceeding the range (latter shouldn't happen) will train a full squad. Others will train less. If
 			// leadership was the minimum required, only 1 militia is trained.
 			ubMilitiaToTrain = ((ubBestLeadership * ubMilitiaToTrain) / ubLeadershipRange) + 1;
@@ -2208,7 +2208,7 @@ UINT8 CalcNumMilitiaTrained(UINT8 ubBestLeadership, BOOLEAN fMobile)
 		ubMilitiaToTrain = gGameExternalOptions.guiNumMobileMilitiaTrained;
 
 		// Is affected by Leadership?
-		if (gGameExternalOptions.fLeadershipAffectsMobileMilitiaQuantity && 
+		if (gGameExternalOptions.fLeadershipAffectsMobileMilitiaQuantity &&
 			gGameExternalOptions.ubReqLeadershipForFullMobileTraining > gGameExternalOptions.ubMinimumLeadershipToTrainMobileMilitia )
 		{
 
@@ -2218,18 +2218,18 @@ UINT8 CalcNumMilitiaTrained(UINT8 ubBestLeadership, BOOLEAN fMobile)
 
 			// We make sure our effective leadership isn't above or below the limits. If so, reset to limits.
 			// If there is a minimum required to train militia, we're ASSUMING that the character has enough leadership
-			// otherwise they wouldn't even be here. But just in case he's skipped the check somehow, this will raise 
+			// otherwise they wouldn't even be here. But just in case he's skipped the check somehow, this will raise
 			// leadership to the minimum to avoid problems.
 			ubBestLeadership = __max(ubBestLeadership, ubMinLeadershipForTraining);
 			ubBestLeadership = __min(ubBestLeadership, ubReqLeadershipForFull);
-			
+
 			// Find out by how much we've beaten the skill check
 			ubBestLeadership = ubBestLeadership - ubMinLeadershipForTraining;
 
 			// Find the range between the minimum and maximum.
 			ubLeadershipRange = ubReqLeadershipForFull - ubMinLeadershipForTraining;
 
-			// Squad Size is determined by the relative value of the leadership within the range. Anyone meeting or 
+			// Squad Size is determined by the relative value of the leadership within the range. Anyone meeting or
 			// exceeding the range (latter shouldn't happen) will train a full squad. Others will train less. If
 			// leadership was the minimum required, only 3 militia are trained.
 			ubMilitiaToTrain = ((ubBestLeadership * ubMilitiaToTrain) / ubLeadershipRange) + 1;
@@ -2237,7 +2237,7 @@ UINT8 CalcNumMilitiaTrained(UINT8 ubBestLeadership, BOOLEAN fMobile)
 			ubMilitiaToTrain = __max(3, ubMilitiaToTrain);
 		}
 	}
-	
+
 	return (ubMilitiaToTrain);
 }
 
@@ -2395,7 +2395,7 @@ void HandleMilitiaUpkeepPayment( void )
 						uiMoneyUnpaid -= gGameExternalOptions.usDailyCostMobile[GREEN_MILITIA];
 						++uiNumMilitiaDisbanded;
 						++usGreenDisbanded;
-					}							
+					}
 					else if (MilitiaList[0].ubNumTownElites > 0)
 					{
 						StrategicRemoveMilitiaFromSector( sX, sY, ELITE_MILITIA, 1 );
@@ -2432,7 +2432,7 @@ void HandleMilitiaUpkeepPayment( void )
 
 				// Pay all we can
 				uiPayment = LaptopSaveInfo.iCurrentBalance;
-				
+
 				// Flugente: individual militia
 				DisbandIndividualMilitia( MilitiaList[0].ubSectorId, usGreenDisbanded, usRegularsDisbanded, usElitesDisbanded );
 
@@ -2612,7 +2612,7 @@ FLOAT CalcHourlyVolunteerGain()
 
 // every hour, controlled sectors add to our volunteer pool
 void UpdateVolunteers()
-{	
+{
 	AddVolunteers( CalcHourlyVolunteerGain() );
 }
 
@@ -2621,7 +2621,7 @@ BOOLEAN ConvertItemToResources( OBJECTTYPE& object, BOOLEAN fAll, FLOAT& arValue
 {
 	UINT16 usItemType = object.usItem;
 	UINT8 ubNumberOfObjects = fAll ? object.ubNumberOfObjects : 1;
-	UINT8 coolness = Item[usItemType].ubCoolness;			
+	UINT8 coolness = Item[usItemType].ubCoolness;
 	UINT8 progress = HighestPlayerProgressPercentage( );
 	FLOAT mod_progress = ResourceProgressModifier( progress );
 

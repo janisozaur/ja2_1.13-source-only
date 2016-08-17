@@ -1,10 +1,10 @@
-/* 
+/*
  * bfVFS : vfs/Core/vfs_path.cpp
  *  - Path class, stores and validates a file/directory path string, offers meaningful path operations
  *  - path comparison functions (operator overloading)
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -112,7 +112,7 @@ static void unifySeparators(vfs::String::str_t &sPath)
 static vfs::UInt32 removeSeparators(vfs::String::str_t &str)
 {
 	vfs::UInt32 sepcount = 0;
-	vfs::Int32 numsep = 0; 
+	vfs::Int32 numsep = 0;
 	::size_t put_pos = 0;
 	::size_t len = str.length();
 	vfs::String::char_t&	raw = str[0];
@@ -202,7 +202,7 @@ static void removeDots(vfs::String::str_t &str, vfs::UInt32 number_of_separators
 	{
 	}
 	sub_strings[pos++] = new_ptr;
-	
+
 	while(*old_ptr != 0)
 	{
 		if(*old_ptr != vfs::Const::SEPARATOR_CHAR())
@@ -224,9 +224,9 @@ static void removeDots(vfs::String::str_t &str, vfs::UInt32 number_of_separators
 
 		if((&raw+3) < old_ptr)
 		{
-			if( (*(old_ptr-4) == vfs::Const::SEPARATOR_CHAR()) && 
-				(*(old_ptr-3) == vfs::Const::DOT_CHAR()) && 
-				(*(old_ptr-2) == vfs::Const::DOT_CHAR()) && 
+			if( (*(old_ptr-4) == vfs::Const::SEPARATOR_CHAR()) &&
+				(*(old_ptr-3) == vfs::Const::DOT_CHAR()) &&
+				(*(old_ptr-2) == vfs::Const::DOT_CHAR()) &&
 				(*(old_ptr-1) == vfs::Const::SEPARATOR_CHAR()) )
 			{
 				if(pos > 1)
@@ -236,8 +236,8 @@ static void removeDots(vfs::String::str_t &str, vfs::UInt32 number_of_separators
 					dirty = true;
 				}
 			}
-			else if((*(old_ptr-3) == vfs::Const::SEPARATOR_CHAR()) && 
-					(*(old_ptr-2) == vfs::Const::DOT_CHAR()) && 
+			else if((*(old_ptr-3) == vfs::Const::SEPARATOR_CHAR()) &&
+					(*(old_ptr-2) == vfs::Const::DOT_CHAR()) &&
 					(*(old_ptr-1) == vfs::Const::SEPARATOR_CHAR()) )
 			{
 				if(pos > 0)
@@ -250,8 +250,8 @@ static void removeDots(vfs::String::str_t &str, vfs::UInt32 number_of_separators
 		}
 		else if((&raw+2) < old_ptr)
 		{
-			if( (*(old_ptr-3) == vfs::Const::SEPARATOR_CHAR()) && 
-				(*(old_ptr-2) == vfs::Const::DOT_CHAR()) && 
+			if( (*(old_ptr-3) == vfs::Const::SEPARATOR_CHAR()) &&
+				(*(old_ptr-2) == vfs::Const::DOT_CHAR()) &&
 				(*(old_ptr-1) == vfs::Const::SEPARATOR_CHAR()) )
 			{
 				if(pos > 0)
@@ -317,7 +317,7 @@ vfs::Path::Path(const char* sPath)
 {
 	if(vfs::Settings::getUseUnicode())
 	{
-		vfs::String::as_utf16(sPath,_path); 
+		vfs::String::as_utf16(sPath,_path);
 	}
 	else
 	{
@@ -330,7 +330,7 @@ vfs::Path::Path(std::string const& sPath)
 {
 	if(vfs::Settings::getUseUnicode())
 	{
-		vfs::String::as_utf16(sPath,_path); 
+		vfs::String::as_utf16(sPath,_path);
 	}
 	else
 	{
@@ -432,7 +432,7 @@ static void pathSplitLast(vfs::String::str_t const& path,
 		if(c == '\\' || c == '/')
 		{
 			break;
-		}		
+		}
 	}
 	if(position != vfs::npos)
 	{
@@ -573,7 +573,7 @@ bool operator==(vfs::Path const& p1, vfs::Path const& p2)
 }
 bool operator==(vfs::Path const& p1, vfs::String const& p2)
 {
-	return vfs::StrCmp::Equal(p1.c_str(), p2); 
+	return vfs::StrCmp::Equal(p1.c_str(), p2);
 }
 bool operator==(vfs::Path const& p1, vfs::String::str_t const& p2)
 {

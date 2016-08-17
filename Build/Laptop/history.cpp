@@ -1,24 +1,24 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "History.h"
-	#include "Game clock.h"
+	#include "Game Clock.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Soldier Profile.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "QuestText.h"
-	#include "text.h"
-	#include "message.h"
+	#include "Text.h"
+	#include "Message.h"
 	#include "LaptopSave.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 #define TOP_X											LAPTOP_SCREEN_UL_X
 #define TOP_Y											LAPTOP_SCREEN_UL_Y
@@ -438,7 +438,7 @@ void CreateHistoryButtons( void )
 	giHistoryButton[FIRST_PAGE_BUTTON] = QuickCreateButton( giHistoryButtonImage[FIRST_PAGE_BUTTON], FIRST_PAGE_X, BTN_Y,
 										BUTTON_TOGGLE, MSYS_PRIORITY_HIGHEST - 1,
 											(GUI_CALLBACK)BtnGenericMouseMoveButtonCallback, (GUI_CALLBACK)BtnHistoryFirstLastPageCallBack);
-	
+
 	MSYS_SetBtnUserData( giHistoryButton[FIRST_PAGE_BUTTON], 0, 0 );
 
 	//button to go to the last page
@@ -921,7 +921,7 @@ void DrawHistoryRecordsText( void )
 		ProcessHistoryTransactionString(sString, pCurHistory);
 //	mprintf(RECORD_DATE_X + RECORD_DATE_WIDTH + 25, RECORD_Y + ( iCounter * ( BOX_HEIGHT ) ) + 3, pHistoryStrings[pCurHistory->ubCode] );
 		mprintf(RECORD_DATE_X + RECORD_LOCATION_WIDTH +RECORD_DATE_WIDTH + 15, RECORD_Y + ( iCounter * ( BOX_HEIGHT ) ) + 3, sString );
-		
+
 		// no location
 		if( ( pCurHistory->sSectorX == -1 )||( pCurHistory->sSectorY == -1 ) )
 		{

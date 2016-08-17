@@ -109,12 +109,12 @@ enum
 	SNITCH_PRISON_EXPOSED_FINE_EXPLEVEL,
 	SNITCH_PRISON_EXPOSED_FINE_GUARDS,
 
-	SNITCH_PRISON_EXPOSED_WOUNDED_DROWN,	
+	SNITCH_PRISON_EXPOSED_WOUNDED_DROWN,
 	SNITCH_PRISON_EXPOSED_WOUNDED_BEATEN,
 	SNITCH_PRISON_EXPOSED_WOUNDED_KNIFED,
 	SNITCH_PRISON_EXPOSED_WOUNDED_STRANGLED,
 
-	SNITCH_PRISON_EXPOSED_DEAD_DROWN,	
+	SNITCH_PRISON_EXPOSED_DEAD_DROWN,
 	SNITCH_PRISON_EXPOSED_DEAD_BEATEN,
 	SNITCH_PRISON_EXPOSED_DEAD_KNIFED,
 	SNITCH_PRISON_EXPOSED_DEAD_STRANGLED,
@@ -247,14 +247,14 @@ void CheckIfSoldierUnassigned( SOLDIERTYPE *pSoldier );
 // figure out the assignment menu pop up box positions
 void DetermineBoxPositions( void );
 
-// set x,y position in tactical 
+// set x,y position in tactical
 void SetTacticalPopUpAssignmentBoxXY( void );
 
 // get number of pts that are being used this strategic turn
 INT16 GetTownTrainPtsForCharacter( SOLDIERTYPE *pTrainer, UINT16 *pusMaxPts );
 
 
-// find number of healing pts 
+// find number of healing pts
 UINT16 CalculateHealingPointsForDoctor(SOLDIERTYPE *pSoldier, UINT16 *pusMaxPts, BOOLEAN fMakeSureKitIsInHand );
 
 // find number of repair pts repairman has available
@@ -280,7 +280,7 @@ enum
 	INFO_TYPE_MAX,
 };
 
-// this function gives a random bit of information to the player. The type of info depends on aInfoType. 
+// this function gives a random bit of information to the player. The type of info depends on aInfoType.
 // If higher-order info cannot be given (for example if all info is already known to the player), lower-order info wil be given instead
 // returns TRUE if info was given, FALSE if not
 BOOLEAN GiveInfoToPlayer( UINT8 aInfoType );
@@ -372,7 +372,7 @@ void CreateDestroyMouseRegionsForSquadMenu( BOOLEAN fPositionBox );
 void SquadMenuMvtCallBack(MOUSE_REGION * pRegion, INT32 iReason );
 void SquadMenuBtnCallback( MOUSE_REGION * pRegion, INT32 iReason );
 
-// vehicle menu 
+// vehicle menu
 void CreateDestroyMouseRegionForVehicleMenu( void );
 void VehicleMenuMvtCallback(MOUSE_REGION * pRegion, INT32 iReason );
 void VehicleMenuBtnCallback(MOUSE_REGION * pRegion, INT32 iReason );
@@ -447,7 +447,7 @@ BOOLEAN PutMercInAwakeState( SOLDIERTYPE *pSoldier );
 
 BOOLEAN AssignMercToAMovementGroup( SOLDIERTYPE *pSoldier );
 
-// set what time this merc undertook this assignment 
+// set what time this merc undertook this assignment
 void SetTimeOfAssignmentChangeForMerc( SOLDIERTYPE *pSoldier );
 
 // enough time on assignment for it to count?

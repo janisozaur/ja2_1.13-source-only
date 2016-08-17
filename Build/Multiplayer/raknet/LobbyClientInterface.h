@@ -67,7 +67,7 @@ public:
 
 class LobbyClientInterface
 {
-public:	
+public:
 	virtual bool StartLogin(const char *titleIdentifier){return false;}
 	virtual void Logoff(){}
 	virtual bool IsLoggedIn(void) const{return false;}

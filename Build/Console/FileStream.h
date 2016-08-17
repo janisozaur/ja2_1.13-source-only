@@ -24,7 +24,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////
-// FileStream.h		- implementation of IStream interface on any file 
+// FileStream.h		- implementation of IStream interface on any file
 //					(not really COM, I'm faking it here a bit :-)
 //
 
@@ -79,7 +79,7 @@ class FileStream : public IStream {
 		STDMETHOD_(ULONG, Release)(void) {
 			long l = ::InterlockedDecrement(&m_lRefCount);
 			if (l == 0) delete this;
-			return l; 
+			return l;
 		};
 
 		// IStream methods

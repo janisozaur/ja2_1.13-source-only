@@ -52,7 +52,7 @@ BOOLEAN OverrideMercPopupBox( MercPopUpBox *pMercBox );
 BOOLEAN ResetOverrideMercPopupBox( );
 BOOLEAN	SetPrepareMercPopupFlags( UINT32 uiFlags );
 
-	
+
 // background enumeration
 enum{
 	BASIC_MERC_POPUP_BACKGROUND = 0,

@@ -3,7 +3,7 @@
 #else
 	#include "Types.h"
 	#include "SaveLoadMap.h"
-	#include "OverHead.h"
+	#include "Overhead.h"
 	#include "FileMan.h"
 	#include "Tactical Save.h"
 	#include "Debug.h"
@@ -223,7 +223,7 @@ ModifiedMapFile& GetOrCreateModifiedMapFile(UINT32 uiType, INT16 sMapX, INT16 sM
 	ModifiedMapFile key(uiType, sMapX, sMapY, bMapZ);
 	ModifiedMapFileSet::iterator itr = g_mapFileSet.insert(g_mapFileSet.end(), std::make_pair(key.key, key));
 	pResult = &(itr->second);
-	
+
 	GetMapTempFileName( pResult->key.uiType, pResult->szMapName, pResult->key.sMapX, pResult->key.sMapY, pResult->key.bMapZ );
 
 	return *pResult;
@@ -526,7 +526,7 @@ BOOLEAN LoadAllMapChangesFromMapTempFileAndApplyThem( )
 					uiNumberOfElementsSavedBackToFile++;
 				}
 				break;
-#ifdef JA2UB				
+#ifdef JA2UB
 			case SLM_REMOVE_EXIT_GRID:
 				//Remove the exit grid
 				RemoveExitGridFromWorld( pMap->usGridNo );
@@ -768,12 +768,12 @@ void RemoveSavedStructFromMap( INT32 uiMapIndex, UINT16 usIndex )
 void SaveMineFlagFromMapToTempFile()
 {
 	MODIFY_MAP Map;
-	INT32	cnt;	
+	INT32	cnt;
 
 	for ( cnt = 0; cnt < WORLD_MAX; cnt++ )
 	{
 		if( gpWorldLevelData[cnt].uiFlags & MAPELEMENT_PLAYER_MINE_PRESENT )
-		{	
+		{
 			memset( &Map, 0, sizeof( MODIFY_MAP ) );
 			Map.usGridNo	= cnt;
 			Map.ubType			= SLM_MINE_PRESENT;
@@ -1374,7 +1374,7 @@ BOOLEAN ModifyWindowStatus( INT32 uiMapIndex )
 	pStructure = FindStructure( uiMapIndex, STRUCTURE_WALLNWINDOW );
 	if (pStructure)
 	{
-		SwapStructureForPartner( uiMapIndex, pStructure );		
+		SwapStructureForPartner( uiMapIndex, pStructure );
 		return( TRUE );
 	}
 	// else forget it, window could be destroyed

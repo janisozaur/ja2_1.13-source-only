@@ -1,12 +1,12 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <string.h>
-	#include "wcheck.h"
+	#include "WCheck.h"
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Animation Data.h"
 	#include "Animation Control.h"
 
@@ -14,9 +14,9 @@
 	#include "tiledef.h"
 	#include "Sys Globals.h"
 	#include "Debug Control.h"
-	#include "utilities.h"
-	#include "worlddef.h"
-	#include "Fileman.h"
+	#include "Utilities.h"
+	#include "WorldDef.h"
+	#include "FileMan.h"
 #endif
 
 //forward declarations of common classes to eliminate includes
@@ -475,7 +475,7 @@ AnimationSurfaceType	gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ] =
 	ARMED_CAR_READY,		"ANIMS\\VEHICLES\\LATV_ROT.STI", S_STRUCT, ANIM_DATA_FLAG_NOFRAMES, 32, TO_INIT, NULL, NULL, 0, -1,
 	ARMED_CAR_SHOOT,		"ANIMS\\VEHICLES\\LATV_SHT.STI", S_STRUCT, 0, 8, TO_INIT, NULL, NULL, 0, -1,
 	ARMED_CAR_DIE,			"ANIMS\\VEHICLES\\LATV_DIE.STI", S_STRUCT, 0, 2, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	BODYEXPLODE,				"ANIMS\\S_MERC\\BOD_BLOW.STI",		NO_STRUCT,	0,				1, TO_INIT, NULL, NULL, 0, -1,
 
 	//<SB> crouch throwing
@@ -499,7 +499,7 @@ AnimationSurfaceType	gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ] =
 	//for woman - standart animation
 	RGFSTHRG,						"ANIMS\\F_MERC\\F_THROW.STI",		S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGMSTHRG,						"ANIMS\\S_MERC\\S_THROW_G.STI",		S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	BGMSLOBG,						"ANIMS\\M_MERC\\M_THROW_GLOB.sti",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFSLOBG,						"ANIMS\\F_MERC\\F_LOB.STI",			S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGMSLOBG,						"ANIMS\\S_MERC\\S_THROW_GLOB.sti",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
@@ -507,20 +507,20 @@ AnimationSurfaceType	gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ] =
 	RGMROLL_PR,				"ANIMS\\S_MERC\\S_ROLL_N.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMROLL_PR,				"ANIMS\\M_MERC\\M_ROLL_N.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFROLL_PR,				"ANIMS\\F_MERC\\F_ROLL_N.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	RGMWALLJUMP,				"ANIMS\\S_MERC\\S_CLIMB.STI",		S_STRUCT,		0,			4, TO_INIT, NULL, NULL, 0, -1,
 	BGMWALLJUMP,				"ANIMS\\M_MERC\\M_CLIMB.STI",		S_STRUCT,		0,			4, TO_INIT, NULL, NULL, 0, -1,
 	RGFWALLJUMP,				"ANIMS\\F_MERC\\F_CLIMB.STI",		S_STRUCT,		0,			4, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	RGMJUMPWINDOWS,				"ANIMS\\S_MERC\\S_HOP.STI",			NO_STRUCT,	0,			4, TO_INIT, NULL, NULL, 0, -1,
 	BGMJUMPWINDOWS,				"ANIMS\\M_MERC\\M_HOP.STI",			NO_STRUCT,	0,			4, TO_INIT, NULL, NULL, 0, -1,
 	RGFJUMPWINDOWS,				"ANIMS\\F_MERC\\F_HOP.STI",			NO_STRUCT,	0,			4, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	// SANDRO - new animation of remote detonator by PasHancock
 	RGMUSEREMOTE,						"ANIMS\\S_MERC\\S_USEREMOTE.STI",		S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMUSEREMOTE,						"ANIMS\\M_MERC\\M_USEREMOTE.STI",		S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFUSEREMOTE,						"ANIMS\\F_MERC\\F_USEREMOTE.STI",		S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	BGMTHROWKNIFE,			"ANIMS\\M_MERC\\M_K_THRO2.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 
 	RGMPISTOL_RUN,			"ANIMS\\S_MERC\\S_P_RUN.STI",		S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
@@ -530,12 +530,12 @@ AnimationSurfaceType	gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ] =
 	RGMSIDESTEP_P_RDY,				"ANIMS\\S_MERC\\S_P_RDY_SDSP.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGMSIDESTEP_R_RDY,				"ANIMS\\S_MERC\\S_R_RDY_SDSP.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGMSIDESTEP_D_RDY,				"ANIMS\\S_MERC\\S_DBL_RDY_SDSP.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	BGMSIDESTEP_P_RDY,				"ANIMS\\M_MERC\\M_N2_SDSP_RDY.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMSIDESTEP_R_RDY,				"ANIMS\\M_MERC\\M_R_SDSP_RDY.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMSIDESTEP_R_RDY2,				"ANIMS\\M_MERC\\M_R_BDSS_SDSP_RDY.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMSIDESTEP_D_RDY,				"ANIMS\\M_MERC\\M_DBL_SDSP_RDY.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	RGFSIDESTEP_P_RDY,				"ANIMS\\F_MERC\\F_P_RDY_SDSP.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFSIDESTEP_R_RDY,				"ANIMS\\F_MERC\\F_R_RDY_SDSP.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFSIDESTEP_D_RDY,				"ANIMS\\F_MERC\\F_DBL_RDY_SDSP.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
@@ -543,12 +543,12 @@ AnimationSurfaceType	gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ] =
 	RGMWALK_P_RDY,		"ANIMS\\S_MERC\\S_P_RDY_WALK.sti",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGMWALK_R_RDY,		"ANIMS\\S_MERC\\S_R_RDY_WALK.sti",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGMWALK_D_RDY,		"ANIMS\\S_MERC\\S_DBL_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	BGMWALK_P_RDY,		"ANIMS\\M_MERC\\M_N2_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMWALK_R_RDY,		"ANIMS\\M_MERC\\M_R_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMWALK_R_RDY2,		"ANIMS\\M_MERC\\M_R_RDY_DBASS_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGMWALK_D_RDY,		"ANIMS\\M_MERC\\M_DBL_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	
+
 	RGFWALK_P_RDY,		"ANIMS\\F_MERC\\F_P_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFWALK_R_RDY,		"ANIMS\\F_MERC\\F_R_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	RGFWALK_D_RDY,		"ANIMS\\F_MERC\\F_DBL_RDY_WALK.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
@@ -576,7 +576,7 @@ AnimationSurfaceType	gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ] =
 
 	RGM_PFSHOT_AIM,		"ANIMS\\S_MERC\\S_N_SHOT.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 	BGM_PFSHOT_AIM,		"ANIMS\\M_MERC\\M_N_SHOT.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
-	RGF_PFSHOT_AIM,		"ANIMS\\F_MERC\\1_HND_N.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,		
+	RGF_PFSHOT_AIM,		"ANIMS\\F_MERC\\1_HND_N.STI",	S_STRUCT,		0,			8, TO_INIT, NULL, NULL, 0, -1,
 };
 
 
@@ -812,7 +812,7 @@ AnimationStructureType	gAnimStructureDatabase[ TOTALBODYTYPES ][ NUM_STRUCT_IDS 
 	"ANIMS\\STRUCTDATA\\HMMV.JSD",		NULL,
 	"ANIMS\\STRUCTDATA\\HMMV.JSD",		NULL,
 	"ANIMS\\STRUCTDATA\\HMMV.JSD",		NULL,
-	"ANIMS\\STRUCTDATA\\M_CROUCH.JSD",NULL, // default	
+	"ANIMS\\STRUCTDATA\\M_CROUCH.JSD",NULL, // default
 };
 
 

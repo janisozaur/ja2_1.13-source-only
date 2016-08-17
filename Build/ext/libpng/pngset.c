@@ -266,7 +266,7 @@ png_set_IHDR(png_structp png_ptr, png_infop info_ptr,
       info_ptr->rowbytes = (png_size_t)0;
    else
       info_ptr->rowbytes = PNG_ROWBYTES(info_ptr->pixel_depth, width);
-   
+
 #ifdef PNG_APNG_SUPPORTED
    /* for non-animated png. this may be overritten from an acTL chunk later */
    info_ptr->num_frames = 1;
@@ -977,7 +977,7 @@ png_set_sPLT(png_structp png_ptr,
 
 #ifdef PNG_APNG_SUPPORTED
 png_uint_32 PNGAPI
-png_set_acTL(png_structp png_ptr, png_infop info_ptr, 
+png_set_acTL(png_structp png_ptr, png_infop info_ptr,
     png_uint_32 num_frames, png_uint_32 num_plays)
 {
     png_debug1(1, "in %s storage function", "acTL");
@@ -1008,18 +1008,18 @@ png_set_acTL(png_structp png_ptr, png_infop info_ptr,
                     "> 2^31-1");
         return (0);
     }
-    
+
     info_ptr->num_frames = num_frames;
     info_ptr->num_plays = num_plays;
-    
+
     info_ptr->valid |= PNG_INFO_acTL;
-    
+
     return (1);
 }
 
 /* delay_num and delay_den can hold any 16-bit values including zero */
 png_uint_32 PNGAPI
-png_set_next_frame_fcTL(png_structp png_ptr, png_infop info_ptr, 
+png_set_next_frame_fcTL(png_structp png_ptr, png_infop info_ptr,
     png_uint_32 width, png_uint_32 height,
     png_uint_32 x_offset, png_uint_32 y_offset,
     png_uint_16 delay_num, png_uint_16 delay_den,
@@ -1034,10 +1034,10 @@ png_set_next_frame_fcTL(png_structp png_ptr, png_infop info_ptr,
                     "ignored");
         return (0);
     }
-    
-    png_ensure_fcTL_is_valid(png_ptr, width, height, x_offset, y_offset, 
+
+    png_ensure_fcTL_is_valid(png_ptr, width, height, x_offset, y_offset,
                              delay_num, delay_den, dispose_op, blend_op);
-    
+
     if (blend_op == PNG_BLEND_OP_OVER)
     {
         if (!(png_ptr->color_type & PNG_COLOR_MASK_ALPHA) &&
@@ -1058,20 +1058,20 @@ png_set_next_frame_fcTL(png_structp png_ptr, png_infop info_ptr,
     info_ptr->next_frame_delay_den = delay_den;
     info_ptr->next_frame_dispose_op = dispose_op;
     info_ptr->next_frame_blend_op = blend_op;
-    
+
     info_ptr->valid |= PNG_INFO_fcTL;
-    
+
     return (1);
 }
 
 void /* PRIVATE */
-png_ensure_fcTL_is_valid(png_structp png_ptr, 
+png_ensure_fcTL_is_valid(png_structp png_ptr,
     png_uint_32 width, png_uint_32 height,
     png_uint_32 x_offset, png_uint_32 y_offset,
     png_uint_16 delay_num, png_uint_16 delay_den,
     png_byte dispose_op, png_byte blend_op)
 {
-    if (width + x_offset > png_ptr->first_frame_width || 
+    if (width + x_offset > png_ptr->first_frame_width ||
         height + y_offset > png_ptr->first_frame_height)
         png_error(png_ptr, "dimensions of a frame are greater than"
                            "the ones in IHDR");
@@ -1099,15 +1099,15 @@ png_set_first_frame_is_hidden(png_structp png_ptr, png_infop info_ptr,
                               png_byte is_hidden)
 {
     png_debug(1, "in png_first_frame_is_hidden()");
-    
+
     if (png_ptr == NULL)
         return 0;
-    
+
     if(is_hidden)
         png_ptr->apng_flags |= PNG_FIRST_FRAME_HIDDEN;
     else
         png_ptr->apng_flags &= ~PNG_FIRST_FRAME_HIDDEN;
-    
+
     return 1;
 }
 #endif /* PNG_APNG_SUPPORTED */

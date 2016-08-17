@@ -32,7 +32,7 @@ namespace AI
         {
         }
 
-        std::ostream& operator<<(std::ostream& os, const AIInputData& i) 
+        std::ostream& operator<<(std::ostream& os, const AIInputData& i)
         {
             if(i.event_type_ == AIInputData::no_event)
                 return os<<"no_event";

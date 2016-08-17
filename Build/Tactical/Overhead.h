@@ -4,8 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "Soldier Control.h"
-#include "overhead types.h"
-#include "soldier find.h"
+#include "Overhead Types.h"
+#include "Soldier Find.h"
 #include "Campaign Types.h"		// added by Flugente for SECTORINFO and UNDERGROUND_SECTORINFO
 #define             ADD_SOLDIER_NO_PROFILE_ID       200
 
@@ -13,7 +13,7 @@
 
 // Enums for waiting for mercs to finish codes
 enum
-{   
+{
     NO_WAIT_EVENT = 0,
     WAIT_FOR_MERCS_TO_WALKOFF_SCREEN,
     WAIT_FOR_MERCS_TO_WALKON_SCREEN,
@@ -34,7 +34,7 @@ typedef struct
     INT8        bHuman;
 } TacticalTeamType;
 
-//for use with TacticalStatusType.ubEnemyIntention 
+//for use with TacticalStatusType.ubEnemyIntention
 enum
 {
     INTENTION_SCOUTING,
@@ -44,7 +44,7 @@ enum
     INTENTION_RETREATING
 };
 
-//for use with TacticalStatusType.ubEnemyIntendedRetreatDirection 
+//for use with TacticalStatusType.ubEnemyIntendedRetreatDirection
 enum
 {
     RETREAT_NORTH,
@@ -78,7 +78,7 @@ struct TacticalStatusType
     BOOLEAN                         fNOTDOLASTDEMO;
     BOOLEAN                         fMultiplayer;
     BOOLEAN                         fCivGroupHostile[ NUM_CIV_GROUPS ];
-    UINT8                               ubLastBattleSectorX;                    
+    UINT8                               ubLastBattleSectorX;
     UINT8                               ubLastBattleSectorY;
     BOOLEAN                         fLastBattleWon;
     INT8                                bOriginalSizeOfEnemyForce;

@@ -29,9 +29,9 @@
 // About dialog class, etc...
 
 //#include "stdafx.h"
-#include <Windows.h>
+#include <windows.h>
 
-#include "resource.h"
+#include "Resource.h"
 #include "Console.h"
 #include "Dialogs.h"
 

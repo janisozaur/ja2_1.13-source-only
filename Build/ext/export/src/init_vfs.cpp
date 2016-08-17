@@ -31,11 +31,11 @@ void ja2xp::InitVFS::checkParameters(ja2xp::IExporterBase::param_list_t const& p
 				// get library path
 				this->src_path = vfs::Path(*cit);
 				this->has_src = true;
-				
+
 				cit++;
 				if(cit != params.end())
 				{
-					this->src_pattern = vfs::Path(*cit); 
+					this->src_pattern = vfs::Path(*cit);
 					continue;
 				}
 			}
@@ -82,7 +82,7 @@ static void SplitPath(vfs::Path const& path, vfs::Path& root, vfs::Path& pattern
 	if(pos != std::wstring::npos)
 	{
 		vfs::Path temp_root, temp_pattern;
-		// get directory 
+		// get directory
 		vfs::Path temp(sSrc.substr(0,pos+1));
 		temp.splitLast(temp_root, temp_pattern);
 		// correct pattern

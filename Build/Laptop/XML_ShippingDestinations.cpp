@@ -1,7 +1,7 @@
 #include "sgp.h"
-#include "overhead types.h"
-#include "overhead.h"
-#include "text.h"
+#include "Overhead Types.h"
+#include "Overhead.h"
+#include "Text.h"
 #include "Debug Control.h"
 #include "expat.h"
 #include "XML.h"
@@ -50,7 +50,7 @@ destinationStartElementHandle(void *userData, const XML_Char *name, const XML_Ch
 		{
 			pData->curElement = ELEMENT_LIST;
 
-			pData->maxReadDepth++; 
+			pData->maxReadDepth++;
 		}
 		else if(strcmp(name, "DESTINATION") == 0 && pData->curElement == ELEMENT_LIST)
 		{
@@ -105,7 +105,7 @@ destinationEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "DESTINATION") == 0)
 		{
 			pData->curElement = ELEMENT_LIST;
-			
+
 			if( !ShippingDestinations_TextOnly )
 			{
 				// We are reading the base data in the first pass of the file
@@ -115,23 +115,23 @@ destinationEndElementHandle(void *userData, const XML_Char *name)
 			{
 				// We are in second pass, during the loadup of the localization file.
 				// We should have legitimate data for the <uiIndex> and <name> elements.
-				// using uiIndex, iterate thru gPostalService::_Destinations till we find the correct 
+				// using uiIndex, iterate thru gPostalService::_Destinations till we find the correct
 				// DestinationStruct, and change its wstrName
 
 				RefToDestinationListIterator dli = gPostalService.LookupDestinationList().begin();
-				
+
 				while(DESTINATION(dli).uiIndex != pData->tempDest.uiIndex)
 				{
 					dli++;
 					if(dli == gPostalService.LookupDestinationList().end() )
 					{
-						// this doesnt really work, displays a message but then exits imediately, 
+						// this doesnt really work, displays a message but then exits imediately,
 						// but at least it doesnt generate a software exception.. which would prolly actually make this string readable
 						AssertMsg( 0, "Loading invalid uiIndex inside ShippingDestinations.xml." );
 					}
-					
+
 				}
-				DESTINATION(dli).wstrName = pData->tempDest.szName; 
+				DESTINATION(dli).wstrName = pData->tempDest.szName;
 
 			}
 		}
@@ -144,18 +144,18 @@ destinationEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "ubMapX") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->tempDest.ubMapX = (UINT8)strtoul(pData->szCharData, NULL, 10); 
+			pData->tempDest.ubMapX = (UINT8)strtoul(pData->szCharData, NULL, 10);
 		}
 		else if(strcmp(name, "ubMapY") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->tempDest.ubMapY = (UINT8)strtoul(pData->szCharData, NULL, 10); 
+			pData->tempDest.ubMapY = (UINT8)strtoul(pData->szCharData, NULL, 10);
 
 		}
 		else if(strcmp(name, "ubMapZ") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->tempDest.ubMapZ = (UINT8)strtoul(pData->szCharData, NULL, 10); 
+			pData->tempDest.ubMapZ = (UINT8)strtoul(pData->szCharData, NULL, 10);
 		}
 		else if(strcmp(name, "sGridNo") == 0)
 		{
@@ -165,7 +165,7 @@ destinationEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "uiIndex") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->tempDest.uiIndex = (UINT8)strtoul(pData->szCharData, NULL, 10); 
+			pData->tempDest.uiIndex = (UINT8)strtoul(pData->szCharData, NULL, 10);
 		}
 
 
@@ -192,11 +192,11 @@ BOOLEAN ReadInShippingDestinations(STR fileName, BOOLEAN localizedVersion)
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	// Get ShippingDestinations.xml file size and alloc buffer
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
-	
+
 	//Read in ShippingDestinations.xml to the buffer
 	if ( !FileRead( hFile, lpcBuffer, uiFSize, &uiBytesRead ) )
 	{
@@ -219,7 +219,7 @@ BOOLEAN ReadInShippingDestinations(STR fileName, BOOLEAN localizedVersion)
 
 	XML_SetUserData(parser, &pData); // establish address of data container for Interpreter callbacks
 
-	// Parse the buffer, 
+	// Parse the buffer,
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
 	{
 		CHAR8 errorBuf[511];

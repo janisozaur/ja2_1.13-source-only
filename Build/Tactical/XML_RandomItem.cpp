@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -226,7 +226,7 @@ randomitemEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curRandomItemClass.item[9] = (UINT16) atol(pData->szCharData);
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 
@@ -275,7 +275,7 @@ BOOLEAN ReadInRandomItemStats(STR fileName)
 	pData.maxArraySize = RANDOM_ITEM_MAX_CATEGORIES;
 
 	XML_SetUserData(parser, &pData);
-	
+
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
 	{
 		CHAR8 errorBuf[511];
@@ -288,7 +288,7 @@ BOOLEAN ReadInRandomItemStats(STR fileName)
 	}
 
 	MemFree(lpcBuffer);
-	
+
 	XML_ParserFree(parser);
 
 	return( TRUE );

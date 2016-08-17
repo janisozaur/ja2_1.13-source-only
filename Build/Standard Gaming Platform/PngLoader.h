@@ -1,7 +1,7 @@
 #ifndef _PNGLOADER_H_
 #define _PNGLOADER_H_
 
-#include "types.h"
+#include "Types.h"
 #include "himage.h"
 
 bool LoadPNGFileToImage(HIMAGE hImage, UINT16 fContents);

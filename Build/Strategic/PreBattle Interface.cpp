@@ -1,34 +1,34 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "PreBattle Interface.h"
 	#include "Button System.h"
 	#include "mousesystem.h"
 	#include "Map Screen Interface.h"
 	#include "jascreens.h"
-	#include "gamescreen.h"
-	#include "strategicmap.h"
+	#include "GameScreen.h"
+	#include "StrategicMap.h"
 	#include "Game Clock.h"
 	#include "Music Control.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "Font Control.h"
 	#include "Queen Command.h"
 	#include "Strategic Movement.h"
 	#include "Strategic Pathing.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "PopUpBox.h"
 	#include "Player Command.h"
 	#include "Cursors.h"
 	#include "Auto Resolve.h"
 	#include "Sound Control.h"
-	#include "english.h"
+	#include "English.h"
 	#include "Map Screen Interface Bottom.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Tactical Placement GUI.h"
 	#include "Town Militia.h"
-	#include "campaign.h"
+	#include "Campaign.h"
 	#include "GameSettings.h"
 	#include "Random.h"
 	#include "Creature Spreading.h"
@@ -37,18 +37,18 @@
 	#include "Quests.h"
 	#include "Map Screen Interface Border.h"
 	#include "Strategic Status.h"
-	#include "interface control.h"
+	#include "Interface Control.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Squads.h"
 	#include "Assignments.h"
-	#include "Soldier macros.h"
-	#include "history.h"
+	#include "Soldier Macros.h"
+	#include "History.h"
 	#include "Cheats.h"
 	// added by SANDRO
 	#include "Tactical Save.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "CampaignStats.h"				// added by Flugente
-	#include "militiasquads.h"				// added by Flugente
+	#include "MilitiaSquads.h"				// added by Flugente
 	#include "SkillCheck.h"					// added by Flugente
 #endif
 
@@ -68,7 +68,7 @@ extern BOOLEAN gfExitViewer;
 
 extern BOOLEAN fMapScreenBottomDirty;
 
-#include "connect.h"
+#include "Connect.h"
 
 BOOLEAN gfTacticalTraversal = FALSE;
 GROUP *gpTacticalTraversalGroup = NULL;
@@ -606,7 +606,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 	ubNumStationaryEnemies = NumStationaryEnemiesInSector( gubPBSectorX, gubPBSectorY );
 	ubNumMobileEnemies = NumMobileEnemiesInSector( gubPBSectorX, gubPBSectorY );
 	ubNumMercs = PlayerMercsInSector( gubPBSectorX, gubPBSectorY, gubPBSectorZ );
-	
+
 	BOOLEAN fAmbushPrevented = FALSE;
 
 	if( gfPersistantPBI )
@@ -648,7 +648,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 								{
 									gubEnemyEncounterCode = ENEMY_AMBUSH_CODE;
 								}
-								else 
+								else
 								{
 									fAmbushPrevented = TRUE;
 									if ( gSkillTraitValues.fSCThrowMessageIfAmbushPrevented )
@@ -663,20 +663,20 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 							{
 								gubEnemyEncounterCode = ENEMY_AMBUSH_CODE;
 							}
-							else 
+							else
 							{
 								fAmbushPrevented = TRUE;
 								if ( gSkillTraitValues.fSCThrowMessageIfAmbushPrevented )
 									ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, New113Message[MSG113_ENEMY_AMBUSH_PREVENTED] );
 							}
 						}
-						// Madd:  
+						// Madd:
 						// WANNE: Added an ja2_options.ini Property "ENABLE_CHANCE_OF_ENEMY_AMBUSHES_ON_INSANE_DIFFICULT"
 						//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// SANDRO - changed this a lot, now on any difficulty, the enemy can ambush your squad 
+						// SANDRO - changed this a lot, now on any difficulty, the enemy can ambush your squad
 						// based on difficulty level, number of mercs/enemies and other aspects
 						else if( gGameExternalOptions.fEnableChanceOfEnemyAmbushes )
-						{ 					
+						{
 							INT32 iChance;
 							// Basic chance - progress level/2 minus highest merc exp level*2, and 10% on top
 							iChance = (UINT8)( ((CurrentPlayerProgressPercentage() / 2 ) - bBestExpLevel*2 ) + 15 );
@@ -722,7 +722,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 							// there is always a little chance
 							if( iChance <= 0 )
 								iChance = 1;
-							
+
 							// externalized modifier
 							if( gGameExternalOptions.bChanceModifierEnemyAmbushes != 0 )
 								iChance = ((iChance * (100 + gGameExternalOptions.bChanceModifierEnemyAmbushes)) / 100);
@@ -733,7 +733,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 								{
 									gubEnemyEncounterCode = ENEMY_AMBUSH_CODE;
 								}
-								else 
+								else
 								{
 									fAmbushPrevented = TRUE;
 									if ( gSkillTraitValues.fSCThrowMessageIfAmbushPrevented )
@@ -758,7 +758,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 				gubEnemyEncounterCode = ENEMY_INVASION_CODE;
 			//SAM sites not in towns will also be considered to be important
 			else if( pSector->uiFlags & SF_SAM_SITE )
-				gubEnemyEncounterCode = ENEMY_INVASION_CODE;	
+				gubEnemyEncounterCode = ENEMY_INVASION_CODE;
 			else
 				gubEnemyEncounterCode = ENEMY_ENCOUNTER_CODE;
 		}
@@ -864,7 +864,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 				gubEnemyEncounterCode == ENEMY_AMBUSH_CODE ||
 				gubEnemyEncounterCode == BLOODCAT_AMBUSH_CODE ||
 				gubEnemyEncounterCode == ENEMY_AMBUSH_DEPLOYMENT_CODE ||
-				gubEnemyEncounterCode == CREATURE_ATTACK_CODE || 
+				gubEnemyEncounterCode == CREATURE_ATTACK_CODE ||
 				is_client)
 		{
 			DisableButton( iPBButton[ 2 ] );
@@ -926,7 +926,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 	EnableDisAbleMapScreenOptionsButton( FALSE );
 
 	UseCreatureMusic(HostileZombiesPresent());
-	
+
 #ifdef NEWMUSIC
 	GlobalSoundID  = MusicSoundValues[ SECTOR( gubPBSectorX, gubPBSectorY ) ].SoundTacticalTensor[gubPBSectorZ];
 	if ( MusicSoundValues[ SECTOR( gubPBSectorX, gubPBSectorY ) ].SoundTacticalTensor[gubPBSectorZ] != -1 )
@@ -935,7 +935,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 #endif
 	SetMusicMode( MUSIC_TACTICAL_ENEMYPRESENT );
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	if ( gGameUBOptions.AutoResolve == FALSE )
 		DisableButton( iPBButton[0] );
 #endif
@@ -1401,7 +1401,7 @@ void RenderPreBattleInterface()
 			mprintf( x + xResOffset, y + yResOffset, str );
 		}
 		else
-		{			
+		{
 			pGroup = gpGroupList;
 			y = BOTTOM_Y - ROW_HEIGHT * guiNumUninvolved + 2;
 			for( i = gTacticalStatus.Team[ OUR_TEAM ].bFirstID; i <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; i++ )
@@ -1448,10 +1448,10 @@ void RenderPreBattleInterface()
 		// mark any and ALL pop up boxes as altered
 		MarkAllBoxesAsAltered( );
 
-		if( !guiNumUninvolved || gfZoomDone == FALSE )		
-			RestoreExternBackgroundRect( 0 + xResOffset, 0 + yResOffset, 261 + xResOffset, 359 + yResOffset );				
-		else		
-			RestoreExternBackgroundRect( 0 + xResOffset, 0 + yResOffset, 261 + xResOffset, y + yResOffset );				
+		if( !guiNumUninvolved || gfZoomDone == FALSE )
+			RestoreExternBackgroundRect( 0 + xResOffset, 0 + yResOffset, 261 + xResOffset, 359 + yResOffset );
+		else
+			RestoreExternBackgroundRect( 0 + xResOffset, 0 + yResOffset, 261 + xResOffset, y + yResOffset );
 
 		// restore font destinanation buffer to the frame buffer
 		SetFontDestBuffer( FRAME_BUFFER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, FALSE );
@@ -2113,7 +2113,7 @@ void RetreatAllInvolvedMilitiaGroups()
 	// as we don't want to make the location of that dependend on some state, we use a trick:
 	// we drop their gear here, and promote them right now. They can then be properly deleted later on.
 	AutoResolveMilitiaDropAndPromote();
-	
+
 	// dissolve all militia groups here
 	INT16 newX = 0;
 	INT16 newY = 0;

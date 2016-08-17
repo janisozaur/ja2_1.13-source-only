@@ -4,16 +4,16 @@
 	#include "sgp.h"
 	#include "Game Clock.h"
 	#include "Font.h"
-	#include "render dirty.h"
+	#include "Render Dirty.h"
 	#include "Timer Control.h"
-	#include "overhead.h"
-	#include "environment.h"
+	#include "Overhead.h"
+	#include "Environment.h"
 	#include "Game Clock.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Game Events.h"
-	#include "assignments.h"
+	#include "Assignments.h"
 	#include "MercTextBox.h"
-	#include "Renderworld.h"
+	#include "RenderWorld.h"
 	#include "Lighting.h"
 	#include "Map Screen Interface.h"
 	#include "PreBattle Interface.h"
@@ -22,7 +22,7 @@
 	#include "Interface Control.h"
 	#include "Map Screen Interface Map.h"
 	#include "Map Screen Interface Bottom.h"
-	#include "gamescreen.h"
+	#include "GameScreen.h"
 	#include "Map Information.h"
 	#include "GameSettings.h"
 #endif
@@ -254,7 +254,7 @@ void AdvanceClock( UINT8 ubWarpCode )
 	guiDay = ( guiGameClock / NUM_SEC_IN_DAY );
 	guiHour = ( guiGameClock - ( guiDay * NUM_SEC_IN_DAY ) ) / NUM_SEC_IN_HOUR;
 	guiMin	= ( guiGameClock - ( ( guiDay * NUM_SEC_IN_DAY ) + ( guiHour * NUM_SEC_IN_HOUR ) ) ) / NUM_SEC_IN_MIN;
-	
+
 	uiHourLua = guiHour;
 	uiDayLua = guiDay;
 	uiMinLua = guiMin;
@@ -427,7 +427,7 @@ void StartTimeCompression( void )
 
 		// check that we can start compressing
 		if ( !AllowedToTimeCompress( ) )
-		{ 
+		{
 			// not allowed to compress time
 			TellPlayerWhyHeCantCompressTime();
 			return;

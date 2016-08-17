@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author feynman (bears-pit.com)
  */
@@ -7,7 +7,7 @@
 #include "../../Tactical/Soldier Control.h"     // defines SOLDIERTYPE
 #include "../../Tactical/Animation Control.h"   // defines CROW_FLY
 #include "../../Tactical/Soldier Add.h"         // FindGridNoFromSweetSpot()
-#include "../../TacticalAI/ai.h"                // AI_ACTION_...
+#include "../../TacticalAI/AI.h"                // AI_ACTION_...
 #include "../../TacticalAI/AIInternals.h"       // AIDEBUGMSG
 #include "../../Tactical/Rotting Corpses.h"     // FindNearestRottingCorpse()
 #include "../../TileEngine/Isometric Utils.h"   // TileIsOutOfBounds()

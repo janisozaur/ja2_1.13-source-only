@@ -1,21 +1,21 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include "pits.h"
-	#include "worlddef.h"
-	#include "worldman.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
 	#include "Simple Render Utils.h"
 	#include "World Items.h"
 	#include "SaveLoadMap.h"
 	#include "Exit Grids.h"
 	#include "Sys Globals.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Isometric Utils.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Sound Control.h"
-	#include "animation control.h"
-	#include "strategic.h"
+	#include "Animation Control.h"
+	#include "Strategic.h"
 	#include "Action Items.h"
 #endif
 

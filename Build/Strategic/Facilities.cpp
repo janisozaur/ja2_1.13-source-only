@@ -6,7 +6,7 @@
 // XML_FacilityTypes.cpp for the reading XML functions.
 //////////////////////////////////////////////////////////////////
 
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
@@ -20,18 +20,18 @@
 	#include "Assignments.h"
 	#include "GameSettings.h"
 	#include "LaptopSave.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Text.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Strategic Mines.h"
 	#include "SkillCheck.h"
 	#include "Random.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Game Clock.h"
 	#include "Campaign.h"
 	#include "Drugs And Alcohol.h"
 	#include "Interface.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Morale.h"
 	#include "Points.h"
 	#include "Soldier Control.h"
@@ -1832,7 +1832,7 @@ void HandleRisksForSoldierFacilityAssignment( SOLDIERTYPE *pSoldier, UINT8 ubFac
 
 						// Add effects
 						CreateItem( ALCOHOL, Item[ALCOHOL].usPortionSize, &gTempObject );
-						
+
 						ApplyConsumable( pSoldier, &gTempObject, TRUE, FALSE );
 
 						//pSoldier->AddDrugValues( DRUG_TYPE_ALCOHOL, Drug[DRUG_TYPE_ALCOHOL].ubDrugEffect, Drug[DRUG_TYPE_ALCOHOL].ubDrugTravelRate, Drug[DRUG_TYPE_ALCOHOL].ubDrugSideEffect );

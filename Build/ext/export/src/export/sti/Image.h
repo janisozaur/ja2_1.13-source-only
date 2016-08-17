@@ -22,15 +22,15 @@ namespace ja2xp
 		};
 	public:
 
-		CImage(vfs::Path const& sFileName); 
-		CImage(vfs::tReadableFile *pFile); 
+		CImage(vfs::Path const& sFileName);
+		CImage(vfs::tReadableFile *pFile);
 		~CImage();
-		
+
 		EImageType GetImageType();
 
 		bool	GetSize(UINT32 uiSubImage, UINT32 &uiWidth, UINT32 &uiHeight);
 		bool	GetPosition(UINT32 uiSubImage, INT32 &uiX, INT32 &uiY);
-				
+
 		SGPPaletteEntry* GetPalette();
 
 		// use when image type is 'BITMAP'
@@ -42,7 +42,7 @@ namespace ja2xp
 		bool	Unpack16BppImageToRGBBuffer(UINT16* pSrc, UINT8* pDst, UINT32 uiWidth, UINT32 uiHeight);
 
 		UINT32	GetNumberOfSubImages();
-		
+
 		bool	LoadData();
 		bool	DeleteData();
 

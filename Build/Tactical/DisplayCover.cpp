@@ -2,37 +2,37 @@
 	#include "AI All.h"
 	#include "DisplayCover.h"
 	#include "Interface.h"
-	#include "opplist.h"
-	#include "_Ja25Englishtext.h"
+	#include "Opplist.h"
+	#include "_Ja25EnglishText.h"
 	//#include "Ja25 Strategic Ai.h"
 #else
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include "Types.h"
 #include "Isometric Utils.h"
 //#include "Soldier Control.h"
 #include "Overhead.h"
-#include "displaycover.h"
+#include "DisplayCover.h"
 #include "Font Control.h"
 #include "_Ja25EnglishText.h"
-#include "message.h"
+#include "Message.h"
 #include "GameSettings.h"
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include "Interface.h"
 #include "Debug.h"
-#include "PATHAI.H"
-#include "worldman.h"
-#include "opplist.h"
-#include "los.h"
-#include "weapons.h"
+#include "PathAI.h"
+#include "WorldMan.h"
+#include "Opplist.h"
+#include "LOS.h"
+#include "Weapons.h"
 #include "Game Clock.h"
 #include "Animation Control.h"
-#include "lighting.h"
+#include "Lighting.h"
 #include "Text.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 #include "Render Fun.h"
 // HEADROCK HAM B2.7: Allow calling a CTH approximation function for the CTH display ("F" key)
 #include "UI Cursors.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 #include "Interface Cursors.h"	// added by Flugente for UICursorDefines
 #endif
 
@@ -363,7 +363,7 @@ BOOLEAN HasAdjTile( const INT32& ubX, const INT32& ubY, const INT32& ubZ )
 			{
 				continue;
 			}
-			
+
 			if ( gCoverViewArea[ubTX][ubTY][ubZ].bOverlayType > INVALID_COVER && gCoverViewArea[ubTX][ubTY][ubZ].bOverlayType != MAX_COVER && gCoverViewArea[ubTX][ubTY][ubZ].bOverlayType != NO_SEE )
 			{
 				return TRUE;
@@ -383,7 +383,7 @@ void AddCoverObjectsToViewArea()
 	BOOLEAN fChanged = FALSE;
 
 	BOOLEAN fNightTime = NightTime( );
-	
+
 	for ( ubX=gsMinCellX; ubX<=gsMaxCellX; ++ubX )
 	{
 		for ( ubY=gsMinCellY; ubY<=gsMaxCellY; ++ubY )
@@ -443,13 +443,13 @@ void RemoveCoverObjectsFromViewArea()
 			}
 		}
 	}
-		
+
 	// Re-render the scene!
 	if ( fChanged )
 	{
 		SetRenderFlags( RENDER_FLAG_FULL );
 	}
-	
+
 	gNoRedraw = (gubDrawMode == DRAW_MODE_OFF);
 }
 
@@ -534,9 +534,9 @@ void CalculateCover()
 
 	if( gusSelectedSoldier == NOBODY )
 		return;
-	
+
 	GetSoldier( &pSoldier, gusSelectedSoldier );
-	
+
 	for ( ubX=gsMinCellX; ubX<=gsMaxCellX; ++ubX )
 	{
 		for ( ubY=gsMinCellY; ubY<=gsMaxCellY; ++ubY )
@@ -547,7 +547,7 @@ void CalculateCover()
 
 				if( !GridNoOnScreenAndAround( sGridNo, 2 ) )
 					continue;
-								
+
 				if ( IsTheRoofVisible( sGridNo ) )
 				{
 					// do not show stuff on ground if roof is shown
@@ -681,7 +681,7 @@ BOOLEAN CanSoldierSeeFloor( SOLDIERTYPE* pSoldier, INT32 sGridNo, INT8 bLevel )
 		return FALSE;
 
 	UINT16 usSightLimit = pSoldier->GetMaxDistanceVisible( sGridNo, bLevel, CALC_FROM_WANTED_DIR );
-	
+
 	if ( SoldierToVirtualSoldierLineOfSightTest( pSoldier, sGridNo, bLevel, ANIM_PRONE, FALSE, usSightLimit ) != 0 )
 		return TRUE;
 
@@ -702,8 +702,8 @@ void DisplayRangeToTarget( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo )
 	{
 		UINT8 ubLightLevel = LightTrueLevel(sTargetGridNo, gsInterfaceLevel);
 		UINT8 ubBrightness = 100 - 100 * (ubLightLevel-SHADE_MAX)/(SHADE_MIN-SHADE_MAX); // percentage
-		
-		UINT8 ubTerrainType = NO_TERRAIN; 
+
+		UINT8 ubTerrainType = NO_TERRAIN;
 
 		// anv: additional tile properties
 		ADDITIONAL_TILE_PROPERTIES_VALUES zGivenTileProperties;
@@ -829,7 +829,7 @@ void DisplayRangeToTarget( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo )
 		uiHitChance = CalcChanceToHitGun( pSoldier, sTargetGridNo, (INT8)(pSoldier->aiData.bShownAimTime ), pSoldier->bAimShotLocation );
 		// HEADROCK HAM B2.7: CTH approximation?
 		if (gGameExternalOptions.fApproximateCTH)
-		{	
+		{
 			uiHitChance = ChanceToHitApproximation( pSoldier, uiHitChance );
 		}
 		pSoldier->bTargetLevel = bTempTargetLevel;
@@ -974,7 +974,7 @@ void AddMinesObjectsToViewArea()
 {
 	if ( gsMaxCellY < 0 )
 		return;
-	
+
 	register INT32 ubX, ubY, ubZ;
 	BOOLEAN fChanged = FALSE;
 
@@ -1015,7 +1015,7 @@ void CalculateMines()
 	INT32 ubX, ubY;
 	INT8  ubZ;
 	SOLDIERTYPE* pSoldier;
-	
+
 	if ( gusSelectedSoldier == NOBODY || !GetSoldier( &pSoldier, gusSelectedSoldier ) || !pSoldier->bInSector )
 		return;
 
@@ -1029,9 +1029,9 @@ void CalculateMines()
 		else
 			return;
 	}
-	
+
 	const INT32& sSelectedSoldierGridNo = MercPtrs[ gusSelectedSoldier ]->sGridNo;
-		
+
 	for ( ubX=gsMinCellX; ubX<=gsMaxCellX; ++ubX )
 	{
 		for ( ubY=gsMinCellY; ubY<=gsMaxCellY; ++ubY )
@@ -1055,7 +1055,7 @@ void CalculateMines()
 					if ( ubZ == I_ROOF_LEVEL )
 						continue;
 				}
-																
+
 				// if we are looking for hostile mines, but the tile is out of our' detectors range, skip looking for mines
 				if ( gubDrawMode == MINES_DRAW_DETECT_ENEMY && fWithMineDetector )
 				{
@@ -1117,7 +1117,7 @@ void DetermineMineDisplayInTile( INT32 sGridNo, INT8 bLevel, INT8& bOverlayType,
 											// check if the tripwire has a gun attached
 											BOOLEAN fgunfound = FALSE;
 											attachmentList::iterator iterend = (*pObj)[0]->attachments.end();
-											for (attachmentList::iterator iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter) 
+											for (attachmentList::iterator iter = (*pObj)[0]->attachments.begin(); iter != iterend; ++iter)
 											{
 												if ( iter->exists() && Item[iter->usItem].usItemClass == IC_GUN )
 												{
@@ -1229,7 +1229,7 @@ INT32	sTraitgridNo = NOWHERE;
 void ToggleTraitRangeView(BOOLEAN fOn)
 {
 	if ( fOn )
-	{		
+	{
 		gubDrawMode = DRAW_MODE_TRAIT_RANGE;
 	}
 	else
@@ -1258,7 +1258,7 @@ void CalculateTraitRange()
 	INT32 ubX, ubY;
 	INT8  ubZ;
 	SOLDIERTYPE* pSoldier;
-		
+
 	if ( gusSelectedSoldier == NOBODY || !GetSoldier( &pSoldier, gusSelectedSoldier ) || !pSoldier->bInSector )
 		return;
 
@@ -1283,9 +1283,9 @@ void CalculateTraitRange()
 	default:
 		return;
 	}
-				
+
 	const INT32& sSelectedSoldierGridNo = MercPtrs[ gusSelectedSoldier ]->sGridNo;
-	
+
 	for ( ubX=gsMinCellX; ubX<=gsMaxCellX; ++ubX )
 	{
 		for ( ubY=gsMinCellY; ubY<=gsMaxCellY; ++ubY )
@@ -1296,7 +1296,7 @@ void CalculateTraitRange()
 
 				if( !GridNoOnScreenAndAround( sGridNo, 2 ) )
 					continue;
-				
+
 				if ( IsTheRoofVisible( sGridNo ) )
 				{
 					// do not show stuff on ground if roof is shown
@@ -1312,7 +1312,7 @@ void CalculateTraitRange()
 
 				if ( !NewOKDestination( pSoldier, sGridNo, false, ubZ ) )
 					continue;
-				
+
 				if ( range1 && PythSpacesAway(sSelectedSoldierGridNo, sGridNo) == range1 )
 					gCoverViewArea[ubX][ubY][ubZ].bOverlayType = TRAIT_1;
 				else if ( range2 && PythSpacesAway(sSelectedSoldierGridNo, sGridNo) == range2 )
@@ -1333,7 +1333,7 @@ void AddTraitObjectsToViewArea()
 {
 	if ( gsMaxCellY < 0 )
 		return;
-	
+
 	register INT32 ubX, ubY, ubZ;
 	BOOLEAN fChanged = FALSE;
 
@@ -1411,19 +1411,19 @@ void CalculateTrackerRange( )
 	INT32 ubX, ubY;
 	INT8 ubZ;
 	SOLDIERTYPE* pSoldier;
-	
+
 	if ( gusSelectedSoldier == NOBODY || !GetSoldier( &pSoldier, gusSelectedSoldier ) ||  !pSoldier->bInSector )
 		return;
 
 	FLOAT trackerskill = (FLOAT)(NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT ) * gSkillTraitValues.usSVTrackerAbility + pSoldier->GetBackgroundValue( BG_TRACKER_ABILITY )) / 100.0f;
-	
+
 	if ( trackerskill < 0.01f )
 		return;
 
 	UINT16 range = gSkillTraitValues.usSVTrackerMaxRange * trackerskill;
 
 	const INT32& sSelectedSoldierGridNo = MercPtrs[gusSelectedSoldier]->sGridNo;
-	
+
 	for ( ubX = gsMinCellX; ubX <= gsMaxCellX; ++ubX )
 	{
 		for ( ubY = gsMinCellY; ubY <= gsMaxCellY; ++ubY )
@@ -1434,7 +1434,7 @@ void CalculateTrackerRange( )
 
 				if ( !GridNoOnScreenAndAround( sGridNo, 2 ) )
 					continue;
-								
+
 				if ( IsTheRoofVisible( sGridNo ) )
 				{
 					// do not show stuff on ground if roof is shown
@@ -1454,7 +1454,7 @@ void CalculateTrackerRange( )
 
 				if ( !NewOKDestination( pSoldier, sGridNo, false, ubZ ) )
 					continue;
-								
+
 				if ( PythSpacesAway( sSelectedSoldierGridNo, sGridNo ) <= range )
 				{
 					if ( gpWorldLevelData[sGridNo].ubBloodInfo )
@@ -1471,7 +1471,7 @@ void CalculateTrackerRange( )
 					}
 
 					// we need to be able to see the floor
-					// this check is relatively expensive, we don't want to do this unless we have to. 
+					// this check is relatively expensive, we don't want to do this unless we have to.
 					// Thus we check afterwards, and only if a display value was found we reset it
 					if ( gCoverViewArea[ubX][ubY][ubZ].bOverlayType != INVALID_COVER && !CanSoldierSeeFloor( pSoldier, sGridNo, ubZ ) )
 						gCoverViewArea[ubX][ubY][ubZ].bOverlayType = INVALID_COVER;
@@ -1558,7 +1558,7 @@ void CalculateFortify( )
 
 		gCoverViewArea[sX][sY][(*it).second.second].bOverlayType = (*it).second.first;
 	}
-	
+
 	if ( gsMaxCellY < 0 )
 		return;
 
@@ -1612,7 +1612,7 @@ void CalculateWeapondata()
 		return;
 
 	//Get the gridno the cursor is at
-	INT32 sMouseGridNo = NOWHERE;		
+	INT32 sMouseGridNo = NOWHERE;
 	GetMouseMapPos( &sMouseGridNo );
 
 	// depending on whether we have a grenade fire or a bomb to plant, different gridnos are relevant for explosives
@@ -1660,7 +1660,7 @@ void CalculateWeapondata()
 		if ( Item[pObjUsed->usItem].usItemClass & IC_LAUNCHER )
 		{
 			OBJECTTYPE *pAttachment = FindLaunchableAttachment( pObjPlatform, pObjUsed->usItem );
-			
+
 			if ( pAttachment )
 			{
 				explosionradius = Explosive[Item[pAttachment->usItem].ubClassIndex].ubRadius;
@@ -1679,7 +1679,7 @@ void CalculateWeapondata()
 
 		fragrange = Explosive[Item[pObjUsed->usItem].ubClassIndex].ubFragRange / 10;
 	}
-	
+
 	// we have to store and later reset the soldier's target level
 	INT8 bTempTargetLevel = pSoldier->bTargetLevel;
 
@@ -1709,7 +1709,7 @@ void CalculateWeapondata()
 
 				if ( !NewOKDestination( pSoldier, sGridNo, false, ubZ ) )
 					continue;
-				
+
 				if ( tosscursorisvalid && explosionradius > 0 && PythSpacesAway( explosivetargetgridno, sGridNo ) <= explosionradius )
 					gCoverViewArea[ubX][ubY][ubZ].bOverlayType = NO_COVER;
 				else if ( tosscursorisvalid && fragrange > 0 && PythSpacesAway( explosivetargetgridno, sGridNo ) <= fragrange )
@@ -1740,7 +1740,7 @@ void CalculateWeapondata()
 
 	// important: reset target level to what it really was
 	pSoldier->bTargetLevel = bTempTargetLevel;
-	
+
 	BOOLEAN fChanged = FALSE;
 
 	BOOLEAN fNightTime = NightTime( );

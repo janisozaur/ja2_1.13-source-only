@@ -1,10 +1,10 @@
-/* 
+/*
  * bfVFS : vfs/Core/vfs_profile.h
  *  - Virtual Profile, container for real file system locations or archives
  *  - Profile Stack, orders profiles in a linear fashion (top-bottom)
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -52,7 +52,7 @@ namespace vfs
 
 		Iterator				begin();
 		FileIterator			files(vfs::Path const& sPattern);
-		
+
 		void					addLocation(vfs::IBaseLocation* pLoc);
 		vfs::IBaseLocation*		getLocation(vfs::Path const& sPath) const;
 		vfs::IBaseFile*			getFile(vfs::Path const& sPath) const;
@@ -75,7 +75,7 @@ namespace vfs
 		CVirtualProfile*	getProfile(vfs::String const& sName) const;
 
 		CVirtualProfile*	topProfile() const;
-		/** 
+		/**
 		 *  All files from the top profile will be removed from the VFS and the profile object will be deleted.
 		 */
 		bool				popProfile();

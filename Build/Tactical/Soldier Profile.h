@@ -41,7 +41,7 @@ extern MERCPROFILEGEAR gMercProfileGear[ NUM_PROFILES ][ NUM_MERCSTARTINGGEAR_KI
 
 //use this to sort out the above define
 BOOLEAN IsProfileIdAnAimOrMERCMerc( UINT8 ubProfileID );
-//enums for the mercs 
+//enums for the mercs
 
 //new profiles by Jazz-------------------------------
 typedef struct
@@ -220,7 +220,7 @@ enum NPCIDs
 	CALVIN,
 	CARL,
 	SPECK,
-	
+
 	PROF_HUMMER,
 
 	PROF_ELDERODO,	// 161
@@ -239,10 +239,10 @@ enum NPCIDs
 	TEX,
 	BIGGENS,
 	NPC169,
-#endif	
+#endif
 	NPC170 = NPC169 + 84,
 	SPECK_PLAYABLE = 191,// anv
-	
+
 	// Those 4 only available in JA2 113 and not in JA2 UB!
 	JOHN_MERC = 195,
 	ELIO = 196,
@@ -324,7 +324,7 @@ typedef struct
 	INT8		bLife;
 	INT8		bStrength;
 	INT8		bAgility;
-	INT8		bDexterity;	
+	INT8		bDexterity;
 	INT8		bWisdom;
 	INT8		bMarksmanship;
 	INT8		bExplosive;
@@ -407,9 +407,9 @@ typedef struct
 	UINT16		usApproachFactor[4];
 
 	INT8 bMercOpinion[NUMBER_OF_OPINIONS];
-	
+
 	UINT32 Type;
-	
+
 	UINT16 sSectorX;
 	UINT16 sSectorY;
 	INT8	bSectorZ;

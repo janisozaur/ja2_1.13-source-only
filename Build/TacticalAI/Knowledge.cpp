@@ -1,15 +1,15 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "AI All.h"
 #else
-	#include "ai.h"
+	#include "AI.h"
 	#include "AIInternals.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "Soldier Profile.h"
-	#include "los.h"
+	#include "LOS.h"
 	#include "NPC.h"
 	#include "Quests.h"
 	#include "Render Fun.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 #endif
 
 extern SECTOR_EXT_DATA	SectorExternalData[256][4];
@@ -180,7 +180,7 @@ INT32 MostImportantNoiseHeard( SOLDIERTYPE *pSoldier, INT32 *piRetValue, BOOLEAN
 
 	// sevenfm: sector information
 	UINT8 sectordata = 0;
-	if ( gbWorldSectorZ > 0 )	// underground we are always suspicious		
+	if ( gbWorldSectorZ > 0 )	// underground we are always suspicious
 		sectordata = 2;
 	else
 		sectordata = SectorExternalData[SECTOR( gWorldSectorX, gWorldSectorY )][gbWorldSectorZ].usCurfewValue;
@@ -247,7 +247,7 @@ INT32 MostImportantNoiseHeard( SOLDIERTYPE *pSoldier, INT32 *piRetValue, BOOLEAN
 		}
 	}
 
-	// if any "misc. noise" was also heard recently	
+	// if any "misc. noise" was also heard recently
 	if (!TileIsOutOfBounds(pSoldier->aiData.sNoiseGridno))
 	{
 		if ( pSoldier->bNoiseLevel != pSoldier->pathing.bLevel || PythSpacesAway( pSoldier->sGridNo, pSoldier->aiData.sNoiseGridno ) >= 6 || SoldierTo3DLocationLineOfSightTest( pSoldier, pSoldier->aiData.sNoiseGridno, pSoldier->bNoiseLevel, 0, FALSE, NO_DISTANCE_LIMIT ) == 0 )
@@ -270,10 +270,10 @@ INT32 MostImportantNoiseHeard( SOLDIERTYPE *pSoldier, INT32 *piRetValue, BOOLEAN
 			pSoldier->aiData.ubNoiseVolume = 0;
 		}
 	}
-	
+
 	// if any recent PUBLIC "misc. noise" is also known
 	if ( (pSoldier->bTeam != CIV_TEAM) || ( pSoldier->ubCivilianGroup == KINGPIN_CIV_GROUP ) )
-	{		
+	{
 		if (!TileIsOutOfBounds(*psNoiseGridNo))
 		{
 			// if we are NOT there (at the noise gridno)
@@ -292,7 +292,7 @@ INT32 MostImportantNoiseHeard( SOLDIERTYPE *pSoldier, INT32 *piRetValue, BOOLEAN
 			}
 		}
 	}
-	
+
 	if (!TileIsOutOfBounds(sBestGridNo) && pfReachable )
 	{
 		*pfReachable = TRUE;
@@ -320,7 +320,7 @@ INT32 MostImportantNoiseHeard( SOLDIERTYPE *pSoldier, INT32 *piRetValue, BOOLEAN
 			// of where we have to climb to instead
 			sClimbingGridNo = GetInterveningClimbingLocation( pSoldier, sBestGridNo, bBestLevel, &fClimbingNecessary );
 			if ( fClimbingNecessary )
-			{				
+			{
 				if (TileIsOutOfBounds(sClimbingGridNo))
 				{
 					// can't investigate!
@@ -349,7 +349,7 @@ INT32 MostImportantNoiseHeard( SOLDIERTYPE *pSoldier, INT32 *piRetValue, BOOLEAN
 		*pfClimbingNecessary = fClimbingNecessary;
 	}
 
-#ifdef DEBUGDECISIONS	
+#ifdef DEBUGDECISIONS
 	if (!TileIsOutOfBounds(sBestGridNo))
 		AINumMessage("MOST IMPORTANT NOISE HEARD FROM GRID #",sBestGridNo);
 #endif

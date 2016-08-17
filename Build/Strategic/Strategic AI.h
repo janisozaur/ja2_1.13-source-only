@@ -21,7 +21,7 @@ enum
 
 // WDS - New AI
 void ExecuteStrategicAIAction(
-							  UINT16 usActionCode,  // See list in "interface Dialogue.h"
+							  UINT16 usActionCode,  // See list in "Interface Dialogue.h"
 							  INT16 sSectorX,		// Target X location of strategic action
 							  INT16 sSectorY,		// Target Y location of strategic action
 							  INT32 option1 = 0,	// Option 1, vaies with action
@@ -69,7 +69,7 @@ void MoveSAIGroupToSector( GROUP **pGroup, UINT8 ubSectorID, UINT32 uiMoveCode, 
 
 void RepollSAIGroup( GROUP *pGroup );
 
-//When an enemy AI group is eliminated by the player, apply a grace period in which the 
+//When an enemy AI group is eliminated by the player, apply a grace period in which the
 //group isn't allowed to be filled for several days.
 void TagSAIGroupWithGracePeriod( GROUP *pGroup );
 
@@ -133,7 +133,7 @@ typedef struct ARMY_COMPOSITION
 
 //Defines the patrol groups -- movement groups.
 typedef struct PATROL_GROUP
-{ 
+{
 	INT8	bSize;
 	INT8	bPriority;
 	UINT8 ubSectorID[4];
@@ -144,7 +144,7 @@ typedef struct PATROL_GROUP
 	INT8	bPadding[10];
 }PATROL_GROUP;
 
-//Defines all stationary defence forces. 
+//Defines all stationary defence forces.
 typedef struct GARRISON_GROUP
 {
 	UINT8 ubSectorID;

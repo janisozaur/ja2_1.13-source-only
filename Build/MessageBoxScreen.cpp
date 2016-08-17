@@ -2,25 +2,25 @@
 	#include "JA2 All.h"
 #else
 	#include "sgp.h"
-	#include "screenids.h"
-	#include "fade screen.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
+	#include "ScreenIds.h"
+	#include "Fade Screen.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
 	#include "MercTextBox.h"
-	#include "cursors.h"
-	#include "messageboxscreen.h"
-	#include "font control.h"
+	#include "Cursors.h"
+	#include "MessageBoxScreen.h"
+	#include "Font Control.h"
 	#include "Map Screen Interface.h"
-	#include "renderworld.h"
-	#include "gameloop.h"
-	#include "english.h"
+	#include "RenderWorld.h"
+	#include "GameLoop.h"
+	#include "English.h"
 	#include "GameSettings.h"
 	#include "Interface Control.h"
-	#include "cursor control.h"
-	#include "laptop.h"
-	#include "text.h"
+	#include "Cursor Control.h"
+	#include "Laptop.h"
+	#include "Text.h"
 	#include "Text Input.h"
-	#include "overhead map.h"
+	#include "Overhead Map.h"
 	#include "DropDown.h"		// added by Flugente
 	#include "Utilities.h"		// added by Flugente for FilenameForBPP(...)
 #endif
@@ -208,7 +208,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 			usCursor = CURSOR_NORMAL;
 			break;
 	}
-	
+
 	if ( usFlags & MSG_BOX_FLAG_USE_CENTERING_RECT && pCenteringRect != NULL )
 	{
 		aRect.iTop = 	pCenteringRect->iTop;
@@ -237,7 +237,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 	if ( usFlags & MSG_BOX_FLAG_GENERIC_FOUR_BUTTONS )
 		heightincrease = 120;
 	if ( usFlags & MSG_BOX_FLAG_GENERIC_EIGHT_BUTTONS )
-	{		
+	{
 		if( ubStyle == MSG_BOX_BASIC_MEDIUM_BUTTONS )
 			heightincrease = 120;
 		else
@@ -252,7 +252,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 
 	if ( usFlags & ( MSG_BOX_FLAG_DROPDOWN_1 | MSG_BOX_FLAG_DROPDOWN_2 ) )
 		heightincrease = 130;
-		
+
 	UINT16 usMBWidth=MSGBOX_DEFAULT_WIDTH;
 	BOOLEAN bFixedWidth = FALSE;
 	// sevenfm: custom width for 16-medium-button  messagebox
@@ -325,7 +325,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 
 	UnLockVideoSurface( gMsgBox.uiSaveBuffer );
 	UnLockVideoSurface( FRAME_BUFFER );
-		
+
 	// Create top-level mouse region
 	MSYS_DefineRegion( &(gMsgBox.BackRegion), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, MSYS_PRIORITY_HIGHEST - 1,	usCursor, MSYS_NO_CALLBACK, MsgBoxClickCallback );
 
@@ -568,7 +568,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 			sButtonY = usTextBoxHeight - MSGBOX_BUTTON_HEIGHT - 10 - heightincrease - 6;
 			sButtonY -= MSGBOX_SMALL_BUTTON_WIDTH - MSGBOX_SMALL_BUTTON_X_SEP;
 		}
-				
+
 		for ( INT8 i = 0; i < 4; ++i)
 		{
 			if( ubStyle == MSG_BOX_BASIC_STYLE )
@@ -589,7 +589,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 			for ( INT8 j = 0; j < 4; ++j)
 			{
 				INT8 k = 4*i + j;
-				
+
 				if( ubStyle == MSG_BOX_BASIC_STYLE )
 					sButtonX += MSGBOX_BUTTON_WIDTH;
 				else
@@ -624,9 +624,9 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 
 		int ibx = gMsgBox.sX + 10;
 		int iby = gMsgBox.sY +(usTextBoxHeight - 20 - 10);
-		//Add Player Name textbox 
+		//Add Player Name textbox
 		AddTextInputField(	ibx,
-							iby, 
+							iby,
 							usTextBoxWidth - 20,
 							20,
 							MSYS_PRIORITY_HIGH+2,
@@ -672,7 +672,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 			SetButtonCursor(gMsgBox.uiOKButton, usCursor);
 			ForceButtonUnDirty( gMsgBox.uiOKButton );
 		}
-		
+
 		// Create text button
 		if ( usFlags & MSG_BOX_FLAG_CANCEL )
 		{
@@ -982,7 +982,7 @@ template<>	void	DropDownTemplate<DROPDOWNNR_MSGBOX_1>::SetRefresh()
 
 		DropDownTemplate<DROPDOWNNR_MSGBOX_2>::getInstance( ).SetSelectedEntryKey( guiMessageBoxImageIndex );
 	}
-	
+
 	if ( gMsgBox.usFlags & MSG_BOX_FLAG_IMAGE )
 	{
 		DeleteVideoObjectFromIndex( guiMessageBoxImage );
@@ -997,7 +997,7 @@ template<>	void	DropDownTemplate<DROPDOWNNR_MSGBOX_1>::SetRefresh()
 		if ( !AddVideoObject( &VObjectDesc, &guiMessageBoxImage ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "TILESETS\\0\\%s", gStructureConstruct[box1key].szTileSetName );
-			
+
 			AddVideoObject( &VObjectDesc, &guiMessageBoxImage );
 		}
 	}
@@ -1265,7 +1265,7 @@ UINT32	ExitMsgBox( INT8 ubExitCode )
 	{
 		DropDownTemplate<DROPDOWNNR_MSGBOX_2>::getInstance( ).Destroy( );
 	}
-		
+
 	// Delete button images
 	UnloadButtonImage( gMsgBox.iButtonImages );
 
@@ -1290,7 +1290,7 @@ UINT32	ExitMsgBox( INT8 ubExitCode )
 	{
 		(*(gMsgBox.ExitCallback))( ubExitCode );
 	}
-	
+
 	//if ur in a non gamescreen and DONT want the msg box to use the save buffer, unset gfDontOverRideSaveBuffer in ur callback
 	if( ( ( gMsgBox.uiExitScreen != GAME_SCREEN ) || ( fRestoreBackgroundForMessageBox == TRUE ) ) && gfDontOverRideSaveBuffer )
 	{
@@ -1331,7 +1331,7 @@ UINT32	ExitMsgBox( INT8 ubExitCode )
 
 	// Remove save buffer!
 	DeleteVideoSurfaceFromIndex( gMsgBox.uiSaveBuffer );
-	
+
 	switch( gMsgBox.uiExitScreen )
 	{
 		case GAME_SCREEN:
@@ -1632,7 +1632,7 @@ UINT32	MessageBoxScreenHandle( )
 					}
 				}
 			}
-				
+
 			// box with sixteen buttons
 			UINT32 sixteentxt[16] = {
 				'1-A',
@@ -1686,7 +1686,7 @@ UINT32	MessageBoxScreenHandle( )
 	{
 		DropDownTemplate<DROPDOWNNR_MSGBOX_2>::getInstance( ).Display( );
 	}
-		
+
 	if ( gMsgBox.bHandled )
 	{
 		SetRenderFlags( RENDER_FLAG_FULL );

@@ -2,7 +2,7 @@
 	#include "Strategic All.h"
 	#include "XML.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "XML.h"
 	#include "expat.h"
@@ -11,7 +11,7 @@
 	#include "FileMan.h"
 	#include "MemMan.h"
 	#include "Debug Control.h"
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 #endif
 
 #define MAX_CHAR_DATA_LENGTH			500

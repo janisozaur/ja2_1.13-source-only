@@ -7,7 +7,7 @@
 */
 
 #include "Types.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 void	EnterIMPGear( void );
 void	RenderIMPGear( void );

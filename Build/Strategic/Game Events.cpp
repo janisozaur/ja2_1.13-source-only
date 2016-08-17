@@ -1,15 +1,15 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
-	#include "types.h"
+	#include "Types.h"
 	#include "Game Events.h"
 	#include "Game Clock.h"
 	#include "MemMan.h"
 	#include "Debug.h"
 	#include "Font Control.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Text.h"
 #endif
 

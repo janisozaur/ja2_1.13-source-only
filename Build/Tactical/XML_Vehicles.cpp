@@ -57,10 +57,10 @@ newCarStartElementHandle(void *userData, const XML_Char *name, const XML_Char **
 			   strcmp(name, "VehicleBodyType") == 0 ||
 			   strcmp(name, "VehicleEnabled") == 0 ||
 			   strcmp(name, "Pilot") == 0 ||
-			   strcmp(name, "StiFaceIcon") == 0 ||	   
+			   strcmp(name, "StiFaceIcon") == 0 ||
 			   strcmp(name, "Name") == 0 ||
 			   strcmp(name, "LongName") == 0 ||
-			   strcmp(name, "ShortName") == 0 ||		   
+			   strcmp(name, "ShortName") == 0 ||
 			   strcmp(name, "Neutral") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
@@ -115,7 +115,7 @@ newCarEndElementHandle(void *userData, const XML_Char *name)
 
 	newCarParseData * pData = (newCarParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "VEHICLES") == 0)
 		{
@@ -123,10 +123,10 @@ newCarEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "VEHICLE") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!NewCar_TextOnly)
-			{	
+			{
 				gNewVehicle[pData->curNewCar.uiIndex].uiIndex = pData->curNewCar.uiIndex;
 				gNewVehicle[pData->curNewCar.uiIndex].iNewMvtTypes = pData->curNewCar.iNewMvtTypes;
 				gNewVehicle[pData->curNewCar.uiIndex].iNewSeatingCapacities = pData->curNewCar.iNewSeatingCapacities;
@@ -134,12 +134,12 @@ newCarEndElementHandle(void *userData, const XML_Char *name)
 				gNewVehicle[pData->curNewCar.uiIndex].iNewMoveVehicleSndID = pData->curNewCar.iNewMoveVehicleSndID;
 				gNewVehicle[pData->curNewCar.uiIndex].ubNewVehicleTypeProfileID = pData->curNewCar.ubNewVehicleTypeProfileID;
 				gNewVehicle[pData->curNewCar.uiIndex].sNewVehicleArmourType = pData->curNewCar.sNewVehicleArmourType;
-				gNewVehicle[pData->curNewCar.uiIndex].NewVehicleBodyType = pData->curNewCar.NewVehicleBodyType;	
+				gNewVehicle[pData->curNewCar.uiIndex].NewVehicleBodyType = pData->curNewCar.NewVehicleBodyType;
 				gNewVehicle[pData->curNewCar.uiIndex].bNewVehicle = pData->curNewCar.bNewVehicle;
 				gNewVehicle[pData->curNewCar.uiIndex].bNewNeutral = pData->curNewCar.bNewNeutral;
-				gNewVehicle[pData->curNewCar.uiIndex].NewPilot = pData->curNewCar.NewPilot;	
+				gNewVehicle[pData->curNewCar.uiIndex].NewPilot = pData->curNewCar.NewPilot;
 				strcpy(gNewVehicle[pData->curNewCar.uiIndex].szIconFace, pData->curNewCar.szIconFace);
-				gNewVehicle[ pData->curNewCar.uiIndex ].NewCarPortraits = -1;					
+				gNewVehicle[ pData->curNewCar.uiIndex ].NewCarPortraits = -1;
 				wcscpy(gNewVehicle[pData->curNewCar.uiIndex].NewVehicleStrings, pData->curNewCar.NewVehicleStrings);
 				wcscpy(gNewVehicle[pData->curNewCar.uiIndex].NewVehicleName, pData->curNewCar.NewVehicleName);
 				wcscpy(gNewVehicle[pData->curNewCar.uiIndex].NewShortVehicleStrings, pData->curNewCar.NewShortVehicleStrings);
@@ -164,42 +164,42 @@ newCarEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.iNewMvtTypes	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "SeatingCapacities") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.iNewSeatingCapacities	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "EnterVehicleSndID") == 0)
-		{			
+		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.iNewEnterVehicleSndID	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "MoveVehicleSndID") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.iNewMoveVehicleSndID	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "VehicleArmourType") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.sNewVehicleArmourType	= (INT16) atol(pData->szCharData);
-		}			
+		}
 		else if(strcmp(name, "VehicleEnabled") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.bNewVehicle	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "Neutral") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.bNewNeutral	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "Pilot") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curNewCar.NewPilot	= (INT8) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "Name") == 0 )
 		{
 			pData->curElement = ELEMENT;
@@ -244,12 +244,12 @@ newCarEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 
 			if (!NewCar_TextOnly)
-			{	
+			{
 				memcpy( gNewVehicle[pData->curNewCar.uiIndex].VehicleSeats, pData->curNewCar.VehicleSeats, sizeof(pData->curNewCar.VehicleSeats) );
 			}
 			else
 			{
-				wcscpy( gNewVehicle[pData->curNewCar.uiIndex].VehicleSeats[pData->curSeatIndex].zSeatName, pData->curNewCar.VehicleSeats[pData->curSeatIndex].zSeatName ); 
+				wcscpy( gNewVehicle[pData->curNewCar.uiIndex].VehicleSeats[pData->curSeatIndex].zSeatName, pData->curNewCar.VehicleSeats[pData->curSeatIndex].zSeatName );
 			}
 		}
 		else if(strcmp(name, "SeatIndex") == 0)
@@ -335,7 +335,7 @@ BOOLEAN ReadInNewVehicles(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading Vehicles.xml" );
 
 	NewCar_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -382,9 +382,9 @@ BOOLEAN ReadInNewVehicles(STR fileName, BOOLEAN localizedVersion)
 void InitNewVehicles ()
 {
 	UINT32 iCount;
-	
+
 	for( iCount=0; iCount<NUM_PROFILES; iCount++ )
-	{	
+	{
 		gNewVehicle[ iCount ].uiIndex = iCount;
 		gNewVehicle[ iCount ].iNewMvtTypes = 1;
 		gNewVehicle[ iCount ].iNewSeatingCapacities = 6;
@@ -395,12 +395,12 @@ void InitNewVehicles ()
 		gNewVehicle[ iCount ].NewVehicleBodyType = 0;
 		gNewVehicle[ iCount ].bNewNeutral = TRUE;
 		gNewVehicle[ iCount ].bNewVehicle = FALSE;
-		gNewVehicle[ iCount ].NewPilot = -1;	
+		gNewVehicle[ iCount ].NewPilot = -1;
 		gNewVehicle[ iCount ].NewCarPortraits = -1;
-		gNewVehicle[ iCount ].szIconFace[MAX_MAIN_VEHICLE_CHARS-1] = '\0';			
+		gNewVehicle[ iCount ].szIconFace[MAX_MAIN_VEHICLE_CHARS-1] = '\0';
 		gNewVehicle[ iCount ].NewVehicleStrings[127] = '\0';
 		gNewVehicle[ iCount ].NewVehicleName[127] = '\0';
-		gNewVehicle[ iCount ].NewShortVehicleStrings[127] = '\0';	
+		gNewVehicle[ iCount ].NewShortVehicleStrings[127] = '\0';
 		gNewVehicle[ iCount ].NewUsed = FALSE;
 		memset( &gNewVehicle[ iCount ].VehicleSeats, 0, sizeof(gNewVehicle[ iCount ].VehicleSeats) );
 	}

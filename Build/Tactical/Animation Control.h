@@ -104,7 +104,7 @@ typedef struct
 	CHAR8			zAnimStr[ MAX_ANIM_STR_SIZE ];
 	INT16			sAP;
 	INT16			sSpeed;
-	FLOAT			dMovementChange;	
+	FLOAT			dMovementChange;
 	UINT32			uiFlags;
 	UINT8			ubHeight;
 	UINT8			ubEndHeight;
@@ -242,7 +242,7 @@ enum AnimationStates
 	DROP_ITEM,
 
 	SLICE,
-	STAB, 
+	STAB,
 	CROUCH_STAB,
 
 	START_AID,
@@ -282,7 +282,7 @@ enum AnimationStates
 
 	GIVE_ITEM,
 
-	CLIMB_CLIFF, 
+	CLIMB_CLIFF,
 
 	COW_EATING,
 	COW_HIT,
@@ -327,7 +327,7 @@ enum AnimationStates
 	BLOODCAT_DYING,
 	BLOODCAT_DYING_STOP,
 	BLOODCAT_SWIPE,
-	
+
 	NINJA_GOTOBREATH,
 	NINJA_BREATH,
 	NINJA_LOWKICK,
@@ -388,7 +388,7 @@ enum AnimationStates
 	SHOOT_DUAL_CROUCH,
 	END_DUAL_CROUCH,
 	CROUCH_SHOOT_DWEL_UNJAM,
-	
+
 	ADJACENT_GET_ITEM,
 
 	CUTTING_FENCE,
@@ -494,7 +494,7 @@ enum AnimationStates
 	QUEEN_FRUSTRATED_SLAP,
 
 	CHARIOTS_OF_FIRE,
-	
+
 	AI_PULL_SWITCH,
 
 	MONSTER_MELT,
@@ -554,14 +554,14 @@ enum AnimationStates
 	LOB_GRENADE_STANCE,
 	//Prone rolls
 	ROLL_PRONE_R,
-	ROLL_PRONE_L, 
-	
+	ROLL_PRONE_L,
+
 	//jump wall
 	JUMPUPWALL,
 	JUMPDOWNWALL,
-	
+
 	JUMPWINDOWS,
-	
+
 	THROW_KNIFE_SP_BM,
 	RUNNING_W_PISTOL,
 
@@ -577,7 +577,7 @@ enum AnimationStates
 
 	ADJACENT_GET_ITEM_CROUCHED,
 	STEAL_ITEM_CROUCHED,
-	
+
 	BURST_DUAL_STAND,
 	BURST_DUAL_CROUCH,
 	BURST_DUAL_PRONE,
@@ -603,19 +603,19 @@ enum AnimationStates
 	BIGMERC_IDLE_NECK2,
 
 	FOCUSED_PUNCH,
-	FOCUSED_STAB,	
-	HTH_KICK,	
+	FOCUSED_STAB,
+	HTH_KICK,
 	FOCUSED_HTH_KICK,
 
 	LONG_JUMP,
 
 	CRYO_DEATH,
 	CRYO_DEATH_CROUCHED,
-	
+
 	NUMANIMATIONSTATES
 
 };
- 
+
 
 
 extern UINT16						gusAnimInst[ MAX_ANIMATIONS ][ MAX_FRAMES_PER_ANIM ];

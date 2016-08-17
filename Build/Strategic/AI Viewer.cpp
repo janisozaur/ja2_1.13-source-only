@@ -4,39 +4,39 @@
 	#include "Strategic All.h"
 	#include "INIReader.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
-	#include "types.h"
-	#include "english.h"
+	#include "Types.h"
+	#include "English.h"
 	#include "Timer Control.h"
-	#include "vsurface.h"
+	#include "VSurface.h"
 	#include "Button System.h"
 	#include "Font Control.h"
 	#include "Editor Taskbar Utils.h"
-	#include "line.h"
-	#include "input.h"
-	#include "vobject_blitters.h"
+	#include "Line.h"
+	#include "Input.h"
+	#include "VObject_blitters.h"
 	#include "Text Input.h"
 	#include "mousesystem.h"
-	#include "strategicmap.h"
-	#include "Fileman.h"
+	#include "StrategicMap.h"
+	#include "FileMan.h"
 	#include "Map Information.h"
-	#include "render dirty.h"
+	#include "Render Dirty.h"
 	#include "Game Clock.h"
 	#include "Campaign Types.h"
 	#include "Queen Command.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Strategic Movement.h"
 	#include "GameSettings.h"
 	#include "Game Event Hook.h"
 	#include "Creature Spreading.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Game Init.h"
 	#include "Strategic AI.h"
 	#include "Campaign.h"
 	#include "Auto Resolve.h"
 	#include "Strategic Status.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "Town Militia.h"	// added by Flugente
 #endif
 
@@ -398,9 +398,9 @@ BOOLEAN CreateAIViewer()
 	AddTextInputField( 10, VIEWER_BOTTOM + 90, 25, 15, MSYS_PRIORITY_NORMAL, str, 2, INPUTTYPE_NUMERICSTRICT );
 
 	//Press buttons in based on current settings
-	if (gGameOptions.ubDifficultyLevel >= DIF_LEVEL_EASY && gGameOptions.ubDifficultyLevel <= DIF_LEVEL_HARD) 
+	if (gGameOptions.ubDifficultyLevel >= DIF_LEVEL_EASY && gGameOptions.ubDifficultyLevel <= DIF_LEVEL_HARD)
 		ButtonList[ iViewerButton[ RESET_EASY + gGameOptions.ubDifficultyLevel - DIF_LEVEL_EASY ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	
+
 	ButtonList[ iViewerButton[ COMPRESSION0 ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	if( !GamePaused() )
 		SetGameMinutesPerSecond( 0 );
@@ -483,7 +483,7 @@ void RenderStationaryGroups()
 
 			if( pSector->uiFlags & SF_SAM_SITE )
 				BltVideoObject( FRAME_BUFFER, hVObject, SAM_ICON, xp + 20, yp + 4, VO_BLT_SRCTRANSPARENCY, NULL );
-			
+
 			UINT8 nummilitia = NumNonPlayerTeamMembersInSector( x, y, MILITIA_TEAM );
 
 			if ( nummilitia )
@@ -759,7 +759,7 @@ void RenderInfoInSector()
 			ubMercs, ubActive, ubUnconcious, ubCollapsed );
 		yp += 10;
 		SetFontForeground( FONT_LTBLUE );
-		mprintf( 280, yp, L"Militia:	(%d Green, %d Regular, %d Elite)", 
+		mprintf( 280, yp, L"Militia:	(%d Green, %d Regular, %d Elite)",
 				 MilitiaInSectorOfRank( ubSectorX, ubSectorY, GREEN_MILITIA ), MilitiaInSectorOfRank( ubSectorX, ubSectorY, REGULAR_MILITIA ), MilitiaInSectorOfRank( ubSectorX, ubSectorY, ELITE_MILITIA ) );
 		yp += 10;
 		SetFontForeground( FONT_ORANGE );

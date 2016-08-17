@@ -23,7 +23,7 @@ namespace DataStructures
 		unsigned char* Allocate(int bytesWanted);
 		void Release(unsigned char *data);
 		void Clear(void);
-	protected:	
+	protected:
 		MemoryPool<unsigned char[128]> pool128;
 		MemoryPool<unsigned char[512]> pool512;
 		MemoryPool<unsigned char[2048]> pool2048;

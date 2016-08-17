@@ -1,19 +1,19 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-	#include "types.h"
-	#include "compression.h"
-	#include "debug.h"
-	#include "fileman.h"
+	#include "Types.h"
+	#include "Compression.h"
+	#include "Debug.h"
+	#include "FileMan.h"
 	#include "imgfmt.h"
 	#include "himage.h"
 	#include "pcx.h"
 	#include "impTGA.h"
-	#include "wcheck.h"
+	#include "WCheck.h"
 #endif
 
 //CONVERT_TO_16_BIT

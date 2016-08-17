@@ -2,8 +2,8 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -108,7 +108,7 @@ attachmentslotEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT_LIST;
 
 			if(pData->curAttachmentSlot.uiSlotIndex < pData->maxArraySize)
-			{				
+			{
 				if (!localizedTextOnly_AttachmentSlots)
 				{
 					pData->curArray[pData->curAttachmentSlot.uiSlotIndex] = pData->curAttachmentSlot; //write the attachmentinfo into the table
@@ -122,7 +122,7 @@ attachmentslotEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(AttachmentSlots[pData->curAttachmentSlot.uiSlotIndex].szSlotName, pData->curAttachmentSlot.szSlotName);
-				}				
+				}
 			}
 		}
 		else if(strcmp(name, "uiSlotIndex") == 0)
@@ -215,16 +215,16 @@ BOOLEAN ReadInAttachmentSlotsStats(STR fileName, BOOLEAN localizedVersion)
 	XML_SetElementHandler(parser, attachmentslotStartElementHandle, attachmentslotEndElementHandle);
 	XML_SetCharacterDataHandler(parser, attachmentslotCharacterDataHandle);
 
-	// This should fix the crash in a Release Version with VS 2008	
+	// This should fix the crash in a Release Version with VS 2008
 	//memset(&pData,0,sizeof(pData));
-	
+
 	pData.curElement = ELEMENT_NONE;
 	pData.szCharData[0] = 0;
 	pData.currentDepth = 0;
-	pData.maxReadDepth = 0;	
+	pData.maxReadDepth = 0;
 	pData.curArray = AttachmentSlots;
-	pData.maxArraySize = MAXITEMS;	
-	
+	pData.maxArraySize = MAXITEMS;
+
 	XML_SetUserData(parser, &pData);
 
 	if(!XML_Parse(parser, lpcBuffer, uiFSize, TRUE))
@@ -241,7 +241,7 @@ BOOLEAN ReadInAttachmentSlotsStats(STR fileName, BOOLEAN localizedVersion)
 	MemFree(lpcBuffer);
 
 	XML_ParserFree(parser);
-	
+
 	return( TRUE );
 }
 
@@ -275,7 +275,7 @@ BOOLEAN WriteAttachmentSlotsStats()
 			//DBrot: MOLLE
 			FilePrintf(hFile,"\t\t<ubPocketMapping>%d</ubPocketMapping>\r\n",											AttachmentSlots[cnt].ubPocketMapping						);
 			FilePrintf(hFile,"\t\t<fBigSlot>%d</fBigSlot>\r\n",											AttachmentSlots[cnt].fBigSlot						);
-			
+
 			FilePrintf(hFile,"\t</ATTACHMENTSLOT>\r\n");
 		}
 		FilePrintf(hFile,"</ATTACHMENTSLOTLIST>\r\n");

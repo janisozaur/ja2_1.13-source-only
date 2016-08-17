@@ -70,7 +70,7 @@ qarrayStartElementHandle(void *userData, const XML_Char *name, const XML_Char **
 	pData->currentDepth++;
 	}
 
-	
+
 
 static void XMLCALL
 qarrayCharacterDataHandle(void *userData, const XML_Char *str, int len)
@@ -98,13 +98,13 @@ qarrayEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "PROFILE") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
+			pData->curElement = ELEMENT_LIST;
 
 			if(pData->curQarray.uiIndex < pData->maxArraySize)
 			{
-				pData->curArray[pData->curQarray.uiIndex] = pData->curQarray; 
+				pData->curArray[pData->curQarray.uiIndex] = pData->curQarray;
 			}
-			
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -165,7 +165,7 @@ BOOLEAN ReadInMercQuotes(QARRAY_VALUES *pQarray, STR fileName)
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading MercQuote.xml" );
 
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

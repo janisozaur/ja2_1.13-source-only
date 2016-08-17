@@ -1,4 +1,4 @@
-/// \brief \b [Internal] SHA-1 computation class 
+/// \brief \b [Internal] SHA-1 computation class
 ///
 /// 100% free public domain implementation of the SHA-1
 /// algorithm by Dominik Reichl <Dominik.Reichl@tiscali.de>
@@ -26,7 +26,7 @@
 #include <string.h> // Needed for strcat and strcpy
 #include "Export.h"
 
-#define MAX_FILE_READ_BUFFER 8000 
+#define MAX_FILE_READ_BUFFER 8000
 
 #define SHA1_LENGTH 20
 
@@ -58,7 +58,7 @@ public:
 		unsigned char c[ 64 ];
 		unsigned int l[ 16 ];
 	} SHA1_WORKSPACE_BLOCK;
-	/* Two different formats for ReportHash(...) 
+	/* Two different formats for ReportHash(...)
 	*/
 	enum { REPORT_HEX = 0,
 		REPORT_DIGIT = 1};

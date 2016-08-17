@@ -3,8 +3,8 @@
 	#include "HelpScreen.h"
 #else
 	#include "Map Screen Interface TownMine Info.h"
-	#include "strategicmap.h"
-	#include "popupbox.h"
+	#include "StrategicMap.h"
+	#include "PopUpBox.h"
 	#include "Map Screen Interface.h"
 	#include "Queen Command.h"
 	#include "Player Command.h"
@@ -17,17 +17,17 @@
 	#include "NPC.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Strategic Mines.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Map Screen Interface Map Inventory.h"
 	#include "Strategic.h"
 	#include "Utilities.h"
-	#include "video.h"
+	#include "Video.h"
 	#include "Town Militia.h"
 	#include "HelpScreen.h"
 	#include "Map Screen Helicopter.h"
 	#include "Tactical Save.h"
 	#include "GameSettings.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Overhead.h"	// added by Flugente
 	#include "Game Clock.h"			// added by Flugente
 	#include "Game Event Hook.h"	// added by Flugente
@@ -212,7 +212,7 @@ void CreateDestroyTownInfoBox( void )
 			// resize box to fit button
 			pDimensions.iRight += BOX_BUTTON_WIDTH;
 		}
-		
+
 		pDimensions.iBottom += BOX_BUTTON_HEIGHT;
 
 		for ( UINT16 x = 0; x < MAX_NUMBER_OF_SAMS; ++x )
@@ -315,7 +315,7 @@ void AddTextToTownBox( void )
 	BOOLEAN fSectorHasXMLNames = TRUE;
 	CHAR16 zUnexplored[MAX_SECTOR_NAME_LENGTH];
 	CHAR16 zExplored[MAX_SECTOR_NAME_LENGTH];
-	
+
 	wcscpy( zUnexplored, gzSectorNames[ usTownSectorIndex ][0] );
 	wcscpy( zExplored, gzSectorNames[ usTownSectorIndex ][2] );
 
@@ -330,7 +330,7 @@ void AddTextToTownBox( void )
 		// In the event that a specific name or set of names is missing, the program generates a default
 		// name as it always has.
 		// I've also updated the SAM Site sectors to rely on SamSite.XML data.
-		
+
 		BOOLEAN fVisited = (SectorInfo[ usTownSectorIndex ].uiFlags & SF_ALREADY_VISITED);
 		BOOLEAN fSAMSiteKnown = FALSE;
 
@@ -644,7 +644,7 @@ void AddTextToBlankSectorBox( void )
 	BOOLEAN fSectorHasXMLNames = TRUE;
 	CHAR16 zUnexplored[MAX_SECTOR_NAME_LENGTH];
 	CHAR16 zExplored[MAX_SECTOR_NAME_LENGTH];
-	
+
 	wcscpy( zUnexplored, gzSectorNames[ usSectorValue ][0] );
 	wcscpy( zExplored, gzSectorNames[ usSectorValue ][2] );
 
@@ -659,7 +659,7 @@ void AddTextToBlankSectorBox( void )
 		// In the event that a specific name or set of names is missing, the program generates a default
 		// name as it always has.
 		// I've also updated the SAM Site sectors to rely on SamSite.XML data.
-		
+
 		BOOLEAN fVisited = (SectorInfo[ usSectorValue ].uiFlags & SF_ALREADY_VISITED);
 		BOOLEAN fSAMSiteKnown = FALSE;
 
@@ -770,7 +770,7 @@ void AddCommonInfoToBox(void)
 	// known town check, to exclude non-town sectors
 	else if( gfHiddenTown[ ubTownId ] && ubTownId != BLANK_SECTOR )
 		fKnownSite = TRUE;
-	
+
 	// known SAM Site check
 	else
 	{
@@ -786,7 +786,7 @@ void AddCommonInfoToBox(void)
 			}
 		}
 	}
-	
+
 	/*// ABOVE GROUND HARDCODED
 	fKnownSite = TRUE;
 	switch( usSectorValue )
@@ -1019,7 +1019,7 @@ void PositionTownMineInfoBox( void )
 	{
 		pPosition.iY = MapScreenRect.iBottom - pDimensions.iBottom - 8;
 	}
-	
+
 	// reset position
 	SetBoxPosition( ghTownMineBox, pPosition );
 }
@@ -1035,7 +1035,7 @@ void AddInventoryButtonForMapPopUpBox( void )
 	ETRLEObject	*pTrav;
 	INT16 sWidthA = 0, sWidthB = 0, sTotalBoxWidth = 0;
 	HVOBJECT hHandle;
-	
+
 	// load the button
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("INTERFACE\\mapinvbtns.sti", VObjectDesc.ImageFile);
@@ -1255,7 +1255,7 @@ void MapTownSAMRepairButtonCallBack( GUI_BUTTON *btn, INT32 reason )
 						DoMapMessageBox( MSG_BOX_BASIC_STYLE, szEnemyHeliText[4], MAP_SCREEN, MSG_BOX_FLAG_OK, NULL );
 						break;
 					}
-					
+
 					UINT32 time = (100 - pSAMStrategicMap->bSAMCondition) / 4 + 1;
 
 					CHAR16	sSamSiteRepairPromptText[320];

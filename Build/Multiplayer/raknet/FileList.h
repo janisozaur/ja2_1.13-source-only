@@ -32,7 +32,7 @@ struct FileListNode
 	unsigned fileLengthBytes;
 
 	/// User specific data for whatever, describing this file.
-	FileListNodeContext context; 
+	FileListNodeContext context;
 
 	/// If true, data and dataLengthBytes should be empty. This is just storing the filename
 	bool isAReference;

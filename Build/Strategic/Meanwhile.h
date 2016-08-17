@@ -83,10 +83,10 @@ void HandleOutskirtsOfMedunaMeanwhileScene( void );
 // let player know about Madlab after certain status % reached
 void HandleScientistAWOLMeanwhileScene( void );
 
-// handle chopper used meanwhile 
+// handle chopper used meanwhile
 void HandleKillChopperMeanwhileScene( void );
 
-// handle interrogation meanwhile 
+// handle interrogation meanwhile
 void HandleInterrogationMeanwhileScene( void );
 
 extern	MEANWHILE_DEFINITION	gCurrentMeanwhileDef;
@@ -101,6 +101,6 @@ extern	UINT32								uiMeanWhileFlags;
 
 
 
- 
+
 
 

@@ -5,21 +5,21 @@
 	#include "Morale.h"
 	#include "Overhead.h"
 	#include "Soldier Profile.h"
-	#include "dialogue control.h"
+	#include "Dialogue Control.h"
 	#include "Map Screen Interface.h"
-	#include "message.h"
-	#include "assignments.h"
+	#include "Message.h"
+	#include "Assignments.h"
 	#include "Strategic Movement.h"
 	#include "Strategic Status.h"
 	#include "SkillCheck.h"
-	#include "drugs and alcohol.h"
+	#include "Drugs And Alcohol.h"
 	#include "StrategicMap.h"
 	#include "Debug.h"
 	#include "Squads.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Campaign.h"
-	#include "mapscreen.h"
-	#include "Soldier macros.h"
+	#include "MapScreen.h"
+	#include "Soldier Macros.h"
 	#include "Event Pump.h"
 	// HEADROCK HAM 3.5: Added for facility effect on morale
 	#include "Facilities.h"
@@ -28,13 +28,13 @@
 	#include "Isometric Utils.h"
 	#include "Food.h"
 	#include "Interface.h"			// added by Flugente
-	#include "finances.h"			// added by Flugente for EXTENDED_CONTRACT_BY_1_DAY
+	#include "Finances.h"			// added by Flugente for EXTENDED_CONTRACT_BY_1_DAY
 	#include "Soldier Add.h"		// added by Flugente for MERC_TYPE__AIM_MERC
 	#include "CampaignStats.h"		// added by Flugente for gCurrentIncident
 	#include "DynamicDialogue.h"	// added by Flugente
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include "fresh_header.h"
 
 #include "Random.h"
@@ -259,7 +259,7 @@ void DecayTacticalMoraleModifiers( void )
 			{
 				continue;
 			}
-				
+
 			if ( DoesMercHaveDisability( pSoldier, CLAUSTROPHOBIC ) )
 			{
 				if ( pSoldier->bSectorZ > 0 )
@@ -398,7 +398,7 @@ void RefreshSoldierMorale( SOLDIERTYPE * pSoldier )
 		if (gFacilityLocations[SECTOR(pSoldier->sSectorX, pSoldier->sSectorY)][cnt].fFacilityHere)
 		{
 			if (cnt == (UINT16)pSoldier->sFacilityTypeOperated && // Soldier is operating this facility
-				GetSoldierFacilityAssignmentIndex( pSoldier ) != -1) 
+				GetSoldierFacilityAssignmentIndex( pSoldier ) != -1)
 			{
 				UINT8 ubFacilityType = (UINT8)cnt;
 				UINT8 ubAssignmentType = (UINT8)GetSoldierFacilityAssignmentIndex( pSoldier );
@@ -462,7 +462,7 @@ void UpdateSoldierMorale( SOLDIERTYPE * pSoldier, INT8 bMoraleEvent )
 	{
 		return;
 	}
-	
+
 	if(cDisableMorale && is_networked)
 	{
 		return;
@@ -477,8 +477,8 @@ void UpdateSoldierMorale( SOLDIERTYPE * pSoldier, INT8 bMoraleEvent )
 	{
 		if ( gGameOptions.fNewTraitSystem )
 		{
-			// SANDRO - STOMP traits 
-			// Squadleader's bonus to morale 
+			// SANDRO - STOMP traits
+			// Squadleader's bonus to morale
 			if ( IS_MERC_BODY_TYPE( pSoldier ) && (pSoldier->bTeam == ENEMY_TEAM || pSoldier->bTeam == MILITIA_TEAM || pSoldier->bTeam == gbPlayerNum) )
 			{
 				bMoraleMod += (gSkillTraitValues.ubSLMoraleGainBonus * GetSquadleadersCountInVicinity( pSoldier, FALSE, FALSE ));
@@ -565,7 +565,7 @@ void UpdateSoldierMorale( SOLDIERTYPE * pSoldier, INT8 bMoraleEvent )
 	{
 		if ( gGameOptions.fNewTraitSystem )
 		{
-			// SANDRO - STOMP traits - squadleader's bonus to morale 
+			// SANDRO - STOMP traits - squadleader's bonus to morale
 			if ( IS_MERC_BODY_TYPE( pSoldier ) && (pSoldier->bTeam == ENEMY_TEAM || pSoldier->bTeam == MILITIA_TEAM || pSoldier->bTeam == gbPlayerNum) )
 			{
 				switch ( bMoraleEvent ) // certain thing are not supported by our squadleader
@@ -843,7 +843,7 @@ void HandleMoraleEvent( SOLDIERTYPE *pSoldier, INT8 bMoraleEvent, INT16 sMapX, I
 				{
 					if ( gGameOptions.fNewTraitSystem && bMoraleEvent != MORALE_DEIDRANNA_KILLED)
 					{
-						if ( !SOLDIER_IN_SECTOR( pTeamSoldier, sMapX, sMapY, bMapZ ) && ( gMoraleSettings.bValues[bMoraleEvent] > 0 ) && //( gbMoraleEvent[bMoraleEvent].bChange > 0 ) && 
+						if ( !SOLDIER_IN_SECTOR( pTeamSoldier, sMapX, sMapY, bMapZ ) && ( gMoraleSettings.bValues[bMoraleEvent] > 0 ) && //( gbMoraleEvent[bMoraleEvent].bChange > 0 ) &&
 							 DoesMercHavePersonality( pTeamSoldier, CHAR_TRAIT_ASSERTIVE ) )
 						{
 							// No morale gain for assertive people from actions of others
@@ -934,7 +934,7 @@ void HandleMoraleEvent( SOLDIERTYPE *pSoldier, INT8 bMoraleEvent, INT16 sMapX, I
 								HandleMoraleEventForSoldier( pTeamSoldier, MORALE_SQUADMATE_DIED );
 							}
 						}
-						
+
 						if (BUDDY_MERC( pProfile, pSoldier->ubProfile ))
 						{
 							// oh no!	buddy died!
@@ -1181,7 +1181,7 @@ void HourlyMoraleUpdate( void )
 					}
 
 					bOpinion = SoldierRelation( pSoldier, pOtherSoldier);
-										
+
 					if (bOpinion == HATED_OPINION)
 					{
 						bHated = WhichHated( pSoldier->ubProfile, pOtherSoldier->ubProfile );
@@ -1660,7 +1660,7 @@ BOOLEAN IsShowOffNearBy( SOLDIERTYPE * pSoldier )
 	}
 	if( !(pSoldier->bActive) || !(pSoldier->bInSector) )
 	{
-		return( FALSE );	
+		return( FALSE );
 	}
 
 	for ( uiLoop = gTacticalStatus.Team[ pSoldier->bTeam ].bFirstID; uiLoop < gTacticalStatus.Team[ pSoldier->bTeam ].bLastID; uiLoop++)
@@ -1681,16 +1681,16 @@ BOOLEAN IsShowOffNearBy( SOLDIERTYPE * pSoldier )
 			continue;
 		}
 		// Are we from our team an dalive?
-		if ( pTeammate->bTeam == pSoldier->bTeam && pTeammate->stats.bLife >= OKLIFE && 
+		if ( pTeammate->bTeam == pSoldier->bTeam && pTeammate->stats.bLife >= OKLIFE &&
 			 DoesMercHavePersonality( pTeammate, CHAR_TRAIT_SHOWOFF ) && PythSpacesAway( pSoldier->sGridNo, pTeammate->sGridNo ) <= 15 )
 		{
-			if ( (pSoldier->ubBodyType <= STOCKYMALE && pTeammate->ubBodyType <= STOCKYMALE) || 
-				(pSoldier->ubBodyType == REGFEMALE && pTeammate->ubBodyType == REGFEMALE) ) 
+			if ( (pSoldier->ubBodyType <= STOCKYMALE && pTeammate->ubBodyType <= STOCKYMALE) ||
+				(pSoldier->ubBodyType == REGFEMALE && pTeammate->ubBodyType == REGFEMALE) )
 			{
 				// phlegmatic character can ignore one
 				if ( DoesMercHavePersonality( pSoldier, CHAR_TRAIT_PHLEGMATIC ) && !fOneException )
 				{
-					fOneException = TRUE;			
+					fOneException = TRUE;
 				}
 				else
 				{

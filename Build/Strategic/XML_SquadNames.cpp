@@ -3,7 +3,7 @@
 #else
 	#include "sgp.h"
 	#include "Map Screen Interface.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -108,7 +108,7 @@ squadnamesEndElementHandle(void *userData, const XML_Char *name)
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curSquadNames.squadname, sizeof(pData->curSquadNames.squadname)/sizeof(pData->curSquadNames.squadname[0]) );
 			pData->curSquadNames.squadname[sizeof(pData->curSquadNames.squadname)/sizeof(pData->curSquadNames.squadname[0]) - 1] = '\0';
 		}
-		
+
 
 		pData->maxReadDepth--;
 	}
@@ -184,6 +184,6 @@ BOOLEAN ReadInSquadNamesStats(STR fileName)
 
 BOOLEAN WriteSquadNamesStats()
 {
-	
+
 	return( TRUE );
 }

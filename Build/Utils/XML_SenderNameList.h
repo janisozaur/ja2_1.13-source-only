@@ -7,7 +7,7 @@
 
 typedef struct
 {
-	UINT16	uiIndex; 
+	UINT16	uiIndex;
 	CHAR16	Name[MAX_SENDER_NAMES_CHARS];
 
 } SENDER_NAMES_VALUES;

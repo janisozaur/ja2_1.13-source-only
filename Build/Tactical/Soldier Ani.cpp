@@ -4,61 +4,61 @@
 #include <stdio.h>
 #include <string.h>
 #include "stdlib.h"
-#include "debug.h"
+#include "Debug.h"
 #include "MemMan.h"
 #include "Overhead Types.h"
 #include "Soldier Control.h" // I need this here - SANDRO
 #include "Animation Cache.h"
 #include "Animation Data.h"
 #include "Animation Control.h"
-#include "weapons.h"
-#include "soldier ani.h"
+#include "Weapons.h"
+#include "Soldier Ani.h"
 #include "Random.h"
-#include "video.h"
-#include "vobject_blitters.h"
+#include "Video.h"
+#include "VObject_blitters.h"
 #include "Sound Control.h"
-#include "isometric utils.h"
+#include "Isometric Utils.h"
 #include "Handle UI.h"
 #include "Event Pump.h"
-#include "opplist.h"
-#include "lighting.h"
-#include "ai.h"
-#include "renderworld.h"
-#include "interactive tiles.h"
-#include "points.h"
-#include "message.h"
-#include "world items.h"
-#include "physics.h"
-#include "soldier create.h"
-#include "dialogue control.h"
-#include "soldier functions.h"
-#include "rotting corpses.h"
+#include "Opplist.h"
+#include "Lighting.h"
+#include "AI.h"
+#include "RenderWorld.h"
+#include "Interactive Tiles.h"
+#include "Points.h"
+#include "Message.h"
+#include "World Items.h"
+#include "Physics.h"
+#include "Soldier Create.h"
+#include "Dialogue Control.h"
+#include "Soldier Functions.h"
+#include "Rotting Corpses.h"
 #include "merc entering.h"
-#include "soldier add.h"
-#include "soldier profile.h"
-#include "soldier functions.h"
-#include "interface.h"
+#include "Soldier Add.h"
+#include "Soldier Profile.h"
+#include "Soldier Functions.h"
+#include "Interface.h"
 #include "qarray.h"
-#include "soldier macros.h"
+#include "Soldier Macros.h"
 #include "Strategic Town Loyalty.h"
 #include "Squads.h"
-#include "worldman.h"
-#include "structure wrap.h"
-#include "pathai.h"
+#include "WorldMan.h"
+#include "Structure Wrap.h"
+#include "PathAI.h"
 #include "pits.h"
-#include "text.h"
-#include "npc.h"
-#include "meanwhile.h"
+#include "Text.h"
+#include "NPC.h"
+#include "Meanwhile.h"
 #include "Explosion Control.h"
 #include "fov.h"
-#include "campaign.h"
-#include "los.h"
+#include "Campaign.h"
+#include "LOS.h"
 #include "GameSettings.h"
 #include "Boxing.h"
-#include "drugs and alcohol.h"
+#include "Drugs And Alcohol.h"
 #include "Smell.h"
 #include "GameSettings.h"
-#include "interface dialogue.h"
+#include "Interface Dialogue.h"
 #include "Strategic Status.h"
 #include "Food.h"
 #include "CampaignStats.h"				// added by Flugente
@@ -72,7 +72,7 @@
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
-#include "connect.h"
+#include "Connect.h"
 #include "fresh_header.h"
 #define		NO_JUMP											0
 #define		MAX_ANIFRAMES_PER_FLASH			2
@@ -204,7 +204,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 				}
 			}
 		}
-		
+
 		// Check for special code
 		if ( sNewAniFrame < 399 )
 		{
@@ -377,9 +377,9 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					{
 						//only carry on if own werc
 						AddGameEvent( S_FIREWEAPON, 0, &SFireWeapon );
-				
+
 						//hayden
-						if(is_server || (is_client && pSoldier->ubID <20) ) 
+						if(is_server || (is_client && pSoldier->ubID <20) )
 							send_fireweapon( &SFireWeapon );
 					}
 
@@ -388,7 +388,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					//DIGICRAB: Burst UnCap
 					//Loop around in the animation if we still have burst rounds to fire
 					if (pSoldier->bDoBurst && !(pSoldier->IsValidSecondHandBurst())
-						&& ( pSoldier->bDoBurst <= ( (pSoldier->bDoAutofire)?(pSoldier->bDoAutofire):(GetShotsPerBurst( pObjHand ))	) 
+						&& ( pSoldier->bDoBurst <= ( (pSoldier->bDoAutofire)?(pSoldier->bDoAutofire):(GetShotsPerBurst( pObjHand ))	)
 						|| (( pSoldier->bWeaponMode == WM_ATTACHED_GL_BURST && pSoldier->bDoBurst <= Weapon[GetAttachedGrenadeLauncher(&pSoldier->inv[HANDPOS])].ubShotsPerBurst)) ))
 					{
 						if(pSoldier->usAnimState == STANDING_BURST || pSoldier->usAnimState == CROUCHED_BURST || pSoldier->usAnimState == PRONE_BURST || pSoldier->usAnimState == BURST_ALTERNATIVE_STAND && pSoldier->usAniCode == 33) //we are standing, crounching or prone, firing the fast shot
@@ -623,7 +623,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 				if ( pSoldier->usAnimState == START_COWER || pSoldier->usAnimState == START_COWER_CROUCHED || pSoldier->usAnimState == START_COWER_PRONE )
 				{
 					UnSetUIBusy( pSoldier->ubID );
-				} 
+				}
 
 				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// SANDRO - if pending interrupt flag was set for after-attack type of interupt, try to resolve it now
@@ -637,10 +637,10 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 						if (pSoldier->bTeam == gbPlayerNum)
 						{
 							//AddTopMessage( COMPUTER_INTERRUPT_MESSAGE, Message[STR_INTERRUPT] );
-							guiPendingOverrideEvent = LU_BEGINUILOCK;								
+							guiPendingOverrideEvent = LU_BEGINUILOCK;
 							HandleTacticalUI( );
 						}
-						return( TRUE );		
+						return( TRUE );
 					}
 				}
 				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -912,7 +912,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 									pSoldier->ChangeSoldierState( AIM_DUAL_STAND, 0 , FALSE );
 								else if ( pSoldier->usAnimState == BURST_ALTERNATIVE_STAND || pSoldier->usAnimState == LOW_BURST_ALTERNATIVE_STAND )
 									pSoldier->ChangeSoldierState( AIM_ALTERNATIVE_STAND, 0 , FALSE );
-								else 
+								else
 									pSoldier->ChangeSoldierState( AIM_RIFLE_STAND, 0 , FALSE );
 								break;
 
@@ -959,7 +959,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 
 				//CODE: BEGINHOPFENCE
 				// MOVE TWO FACGIN GRIDNOS
-				// Flugente: the old complicaed method relied on pSoldier->pathing.usPathingData to be filled correctly - which it often wasn't. 
+				// Flugente: the old complicaed method relied on pSoldier->pathing.usPathingData to be filled correctly - which it often wasn't.
 				// This is unneccessary, as we've already filled sTempNewGridNo with the correct data
 				// we could fill sForcastGridno when initiating the jump, but lets keep this as a hook
 				if ( pSoldier->sTempNewGridNo != NOWHERE )
@@ -1294,7 +1294,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 						else
 						{
 #ifdef JA2UB
-					//Ja25 No meanwhiles		
+					//Ja25 No meanwhiles
 					          	if ( fMartialArtist )
 #else
 							if ( fMartialArtist && !AreInMeanwhile( ) )
@@ -1374,15 +1374,15 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					if ( pSoldier->stats.bLife >= OKLIFE && bGoBackToAimAfterHit)
 					{
 						if ( bGoBackToAimAfterHit == GO_TO_AIM_AFTER_HIT )
-						{				
+						{
 							pSoldier->InternalSoldierReadyWeapon(pSoldier->ubDirection, FALSE, FALSE );
 						}
 						else if ( bGoBackToAimAfterHit == GO_TO_ALTERNATIVE_AIM_AFTER_HIT && (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_STAND) )
-						{						
+						{
 							pSoldier->InternalSoldierReadyWeapon(pSoldier->ubDirection, FALSE, TRUE );
 						}
 						else if ( bGoBackToAimAfterHit == GO_TO_HTH_BREATH_AFTER_HIT && (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_STAND))
-						{						
+						{
 							if ( Item[ pSoldier->inv[HANDPOS].usItem ].usItemClass & (IC_NONE | IC_PUNCH) )
 							{
 								if ((((NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ) >= ((gSkillTraitValues.fPermitExtraAnimationsOnlyToMA) ? 2 : 1 )) && gGameOptions.fNewTraitSystem ) ||
@@ -1410,7 +1410,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 							}
 						}
 						else if ( bGoBackToAimAfterHit == GO_TO_COWERING_AFTER_HIT )
-						{			
+						{
 							if (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_CROUCH)
 							{
 								if(is_networked)
@@ -1418,7 +1418,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 								else
 									pSoldier->EVENT_InitNewSoldierAnim( START_COWER_CROUCHED, 0 , FALSE );
 							}
-							else if (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_PRONE) 
+							else if (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_PRONE)
 							{
 								if(is_networked)
 									pSoldier->ChangeSoldierState( START_COWER_PRONE, 0 , FALSE );
@@ -1656,7 +1656,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 				// CODE: GIVE ITEM
 				SoldierGiveItemFromAnimation( pSoldier );
 			//	if (pSoldier->ubProfile != NO_PROFILE && pSoldier->ubProfile >= FIRST_NPC )
-				//new profiles by Jazz	
+				//new profiles by Jazz
 				if (pSoldier->ubProfile != NO_PROFILE && (gProfilesNPC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile ||
 					gProfilesRPC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile ||
 					gProfilesVehicle[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile))
@@ -1720,7 +1720,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 						pSoldier->uiTimeOfLastRandomAction = 0;
 
 						// Don't play these generally if this is the guy selected by player, as this one is "awaiting orders"
-						if (pSoldier->ubID != (UINT8)gusSelectedSoldier || Random( 10 ) == 0 ) 
+						if (pSoldier->ubID != (UINT8)gusSelectedSoldier || Random( 10 ) == 0 )
 						{
 							// Don't do any in water!
 							// Also don't play if we are in the middle of something
@@ -1813,7 +1813,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 												continue;
 											}
 										}
-										
+
 										// If it is lookaround animation, don't play it if we see at least one enemy
 										if ( pAnimDef->ubFlags & RANDOM_ANIM_LOOKAROUND )
 										{
@@ -1823,7 +1823,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 												continue;
 											}
 										}
-										
+
 										// If it is lookaround animation, don't play it if we see at least one enemy
 										if ( pAnimDef->ubFlags & RANDOM_ANIM_SHOWOFF )
 										{
@@ -1835,7 +1835,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 													continue;
 												}
 											}
-											else 
+											else
 											{
 												if ( Random( 10 ) < 7 )
 												{
@@ -1933,17 +1933,17 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 														if ( ( gTacticalStatus.uiFlags & INCOMBAT ) )
 														{
 															if ( pSoldier->aiData.bMorale < 95 ) // .. unless we are really confident about ourselves
-															{ 
+															{
 																continue;
 															}
-															else 
-															{ 
+															else
+															{
 																if ( Random( 2 ) == 1 ) // even if we are, still make them show seldomly
 																	continue;
 															}
 														}
 														if ( Random( 4 ) == 1 ) // make this rare as we need to lower the weapon -> make the move -> raise the weapon again... rather show off
-														{ 
+														{
 															continue;
 														}
 													}
@@ -2020,7 +2020,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 									{
 										pTSoldier->flags.bGoBackToAimAfterHit = GO_TO_COWERING_AFTER_HIT;
 									}
-									else 
+									else
 									{
 										pTSoldier->flags.bGoBackToAimAfterHit = NO_SPEC_STANCE_AFTER_HIT;
 									}
@@ -2286,7 +2286,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 				if ( gGameOptions.fImprovedInterruptSystem )
 				{
 					if ( ResolvePendingInterrupt( pSoldier, BEFORESHOT_INTERRUPT ) )
-					{	
+					{
 						if ( pSoldier->flags.fTurningToShoot )
 							pSoldier->flags.fTurningToShoot = FALSE;
 
@@ -2296,10 +2296,10 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 						if (pSoldier->bTeam == gbPlayerNum)
 						{
 							//AddTopMessage( COMPUTER_INTERRUPT_MESSAGE, Message[STR_INTERRUPT] );
-							guiPendingOverrideEvent = LU_BEGINUILOCK;								
+							guiPendingOverrideEvent = LU_BEGINUILOCK;
 							HandleTacticalUI( );
 						}
-						return( TRUE );				
+						return( TRUE );
 						break;
 					}
 				}
@@ -2364,7 +2364,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					}
 
 					if (pSoldier->usAnimState == DODGE_ONE && pSoldier->usPendingAnimation == NO_PENDING_ANIMATION )
-					{						
+					{
 						INT8 bGoBackToAimAfterHit = pSoldier->flags.bGoBackToAimAfterHit;
 						pSoldier->flags.bGoBackToAimAfterHit = NO_SPEC_STANCE_AFTER_HIT;
 
@@ -2372,15 +2372,15 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 						if ( pSoldier->stats.bLife >= OKLIFE && bGoBackToAimAfterHit )
 						{
 							if ( bGoBackToAimAfterHit == GO_TO_AIM_AFTER_HIT )
-							{		
+							{
 								pSoldier->InternalSoldierReadyWeapon(pSoldier->ubDirection, FALSE, FALSE );
 							}
 							else if ( bGoBackToAimAfterHit == GO_TO_ALTERNATIVE_AIM_AFTER_HIT && (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_STAND) )
-							{						
+							{
 								pSoldier->InternalSoldierReadyWeapon(pSoldier->ubDirection, FALSE, TRUE );
 							}
 							else if ( bGoBackToAimAfterHit == GO_TO_HTH_BREATH_AFTER_HIT && (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_STAND))
-							{						
+							{
 								if ( Item[ pSoldier->inv[HANDPOS].usItem ].usItemClass & (IC_NONE | IC_PUNCH) )
 								{
 									if ((((NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ) >= ((gSkillTraitValues.fPermitExtraAnimationsOnlyToMA) ? 2 : 1 )) && gGameOptions.fNewTraitSystem ) ||
@@ -2408,7 +2408,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 								}
 							}
 							else if ( bGoBackToAimAfterHit == GO_TO_COWERING_AFTER_HIT )
-							{			
+							{
 								if (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_CROUCH)
 								{
 									if(is_networked)
@@ -2416,7 +2416,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 									else
 										pSoldier->EVENT_InitNewSoldierAnim( START_COWER_CROUCHED, 0 , FALSE );
 								}
-								else if (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_PRONE) 
+								else if (gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_PRONE)
 								{
 									if(is_networked)
 										pSoldier->ChangeSoldierState( START_COWER_PRONE, 0 , FALSE );
@@ -2438,8 +2438,8 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					//	ReduceAttackBusyCount( pSoldier->ubSuppressorID, FALSE );
 					// }
 
-					if ( pSoldier->usPendingAnimation == NO_PENDING_ANIMATION && 
-						( pSoldier->flags.bTurningFromPronePosition != TURNING_FROM_PRONE_ENDING_UP_FROM_MOVE ) && 
+					if ( pSoldier->usPendingAnimation == NO_PENDING_ANIMATION &&
+						( pSoldier->flags.bTurningFromPronePosition != TURNING_FROM_PRONE_ENDING_UP_FROM_MOVE ) &&
 						( pSoldier->flags.bTurningFromPronePosition != TURNING_FROM_PRONE_ON ) )
 					{
 						if ( gTacticalStatus.ubAttackBusyCount == 0 )
@@ -2453,9 +2453,9 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					// Check to see if we have changed stance and need to update visibility
 					if ( gAnimControl[ pSoldier->usAnimState ].uiFlags & ANIM_STANCECHANGEANIM)
 					{
-						if ( pSoldier->usPendingAnimation == NO_PENDING_ANIMATION && 
-							gTacticalStatus.ubAttackBusyCount == 0 && 
-							pSoldier->flags.bTurningFromPronePosition != TURNING_FROM_PRONE_ENDING_UP_FROM_MOVE && 
+						if ( pSoldier->usPendingAnimation == NO_PENDING_ANIMATION &&
+							gTacticalStatus.ubAttackBusyCount == 0 &&
+							pSoldier->flags.bTurningFromPronePosition != TURNING_FROM_PRONE_ENDING_UP_FROM_MOVE &&
 							pSoldier->flags.bTurningFromPronePosition != TURNING_FROM_PRONE_ON )
 						{
 							HandleSight(pSoldier,SIGHT_LOOK | SIGHT_RADIO | SIGHT_INTERRUPT );
@@ -2482,9 +2482,9 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					// Have we finished opening doors?
 					// 0verhaul:  Added additional check:  Are we told to stop at this point, maybe due to being interrupted?
 					if ( !pSoldier->flags.fNoAPToFinishMove &&
-						(pSoldier->usAnimState == END_OPEN_DOOR || 
-						pSoldier->usAnimState == END_OPEN_DOOR_CROUCHED || 
-						pSoldier->usAnimState == CRIPPLE_CLOSE_DOOR || 
+						(pSoldier->usAnimState == END_OPEN_DOOR ||
+						pSoldier->usAnimState == END_OPEN_DOOR_CROUCHED ||
+						pSoldier->usAnimState == CRIPPLE_CLOSE_DOOR ||
 						pSoldier->usAnimState == CRIPPLE_END_OPEN_DOOR ) )
 					{
 						// Are we told to continue movement...?
@@ -2498,7 +2498,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 							pSoldier->EVENT_GetNewSoldierPath( pSoldier->pathing.sFinalDestination, pSoldier->usUIMovementMode );
 
 							if ( !( gAnimControl[ pSoldier->usAnimState ].uiFlags & ( ANIM_MOVING ) ) )
-							{								
+							{
 								if (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 								{
 									CancelAIAction( pSoldier, FORCE );
@@ -2628,7 +2628,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 			case BURST_ALTERNATIVE_STAND:
 			case LOW_SHOT_ALTERNATIVE_STAND:
 			case LOW_BURST_ALTERNATIVE_STAND:
-				pSoldier->EVENT_InitNewSoldierAnim( AIM_ALTERNATIVE_STAND, 0 , FALSE ); 
+				pSoldier->EVENT_InitNewSoldierAnim( AIM_ALTERNATIVE_STAND, 0 , FALSE );
 				return( TRUE );
 				break;
 			// hack to raise rifle after using idle animation without one in hand
@@ -2637,7 +2637,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 			case BIGBUY_FLEX:
 			case BIGBUY_STRECH:
 			case FEM_KICKSN:
-			case FEM_WIPE: 
+			case FEM_WIPE:
 				if ( pSoldier->inv[ HANDPOS ].exists() == true && Item[ pSoldier->inv[ HANDPOS ].usItem ].usItemClass == IC_GUN && Item[ pSoldier->inv[ HANDPOS ].usItem ].twohanded )
 				{
 					pSoldier->EVENT_InitNewSoldierAnim( RAISE_RIFLE, 0 , FALSE );
@@ -3015,7 +3015,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 					DebugAttackBusy( "@@@@@@@ Reducing attacker busy count for end of queen swipe" );
 					// ReduceAttackBusyCount( pSoldier->ubID, FALSE );
 				}
-				
+
 				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// SANDRO - if pending interrupt flag was set for after-attack type of interupt, try to resolve it now
 				if ( gGameOptions.fImprovedInterruptSystem )
@@ -3348,7 +3348,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 
 			case 792:
 
-				
+
 				break;
 			}
 			// Adjust frame control pos, and try again
@@ -3368,7 +3368,7 @@ BOOLEAN AdjustToNextAnimationFrame( SOLDIERTYPE *pSoldier )
 			return( TRUE );
 		}
 		else if ( sNewAniFrame > 1099 )
-		{				
+		{
 			switch( sNewAniFrame )
 			{
 
@@ -3472,7 +3472,7 @@ void SayBuddyWitnessedQuoteFromKill( SOLDIERTYPE *pKillerSoldier, INT32 sGridNo,
 	// run through list
 	for ( pTeamSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; cnt++,pTeamSoldier++ )
 	{
-		// Add guy if he's a candidate...		
+		// Add guy if he's a candidate...
 		if ( OK_INSECTOR_MERC( pTeamSoldier ) && !AM_AN_EPC( pTeamSoldier ) && !( pTeamSoldier->flags.uiStatusFlags & SOLDIER_GASSED ) && !(AM_A_ROBOT( pTeamSoldier )) && !pTeamSoldier->flags.fMercAsleep && !TileIsOutOfBounds(pTeamSoldier->sGridNo))
 		{
 			// Are we a buddy of killer?
@@ -3785,11 +3785,11 @@ BOOLEAN HandleSoldierDeath( SOLDIERTYPE *pSoldier , BOOLEAN *pfMadeCorpse )
 	{
 		// Haydent/send death info
 		if (is_networked)
-		{			
-			if(pSoldier->bTeam==0) 
+		{
+			if(pSoldier->bTeam==0)
 				send_death(pSoldier);
 			else if(pSoldier->bTeam <6 && ((gTacticalStatus.ubTopMessageType == PLAYER_TURN_MESSAGE) || (gTacticalStatus.ubTopMessageType == PLAYER_INTERRUPT_MESSAGE)))
-				send_death(pSoldier);						
+				send_death(pSoldier);
 		}
 
 		// anv: enemy taunts after kill
@@ -3859,9 +3859,9 @@ BOOLEAN HandleSoldierDeath( SOLDIERTYPE *pSoldier , BOOLEAN *pfMadeCorpse )
 		{
 			//////////////////////////////////////////////////////////////
 			// SANDRO - some changes here
-			UINT8   ubAttacker = pSoldier->ubAttackerID; 
+			UINT8   ubAttacker = pSoldier->ubAttackerID;
 			UINT8	ubAssister = pSoldier->ubPreviousAttackerID;
-			// If attacker is nobody, and we died, then set the last attacker(if exists) as our killer 
+			// If attacker is nobody, and we died, then set the last attacker(if exists) as our killer
 			if ( ubAttacker == NOBODY )
 			{
 				if ( ubAssister != NOBODY )
@@ -3889,7 +3889,7 @@ BOOLEAN HandleSoldierDeath( SOLDIERTYPE *pSoldier , BOOLEAN *pfMadeCorpse )
 				// anv: note that ubAttacker can be already different from pSoldier->ubAttackerID
 				// IF this guy has an attacker and he's a good guy, play sound
 				if ( pSoldier->ubAttackerID != NOBODY )
-				{								
+				{
 					if ( MercPtrs[ pSoldier->ubAttackerID ] != NULL && MercPtrs[ pSoldier->ubAttackerID ]->bTeam == gbPlayerNum && gTacticalStatus.ubAttackBusyCount > 0 )
 					{
 						gTacticalStatus.fKilledEnemyOnAttack	= TRUE;
@@ -3915,12 +3915,12 @@ BOOLEAN HandleSoldierDeath( SOLDIERTYPE *pSoldier , BOOLEAN *pfMadeCorpse )
 							else
 								MercPtrs[ ubAttacker ]->DoMercBattleSound( BATTLE_SOUND_LAUGH1 );
 						}
-					}					
+					}
 				}
-			
+
 				// Handle NPC Dead
-				HandleNPCTeamMemberDeath( pSoldier );				
-				
+				HandleNPCTeamMemberDeath( pSoldier );
+
 				// if a friendly with a profile, increment kills
 				// militia also now track kills...
 				if ( ubAttacker != NOBODY )
@@ -4000,7 +4000,7 @@ BOOLEAN HandleSoldierDeath( SOLDIERTYPE *pSoldier , BOOLEAN *pfMadeCorpse )
 					}
 
 				}
-				
+
 				if ( ubAssister != NOBODY && ubAssister != ubAttacker )
 				{
 					if ( MercPtrs[ ubAssister ]->bTeam == gbPlayerNum )
@@ -4262,7 +4262,7 @@ void CheckForAndHandleSoldierIncompacitated( SOLDIERTYPE *pSoldier )
 		if ( pSoldier->stats.bLife == 0	)
 		{
 #ifdef JA2UB
-//Ja25 No meanwhiles		
+//Ja25 No meanwhiles
 #else
 			if ( !AreInMeanwhile() )
 #endif
@@ -4291,7 +4291,7 @@ void CheckForAndHandleSoldierIncompacitated( SOLDIERTYPE *pSoldier )
 #else
 			// SANDRO - if Martial Artist took someone down, always fall back if possible (for the fun)
 			if ( pSoldier->ubAttackerID != NOBODY && gGameOptions.fNewTraitSystem )
-			{ 
+			{
 				if ( HAS_SKILL_TRAIT( MercPtrs[ pSoldier->ubAttackerID ], MARTIAL_ARTS_NT ) && (!MercPtrs[ pSoldier->ubAttackerID ]->usAttackingWeapon || Item[MercPtrs[ pSoldier->ubAttackerID ]->inv[HANDPOS].usItem].brassknuckles ) )
 				{
 					fAlwaysFallBack = TRUE;
@@ -4559,7 +4559,7 @@ BOOLEAN CheckForImproperFireGunEnd( SOLDIERTYPE *pSoldier )
 
 	// SANDRO: if we are holding up a very heavy gun, and can't do it anymore, lower it
 	if ( gGameExternalOptions.ubEnergyCostForWeaponWeight && pSoldier->bBreath < OKBREATH )
-	{		
+	{
 		// Check for breath collapse, though this should rarely happen
 		if ( pSoldier->CheckForBreathCollapse( ) )
 		{
@@ -4569,7 +4569,7 @@ BOOLEAN CheckForImproperFireGunEnd( SOLDIERTYPE *pSoldier )
 			return( TRUE );
 		}
 		// ok, if this gun is rather heavy, and cost us at least 3 energy points per turn, and we got very low on breath
-		else if ( (GetBPCostPer10APsForGunHolding( pSoldier ) * 10) >= (300 * gGameExternalOptions.ubEnergyCostForWeaponWeight / 100) ) 
+		else if ( (GetBPCostPer10APsForGunHolding( pSoldier ) * 10) >= (300 * gGameExternalOptions.ubEnergyCostForWeaponWeight / 100) )
 		{
 			// throw quote
 			if ( !(pSoldier->usQuoteSaidFlags & SOLDIER_QUOTE_SAID_LOW_BREATH ) )
@@ -4676,7 +4676,7 @@ BOOLEAN HandleUnjamAnimation( SOLDIERTYPE *pSoldier )
 		// Normal shoot rifle.... play
 		pSoldier->ChangeSoldierState( LOW_UNJAM_ALTERNATIVE_STAND, 0 , FALSE );
 		return( TRUE );
-		
+
 	}
 
 	return( FALSE );
@@ -4735,7 +4735,7 @@ BOOLEAN OKFallDirection( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT
 	UINT16								usAnimSurface;
 	UINT8					bOverTerrainType;
 
-	// WANNE - MP: MP crashed here, so I added the prevention	
+	// WANNE - MP: MP crashed here, so I added the prevention
 	if (TileIsOutOfBounds(sGridNo))
 		return ( FALSE );
 

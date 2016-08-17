@@ -13,29 +13,29 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
 
 #ifndef PRECOMPILEDHEADERS
 	#include "tiledef.h"
-	#include "sysutil.h"
-	#include "font.h"
+	#include "SysUtil.h"
+	#include "Font.h"
 	#include "Font Control.h"
-	#include "line.h"
-	#include "worlddat.h"
+	#include "Line.h"
+	#include "WorldDat.h"
 	#include "selectwin.h"
 	#include "popupmenu.h"
 	#include "EditorDefines.h"
-	#include "render dirty.h"
-	#include "debug.h"
+	#include "Render Dirty.h"
+	#include "Debug.h"
 	#include "mousesystem.h"
-	#include "cursors.h"
-	#include "overhead types.h"
+	#include "Cursors.h"
+	#include "Overhead Types.h"
 	#include "EditorMercs.h"
 	#include "Scheduling.h"
-	#include "english.h"
+	#include "English.h"
 	#include "Item Statistics.h"
 #endif
 

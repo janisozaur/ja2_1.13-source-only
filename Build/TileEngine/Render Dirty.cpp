@@ -1,22 +1,22 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
-	#include "winfont.h"
+	#include "WinFont.h"
 
 #else
 	#include "math.h"
 	#include <stdio.h>
 	#include <errno.h>
 
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "vsurface.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "VSurface.h"
 	#include "Render Dirty.h"
-	#include "sysutil.h"
-	#include "container.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
+	#include "SysUtil.h"
+	#include "Container.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
 	#include "Font Control.h"
 #endif
 
@@ -44,7 +44,7 @@ void SaveVideoOverlayArea( UINT32 uiSrcBuffer, UINT32 uiCount );
 
 // do zmiany
 //SGPRect		gDirtyClipRect = { 0, 0, 2560, 1600 };
-SGPRect		gDirtyClipRect = { 0, 0, 0, 0 }; 
+SGPRect		gDirtyClipRect = { 0, 0, 0, 0 };
 
 BOOLEAN		gfViewportDirty=FALSE;
 

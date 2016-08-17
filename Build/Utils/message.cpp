@@ -3,22 +3,22 @@
 	#include "Game Clock.h"
 #else
 	#include "sgp.h"
-	#include "font.h"
-	#include "types.h"
+	#include "Font.h"
+	#include "Types.h"
 	#include "Font Control.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "memory.h"
 	#include "mbstring.h"
 	#include "Timer Control.h"
-	#include "render dirty.h"
-	#include "renderworld.h"
+	#include "Render Dirty.h"
+	#include "RenderWorld.h"
 	#include "Mutex Manager.h"
-	#include "local.h"
-	#include "interface.h"
+	#include "Local.h"
+	#include "Interface.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "WordWrap.h"
 	#include "Sound Control.h"
-	#include "Soundman.h"
+	#include "SoundMan.h"
 	#include "BuildDefines.h"
 	#include "Dialogue Control.h"
 	#include <stdio.h>
@@ -70,7 +70,7 @@ BOOLEAN fOkToBeepNewMessage = TRUE;
 
 
 // HEADROCK HAM 3.6: Increased size of absolute MAXIMUM possible displayed messages to 36 (the most that can be seen
-// in a 1024x768 display. There's now an INI setting that allows displaying up to 36 in the tactical screen. 
+// in a 1024x768 display. There's now an INI setting that allows displaying up to 36 in the tactical screen.
 // Strategic screen not yet changed. Please note that there are also fail-safes that make sure that the actual
 // maximum isn't more that can be displayed given the resolution being used.
 //static ScrollStringStPtr	gpDisplayList[ MAX_LINE_COUNT ];
@@ -1204,7 +1204,7 @@ void EnableDisableScrollStringVideoOverlay( BOOLEAN fEnable )
 	{
 		ubLines = gGameExternalOptions.ubMaxMessagesTactical;
 	}
-	
+
 	for( bCounter = 0; bCounter < ubLines; bCounter++ )
 	{
 

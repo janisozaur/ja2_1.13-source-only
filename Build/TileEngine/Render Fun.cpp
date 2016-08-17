@@ -6,20 +6,20 @@
 	#include <errno.h>
 
 	#include "Render Fun.h"
-	#include "worlddef.h"
-	#include "input.h"
-	#include "sysutil.h"
-	#include "debug.h"
-	#include "worldman.h"
+	#include "WorldDef.h"
+	#include "Input.h"
+	#include "SysUtil.h"
+	#include "Debug.h"
+	#include "WorldMan.h"
 	#include "jascreens.h"
 	#include "Isometric Utils.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "fov.h"
 	#include "Fog Of War.h"
-	#include "environment.h"
-	#include "dialogue control.h"
+	#include "Environment.h"
+	#include "Dialogue Control.h"
 	#include "Random.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 #endif
 
 // Room Information
@@ -133,7 +133,7 @@ void SetGridNoRevealedFlag( INT32 sGridNo )
 	{
 		SetStructAframeFlags(	sGridNo, LEVELNODE_HIDDEN );
 		// Find gridno one east as well...
-		
+
 		if ( ( sGridNo + WORLD_COLS ) < MAX_MAP_POS )
 		{
 			SetStructAframeFlags(	sGridNo + WORLD_COLS, LEVELNODE_HIDDEN );
@@ -350,7 +350,7 @@ BOOLEAN AddSpecialTileRange( SGPRect *pSelectRegion	)
 	{
 		for ( cnt2 = pSelectRegion->iLeft; cnt2 <= pSelectRegion->iRight; cnt2++ )
 		{
-			AddObjectToHead( MAPROWCOLTOPOS( cnt1, cnt2 ), SPECIALTILE_MAPEXIT ); 
+			AddObjectToHead( MAPROWCOLTOPOS( cnt1, cnt2 ), SPECIALTILE_MAPEXIT );
 		}
 	}
 
@@ -366,7 +366,7 @@ BOOLEAN RemoveSpecialTileRange( SGPRect *pSelectRegion	)
 	{
 		for ( cnt2 = pSelectRegion->iLeft; cnt2 <= pSelectRegion->iRight; cnt2++ )
 		{
-			RemoveObject( MAPROWCOLTOPOS( cnt1, cnt2 ), SPECIALTILE_MAPEXIT ); 
+			RemoveObject( MAPROWCOLTOPOS( cnt1, cnt2 ), SPECIALTILE_MAPEXIT );
 		}
 	}
 

@@ -4,7 +4,7 @@
 #include "WorldDef.h"
 #include "Exit Grids.h"
 
-//Used for the ubType in the MODIFY_MAP struct	
+//Used for the ubType in the MODIFY_MAP struct
 enum
 {
 	SLM_NONE,
@@ -41,9 +41,9 @@ enum
 	// State of Openable structs
 	SLM_OPENABLE_STRUCT,
 
-	// Modify window graphic & structure 
+	// Modify window graphic & structure
 	SLM_WINDOW_HIT,
-#ifdef JA2UB	
+#ifdef JA2UB
 	SLM_REMOVE_EXIT_GRID,
 #endif
 	// sevenfm

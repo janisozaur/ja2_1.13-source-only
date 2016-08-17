@@ -1,7 +1,7 @@
 #ifndef ANIMATION_DATA_H_
 #define ANIMATION_DATA_H_
 
-#include "vobject.h"
+#include "VObject.h"
 
 #include "Soldier Control.h"
 #include "Overhead.h"
@@ -150,7 +150,7 @@ typedef enum
 	RGMHURTSTANDINGN,
 	RGMHURTSTANDINGR,
 	RGMHURTWALKINGN,
-	RGMHURTWALKINGR,	
+	RGMHURTWALKINGR,
 	RGMHURTTRANS,
 	RGMTHROWKNIFE,
 	RGMBREATHKNIFE,
@@ -239,7 +239,7 @@ typedef enum
 	BGMHURTSTANDINGN,
 	BGMHURTSTANDINGR,
 	BGMHURTWALKINGN,
-	BGMHURTWALKINGR,	
+	BGMHURTWALKINGR,
 	BGMHURTTRANS,
 	BGMTHROWKNIFE,
 	BGMBREATHKNIFE,
@@ -264,7 +264,7 @@ typedef enum
 	BGMPISTOLDRUNK,
 	BGMCROWBAR,
 	BGMJUMPOVER,
-	
+
 
 	RGFWALKING,
 	RGFSTANDING,
@@ -331,7 +331,7 @@ typedef enum
 	RGFHURTSTANDINGN,
 	RGFHURTSTANDINGR,
 	RGFHURTWALKINGN,
-	RGFHURTWALKINGR,	
+	RGFHURTWALKINGR,
 	RGFHURTTRANS,
 	RGFTHROWKNIFE,
 	RGFBREATHKNIFE,
@@ -511,39 +511,39 @@ typedef enum
 	BODYEXPLODE,
 
 	//<SB> crouch throwing
-	RGMCRTHROW, 
-	BGMCRTHROW, 
-	RGFCRTHROW, 
+	RGMCRTHROW,
+	BGMCRTHROW,
+	RGFCRTHROW,
 //</SB>
 
 //***ddd
 BGMWITHSTONE,
 //for crouched shoot rocket
-	RGMCRROCKET, 
-	BGMCRROCKET, 
-	RGFCRROCKET, 
+	RGMCRROCKET,
+	BGMCRROCKET,
+	RGFCRROCKET,
 //swatting with knife
-	BGMSWKNIFE, 
+	BGMSWKNIFE,
 	RGFSWKNIFE,
-	RGMSWKNIFE, 
+	RGMSWKNIFE,
 //Launch grenade (?)
-	BGMSTHRG, 
+	BGMSTHRG,
 	RGFSTHRG,
-	RGMSTHRG, 
+	RGMSTHRG,
 //Lob grenade
-	BGMSLOBG, 
+	BGMSLOBG,
 	RGFSLOBG,
 	RGMSLOBG,
 //Roll while prone
 	RGMROLL_PR,
 	BGMROLL_PR,
-	RGFROLL_PR,	
-	
+	RGFROLL_PR,
+
 	RGMWALLJUMP,
 	BGMWALLJUMP,
 	RGFWALLJUMP,
-	
-	//jump windows 
+
+	//jump windows
 	RGMJUMPWINDOWS,
 	BGMJUMPWINDOWS,
 	RGFJUMPWINDOWS,
@@ -562,12 +562,12 @@ BGMWITHSTONE,
 	RGMSIDESTEP_P_RDY,
 	RGMSIDESTEP_R_RDY,
 	RGMSIDESTEP_D_RDY,
-	
+
 	BGMSIDESTEP_P_RDY,
 	BGMSIDESTEP_R_RDY,
 	BGMSIDESTEP_R_RDY2,
 	BGMSIDESTEP_D_RDY,
-	
+
 	RGFSIDESTEP_P_RDY,
 	RGFSIDESTEP_R_RDY,
 	RGFSIDESTEP_D_RDY,
@@ -609,7 +609,7 @@ BGMWITHSTONE,
 	RGM_PFSHOT_AIM,
 	BGM_PFSHOT_AIM,
 	RGF_PFSHOT_AIM,
-		
+
 	NUMANIMATIONSURFACETYPES
 
 } AnimationSurfaceTypes;
@@ -632,7 +632,7 @@ typedef struct
 {
 	UINT16								ubName;
 	CHAR8										Filename[ 50 ];
-	CHAR8										bStructDataType; 
+	CHAR8										bStructDataType;
 	UINT8										ubFlags;
 	UINT32									uiNumDirections;
 	UINT32									uiNumFramesPerDir;
@@ -650,8 +650,8 @@ typedef struct
 	STRUCTURE_FILE_REF *		pStructureFileRef;
 
 } AnimationStructureType;
- 
-	
+
+
 extern AnimationSurfaceType		gAnimSurfaceDatabase[ NUMANIMATIONSURFACETYPES ];
 extern AnimationStructureType	gAnimStructureDatabase[ TOTALBODYTYPES ][ NUM_STRUCT_IDS ];
 

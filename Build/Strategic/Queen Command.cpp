@@ -7,27 +7,27 @@
 	#include "Queen Command.h"
 	#include "Strategic Event Handler.h"
 	#include "Overhead Types.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Soldier Init List.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Random.h"
 	#include "Strategic Movement.h"
 	#include "Overhead.h"
 	#include "Strategic Pathing.h"
-	#include "strategic.h"
-	#include "message.h"
+	#include "Strategic.h"
+	#include "Message.h"
 	#include "Map Edgepoints.h"
 	#include "PreBattle Interface.h"
-	#include "strategic status.h"
-	#include "squads.h"
-	#include "assignments.h"
-	#include "items.h"
-	#include "tactical save.h"
+	#include "Strategic Status.h"
+	#include "Squads.h"
+	#include "Assignments.h"
+	#include "Items.h"
+	#include "Tactical Save.h"
 	#include "Soldier Ani.h"
 	#include "Strategic AI.h"
 	#include "GameSettings.h"
 	#include "MessageBoxScreen.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Soldier Profile.h"
 	#include "Quests.h"
@@ -36,12 +36,12 @@
 	#include "Game Event Hook.h"
 	#include "Animation Data.h"
 	#include "Game Clock.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Town Militia.h"
 	#include "Dialogue Control.h"
 	#include "Campaign Init.h"
-	#include "meanwhile.h"
-	#include "Soldier macros.h"
+	#include "Meanwhile.h"
+	#include "Soldier Macros.h"
 	#include "Morale.h"
 	#include "CampaignStats.h"		// added by Flugente
 	#include "ASD.h"				// added by Flugente
@@ -51,7 +51,7 @@
 	extern BOOLEAN gfClearCreatureQuest;
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include "Reinforcement.h"
 #include "MilitiaSquads.h"
 
@@ -60,8 +60,8 @@
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
 #include "Arms Dealer Init.h"
 #endif
 
@@ -128,7 +128,7 @@ void ValidateEnemiesHaveWeapons()
 				++iNumInvalid;
 			}
 			// WDS DEBUG
-			// Uncommenting the following two lines will cause all the PLACED soldiers to instantly drop dead, 
+			// Uncommenting the following two lines will cause all the PLACED soldiers to instantly drop dead,
 			// which is useful for debugging some things
 			//pSoldier->bBleeding = 10;
 			//pSoldier->stats.bLife = 1;
@@ -260,7 +260,7 @@ UINT8 NumNonPlayerTeamMembersInSector( INT16 sSectorX, INT16 sSectorY, UINT8 ubT
 	if ( ubTeam == ENEMY_TEAM )
 	{
 		ubNumTroops = (UINT8)(pSector->ubNumAdmins + pSector->ubNumTroops + pSector->ubNumElites + pSector->ubNumTanks);
-	
+
 		if ( is_networked )
 			ubNumTroops += numenemyLAN((UINT8)sSectorX,(UINT8)sSectorY ); //hayden
 	}
@@ -307,7 +307,7 @@ UINT16 NumEnemyArmedVehiclesInSector( INT16 sSectorX, INT16 sSectorY, UINT8 usTe
 
 	if ( usTeam == ENEMY_TEAM )
 		ubNum = (UINT16)(pSector->ubNumTanks + pSector->ubNumJeeps);
-	
+
 	pGroup = gpGroupList;
 	while ( pGroup )
 	{
@@ -595,7 +595,7 @@ BOOLEAN PrepareEnemyForSectorBattle()
 		// Reinforcement groups?  Bring it on!
 		// only if not Omerta on a non-insane difficulty level
 		if( gGameExternalOptions.gfAllowReinforcements &&
-			!( ( GetTownIdForSector( gWorldSectorX, gWorldSectorY ) == OMERTA) && (gGameOptions.ubDifficultyLevel != DIF_LEVEL_INSANE) ) )				
+			!( ( GetTownIdForSector( gWorldSectorX, gWorldSectorY ) == OMERTA) && (gGameOptions.ubDifficultyLevel != DIF_LEVEL_INSANE) ) )
 		{
 			UINT16 pusMoveDir[4][3];
 			UINT8 ubDirNumber = 0;
@@ -659,11 +659,11 @@ BOOLEAN PrepareEnemyForSectorBattle()
 	}
 
 	AssertGE (mapMaximumNumberOfEnemies, 0);
-	
+
 	if (mapMaximumNumberOfEnemies > gGameExternalOptions.ubGameMaximumNumberOfEnemies)
 		mapMaximumNumberOfEnemies = gGameExternalOptions.ubGameMaximumNumberOfEnemies;
-	//is there more enemies in the sector then we can actually place on map? 
-	//are there more enemies in the sector then we can actually place on map? 
+	//is there more enemies in the sector then we can actually place on map?
+	//are there more enemies in the sector then we can actually place on map?
 	gfPendingNonPlayerTeam[ENEMY_TEAM] = (NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, ENEMY_TEAM ) > mapMaximumNumberOfEnemies);
 
 	pSector = &SectorInfo[ SECTOR( gWorldSectorX, gWorldSectorY ) ];
@@ -946,7 +946,7 @@ BOOLEAN PrepareEnemyForSectorBattle()
 					// if this guy already has an ID, reduce the number of people who still need one
 					--num;
 					--sNumSlots;
-					
+
 					continue;
 				}
 
@@ -1088,7 +1088,7 @@ void ProcessQueenCmdImplicationsOfDeath( SOLDIERTYPE *pSoldier )
 
 	switch( pSoldier->ubProfile )
 	{
-#ifdef JA2UB	
+#ifdef JA2UB
 		case 75://MORRIS:
 
 			if( !pSoldier->bSectorZ )
@@ -1118,7 +1118,7 @@ void ProcessQueenCmdImplicationsOfDeath( SOLDIERTYPE *pSoldier )
 				}
 			}
 			break;
-#endif			
+#endif
 		case MIKE:
 		case IGGY:
 			if( pSoldier->ubProfile == IGGY && !gubFact[ FACT_IGGY_AVAILABLE_TO_ARMY ] )
@@ -1294,7 +1294,7 @@ void ProcessQueenCmdImplicationsOfDeath( SOLDIERTYPE *pSoldier )
 							if (!is_client)
 							{
 								DoScreenIndependantMessageBox( L"Group troop counters are bad.  What were the last 2-3 things to die, and how?  Save game and send to KM with info!!!", MSG_BOX_FLAG_OK, NULL );
-						
+
 							}
 						}
 					}
@@ -1460,7 +1460,7 @@ void ProcessQueenCmdImplicationsOfDeath( SOLDIERTYPE *pSoldier )
 						{
 							pSector->bBloodCats--;
 						}
-#ifdef JA2UB						
+#ifdef JA2UB
 							//JA25 UB
 							//handle anything important when bloodcats die
 							HandleBloodCatDeaths( pSector );
@@ -1635,7 +1635,7 @@ void AddPossiblePendingEnemiesToBattle()
 			return;
 		}
 	}
-	
+
 	if ( (!PlayerMercsInSector( (UINT8)gWorldSectorX, (UINT8)gWorldSectorY, 0 ) && !NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, MILITIA_TEAM ))
 		|| !NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, ENEMY_TEAM ) )
 		return;
@@ -1840,7 +1840,7 @@ void AddPossiblePendingEnemiesToBattle()
 		pGroup = pGroupInSectorList[ ubGroupIndex];
 
 		// Flugente fix: check for underflow...
-		UINT8 currentgroupsize = pGroup->pEnemyGroup->ubElitesInBattle + pGroup->pEnemyGroup->ubTroopsInBattle + pGroup->pEnemyGroup->ubAdminsInBattle 
+		UINT8 currentgroupsize = pGroup->pEnemyGroup->ubElitesInBattle + pGroup->pEnemyGroup->ubTroopsInBattle + pGroup->pEnemyGroup->ubAdminsInBattle
 			+ pGroup->pEnemyGroup->ubTanksInBattle + pGroup->pEnemyGroup->ubJeepsInBattle;
 		if ( currentgroupsize > pGroup->ubGroupSize )
 			ubNumAvailable = 0;
@@ -1867,7 +1867,7 @@ void AddPossiblePendingEnemiesToBattle()
 			else
 			{
 				// WANNE: Hack: If no valid insertion is found, get random insertion instead of Assert() error
-				UINT32 rndInsertionCode = GetRndNum(3);				
+				UINT32 rndInsertionCode = GetRndNum(3);
 				ubInsertionCode = rndInsertionCode;
 
 				//Assert(0);
@@ -1886,9 +1886,9 @@ void AddPossiblePendingEnemiesToBattle()
 			else
 			{
 				// WANNE: Hack: If no valid insertion is found, get random insertion instead of Assert() error
-				UINT32 rndInsertionCode = GetRndNum(3);				
+				UINT32 rndInsertionCode = GetRndNum(3);
 				ubInsertionCode = rndInsertionCode;
-				
+
 				//Assert(0);
 			}
 		}
@@ -1897,7 +1897,7 @@ void AddPossiblePendingEnemiesToBattle()
 			// The group has no movement orders.  Where did it come from?
 			Assert(0);
 		}
-		
+
 		if ( pGroup->pEnemyGroup->ubElitesInBattle < pGroup->pEnemyGroup->ubNumElites )
 		{ //Add an elite troop
 			pGroup->pEnemyGroup->ubElitesInBattle++;
@@ -2013,7 +2013,7 @@ void AddEnemiesToBattle( GROUP *pGroup, UINT8 ubStrategicInsertionCode, UINT8 ub
 	UINT8 ubCurrSlot;
 	UINT8 ubTotalSoldiers;
 	UINT8 bDesiredDirection=0;
-	
+
 	switch( ubStrategicInsertionCode )
 	{
 		case INSERTION_CODE_NORTH:	bDesiredDirection = SOUTHEAST;										break;
@@ -2064,7 +2064,7 @@ void AddEnemiesToBattle( GROUP *pGroup, UINT8 ubStrategicInsertionCode, UINT8 ub
 	}
 
 	ubTotalSoldiers = ubNumAdmins + ubNumTroops + ubNumElites + ubNumTanks + ubNumJeeps;
-	
+
 #ifdef JA2UB
 	if( gsGridNoForMapEdgePointInfo != -1 )
 	{
@@ -2093,8 +2093,8 @@ void AddEnemiesToBattle( GROUP *pGroup, UINT8 ubStrategicInsertionCode, UINT8 ub
 	}
 #else
 	ChooseMapEdgepoints( &MapEdgepointInfo, ubStrategicInsertionCode, ubTotalSoldiers );
-#endif	
-	
+#endif
+
 	ubCurrSlot = 0;
 	while( ubTotalSoldiers )
 	{
@@ -2216,7 +2216,7 @@ void AddEnemiesToBattle( GROUP *pGroup, UINT8 ubStrategicInsertionCode, UINT8 ub
 
 		// HEADROCK HAM 3.2: enemy reinforcements arrive with 0 APs.
 		if (gGameExternalOptions.ubReinforcementsFirstTurnFreeze == 1 || gGameExternalOptions.ubReinforcementsFirstTurnFreeze == 2)
-		{			
+		{
 			pSoldier->bActionPoints = 0;
 
 			// Flugente: due to a fix, also note here that the reinforcements get no APs.
@@ -2229,7 +2229,7 @@ void AddEnemiesToBattle( GROUP *pGroup, UINT8 ubStrategicInsertionCode, UINT8 ub
 				gCurrentIncident.usIncidentFlags |= INCIDENT_REINFORCEMENTS_ENEMY;
 		}
 	}
-	
+
 #ifdef JA2UB
 	gsGridNoForMapEdgePointInfo = -1;
 #endif
@@ -2302,7 +2302,7 @@ void AddMilitiaToBattle( GROUP *pGroup, UINT8 ubStrategicInsertionCode, UINT8 ub
 	}
 #else
 	ChooseMapEdgepoints( &MapEdgepointInfo, ubStrategicInsertionCode, (ubTotalSoldiers) );
-#endif	
+#endif
 
 	ubCurrSlot = 0;
 	while ( ubTotalSoldiers )
@@ -2541,7 +2541,7 @@ void EndCaptureSequence( )
 #ifdef JA2UB
 // no UB
 #else
-     
+
 	// Set flag...
 	if( !( gStrategicStatus.uiFlags & STRATEGIC_PLAYER_CAPTURED_FOR_RESCUE ) || !(gStrategicStatus.uiFlags & STRATEGIC_PLAYER_CAPTURED_FOR_ESCAPE) )
 	{
@@ -2744,7 +2744,7 @@ void EnemyCapturesPlayerSoldier( SOLDIERTYPE *pSoldier )
 	{
 		pSoldier->stats.bLife += (INT8)(10 - Random( 21 ) );
 	}
-		
+
 	// SANDRO - make the lost life insta-healable
 	pSoldier->iHealableInjury = ((pSoldier->stats.bLifeMax - pSoldier->stats.bLife) * 100);
 
@@ -2929,7 +2929,7 @@ BOOLEAN CheckPendingNonPlayerTeam( UINT8 usTeam )
 
 	if ( usTeam == ENEMY_TEAM )
 	{
-		if ( (pSector->ubNumElites + pSector->ubNumTroops + pSector->ubNumAdmins + pSector->ubNumTanks + pSector->ubNumJeeps) > 
+		if ( (pSector->ubNumElites + pSector->ubNumTroops + pSector->ubNumAdmins + pSector->ubNumTanks + pSector->ubNumJeeps) >
 			 (pSector->ubElitesInBattle + pSector->ubTroopsInBattle + pSector->ubAdminsInBattle + pSector->ubTanksInBattle + pSector->ubJeepsInBattle) )
 			return TRUE;
 	}
@@ -2937,13 +2937,13 @@ BOOLEAN CheckPendingNonPlayerTeam( UINT8 usTeam )
 	for (GROUP *pGroup = gpGroupList; pGroup; pGroup = pGroup->next)
 	{
 		if ( pGroup->usGroupTeam == usTeam
-			&& !pGroup->fVehicle 
-			&& pGroup->ubSectorX == gWorldSectorX 
+			&& !pGroup->fVehicle
+			&& pGroup->ubSectorX == gWorldSectorX
 			&& pGroup->ubSectorY == gWorldSectorY )
 		{
 			if ( usTeam == ENEMY_TEAM )
 			{
-				if ( pGroup->ubGroupSize > pGroup->pEnemyGroup->ubElitesInBattle + pGroup->pEnemyGroup->ubTroopsInBattle + pGroup->pEnemyGroup->ubAdminsInBattle 
+				if ( pGroup->ubGroupSize > pGroup->pEnemyGroup->ubElitesInBattle + pGroup->pEnemyGroup->ubTroopsInBattle + pGroup->pEnemyGroup->ubAdminsInBattle
 					 + pGroup->pEnemyGroup->ubTanksInBattle + pGroup->pEnemyGroup->ubJeepsInBattle )
 					return TRUE;
 			}

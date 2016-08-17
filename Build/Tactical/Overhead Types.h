@@ -13,7 +13,7 @@
 #define REFINE_AIM_MID4				7
 #define REFINE_AIM_5					8
 #define REFINE_AIM_BURST			-1	// SANDRO - I've changed this from 10 to -1, so when the code asks about how much we aim, it does not return this high value when we don't aim at all
-										// hopefully, it will not cause any troubles anywhere .. it shouldn't 
+										// hopefully, it will not cause any troubles anywhere .. it shouldn't
 
 #define AIM_SHOT_RANDOM				0
 #define AIM_SHOT_HEAD					1
@@ -64,12 +64,12 @@
 #define			OUR_MERCS_AUTO_MOVE									0x002000000
 #define			SHOW_ALL_ROOFS											0x004000000
 #define			NEWLY_ENTERED_SECTOR								0x008000000
-#define			RED_ITEM_GLOW_ON										0x010000000				
+#define			RED_ITEM_GLOW_ON										0x010000000
 #define			IGNORE_ENGAGED_IN_CONV_UI_UNLOCK		0x020000000
 #define			IGNORE_ALL_OBSTACLES								0x040000000
 #define			IN_DEIDRANNA_ENDGAME								0x080000000
 #define			DONE_DEIDRANNA_ENDGAME							0x100000000
-	
+
 #define			OKBREATH						10
 #define			OKLIFE							15
 #define			CONSCIOUSNESS				10
@@ -78,7 +78,7 @@
 #define	 NORMAL_VIEW_RANGE					13
 #define			MIN_RANGE_FOR_BLOWNAWAY		40
 
-// MODIFIERS FOR AP COST FOR MOVEMENT 
+// MODIFIERS FOR AP COST FOR MOVEMENT
 #define RUNDIVISOR				1.8
 #define WALKCOST					-1
 #define SWATCOST					0
@@ -219,7 +219,7 @@ enum
 //#define SIDE			(INT8)( SIDE_RATIO * STRAIGHT_RANGE )
 //#define ANGLE			(INT8)( ANGLE_RATIO * STRAIGHT_RANGE )
 //#define STRAIGHT		(INT8)( STRAIGHT_RATIO * STRAIGHT_RANGE )
- 
+
 
 // opplist value constants
 #define HEARD_3_TURNS_AGO		-4
@@ -240,7 +240,7 @@ enum
 #define UNDER_FIRE_LAST_TURN		1
 
 
-#define		MAX_DISTANCE_FOR_PROXIMITY_SIGHT		15		
+#define		MAX_DISTANCE_FOR_PROXIMITY_SIGHT		15
 
 
 
@@ -399,7 +399,7 @@ enum
 	UNNAMED_CIV_GROUP_57,
 	UNNAMED_CIV_GROUP_58,
 	UNNAMED_CIV_GROUP_59,
-	UNNAMED_CIV_GROUP_60,	
+	UNNAMED_CIV_GROUP_60,
 	UNNAMED_CIV_GROUP_61,
 	UNNAMED_CIV_GROUP_62,
 	UNNAMED_CIV_GROUP_63,
@@ -480,7 +480,7 @@ enum
 	UNNAMED_CIV_GROUP_138,
 	UNNAMED_CIV_GROUP_139,
 	UNNAMED_CIV_GROUP_140,
-	
+
 	UNNAMED_CIV_GROUP_141,
 	UNNAMED_CIV_GROUP_142,
 	UNNAMED_CIV_GROUP_143,
@@ -511,7 +511,7 @@ enum
 	UNNAMED_CIV_GROUP_168,
 	UNNAMED_CIV_GROUP_169,
 	UNNAMED_CIV_GROUP_170,
-	
+
 	UNNAMED_CIV_GROUP_171,
 	UNNAMED_CIV_GROUP_172,
 	UNNAMED_CIV_GROUP_173,
@@ -542,7 +542,7 @@ enum
 	UNNAMED_CIV_GROUP_198,
 	UNNAMED_CIV_GROUP_199,
 	UNNAMED_CIV_GROUP_200,
-	
+
 	UNNAMED_CIV_GROUP_201,
 	UNNAMED_CIV_GROUP_202,
 	UNNAMED_CIV_GROUP_203,
@@ -573,7 +573,7 @@ enum
 	UNNAMED_CIV_GROUP_228,
 	UNNAMED_CIV_GROUP_229,
 	UNNAMED_CIV_GROUP_230,
-	
+
 	UNNAMED_CIV_GROUP_231,
 	UNNAMED_CIV_GROUP_232,
 	UNNAMED_CIV_GROUP_233,
@@ -594,7 +594,7 @@ enum
 	UNNAMED_CIV_GROUP_248,
 	UNNAMED_CIV_GROUP_249,
 	UNNAMED_CIV_GROUP_250,
-	
+
 	UNNAMED_CIV_GROUP_251,
 	UNNAMED_CIV_GROUP_252,
 	UNNAMED_CIV_GROUP_253,
@@ -621,7 +621,7 @@ enum BoxingStates
 } ;
 
 //NOTE:	The editor uses these enumerations, so please update the text as well if you modify or
-//			add new groups.	Try to abbreviate the team name as much as possible.	The text is in 
+//			add new groups.	Try to abbreviate the team name as much as possible.	The text is in
 //			EditorMercs.c
 #ifdef JA2EDITOR
 	extern CHAR16 gszCivGroupNames[ NUM_CIV_GROUPS ][ 128 ];
@@ -630,7 +630,7 @@ enum BoxingStates
 //-----------------------------------------------
 
 // PALETTE SUBSITUTION TYPES
-typedef struct 
+typedef struct
 {
 	UINT8		ubStart;
 	UINT8		ubEnd;
@@ -639,7 +639,7 @@ typedef struct
 
 typedef CHAR8 PaletteRepID[ 30 ];
 
-typedef struct 
+typedef struct
 {
 	UINT8					ubType;
 	PaletteRepID	ID;
@@ -653,7 +653,7 @@ typedef struct
 // MACROS
 // This will set an animation ID
 #define			SET_PALETTEREP_ID( a, b )				( strcpy( a, b ) )
-																						// strcmp returns 0 if true!		
+																						// strcmp returns 0 if true!
 #define	 COMPARE_PALETTEREP_ID( a, b )		( strcmp( a, b ) ? FALSE : TRUE )
 
 #endif

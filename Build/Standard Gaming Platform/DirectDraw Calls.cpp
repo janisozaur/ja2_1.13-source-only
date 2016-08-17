@@ -7,8 +7,8 @@
 	#include "DirectDraw Calls.h"
 
 	#include <ddraw.h>
-	#include "debug.h"
-	#include "vobject_blitters.h"
+	#include "Debug.h"
+	#include "VObject_blitters.h"
 #endif
 
 // DirectDrawSurface2 Calls

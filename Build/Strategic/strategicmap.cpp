@@ -1,92 +1,92 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 #include "Strategic All.h"
 #include "Loading Screen.h"
 #include "Enemy Soldier Save.h"
-#include "points.h"
+#include "Points.h"
 #else
-#include "strategicmap.h"
-#include "strategic.h"
+#include "StrategicMap.h"
+#include "Strategic.h"
 #include "Strategic Mines.h"
-#include "types.h"
+#include "Types.h"
 #include "memory.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <math.h>
 #include <time.h>
 #include "jascreens.h"
-#include "worlddef.h"
+#include "WorldDef.h"
 #include "Soldier Control.h"
-#include "overhead.h"
-#include "interface panels.h"
-#include "isometric utils.h"
+#include "Overhead.h"
+#include "Interface Panels.h"
+#include "Isometric Utils.h"
 #include "Ambient Control.h"
-#include "worlddef.h"
-#include "worlddat.h"
-#include "text.h"
-#include "Soldier add.h"
-#include "soldier macros.h"
+#include "WorldDef.h"
+#include "WorldDat.h"
+#include "Text.h"
+#include "Soldier Add.h"
+#include "Soldier Macros.h"
 #include "Strategic Pathing.h"
-#include "soldier create.h"
-#include "handle UI.h"
-#include "faces.h"
-#include "renderworld.h"
-#include "gamescreen.h"
-#include "game clock.h"
+#include "Soldier Create.h"
+#include "Handle UI.h"
+#include "Faces.h"
+#include "RenderWorld.h"
+#include "GameScreen.h"
+#include "Game Clock.h"
 #include "Soldier Init List.h"
-#include "strategic turns.h"
+#include "Strategic Turns.h"
 #include "merc entering.h"
 #include "Map Information.h"
 #include "Assignments.h"
-#include "message.h"
+#include "Message.h"
 #include "Font Control.h"
-#include "environment.h"
+#include "Environment.h"
 #include "Game Events.h"
-#include "quests.h"
+#include "Quests.h"
 #include "FileMan.h"
-#include "animated progressbar.h"
-#include "music control.h"
-#include "fade screen.h"
+#include "Animated ProgressBar.h"
+#include "Music Control.h"
+#include "Fade Screen.h"
 #include "Strategic Movement.h"
 #include "Campaign Types.h"
-#include "sys globals.h"
+#include "Sys Globals.h"
 #include "Exit Grids.h"
 #include "Tactical Save.h"
-#include "pathai.h"
-#include "animation control.h"
-#include "squads.h"
-#include "worldman.h"
+#include "PathAI.h"
+#include "Animation Control.h"
+#include "Squads.h"
+#include "WorldMan.h"
 #include "Overhead.h"
 #include "Strategic Town Loyalty.h"
 #include "Queen Command.h"
-#include "cursor control.h"
+#include "Cursor Control.h"
 #include "PreBattle Interface.h"
 #include "Shade Table Util.h"
 #include "Scheduling.h"
-#include "gameloop.h"
+#include "GameLoop.h"
 #include "Random.h"
-#include "ai.h"
-#include "opplist.h"
-#include "keys.h"
+#include "AI.h"
+#include "Opplist.h"
+#include "Keys.h"
 #include "Tactical Placement GUI.h"
 #include "Map Screen Helicopter.h"
-#include "map edgepoints.h"
+#include "Map Edgepoints.h"
 #include "Player Command.h"
 #include "Event Pump.h"
-#include "meanwhile.h"
-#include "air raid.h"
+#include "Meanwhile.h"
+#include "Air Raid.h"
 #include "Strategic Mines.h"
 #include "Creature Spreading.h"
 #include "SaveLoadMap.h"
 #include "Militia Control.h"
-#include "gamesettings.h"
-#include "dialogue control.h"
+#include "GameSettings.h"
+#include "Dialogue Control.h"
 #include "Town Militia.h"
-#include "sysutil.h"
+#include "SysUtil.h"
 #include "Sound Control.h"
-#include "points.h"
-#include "render dirty.h"
+#include "Points.h"
+#include "Render Dirty.h"
 #include "Debug Control.h"
 #include "expat.h"
 #include "Loading Screen.h"
@@ -95,14 +95,14 @@
 #include "NPC.h"
 #include "Strategic Event Handler.h"
 #include "MessageBoxScreen.h"
-#include "interface dialogue.h"
+#include "Interface Dialogue.h"
 #include "Map Screen Interface.h"
-#include "history.h"
+#include "History.h"
 #include "Bullets.h"
-#include "physics.h"
+#include "Physics.h"
 #include "Explosion Control.h"
 #include "Auto Resolve.h"
-#include "cursors.h"
+#include "Cursors.h"
 #include "GameVersion.h"
 #endif
 
@@ -113,7 +113,7 @@
 
 #ifdef JA2UB
 #include "SaveLoadGame.h"
-#include "email.h"
+#include "Email.h"
 #include "Ja25 Strategic Ai.h"
 #include "Merc Hiring.h"
 #include "Ja25_Tactical.h"
@@ -126,7 +126,7 @@
 #include "Luaglobal.h"
 #endif
 
-#include "connect.h" //hayden added alot ""'s to get around client spawing random/different placed AI
+#include "Connect.h" //hayden added alot ""'s to get around client spawing random/different placed AI
 #include "SaveLoadGame.h"
 #include "Strategic Mines.h"
 #include "Strategic Mines LUA.h"
@@ -334,9 +334,9 @@ STR8 pHortStrings[] = {
 CHAR16 gzSectorNames[256][4][MAX_SECTOR_NAME_LENGTH];
 
 // moved to lua
-//CHAR16 gzSectorUndergroundNames1[256][4][MAX_SECTOR_NAME_LENGTH]; 
-//CHAR16 gzSectorUndergroundNames2[256][4][MAX_SECTOR_NAME_LENGTH]; 
-//CHAR16 gzSectorUndergroundNames3[256][4][MAX_SECTOR_NAME_LENGTH]; 
+//CHAR16 gzSectorUndergroundNames1[256][4][MAX_SECTOR_NAME_LENGTH];
+//CHAR16 gzSectorUndergroundNames2[256][4][MAX_SECTOR_NAME_LENGTH];
+//CHAR16 gzSectorUndergroundNames3[256][4][MAX_SECTOR_NAME_LENGTH];
 
 BOOLEAN ReadInStrategicMapSectorTownNames( STR fileName, BOOLEAN localizedVersion );
 
@@ -415,8 +415,8 @@ UINT32 uiBuildShadeTableTime;
 UINT32 uiNumTablesSaved;
 UINT32 uiNumTablesLoaded;
 UINT32 uiNumImagesReloaded;
-#include "render dirty.h"
-#include "tiledat.h"
+#include "Render Dirty.h"
+#include "TileDat.h"
 #endif
 
 // SAM externalization stuff
@@ -1595,7 +1595,7 @@ void BeginLoadScreen( void )
 	InvalidateScreen( );
 	RefreshScreen( NULL );
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//if we are going to the intro screen, return before putting up a loadscreen
 	if ( gbExitingMapScreenToWhere == MAP_EXIT_TO_INTRO_SCREEN )
 	{
@@ -2288,7 +2288,7 @@ BOOLEAN	SetCurrentWorldSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 
 #ifdef JA2UB
 		/*  Ja25 no creatures  */
-#else			
+#else
 		if ( gWorldSectorX == gCreaturesSettings.ubCrepitusFeedingSectorX && gWorldSectorY == gCreaturesSettings.ubCrepitusFeedingSectorY
 			 && gbWorldSectorZ == gCreaturesSettings.ubCrepitusFeedingSectorZ ) // (9, 10, 2)
 		{
@@ -2353,10 +2353,10 @@ BOOLEAN	SetCurrentWorldSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 
 		// Check for helicopter being on the ground in this sector...
 		HandleHelicopterOnGroundSkyriderProfile( );
-#ifdef JA2UB			
+#ifdef JA2UB
 		//Check to see if we should add Manuel to this sector, if so add him
 		ShouldNpcBeAddedToSector( gWorldSectorX, gWorldSectorY, bMapZ );
-#endif		
+#endif
 	}
 
 	//Load and enter the new sector
@@ -2412,7 +2412,7 @@ BOOLEAN	SetCurrentWorldSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 				SetMusicMode( MUSIC_TACTICAL_NOTHING );
 		}
 
-#ifdef JA2UB			
+#ifdef JA2UB
 		// Say a quote from a merc who has new lines for the sector ( if any )
 		HandlePlayerTeamQuotesWhenEnteringSector( sMapX, sMapY, bMapZ );
 #else
@@ -2423,7 +2423,7 @@ BOOLEAN	SetCurrentWorldSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 
 		// ATE: Set Flag for being visited...
 		SetSectorFlag( sMapX, sMapY, bMapZ, SF_HAS_ENTERED_TACTICAL );
-#ifdef JA2UB			
+#ifdef JA2UB
 		//ja2ub
 		// If any emails should be sent from this sector
 		HandleEmailBeingSentWhenEnteringSector( sMapX, sMapY, bMapZ, FALSE );
@@ -2440,7 +2440,7 @@ BOOLEAN	SetCurrentWorldSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 		gTacticalStatus.fGoodToAllowCrows = FALSE;
 		gTacticalStatus.fHasEnteredCombatModeSinceEntering = FALSE;
 		gTacticalStatus.fDontAddNewCrows = FALSE;
-#ifdef JA2UB			
+#ifdef JA2UB
 		//Call this function, if Jerry doesnt need to be added, it will return
 		UpdateJerryMiloInInitialSector( );
 #endif
@@ -2745,7 +2745,7 @@ void PrepareLoadedSector( )
 
 	ScreenMsg( FONT_YELLOW, MSG_DEBUG, L"Current Time is: %d", GetWorldTotalMin( ) );
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	HandleSectorSpecificModificatioToMap( gWorldSectorX, gWorldSectorY, gbWorldSectorZ, FALSE );
 
 	//If there needs to be modifications done to the enemy exp levels...
@@ -2946,7 +2946,7 @@ void HandleQuestCodeOnSectorExit( INT16 sOldSectorX, INT16 sOldSectorY, INT8 bOl
 		gMercProfiles[CONRAD].sSectorX = 0;
 		gMercProfiles[CONRAD].sSectorY = 0;
 	}
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 UB
 	if ( sOldSectorX == 7 && sOldSectorY == MAP_ROW_H && bOldSectorZ == 0 )
 	{
@@ -3406,7 +3406,7 @@ void UpdateMercInSector( SOLDIERTYPE *pSoldier, INT16 sSectorX, INT16 sSectorY, 
 							 pSoldier->name, pSoldier->sInsertionGridNo, pSoldier->aiData.sPendingActionData2, pSoldier->usStrategicInsertionData );
 					DebugMsg( TOPIC_JA2, DBG_LEVEL_3, str );
 				}
-#endif					
+#endif
 				if ( TileIsOutOfBounds( pSoldier->sInsertionGridNo ) )
 				{
 					ScreenMsg( FONT_RED, MSG_ERROR, L"Main edgepoint search failed for %s -- substituting entrypoint.", pSoldier->name );
@@ -3423,7 +3423,7 @@ void UpdateMercInSector( SOLDIERTYPE *pSoldier, INT16 sSectorX, INT16 sSectorY, 
 							 pSoldier->name, pSoldier->sInsertionGridNo, pSoldier->aiData.sPendingActionData2, pSoldier->usStrategicInsertionData );
 					DebugMsg( TOPIC_JA2, DBG_LEVEL_3, str );
 				}
-#endif					
+#endif
 				if ( TileIsOutOfBounds( pSoldier->sInsertionGridNo ) )
 				{
 					ScreenMsg( FONT_RED, MSG_ERROR, L"Isolated edgepont search failed for %s -- substituting entrypoint.", pSoldier->name );
@@ -4751,7 +4751,7 @@ BOOLEAN SoldierOKForSectorExit( SOLDIERTYPE * pSoldier, INT8 bExitDirection, INT
 	INT32 sGridNo;
 	INT16	sAPs;
 
-	// if the soldiers gridno is not NOWHERE	
+	// if the soldiers gridno is not NOWHERE
 	if ( TileIsOutOfBounds( pSoldier->sGridNo ) )
 		return(FALSE);
 
@@ -5062,7 +5062,7 @@ void SetupNewStrategicGame( )
 		}
 	}
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//Ja25
 	// Make the initial sector free of enemies
 	StrategicMap[CALCULATE_STRATEGIC_INDEX( JA2_5_START_SECTOR_X, JA2_5_START_SECTOR_Y )].fEnemyControlled = FALSE;
@@ -5090,7 +5090,7 @@ void SetupNewStrategicGame( )
 	//Ja25:  No insurance for mercs
 	//JA25: There is no mines
 	//Ja25 no town opinions
-#else	
+#else
 	//Daily update of insured mercs
 	AddEveryDayStrategicEvent( EVENT_HANDLE_INSURED_MERCS, INSURANCE_UPDATE_TIME, 0 );
 	//Daily update of mercs
@@ -5446,7 +5446,7 @@ BOOLEAN LoadStrategicInfoFromSavedFile( HWFILE hFile )
 		if ( guiCurrentSaveGameVersion < MILITIA_MOVEMENT )
 			StrategicMap[i].usFlags = 0;
 	}
-	
+
 	// Load the Sector Info
 	uiSize = sizeof(SECTORINFO);
 	if ( guiCurrentSaveGameVersion < ENEMY_JEEPS )
@@ -6778,24 +6778,24 @@ void HandlePlayerTeamQuotesWhenEnteringSector( INT16 sSectorX, INT16 sSectorY, I
 
 	#define	NUM_VALID_SECTORS									6
 	#define	DELAY_FOR_PLAYER_DESC_OF_SECTOR		2
-	
-	ENTER_SECTOR_PLAYER_QUOTE	PlayerSectorDescQuote[ NUM_VALID_SECTORS ] = 
+
+	ENTER_SECTOR_PLAYER_QUOTE	PlayerSectorDescQuote[ NUM_VALID_SECTORS ] =
 	{
 	    //SEC_H9-0
 		{ SECTOR( gGameUBOptions.SectorGuardPostX, gGameUBOptions.SectorGuardPostY ),		gGameUBOptions.SectorGuardPostZ,	QUOTE_HATE_MERC_1_ON_TEAM },
-		
+
 		//SEC_I9-0
 		{ SECTOR( gGameUBOptions.I9SectorPlayerQuoteX, gGameUBOptions.I9SectorPlayerQuoteY ),		gGameUBOptions.I9SectorPlayerQuoteZ,	QUOTE_LEARNED_TO_HATE_MERC_ON_TEAM },
-		
+
 		//SEC_H10-0
 		{ SECTOR( gGameUBOptions.H10SectorPlayerQuoteX, gGameUBOptions.H10SectorPlayerQuoteY ),	gGameUBOptions.H10SectorPlayerQuoteZ,	QUOTE_LEARNED_TO_HATE_MERC_ON_TEAM },
-		
+
 		//SEC_I10-0
 		{ SECTOR( gGameUBOptions.FristSectorTownX, gGameUBOptions.FristSectorTownY ),	gGameUBOptions.FristSectorTownZ,	QUOTE_HATE_MERC_2_ON_TEAM },
-		
+
 		//SEC_J13-0
 		{ SECTOR( gGameUBOptions.SectorFanX, gGameUBOptions.SectorFanY ),	gGameUBOptions.SectorFanZ,	QUOTE_ENTER_SECTOR_WITH_FAN_1 },
-		
+
 		//SEC_J14-1
 		{ SECTOR( gGameUBOptions.SectorGuardPostX, gGameUBOptions.SectorGuardPostY ),	gGameUBOptions.ExitForFanToPowerGenSectorZ,	0 },
 	};
@@ -6828,7 +6828,7 @@ void HandlePlayerTeamQuotesWhenEnteringSector( INT16 sSectorX, INT16 sSectorY, I
 						if ( iSectorID == SECTOR( gGameUBOptions.FristSectorTownX, gGameUBOptions.FristSectorTownY ) )
 							{
 								UINT8	cnt;
-	
+
 								for( cnt=0; cnt<bNumValidMercs; cnt++ )
 								{
 									//Say the qoute in a couple of seconds
@@ -6837,8 +6837,8 @@ void HandlePlayerTeamQuotesWhenEnteringSector( INT16 sSectorX, INT16 sSectorY, I
 							}
 						//J13
 						else if ( iSectorID == SECTOR( gGameUBOptions.SectorFanX, gGameUBOptions.SectorFanY ) )
-						{	
-							
+						{
+
 							if( PlayerSectorDescQuote[ uiCnt ].bSectorZ == gGameUBOptions.SectorFanZ )
 							{
 								//See if Manuel is on the team
@@ -6871,7 +6871,7 @@ void HandlePlayerTeamQuotesWhenEnteringSector( INT16 sSectorX, INT16 sSectorY, I
 
 								//Remeber the quote was said
 								SetFactTrue( FACT_PLAYER_KNOWS_ABOUT_FAN_STOPPING );
-							}	
+							}
 					}
 					//J14
 					else if ( iSectorID == SECTOR( gGameUBOptions.ExitForFanToPowerGenSectorX, gGameUBOptions.ExitForFanToPowerGenSectorY ) )
@@ -6886,7 +6886,7 @@ void HandlePlayerTeamQuotesWhenEnteringSector( INT16 sSectorX, INT16 sSectorY, I
 
 							//Say the qoute in a couple of seconds
 							DelayedMercQuote( ubMercToSayQuote, PlayerSectorDescQuote[ uiCnt ].ubQuoteNum, GetWorldTotalSeconds() + DELAY_FOR_PLAYER_DESC_OF_SECTOR );
-							
+
 					}
 /*
 					switch ( iSectorID )
@@ -6964,7 +6964,7 @@ void HandlePlayerTeamQuotesWhenEnteringSector( INT16 sSectorX, INT16 sSectorY, I
 						//SetSectorFlag( 9, 9, 0, SF_HAVE_SAID_PLAYER_QUOTE_NEW_SECTOR );
 						//SetSectorFlag( 10, 8, 0, SF_HAVE_SAID_PLAYER_QUOTE_NEW_SECTOR );
 						SetSectorFlag( gGameUBOptions.I9SectorPlayerQuoteX, gGameUBOptions.I9SectorPlayerQuoteY, gGameUBOptions.I9SectorPlayerQuoteZ, SF_HAVE_SAID_PLAYER_QUOTE_NEW_SECTOR );
-						SetSectorFlag( gGameUBOptions.H10SectorPlayerQuoteX, gGameUBOptions.H10SectorPlayerQuoteY, gGameUBOptions.H10SectorPlayerQuoteZ, SF_HAVE_SAID_PLAYER_QUOTE_NEW_SECTOR );	
+						SetSectorFlag( gGameUBOptions.H10SectorPlayerQuoteX, gGameUBOptions.H10SectorPlayerQuoteY, gGameUBOptions.H10SectorPlayerQuoteZ, SF_HAVE_SAID_PLAYER_QUOTE_NEW_SECTOR );
 					}
 
 					//default
@@ -7051,7 +7051,7 @@ void HandleEmailBeingSentWhenEnteringSector( INT16 sMapX, INT16 sMapY, INT8 bMap
 	{
 		//if its either J11 or I12 ( or we just got the email back up and we have been to the sector
 		if( ( ( sMapY == gGameUBOptions.SectorTown2Y && sMapX == gGameUBOptions.SectorTown2X ) || ( sMapY == 9 && sMapX == 12 ) && bMapZ == 0 ) ||
-			fLaptopJustGotFixed && 
+			fLaptopJustGotFixed &&
 			( GetSectorFlagStatus( gGameUBOptions.SectorTown2X, gGameUBOptions.SectorTown2Y, gGameUBOptions.SectorTown2Z, SF_HAS_ENTERED_TACTICAL ) == TRUE || GetSectorFlagStatus( 12, 9, 0, SF_HAS_ENTERED_TACTICAL ) == TRUE ) )
 		{
 			//and we havent sent it before
@@ -7122,7 +7122,7 @@ void ShouldNpcBeAddedToSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 		if( ( sMapY == gGameUBOptions.H10SectorPlayerQuoteY && sMapX == gGameUBOptions.H10SectorPlayerQuoteX && bMapZ == gGameUBOptions.H10SectorPlayerQuoteZ ) ||
 				( sMapY == gGameUBOptions.I9SectorPlayerQuoteY && sMapX == gGameUBOptions.I9SectorPlayerQuoteX && bMapZ == gGameUBOptions.I9SectorPlayerQuoteZ ) )
 		{
-			//Change his sector values to 
+			//Change his sector values to
 			gMercProfiles[MANUEL_UB].sSectorX = sMapX;
 			gMercProfiles[MANUEL_UB].sSectorY = sMapY;
 			gMercProfiles[MANUEL_UB].bSectorZ = bMapZ;
@@ -7132,7 +7132,7 @@ void ShouldNpcBeAddedToSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 		}
 	}
 
-	//if Tex has never been added before 
+	//if Tex has never been added before
 	if ( !(gJa25SaveStruct.fNpcHasBeenAdded & SECTOR_ADDED_NPC__TEX) )
 	{
 		//and tex is TO be added
@@ -7141,7 +7141,7 @@ void ShouldNpcBeAddedToSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 			//if it is the right sector
 			if ( sMapY == MAP_ROW_I && sMapX == 10 && bMapZ == 0 )
 			{
-				//Change his sector values to 
+				//Change his sector values to
 				gMercProfiles[TEX_UB].sSectorX = sMapX;
 				gMercProfiles[TEX_UB].sSectorY = sMapY;
 				gMercProfiles[TEX_UB].bSectorZ = bMapZ;
@@ -7152,7 +7152,7 @@ void ShouldNpcBeAddedToSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 		}
 	}
 
-	//if John has never been added before 
+	//if John has never been added before
 	if ( !(gJa25SaveStruct.fNpcHasBeenAdded & SECTOR_ADDED_NPC__JOHN_K) )
 	{
 		//and John is TO be added ( Tex not in game )
@@ -7163,7 +7163,7 @@ void ShouldNpcBeAddedToSector( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 			 sMapY == gJa25SaveStruct.ubJohnKulbaInitialSectorY &&
 			 bMapZ == 0 )
 		{
-			//Change his sector values to 
+			//Change his sector values to
 			gMercProfiles[JOHN_K_UB].sSectorX = sMapX;
 			gMercProfiles[JOHN_K_UB].sSectorY = sMapY;
 			gMercProfiles[JOHN_K_UB].bSectorZ = bMapZ;
@@ -7286,7 +7286,7 @@ void HandleSectorSpecificModificatioToMap( INT16 sMapX, INT16 sMapY, INT8 bMapZ,
 				//CreateAndAddMoneyObjectToGround( 7906,  12000, 6000, 5000 );
 				CreateAndAddMoneyObjectToGround( gGameUBOptions.I10MoneyGridNo1, gGameUBOptions.I10MoneyEasy1, gGameUBOptions.I10MoneyMedium1, gGameUBOptions.I10MoneyHard1 );
 				CreateAndAddMoneyObjectToGround( gGameUBOptions.I10MoneyGridNo2, gGameUBOptions.I10MoneyEasy2, gGameUBOptions.I10MoneyMedium2, gGameUBOptions.I10MoneyHard2 );
-				
+
 			}
 		}
 

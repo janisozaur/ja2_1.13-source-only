@@ -5,26 +5,26 @@
 	#include "Game Clock.h"
 	#include "Font Control.h"
 	#include "Timer Control.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Game Clock.h"
-	#include "message.h"
-	#include "worlddef.h"
-	#include "rotting corpses.h"
-	#include "soldier create.h"
-	#include "soldier add.h"
-	#include "isometric utils.h"
-	#include "animation data.h"
-	#include "animation control.h"
+	#include "Message.h"
+	#include "WorldDef.h"
+	#include "Rotting Corpses.h"
+	#include "Soldier Create.h"
+	#include "Soldier Add.h"
+	#include "Isometric Utils.h"
+	#include "Animation Data.h"
+	#include "Animation Control.h"
 	#include "Tactical Turns.h"
-	#include "smell.h"
-	#include "opplist.h"
+	#include "Smell.h"
+	#include "Opplist.h"
 	#include "Queen Command.h"
-	#include "dialogue control.h"
-	#include "smokeeffects.h"
-	#include "lighteffects.h"
-	#include "campaign.h"
-	#include "Soldier macros.h"
-	#include "strategicmap.h"
+	#include "Dialogue Control.h"
+	#include "SmokeEffects.h"
+	#include "LightEffects.h"
+	#include "Campaign.h"
+	#include "Soldier Macros.h"
+	#include "StrategicMap.h"
 	#include "Random.h"
 	#include "Explosion Control.h"
 #endif
@@ -180,7 +180,7 @@ void HandleTacticalEndTurn( )
 
 	if(gGameExternalOptions.gfAllowReinforcements)//dnl ch68 100913
 	{
-		if ( gTacticalStatus.Team[ENEMY_TEAM].bTeamActive || gfPendingNonPlayerTeam[ENEMY_TEAM] || 
+		if ( gTacticalStatus.Team[ENEMY_TEAM].bTeamActive || gfPendingNonPlayerTeam[ENEMY_TEAM] ||
 			 gTacticalStatus.Team[MILITIA_TEAM].bTeamActive || gfPendingNonPlayerTeam[MILITIA_TEAM] )
 			 ++guiTurnCnt;
 		else
@@ -247,7 +247,7 @@ void HandleTacticalEndTurn( )
 				//{
 				////	UpdateStats( pSoldier );
 				//}
-								
+
 				// Flugente: update multi-turn actions
 				pSoldier->UpdateMultiTurnAction();
 			}

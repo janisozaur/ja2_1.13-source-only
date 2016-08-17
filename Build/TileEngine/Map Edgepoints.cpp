@@ -4,23 +4,23 @@
 #else
 	#include "Map Edgepoints.h"
 
-	#include "pathai.h"
-	#include "ai.h"
+	#include "PathAI.h"
+	#include "AI.h"
 	#include "Map Information.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Isometric Utils.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Random.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Animation Control.h"
 	#include "Render Fun.h"
-	#include "strategicmap.h"
-	#include "environment.h"
-	#include "worldman.h"
+	#include "StrategicMap.h"
+	#include "Environment.h"
+	#include "WorldMan.h"
 	#include "PreBattle Interface.h"	// added by Flugente
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
@@ -81,7 +81,7 @@ BOOLEAN GridNoValidForCenterEntryPoint(INT32 sGridNo)
 {
 	if ( GridNoOnVisibleWorldTile( sGridNo ) && gpWorldLevelData[gMapInformation.sCenterGridNo].sHeight == gpWorldLevelData[sGridNo].sHeight && !FindStructure( sGridNo, (STRUCTURE_SLANTED_ROOF|STRUCTURE_TALL_ROOF) ) )
 		return TRUE;
-	
+
 	return FALSE;
 }
 
@@ -101,7 +101,7 @@ void FillCentreGridnos(BOOLEAN fCenterOnly)
 
 	sectorX = gWorldSectorX;
 	sectorY = gWorldSectorY;
-		
+
 	statCentGrid = (INT32*)MemAlloc( NUM_CENTER_ENTRY_POINTS * sizeof( INT32 ) );
 
 	FLOAT lenx = 0.0f;
@@ -192,13 +192,13 @@ void TrashMapEdgepoints()
 		MemFree( gps1stSouthEdgepointArray );
 	if( gps1stWestEdgepointArray )
 		MemFree( gps1stWestEdgepointArray );
-	
+
 	// WANNE - MP: Center
 	if (gps1stCenterEdgepointArray )
 		MemFree( gps1stCenterEdgepointArray );
 	gps1stCenterEdgepointArray = NULL;
 	gus1stCenterEdgepointArraySize = 0;
-	
+
 	gps1stNorthEdgepointArray					= NULL;
 	gps1stEastEdgepointArray					= NULL;
 	gps1stSouthEdgepointArray					= NULL;
@@ -211,7 +211,7 @@ void TrashMapEdgepoints()
 	gus1stEastEdgepointMiddleIndex		= 0;
 	gus1stSouthEdgepointMiddleIndex		= 0;
 	gus1stWestEdgepointMiddleIndex		= 0;
-		
+
 	//Secondary edgepoints
 	if( gps2ndNorthEdgepointArray )
 		MemFree( gps2ndNorthEdgepointArray );
@@ -433,7 +433,7 @@ void CompactEdgepointArray( INT32 **psArray, UINT16 *pusMiddleIndex, UINT16 *pus
 	Assert( *psArray );
 }
 
-void InternallyClassifyEdgepoints( SOLDIERTYPE *pSoldier, INT32 sGridNo, 
+void InternallyClassifyEdgepoints( SOLDIERTYPE *pSoldier, INT32 sGridNo,
 																	 INT32 **psArray1, UINT16 *pusMiddleIndex1, UINT16 *pusArraySize1,
 																	 INT32 **psArray2, UINT16 *pusMiddleIndex2, UINT16 *pusArraySize2 )
 {
@@ -568,7 +568,7 @@ void ClassifyEdgepoints()
 	if( gMapInformation.sNorthGridNo != -1 )
 	{
 		sGridNo = FindNearestEdgepointOnSpecifiedEdge( gMapInformation.sNorthGridNo, NORTH_EDGEPOINT_SEARCH );
-		
+
 		if(!TileIsOutOfBounds(sGridNo))
 		{
 			InternallyClassifyEdgepoints( &Soldier, sGridNo,
@@ -580,7 +580,7 @@ void ClassifyEdgepoints()
 	if( gMapInformation.sEastGridNo != -1 )
 	{
 		sGridNo = FindNearestEdgepointOnSpecifiedEdge( gMapInformation.sEastGridNo, EAST_EDGEPOINT_SEARCH );
-		
+
 		if(!TileIsOutOfBounds(sGridNo))
 		{
 			InternallyClassifyEdgepoints( &Soldier, sGridNo,
@@ -592,7 +592,7 @@ void ClassifyEdgepoints()
 	if( gMapInformation.sSouthGridNo != -1 )
 	{
 		sGridNo = FindNearestEdgepointOnSpecifiedEdge( gMapInformation.sSouthGridNo, SOUTH_EDGEPOINT_SEARCH );
-		
+
 		if(!TileIsOutOfBounds(sGridNo))
 		{
 			InternallyClassifyEdgepoints( &Soldier, sGridNo,
@@ -604,7 +604,7 @@ void ClassifyEdgepoints()
 	if( gMapInformation.sWestGridNo != -1 )
 	{
 		sGridNo = FindNearestEdgepointOnSpecifiedEdge( gMapInformation.sWestGridNo, WEST_EDGEPOINT_SEARCH );
-		
+
 		if(!TileIsOutOfBounds(sGridNo))
 		{
 			InternallyClassifyEdgepoints( &Soldier, sGridNo,
@@ -934,7 +934,7 @@ BOOLEAN LoadMapEdgepoints( INT8 **hBuffer, FLOAT dMajorMapVersion )
 {
 	TrashMapEdgepoints();
 	if( gMapInformation.ubMapVersion < 17 )
-	{	
+	{
 		//To prevent invalidation of older maps, which only used one layer of edgepoints, and a UINT8 for
 		//containing the size, we will preserve that paradigm, then kill the loaded edgepoints and
 		//regenerate them.
@@ -1360,7 +1360,7 @@ INT32 FindClosestMapEdgepoint(INT32 sGridNo, INT32* psArray, UINT16 usArraySize)
 			sGridNo = psArray[i];
 		}
 	}
-	// Is sGridNo in the edgepoint array	
+	// Is sGridNo in the edgepoint array
 	if(!TileIsOutOfBounds(sGridNo))
 		gpReservedGridNos[gsReservedIndex++] = sGridNo;
 	return(sGridNo);
@@ -1667,8 +1667,8 @@ UINT8 CalcMapEdgepointClassInsertionCode( INT32 sGridNo )
 }
 
 #ifdef JA2BETAVERSION
-#include "worldman.h"
-#include "message.h"
+#include "WorldMan.h"
+#include "Message.h"
 void ShowMapEdgepoints()
 {
 	INT32 i, usIllegal1 = 0, usIllegal2 = 0;

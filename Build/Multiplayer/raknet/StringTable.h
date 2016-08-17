@@ -51,7 +51,7 @@ namespace RakNet
 	{
 	public:
 
-		/// Destructor	
+		/// Destructor
 		~StringTable();
 
 		/// static function because only static functions can access static members
@@ -67,7 +67,7 @@ namespace RakNet
 		/// Writes input to output, compressed.  Takes care of the null terminator for you.
 		/// Relies on the StringCompressor class, which is automatically reference counted in the constructor and destructor in RakPeer.  You can call the reference counting functions yourself if you wish too.
 		/// \param[in] input Pointer to an ASCII string
-		/// \param[in] maxCharsToWrite The size of \a input 
+		/// \param[in] maxCharsToWrite The size of \a input
 		/// \param[out] output The bitstream to write the compressed string to
 		void EncodeString( const char *input, int maxCharsToWrite, RakNet::BitStream *output );
 
@@ -84,7 +84,7 @@ namespace RakNet
 		/// Used so I can allocate and deallocate this singleton at runtime
 		static void RemoveReference(void);
 
-		/// Private Constructor	
+		/// Private Constructor
 		StringTable();
 
 	protected:

@@ -1,16 +1,16 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
 #else
-	#include "types.h"
-	#include "strategic town reputation.h"
-	#include "soldier profile type.h"
-	#include "game event hook.h"
+	#include "Types.h"
+	#include "Strategic Town Reputation.h"
+	#include "Soldier Profile Type.h"
+	#include "Game Event Hook.h"
 	#include "Soldier Profile.h"
 	#include "Overhead.h"
 	#include "Game Clock.h"
-	#include "strategic town loyalty.h"
+	#include "Strategic Town Loyalty.h"
 	#include "Debug.h"
-	#include "message.h"
+	#include "Message.h"
 #endif
 
 
@@ -40,10 +40,10 @@ void InitializeProfilesForTownReputation( void )
 
 	// initialize the town opinion values in each recruitable merc's profile structure
 	//for( uiProfileId = 0; uiProfileId < FIRST_NPC; uiProfileId++ )
-	//new profiles by Jazz	
+	//new profiles by Jazz
 	for( uiProfileId = 0; uiProfileId < NUM_PROFILES; uiProfileId++ )
 	{
-		if ( gProfilesIMP[uiProfileId].ProfilId == uiProfileId || gProfilesRPC[uiProfileId].ProfilId == uiProfileId || gProfilesAIM[uiProfileId].ProfilId == uiProfileId || gProfilesMERC[uiProfileId].ProfilId == uiProfileId) 
+		if ( gProfilesIMP[uiProfileId].ProfilId == uiProfileId || gProfilesRPC[uiProfileId].ProfilId == uiProfileId || gProfilesAIM[uiProfileId].ProfilId == uiProfileId || gProfilesMERC[uiProfileId].ProfilId == uiProfileId)
 		memset( &( gMercProfiles[ uiProfileId ].bMercTownReputation ), INITIAL_TOWN_REPUTATION, sizeof( gMercProfiles[ uiProfileId ].bMercTownReputation ) );
 	}
 }
@@ -65,7 +65,7 @@ void PostEventsForSpreadOfTownOpinion( void )
 
 UINT8 GetTownOpinionOfMerc( UINT8 ubProfileId, UINT8 ubTownId )
 {
-		//new profiles by Jazz	
+		//new profiles by Jazz
 	//Assert(ubProfileId < FIRST_NPC);
 	Assert(ubTownId < NUM_TOWNS);
 
@@ -91,7 +91,7 @@ UINT8 GetTownOpinionOfMercForSoldier( SOLDIERTYPE *pSoldier, UINT8 ubTownId )
 
 void UpdateTownOpinionOfThisMerc( UINT8 ubProfileId, UINT8 ubTownId, INT8 bAmount )
 {
-		//new profiles by Jazz	
+		//new profiles by Jazz
 	//Assert(ubProfileId < FIRST_NPC);
 	Assert(ubTownId < NUM_TOWNS);
 
@@ -138,8 +138,8 @@ void HandleSpreadOfAllTownsOpinion( void )
 
 	// run though all player-recruitable profiles and update towns opinion of mercs
 	//for( ubProfileId = 0; ubProfileId < FIRST_NPC; ubProfileId++ )
-	//new profiles by Jazz	
-	for( ubProfileId = 0; ubProfileId < NUM_PROFILES; ubProfileId++ )	
+	//new profiles by Jazz
+	for( ubProfileId = 0; ubProfileId < NUM_PROFILES; ubProfileId++ )
 	{
 		if ( gProfilesIMP[ubProfileId].ProfilId == ubProfileId || gProfilesAIM[ubProfileId].ProfilId == ubProfileId || gProfilesMERC[ubProfileId].ProfilId == ubProfileId || gProfilesRPC[ubProfileId].ProfilId == ubProfileId)
 		HandleSpreadOfTownOpinionForMerc( ubProfileId );

@@ -1,4 +1,4 @@
-﻿// WANNE: This pragma should not be needed anymore for Polish version, after we set the encoding to UTF8 
+// WANNE: This pragma should not be needed anymore for Polish version, after we set the encoding to UTF8
 // WANNE: Yes we need this here exclusivly in Polish version, because we do not have a codepage in the code like for other versions.
 //#pragma setlocale("POLISH")
 
@@ -8,8 +8,8 @@
 #else
 	#include "Language Defines.h"
 	#ifdef POLISH
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 	#endif
 #endif
 
@@ -260,7 +260,7 @@ STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 
 STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]=	// TODO.Translate
 {
-	L"Can use communications equipment.\n", 
+	L"Can use communications equipment.\n",
 	L"Can call in artillery strikes from allies in neighbouring sectors.\n",
 	L"Via Frequency Scan assignment, enemy patrols can be located.\n",
 	L"Communications can be jammed sector-wide.\n",
@@ -384,7 +384,7 @@ STR16 gzIMPMinorTraitsHelpTextsSnitch[]=
 	L"Może zbierać plotki w miastach.\n",
 	L"Może zostać umieszczony w więzieniu jako tajniak.\n",
 	L"Jeżeli w dobrym nastroju, poprawia twoją reputację o %d każdego dnia.\n",
-	L"+%d zasięg słuchu\n",	
+	L"+%d zasięg słuchu\n",
 };
 
 STR16 gzIMPMajorTraitsHelpTextsSurvival[] =	// TODO.Translate

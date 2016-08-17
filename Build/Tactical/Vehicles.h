@@ -5,7 +5,7 @@
 
 #include "Soldier Control.h"
 #include "Strategic Movement.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 #define	MAX_VEHICLES	10
 extern std::vector<INT8>	gubVehicleMovementGroups;
@@ -50,7 +50,7 @@ typedef struct
 	INT32 NewCarPortraits;
 	BOOLEAN NewUsed;
 	VEHICLE_SEAT VehicleSeats[10];
-	
+
 } NEW_CAR;
 
 extern NEW_CAR gNewVehicle[NUM_PROFILES];
@@ -78,7 +78,7 @@ enum{
 	NEW_VEHICLE17,
 	NEW_VEHICLE18,
 	NEW_VEHICLE19,
-	NEW_VEHICLE20,	
+	NEW_VEHICLE20,
 	NEW_VEHICLE21,
 	NEW_VEHICLE22,
 	NEW_VEHICLE23,
@@ -108,7 +108,7 @@ enum{
 	NEW_VEHICLE47,
 	NEW_VEHICLE48,
 	NEW_VEHICLE49,
-	NEW_VEHICLE50,	
+	NEW_VEHICLE50,
 	NEW_VEHICLE51,
 	NEW_VEHICLE52,
 	NEW_VEHICLE53,
@@ -128,7 +128,7 @@ enum{
 	NEW_VEHICLE67,
 	NEW_VEHICLE68,
 	NEW_VEHICLE69,
-	NEW_VEHICLE70,	
+	NEW_VEHICLE70,
 	NEW_VEHICLE71,
 	NEW_VEHICLE72,
 	NEW_VEHICLE73,
@@ -178,7 +178,7 @@ enum{
 	NEW_VEHICLE117,
 	NEW_VEHICLE118,
 	NEW_VEHICLE119,
-	NEW_VEHICLE120,	
+	NEW_VEHICLE120,
 	NEW_VEHICLE121,
 	NEW_VEHICLE122,
 	NEW_VEHICLE123,
@@ -188,7 +188,7 @@ enum{
 	NEW_VEHICLE127,
 	NEW_VEHICLE128,
 	NEW_VEHICLE129,
-	NEW_VEHICLE130,		
+	NEW_VEHICLE130,
 	NEW_VEHICLE131,
 	NEW_VEHICLE132,
 	NEW_VEHICLE133,
@@ -198,7 +198,7 @@ enum{
 	NEW_VEHICLE137,
 	NEW_VEHICLE138,
 	NEW_VEHICLE139,
-	NEW_VEHICLE140,	
+	NEW_VEHICLE140,
 	NEW_VEHICLE141,
 	NEW_VEHICLE142,
 	NEW_VEHICLE143,
@@ -208,7 +208,7 @@ enum{
 	NEW_VEHICLE147,
 	NEW_VEHICLE148,
 	NEW_VEHICLE149,
-	NEW_VEHICLE150,	
+	NEW_VEHICLE150,
 	NEW_VEHICLE151,
 	NEW_VEHICLE152,
 	NEW_VEHICLE153,
@@ -222,7 +222,7 @@ enum{
 	NEW_VEHICLE1 = 0,
 	COMBAT_JEEP_CAR = 71,
 	NEW_VEHICLE2 = NEW_VEHICLE1 + 159,
-	HUMMER = 160,	
+	HUMMER = 160,
 	ELDORADO_CAR = 161,
 	ICE_CREAM_TRUCK = 162,
 	HELICOPTER = 163,
@@ -232,9 +232,9 @@ enum{
 	NEW_VEHICLE166 = 166,
 	NEW_VEHICLE167 = 167,
 	NEW_VEHICLE168 = 168,
-	NEW_VEHICLE169 = 169,	
-	NUMBER_OF_TYPES_OF_VEHICLES = NEW_VEHICLE169 + 84, 
-	
+	NEW_VEHICLE169 = 169,
+	NUMBER_OF_TYPES_OF_VEHICLES = NEW_VEHICLE169 + 84,
+
 	/*
 	ELDORADO_CAR = 0,
 	HUMMER,
@@ -242,8 +242,8 @@ enum{
 	JEEP_CAR,
 	TANK_CAR,
 	HELICOPTER,
-	
-	NUMBER_OF_TYPES_OF_VEHICLES, 
+
+	NUMBER_OF_TYPES_OF_VEHICLES,
 	*/
 };
 
@@ -282,7 +282,7 @@ typedef struct
 {
  PathStPtr pMercPath;	// vehicle's stategic path list
  UINT8	 ubMovementGroup; // the movement group this vehicle belongs to
- UINT8	 ubVehicleType; // type of vehicle 
+ UINT8	 ubVehicleType; // type of vehicle
  INT16	 sSectorX;	// X position on the Stategic Map
  INT16	 sSectorY;	// Y position on the Stategic Map
  INT16	 sSectorZ;
@@ -395,7 +395,7 @@ BOOLEAN EnterVehicle( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 ubSeat
 SOLDIERTYPE *GetDriver( INT32 iID );
 
 void SetVehicleName( SOLDIERTYPE *pVehicle );
-	
+
 BOOLEAN ExitVehicle( SOLDIERTYPE *pSoldier );
 
 BOOLEAN ChangeVehicleSeat( SOLDIERTYPE *pVehicle, SOLDIERTYPE *pSoldier, UINT8 ubSeatIndex );
@@ -454,7 +454,7 @@ BOOLEAN IsRobotControllerInVehicle( INT32 iId );
 
 void AddVehicleFuelToSave( );
 
-BOOLEAN CanSoldierDriveVehicle( SOLDIERTYPE *pSoldier, INT32 iVehicleId, BOOLEAN fIgnoreAsleep ); 
+BOOLEAN CanSoldierDriveVehicle( SOLDIERTYPE *pSoldier, INT32 iVehicleId, BOOLEAN fIgnoreAsleep );
 BOOLEAN SoldierMustDriveVehicle( SOLDIERTYPE *pSoldier, INT32 iVehicleId, BOOLEAN fTryingToTravel );
 BOOLEAN OnlythisCanDriveVehicle( SOLDIERTYPE *pSoldier, INT32 iVehicleId );
 

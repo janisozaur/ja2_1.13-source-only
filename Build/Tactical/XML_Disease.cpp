@@ -2,7 +2,7 @@
 #include "Tactical All.h"
 #else
 #include "sgp.h"
-#include "overhead.h"
+#include "Overhead.h"
 #include "Disease.h"
 #include "Debug Control.h"
 #include "expat.h"
@@ -35,7 +35,7 @@ diseaseStartElementHandle( void *userData, const XML_Char *name, const XML_Char 
 		if ( strcmp( name, "DISEASESLIST" ) == 0 && pData->curElement == ELEMENT_NONE )
 		{
 			pData->curElement = ELEMENT_LIST;
-			
+
 			if ( !localizedTextOnly_Disease )
 				memset( pData->curArray, 0, sizeof(DISEASE)*pData->maxArraySize );
 
@@ -94,7 +94,7 @@ diseaseStartElementHandle( void *userData, const XML_Char *name, const XML_Char 
 				  strcmp( name, "sNeedToSleep" ) == 0 ||
 				  strcmp( name, "sDrinkModifier" ) == 0 ||
 				  strcmp( name, "sFoodModifier" ) == 0 ||
-				  strcmp( name, "moralemodifier" ) == 0 ) ) 
+				  strcmp( name, "moralemodifier" ) == 0 ) )
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 

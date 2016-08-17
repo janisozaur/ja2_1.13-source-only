@@ -18,10 +18,10 @@
 	#include	"Debug.h"
 	#include	"Music Control.h"
 	#include	"Sound Control.h"
-	#include	"soundman.h"
+	#include	"SoundMan.h"
 	#include	"Ambient Control.h"
-	#include	"Worlddat.h"
-	#include	"Worlddef.h"
+	#include	"WorldDat.h"
+	#include	"WorldDef.h"
 	#include	"GameSettings.h"
 	#include	"Game Init.h"
 	#include	"English.h"
@@ -41,7 +41,7 @@
 #endif
 
 #include		"Cheats.h"
-#include		"connect.h"
+#include		"Connect.h"
 #include		"WorldMan.h"
 
 #include		"Game Events.h"
@@ -79,13 +79,13 @@ extern CPostalService gPostalService;
 #define	OPT_QUIT_BTN_Y							OPT_SAVE_BTN_Y
 // ary-05/05/2009 : need more option screen toggles : Add in buttons that allow for options column paging
 #define	OPT_PREV_BTN_X							iScreenWidthOffset + 310
-#define	OPT_PREV_BTN_Y							OPT_SAVE_BTN_Y 
+#define	OPT_PREV_BTN_Y							OPT_SAVE_BTN_Y
 
 #define	OPT_PAGE_X								iScreenWidthOffset + 364
 #define	OPT_PAGE_Y								OPT_SAVE_BTN_Y + 7
 
 #define	OPT_NEXT_BTN_X							iScreenWidthOffset + 420
-#define	OPT_NEXT_BTN_Y							OPT_SAVE_BTN_Y 
+#define	OPT_NEXT_BTN_Y							OPT_SAVE_BTN_Y
 
 #define	OPT_DONE_BTN_X							iScreenWidthOffset + 550
 #define	OPT_DONE_BTN_Y							OPT_SAVE_BTN_Y
@@ -246,11 +246,11 @@ MOUSE_REGION	gSelectedToggleBoxAreaRegion;
 void		SelectedToggleBoxAreaRegionMovementCallBack(MOUSE_REGION * pRegion, INT32 reason );
 
 //toggle box correspondence to option tracker
-//1 define the render rules, 
-//2 recast real options into new array under constraints of rules, 
+//1 define the render rules,
+//2 recast real options into new array under constraints of rules,
 //3 then using a pager system, create a subset that will fit on screen
 int toggle_box_content_rules[NUM_GAME_OPTIONS];		// index = game option					value = render state
-int toggle_box_gGameSettings_recast[NUM_GAME_OPTIONS+OPT_FIRST_COLUMN_TOGGLE_CUT_OFF];	
+int toggle_box_gGameSettings_recast[NUM_GAME_OPTIONS+OPT_FIRST_COLUMN_TOGGLE_CUT_OFF];
 													// index = reinterpreted positions		value = game_option or state
 	//" + OPT_FIRST_COLUMN_TOGGLE_CUT_OFF " to account for potential empty togglebox positions up to next whole column
 int toggle_box_array[MAX_NUMBER_OF_OPTION_TOGGLES];	// index = option position on screen	value = game_option or state
@@ -370,10 +370,10 @@ void Establish_Options_Screen_Rules(void)
 //	: note : enum of states possible :
 //  : note : state -2 = is a state defined later, after rules build-up, and denotes the unused spots that exceed the final page.
 //	: note : state -1 = used in toggle_box_array, after rules build-up. and denotes the unused spots that are within last page.
-//	: note : state  0 = skip this option, consider it to be non-existant.. do not render.. 
+//	: note : state  0 = skip this option, consider it to be non-existant.. do not render..
 //	: note : state  1 = normal, default
 //	: note : state  2 = text only, no box, no option to toggle, a "header/divider" type rendering
-	
+
 	//Re-init toggle_box_content_rules[]
 	for( counter = 0; counter < NUM_GAME_OPTIONS; counter++)
 	{
@@ -394,29 +394,29 @@ void Establish_Options_Screen_Rules(void)
 		// hide this to prevent user mistake of reseting options
 		toggle_box_content_rules[TOPTION_RESET_ALL_OPTIONS] = 0;
 	}
-	if( JA2BETAVERSION_FLAG || gGameSettings.fOptions[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE] ) 
+	if( JA2BETAVERSION_FLAG || gGameSettings.fOptions[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE] )
 	{
-		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_HEADER]			= 2;	
-		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_END]			= 2;	
+		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_HEADER]			= 2;
+		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_END]			= 2;
 		toggle_box_content_rules[TOPTION_DEBUG_MODE_OPTIONS_HEADER]			= 2;	//a sample options screen options header (text)
 		toggle_box_content_rules[TOPTION_DEBUG_MODE_OPTIONS_END]			= 2;	//a sample options screen options divider(text)
 		toggle_box_content_rules[TOPTION_LAST_OPTION]						= 2;	//this is THE LAST option that exists
 		//example of "options screens option" in action :
 		if( !(gGameSettings.fOptions[TOPTION_DEBUG_MODE_RENDER_OPTIONS_GROUP]))
 		{
-			toggle_box_content_rules[TOPTION_RENDER_MOUSE_REGIONS] = 0; 
+			toggle_box_content_rules[TOPTION_RENDER_MOUSE_REGIONS] = 0;
 		}
 	}
 	else //establish any NOT in "DEBUG build mode" rules
 	{
-		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_HEADER]			= 0;	
-		toggle_box_content_rules[TOPTION_FORCE_BOBBY_RAY_SHIPMENTS]			= 0;	
-		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_END]			= 0;	
+		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_HEADER]			= 0;
+		toggle_box_content_rules[TOPTION_FORCE_BOBBY_RAY_SHIPMENTS]			= 0;
+		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_END]			= 0;
 		toggle_box_content_rules[TOPTION_DEBUG_MODE_OPTIONS_HEADER]			= 0;	//a sample options screen options header (text)
-		toggle_box_content_rules[TOPTION_REPORT_MISS_MARGIN]				= 0;	
+		toggle_box_content_rules[TOPTION_REPORT_MISS_MARGIN]				= 0;
 		toggle_box_content_rules[TOPTION_SHOW_RESET_ALL_OPTIONS]			= 0;	//a sample option that hides/shows another option
 		toggle_box_content_rules[TOPTION_RESET_ALL_OPTIONS]					= 0;	// kept inside Debug Builds (dev's quick reset)
-		toggle_box_content_rules[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE]	= 0;	
+		toggle_box_content_rules[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE]	= 0;
 		toggle_box_content_rules[TOPTION_DEBUG_MODE_RENDER_OPTIONS_GROUP]	= 0;	//a sample option that hides/shows another option(s)
 		toggle_box_content_rules[TOPTION_RENDER_MOUSE_REGIONS]				= 0;	//a sample DEBUG build option
 		toggle_box_content_rules[TOPTION_DEBUG_MODE_OPTIONS_END]			= 0;	//a sample options screen options divider
@@ -425,23 +425,23 @@ void Establish_Options_Screen_Rules(void)
 		////however if allowing some debug options to bleed thru to release. Allow these options to be managable.
 		//if( gGameSettings.fOptions[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE] )
 		//{
-		//	toggle_box_content_rules[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE]	= 1;	
+		//	toggle_box_content_rules[TOPTION_RETAIN_DEBUG_OPTIONS_IN_RELEASE]	= 1;
 		//	toggle_box_content_rules[TOPTION_DEBUG_MODE_RENDER_OPTIONS_GROUP]	= 1;
-		//	toggle_box_content_rules[TOPTION_RENDER_MOUSE_REGIONS]				= 1;	
+		//	toggle_box_content_rules[TOPTION_RENDER_MOUSE_REGIONS]				= 1;
 		//}
 	}
 	//at this point despite whatever build rules, enable cheat mode options to render
-	if( CHEATER_CHEAT_LEVEL( ) ) 
+	if( CHEATER_CHEAT_LEVEL( ) )
 	{
 		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_HEADER]			= 2;	// text only
-		toggle_box_content_rules[TOPTION_FORCE_BOBBY_RAY_SHIPMENTS]			= 1;	
+		toggle_box_content_rules[TOPTION_FORCE_BOBBY_RAY_SHIPMENTS]			= 1;
 		toggle_box_content_rules[TOPTION_CHEAT_MODE_OPTIONS_END]			= 2;	// text only
 	}
 }
 
 void Build_Options_List_Reinterpretation(void)
 {
-	// This function fills out a recast of gGameSettings.fOptions[], 
+	// This function fills out a recast of gGameSettings.fOptions[],
 	// it differs by constraint foun in Establish_Options_Screen_Rules()
 
 	INT16 counter1, counter2, index_of_last_valid_option;
@@ -449,17 +449,17 @@ void Build_Options_List_Reinterpretation(void)
 	for(counter1= 0 ; counter1 < (NUM_GAME_OPTIONS+OPT_FIRST_COLUMN_TOGGLE_CUT_OFF) ; counter1++)
 	{ toggle_box_gGameSettings_recast[counter1] = -2; }
 
-	index_of_last_valid_option = 0; //track where inside the recast we ran out of actual options, 
+	index_of_last_valid_option = 0; //track where inside the recast we ran out of actual options,
 									//we then pad the rest with -1's
 									//also, this is the basis for column counting
-	
+
 // ary-05/05/2009 : counter1 represents the position inside toggle_box_gGameSettings_recast[], we dont skip these until there are no more options
 //		 : counter2 represents the position inside gGameSettings.fOptions[], skip invalids until valid or NUM_GAME_OPTIONS
 	counter2 = 0; // init prior to the loop
 	for( counter1 = 0 ; counter1 < NUM_GAME_OPTIONS ; counter1++)
 	{
 		for( ; counter2<NUM_GAME_OPTIONS ; )
-		{	
+		{
 			if(toggle_box_content_rules[counter2]) // might be change to bit_vect, or some other mechanic, but for only 0 is not rendered
 			{
 				toggle_box_gGameSettings_recast[counter1] = counter2;
@@ -476,14 +476,14 @@ void Build_Options_List_Reinterpretation(void)
 	{
 		Max_Number_Of_Pages = ((index_of_last_valid_option+1) / OPT_FIRST_COLUMN_TOGGLE_CUT_OFF)+1;
 		for(	counter1 = (index_of_last_valid_option+1) ;
-				counter1 < (Max_Number_Of_Pages * OPT_FIRST_COLUMN_TOGGLE_CUT_OFF); 
-				counter1++ 	) 
+				counter1 < (Max_Number_Of_Pages * OPT_FIRST_COLUMN_TOGGLE_CUT_OFF);
+				counter1++ 	)
 		{
 			toggle_box_gGameSettings_recast[counter1] = -1;
 		}
 	}
-	else 
-	{ 
+	else
+	{
 		Max_Number_Of_Pages = ((index_of_last_valid_option+1) / OPT_FIRST_COLUMN_TOGGLE_CUT_OFF);
 		// no tail to fill out, index_of_last_valid_option is the last option up to a whole column
 	}
@@ -530,7 +530,7 @@ void Create_Toggle_Buttons(void)
 
 	for( counter1=0; counter1<MAX_NUMBER_OF_OPTION_TOGGLES; counter1++)
 	{
-		//	skip creating toggle box for cases : no option , option supression 		
+		//	skip creating toggle box for cases : no option , option supression
 		if (toggle_box_array[counter1] == -1) // skip every thing for -1
 		{	continue;	}
 
@@ -558,7 +558,7 @@ void Create_Toggle_Buttons(void)
 				usTextPosX = OPT_TOGGLE_BOX_SECOND_TEXT_X;
 			}
 
-			continue;	
+			continue;
 		}
 
 		// init or re-init base points of where graphics/text/regions are going to be placed
@@ -582,7 +582,7 @@ void Create_Toggle_Buttons(void)
 
 		//Check box ID stored to guiOptionsToggles[] by toggle option
 		guiOptionsToggles[ counter1 ] = CreateCheckBoxButton( usBoxPosX, usPosY,
-															"INTERFACE\\OptionsCheckBoxes_12x12.sti", 
+															"INTERFACE\\OptionsCheckBoxes_12x12.sti",
 															MSYS_PRIORITY_HIGH+10,
 															BtnOptionsTogglesCallback );
 
@@ -596,14 +596,14 @@ void Create_Toggle_Buttons(void)
 		if( usTextWidth > OPT_TOGGLE_BOX_TEXT_WIDTH )
 		{
 			//Get how many lines will be used to display the string, without displaying the string
-			UINT8	ubNumLines = (UINT8) (	DisplayWrappedString( 0, 0, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_HIGHLIGHT_COLOR, 
-											zOptionsToggleText[ toggle_box_array[ counter1 ] ], FONT_MCOLOR_BLACK, TRUE, 
+			UINT8	ubNumLines = (UINT8) (	DisplayWrappedString( 0, 0, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_HIGHLIGHT_COLOR,
+											zOptionsToggleText[ toggle_box_array[ counter1 ] ], FONT_MCOLOR_BLACK, TRUE,
 											LEFT_JUSTIFIED | DONT_DISPLAY_TEXT ) / GetFontHeight( OPT_MAIN_FONT ) );
 
 			usTextWidth = OPT_TOGGLE_BOX_TEXT_WIDTH;
-	
+
 			//Create mouse regions for the option toggle text
-			MSYS_DefineRegion(	&gSelectedOptionTextRegion[counter1], usBoxPosX+13, usPosY, 
+			MSYS_DefineRegion(	&gSelectedOptionTextRegion[counter1], usBoxPosX+13, usPosY,
 								(usTextPosX + usTextWidth), (UINT16)(usPosY+usTextHeight*ubNumLines), MSYS_PRIORITY_HIGH,
 								CURSOR_NORMAL, SelectedOptionTextRegionMovementCallBack, SelectedOptionTextRegionCallBack );
 			MSYS_AddRegion( &gSelectedOptionTextRegion[counter1]);
@@ -616,7 +616,7 @@ void Create_Toggle_Buttons(void)
 		else
 		{
 			//Create mouse regions for the option toggle text
-			MSYS_DefineRegion(	&gSelectedOptionTextRegion[counter1], usBoxPosX+13, usPosY, 
+			MSYS_DefineRegion(	&gSelectedOptionTextRegion[counter1], usBoxPosX+13, usPosY,
 								(usTextPosX + usTextWidth), (UINT16)(usPosY+usTextHeight), MSYS_PRIORITY_HIGH,
 								CURSOR_NORMAL, SelectedOptionTextRegionMovementCallBack, SelectedOptionTextRegionCallBack );
 			MSYS_AddRegion( &gSelectedOptionTextRegion[counter1]);
@@ -628,7 +628,7 @@ void Create_Toggle_Buttons(void)
 		}
 
 		SetRegionFastHelpText( &gSelectedOptionTextRegion[ counter1 ], zOptionsScreenHelpText[ toggle_box_array[ counter1 ] ] );
-		SetButtonFastHelpText( guiOptionsToggles[ counter1 ], zOptionsScreenHelpText[ toggle_box_array[ counter1 ] ] );	
+		SetButtonFastHelpText( guiOptionsToggles[ counter1 ], zOptionsScreenHelpText[ toggle_box_array[ counter1 ] ] );
 
 		usPosY += OPT_GAP_BETWEEN_TOGGLE_BOXES;
 	}
@@ -642,7 +642,7 @@ void Destroy_Toggle_Buttons(void)
 {
 	UINT8	counter1;
 
-	Buttons_Exist_State = 0;	// set this to off, prevents HandleOptionsScreen() from causing a CTD when tring to  
+	Buttons_Exist_State = 0;	// set this to off, prevents HandleOptionsScreen() from causing a CTD when tring to
 								// higlight text for non-existing checkboxes
 
 	//Remove the toggle buttons
@@ -652,7 +652,7 @@ void Destroy_Toggle_Buttons(void)
 		{
 			// dont delete non existing buttons
 			continue;
-		}		
+		}
 		if( toggle_box_content_rules[toggle_box_array[ counter1 ]] == 2  )
 		{
 			// dont delete non existing buttons
@@ -744,28 +744,28 @@ BOOLEAN EnterOptionsScreen()
 
 // ary-05/05/2009 : need more option screen toggles : Add in buttons that allow for options column paging
 	// Previous Column of options
- 	giOptPrevBtnImage = UseLoadedButtonImage( giOptionsButtonImages, -1,2,-1,3,-1 );                         
+ 	giOptPrevBtnImage = UseLoadedButtonImage( giOptionsButtonImages, -1,2,-1,3,-1 );
  	guiOptPrevButton = CreateIconAndTextButton( giOptPrevBtnImage, zOptionsText[OPT_PREV], OPT_BUTTON_FONT2,
- 													OPT_BUTTON_ON_COLOR, DEFAULT_SHADOW,                                                      
- 													OPT_BUTTON_OFF_COLOR, DEFAULT_SHADOW,                                                     
- 													TEXT_CJUSTIFIED,                                                                          
- 													OPT_PREV_BTN_X, OPT_PREV_BTN_Y, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,                        
- 													DEFAULT_MOVE_CALLBACK, BtnOptPrevCallback);                                               
- 	SpecifyDisabledButtonStyle( guiOptPrevButton, DISABLED_STYLE_HATCHED );  
+ 													OPT_BUTTON_ON_COLOR, DEFAULT_SHADOW,
+ 													OPT_BUTTON_OFF_COLOR, DEFAULT_SHADOW,
+ 													TEXT_CJUSTIFIED,
+ 													OPT_PREV_BTN_X, OPT_PREV_BTN_Y, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
+ 													DEFAULT_MOVE_CALLBACK, BtnOptPrevCallback);
+ 	SpecifyDisabledButtonStyle( guiOptPrevButton, DISABLED_STYLE_HATCHED );
 	if( OptionsList_Column_Offset == 0 )
 	{
 		DisableButton( guiOptPrevButton );
 	}
 
 	// Next Column of options
- 	giOptNextBtnImage = UseLoadedButtonImage( giOptionsButtonImages, -1,2,-1,3,-1 );                         
+ 	giOptNextBtnImage = UseLoadedButtonImage( giOptionsButtonImages, -1,2,-1,3,-1 );
  	guiOptNextButton = CreateIconAndTextButton( giOptNextBtnImage, zOptionsText[OPT_NEXT], OPT_BUTTON_FONT2,
- 													OPT_BUTTON_ON_COLOR, DEFAULT_SHADOW,                                                      
- 													OPT_BUTTON_OFF_COLOR, DEFAULT_SHADOW,                                                     
- 													TEXT_CJUSTIFIED,                                                                          
- 													OPT_NEXT_BTN_X, OPT_NEXT_BTN_Y, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,                        
- 													DEFAULT_MOVE_CALLBACK, BtnOptNextCallback);                                               
- 	SpecifyDisabledButtonStyle( guiOptNextButton, DISABLED_STYLE_HATCHED );   
+ 													OPT_BUTTON_ON_COLOR, DEFAULT_SHADOW,
+ 													OPT_BUTTON_OFF_COLOR, DEFAULT_SHADOW,
+ 													TEXT_CJUSTIFIED,
+ 													OPT_NEXT_BTN_X, OPT_NEXT_BTN_Y, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
+ 													DEFAULT_MOVE_CALLBACK, BtnOptNextCallback);
+ 	SpecifyDisabledButtonStyle( guiOptNextButton, DISABLED_STYLE_HATCHED );
 	if( OptionsList_Column_Offset >= (Max_Number_Of_Pages-2) )// ary-05/05/2009 : "Max_Number_Of_Pages-2" becaues each "page" = 2 "columns"
 	{
 		DisableButton( guiOptNextButton );
@@ -793,19 +793,19 @@ BOOLEAN EnterOptionsScreen()
 	RenderOptionsScreen();
 
 	//Add a slider bar for the Sound Effects
-	guiSoundEffectsSliderID = AddSlider(	SLIDER_VERTICAL_STEEL, CURSOR_NORMAL, OPT_SOUND_EFFECTS_SLIDER_X, OPT_SOUND_EFFECTS_SLIDER_Y, 
+	guiSoundEffectsSliderID = AddSlider(	SLIDER_VERTICAL_STEEL, CURSOR_NORMAL, OPT_SOUND_EFFECTS_SLIDER_X, OPT_SOUND_EFFECTS_SLIDER_Y,
 											OPT_SLIDER_BAR_SIZE, 127, MSYS_PRIORITY_HIGH, SoundFXSliderChangeCallBack, 0 );
 	AssertMsg( guiSoundEffectsSliderID, "Failed to AddSlider" );
 	SetSliderValue( guiSoundEffectsSliderID, GetSoundEffectsVolume() );
 
 	//Add a slider bar for the Speech
-	guiSpeechSliderID = AddSlider(	SLIDER_VERTICAL_STEEL, CURSOR_NORMAL, OPT_SPEECH_SLIDER_X, OPT_SPEECH_SLIDER_Y, 
+	guiSpeechSliderID = AddSlider(	SLIDER_VERTICAL_STEEL, CURSOR_NORMAL, OPT_SPEECH_SLIDER_X, OPT_SPEECH_SLIDER_Y,
 									OPT_SLIDER_BAR_SIZE, 127, MSYS_PRIORITY_HIGH, SpeechSliderChangeCallBack, 0 );
 	AssertMsg( guiSpeechSliderID, "Failed to AddSlider" );
 	SetSliderValue( guiSpeechSliderID, GetSpeechVolume() );
 
 	//Add a slider bar for the Music
-	guiMusicSliderID = AddSlider(	SLIDER_VERTICAL_STEEL, CURSOR_NORMAL, OPT_MUSIC_SLIDER_X, OPT_MUSIC_SLIDER_Y, 
+	guiMusicSliderID = AddSlider(	SLIDER_VERTICAL_STEEL, CURSOR_NORMAL, OPT_MUSIC_SLIDER_X, OPT_MUSIC_SLIDER_Y,
 									OPT_SLIDER_BAR_SIZE, 127, MSYS_PRIORITY_HIGH, MusicSliderChangeCallBack, 0 );
 	AssertMsg( guiMusicSliderID, "Failed to AddSlider" );
 	SetSliderValue( guiMusicSliderID, MusicGetVolume() );
@@ -855,7 +855,7 @@ void ExitOptionsScreen()
 	GetOptionsScreenToggleBoxes();	//currently empty, used to interpret button states to determine gGameSettings.fOptions[]
 									//its still remains in case of future dev where any final interpertations may be needed
 	//The save the current settings to disk
-	SaveGameSettings(); 
+	SaveGameSettings();
 
 	//Create the clock mouse region
 //	CreateMouseRegionForPauseOfClock( CLOCK_REGION_START_X, CLOCK_REGION_START_Y );
@@ -981,10 +981,10 @@ void RenderOptionsScreen()
 
 		//if the string is going to wrap, move the string up a bit
 		if( usWidth > OPT_TOGGLE_BOX_TEXT_WIDTH )
-			DisplayWrappedString(	usPosX, usPosY, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_MAIN_COLOR, 
+			DisplayWrappedString(	usPosX, usPosY, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_MAIN_COLOR,
 									zOptionsToggleText[ toggle_box_array[ count ] ], FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 		else
-			DrawTextToScreen(	zOptionsToggleText[ toggle_box_array[ count ] ], usPosX, usPosY, 0, 
+			DrawTextToScreen(	zOptionsToggleText[ toggle_box_array[ count ] ], usPosX, usPosY, 0,
 								OPT_MAIN_FONT, OPT_MAIN_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED	);
 
 		usPosY += OPT_GAP_BETWEEN_TOGGLE_BOXES;
@@ -995,20 +995,20 @@ void RenderOptionsScreen()
 	//
 
 	//Display the Sound Fx text
-	DisplayWrappedString(	OPT_SOUND_FX_TEXT_X, OPT_SOUND_FX_TEXT_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_SLIDER_FONT, OPT_MAIN_COLOR, 
+	DisplayWrappedString(	OPT_SOUND_FX_TEXT_X, OPT_SOUND_FX_TEXT_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_SLIDER_FONT, OPT_MAIN_COLOR,
 							zOptionsText[ OPT_SOUND_FX ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED	);
 
 	//Display the Speech text
-	DisplayWrappedString(	OPT_SPEECH_TEXT_X, OPT_SPEECH_TEXT_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_SLIDER_FONT, OPT_MAIN_COLOR, 
+	DisplayWrappedString(	OPT_SPEECH_TEXT_X, OPT_SPEECH_TEXT_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_SLIDER_FONT, OPT_MAIN_COLOR,
 							zOptionsText[ OPT_SPEECH ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED	);
 
 	//Display the Music text
-	DisplayWrappedString(	OPT_MUSIC_TEXT_X, OPT_MUSIC_TEXT_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_SLIDER_FONT, OPT_MAIN_COLOR, 
+	DisplayWrappedString(	OPT_MUSIC_TEXT_X, OPT_MUSIC_TEXT_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_SLIDER_FONT, OPT_MAIN_COLOR,
 							zOptionsText[ OPT_MUSIC ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
 	//Display the option page numbers
 	swprintf( sPage, L"%d / %d", OptionsList_Column_Offset + 1, Max_Number_Of_Pages - 1 );
-	DisplayWrappedString(	OPT_PAGE_X, OPT_PAGE_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_BUTTON_FONT2, OPT_MAIN_COLOR, 
+	DisplayWrappedString(	OPT_PAGE_X, OPT_PAGE_Y, OPT_SLIDER_TEXT_WIDTH, 2, OPT_BUTTON_FONT2, OPT_MAIN_COLOR,
 							sPage, FONT_MCOLOR_BLACK, FALSE, RIGHT_JUSTIFIED );
 
 	InvalidateRegion( OPTIONS__TOP_LEFT_X, OPTIONS__TOP_LEFT_Y, OPTIONS__BOTTOM_RIGHT_X, OPTIONS__BOTTOM_RIGHT_Y);
@@ -1181,18 +1181,18 @@ void BtnOptQuitCallback(GUI_BUTTON *btn,INT32 reason)
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
 
 		//Confirm the Exit to the main menu screen
-		DoOptionsMessageBox(	MSG_BOX_BASIC_STYLE, zOptionsText[OPT_RETURN_TO_MAIN], OPTIONS_SCREEN, MSG_BOX_FLAG_YESNO, 
+		DoOptionsMessageBox(	MSG_BOX_BASIC_STYLE, zOptionsText[OPT_RETURN_TO_MAIN], OPTIONS_SCREEN, MSG_BOX_FLAG_YESNO,
 								ConfirmQuitToMainMenuMessageBoxCallBack );
 
 ///		SetOptionsExitScreen( MAINMENU_SCREEN );
 
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LOST_MOUSE)
 	{
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 }
@@ -1203,7 +1203,7 @@ void BtnOptPrevCallback(GUI_BUTTON *btn,INT32 reason)
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags |= BUTTON_CLICKED_ON;
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_UP )
@@ -1217,13 +1217,13 @@ void BtnOptPrevCallback(GUI_BUTTON *btn,INT32 reason)
 
 		OptionsScreenInit();	// ary-05/05/2009 : This is important to refresh the screen properly, it stores a new SAVE_BUFFER
 
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LOST_MOUSE)
 	{
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 }
@@ -1233,7 +1233,7 @@ void BtnOptNextCallback(GUI_BUTTON *btn,INT32 reason)
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags |= BUTTON_CLICKED_ON;
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_UP )
@@ -1248,13 +1248,13 @@ void BtnOptNextCallback(GUI_BUTTON *btn,INT32 reason)
 
 		OptionsScreenInit();	// ary-05/05/2009 : This is important to refresh the screen properly, it stores a new SAVE_BUFFER
 
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LOST_MOUSE)
 	{
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 }
@@ -1265,7 +1265,7 @@ void BtnDoneCallback(GUI_BUTTON *btn,INT32 reason)
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags |= BUTTON_CLICKED_ON;
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_UP )
@@ -1274,13 +1274,13 @@ void BtnDoneCallback(GUI_BUTTON *btn,INT32 reason)
 
 		SetOptionsExitScreen( guiPreviousOptionScreen );
 
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 	if(reason & MSYS_CALLBACK_REASON_LOST_MOUSE)
 	{
 		btn->uiFlags &= (~BUTTON_CLICKED_ON );
-		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY, 
+		InvalidateRegion(	btn->Area.RegionTopLeftX,		btn->Area.RegionTopLeftY,
 							btn->Area.RegionBottomRightX,	btn->Area.RegionBottomRightY);
 	}
 }
@@ -1321,7 +1321,7 @@ void BtnOptionsTogglesCallback( GUI_BUTTON *btn, INT32 reason )
 void Handle_ButtonStyle_Options( UINT8 Button_UserData_1 )
 {
 	// note : This function is where all immediately apply effects occur
-	//		:	These options represent button like applications. 
+	//		:	These options represent button like applications.
 	//		:	They are meant to be clicked on, then performed, then reset to off
 
 	if( Button_UserData_1 == TOPTION_RESET_ALL_OPTIONS)
@@ -1340,11 +1340,11 @@ void Handle_ButtonStyle_Options( UINT8 Button_UserData_1 )
 
 		if ( guiPreviousOptionScreen == MAINMENU_SCREEN) return; //GTFO, not in game,
 
-		if( pEvent ) 
+		if( pEvent )
 		{
 			// clean up events prior to the DeliverShipment block (below)
 			// so that we accuately determine EVENT_POSTAL_SERVICE_SHIPMENT events have been removed
-			DeleteEventsWithDeletionPending(); 
+			DeleteEventsWithDeletionPending();
 		}
 		else
 		{
@@ -1358,7 +1358,7 @@ void Handle_ButtonStyle_Options( UINT8 Button_UserData_1 )
 					gPostalService.DeliverShipment(pEvent->uiParam);
 					ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Forced Bobby Ray's delivery.");
 					// ok now clean up the events we just forced..
-					// Use Assert () to help find any cases where these events are NOT deleted 
+					// Use Assert () to help find any cases where these events are NOT deleted
 					//	If they are still in EventList, an empty next Shipment will crash the game
 					pEvent->ubFlags |= SEF_DELETION_PENDING;
 					pEvent = pEvent->next; //move to next before deleting current event
@@ -1371,7 +1371,7 @@ void Handle_ButtonStyle_Options( UINT8 Button_UserData_1 )
 					pEvent = pEvent->next; //not a shipment move to next
 			}
 		}
-				
+
 	}
 
 }
@@ -1447,7 +1447,7 @@ void HandleOptionToggle( UINT8 Button_UserData_0, UINT8 Button_UserData_1, BOOLE
 		{
 			gGameSettings.fOptions[TOPTION_SPEECH] = TRUE;
 		}
-			
+
 		//ok now commit
 		gGameSettings.fOptions[ Button_UserData_1 ] = FALSE;
 
@@ -1544,14 +1544,14 @@ void MusicSliderChangeCallBack( INT32 iNewValue )
 	MusicSetVolume( iNewValue );
 }
 
-BOOLEAN DoOptionsMessageBoxWithRect(	UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UINT16 usFlags, 
+BOOLEAN DoOptionsMessageBoxWithRect(	UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UINT16 usFlags,
 										MSGBOX_CALLBACK ReturnCallback, SGPRect *pCenteringRect )
 {
 	// reset exit mode
 	gfExitOptionsDueToMessageBox = TRUE;
 
 	// do message box and return
-	giOptionsMessageBox = DoMessageBox(	ubStyle,	zString,	uiExitScreen, ( UINT16 ) ( usFlags| MSG_BOX_FLAG_USE_CENTERING_RECT ),	
+	giOptionsMessageBox = DoMessageBox(	ubStyle,	zString,	uiExitScreen, ( UINT16 ) ( usFlags| MSG_BOX_FLAG_USE_CENTERING_RECT ),
 										ReturnCallback,	pCenteringRect );
 
 	// send back return state
@@ -1566,7 +1566,7 @@ BOOLEAN DoOptionsMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitSc
 	gfExitOptionsDueToMessageBox = TRUE;
 
 	// do message box and return
-	giOptionsMessageBox = DoMessageBox(	ubStyle,	zString,	uiExitScreen, ( UINT16 ) ( usFlags| MSG_BOX_FLAG_USE_CENTERING_RECT ),	
+	giOptionsMessageBox = DoMessageBox(	ubStyle,	zString,	uiExitScreen, ( UINT16 ) ( usFlags| MSG_BOX_FLAG_USE_CENTERING_RECT ),
 										ReturnCallback,	&CenteringRect );
 
 	// send back return state
@@ -1606,7 +1606,7 @@ void SetOptionsScreenToggleBoxes()
 
 	for( counter=0; counter < MAX_NUMBER_OF_OPTION_TOGGLES; counter++)
 	{
-		if ( toggle_box_array[ counter ] == -1) 
+		if ( toggle_box_array[ counter ] == -1)
 			{ continue; }//there are no options to set for this toggle_box
 		if ( toggle_box_content_rules[ toggle_box_array[ counter ] ] == 2)
 			{ continue; }//there are no options to set for this toggle_box
@@ -1620,7 +1620,7 @@ void SetOptionsScreenToggleBoxes()
 
 void GetOptionsScreenToggleBoxes()
 {
-// ary-05/05/2009 :	note : the function is now entirely defunct, it used to reset option based on button states, 
+// ary-05/05/2009 :	note : the function is now entirely defunct, it used to reset option based on button states,
 //			note : but now options states are handled more directly
 //			note : I'm leaving the function here just in case some future form of 'wrap-up' code might be needed
 ;
@@ -1674,7 +1674,7 @@ void SelectedOptionTextRegionCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 
 		HandleOptionToggle( Region_UserData_0, Region_UserData_1, (BOOLEAN)(!gGameSettings.fOptions[ Region_UserData_1 ]), FALSE, TRUE );
 
-		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY, 
+		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY,
 							pRegion->RegionBottomRightX,	pRegion->RegionBottomRightY);
 	}
 
@@ -1701,13 +1701,13 @@ void SelectedOptionTextRegionMovementCallBack(MOUSE_REGION * pRegion, INT32 reas
 	{
 		HandleHighLightedText( FALSE );
 		gbHighLightedOptionText = -1;
-		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY, 
+		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY,
 							pRegion->RegionBottomRightX,	pRegion->RegionBottomRightY);
 	}
 	else if( reason & MSYS_CALLBACK_REASON_GAIN_MOUSE )
 	{
 		gbHighLightedOptionText = Region_UserData_0;
-		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY, 
+		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY,
 							pRegion->RegionBottomRightX,	pRegion->RegionBottomRightY);
 	}
 }
@@ -1732,10 +1732,10 @@ void HandleHighLightedText( BOOLEAN fHighLight )
 	if( gbHighLightedOptionText == -1 )
 		fHighLight = FALSE;
 
-	//if the user has the mouse in one of the checkboxes 
+	//if the user has the mouse in one of the checkboxes
 	for( counter=0; counter< MAX_NUMBER_OF_OPTION_TOGGLES; counter++)
 	{
-		if ( toggle_box_array[ counter ] == -1) 
+		if ( toggle_box_array[ counter ] == -1)
 			{ continue; }//there are no options to set for this toggle_box
 		if ( toggle_box_content_rules[ toggle_box_array[ counter ] ] == 2)
 			{ continue; }//there are no options to set for this toggle_box
@@ -1769,35 +1769,35 @@ void HandleHighLightedText( BOOLEAN fHighLight )
 		if( bHighLight < OPT_FIRST_COLUMN_TOGGLE_CUT_OFF )
 		{
 			usPosX = OPT_TOGGLE_BOX_FIRST_COL_TEXT_X;
-			usPosY = OPT_TOGGLE_BOX_FIRST_COLUMN_START_Y + OPT_TOGGLE_TEXT_OFFSET_Y + 
+			usPosY = OPT_TOGGLE_BOX_FIRST_COLUMN_START_Y + OPT_TOGGLE_TEXT_OFFSET_Y +
 						( bHighLight * OPT_GAP_BETWEEN_TOGGLE_BOXES ) ;
 		}
 		else
 		{
 			usPosX = OPT_TOGGLE_BOX_SECOND_TEXT_X;
-			usPosY = OPT_TOGGLE_BOX_SECOND_COLUMN_START_Y + OPT_TOGGLE_TEXT_OFFSET_Y + 
+			usPosY = OPT_TOGGLE_BOX_SECOND_COLUMN_START_Y + OPT_TOGGLE_TEXT_OFFSET_Y +
 						( ( bHighLight - OPT_FIRST_COLUMN_TOGGLE_CUT_OFF ) * OPT_GAP_BETWEEN_TOGGLE_BOXES ) ;
 		}
 
 		usWidth = StringPixLength( zOptionsToggleText[ toggle_box_array[ bHighLight ] ], OPT_MAIN_FONT );
-		
+
 		//if the string is going to wrap, move the string up a bit
 		if( usWidth > OPT_TOGGLE_BOX_TEXT_WIDTH )
 		{
 			if( fHighLight )
-				DisplayWrappedString(	usPosX, usPosY, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_HIGHLIGHT_COLOR, 
+				DisplayWrappedString(	usPosX, usPosY, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_HIGHLIGHT_COLOR,
 										zOptionsToggleText[ toggle_box_array[ bHighLight ] ], FONT_MCOLOR_BLACK, TRUE, LEFT_JUSTIFIED );
 			else
-				DisplayWrappedString(	usPosX, usPosY, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_MAIN_COLOR, 
+				DisplayWrappedString(	usPosX, usPosY, OPT_TOGGLE_BOX_TEXT_WIDTH, 2, OPT_MAIN_FONT, OPT_MAIN_COLOR,
 										zOptionsToggleText[ toggle_box_array[ bHighLight ] ], FONT_MCOLOR_BLACK, TRUE, LEFT_JUSTIFIED );
 		}
 		else
 		{
 			if( fHighLight )
-				DrawTextToScreen(	zOptionsToggleText[ toggle_box_array[ bHighLight ] ], usPosX, usPosY, 0, 
+				DrawTextToScreen(	zOptionsToggleText[ toggle_box_array[ bHighLight ] ], usPosX, usPosY, 0,
 									OPT_MAIN_FONT, OPT_HIGHLIGHT_COLOR, FONT_MCOLOR_BLACK, TRUE, LEFT_JUSTIFIED	);
 			else
-				DrawTextToScreen(	zOptionsToggleText[ toggle_box_array[ bHighLight ] ], usPosX, usPosY, 0, 
+				DrawTextToScreen(	zOptionsToggleText[ toggle_box_array[ bHighLight ] ], usPosX, usPosY, 0,
 									OPT_MAIN_FONT, OPT_MAIN_COLOR, FONT_MCOLOR_BLACK, TRUE, LEFT_JUSTIFIED	);
 		}
 	}
@@ -1815,7 +1815,7 @@ void SelectedToggleBoxAreaRegionMovementCallBack(MOUSE_REGION * pRegion, INT32 r
 		//loop through all the toggle box's and remove the in area flag
 		for( counter=0; counter < MAX_NUMBER_OF_OPTION_TOGGLES; counter++)
 		{
-			if ( toggle_box_array[ counter ] == -1) 
+			if ( toggle_box_array[ counter ] == -1)
 				{ continue; }//there are no options to set for this toggle_box
 			if ( toggle_box_content_rules[ toggle_box_array[ counter ] ] == 2)
 				{ continue; }//there are no options to set for this toggle_box
@@ -1825,7 +1825,7 @@ void SelectedToggleBoxAreaRegionMovementCallBack(MOUSE_REGION * pRegion, INT32 r
 
 		gbHighLightedOptionText = -1;
 
-		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY, 
+		InvalidateRegion(	pRegion->RegionTopLeftX,		pRegion->RegionTopLeftY,
 							pRegion->RegionBottomRightX,	pRegion->RegionBottomRightY);
 	}
 }

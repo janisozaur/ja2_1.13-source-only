@@ -1,19 +1,19 @@
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */
 
 #include "CampaignStats.h"
-#include "message.h"
+#include "Message.h"
 #include "SaveLoadGame.h"
 #include "GameVersion.h"
 #include "Campaign Types.h"
 #include "Game Clock.h"
-#include "Soldier macros.h"
+#include "Soldier Macros.h"
 #include "Text.h"
 #include "Laptop.h"
 #include "LaptopSave.h"
-#include "email.h"
+#include "Email.h"
 #include "DynamicDialogue.h"
 
 Campaign_Stats	gCampaignStats;
@@ -33,7 +33,7 @@ Incident_Stats::clear()
 	usCivFactionFought	= 0;
 	usIncidentFlags		= 0;
 	usOneTimeEventFlags = 0;
-		
+
 	for (UINT8 i = 0; i < CAMPAIGNHISTORY_SD_MAX; ++i)
 	{
 		usKills[i]			= 0;
@@ -87,7 +87,7 @@ Incident_Stats::CalcInterestRating()
 	if ( usIncidentFlags & INCIDENT_WIN )							usInterestRating +=  100;
 	else															usInterestRating +=  200;
 	if ( usIncidentFlags & INCIDENT_SAMSITE_SABOTAGED )				usInterestRating += 1500;
-	
+
 	if ( usOneTimeEventFlags & INCIDENT_ONETIMEEVENT_OMERTA )			usInterestRating += 1000;
 	if ( usOneTimeEventFlags & INCIDENT_ONETIMEEVENT_DEATH_KINGPIN )	usInterestRating += 500;
 	if ( usOneTimeEventFlags & (INCIDENT_ONETIMEEVENT_MASSACRE_HICKS|INCIDENT_ONETIMEEVENT_MASSACRE_BLOODCATS) )	usInterestRating += 800;
@@ -95,7 +95,7 @@ Incident_Stats::CalcInterestRating()
 	if ( usOneTimeEventFlags & INCIDENT_ONETIMEEVENT_CITY_LIBERATED )	usInterestRating += 1000;
 }
 
-BOOLEAN	
+BOOLEAN
 Incident_Stats::Save( HWFILE hFile )
 {
 	UINT32 uiNumBytesWritten = 0;
@@ -108,13 +108,13 @@ Incident_Stats::Save( HWFILE hFile )
 	return( TRUE );
 }
 
-BOOLEAN	
+BOOLEAN
 Incident_Stats::Load( HWFILE hwFile )
 {
 	if(guiCurrentSaveGameVersion >= CAMPAIGNSTATS)
 	{
 		UINT32 numBytesRead = 0;
-		
+
 		numBytesRead = ReadFieldByField(hwFile, &usID,					sizeof(usID),				sizeof(UINT32), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usTime,				sizeof(usTime),				sizeof(UINT32), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usSector,				sizeof(usSector),			sizeof(UINT8), numBytesRead);
@@ -124,7 +124,7 @@ Incident_Stats::Load( HWFILE hwFile )
 		numBytesRead = ReadFieldByField(hwFile, &usCivFactionFought,	sizeof(usCivFactionFought), sizeof(UINT8), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usIncidentFlags,		sizeof(usIncidentFlags),	sizeof(UINT64), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usOneTimeEventFlags,	sizeof(usOneTimeEventFlags),sizeof(UINT64), numBytesRead);
-		
+
 		numBytesRead = ReadFieldByField(hwFile, &usKills,				sizeof(usKills),			sizeof(UINT16), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usWounds,				sizeof(usWounds),			sizeof(UINT16), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usPrisoners,			sizeof(usPrisoners),		sizeof(UINT16), numBytesRead);
@@ -133,7 +133,7 @@ Incident_Stats::Load( HWFILE hwFile )
 		numBytesRead = ReadFieldByField(hwFile, &usPromotions,			sizeof(usPromotions),		sizeof(UINT16), numBytesRead);
 
 		numBytesRead = ReadFieldByField(hwFile, &usFiller,				sizeof(usFiller),			sizeof(UINT8), numBytesRead);
-		
+
 		if( numBytesRead != SIZEOF_INCIDENT_STATS_POD )
 			return(FALSE);
 	}
@@ -524,13 +524,13 @@ Incident_Stats::GetTerrainandType(UINT8& arTerrain, UINT8& arType)
 				break;
 
 			case ROAD:
-			case PLAINS:			
-			case SPARSE:													
+			case PLAINS:
+			case SPARSE:
 			case FARMLAND:
 			case PLAINS_ROAD:
 			case SPARSE_ROAD:
-			case FARMLAND_ROAD:			
-			case SPARSE_SAM_SITE:		
+			case FARMLAND_ROAD:
+			case SPARSE_SAM_SITE:
 			default:
 				arTerrain = CAMPAINGHISTORY_PICLIBRARY_TERRAIN_SPARSE;
 				break;
@@ -542,7 +542,7 @@ Incident_Stats::GetTerrainandType(UINT8& arTerrain, UINT8& arType)
 	else if ( usIncidentFlags & (INCIDENT_TANKS_ENEMY|INCIDENT_TANKS_PLAYERSIDE) )
 		arType = CAMPAINGHISTORY_PICLIBRARY_TYPE_TANKS;
 	else if ( usIncidentFlags & INCIDENT_WIN )
-		arType = CAMPAINGHISTORY_PICLIBRARY_TYPE_WIN;	
+		arType = CAMPAINGHISTORY_PICLIBRARY_TYPE_WIN;
 	else
 		arType = CAMPAINGHISTORY_PICLIBRARY_TYPE_LOSS;
 }
@@ -609,10 +609,10 @@ Campaign_Stats::Load( HWFILE hwFile )
 		numBytesRead = ReadFieldByField(hwFile, &usWounds,			sizeof(usWounds),			sizeof(UINT32), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usPrisoners,		sizeof(usPrisoners),		sizeof(UINT32), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usShots,			sizeof(usShots),			sizeof(UINT32), numBytesRead);
-		
+
 		numBytesRead = ReadFieldByField(hwFile, &sMoneyEarned,		sizeof(sMoneyEarned),		sizeof(INT32), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usConsumed,		sizeof(usConsumed),			sizeof(FLOAT), numBytesRead);
-				
+
 		numBytesRead = ReadFieldByField(hwFile, &usNumIncidents,	sizeof(usNumIncidents),		sizeof(UINT32), numBytesRead);
 		numBytesRead = ReadFieldByField(hwFile, &usHighestID,		sizeof(usHighestID),		sizeof(UINT32), numBytesRead);
 
@@ -626,7 +626,7 @@ Campaign_Stats::Load( HWFILE hwFile )
 			Incident_Stats incident;
 			if ( !incident.Load ( hwFile ) )
 				return(FALSE);
-			
+
 			// if option is active, only read the last reports and forget the rest
 			if ( gGameExternalOptions.usReportsToLoad < 0 || i >= usNumIncidents - gGameExternalOptions.usReportsToLoad )
 				mIncidentVector.push_back(incident);
@@ -635,7 +635,7 @@ Campaign_Stats::Load( HWFILE hwFile )
 		// re-evaluate the vector size - we may have been ordered to forget some
 		usNumIncidents = mIncidentVector.size();
 	}
-	
+
 	return( TRUE );
 }
 
@@ -686,7 +686,7 @@ Campaign_Stats::AddConsumption(UINT8 aType, FLOAT aVal)
 // add this incident to the campaign stats and then clear it
 void FinishIncident(INT16 sX, INT16 sY, INT8 sZ)
 {
-	// it is possible to enter a combat without any real fighting. 
+	// it is possible to enter a combat without any real fighting.
 	// For now, lets just assume this happens with undetected spies. If nothing of interest happened, don't add this incident (it would be boring to read anyway)
 	if ( gCurrentIncident.usIncidentFlags & (INCIDENT_SPYACTION_ENEMY|INCIDENT_SPYACTION_PLAYERSIDE) && !(gCurrentIncident.usIncidentFlags & INCIDENT_SPYACTION_UNCOVERED) )
 	{
@@ -711,12 +711,12 @@ void FinishIncident(INT16 sX, INT16 sY, INT8 sZ)
 			}
 		}
 	}
-	
+
 	// due to odd coding, we do not know when an incident starts
 	// (checking for entering combat isn't enough, as we do that multiple times per battle)
 	// we thus set the relevant data when finishing an incident
 	gCampaignStats.usHighestID++;
-	
+
 	gCurrentIncident.usID = gCampaignStats.usHighestID;
 	gCurrentIncident.usTime = GetWorldTotalSeconds();
 	gCurrentIncident.usSector = SECTOR(sX, sY);
@@ -731,7 +731,7 @@ void FinishIncident(INT16 sX, INT16 sY, INT8 sZ)
 	HandleDynamicOpinionBattleFinished( (gCurrentIncident.usIncidentFlags & INCIDENT_WIN) != 0 );
 
 	gCampaignStats.AddNewIncident(gCurrentIncident);
-	
+
 	// reset incident after adding it
 	gCurrentIncident.clear();
 }

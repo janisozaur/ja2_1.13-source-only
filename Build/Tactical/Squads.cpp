@@ -4,19 +4,19 @@
 	#include "Types.h"
 	#include "Squads.h"
 	#include "Strategic Pathing.h"
-	#include "Strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Faces.h"
 	#include "Strategic Movement.h"
 	#include "Assignments.h"
-	#include "OverHead.h"
+	#include "Overhead.h"
 	#include "Interface.h"
 	#include "Vehicles.h"
 	#include "Map Screen Helicopter.h"
 	#include "Soldier Profile.h"
 	#include "Debug.h"
 	#include "jascreens.h"
-	#include "screenids.h"
-	#include "Soldier macros.h"
+	#include "ScreenIds.h"
+	#include "Soldier Macros.h"
 	#include "GameSettings.h"
 #endif
 #include <vector>
@@ -142,7 +142,7 @@ void FixOversizedSquadsInSector( void )
 	INT32 iCountSquad = 0;
 	INT8  iCountSoldier = 0;
 	INT8  iPeopleInSquad = 0;
-	
+
 	// loop through all squads
 	for( iCountSquad = 0; iCountSquad < NUMBER_OF_SQUADS; iCountSquad++ )
 	{
@@ -154,14 +154,14 @@ void FixOversizedSquadsInSector( void )
 			while ( iPeopleInSquad > gGameOptions.ubSquadSize )
 			{
 				// oversized squad found -- move some people to another squad
-				// 
+				//
 				// loop backwards through the squad in order to remove the last person
 				for( iCountSoldier = NUMBER_OF_SOLDIERS_PER_SQUAD - 1; iCountSoldier >= 0 ; iCountSoldier-- )
 				{
 					// if squad is still oversized, and we have found a squad member
 					if( (Squad[ iCountSquad ][ iCountSoldier ] != NULL) && (iPeopleInSquad > gGameOptions.ubSquadSize) )
 					{
-						// ... attempt to move him to another squad						
+						// ... attempt to move him to another squad
 						if ( AddCharacterToAnySquad( Squad[ iCountSquad ][ iCountSoldier ] ) == TRUE )
 						{
 							// success: we got rid of one person in this squad

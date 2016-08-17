@@ -1,7 +1,7 @@
 #ifndef __DEBUG_CONTROL_
 #define __DEBUG_CONTROL_
 
-#include "types.h"
+#include "Types.h"
 
 
 //#define		_PHYSICSSUBSYSTEM_DEBUG
@@ -22,7 +22,7 @@ void MPDebugMsg( CHAR8 *strMessage);
 
 extern	void		AnimDbgMessage( CHAR8 *Str);
 
-#else 
+#else
 
 #define AnimDebugMsg(c)
 
@@ -35,7 +35,7 @@ extern	void		AnimDbgMessage( CHAR8 *Str);
 
 extern	void		PhysicsDbgMessage( CHAR8 *Str);
 
-#else 
+#else
 
 #define PhysicsDebugMsg(c)
 
@@ -49,7 +49,7 @@ extern	void		PhysicsDbgMessage( CHAR8 *Str);
 
 extern	void		AiDbgMessage( CHAR8 *Str);
 
-#else 
+#else
 
 #define AiDebugMsg(c)
 

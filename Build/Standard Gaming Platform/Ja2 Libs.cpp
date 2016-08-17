@@ -1,6 +1,6 @@
 #include "LibraryDataBase.h"
-LibraryInitHeader gGameLibaries[ ] = 
-{ 
+LibraryInitHeader gGameLibaries[ ] =
+{
 		//Library Name					Can be	Init at start
 //													on cd
 	{ "Data.slf",							FALSE, TRUE },

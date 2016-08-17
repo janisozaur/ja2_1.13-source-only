@@ -5,16 +5,16 @@
 #else
 	#include "DirectDraw Calls.h"
 	#include <stdio.h>
-	#include "debug.h"
+	#include "Debug.h"
 	#if defined( JA2 ) || defined( UTIL )
-		#include "video.h"
+		#include "Video.h"
 	#else
 		#include "video2.h"
 	#endif
 	#include "himage.h"
-	#include "vobject.h"
-	#include "wcheck.h"
-	#include "vobject_blitters.h"
+	#include "VObject.h"
+	#include "WCheck.h"
+	#include "VObject_blitters.h"
 	#include "sgp.h"
 #endif
 
@@ -65,10 +65,10 @@ HLIST		ghVideoObjects = NULL;
 BOOLEAN	gfVideoObjectsInit=FALSE;
 
 #ifndef SGP_VIDEO_DEBUGGING
-	#define USE_HASHMAP_FOR_VOBJECTS 
+	#define USE_HASHMAP_FOR_VOBJECTS
 #endif
 
-#ifdef USE_HASHMAP_FOR_VOBJECTS 
+#ifdef USE_HASHMAP_FOR_VOBJECTS
 typedef struct VOBJECT_NODE
 {
 	HVOBJECT hVObject;
@@ -568,7 +568,7 @@ HVOBJECT CreateVideoObject( VOBJECT_DESC *VObjectDesc )
 			if(hImage->ubBitDepth == 32)
 			{
 				SGP_THROW_IFFALSE(hImage->usNumberOfObjects > 0, L"bad himage");
-				
+
 				// create one 16bpp object (that contains 32bpp data)
 				hVObject->p16BPPObject = (SixteenBPPObjectInfo*)MemAlloc(sizeof(SixteenBPPObjectInfo));
 				if(!hVObject->p16BPPObject)
@@ -929,16 +929,16 @@ BOOLEAN BltVideoObjectToBuffer( UINT16 *pBuffer, UINT32 uiDestPitchBYTES, HVOBJE
 				SGP_THROW_IFFALSE(usIndex < hSrcVObject->usNumberOf16BPPObjects, L"index larger that number images");
 				image = &hSrcVObject->p16BPPObject[usIndex];
 #if 0
-				Blt16BPPTo16BPPTrans( pBuffer, uiDestPitchBYTES, 
+				Blt16BPPTo16BPPTrans( pBuffer, uiDestPitchBYTES,
 					image->p16BPPData, image->usWidth * sizeof(UINT16),
-					iDestX, iDestY, 
+					iDestX, iDestY,
 					0, 0, image->usWidth, image->usHeight,
-					0 ); 
+					0 );
 #else
-				Blt32BPPTo16BPPTrans( pBuffer, uiDestPitchBYTES, 
+				Blt32BPPTo16BPPTrans( pBuffer, uiDestPitchBYTES,
 					(UINT32*)image->p16BPPData, image->usWidth * sizeof(UINT32),
-					iDestX, iDestY, 
-					0, 0, image->usWidth, image->usHeight); 
+					iDestX, iDestY,
+					0, 0, image->usWidth, image->usHeight);
 #endif
 				break;
 
@@ -947,16 +947,16 @@ BOOLEAN BltVideoObjectToBuffer( UINT16 *pBuffer, UINT32 uiDestPitchBYTES, HVOBJE
 				image = &hSrcVObject->p16BPPObject[usIndex];
 				if ( fBltFlags & VO_BLT_SRCTRANSPARENCY	)
 				{
-					Blt16BPPTo16BPPTrans( pBuffer, uiDestPitchBYTES, 
+					Blt16BPPTo16BPPTrans( pBuffer, uiDestPitchBYTES,
 						image->p16BPPData, image->usWidth * sizeof(UINT16),
-						iDestX, iDestY, 
+						iDestX, iDestY,
 						0, 0, image->usWidth, image->usHeight, 0x1F ); // 0x1f = 5 bits of blue
 				}
 				else
 				{
-					Blt16BPPTo16BPP( pBuffer, uiDestPitchBYTES, 
+					Blt16BPPTo16BPP( pBuffer, uiDestPitchBYTES,
 						image->p16BPPData, image->usWidth * sizeof(UINT16),
-						iDestX, iDestY, 
+						iDestX, iDestY,
 						0, 0, image->usWidth, image->usHeight );
 				}
 

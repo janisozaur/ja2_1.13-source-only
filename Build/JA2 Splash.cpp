@@ -2,8 +2,8 @@
 	#include "JA2 All.h"
 #else
 #include "Types.h"
-#include "vsurface.h"
-#include "mainmenuscreen.h"
+#include "VSurface.h"
+#include "MainMenuScreen.h"
 #include "Video.h"
 #include "Timer Control.h"
 #include "Multi Language Graphic Utils.h"

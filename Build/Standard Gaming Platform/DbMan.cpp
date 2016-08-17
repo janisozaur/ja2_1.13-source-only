@@ -21,7 +21,7 @@
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 	#include "WIZ8 SGP ALL.H"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include <stdlib.h>
 	#include <malloc.h>
 	#include <stdio.h>
@@ -140,7 +140,7 @@ typedef struct DbSystemTag
 } DbSystem;
 
 // this is for reading the database file
-typedef struct DbHeaderTag 
+typedef struct DbHeaderTag
 {
 	CHAR		strSignature[20];
 	INT32		iNumFiles;
@@ -148,7 +148,7 @@ typedef struct DbHeaderTag
 } DbHeader;
 
 // this is for reading the database file
-typedef struct IndexMemberTag 
+typedef struct IndexMemberTag
 {
 	CHAR		strFilename[IM_FILENAME_LENGTH];
 	INT32		iFileSize;
@@ -398,7 +398,7 @@ HDBINDEX DbOpen( STR strFilename )
 		DbInfo *pNew;
 
 		pNew = (DbInfo *) MemRealloc( gdb.pDBFiles, gdb.uiNumDBFiles + NUM_FILES_TO_ADD_AT_A_TIME );
-		
+
 		if ( !pNew )
 		{
 			return(0);
@@ -488,7 +488,7 @@ HDBFILE DbFileOpen( STR strFilename )
 	}
 	if ( i == gdb.pDBFiles[hDBIndex].uiNumFiles )
 	{
-		DbFile	*pNew; 
+		DbFile	*pNew;
 
 		pNew = (DbFile *) MemRealloc( gdb.pDBFiles[hDBIndex].pOpenFiles,
 								gdb.pDBFiles[hDBIndex].uiNumFiles + NUM_FILES_TO_ADD_AT_A_TIME );

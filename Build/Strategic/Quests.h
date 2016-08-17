@@ -2,7 +2,7 @@
 #define __QUESTS_H
 
 #include "FileMan.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 
 //	Quest.ubStatus values
 #define QUESTNOTSTARTED					0
@@ -94,12 +94,12 @@ enum Quests
 // Drassen. Result allows player to hire on 2 of Miguel's guys.
 #define QUEST_FOOD_ROUTE				1
 
-// terrorist quests: 3 out of possible 6 per game - randomized which 3 and where. The 
+// terrorist quests: 3 out of possible 6 per game - randomized which 3 and where. The
 // Bounty Hunter will either appear in CAMBRIA or ALMA. He'll give a diskette with files
 // on three of these terrorists. (we won't give files for all six since it may confuse
 // player if ony 3 of them exist). The files will contain photographs. The terrorists will go
-// by aliases and the photographs will be hard to tell if the NPC is really a terrorist. 
-// Bounty Hunter will give reward ($$$ CASH $$$) for proof of each death. 
+// by aliases and the photographs will be hard to tell if the NPC is really a terrorist.
+// Bounty Hunter will give reward ($$$ CASH $$$) for proof of each death.
 #define QUEST_KILL_TERRORISTS				2
 #define QUEST_KILL_IMPOSTER			3
 #define QUEST_KILL_TERRORIST3		4
@@ -117,22 +117,22 @@ enum Quests
 #define QUEST_MEDICAL_FACILITY	9		// Cambria
 
 
-// A hermit will exist in each game, but in a different location. The player can try to 
+// A hermit will exist in each game, but in a different location. The player can try to
 // talk to him, but he won't admit much. If the player threatens him, he gets his pet blood
 // cats to attack the player. However, if the player talks to the hermit's brother, the brother
 // will give valuable info (a code phrase) to the player that will allow the hermit to talk
-// to the player, telling him about using creature blood when in the mines and giving him a 
+// to the player, telling him about using creature blood when in the mines and giving him a
 // vile - good enough for 3 mercs.
 #define QUEST_FIND_HERMIT				10
 
 
-// SAN MONA is a tough town. Player will find it tough to get any info out of any residents 
+// SAN MONA is a tough town. Player will find it tough to get any info out of any residents
 // because they won't trust the player's mercs. SAN MONA doesn't have it as tough as any of
 // the other towns - the local authorities (Queen's police) is as corrupt as the residents
 // and to protect themselves they don't deal with outsiders. All residents will more or less
 // let the player know that unless the word comes down from the top dude, no one will speak
-// or deal with them. So, the player must seek out the top dude who'll want the player to 
-// fight his strongest bodyguard (hand to hand or knife). 
+// or deal with them. So, the player must seek out the top dude who'll want the player to
+// fight his strongest bodyguard (hand to hand or knife).
 #define QUEST_SAN_MONA_FIGHT		11
 
 
@@ -140,7 +140,7 @@ enum Quests
 // Need a way to bring a kid giving us something into the picture.
 
 
-// Micky returns in JA2 but with a new occupation. 
+// Micky returns in JA2 but with a new occupation.
 #define QUEST_FIND_MICKY				12
 
 
@@ -152,17 +152,17 @@ enum Quests
 
 #define QUEST_KILL_BUGS					15	// Queen bug - randomized location?
 
-// 
+//
 #define QUEST_ESCAPE_MEDUNA			16
 
 // Arulco farmer in F11 (Juan Erizia) is suspected of harboring a weapons cache in support
 // of the Queen's forces. Player finds out about him in Cambria via conversation with a non
-// family member (many of Cambria's residents are related/Erizias). So, player can go 
+// family member (many of Cambria's residents are related/Erizias). So, player can go
 // investigate. F11 must be liberated and Juan Erizia must still be alive. We randomize
 // between QUEST_WEAPON_FARM and QUEST_SICK_WIFE. Player goes to talk to Juan. If he arrives
 // during nighttime, there won't be too many cousins hanging around, but player has to be
-// careful 
-//any attempt to 
+// careful
+//any attempt to
 // investigate will awaken everyone, a battle will ensue.
 
 
@@ -185,7 +185,7 @@ enum Quests
 #define QUEST_SICK_WIFE					18
 
 
-// Queen has removed a national & historic treasure from the ruins of Chitzena. It is 
+// Queen has removed a national & historic treasure from the ruins of Chitzena. It is
 // believed a wealthy supporter of the Queen purchased the item and that it is located in
 // his home in Balime. Returning the treasure to Chitzena boosts loyalty points.
 #define QUEST_RUIN_ARTIFACT			19
@@ -330,7 +330,7 @@ enum Facts
 	FACT_ANGEL_LEFT_DEED,//																		120
 
 	FACT_NPC_BANDAGED_TODAY =																	122,
-	
+
 	FACT_PABLO_WONT_STEAL = 																	124,
 	FACT_AGENTS_PREVENTED_SHIPMENT,//													125
 
@@ -341,7 +341,7 @@ enum Facts
 	FACT_SMALL_AMOUNT_OF_MONEY,//															128
 
 	// anv: it was 130 in Waldo script
-	FACT_HELICOPTER_LOST =																	130, 
+	FACT_HELICOPTER_LOST =																	130,
 
 	FACT_LOYALTY_OKAY =																				135,
 	FACT_LOYALTY_LOW,//																				136
@@ -353,7 +353,7 @@ enum Facts
 	FACT_CURRENT_SECTOR_C13,//																142
 	FACT_CARMEN_HAS_TEN_THOUSAND,//														143
 	FACT_SLAY_HIRED_AND_WORKED_FOR_48_HOURS,//								144
-	
+
 	FACT_SLAY_IN_SECTOR =																			146,
 
 	FACT_VINCE_EXPLAINED_HAS_TO_CHARGE =											148,
@@ -435,7 +435,7 @@ enum Facts
 	FACT_PLAYER_FORCED_WAY_INTO_BROTHEL,//										237
 
 	FACT_PLAYER_PAID_FOR_TWO_IN_BROTHEL =											239,
-	
+
 	FACT_PLAYER_OWNS_2_TOWNS_INCLUDING_OMERTA =								242,
 	FACT_PLAYER_OWNS_3_TOWNS_INCLUDING_OMERTA,//							243
 	FACT_PLAYER_OWNS_4_TOWNS_INCLUDING_OMERTA,//							244
@@ -468,7 +468,7 @@ enum Facts
 	FACT_WILLIS_HEARD_ABOUT_JOEY_RESCUE,//										271
 	FACT_WILLIS_GIVES_DISCOUNT,//															272
 	FACT_HILLBILLIES_KILLED,//																273
-	FACT_KEITH_OUT_OF_BUSINESS,	//														274												
+	FACT_KEITH_OUT_OF_BUSINESS,	//														274
 	FACT_MIKE_AVAILABLE_TO_ARMY,//														275
 	FACT_KINGPIN_CAN_SEND_ASSASSINS,//												276
 	FACT_ESTONI_REFUELLING_POSSIBLE,//						277
@@ -494,7 +494,7 @@ enum Facts
 
 	FACT_VINCE_ALIVE = 																				299,
 	FACT_JENNY_ALIVE,//																				300
-	
+
 	FACT_ARNOLD_ALIVE =																				303,
 	FACT_ROCKET_RIFLE_EXISTS,//																304,
 	FACT_24_HOURS_SINCE_JOEY_RESCUED,//												305
@@ -566,8 +566,8 @@ enum Facts
 	FACT_BOUNTYHUNTER_SECTOR_2,
 	FACT_BOUNTYHUNTER_KILLED_1,
 	FACT_BOUNTYHUNTER_KILLED_2,
-	
-#ifdef JA2UB	
+
+#ifdef JA2UB
 	//Ja25 UB
 	FACT_IMPORTED_SAVE_AND_MARY_WAS_DEAD	=										400,
 	FACT_JOHN_KULBA_OFFERED_TO_BE_RECRUITED,//								401,
@@ -696,6 +696,6 @@ extern BOOLEAN CheckTalkerUnpropositionedFemale( void );
 
 
 
- 
+
 
 

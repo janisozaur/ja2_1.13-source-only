@@ -6,24 +6,24 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Laptop All.h"
 #include "IMP Skill Trait.h"
-#include "_Ja25Englishtext.h"
+#include "_Ja25EnglishText.h"
 #else
 #include "IMP Gear.h"
 #include "IMP Skill Trait.h"
 #include "Button System.h"
-#include "utilities.h"
+#include "Utilities.h"
 #include "Debug.h"
 #include "Text.h"
 #include "Font Control.h"
-#include "font.h"
-#include "laptop.h"
-#include "cursors.h"
+#include "Font.h"
+#include "Laptop.h"
+#include "Cursors.h"
 #include "IMP MainPage.h"
 #include "IMPVideoObjects.h"
 #include "_Ja25EnglishText.h"
-#include "wordwrap.h"
+#include "WordWrap.h"
 #include "CharProfile.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 #include "IMP Compile Character.h"
 #include "GameSettings.h"
 #include "Interface.h"
@@ -81,7 +81,7 @@ enum impgeardropdownenums
 	IMPGEAR_DROPDOWN_GUN_2,
 	IMPGEAR_DROPDOWN_AMMO_2,
 	IMPGEAR_DROPDOWN_MELEE,
-		
+
 	IMPGEAR_DROPDOWN_HELMET,
 	IMPGEAR_DROPDOWN_VEST,
 	IMPGEAR_DROPDOWN_LEGS,
@@ -242,11 +242,11 @@ void EnterIMPGear( void )
 	gIMPGearMaximum[IMPGEAR_DROPDOWN_MISC_6] = 4;
 	pIMPGEARDropDown[IMPGEAR_DROPDOWN_MISC_7] = &DropDownTemplate<DROPDOWNNR_IMPGEAR_MISC_7>::getInstance( );
 	gIMPGearMaximum[IMPGEAR_DROPDOWN_MISC_7] = 4;
-	
+
 	// determine all possible items
 	CalculatePossibleItems();
 
-	DistributePossibleItemsOnDropDowns();	
+	DistributePossibleItemsOnDropDowns();
 
 	UINT16 usX = LAPTOP_SCREEN_UL_X + 20 + IMP_GEAR_ITEMDISPLAY_WIDTH;
 	UINT16 usY = LAPTOP_SCREEN_WEB_UL_Y + 30;
@@ -390,8 +390,8 @@ void IMPGearDisplay( )
 {
 	//Display the title
 	DrawTextToScreen( szIMPGearWebSiteText[5], IMP_GEAR__TITLE_X, LAPTOP_TITLE_Y, LAPTOP_TEXT_WIDTH, FONT14ARIAL, IMP_GEAR__COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
-	// depending on guns selected, we need to alter the ammochoices	
+
+	// depending on guns selected, we need to alter the ammochoices
 	{
 		if ( pIMPGEARDropDown[IMPGEAR_DROPDOWN_GUN_1]->HasEntries() )
 		{
@@ -418,7 +418,7 @@ void IMPGearDisplay( )
 						++usLoop;
 					}
 				}
-			
+
 				pIMPGEARDropDown[IMPGEAR_DROPDOWN_AMMO_1]->SetEntries( entries );
 				pIMPGEARDropDown[IMPGEAR_DROPDOWN_AMMO_1]->SetNthEntry( 1 );
 				pIMPGEARDropDown[IMPGEAR_DROPDOWN_AMMO_1]->Create( pIMPGEARDropDown[IMPGEAR_DROPDOWN_AMMO_1]->GetX(), pIMPGEARDropDown[IMPGEAR_DROPDOWN_AMMO_1]->GetY() );
@@ -493,7 +493,7 @@ void IMPGearDisplay( )
 			gIMPGearCount[i] = 0;
 		}
 	}
-	
+
 	CHAR16 wTemp[50];
 	swprintf( wTemp, szIMPGearWebSiteText[6], GetIMPGearCost( ) );
 	DrawTextToScreen( wTemp, LAPTOP_SCREEN_UL_X + 180, LAPTOP_SCREEN_WEB_UL_Y + 360, LAPTOP_TEXT_WIDTH, FONT14ARIAL, IMP_GEAR__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
@@ -604,7 +604,7 @@ void CalculatePossibleItems()
 		if ( gfSkillTraitQuestions[uiCnt] && gfSkillTraitQuestions2[uiCnt] )
 		{
 			if ( gGameOptions.fNewTraitSystem )
-			{				
+			{
 				switch ( uiCnt )
 				{
 				case IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS:		AddItemCategoryToPossibleGear( IMP_AUTO_WEAPONS_EXP );	break;
@@ -715,7 +715,7 @@ void CalculatePossibleItems()
 				case IMP_SKILL_TRAITS_NEW_SCOUTING:			AddItemCategoryToPossibleGear( IMP_SCOUTING );	break;
 				case IMP_SKILL_TRAITS_NEW_RADIO_OPERATOR:	AddItemCategoryToPossibleGear( IMP_RADIO_OPERATOR );	break;
 				case IMP_SKILL_TRAITS_NEW_SURVIVAL:			AddItemCategoryToPossibleGear( IMP_SURVIVAL );	break;
-					
+
 				default:
 					break;
 				}
@@ -748,7 +748,7 @@ void DistributePossibleItemsOnDropDowns()
 {
 	// these vectors contain the items to be shown in the dropdowns
 	std::map< UINT16, std::vector<std::pair<INT16, STR16> > > entryvec;
-	
+
 	// it is always possible to not select something
 	for ( int i = 0; i < IMPGEAR_DROPDOWN_MAX; ++i )
 	{
@@ -800,7 +800,7 @@ void DistributePossibleItemsOnDropDowns()
 				break;
 			case BACKPACK:
 				entryvec[IMPGEAR_DROPDOWN_LBE3].push_back( std::make_pair( usItem, Item[usItem].szItemName ) );
-				break;			
+				break;
 			default:
 				entryvec[IMPGEAR_DROPDOWN_LBE4].push_back( std::make_pair( usItem, Item[usItem].szItemName ) );
 				entryvec[IMPGEAR_DROPDOWN_LBE5].push_back( std::make_pair( usItem, Item[usItem].szItemName ) );

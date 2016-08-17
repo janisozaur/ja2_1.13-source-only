@@ -3,24 +3,24 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
 
 #ifndef PRECOMPILEDHEADERS
 	#include "tiledef.h"
-	#include "vsurface.h"
-	#include "worlddat.h"
-	#include "random.h"
-	#include "sysutil.h"
+	#include "VSurface.h"
+	#include "WorldDat.h"
+	#include "Random.h"
+	#include "SysUtil.h"
 	#include "Font Control.h"
 	#include "selectwin.h"
 	#include "EditorDefines.h"
 	#include "Editor Taskbar Utils.h"
 #endif
 
-#include "vobject_blitters.h"
+#include "VObject_blitters.h"
 #include "Text.h"
 
 extern BOOLEAN gfOverheadMapDirty;

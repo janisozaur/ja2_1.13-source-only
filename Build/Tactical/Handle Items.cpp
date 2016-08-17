@@ -1,79 +1,79 @@
-#include "connect.h"
+#include "Connect.h"
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "items.h"
+	#include "Items.h"
 	#include "Action Items.h"
-	#include "handle Items.h"
-	#include "overhead.h"
-	#include "weapons.h"
-	#include "points.h"
+	#include "Handle Items.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
+	#include "Points.h"
 	#include "tiledef.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "interface.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "Interface.h"
+	#include "RenderWorld.h"
 	#include "Animation Control.h"
-	#include "font control.h"
-	#include "render dirty.h"
-	#include "World items.h"
-	#include "text.h"
+	#include "Font Control.h"
+	#include "Render Dirty.h"
+	#include "World Items.h"
+	#include "Text.h"
 	#include "Timer Control.h"
-	#include "wcheck.h"
-	#include "interface items.h"
-	#include "physics.h"
-	#include "soldier profile.h"
-	#include "interface dialogue.h"
-	#include "quests.h"
-	#include "message.h"
-	#include "isometric utils.h"
-	#include "los.h"
-	#include "dialogue control.h"
-	#include "ai.h"
-	#include "soldier macros.h"
-	#include "interface panels.h"
+	#include "WCheck.h"
+	#include "Interface Items.h"
+	#include "Physics.h"
+	#include "Soldier Profile.h"
+	#include "Interface Dialogue.h"
+	#include "Quests.h"
+	#include "Message.h"
+	#include "Isometric Utils.h"
+	#include "LOS.h"
+	#include "Dialogue Control.h"
+	#include "AI.h"
+	#include "Soldier Macros.h"
+	#include "Interface Panels.h"
 	#include "Strategic Town Loyalty.h"
-	#include "soldier functions.h"
+	#include "Soldier Functions.h"
 	#include "Map Screen Helicopter.h"
-	#include "pathai.h"
+	#include "PathAI.h"
 	#include "fov.h"
 	#include "MessageBoxScreen.h"
-	#include "explosion control.h"
+	#include "Explosion Control.h"
 	#include "SkillCheck.h"
 	#include "Campaign.h"
 	#include "Random.h"
-	#include "structure wrap.h"
-	#include "interactive tiles.h"
+	#include "Structure Wrap.h"
+	#include "Interactive Tiles.h"
 	#include "SaveLoadMap.h"
 	#include "ShopKeeper Interface.h"
 	#include "Arms Dealer Init.h"
-	#include "soldier add.h"
+	#include "Soldier Add.h"
 	#include "Sound Control.h"
-	#include "squads.h"
-	#include "rotting corpses.h"
-	#include "soldier ani.h"
+	#include "Squads.h"
+	#include "Rotting Corpses.h"
+	#include "Soldier Ani.h"
 	#include "Opplist.h"
 	#include "qarray.h"
-	#include "render fun.h"
+	#include "Render Fun.h"
 	#include "Map Information.h"
 	#include "GameSettings.h"
-	#include "end game.h"
-	#include "interface control.h"
+	#include "End Game.h"
+	#include "Interface Control.h"
 	#include "Map Screen Interface Map Inventory.h"
 	// added by SANDRO
 	#include "Morale.h"
 	// added by Flugente
-	#include "drugs and alcohol.h"
+	#include "Drugs And Alcohol.h"
 	#include "Food.h"
 	// added by sevenfm - this is needed for _keydown(SHIFT) to work
-	#include "english.h"
+	#include "English.h"
 
 	#include <iostream>	// added by Flugente
 	#include <fstream>	// added by Flugente
 	#include "DisplayCover.h"		// added by Flugente
 	#include "Queen Command.h"		// added by Flugente for FindUnderGroundSector(...)
 	#include "LuaInitNPCs.h"		// added by Flugente
-	#include "finances.h"			// added by Flugente
+	#include "Finances.h"			// added by Flugente
 	#include "LaptopSave.h"			// added by Flugente
 	#include "Game Clock.h"			// added by Flugente
 	#include <vfs/Core/vfs_file_raii.h>		// added by Flugente for vfs-stuff
@@ -161,7 +161,7 @@ void CleanWeapons( BOOLEAN fEntireTeam );
 void UpdateGear();
 void StartCorpseMessageBox( SOLDIERTYPE * pSoldier, INT32 sGridNo,  INT8 bLevel );
 
-BOOLEAN	HandleCheckForBadChangeToGetThrough( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pTargetSoldier, INT32 sTargetGridNo , INT8 bLevel ) 
+BOOLEAN	HandleCheckForBadChangeToGetThrough( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pTargetSoldier, INT32 sTargetGridNo , INT8 bLevel )
 {
 	BOOLEAN						fBadChangeToGetThrough = FALSE;
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("HandleCheckForBadChangeToGetThrough"));
@@ -433,7 +433,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 					{
 						// first shot using "virgin" gun... set imprint ID
 						pSoldier->inv[ pSoldier->ubAttackingHand ][0]->data.ubImprintID = pSoldier->ubProfile;
-												
+
 						// this could be an NPC (Krott)
 						if (pSoldier->bTeam == gbPlayerNum)
 						{
@@ -590,7 +590,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 
 						if ( EnoughPoints( pSoldier, sAPCost, 0, FALSE ) )
 						{
-							// we have enough points to do this burst, roll the dice and see if we want to change						
+							// we have enough points to do this burst, roll the dice and see if we want to change
 							pSoldier->DoMercBattleSound( BATTLE_SOUND_LAUGH1 );
 							pSoldier->bDoBurst = TRUE;
 							pSoldier->bWeaponMode = WM_BURST;
@@ -620,7 +620,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 				UINT32 diceSides = RAND_MAX / ( max(10,pSoldier->stats.bMarksmanship) / 10) ;
 
 				DOUBLE avgAPadded;
-				// SANDRO - Slightly changed this formula to make the auto weapons trait little more needed if new traits activated - 
+				// SANDRO - Slightly changed this formula to make the auto weapons trait little more needed if new traits activated -
 				if( gGameOptions.fNewTraitSystem )
 				{
 					// also include possible squadleader bonus
@@ -732,7 +732,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 					if ( pSoldier->sSpreadLocations[ 0 ] != 0 )
 					{
 						SendBeginFireWeaponEvent( pSoldier, pSoldier->sSpreadLocations[ 0 ] );
-						if(is_server || (is_client && pSoldier->ubID <20) ) 
+						if(is_server || (is_client && pSoldier->ubID <20) )
 							send_fire( pSoldier, pSoldier->sSpreadLocations[ 0 ] );
 
 						//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Handle Items.cpp: SendBeginFireWeaponEvent" );
@@ -740,7 +740,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 					else
 					{
 						SendBeginFireWeaponEvent( pSoldier, sTargetGridNo );
-						if(is_server || (is_client && pSoldier->ubID <20) ) 
+						if(is_server || (is_client && pSoldier->ubID <20) )
 							send_fire( pSoldier, sTargetGridNo );
 
 						//ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Handle Items.cpp: SendBeginFireWeaponEvent" );
@@ -858,7 +858,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 			}
 		}
 
-		// Did we get a loaction?		
+		// Did we get a loaction?
 		if (!TileIsOutOfBounds(sGotLocation))
 		{
 			pSoldier->sTargetGridNo = sGridNo;
@@ -1056,7 +1056,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 			UINT8	ubDirection;
 
 			sNewGridNo = FindGridNoFromSweetSpotWithStructDataFromSoldier( pSoldier, pSoldier->usUIMovementMode, 5, &ubDirection, 0, MercPtrs[ ubMercID ] );
-			
+
 			if (!TileIsOutOfBounds(sNewGridNo))
 			{
 				sGridNo = sNewGridNo;
@@ -1134,7 +1134,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 			UINT8	ubDirection;
 
 			sNewGridNo = FindGridNoFromSweetSpotWithStructDataFromSoldier( pSoldier, pSoldier->usUIMovementMode, 5, &ubDirection, 0, MercPtrs[ ubMercID ] );
-			
+
 			if (!TileIsOutOfBounds(sNewGridNo))
 			{
 				sGridNo = sNewGridNo;
@@ -1271,11 +1271,11 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 		// we need to find out in which direction we need to look
 		// sActionGridNo is the gridno we are supposed to sit
 		ubDirection = (UINT8)GetDirectionToGridNoFromGridNo( sGridNo, pSoldier->sGridNo );
-			
+
 		sActionGridNo = FindAdjacentGridEx( pSoldier, sGridNo, &ubDirection, &sAdjustedGridNo, FALSE, FALSE );
 
 		if ( !TileIsOutOfBounds( sActionGridNo ) )
-		{			
+		{
 			// Calculate AP costs...
 			sAPCost += PlotPath( pSoldier, sActionGridNo, NO_COPYROUTE, FALSE, TEMPORARY, (UINT16)pSoldier->usUIMovementMode, NOT_STEALTH, FORWARD, pSoldier->bActionPoints );
 
@@ -1600,7 +1600,7 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 	if ( fDropBomb )
 	{
 		// Save gridno....
-       pSoldier->aiData.sPendingActionData2    = sGridNo;                
+       pSoldier->aiData.sPendingActionData2    = sGridNo;
 
 		if ( pSoldier->sGridNo != sGridNo )
 		{
@@ -1933,7 +1933,7 @@ void HandleSoldierDropBomb( SOLDIERTYPE *pSoldier, INT32 sGridNo )
 				// we now know there is something nasty here
 				gpWorldLevelData[ sGridNo ].uiFlags |= MAPELEMENT_PLAYER_MINE_PRESENT;
 
-				if (pSoldier->inv[ HANDPOS ].MoveThisObjectTo(gTempObject, 1) == 0) 
+				if (pSoldier->inv[ HANDPOS ].MoveThisObjectTo(gTempObject, 1) == 0)
 				{
 					AddItemToPool( sGridNo, &gTempObject, BURIED, pSoldier->pathing.bLevel, WORLD_ITEM_ARMED_BOMB, 0 );
 					// sevenfm: take another item with same id from inventory, only REALTIME
@@ -2042,19 +2042,19 @@ void HandleSoldierThrowItem( SOLDIERTYPE *pSoldier, INT32 sGridNo )
 			// Draw item depending on distance from buddy
 			if ( GetRangeFromGridNoDiff( sGridNo, pSoldier->sGridNo ) < MIN_LOB_RANGE )
 			{
-				
+
 				//ddd maybe need to add check for throwing item class - grenade
-				if( (pSoldier->pThrowParams->ubActionCode == THROW_ARM_ITEM) && 
+				if( (pSoldier->pThrowParams->ubActionCode == THROW_ARM_ITEM) &&
 					( (pSoldier->ubBodyType == BIGMALE) || (pSoldier->ubBodyType == REGMALE) ) )
 					pSoldier->usPendingAnimation = LOB_GRENADE_STANCE;
 				else
 					pSoldier->usPendingAnimation = LOB_ITEM;
-				
+
 			}
-			else			
+			else
 			{
 
-				if( (pSoldier->pThrowParams->ubActionCode == THROW_ARM_ITEM) && 
+				if( (pSoldier->pThrowParams->ubActionCode == THROW_ARM_ITEM) &&
 					( (pSoldier->ubBodyType == BIGMALE) || (pSoldier->ubBodyType == REGMALE) ) )
 					pSoldier->usPendingAnimation = THROW_GRENADE_STANCE;
 				else
@@ -2512,7 +2512,7 @@ void SoldierGetItemFromWorld( SOLDIERTYPE *pSoldier, INT32 iItemIndex, INT32 sGr
 						if ( gWorldItems[ iItemIndex ].usFlags & WORLD_ITEM_TABOO_FOR_MILITIA_EQ_BLUE )
 							gWorldItems[ iItemIndex ].object[0]->data.sObjectFlag |= TAKEN_BY_MILITIA_TABOO_BLUE;
 					}
-					
+
 					if ( !AutoPlaceObject( pSoldier, &(gWorldItems[ iItemIndex ].object ), TRUE ) )
 					{
 						//ADB well we made an animation, should we still use up points?
@@ -2524,7 +2524,7 @@ void SoldierGetItemFromWorld( SOLDIERTYPE *pSoldier, INT32 iItemIndex, INT32 sGr
 						fItemTaken = TRUE;
 					}
 
-					// Flugente: if we remove an object, we basically give it free to overwriting. Thus it is very, VERY bad to theninteract with it, as the code might jsut do that - 
+					// Flugente: if we remove an object, we basically give it free to overwriting. Thus it is very, VERY bad to theninteract with it, as the code might jsut do that -
 					// the object data may be overwritten at any moment! Better remove it after manipulation is finished.
 					RemoveItemFromPool( sGridNo, iItemIndex, pSoldier->pathing.bLevel );
 				}
@@ -2558,7 +2558,7 @@ void SoldierGetItemFromWorld( SOLDIERTYPE *pSoldier, INT32 iItemIndex, INT32 sGr
 			}
 		}
 	}
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 ub
 	//if the item is valid
 	if( iItemIndex != 0 )
@@ -2822,7 +2822,7 @@ OBJECTTYPE* InternalAddItemToPool( INT32 *psGridNo, OBJECTTYPE *pObject, INT8 bV
 	BOOLEAN			fObjectInOpenable = FALSE;
 	INT8		bTerrainID;
 
-	// ATE: Check if the gridno is OK	
+	// ATE: Check if the gridno is OK
 	if (TileIsOutOfBounds((*psGridNo)))
 	{
 		// Display warning.....
@@ -4727,8 +4727,8 @@ void SoldierGiveItemFromAnimation( SOLDIERTYPE *pSoldier )
 		// Switch on target...
 		// Are we a player dude.. ( target? )
 	//	if ( ubProfile < FIRST_RPC || RPC_RECRUITED( pTSoldier ) || ubProfile >= GASTON )
-		//new profiles by Jazz		
-		if ( ( gProfilesAIM[ubProfile].ProfilId == ubProfile || gProfilesMERC[ubProfile].ProfilId == ubProfile || gProfilesIMP[ubProfile].ProfilId == ubProfile ) || RPC_RECRUITED( pTSoldier ) )			
+		//new profiles by Jazz
+		if ( ( gProfilesAIM[ubProfile].ProfilId == ubProfile || gProfilesMERC[ubProfile].ProfilId == ubProfile || gProfilesIMP[ubProfile].ProfilId == ubProfile ) || RPC_RECRUITED( pTSoldier ) )
 		{
 			fToTargetPlayer = TRUE;
 		}
@@ -4873,7 +4873,7 @@ INT32 AdjustGridNoForItemPlacement( SOLDIERTYPE *pSoldier, INT32 sGridNo )
 void StartCorpseMessageBox( SOLDIERTYPE * pSoldier, INT32 sGridNo,  INT8 bLevel )
 {
 	gpTempSoldier = pSoldier;
-		
+
 	wcscpy( gzUserDefinedButton[0], TacticalStr[ DECAPITATE_STR ] );
 	wcscpy( gzUserDefinedButton[1], TacticalStr[ GUT_STR ] );
 	wcscpy( gzUserDefinedButton[2], TacticalStr[ TAKE_CLOTHES_STR ] );
@@ -5012,7 +5012,7 @@ void StartBombMessageBox( SOLDIERTYPE * pSoldier, INT32 sGridNo )
        // sevenfm: zero out color values
        for( INT32 cnt = 0; cnt< NUM_CUSTOM_BUTTONS; cnt++)
            gzUserDefinedButtonColor[cnt] = 0;
-		
+
 		// sevenfm: if SHIFT is pressed - plant tripwire with last network settings
 		if( gfShiftBombPlant && gubLastTripwire > 0 )
 			BombMessageBoxCallBack(gubLastTripwire);
@@ -5089,7 +5089,7 @@ void CleanWeapons( BOOLEAN fEntireTeam )
 			pSoldier->CleanWeapon(FALSE);
 	}
 	else	// perform action for every merc in this sector
-	{	
+	{
 		UINT16									bMercID, bLastTeamID;
 		SOLDIERTYPE*							pSoldier = NULL;
 
@@ -5122,13 +5122,13 @@ OBJECTTYPE* GetBetterSectorObject( UINT16 usItem, INT16 status, UINT8& arIndex )
 	for ( UINT32 uiCount = 0; uiCount < guiNumWorldItems; ++uiCount )				// ... for all items in the world ...
 	{
 		if ( gWorldItems[uiCount].fExists && gWorldItems[uiCount].usFlags & WORLD_ITEM_REACHABLE &&
-			 !(gWorldItems[uiCount].usFlags & WORLD_ITEM_ARMED_BOMB) && gWorldItems[uiCount].bVisible == VISIBLE && 
+			 !(gWorldItems[uiCount].usFlags & WORLD_ITEM_ARMED_BOMB) && gWorldItems[uiCount].bVisible == VISIBLE &&
 			 gWorldItems[uiCount].object.usItem == usItem )
-		{			
+		{
 			OBJECTTYPE* pObj = &(gWorldItems[uiCount].object);
-			
+
 			if ( pObj != NULL && pObj->exists() )
-			{					
+			{
 				for ( UINT8 i = 0; i < pObj->ubNumberOfObjects; ++i )
 				{
 					if ( (*pObj)[i]->data.objectStatus > beststatus )
@@ -5171,7 +5171,7 @@ void UpdateGear()
 	// no functionality if not in tactical or in combat, or nobody is here
 	if ( (guiCurrentScreen != GAME_SCREEN && guiCurrentScreen != MSG_BOX_SCREEN) )
 		return;
-		
+
 	UINT16									bMercID, bLastTeamID;
 	SOLDIERTYPE*							pSoldier = NULL;
 
@@ -5216,7 +5216,7 @@ void UpdateGear()
 
 								if ( totalmags < pObj->ubNumberOfObjects )
 									pObj->RemoveObjectsFromStack( pObj->ubNumberOfObjects - totalmags );
-								
+
 								for ( INT16 i = 0; i < totalmags; ++i )
 									(*pObj)[i]->data.ubShotsLeft = magsize;
 
@@ -5224,7 +5224,7 @@ void UpdateGear()
 									(*pObj)[0]->data.ubShotsLeft = leftover;
 							}
 						}
-						
+
 						for ( INT16 i = 0; i < pObj->ubNumberOfObjects; ++i )				// ... there might be multiple items here (item stack), so for each one ...
 						{
 							// we could improve our gear by changing this object with another one
@@ -5300,8 +5300,8 @@ void UpdateGear()
 						{
 							UINT8 ubSlotLimit = ItemSlotLimit( pObj, bLoop, pSoldier, FALSE );
 							UINT16 usMagIndex = Item[pObj->usItem].ubClassIndex;
-							UINT16 magsize = Magazine[usMagIndex].ubMagSize; 
-							
+							UINT16 magsize = Magazine[usMagIndex].ubMagSize;
+
 							if ( magsize )
 							{
 								while ( pObj->ubNumberOfObjects < ubSlotLimit )
@@ -5314,7 +5314,7 @@ void UpdateGear()
 									if ( pObj_Better )
 									{
 										pObj->AddObjectsToStack( *pObj_Better, add );
-									
+
 										ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, TacticalStr[IMPROVEGEARPICKUPMAG_STR], pSoldier->GetName( ), Item[pObj->usItem].szItemName );
 
 										// re-merge the magazines again, in case we picked up not full magazines
@@ -5366,7 +5366,7 @@ void BombMessageBoxCallBack( UINT8 ubExitValue )
 		else
 		{
 			INT32 iResult;
-			
+
 			if ( HasAttachmentOfClass( &(gpTempSoldier->inv[HANDPOS]), AC_REMOTEDET ) )
 			{
 				iResult = SkillCheck( gpTempSoldier, PLANTING_REMOTE_BOMB_CHECK, 0 );
@@ -5464,11 +5464,11 @@ void BombMessageBoxCallBack( UINT8 ubExitValue )
 				// Flugente: backgrounds
 				if ( gpTempSoldier->HasBackgroundFlag( BACKGROUND_TRAPLEVEL ) )
 					(*pObj)[0]->data.bTrap++;
-				
+
 				// HACK IMMINENT!
 				// value of 1 is stored in maps for SIDE of bomb owner... when we want to use IDs!
 				// so we add 2 to all owner IDs passed through here and subtract 2 later
-				if ( pObj != &(gpTempSoldier->inv[HANDPOS]) || gpTempSoldier->inv[HANDPOS].MoveThisObjectTo(gTempObject, 1) == 0) 
+				if ( pObj != &(gpTempSoldier->inv[HANDPOS]) || gpTempSoldier->inv[HANDPOS].MoveThisObjectTo(gTempObject, 1) == 0)
 				{
 					gTempObject[0]->data.misc.ubBombOwner = gpTempSoldier->ubID + 2;
 					gTempObject[0]->data.ubDirection = gpTempSoldier->ubDirection;		// Flugente: direction of bomb is direction of soldier
@@ -5486,7 +5486,7 @@ void BombMessageBoxCallBack( UINT8 ubExitValue )
 					}
 					else
 						AddItemToPool( gsTempGridNo, &gTempObject, VISIBLE, gpTempSoldier->pathing.bLevel, WORLD_ITEM_ARMED_BOMB, 0 );
-				}				
+				}
 			}
 		}
 	}
@@ -5506,7 +5506,7 @@ void TacticalFunctionSelectionMessageBoxCallBack( UINT8 ubExitValue )
 			SectorFillCanteens();
 			break;
 		case 2:
-       		// undisguise or take off custom clothes 
+       		// undisguise or take off custom clothes
 			gpTempSoldier->Strip();
 			break;
        case 3:
@@ -5559,13 +5559,13 @@ void CorpseMessageBoxCallBack( UINT8 ubExitValue )
 			if ( DecapitateCorpse( gpTempSoldier, nextGridNoinSight, level ) )
 				fDamageKnife = TRUE;
 
-			DeductPoints( gpTempSoldier, sAPCost, 0 );			
+			DeductPoints( gpTempSoldier, sAPCost, 0 );
 			break;
 		case 2:
 			if ( GutCorpse( gpTempSoldier, nextGridNoinSight, level ) )
 				fDamageKnife = TRUE;
 
-			DeductPoints( gpTempSoldier, sAPCost, 0 );			
+			DeductPoints( gpTempSoldier, sAPCost, 0 );
 			break;
 		case 3:
 			StripCorpse( gpTempSoldier, nextGridNoinSight, level );
@@ -5844,7 +5844,7 @@ void BoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
 				{
 					// disarmed our team's boobytrap!
 					StatChange( gpBoobyTrapSoldier, EXPLODEAMT, (UINT16) (4 * gbTrapDifficulty), FALSE );
-					
+
 					// SANDRO - merc records - trap removal count (don't count our own traps)
 					gMercProfiles[ gpBoobyTrapSoldier->ubProfile ].records.usTrapsRemoved++;
 				}
@@ -5907,7 +5907,7 @@ void BoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
 						gTempObject.fFlags &= ~(OBJECT_ARMED_BOMB);
 						gTempObject[0]->data.misc.bDetonatorType = 0;
 					}
-					
+
 					if (is_networked && is_client)
 					{
 						OBJECTTYPE TempAttachment;
@@ -5917,12 +5917,12 @@ void BoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
 							// attack a remote deonator, but they will need a trigger to use it :)
 							CreateItem( REMDETONATOR, gTempObject[0]->data.misc.bBombStatus, &TempAttachment );
 						}
-						else 
+						else
 						{
 							// always just give a timed detonator so they can use it
 							CreateItem( DETONATOR, gTempObject[0]->data.misc.bBombStatus, &TempAttachment );
 						}
-						
+
 						if (ValidAttachment( TempAttachment.usItem , &gTempObject ))
 						{
 							gTempObject.AttachObject(NULL, &TempAttachment, FALSE);
@@ -5972,7 +5972,7 @@ void BoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
 					// ATE; If we failed to add to inventory, put failed one in our cursor...
 					gfDontChargeAPsToPickup = TRUE;
 					HandleAutoPlaceFail( gpBoobyTrapSoldier, gpBoobyTrapItemPool->iItemIndex, gsBoobyTrapGridNo );
-			
+
 					// OJW - 20091029 - disarm explosives
 					if (is_networked && is_client)
 						send_disarm_explosive( gsBoobyTrapGridNo , gpBoobyTrapItemPool->iItemIndex , gpBoobyTrapSoldier->ubID );
@@ -6002,12 +6002,12 @@ void BoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
 		else
 		{
 			// oops! trap goes off
-			gpBoobyTrapSoldier->DoMercBattleSound( BATTLE_SOUND_CURSE1 ); 
-			
+			gpBoobyTrapSoldier->DoMercBattleSound( BATTLE_SOUND_CURSE1 );
+
 			if ( HasItemFlag( gTempObject.usItem, BEARTRAP ) )
 				return;
 
-			StatChange( gpBoobyTrapSoldier, EXPLODEAMT, (INT8)(3 * gbTrapDifficulty), FROM_FAILURE );			
+			StatChange( gpBoobyTrapSoldier, EXPLODEAMT, (INT8)(3 * gbTrapDifficulty), FROM_FAILURE );
 
 			if (gfDisarmingBuriedBomb)
 			{
@@ -6171,7 +6171,7 @@ BOOLEAN NearbyGroundSeemsWrong( SOLDIERTYPE * pSoldier, INT32 sGridNo, BOOLEAN f
 	// Flugente: changed the way the metal detector works: now it detects mines only when it is used in hands, not if it is anywhere in the inventory.
 	// Reason: with the new tripwire functionality and th new ability of a detector to spot mines several tiles away the detector s more useful.
 	// However, the most likely persons to use it (explosive experts) are also those that plant those networks. They will often have a detector in their inventory.
-	// If the detector just works if its in inventory, they autoflag the mines they are laying, which is bad. 
+	// If the detector just works if its in inventory, they autoflag the mines they are laying, which is bad.
 	// With this change, a detector must be in order to work.
 	if ( FindMetalDetectorInHand( pSoldier ) != NO_SLOT )
 	{
@@ -6205,7 +6205,7 @@ BOOLEAN NearbyGroundSeemsWrong( SOLDIERTYPE * pSoldier, INT32 sGridNo, BOOLEAN f
 
 	// sevenfm
 	// pSoldier->aiData.bNeutral is needed to prevent neutral civs stepping on player's mines
-	if (pSoldier->bSide == 0 || (pSoldier->aiData.bNeutral && gGameExternalOptions.bNeutralCiviliansAvoidPlayerMines))	
+	if (pSoldier->bSide == 0 || (pSoldier->aiData.bNeutral && gGameExternalOptions.bNeutralCiviliansAvoidPlayerMines))
 	{
 		fCheckFlag = MAPELEMENT_PLAYER_MINE_PRESENT;
 	}
@@ -6215,7 +6215,7 @@ BOOLEAN NearbyGroundSeemsWrong( SOLDIERTYPE * pSoldier, INT32 sGridNo, BOOLEAN f
 	}
 
 	// anv: vehicles and passengers can't detect mines
-	if ( pSoldier->flags.uiStatusFlags & ( SOLDIER_VEHICLE | SOLDIER_DRIVER | SOLDIER_PASSENGER ))	
+	if ( pSoldier->flags.uiStatusFlags & ( SOLDIER_VEHICLE | SOLDIER_DRIVER | SOLDIER_PASSENGER ))
 	{
 		return (FALSE);
 	}
@@ -6289,7 +6289,7 @@ BOOLEAN NearbyGroundSeemsWrong( SOLDIERTYPE * pSoldier, INT32 sGridNo, BOOLEAN f
 							StatChange( pSoldier, EXPLODEAMT, (UINT16) ((*pObj)[0]->data.bTrap), FALSE );
 							StatChange( pSoldier, WISDOMAMT, (UINT16) ((*pObj)[0]->data.bTrap), FALSE );
 
-							// sevenfm: we should stop only if trying to step on bomb or if we found new bomb				
+							// sevenfm: we should stop only if trying to step on bomb or if we found new bomb
 							if(fCheckAroundGridNo && ( (*pObj).fFlags & OBJECT_KNOWN_TO_BE_TRAPPED ) )
 								continue;
 
@@ -6866,7 +6866,7 @@ UINT8 StealItems(SOLDIERTYPE* pSoldier,SOLDIERTYPE* pOpponent, UINT8* ubIndexRet
 
 							break;
 						}
-						case SECONDHANDPOS:					
+						case SECONDHANDPOS:
 						case KNIFEPOCKPOS:
 						case BIGPOCK1POS:
 						case BIGPOCK2POS:
@@ -7001,7 +7001,7 @@ void SoldierStealItemFromSoldier( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pOpponent,
 				if ( gGameExternalOptions.fEnhancedCloseCombatSystem )
 				{
 					if (pSoldier->bActionPoints >= GetBasicAPsToPickupItem( pSoldier ) )
-					{					
+					{
 						// Make copy of item
 						gTempObject = pOpponent->inv[pTempItemPool->iItemIndex];
 						if ( ItemIsCool( &gTempObject ) )
@@ -7017,7 +7017,7 @@ void SoldierStealItemFromSoldier( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pOpponent,
 						// add to merc records
 						if ( pSoldier->ubProfile != NO_PROFILE )
 							gMercProfiles[ pSoldier->ubProfile ].records.usItemsStolen++;
-						
+
 						DeductPoints( pSoldier, GetBasicAPsToPickupItem( pSoldier ), 0, AFTERACTION_INTERRUPT );
 					}
 					else
@@ -7136,7 +7136,7 @@ BOOLEAN IsStructureDeconstructItem( UINT16 usItem, INT32 sGridNo, SOLDIERTYPE* p
 }
 
 BOOLEAN BuildFortification( INT32 sGridNo, SOLDIERTYPE *pSoldier, OBJECTTYPE *pObj )
-{	
+{
 	UINT32				fHeadType;
 	UINT16				usUseIndex;
 	INT16				sUseObjIndex = -1;
@@ -7155,13 +7155,13 @@ BOOLEAN BuildFortification( INT32 sGridNo, SOLDIERTYPE *pSoldier, OBJECTTYPE *pO
 	// needs to be a valid location
 	if ( TileIsOutOfBounds( sGridNo ) )
 		return FALSE;
-	
+
 	// don't build in water
 	if ( TERRAIN_IS_WATER( GetTerrainType( sGridNo ) ) )
 		return FALSE;
 
 	ubDirection = pSoldier->ubDirection;
-	
+
 	// we'll check wether this item is in our index of known creation items
 	BOOLEAN indexfound = FALSE;
 	INT16 structureconstructindex = -1;
@@ -7439,7 +7439,7 @@ UINT8	CheckBuildFortification( INT32 sGridNo, INT8 sLevel, UINT8 usIndex, UINT32
 	INT16				sUseObjIndex = -1;
 	INT32				iRandSelIndex = 1;
 	BOOLEAN				fOkayToAdd;
-	
+
 	// needs to be a valid location
 	if ( TileIsOutOfBounds( sGridNo ) )
 		return 1;
@@ -7451,7 +7451,7 @@ UINT8	CheckBuildFortification( INT32 sGridNo, INT8 sLevel, UINT8 usIndex, UINT32
 	// don't build in water
 	if ( TERRAIN_IS_WATER( GetTerrainType( sGridNo ) ) )
 		return 1;
-			
+
 	// we'll check wether this item is in our index of known creation items
 	BOOLEAN indexfound = FALSE;
 	INT16 structureconstructindex = 0;
@@ -7489,7 +7489,7 @@ UINT8	CheckBuildFortification( INT32 sGridNo, INT8 sLevel, UINT8 usIndex, UINT32
 	// do not build into people
 	if ( NOBODY != WhoIsThere2( sGridNo, sLevel ) )
 		return 2;
-	
+
 	// Check with Structure Database (aka ODB) if we can put the object here!
 	fOkayToAdd = OkayToAddStructureToWorld( sGridNo, sLevel, gTileDatabase[(gTileTypeStartIndex[sUseObjIndex] + usUseIndex)].pDBStructureRef, INVALID_STRUCTURE_ID );
 	if ( fOkayToAdd || (gTileDatabase[(gTileTypeStartIndex[sUseObjIndex] + usUseIndex)].pDBStructureRef == NULL) )
@@ -7520,7 +7520,7 @@ BOOLEAN	BuildFortification( INT32 sGridNo, INT8 sLevel, UINT8 usIndex, UINT32 us
 	// do not build into people
 	if ( NOBODY != WhoIsThere2( sGridNo, sLevel ) )
 		return FALSE;
-	
+
 	// search wether structure exists in the current tilesets. If not, well, too bad
 	for ( INT32 iType = 0; iType < giNumberOfTileTypes; ++iType )
 	{
@@ -7570,7 +7570,7 @@ BOOLEAN	BuildFortification( INT32 sGridNo, INT8 sLevel, UINT8 usIndex, UINT32 us
 			RemoveStruct( sGridNo, (UINT16)(gTileTypeStartIndex[sUseObjIndex] + usIndex) );
 
 			AddStructToHead( sGridNo, (UINT16)(gTileTypeStartIndex[sUseObjIndex] + usIndex) );
-		}			
+		}
 
 		RecompileLocalMovementCosts( sGridNo );
 
@@ -7589,7 +7589,7 @@ BOOLEAN	CanRemoveFortification( INT32 sGridNo, INT8 sLevel, UINT32 usStructureco
 	// needs to be a valid location
 	if ( TileIsOutOfBounds( sGridNo ) )
 		return FALSE;
-	
+
 	STRUCTURE* pStruct = GetTallestStructureOnGridno( sGridNo, sLevel );
 
 	if ( pStruct != NULL )
@@ -7647,7 +7647,7 @@ BOOLEAN	RemoveFortification( INT32 sGridNo, INT8 sLevel, UINT32 usStructureconst
 		return FALSE;
 
 	STRUCTURE* pStruct = GetTallestStructureOnGridno( sGridNo, sLevel );
-	
+
 	if ( pStruct != NULL )
 	{
 		// Get LEVELNODE for struct and remove!
@@ -7658,7 +7658,7 @@ BOOLEAN	RemoveFortification( INT32 sGridNo, INT8 sLevel, UINT32 usStructureconst
 			UINT16 usIndex = pNode->usIndex;
 			UINT32 uiTileType = 0;
 			if ( GetTileType( usIndex, &uiTileType ) )
-			{	
+			{
 				// if tileset is from the current tileset, check that
 				BOOLEAN found = FALSE;
 				if ( gTilesets[giCurrentTilesetID].TileSurfaceFilenames[uiTileType][0] )
@@ -7713,7 +7713,7 @@ BOOLEAN	RemoveFortification( INT32 sGridNo, INT8 sLevel, UINT32 usStructureconst
 							// Turn off permanent changes....
 							ApplyMapChangesToMapTempFile( FALSE );
 							SetRenderFlags( RENDER_FLAG_FULL );
-							
+
 							return TRUE;
 						}
 					}
@@ -7792,7 +7792,7 @@ CHAR16 gCurrentSectorTileIndexNamesChar16[STRUCTURE_CONSTRUCT_MAX][20];
 std::vector<std::pair<INT16, STR16> > GetCurrentSectorTileSetVector()
 {
 	std::vector<std::pair<INT16, STR16> > vec;
-	
+
 	// search wether structure exists in the current tilesets. If not, well, too bad
 	for ( INT32 iType = 0; iType < giNumberOfTileTypes; ++iType )
 	{
@@ -7859,12 +7859,12 @@ std::vector<std::pair<INT16, STR16> > GetCurrentSectorAllowedFortificationTileSe
 			}
 		}
 	}
-	
+
 	for ( std::set< std::pair<INT16, STR16> >::iterator it = pairset.begin( ); it != pairset.end( ); ++it )
 	{
 		vec.push_back( (*it) );
 	}
-		
+
 	return vec;
 }
 
@@ -8004,7 +8004,7 @@ void AddFortificationPlanNode( INT32 sGridNo, INT8 sLevel, INT16 sFortificationS
 	// don't build in water
 	if ( TERRAIN_IS_WATER( GetTerrainType( sGridNo ) ) )
 		return;
-	
+
 	// we have to check whether what we are ordered to build can bere built here (this is necessary, as the selection menu can be avoided)
 	BOOLEAN found = FALSE;
 
@@ -8097,7 +8097,7 @@ void AddFortificationPlanNode( INT32 sGridNo, INT8 sLevel, INT16 sFortificationS
 
 		return;
 	}
-			
+
 	FORTIFICATION_NODE node( sGridNo, sLevel, fAdd, sFortificationStructure, usFortificationTileLibraryIndex );
 
 	UINT8 sector = SECTOR( gWorldSectorX, gWorldSectorY );
@@ -8125,7 +8125,7 @@ void AddFortificationPlanNode( INT32 sGridNo, INT8 sLevel, INT16 sFortificationS
 			// if specified, try to get adjacent nodes to match each other
 			if ( fAdd && gStructureConstruct[node.structurexmlindex].fFortifyAdjacentAdjustment )
 			{
-				// check the adjacent nodes and alter the index fittingly (northern-southern vs eastern-western kind)		
+				// check the adjacent nodes and alter the index fittingly (northern-southern vs eastern-western kind)
 				INT32 nextGridNoinSight = node.sGridNo;
 
 				for ( int i = NORTH; i < NUM_WORLD_DIRECTIONS; i += 2 )
@@ -8201,7 +8201,7 @@ std::vector< std::pair<INT16, std::pair<UINT8, INT8> > > GetAllForticationGridNo
 		for ( SectorFortificationVector::iterator nodeit = vec.begin( ); nodeit != nodeitend; ++nodeit )
 		{
 			UINT16 type = FORTIFICATIONNODE_REMOVE;
-			
+
 			if ( (*nodeit).fBuild )
 			{
 				if ( gStructureConstruct[(*nodeit).structurexmlindex].fFortifyAdjacentAdjustment )
@@ -8225,22 +8225,22 @@ void LoadSectorFortificationPlan( INT16 sSectorX, INT16 sSectorY, INT8 sSectorZ 
 	CHAR8	filename[MAX_PATH];
 
 	UINT8 sector = SECTOR( sSectorX, sSectorY );
-	
+
 	// get sector name for filename
 	CHAR16 wSectorName[64];
 	GetShortSectorString( sSectorX, sSectorY, wSectorName );
-	
+
 	if ( sSectorZ )
 		sprintf( filename, "%s%S_%d.txt", FORTIFICATIONPLAN_DIRECTORY, wSectorName, sSectorZ );
 	else
 		sprintf( filename, "%s%S.txt", FORTIFICATIONPLAN_DIRECTORY, wSectorName );
-	
+
 	// get full path to save file
 	vfs::Path vfsPath;
 	vfs::COpenWriteFile rfile( filename, true );
 	rfile->_getRealPath( vfsPath );
 	std::string str = vfsPath.to_string( );
-	
+
 	const char* filenamewithpath = str.c_str( );
 
 	// Read data
@@ -8267,7 +8267,7 @@ void SaveSectorFortificationPlan( INT16 sSectorX, INT16 sSectorY, INT8 sSectorZ 
 	if ( gSectorFortificationMap.find( sector ) != gSectorFortificationMap.end( ) )
 	{
 		SectorFortificationVector vec = gSectorFortificationMap[sector];
-		
+
 		if ( !vec.empty() )
 		{
 			CHAR8	filename[MAX_PATH];
@@ -8280,7 +8280,7 @@ void SaveSectorFortificationPlan( INT16 sSectorX, INT16 sSectorY, INT8 sSectorZ 
 				sprintf( filename, "%s%S_%d.txt", FORTIFICATIONPLAN_DIRECTORY, wSectorName, sSectorZ );
 			else
 				sprintf( filename, "%s%S.txt", FORTIFICATIONPLAN_DIRECTORY, wSectorName );
-			
+
 			// get full path to save file
 			// what we are doing here might seem rather odd. If the file does not exist, we are creating a new file via vfs... and then create a fresh binary file afterwards.
 			// I found this to be the easiest solution for using both vfs pathing and being able to use a std::fstream
@@ -8291,7 +8291,7 @@ void SaveSectorFortificationPlan( INT16 sSectorX, INT16 sSectorY, INT8 sSectorZ 
 			std::string str = vfsPath.to_string( );
 
 			const char* filenamewithpath = str.c_str( );
-			
+
 			// write
 			std::fstream binary_file( filenamewithpath, std::ios::out );
 
@@ -8315,7 +8315,7 @@ void UpdateFortificationPossibleAmount()
 
 	// update the sector value of how much can still be built by looping through the plan. Only works in the currently loaded sector
 	UINT8 sector = SECTOR( gWorldSectorX, gWorldSectorY );
-		
+
 	if ( gSectorFortificationMap.find( sector ) != gSectorFortificationMap.end( ) )
 	{
 		SectorFortificationVector vec = gSectorFortificationMap[sector];
@@ -8326,7 +8326,7 @@ void UpdateFortificationPossibleAmount()
 		for ( SectorFortificationVector::iterator nodeit = vec.begin(); nodeit != nodeitend; ++nodeit )
 		{
 			FORTIFICATION_NODE node = (*nodeit);
-			
+
 			if ( node.fBuild )
 			{
 				UINT8 buildpossiblestate = CheckBuildFortification( node.sGridNo, node.sLevel, node.usIndex, node.structurexmlindex );
@@ -8346,7 +8346,7 @@ void UpdateFortificationPossibleAmount()
 				maxpossible += gStructureDeconstruct[node.structurexmlindex].dCreationCost;
 			}
 		}
-		
+
 		if ( gbWorldSectorZ )
 		{
 			UNDERGROUND_SECTORINFO *pSector = FindUnderGroundSector( gWorldSectorX, gWorldSectorY, gbWorldSectorZ );
@@ -8380,7 +8380,7 @@ void HandleFortificationUpdate()
 		return;
 
 	UINT8 sector = SECTOR( gWorldSectorX, gWorldSectorY );
-	
+
 	if ( gSectorFortificationMap.find( sector ) != gSectorFortificationMap.end() )
 	{
 		SectorFortificationVector vec = gSectorFortificationMap[sector];
@@ -8415,7 +8415,7 @@ void HandleFortificationUpdate()
 				dFortification_MaxPossible = pSector->dFortification_MaxPossible;
 			}
 		}
-		
+
 		// as we consume resources, we use a map to keep track of them (and lower the amount of looping over the inventory required)
 		std::map< UINT16, INT32 > builditemobjectmap;
 
@@ -8749,7 +8749,7 @@ void ExtendedBoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
 		disarmBP = APBPConstants[BP_DISARM_MINE];
 		if( (gTacticalStatus.uiFlags & TURNBASED ) && (gTacticalStatus.uiFlags & INCOMBAT) )
 			turnbased = TRUE;
-		
+
 		if(gpWorldLevelData[gsBoobyTrapGridNo].uiFlags & MAPELEMENT_PLAYER_MINE_PRESENT)
 			playerMine=TRUE;
 
@@ -8759,7 +8759,7 @@ void ExtendedBoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
                 BoobyTrapMessageBoxCallBack(MSG_BOX_RETURN_YES);
         }
         else if (ubExitValue == 2)
-        { 
+        {
 			if( turnbased )
 			{
 				if(EnoughPoints(gpBoobyTrapSoldier, disarmAP / 2, disarmBP / 2 , TRUE))
@@ -8808,7 +8808,7 @@ void ExtendedBoobyTrapMessageBoxCallBack( UINT8 ubExitValue )
                 else
                 {
                         SetOffBoobyTrap( gpBoobyTrapItemPool );
-                }       
+                }
         }
 }
 
@@ -8816,7 +8816,7 @@ void HandleTakeNewBombFromInventory(SOLDIERTYPE* pSoldier, OBJECTTYPE* pObj)
 {
 	if( !( (gTacticalStatus.uiFlags & TURNBASED ) && (gTacticalStatus.uiFlags & INCOMBAT) ) &&
 			!pSoldier->inv[HANDPOS].exists() && gfShiftBombPlant )
-	{	
+	{
        pSoldier->TakeNewBombFromInventory(pObj->usItem);
 	}
 }
@@ -8827,11 +8827,11 @@ void DoInteractiveAction( INT32 sGridNo, SOLDIERTYPE *pSoldier )
 	// we need a valid soldier and a valid object
 	if ( !pSoldier )
 		return;
-	
+
 	// needs to be a valid location
 	if ( TileIsOutOfBounds( sGridNo ) )
 		return;
-	
+
 	UINT16 structindex;
 	UINT16 possibleaction = InteractiveActionPossibleAtGridNo( sGridNo, pSoldier->pathing.bLevel, structindex );
 
@@ -8950,7 +8950,7 @@ void DoInteractiveActionDefaultResult( INT32 sGridNo, UINT8 ubID, BOOLEAN aSucce
 						aSuccess = TRUE;
 					}
 				}
-			}				
+			}
 
 			if ( aSuccess )
 			{

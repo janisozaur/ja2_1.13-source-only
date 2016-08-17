@@ -16,7 +16,7 @@
 #define		AIM_FI_CLICK_TEXT_WIDTH						110
 
 #define		AIM_FI_HELP_FONT									FONT10ARIAL
-#define		AIM_FI_HELP_TITLE_FONT						FONT12ARIAL	
+#define		AIM_FI_HELP_TITLE_FONT						FONT12ARIAL
 #define	IM_FI_HELP_COLOR							FONT_MCOLOR_WHITE
 
 void GameInitAimFacialIndex();
@@ -34,6 +34,6 @@ extern UINT8 START_MERC;
 
 
 
- 
+
 
 

@@ -16,7 +16,7 @@
 /// option) any later version.
 
 #ifndef __LINKED_LIST_H
-#define __LINKED_LIST_H 
+#define __LINKED_LIST_H
 
 #include "Export.h"
 #include "RakMemoryOverride.h"
@@ -34,8 +34,8 @@ namespace DataStructures
 	class RAK_DLL_EXPORT LinkedList;
 
 	/**
-	* \brief (Circular) Linked List ADT (Doubly Linked Pointer to Node Style) - 
-	* 
+	* \brief (Circular) Linked List ADT (Doubly Linked Pointer to Node Style) -
+	*
 	* By Kevin Jenkins (http://www.rakkar.org)
 	* Initilize with the following command
 	* LinkedList<TYPE>
@@ -44,37 +44,37 @@ namespace DataStructures
 	*
 	* Has the following member functions
 	* - size: returns number of elements in the linked list
-	* - insert(item):  inserts @em item at the current position in 
+	* - insert(item):  inserts @em item at the current position in
 	*   the LinkedList.
-	* - add(item): inserts @em item after the current position in 
+	* - add(item): inserts @em item after the current position in
 	*   the LinkedList.  Does not increment the position
 	* - replace(item): replaces the element at the current position @em item.
 	* - peek:  returns the element at the current position
 	* - pop:  returns the element at the current position and deletes it
 	* - del: deletes the current element. Does nothing for an empty list.
 	* - clear:  empties the LinkedList and returns storage
-	* - bool IsInitem): Does a linear search for @em item.  Does not set 
+	* - bool IsInitem): Does a linear search for @em item.  Does not set
 	*   the position to it, only returns true on item found, false otherwise
-	* - bool find(item): Does a linear search for @em item and sets the current 
-	*   position to point to it if and only if the item is found. Returns true 
+	* - bool find(item): Does a linear search for @em item and sets the current
+	*   position to point to it if and only if the item is found. Returns true
 	*   on item found, false otherwise
-	* - sort: Sorts the elements of the list with a mergesort and sets the 
+	* - sort: Sorts the elements of the list with a mergesort and sets the
 	*   current pointer to the first element
 	* - concatenate(list L): This appends L to the current list
-	* - ++(prefix): moves the pointer one element up in the list and returns the 
+	* - ++(prefix): moves the pointer one element up in the list and returns the
 	*   appropriate copy of the element in the list
-	* - --(prefix): moves the pointer one element back in the list and returns 
+	* - --(prefix): moves the pointer one element back in the list and returns
 	*   the appropriate copy of the element in the list
-	* - beginning - moves the pointer to the start of the list.  For circular 
-	*   linked lists this is first 'position' created.  You should call this 
+	* - beginning - moves the pointer to the start of the list.  For circular
+	*   linked lists this is first 'position' created.  You should call this
 	*   after the sort function to read the first value.
-	* - end - moves the pointer to the end of the list.  For circular linked 
+	* - end - moves the pointer to the end of the list.  For circular linked
 	*   lists this is one less than the first 'position' created
 	* The assignment and copy constructor operators are defined
 	*
-	* \note 
-	* 1. LinkedList and CircularLinkedList are exactly the same except LinkedList 
-	*    won't let you wrap around the root and lets you jump to two positions 
+	* \note
+	* 1. LinkedList and CircularLinkedList are exactly the same except LinkedList
+	*    won't let you wrap around the root and lets you jump to two positions
 	*    relative to the root/
 	* 2. Postfix ++ and -- can be used but simply call the prefix versions.
 	*
@@ -82,7 +82,7 @@ namespace DataStructures
 	* EXAMPLE:
 	* @code
 	* LinkedList<int> A;  // Creates a Linked List of integers called A
-	* CircularLinkedList<int> B;  // Creates a Circular Linked List of 
+	* CircularLinkedList<int> B;  // Creates a Circular Linked List of
 	*          // integers called B
 	*
 	* A.Insert(20);  // Adds 20 to A.  A: 20 - current is 20
@@ -108,7 +108,7 @@ namespace DataStructures
 	*
 	* A.Del();  // Deletes 10.  Current points to the next element, which is 20
 	* A.Peek();  // Returns 20
-	* 
+	*
 	* A.Beginning();  // Current points to the beginning of the list at 1
 	*
 	* (++A).Peek();  // Returns 5
@@ -129,11 +129,11 @@ namespace DataStructures
 	* B.Add(5);
 	* B.Add(2);
 	* B.Add(25);
-	* // Sorts the numbers in the list and sets the current pointer to the 
+	* // Sorts the numbers in the list and sets the current pointer to the
 	* // first element
-	* B.sort();  
+	* B.sort();
 	*
-	* // Postfix ++ just calls the prefix version and has no functional 
+	* // Postfix ++ just calls the prefix version and has no functional
 	* // difference.
 	* B.Peek();  // Returns 2
 	* B++;
@@ -1213,7 +1213,7 @@ namespace DataStructures
 	operator++();
 	return before;
 	}
-	*/ 
+	*/
 	// Postfix
 	template <class LinkedListType>
 		LinkedList<LinkedListType>& LinkedList<LinkedListType>::operator++( int )

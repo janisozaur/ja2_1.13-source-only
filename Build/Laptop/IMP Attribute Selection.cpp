@@ -8,20 +8,20 @@
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "Utilities.h"
-	#include "input.h"
+	#include "Input.h"
 	#include "Isometric Utils.h"
 	#include "IMP Skill Trait.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Text System.h"
 	#include "IMP Compile Character.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "GameSettings.h"
 	// Added these 3 - SANDRO
-	#include "IMP Disability Trait.h" 
+	#include "IMP Disability Trait.h"
 	#include "IMP Color Choosing.h"
 	#include "IMP Minor Trait.h"
 
@@ -231,7 +231,7 @@ void EnterIMPAttributeSelection( void )
 
 void RenderIMPAlteredAttribute( void )
 {
-	
+
 }
 
 void RenderIMPAttributeSelection( void )
@@ -1047,10 +1047,10 @@ void BtnIMPAttributeFinishCallback(GUI_BUTTON *btn,INT32 reason)
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
 			btn->uiFlags&=~(BUTTON_CLICKED_ON);
-						
+
 			iCurrentImpPage = IMP_GEAR_ENTRANCE;
 			fButtonPendingFlag = TRUE;
-			
+
 			// SET ATTRIBUTES NOW
 			SetGeneratedCharacterAttributes( );
 		}
@@ -1186,7 +1186,7 @@ void BtnIMPLevelSelectionRightCallback( GUI_BUTTON *btn,INT32 reason )
 
 INT32 iBonusPointsNeededForLevelUp()
 {
-	INT32 iBonusPointsNeeded = 0; 
+	INT32 iBonusPointsNeeded = 0;
 
 	if (iStartingLevel > 0 && iStartingLevel < 10)
 	{
@@ -1198,7 +1198,7 @@ INT32 iBonusPointsNeededForLevelUp()
 
 INT32 iBonusPointsRecievedForLevelDown()
 {
-	INT32 iBonusPointsRecieved=0; 
+	INT32 iBonusPointsRecieved=0;
 
 	if (iStartingLevel > 1 && iStartingLevel <= 10)
 	{
@@ -1728,7 +1728,7 @@ void SliderRegionButtonCallback( MOUSE_REGION * pRegion, INT32 iReason )
 				{
 					iCounter = 0;
 				}
-				
+
 				IncrementStat( iAttribute );
 			}
 		}
@@ -1870,7 +1870,7 @@ void SetAttributes( void )
 		if ( iStrengthMinimum > gGameExternalOptions.iMaxAttribute )
 			iStrengthMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentStrength = iStrengthMinimum; 
+		iCurrentStrength = iStrengthMinimum;
 		iCurrentBonusPoints -= iStrengthMinimum;
 
 		// Get Agility minimum
@@ -1883,7 +1883,7 @@ void SetAttributes( void )
 		if ( iAgilityMinimum > gGameExternalOptions.iMaxAttribute )
 			iAgilityMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentAgility = iAgilityMinimum; 
+		iCurrentAgility = iAgilityMinimum;
 		iCurrentBonusPoints -= iAgilityMinimum;
 
 		// Get Dexterity minimum
@@ -1896,7 +1896,7 @@ void SetAttributes( void )
 		if ( iDexterityMinimum > gGameExternalOptions.iMaxAttribute )
 			iDexterityMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentDexterity = iDexterityMinimum; 
+		iCurrentDexterity = iDexterityMinimum;
 		iCurrentBonusPoints -= iDexterityMinimum;
 
 		// Get Health minimum
@@ -1909,7 +1909,7 @@ void SetAttributes( void )
 		if ( iHealthMinimum > gGameExternalOptions.iMaxAttribute )
 			iHealthMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentHealth = iHealthMinimum; 
+		iCurrentHealth = iHealthMinimum;
 		iCurrentBonusPoints -= iHealthMinimum;
 
 		// Get Leadership minimum
@@ -1922,7 +1922,7 @@ void SetAttributes( void )
 		if ( iLeaderShipMinimum > gGameExternalOptions.iMaxAttribute )
 			iLeaderShipMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentLeaderShip = iLeaderShipMinimum; 
+		iCurrentLeaderShip = iLeaderShipMinimum;
 		iCurrentBonusPoints -= (iLeaderShipMinimum - gGameExternalOptions.iMinAttribute + gGameExternalOptions.iMaxZeroBonus);
 
 		// Get Wisdom minimum
@@ -1935,20 +1935,20 @@ void SetAttributes( void )
 		if ( iWisdomMinimum > gGameExternalOptions.iMaxAttribute )
 			iWisdomMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentWisdom = iWisdomMinimum; 
+		iCurrentWisdom = iWisdomMinimum;
 		iCurrentBonusPoints -= iWisdomMinimum;
 
 		// Get Marksmanship minimum
 		iMarkmanshipMinimum = MarksmanshipRequiredDueToMajorSkills();
 		if ( iMarkmanshipMinimum < gGameExternalOptions.iMinAttribute )
 			iMarkmanshipMinimum = gGameExternalOptions.iMinAttribute;
-		
+
 		iMarkmanshipMinimum += MarksmanshipRequiredAdjustmentForMinorTraits( iMarkmanshipMinimum );
 
 		if ( iMarkmanshipMinimum > gGameExternalOptions.iMaxAttribute )
 			iMarkmanshipMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentMarkmanship = iMarkmanshipMinimum; 
+		iCurrentMarkmanship = iMarkmanshipMinimum;
 		iCurrentBonusPoints -= (iMarkmanshipMinimum - gGameExternalOptions.iMinAttribute + gGameExternalOptions.iMaxZeroBonus);
 
 		// Get Mechanical minimum
@@ -1961,7 +1961,7 @@ void SetAttributes( void )
 		if ( iMechanicalMinimum > gGameExternalOptions.iMaxAttribute )
 			iMechanicalMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentMechanical = iMechanicalMinimum; 
+		iCurrentMechanical = iMechanicalMinimum;
 		iCurrentBonusPoints -= (iMechanicalMinimum - gGameExternalOptions.iMinAttribute + gGameExternalOptions.iMaxZeroBonus);
 
 		// Get Medical minimum
@@ -1974,7 +1974,7 @@ void SetAttributes( void )
 		if ( iMedicalMinimum > gGameExternalOptions.iMaxAttribute )
 			iMedicalMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentMedical = iMedicalMinimum; 
+		iCurrentMedical = iMedicalMinimum;
 		iCurrentBonusPoints -= (iMedicalMinimum - gGameExternalOptions.iMinAttribute + gGameExternalOptions.iMaxZeroBonus);
 
 		// Get Explosives minimum
@@ -1987,7 +1987,7 @@ void SetAttributes( void )
 		if ( iExplosivesMinimum > gGameExternalOptions.iMaxAttribute )
 			iExplosivesMinimum = gGameExternalOptions.iMaxAttribute;
 
-		iCurrentExplosives = iExplosivesMinimum; 
+		iCurrentExplosives = iExplosivesMinimum;
 		iCurrentBonusPoints -= (iExplosivesMinimum - gGameExternalOptions.iMinAttribute + gGameExternalOptions.iMaxZeroBonus);
 
 
@@ -1996,7 +1996,7 @@ void SetAttributes( void )
 			iCurrentBonusPoints = 0;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////
-	else // ORIGINAL 
+	else // ORIGINAL
 	{
 		// default
 		iStrengthMinimum = gGameExternalOptions.iMinAttribute;
@@ -2005,7 +2005,7 @@ void SetAttributes( void )
 		iHealthMinimum		= gGameExternalOptions.iMinAttribute;
 		iLeaderShipMinimum	= gGameExternalOptions.iMinAttribute;
 		iWisdomMinimum		= gGameExternalOptions.iMinAttribute;
-		
+
 		iMarkmanshipMinimum = gGameExternalOptions.iMinAttribute;
 		iMechanicalMinimum	= gGameExternalOptions.iMinAttribute;
 		iMedicalMinimum	 = gGameExternalOptions.iMinAttribute;
@@ -2029,7 +2029,7 @@ void SetAttributes( void )
 		iCurrentMechanical = gGameExternalOptions.iMinAttribute;
 		iCurrentMedical = gGameExternalOptions.iMinAttribute;
 		iCurrentExplosives = gGameExternalOptions.iMinAttribute;
-		
+
 		iCurrentBonusPoints -= ((5 * gGameExternalOptions.iMinAttribute) + (5 * gGameExternalOptions.iMaxZeroBonus));
 	}
 	////////////////////////////////////////////////////
@@ -2145,6 +2145,6 @@ INT8 StartingLevelChosen()
 {
 	if ( (iStartingLevel > 0) && (iStartingLevel <= 10) )
 		return(iStartingLevel);
-	
+
 	return(1);
 }

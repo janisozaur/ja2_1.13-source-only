@@ -16,7 +16,7 @@
 #define		MSG_BOX_FLAG_OKSKIP						0x00000200		// Displays ok or skip (meanwhile) buttons
 #define		MSG_BOX_FLAG_GENERICCONTRACT			0x00000400		// displays contract buttoin + 2 user-defined text buttons
 #define		MSG_BOX_FLAG_GENERIC_TWO_BUTTONS		0x00000800		// 2 user-defined text buttons
-// OJW - Adding text chatbox 
+// OJW - Adding text chatbox
 #define		MSG_BOX_FLAG_INPUTBOX					0x00001000		// has a text input field
 // Flugente - added boxes with multiple buttons that can be renamed easily
 #define		MSG_BOX_FLAG_GENERIC_FOUR_BUTTONS		0x00002000		// Displays four numbered buttons with definable labels
@@ -69,7 +69,7 @@ enum
 	MSG_BOX_DEFAULT_BUTTON_16,
 };
 
-typedef void (*MSGBOX_CALLBACK)( UINT8 bExitValue );	
+typedef void (*MSGBOX_CALLBACK)( UINT8 bExitValue );
 
 // Flugente: made an array for user-defined buttons
 #define		NUM_CUSTOM_BUTTONS	16
@@ -128,7 +128,7 @@ extern		CHAR16							gszMsgBoxInputString[255];
 // uiExitScreen		The screen to exit to
 // ubFlags				Some flags for button style
 // ReturnCallback	Callback for return. Can be NULL. Returns any above return value
-// pCenteringRect	Rect to send if MSG_BOX_FLAG_USE_CENTERING_RECT set. Can be NULL 
+// pCenteringRect	Rect to send if MSG_BOX_FLAG_USE_CENTERING_RECT set. Can be NULL
 ////////////////////////////////
 
 INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UINT32 usFlags, MSGBOX_CALLBACK ReturnCallback, SGPRect *pCenteringRect, UINT8 ubDefaultButton = MSG_BOX_DEFAULT_BUTTON_NONE );

@@ -89,7 +89,7 @@ soldierProfilesEndElementHandle(void *userData, const XML_Char *name)
 {
 	enemyProfileParseData * pData = (enemyProfileParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "PROFILES") == 0)
 		{
@@ -98,12 +98,12 @@ soldierProfilesEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "PROFILE") == 0)
 		{
 			pData->curElement = ELEMENT_LIST;
-			
+
 			if(pData->curSoldierProfile.uiIndex < pData->maxArraySize)
 			{
 				pData->curArray[pData->curSoldierProfile.uiIndex] = pData->curSoldierProfile; //write the profiles into the table
 			}
-		
+
 			num_found_profiles = pData->curSoldierProfile.uiIndex + 1;
 		}
 		else if(strcmp(name, "uiIndex") == 0)
@@ -114,7 +114,7 @@ soldierProfilesEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "szName") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curSoldierProfile.szName, sizeof(pData->curSoldierProfile.szName)/sizeof(pData->curSoldierProfile.szName[0]) );
 			pData->curSoldierProfile.szName[sizeof(pData->curSoldierProfile.szName)/sizeof(pData->curSoldierProfile.szName[0]) - 1] = '\0';
 		}
@@ -165,7 +165,7 @@ BOOLEAN ReadInSoldierProfiles(SOLDIER_PROFILE_VALUES* pProfiles, STR fileName)
 	enemyProfileParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading SoldierProfile.xml" );
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -235,13 +235,13 @@ BOOLEAN WriteSoldierProfiles( STR fileName)
 		{
 			FilePrintf(hFile,"\t<PROFILE>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);
-			FilePrintf(hFile,"\t\t<uiBodyType>%d</uiBodyType>\r\n",			zSoldierProfile[0][cnt].uiBodyType);	
-			FilePrintf(hFile,"\t\t<uiHair>%d</uiHair>\r\n",					zSoldierProfile[0][cnt].uiHair);	
-			FilePrintf(hFile,"\t\t<uiSkin>%d</uiSkin>\r\n",					zSoldierProfile[0][cnt].uiSkin);	
-			FilePrintf(hFile,"\t\t<uiTrait1>%d</uiTrait1>\r\n",				zSoldierProfile[0][cnt].uiTrait[0]);	
-			FilePrintf(hFile,"\t\t<uiTrait2>%d</uiTrait2>\r\n",				zSoldierProfile[0][cnt].uiTrait[1]);	
+			FilePrintf(hFile,"\t\t<uiBodyType>%d</uiBodyType>\r\n",			zSoldierProfile[0][cnt].uiBodyType);
+			FilePrintf(hFile,"\t\t<uiHair>%d</uiHair>\r\n",					zSoldierProfile[0][cnt].uiHair);
+			FilePrintf(hFile,"\t\t<uiSkin>%d</uiSkin>\r\n",					zSoldierProfile[0][cnt].uiSkin);
+			FilePrintf(hFile,"\t\t<uiTrait1>%d</uiTrait1>\r\n",				zSoldierProfile[0][cnt].uiTrait[0]);
+			FilePrintf(hFile,"\t\t<uiTrait2>%d</uiTrait2>\r\n",				zSoldierProfile[0][cnt].uiTrait[1]);
 			FilePrintf(hFile,"\t\t<uiTrait3>%d</uiTrait3>\r\n",				zSoldierProfile[0][cnt].uiTrait[2]);
-			
+
 			FilePrintf(hFile,"\t</PROFILE>\r\n");
 		}
 		FilePrintf(hFile,"</PROFILES>\r\n");

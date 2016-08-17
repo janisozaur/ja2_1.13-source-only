@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -9,8 +9,8 @@
 #ifndef PRECOMPILEDHEADERS
 	#include <stdlib.h>
 	#include "tiledef.h"
-	#include "worlddef.h"
-	#include "worldman.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
 	#include "newsmooth.h"
 	#include "Isometric Utils.h"
 	#include "EditorBuildings.h"
@@ -18,7 +18,7 @@
 	#include "Smoothing Utils.h"
 	#include "Editor Undo.h"
 	#include "Structure Internals.h"
-	#include "environment.h"
+	#include "Environment.h"
 	#include "Random.h"
 	#include "Render Fun.h"
 #endif
@@ -35,7 +35,7 @@ BOOLEAN CaveAtGridNo( INT32 iMapIndex )
 
 	if( TileIsOutOfBounds(iMapIndex))
 		return FALSE;
-	
+
 	pStruct = gpWorldLevelData[ iMapIndex ].pStructureHead;
 	while( pStruct )
 	{

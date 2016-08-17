@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/Interface/vfs_location_interface.h
  *  - generic Location interface that allows retrieval of a file from a real location
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -88,7 +88,7 @@ namespace vfs
 			return m_mountPoint;
 		}
 
-		/** 
+		/**
 		 *  TLocationTemplate interface
 		 */
 		virtual vfs::Path const&	getPath()
@@ -121,7 +121,7 @@ namespace vfs
 			return NULL;
 		}
 	public:
-		TReadLocation(vfs::Path const& sLocalPath) 
+		TReadLocation(vfs::Path const& sLocalPath)
 			: vfs::TLocationTemplate<IReadable,WriteType>(sLocalPath)
 		{};
 		virtual ~TReadLocation(){};
@@ -142,7 +142,7 @@ namespace vfs
 			return NULL;
 		}
 	public:
-		TWriteLocation(vfs::Path const& sLocalPath) 
+		TWriteLocation(vfs::Path const& sLocalPath)
 			: vfs::TLocationTemplate<ReadType,vfs::IWritable>(sLocalPath)
 		{};
 		virtual ~TWriteLocation(){};
@@ -153,7 +153,7 @@ namespace vfs
 
 	typedef TReadLocation<vfs::IWriteType> tReadLocation;
 	typedef TWriteLocation<vfs::IReadType> tWriteLocation;
-	
+
 } // end namespace
 
 #endif // _VFS_LOCATION_INTERFACE_H_

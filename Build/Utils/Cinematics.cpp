@@ -21,19 +21,19 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-#include "DEBUG.H"
+#include "Debug.h"
 #include "FileMan.h"
-#include "smack.h"
+#include "SMACK.h"
 #include "ddraw.h"
 #include "DirectX Common.h"
 #include "DirectDraw Calls.h"
 #include "Cinematics.h"
-#include "soundman.h"
+#include "SoundMan.h"
 #include <vfs/Core/vfs.h>
 #include <vfs/Core/vfs_file_raii.h>
 
 #ifdef JA2
-	#include "video.h"
+	#include "Video.h"
 #else
 	#include "video2.h"
 #endif
@@ -190,7 +190,7 @@ SMKFLIC *SmkPlayFlic(const CHAR8 *cFilename, UINT32 uiLeft, UINT32 uiTop, BOOLEA
 SMKFLIC *SmkOpenFlic(const CHAR8 *cFilename)
 {
 	SMKFLIC *pSmack;
-	
+
 	// Get an available flic slot from the list
 	if(!(pSmack=SmkGetFreeFlic()))
 	{

@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
@@ -7,36 +7,36 @@
 	#include <time.h>
 	#include "sgp.h"
 	#include "himage.h"
-	#include "vsurface.h"
-	#include "sysutil.h"
-	#include "renderworld.h"
-	#include "interface.h"
+	#include "VSurface.h"
+	#include "SysUtil.h"
+	#include "RenderWorld.h"
+	#include "Interface.h"
 	#include "Sound Control.h"
-	#include "worlddef.h"
+	#include "WorldDef.h"
 	#include "Interactive Tiles.h"
-	#include "interface cursors.h"
-	#include "worldman.h"
+	#include "Interface Cursors.h"
+	#include "WorldMan.h"
 	#include "structure.h"
 	#include "Animation Control.h"
-	#include "points.h"
-	#include "overhead.h"
-	#include "structure wrap.h"
-	#include "tile animation.h"
-	#include "tile cache.h"
-	#include "handle doors.h"
-	#include "Strategicmap.h"
+	#include "Points.h"
+	#include "Overhead.h"
+	#include "Structure Wrap.h"
+	#include "Tile Animation.h"
+	#include "Tile Cache.h"
+	#include "Handle Doors.h"
+	#include "StrategicMap.h"
 	#include "Quests.h"
 	#include "Dialogue Control.h"
 	#include "Random.h"
-	#include "english.h"
-	#include "handle items.h"
-	#include "message.h"
-	#include "handle ui.h"
+	#include "English.h"
+	#include "Handle Items.h"
+	#include "Message.h"
+	#include "Handle UI.h"
 	#include "NPC.h"
 	#include "Explosion Control.h"
 	#include "Text.h"
 	#include "GameSettings.h"
-	#include "environment.h"
+	#include "Environment.h"
 #endif
 
 #define		MAX_INTTILE_STACK							10
@@ -843,7 +843,7 @@ BOOLEAN RefineLogicOnStruct( INT32 sGridNo, LEVELNODE *pNode )
 			// IF we are a switch, reject in another direction...
 			if ( pStructure->fFlags & STRUCTURE_SWITCH )
 			{
-				// Find a new gridno based on switch's orientation...				
+				// Find a new gridno based on switch's orientation...
 				INT32 sNewGridNo = NOWHERE;
 
 				switch( pStructure->pDBStructureRef->pDBStructure->ubWallOrientation )
@@ -863,7 +863,7 @@ BOOLEAN RefineLogicOnStruct( INT32 sGridNo, LEVELNODE *pNode )
 						break;
 
 				}
-				
+
 				if (!TileIsOutOfBounds(sNewGridNo))
 				{
 					// If we are hidden by a roof, reject it!

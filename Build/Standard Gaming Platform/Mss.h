@@ -292,7 +292,7 @@ extern "C" {
 	#define MSS_DIR_SEP "\\"
 	#define MSS_DIR_UP ".." MSS_DIR_SEP
 	#define MSS_DIR_UP_TWO MSS_DIR_UP MSS_DIR_UP
- 
+
 #else
 
 	#define AILEXPORT __export WINAPI
@@ -302,7 +302,7 @@ extern "C" {
 
 	#define MSSDLLNAME "MSS16.DLL"
 	#define MSS_REDIST_DIR_NAME "WIN16"
-	
+
 	#define MSS_DIR_SEP "\\"
 	#define MSS_DIR_UP ".." MSS_DIR_SEP
 	#define MSS_DIR_UP_TWO MSS_DIR_UP MSS_DIR_UP
@@ -1299,7 +1299,7 @@ typedef S32	(AILCALL FAR *ASI_STREAM_PROCESS) (HASISTREAM	stream,				// Handle o
 // At next ASI_stream_process() call, decoder will seek to the closest possible
 // point in the stream which occurs at or after the specified position
 //
-// This function has no effect for decoders which do not support random 
+// This function has no effect for decoders which do not support random
 // seeks on a given stream type
 //
 // Warning: some decoders may need to implement seeking by reparsing
@@ -1394,16 +1394,16 @@ typedef H3DSAMPLE	(AILCALL FAR * M3D_ALLOCATE_3D_SAMPLE_HANDLE)(void);
 
 
 typedef void		(AILCALL FAR * M3D_RELEASE_3D_SAMPLE_HANDLE)(H3DSAMPLE samp);
-										
+
 
 typedef void		(AILCALL FAR * M3D_START_3D_SAMPLE)(H3DSAMPLE samp);
 
 
 typedef void		(AILCALL FAR * M3D_STOP_3D_SAMPLE)(H3DSAMPLE samp);
-										
+
 
 typedef void		(AILCALL FAR * M3D_RESUME_3D_SAMPLE)(H3DSAMPLE samp);
-										
+
 typedef void		(AILCALL FAR * M3D_END_3D_SAMPLE)(H3DSAMPLE samp);
 
 typedef S32		(AILCALL FAR * M3D_SET_3D_SAMPLE_DATA)(H3DSAMPLE		 samp,
@@ -2127,7 +2127,7 @@ typedef struct _DIG_INPUT_DRIVER	// Handle to digital input driver
 	HTIMER background_timer;		 // Background timer handle
 
 	AIL_INPUT_INFO info;			 // Input device descriptor
-	
+
 	S32		input_enabled;		 // 1 if enabled, 0 if not
 
 #ifndef IS_MAC
@@ -2360,7 +2360,7 @@ typedef struct _DIG_DRIVER			// Handle to digital audio driver
 
 	DIG_DDT	*DDT;				 // Protected-mode pointer to DDT
 	DIG_DST	*DST;				 // Protected-mode pointer to DST
-	
+
 	#endif
 
 #endif
@@ -2534,7 +2534,7 @@ typedef struct _MDI_DRIVER			// Handle to XMIDI driver
 	S32		 system_data[8];		// Miscellaneous system data
 
 #if defined(IS_WINDOWS) || defined(IS_MAC)
-	
+
 	S32		 released;			// has the hmidiout handle been released
 	U32		 deviceid;			// ID of the MIDI device
 	U8		FAR *sysdata;			// SysEx buffer
@@ -2929,7 +2929,7 @@ DXDEC	void	AILCALL	AIL_set_error				 (char const FAR * error_msg);
 // Low-level support services
 //
 
-DXDEC	void	
+DXDEC	void
 #ifndef IS_MAC
 __cdecl
 #endif
@@ -4603,7 +4603,7 @@ DXDEC void		AILCALL AIL_set_3D_sample_cone		(H3DSAMPLE S,
 														F32		outer_angle,
 														S32		outer_volume);
 
-DXDEC void		AILCALL AIL_set_3D_sample_effects_level 
+DXDEC void		AILCALL AIL_set_3D_sample_effects_level
 														(H3DSAMPLE S,
 														F32		effects_level);
 

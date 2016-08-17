@@ -1,19 +1,19 @@
 #ifndef __STRUCTURE_INTERNAL_H
 #define __STRUCTURE_INTERNAL_H
 
-// 
-// If you wish to use the structure database functions, include 
-// structure_extern.h, not structure.h! 
+//
+// If you wish to use the structure database functions, include
+// structure_extern.h, not structure.h!
 //
 
-#include "types.h"
+#include "Types.h"
 #include "himage.h"
 
 // A few words about the overall structure scheme:
 //
 // Large structures are split into multiple sections,
 // one for each tile.
-// 
+//
 // Each section is treated as a separate object,
 // except that it does NOT record information about
 // hit points, but instead stores a pointer to the
@@ -149,7 +149,7 @@ typedef struct TAG_DB_STRUCTURE
 	UINT32							fFlags;
 	UINT16							usStructureNumber;
 	UINT8								ubWallOrientation;
-	INT8								bDestructionPartner; // >0 = debris number (bDP - 1), <0 = partner graphic 
+	INT8								bDestructionPartner; // >0 = debris number (bDP - 1), <0 = partner graphic
 	INT8								bPartnerDelta; // opened/closed version, etc... 0 for unused
 	INT8								bZTileOffsetX;
 	INT8								bZTileOffsetY;

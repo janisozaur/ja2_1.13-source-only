@@ -15,7 +15,7 @@
 	#include "sgp.h"
 	#include "Debug Control.h"
 	#include "expat.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "XML.h"
 	#include "FileMan.h"
 	#include "Campaign Types.h"
@@ -85,7 +85,7 @@ void InitAssignmentDataArray( facilitytypeParseData *pData )
 {
 
 	// Set assignment data from memory
-	pData->curAssignmentData.usPerformance = 100;				
+	pData->curAssignmentData.usPerformance = 100;
 	pData->curAssignmentData.ubStaffLimit = 0;
 	swprintf(pData->curAssignmentData.szTooltipText, L"");
 	pData->curAssignmentData.sCostPerHour = 0;
@@ -460,7 +460,7 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 
 							gFacilityTypes[pData->curIndex].AssignmentData[cnt].sCantinaFoodModifier = pData->curFacilityTypeData.AssignmentData[cnt].sCantinaFoodModifier;
 							gFacilityTypes[pData->curIndex].AssignmentData[cnt].usPrisonBaseLimit = pData->curFacilityTypeData.AssignmentData[cnt].usPrisonBaseLimit;
-							
+
 							// Conditions
 							gFacilityTypes[pData->curIndex].AssignmentData[cnt].ubMinimumStrength = pData->curFacilityTypeData.AssignmentData[cnt].ubMinimumStrength;
 							gFacilityTypes[pData->curIndex].AssignmentData[cnt].ubMinimumAgility = pData->curFacilityTypeData.AssignmentData[cnt].ubMinimumAgility;
@@ -488,7 +488,7 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 					{
 						wcscpy(gFacilityTypes[pData->curIndex].szFacilityName, pData->curFacilityTypeData.szFacilityName);
 						wcscpy(gFacilityTypes[pData->curIndex].szFacilityShortName, pData->curFacilityTypeData.szFacilityShortName);
-					
+
 						for (UINT16 cnt = 0; cnt < NUM_FACILITY_ASSIGNMENTS; ++cnt)
 						{
 							wcscpy(gFacilityTypes[pData->curIndex].AssignmentData[cnt].szTooltipText, pData->curFacilityTypeData.AssignmentData[cnt].szTooltipText);
@@ -511,7 +511,7 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = FACILITYTYPE_TYPE;
 			pData->curIndex = (UINT8) atol(pData->szCharData);
 		}
-		
+
 
 		//////////////////////////////////////////////
 		// General facility data and militia effects
@@ -643,9 +643,9 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 				{
 					wcscpy(pData->curFacilityTypeData.AssignmentData[pData->curAssignmentType].szTooltipText, pData->curAssignmentData.szTooltipText);
 				}
-			
+
 			}
-			
+
 		}
 
 		////////////////////////////////////////////////
@@ -850,7 +850,7 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 			{
 				//pData->curAssignmentType = (INT16) atol(pData->szCharData);
 				pData->curAssignmentType = FAC_SPREAD_PROPAGANDA;
-			}	
+			}
 			else if (strcmp(pData->szCharData, "SPREAD_PROPAGANDA_GLOBAL") == 0)
 			{
 				//pData->curAssignmentType = (INT16) atol(pData->szCharData);
@@ -864,7 +864,7 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 			else if (strcmp(pData->szCharData, "STRATEGIC_MILITIA_MOVEMENT") == 0)
 			{
 				pData->curAssignmentType = FAC_STRATEGIC_MILITIA_MOVEMENT;
-			}	
+			}
 			else
 			{
 				CHAR16 sErrorString[256];
@@ -1111,7 +1111,7 @@ facilitytypeEndElementHandle(void *userData, const XML_Char *name)
 			// No data write, simply downgrade the parse stage
 			pData->curElement = FACILITYTYPE_ASSIGNMENT;
 		}
-		
+
 		else if(strcmp(name, "ubChance") == 0 )
 		{
 			pData->curElement = FACILITYTYPE_RISK;
@@ -1148,7 +1148,7 @@ BOOLEAN ReadInFacilityTypes(STR fileName, BOOLEAN localizedVersion)
 	XML_Parser	parser = XML_ParserCreate(NULL);
 
 	facilitytypeParseData pData;
-	
+
 	FacilityTypes_TextOnly = localizedVersion;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading FacilityTypes.xml" );

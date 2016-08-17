@@ -43,11 +43,11 @@ void HandleTacticalPanelSwitch( );
 BOOLEAN InterfaceOKForMeanwhilePopup();
 
 // sevenfm: these values are used to calculate scale for displaying values as asterisks (no more than 5 asterisks for any value)
-enum{ 
-	PRINT_SCALE_PLAIN_NUMBER, 
-	PRINT_SCALE_ASTERISK, 
-	PRINT_SCALE_ASTERISK_SUPPRESSION, 
-	PRINT_SCALE_ASTERISK_DAMAGE, 
+enum{
+	PRINT_SCALE_PLAIN_NUMBER,
+	PRINT_SCALE_ASTERISK,
+	PRINT_SCALE_ASTERISK_SUPPRESSION,
+	PRINT_SCALE_ASTERISK_DAMAGE,
 	PRINT_SCALE_ASTERISK_MORALE,
 	PRINT_SCALE_ASTERISK_AP,
 	PRINT_SCALE_ASTERISK_SHOCK,

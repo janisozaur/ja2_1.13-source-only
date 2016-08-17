@@ -1,5 +1,5 @@
-#include "worlddef.h"
-#include "renderworld.h"
+#include "WorldDef.h"
+#include "RenderWorld.h"
 #include "Isometric Utils.h"
 
 

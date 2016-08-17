@@ -2,7 +2,7 @@
 	#include "Strategic All.h"
 	#include "XML.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "XML.h"
 	#include "expat.h"
@@ -11,7 +11,7 @@
 	#include "FileMan.h"
 	#include "MemMan.h"
 	#include "Debug Control.h"
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 #endif
 
 #define MAX_CHAR_DATA_LENGTH			500
@@ -23,9 +23,9 @@ extern CHAR16 gzSectorNames[256][4][MAX_SECTOR_NAME_LENGTH];
 extern SECTOR_EXT_DATA	SectorExternalData[256][4];
 
 // moved to lua
-//extern CHAR16 gzSectorUndergroundNames1[256][4][MAX_SECTOR_NAME_LENGTH]; 
-//extern CHAR16 gzSectorUndergroundNames2[256][4][MAX_SECTOR_NAME_LENGTH]; 
-//extern CHAR16 gzSectorUndergroundNames3[256][4][MAX_SECTOR_NAME_LENGTH]; 
+//extern CHAR16 gzSectorUndergroundNames1[256][4][MAX_SECTOR_NAME_LENGTH];
+//extern CHAR16 gzSectorUndergroundNames2[256][4][MAX_SECTOR_NAME_LENGTH];
+//extern CHAR16 gzSectorUndergroundNames3[256][4][MAX_SECTOR_NAME_LENGTH];
 
 typedef struct
 {
@@ -157,14 +157,14 @@ SectorNameEndElementHandle(void *userData, const XML_Char *name)
 					//	wcscpy(gzSectorUndergroundNames1[ubSectorId][0], pData->szCurUnexploredName);
 					//	wcscpy(gzSectorUndergroundNames1[ubSectorId][1], pData->szCurDetailedUnexploredName);
 					//	wcscpy(gzSectorUndergroundNames1[ubSectorId][2], pData->szCurExploredName);
-					//	wcscpy(gzSectorUndergroundNames1[ubSectorId][3], pData->szCurDetailedExploredName);					
+					//	wcscpy(gzSectorUndergroundNames1[ubSectorId][3], pData->szCurDetailedExploredName);
 					//}
 					//else if (Sector_Level == 2 )
 					//{
 					//	wcscpy(gzSectorUndergroundNames2[ubSectorId][0], pData->szCurUnexploredName);
 					//	wcscpy(gzSectorUndergroundNames2[ubSectorId][1], pData->szCurDetailedUnexploredName);
 					//	wcscpy(gzSectorUndergroundNames2[ubSectorId][2], pData->szCurExploredName);
-					//	wcscpy(gzSectorUndergroundNames2[ubSectorId][3], pData->szCurDetailedExploredName);					
+					//	wcscpy(gzSectorUndergroundNames2[ubSectorId][3], pData->szCurDetailedExploredName);
 					//}
 					//else if (Sector_Level == 3 )
 					//{
@@ -225,12 +225,12 @@ SectorNameEndElementHandle(void *userData, const XML_Char *name)
 					SectorExternalData[ubSectorId][1].numsnakes = 0;
 					SectorExternalData[ubSectorId][2].numsnakes = 0;
 					SectorExternalData[ubSectorId][3].numsnakes = 0;
-					
+
 					SectorExternalData[ubSectorId][0].maxworkers = pData->sectordata.maxworkers;
 					SectorExternalData[ubSectorId][1].maxworkers = 0;
 					SectorExternalData[ubSectorId][2].maxworkers = 0;
 					SectorExternalData[ubSectorId][3].maxworkers = 0;
-																				
+
 					if ( !prisonroomvector.empty( ) )
 					{
 						std::vector<UINT16>::iterator itend = prisonroomvector.end( );
@@ -263,10 +263,10 @@ SectorNameEndElementHandle(void *userData, const XML_Char *name)
 						wcscpy(gzSectorNames[ubSectorId][0], pData->szCurUnexploredName);
 						wcscpy(gzSectorNames[ubSectorId][1], pData->szCurDetailedUnexploredName);
 						wcscpy(gzSectorNames[ubSectorId][2], pData->szCurExploredName);
-						wcscpy(gzSectorNames[ubSectorId][3], pData->szCurDetailedExploredName);												
+						wcscpy(gzSectorNames[ubSectorId][3], pData->szCurDetailedExploredName);
 					}
 				}
-			}	
+			}
 		}
 
 		else if(strcmp(name, "SectorGrid") == 0 )
@@ -342,7 +342,7 @@ SectorNameEndElementHandle(void *userData, const XML_Char *name)
 
 			if ( room )
 				prisonroomvector.push_back( room );
-		}		
+		}
 		else if(strcmp(name, "usCivilianPopulation") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -395,7 +395,7 @@ BOOLEAN ReadInSectorNames(STR fileName, BOOLEAN localizedVersion, INT8 Level )
 	XML_Parser	parser = XML_ParserCreate(NULL);
 
 	SectorNameParseData pData;
-	
+
 	Sector_Level = Level;
 
 	SectorName_TextOnly = localizedVersion;

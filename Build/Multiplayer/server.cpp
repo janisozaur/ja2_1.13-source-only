@@ -19,20 +19,20 @@
 #include <string.h>
 #include <time.h>
 #include <list>
-#include "connect.h"
-#include "types.h"
-#include "gamesettings.h"
-#include "message.h"
+#include "Connect.h"
+#include "Types.h"
+#include "GameSettings.h"
+#include "Message.h"
 #include "FileMan.h"
-#include "IniReader.h"
+#include "INIReader.h"
 #include <vfs/Core/vfs.h>
 #include "transfer_rules.h"
 #include "MPJoinScreen.h"
-#include "game init.h"
-#include "text.h"
+#include "Game Init.h"
+#include "Text.h"
 #include "network.h"
-#include "message.h"
-#include "overhead.h"
+#include "Message.h"
+#include "Overhead.h"
 #include "fresh_header.h"
 #include "Debug Control.h"
 #include "MPXmlTeams.hpp"
@@ -57,7 +57,7 @@ class ServerFileListProgress : public FileListProgress
 		*/
 	}
 
-	char *ExtractFilename(char *pathname) 
+	char *ExtractFilename(char *pathname)
 	{
 		char *s;
 
@@ -122,7 +122,7 @@ typedef struct
 {
 	SystemAddress address;
 	int cl_number;
-	
+
 }client_data;
 
 client_data client_d[4];
@@ -226,16 +226,16 @@ void sendFIRE(RPCParameters *rpcParameters)
 void sendHIT(RPCParameters *rpcParameters)
 {
 	EV_S_WEAPONHIT* hit = (EV_S_WEAPONHIT*)rpcParameters->input;
-	
+
 	int team = MercPtrs[ hit->ubAttackerID ]->bTeam;
-	
+
 	// AI
-	if (team == 1) 
+	if (team == 1)
 		team = 4;
 	// Client
-	else if (team >= 6) 
+	else if (team >= 6)
 		team -= 6;
-	else if (team == 0) 
+	else if (team == 0)
 		team = CLIENT_NUM-1; // this case should not be possible, including as a precaution
 
     Assert(team<5); // FIXME
@@ -350,7 +350,7 @@ void sendDEATH(RPCParameters *rpcParameters)
 	// Save Stats on the server side
 	gMPPlayerStats[nDeath->soldier_team-1].deaths++;
 	gMPPlayerStats[nDeath->attacker_team-1].kills++;
-	
+
 	// get the client number of the client sending the message
 	int iCLnum = f_rec_num(3,rpcParameters->sender)+1;
 
@@ -372,19 +372,19 @@ void sendDEATH(RPCParameters *rpcParameters)
 void sendhitSTRUCT(RPCParameters *rpcParameters)
 {
 	EV_S_STRUCTUREHIT* miss = (EV_S_STRUCTUREHIT*)rpcParameters->input;
-	
+
 	SOLDIERTYPE* pAttacker = MercPtrs[ miss->ubAttackerID ];
 	if (pAttacker != NULL)
 	{
 		int team = MercPtrs[ miss->ubAttackerID ]->bTeam;
-		
+
 		// AI
-		if (team == 1) 
+		if (team == 1)
 			team = 4;
 		// Clients
-		else if (team >= 6) 
+		else if (team >= 6)
 			team -= 6;
-		else if (team == 0) 
+		else if (team == 0)
 			team = CLIENT_NUM-1; // this case should not be possible, including as a precaution
 
         Assert(team<5); // FIXME
@@ -396,20 +396,20 @@ void sendhitSTRUCT(RPCParameters *rpcParameters)
 void sendhitWINDOW(RPCParameters *rpcParameters)
 {
 	EV_S_WINDOWHIT* miss = (EV_S_WINDOWHIT*)rpcParameters->input;
-	
+
 
 	SOLDIERTYPE* pAttacker = MercPtrs[ miss->ubAttackerID ];
 	if (pAttacker != NULL)
 	{
 		int team = MercPtrs[ miss->ubAttackerID ]->bTeam;
-		
+
 		// AI
-		if (team == 1) 
+		if (team == 1)
 			team = 4;
 		// Clients
-		else if (team >= 6) 
+		else if (team >= 6)
 			team -= 6;
-		else if (team == 0) 
+		else if (team == 0)
 			team = CLIENT_NUM-1; // this case should not be possible, including as a precaution
 
         Assert(team<5); // FIXME
@@ -426,14 +426,14 @@ void sendMISS(RPCParameters *rpcParameters)
 	if (pAttacker != NULL)
 	{
 		int team = MercPtrs[ miss->ubAttackerID ]->bTeam;
-		
+
 		// AI
-		if (team == 1) 
+		if (team == 1)
 			team = 4;
 		// Clients
-		else if (team >= 6) 
+		else if (team >= 6)
 			team -= 6;
-		else if (team == 0) 
+		else if (team == 0)
 			team = CLIENT_NUM-1; // this case should not be possible, including as a precaution
 
         Assert(team<5); // FIXME
@@ -504,7 +504,7 @@ void receiveSETID(RPCParameters *rpcParameters)
 void startCOMBAT(RPCParameters *rpcParameters)
 {
 	if(!( gTacticalStatus.uiFlags & INCOMBAT ))
-	
+
 	{
 
 		gTacticalStatus.uiFlags |= INCOMBAT;
@@ -530,7 +530,7 @@ void sendREAL(RPCParameters *rpcParameters)
 		{
 			if(i==6)
 				b=0;
-			else 
+			else
 				b=i;
 
 			if(gTacticalStatus.Team[ b ].bTeamActive)
@@ -603,7 +603,7 @@ void rSortArray(int* arr, int len)
 	{
 		int iRandPos =  rand() % tmpList.size();
 		for(Iter = tmpList.begin(); iRandPos>0; iRandPos--, Iter++);
-		
+
 		shuffledList.push_front(*Iter);
 		tmpList.erase(Iter);
 	}
@@ -659,7 +659,7 @@ void requestSETTINGS(RPCParameters *rpcParameters )
 			server->CloseConnection(rpcParameters->sender, true);
 			return;
 		}
-		
+
 		//server assigned client numbers - hayden.
 		SystemAddress sender = rpcParameters->sender;//get senders address
 		int bslot = f_rec_num(0,blank);//get empty record slot
@@ -668,7 +668,7 @@ void requestSETTINGS(RPCParameters *rpcParameters )
 		client_d[bslot].cl_number=new_cl_num; //record clients number
 
 		settings_struct lan;
-		
+
 		lan.client_num = new_cl_num; //new server assigned number
 		strcpy(lan.client_name , clinf->client_name);
 
@@ -697,43 +697,43 @@ void requestSETTINGS(RPCParameters *rpcParameters )
 		// WANNE.MP: Check
 		lan.soubBobbyRayQuality = BR_AWESOME;
 		lan.soubBobbyRayQuantity = BR_AWESOME;
-		lan.sofGunNut = TRUE;	
+		lan.sofGunNut = TRUE;
 		lan.soubGameStyle = STYLE_REALISTIC;
 		lan.soubDifficultyLevel = gDifficultyLevel;
 		lan.soubSkillTraits = gSkillTraits;
 		lan.sofTurnTimeLimit = TRUE;
 		lan.sofIronManMode = FALSE;
 		lan.startingCash = gStartingCash;
-		
+
 		// Old/Old
 		if (gInventoryAttachment == INVENTORY_OLD)
-		{			
-			lan.inventoryAttachment = 0;	
+		{
+			lan.inventoryAttachment = 0;
 		}
 		else
 		{
 			// New/Old
 			if (gGameOptions.ubAttachmentSystem == ATTACHMENT_OLD)
-			{				
+			{
 				lan.inventoryAttachment = 1; // New/Old
 			}
 			// New/New
 			else
-			{				
+			{
 				lan.inventoryAttachment = 2;	// New/New
 			}
-		}		
-		
+		}
+
 		lan.disableBobbyRay=gDisableBobbyRay;
 		lan.disableMercEquipment=gDisableMercEquipment;
 
 		lan.maxMercs = gMaxMercs;
-		
+
 		memcpy( lan.client_names , client_names, sizeof( char ) * 4 * 30 );
 		lan.team=clinf->team;
 		// OJW - 20090530 - fix teams not initialised properly
 		client_teams[ lan.client_num - 1 ] = lan.team;
-		
+
 		// OJW - 20081218
 		if (gRandomStartingEdge)
 		{
@@ -760,7 +760,7 @@ void requestSETTINGS(RPCParameters *rpcParameters )
 
 		// OJW - 20081223
 		if (gRandomMercs)
-		{			
+		{
 			mpTeams.SerializeProfiles(lan.random_mercs);
 		}
 
@@ -868,34 +868,34 @@ void AddFilesToSendList()
 				fileList.AddFile(vfs::String::as_utf8(valid_path()).c_str(),&data[0], fsize,fsize,FileListNodeContext(0,0), false);
 			}
 		}
-	}	
+	}
 }
 
 void start_server (void)
 {
 	if(!is_server)
-	{	
+	{
 		f_rec_num(1,blank);//wipe clean
-				
+
 		// ----------------------------
 		// Read from ja2_mp.ini
 		// ----------------------------
 
 		CIniReader iniReader(JA2MP_INI_FILENAME);	// Wird nur für Strings gebraucht
-		strncpy(cServerName, iniReader.ReadString(JA2MP_INI_INITIAL_SECTION, JA2MP_SERVER_NAME, "My JA2 Server"), 30 );				
+		strncpy(cServerName, iniReader.ReadString(JA2MP_INI_INITIAL_SECTION, JA2MP_SERVER_NAME, "My JA2 Server"), 30 );
 		strncpy(gKitBag, iniReader.ReadString(JA2MP_INI_INITIAL_SECTION,JA2MP_KIT_BAG, ""), 100);
-		
+
 		vfs::PropertyContainer props;
 		props.initFromIniFile(JA2MP_INI_FILENAME);
-		UINT16 serverPort = (UINT16)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_SERVER_PORT, 60005);		
-		UINT8 maxClients = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_MAX_CLIENTS, 4);										
+		UINT16 serverPort = (UINT16)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_SERVER_PORT, 60005);
+		UINT8 maxClients = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_MAX_CLIENTS, 4);
 		UINT8 sameMercAllowed = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_SAME_MERC, 1);
 		UINT8 civEnabled = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_CIV_ENABLED, 0);
 		UINT8 gameType = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_GAME_MODE, 0);
 		UINT8 difficultyLevel = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_DIFFICULT_LEVEL, 3);
 		UINT8 skillTraits = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_NEW_TRAITS, 0);
 		UINT8 randomMercs = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION,JA2MP_RANDOM_MERCS, 0);
-		UINT8 randomStartingEdge = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_RANDOM_EDGES, 0);		
+		UINT8 randomStartingEdge = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_RANDOM_EDGES, 0);
 		UINT8 damageSelection = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_DAMAGE_MULTIPLIER, 1);
 		UINT8 maxEnemiesEnabled = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_OVERRIDE_MAX_AI, 0);
 		UINT8 syncGameDirectory = (UINT8)props.getIntProperty(JA2MP_INI_INITIAL_SECTION, JA2MP_SYNC_CLIENTS_MP_DIR, 1);
@@ -909,15 +909,15 @@ void start_server (void)
 
 		// ----------------------------
 		// Save to global values
-		// ----------------------------		
+		// ----------------------------
 		gMaxClients = maxClients;
 		gMaxEnemiesEnabled = 0;
 		gDisableMorale = 0;
-		gSyncGameDirectory = syncGameDirectory;										
-		gReportHiredMerc = reportHiredMerc;			
+		gSyncGameDirectory = syncGameDirectory;
+		gReportHiredMerc = reportHiredMerc;
 		gDisableBobbyRay = disableBobbyRay;
-		gDisableMercEquipment = 0;		// Disable AIM and MERC equipment				
-		gMaxMercs = maxMercs;		
+		gDisableMercEquipment = 0;		// Disable AIM and MERC equipment
+		gMaxMercs = maxMercs;
 		gGameType = gameType;
 		gDifficultyLevel = difficultyLevel + 1;
 		gSkillTraits = skillTraits;
@@ -935,7 +935,7 @@ void start_server (void)
 		{
 			// create random starting edges
 			int spawns[5] = { 0 , 1 , 2 , 3, 9 };	// 9 == Center
-			
+
 			// Randomize spawns
 			rSortArray(spawns,5);
 			memcpy(client_edges,spawns,sizeof(int)*5);
@@ -954,12 +954,12 @@ void start_server (void)
 			gEnemyEnabled = 1;				// always enable enemies in co-op
 			gMilitiaEnabled = 0;			// always disable militia
 			gCivEnabled = civEnabled;
-			gMaxEnemiesEnabled = maxEnemiesEnabled;				
+			gMaxEnemiesEnabled = maxEnemiesEnabled;
 		}
 
 		// random_mercs implies same_merc
 		gSameMercAllowed = gRandomMercs ? 1 : sameMercAllowed;
-				
+
 		switch (damageSelection)
 		{
 			case 0:	// Very Low
@@ -971,7 +971,7 @@ void start_server (void)
 			case 2:	// Normal
 				gDamageMultiplier = 1.0f;
 				break;
-		}									
+		}
 
 		switch (timeTurnsSelection)
 		{
@@ -1004,7 +1004,7 @@ void start_server (void)
 				gStartingCash = 999999999;
 				break;
 		}
-		
+
 		switch (timeSelection)
 		{
 			case 0:	// Morning
@@ -1017,13 +1017,13 @@ void start_server (void)
 				gStartingTime = 2.00;
 				break;
 		}
-					
+
 		//**********************
 
 		ScreenMsg( FONT_ORANGE, MSG_MPSYSTEM, MPServerMessage[0] );
 
 		server=RakNetworkFactory::GetRakPeerInterface();
-		
+
 		// WANNE: Set higher timeout than default (30 seconds)
 		server->SetTimeoutTime(120000, UNASSIGNED_SYSTEM_ADDRESS);	// 120 Seconds
 
@@ -1065,7 +1065,7 @@ void start_server (void)
 		REGISTER_STATIC_RPC(server, sendDEATH);
 		REGISTER_STATIC_RPC(server, sendhitSTRUCT);
 		REGISTER_STATIC_RPC(server, sendhitWINDOW);
-		REGISTER_STATIC_RPC(server, sendMISS);		
+		REGISTER_STATIC_RPC(server, sendMISS);
 		REGISTER_STATIC_RPC(server, updatenetworksoldier);
 		REGISTER_STATIC_RPC(server, Snull_team);
 		REGISTER_STATIC_RPC(server, sendFIREW);
@@ -1079,11 +1079,11 @@ void start_server (void)
 		REGISTER_STATIC_RPC(server, sendTEAMCHANGE);
 		REGISTER_STATIC_RPC(server, sendGAMEOVER);
 		REGISTER_STATIC_RPC(server, sendCHATMSG);
-		REGISTER_STATIC_RPC(server, receiveSETID);		
+		REGISTER_STATIC_RPC(server, receiveSETID);
 
 		if (b)
 		{
-			ScreenMsg( FONT_ORANGE, MSG_MPSYSTEM, MPServerMessage[1]);			
+			ScreenMsg( FONT_ORANGE, MSG_MPSYSTEM, MPServerMessage[1]);
 			is_server = true;
 
 			// WANNE: FILE TRANSFER
@@ -1115,7 +1115,7 @@ void start_server (void)
 
 void server_packet ( void )
 {
-	
+
 	Packet* p;
 
 	if (is_server)
@@ -1186,7 +1186,7 @@ void server_packet ( void )
 				#endif
 				break;
 			default:
-				#ifdef JA2BETAVERSION	
+				#ifdef JA2BETAVERSION
 					ScreenMsg( FONT_ORANGE, MSG_MPSYSTEM, L"** a packet has been recieved for which i dont know what to do... **");
 				#endif
 				break;

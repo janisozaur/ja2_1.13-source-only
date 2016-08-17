@@ -17,7 +17,7 @@ namespace sgp
 	enum _endl{endl};
 	enum _lock{lock};
 	enum _flush{flush};
-	
+
 	class Logger
 	{
 		struct LogData
@@ -30,7 +30,7 @@ namespace sgp
 			LogData() : stream(NULL), screen(NULL) {};
 #endif
 			std::wostream*		stream;
-			std::wstringstream*	screen; 
+			std::wstringstream*	screen;
 		};
 	public:
 

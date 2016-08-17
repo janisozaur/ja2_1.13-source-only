@@ -82,7 +82,7 @@ tauntStartElementHandle(void *userData, const XML_Char *name, const XML_Char **a
 				strcmp(name, "steal") == 0 ||
 
 				strcmp(name, "charge_blade") == 0 ||
-				strcmp(name, "charge_hth") == 0 ||		
+				strcmp(name, "charge_hth") == 0 ||
 				strcmp(name, "run_away") == 0 ||
 				strcmp(name, "seek_noise") == 0 ||
 				strcmp(name, "alert") == 0 ||
@@ -218,7 +218,7 @@ tauntEndElementHandle(void *userData, const XML_Char *name)
 {
 	tauntParseData * pData = (tauntParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "TAUNTS") == 0)
 		{
@@ -226,13 +226,13 @@ tauntEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "TAUNT") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			//if(pData->curTaunt.uiIndex < pData->maxArraySize)
 			if(num_found_taunt < pData->maxArraySize)
 			{
 				if ( localizedTextOnly_Taunts )
-				{			
+				{
 					// WANNE: Not working
 					/*
 					MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curArray[pData->curTaunt.uiIndex].szText, sizeof(pData->curTaunt.szText)/sizeof(pData->curTaunt.szText[0]) );
@@ -272,7 +272,7 @@ tauntEndElementHandle(void *userData, const XML_Char *name)
 					}
 
 					// no class specified -> set all enemies
-					if( !(pData->curTaunt.uiFlags2 & ( TAUNT_C_ADMIN | TAUNT_C_ARMY | TAUNT_C_ELITE | TAUNT_C_GREEN | 
+					if( !(pData->curTaunt.uiFlags2 & ( TAUNT_C_ADMIN | TAUNT_C_ARMY | TAUNT_C_ELITE | TAUNT_C_GREEN |
 						TAUNT_C_REGULAR | TAUNT_C_VETERAN ) ) )
 					{
 						pData->curTaunt.uiFlags2 |= TAUNT_C_ADMIN;
@@ -288,7 +288,7 @@ tauntEndElementHandle(void *userData, const XML_Char *name)
 
 					num_found_taunt++;
 				}
-			}	
+			}
 			//num_found_taunt++;
 			//num_found_taunt = pData->curTaunt.uiIndex;
 		}
@@ -299,21 +299,21 @@ tauntEndElementHandle(void *userData, const XML_Char *name)
 			for(UINT16 i = 0; i < TAUNT_MAX; i++)
 			{
 				pData->curTaunt.value[i] = (-1);
-			}	
+			}
 			pData->curTaunt.uiFlags = 0;
 			pData->curTaunt.uiFlags2 = 0;
 		}
 		else if(strcmp(name, "szText") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curTaunt.szText, sizeof(pData->curTaunt.szText)/sizeof(pData->curTaunt.szText[0]) );
 			pData->curTaunt.szText[sizeof(pData->curTaunt.szText)/sizeof(pData->curTaunt.szText[0]) - 1] = '\0';
 		}
 		else if(strcmp(name, "szCensoredText") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curTaunt.szCensoredText, sizeof(pData->curTaunt.szCensoredText)/sizeof(pData->curTaunt.szCensoredText[0]) );
 			pData->curTaunt.szCensoredText[sizeof(pData->curTaunt.szCensoredText)/sizeof(pData->curTaunt.szCensoredText[0]) - 1] = '\0';
 		}
@@ -959,7 +959,7 @@ BOOLEAN ReadInTaunts(STR fileName, BOOLEAN localizedVersion)
 
 	if (!localizedTextOnly_Taunts)
 		offset_index = num_found_taunt;
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -1028,7 +1028,7 @@ BOOLEAN WriteTaunts( STR fileName)
 		{
 			FilePrintf(hFile,"\t<TAUNT>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);
-			
+
 			FilePrintf(hFile,"\t</TAUNT>\r\n");
 		}
 		FilePrintf(hFile,"</TAUNTS>\r\n");

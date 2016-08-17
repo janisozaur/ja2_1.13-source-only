@@ -1,14 +1,14 @@
-﻿// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
+// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
 //#pragma setlocale("CHINESE")
 
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "Language Defines.h"
 	#ifdef CHINESE
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 	#endif
 #endif
 
@@ -258,7 +258,7 @@ STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 
 STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]=
 {
-	L"可以使用通讯设备\n", //L"Can use communications equipment\n", 
+	L"可以使用通讯设备\n", //L"Can use communications equipment\n",
 	L"可以呼叫临区盟友进行火炮攻击。\n", //L"Can call in artillery strikes from allies in neighbouring sectors.\n",
 	L"可以通过通讯频率扫描任务定位敌军巡逻队。\n", //L"Via Frequency Scan assignment, enemy patrols can be located.\n",
 	L"可以在分区范围内干扰通讯设备。\n", //L"Communications can be jammed sector-wide.\n",

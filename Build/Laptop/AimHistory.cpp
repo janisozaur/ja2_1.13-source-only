@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "AimHistory.h"
-	#include "aim.h"
+	#include "Aim.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"

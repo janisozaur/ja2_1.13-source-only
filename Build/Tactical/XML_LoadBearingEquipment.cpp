@@ -2,8 +2,8 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -20,7 +20,7 @@ struct
 }
 typedef lbeParseData;
 
-static void XMLCALL 
+static void XMLCALL
 lbeStartElementHandle(void *userData, const XML_Char *name, const XML_Char **atts)
 {
 	lbeParseData * pData = (lbeParseData *)userData;
@@ -79,7 +79,7 @@ lbeCharacterDataHandle(void *userData, const XML_Char *str, int len)
 {
 	lbeParseData * pData = (lbeParseData *)userData;
 
-	if( (pData->currentDepth <= pData->maxReadDepth) && 
+	if( (pData->currentDepth <= pData->maxReadDepth) &&
 		(strlen(pData->szCharData) < MAX_CHAR_DATA_LENGTH)
 	  ){
 		strncat(pData->szCharData,str,__min((unsigned int)len,MAX_CHAR_DATA_LENGTH-strlen(pData->szCharData)));
@@ -189,14 +189,14 @@ lbeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curLBE.lbePocketIndex[11] = (UINT8) atol(pData->szCharData);
 		}
-		
-		
+
+
 		else if(strcmp(name, "lbePocketsAvailable") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curLBE.lbePocketsAvailable = (UINT16) atol(pData->szCharData);
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 
@@ -213,7 +213,7 @@ BOOLEAN ReadInLBEStats(STR fileName)
 	UINT32		uiFSize;
 	CHAR8 *		lpcBuffer;
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	lbeParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading LoadBearingEquipment.xml" );
@@ -222,7 +222,7 @@ BOOLEAN ReadInLBEStats(STR fileName)
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -237,15 +237,15 @@ BOOLEAN ReadInLBEStats(STR fileName)
 
 	FileClose( hFile );
 
-	
+
 	XML_SetElementHandler(parser, lbeStartElementHandle, lbeEndElementHandle);
 	XML_SetCharacterDataHandler(parser, lbeCharacterDataHandle);
 
-	
+
 	memset(&pData,0,sizeof(pData));
 	//pData.curArray = LoadBearingEquipment;
-	//pData.maxArraySize = MAXITEMS; 
-	
+	//pData.maxArraySize = MAXITEMS;
+
 	XML_SetUserData(parser, &pData);
 
 	LoadBearingEquipment.clear();
@@ -278,7 +278,7 @@ BOOLEAN WriteLBEEquipmentStats()
 	hFile = FileOpen( "TABLEDATA\\LoadBearingEquipment out.xml", FILE_ACCESS_WRITE | FILE_CREATE_ALWAYS, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	{
 		UINT32 cnt;
 

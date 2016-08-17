@@ -1,42 +1,42 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <memory.h>
 
-	#include "types.h"
+	#include "Types.h"
 
 	#include "Keys.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Smoothing Utils.h"
 	#include "SkillCheck.h"
-	#include "opplist.h"
-	#include "items.h"
-	#include "weapons.h"
-	#include "ai.h"
-	#include "message.h"
-	#include "text.h"
-	#include "explosion control.h"
-	#include "isometric utils.h"
+	#include "Opplist.h"
+	#include "Items.h"
+	#include "Weapons.h"
+	#include "AI.h"
+	#include "Message.h"
+	#include "Text.h"
+	#include "Explosion Control.h"
+	#include "Isometric Utils.h"
 	#include "StrategicMap.h"
 	#include "Tactical Save.h"
 	#include "Campaign Types.h"
-	#include "los.h"
-	#include "opplist.h"
-	#include "tiledat.h"
-	#include "overhead.h"
+	#include "LOS.h"
+	#include "Opplist.h"
+	#include "TileDat.h"
+	#include "Overhead.h"
 	#include "structure.h"
-	#include "renderworld.h"
-	#include "worldman.h"
-	#include "wcheck.h"
-	#include "random.h"
-	#include "worlddef.h"
-	#include "campaign.h"
+	#include "RenderWorld.h"
+	#include "WorldMan.h"
+	#include "WCheck.h"
+	#include "Random.h"
+	#include "WorldDef.h"
+	#include "Campaign.h"
 	#include "Sound Control.h"
 	#include "Interface.h"
 	#include "Game Clock.h"
-	#include "handle doors.h"
+	#include "Handle Doors.h"
 	#include "Map Screen Interface.h"
 	#include "GameSettings.h" // added by SANDRO
 #endif
@@ -1407,7 +1407,7 @@ BOOLEAN AllMercsLookForDoor( INT32 sGridNo, BOOLEAN fUpdateValue )
 	// look for all mercs on the same team,
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; cnt++,pSoldier++ )
 	{
-		// ATE: Ok, lets check for some basic things here!		
+		// ATE: Ok, lets check for some basic things here!
 		if ( pSoldier->stats.bLife >= OKLIFE && !TileIsOutOfBounds(pSoldier->sGridNo) && pSoldier->bActive && pSoldier->bInSector )
 		{
 			// and we can trace a line of sight to his x,y coordinates?

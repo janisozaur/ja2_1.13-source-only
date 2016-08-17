@@ -4,10 +4,10 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "math.h"
-	#include "worlddef.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
 
 	#include "Random.h"
 	#include "Campaign.h"
@@ -110,7 +110,7 @@ void InitRandomMercs()
 		if (item->usItemClass == IC_ARMOUR)
 		{
 			ARMOURTYPE* armor = &Armour[item->ubClassIndex];
-			
+
 			if (armor->ubArmourClass == ARMOURCLASS_HELMET)
 				gear_helmets.push_back(item);
 			else if (armor->ubArmourClass == ARMOURCLASS_VEST)
@@ -136,7 +136,7 @@ void InitRandomMercs()
 		{
 			gear_attachments.push_back(item);
 		}
-		else if (item->usItemClass == IC_BLADE || item->usItemClass == IC_THROWING_KNIFE || item->usItemClass == IC_THROWN || item->usItemClass == IC_PUNCH || item->usItemClass == IC_APPLIABLE || 
+		else if (item->usItemClass == IC_BLADE || item->usItemClass == IC_THROWING_KNIFE || item->usItemClass == IC_THROWN || item->usItemClass == IC_PUNCH || item->usItemClass == IC_APPLIABLE ||
 			     item->usItemClass == IC_MONEY || item->usItemClass == IC_GRENADE || item->usItemClass == IC_BOMB || item->usItemClass == IC_MEDKIT || item->usItemClass == IC_KIT)
 		{
 			gear_misc.push_back(item);
@@ -227,7 +227,7 @@ FLOAT CountCombatTraits(std::vector<UINT8>* traits)
 			amount += 0.5f;
 		}
 	}
-	
+
 	return amount;
 }
 
@@ -241,7 +241,7 @@ UINT8 HasTrait(std::vector<UINT8>* traits, UINT8 trait_to_check)
 		if (*it == trait_to_check)
 			amount++;
 	}
-	
+
 	return amount;
 }
 
@@ -255,7 +255,7 @@ BOOLEAN HasRole(std::vector<UINT8>* roles, UINT8 role_to_check)
 		if (*it == role_to_check)
 			exists = true;
 	}
-	
+
 	return exists;
 }
 
@@ -404,7 +404,7 @@ void GearKitSetPrice(UINT8 profid, UINT8 kit_number, INT16 price)
 	gMercProfileGear[profid][kit_number].AbsolutePrice = price;
 }
 
-//get the specified slot 
+//get the specified slot
 INVTYPE* GearGetSlot(UINT8 profid, UINT8 kit_number, UINT8 slot)
 {
 	return &Item[ gMercProfileGear[profid][kit_number].inv[slot] ];
@@ -513,7 +513,7 @@ INVTYPE* GearGetRandomArmor(std::vector<INVTYPE*>* pointer, INT8 min_coolness = 
 		if (preferred_camo == CAMO_WOODLAND && (*it)->camobonus < min_camo) continue;
 		if (preferred_camo == CAMO_DESERT && (*it)->desertCamobonus < min_camo) continue;
 		if (preferred_camo == CAMO_STEALTH && (*it)->stealthbonus < min_camo) continue;
-		
+
 		candidates.push_back(*it);
 	}
 
@@ -653,8 +653,8 @@ std::vector<INVTYPE*> GearFindAttachmentsForWeapon(INVTYPE* weapon, BOOL attach_
 		if (!ValidAttachment(item->uiIndex, weapon->uiIndex))
 			continue;
 
-		if (attach_grip			 && item->attachmentclass == AC_BIPOD)			candidates[0].push_back(item);			
-		if (attach_grip			 && item->attachmentclass == AC_FOREGRIP)		candidates[0].push_back(item);		
+		if (attach_grip			 && item->attachmentclass == AC_BIPOD)			candidates[0].push_back(item);
+		if (attach_grip			 && item->attachmentclass == AC_FOREGRIP)		candidates[0].push_back(item);
 		if (attach_muzzle		 && item->attachmentclass == AC_MUZZLE)			candidates[1].push_back(item);
 		if (attach_laser		 && item->attachmentclass == AC_LASER)			candidates[2].push_back(item);
 		if (attach_sight		 && item->attachmentclass == AC_SIGHT)			candidates[3].push_back(item);
@@ -707,7 +707,7 @@ std::vector<INVTYPE*> GearFindItemsForRole(std::vector<UINT8>* roles, std::vecto
 
 		chance = Random(100) - (HasTrait(traits, TECHNICIAN_NT) * 40) - 1;
 		if (item->usItemClass == IC_KIT && chance < 0 && tracker[5] < 2) { result.push_back(item); tracker[5]++; }
-			
+
 		chance = Random(100) - 3;
 		if (item->usItemClass == IC_APPLIABLE && chance < 0 && tracker[6] < 2) { result.push_back(item); tracker[6]++; }
 
@@ -808,7 +808,7 @@ void RandomizeMerc(UINT8 profile_id, MERCPROFILESTRUCT* merc, BOOL random_gear_k
 
 	std::vector<UINT8> roles = GrantRoles(roles_to_grant);
 	std::vector<UINT8> traits;
-	
+
 	//spend our points budget
 	while (points > 0)
 	{
@@ -976,7 +976,7 @@ void RandomizeMerc(UINT8 profile_id, MERCPROFILESTRUCT* merc, BOOL random_gear_k
 						if (mags < mags_per_slot)
 							mags_per_slot = mags;
 
-						kit_cost += GearSetSlot(profile_id, kit_id, SMALLPOCK17POS + pos, ammo, mags_per_slot); 
+						kit_cost += GearSetSlot(profile_id, kit_id, SMALLPOCK17POS + pos, ammo, mags_per_slot);
 						for (int i = 0; i < mags_per_slot; i++) { storage[0][ LBEGetItemSize(ammo) ]++; }
 
 						mags -= mags_per_slot;
@@ -1003,7 +1003,7 @@ void RandomizeMerc(UINT8 profile_id, MERCPROFILESTRUCT* merc, BOOL random_gear_k
 
 						if (ammo)
 						{
-							kit_cost += GearSetSlot(profile_id, kit_id, MEDPOCK2POS, ammo, 2); 
+							kit_cost += GearSetSlot(profile_id, kit_id, MEDPOCK2POS, ammo, 2);
 							for (int i = 0; i < 2; i++) { storage[0][ LBEGetItemSize(ammo) ]++; }
 						}
 					}
@@ -1056,13 +1056,13 @@ void RandomizeMerc(UINT8 profile_id, MERCPROFILESTRUCT* merc, BOOL random_gear_k
 			//sometimes we get the second thigh slot
 			if ((Random(10) - max_kit_level) < 5) kit_cost += GearSetSlot(profile_id, kit_id, RTHIGHPOCKPOS, GearGetRandomLBE(min_kit_level, max_kit_level, THIGH_PACK));
 
-			//tally up costs of kit 
+			//tally up costs of kit
 			kit_cost = kit_cost * (1 + (max_kit_level / 10));
 			GearKitSetPrice(profile_id, kit_id, kit_cost);
 
 			//make sure this is set to the price of the FIRST gear set and you'll be fine.
 			if (kit_id == 0)
-				merc->usOptionalGearCost = kit_cost; 
+				merc->usOptionalGearCost = kit_cost;
 		}
 	}
 }

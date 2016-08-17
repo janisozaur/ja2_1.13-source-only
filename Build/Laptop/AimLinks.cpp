@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "AimLinks.h"
-	#include "aim.h"
+	#include "Aim.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
 	#include "Text.h"
@@ -72,8 +72,8 @@ void GameInitAimLinks()
 BOOLEAN EnterAimLinks()
 {
 	VOBJECT_DESC	VObjectDesc;
-	UINT16					usPosY;	
-	
+	UINT16					usPosY;
+
 	InitAimDefaults();
 	InitAimMenuBar();
 
@@ -88,7 +88,7 @@ BOOLEAN EnterAimLinks()
 	#ifdef JA2UB
 	}
 	#endif
-	
+
 	#ifdef JA2UB
 	if (gGameUBOptions.LaptopLinkFuneral == TRUE )
 	{
@@ -100,7 +100,7 @@ BOOLEAN EnterAimLinks()
 	#ifdef JA2UB
 	}
 	#endif
-	
+
 	#ifdef JA2UB
 	if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 	{
@@ -112,7 +112,7 @@ BOOLEAN EnterAimLinks()
 	#ifdef JA2UB
 	}
 	#endif
-	
+
 	#ifdef JA2UB
 		usPosY = AIM_LINK_BOBBY_LINK_Y;
 		if (gGameUBOptions.LaptopLinkBobby == TRUE )
@@ -121,19 +121,19 @@ BOOLEAN EnterAimLinks()
 								CURSOR_WWW, MSYS_NO_CALLBACK, SelectLinkRegionCallBack );
 		MSYS_AddRegion(&gSelectedLinkRegion[0]);
 		MSYS_SetRegionUserData( &gSelectedLinkRegion[0], 0, gubLinkPages[0]);
-		//usPosY += AIM_LINK_LINK_OFFSET_Y;	
+		//usPosY += AIM_LINK_LINK_OFFSET_Y;
 		}
-		
-		usPosY = AIM_LINK_FUNERAL_LINK_Y;	
+
+		usPosY = AIM_LINK_FUNERAL_LINK_Y;
 		if (gGameUBOptions.LaptopLinkFuneral == TRUE )
 		{
 		MSYS_DefineRegion( &gSelectedLinkRegion[1], AIM_LINK_FUNERAL_LINK_X, usPosY , AIM_LINK_FUNERAL_LINK_X + AIM_LINK_LINK_WIDTH, (UINT16)(usPosY + AIM_LINK_LINK_HEIGHT), MSYS_PRIORITY_HIGH,
 								CURSOR_WWW, MSYS_NO_CALLBACK, SelectLinkRegionCallBack );
 		MSYS_AddRegion(&gSelectedLinkRegion[1]);
 		MSYS_SetRegionUserData( &gSelectedLinkRegion[1], 0, gubLinkPages[1]);
-		//usPosY += AIM_LINK_LINK_OFFSET_Y;	
+		//usPosY += AIM_LINK_LINK_OFFSET_Y;
 		}
-		
+
 		usPosY = AIM_LINK_INSURANCE_LINK_Y;
 		if (gGameUBOptions.LaptopLinkInsurance== TRUE )
 		{
@@ -141,10 +141,10 @@ BOOLEAN EnterAimLinks()
 								CURSOR_WWW, MSYS_NO_CALLBACK, SelectLinkRegionCallBack );
 		MSYS_AddRegion(&gSelectedLinkRegion[2]);
 		MSYS_SetRegionUserData( &gSelectedLinkRegion[2], 0, gubLinkPages[2]);
-		usPosY += AIM_LINK_LINK_OFFSET_Y;	
+		usPosY += AIM_LINK_LINK_OFFSET_Y;
 		}
-	
-	#else	
+
+	#else
 	usPosY = AIM_LINK_BOBBY_LINK_Y;
 	for(UINT8 i=0; i<AIM_LINK_NUM_LINKS; i++)
 	{
@@ -163,37 +163,37 @@ BOOLEAN EnterAimLinks()
 void ExitAimLinks()
 {
 	RemoveAimDefaults();
-	
+
 	#ifdef JA2UB
 	if (gGameUBOptions.LaptopLinkBobby == TRUE )
 		DeleteVideoObjectFromIndex(guiBobbyLink);
-	
+
 	if (gGameUBOptions.LaptopLinkFuneral == TRUE )
 		DeleteVideoObjectFromIndex(guiFuneralLink);
-	
+
 	if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 		DeleteVideoObjectFromIndex(guiInsuranceLink);
-	
+
 	if (gGameUBOptions.LaptopLinkBobby == TRUE )
 		MSYS_RemoveRegion( &gSelectedLinkRegion[0]);
-	
+
 	if (gGameUBOptions.LaptopLinkFuneral == TRUE )
 		MSYS_RemoveRegion( &gSelectedLinkRegion[1]);
-	
+
 	if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 		MSYS_RemoveRegion( &gSelectedLinkRegion[2]);
-		
+
 	#else
-	
+
 	DeleteVideoObjectFromIndex(guiBobbyLink);
 	DeleteVideoObjectFromIndex(guiFuneralLink);
 	DeleteVideoObjectFromIndex(guiInsuranceLink);
-	
+
 	for(INT16 i=0; i<AIM_LINK_NUM_LINKS; i++)
 		MSYS_RemoveRegion( &gSelectedLinkRegion[i]);
 	#endif
-	
-	
+
+
 	ExitAimMenuBar();
 
 }
@@ -219,7 +219,7 @@ void RenderAimLinks()
 	#ifdef JA2UB
 	}
 	#endif
-	
+
 	#ifdef JA2UB
 	if (gGameUBOptions.LaptopLinkFuneral == TRUE )
 	{
@@ -230,7 +230,7 @@ void RenderAimLinks()
 	#ifdef JA2UB
 	}
 	#endif
-	
+
 	#ifdef JA2UB
 	if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 	{
@@ -241,7 +241,7 @@ void RenderAimLinks()
 	#ifdef JA2UB
 	}
 	#endif
-	
+
 	//Draw Link Title
 	DrawTextToScreen(AimLinkText[AIM_LINK_TITLE], AIM_LINK_TITLE_X, AIM_LINK_TITLE_Y, AIM_LINK_TITLE_WIDTH, AIM_LINK_TITLE_FONT, AIM_LINK_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED);
 

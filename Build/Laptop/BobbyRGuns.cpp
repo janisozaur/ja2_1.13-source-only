@@ -1,16 +1,16 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "BobbyRGuns.h"
 	#include "BobbyR.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
 	#include "Cursors.h"
-	#include "interface items.h"
+	#include "Interface Items.h"
 	#include "Encrypted File.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Store Inventory.h"
 	#include "LaptopSave.h"
 	#include "Finances.h"
@@ -19,9 +19,9 @@
 	#include "GameSettings.h"
 	#include "Points.h"
 	#include "Multi Language Graphic Utils.h"
-	#include "english.h"
+	#include "English.h"
 	// HEADROCK HAM 4
-	#include "input.h"
+	#include "Input.h"
 	#include "Encyclopedia_new.h"	//update encyclopedia item visibility when viewing that item
 #endif
 
@@ -64,11 +64,11 @@
 #define		BOBBYR_TO_ORDER_TEXT_Y						iScreenHeightOffset + 33 + LAPTOP_SCREEN_WEB_DELTA_Y
 #define		BOBBYR_TO_ORDER_TEXT_WIDTH				330
 
-#define		BOBBYR_PREVIOUS_BUTTON_X					LAPTOP_SCREEN_UL_X + 5			//BOBBYR_HOME_BUTTON_X + BOBBYR_CATALOGUE_BUTTON_WIDTH + 5 
-#define		BOBBYR_PREVIOUS_BUTTON_Y					LAPTOP_SCREEN_WEB_UL_Y + 300	//LAPTOP_SCREEN_WEB_UL_Y + 340		//BOBBYR_HOME_BUTTON_Y 
+#define		BOBBYR_PREVIOUS_BUTTON_X					LAPTOP_SCREEN_UL_X + 5			//BOBBYR_HOME_BUTTON_X + BOBBYR_CATALOGUE_BUTTON_WIDTH + 5
+#define		BOBBYR_PREVIOUS_BUTTON_Y					LAPTOP_SCREEN_WEB_UL_Y + 300	//LAPTOP_SCREEN_WEB_UL_Y + 340		//BOBBYR_HOME_BUTTON_Y
 
-#define		BOBBYR_NEXT_BUTTON_X							LAPTOP_SCREEN_UL_X + 412		//BOBBYR_ORDER_FORM_X + BOBBYR_ORDER_FORM_WIDTH + 5 
-#define		BOBBYR_NEXT_BUTTON_Y							BOBBYR_PREVIOUS_BUTTON_Y		//BOBBYR_PREVIOUS_BUTTON_Y 
+#define		BOBBYR_NEXT_BUTTON_X							LAPTOP_SCREEN_UL_X + 412		//BOBBYR_ORDER_FORM_X + BOBBYR_ORDER_FORM_WIDTH + 5
+#define		BOBBYR_NEXT_BUTTON_Y							BOBBYR_PREVIOUS_BUTTON_Y		//BOBBYR_PREVIOUS_BUTTON_Y
 
 #define		BOBBYR_CATALOGUE_BUTTON_START_X		BOBBYR_PREVIOUS_BUTTON_X + 92 	//LAPTOP_SCREEN_UL_X + 93 - BOBBYR_CATALOGUE_BUTTON_WIDTH/2
 #define		BOBBYR_CATALOGUE_BUTTON_GAP				( 318 - NUM_CATALOGUE_BUTTONS * BOBBYR_CATALOGUE_BUTTON_WIDTH) / (NUM_CATALOGUE_BUTTONS + 1) + BOBBYR_CATALOGUE_BUTTON_WIDTH + 1//80
@@ -154,7 +154,7 @@ BobbyRayPurchaseStruct BobbyRayPurchases[ 100 ];
 #define		FILTER_BUTTONS_ARMOUR_START_X			FILTER_BUTTONS_GUN_START_X
 #define		FILTER_BUTTONS_MISC_START_X				FILTER_BUTTONS_GUN_START_X
 #define		FILTER_BUTTONS_Y_OFFSET					22 //Madd: added to standardize this value, and decreased slightly from 25 to make more room
-#define		FILTER_BUTTONS_Y						BOBBYR_PREVIOUS_BUTTON_Y + FILTER_BUTTONS_Y_OFFSET 
+#define		FILTER_BUTTONS_Y						BOBBYR_PREVIOUS_BUTTON_Y + FILTER_BUTTONS_Y_OFFSET
 
 // The number of filter buttons which category uses
 #define		NUMBER_GUNS_FILTER_BUTTONS			9
@@ -731,10 +731,10 @@ BOOLEAN InitBobbyRMiscFilterBar()
 		usPosY = FILTER_BUTTONS_Y + ( (bCurMode / sItemWidth) * usYOffset);
 
 		// Filter buttons
-		guiBobbyRFilterMisc[i] = CreateIconAndTextButton( guiBobbyRFilterImage, BobbyRFilter[BOBBYR_FILTER_MISC_BLADE+i], BOBBYR_GUNS_BUTTON_FONT, 
-													BOBBYR_GUNS_TEXT_COLOR_ON, BOBBYR_GUNS_SHADOW_COLOR, 
-													BOBBYR_GUNS_TEXT_COLOR_OFF, BOBBYR_GUNS_SHADOW_COLOR, 
-													TEXT_CJUSTIFIED, 
+		guiBobbyRFilterMisc[i] = CreateIconAndTextButton( guiBobbyRFilterImage, BobbyRFilter[BOBBYR_FILTER_MISC_BLADE+i], BOBBYR_GUNS_BUTTON_FONT,
+													BOBBYR_GUNS_TEXT_COLOR_ON, BOBBYR_GUNS_SHADOW_COLOR,
+													BOBBYR_GUNS_TEXT_COLOR_OFF, BOBBYR_GUNS_SHADOW_COLOR,
+													TEXT_CJUSTIFIED,
 													usPosX, usPosY, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH,
 													DEFAULT_MOVE_CALLBACK, BtnBobbyRFilterMiscCallback);
 
@@ -1924,7 +1924,7 @@ BOOLEAN DisplayBigItemImage(UINT16 usIndex, UINT16 PosY)
 	if(hPixHandle->ubBitDepth == 8)
 	{
 		pTrav = &(hPixHandle->pETRLEObject[ 0 ] );
-	
+
 		//center picture in frame
 		usHeight				= (UINT32)pTrav->usHeight;
 		usWidth					= (UINT32)pTrav->usWidth;
@@ -2105,11 +2105,11 @@ UINT16 DisplayGunAP(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHeight)
 	OBJECTTYPE pObject;
 
 	DrawTextToScreen(BobbyRText[BOBBYR_GUNS_AP], BOBBYR_ITEM_WEIGHT_TEXT_X, (UINT16)usPosY, 0, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_STATIC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	CreateItem(usIndex, 100, &pObject);
 	UINT16		readyAPs = (UINT16)(( Weapon[ usIndex ].ubReadyTime * (100 - Item[ usIndex ].percentreadytimeapreduction)) / 100);
 	INT16		ubAttackAPs = BaseAPsToShootOrStab( APBPConstants[DEFAULT_APS], APBPConstants[DEFAULT_AIMSKILL], &pObject, NULL );
-	
+
 	swprintf( sTemp, L"(%d)", readyAPs );
 
 	if ( Weapon[ usIndex ].NoSemiAuto )
@@ -2147,7 +2147,7 @@ UINT16 DisplayMeleeAP(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHeight)
 	OBJECTTYPE pObject;
 
 	DrawTextToScreen(BobbyRText[BOBBYR_GUNS_AP], BOBBYR_ITEM_WEIGHT_TEXT_X, (UINT16)usPosY, 0, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_STATIC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	CreateItem(usIndex, 100, &pObject);
 	INT16		ubAttackAPs = BaseAPsToShootOrStab( APBPConstants[DEFAULT_APS], APBPConstants[DEFAULT_AIMSKILL], &pObject, NULL );
 
@@ -2258,9 +2258,9 @@ UINT16 DisplayExplosiveDamage(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHeight
 	CHAR16	sTemp[20];
 
 	DrawTextToScreen(BobbyRText[BOBBYR_GUNS_DAMAGE], BOBBYR_ITEM_WEIGHT_TEXT_X, (UINT16)usPosY, 0, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_STATIC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	UINT16 explDamage = (UINT16) GetModifiedExplosiveDamage( Explosive[Item[ usIndex ].ubClassIndex].ubDamage, 0 );
-	
+
 	swprintf(sTemp, L"%4d", explDamage);
 	DrawTextToScreen(sTemp, BOBBYR_ITEM_WEIGHT_NUM_X, (UINT16)usPosY, BOBBYR_ITEM_WEIGHT_NUM_WIDTH, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_ITEM_DESC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, RIGHT_JUSTIFIED);
 	usPosY += usFontHeight + 2;
@@ -2272,9 +2272,9 @@ UINT16 DisplayExplosiveStunDamage(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHe
 	CHAR16	sTemp[20];
 
 	DrawTextToScreen(BobbyRText[BOBBYR_GUNS_STUN], BOBBYR_ITEM_WEIGHT_TEXT_X, (UINT16)usPosY, 0, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_STATIC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	UINT16 explStunDamage = (UINT16) GetModifiedExplosiveDamage( Explosive[Item[ usIndex ].ubClassIndex].ubStunDamage, 1 );
-	
+
 	swprintf(sTemp, L"%4d", explStunDamage);
 	DrawTextToScreen(sTemp, BOBBYR_ITEM_WEIGHT_NUM_X, (UINT16)usPosY, BOBBYR_ITEM_WEIGHT_NUM_WIDTH, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_ITEM_DESC_TEXT_COLOR_ALT, FONT_MCOLOR_BLACK, FALSE, RIGHT_JUSTIFIED);
 	usPosY += usFontHeight + 2;
@@ -2287,7 +2287,7 @@ UINT16 DisplayProtection(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHeight)
 	CHAR16	sTemp2[20];
 
 	DrawTextToScreen(BobbyRText[BOBBYR_GUNS_PROTECTION], BOBBYR_ITEM_WEIGHT_TEXT_X, (UINT16)usPosY, 0, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_STATIC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	INT32 iProtection = Armour[ Item[ usIndex ].ubClassIndex ].ubProtection;
 
 	switch( Armour[ Item[ usIndex ].ubClassIndex ].ubArmourClass )
@@ -2308,7 +2308,7 @@ UINT16 DisplayProtection(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHeight)
 		iProtection = 65 * iProtection / ( Armour[ Item[ CERAMIC_PLATES ].ubClassIndex ].ubProtection );
 		break;
 	}
-	
+
 	swprintf(sTemp, L"%d", iProtection, Armour[ Item[ usIndex ].ubClassIndex ].ubProtection); // FIXME: param4 is unused
 	wcscat( sTemp, L"%%" );
 	swprintf( sTemp2, L"(%d)", Armour[ Item[ usIndex ].ubClassIndex ].ubProtection );
@@ -2323,7 +2323,7 @@ UINT16 DisplayCamo(UINT16 usPosY, UINT16 usIndex, UINT16 usFontHeight)
 	CHAR16 sTemp[20];
 
 	DrawTextToScreen(BobbyRText[BOBBYR_GUNS_CAMO], BOBBYR_ITEM_WEIGHT_TEXT_X, (UINT16)usPosY, 0, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_STATIC_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	swprintf(sTemp, L"%d", Item[ usIndex ].camobonus);
 	wcscat( sTemp, L"%%" );
 	DrawTextToScreen(sTemp, BOBBYR_ITEM_WEIGHT_NUM_X, (UINT16)usPosY, BOBBYR_ITEM_WEIGHT_NUM_WIDTH, BOBBYR_ITEM_DESC_TEXT_FONT, BOBBYR_ITEM_DESC_TEXT_COLOR_ALT, FONT_MCOLOR_BLACK, FALSE, RIGHT_JUSTIFIED);
@@ -2438,7 +2438,7 @@ void DisplayItemNameAndInfo(UINT16 usPosY, UINT16 usIndex, UINT16 usBobbyIndex, 
 		#else
 			swprintf( sTemp, L"*%3d%%%%", LaptopSaveInfo.BobbyRayUsedInventory[ usBobbyIndex ].ubItemQuality );
 		#endif
-		
+
 		DrawTextToScreen(sTemp, (UINT16)(BOBBYR_ITEM_NAME_X-2), (UINT16)(usPosY - BOBBYR_ORDER_NUM_Y_OFFSET), BOBBYR_ORDER_NUM_WIDTH, BOBBYR_ITEM_NAME_TEXT_FONT, BOBBYR_ITEM_NAME_TEXT_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 	}
 
@@ -2507,7 +2507,7 @@ void CalculateFirstAndLastIndexs()
 }
 */
 
-//Loops through Bobby Rays Inventory to find the first and last index 
+//Loops through Bobby Rays Inventory to find the first and last index
 void SetFirstLastPagesForNew( UINT32 uiClassMask, INT32 iFilter, INT32 iSubFilter )
 {
 	UINT16	i;
@@ -2565,7 +2565,7 @@ void SetFirstLastPagesForNew( UINT32 uiClassMask, INT32 iFilter, INT32 iSubFilte
 							}
 							break;
 						// Misc
-						case IC_BOBBY_MISC: 
+						case IC_BOBBY_MISC:
 							if (Item[usItemIndex].usItemClass == iFilter) // Madd: new BR filter options
 							{
 								if (iSubFilter > -1 )
@@ -2613,7 +2613,7 @@ void SetFirstLastPagesForNew( UINT32 uiClassMask, INT32 iFilter, INT32 iSubFilte
 		gubNumPages += 1;
 }
 
-//Loops through Bobby Rays Used Inventory to find the first and last index 
+//Loops through Bobby Rays Used Inventory to find the first and last index
 void SetFirstLastPagesForUsed(INT32 iFilter)
 {
 	UINT16  i;
@@ -3389,7 +3389,7 @@ void DisableBobbyRButtons()
 		DisableButton( guiBobbyRNextPage );
 	else
 		EnableButton( guiBobbyRNextPage );
-		
+
 
 	// if it is the first page, disable the prev page buitton
 	if( (gusCurWeaponIndex == gusFirstItemIndex ) )
@@ -3553,7 +3553,7 @@ void CalcFirstIndexForPage( STORE_INVENTORY *pInv, UINT32	uiItemClass )
 					}
 					else
 					{
-						usItemIndex = LaptopSaveInfo.BobbyRayInventory[ i ].usItemIndex; 
+						usItemIndex = LaptopSaveInfo.BobbyRayInventory[ i ].usItemIndex;
 						if (Item[usItemIndex].usItemClass == guiCurrentMiscFilterMode)
 						{
 							if (guiCurrentMiscSubFilterMode > -1) // Madd: new BR filter options
@@ -3565,7 +3565,7 @@ void CalcFirstIndexForPage( STORE_INVENTORY *pInv, UINT32	uiItemClass )
 								else if (guiCurrentMiscSubFilterMode == BR_MISC_FILTER_NO_ATTACHMENTS && !Item[usItemIndex].attachment)
 									bCntItem = TRUE;
 							}
-							else 
+							else
 								bCntItem = TRUE;
 						}
 					}
@@ -3596,7 +3596,7 @@ void CalcFirstIndexForPage( STORE_INVENTORY *pInv, UINT32	uiItemClass )
 BOOLEAN IsAmmoMatchinWeaponType(UINT16 usItemIndex, UINT8 ubWeaponType)
 {
 	BOOLEAN bRetValue = FALSE;
-	
+
 	for ( UINT32 i = 0; i < gMAXITEMS_READ; ++i )
 	{
 		if (Item[i].usItemClass != IC_GUN )
@@ -3760,7 +3760,7 @@ void HandleBobbyRGunsKeyBoardInput()
 				break;
 				case '1':
 					// 1st item on screen
-					if( ( ( gubNumPages > 0 ) && ( gubCurPage != gubNumPages - 1 ) ) || 
+					if( ( ( gubNumPages > 0 ) && ( gubCurPage != gubNumPages - 1 ) ) ||
 						( ( gubCurPage == gubNumPages - 1 ) ) )
 					{
 						if( fCtrl )
@@ -3811,7 +3811,7 @@ void HandleBobbyRGunsKeyBoardInput()
 				break;
 				case '!':
 					// 1st item on screen all at once
-					if( ( ( gubNumPages > 0 ) && ( gubCurPage != gubNumPages - 1 ) ) || 
+					if( ( ( gubNumPages > 0 ) && ( gubCurPage != gubNumPages - 1 ) ) ||
 						( ( gubCurPage == gubNumPages - 1 ) ) )
 					{
 						if( fCtrl )
@@ -3892,7 +3892,7 @@ void HandleBobbyRGunsKeyBoardInput()
 					// jump to 10 pages back
 					if( gubCurPage > 0 )
 						gubCurPage = __max(gubCurPage - 10, 0);
-					
+
 					fReDrawScreenFlag = TRUE;
 					fPausedReDrawScreenFlag = TRUE;
 				break;
@@ -3901,13 +3901,13 @@ void HandleBobbyRGunsKeyBoardInput()
 					// jump to 10 pages forward
 					if( gubCurPage < gubNumPages - 1 )
 						gubCurPage = __min(gubNumPages - 1, gubCurPage + 10);
-					
+
 					fReDrawScreenFlag = TRUE;
 					fPausedReDrawScreenFlag = TRUE;
 				break;
 				case '1':
 					// 1st item on screen
-					if( ( ( gubNumPages > 0 ) && ( gubCurPage != gubNumPages - 1 ) ) || 
+					if( ( ( gubNumPages > 0 ) && ( gubCurPage != gubNumPages - 1 ) ) ||
 						( ( gubCurPage == gubNumPages - 1 ) ) )
 					{
 						if( fCtrl )
@@ -3967,7 +3967,7 @@ void HandleBobbyRGunsKeyBoardInput()
 }
 
 void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
-{		
+{
 	CHAR16	zItemName[ SIZE_ITEM_NAME ];
 	UINT8	ubItemCount=0;
 
@@ -4042,7 +4042,7 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 					//need to refactor this to work more like the NAS attachment slots method
 					usAttachment = 0;
 					if ( IsAttachmentPointAvailable(Item[usItemNumber].uiIndex, iLoop) )
-					{	
+					{
 						usAttachment = iLoop;
 						// If the attachment is not hidden
 						if (usAttachment > 0 && !Item[ usAttachment ].hiddenaddon && !Item[ usAttachment ].hiddenattachment)
@@ -4130,8 +4130,8 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 				wcscat( attachStr, attachStr3 );
 			}
 
-			// HEADROCK HAM 3: Added last string (attachStr), for display of the possible attachment list. 
-			// If the feature is deactivated, the attachStr will simply be empty at this point 
+			// HEADROCK HAM 3: Added last string (attachStr), for display of the possible attachment list.
+			// If the feature is deactivated, the attachStr will simply be empty at this point
 			// (remember? we emptied it earlier!).
 			INT8 accuracy = (UsingNewCTHSystem()==true?Weapon[ usItemNumber ].nAccuracy:Weapon[ usItemNumber ].bAccuracy);
 			swprintf( pzStr, L"%s (%s)\n%s %d\n%s %d\n%s %d\n%s (%d) %s\n%s %1.1f %s%s",
@@ -4142,7 +4142,7 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 				gWeaponStatsDesc[ 11 ],					//Damage String
 				gunDamage,								//Gun damage
 				gWeaponStatsDesc[ 10 ],					//Range String
-				gGameSettings.fOptions[ TOPTION_SHOW_WEAPON_RANGE_IN_TILES ] ? gunRange/10 : gunRange,	//Gun Range 
+				gGameSettings.fOptions[ TOPTION_SHOW_WEAPON_RANGE_IN_TILES ] ? gunRange/10 : gunRange,	//Gun Range
 				gWeaponStatsDesc[ 6 ],					//AP String
 				readyAPs,
 				apStr,									//AP's
@@ -4191,7 +4191,7 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 			}
 			else
 				wcscat( apStr, L" / -" );
-			
+
 			swprintf( pzStr, L"%s\n%s %d\n%s %d\n%s %d\n%s (%d) %s\n%s %1.1f %s",
 				ItemNames[ usItemNumber ],
 				gWeaponStatsDesc[ 9 ],					//Accuracy String
@@ -4199,7 +4199,7 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 				gWeaponStatsDesc[ 11 ],					//Damage String
 				gunDamage,								//Gun damage
 				gWeaponStatsDesc[ 10 ],					//Range String
-				gGameSettings.fOptions[ TOPTION_SHOW_WEAPON_RANGE_IN_TILES ] ? usRange/10 : usRange,	//Gun Range 
+				gGameSettings.fOptions[ TOPTION_SHOW_WEAPON_RANGE_IN_TILES ] ? usRange/10 : usRange,	//Gun Range
 				gWeaponStatsDesc[ 6 ],					//AP String
 				readyAPs,
 				apStr,									//AP's
@@ -4214,7 +4214,7 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 	case IC_THROWING_KNIFE:
 	case IC_PUNCH:
 		{
-			// HEADROCK HAM 3.6: Can now take a negative modifier 
+			// HEADROCK HAM 3.6: Can now take a negative modifier
 			//UINT16 meleeDamage = (UINT16)( Weapon[ usItemNumber ].ubImpact + ( (double) Weapon[ usItemNumber ].ubImpact / 100) * gGameExternalOptions.ubMeleeDamageMultiplier );
 			//UINT16 meleeDamage = (UINT16)GetModifiedMeleeDamage( Weapon[ usItemNumber ].ubImpact );
 			OBJECTTYPE pObject;
@@ -4243,7 +4243,7 @@ void GetHelpTextForItemInLaptop( STR16 pzStr, UINT16 usItemNumber )
 				);
 
 			//Lal: do not delete, commented out for next version
-			//swprintf( pzStr, L"%s %s %s %d [%d rnds]\n%s %1.1f %s", 				
+			//swprintf( pzStr, L"%s %s %s %d [%d rnds]\n%s %1.1f %s",
 			//	AmmoCaliber[ Magazine[ Item[usItem].ubClassIndex ].ubCalibre ],			//Ammo calibre
 			//	AmmoTypes[Magazine[ Item[usItem].ubClassIndex ].ubAmmoType].ammoName,	//Ammo type
 			//	MagNames[Magazine[ Item[usItem].ubClassIndex ].ubMagType],				//Magazine type

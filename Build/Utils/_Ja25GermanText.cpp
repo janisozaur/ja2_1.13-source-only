@@ -1,4 +1,4 @@
-﻿// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
+// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
 //#pragma setlocale("GERMAN")
 
 #ifdef PRECOMPILEDHEADERS
@@ -7,8 +7,8 @@
 #else
 	#include "Language Defines.h"
 	#ifdef GERMAN
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 	#endif
 #endif
 
@@ -260,7 +260,7 @@ STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 
 STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]=
 {
-	L"Kann Funkausrüstung nutzen\n", 
+	L"Kann Funkausrüstung nutzen\n",
 	L"Kann Artillerieunterstützung von Verbündeten in Nachbarsektoren anfordern\n",
 	L"Kann Funkfrequenzen abhören und feindliche Truppen aufspüren\n",
 	L"Kann den Funkverkehr im ganzen Sektor stören\n",
@@ -520,8 +520,8 @@ STR16 gzDisplayCoverText[]=
 	L"Wüste und Schnee",
 	L"Stadt und Schnee",
 	L"-", // yes empty for now
-	L"Deckung: %d/100, Helligkeit: %d/100",			
-	L"Footstep volume",				// TODO.Translate			
+	L"Deckung: %d/100, Helligkeit: %d/100",
+	L"Footstep volume",				// TODO.Translate
 	L"Stealth difficulty",
 	L"Trap level",
 };

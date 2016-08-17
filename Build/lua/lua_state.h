@@ -55,7 +55,7 @@ public:
 	 * initialize longterm lua state by its ID
 	 */
 	static void			INIT(lua::State state_id, bool init_libs);
-	
+
 	/**
 	 * initializes and returns shortterm lua state
 	 */
@@ -88,17 +88,17 @@ public:
 
 	/**
 	 * loads and evaluates lua file. catches and logs error if file doesn't exist or could not be read.
-	 * @return true if file could be loaded and evaluated, false otherwise. 
+	 * @return true if file could be loaded and evaluated, false otherwise.
 	 */
 	bool EvalFile(const char* filename);
 
 	/**
 	 * evaluate string
-	 */ 
+	 */
 	bool EvalString(const char* lua_str, size_t length, const char* id_str);
 	/**
 	 * evaluate string
-	 */ 
+	 */
 	bool EvalString(const wchar_t* lua_str, size_t length, const char* id_str);
 
 	/**

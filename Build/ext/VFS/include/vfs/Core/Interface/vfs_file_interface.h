@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/Interface/vfs_file_interface.h
  *  - generic interface for read/write files
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -114,7 +114,7 @@ namespace vfs
 	public:
 		virtual bool		isOpenRead() = 0;
 		virtual bool		openRead() = 0;
-		virtual vfs::size_t	read(vfs::Byte* data, vfs::size_t bytesToRead) = 0;	
+		virtual vfs::size_t	read(vfs::Byte* data, vfs::size_t bytesToRead) = 0;
 
 		virtual vfs::size_t	getReadPosition() = 0;
 		virtual void		setReadPosition(vfs::size_t positionInBytes) = 0;
@@ -131,7 +131,7 @@ namespace vfs
 	public:
 		virtual bool		isOpenWrite() = 0;
 		virtual bool		openWrite(bool createWhenNotExist = false, bool truncate = false) = 0;
-		virtual vfs::size_t	write(const vfs::Byte* data, vfs::size_t bytesToWrite) = 0;	
+		virtual vfs::size_t	write(const vfs::Byte* data, vfs::size_t bytesToWrite) = 0;
 
 		virtual vfs::size_t	getWritePosition() = 0;
 		virtual void		setWritePosition(vfs::size_t positionInBytes) = 0;
@@ -145,7 +145,7 @@ namespace vfs
 	/******************************************************************/
 
 	/**
-	 *  IFileTemplate 
+	 *  IFileTemplate
 	 */
 	template<typename ReadType=vfs::IReadType, typename WriteType=vfs::IWriteType>
 	class VFS_API TFileTemplate : public vfs::IBaseFile, public ReadType, public WriteType
@@ -157,7 +157,7 @@ namespace vfs
 		typedef vfs::TFileTemplate<read_type,vfs::IWritable> write_file_type;
 		typedef vfs::TFileTemplate<vfs::IReadable,write_type> read_file_type;
 	public:
-		TFileTemplate(vfs::Path const& fileName) 
+		TFileTemplate(vfs::Path const& fileName)
 			: vfs::IBaseFile(fileName), ReadType(), WriteType()
 		{};
 		virtual ~TFileTemplate()
@@ -173,7 +173,7 @@ namespace vfs
 	};
 
 	/**
-	 *  TReadableFile 
+	 *  TReadableFile
 	 */
 	template<class WriteType=vfs::IWriteType>
 	class TReadableFile : public vfs::TFileTemplate<vfs::IReadable,WriteType>
@@ -208,7 +208,7 @@ namespace vfs
 	};
 
 	/**
-	 *  TWritableFile 
+	 *  TWritableFile
 	 */
 	template<class ReadType=vfs::IReadType>
 	class TWritableFile : public vfs::TFileTemplate<ReadType,vfs::IWritable>
@@ -245,7 +245,7 @@ namespace vfs
 
 	/******************************************************************/
 	/******************************************************************/
-	
+
 	/**
 	 *  typedef's
 	 */

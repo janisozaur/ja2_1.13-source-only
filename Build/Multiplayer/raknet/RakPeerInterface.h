@@ -62,9 +62,9 @@ public:
 	/// If you accept connections, you must call this or else secure connections will not be enabled for incoming connections.
 	/// If you are connecting to another system, you can call this with values for the (e and p,q) public keys before connecting to prevent MitM
 	/// \pre Must be called while offline
-	/// \param[in] pubKeyE A pointer to the public keys from the RSACrypt class.  
-	/// \param[in] pubKeyN A pointer to the public keys from the RSACrypt class. 
-	/// \param[in] privKeyP Public key generated from the RSACrypt class.  
+	/// \param[in] pubKeyE A pointer to the public keys from the RSACrypt class.
+	/// \param[in] pubKeyN A pointer to the public keys from the RSACrypt class.
+	/// \param[in] privKeyP Public key generated from the RSACrypt class.
 	/// \param[in] privKeyQ Public key generated from the RSACrypt class.  If the private keys are 0, then a new key will be generated when this function is called@see the Encryption sample
 	virtual void InitializeSecurity(const char *pubKeyE, const char *pubKeyN, const char *privKeyP, const char *privKeyQ )=0;
 
@@ -144,7 +144,7 @@ public:
 
 	/// Fills the array remoteSystems with the SystemAddress of all the systems we are connected to
 	/// \param[out] remoteSystems An array of SystemAddress structures to be filled with the SystemAddresss of the systems we are connected to. Pass 0 to remoteSystems to only get the number of systems we are connected to
-	/// \param[in, out] numberOfSystems As input, the size of remoteSystems array.  As output, the number of elements put into the array 
+	/// \param[in, out] numberOfSystems As input, the size of remoteSystems array.  As output, the number of elements put into the array
 	virtual bool GetConnectionList( SystemAddress *remoteSystems, unsigned short *numberOfSystems ) const=0;
 
 	/// Sends a block of data to the specified system that you are connected to.
@@ -208,7 +208,7 @@ public:
 	virtual Packet* Receive( void )=0;
 
 	/// Call this to deallocate a message returned by Receive() when you are done handling it.
-	/// \param[in] packet The message to deallocate.	
+	/// \param[in] packet The message to deallocate.
 	virtual void DeallocatePacket( Packet *packet )=0;
 
 	/// Return the total number of connections we are allowed
@@ -261,7 +261,7 @@ public:
 	/// \param[in] replyFromTarget If 0, this function is non-blocking.  Otherwise it will block while waiting for a reply from the target procedure, which should be remotely written to RPCParameters::replyToSender and copied to replyFromTarget.  The block will return early on disconnect or if the sent packet is unreliable and more than 3X the ping has elapsed.
 	/// \return True on a successful packet send (this does not indicate the recipient performed the call), false on failure
 	virtual bool RPC( const char* uniqueID, const char *data, BitSize_t bitLength, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )=0;
-	
+
 	/// \ingroup RAKNET_RPC
 	/// Calls a C function on the remote system that was already registered using RegisterAsRemoteProcedureCall.
 	/// If you want that function to return data you should call RPC from that system in the same wayReturns true on a successful packet
@@ -279,7 +279,7 @@ public:
 	/// \param[in] replyFromTarget If 0, this function is non-blocking.  Otherwise it will block while waiting for a reply from the target procedure, which should be remotely written to RPCParameters::replyToSender and copied to replyFromTarget.  The block will return early on disconnect or if the sent packet is unreliable and more than 3X the ping has elapsed.
 	/// \return True on a successful packet send (this does not indicate the recipient performed the call), false on failure
 	virtual bool RPC( const char* uniqueID, const RakNet::BitStream *bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )=0;
-	
+
 	// -------------------------------------------------------------------------------------------- Connection Management Functions--------------------------------------------------------------------------------------------
 	/// Close the connection to another host (if we initiated the connection it will disconnect, if they did it will kick them out).
 	/// \param[in] target Which system to close the connection to.
@@ -315,7 +315,7 @@ public:
 	/// \param[in] milliseconds how many ms for a temporary ban.  Use 0 for a permanent ban
 	virtual void AddToBanList( const char *IP, RakNetTime milliseconds=0 )=0;
 
-	/// Allows a previously banned IP to connect. 
+	/// Allows a previously banned IP to connect.
 	/// param[in] Dotted IP address. Can use * as a wildcard, such as 128.0.0.* will banAll IP addresses starting with 128.0.0
 	virtual void RemoveFromBanList( const char *IP )=0;
 
@@ -479,12 +479,12 @@ public:
 	/// Enables or disables frequency table tracking.  This is required to get a frequency table, which is used in GenerateCompressionLayer()
 	/// This value persists between connect calls and defaults to false (no frequency tracking)
 	/// \pre You can call this at any time - however you SHOULD only call it when disconnected.  Otherwise you will only trackpart of the values sent over the network.
-	/// \param[in] doCompile True to enable tracking 
+	/// \param[in] doCompile True to enable tracking
 	virtual void SetCompileFrequencyTable( bool doCompile )=0;
 
 	/// Returns the frequency of outgoing bytes into output frequency table
 	/// The purpose is to save to file as either a master frequency table from a sample game session for passing to
-	/// GenerateCompressionLayer() 
+	/// GenerateCompressionLayer()
 	/// \pre You should only call this when disconnected. Requires that you first enable data frequency tracking by calling SetCompileFrequencyTable(true)
 	/// \param[out] outputFrequencyTable  The frequency of each corresponding byte
 	/// \return False (failure) if connected or if frequency table tracking is not enabled. Otherwise true (success)

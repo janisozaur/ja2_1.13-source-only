@@ -7,24 +7,24 @@
 	#include "Types.h"
 	#include "Credits.h"
 	#include "Language Defines.h"
-	#include "vsurface.h"
+	#include "VSurface.h"
 	#include "mousesystem.h"
 	#include "Text.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "Video.h"
-	#include "render dirty.h"
-	#include "local.h"
-	#include "utilities.h"
+	#include "Render Dirty.h"
+	#include "Local.h"
+	#include "Utilities.h"
 	#include "WCheck.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Font Control.h"
-	#include "cursors.h"
-	#include "font.h"
-	#include "wordwrap.h"
-	#include "sysutil.h"
+	#include "Cursors.h"
+	#include "Font.h"
+	#include "WordWrap.h"
+	#include "SysUtil.h"
 	#include "Input.h"
-	#include "english.h"
-	#include "encrypted file.h"
+	#include "English.h"
+	#include "Encrypted File.h"
 	#include "Random.h"
 #endif
 
@@ -1335,7 +1335,7 @@ UINT32	GetAndHandleCreditCodeFromCodeString( STR16 pzCode )
 	{
 		return( CRDT_FLAG__END_SECTION );
 	}
-	
+
 	return( CRDT_NODE_NONE );
 }
 

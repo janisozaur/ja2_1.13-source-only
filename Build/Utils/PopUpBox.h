@@ -2,8 +2,8 @@
 #define __POPUP_BOX
 
 #include "sgp.h"
-//#include "local.h"
-#include "vobject_blitters.h"
+//#include "Local.h"
+#include "VObject_blitters.h"
 #include "WCheck.h"
 #include "Render Dirty.h"
 
@@ -62,10 +62,10 @@ static UINT32 guiCurrentBox;
 
 // functions
 void InitPopUpBoxList();
-BOOLEAN CreatePopUpBox(INT32 *hBoxHandle, SGPRect Dimensions, SGPPoint Position, UINT32 
+BOOLEAN CreatePopUpBox(INT32 *hBoxHandle, SGPRect Dimensions, SGPPoint Position, UINT32
 										uiFlags);
 
-void SetMargins(INT32 hBoxHandle, UINT32 uiLeft, UINT32 uiTop, UINT32 uiBottom, 
+void SetMargins(INT32 hBoxHandle, UINT32 uiLeft, UINT32 uiTop, UINT32 uiBottom,
 								UINT32 uiRight);
 UINT32 GetTopMarginSize( INT32 hBoxHandle );
 void SetLineSpace(INT32 hBoxHandle, UINT32 uiLineSpace);

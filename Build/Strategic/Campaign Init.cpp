@@ -2,12 +2,12 @@
 	#include "Strategic All.h"
 	#include "XML.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include "Campaign Init.h"
 	#include "Random.h"
 	#include "Campaign Types.h"
 	#include "Queen Command.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Strategic Movement.h"
 	#include "Strategic Status.h"
 	#include "GameSettings.h"
@@ -18,7 +18,7 @@
 	#include "Tactical Save.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include <vfs/Core/vfs.h>
 #include "XMLWriter.h"
 
@@ -434,18 +434,18 @@ void BuildUndergroundSectorInfoList()
 
 	//J9 feeding zone
 	curr = NewUndergroundNode( 9, 10, 2 );
-	curr->ubNumCreatures = (UINT8)(2 + zDiffSetting[gGameOptions.ubDifficultyLevel].iJ9B2NumCreatures*2 + Random( 2 ));	
-	
+	curr->ubNumCreatures = (UINT8)(2 + zDiffSetting[gGameOptions.ubDifficultyLevel].iJ9B2NumCreatures*2 + Random( 2 ));
+
 	//K4
 	curr = NewUndergroundNode( 4, 11, 1 );
 	curr->ubNumTroops = (UINT8)(6 + zDiffSetting[gGameOptions.ubDifficultyLevel].iK4B1NumTroops*2 + Random( 3 ));
 	curr->ubNumElites = (UINT8)(4 + zDiffSetting[gGameOptions.ubDifficultyLevel].iK4B1NumElites + Random( 2 ));
-	
+
 	//O3
 	curr = NewUndergroundNode( 3, 15, 1 );
 	curr->ubNumTroops = (UINT8)(6 + zDiffSetting[gGameOptions.ubDifficultyLevel].iO3B1NumTroops*2 + Random( 3 ));
-	curr->ubNumElites = (UINT8)(4 + zDiffSetting[gGameOptions.ubDifficultyLevel].iO3B1NumElites + Random( 2 ));	
-	
+	curr->ubNumElites = (UINT8)(4 + zDiffSetting[gGameOptions.ubDifficultyLevel].iO3B1NumElites + Random( 2 ));
+
 	//P3
 	curr = NewUndergroundNode( 3, 16, 1 );
 	if (gGameOptions.ubDifficultyLevel == DIF_LEVEL_EASY )
@@ -454,9 +454,9 @@ void BuildUndergroundSectorInfoList()
 		curr->ubNumElites = (UINT8)(zDiffSetting[gGameOptions.ubDifficultyLevel].iP3B1NumElites + Random( 5 ));
 	else if (gGameOptions.ubDifficultyLevel == DIF_LEVEL_HARD )
 		curr->ubNumElites = (UINT8)(zDiffSetting[gGameOptions.ubDifficultyLevel].iP3B1NumElites + Random( 6 ));
-	else 
+	else
 		curr->ubNumElites = zDiffSetting[gGameOptions.ubDifficultyLevel].iP3B1NumElites;
-	
+
 	//Do all of the mandatory underground mine sectors
 
 	//Drassen's mine

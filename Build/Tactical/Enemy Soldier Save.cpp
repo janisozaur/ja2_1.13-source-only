@@ -2,37 +2,37 @@
 	#include "Tactical All.h"
 	#include "Enemy Soldier Save.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
     #include "GameSettings.h"
 	#include <stdio.h>
 	#include <memory.h>
 
-	#include "types.h"
+	#include "Types.h"
 
-	#include "strategicmap.h"
-	#include "overhead.h"
-	#include "isometric utils.h"
+	#include "StrategicMap.h"
+	#include "Overhead.h"
+	#include "Isometric Utils.h"
 
-	#include "soldier add.h"
-	#include "soldier create.h"
+	#include "Soldier Add.h"
+	#include "Soldier Create.h"
 	#include "Soldier Init List.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "Random.h"
-	#include "items.h"
+	#include "Items.h"
 
 
 	#include "Map Information.h"
-	#include "soldier profile.h"
+	#include "Soldier Profile.h"
 	#include "EditorMercs.h"
 	#include "Animation Data.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Font Control.h"
 	#include "Campaign Types.h"
 	#include "Tactical Save.h"
 	#include "Game Clock.h"
 	#include "Queen Command.h"
 	#include "Scheduling.h"
-	#include "Soldier macros.h"		// added by Flugente
+	#include "Soldier Macros.h"		// added by Flugente
 #endif
 
 #include "GameVersion.h"
@@ -1636,7 +1636,7 @@ BOOLEAN CountNumberOfElitesRegularsAdminsAndCreaturesFromEnemySoldiersTempFile( 
 	UINT8 ubSectorID;
 //	UINT8 ubNumElites = 0, ubNumTroops = 0, ubNumAdmins = 0, ubNumCreatures = 0;
 //	UINT8 ubStrategicElites, ubStrategicTroops, ubStrategicAdmins, ubStrategicCreatures;
-		
+
 	//make sure the variables are initialized
 	*pubNumElites = 0;
 	*pubNumRegulars = 0;
@@ -1644,9 +1644,9 @@ BOOLEAN CountNumberOfElitesRegularsAdminsAndCreaturesFromEnemySoldiersTempFile( 
 	*pubNumTanks = 0;
 	*pubNumJeeps = 0;
 	*pubNumCreatures = 0;
-	
+
 	//STEP ONE:	Set up the temp file to read from.
-	
+
 	//Convert the current sector location into a file name
 //	GetMapFileName( gWorldSectorX, gWorldSectorY, gbWorldSectorZ, zTempName, FALSE );
 
@@ -1720,7 +1720,7 @@ BOOLEAN CountNumberOfElitesRegularsAdminsAndCreaturesFromEnemySoldiersTempFile( 
 		#endif
 		goto FAIL_LOAD;
 	}
-	
+
 	FileRead( hfile, &bSectorZ, 1, &uiNumBytesRead );
 	if( uiNumBytesRead != 1 )
 	{

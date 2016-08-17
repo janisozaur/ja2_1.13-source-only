@@ -78,7 +78,7 @@ keyEndElementHandle(void *userData, const XML_Char *name)
 {
 	keyParseData * pData = (keyParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "KEYS") == 0)
 		{
@@ -86,8 +86,8 @@ keyEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "KEY") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if(num_found_key < pData->maxArraySize)
 			{
 
@@ -126,7 +126,7 @@ BOOLEAN ReadInKeys(STR fileName)
 	keyParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading Keys.xml" );
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

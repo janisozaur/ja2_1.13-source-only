@@ -96,7 +96,7 @@ loadscreenhintsEndElementHandle(void *userData, const XML_Char *name)
 {
 	enemyRankParseData * pData = (enemyRankParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "LOADSCREENHINTS") == 0)
 		{
@@ -104,8 +104,8 @@ loadscreenhintsEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "LOADSCREENHINT") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if(pData->curLoadScreenHint.uiIndex < pData->maxArraySize)
 			{
 				if (!localizedTextOnly_LoadScreenHints)
@@ -115,9 +115,9 @@ loadscreenhintsEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(zLoadScreenHint[pData->curLoadScreenHint.uiIndex].szName, pData->curLoadScreenHint.szName);
-				}				
+				}
 			}
-		
+
 			num_found_loadscreenhints = pData->curLoadScreenHint.uiIndex;
 		}
 		else if(strcmp(name, "uiIndex") == 0)
@@ -128,7 +128,7 @@ loadscreenhintsEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "szName") == 0 )
 		{
 			pData->curElement = ELEMENT;
-			
+
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curLoadScreenHint.szName, sizeof(pData->curLoadScreenHint.szName)/sizeof(pData->curLoadScreenHint.szName[0]) );
 			pData->curLoadScreenHint.szName[sizeof(pData->curLoadScreenHint.szName)/sizeof(pData->curLoadScreenHint.szName[0]) - 1] = '\0';
 		}
@@ -177,7 +177,7 @@ loadscreenhintsEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curLoadScreenHint.usFlags	|= (UINT8) atol(pData->szCharData) ? LOADSCREEN_COVERTOPS : 0;
 		}
-										
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -196,7 +196,7 @@ BOOLEAN ReadInLoadScreenHints(STR fileName, BOOLEAN localizedVersion)
 	localizedTextOnly_LoadScreenHints = localizedVersion;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading LoadScreenHints.xml" );
-		
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -265,9 +265,9 @@ BOOLEAN WriteLoadScreenHints( STR fileName)
 		for(cnt = 0; cnt < num_found_loadscreenhints; ++cnt)
 		{
 			FilePrintf(hFile,"\t<LOADSCREENHINT>\r\n");
-			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);			
+			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n",				cnt);
 			FilePrintf(hFile,"\t\t<usFlags>%d</usFlags>\r\n",				zLoadScreenHint[cnt].usFlags);
-			
+
 			FilePrintf(hFile,"\t</LOADSCREENHINT>\r\n");
 		}
 		FilePrintf(hFile,"</LOADSCREENHINTS>\r\n");

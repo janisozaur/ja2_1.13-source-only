@@ -1,16 +1,16 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
 
 #ifndef PRECOMPILEDHEADERS
 	#include <stdio.h>
-	#include "Font Control.h" 
-	#include "renderworld.h"
-	#include "render dirty.h"
+	#include "Font Control.h"
+	#include "RenderWorld.h"
+	#include "Render Dirty.h"
 	#include "loadscreen.h"
 	#include "selectwin.h"
 	#include "EditorDefines.h"
@@ -21,8 +21,8 @@
 	#include "EditorBuildings.h"
 	#include "Editor Taskbar Utils.h"
 	#include "Editor Undo.h"
-	#include "editscreen.h"
-	#include "strategicmap.h"
+	#include "EditScreen.h"
+	#include "StrategicMap.h"
 	#include "Editor Modes.h"
 	#include "Map Information.h"
 	#include "Sys Globals.h"
@@ -31,14 +31,14 @@
 	#include "Simple Render Utils.h"
 	#include "Animated ProgressBar.h"
 	#include "EditorMercs.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "EditorMapInfo.h"
-	#include "environment.h"
+	#include "Environment.h"
 	#include "edit_sys.h"
 	#include "EditorItems.h"
-	#include "english.h"
-	#include "gameloop.h"
-	#include "message.h"
+	#include "English.h"
+	#include "GameLoop.h"
+	#include "Message.h"
 	#include "pits.h"
 	#include "Item Statistics.h"
 	#include "Scheduling.h"
@@ -66,7 +66,7 @@ enum{
 extern UINT16 Counter;
 
 //Hook into the text input code.  These callbacks help give back control, so we
-//can use the dialog interface in conjunction with the 
+//can use the dialog interface in conjunction with the
 void FDlgOkCallback( GUI_BUTTON *butn, INT32 reason );
 void FDlgCancelCallback( GUI_BUTTON *butn, INT32 reason );
 void FDlgUpCallback( GUI_BUTTON *butn, INT32 reason );
@@ -294,7 +294,7 @@ UINT32 ProcessLoadSaveScreenMessageBoxResult()
 				}
 				FileDelete( gszCurrFilename );
 
-				//File is deleted so redo the text fields so they show the 
+				//File is deleted so redo the text fields so they show the
 				//next file in the list.
 				temp = curr->pNext;
 				if( !temp )
@@ -566,7 +566,7 @@ void CreateFileDialog( STR16 zTitle )
 	iFileDlgButtons[3] = CreateSimpleButton(iScreenWidthOffset+426, iScreenHeightOffset+182-19, "EDITOR//downarrow.sti", BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, FDlgDwnCallback);
 
 	//File list window
-	iFileDlgButtons[4] = CreateHotSpot( (iScreenWidthOffset + 179+4), (iScreenHeightOffset + 69+3), (179+4+240), (69+120+3), MSYS_PRIORITY_HIGH-1, BUTTON_NO_CALLBACK, FDlgNamesCallback);	
+	iFileDlgButtons[4] = CreateHotSpot( (iScreenWidthOffset + 179+4), (iScreenHeightOffset + 69+3), (179+4+240), (69+120+3), MSYS_PRIORITY_HIGH-1, BUTTON_NO_CALLBACK, FDlgNamesCallback);
 	//Title button
 	iFileDlgButtons[5] = CreateTextButton(zTitle, HUGEFONT, FONT_LTKHAKI, FONT_DKKHAKI,
 		BUTTON_USE_DEFAULT,iScreenWidthOffset + 179, iScreenHeightOffset + 39,281,30,BUTTON_NO_TOGGLE,
@@ -675,8 +675,8 @@ void DrawFileDialog(void)
 	SetFontShadow( FONT_DKKHAKI );
 	SetFontBackground( FONT_BLACK );
 	mprintf( iScreenWidthOffset + 183, iScreenHeightOffset + 217, L"Filename" );
-	
-	if( iFileDlgButtons[6] != -1 ) 
+
+	if( iFileDlgButtons[6] != -1 )
 	{
 		mprintf( iScreenWidthOffset + 200, iScreenHeightOffset + 231, L"Update world info" );
 	}
@@ -691,7 +691,7 @@ void SelectFileDialogYPos( UINT16 usRelativeYPos )
 	FDLG_LIST *FListNode;
 
 	sSelName = usRelativeYPos / 15;
-	
+
 	//This is a field in the text editmode, but clicked via mouse.
 	SetActiveField( 1 );
 
@@ -701,7 +701,7 @@ void SelectFileDialogYPos( UINT16 usRelativeYPos )
 	{
 		FListNode = FListNode->pNext;
 	}
-	
+
 	for(x=iTopFileShown;x<(iTopFileShown+8) && x<iTotalFiles && FListNode != NULL; x++)
 	{
 		if( (INT32)sSelName == (x-iTopFileShown) )
@@ -802,7 +802,7 @@ BOOLEAN RemoveFromFDlgList( FDLG_LIST **head, FDLG_LIST *node )
 		}
 		curr = curr->pNext;
 	}
-	return FALSE; //wasn't deleted 
+	return FALSE; //wasn't deleted
 }
 
 void TrashFDlgList(FDLG_LIST *pList)
@@ -845,7 +845,7 @@ void SetTopFileToLetter( UINT16 usLetter )
 		curr = curr->pNext;
 		x++;
 	}
-	if( FileList )	
+	if( FileList )
 	{
 		iCurrFileShown = x;
 		iTopFileShown = x;
@@ -998,7 +998,7 @@ void InitErrorCatchDialog()
 	SGPRect CenteringRect= {0 + xResOffset, 0, SCREEN_WIDTH - xResOffset, SCREEN_HEIGHT };
 
 	// do message box and return
-	giErrorCatchMessageBox = DoMessageBox( MSG_BOX_BASIC_STYLE, gzErrorCatchString, 
+	giErrorCatchMessageBox = DoMessageBox( MSG_BOX_BASIC_STYLE, gzErrorCatchString,
 											EDIT_SCREEN, MSG_BOX_FLAG_OK, NULL, &CenteringRect );
 	gfErrorCatch = FALSE;
 }
@@ -1016,7 +1016,7 @@ UINT32 ProcessFileIO()
 	BOOLEAN fAltMap;//dnl ch31 150909
 	switch( gbCurrentFileIOStatus )
 	{
-		case INITIATE_MAP_SAVE:	//draw save message 
+		case INITIATE_MAP_SAVE:	//draw save message
 			StartFrameBufferRender( );
 			SaveFontSettings();
 			SetFont( HUGEFONT );
@@ -1095,7 +1095,7 @@ UINT32 ProcessFileIO()
 		case LOADING_MAP: //load map
 			DisableUndo();
 			sprintf( ubNewFilename, "%S", gzFilename );
-			
+
 			RemoveMercsInSector( );
 
 			 // Want to override crash, so user can do something else.
@@ -1117,7 +1117,7 @@ UINT32 ProcessFileIO()
 
 			//ATE: Any current mercs are transfered here...
 			//UpdateMercsInSector( gWorldSectorX, gWorldSectorY, gbWorldSectorZ );
-			
+
 			AddSoldierInitListTeamToWorld( ENEMY_TEAM,		TOTAL_SOLDIERS + 1 );
 			AddSoldierInitListTeamToWorld( CREATURE_TEAM,	TOTAL_SOLDIERS + 1 );
 			AddSoldierInitListTeamToWorld( MILITIA_TEAM,	TOTAL_SOLDIERS + 1 );
@@ -1200,7 +1200,7 @@ void FDlgOkCallback( GUI_BUTTON *butn, INT32 reason )
 	if( reason & (MSYS_CALLBACK_REASON_LBUTTON_UP) )
 	{
 		gfDestroyFDlg = TRUE;
-		iFDlgState = iCurrentAction == ACTION_SAVE_MAP ? DIALOG_SAVE : DIALOG_LOAD;	
+		iFDlgState = iCurrentAction == ACTION_SAVE_MAP ? DIALOG_SAVE : DIALOG_LOAD;
 	}
 }
 
@@ -1209,7 +1209,7 @@ void FDlgCancelCallback( GUI_BUTTON *butn, INT32 reason )
 	if( reason & (MSYS_CALLBACK_REASON_LBUTTON_UP) )
 	{
 		gfDestroyFDlg = TRUE;
-		iFDlgState = DIALOG_CANCEL;	
+		iFDlgState = DIALOG_CANCEL;
 	}
 }
 
@@ -1302,8 +1302,8 @@ BOOLEAN ExternalSaveMap(STR16 szFilename)
 
 #else //non-editor version
 
-#include "types.h"
-#include "screenids.h"
+#include "Types.h"
+#include "ScreenIds.h"
 
 UINT32 LoadSaveScreenInit()
 {

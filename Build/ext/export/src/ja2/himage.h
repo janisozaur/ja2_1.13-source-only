@@ -5,7 +5,7 @@
 #include "imgfmt.h"
 
 
-#define FROMRGB(r, g ,b)  ((UINT32) (((UINT8) (r) | ((UINT16) (g) << 8)) | (((UINT32) (UINT8) (b)) << 16))) 
+#define FROMRGB(r, g ,b)  ((UINT32) (((UINT8) (r) | ((UINT16) (g) << 8)) | (((UINT32) (UINT8) (b)) << 16)))
 
 
 // The HIMAGE module provides a common interface for managing image data. This module
@@ -40,13 +40,13 @@
 
 // Palette structure, mimics that of Win32
 typedef struct tagSGPPaletteEntry
-{  
-  UINT8 peRed; 
-  UINT8 peGreen; 
-  UINT8 peBlue; 
-  UINT8 peFlags; 
+{
+  UINT8 peRed;
+  UINT8 peGreen;
+  UINT8 peBlue;
+  UINT8 peFlags;
 
-} SGPPaletteEntry; 
+} SGPPaletteEntry;
 
 #define AUX_FULL_TILE					0x01
 #define AUX_ANIMATED_TILE				0x02
@@ -75,7 +75,7 @@ typedef struct
 
 // TRLE subimage structure, mirroring that of ST(C)I
 typedef struct tagETRLEObject
-{	
+{
 	UINT32			uiDataOffset;
 	UINT32			uiDataLength;
 	INT16			sOffsetX;
@@ -107,7 +107,7 @@ typedef struct
 	UINT32					uiAppDataSize;
 	// This union is used to describe each data type and is flexible to include the
 	// data strucutre of the compresssed format, once developed.
-	union 
+	union
 	{
 		PTR					pImageData;
 		PTR					pCompressedImageData;
@@ -125,14 +125,14 @@ typedef struct
 } image_type, *HIMAGE;
 
 
-#define SGPGetRValue(rgb)   ((BYTE) (rgb))  
-#define SGPGetBValue(rgb)   ((BYTE) ((rgb) >> 16))  
-#define SGPGetGValue(rgb)   ((BYTE) (((UINT16) (rgb)) >> 8))  
+#define SGPGetRValue(rgb)   ((BYTE) (rgb))
+#define SGPGetBValue(rgb)   ((BYTE) ((rgb) >> 16))
+#define SGPGetGValue(rgb)   ((BYTE) (((UINT16) (rgb)) >> 8))
 
 // *****************************************************************************
 //
 // Function prototypes
-// 
+//
 // *****************************************************************************
 
 #ifdef __cplusplus

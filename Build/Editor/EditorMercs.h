@@ -11,7 +11,7 @@ enum
 	MERC_NOMODE,					//used for shutting down mercs tab, to extract any changed information
 
 	MERC_GETITEMMODE,			//when selecting a specific piece of inventory from inventorymode
-		
+
 	MERC_TEAMMODE,				//selecting a team with no merc selected.
 	MERC_BASICMODE,				//basic placement mode
 
@@ -151,6 +151,6 @@ void PasteMercPlacement( INT32 iMapIndex );
 
 
 
- 
+
 
 

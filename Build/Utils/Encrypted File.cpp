@@ -13,10 +13,10 @@
 // anv: loading random line from the file
 BOOLEAN LoadEncryptedDataFromFileRandomLine(STR pFileName, STR16 pDestString, UINT32 uiSeekAmount)
 {
-	HWFILE		hFile;	
+	HWFILE		hFile;
 	UINT32		uiBytesRead;
 	UINT32		uiSeekFrom;
- 
+
 	hFile = FileOpen(pFileName, FILE_ACCESS_READ, FALSE);
 	if ( !hFile )
 	{
@@ -48,7 +48,7 @@ BOOLEAN LoadEncryptedDataFromFileRandomLine(STR pFileName, STR16 pDestString, UI
 
 BOOLEAN LoadEncryptedDataFromFile(STR pFileName, STR16 pDestString, UINT32 uiSeekFrom, UINT32 uiSeekAmount)
 {
-	HWFILE		hFile;	
+	HWFILE		hFile;
 	UINT32		uiBytesRead;
 
 
@@ -79,8 +79,8 @@ BOOLEAN LoadEncryptedDataFromFile(STR pFileName, STR16 pDestString, UINT32 uiSee
 	//for(i=0; (i<uiSeekAmount) && (pDestString[i] != 0); i++ )
 	//{
 	//	if( pDestString[i] > 33 )
-	//		pDestString[i] -= 1;		
-	//	
+	//		pDestString[i] -= 1;
+	//
 
 	//}
 
@@ -99,7 +99,7 @@ void DecodeString(STR16 pDestString, UINT32 uiSeekAmount)
 	for(i=0; (i<uiSeekAmount) && (pDestString[i] != 0); i++ )
 	{
 		if( pDestString[i] > 33 )
-			pDestString[i] -= 1;	
+			pDestString[i] -= 1;
 
 		//#ifdef GERMAN
   //             //switch( pDestString[ i ] )
@@ -203,7 +203,7 @@ void DecodeString(STR16 pDestString, UINT32 uiSeekAmount)
   //              case 252:          pDestString[ i ] = 1100;  break;
   //              case 253:          pDestString[ i ] = 1101;  break;
   //              case 254:          pDestString[ i ] = 1102;  break;
-  //              case 255:          pDestString[ i ] = 1103;  break; //U+044F           d1 8f     CYRILLIC SMALL LETTER YA    
+  //              case 255:          pDestString[ i ] = 1103;  break; //U+044F           d1 8f     CYRILLIC SMALL LETTER YA
 
 		//	}
 		//#endif

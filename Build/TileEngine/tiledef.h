@@ -1,8 +1,8 @@
 #ifndef __TILEDEF_H
 #define __TILEDEF_H
 
-#include "vobject.h"
-#include "timer.h"
+#include "VObject.h"
+#include "Timer.h"
 #include "TileDat.h"
 #include "structure.h"
 
@@ -45,7 +45,7 @@
 //wall pieces.
 enum WallOrientationDefines
 {
-	NO_ORIENTATION, INSIDE_TOP_LEFT, INSIDE_TOP_RIGHT, OUTSIDE_TOP_LEFT, 
+	NO_ORIENTATION, INSIDE_TOP_LEFT, INSIDE_TOP_RIGHT, OUTSIDE_TOP_LEFT,
 	OUTSIDE_TOP_RIGHT, INSIDE_BOTTOM_CORNER, OUTSIDE_BOTTOM_CORNER
 };
 
@@ -64,7 +64,7 @@ enum TerrainTypeDefines
 	MED_WATER,
 	DEEP_WATER,
 	NUM_TERRAIN_TYPES
-	
+
 } ;
 
 
@@ -105,7 +105,7 @@ typedef struct
 	UINT16							*pusFrames;
 	INT8								bCurrentFrame;
 	UINT8								ubNumFrames;
-	
+
 } TILE_ANIMATION_DATA;
 
 
@@ -126,14 +126,14 @@ typedef struct
 	UINT8								bZOffsetY;
 
 	// This union contains different data based on tile type
-//	union 
+//	union
 //	{
 		// Land and overlay type
 //		struct
 //		{
-			INT16					sOffsetHeight;	
+			INT16					sOffsetHeight;
 			UINT16					usWallOrientation;
-			UINT8					ubFullTile;	
+			UINT8					ubFullTile;
 
 			// For animated tiles
 			TILE_ANIMATION_DATA	*pAnimData;

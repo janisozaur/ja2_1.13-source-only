@@ -37,14 +37,14 @@ extern BOOL g_bWin2000;
 
 class Cursor {
 	public:
-		Cursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor) 
+		Cursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor)
 			: m_hwndParent(hwndParent)
 			, m_hdcWindow(hdcWindow)
 			, m_crCursorColor(crCursorColor)
 			, m_bActive(TRUE)
             , m_uiTimer(0)
 		{};
-		
+
 		virtual ~Cursor(){};
 
 		void SetState(BOOL bActive) {m_bActive = bActive;};
@@ -60,7 +60,7 @@ class Cursor {
 		HWND		m_hwndParent;
 		HDC			m_hdcWindow;
 		COLORREF	m_crCursorColor;
-		
+
 		BOOL		m_bActive;
 		UINT		m_uiTimer;
 };
@@ -94,10 +94,10 @@ class BlockCursor : public Cursor {
 	public:
 		BlockCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~BlockCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HBRUSH	m_hActiveBrush;
 		BOOL	m_bVisible;
@@ -113,10 +113,10 @@ class NBBlockCursor : public Cursor {
 	public:
 		NBBlockCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~NBBlockCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HBRUSH	m_hActiveBrush;
 };
@@ -131,10 +131,10 @@ class PulseBlockCursor : public Cursor {
 	public:
 		PulseBlockCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~PulseBlockCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HBRUSH	m_hActiveBrush;
 		RECT	m_rect;
@@ -153,10 +153,10 @@ class BarCursor : public Cursor {
 	public:
 		BarCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~BarCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HPEN	m_hPen;
 		BOOL	m_bVisible;
@@ -172,10 +172,10 @@ class ConsoleCursor : public Cursor {
 	public:
 		ConsoleCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~ConsoleCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HANDLE	m_hStdOut;
 		HBRUSH	m_hActiveBrush;
@@ -192,10 +192,10 @@ class NBHLineCursor : public Cursor {
 public:
 	NBHLineCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 	~NBHLineCursor();
-	
+
 	void Draw(LPRECT pRect);
 	void PrepareNext();
-	
+
 private:
 	HPEN	m_hPen;
 };
@@ -210,10 +210,10 @@ class HLineCursor : public Cursor {
 	public:
 		HLineCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~HLineCursor();
-			
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-			
+
 	private:
 		HPEN	m_hPen;
 		int		m_nSize;
@@ -231,10 +231,10 @@ class VLineCursor : public Cursor {
 	public:
 		VLineCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~VLineCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HPEN	m_hPen;
 		int		m_nSize;
@@ -252,10 +252,10 @@ class RectCursor : public Cursor {
 	public:
 		RectCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~RectCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HBRUSH	m_hActiveBrush;
 		BOOL	m_bVisible;
@@ -271,10 +271,10 @@ class NBRectCursor : public Cursor {
 	public:
 		NBRectCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~NBRectCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HBRUSH	m_hActiveBrush;
 };
@@ -289,10 +289,10 @@ class PulseRectCursor : public Cursor {
 	public:
 		PulseRectCursor(HWND hwndParent, HDC hdcWindow, COLORREF crCursorColor);
 		~PulseRectCursor();
-		
+
 		void Draw(LPRECT pRect);
 		void PrepareNext();
-		
+
 	private:
 		HBRUSH	m_hActiveBrush;
 		RECT	m_rect;
@@ -327,7 +327,7 @@ class FadeBlockCursor : public Cursor {
 
 		COLORREF	m_crCursorColor;
 		int			m_nStep;
-		
+
 		// used under WinNT 4.0
 		COLORREF	m_crBkColor;
 		COLORREF	m_arrColors[FADE_STEPS+1];

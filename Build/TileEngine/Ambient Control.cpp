@@ -1,17 +1,17 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
 	#include "stdio.h"
 	#include "sgp.h"
-	#include "Ambient types.h"
-	#include "fileman.h"
-	#include "environment.h"
+	#include "Ambient Types.h"
+	#include "FileMan.h"
+	#include "Environment.h"
 	#include "Sound Control.h"
 	#include "Game Events.h"
 	#include "Ambient Control.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Random.h"
 #endif
 

@@ -6,17 +6,17 @@
 #include "DirectDraw Calls.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "debug.h"
+#include "Debug.h"
 #if defined( JA2 ) || defined( UTIL )
-#include "video.h"
+#include "Video.h"
 #else
 #include "video2.h"
 #endif
 #include "himage.h"
-#include "vsurface.h"
+#include "VSurface.h"
 #include "vsurface_private.h"
-#include "wcheck.h"
-#include "vobject_blitters.h"
+#include "WCheck.h"
+#include "VObject_blitters.h"
 #endif
 
 extern void SetClippingRect(SGPRect *clip);
@@ -275,10 +275,10 @@ void ClipRectangle::Set(int x1, int y1, int x2, int y2)
 }
 
 /**
- * @returns: 
+ * @returns:
  *   NoClip      : value references are not modified
  *   FullClip    : value references are not modified, as the values lie completely outside. Why bother doing the extra work.
- *   PartialClip : value references are modified 
+ *   PartialClip : value references are modified
  */
 ClipRectangle::ClipType ClipRectangle::Clip(int& x, int& y, unsigned int& w, unsigned int& h)
 {
@@ -1048,7 +1048,7 @@ HVSURFACE CreateVideoSurface( VSURFACE_DESC *VSurfaceDesc )
 
 		SGP_THROW_IFFALSE(hImage = CreateImage( VSurfaceDesc->ImageFile, IMAGE_ALLIMAGEDATA, order ),
 			_BS(L"Could not create video surface from file : ") << vfs::String(VSurfaceDesc->ImageFile) << _BS::wget);
-		
+
 		if ( hImage == NULL )
 		{
 			DbgMessage( TOPIC_VIDEOSURFACE, DBG_LEVEL_2, "Invalid Image Filename given" );
@@ -1196,7 +1196,7 @@ HVSURFACE CreateVideoSurface( VSURFACE_DESC *VSurfaceDesc )
 
 	hVSurface->usHeight				= usHeight;
 	hVSurface->usWidth				= usWidth;
-	// BF : since we use a 16bpp framebuffer and images are converted to that format, 
+	// BF : since we use a 16bpp framebuffer and images are converted to that format,
 	//      there is no need to set the surface bit depth to a higher value than 16
 	hVSurface->ubBitDepth			= ubBitDepth > 16 ? 16 : ubBitDepth;
 	hVSurface->pSurfaceData1		= (PTR)lpDDS;
@@ -2717,7 +2717,7 @@ BOOLEAN MakeVSurfaceFromVObject(UINT32 uiVObject, UINT16 usSubIndex, UINT32 *pui
 			else
 				DeleteVideoSurfaceFromIndex(uiVSurface);
 		}
-	}		
+	}
 
 	return(FALSE);
 }

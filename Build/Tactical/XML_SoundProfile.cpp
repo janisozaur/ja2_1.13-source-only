@@ -8,7 +8,7 @@
 #endif
 
 #include "Dialogue Control.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 struct
 {
@@ -89,7 +89,7 @@ SoundProfileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT_LIST;
 
 			gSoundProfileValue[pData->curSoundProfile.uiIndex].EnabledSound = pData->curSoundProfile.EnabledSound;
-		}	
+		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -99,7 +99,7 @@ SoundProfileEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curSoundProfile.EnabledSound	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		pData->maxReadDepth--;
 	}
 

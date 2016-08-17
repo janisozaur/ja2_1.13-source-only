@@ -4,36 +4,36 @@
 	#include "Map Screen Interface Bottom.h"
 	#include "Map Screen Interface Border.h"
 	#include "Types.h"
-	#include "vsurface.h"
+	#include "VSurface.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
 	#include "sgp.h"
 	#include "Utilities.h"
-	#include "message.h"
-	#include "mapscreen.h"
-	#include "strategicmap.h"
-	#include "font control.h"
+	#include "Message.h"
+	#include "MapScreen.h"
+	#include "StrategicMap.h"
+	#include "Font Control.h"
 	#include "Radar Screen.h"
-	#include "game clock.h"
-	#include "sysutil.h"
+	#include "Game Clock.h"
+	#include "SysUtil.h"
 	#include "Render Dirty.h"
 	#include "Map Screen Interface.h"
 	#include "Map Screen Interface Map.h"
 	#include "Text.h"
 	#include "Overhead.h"
-	#include "Prebattle Interface.h"
+	#include "PreBattle Interface.h"
 	#include "Options Screen.h"
 	#include "Cursor Control.h"
-	#include "gameloop.h"
-	#include "ai.h"
+	#include "GameLoop.h"
+	#include "AI.h"
 	#include "Tactical Save.h"
 	#include "Campaign Types.h"
 	#include "Air Raid.h"
 	#include "Finances.h"
 	#include "LaptopSave.h"
 	#include "Interface Items.h"
-	#include "wordwrap.h"
-	#include "meanwhile.h"
+	#include "WordWrap.h"
+	#include "Meanwhile.h"
 	#include "Dialogue Control.h"
 	#include "Map Screen Helicopter.h"
 	#include "Map Screen Interface TownMine Info.h"
@@ -42,22 +42,22 @@
 	#include "Explosion Control.h"
 	#include "Creature Spreading.h"
 	#include "Assignments.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "GameSettings.h"
 	#include "SaveLoadScreen.h"
 	#include "Interface Control.h"
 	#include "Sys Globals.h"
-#include "game init.h"
+#include "Game Init.h"
 #endif
 
 #ifdef JA2UB
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
 #include "SaveLoadGame.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 /* CHRISL: Adjusted settings to allow new Map_Screen_Bottom_800x600.sti to work.  This is needed if we
 want to have the new inventory panel not overlap the message text area. */
@@ -313,9 +313,9 @@ void RenderMapScreenInterfaceBottom( BOOLEAN fForceMapscreenFullRender )
 		GetVideoObject(&hHandle, guiMAPBOTTOMPANEL );
 
 		BltVideoObject( guiSAVEBUFFER , hHandle, 0, xResOffset + MAP_BOTTOM_X, MAP_BOTTOM_Y, VO_BLT_SRCTRANSPARENCY,NULL );
-	
+
 		// WANNE - MP: Radarmap image should be displayed on every sector in multiplayer game
-		if( GetSectorFlagStatus( sSelMapX, sSelMapY, ( UINT8 )iCurrentMapSectorZ, SF_ALREADY_VISITED ) == TRUE 
+		if( GetSectorFlagStatus( sSelMapX, sSelMapY, ( UINT8 )iCurrentMapSectorZ, SF_ALREADY_VISITED ) == TRUE
 			|| is_networked)
 		{
 			GetMapFileName( sSelMapX, sSelMapY, ( UINT8 )iCurrentMapSectorZ, bFilename, TRUE, TRUE );
@@ -367,7 +367,7 @@ void RenderMapScreenInterfaceBottom( BOOLEAN fForceMapscreenFullRender )
 	// display slider on the scroll bar
 	DisplayScrollBarSlider( );
 
-		
+
 	// handle auto scroll
 	//CheckForAndHandleAutoMessageScroll( );
 
@@ -376,11 +376,11 @@ void RenderMapScreenInterfaceBottom( BOOLEAN fForceMapscreenFullRender )
 	EnableDisableBottomButtonsAndRegions( );
 
 	fMapBottomDirtied = FALSE;
-	
+
 	#ifdef JA113DEMO
 	DisableButton (guiMapBottomExitButtons[MAP_EXIT_TO_LAPTOP]);
 	#endif
-	
+
 	return;
 }
 
@@ -999,7 +999,7 @@ void DisplayCompressMode( void )
 	SetFontBackground( FONT_BLACK );
 
 	FindFontCenterCoordinates( xResOffset + (xResSize - 151), (SCREEN_HEIGHT - 24), 33, 13, sString, COMPFONT, &sX, &sY );
-		
+
 	mprintf( sX, sY, sString );
 
 	return;
@@ -1417,14 +1417,14 @@ BOOLEAN AllowedToTimeCompress( void )
 		return FALSE;
 	}
 
-	// Flugente: no time compression if hostile civilians bloodcats are in the current sector. 
+	// Flugente: no time compression if hostile civilians bloodcats are in the current sector.
 	// Otherwise time progresses, but squad arrivals will be delayed as long as they still exist
 	if ( HostileCiviliansPresent() || HostileBloodcatsPresent() )
 	{
 		return FALSE;
 	}
 
-#ifdef JA2UB  
+#ifdef JA2UB
 		//if the player hasnt been to the initial sector yet
 	if( !GetSectorFlagStatus( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY, 0, SF_HAS_ENTERED_TACTICAL ) ) //7, 8
 	{
@@ -1435,7 +1435,7 @@ BOOLEAN AllowedToTimeCompress( void )
 		}
 	}
 #endif
-	
+
 	return( TRUE );
 }
 
@@ -1461,7 +1461,7 @@ void DisplayCurrentBalanceTitleForMapBottom( void )
 	//VarFindFontCenterCoordinates( 359, (SCREEN_HEIGHT - 107),  78, 10,  COMPFONT, &sFontX, &sFontY, sString );
 	// HEADROCK HAM 3.6: The balance/income box has been moved to the right side, near the laptop button.
 	VarFindFontCenterCoordinates( xResOffset + (xResSize - 278), (SCREEN_HEIGHT - 111), 78, 10, COMPFONT, &sFontX, &sFontY, sString );
-	
+
 	// print it
 	mprintf( sFontX, sFontY, L"%s", sString );
 
@@ -1472,7 +1472,7 @@ void DisplayCurrentBalanceTitleForMapBottom( void )
 	//VarFindFontCenterCoordinates( (1024 - 637), (SCREEN_HEIGHT - 61),  78, 10,  COMPFONT, &sFontX, &sFontY, sString );
 	// CHRISL: Use this if we want to display from the left edge
 	//VarFindFontCenterCoordinates( 359, (SCREEN_HEIGHT - 61),  78, 10,  COMPFONT, &sFontX, &sFontY, sString );
-	// HEADROCK HAM 3.6: The balance/income box has been moved to the right side, near the laptop button.	
+	// HEADROCK HAM 3.6: The balance/income box has been moved to the right side, near the laptop button.
 	VarFindFontCenterCoordinates( xResOffset + (xResSize - 278), (SCREEN_HEIGHT - 74), 78, 10, COMPFONT, &sFontX, &sFontY, sString );
 
 	// print it
@@ -1489,7 +1489,7 @@ void DisplayCurrentBalanceTitleForMapBottom( void )
 
 	// ste the font buffer
 	SetFontDestBuffer( FRAME_BUFFER, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, FALSE );
-	
+
 	return;
 }
 
@@ -1514,7 +1514,7 @@ void DisplayCurrentBalanceForMapBottom( void )
 	InsertDollarSignInToString( sString );
 
 	VarFindFontCenterCoordinates( xResOffset + (xResSize - 278), (SCREEN_HEIGHT - 95), 78, 10, COMPFONT, &sFontX, &sFontY, sString );
-	
+
 	// print it
 	mprintf( sFontX, sFontY, L"%s", sString );
 

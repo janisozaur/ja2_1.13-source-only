@@ -1,18 +1,18 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <wchar.h>
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "MemMan.h"
 	#include "Overhead Types.h"
 
-	#include "random.h"
-	#include "campaign.h"
-	#include "dialogue control.h"
+	#include "Random.h"
+	#include "Campaign.h"
+	#include "Dialogue Control.h"
 	#include "Map Screen Interface.h"
 	#include "Message.h"
 	#include "Game Clock.h"
@@ -25,17 +25,17 @@
 	#include "Interface.h"
 	#include "Game Event Hook.h"
 	#include "Overhead.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Quests.h"
 	#include "Squads.h"
-	#include "Soldier macros.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "Soldier Macros.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "Town Militia.h"
 	#include "Campaign Types.h"
 	#include "Tactical Save.h"
 	#include "Strategic AI.h"
-	#include "interface Dialogue.h"
+	#include "Interface Dialogue.h"
 	#include "DynamicDialogue.h"
 #endif
 
@@ -44,16 +44,16 @@
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
-#include "mercs.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
+#include "Mercs.h"
 #include "ub_config.h"
 #endif
 
 #include "GameInitOptionsScreen.h"
 
-#include "email.h"
-#include "mercs.h"
+#include "Email.h"
+#include "Mercs.h"
 
 
 //forward declarations of common classes to eliminate includes
@@ -183,7 +183,7 @@ void ProcessStatChange(MERCPROFILESTRUCT *pProfile, UINT8 ubStat, UINT16 usNumCh
 
 	if (usNumChances == 0)
 		return;
-	
+
 	usSubpointsPerPoint = SubpointsPerPoint(ubStat, pProfile->bExpLevel);
 	usSubpointsPerLevel = SubpointsPerPoint(EXPERAMT, pProfile->bExpLevel);
 
@@ -261,7 +261,7 @@ void ProcessStatChange(MERCPROFILESTRUCT *pProfile, UINT8 ubStat, UINT16 usNumCh
 		// training always affected by wisdom
 		fAffectedByWisdom = TRUE;
 	}
-	
+
 	// stats/skills of 0 can NEVER be improved!
 	if ( bCurrentRating < 0 )
 	{
@@ -486,7 +486,7 @@ void ChangeStat( MERCPROFILESTRUCT *pProfile, SOLDIERTYPE *pSoldier, UINT8 ubSta
 	UINT8 ubMercMercIdValue = 0;
 	UINT16 usIncreaseValue = 0;
 	UINT16 usSubpointsPerPoint;
-	INT8 bDamagedStatToRaise = -1; // added by SANDRO 
+	INT8 bDamagedStatToRaise = -1; // added by SANDRO
 
 	usSubpointsPerPoint = SubpointsPerPoint(ubStat, pProfile->bExpLevel );
 
@@ -692,7 +692,7 @@ void ChangeStat( MERCPROFILESTRUCT *pProfile, SOLDIERTYPE *pSoldier, UINT8 ubSta
 
 					ptstolower -= oldctrpts - pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ];
 				}
-								
+
 				if ( bDamagedStatToRaise == DAMAGED_STAT_STRENGTH && pSoldier->usStarveDamageStrength > 0 )
 					pSoldier->usStarveDamageStrength = max(0, pSoldier->usStarveDamageStrength - ptstolower);
 				else if ( bDamagedStatToRaise == DAMAGED_STAT_HEALTH && pSoldier->usStarveDamageHealth > 0 )
@@ -710,9 +710,9 @@ void ChangeStat( MERCPROFILESTRUCT *pProfile, SOLDIERTYPE *pSoldier, UINT8 ubSta
 				TacticalCharacterDialogueWithSpecialEventEx( pSoldier, 0, DIALOGUE_SPECIAL_EVENT_DISPLAY_STAT_CHANGE, fChangeTypeIncrease, sPtsChanged, ubStat );
 
 				//Madd: option to make mercs quiet during training / doctoring / repairing
-				if ( ((pSoldier->bAssignment == TRAIN_BY_OTHER || pSoldier->bAssignment == TRAIN_TEAMMATE || pSoldier->bAssignment == TRAIN_SELF || 
+				if ( ((pSoldier->bAssignment == TRAIN_BY_OTHER || pSoldier->bAssignment == TRAIN_TEAMMATE || pSoldier->bAssignment == TRAIN_SELF ||
 							pSoldier->bAssignment == FACILITY_STAFF || pSoldier->bAssignment == TRAIN_TOWN || pSoldier->bAssignment == TRAIN_MOBILE
-							|| pSoldier->bAssignment == TRAIN_WORKERS ) 
+							|| pSoldier->bAssignment == TRAIN_WORKERS )
 							&& !gGameSettings.fOptions[TOPTION_QUIET_TRAINING]) ||
 					 (IS_REPAIR(pSoldier->bAssignment) && !gGameSettings.fOptions[TOPTION_QUIET_REPAIRING]) ||
 					 (IS_DOCTOR(pSoldier->bAssignment) && !gGameSettings.fOptions[TOPTION_QUIET_DOCTORING]))
@@ -1189,7 +1189,7 @@ UINT16 SubpointsPerPoint(UINT8 ubStat, INT8 bExpLevel)
 	case STRAMT:
 		usSubpointsPerPoint = STRENGTH_SUBPOINTS_TO_IMPROVE;
 		break;
-		
+
 	  // Skills
     case MEDICALAMT:
 		usSubpointsPerPoint = MEDICAL_SUBPOINTS_TO_IMPROVE;
@@ -1293,7 +1293,7 @@ void HandleUnhiredMercDeaths( INT32 iProfileID )
 		// then we're not allowed to kill him (to avoid really pissing off player by killing his very favorite merc)
 		return;
 	}
-	
+
 	ubMaxDeaths = zDiffSetting[gGameOptions.ubDifficultyLevel].iMaxMercDeaths;
 
 	// if we've already hit the limit in this game, skip these checks
@@ -1307,7 +1307,7 @@ void HandleUnhiredMercDeaths( INT32 iProfileID )
 
 	// SANDRO - certain traits makes us less likely to get killed
 	if ( gGameOptions.fNewTraitSystem )
-	{	
+	{
 		if (pProfile->bDisability != NO_DISABILITY)
 		{
 			sChance += 1;
@@ -1326,7 +1326,7 @@ void HandleUnhiredMercDeaths( INT32 iProfileID )
 			sChance -= ProfileHasSkillTrait( iProfileID, SCOUTING_NT );
 	}
 	else
-	{		
+	{
 		switch (pProfile->bDisability)
 		{
 			case FORGETFUL:
@@ -1352,7 +1352,7 @@ void HandleUnhiredMercDeaths( INT32 iProfileID )
 
 		//send an email as long as the merc is from aim
 #ifdef JA2UB
-		//ja25 ub	
+		//ja25 ub
 	if( gubQuest[ QUEST_FIX_LAPTOP ] == QUESTDONE || gGameUBOptions.LaptopQuestEnabled == FALSE )
 	{
 		if ( gProfilesAIM[ iProfileID ].ProfilId == iProfileID && gGameUBOptions.fDeadMerc == TRUE )  //new profiles by Jazz
@@ -1385,7 +1385,7 @@ UINT8 CurrentPlayerProgressPercentage(void)
 	INT8	bFurthestSectorPlayerOwns=-1; //JA25 UB
 	UINT8 ubCurrentProgress;
 #else
-	
+
 	UINT32 uiCurrentIncome;
 	UINT32 uiPossibleIncome;
 	UINT16 usCurrentProgress;
@@ -1393,7 +1393,7 @@ UINT8 CurrentPlayerProgressPercentage(void)
  	UINT16 usKillsProgress;
  	UINT16 usControlProgress;
  	UINT16 usVisitProgress;
-	// HEADROCK HAM 3: Added a separate variable for Income Progress, 
+	// HEADROCK HAM 3: Added a separate variable for Income Progress,
 	// to enable comparing the results from each progress aspect SEPARATELY.
 	UINT16 usIncomeProgress;
 	// HEADROCK HAM 3: And another variable to contain the highest result so far.
@@ -1405,7 +1405,7 @@ UINT8 CurrentPlayerProgressPercentage(void)
 	UINT16 usMaxVisitProgress;
 #endif
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//Get the furthest sector the player owns
 	bFurthestSectorPlayerOwns = GetTheFurthestSectorPlayerOwns();
 	//JA25 UB
@@ -1556,14 +1556,14 @@ UINT8 CurrentPlayerProgressPercentage(void)
 	uiPossibleIncome = CalcMaxPlayerIncomeFromMines();
 
 	// either of these indicates a critical failure of some sort
-	
+
 	// HEADROCK HAM 3.6: No need to assert this. Max Income can potentially be 0 in modded games.
 	// Assert(uiPossibleIncome > 0);
 
-	// HEADROCK HAM 3.6: It is now possible, with the help of facilities, 
-	// to make more money from mines than normally possible. 
+	// HEADROCK HAM 3.6: It is now possible, with the help of facilities,
+	// to make more money from mines than normally possible.
 	// This assertion check is now obsolete.
-	//Assert(uiCurrentIncome <= uiPossibleIncome); 
+	//Assert(uiCurrentIncome <= uiPossibleIncome);
 	uiCurrentIncome = __min(uiPossibleIncome, uiCurrentIncome);
 
 	// for a rough guess as to how well the player is doing,
@@ -1603,7 +1603,7 @@ UINT8 CurrentPlayerProgressPercentage(void)
 
 	// 19 sectors in mining towns + 3 wilderness SAMs each count double.  Balime & Meduna are extra and not required
 	// HEADROCK HAM B1: Changed the next line, adding a call to a new function. This allows the weight of Sector
-	// Control to be altered in JA2_OPTIONS.INI (Previously damaged the game's progress if set over 25... So I've 
+	// Control to be altered in JA2_OPTIONS.INI (Previously damaged the game's progress if set over 25... So I've
 	// made this MOD-Friendly :D )
 	// BTW, Balime and Meduna _ARE_ required. The function doesn't differentiate! Such carelessness. Tsk tsk tsk.
 
@@ -1619,8 +1619,8 @@ UINT8 CurrentPlayerProgressPercentage(void)
 	// 100 even if the map has some unvisitable sectors (heh, doesn't it always?)
 	usVisitProgress = CountSurfaceSectorsVisited() * usMaxVisitProgress / TotalVisitableSurfaceSectors();
 
-	// HEADROCK HAM 3: This bit is ugly for now, unless someone can optimize it for me. 
-	// When the "Alternate Progress Calculation" is activated, the program selects only the HIGHEST of the 
+	// HEADROCK HAM 3: This bit is ugly for now, unless someone can optimize it for me.
+	// When the "Alternate Progress Calculation" is activated, the program selects only the HIGHEST of the
 	// progress controls, and sets that to be the current progress, disregarding any advances in the three
 	// other fields.
 
@@ -1642,7 +1642,7 @@ UINT8 CurrentPlayerProgressPercentage(void)
 	// HEADROCK HAM 3.6: Allow negative modifiers!
 	usCurrentProgress = __max(0, (INT16)(usCurrentProgress + gGameExternalOptions.bGameProgressModifier));
 
-	// And failsafes here. I'm not 100% sure about these though: I've never personally seen progress 
+	// And failsafes here. I'm not 100% sure about these though: I've never personally seen progress
 	// values go over 100, and I don't think they SHOULD... Can the game handle values > 100? Should it?
 	usCurrentProgress = __min(100, usCurrentProgress);
 	usCurrentProgress = __max(0, usCurrentProgress);
@@ -1652,7 +1652,7 @@ UINT8 CurrentPlayerProgressPercentage(void)
 
 
 	return((UINT8)usCurrentProgress);
-	
+
 #endif
 }
 
@@ -1928,7 +1928,7 @@ UINT8 CalcImportantSectorControl( void )
 }
 
 // HEADROCK HAM B1: function to calculate how many "important sectors" there actually are in the game. This is
-// used to fix the weight of strategic control importance on game progress, which was until now not really 
+// used to fix the weight of strategic control importance on game progress, which was until now not really
 // moddable.
 
 UINT8 CalcTotalImportantSectors( void )
@@ -1983,7 +1983,7 @@ UINT16 TotalVisitableSurfaceSectors( void )
 {
 	UINT8 ubMapX, ubMapY;
 	UINT16	ubVisitableSectors = 0;
-	
+
 	for ( ubMapX = 1; ubMapX < MAP_WORLD_X - 1; ubMapX++ )
 	{
 		for ( ubMapY = 1; ubMapY < MAP_WORLD_Y - 1; ubMapY++ )
@@ -2003,17 +2003,17 @@ void MERCMercWentUpALevelSendEmail( UINT8 ubMercMercIdValue )
 #else
 	UINT8 ubEmailOffset = 0;
 	int iMsgLength = 0;
-	
+
 	UINT8 pMerc = 0;
 	UINT8 iMerc = 0;
 	UINT8 oMerc = 0;
-	
+
 	// Read from EmailMercAvailable.xml
 	if ( ReadXMLEmail == TRUE )
-	{		
-	oMerc = ubMercMercIdValue;				
+	{
+	oMerc = ubMercMercIdValue;
 	iMerc = oMerc * 1;
-	
+
 	if ( oMerc != 0 )
 		pMerc = oMerc + 1;
 	else
@@ -2057,11 +2057,11 @@ void MERCMercWentUpALevelSendEmail( UINT8 ubMercMercIdValue )
 	else
 	{
 		iMsgLength = MERC_UP_LEVEL_LENGTH_BIFF;
-		ubEmailOffset = MERC_UP_LEVEL_BIFF + MERC_UP_LEVEL_LENGTH_BIFF * ( ubMercMercIdValue ); 
+		ubEmailOffset = MERC_UP_LEVEL_BIFF + MERC_UP_LEVEL_LENGTH_BIFF * ( ubMercMercIdValue );
 	}
 
 	AddEmail( ubEmailOffset, iMsgLength, SPECK_FROM_MERC, GetWorldTotalMin(), -1, -1, TYPE_EMAIL_EMAIL_EDT_NAME_MERC);
-	
+
 	}
 #endif
 }

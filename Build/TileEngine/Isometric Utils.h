@@ -1,7 +1,7 @@
 #ifndef __ISOMETRIC_UTILSH
 #define __ISOMETRIC_UTILSH
 
-#include "worlddef.h"
+#include "WorldDef.h"
 
 //DEFINES
 #define MAXCOL					WORLD_COLS
@@ -21,7 +21,7 @@
 //#define MAPLENGTH			(MAPHEIGHT*MAPWIDTH) //Lalien: replaced with WORLD_MAX
 
 
-#define	ADJUST_Y_FOR_HEIGHT( pos, y )				( y -= gpWorldLevelData[ pos ].sHeight )					
+#define	ADJUST_Y_FOR_HEIGHT( pos, y )				( y -= gpWorldLevelData[ pos ].sHeight )
 
 
 extern UINT8 gOppositeDirection[ NUM_WORLD_DIRECTIONS ];
@@ -38,7 +38,7 @@ extern UINT8 gPurpendicularDirection[ NUM_WORLD_DIRECTIONS ][ NUM_WORLD_DIRECTIO
 //												|Check for map bounds------------------------------------------|	|Invalid-|	|Valid-------------------|
 #define MAPROWCOLTOPOS( r, c )									( ( (r < 0) || (r >= WORLD_ROWS) || (c < 0) || (c >= WORLD_COLS) ) ? ( 0xFFFFFFFF ) : ( (INT32)(r) * WORLD_COLS + (c) ) )
 
-#define GETWORLDINDEXFROMWORLDCOORDS( y, x )		( (INT32) ( x / CELL_X_SIZE ) ) + WORLD_COLS * ( (INT32) ( y / CELL_Y_SIZE ) ) 
+#define GETWORLDINDEXFROMWORLDCOORDS( y, x )		( (INT32) ( x / CELL_X_SIZE ) ) + WORLD_COLS * ( (INT32) ( y / CELL_Y_SIZE ) )
 
 void ConvertGridNoToXY( INT32 sGridNo, INT16 *sXPos, INT16 *sYPos );
 void ConvertGridNoToCellXY( INT32 sGridNo, INT16 *sXPos, INT16 *sYPos );
@@ -56,7 +56,7 @@ INT32 OutOfBounds(INT32 sGridNo, INT32 sProposedGridNo);
 //
 // tazpn: inline this routine due to high call count
 #define TileIsOutOfBounds(sGridNo) (( (sGridNo < 0) || (sGridNo >= MAX_MAP_POS) ) ? TRUE : FALSE)
- 
+
 // Functions
 BOOLEAN GetMouseCell( INT32 *piMouseMapPos );
 BOOLEAN GetMouseXY( INT16 *psMouseX, INT16 *psMouseY );
@@ -102,7 +102,7 @@ INT16 CardinalSpacesAway(INT32 sOrigin, INT32 sDest);
 INT8 FindNumTurnsBetweenDirs( INT8 sDir1, INT8 sDir2 );
 BOOLEAN FindHeigherLevel( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection );
 BOOLEAN FindLowerLevel( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection );
-	
+
 INT16 QuickestDirection(INT16 origin, INT16 dest);
 INT16 ExtQuickestDirection(INT16 origin, INT16 dest);
 
@@ -127,7 +127,7 @@ extern UINT32 guiForceRefreshMousePositionCalculation;
 //I need to see an x and y.	I created this class for the AStar,
 //but moved it here as you can convert a regular INT16 gridno to a GridNode then print it out for debugging.
 //Don't switch between the 2 types too often, IntToGridNode is especially slow
-//0verhaul:  It's not good to give the computer extra work just for readability's sake.  So this should be a 
+//0verhaul:  It's not good to give the computer extra work just for readability's sake.  So this should be a
 //good compromise.  Possibly even more useful.  Just add a watch variable for GridNode.MapXY[ mygridvar ] and
 //see its X,Y in the watch window.
 
@@ -145,10 +145,10 @@ public:
 	static MapXY_t *initGridNodes() { for (INT32 i=0; i<WORLD_MAX; i++){ConvertGridNoToXY(i, &MapXY[i].x, &MapXY[i].y); } return &MapXY; };
 };
 
-//Legion by JAzz	
+//Legion by JAzz
 BOOLEAN FindHeigherLevelOkno( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection );
 BOOLEAN FindWallJumpDirection( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection );
-BOOLEAN FindLowerLevelWall( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection ); 
+BOOLEAN FindLowerLevelWall( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection );
 BOOLEAN FindWindowJumpDirection( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStartingDir, INT8 *pbDirection );
 
 // Flugente: is this gridno near a player merc?

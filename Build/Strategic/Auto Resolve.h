@@ -1,7 +1,7 @@
 #ifndef __AUTO_RESOLVE_H
 #define __AUTO_RESOLVE_H
 
-#include "types.h"
+#include "Types.h"
 
 //generic face images
 enum

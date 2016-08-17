@@ -2,9 +2,9 @@
 	#include "Strategic All.h"
 	#include "GameSettings.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
-	#include "types.h"
+	#include "Types.h"
 	#include "Auto Resolve.h"
 	#include "Strategic Movement.h"
 	#include "Queen Command.h"
@@ -13,16 +13,16 @@
 	#include "Player Command.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "gameloop.h"
-	#include "screenids.h"
-	#include "mapscreen.h"
-	#include "vobject.h"
-	#include "video.h"
-	#include "input.h"
-	#include "gamescreen.h"
-	#include "render dirty.h"
-	#include "vObject_Blitters.h"
-	#include "sysutil.h"
+	#include "GameLoop.h"
+	#include "ScreenIds.h"
+	#include "MapScreen.h"
+	#include "VObject.h"
+	#include "Video.h"
+	#include "Input.h"
+	#include "GameScreen.h"
+	#include "Render Dirty.h"
+	#include "VObject_blitters.h"
+	#include "SysUtil.h"
 	#include "Font Control.h"
 	#include "Soldier Create.h"
 	#include "Overhead.h"
@@ -36,37 +36,37 @@
 	#include "Tactical Save.h"
 	#include "Strategic Status.h"
 	#include "Map Screen Interface.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "WordWrap.h"
 	#include "Squads.h"
 	#include "Random.h"
-	#include "line.h"
-	#include "english.h"
+	#include "Line.h"
+	#include "English.h"
 	#include "Strategic Pathing.h"
 	#include "Strategic Merc Handler.h"
-	#include "strategic.h"
-	#include "message.h"
+	#include "Strategic.h"
+	#include "Message.h"
 	#include "Town Militia.h"
 	#include "Animation Data.h"
 	#include "Creature Spreading.h"
 	#include "Strategic AI.h"
 	#include "SkillCheck.h"
 	#include "rt time defines.h"
-	#include "morale.h"
+	#include "Morale.h"
 	#include "Strategic Town Loyalty.h"
 	#include "GameSettings.h"
-	#include "Soldier macros.h"
-	#include "strategicmap.h"
+	#include "Soldier Macros.h"
+	#include "StrategicMap.h"
 	#include "Quests.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Inventory Choosing.h"
 	#include "Game Event Hook.h"
 	#include "Assignments.h"
-	#include "cheats.h"
+	#include "Cheats.h"
 	#include "Map Information.h"
 	#include "MilitiaSquads.h"
 //	#include "Strategic AI.h"
-	#include "interface Dialogue.h"
+	#include "Interface Dialogue.h"
 	#include "AIInternals.h" // added by SANDRO
 	#include "Bullets.h" // HEADROCK HAM 5, for use with Bullet Impact.
 	#include "CampaignStats.h"				// added by Flugente
@@ -596,7 +596,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Autoresolve1");
 	gpAR = (AUTORESOLVE_STRUCT*)MemAlloc( sizeof( AUTORESOLVE_STRUCT ) );
 	Assert( gpAR );
 	memset( gpAR, 0, sizeof( AUTORESOLVE_STRUCT ) );
-	//Mercs 
+	//Mercs
 	gpMercs = (SOLDIERCELL*)MemAlloc( sizeof( SOLDIERCELL) * MAX_AR_TEAM_SIZE );
 	Assert( gpMercs );
 	memset( gpMercs, 0, sizeof( SOLDIERCELL ) * MAX_AR_TEAM_SIZE );
@@ -742,7 +742,7 @@ void AssociateEnemiesWithStrategicGroups()
 {
 	SECTORINFO *pSector;
 	GROUP *pGroup;
-	UINT8 ubNumAdmins, ubNumTroops, ubNumElites, ubNumTanks, ubNumJeeps;	//how many soldiers of the type do we still have to assign to a group? 
+	UINT8 ubNumAdmins, ubNumTroops, ubNumElites, ubNumTanks, ubNumJeeps;	//how many soldiers of the type do we still have to assign to a group?
 	UINT8 ubISNumAdmins, ubISNumTroops, ubISNumElites, ubISNumTanks, ubISNumJeeps;
 	UINT8 ubNumElitesInGroup, ubNumTroopsInGroup, ubNumAdminsInGroup, ubNumTanksInGroup, ubNumJeepsInGroup;
 	INT32 i;
@@ -766,7 +766,7 @@ void AssociateEnemiesWithStrategicGroups()
 	//Stationary groups have a group ID of 0 - first assign enemies from those stationary groups
 	for( i = 0; i < gpAR->ubEnemies; ++i )
 	{
-		if ( gpEnemies[i].uiFlags & CELL_TANK && ubNumTanks )	//is this soldier a tank? and we still have some tanks to add? (since there might not be a static tank in sector) 
+		if ( gpEnemies[i].uiFlags & CELL_TANK && ubNumTanks )	//is this soldier a tank? and we still have some tanks to add? (since there might not be a static tank in sector)
 		{
 			gpEnemies[ i ].pSoldier->ubGroupID = 0;
 			gpEnemies[ i ].uiFlags |= CELL_ASSIGNED;
@@ -858,7 +858,7 @@ void AssociateEnemiesWithStrategicGroups()
 						gpEnemies[ i ].uiFlags |= CELL_ASSIGNED;
 						ubNumAdmins--;
 						ubNumAdminsInGroup--;
-					} 
+					}
 					}
 				}
 			}
@@ -1267,12 +1267,12 @@ void RenderSoldierCellBars( SOLDIERCELL *pCell )
 	iStartY = pCell->yp + 29 - 25*pCell->pSoldier->stats.bLifeMax/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, pCell->xp+37, iStartY, pCell->xp+38, pCell->yp+29, Get16BPPColor( FROMRGB( 107, 107, 57 ) ) );
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, pCell->xp+38, iStartY, pCell->xp+39, pCell->yp+29, Get16BPPColor( FROMRGB( 222, 181, 115 ) ) );
-	
+
 	//pink one for bandaged.
 	iStartY = pCell->yp + 29 - 25*(pCell->pSoldier->stats.bLifeMax - pCell->pSoldier->bBleeding)/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, pCell->xp+37, iStartY, pCell->xp+38, pCell->yp+29, Get16BPPColor( FROMRGB( 156, 57, 57 ) ) );
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, pCell->xp+38, iStartY, pCell->xp+39, pCell->yp+29, Get16BPPColor( FROMRGB( 222, 132, 132 ) ) );
-		
+
 	//red one for actual health
 	iStartY = pCell->yp + 29 - 25*pCell->pSoldier->stats.bLife/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, pCell->xp+37, iStartY, pCell->xp+38, pCell->yp+29, Get16BPPColor( FROMRGB( 107, 8, 8 ) ) );
@@ -1539,7 +1539,7 @@ UINT32 AutoBandageMercs()
 			if( gpMercs[ i ].pSoldier->stats.bMedical > gpMercs[ iBest ].pSoldier->stats.bMedical )
 			{
 				iBest = i;
-			}			
+			}
 		}
 	}
 
@@ -1775,7 +1775,7 @@ void RenderAutoResolve()
 					else
 					#endif
 					SetMusicMode( MUSIC_TACTICAL_VICTORY );
-					
+
 					LogBattleResults( LOG_VICTORY );
 					break;
 
@@ -1823,7 +1823,7 @@ void RenderAutoResolve()
 					else
 					#endif
 					SetMusicMode( MUSIC_TACTICAL_DEATH );
-						
+
 					LogBattleResults( LOG_DEFEAT );
 					break;
 
@@ -2068,28 +2068,28 @@ void CreateAutoResolveInterface()
 		VOBJECT_DESC VObjectDesc;
 		//Load the face
 		VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
-		
+
 		/*
 		sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );
 		*/
-		
+
 		if ( ( gpMercs[ i ].pSoldier->ubProfile >= 0 ) && ( gpMercs[ i ].pSoldier->ubProfile < 100 ) && ( gProfilesIMP[ gpMercs[ i ].pSoldier->ubProfile ].ProfilId == gpMercs[ i ].pSoldier->ubProfile ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );
-		} 
+		}
 		else if ( ( gpMercs[ i ].pSoldier->ubProfile > 99 ) && ( gProfilesIMP[ gpMercs[ i ].pSoldier->ubProfile ].ProfilId == gpMercs[ i ].pSoldier->ubProfile ) )
-		{			
-			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );			
+		{
+			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );
 		}
 		else if ( ( gpMercs[ i ].pSoldier->ubProfile >= 0 ) && ( gpMercs[ i ].pSoldier->ubProfile < 100 ) )
-		{			
-			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );			
+		{
+			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );
 		}
-		else 
-		{			
-			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );		
+		else
+		{
+			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex );
 		}
-		
+
 		if( !AddVideoObject( &VObjectDesc, &gpMercs[ i ].uiVObjectID ) )
 		{
 			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\speck.sti" );
@@ -2098,8 +2098,8 @@ void CreateAutoResolveInterface()
 				AssertMsg( 0, String("Failed to load %Faces\\65Face\\%02d.sti or it's placeholder, speck.sti", gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].ubFaceIndex) );
 			}
 		}
-		
-		
+
+
 		if( GetVideoObject( &hVObject, gpMercs[ i ].uiVObjectID ) )
 		{
 			hVObject->pShades[ 0 ] = Create16BPPPaletteShaded( hVObject->pPaletteEntry, 255, 255, 255, FALSE );
@@ -2407,7 +2407,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Autoresolve2");
 						}
 						else
 						{
-							gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].records.usBattlesAutoresolve++; 
+							gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].records.usBattlesAutoresolve++;
 							if ( gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].records.usLargestBattleFought < gpAR->ubEnemies )
 							{
 								gMercProfiles[ gpMercs[ i ].pSoldier->ubProfile ].records.usLargestBattleFought = gpAR->ubEnemies;
@@ -2429,7 +2429,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Autoresolve2");
 					}
 				}
 				/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 			}
 		}
 		for( i = 0; i < gpAR->iNumMercFaces; i++ )
@@ -2945,7 +2945,7 @@ void CalculateAutoResolveInfo()
 		// because we called the DetermineCreatureTownComposition() method before which was wrong.
 		if (gubNumCreaturesAttackingTown == 0)
 		{
-			DetermineCreatureTownCompositionBasedOnTacticalInformation( &gubNumCreaturesAttackingTown, 
+			DetermineCreatureTownCompositionBasedOnTacticalInformation( &gubNumCreaturesAttackingTown,
 																				&gpAR->ubYMCreatures, &gpAR->ubYFCreatures,
 																				&gpAR->ubAMCreatures, &gpAR->ubAFCreatures );
 		}
@@ -4097,7 +4097,7 @@ BOOLEAN FireTankCannon( SOLDIERCELL *pAttacker )
 	// a tank has several guns, don't fire the main gun all the time
 	//if ( Chance(33) )
 		//return FALSE;
-	
+
 	UINT8 invsize = pSoldier->inv.size();
 	for ( UINT8 i = 0; i < invsize; ++i )
 	{
@@ -4117,7 +4117,7 @@ BOOLEAN FireTankCannon( SOLDIERCELL *pAttacker )
 
 			pAttacker->bWeaponSlot = (INT8)i;
 
-			return TRUE;			
+			return TRUE;
 		}
 	}
 
@@ -4131,7 +4131,7 @@ BOOLEAN FireAntiTankWeapon( SOLDIERCELL *pAttacker )
 	SOLDIERTYPE *pSoldier;
 
 	pSoldier = pAttacker->pSoldier;
-	
+
 	UINT8 invsize = pSoldier->inv.size( );
 	for ( UINT8 i = 0; i < invsize; ++i )
 	{
@@ -4162,7 +4162,7 @@ BOOLEAN FireAntiTankWeapon( SOLDIERCELL *pAttacker )
 					PlayAutoResolveSample( Weapon[pItem->usItem].sLocknLoadSound, RATE_11025, 50, 1, MIDDLEPAN );
 				}
 			}
-			
+
 			PlayAutoResolveSample( Weapon[pItem->usItem].sSound, RATE_11025, 50, 1, MIDDLEPAN );
 			if ( pAttacker->uiFlags & CELL_MERC )
 			{
@@ -4171,7 +4171,7 @@ BOOLEAN FireAntiTankWeapon( SOLDIERCELL *pAttacker )
 
 				StatChange( pAttacker->pSoldier, MARKAMT, 3, FALSE );
 			}
-				
+
 			return TRUE;
 		}
 	}
@@ -4253,7 +4253,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		usDefence = (UINT16)(950 + PreRandom( 50 ));
 
 	///////////////////////////////////////////////////////////////////////////////////////////
-	// SANDRO - Iincrease Militia Strength in autoresolve battles 
+	// SANDRO - Iincrease Militia Strength in autoresolve battles
 	// because the attack and defense is limited to max 1000, rather than only increasing the attack of milita,
 	// decrease the defense of target - so +100% bonus means +50% attack of attacker and -50% defense of target
 
@@ -4411,8 +4411,8 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 	// hit with a tank
 	if ( fCannon )
 	{
-		ubImpact = (UINT8)GetDamage( &pAttacker->pSoldier->inv[pAttacker->bWeaponSlot] ); 
-		
+		ubImpact = (UINT8)GetDamage( &pAttacker->pSoldier->inv[pAttacker->bWeaponSlot] );
+
 		ubLocation = AIM_SHOT_TORSO;
 
 		ubAccuracy = (UINT8)((usAttack - usDefence + PreRandom( usDefence - pTarget->usDefence )) / 10);
@@ -4478,7 +4478,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		ubImpact = (UINT8)GetDamage( &pAttacker->pSoldier->inv[pAttacker->bWeaponSlot] ) / 3;
 
 		UINT8 ubAmmoType = Magazine[Item[(&pAttacker->pSoldier->inv[pAttacker->bWeaponSlot])->usItem].ubClassIndex].ubAmmoType;
-				
+
 		ubImpact *= AmmoTypes[ubAmmoType].dDamageModifierTank;
 
 		iRandom = Random( 100 );
@@ -4607,7 +4607,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		// WANNE: Just for safty.
 		if (iImpact < 0)
 			iImpact = 0;
-		
+
 		iNewLife = pTarget->pSoldier->stats.bLife - iImpact;
 
 		if( pAttacker->uiFlags & CELL_MERC )
@@ -4745,7 +4745,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		{
 			// SANDRO - added check to erase insta-healable amount of HPs if dead
 			if (pTarget->pSoldier->iHealableInjury > 0)
-			{ pTarget->pSoldier->iHealableInjury = 0; } 
+			{ pTarget->pSoldier->iHealableInjury = 0; }
 
 			gpAR->fRenderAutoResolve = TRUE;
 			#ifdef INVULNERABILITY
@@ -4838,7 +4838,7 @@ void TargetHitCallback( SOLDIERCELL *pTarget, INT32 index )
 	//bullet hit -- play an impact sound and a merc hit sound
 	if ( ARMED_VEHICLE( pTarget->pSoldier ) )
 		PlayAutoResolveSample( (UINT8)(S_METAL_IMPACT1 + PreRandom( 3 )), RATE_11025, 50, 1, MIDDLEPAN );
-	else	
+	else
 	PlayAutoResolveSample( (UINT8)(BULLET_IMPACT_1+PreRandom(3)), RATE_11025, 50, 1, MIDDLEPAN );
 
 	if( pTarget->pSoldier->stats.bLife >= CONSCIOUSNESS )
@@ -5046,7 +5046,7 @@ void TargetHitCallback( SOLDIERCELL *pTarget, INT32 index )
 	{
 		// SANDRO - added check to erase insta-healable amount of HPs if dead
 		if (pTarget->pSoldier->iHealableInjury > 0)
-		{ pTarget->pSoldier->iHealableInjury = 0; } 
+		{ pTarget->pSoldier->iHealableInjury = 0; }
 
 		gpAR->fRenderAutoResolve = TRUE;
 		if( pTarget->uiFlags & CELL_MERC )
@@ -5773,7 +5773,7 @@ void AutoResolveMilitiaDropAndPromote()
 
 			// Flugente: drop sector equipment
 			gpCivs[i].pSoldier->DropSectorEquipment( );
-						
+
 			if ( gpCivs[i].pSoldier->stats.bLife < OKLIFE / 2 )
 			{
 				// Flugente: individual militia
@@ -5783,12 +5783,12 @@ void AutoResolveMilitiaDropAndPromote()
 				{
 					MILITIA_BATTLEREPORT report;
 					report.id = GetIdOfCurrentlyOngoingIncident( );
-					
+
 					report.flagmask |= MILITIA_BATTLEREPORT_FLAG_DIED;
-					
+
 					if ( gpCivs[i].pSoldier->ubMilitiaKills )
 						report.flagmask |= MILITIA_BATTLEREPORT_FLAG_KILLEDENEMY;
-					
+
 					militia.history.push_back( report );
 
 					militia.healthratio = 0.0f;

@@ -11,7 +11,7 @@ public:
 	  fInitialized(FALSE), usPosX(0), gPopup(NULL)
 	{
 	}
-	  	
+
 	virtual void Cancel()
 	{
 		// Hide the Filter Menu pop-up.

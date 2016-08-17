@@ -118,7 +118,7 @@ typedef struct MoraleEvent
 	INT8	bChange;
 } MoraleEvent;
 
-typedef enum 
+typedef enum
 {
 	SNITCH_INTRODUCTION= 0,
 	SNITCH_DEATH_RATE, // current death rate higher than preferable
@@ -128,7 +128,7 @@ typedef enum
 	SNITCH_GONNA_QUIT, // merc's contract going to end and he won't renew
 	SNITCH_PROGRESS,  // merc thinks player is inactive too long
 	SNITCH_OWED_MONEY, // merc is owed money
-	
+
 	SNITCH_TEAM_ROTATION, // unused at the moment (will have to add specific rotation tolerance to mercs or something)
 						// maybe with personal opinion on rotation depending on opinions (so they get pissed faster when liked mercs are fired)
 

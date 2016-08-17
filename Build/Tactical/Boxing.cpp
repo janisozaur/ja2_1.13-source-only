@@ -6,24 +6,24 @@
 	#include "Boxing.h"
 	#include "Render Fun.h"
 	#include "Random.h"
-	#include "Worldman.h"
+	#include "WorldMan.h"
 	#include "Soldier Profile.h"
 	#include "NPC.h"
 	#include "Opplist.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Dialogue Control.h"
 	#include "Handle UI.h"
 	#include "Points.h"
-	#include "interface.h"
-	#include "interface dialogue.h"
+	#include "Interface.h"
+	#include "Interface Dialogue.h"
 	#include "TeamTurns.h"
 	#include "Music Control.h"
-	#include "history.h"
-	#include "strategicmap.h"
+	#include "History.h"
+	#include "StrategicMap.h"
 	#include "Game Clock.h"
 	#include "Animation Data.h"
 	#include "Font Control.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "GameSettings.h" // added by SANDRO
 #endif
 
@@ -117,11 +117,11 @@ void ExitBoxing( void )
 	if ( CheckForEndOfCombatMode( FALSE ) )
 	{
 		EndTopMessage();
-		
+
 		#ifdef NEWMUSIC
 		GlobalSoundID  = MusicSoundValues[ SECTOR( gWorldSectorX, gWorldSectorY ) ].SoundTacticalNothing[gbWorldSectorZ];
 		if ( MusicSoundValues[ SECTOR( gWorldSectorX, gWorldSectorY ) ].SoundTacticalNothing[gbWorldSectorZ] != -1 )
-			SetMusicModeID( MUSIC_TACTICAL_NOTHING, MusicSoundValues[ SECTOR( gWorldSectorX, gWorldSectorY ) ].SoundTacticalNothing[gbWorldSectorZ] );	
+			SetMusicModeID( MUSIC_TACTICAL_NOTHING, MusicSoundValues[ SECTOR( gWorldSectorX, gWorldSectorY ) ].SoundTacticalNothing[gbWorldSectorZ] );
 		else
 		#endif
 		SetMusicMode( MUSIC_TACTICAL_NOTHING );

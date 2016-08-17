@@ -1,7 +1,7 @@
 #ifndef __HANDLEUIPLAN_H
 #define __HANDLEUIPLAN_H
 
-#include "types.h"
+#include "Types.h"
 #include "Soldier Control.h"
 
 #define		UIPLAN_ACTION_MOVETO			1

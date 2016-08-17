@@ -10,7 +10,7 @@
 #define AP_INCREASE			 10		// optional across-the-board AP boost
 #define MAX_AP_CARRIED			5		// APs carried from turn-to-turn
 
-// monster AP bonuses, expressed in 10ths (12 = 120% normal) 
+// monster AP bonuses, expressed in 10ths (12 = 120% normal)
 #define AP_YOUNG_MONST_FACTOR	15
 #define AP_ADULT_MONST_FACTOR	12
 #define AP_MONST_FRENZY_FACTOR 13
@@ -32,9 +32,9 @@
 #define	AP_TALK									6
 
 #define AP_MOVEMENT_FLAT		3				// div by 2 for run, +2, for crawl, -1 for swat
-#define AP_MOVEMENT_GRASS		4				
-#define AP_MOVEMENT_BUSH		5				
-#define AP_MOVEMENT_RUBBLE		6				
+#define AP_MOVEMENT_GRASS		4
+#define AP_MOVEMENT_BUSH		5
+#define AP_MOVEMENT_RUBBLE		6
 #define AP_MOVEMENT_SHORE		7		// shallow wade
 
 #define AP_MOVEMENT_LAKE		9		// deep wade->slowest
@@ -158,7 +158,7 @@
 #define BP_RUN_ENERGYCOSTFACTOR		3		// Richard thinks running is 3rd most strenous over time... tough, Mark didn't.	CJC increased it again
 #define BP_WALK_ENERGYCOSTFACTOR	1		// walking subtracts flat terrain breath value
 #define BP_SWAT_ENERGYCOSTFACTOR	2		// Richard thinks swatmove is 2nd most strenous over time... tough, Mark didn't
-#define BP_CRAWL_ENERGYCOSTFACTOR	4		// Richard thinks crawling is the MOST strenuous over time	
+#define BP_CRAWL_ENERGYCOSTFACTOR	4		// Richard thinks crawling is the MOST strenuous over time
 
 #define BP_RADIO				0		// no breath cost
 #define BP_USE_DETONATOR		0		// no breath cost
@@ -270,7 +270,7 @@
 
 #define DEFAULT_APS 20
 #define DEFAULT_AIMSKILL 80
-*/						
+*/
 
 //Just so the compiler will be able to use it in init.cpp, I'm a careful person.  Gotthard 1/18/07
 extern INT16 APBPConstants[TOTAL_APBP_VALUES];
@@ -369,7 +369,7 @@ INT16 GetAPsToAutoReload( SOLDIERTYPE * pSoldier );
 INT32 CalcAPCostForAiming( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo, INT8 bAimTime );
 INT8 CalcAimingLevelsAvailableWithAP( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo, INT8 bAPsLeft );
 
-// SANDRO - added these: 
+// SANDRO - added these:
 INT16 GetAPsCrouch( SOLDIERTYPE *pSoldier, BOOLEAN fBackpackCheck  );
 INT16 GetAPsProne( SOLDIERTYPE *pSoldier, BOOLEAN fBackpackCheck  );
 INT16 GetAPsStartRun( SOLDIERTYPE *pSoldier );

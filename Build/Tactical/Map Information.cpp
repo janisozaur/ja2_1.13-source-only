@@ -3,22 +3,22 @@
 	#include "edit_sys.h"
 #else
 	#include <stdio.h>
-	#include "fileMan.h"
-	#include "types.h"
+	#include "FileMan.h"
+	#include "Types.h"
 	#include "Map Information.h"
 	#include "Soldier Init List.h"
 	#include "Random.h"
-	#include "worlddef.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
 	#include "EditorMercs.h"
 	#include "Exit Grids.h"
 	#include "Isometric Utils.h"
 	#include "Animation Data.h"
 	#include "Road Smoothing.h"
-	#include "message.h"
-	#include "weapons.h"
-	#include "environment.h"
-	#include "lighting.h"
+	#include "Message.h"
+	#include "Weapons.h"
+	#include "Environment.h"
+	#include "Lighting.h"
 	#include "Animated ProgressBar.h"
 #endif
 
@@ -88,7 +88,7 @@ BOOLEAN ValidateEntryPointGridNo( INT32 *sGridNo )
 	INT16 sWorldX, sWorldY;
 	INT32 iNewMapX, iNewMapY;
 	INT32 sTopLimit, sBottomLimit;
-	
+
 	if ( TileIsOutOfBounds( *sGridNo ) )
 		return FALSE; //entry point is non-existant
 
@@ -637,7 +637,7 @@ void UpdateOldVersionMap()
 		gMapInformation.ubMapVersion = 27;
 	}
 	if( gMapInformation.ubMapVersion < 29 )
-	{ 
+	{
 		gMapInformation.ubMapVersion = 29;
 	}
 }

@@ -1,7 +1,7 @@
 #include "sgp.h"
-#include "overhead types.h"
-#include "overhead.h"
-#include "text.h"
+#include "Overhead Types.h"
+#include "Overhead.h"
+#include "Text.h"
 #include "Debug Control.h"
 #include "expat.h"
 #include "XML.h"
@@ -144,7 +144,7 @@ deliveryMethodEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = DELIVERYMETHOD_ELEMENT_TABLE;
 			UINT8 ubCurrentDM = gPostalService.AddDeliveryMethod(pData->CurDeliveryMethod.szDescription);
-			
+
 			RefToDestinationDeliveryInfoReadInTableIterator dfriti = pData->CurDeliveryMethod.DestinationDeliveryInfos->begin();
 
 			while(dfriti != pData->CurDeliveryMethod.DestinationDeliveryInfos->end())
@@ -265,7 +265,7 @@ BOOLEAN ReadInDeliveryMethods(STR fileName)
 	XML_ParserFree(parser);
 
 	// Interface stuff for the old game code. Once Bobby Ray and the laptop are fully C++'ized and/or externalised, this stuff can go
-	
+
 
 	return( TRUE );
 }

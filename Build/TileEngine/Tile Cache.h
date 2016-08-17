@@ -48,7 +48,7 @@ void CheckForAndDeleteTileCacheStructInfo( LEVELNODE *pNode, UINT16 usIndex );
 void GetRootName( STR8 pDestStr, const STR8 pSrcStr );
 
 
-// OF COURSE, FOR SPEED, WE EXPORT OUR ARRAY 
+// OF COURSE, FOR SPEED, WE EXPORT OUR ARRAY
 // ACCESS FUNCTIONS IN RENDERER IS NOT TOO NICE
 // ATE
 

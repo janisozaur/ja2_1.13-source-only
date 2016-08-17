@@ -1,8 +1,8 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
 #else
-	#include "text.h"
-	#include "Fileman.h"
+	#include "Text.h"
+	#include "FileMan.h"
 	#include "GameSettings.h"
 #endif
 
@@ -1016,37 +1016,37 @@ FLOAT GetWeightBasedOnMetricOption( UINT32 uiObjectWeight )
 	return( fWeight );
 }
 
-static inline STR8 Trim(STR8 &p) { 
-	while(isspace(*p)) *p++ = 0; 
+static inline STR8 Trim(STR8 &p) {
+	while(isspace(*p)) *p++ = 0;
 	STR8 e = p + strlen(p) - 1;
 	while (e > p && isspace(*e)) *e-- = 0;
 	return p;
 }
 
-static inline STR16 Trim(STR16 &p) { 
-	while(iswspace(*p)) *p++ = 0; 
+static inline STR16 Trim(STR16 &p) {
+	while(iswspace(*p)) *p++ = 0;
 	STR16 e = p + wcslen(p) - 1;
 	while (e > p && iswspace(*e)) *e-- = 0;
 	return p;
 }
 
 
-int StringToEnum(const STR value, const Str8EnumLookupType *table) 
+int StringToEnum(const STR value, const Str8EnumLookupType *table)
 {
-	if (NULL == value || 0 == *value) 
+	if (NULL == value || 0 == *value)
 		return 0;
 
 	for (const Str8EnumLookupType *itr = table; itr->name != NULL; ++itr) {
-		if (0 == _stricmp(value, itr->name)) 
+		if (0 == _stricmp(value, itr->name))
 			return itr->value;
 	}
 	STR end = NULL;
 	return (int)strtol(value, &end, 0);
 }
 
-int StringToEnum(const STR8 value, const Str16EnumLookupType *table) 
+int StringToEnum(const STR8 value, const Str16EnumLookupType *table)
 {
-	if (NULL == value || 0 == *value) 
+	if (NULL == value || 0 == *value)
 		return 0;
 
 	int result = 0;
@@ -1062,9 +1062,9 @@ int StringToEnum(const STR8 value, const Str16EnumLookupType *table)
 	return (result) ? result : (int)strtol(value, NULL, 0);
 }
 
-int StringToEnum(const STR16 value, const Str8EnumLookupType *table) 
+int StringToEnum(const STR16 value, const Str8EnumLookupType *table)
 {
-	if (NULL == value || 0 == *value) 
+	if (NULL == value || 0 == *value)
 		return 0;
 
 	int result = 0;
@@ -1081,11 +1081,11 @@ int StringToEnum(const STR16 value, const Str8EnumLookupType *table)
 }
 
 int StringToEnum(const STR16 value, const Str16EnumLookupType *table) {
-	if (NULL == value || 0 == *value) 
+	if (NULL == value || 0 == *value)
 		return 0;
 
 	for (const Str16EnumLookupType *itr = table; itr->name != NULL; ++itr) {
-		if (0 == _wcsicmp(value, itr->name)) 
+		if (0 == _wcsicmp(value, itr->name))
 			return itr->value;
 	}
 	return (int)wcstol(value, NULL, 0);
@@ -1122,7 +1122,7 @@ void ParseCommandLine (
    inquote = 0;
 
    /* loop on each argument */
-   for(;;) 
+   for(;;)
    {
       if ( *p ) { while (*p == SPACECHAR || *p == TABCHAR || *p == RETURNCHAR || *p == LINEFEEDCHAR) ++p; }
 
@@ -1134,20 +1134,20 @@ void ParseCommandLine (
       ++*numargs;
 
       /* loop through scanning one argument */
-      for (;;) 
+      for (;;)
       {
          copychar = 1;
          /* Rules: 2N backslashes + " ==> N backslashes and begin/end quote
          2N+1 backslashes + " ==> N backslashes + literal "
          N backslashes ==> N backslashes */
          numslash = 0;
-         while (*p == SLASHCHAR) 
+         while (*p == SLASHCHAR)
          {
             /* count number of backslashes for use below */
             ++p;
             ++numslash;
          }
-         if (*p == DQUOTECHAR) 
+         if (*p == DQUOTECHAR)
          {
             /* if 2N backslashes before, start/end quote, otherwise copy literally */
             if (numslash % 2 == 0) {
@@ -1176,7 +1176,7 @@ void ParseCommandLine (
             break;
 
          /* copy character into argument */
-         if (copychar) 
+         if (copychar)
          {
             if (args)
                *args++ = *p;
@@ -1226,7 +1226,7 @@ void ParseCommandLine (
    inquote = 0;
 
    /* loop on each argument */
-   for(;;) 
+   for(;;)
    {
       if ( *p ) { while (*p == SPACECHAR || *p == TABCHAR || *p == RETURNCHAR || *p == LINEFEEDCHAR) ++p; }
 
@@ -1238,20 +1238,20 @@ void ParseCommandLine (
       ++*numargs;
 
       /* loop through scanning one argument */
-      for (;;) 
+      for (;;)
       {
          copychar = 1;
          /* Rules: 2N backslashes + " ==> N backslashes and begin/end quote
          2N+1 backslashes + " ==> N backslashes + literal "
          N backslashes ==> N backslashes */
          numslash = 0;
-         while (*p == SLASHCHAR) 
+         while (*p == SLASHCHAR)
          {
             /* count number of backslashes for use below */
             ++p;
             ++numslash;
          }
-         if (*p == DQUOTECHAR) 
+         if (*p == DQUOTECHAR)
          {
             /* if 2N backslashes before, start/end quote, otherwise copy literally */
             if (numslash % 2 == 0) {
@@ -1280,7 +1280,7 @@ void ParseCommandLine (
             break;
 
          /* copy character into argument */
-         if (copychar) 
+         if (copychar)
          {
             if (args)
                *args++ = *p;

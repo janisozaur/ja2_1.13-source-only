@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "mercs No Account.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"

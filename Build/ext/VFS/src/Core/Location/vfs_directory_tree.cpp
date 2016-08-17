@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Core/Location/vfs_directory_tree.cpp
  *  - class for directories in a File System, implements Directory interface
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -89,7 +89,7 @@ namespace vfs
 		};
 		/////////////////////////////////////////////////////////////////////
 	public:
-		TSubDir(vfs::Path const& sMountPoint, vfs::Path const& sRealPath) 
+		TSubDir(vfs::Path const& sMountPoint, vfs::Path const& sRealPath)
 			: tBaseClass(sMountPoint,sRealPath)
 		{};
 
@@ -98,7 +98,7 @@ namespace vfs
 		virtual bool			fileExists(vfs::Path const& rFileName);
 		virtual vfs::IBaseFile* getFile(vfs::Path const& rFileName);
 		virtual tFileType*		getFileTyped(vfs::Path const& rFileName);
-		
+
 		virtual tFileType*		addFile(vfs::Path const& sFilename, bool bDeleteOldFile=false);
 		virtual bool			addFile(tFileType* pFile, bool bDeleteOldFile=false);
 
@@ -359,7 +359,7 @@ typename vfs::TDirectoryTree<WriteType>::tFileType* vfs::TDirectoryTree<WriteTyp
 {
 	if(!_file_iter.end())
 	{
-		return static_cast<typename vfs::TDirectoryTree<WriteType>::tFileType*>(_file_iter.value());		
+		return static_cast<typename vfs::TDirectoryTree<WriteType>::tFileType*>(_file_iter.value());
 	}
 	return NULL;
 }
@@ -419,9 +419,9 @@ bool vfs::TDirectoryTree<WriteType>::init()
 	typedef std::pair<vfs::Path,tSubDir*> tDirs;
 	std::queue<tDirs> qSubDirs;
 	qSubDirs.push(tDirs(vfs::Path(vfs::Const::EMPTY()),new tSubDir(this->m_mountPoint, this->m_realPath)));
-	
+
 	m_catDirs[this->m_mountPoint] = qSubDirs.front().second;
-	
+
 	vfs::String sFilename;
 	tSubDir *pCurrentDir;
 	vfs::Path oCurDir;
@@ -438,13 +438,13 @@ bool vfs::TDirectoryTree<WriteType>::init()
 		{
 			vfs::OS::CIterateDirectory::EFileAttribute eFA;
 			vfs::OS::CIterateDirectory iterFS(oCurDir, vfs::Const::STAR());
-			while ( iterFS.nextFile(sFilename, eFA) ) 
+			while ( iterFS.nextFile(sFilename, eFA) )
 			{
 				if (StrCmp::Equal(vfs::Const::DOT(),sFilename) || StrCmp::Equal(vfs::Const::DOTDOT(),sFilename) || StrCmp::Equal(vfs::Const::DOTSVN(),sFilename) )
 				{
 					continue;
 				}
-				if (eFA == vfs::OS::CIterateDirectory::FA_DIRECTORY) 
+				if (eFA == vfs::OS::CIterateDirectory::FA_DIRECTORY)
 				{
 					vfs::Path sLocal = qSubDirs.front().first + sFilename;
 
@@ -453,7 +453,7 @@ bool vfs::TDirectoryTree<WriteType>::init()
 					qSubDirs.push(tDirs(sLocal,pNewDir));
 					m_catDirs[temp] = pNewDir;
 				}
-				else 
+				else
 				{
 					pCurrentDir->addFile(vfs::Path(sFilename));
 				}
@@ -545,7 +545,7 @@ bool vfs::TDirectoryTree<WriteType>::deleteFileFromDirectory(vfs::Path const& sF
 	return false;
 }
 
-/** 
+/**
  *  IVFSLocation interface
  */
 template<typename WriteType>

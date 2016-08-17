@@ -1,55 +1,55 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 	#include "PreBattle Interface.h"
 #else
-	#include "worlddef.h"
-	#include "worlddat.h"
+	#include "WorldDef.h"
+	#include "WorldDat.h"
 	#include <stdio.h>
 	#include <string.h>
-	#include "wcheck.h"
+	#include "WCheck.h"
 	#include "stdlib.h"
 	#include "time.h"
-	#include "video.h"
-	#include "debug.h"
-	#include "worldman.h"
+	#include "Video.h"
+	#include "Debug.h"
+	#include "WorldMan.h"
 	#include "mousesystem.h"
-	#include "sys globals.h"
-	#include "screenids.h"
+	#include "Sys Globals.h"
+	#include "ScreenIds.h"
 	#include "Render Fun.h"
-	#include "font control.h"
-	#include "lighting.h"
+	#include "Font Control.h"
+	#include "Lighting.h"
 	#include "structure.h"
-	#include "vobject.h"
+	#include "VObject.h"
 	#include "Soldier Control.h"
-	#include "isometric utils.h"
+	#include "Isometric Utils.h"
 	#include "Interactive Tiles.h"
-	#include "utilities.h"
-	#include "overhead.h"
+	#include "Utilities.h"
+	#include "Overhead.h"
 	#include "Event Pump.h"
 	#include "Handle UI.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "shading.h"
 	#include "Animation Control.h"
 	#include "World Items.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Radar Screen.h"
-	#include "soldier create.h"
+	#include "Soldier Create.h"
 	#include "Soldier Init List.h"
 	#include "Exit Grids.h"
-	#include "tile surface.h"
-	#include "rotting corpses.h"
+	#include "Tile Surface.h"
+	#include "Rotting Corpses.h"
 	#include "Keys.h"
 	#include "Map Information.h"
 	#include "Exit Grids.h"
 	#include "Summary Info.h"
 	#include "Animated ProgressBar.h"
-	#include "pathai.h"
+	#include "PathAI.h"
 	#include "EditorBuildings.h"
 	#include "FileMan.h"
 	#include "Map Edgepoints.h"
-	#include "environment.h"
+	#include "Environment.h"
 	#include "Shade Table Util.h"
 	#include "Structure Wrap.h"
 	#include "Scheduling.h"
@@ -57,24 +57,24 @@
 	#include "pits.h"
 	#include "Game Clock.h"
 	#include "Buildings.h"
-	#include "strategicmap.h"
-	#include "overhead map.h"
+	#include "StrategicMap.h"
+	#include "Overhead Map.h"
 	#include "SmokeEffects.h"
 	#include "LightEffects.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "LoadScreen.h"//dnl ch30 150909
 	#include "Interface Cursors.h"
 	#include "Simple Render Utils.h"//dnl ch54 111009
 ///ddd
-	#include "gamesettings.h"
-	#include "editscreen.h"
+	#include "GameSettings.h"
+	#include "EditScreen.h"
 	#include "Button Defines.h"
 	#include "Editor Taskbar Utils.h"
 #endif
 
 #define	SET_MOVEMENTCOST( a, b, c, d )				( ( gubWorldMovementCosts[ a ][ b ][ c ] < d ) ? ( gubWorldMovementCosts[ a ][ b ][ c ] = d ) : 0 );
 #define	FORCE_SET_MOVEMENTCOST( a, b, c, d )	( gubWorldMovementCosts[ a ][ b ][ c ] = d )
-#define  SET_CURRMOVEMENTCOST( a, b )			SET_MOVEMENTCOST( usGridNo, a, 0, b ) 
+#define  SET_CURRMOVEMENTCOST( a, b )			SET_MOVEMENTCOST( usGridNo, a, 0, b )
 
 #define	TEMP_FILE_FOR_TILESET_CHANGE				"jatileS34.dat"
 
@@ -97,7 +97,7 @@
 //<SB> variable map size
 INT32 guiWorldCols = OLD_WORLD_COLS;
 INT32 guiWorldRows = OLD_WORLD_ROWS;
-                                  
+
 // size must be multiple of 8
 //SB: resize all service array due to tactical map size change
 extern UINT8 *gubGridNoMarkers;
@@ -289,7 +289,7 @@ BOOLEAN InitializeWorld( )
 	gTileDatabaseSize = 0;
 	gSurfaceMemUsage = 0;
 	giCurrentTilesetID = -1;
-	
+
 	#ifdef JA2UBMAPS
 	giOldTilesetUsed = -1;
 	#endif
@@ -306,7 +306,7 @@ BOOLEAN InitializeWorld( )
 	memset( gTileTypeLogicalHeight, 1, sizeof( gTileTypeLogicalHeight) );
 
 	// Memset tile database
-	memset( gTileDatabase, 0, sizeof(gTileDatabase) ); 
+	memset( gTileDatabase, 0, sizeof(gTileDatabase) );
 
 	// Init surface list
 	memset( gTileSurfaceArray, 0, sizeof( gTileSurfaceArray ) );
@@ -419,8 +419,8 @@ BOOLEAN LoadTileSurfaces( char ppTileSurfaceFilenames[][32], UINT8 ubTilesetID )
 	SetRelativeStartAndEndPercentage( 0, 1, 35, L"Tile Surfaces" );
 	for (uiLoop = 0; uiLoop < (UINT32)giNumberOfTileTypes; uiLoop++)
 	{
-	
-	
+
+
 		// ATE: Set flag indicating to use another default
 		// tileset
 	#ifdef JA2UBMAPS
@@ -499,7 +499,7 @@ BOOLEAN LoadTileSurfaces( char ppTileSurfaceFilenames[][32], UINT8 ubTilesetID )
 					// ATE: If here, don't load default surface if already loaded...
 					if ( !gbDefaultSurfaceUsed[ uiLoop ] )
 					{
-					
+
 						#ifdef JA2UBMAPS
 						if( ubTilesetID < DEFAULT_JA25_TILESET && uiLoop != SPECIALTILES )
 						{
@@ -512,18 +512,18 @@ BOOLEAN LoadTileSurfaces( char ppTileSurfaceFilenames[][32], UINT8 ubTilesetID )
 						}
 						else
 						{
-						  
+
 						  if (  uiLoop == 123  )
-							{					
+							{
 								strcpy( TileSurfaceFilenames[123], gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[123] );//(char *)(ppTileSurfaceFilenames + (65 * uiLoop)) );
 								if (AddTileSurface( gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[123], 123, TLS_GENERIC_1, FALSE ) == FALSE)
 								{
 									DestroyTileSurfaces(  );
 									return( FALSE );
 								}
-							}	
+							}
 							else if (  uiLoop == 124  )
-							{					
+							{
 								strcpy( TileSurfaceFilenames[124], gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[124] );//(char *)(ppTileSurfaceFilenames + (65 * uiLoop)) );
 								if (AddTileSurface( gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[124], 124, TLS_GENERIC_1, FALSE ) == FALSE)
 								{
@@ -532,7 +532,7 @@ BOOLEAN LoadTileSurfaces( char ppTileSurfaceFilenames[][32], UINT8 ubTilesetID )
 								}
 							}
 							else if (  uiLoop == 125 )
-							{					
+							{
 								strcpy( TileSurfaceFilenames[125], gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[125] );//(char *)(ppTileSurfaceFilenames + (65 * uiLoop)) );
 								if (AddTileSurface( gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[125], 125, TLS_GENERIC_1, FALSE ) == FALSE)
 								{
@@ -541,7 +541,7 @@ BOOLEAN LoadTileSurfaces( char ppTileSurfaceFilenames[][32], UINT8 ubTilesetID )
 								}
 							}
 							else if (  uiLoop == 127 )
-							{					
+							{
 								strcpy( TileSurfaceFilenames[127], gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[127] );//(char *)(ppTileSurfaceFilenames + (65 * uiLoop)) );
 								if (AddTileSurface( gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[127], 127, TLS_GENERIC_1, FALSE ) == FALSE)
 								{
@@ -558,7 +558,7 @@ BOOLEAN LoadTileSurfaces( char ppTileSurfaceFilenames[][32], UINT8 ubTilesetID )
 								return( FALSE );
 								}
 							}
-						}						
+						}
 						#else
 						strcpy( TileSurfaceFilenames[uiLoop], gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[uiLoop] );//(ppTileSurfaceFilenames + (65 * uiLoop)) );
 						if (AddTileSurface( gTilesets[ TLS_GENERIC_1 ].TileSurfaceFilenames[uiLoop], uiLoop, TLS_GENERIC_1, FALSE ) == FALSE)
@@ -622,7 +622,7 @@ BOOLEAN AddTileSurface( STR8  cFilename, UINT32 ubType, UINT8 ubTilesetID, BOOLE
 	gTileSurfaceArray[ ubType ] = TileSurf;
 
 	// OK, if we were not the default tileset, set value indicating that!
-	
+
 	#ifdef JA2UBMAPS
 	// OK, if we were not the default tileset, set value indicating that!
 	if ( ubTilesetID != TLS_GENERIC_1 && ubTilesetID != 0 )
@@ -643,7 +643,7 @@ BOOLEAN AddTileSurface( STR8  cFilename, UINT32 ubType, UINT8 ubTilesetID, BOOLE
 		gbDefaultSurfaceUsed[ ubType ] = TRUE;
 	}
 	#endif
-	
+
 	gbNewTileSurfaceLoaded[ ubType ] = TRUE;
 
 	return( TRUE );
@@ -812,7 +812,7 @@ void CompileWorldTerrainIDs( void )
 			pNode = gpWorldLevelData[ sGridNo ].pObjectHead;
 
 			// ATE: CRAPOLA! Special case stuff here for the friggen pool since art was fu*ked up
-			
+
 			#ifdef JA2UBMAPS
 			if ( giCurrentTilesetID == TEMP_19 )
 			#else
@@ -852,7 +852,7 @@ void CompileWorldTerrainIDs( void )
 }
 
 BOOLEAN IsNotRestrictedWindow(STRUCTURE *	pStructure)
-{	
+{
 
 	if (	(pStructure->fFlags & STRUCTURE_WALLNWINDOW) && gGameExternalOptions.fCanJumpThroughWindows
 			&& !(pStructure->fFlags & STRUCTURE_SPECIAL)
@@ -860,8 +860,8 @@ BOOLEAN IsNotRestrictedWindow(STRUCTURE *	pStructure)
 			&& (pStructure->pDBStructureRef->pDBStructure->bPartnerDelta == NO_PARTNER_STRUCTURE)		)
 	{
 		//manual check for closed (unbreakable?) windows
-		//build_13.sti - closed ( shielded ) windows index: 
-		
+		//build_13.sti - closed ( shielded ) windows index:
+
 		LEVELNODE *pNode = NULL;// STRUCTURE	*pBase=NULL;
 		UINT32 uiTileType=0;
 		//pBase = FindStructure( pStructure->sGridNo, STRUCTURE_WALLNWINDOW );
@@ -876,11 +876,11 @@ BOOLEAN IsNotRestrictedWindow(STRUCTURE *	pStructure)
 		GetSubIndexFromTileIndex( pNode->usIndex, (UINT16 *)&RestrSubIndex );
 
 		//this type of window is not present in tileset 0, checking tileset 0 is not necessary in this case
-		if ( _stricmp( gTilesets[ giCurrentTilesetID ].TileSurfaceFilenames[ uiTileType ], "build_13.sti" ) == 0 
+		if ( _stricmp( gTilesets[ giCurrentTilesetID ].TileSurfaceFilenames[ uiTileType ], "build_13.sti" ) == 0
 			//&& ( pNode->usIndex == 814 || pNode->usIndex == 816 || pNode->usIndex == 817 || pNode->usIndex == 823) - restricts only in particular tileset, doesn't work with others
-			&& (RestrSubIndex == 40 || RestrSubIndex == 41 || RestrSubIndex == 37 || RestrSubIndex == 38 
+			&& (RestrSubIndex == 40 || RestrSubIndex == 41 || RestrSubIndex == 37 || RestrSubIndex == 38
 				|| RestrSubIndex == 43 || RestrSubIndex == 44 || RestrSubIndex == 46 || RestrSubIndex == 47) //frame numbers in STI
-			
+
 			)
 			return FALSE;
 
@@ -1472,7 +1472,7 @@ void CompileTileMovementCosts( INT32 usGridNo )
 							SET_CURRMOVEMENTCOST( WEST, TRAVELCOST_WALL );
 							SET_CURRMOVEMENTCOST( NORTHWEST, TRAVELCOST_WALL );
 							SET_MOVEMENTCOST( usGridNo + 1, SOUTHEAST, 0, TRAVELCOST_WALL );
-							SET_MOVEMENTCOST( usGridNo + 1, EAST, 0, TRAVELCOST_WALL );								
+							SET_MOVEMENTCOST( usGridNo + 1, EAST, 0, TRAVELCOST_WALL );
 							SET_MOVEMENTCOST( usGridNo + 1, NORTHEAST, 0, TRAVELCOST_WALL );
 
 							// DO CORNERS
@@ -1734,7 +1734,7 @@ void RecompileLocalMovementCostsInAreaWithFlags( void )
 					gubWorldMovementCosts[usGridNo][bDirLoop][1] = 0;
 				}
 				// reset flag
-				gpWorldLevelData[ usGridNo ].ubExtFlags[0] &= (~MAPELEMENT_EXT_RECALCULATE_MOVEMENT); 
+				gpWorldLevelData[ usGridNo ].ubExtFlags[0] &= (~MAPELEMENT_EXT_RECALCULATE_MOVEMENT);
 			}
 		}
 	}
@@ -1842,7 +1842,7 @@ BOOLEAN SaveWorld(const STR8 puiFilename, FLOAT dMajorMapVersion, UINT8 ubMinorM
 	bCounts = (UINT8**)MemAlloc(WORLD_MAX*sizeof(UINT8*));
 	for(i = 0; i<WORLD_MAX; i++)
 		bCounts[i] = (UINT8*)MemAlloc(8);
-	
+
 
 	sprintf( aFilename, "MAPS\\%s", puiFilename );
 	FileDelete(aFilename);// If file exist FileOpen will not truncate, so delete.
@@ -2256,7 +2256,7 @@ BOOLEAN SaveWorld(const STR8 puiFilename, FLOAT dMajorMapVersion, UINT8 ubMinorM
 		}
 	}
 
-	
+
 		// Write out room information
 		if(ubMinorMapVersion < 29){
 			UINT8 tmproom;
@@ -2271,7 +2271,7 @@ BOOLEAN SaveWorld(const STR8 puiFilename, FLOAT dMajorMapVersion, UINT8 ubMinorM
 				FileWrite( hfile, &gusWorldRoomInfo[ cnt ], sizeof( UINT16 ), &uiBytesWritten );
 			}
 		}
-	
+
 
 	if ( uiFlags & MAP_WORLDITEMS_SAVED )
 	{
@@ -2680,13 +2680,13 @@ BOOLEAN EvaluateWorld(STR8 pSector, UINT8 ubLevel)
 				pTeam->ubPoorE++;
 				break;
 			case 2:
-				pTeam->ubAvgE++;	
+				pTeam->ubAvgE++;
 				break;
 			case 3:
 				pTeam->ubGoodE++;
 				break;
 			case 4:
-				pTeam->ubGreatE++;	
+				pTeam->ubGreatE++;
 				break;
 			}
 			if(basic.fDetailedPlacement)
@@ -3185,7 +3185,7 @@ BOOLEAN LoadWorld(const STR8 puiFilename, FLOAT* pMajorMapVersion, UINT8* pMinor
 		}else{
 			LOADDATA(&gusWorldRoomInfo[cnt], pBuffer, sizeof(UINT16));
 		}
-		
+
 		// Got to set the max room number
 		if(gusWorldRoomInfo[cnt] > gusMaxRoomNumber)
 			gusMaxRoomNumber = gusWorldRoomInfo[cnt];
@@ -4405,7 +4405,7 @@ void SetWorldSize(INT32 nWorldRows, INT32 nWorldCols)
 	gsOverItemsGridNo = NOWHERE;
 	gsOutOfRangeGridNo = NOWHERE;
 	gsUITargetShotGridNo = NOWHERE;
-	gsUIHandleShowMoveGridLocation = NOWHERE;	
+	gsUIHandleShowMoveGridLocation = NOWHERE;
 	gusCurMousePos = 0;
 }
 

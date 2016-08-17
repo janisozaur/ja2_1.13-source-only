@@ -3,24 +3,24 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead types.h"
+	#include "Overhead Types.h"
 	#include "Soldier Control.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Event Pump.h"
-	#include "weapons.h"
+	#include "Weapons.h"
 	#include "Animation Control.h"
 	#include "Handle UI.h"
 	#include "Isometric Utils.h"
 	#include "math.h"
-	#include "ai.h"
-	#include "los.h"
-	#include "renderworld.h"
-	#include "interface.h"
-	#include "message.h"
-	#include "campaign.h"
-	#include "items.h"
-	#include "weapons.h"
-	#include "text.h"
+	#include "AI.h"
+	#include "LOS.h"
+	#include "RenderWorld.h"
+	#include "Interface.h"
+	#include "Message.h"
+	#include "Campaign.h"
+	#include "Items.h"
+	#include "Weapons.h"
+	#include "Text.h"
 	#include "Soldier Profile.h"
 	#include "Dialogue Control.h"
 	#include "SkillCheck.h"
@@ -28,10 +28,10 @@
 	#include "Physics.h"
 	#include "Random.h"
 	#include "Vehicles.h"
-	#include "bullets.h"
-	#include "morale.h"
+	#include "Bullets.h"
+	#include "Morale.h"
 	#include "SkillCheck.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "SaveLoadMap.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -58,7 +58,7 @@ struct
 typedef spreadpatternParseData;
 
 
-static void XMLCALL 
+static void XMLCALL
 spreadpatternStartElementHandle(void *userData, const XML_Char *name, const XML_Char **atts)
 {
 	spreadpatternParseData * pData = (spreadpatternParseData *)userData;
@@ -126,7 +126,7 @@ spreadpatternStartElementHandle(void *userData, const XML_Char *name, const XML_
 				|| strcmp(name, "NAME") == 0
 				|| strcmp(name, "method") == 0
 				))
-				
+
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 
@@ -145,7 +145,7 @@ spreadpatternCharacterDataHandle(void *userData, const XML_Char *str, int len)
 {
 	spreadpatternParseData * pData = (spreadpatternParseData *)userData;
 
-	if( (pData->currentDepth <= pData->maxReadDepth) && 
+	if( (pData->currentDepth <= pData->maxReadDepth) &&
 		(strlen(pData->szCharData) < MAX_CHAR_DATA_LENGTH)
 		&& pData->curElement == ELEMENT_PROPERTY
 	  ){
@@ -158,7 +158,7 @@ static void XMLCALL
 spreadpatternEndElementHandle(void *userData, const XML_Char *name)
 {
 	DOUBLE d;
-	
+
 	spreadpatternParseData * pData = (spreadpatternParseData *)userData;
 
 	if(pData->currentDepth <= pData->maxReadDepth) //we're at the end of an element that we've been reading
@@ -246,7 +246,7 @@ BOOLEAN ReadInSpreadPatterns(STR fileName)
 	UINT32		uiFSize;
 	CHAR8 *		lpcBuffer;
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	spreadpatternParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading SpreadPatterns.xml" );
@@ -255,7 +255,7 @@ BOOLEAN ReadInSpreadPatterns(STR fileName)
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -270,14 +270,14 @@ BOOLEAN ReadInSpreadPatterns(STR fileName)
 
 	FileClose( hFile );
 
-	
+
 	XML_SetElementHandler(parser, spreadpatternStartElementHandle, spreadpatternEndElementHandle);
 	XML_SetCharacterDataHandler(parser, spreadpatternCharacterDataHandle);
 
-	
+
 	memset(&pData,0,sizeof(pData));
-	//pData.maxArraySize = MAXITEMS; 
-	
+	//pData.maxArraySize = MAXITEMS;
+
 	XML_SetUserData(parser, &pData);
 
 
@@ -363,8 +363,8 @@ int FindSpreadPatternIndex( const STR strName )
 	while( strlen(str)>0 && str[ strlen(str)-1 ] == ' ' ) str[ strlen(str)-1 ]=0;
 
 	//Named pattern or raw index?
-	for(ui=0;ui<strlen(str);ui++) 
-		if( !isdigit(str[ui]) ) 
+	for(ui=0;ui<strlen(str);ui++)
+		if( !isdigit(str[ui]) )
 			break;
 
 	if(ui<strlen(str))

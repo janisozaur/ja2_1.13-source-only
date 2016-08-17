@@ -2,18 +2,18 @@
 	#include "Strategic All.h"
 	#include "InIReader.h"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include "Game Events.h"
-	#include "soundman.h"
-	#include "environment.h"
+	#include "SoundMan.h"
+	#include "Environment.h"
 	#include "Ambient Control.h"
 	#include "Quests.h"
 //	#include "Sound Control.h"
 	#include "AimMembers.h"
 	#include "Strategic Event Handler.h"
 	#include "BobbyR.h"
-	#include "mercs.h"
-	#include "email.h"
+	#include "Mercs.h"
+	#include "Email.h"
 	#include "Game Clock.h"
 	#include "Merc Hiring.h"
 	#include "Insurance Contract.h"
@@ -27,40 +27,40 @@
 	#include "Map Screen Helicopter.h"
 	#include "Scheduling.h"
 	#include "Arms Dealer Init.h"
-	#include "Strategic town reputation.h"
-	#include "air raid.h"
-	#include "meanwhile.h"
-	#include "overhead.h"
-	#include "random.h"
+	#include "Strategic Town Reputation.h"
+	#include "Air Raid.h"
+	#include "Meanwhile.h"
+	#include "Overhead.h"
+	#include "Random.h"
 	#include "Creature Spreading.h"
 	#include "Strategic AI.h"
 	#include "Merc Contract.h"
 	#include "Strategic Status.h"
 	#include "INIReader.h"
 	#include "GameSettings.h"
-	#include "english.h"
+	#include "English.h"
 	#include "Input.h"
 	#include "Soldier Profile.h"
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "Campaign.h"
 	#include "PostalService.h"
 	#include "MilitiaSquads.h"
 	#include "PMC.h"			// added by Flugente
-	#include "finances.h"		// added by Flugente
+	#include "Finances.h"		// added by Flugente
 	#include "ASD.h"			// added by Flugente
 	#include "Player Command.h"	// added by Flugente
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2UB
 #include "Explosion Control.h"
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
-#include "mercs.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
+#include "Mercs.h"
 #include "ub_config.h"
 #endif
 
@@ -197,7 +197,7 @@ BOOLEAN ExecuteStrategicEvent( STRATEGICEVENT *pEvent )
 			}
 			break;
 		case EVENT_AIM_RESET_MERC_ANNOYANCE:
-			ResetMercAnnoyanceAtPlayer( (UINT8) pEvent->uiParam );		
+			ResetMercAnnoyanceAtPlayer( (UINT8) pEvent->uiParam );
 			break;
 		// WANNE: This is the EVENT for the old Bobby Ray shipment code. Look for the EVENT "EVENT_POSTAL_SERVICE_SHIPMENT" below
 		/*
@@ -229,7 +229,7 @@ BOOLEAN ExecuteStrategicEvent( STRATEGICEVENT *pEvent )
 			//No JA25 UB
 			#else
 				AddEmail(MERC_INTRO, MERC_INTRO_LENGTH, SPECK_FROM_MERC, GetWorldTotalMin( ), -1, -1 ,TYPE_EMAIL_EMAIL_EDT );
-			#endif	
+			#endif
 			}
 			break;
 		case EVENT_DAY2_ADD_EMAIL_FROM_IMP:
@@ -463,8 +463,8 @@ BOOLEAN ExecuteStrategicEvent( STRATEGICEVENT *pEvent )
 		case EVENT_POSTAL_SERVICE_SHIPMENT:
 			gPostalService.DeliverShipment(pEvent->uiParam);
 			break;
-#ifdef JA2UB			
-		//Ja25 UB	
+#ifdef JA2UB
+		//Ja25 UB
 		case EVENT_ATTACK_INITIAL_SECTOR_IF_PLAYER_STILL_THERE:
 			if ( gGameUBOptions.EventAttackInitialSectorIfPlayerStillThere == TRUE )
 			{
@@ -507,7 +507,7 @@ BOOLEAN ExecuteStrategicEvent( STRATEGICEVENT *pEvent )
 				AddEmail( PMC_INTRO, PMC_INTRO_LENGTH, PMC, GetWorldTotalMin( ), -1, -1, TYPE_EMAIL_EMAIL_EDT );
 			break;
 #endif
-		
+
 		case EVENT_PMC_REINFORCEMENT_ARRIVAL:
 			HandlePMCArrival( (UINT8)pEvent->uiParam );
 			break;
@@ -516,7 +516,7 @@ BOOLEAN ExecuteStrategicEvent( STRATEGICEVENT *pEvent )
 #else
 		case EVENT_KINGPIN_BOUNTY_INITIAL:
 			// if Kingpin, Angel and Maria are still alive, we can start the quest
-			if ( gMercProfiles[KINGPIN].bMercStatus != MERC_IS_DEAD && !CheckFact( FACT_KINGPIN_DEAD, NO_PROFILE ) && !CheckFact( FACT_KINGPIN_IS_ENEMY, NO_PROFILE ) && 
+			if ( gMercProfiles[KINGPIN].bMercStatus != MERC_IS_DEAD && !CheckFact( FACT_KINGPIN_DEAD, NO_PROFILE ) && !CheckFact( FACT_KINGPIN_IS_ENEMY, NO_PROFILE ) &&
 				 gMercProfiles[MARIA].bMercStatus != MERC_IS_DEAD && gMercProfiles[ANGEL].bMercStatus != MERC_IS_DEAD )
 			{
 				StartQuest( QUEST_KINGPIN_ANGEL_MARIA, gWorldSectorX, gWorldSectorY );
@@ -565,7 +565,7 @@ BOOLEAN ExecuteStrategicEvent( STRATEGICEVENT *pEvent )
 			UpdateASD();
 			break;
 
-		case EVENT_ASD_PURCHASE_FUEL:	
+		case EVENT_ASD_PURCHASE_FUEL:
 			ASDReduceOrderedStrategicResources( ASD_FUEL, pEvent->uiParam );
 
 			if ( IsSectorEnemyControlled( gModSettings.usASDSupplyArrivalSectorX, gModSettings.usASDSupplyArrivalSectorY, 0 ) )

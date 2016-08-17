@@ -7,13 +7,13 @@
 	#include "IMPVideoObjects.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
-	#include "input.h"
+	#include "Input.h"
 	#include "Isometric Utils.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Text System.h"
 #endif
 
@@ -123,15 +123,15 @@ BOOLEAN RenderPortrait( INT16 sX, INT16 sY )
 
 		// load it
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
-	
-	
+
+
 		if (  gIMPMaleValues[ iCurrentPortrait ].Enabled == 1 )
-		{		
+		{
 			///sprintf( VObjectDesc.ImageFile, "Faces\\BigFaces\\%02d.sti", gIMPMaleValues[ iCurrentPortrait ].PortraitId );
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\BigFaces\\%02d.sti", gIMPMaleValues[ iCurrentPortrait ].PortraitId );
 		}
-	
-	
+
+
 	//FilenameForBPP( pPlayerSelectedBigFaceFileNames[ iCurrentPortrait ] , VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &uiGraphicHandle));
 
@@ -149,16 +149,16 @@ BOOLEAN RenderPortrait( INT16 sX, INT16 sY )
 	{
 		// load it
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
-	
+
 	//FilenameForBPP( pPlayerSelectedBigFaceFileNames[ iCurrentPortrait + 8 ] , VObjectDesc.ImageFile);
-	
+
 		if (  gIMPFemaleValues[ iCurrentPortrait ].Enabled == 1 )
 		{
 		//	sprintf( VObjectDesc.ImageFile, "Faces\\BigFaces\\%02d.sti", gIMPFemaleValues[ iCurrentPortrait ].PortraitId );
 			sprintf( VObjectDesc.ImageFile, "IMPFaces\\BigFaces\\%02d.sti", gIMPFemaleValues[ iCurrentPortrait ].PortraitId );
 		}
-			
-			
+
+
 	CHECKF(AddVideoObject(&VObjectDesc, &uiGraphicHandle));
 
 	// show it
@@ -200,7 +200,7 @@ else
 		iCurrentPortrait = 0;
 	}
 
-}		
+}
 	// cycle to next picture
 /*
 	iCurrentPortrait++;
@@ -224,17 +224,17 @@ UINT32 idPort = 0;
 if( fCharacterIsMale )
 {
 	for ( cnt = 0; cnt < MAX_NEW_IMP_PORTRAITS; cnt++ )
-		{	
+		{
 			if ( gIMPMaleValues[cnt].uiIndex == cnt && gIMPMaleValues[cnt].PortraitId !=0 )
 				{
 					iLastPictureM = gIMPMaleValues[cnt].uiIndex;
 				}
 		}
-		
+
 		iLastPicture = iLastPictureM;
 }
 else
-{	
+{
 	for ( cnt = 0; cnt < MAX_NEW_IMP_PORTRAITS; cnt++ )
 		{
 			if ( gIMPFemaleValues[cnt].uiIndex == cnt && gIMPFemaleValues[cnt].PortraitId !=0 )
@@ -242,7 +242,7 @@ else
 					iLastPictureF = gIMPFemaleValues[cnt].uiIndex;
 				}
 		}
-		
+
 		iLastPicture = iLastPictureF;
 }
 
@@ -448,9 +448,9 @@ void BtnIMPPortraitDoneCallback(GUI_BUTTON *btn,INT32 reason)
 			}*/
 
 			// grab picture number
-			
 
-		
+
+
 			if( fCharacterIsMale	)
 			{
 				// male
@@ -461,7 +461,7 @@ void BtnIMPPortraitDoneCallback(GUI_BUTTON *btn,INT32 reason)
 				// female
 				iPortraitNumber = gIMPFemaleValues[ iCurrentPortrait ].uiIndex; //iCurrentPortrait ;//+ ( 8 );
 			}
-		
+
 			fButtonPendingFlag = TRUE;
 		}
 	}

@@ -58,7 +58,7 @@ UINT8 MilitiaInSectorOfRankInGroups( INT16 sMapX, INT16 sMapY, UINT8 ubRank );
 // Returns TRUE if sector is under player control, has no enemies in it, and isn't currently in combat mode
 BOOLEAN SectorOursAndPeaceful( INT16 sMapX, INT16 sMapY, INT8 bMapZ );
 
-// tell player how much it will cost 
+// tell player how much it will cost
 void HandleInterfaceMessageForCostOfTrainingMilitia( SOLDIERTYPE *pSoldier );
 
 // continue training?

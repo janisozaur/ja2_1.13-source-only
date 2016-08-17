@@ -1,17 +1,17 @@
 #ifndef _FACILITIES_H
 #define _FACILITIES_H
 
-#include "campaign types.h"
+#include "Campaign Types.h"
 #include "Soldier Control.h"
 
-// Get a specific modifier for a specific assignment at a specific facility. Includes Ambient (non-assignment based) 
+// Get a specific modifier for a specific assignment at a specific facility. Includes Ambient (non-assignment based)
 // effects, if any.
 INT16 GetFacilityModifier( UINT8 ubModifierType, UINT8 ubFacilityType, UINT8 ubAssignmentType );
 // Get a specific modifier from all facilities in the soldier's sector. This utilizes the above function.
 INT16 GetSectorModifier( SOLDIERTYPE *pSoldier, UINT8 ubModifierType );
 
 // Level of awareness to enemy movements, bestowed by facilities
-extern void UpdateStrategicDetectionLevel( ); 
+extern void UpdateStrategicDetectionLevel( );
 
 // Adjustment to Skyrider's cost-per-tile, bestowed by facilities
 extern void UpdateSkyriderCostModifier( );
@@ -34,7 +34,7 @@ enum
 	FACILITY_SLEEP_MOD,
 	FACILITY_FATIGUE_MOD,
 	FACILITY_KIT_DEGRADE_MOD,
-	
+
 	FACILITY_MAX_MORALE,
 	FACILITY_MAX_BREATH,
 
@@ -44,7 +44,7 @@ enum
 	FACILITY_DETECT_ANYWHERE,
 	FACILITY_COUNT_INWILD,
 	FACILITY_COUNT_INCITIES,
-	
+
 	FACILITY_MINE_INCOME_MOD,
 	FACILITY_SKYRIDER_COST_MOD,
 

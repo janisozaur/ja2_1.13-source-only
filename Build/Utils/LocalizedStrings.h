@@ -48,7 +48,7 @@ namespace Loc
 
 	bool GetString(Topic t, vfs::String const& section, vfs::String const& key, vfs::String::char_t* value, vfs::UInt32 len);
 	bool GetString(Topic t, vfs::String const& section, int key, vfs::String::char_t* value, vfs::UInt32 len);
-	
+
 	vfs::String const& GetString(Topic t, vfs::String const& section, vfs::String const& key);
 	vfs::String const& GetString(Topic t, vfs::String const& section, int key);
 };

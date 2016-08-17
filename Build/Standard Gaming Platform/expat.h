@@ -887,7 +887,7 @@ XML_GetErrorCode(XML_Parser parser);
 	be within the relevant markup.	When called outside of the callback
 	functions, the position indicated will be just past the last parse
 	event (regardless of whether there was an associated callback).
-	
+
 	They may also be called after returning from a call to XML_Parse
 	or XML_ParseBuffer.	If the return value is XML_STATUS_ERROR then
 	the location is the location of the character at which the error

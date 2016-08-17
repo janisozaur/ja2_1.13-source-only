@@ -16,26 +16,26 @@
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 	#include "WIZ8 SGP ALL.H"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include <windows.h>
 	#include <stdio.h>
 	#include <memory.h>
-	#include "debug.h"
-	#include "input.h"
-	#include "memman.h"
-	#include "line.h"
+	#include "Debug.h"
+	#include "Input.h"
+	#include "MemMan.h"
+	#include "Line.h"
 	#if (defined( JA2 ) || defined( UTIL ))
-		#include "video.h"
+		#include "Video.h"
 		#define BASE_REGION_FLAGS		(MSYS_REGION_ENABLED | MSYS_SET_CURSOR)
 	#else
 		#include "video2.h"
 		#define BASE_REGION_FLAGS		MSYS_REGION_ENABLED				// Wiz doesn't ever want MSYS_SET_CURSOR to be on...
 	#endif
 	#ifdef _JA2_RENDER_DIRTY
-		#include "render dirty.h"
+		#include "Render Dirty.h"
 		#include "Font Control.h"
 	#endif
-	#include "english.h"
+	#include "English.h"
 	// Include mouse system defs and macros
 	#include "mousesystem.h"
 	#include "Cursor Control.h"
@@ -213,11 +213,11 @@ INT32 MSYS_Init(void)
 LONG WINAPI UEFilter(PEXCEPTION_POINTERS pEI)
 {
     MessageBox(NULL, ("Exception"), ("Oops !!!"), MB_ICONSTOP);
-    TerminateProcess(GetCurrentProcess(), -1);    
+    TerminateProcess(GetCurrentProcess(), -1);
     return -1;
 }
 	SetUnhandledExceptionFilter(UEFilter);
- 
+
 *(char*)0 = 0;
 */
 
@@ -258,8 +258,8 @@ void MSYS_SGP_Mouse_Handler_Hook(UINT16 Type,UINT16 Xcoord, UINT16 Ycoord, BOOLE
 			return;
 
 	if(!gGameExternalOptions.fExtMouseKeyEnabled &&
-		(Type == MIDDLE_BUTTON_UP || Type == MIDDLE_BUTTON_DOWN || 	Type == X1_BUTTON_DOWN || 
-		Type == X1_BUTTON_UP || Type == X2_BUTTON_DOWN || Type == X2_BUTTON_UP || Type == X1_BUTTON_REPEAT || 
+		(Type == MIDDLE_BUTTON_UP || Type == MIDDLE_BUTTON_DOWN || 	Type == X1_BUTTON_DOWN ||
+		Type == X1_BUTTON_UP || Type == X2_BUTTON_DOWN || Type == X2_BUTTON_UP || Type == X1_BUTTON_REPEAT ||
 		Type == X2_BUTTON_REPEAT || Type == MOUSE_WHEEL_UP || Type == MOUSE_WHEEL_DOWN  )		)
 		return;
 
@@ -426,7 +426,7 @@ void MSYS_SGP_Mouse_Handler_Hook(UINT16 Type,UINT16 Xcoord, UINT16 Ycoord, BOOLE
 		MSYS_CurrentMX = Xcoord;
 		MSYS_CurrentMY = Ycoord;
 	}
-	
+
 	// update if something happened
 	if (MSYS_Action != MSYS_NO_ACTION)
 		MSYS_UpdateMouseRegion();
@@ -499,7 +499,7 @@ void MSYS_TrashRegList(void)
 		{
 			MSYS_RegList = MSYS_RegList->next;
 		}
-	} 
+	}
 }
 
 
@@ -719,7 +719,7 @@ void MSYS_UpdateMouseRegion(void)
 				MSYS_PrevRegion->uiFlags &= (~MSYS_GOT_BACKGROUND);
 				MSYS_PrevRegion->uiFlags &= (~MSYS_FASTHELP_RESET);
 
-				#ifndef UTIL 
+				#ifndef UTIL
 					// dirty buttons, need a re-render
 //DEF: Nov 30 98
 //				PausedMarkButtonsDirty( );
@@ -727,7 +727,7 @@ void MSYS_UpdateMouseRegion(void)
 
 				//if( region->uiFlags & MSYS_REGION_ENABLED )
 				//	region->uiFlags |= BUTTON_DIRTY;
-#ifndef JA2			
+#ifndef JA2
 							VideoRemoveToolTip();
 #endif
 			}
@@ -762,7 +762,7 @@ void MSYS_UpdateMouseRegion(void)
 					MSYS_CurrRegion->uiFlags &= (~MSYS_GOT_BACKGROUND);
 					MSYS_CurrRegion->uiFlags |= MSYS_FASTHELP_RESET;
 
-#ifndef JA2			
+#ifndef JA2
 							VideoRemoveToolTip();
 #endif
 
@@ -776,8 +776,8 @@ void MSYS_UpdateMouseRegion(void)
 			}
 
 			// if the cursor is set and is not set to no cursor
-		if( MSYS_CurrRegion->uiFlags & MSYS_REGION_ENABLED && 
-					MSYS_CurrRegion->uiFlags & MSYS_SET_CURSOR && 
+		if( MSYS_CurrRegion->uiFlags & MSYS_REGION_ENABLED &&
+					MSYS_CurrRegion->uiFlags & MSYS_SET_CURSOR &&
 					MSYS_CurrRegion->Cursor != MSYS_NO_CURSOR )
 			{
 				MSYS_SetCurrentCursor(MSYS_CurrRegion->Cursor);
@@ -913,7 +913,7 @@ void MSYS_UpdateMouseRegion(void)
 								gpRegionLastLButtonUp = NULL;
 								guiRegionLastLButtonDownTime = 0;
 							}
-							else 
+							else
 							{ //First click, record time and region pointer (to check if 2nd click detected later)
 								gpRegionLastLButtonDown = MSYS_CurrRegion;
 								guiRegionLastLButtonDownTime = GetClock();
@@ -927,7 +927,7 @@ void MSYS_UpdateMouseRegion(void)
 							{ //Double click is Left down, then left up, then left down.	We have just detected the left up here (step 2).
 								gpRegionLastLButtonUp = MSYS_CurrRegion;
 							}
-							else 
+							else
 							{ //User released mouse outside of current button, so kill any chance of a double click happening.
 								gpRegionLastLButtonDown = NULL;
 								gpRegionLastLButtonUp = NULL;

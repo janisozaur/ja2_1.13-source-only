@@ -138,7 +138,7 @@ static int LuaGetGroup( lua_State *L )
 	int grp = luaL_checkinteger( L, 1);
 
 	GROUP *pGroup = GetGroup( (UINT8) grp);
-	
+
 	if (pGroup)
 	{
 		NewLuaObject( L, MOBILEGROUP_CLASS, pGroup);
@@ -334,7 +334,7 @@ static LuaAttrib MobileGroup[] = {
 	{ "grouplist", NULL, NULL, NULL, LuaGetGroupList },
 	{ "get", NULL, NULL, NULL, LuaGetGroup },
 	{ "new", NULL, NULL, NULL, LuaGroupCreate },
-	
+
 	{ "ID", LuaGetGroupID },
 	{ "X", LuaGetGroupX },
 	{ "Y", LuaGetGroupY },

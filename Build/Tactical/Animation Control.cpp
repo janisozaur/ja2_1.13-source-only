@@ -1,26 +1,26 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Tactical All.h"
 #else
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include <stdio.h>
 #include <string.h>
 #include "stdlib.h"
-#include "debug.h"
+#include "Debug.h"
 #include "Animation Control.h"
 #include "Animation Data.h"
 #include "FileMan.h"
-#include "weapons.h"
-#include "message.h"
+#include "Weapons.h"
+#include "Message.h"
 #include "structure.h"
-#include "worlddef.h"
-#include "worldman.h"
-#include "rotting corpses.h"
+#include "WorldDef.h"
+#include "WorldMan.h"
+#include "Rotting Corpses.h"
 #include "Debug Control.h"
 #include "Random.h"
 #include "Soldier Control.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 // Defines for Anim inst reading, taken from orig Jagged
 #define	ANIMFILENAME					"BINARYDATA\\ja2bin.dat"
@@ -45,15 +45,15 @@ static UINT16 CrouchedThrowAnimationScript[MAX_FRAMES_PER_ANIM] = { 1,2,3,4,5,6,
 ///ddd
 static UINT16 StoneAnimationScript[MAX_FRAMES_PER_ANIM] = { 1,2,3,4,5,6,7,8,402,1,2,3,4,5,6,7,8,402,1,2,3,4,5,6,7,8,601,999,0,0,0,0,0 };
 
-static UINT16 CrouchedShootRocketScript[MAX_FRAMES_PER_ANIM] = 
+static UINT16 CrouchedShootRocketScript[MAX_FRAMES_PER_ANIM] =
 {757,1,2,3,4,5,6,7,8,9,10,11,12,470,430,13,14,15,16,477,17,18,19,20,753,499,999,0,0,0,0};
-static UINT16 SwatWithKnifeScript[MAX_FRAMES_PER_ANIM] = 
+static UINT16 SwatWithKnifeScript[MAX_FRAMES_PER_ANIM] =
 //{1,2,3,4,5,6,7,703,8,9,10,11,704,12,13,14,15,16,17,18,19,501,999,0,0,0,0};
 {5,703,6,7,8,9,10,11,704,12,13,14,15,16,501,999,0,0,0,0};//such a sequence is available in dzha2bin
-static UINT16 SwatBackWithKnifeScript[MAX_FRAMES_PER_ANIM] = 
-{16,15,14,13,12,704,11,10,9,8,7,6,703,5,501,999,0,0,0,0}; 
+static UINT16 SwatBackWithKnifeScript[MAX_FRAMES_PER_ANIM] =
+{16,15,14,13,12,704,11,10,9,8,7,6,703,5,501,999,0,0,0,0};
 
-static UINT16 SwatBackWithNothingScript[MAX_FRAMES_PER_ANIM] = 
+static UINT16 SwatBackWithNothingScript[MAX_FRAMES_PER_ANIM] =
 {16,15,14,13,12,704,11,10,9,8,7,6,703,5,501,999,0,0,0,0};
 
 //xs, may need to edit the numbers. throwing grenades script
@@ -874,7 +874,7 @@ ANIMCONTROLTYPE		gAnimControl[ NUMANIMATIONSTATES ] =
 
 	//SOLDIER BRUN
 	"FIRE FIRE"				, 0,			150,			(FLOAT)0, ANIM_STATIONARY | ANIM_TURNING | ANIM_FASTTURN | ANIM_NORESTART | ANIM_NONINTERRUPT | ANIM_NOCHANGE_WEAPON | ANIM_LIGHT_EFFORT | ANIM_IGNORE_AUTOSTANCE | ANIM_ATTACK,		ANIM_STAND,	ANIM_STAND, -1,
-	
+
 	//AI TRIGGER
 	"AI TRIGGER"							, 0,			70,			(FLOAT)0, ANIM_STATIONARY | ANIM_TURNING | ANIM_FASTTURN | ANIM_NORESTART | ANIM_LOWER_WEAPON | ANIM_LIGHT_EFFORT,		ANIM_STAND,	ANIM_STAND, -1,
 
@@ -995,7 +995,7 @@ ANIMCONTROLTYPE		gAnimControl[ NUMANIMATIONSTATES ] =
 	"SWAT with knife"		,0,	0,	(FLOAT)2.2, ANIM_MOVING | ANIM_NORESTART | ANIM_LIGHT_EFFORT | ANIM_TURNING, ANIM_CROUCH, ANIM_CROUCH, -1,
 	"SWAT BACKWARDS with knife"	,  0, 110, (FLOAT)1.4, ANIM_MOVING | ANIM_NORESTART | ANIM_LIGHT_EFFORT | ANIM_TURNING, ANIM_CROUCH, ANIM_CROUCH, -1,
 	"SWAT BACKWARDS with nothing", 0, 110, (FLOAT)1.4, ANIM_MOVING | ANIM_NORESTART | ANIM_LIGHT_EFFORT | ANIM_TURNING, ANIM_CROUCH, ANIM_CROUCH, -1,
-	
+
 	//THROW gren
 	{"THROW GRENADE"	, 0,80, (FLOAT)0,	ANIM_STATIONARY	| ANIM_NOMOVE_MARKER | ANIM_NONINTERRUPT | ANIM_MIN_EFFORT	| ANIM_ATTACK ,		ANIM_STAND, ANIM_STAND, -1},
 	//LOB gren
@@ -1006,7 +1006,7 @@ ANIMCONTROLTYPE		gAnimControl[ NUMANIMATIONSTATES ] =
 
 	//ROLL PRONE RIGHT
 	{"ROLL PRONE RIGHT"			, 0,			80, (FLOAT)0.8 /*1.1*/, ANIM_MOVING | ANIM_NORESTART | ANIM_RAISE_WEAPON | ANIM_VARIABLE_EFFORT,	ANIM_PRONE,	ANIM_PRONE, -1},
-	
+
 	// JUMPUPWALL
 	{"JUMPUPWALL"						, 0,			30,	(FLOAT)0,		ANIM_NONINTERRUPT | ANIM_NORESTART | ANIM_STATIONARY | ANIM_NOSHOW_MARKER | ANIM_MODERATE_EFFORT | ANIM_LOWER_WEAPON, ANIM_STAND, ANIM_CROUCH,	-1},
 
@@ -1077,9 +1077,9 @@ ANIMCONTROLTYPE		gAnimControl[ NUMANIMATIONSTATES ] =
 	{"HTH KICK"							, 0,			70,		(FLOAT)0, ANIM_STATIONARY | ANIM_TURNING | ANIM_NONINTERRUPT | ANIM_MODERATE_EFFORT	| ANIM_NOCHANGE_WEAPON | ANIM_NORESTART | ANIM_ATTACK,		ANIM_STAND,		ANIM_STAND, -1},
 	{"FOCUSED HTH KICK"					, 0,			40,		(FLOAT)0, ANIM_STATIONARY | ANIM_TURNING | ANIM_NONINTERRUPT | ANIM_MODERATE_EFFORT	| ANIM_NOCHANGE_WEAPON | ANIM_NORESTART | ANIM_ATTACK,		ANIM_STAND,		ANIM_STAND, -1},
 
-	// LONG JUMP 
+	// LONG JUMP
 	{"LONG JUMP"					, 0,			100, (FLOAT)3.4,	ANIM_SPECIALMOVE | ANIM_NORESTART | ANIM_LOWER_WEAPON | ANIM_MODERATE_EFFORT | ANIM_TURNING,			ANIM_STAND,	ANIM_STAND, -1},
-	
+
 	// CRYO_DEATH
 	{"CRYO_DEATH", 0, 150, (FLOAT)0, ANIM_STATIONARY | ANIM_NOMOVE_MARKER | ANIM_NO_EFFORT | ANIM_NONINTERRUPT | ANIM_NOCHANGE_WEAPON | ANIM_IGNORE_AUTOSTANCE | ANIM_ATTACK, ANIM_STAND, ANIM_STAND, -1},
 	// CRYO_DEATH_CROUCHED
@@ -1484,12 +1484,12 @@ void	InitAnimationSurfacesPerBodytype( )
 
 	gubAnimSurfaceIndex[ REGMALE ][ JUMPUPWALL ]						= RGMWALLJUMP;
 	gubAnimSurfaceIndex[ REGMALE ][ JUMPDOWNWALL ]					= RGMWALLJUMP;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ JUMPWINDOWS ]											= RGMJUMPWINDOWS;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ SIDE_STEP_WEAPON_RDY ]				= RGMSIDESTEP_R_RDY;
 	gubAnimSurfaceIndex[ REGMALE ][ SIDE_STEP_DUAL_RDY ]				= RGMSIDESTEP_D_RDY;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ WALKING_WEAPON_RDY ]				= RGMWALK_R_RDY;
 	gubAnimSurfaceIndex[ REGMALE ][ WALKING_DUAL_RDY ]					= RGMWALK_D_RDY;
 
@@ -1499,11 +1499,11 @@ void	InitAnimationSurfacesPerBodytype( )
 
 	gubAnimSurfaceIndex[ REGMALE ][ ADJACENT_GET_ITEM_CROUCHED ]		= RGMMEDIC;
 	gubAnimSurfaceIndex[ REGMALE ][ STEAL_ITEM_CROUCHED ]		= RGMMEDIC;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ BURST_DUAL_STAND ]							= RGMSTANDDWALAIM;
 	gubAnimSurfaceIndex[ REGMALE ][ BURST_DUAL_CROUCH ]							= RGMCDBLSHOT;
 	gubAnimSurfaceIndex[ REGMALE ][ BURST_DUAL_PRONE ]							= RGMDWPRONE;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ READY_ALTERNATIVE_STAND ]				= RGM_HIP_AIM;
 	gubAnimSurfaceIndex[ REGMALE ][ AIM_ALTERNATIVE_STAND ]				= RGM_HIP_AIM;
 	gubAnimSurfaceIndex[ REGMALE ][ SHOOT_ALTERNATIVE_STAND ]				= RGM_HIP_AIM;
@@ -1515,22 +1515,22 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceIndex[ REGMALE ][ LOW_UNJAM_ALTERNATIVE_STAND ]			= RGM_HIP_LOW;
 	gubAnimSurfaceIndex[ REGMALE ][ WALKING_ALTERNATIVE_RDY ]			= RGMBASICWALKING;
 	gubAnimSurfaceIndex[ REGMALE ][ SIDE_STEP_ALTERNATIVE_RDY ]			= RGMSIDESTEP;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ START_COWER_CROUCHED ]			= RGMCOWER;
 	gubAnimSurfaceIndex[ REGMALE ][ END_COWER_CROUCHED ]			= RGMCOWER;
 	gubAnimSurfaceIndex[ REGMALE ][ START_COWER_PRONE ]				= RGM_COWER_PRONE;
 	gubAnimSurfaceIndex[ REGMALE ][ COWERING_PRONE ]				= RGM_COWER_PRONE;
 	gubAnimSurfaceIndex[ REGMALE ][ END_COWER_PRONE ]				= RGM_COWER_PRONE;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ FOCUSED_PUNCH ]					= RGMPUNCH;
 	gubAnimSurfaceIndex[ REGMALE ][ FOCUSED_STAB ]					= RGMSTAB;
 	gubAnimSurfaceIndex[ REGMALE ][ HTH_KICK ]						= RGMKICKDOOR;
 	gubAnimSurfaceIndex[ REGMALE ][ FOCUSED_HTH_KICK ]				= RGMKICKDOOR;
-	
+
 	gubAnimSurfaceIndex[ REGMALE ][ LONG_JUMP ]						= RGMJUMPOVER;
 	gubAnimSurfaceIndex[ REGMALE ][ CRYO_DEATH ]					= CRYO_EXPLODE;
 	gubAnimSurfaceIndex[ REGMALE ][ CRYO_DEATH_CROUCHED ]			= CRYO_EXPLODE_CROUCHED;
-	
+
 	gubAnimSurfaceMidWaterSubIndex[ REGMALE ][ STANDING][0]									= RGMWATER_R_STD;
 	gubAnimSurfaceMidWaterSubIndex[ REGMALE ][ WALKING ][0]									= RGMWATER_R_WALK;
 	gubAnimSurfaceMidWaterSubIndex[ REGMALE ][ RUNNING ][0]									= RGMWATER_R_WALK;
@@ -1653,10 +1653,10 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ RUNNING_W_PISTOL ]					= RGMPISTOL_RUN;
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ SIDE_STEP_WEAPON_RDY ]				= RGMSIDESTEP_P_RDY;
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ WALKING_WEAPON_RDY ]				= RGMWALK_P_RDY;
-	
+
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ READY_ALTERNATIVE_STAND ]				= RGM_PFSHOT_AIM;
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ AIM_ALTERNATIVE_STAND ]				= RGM_PFSHOT_AIM;
-	gubAnimSurfaceItemSubIndex[ REGMALE ][ SHOOT_ALTERNATIVE_STAND ]				= RGM_PFSHOT_AIM;	
+	gubAnimSurfaceItemSubIndex[ REGMALE ][ SHOOT_ALTERNATIVE_STAND ]				= RGM_PFSHOT_AIM;
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ BURST_ALTERNATIVE_STAND ]				= RGM_PFSHOT_AIM;
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ LOW_SHOT_ALTERNATIVE_STAND ]				= RGMPISTOLSHOOTLOW;
 	gubAnimSurfaceItemSubIndex[ REGMALE ][ LOW_BURST_ALTERNATIVE_STAND ]			= RGMPISTOLSHOOTLOW;
@@ -1693,7 +1693,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceCorpseID[ REGMALE ][ BODYEXPLODING ]								= EXPLODE_DEAD;
 	gubAnimSurfaceCorpseID[ REGMALE ][ CRYO_DEATH ]						= CRYO_CORPSE;
 	gubAnimSurfaceCorpseID[ REGMALE ][ CRYO_DEATH_CROUCHED ]			= CRYO_CORPSE;
-	
+
 
 	// BIG MALE GUY
 	gubAnimSurfaceIndex[ BIGMALE ][ WALKING ]								= BGMWALKING;
@@ -1923,15 +1923,15 @@ void	InitAnimationSurfacesPerBodytype( )
 	//Rolling
 	gubAnimSurfaceIndex[ BIGMALE ][ ROLL_PRONE_L ]					  	= BGMROLL_PR;
 	gubAnimSurfaceIndex[ BIGMALE ][ ROLL_PRONE_R ]					  	= BGMROLL_PR;
-	
+
 	gubAnimSurfaceIndex[ BIGMALE ][ JUMPUPWALL ]						= BGMWALLJUMP;
 	gubAnimSurfaceIndex[ BIGMALE ][ JUMPDOWNWALL ]					= BGMWALLJUMP;
-	
+
 	gubAnimSurfaceIndex[ BIGMALE ][ JUMPWINDOWS ]					= BGMJUMPWINDOWS;
 
 	gubAnimSurfaceIndex[ BIGMALE ][ SIDE_STEP_WEAPON_RDY ]				= BGMSIDESTEP_R_RDY;
 	gubAnimSurfaceIndex[ BIGMALE ][ SIDE_STEP_DUAL_RDY ]				= BGMSIDESTEP_D_RDY;
-	
+
 	gubAnimSurfaceIndex[ BIGMALE ][ WALKING_WEAPON_RDY ]					= BGMWALK_R_RDY;
 	gubAnimSurfaceIndex[ BIGMALE ][ WALKING_DUAL_RDY ]					= BGMWALK_D_RDY;
 
@@ -1963,18 +1963,18 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceIndex[ BIGMALE ][ START_COWER_PRONE ]				= BGM_COWER_PRONE;
 	gubAnimSurfaceIndex[ BIGMALE ][ COWERING_PRONE ]					= BGM_COWER_PRONE;
 	gubAnimSurfaceIndex[ BIGMALE ][ END_COWER_PRONE ]				= BGM_COWER_PRONE;
-	
+
 	gubAnimSurfaceIndex[ BIGMALE ][ BIGMERC_IDLE_NECK2 ]						= BGMIDLENECK2;
-	
+
 	gubAnimSurfaceIndex[ BIGMALE ][ FOCUSED_PUNCH ]					= BGMPUNCH;
 	gubAnimSurfaceIndex[ BIGMALE ][ FOCUSED_STAB ]					= BGMSTAB;
 	gubAnimSurfaceIndex[ BIGMALE ][ HTH_KICK ]						= BGMKICKDOOR;
 	gubAnimSurfaceIndex[ BIGMALE ][ FOCUSED_HTH_KICK ]				= BGMKICKDOOR;
-	
+
 	gubAnimSurfaceIndex[ BIGMALE ][ LONG_JUMP ]						= BGMJUMPOVER;
 	gubAnimSurfaceIndex[ BIGMALE ][ CRYO_DEATH ]					= CRYO_EXPLODE;
 	gubAnimSurfaceIndex[ BIGMALE ][ CRYO_DEATH_CROUCHED ]			= CRYO_EXPLODE_CROUCHED;
-	
+
 	gubAnimSurfaceItemSubIndex[ BIGMALE ][ STANDING ]						= BGMPISTOLBREATH;
 	gubAnimSurfaceItemSubIndex[ BIGMALE ][ WALKING ]							= BGMNOTHING_WALK;
 	gubAnimSurfaceItemSubIndex[ BIGMALE ][ RUNNING ]							= BGMNOTHING_RUN;
@@ -2102,28 +2102,28 @@ void	InitAnimationSurfacesPerBodytype( )
 	gRandomAnimDefs[ BIGMALE ][ 4 ].ubEndRoll						= 49;
 	gRandomAnimDefs[ BIGMALE ][ 4 ].ubFlags							= RANDOM_ANIM_FIRSTBIGMERC | RANDOM_ANIM_LOOKAROUND;
 	gRandomAnimDefs[ BIGMALE ][ 4 ].ubAnimHeight				= ANIM_STAND;
-	
+
 	gRandomAnimDefs[ BIGMALE ][ 5 ].ubHandRestriction		= RANDOM_ANIM_RIFLEINHAND;
 	gRandomAnimDefs[ BIGMALE ][ 5 ].sAnimID							= BIGMERC_IDLE_NECK2;
 	gRandomAnimDefs[ BIGMALE ][ 5 ].ubStartRoll					= 50;
 	gRandomAnimDefs[ BIGMALE ][ 5 ].ubEndRoll						= 59;
 	gRandomAnimDefs[ BIGMALE ][ 5 ].ubFlags							= RANDOM_ANIM_FIRSTBIGMERC;
 	gRandomAnimDefs[ BIGMALE ][ 5 ].ubAnimHeight				= ANIM_STAND;
-								
+
 	gRandomAnimDefs[ BIGMALE ][ 6 ].ubHandRestriction		= RANDOM_ANIM_RIFLEINHAND;
 	gRandomAnimDefs[ BIGMALE ][ 6 ].sAnimID							= BIGMERC_IDLE_NECK;
 	gRandomAnimDefs[ BIGMALE ][ 6 ].ubStartRoll					= 50;
 	gRandomAnimDefs[ BIGMALE ][ 6 ].ubEndRoll						= 59;
 	gRandomAnimDefs[ BIGMALE ][ 6 ].ubFlags							= RANDOM_ANIM_SECONDBIGMERC;
 	gRandomAnimDefs[ BIGMALE ][ 6 ].ubAnimHeight				= ANIM_STAND;
-								
+
 	gRandomAnimDefs[ BIGMALE ][ 7 ].ubHandRestriction		= RANDOM_ANIM_IRRELEVENTINHAND;
 	gRandomAnimDefs[ BIGMALE ][ 7 ].sAnimID							= MERC_HURT_IDLE_ANIM;
 	gRandomAnimDefs[ BIGMALE ][ 7 ].ubStartRoll					= 0;
 	gRandomAnimDefs[ BIGMALE ][ 7 ].ubEndRoll						= 60;
 	gRandomAnimDefs[ BIGMALE ][ 7 ].ubFlags							= RANDOM_ANIM_INJURED;
 	gRandomAnimDefs[ BIGMALE ][ 7 ].ubAnimHeight				= ANIM_STAND;
-								
+
 	gRandomAnimDefs[ BIGMALE ][ 8 ].ubHandRestriction		= RANDOM_ANIM_IRRELEVENTINHAND;
 	gRandomAnimDefs[ BIGMALE ][ 8 ].sAnimID							= DRUNK_IDLE;
 	gRandomAnimDefs[ BIGMALE ][ 8 ].ubStartRoll					= 61;
@@ -2158,7 +2158,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceCorpseID[ BIGMALE ][ BODYEXPLODING ]								= EXPLODE_DEAD;
 	gubAnimSurfaceCorpseID[ BIGMALE ][ CRYO_DEATH ]							= CRYO_CORPSE;
 	gubAnimSurfaceCorpseID[ BIGMALE ][ CRYO_DEATH_CROUCHED ]				= CRYO_CORPSE;
-	
+
 
 	// STOCKY MALE GUY
 	gubAnimSurfaceIndex[ STOCKYMALE ][ WALKING ]								= RGMBASICWALKING;
@@ -2347,7 +2347,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceIndex[ STOCKYMALE ][ AI_RADIO ]												= RGMRADIO;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ AI_CR_RADIO ]										= RGMCRRADIO;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ SLAP_HIT ]												= RGMHITSTAND;
-	gubAnimSurfaceIndex[ STOCKYMALE ][ TAKE_BLOOD_FROM_CORPSE ]					= RGMMEDIC;	
+	gubAnimSurfaceIndex[ STOCKYMALE ][ TAKE_BLOOD_FROM_CORPSE ]					= RGMMEDIC;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ CHARIOTS_OF_FIRE ]								= RGMBURN;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ AI_PULL_SWITCH ]									= RGMOPEN;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ MERC_HURT_IDLE_ANIM ]						= RGMHURTSTANDINGR;
@@ -2390,15 +2390,15 @@ void	InitAnimationSurfacesPerBodytype( )
 	//Rolling
 	gubAnimSurfaceIndex[ STOCKYMALE ][ ROLL_PRONE_L ]					  	= RGMROLL_PR;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ ROLL_PRONE_R ]					  	= RGMROLL_PR;
-	
+
 	gubAnimSurfaceIndex[ STOCKYMALE ][ JUMPUPWALL ]						= RGMWALLJUMP;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ JUMPDOWNWALL ]					= RGMWALLJUMP;
-	
+
 	gubAnimSurfaceIndex[ STOCKYMALE ][ JUMPWINDOWS ]					= RGMJUMPWINDOWS;
 
 	gubAnimSurfaceIndex[ STOCKYMALE ][ SIDE_STEP_WEAPON_RDY ]				= RGMSIDESTEP_R_RDY;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ SIDE_STEP_DUAL_RDY ]					= RGMSIDESTEP_D_RDY;
-	
+
 	gubAnimSurfaceIndex[ STOCKYMALE ][ WALKING_WEAPON_RDY ]					= RGMWALK_R_RDY;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ WALKING_DUAL_RDY ]					= RGMWALK_D_RDY;
 
@@ -2424,7 +2424,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceIndex[ STOCKYMALE ][ LOW_UNJAM_ALTERNATIVE_STAND ]			= RGM_HIP_LOW;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ WALKING_ALTERNATIVE_RDY ]			= RGMBASICWALKING;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ SIDE_STEP_ALTERNATIVE_RDY ]			= RGMSIDESTEP;
-	
+
 	gubAnimSurfaceIndex[ STOCKYMALE ][ START_COWER_CROUCHED ]			= RGMCOWER;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ END_COWER_CROUCHED ]			= RGMCOWER;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ START_COWER_PRONE ]				= RGM_COWER_PRONE;
@@ -2435,11 +2435,11 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceIndex[ STOCKYMALE ][ FOCUSED_STAB ]					= RGMSTAB;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ HTH_KICK ]						= RGMKICKDOOR;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ FOCUSED_HTH_KICK ]				= RGMKICKDOOR;
-	
+
 	gubAnimSurfaceIndex[ STOCKYMALE ][ LONG_JUMP ]						= RGMJUMPOVER;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ CRYO_DEATH ]						= CRYO_EXPLODE;
 	gubAnimSurfaceIndex[ STOCKYMALE ][ CRYO_DEATH_CROUCHED ]			= CRYO_EXPLODE_CROUCHED;
-	
+
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ STANDING ]						= RGMPISTOLBREATH;
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ WALKING ]						= RGMNOTHING_WALK;
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ RUNNING]							= RGMNOTHING_RUN;
@@ -2485,7 +2485,7 @@ void	InitAnimationSurfacesPerBodytype( )
 
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ READY_ALTERNATIVE_STAND ]					= RGM_PFSHOT_AIM;
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ AIM_ALTERNATIVE_STAND ]						= RGM_PFSHOT_AIM;
-	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ SHOOT_ALTERNATIVE_STAND ]					= RGM_PFSHOT_AIM;	
+	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ SHOOT_ALTERNATIVE_STAND ]					= RGM_PFSHOT_AIM;
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ BURST_ALTERNATIVE_STAND ]					= RGM_PFSHOT_AIM;
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ LOW_SHOT_ALTERNATIVE_STAND ]						= RGMPISTOLSHOOTLOW;
 	gubAnimSurfaceItemSubIndex[ STOCKYMALE ][ LOW_BURST_ALTERNATIVE_STAND ]				= RGMPISTOLSHOOTLOW;
@@ -2555,11 +2555,11 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceCorpseID[ STOCKYMALE ][ STAND_FALLFORWARD_STOP ]			= SMERC_FWD;
 	gubAnimSurfaceCorpseID[ STOCKYMALE ][ FALLBACKHIT_STOP ]						= SMERC_BCK;
 	gubAnimSurfaceCorpseID[ STOCKYMALE ][ PRONE_LAYFROMHIT_STOP ]				= SMERC_PRN;
-	gubAnimSurfaceCorpseID[ STOCKYMALE ][ CHARIOTS_OF_FIRE ]						= BURNT_DEAD;	
+	gubAnimSurfaceCorpseID[ STOCKYMALE ][ CHARIOTS_OF_FIRE ]						= BURNT_DEAD;
 	gubAnimSurfaceCorpseID[ STOCKYMALE ][ BODYEXPLODING ]								= EXPLODE_DEAD;
 	gubAnimSurfaceCorpseID[ STOCKYMALE ][ CRYO_DEATH ]						= CRYO_CORPSE;
 	gubAnimSurfaceCorpseID[ STOCKYMALE ][ CRYO_DEATH_CROUCHED ]				= CRYO_CORPSE;
-	
+
 
 	//Setup some random stuff
 	gRandomAnimDefs[ STOCKYMALE ][ 0 ].ubHandRestriction		= RANDOM_ANIM_RIFLEINHAND;
@@ -2831,12 +2831,12 @@ void	InitAnimationSurfacesPerBodytype( )
 
 	gubAnimSurfaceIndex[ REGFEMALE ][ JUMPUPWALL ]						= RGFWALLJUMP;
 	gubAnimSurfaceIndex[ REGFEMALE ][ JUMPDOWNWALL ]					= RGFWALLJUMP;
-	
+
 	gubAnimSurfaceIndex[ REGFEMALE ][ JUMPWINDOWS ]					= RGFJUMPWINDOWS;
 
 	gubAnimSurfaceIndex[ REGFEMALE ][ SIDE_STEP_WEAPON_RDY ]					= RGFSIDESTEP_R_RDY;
 	gubAnimSurfaceIndex[ REGFEMALE ][ SIDE_STEP_DUAL_RDY ]					= RGFSIDESTEP_D_RDY;
-	
+
 	gubAnimSurfaceIndex[ REGFEMALE ][ WALKING_WEAPON_RDY ]					= RGFWALK_R_RDY;
 	gubAnimSurfaceIndex[ REGFEMALE ][ WALKING_DUAL_RDY ]					= RGFWALK_D_RDY;
 
@@ -2862,22 +2862,22 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceIndex[ REGFEMALE ][ LOW_UNJAM_ALTERNATIVE_STAND ]			= RGF_HIP_AIM;
 	gubAnimSurfaceIndex[ REGFEMALE ][ WALKING_ALTERNATIVE_RDY ]				= RGFWALKING;
 	gubAnimSurfaceIndex[ REGFEMALE ][ SIDE_STEP_ALTERNATIVE_RDY ]			= RGFSIDESTEP;
-	
+
 	gubAnimSurfaceIndex[ REGFEMALE ][ START_COWER_CROUCHED ]		= RGFCOWER;
 	gubAnimSurfaceIndex[ REGFEMALE ][ END_COWER_CROUCHED ]			= RGFCOWER;
 	gubAnimSurfaceIndex[ REGFEMALE ][ START_COWER_PRONE ]			= RGF_COWER_PRONE;
 	gubAnimSurfaceIndex[ REGFEMALE ][ COWERING_PRONE ]					= RGF_COWER_PRONE;
 	gubAnimSurfaceIndex[ REGFEMALE ][ END_COWER_PRONE ]				= RGF_COWER_PRONE;
-	
+
 	gubAnimSurfaceIndex[ REGFEMALE ][ FOCUSED_PUNCH ]					= RGFPUNCH;
 	gubAnimSurfaceIndex[ REGFEMALE ][ FOCUSED_STAB ]					= RGFSTAB;
 	gubAnimSurfaceIndex[ REGFEMALE ][ HTH_KICK ]						= RGFKICKDOOR;
 	gubAnimSurfaceIndex[ REGFEMALE ][ FOCUSED_HTH_KICK ]				= RGFKICKDOOR;
-	
+
 	gubAnimSurfaceIndex[ REGFEMALE ][ LONG_JUMP ]					= RGFJUMPOVER;
 	gubAnimSurfaceIndex[ REGFEMALE ][ CRYO_DEATH ]					= CRYO_EXPLODE;
 	gubAnimSurfaceIndex[ REGFEMALE ][ CRYO_DEATH_CROUCHED ]			= CRYO_EXPLODE_CROUCHED;
-	
+
 	gubAnimSurfaceItemSubIndex[ REGFEMALE ][ STANDING ]						= RGFPISTOLBREATH;
 	gubAnimSurfaceItemSubIndex[ REGFEMALE ][ WALKING ]							= RGFNOTHING_WALK;
 	gubAnimSurfaceItemSubIndex[ REGFEMALE ][ RUNNING ]							= RGFNOTHING_RUN;
@@ -2995,7 +2995,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceCorpseID[ REGFEMALE ][ BODYEXPLODING ]								= EXPLODE_DEAD;
 	gubAnimSurfaceCorpseID[ REGFEMALE ][ CRYO_DEATH ]						= CRYO_CORPSE;
 	gubAnimSurfaceCorpseID[ REGFEMALE ][ CRYO_DEATH_CROUCHED ]				= CRYO_CORPSE;
-	
+
 
 	//Setup some random stuff
 	gRandomAnimDefs[ REGFEMALE ][ 0 ].ubHandRestriction		= RANDOM_ANIM_RIFLEINHAND;
@@ -3643,7 +3643,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceCorpseID[JEEP][WALKING] = ICECREAM_DEAD;
 	gubAnimSurfaceCorpseID[JEEP][RUNNING] = ICECREAM_DEAD;
 	gubAnimSurfaceCorpseID[JEEP][WALK_BACKWARDS] = ICECREAM_DEAD;
-	
+
 	// COMBAT_JEEP
 	gubAnimSurfaceIndex[COMBAT_JEEP][STANDING]																= ARMED_CAR_READY;
 	gubAnimSurfaceIndex[COMBAT_JEEP][WALKING]																= ARMED_CAR_READY;
@@ -3655,7 +3655,7 @@ void	InitAnimationSurfacesPerBodytype( )
 	gubAnimSurfaceCorpseID[COMBAT_JEEP][STANDING] = HUMMER_DEAD;
 	gubAnimSurfaceCorpseID[COMBAT_JEEP][WALKING] = HUMMER_DEAD;
 	gubAnimSurfaceCorpseID[COMBAT_JEEP][RUNNING] = HUMMER_DEAD;
-	gubAnimSurfaceCorpseID[COMBAT_JEEP][WALK_BACKWARDS] = HUMMER_DEAD;	
+	gubAnimSurfaceCorpseID[COMBAT_JEEP][WALK_BACKWARDS] = HUMMER_DEAD;
 }
 
 BOOLEAN LoadAnimationStateInstructions( )
@@ -3683,17 +3683,17 @@ BOOLEAN LoadAnimationStateInstructions( )
 
 	FileClose( hFile );
 
-	//memcpy(gusAnimInst, fuckTheBoundz, sizeof(gusAnimInst)); 
+	//memcpy(gusAnimInst, fuckTheBoundz, sizeof(gusAnimInst));
 	for(int i=0;i<320;i++)
 		memcpy(gusAnimInst[i],fuckTheBoundz[i],sizeof(fuckTheBoundz[i]));
 		//gusAnimInst[i][0] = fuckTheBoundz[i][0];
 
 	// SANDRO - changes to standard animations frame read
-	memcpy(gusAnimInst[ FEM_KICKSN ],F_IDLE_ANIM_KICKSN_AnimationScript,sizeof(F_IDLE_ANIM_KICKSN_AnimationScript));	
+	memcpy(gusAnimInst[ FEM_KICKSN ],F_IDLE_ANIM_KICKSN_AnimationScript,sizeof(F_IDLE_ANIM_KICKSN_AnimationScript));
 	memcpy(gusAnimInst[ FEM_LOOK ],F_IDLE_ANIM_LOOK_AnimationScript,sizeof(F_IDLE_ANIM_LOOK_AnimationScript));
 	memcpy(gusAnimInst[ NINJA_SPINKICK ],NINJA_SPINKICK_AnimationScript,sizeof(NINJA_SPINKICK_AnimationScript));
 
-	// NEW ANIMATION SCRIPTS 
+	// NEW ANIMATION SCRIPTS
 
 	//<SB> crouch throwing
 	memcpy(gusAnimInst[ THROW_ITEM_CROUCHED ],CrouchedThrowAnimationScript,sizeof(CrouchedThrowAnimationScript));
@@ -3710,25 +3710,25 @@ BOOLEAN LoadAnimationStateInstructions( )
 
 	memcpy(gusAnimInst[ ROLL_PRONE_L ],ROLL_L_AnimationScript,sizeof(ROLL_L_AnimationScript));
 	memcpy(gusAnimInst[ ROLL_PRONE_R ],ROLL_R_AnimationScript,sizeof(ROLL_R_AnimationScript));
-	
+
 	memcpy(gusAnimInst[JUMPUPWALL],fuckTheBoundz[32],sizeof(fuckTheBoundz[32])); // copy CLIMBROOF to JUMPUPWALL
-	
+
 	memcpy(gusAnimInst[JUMPDOWNWALL],fuckTheBoundz[35],sizeof(fuckTheBoundz[35])); // copy CLIMBDOWNROOF to JUMPDOWNWALL
-	
+
 	memcpy(gusAnimInst[JUMPWINDOWS],fuckTheBoundz[HOPFENCE],sizeof(fuckTheBoundz[HOPFENCE])); // copy HOPFENCE to JUMPDOWNWALL
-	
+
 	//memcpy(gusAnimInst[ JUMPUPWALL ],JUMP_WALL_UP_AnimationScript,sizeof(JUMP_WALL_UP_AnimationScript));
 	//memcpy(gusAnimInst[ JUMPDOWNWALL ],JUMP_WALL_DOWN_AnimationScript,sizeof(JUMP_WALL_DOWN_AnimationScript));
-	
+
 	memcpy(gusAnimInst[USE_REMOTE],REMOTE_DET_AnimationScript,sizeof(REMOTE_DET_AnimationScript));  // SANDRO - new animation of remote detonator by PasHancock
 
 	memcpy(gusAnimInst[THROW_KNIFE_SP_BM],THROW_KNIFE_SP_BM_AnimationScript,sizeof(THROW_KNIFE_SP_BM_AnimationScript));  // SANDRO - new animation of remote detonator by PasHancock
-	
+
 	memcpy(gusAnimInst[RUNNING_W_PISTOL],fuckTheBoundz[RUNNING],sizeof(fuckTheBoundz[RUNNING]));
 
 	memcpy(gusAnimInst[SIDE_STEP_WEAPON_RDY],fuckTheBoundz[SIDE_STEP],sizeof(fuckTheBoundz[SIDE_STEP]));
 	memcpy(gusAnimInst[SIDE_STEP_DUAL_RDY],fuckTheBoundz[SIDE_STEP],sizeof(fuckTheBoundz[SIDE_STEP]));
-	
+
 	memcpy(gusAnimInst[WALKING_WEAPON_RDY],fuckTheBoundz[WALKING],sizeof(fuckTheBoundz[WALKING]));
 	memcpy(gusAnimInst[WALKING_DUAL_RDY],fuckTheBoundz[WALKING],sizeof(fuckTheBoundz[WALKING]));
 
@@ -3740,7 +3740,7 @@ BOOLEAN LoadAnimationStateInstructions( )
 	memcpy(gusAnimInst[STEAL_ITEM_CROUCHED],fuckTheBoundz[STEAL_ITEM],sizeof(fuckTheBoundz[STEAL_ITEM]));
 
 	memcpy(gusAnimInst[BURST_DUAL_STAND],DUAL_BURST_ST_CR_AnimationScript,sizeof(DUAL_BURST_ST_CR_AnimationScript));
-	memcpy(gusAnimInst[BURST_DUAL_CROUCH],DUAL_BURST_ST_CR_AnimationScript,sizeof(DUAL_BURST_ST_CR_AnimationScript));		
+	memcpy(gusAnimInst[BURST_DUAL_CROUCH],DUAL_BURST_ST_CR_AnimationScript,sizeof(DUAL_BURST_ST_CR_AnimationScript));
 	memcpy(gusAnimInst[BURST_DUAL_PRONE],DUAL_BURST_PRONE_AnimationScript,sizeof(DUAL_BURST_PRONE_AnimationScript));
 
 	memcpy(gusAnimInst[READY_ALTERNATIVE_STAND],fuckTheBoundz[READY_RIFLE_STAND],sizeof(fuckTheBoundz[READY_RIFLE_STAND]));
@@ -3760,9 +3760,9 @@ BOOLEAN LoadAnimationStateInstructions( )
 	memcpy(gusAnimInst[START_COWER_PRONE],START_COWER_PRONE_AnimationScript,sizeof(START_COWER_PRONE_AnimationScript));
 	memcpy(gusAnimInst[COWERING_PRONE],COWER_PRONE_AnimationScript,sizeof(COWER_PRONE_AnimationScript));
 	memcpy(gusAnimInst[END_COWER_PRONE],END_COWER_PRONE_AnimationScript,sizeof(END_COWER_PRONE_AnimationScript));
-	
+
 	memcpy(gusAnimInst[BIGMERC_IDLE_NECK2],fuckTheBoundz[BIGMERC_IDLE_NECK],sizeof(fuckTheBoundz[BIGMERC_IDLE_NECK]));
-	
+
 	memcpy(gusAnimInst[FOCUSED_PUNCH],FOCUSED_PUNCH_AnimationScript,sizeof(FOCUSED_PUNCH_AnimationScript));
 	memcpy(gusAnimInst[FOCUSED_STAB],FOCUSED_STAB_AnimationScript,sizeof(FOCUSED_STAB_AnimationScript));
 	memcpy(gusAnimInst[HTH_KICK],HTH_KICK_AnimationScript,sizeof(HTH_KICK_AnimationScript));
@@ -3773,7 +3773,7 @@ BOOLEAN LoadAnimationStateInstructions( )
 	memcpy( gusAnimInst[CRYO_DEATH], CRYO_DEATH_AnimationScript, sizeof(CRYO_DEATH_AnimationScript) );
 	memcpy( gusAnimInst[CRYO_DEATH_CROUCHED], CRYO_DEATH_CROUCHED_AnimationScript, sizeof(CRYO_DEATH_CROUCHED_AnimationScript) );
 
-	// NOTE: Careful here... keep in mind you have to increase MAX_ANIMATIONS whenever you would go over 399(currently) animation numbers 
+	// NOTE: Careful here... keep in mind you have to increase MAX_ANIMATIONS whenever you would go over 399(currently) animation numbers
 
 	return( TRUE );
 }
@@ -4294,7 +4294,7 @@ UINT16	DetermineSoldierAnimationSurface( SOLDIERTYPE *pSoldier, UINT16 usAnimSta
 						//ddd Put alternative pistol-shot animations here
 						/*if ( usAnimSurface == BGMSTANDAIM2 )
 						{
-						
+
 						usAnimSurface = BGMFLEX;
 						ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"usanimcashe");
 

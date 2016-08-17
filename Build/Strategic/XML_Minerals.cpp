@@ -81,7 +81,7 @@ mineralsEndElementHandle(void *userData, const XML_Char *name)
 {
 	mineralsParseData * pData = (mineralsParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "MINERALS") == 0)
 		{
@@ -89,8 +89,8 @@ mineralsEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "TYPE") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!Minerals_TextOnly)
 			{
 				wcscpy(MineralsName[pData->curMinerals.uiIndex].sMinerals, pData->curMinerals.sMinerals);
@@ -100,8 +100,8 @@ mineralsEndElementHandle(void *userData, const XML_Char *name)
 			else
 			{
 				wcscpy(MineralsName[pData->curMinerals.uiIndex].sMinerals, pData->curMinerals.sMinerals);
-				wcscpy(MineralsName[pData->curMinerals.uiIndex].sType, pData->curMinerals.sType);	
-			}		
+				wcscpy(MineralsName[pData->curMinerals.uiIndex].sType, pData->curMinerals.sType);
+			}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -143,7 +143,7 @@ BOOLEAN ReadInMinerals(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading Minerals.xml" );
 
 	Minerals_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

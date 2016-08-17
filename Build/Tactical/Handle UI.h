@@ -1,7 +1,7 @@
 #ifndef _HANDLE_UI_
 #define _HANDLE_UI_
 
-#include "input.h"
+#include "Input.h"
 #include "Soldier Control.h"
 
 // DEFINES
@@ -134,13 +134,13 @@ typedef enum
 
 	HC_ON_TERRAIN,
 
-	G_GETTINGITEM,	
+	G_GETTINGITEM,
 
 	LC_ON_TERRAIN,
 	LC_CHANGE_TO_LOOK,
 	LC_LOOK,
 
-	TA_TALKINGMENU,	
+	TA_TALKINGMENU,
 
 	T_ON_TERRAIN,
 	T_CHANGE_TO_TALKING,
@@ -166,7 +166,7 @@ typedef enum
 
 } UI_EVENT_DEFINES;
 
-typedef BOOLEAN (*UIKEYBOARD_HOOK)( InputAtom *pInputEvent );	
+typedef BOOLEAN (*UIKEYBOARD_HOOK)( InputAtom *pInputEvent );
 
 
 // GLOBAL EVENT STRUCT

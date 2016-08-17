@@ -260,7 +260,7 @@
   #ifdef __RADX86__
     #define RAD_ATTRIBUTE_ALIGN(num) __declspec(align(num))
   #else
-    #define RAD_ATTRIBUTE_ALIGN(num) 
+    #define RAD_ATTRIBUTE_ALIGN(num)
   #endif
 #endif
 

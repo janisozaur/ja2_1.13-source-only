@@ -91,7 +91,7 @@ impPortraitsEndElementHandle(void *userData, const XML_Char *name)
 {
 	impPortraitsParseData * pData = (impPortraitsParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "IMPPORTRAITSLIST") == 0)
 		{
@@ -99,10 +99,10 @@ impPortraitsEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "IMP") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!IMPPortraits_TextOnly)
-				{		
+				{
 					gIMPFaceValues[pData->curIMPPortraits.uiIndex].uiEyeXPositions = pData->curIMPPortraits.uiEyeXPositions;
 					gIMPFaceValues[pData->curIMPPortraits.uiIndex].uiEyeYPositions = pData->curIMPPortraits.uiEyeYPositions;
 					gIMPFaceValues[pData->curIMPPortraits.uiIndex].uiMouthXPositions = pData->curIMPPortraits.uiMouthXPositions;
@@ -130,8 +130,8 @@ impPortraitsEndElementHandle(void *userData, const XML_Char *name)
 					gIMPFaceValues[pData->curIMPPortraits.uiIndex].iCurrentPants = pData->curIMPPortraits.iCurrentPants;
 					gIMPFaceValues[pData->curIMPPortraits.uiIndex].bBigBody = pData->curIMPPortraits.bBigBody;
 
-				}		
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -172,7 +172,7 @@ impPortraitsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curIMPPortraits.iCurrentSkin	=  (INT32) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "DefaultHair") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -182,18 +182,18 @@ impPortraitsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curIMPPortraits.iCurrentShirt	=  (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "DefaultPants") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curIMPPortraits.iCurrentPants	=  (INT32) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "DefaultBigBody") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curIMPPortraits.bBigBody	=  (INT32) atol(pData->szCharData);
-		}	
-	
+		}
+
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -212,7 +212,7 @@ BOOLEAN ReadInIMPPortraits(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading IMPPortraits.xml" );
 
 	IMPPortraits_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -273,9 +273,9 @@ UINT32 cnt3 = 0;
 			if (gIMPFaceValues[cnt].bSex == 1 && gIMPFaceValues[cnt].PortraitId !=0)
 				{
 					gIMPFemaleValues[cnt2].uiIndex = cnt2;
-					
-					gIMPFemaleValues[cnt2].Enabled = 1;	
-					
+
+					gIMPFemaleValues[cnt2].Enabled = 1;
+
 					gIMPFemaleValues[cnt2].uiEyeXPositions = gIMPFaceValues[cnt].uiEyeXPositions;
 					gIMPFemaleValues[cnt2].uiEyeYPositions = gIMPFaceValues[cnt].uiEyeYPositions;
 					gIMPFemaleValues[cnt2].uiMouthXPositions = gIMPFaceValues[cnt].uiMouthXPositions;
@@ -289,14 +289,14 @@ UINT32 cnt3 = 0;
 					gIMPFemaleValues[cnt2].bBigBody = gIMPFaceValues[cnt].bBigBody;
 					cnt2++;
 				}
-		}		
-		
+		}
+
 	for ( cnt = 0; cnt < NUM_PROFILES; cnt++ )
 		{
 			if (gIMPFaceValues[cnt].bSex == 0 && gIMPFaceValues[cnt].PortraitId !=0)
 				{
 					gIMPMaleValues[cnt3].uiIndex = cnt3;
-					gIMPMaleValues[cnt3].Enabled = 1;	
+					gIMPMaleValues[cnt3].Enabled = 1;
 					gIMPMaleValues[cnt3].uiEyeXPositions = gIMPFaceValues[cnt].uiEyeXPositions;
 					gIMPMaleValues[cnt3].uiEyeYPositions = gIMPFaceValues[cnt].uiEyeYPositions;
 					gIMPMaleValues[cnt3].uiMouthXPositions = gIMPFaceValues[cnt].uiMouthXPositions;
@@ -309,7 +309,7 @@ UINT32 cnt3 = 0;
 					gIMPMaleValues[cnt3].iCurrentPants = gIMPFaceValues[cnt].iCurrentPants;
 					gIMPMaleValues[cnt3].bBigBody = gIMPFaceValues[cnt].bBigBody;
 					cnt3++;
-					}	
+					}
 		}
 
 }

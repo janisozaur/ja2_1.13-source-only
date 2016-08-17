@@ -15,7 +15,7 @@
 #define INITIAL_NUM_HANDLES						20
 
 
-#define	REAL_FILE_LIBRARY_ID					1022			
+#define	REAL_FILE_LIBRARY_ID					1022
 
 #define	DB_BITS_FOR_LIBRARY							10
 #define	DB_BITS_FOR_FILE_ID							22
@@ -55,7 +55,7 @@ extern	CHAR8	gzCdDirectory[ SGPFILENAME_LEN ];
 
 #define		REAL_LIBRARY_FILE	"RealFiles.slf"
 
-typedef struct	
+typedef struct
 {
 	UINT32	uiFileID;						// id of the file ( they start at 1 )
 	HANDLE	hRealFileHandle;		// if the file is a Real File, this its handle
@@ -70,7 +70,7 @@ typedef struct
 } FileHeaderStruct;
 
 
-typedef struct	
+typedef struct
 {
 	UINT32	uiFileID;											// id of the file ( they start at 1 )
 	UINT32	uiFilePosInFile;							// current position in the file
@@ -143,7 +143,7 @@ typedef struct
 #define FILE_DOESNT_EXIST		0xfe
 
 
-typedef struct 
+typedef struct
 {
 	CHAR8		sLibName[ FILENAME_SIZE ];
 	CHAR8		sPathToLibrary[ FILENAME_SIZE ];
@@ -156,7 +156,7 @@ typedef struct
 } LIBHEADER;
 
 
-typedef struct 
+typedef struct
 {
 	CHAR8		sFileName[ FILENAME_SIZE ];
 	UINT32	uiOffset;

@@ -5,25 +5,25 @@
 #else
 	#include "sgp.h"
 	#include "Soldier Create.h"
-	#include "overhead.h"
-	#include "wcheck.h"
-	#include "soldier profile.h"
-	#include "animation control.h"
-	#include "animation data.h"
+	#include "Overhead.h"
+	#include "WCheck.h"
+	#include "Soldier Profile.h"
+	#include "Animation Control.h"
+	#include "Animation Data.h"
 	#include "Sound Control.h"
-	#include "overhead types.h"
-	#include "faces.h"
-	#include "isometric utils.h"
-	#include "items.h"
-	#include "weapons.h"
-	#include "opplist.h"
-	#include "random.h"
+	#include "Overhead Types.h"
+	#include "Faces.h"
+	#include "Isometric Utils.h"
+	#include "Items.h"
+	#include "Weapons.h"
+	#include "Opplist.h"
+	#include "Random.h"
 	#include "Assignments.h"
 	#include "Soldier Init List.h"
 	#include "Smell.h"
 	#include "Squads.h"
 	#include "Interface Panels.h"
-	#include "Strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Inventory Choosing.h"
 	#include "Queen Command.h"
 	#include "Soldier Add.h"
@@ -32,25 +32,25 @@
 	#include "Sys Globals.h"
 	#include "Scheduling.h"
 	#include "Rotting Corpses.h"
-	#include "vehicles.h"
-	#include "handle ui.h"
-	#include "text.h"
+	#include "Vehicles.h"
+	#include "Handle UI.h"
+	#include "Text.h"
 	#include "Campaign.h"
 	#include "GameSettings.h"
 	#include "PreBattle Interface.h"
 	#include "Auto Resolve.h"
 	#include "Morale.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Strategic Mines.h"
 	#include "math.h"
 	#include "Game Clock.h" // added this one - SANDRO
 	#include "Interface.h"	// added by Flugente
-	#include "Soldier macros.h"		// added by Flugente
+	#include "Soldier Macros.h"		// added by Flugente
 	#include "MilitiaIndividual.h"	// added by Flugente
 #endif
 
-#include "connect.h"
-#include "message.h"
+#include "Connect.h"
+#include "Message.h"
 #include "fresh_header.h"
 
 #ifdef JA2UB
@@ -576,7 +576,7 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 	BOOLEAN					fGuyAvail = FALSE;
 	UINT8						bLastTeamID;
 	UINT8						ubVehicleID = 0;
-	
+
 	*pubID = NOBODY;
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("TacticalCreateSoldier"));
 
@@ -814,7 +814,7 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 		{
 			UINT8 sector = SECTOR( Soldier.sSectorX, Soldier.sSectorY );
 			UINT16 population = GetSectorPopulation( Soldier.sSectorX, Soldier.sSectorY );
-			
+
 			// if this is autoresolve, we have to get the sector in a different way..
 			if ( guiCurrentScreen == AUTORESOLVE_SCREEN )
 			{
@@ -822,7 +822,7 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 
 				population = GetSectorPopulation( SECTORX( sector ), SECTORY( sector ) );
 			}
-			
+
 			if ( population )
 			{
 				SECTORINFO *pSectorInfo = &(SectorInfo[sector]);
@@ -871,7 +871,7 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 				{
 					// HEADROCK HAM 3.6: Flag to prevent non-combat civilians from becoming hostile and forcing
 					// you to kill them...
-					if (!gGameExternalOptions.fCanTrueCiviliansBecomeHostile && 
+					if (!gGameExternalOptions.fCanTrueCiviliansBecomeHostile &&
 						(Soldier.ubBodyType >= FATCIV && Soldier.ubBodyType <= CRIPPLECIV ))
 					{
 						Soldier.aiData.bNeutral = TRUE;
@@ -1091,13 +1091,13 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 					case ELDORADO:
 					case ICECREAMTRUCK:
 					case JEEP:
-						if ( Soldier.ubProfile != HELICOPTER && Soldier.ubProfile != 0 && Soldier.ubProfile != NO_PROFILE && Soldier.ubProfile != TANK_CAR ) 
+						if ( Soldier.ubProfile != HELICOPTER && Soldier.ubProfile != 0 && Soldier.ubProfile != NO_PROFILE && Soldier.ubProfile != TANK_CAR )
 						{
 							ubVehicleID = Soldier.ubProfile;
 							Soldier.aiData.bNeutral = gNewVehicle[Soldier.ubProfile].bNewNeutral;
 						}
 					break;
-				
+
 				/*	case HUMVEE:
 
 						ubVehicleID = HUMMER;
@@ -1115,15 +1115,15 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 						ubVehicleID = ICE_CREAM_TRUCK;
 						Soldier.aiData.bNeutral = TRUE;
 						break;
-					
+
 					case JEEP:
 
 						ubVehicleID = JEEP_CAR;
 						break;
-		
-					*/	
+
+					*/
 					case TANK_NW:
-					case TANK_NE:					
+					case TANK_NE:
 						ubVehicleID = TANK_CAR;
 						break;
 
@@ -1205,7 +1205,7 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 //		Menptr[ Soldier.ubID ].usAnimState = Soldier.usAnimState;
 //		Menptr[ Soldier.ubID ].usAniFrame = Soldier.usAniFrame;
 	}
-	
+
 	if( guiCurrentScreen != AUTORESOLVE_SCREEN )
 	{
 		if( pCreateStruct->fOnRoof && FlatRoofAboveGridNo( pCreateStruct->sInsertionGridNo ) )
@@ -1285,7 +1285,7 @@ BOOLEAN TacticalCopySoldierFromProfile( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STR
 	pSoldier->stats.bScientific								= pProfile->bScientific;
 
 	// added by SANDRO - insta-healable injury zero on soldier creation
-	pSoldier->iHealableInjury = 0; 
+	pSoldier->iHealableInjury = 0;
 
 	pSoldier->bVocalVolume							= MIDVOLUME;
 	pSoldier->uiAnimSubFlags						= pProfile->uiBodyTypeSubFlags;
@@ -1297,7 +1297,7 @@ BOOLEAN TacticalCopySoldierFromProfile( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STR
 	pSoldier->bOldAssignment = NO_ASSIGNMENT;
 	for ( INT8 bCnt = 0; bCnt < 30; ++bCnt )
 	{
-		pSoldier->stats.ubSkillTraits[ bCnt ] = pProfile->bSkillTraits[ bCnt ];	
+		pSoldier->stats.ubSkillTraits[ bCnt ] = pProfile->bSkillTraits[ bCnt ];
 	}
 	//pSoldier->stats.ubSkillTrait2 = pProfile->bSkillTrait2;
 	//if ( gGameOptions.fNewTraitSystem )
@@ -1346,7 +1346,7 @@ BOOLEAN TacticalCopySoldierFromProfile( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STR
 		pSoldier->usSoldierFlagMask |= (SOLDIER_ENEMY_OFFICER | SOLDIER_VIP);
 	}
 
-	// Flugente: if playing with the covert trait, the assassins come covert, so they are tougher to find	
+	// Flugente: if playing with the covert trait, the assassins come covert, so they are tougher to find
 	if ( gGameExternalOptions.fAssassinsAreDisguised && gGameOptions.fNewTraitSystem && pSoldier->IsAssassin() )
 	{
 		pSoldier->usSoldierFlagMask |= (SOLDIER_COVERT_SOLDIER|SOLDIER_COVERT_NPC_SPECIAL|SOLDIER_NEW_VEST|SOLDIER_NEW_PANTS);
@@ -1457,7 +1457,7 @@ void SetClothes( SOLDIERTYPE* pSoldier, INT8 aVest, INT8 aPants, INT8 aHair, INT
 {
 	if ( !pSoldier )
 		return;
-	
+
 	// Vest
 	if ( aVest >= 0 && aVest < NUMSHIRTS )
 	{
@@ -1471,10 +1471,10 @@ void SetClothes( SOLDIERTYPE* pSoldier, INT8 aVest, INT8 aPants, INT8 aHair, INT
 		case PURPLESHIRT:	SET_PALETTEREP_ID( pSoldier->VestPal, "PURPLESHIRT" );	break;
 		case BLUEVEST:		SET_PALETTEREP_ID( pSoldier->VestPal, "BLUEVEST" );		break;
 		case JEANVEST:		SET_PALETTEREP_ID( pSoldier->VestPal, "JEANVEST" );		break;
-		case GREENVEST:		SET_PALETTEREP_ID( pSoldier->VestPal, "GREENVEST" );	break;		
-		case REDVEST:		SET_PALETTEREP_ID( pSoldier->VestPal, "REDVEST" );		break;		
+		case GREENVEST:		SET_PALETTEREP_ID( pSoldier->VestPal, "GREENVEST" );	break;
+		case REDVEST:		SET_PALETTEREP_ID( pSoldier->VestPal, "REDVEST" );		break;
 		case BLACKSHIRT:	SET_PALETTEREP_ID( pSoldier->VestPal, "BLACKSHIRT" );	break;
-		
+
 		}
 	}
 
@@ -1721,7 +1721,7 @@ BOOLEAN TacticalCopySoldierFromCreateStruct( SOLDIERTYPE *pSoldier, SOLDIERCREAT
 	pSoldier->stats.bLife								= pCreateStruct->bLife;
 	pSoldier->stats.bLifeMax							= pCreateStruct->bLifeMax;
 	// added by SANDRO - insta-healable injury zero on soldier creation
-	pSoldier->iHealableInjury = 0; 
+	pSoldier->iHealableInjury = 0;
 	pSoldier->stats.bAgility							= pCreateStruct->bAgility;
 	pSoldier->stats.bDexterity						= pCreateStruct->bDexterity;
 	pSoldier->stats.bExpLevel							= pCreateStruct->bExpLevel;
@@ -1781,7 +1781,7 @@ BOOLEAN TacticalCopySoldierFromCreateStruct( SOLDIERTYPE *pSoldier, SOLDIERCREAT
 				if ( cnt > 0 )
 				{
 					pSoldier->usSoldierProfile = availablenames[Random(cnt)];
-								
+
 					if ( zSoldierProfile[type][pSoldier->usSoldierProfile].uiBodyType > 0 && zSoldierProfile[type][pSoldier->usSoldierProfile].uiBodyType < 5 )
 						pSoldier->ubBodyType = zSoldierProfile[type][pSoldier->usSoldierProfile].uiBodyType - 1;
 				}
@@ -1859,7 +1859,7 @@ BOOLEAN TacticalCopySoldierFromCreateStruct( SOLDIERTYPE *pSoldier, SOLDIERCREAT
 			}
 		}
 	}
-	
+
 	// SANDRO - If neither of these two options are activated, use the original code
 	// however, "no traits" means no traits at all, so commented out
 	/*if ( !(gGameExternalOptions.fAssignTraitsToEnemy) && !(gGameExternalOptions.fAssignTraitsToMilitia) )
@@ -2108,7 +2108,7 @@ BOOLEAN InternalTacticalRemoveSoldier( UINT16 usSoldierIndex, BOOLEAN fRemoveVeh
 
 		return( FALSE );
 	}
-	
+
 	// ATE: If this guy is our global selected dude, take selection off...
 	if ( gfUIFullTargetFound && gusUIFullTargetID == usSoldierIndex )
 	{
@@ -2217,7 +2217,7 @@ INT8 CalcDifficultyModifier( UINT8 ubSoldierClass )
 
 	// THESE 3 DIFFICULTY FACTORS MUST ALWAYS ADD UP TO 100% EXACTLY!!!
 	Assert( ( DIFF_FACTOR_PLAYER_PROGRESS	+ DIFF_FACTOR_PALACE_DISTANCE	+ DIFF_FACTOR_GAME_DIFFICULTY ) == 100 );
-	
+
 	// adjust for game difficulty level
 	switch( gGameOptions.ubDifficultyLevel )
 	{
@@ -2253,10 +2253,10 @@ INT8 CalcDifficultyModifier( UINT8 ubSoldierClass )
 			break;
 		default:
 			// equally strong militia, enemies, creatures, bloodcats (+10)
-			bDiffModifier += ( DIFF_FACTOR_GAME_DIFFICULTY / 2 );		
+			bDiffModifier += ( DIFF_FACTOR_GAME_DIFFICULTY / 2 );
 		break;
 	}
-	
+
 	// the progress returned ranges from 0 to 100
 	ubProgress = HighestPlayerProgressPercentage();
 
@@ -2273,14 +2273,14 @@ INT8 CalcDifficultyModifier( UINT8 ubSoldierClass )
 		// -5
 		bDiffModifier += DIFF_MODIFIER_NO_INCOME;
 	}
-	
+
 	// adjust for progress level (0 to +50)
 	ubProgressModifier = ( ubProgress * DIFF_FACTOR_PLAYER_PROGRESS ) / 100;
 	bDiffModifier += ubProgressModifier;
 
 	// adjust for map location
 	bDiffModifier += GetLocationModifier( ubSoldierClass );
-	
+
 	// should be no way to go over 100, although it's possible to go below 0 when just starting on easy
 	// Assert( bDiffModifier <= 100 );
 
@@ -2310,7 +2310,7 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 	INT8 bStatsModifier;
 	UINT8 ubStatsLevel;
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("CreateDetailedPlacementGivenBasicPlacementInfo"));
-	
+
 	if( !pp || !bp )
 		return;
 	pp->fStatic								= FALSE;
@@ -2511,7 +2511,7 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 					UINT8 PlacementType = gBloodcatPlacements[ SECTOR(gWorldSectorX, gWorldSectorY) ][0].PlacementType;
 					if( PlacementType == BLOODCAT_PLACEMENT_LAIR )
 					{
-					
+
 					UINT8 DiffLevel;
 					if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_EASY )
 						DiffLevel = 1;
@@ -2520,12 +2520,12 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 					else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_HARD )
 						DiffLevel = 3;
 					else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE )
-						DiffLevel = 4;	
+						DiffLevel = 4;
 					else
 					{
 						DiffLevel = Random (4);
 						if (DiffLevel == 0) DiffLevel = 1;
-					}	
+					}
 						pp->bExpLevel += DiffLevel;
 						//pp->bExpLevel += gGameOptions.ubDifficultyLevel;
 					}
@@ -2553,7 +2553,7 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 	pp->bExpLevel = min( 10, pp->bExpLevel ); //maximum exp. level of 9 // 10 - Madd
 
 	ubStatsLevel = pp->bExpLevel + bStatsModifier;
-	
+
 		UINT8 DiffLevel;
 		if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_EASY )
 			DiffLevel = 1;
@@ -2562,15 +2562,15 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 		else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_HARD )
 			DiffLevel = 3;
 		else if( gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE )
-			DiffLevel = 4;	
+			DiffLevel = 4;
 		else
 		{
 			DiffLevel = Random (4);
 			if (DiffLevel == 0) DiffLevel = 1;
-		}	
+		}
 	ubStatsLevel = max( DiffLevel, ubStatsLevel );	//minimum stats level of 0 -- madd->= dif level
 	//ubStatsLevel = max( gGameOptions.ubDifficultyLevel, ubStatsLevel );	//minimum stats level of 0 -- madd->= dif level
-	
+
 	if ( gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE )
 		ubStatsLevel = max( 6, ubStatsLevel );	//minimum stats level of 6 in insane
 
@@ -2885,7 +2885,7 @@ void UpdateSoldierWithStaticDetailedInformation( SOLDIERTYPE *s, SOLDIERCREATE_S
 		s->stats.bLife = s->stats.bLifeMax;
 
 	// added by SANDRO - insta-healable injury zero on soldier creation
-	s->iHealableInjury = 0; 
+	s->iHealableInjury = 0;
 
 	s->ubScheduleID		=	spp->ubScheduleID;
 
@@ -3014,7 +3014,7 @@ SOLDIERTYPE* ReserveTacticalSoldierForAutoresolve( UINT8 ubSoldierClass )
 		iEnd = gTacticalStatus.Team[ CREATURE_TEAM ].bLastID;
 	}
 	for( i = iStart; i <= iEnd; ++i )
-	{		
+	{
 		if( MercPtrs[ i ]->bActive && MercPtrs[ i ]->bInSector && MercPtrs[ i ]->stats.bLife && !TileIsOutOfBounds(MercPtrs[ i ]->sGridNo))
 		{
 			if( MercPtrs[ i ]->ubSoldierClass == ubSoldierClass )
@@ -3170,7 +3170,7 @@ SOLDIERTYPE* TacticalCreateEnemyTank()
 	bp.ubBodyType = TANK_NW;
 	bp.ubSoldierClass = SOLDIER_CLASS_TANK;
 	CreateDetailedPlacementGivenBasicPlacementInfo( &pp, &bp );
-	
+
 	pSoldier = TacticalCreateSoldier( &pp, &ubID );
 	if ( pSoldier )
 	{
@@ -3271,7 +3271,7 @@ SOLDIERTYPE* ReserveTacticalMilitiaSoldierForAutoresolve( UINT8 ubSoldierClass )
 	iEnd = gTacticalStatus.Team[ MILITIA_TEAM ].bLastID;
 
 	for( i = iStart; i <= iEnd; i++ )
-	{		
+	{
 		if( MercPtrs[ i ]->bActive && MercPtrs[ i ]->bInSector && MercPtrs[ i ]->stats.bLife && !TileIsOutOfBounds(MercPtrs[ i ]->sGridNo))
 		{
 			if( MercPtrs[ i ]->ubSoldierClass == ubSoldierClass )
@@ -3378,7 +3378,7 @@ SOLDIERTYPE* TacticalCreateArmedCivilian( UINT8 usSoldierClass )
 	// not in autoresolve!
 	if ( guiCurrentScreen == AUTORESOLVE_SCREEN )
 		return NULL;
-	
+
 	memset( &bp, 0, sizeof(BASIC_SOLDIERCREATE_STRUCT) );
 	RandomizeRelativeLevel( &(bp.bRelativeAttributeLevel), usSoldierClass );
 	RandomizeRelativeLevel( &(bp.bRelativeEquipmentLevel), usSoldierClass );
@@ -3407,7 +3407,7 @@ SOLDIERTYPE* TacticalCreateArmedCivilian( UINT8 usSoldierClass )
 }
 
 SOLDIERTYPE* TacticalCreateCivilian( INT32 sGridNo, UINT8 usCivilianGroup, INT8 usTraderID,
-									 INT8 sBodyType, INT8 aVest, INT8 aPants, INT8 aHair, INT8 aSkin, 
+									 INT8 sBodyType, INT8 aVest, INT8 aPants, INT8 aHair, INT8 aSkin,
 									 INT16 sItem1, INT16 sItem2, INT16 sItem3, INT16 sItem4 )
 {
 	// not in autoresolve!
@@ -3460,7 +3460,7 @@ SOLDIERTYPE* TacticalCreateCivilian( INT32 sGridNo, UINT8 usCivilianGroup, INT8 
 		PlaceObjectInSoldierCreateStruct( &MercCreateStruct, &gTempObject );
 	}
 
-	pSoldier = TacticalCreateSoldier( &MercCreateStruct, &ubID );	
+	pSoldier = TacticalCreateSoldier( &MercCreateStruct, &ubID );
 
 	if ( pSoldier )
 	{
@@ -3549,7 +3549,7 @@ SOLDIERTYPE* TacticalCreateEnemyAssassin(UINT8 disguisetype)
 		// set correct stats
 		pSoldier->stats.bLife = pSoldier->stats.bLifeMax = (INT8)( 70 + Random( 26 ) );
 		pSoldier->stats.bAgility = (INT8)( 70 + Random( 16 ) );
-				
+
 		// add assassin flag
 		pSoldier->usSoldierFlagMask |= (SOLDIER_COVERT_SOLDIER|SOLDIER_ASSASSIN);
 
@@ -3587,7 +3587,7 @@ void CreateAssassin(UINT8 disguisetype)
 				if ( ++tries > 20 )
 					return;
 
-				sGridNo = RandomGridNo();				
+				sGridNo = RandomGridNo();
 			}
 			// a valid starting gridno must be valid, not in a structure, not in water, and not too near to our mercs
 			while( TileIsOutOfBounds(sGridNo) || FindStructure( sGridNo, STRUCTURE_BLOCKSMOVES ) || TERRAIN_IS_WATER( gpWorldLevelData[ sGridNo ].ubTerrainID) || GridNoNearPlayerMercs(sGridNo,  12) );
@@ -3661,13 +3661,13 @@ INT32 GetSittableGridNoInRoom(UINT16 usRoom, BOOLEAN fEnoughSpace)
 				if ( fEnoughSpace )
 				{
 					// we have to make sure that the gridno is deep in the room, as otherwise the gridno might be corrected to be on the other side of a wall
-					if ( ( gusWorldRoomInfo[ NewGridNo( uiLoop, DirectionInc(NORTH) ) ] != usRoom ) 
+					if ( ( gusWorldRoomInfo[ NewGridNo( uiLoop, DirectionInc(NORTH) ) ] != usRoom )
 						|| ( gusWorldRoomInfo[ NewGridNo( uiLoop, DirectionInc(EAST) ) ] != usRoom )
 						|| ( gusWorldRoomInfo[ NewGridNo( uiLoop, DirectionInc(SOUTH) ) ] != usRoom )
 						|| ( gusWorldRoomInfo[ NewGridNo( uiLoop, DirectionInc(WEST) ) ] != usRoom ) )
 									continue;
 				}
-								
+
 				// check wether this location is sittable
 				if ( IsLocationSittable( uiLoop, 0 ) )
 				{
@@ -3726,7 +3726,7 @@ void CreatePrisonerOfWar()
 		bPowBodyType = REGMALE;
 
 	RandomizeNewSoldierStats( &MercCreateStruct );
-	
+
 	SOLDIERTYPE* pSoldier = TacticalCreateSoldier( &MercCreateStruct, &ubID );
 
 	if ( pSoldier )
@@ -3787,7 +3787,7 @@ void CreateDownedPilot( )
 
 	SOLDIERCREATE_STRUCT		MercCreateStruct;
 	UINT8						ubID;
-	
+
 	MercCreateStruct.initialize( );
 	MercCreateStruct.bTeam = CIV_TEAM;
 	MercCreateStruct.ubProfile = NO_PROFILE;
@@ -3797,7 +3797,7 @@ void CreateDownedPilot( )
 	MercCreateStruct.sInsertionGridNo = sGridNo;
 	MercCreateStruct.ubDirection = Random( NUM_WORLD_DIRECTIONS );
 	MercCreateStruct.ubBodyType = Random( ADULTFEMALEMONSTER );
-	
+
 	RandomizeNewSoldierStats( &MercCreateStruct );
 
 	SOLDIERTYPE* pSoldier = TacticalCreateSoldier( &MercCreateStruct, &ubID );
@@ -3809,10 +3809,10 @@ void CreateDownedPilot( )
 		pSoldier->bBleeding = pSoldier->stats.bLifeMax - pSoldier->stats.bLife;
 
 		AddSoldierToSector( pSoldier->ubID );
-		
+
 		// set correct civ group
 		pSoldier->ubCivilianGroup = DOWNEDPILOT_CIV_GROUP;
-		
+
 		// make him wear administrator uniform
 		UINT16 usPaletteAnimSurface = LoadSoldierAnimationSurface( pSoldier, pSoldier->usAnimState );
 
@@ -4090,8 +4090,8 @@ void CopyProfileItems( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCreateStruc
 						// since keys depend on 2 values, they pretty much have to be hardcoded.
 						// and if a case isn't handled here it's better to not give any key than
 						// to provide one which doesn't work and would confuse everything.
-						
-						#ifdef JA2UB						
+
+						#ifdef JA2UB
 							if ( pCreateStruct->ubProfile == MORRIS_UB )
 						{
 								if ( pProfile->inv[ cnt ] >= KEY_1 && pProfile->inv[ cnt ] <= KEY_32)
@@ -4105,10 +4105,10 @@ void CopyProfileItems( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCreateStruc
 								//}
 							}
 						#endif
-						
+
 						switch( pCreateStruct->ubProfile )
 						{
-#ifdef JA2UB						
+#ifdef JA2UB
 
 #endif
 
@@ -4209,7 +4209,7 @@ void TrashAllSoldiers( )
 
 UINT8 GetLocationModifier( UINT8 ubSoldierClass )
 {
-	UINT8 ubLocationModifier = 0;	
+	UINT8 ubLocationModifier = 0;
 	INT16 sSectorX, sSectorY, sSectorZ;
 
 	// Flugente: why do we always crash the game if something does not work?
@@ -4342,7 +4342,7 @@ UINT8 GetLocationModifier( UINT8 ubSoldierClass )
 		}
 		break;
 	}
-#else	
+#else
 	// HEADROCK HAM 5:
 	// The calculation has been replaced with an XML table.
 
@@ -4606,7 +4606,7 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 		(ubSolClass == SOLDIER_CLASS_ELITE || ubSolClass == SOLDIER_CLASS_ELITE_MILITIA ||
 		ubSolClass == SOLDIER_CLASS_ARMY || ubSolClass == SOLDIER_CLASS_REG_MILITIA) )
 	{
-		// set the first in command 
+		// set the first in command
 		if ( bNumSquadleadersInArmy == 0 )
 		{
 			if ( ubSolClass == SOLDIER_CLASS_ELITE || ubSolClass == SOLDIER_CLASS_ELITE_MILITIA )
@@ -5168,7 +5168,7 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 			}
 		}
 
-		// HEAVY WEAPONS TRAIT 
+		// HEAVY WEAPONS TRAIT
 		if ( foundMortar || foundRocketlauncher || foundGrenadelauncher )
 		{
 			// setup basic chances based on soldier type

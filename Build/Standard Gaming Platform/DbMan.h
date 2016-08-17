@@ -19,7 +19,7 @@
 //
 //**************************************************************************
 
-#include "types.h"
+#include "Types.h"
 
 //**************************************************************************
 //
@@ -59,7 +59,7 @@ typedef UINT16		HDBINDEX;
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 extern BOOLEAN	InitializeDatabaseManager( STR strIndexFilename );
 extern void		ShutdownDatabaseManager( void );
 extern void		DbDebug( BOOLEAN f );

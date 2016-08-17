@@ -13,7 +13,7 @@
 	#include "Debug.h"
 
 	#if defined(JA2) || defined( UTIL )
-		#include "video.h"
+		#include "Video.h"
 	#else
 		#include "video2.h"
 	#endif
@@ -77,7 +77,7 @@ BOOLEAN InitializeFileDatabase( )
 	//allocate memory for the each of the library headers
 	uiSize = NUMBER_OF_LIBRARIES * sizeof( LibraryHeaderStruct );
 	if( uiSize )
-	{ 
+	{
 		gFileDataBase.pLibraries = (LibraryHeaderStruct *) MemAlloc( uiSize );
 		CHECKF( gFileDataBase.pLibraries );
 
@@ -126,12 +126,12 @@ BOOLEAN InitializeFileDatabase( )
 
 //*****************************************************************************************
 // ReopenCDLibraries
-// 
+//
 // Closes all CD libraries, then reopens them. This function needs to be called when CDs
 // are changed.
-// 
+//
 // Returns BOOLEAN			- TRUE, always
-// 
+//
 // Created:	3/21/00 Derek Beland
 //*****************************************************************************************
 BOOLEAN ReopenCDLibraries(void)
@@ -229,7 +229,7 @@ BOOLEAN InitializeLibrary( STR pLibraryName, LibraryHeaderStruct *pLibHeader, BO
 	UINT32	uiLoop;
 	DIRENTRY DirEntry;
 	LIBHEADER	LibFileHeader;
-	UINT32	uiCount=0;	
+	UINT32	uiCount=0;
 	CHAR8		zTempPath[ SGPFILENAME_LEN ];
 
 	//open the library for reading ( if it exists )
@@ -501,7 +501,7 @@ INT16 sLoop1, sBestMatch=-1;
 			}
 
 			//compare the library name to the file name that is passed in
-			else 
+			else
 			{
 				// if the directory paths are the same, to the length of the lib's path
 				if( _strnicmp( gFileDataBase.pLibraries[ sLoop1 ].sLibraryPath, pFileName, strlen( gFileDataBase.pLibraries[ sLoop1 ].sLibraryPath ) ) == 0 )
@@ -818,7 +818,7 @@ BOOLEAN CloseLibraryFile( INT16 sLibraryID, UINT32 uiFileID )
 		//if the uiFileID is invalid
 		if( (uiFileID >= (UINT32)gFileDataBase.pLibraries[ sLibraryID ].iSizeOfOpenFileArray ) )
 			return( FALSE );
-			
+
 		//if the file is not opened, dont close it
 		if( gFileDataBase.pLibraries[ sLibraryID ].pOpenFiles[ uiFileID ].uiFileID != 0 )
 		{
@@ -1075,8 +1075,8 @@ BOOLEAN GetLibraryFileTime( INT16 sLibraryID, UINT32 uiFileNum, SGP_FILETIME	*pL
 
 
 	/* try to find the filename using a binary search algorithm: */
-	ppDirEntry = (DIRENTRY **) bsearch( gFileDataBase.pLibraries[ sLibraryID ].pOpenFiles[ uiFileNum ].pFileHeader->pFileName, 
-																			(DIRENTRY *) pAllEntries, 
+	ppDirEntry = (DIRENTRY **) bsearch( gFileDataBase.pLibraries[ sLibraryID ].pOpenFiles[ uiFileNum ].pFileHeader->pFileName,
+																			(DIRENTRY *) pAllEntries,
 																			LibFileHeader.iEntries,
 																			sizeof( DIRENTRY ), (int (*)(const void*, const void*))CompareDirEntryFileNames );
 

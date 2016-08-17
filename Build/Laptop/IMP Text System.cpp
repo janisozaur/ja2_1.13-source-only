@@ -6,7 +6,7 @@
 	#include "Encrypted File.h"
 	#include "IMP Text System.h"
 	#include "CharProfile.h"
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "IMP Personality Quiz.h"
 	#include "IMP Personality Finish.h"
 	#include "IMP Attribute Selection.h"
@@ -15,29 +15,29 @@
 	#include "IMP Confirm.h"
 	#include "GameSettings.h"
 	#include "Text.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #ifdef JA2UB
-	#include "laptop.h"
-	#include "email.h"
+	#include "Laptop.h"
+	#include "Email.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "soldier profile.h"
+	#include "Cursors.h"
+	#include "Soldier Profile.h"
 	#include "IMP Compile Character.h"
 	#include "IMP Voices.h"
 	#include "IMP Portraits.h"
 	#include "Game Clock.h"
-	#include "environment.h"
+	#include "Environment.h"
 	#include "AimMembers.h"
 	#include "Random.h"
 	#include "Text.h"
 	#include "LaptopSave.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "PostalService.h"
-	#include "faces.h"
+	#include "Faces.h"
 	#include "GameSettings.h"
 #endif
 
@@ -95,7 +95,7 @@ void LoadAndDisplayIMPText( INT16 sStartX, INT16 sStartY, INT16 sLineLength, INT
 	}
 	else
 	{
-	LoadEncryptedDataFromFile(IMPTEXT_EDT_FILE_JA2, sString, ( UINT32 ) ( ( sIMPTextRecordNumber ) * IMP_SEEK_AMOUNT ), IMP_SEEK_AMOUNT);	
+	LoadEncryptedDataFromFile(IMPTEXT_EDT_FILE_JA2, sString, ( UINT32 ) ( ( sIMPTextRecordNumber ) * IMP_SEEK_AMOUNT ), IMP_SEEK_AMOUNT);
 	}
 #else
 	LoadEncryptedDataFromFile("BINARYDATA\\IMPText.EDT", sString, ( UINT32 ) ( ( sIMPTextRecordNumber ) * IMP_SEEK_AMOUNT ), IMP_SEEK_AMOUNT);
@@ -167,7 +167,7 @@ void PrintImpText( void )
 		break;
 		case ( IMP_MAIN_PAGE ):
 		// title
-			
+
 			LoadAndDisplayIMPText( LAPTOP_SCREEN_UL_X - 111, LAPTOP_TITLE_Y, sWidth, IMP_MAIN_1, FONT14ARIAL, FONT_WHITE, TRUE, CENTER_JUSTIFIED);
 
 			// set up for IMP text for title box area

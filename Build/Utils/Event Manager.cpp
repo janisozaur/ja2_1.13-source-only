@@ -4,8 +4,8 @@
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "container.h"
-	#include "wcheck.h"
+	#include "Container.h"
+	#include "WCheck.h"
 	#include "Event Manager.h"
 	#include "Timer Control.h"
 #endif

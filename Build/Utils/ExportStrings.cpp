@@ -1,9 +1,9 @@
 #include "ExportStrings.h"
 #include "LocalizedStrings.h"
 #include "Map Screen Interface.h"
-#include "personnel.h"
-#include "soldier profile type.h"
-#include "interface.h"
+#include "Personnel.h"
+#include "Soldier Profile Type.h"
+#include "Interface.h"
 #include "Keys.h"
 #include "Merc Contract.h"
 #include "Campaign Types.h"
@@ -160,7 +160,7 @@ bool Loc::ExportStrings()
 
 	ExportSection(props, L"GameClock",					Loc::gpGameClockString,				0,	TEXT_NUM_GAMECLOCK);
 	ExportSection(props, L"KeyDescription",				Loc::sKeyDescriptionStrings,		0,	2);
-	ExportSection(props, L"WeaponStatsDesc",			Loc::gWeaponStatsDesc,				0,	17);	
+	ExportSection(props, L"WeaponStatsDesc",			Loc::gWeaponStatsDesc,				0,	17);
 	ExportSection(props, L"WeaponStatsFasthelpTactical",Loc::gzWeaponStatsFasthelpTactical, 0,	29);
 	ExportSection(props, L"MiscItemStatsFasthelp",		Loc::gzMiscItemStatsFasthelp,		0,	34);
 	ExportSection(props, L"MoneyStatsDesc",				Loc::gMoneyStatsDesc,				0,	TEXT_NUM_MONEY_DESC);
@@ -316,7 +316,7 @@ bool Loc::ExportStrings()
 	ExportSection(props, L"GIOScreen",					Loc::gzGIOScreenText,				0,	TEXT_NUM_GIO_TEXT);
 	ExportSection(props, L"MPJScreen",					Loc::gzMPJScreenText,				0,	TEXT_NUM_MPJ_TEXT);
 	ExportSection(props, L"MPJHelpText",				Loc::gzMPJHelpText,					0,	10);
-	ExportSection(props, L"MPHScreen",					Loc::gzMPHScreenText,				0,	TEXT_NUM_MPH_TEXT);	
+	ExportSection(props, L"MPHScreen",					Loc::gzMPHScreenText,				0,	TEXT_NUM_MPH_TEXT);
 	ExportSection(props, L"DeliveryLocation",			Loc::pDeliveryLocationStrings,		0,	17);
 	ExportSection(props, L"SkillAtZeroWarning",			Loc::pSkillAtZeroWarning,			0,	1);
 	ExportSection(props, L"IMPBeginScreen",				Loc::pIMPBeginScreenStrings,		0,	1);
@@ -360,7 +360,7 @@ bool Loc::ExportStrings()
 	ExportSection(props, L"MissingIMPSkills",			Loc::MissingIMPSkillsDescriptions,	0,	2);
 	ExportSection(props, L"NewInvMessage",				Loc::NewInvMessage,					0,	TEXT_NUM_NIV);
 	ExportSection(props, L"MPServerMessage",			Loc::MPServerMessage,				0,	13);
-	ExportSection(props, L"MPClientMessage",			Loc::MPClientMessage,				0,	69);	
+	ExportSection(props, L"MPClientMessage",			Loc::MPClientMessage,				0,	69);
 	ExportSection(props, L"MPEdges",					Loc::gszMPEdgesText,				0,	5);
 	ExportSection(props, L"MPTeamName",					Loc::gszMPTeamNames,				0,	5);
 	ExportSection(props, L"MPMapscreen",				Loc::gszMPMapscreenText,			0,	9);
@@ -500,7 +500,7 @@ namespace Loc
 			case 252:          siChar = 1100;  break;
 			case 253:          siChar = 1101;  break;
 			case 254:          siChar = 1102;  break;
-			case 255:          siChar = 1103;  break; //U+044F           d1 8f     CYRILLIC SMALL LETTER YA                
+			case 255:          siChar = 1103;  break; //U+044F           d1 8f     CYRILLIC SMALL LETTER YA
 		}
 		return siChar;
 	}
@@ -535,7 +535,7 @@ void Loc::ExportMercBio()
 	vfs::COpenReadFile rfile("BINARYDATA\\aimbios.edt");
 	vfs::tReadableFile& file = rfile.file();
 
-	vfs::PropertyContainer props; 
+	vfs::PropertyContainer props;
 	for(int i=0; i<40; ++i)
 	{
 		memset(pInfoString,0,SIZE_MERC_BIO_INFO*sizeof(wchar_t));
@@ -545,7 +545,7 @@ void Loc::ExportMercBio()
 		DecodeString(pInfoString,SIZE_MERC_BIO_INFO);
 		Loc::Translate(pInfoString, SIZE_MERC_BIO_INFO, lang);
 		props.setStringProperty(L"Bio", vfs::toString<wchar_t>(i), pInfoString);
-		
+
 		file.read((vfs::Byte*)pAddInfo, SIZE_MERC_ADDITIONAL_INFO);
 		DecodeString(pAddInfo, SIZE_MERC_ADDITIONAL_INFO);
 		Loc::Translate(pAddInfo, SIZE_MERC_ADDITIONAL_INFO, lang);
@@ -562,7 +562,7 @@ void Loc::ExportAIMHistory()
 	vfs::COpenReadFile rfile("BINARYDATA\\AimHist.edt");
 	vfs::tReadableFile& file = rfile.file();
 
-	vfs::PropertyContainer props; 
+	vfs::PropertyContainer props;
 	for(int i=0; i<23; ++i)
 	{
 		memset(pHistLine,0,AIM_HISTORY_LINE_SIZE*sizeof(wchar_t));
@@ -574,8 +574,8 @@ void Loc::ExportAIMHistory()
 	}
 	props.writeToXMLFile(L"Localization/AimHistory.xml", vfs::PropertyContainer::TagMap());
 }
-	
-	
+
+
 void Loc::ExportAIMPolicy()
 {
 	Loc::Language lang = gs_Lang;
@@ -584,7 +584,7 @@ void Loc::ExportAIMPolicy()
 	vfs::COpenReadFile rfile("BINARYDATA\\AimPol.edt");
 	vfs::tReadableFile& file = rfile.file();
 
-	vfs::PropertyContainer props; 
+	vfs::PropertyContainer props;
 	for(int i=0; i<46; ++i)
 	{
 		memset(pPolLine,0,400*sizeof(wchar_t));
@@ -605,7 +605,7 @@ void Loc::ExportAlumniName()
 	vfs::COpenReadFile rfile("BINARYDATA\\AlumName.edt");
 	vfs::tReadableFile& file = rfile.file();
 
-	vfs::PropertyContainer props; 
+	vfs::PropertyContainer props;
 	for(int i=0; i<51; ++i)
 	{
 		memset(pAlumniName,0,AIM_ALUMNI_NAME_SIZE*sizeof(wchar_t));

@@ -1,6 +1,6 @@
 
 //#include "stdafx.h"
-#include "profiler.h"
+#include "Profiler.h"
 
 using namespace std;
 

@@ -61,7 +61,7 @@ namespace DataStructures
 		void RemoveFromEnd(const unsigned num=1);
 		void Clear(bool doNotDeallocate=false);
 		unsigned Size(void) const;
-	
+
 	protected:
 		DataStructures::List<data_type> orderedList;
 	};
@@ -189,7 +189,7 @@ namespace DataStructures
 		{
 			orderedList.Insert(data,index);
 			return index;
-		}		
+		}
 	}
 
 	template <class key_type, class data_type, int (*default_comparison_function)(const key_type&, const data_type&)>

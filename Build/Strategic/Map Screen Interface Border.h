@@ -19,9 +19,9 @@ enum{
 
 enum{
 	EAST_DIR =	0,
-	WEST_DIR,	
-	NORTH_DIR, 
-	SOUTH_DIR, 
+	WEST_DIR,
+	NORTH_DIR,
+	SOUTH_DIR,
 };
 enum{
 	MAP_BORDER_TOWN_BTN =0,

@@ -3,33 +3,33 @@
 #else
 	#include "sgp.h"
 	#include "Isometric Utils.h"
-	#include "worlddef.h"
-	#include "render fun.h"
-	#include "renderworld.h"
-	#include "dialogue control.h"
-	#include "structure wrap.h"
-	#include "font control.h"
-	#include "pathai.h"
-	#include "overhead.h"
-	#include "smell.h"
+	#include "WorldDef.h"
+	#include "Render Fun.h"
+	#include "RenderWorld.h"
+	#include "Dialogue Control.h"
+	#include "Structure Wrap.h"
+	#include "Font Control.h"
+	#include "PathAI.h"
+	#include "Overhead.h"
+	#include "Smell.h"
 	#include "fov.h"
-	#include "rotting corpses.h"
-	#include "keys.h"
-	#include "english.h"
+	#include "Rotting Corpses.h"
+	#include "Keys.h"
+	#include "English.h"
 	#include "Random.h"
-	#include "input.h"
-	#include "exit grids.h"
-	#include "environment.h"
-	#include "worldman.h"
+	#include "Input.h"
+	#include "Exit Grids.h"
+	#include "Environment.h"
+	#include "WorldMan.h"
 	#include "Fog Of War.h"
-	#include "Strategicmap.h"
-	#include "boxing.h"
-	#include "opplist.h"
-	#include "lighting.h"
-	#include "Soldier macros.h"
+	#include "StrategicMap.h"
+	#include "Boxing.h"
+	#include "Opplist.h"
+	#include "Lighting.h"
+	#include "Soldier Macros.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include "GameSettings.h"
 
 /* view directions */
@@ -332,7 +332,7 @@ void RevealRoofsAndItems(SOLDIERTYPE *pSoldier, UINT32 itemsToo, BOOLEAN fShowLo
 		return;
 	}
 
-	// Return if this guy has no gridno, has bad life, etc	
+	// Return if this guy has no gridno, has bad life, etc
 	if(TileIsOutOfBounds(pSoldier->sGridNo) || !pSoldier->bInSector || pSoldier->stats.bLife < OKLIFE )
 	{
 		return;

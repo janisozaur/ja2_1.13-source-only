@@ -6,11 +6,11 @@
 #include "Text.h"
 #include "Isometric Utils.h"
 #include "DisplayCover.h"
-#include "worldman.h"
+#include "WorldMan.h"
 #include "Vehicles.h"
-#include "soldier macros.h"
+#include "Soldier Macros.h"
 #include "Soldier Add.h"
-#include "PATHAI.h"
+#include "PathAI.h"
 #include "Points.h"
 #include "Handle UI.h"
 #include "Squads.h"
@@ -41,7 +41,7 @@ VehicleMenuItem::SetupPopup(CHAR* name)
 {
 	// create a popup
 	gPopup = new POPUP(name);
-	
+
 	// add a callback that lets the keyboard handler know we're done (and ready to pop up again)
 	gPopup->setCallback(POPUP_CALLBACK_HIDE, new popupCallbackFunction<void, void>( &HideVehicleMenu ) );
 }
@@ -71,7 +71,7 @@ VehicleSelection::Setup( UINT32 aVal )
 	SetupPopup("VehicleSelection");
 
 	POPUP_OPTION *pOption;
-	
+
 	CHAR16 pStr[300];
 
 	// create entries for each vehicle seat
@@ -87,7 +87,7 @@ VehicleSelection::Setup( UINT32 aVal )
 
 		// if seat is already taken, grey it out
 		if ( pVehicleList[ bVehicleID ].pPassengers[ i ] != NULL )
-		{			
+		{
 			if( pCurrentSoldier->flags.uiStatusFlags & ( SOLDIER_DRIVER | SOLDIER_PASSENGER ) )
 			{
 				if( pVehicleList[ bVehicleID ].pPassengers[ i ] == pCurrentSoldier )
@@ -105,7 +105,7 @@ VehicleSelection::Setup( UINT32 aVal )
 			{
 				// Set this option off.
 				pOption->setAvail(new popupCallbackFunction<bool,void*>( &Popup_VehicleMenuOptionOff, NULL ));
-			}			
+			}
 		}
 
 		// block swapping between different compartments
@@ -129,15 +129,15 @@ VehicleSelection::Setup( UINT32 aVal )
 	swprintf( pStr, pSkillMenuStrings[SKILLMENU_CANCEL] );
 	pOption = new POPUP_OPTION(&std::wstring( pStr ), new popupCallbackFunction<void,UINT32>( &Wrapper_Cancel_VehicleSelection, 0 ) );
 	GetPopup()->addOption( *pOption );
-		
+
 	// grab soldier's x,y screen position
 	INT16 sX, sY;
 	GetGridNoScreenPos( sVehicleMenuTargetGridNo, (UINT8)gsInterfaceLevel, &sX, &sY );
-		
+
 	if( sX < 0 ) sX = 0;
 	if( sY < 0 ) sY = 0;
 
-	usVehicleMenuPosX = sX + 30;		
+	usVehicleMenuPosX = sX + 30;
 	usVehicleMenuPosY = sY;
 
 	if ( ( usVehicleMenuPosX + 200 ) > SCREEN_WIDTH )
@@ -172,7 +172,7 @@ VehicleSelection::Functions( UINT32 aVal  )
 	{
 		// Find a gridno closest to sweetspot...
 		sActionGridNo = FindGridNoFromSweetSpotWithStructDataFromSoldier( pCurrentSoldier, pCurrentSoldier->usUIMovementMode, 5, &ubDirection, 0, pCurrentVehicle, TRUE );
-				
+
 		if (!TileIsOutOfBounds(sActionGridNo))
 		{
 			// Calculate AP costs...
@@ -207,7 +207,7 @@ VehicleSelection::Functions( UINT32 aVal  )
 			}
 		}
 	}
-	
+
 	Cancel();
 	gVehicleSelection.Cancel();
 }

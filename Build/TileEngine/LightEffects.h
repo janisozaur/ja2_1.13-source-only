@@ -26,7 +26,7 @@ typedef struct
 	// Flugente: added variables necessary for dynamic (flash-)lighting
 	INT32		flags;
 	UINT8		ubOwner;
-	
+
 } LIGHTEFFECT;
 
 #define LIGHTEFFECT_OLDSIZE				20			// Flugente: the old size of LIGHTEFFECT (before Gameversion DYNAMIC_FLASHLIGHTS)

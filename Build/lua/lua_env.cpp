@@ -1,5 +1,5 @@
 #include "Lua Interpreter.h"
-#include "environment.h"
+#include "Environment.h"
 
 #define ENVIRONMENT_CLASS "ja2_EnvironmentClass"
 

@@ -19,13 +19,13 @@
 	#include "Radar Screen.h"
 	#include "Interface Items.h"
 	#include "Interface Utils.h"
-	#include "VObject_Blitters.h"
+	#include "VObject_blitters.h"
 	#include "Finances.h"
 	#include "Text.h"
 	#include "Cursor Control.h"
 	#include "Input.h"
 	#include "Arms Dealer Init.h"
-	#include "english.h"
+	#include "English.h"
 	#include "Soldier Add.h"
 	#include "Faces.h"
 	#include "Dialogue Control.h"
@@ -41,16 +41,16 @@
 	#include "Quests.h"
 	#include "Weapons.h"
 	#include "MessageBoxScreen.h"
-	#include "LINE.H"
-	#include "Drugs and Alcohol.h"
+	#include "Line.h"
+	#include "Drugs And Alcohol.h"
 	#include "Map Screen Interface.h"
-	#include "Soldier macros.h"
-	#include "armsdealerinvinit.h"
-	#include "opplist.h"
-	#include "los.h"
+	#include "Soldier Macros.h"
+	#include "ArmsDealerInvInit.h"
+	#include "Opplist.h"
+	#include "LOS.h"
 	#include "NPC.h"
 	#include "Soldier Create.h"
-	#include "PATHAI.h"
+	#include "PathAI.h"
 	#include "Points.h"
 	#include "InterfaceItemImages.h"
 	#include "Encyclopedia_new.h"
@@ -61,8 +61,8 @@
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
 #include "Ja25_Tactical.h"
 #include "ub_config.h"
 #endif
@@ -795,7 +795,7 @@ UINT32	ShopKeeperScreenHandle()
 	RestoreBackgroundRects();
 
 	GetShopKeeperInterfaceUserInput();
-	
+
 	// Check for any newly added items...
 	if ( gpSMCurrentMerc->flags.fCheckForNewlyAddedItems )
 	{
@@ -805,7 +805,7 @@ UINT32	ShopKeeperScreenHandle()
 	}
 
 	HandleShopKeeperInterface();
-	
+
 	if( gubSkiDirtyLevel == SKI_DIRTY_LEVEL2 )
 	{
 		RenderShopKeeperInterface();
@@ -832,14 +832,14 @@ UINT32	ShopKeeperScreenHandle()
 	}
 
 	RenderButtons( );
-	
+
 	//CHRISL: If we put this function call here, we overwrite the bullet graphic.  I don't know why.  I just know it happens.
 	//RenderItemDescriptionBox( );
-	
+
 	// render help
 	SaveBackgroundRects( );
 	RenderButtonsFastHelp( );
-	
+
 	ExecuteBaseDirtyRectQueue();
 	EndFrameBufferRender();
 
@@ -860,7 +860,7 @@ UINT32	ShopKeeperScreenHandle()
 
 		gfDisplayNoRoomMsg = FALSE;
 	}
-	
+
 	return( SHOPKEEPER_SCREEN );
 }
 
@@ -887,7 +887,7 @@ BOOLEAN EnterShopKeeperInterface()
 
 	SOLDIERTYPE* pSoldier = MercPtrs[ gusSelectedSoldier ];
 	SOLDIERTYPE* pShopkeeper = NULL;
-	
+
 	if ( gusIDOfCivTrader != NOBODY )
 		pShopkeeper = MercPtrs[gusIDOfCivTrader];
 	else
@@ -964,10 +964,10 @@ BOOLEAN EnterShopKeeperInterface()
 
 		return( FALSE );
 	}
-	
-	//Heinz: 22.02.09 shadowing of tactical screen for further using as a background 
+
+	//Heinz: 22.02.09 shadowing of tactical screen for further using as a background
 	ShadowVideoSurfaceRect( guiCornerWhereTacticalIsStillSeenImage, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
-	
+
 	//Clear out all the save background rects
 	EmptyBackgroundRects( );
 
@@ -1037,16 +1037,16 @@ ATM:
 
 			//Create the string for the face file name
 			//sprintf( zTemp, "FACES\\33FACE\\%02d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
-						
+
 			if ( gProfilesIMP[ pSoldier->ubProfile ].ProfilId == pSoldier->ubProfile )
 			{
-				sprintf( zTemp, "IMPFACES\\33FACE\\%02d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );	
-			} 
+				sprintf( zTemp, "IMPFACES\\33FACE\\%02d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
+			}
 			else
-			{			
+			{
 				sprintf( zTemp, "FACES\\33FACE\\%02d.sti", gMercProfiles[ pSoldier->ubProfile ].ubFaceIndex );
 			}
-			
+
 			//While we are at it, add their small face
 			VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 			FilenameForBPP( zTemp, VObjectDesc.ImageFile);
@@ -1078,7 +1078,7 @@ ATM:
 										BUTTON_NEWTOGGLE, MSYS_PRIORITY_HIGHEST,
 										DEFAULT_MOVE_CALLBACK, BtnSKI_InvPageDownButtonCallback );
 	SpecifyDisabledButtonStyle( guiSKI_InvPageDownButton, DISABLED_STYLE_HATCHED );
-	
+
 //Evaluate:
 	EnableDisableShopkeeperButtons(SHOPKEEPER_SCREEN, ACTIVATE_BUTTON);
 	//	guiSKI_EvaluateButtonImage = LoadButtonImage("INTERFACE\\TradeButtons.sti", -1,0,-1,1,-1 );
@@ -1129,7 +1129,7 @@ ATM:
 	MSYS_DefineRegion( &gSKI_EntireScreenMouseRegions, 0, 0, (SCREEN_WIDTH - 1), (SCREEN_HEIGHT - INV_INTERFACE_HEIGHT), MSYS_PRIORITY_HIGH-2,
 						 CURSOR_NORMAL, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK);
 	MSYS_AddRegion( &gSKI_EntireScreenMouseRegions );
-	
+
 /*
 //ATM:
 	//Blanket the tactical buttons where the ATM will go
@@ -1140,7 +1140,7 @@ ATM:
 
 	//Create the mouse regions for the inventory slot
 	CreateSkiInventorySlotMouseRegions( );
-	
+
 	//Create the mouse region to limit the movement of the item cursos
 	MSYS_DefineRegion( &gSkiInventoryMovementAreaMouseRegions, SKI_ITEM_MOVEMENT_AREA_X, SKI_ITEM_MOVEMENT_AREA_Y, (UINT16)(SKI_ITEM_MOVEMENT_AREA_X+SKI_ITEM_MOVEMENT_AREA_WIDTH), (UINT16)(SKI_ITEM_MOVEMENT_AREA_Y+SKI_ITEM_MOVEMENT_AREA_HEIGHT), MSYS_PRIORITY_HIGH-1,
 				CURSOR_NORMAL, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK ); //SelectSkiInventoryMovementAreaRegionCallBack
@@ -1148,12 +1148,12 @@ ATM:
 
 	//Disable the region that limits the movement of the cursor with the item
 	MSYS_DisableRegion( &gSkiInventoryMovementAreaMouseRegions );
-	
+
 	//Create the mouse region for the shopkeeper's face
 	MSYS_DefineRegion( &gArmsDealersFaceMouseRegions, SKI_FACE_X, SKI_FACE_Y, (UINT16)(SKI_FACE_X+SKI_FACE_WIDTH), (UINT16)(SKI_FACE_Y+SKI_FACE_HEIGHT), MSYS_PRIORITY_HIGH-1,
 				CURSOR_NORMAL, MSYS_NO_CALLBACK, SelectArmsDealersFaceRegionCallBack );
 	MSYS_AddRegion( &gArmsDealersFaceMouseRegions );
-	
+
 	//Create the atm button
 //ATM:
 	//	CreateSkiAtmButtons();
@@ -1171,7 +1171,7 @@ ATM:
 
 	//Setup the currently selected arms dealer
 	InitializeShopKeeper( TRUE );
-	
+
 	//Set the flag indicating that we are in the shop keeper interface
 	guiTacticalInterfaceFlags |= INTERFACE_SHOPKEEP_INTERFACE;
 
@@ -1252,7 +1252,7 @@ ATM:
 
 	// by default re-enable calls to PerformTransaction()
 	gfPerformTransactionInProgress = FALSE;
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 UB
 	//if the dealer is RAUL
 	if( gbSelectedArmsDealerID == ARMS_DEALER_RAUL )
@@ -1289,7 +1289,7 @@ BOOLEAN InitShopKeepersFace( UINT8 usProfileID )
 	//Set it so the face cannot be set InActive
 	if ( giShopKeeperFaceIndex > -1 )
 		gFacesData[ giShopKeeperFaceIndex ].uiFlags |= FACE_INACTIVE_HANDLED_ELSEWHERE;
-	
+
 	RenderAutoFace( giShopKeeperFaceIndex );
 
 	return(TRUE);
@@ -1384,7 +1384,7 @@ BOOLEAN ExitShopKeeperInterface()
 	MSYS_EnableRegion(&gRadarRegion);
 
 	gfSMDisableForItems = FALSE;
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 UB
 	//Check to see if a merc should say something
 	//CheckForValidQuotesWhenLeavingDealer( gTalkPanel.ubCharNum );
@@ -1395,7 +1395,7 @@ BOOLEAN ExitShopKeeperInterface()
 
 		INT8	bSoldierID=-1;
 
-			
+
 		//Have a new merc say a quote
 		bSoldierID = RandomSoldierIdFromNewMercsOnPlayerTeam();
 		if( bSoldierID != -1 )
@@ -1440,7 +1440,7 @@ void HandleShopKeeperInterface()
 
 		return;
 	}
-	
+
 	if( gubSkiDirtyLevel == SKI_DIRTY_LEVEL2 )
 	{
 		fInterfacePanelDirty = DIRTYLEVEL2;
@@ -1554,12 +1554,12 @@ BOOLEAN RenderShopKeeperInterface()
 	CHAR16	zMoney[128];
 	HVSURFACE hDestVSurface, hSrcVSurface;
 	SGPRect		SrcRect;
-	
+
 	if( InItemDescriptionBox( ) && pShopKeeperItemDescObject != NULL )
 	{
 		return( TRUE );
 	}
-	
+
 //	RenderSMPanel( &fDirty );
 
 //	RenderTacticalInterface( );
@@ -1587,7 +1587,7 @@ BOOLEAN RenderShopKeeperInterface()
 
 	//Display the total value text
 	DisplayWrappedString( SKI_TOTAL_VALUE_X, SKI_TOTAL_VALUE_Y, SKI_TOTAL_VALUE_WIDTH, 2, SKI_LABEL_FONT, SKI_TITLE_COLOR, SKI_Text[ SKI_TEXT_TOTAL_VALUE ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	//Display the players current balance text
 	DisplayWrappedString( SKI_PLAYERS_CURRENT_BALANCE_X, SKI_PLAYERS_CURRENT_BALANCE_Y, SKI_PLAYERS_CURRENT_BALANCE_WIDTH, 2, SKI_LABEL_FONT, SKI_TITLE_COLOR, SkiMessageBoxText[ SKI_PLAYERS_CURRENT_BALANCE ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
@@ -1670,28 +1670,28 @@ void RestoreTacticalBackGround()
 
 	//BltVSurfaceUsingDD( hDestVSurface, hSrcVSurface, VO_BLT_SRCTRANSPARENCY, SKI_TACTICAL_BACKGROUND_START_X, SKI_TACTICAL_BACKGROUND_START_Y, (RECT*)&SrcRect );
 	// Top
-	SrcRect.iLeft = 0; 
-	SrcRect.iTop = 0; 
-	SrcRect.iRight = SCREEN_WIDTH; 
-	SrcRect.iBottom = SCREEN_Y_OFFSET; 
+	SrcRect.iLeft = 0;
+	SrcRect.iTop = 0;
+	SrcRect.iRight = SCREEN_WIDTH;
+	SrcRect.iBottom = SCREEN_Y_OFFSET;
 	BltVSurfaceUsingDD( hDestVSurface, hSrcVSurface, VO_BLT_SRCTRANSPARENCY, SrcRect.iLeft, SrcRect.iTop, (RECT*)&SrcRect );
 	// Bottom
-	SrcRect.iLeft = 0; 
-	SrcRect.iTop = SCREEN_Y_OFFSET + SKI_INTERFACE_HEIGHT; 
-	SrcRect.iRight = SCREEN_WIDTH; 
-	SrcRect.iBottom = SCREEN_HEIGHT - INV_INTERFACE_HEIGHT; 
+	SrcRect.iLeft = 0;
+	SrcRect.iTop = SCREEN_Y_OFFSET + SKI_INTERFACE_HEIGHT;
+	SrcRect.iRight = SCREEN_WIDTH;
+	SrcRect.iBottom = SCREEN_HEIGHT - INV_INTERFACE_HEIGHT;
 	BltVSurfaceUsingDD( hDestVSurface, hSrcVSurface, VO_BLT_SRCTRANSPARENCY, SrcRect.iLeft, SrcRect.iTop, (RECT*)&SrcRect );
 	// Left
-	SrcRect.iLeft = 0; 
-	SrcRect.iTop = SCREEN_Y_OFFSET; 
-	SrcRect.iRight = SCREEN_X_OFFSET; 
-	SrcRect.iBottom = SCREEN_Y_OFFSET + SKI_INTERFACE_HEIGHT; 
+	SrcRect.iLeft = 0;
+	SrcRect.iTop = SCREEN_Y_OFFSET;
+	SrcRect.iRight = SCREEN_X_OFFSET;
+	SrcRect.iBottom = SCREEN_Y_OFFSET + SKI_INTERFACE_HEIGHT;
 	BltVSurfaceUsingDD( hDestVSurface, hSrcVSurface, VO_BLT_SRCTRANSPARENCY, SrcRect.iLeft, SrcRect.iTop, (RECT*)&SrcRect );
 	// Right
-	SrcRect.iLeft = SCREEN_X_OFFSET + SKI_INTERFACE_WIDTH; 
-	SrcRect.iTop = SCREEN_Y_OFFSET; 
-	SrcRect.iRight = SCREEN_WIDTH; 
-	SrcRect.iBottom = SCREEN_Y_OFFSET + SKI_INTERFACE_HEIGHT; 
+	SrcRect.iLeft = SCREEN_X_OFFSET + SKI_INTERFACE_WIDTH;
+	SrcRect.iTop = SCREEN_Y_OFFSET;
+	SrcRect.iRight = SCREEN_WIDTH;
+	SrcRect.iBottom = SCREEN_Y_OFFSET + SKI_INTERFACE_HEIGHT;
 	BltVSurfaceUsingDD( hDestVSurface, hSrcVSurface, VO_BLT_SRCTRANSPARENCY, SrcRect.iLeft, SrcRect.iTop, (RECT*)&SrcRect );
 	// WANNE: I think it is not used.
 	//InvalidateRegion( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
@@ -2955,7 +2955,7 @@ UINT32 DisplayInvSlot( UINT16 ubSlotNum, UINT16 usItemIndex, UINT16 usPosX, UINT
 	{
 		//Display the '*' in the bottom right corner of the square
 		swprintf( zTemp, L"*" );
-		DrawTextToScreen( zTemp, (UINT16)(usPosX+SKI_ATTACHMENT_SYMBOL_X_OFFSET), (UINT16)(usPosY+SKI_ATTACHMENT_SYMBOL_Y_OFFSET), 0, TINYFONT1, FONT_BLUE, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );	
+		DrawTextToScreen( zTemp, (UINT16)(usPosX+SKI_ATTACHMENT_SYMBOL_X_OFFSET), (UINT16)(usPosY+SKI_ATTACHMENT_SYMBOL_Y_OFFSET), 0, TINYFONT1, FONT_BLUE, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 	}
 
 	// Display 'JAMMED' if it's jammed
@@ -3255,7 +3255,7 @@ void DrawHatchOnInventory_MilitiaAccess( UINT32 uiSurface, UINT16 usPosX, UINT16
 	ClipRect.iTop = usPosY;
 	ClipRect.iBottom = usPosY + usHeight;
 
-	pDestBuf = LockVideoSurface( uiSurface, &uiDestPitchBYTES );	
+	pDestBuf = LockVideoSurface( uiSurface, &uiDestPitchBYTES );
 	if(usColor == 0){
 		Blt16BPPBufferPixelateRect( (UINT16*)pDestBuf, uiDestPitchBYTES, &ClipRect, Pattern );
 	}
@@ -3433,8 +3433,8 @@ UINT8		ubItemsNotCounted = 0; //ja25 UB
 
 	// we're always count the first one
 	uiTotalPrice = uiUnitPrice;
-	
-#ifdef JA2UB	
+
+#ifdef JA2UB
 	//---------------------------JA25 UB---------------
 	// if NOT pricing just one
 	if ( !fUnitPriceOnly )
@@ -3463,7 +3463,7 @@ UINT8		ubItemsNotCounted = 0; //ja25 UB
 					gfCanSayMakeTransactionQuote = FALSE;
 				}
 
-				//else if 
+				//else if
 				if( gArmsDealerStatus[ gbSelectedArmsDealerID ].ubSpecificDealerFlags & ARMS_DEALER_FLAG__RAUL_SAID_QUOTE_49 )
 				{
 					//if the player hasnt said it before
@@ -3504,7 +3504,7 @@ UINT8		ubItemsNotCounted = 0; //ja25 UB
 		}
 	}
 
-#endif	
+#endif
 	return( uiTotalPrice );
 }
 
@@ -4003,7 +4003,7 @@ void PerformTransaction( UINT32 uiMoneyFromPlayersAccount )
 	UINT32	uiMoneyInPlayersOfferArea = CalculateHowMuchMoneyIsInPlayersOfferArea( );
 	INT32		iChangeToGiveToPlayer = 0;
 	UINT32	uiAvailablePlayerOfferSlots;
-	
+
 	//if the player has already requested to leave, get out
 	if( gfUserHasRequestedToLeave )
 		return;
@@ -4158,7 +4158,7 @@ void PerformTransaction( UINT32 uiMoneyFromPlayersAccount )
 
 			//Move all dealers offered items to the player
 			MoveAllArmsDealersItemsInOfferAreaToPlayersOfferArea( );
-#ifdef JA2UB			
+#ifdef JA2UB
 			//JA25 UB
 			//if the arms dealer is Raul
 			if( gbSelectedArmsDealerID == ARMS_DEALER_RAUL )
@@ -4209,7 +4209,7 @@ void PerformTransaction( UINT32 uiMoneyFromPlayersAccount )
 				else if( iChangeToGiveToPlayer == 0 )
 					StartShopKeeperTalking( SK_QUOTES_PLAYER_HAS_EXACTLY_ENOUGH_MONEY_FOR_TRANSACTION );
 			}
-#ifdef JA2UB			
+#ifdef JA2UB
 			//Bought from dealer specific stuff
 
 			//if the arms dealer is Betty, set fact 403
@@ -4275,7 +4275,7 @@ void MoveAllArmsDealersItemsInOfferAreaToPlayersOfferArea( )
 	//for all items in the dealers items offer area
 	UINT32	uiCnt;
 	INT16		bSlotID=0;
-#ifdef JA2UB	
+#ifdef JA2UB
 	BOOLEAN	fAddItemToPlayer=TRUE;
 #endif
 	//loop through all the slots in the shopkeeper's offer area
@@ -4286,7 +4286,7 @@ void MoveAllArmsDealersItemsInOfferAreaToPlayersOfferArea( )
 		{
 #ifdef JA2UB
 			//JA25 UB
-			fAddItemToPlayer = TRUE; 
+			fAddItemToPlayer = TRUE;
 
 			//if the dealer is betty
 			if( gbSelectedArmsDealerID == ARMS_DEALER_BETTY )
@@ -4316,26 +4316,26 @@ void MoveAllArmsDealersItemsInOfferAreaToPlayersOfferArea( )
 					SetFactTrue( FACT_PLAYER_BOUGHT_A_TEX_VIDEO_FROM_BETTY );
 				}
 			}
-			
+
 			if( fAddItemToPlayer ) //JA25 UB
-			{		
-#endif			
+			{
+#endif
 			bSlotID = AddItemToPlayersOfferArea( NO_PROFILE, &ArmsDealerOfferArea[ uiCnt ], -1 );
 
 			if( bSlotID != -1 )
 			{
 				PlayersOfferArea[ bSlotID ].uiFlags |= ARMS_INV_JUST_PURCHASED;
 
-#ifdef JA2UB				
-				
+#ifdef JA2UB
+
 				//if the player has just purchased the BArrett form Raul
 				if( ( gbSelectedArmsDealerID == ARMS_DEALER_RAUL ) && ( ArmsDealerOfferArea[ uiCnt ].sItemIndex == BARRETT_UB ) )
 				{
 					// set a special flag
 					gArmsDealerStatus[ gbSelectedArmsDealerID ].ubSpecificDealerFlags |= ARMS_DEALER_FLAG__RAUL_HAS_SOLD_BARRETT_TO_PLAYER;
 				}
-					
-#endif					
+
+#endif
 				//if the player has just purchased a VIDEO_CAMERA from Franz Hinkle
 				if( ( gbSelectedArmsDealerID == ARMS_DEALER_FRANZ ) && ( ArmsDealerOfferArea[ uiCnt ].sItemIndex == VIDEO_CAMERA ) )
 				{
@@ -4343,7 +4343,7 @@ void MoveAllArmsDealersItemsInOfferAreaToPlayersOfferArea( )
 					gArmsDealerStatus[ gbSelectedArmsDealerID ].ubSpecificDealerFlags |= ARMS_DEALER_FLAG__FRANZ_HAS_SOLD_VIDEO_CAMERA_TO_PLAYER;
 				}
 			}
-#ifdef JA2UB			
+#ifdef JA2UB
 			}
 #endif
 
@@ -4409,7 +4409,7 @@ void MovePlayerOfferedItemsOfValueToArmsDealersInventory()
 				}
 #ifdef JA2UB
 				else
-				{			
+				{
 					fAddItemToDealer = TRUE;
 
 					//if the dealer is raul
@@ -4443,7 +4443,7 @@ void MovePlayerOfferedItemsOfValueToArmsDealersInventory()
 							fAddItemToDealer = FALSE;
 						}
 					}
-				
+
 					//if we ARE to transfer the item
 					if( fAddItemToDealer )
 					{
@@ -4454,7 +4454,7 @@ void MovePlayerOfferedItemsOfValueToArmsDealersInventory()
 							AddObjectToArmsDealerInventory( gbSelectedArmsDealerID, &( PlayersOfferArea[ uiCnt ].ItemObject ) );
 							PlayersOfferArea[ uiCnt ].ItemObject.initialize();
 						}
-					
+
 					}
 				}
 #else
@@ -4580,7 +4580,7 @@ void BeginSkiItemPointer( UINT8 ubSource, INT16 bSlotNum, BOOLEAN fOfferToDealer
 			}
 			else
 				gpItemPointerSoldier = gpSMCurrentMerc;
-#ifdef JA2UB				
+#ifdef JA2UB
 				//ja25 ub
 			//if the dealer is Raul
 			if( gbSelectedArmsDealerID == ARMS_DEALER_RAUL )
@@ -5058,7 +5058,7 @@ void HandleShopKeeperDialog( UINT8 ubInit )
 						}
 					}
 				}
-#ifdef JA2UB				
+#ifdef JA2UB
 				//ja25 UB
 				// if neither of the more precise quotes fit, or 33 percent of the time anyways
 				if ( ( sRandomQuoteToUse == -1 ) || Chance( 33 ) )
@@ -5098,9 +5098,9 @@ void HandleShopKeeperDialog( UINT8 ubInit )
 					gfCommonQuoteUsedThisSession[ sRandomQuoteToUse ] = TRUE;
 
 					//increase the random quote delay
-					guiRandomQuoteDelayTime += SKI_DEALERS_RANDOM_QUOTE_DELAY_INCREASE_RATE; 
+					guiRandomQuoteDelayTime += SKI_DEALERS_RANDOM_QUOTE_DELAY_INCREASE_RATE;
 				}
-				
+
 #else
 				// if neither of the more precise quotes fit, or 33 percent of the time anyways
 				if ( ( sRandomQuoteToUse == -1 ) || Chance( 33 ) )
@@ -5228,7 +5228,7 @@ void			InitShopKeeperSubTitledText( STR16 pString )
 		UINT16 usActualHeight=0;
 
 		giPopUpBoxId = PrepareMercPopupBox( giPopUpBoxId, BASIC_MERC_POPUP_BACKGROUND, BASIC_MERC_POPUP_BORDER, gsShopKeeperTalkingText, 300, 0, 0, 0, &usActualWidth, &usActualHeight);
-		
+
 //		gusPositionOfSubTitlesX = ( 640 - usActualWidth ) / 2 ;
 		//position it to start under the guys face
 
@@ -6574,14 +6574,14 @@ void EvaluateItemAddedToPlayersOfferArea( INT8 bSlotID, BOOLEAN fFirstOne )
 				{
 					// then he doesn't have quotes 17, 19, or 20, always use 4.  Devin doesn't have 18 either,
 					// while the text of 18 seems wrong for Sam & Howard if offered something they should consider valuable.
-					sQuoteNum = SK_QUOTES_NOT_INTERESTED_IN_THIS_ITEM;			
+					sQuoteNum = SK_QUOTES_NOT_INTERESTED_IN_THIS_ITEM;
 				}
 				else
 				{
 					//if the dealer is BETTY
-					if( gbSelectedArmsDealerID == ARMS_DEALER_BETTY && 
+					if( gbSelectedArmsDealerID == ARMS_DEALER_BETTY &&
 							( Item[ PlayersOfferArea[ bSlotID ].sItemIndex ].usItemClass == IC_AMMO ||
-								Item[ PlayersOfferArea[ bSlotID ].sItemIndex ].usItemClass == IC_GUN 
+								Item[ PlayersOfferArea[ bSlotID ].sItemIndex ].usItemClass == IC_GUN
 							)
 						)
 					{
@@ -6985,7 +6985,7 @@ void InitShopKeeperItemDescBox( OBJECTTYPE *pObject, UINT16 ubPocket, UINT8 ubFr
 			Assert( 0 );
 			return;
 	}
-	
+
 	// WANNE: Only allow right click (item desription box) in the arms dealer inventory
 	if (showItemDescriptionBox)
 	{
@@ -7064,7 +7064,7 @@ void DeleteShopKeeperItemDescBox()
 	//Redraw the face
 	if ( giShopKeeperFaceIndex > -1 )
 		gFacesData[ giShopKeeperFaceIndex ].uiFlags |= FACE_REDRAW_WHOLE_FACE_NEXT_FRAME;
-	
+
 	// enable almost everything!
 
 	CheckForDisabledForGiveItem( );
@@ -7225,7 +7225,7 @@ void SplitComplexObjectIntoSubObjects( OBJECTTYPE *pComplexObject )
 	subObjects.clear();
 	int usItem = pComplexObject->usItem;
 	//CHRISL: This won't work.  As we his MoveThisObjectTo, we reduce ubNumberOfObjects.  If we started with ubNumberOfObjects=4 & x=0,
-	//	our first iteration would be ubNumberOfObjects=3 & x=1.  Then ubNumberOfObjects=2 & x=2, which ends the loop.  We want to 
+	//	our first iteration would be ubNumberOfObjects=3 & x=1.  Then ubNumberOfObjects=2 & x=2, which ends the loop.  We want to
 	//	run the loop ubNumberOfObjects number of times regardless of whether ubNumberOfObjects is reduced.  Use a while loop.
 	//for (int x = 0; x < pComplexObject->ubNumberOfObjects; ++x) {
 	while(pComplexObject->ubNumberOfObjects > 0) {
@@ -7349,7 +7349,7 @@ BOOLEAN ShopkeeperAutoPlaceObject( SOLDIERTYPE * pSoldier, OBJECTTYPE * pObject,
 	// the entire pObj will get memset to 0 by RemoveObjs() if all the items are successfully placed,
 	// so we have to keep a copy to retrieve with every iteration of the loop
 	OBJECTTYPE movingObject;
-	
+
 	while ( pObject->exists() == true )
 	{
 		// figure out how many to place during this loop iteration.  Can't do more than MAX_OBJECTS_PER_SLOT at a time
@@ -7491,7 +7491,7 @@ BOOLEAN SKITryToAddInvToMercsInventory( INVENTORY_IN_SLOT *pInv, SOLDIERTYPE *pS
 {
 	INT8	bMoneyInvPos;
 	BOOLEAN fNewItem = FALSE;
-	
+
 	//if the item is money
 	if( Item[ pInv->sItemIndex ].usItemClass == IC_MONEY )
 	{
@@ -7533,7 +7533,7 @@ BOOLEAN CanMercInteractWithSelectedShopkeeper( SOLDIERTYPE *pSoldier )
 	INT32 sDestGridNo;
 	INT8			bDestLevel;
 	UINT32		uiRange;
-	
+
 	Assert( pSoldier!= NULL );
 	Assert( gbSelectedArmsDealerID != -1 );
 
@@ -7606,7 +7606,7 @@ void AddShopkeeperToGridNo( UINT8 ubProfile, INT32 sGridNo )
 void ExitSKIRequested()
 {
 	BOOLEAN	fPlayerOwnedStuffOnTable = FALSE;
-	
+
 	ShutUpShopKeeper();
 
 	if( !gfRemindedPlayerToPickUpHisStuff )
@@ -7642,7 +7642,7 @@ void ExitSKIRequested()
 			}
 		}
 	}
-	
+
 	// if the player hasn't already requested to leave
 	if( !gfUserHasRequestedToLeave )
 	{
@@ -7677,7 +7677,7 @@ void DealWithItemsStillOnTheTable()
 {
 	UINT8	ubCnt;
 	SOLDIERTYPE *pDropSoldier;
-	
+
 	// in case we have have to drop stuff off at someone's feet, figure out where it's all gonna go
 
 	// use the current merc, unless he's ineligible, then use the selected merc instead.
@@ -7801,7 +7801,7 @@ void DealerGetsBribed( UINT8 ubProfileId, UINT32 uiMoneyAmount )
 void HandlePossibleRepairDelays()
 {
 	UINT32 uiHoursSinceAnyItemsShouldHaveBeenRepaired = 0;
-	
+
 	// assume there won't be a delay
 	gfStartWithRepairsDelayedQuote = FALSE;
 

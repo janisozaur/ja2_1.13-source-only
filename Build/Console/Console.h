@@ -45,17 +45,17 @@ typedef basic_string<TCHAR>			tstring;
 #define TRAY_ICON_ID				1
 
 // timer #defines
-#define TIMER_REPAINT_CHANGE		42	// timer that is started after there 
+#define TIMER_REPAINT_CHANGE		42	// timer that is started after there
 										// were some changes in the console
 
-#define TIMER_REPAINT_MASTER		43	// master timer (needed to repaint 
-										// for some DOS programs, can be 
+#define TIMER_REPAINT_MASTER		43	// master timer (needed to repaint
+										// for some DOS programs, can be
 										// disabled for lower CPU usage)
 
-#define TIMER_SHOW_HIDE_CONSOLE		100	// used to hide console window when 
-										// starting shell process after a 
-										// defined period of time (some 
-										// shells, like 4NT need console 
+#define TIMER_SHOW_HIDE_CONSOLE		100	// used to hide console window when
+										// starting shell process after a
+										// defined period of time (some
+										// shells, like 4NT need console
 										// window visible during startup for
 										// all init options to work properly
 
@@ -123,7 +123,7 @@ typedef basic_string<TCHAR>			tstring;
 
 class Console {
 	public: // ctor/dtor
-		
+
 		Console(LPCTSTR szConfigFile, LPCTSTR szShellCmdLine, LPCTSTR szConsoleTitle, LPCTSTR pszReloadNewConfig);
 		~Console();
 
@@ -137,106 +137,106 @@ class Console {
 		////////////////////
 		// message handlers
 		////////////////////
-		
+
 		////////////////////////////////
 		// windows destruction messages
-		
+
 		// destroys GDI stuff and posts a quit message
 		void OnDestroy();
 		// deletes Console object
 		void OnNcDestroy();
-		
-		
+
+
 		/////////////////////
 		// painting messages
-		
+
 		// handles painting from off-screen buffers
 		void OnPaint();
-		
+
 		// handles master and 'change' timers
 		void OnPaintTimer();
-		
+
 		// handles cursor timer (for animated cursors)
 		void OnCursorTimer();
-		
-		
+
+
 		/////////////////////////
 		// window state messages
-		
+
 		// handles window position changes (for snapping to desktop edges)
 		void OnWindowPosChanging(WINDOWPOS* lpWndPos);
-		
+
 		// handles activation message (used for setting alpha transparency and cursor states)
 		void OnActivateApp(BOOL bActivate, DWORD dwFlags);
-		
+
 		// handles vertical scrolling
 		void OnVScroll(WPARAM wParam);
-		
+
 		// handles keyboard layout change, posts the same message to the windows console window
 		void OnInputLangChangeRequest(WPARAM wParam, LPARAM lParam);
-		
-		
+
+
 		//////////////////
 		// mouse messages
-		
+
 		// handles text selection start and window mouse drag start
 		void OnLButtonDown(UINT uiFlags, POINTS points);
-		
+
 		// handles text selection end, window mouse drag end and text copy
 		void OnLButtonUp(UINT uiFlags, POINTS points);
-		
+
 		// toggles always on top flag
 		void OnLButtonDblClick(UINT uiFlags, POINTS points);
-		
+
 		// pops up the Console menu
 		void OnRButtonUp(UINT uiFlags, POINTS points);
-		
+
 		// pastes text from clipboard
 		void OnMButtonDown(UINT uiFlags, POINTS points);
-		
+
 		// handles mouse movement for text selection and window mouse drag
 		void OnMouseMove(UINT uiFlags, POINTS points);
-		
+
 		// handles start/stop mouse drag for window border
 		void OnSetCursor(WORD wHitTest, WORD wMouseMessage);
 
 		// handles text input
 		void OnChar(WORD mychar);
-		
+
 		wstring Input;
-		
+
 		//////////////////
 		// other messages
-		
-		// called before the Console menu or system menu pops up 
+
+		// called before the Console menu or system menu pops up
 		// (populates config files submenu with filenames)
 		void OnInitMenuPopup(HMENU hMenu, UINT uiPos, BOOL bSysMenu);
-		
+
 		// handles drag-n-dropped filenames
 		void OnDropFiles(HDROP hDrop);
-		
+
 		// handles commands from the Console popup menu
 		BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-		
+
 		// handles commands from the system popup menu
 		BOOL OnSysCommand(WPARAM wParam, LPARAM lParam);
-		
+
 		// handles tray icon messages
 		void OnTrayNotify(WPARAM wParam, LPARAM lParam);
-		
+
 		// handles WM_SETTINGCHANGE (we handle only wallpaper changes here)
 //		void OnWallpaperChanged(const TCHAR* pszFilename);
 
-		
+
 	private:
 
 		///////////////////////////////////////////
 		// Console window creation/setup functions
 		///////////////////////////////////////////
-		
+
 		// gets Console options
 		BOOL GetOptions();
-		
+
 		// registers Console window classes
 		BOOL RegisterWindowClasses();
 
@@ -245,25 +245,25 @@ class Console {
 
 		// creates Console window
 		BOOL CreateConsoleWindow();
-		
+
 		// creates new Console font
 		void CreateNewFont();
-		
+
 		// creates new background brush
 		void CreateNewBrush();
 
 		// creates the cursor
 		void CreateCursor();
-		
+
 		// creates offscreen painting buffers
 		void CreateOffscreenBuffers();
-		
+
 		// creates background bitmap
 		void CreateBackgroundBitmap();
 
 		// called by the ::EnumDisplayMonitors to create background for each display
 //		static BOOL CALLBACK BackgroundEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData);
-		
+
 		// gets character width and height
 		void GetTextSize();
 
@@ -278,16 +278,16 @@ class Console {
 
 		// sets scrollbar stuff
 		void SetScrollbarStuff();
-		
+
 		// sets default console colors
 		void SetDefaultConsoleColors();
-		
+
 		// sets window size and position
 		void SetWindowSizeAndPosition();
-		
+
 		// sets Console's big, small and tray icons
 		void SetWindowIcons();
-		
+
 		// sets up traybar icon
 		BOOL SetTrayIcon(DWORD dwMessage);
 
@@ -296,7 +296,7 @@ class Console {
 
 		// opens the configuration file in a text editor
 		void EditConfigFile();
-		
+
 		// reloads Console settings
 		void ReloadSettings();
 
@@ -304,39 +304,39 @@ class Console {
 		/////////////////////////////
 		// windows console functions
 		/////////////////////////////
-		
+
 		// allocates the console and starts the command shell
 		BOOL StartShellProcess();
-		
+
 		// refreshes m_hStdOutFresh handle
 		void RefreshStdOut();
-		
+
 		// gets a fresh console output
 		void RefreshScreenBuffer();
 
 		// sets initial windows console size
 		void InitConsoleWndSize(DWORD dwColumns);
-		
+
 		// resizes the windows console
 		void ResizeConsoleWindow();
 
 		// Allocates the screen buffer
 		void AllocateBuffer();
-		
-		
+
+
 		//////////////////////
 		// painting functions
 		//////////////////////
 
 		// repaints the memory hdc
 		void RepaintWindow();
-		
+
 		// repaints the memory hdc (paint only changes)
 		void RepaintWindowChanges();
-		
+
 		// draws the cursor
 		void DrawCursor(BOOL bOnlyCursor = FALSE);
-		
+
 		// two helper functions for DrawCursor method
 
 		// returns cursor rectangle
@@ -346,7 +346,7 @@ class Console {
 
 		// clears text selection
 		void ClearSelection();
-		
+
 		// returns the console text change rate since the last painting
 		// (using this value we decide whether to repaint entire window
 		// or just the changes)
@@ -356,17 +356,17 @@ class Console {
 		//////////////////////////
 		// window state functions
 		//////////////////////////
-		
+
 		// shows/hides Console window
 		void ShowHideWindow();
-		
+
 		// shows/hides windows console window
 		void ShowHideConsole();
 
 		// shows/hides windows console window after a timeout (used during
 		// shell startup)
 		void ShowHideConsoleTimeout();
-		
+
 		// toggles 'always on top' status
 		void ToggleWindowOnTop();
 
@@ -377,10 +377,10 @@ class Console {
 
 		// called by OnCommand and OnSysCommand to handle menu commands
 		BOOL HandleMenuCommand(DWORD dwID);
-		
+
 		// updates popup and system menus for 'always on top' status
 		void UpdateOnTopMenuItem();
-		
+
 		// updates popup and system menus for 'hide console' status
 		void UpdateHideConsoleMenuItem();
 
@@ -391,13 +391,13 @@ class Console {
 		///////////////////////
 		// clipboard functions
 		///////////////////////
-		
+
 		// copies selected text to the clipboard
 		void CopyTextToClipboard();
-		
+
 		// pastes text from the clipboard
 		void PasteClipoardText();
-		
+
 		//////////////////
 		// misc functions
 		//////////////////
@@ -424,7 +424,7 @@ class Console {
 		///////////////////////
 		// 'gearbox' functions
 		///////////////////////
-		
+
 		// Console window procedure
 		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -453,7 +453,7 @@ class Console {
 
 		BOOL	m_bInitializing;
 		BOOL	m_bReloading;
-		
+
 		tstring	m_strConfigFile;
 		tstring	m_strConfigEditor;
 		tstring m_strConfigEditorParams;
@@ -463,20 +463,20 @@ class Console {
 		// (auto reload, don't reload, ask user)
 		DWORD	m_dwReloadNewConfigDefault;
 		DWORD	m_dwReloadNewConfig;
-		
+
 		tstring	m_strShell;
 		tstring	m_strShellCmdLine;
-		
+
 		// handle to invisible window - used for hiding the taskbar button in tray and 'hidden' modes
 		HWND m_hwndInvisParent;
 
 		// memory device context that holds console output image
 		HDC		m_hdcConsole;
-		// memory device context for an off-screen window buffer (used to 
-		// compose an image from m_hdcConsole and m_hdcSelection if text 
+		// memory device context for an off-screen window buffer (used to
+		// compose an image from m_hdcConsole and m_hdcSelection if text
 		// selection is active)
 		HDC		m_hdcWindow;
-		
+
 		// a bitmap used for drawing in the console memory DC
 		HBITMAP	m_hbmpConsole;
 		HBITMAP	m_hbmpConsoleOld;
@@ -484,27 +484,27 @@ class Console {
 		// a bitmap used for drawing in the window memory DC
 		HBITMAP	m_hbmpWindow;
 		HBITMAP	m_hbmpWindowOld;
-		
+
 		// brush for painting background
 		HBRUSH	m_hBkBrush;
 
-		// master repaint timer interval (runs independent of changes in the 
+		// master repaint timer interval (runs independent of changes in the
 		// console)
 		DWORD	m_dwMasterRepaintInt;
 
-		// change repaint timer interval (when a change occurs, repainting 
+		// change repaint timer interval (when a change occurs, repainting
 		// will be postponed for this interval)
 		DWORD	m_dwChangeRepaintInt;
-		
+
 		// icon filename
 		tstring	m_strIconFilename;
 		// program icons
 		HICON	m_hSmallIcon;
 		HICON	m_hBigIcon;
-		
+
 		// popup menu
 		HMENU	m_hPopupMenu;
-		
+
 		// system (taskbar button) menu
 		HMENU	m_hSysMenu;
 
@@ -513,7 +513,7 @@ class Console {
 
 		// set to TRUE if the popup menu is disabled
 		BOOL	m_bPopupMenuDisabled;
-		
+
 		// Console window title variables
 		// holds the default console title ("console" or the one passed in the cmdline param)
 		tstring m_strWindowTitleDefault;
@@ -521,7 +521,7 @@ class Console {
 		tstring	m_strWindowTitle;
 		// holds the current window title
 		tstring m_strWindowTitleCurrent;
-		
+
 		// font data
 		tstring	m_strFontName;
 		DWORD	m_dwFontSize;
@@ -531,14 +531,14 @@ class Console {
 		COLORREF m_crFontColor;
 		HFONT	m_hFont;
 		HFONT	m_hFontOld;
-		
+
 		// window X and Y positions
 		int		m_nX;
 		int		m_nY;
 
 		// client area inside border (gives a more 'relaxed' look to windows)
 		int		m_nInsideBorder;
-		
+
 		// window width and height
 		int		m_nWindowWidth;
 		int		m_nWindowHeight;
@@ -552,8 +552,8 @@ class Console {
 		int		m_nClientWidth;
 		int		m_nClientHeight;
 
-		// char height and width (used in window repainting) 
-		// Note: width is used only for fixed-pitch fonts to speed up 
+		// char height and width (used in window repainting)
+		// Note: width is used only for fixed-pitch fonts to speed up
 		// repainting
 		int		m_nCharHeight;
 		int		m_nCharWidth;
@@ -573,20 +573,20 @@ class Console {
 		int		m_nScrollbarThunmbHeight;
 
 		// what to do with the taskbar button
-		// if the taskbar button is hidden, or placed in the traybar, you 
-		// can't ALT-TAB to console (take care when using with color key 
+		// if the taskbar button is hidden, or placed in the traybar, you
+		// can't ALT-TAB to console (take care when using with color key
 		// transparency :-)
 		// 0 - nothing
 		// 1 - hide it
 		// 2 - put icon to traybar
 		DWORD	m_dwTaskbarButton;
-		
+
 		// set to TRUE if the window can be dragged by left-click hold
 		BOOL	m_bMouseDragable;
 
 		// snap distance
 		int		m_nSnapDst;
-		
+
 		// window docking position
 		// 0 - no dock
 		// 1 - top left
@@ -624,7 +624,7 @@ class Console {
 		BYTE	m_byTintR;
 		BYTE	m_byTintG;
 		BYTE	m_byTintB;
-		
+
 		// used when background is an image
 		BOOL	m_bBitmapBackground;
 		tstring	m_strBackgroundFile;
@@ -640,7 +640,7 @@ class Console {
 		BOOL	m_bRelativeBackground;
 		// set to true to extend the background to all monitors
 		BOOL	m_bExtendBackground;
-		
+
 		// offsets used for multiple monitors and relative backgrounds (fake transparency, too)
 		int		m_nBackgroundOffsetX;
 		int		m_nBackgroundOffsetY;
@@ -656,8 +656,8 @@ class Console {
 
 		// if set to TRUE, Console will be started minimized
 		BOOL	m_bStartMinimized;
-		
-		
+
+
 		// cursor style
 		// 0 - none
 		// 1 - XTerm
@@ -671,7 +671,7 @@ class Console {
 		DWORD	m_dwCursorStyle;
 
 		COLORREF m_crCursorColor;
-		
+
 		// console screen buffer info for cursor
 		CONSOLE_SCREEN_BUFFER_INFO m_csbiCursor;
 
@@ -682,7 +682,7 @@ class Console {
 
 		// mouse cursor offset within the window (used for moving the window)
 		POINT	m_mouseCursorOffset;
-		
+
 		/////////////////////
 		// console stuff
 
@@ -691,11 +691,11 @@ class Console {
 
 		// console screen buffer info for console repainting
 		CONSOLE_SCREEN_BUFFER_INFO m_csbiConsole;
-		
+
 		// console stdouts
 		HANDLE	m_hStdOut;
 		HANDLE	m_hStdOutFresh;
-		
+
 		// set when quitting the application
 		HANDLE	m_hQuitEvent;
 
@@ -719,7 +719,7 @@ class Console {
 
 		// Inverse the shift behaviour for selecting and dragging
 		BOOL	m_bInverseShift;
-		
+
 		COORD	m_coordSelOrigin;
 		RECT	m_rectSelection;
 		HDC		m_hdcSelection;

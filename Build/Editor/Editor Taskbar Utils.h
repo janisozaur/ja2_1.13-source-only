@@ -4,7 +4,7 @@
 #ifndef __EDITOR_TASKBAR_UTILS_H
 #define __EDITOR_TASKBAR_UTILS_H
 
-//These are utilities that are used within the editor.	This function absorbs the expensive 
+//These are utilities that are used within the editor.	This function absorbs the expensive
 //compile time of the SGP dependencies, while allowing the other editor files to hook into it
 //without paying, so to speak.
 

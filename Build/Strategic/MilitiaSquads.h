@@ -5,9 +5,9 @@
 
 #include "Types.h"
 #include "Soldier Control.h"
-#include "campaign types.h"
+#include "Campaign Types.h"
 
-//#define MAXIMUM_MILITIA_SQUAD_SIZE 30 
+//#define MAXIMUM_MILITIA_SQUAD_SIZE 30
 
 extern UINT8 gpAttackDirs[5][4];
 extern UINT8 guiDirNumber;

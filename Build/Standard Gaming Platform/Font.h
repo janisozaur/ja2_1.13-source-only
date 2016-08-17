@@ -3,7 +3,7 @@
 
 #include "Types.h"
 #include "himage.h"
-#include "vobject.h"
+#include "VObject.h"
 //#ifdef WINFONTS
 #include "WinFont.h"
 //#endif
@@ -40,7 +40,7 @@
 #else
 
 // font foreground color symbols
-#define		FONT_FCOLOR_WHITE			0x0000		
+#define		FONT_FCOLOR_WHITE			0x0000
 #define		FONT_FCOLOR_RED				0x0000
 #define		FONT_FCOLOR_BLUE			0x0000
 #define		FONT_FCOLOR_GREEN			0x0000
@@ -88,7 +88,7 @@ extern UINT32		FontDestPitch;
 extern UINT32		FontDestBPP;
 extern SGPRect	FontDestRegion;
 extern BOOLEAN	FontDestWrap;
-	
+
 #define					SetFontDestObject(x)	(SetFontDestBuffer(x,										\
 																												FontDestRegion.left,	\
 																												FontDestRegion.top,		\

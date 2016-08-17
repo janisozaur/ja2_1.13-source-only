@@ -38,7 +38,7 @@ protected:
 private:
 	void					luaCreateObject( LuaState L, void *Ptr );
 	void*					luaObject;
-	
+
 	static LuaAttrib*		luaCommonGetSet( LuaState L );
 	static void*			luaIsOfType(LuaState L, int index, const char* sClassName);
 
@@ -47,7 +47,7 @@ private:
 	//static int				luaSetObject( lua_State *L);
 	DECLARE_LUA_CFUNCTION( luaGetObject );
 	DECLARE_LUA_CFUNCTION( luaSetObject );
-	
+
 	static luaL_Reg			s_ClassList[];
 public:
 	/////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ private:
 	protected: \
 		virtual SInterfaceData*	luaGetInterface(); \
 	private: \
-		static	SInterfaceData	luaInterface; 
+		static	SInterfaceData	luaInterface;
 #endif // DECLARE_LUA_INTERFACE
 
 #ifndef IMPLEMENT_LUA_INTERFACE

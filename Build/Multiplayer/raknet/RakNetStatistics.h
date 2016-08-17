@@ -23,9 +23,9 @@
 #include "Export.h"
 #include "RakNetTypes.h"
 
-/// \brief Network Statisics Usage 
+/// \brief Network Statisics Usage
 ///
-/// Store Statistics information related to network usage 
+/// Store Statistics information related to network usage
 struct RAK_DLL_EXPORT RakNetStatistics
 {
 	///  Number of Messages in the send Buffer (high, medium, low priority)
@@ -36,7 +36,7 @@ struct RAK_DLL_EXPORT RakNetStatistics
 	uint64_t messageDataBitsSent[ NUMBER_OF_PRIORITIES ];
 	///  Number of total bits used for user messages, including headers
 	uint64_t messageTotalBitsSent[ NUMBER_OF_PRIORITIES ];
-	
+
 	///  Number of packets sent containing only acknowledgments
 	unsigned packetsContainingOnlyAcknowlegements;
 	///  Number of acknowledgments sent
@@ -45,10 +45,10 @@ struct RAK_DLL_EXPORT RakNetStatistics
 	unsigned acknowlegementsPending;
 	///  Number of acknowledgments bits sent
 	uint64_t acknowlegementBitsSent;
-	
+
 	///  Number of packets containing only acknowledgments and resends
 	unsigned packetsContainingOnlyAcknowlegementsAndResends;
-	
+
 	///  Number of messages resent
 	unsigned messageResends;
 	///  Number of bits resent of actual data
@@ -57,32 +57,32 @@ struct RAK_DLL_EXPORT RakNetStatistics
 	uint64_t messagesTotalBitsResent;
 	///  Number of messages waiting for ack (// TODO - rename this)
 	unsigned messagesOnResendQueue;
-	
+
 	///  Number of messages not split for sending
 	unsigned numberOfUnsplitMessages;
 	///  Number of messages split for sending
 	unsigned numberOfSplitMessages;
 	///  Total number of splits done for sending
 	unsigned totalSplits;
-	
+
 	///  Total packets sent
 	unsigned packetsSent;
-	
+
 	///  Number of bits added by encryption
 	uint64_t encryptionBitsSent;
 	///  total bits sent
 	uint64_t totalBitsSent;
-	
+
 	///  Number of sequenced messages arrived out of order
 	unsigned sequencedMessagesOutOfOrder;
 	///  Number of sequenced messages arrived in order
 	unsigned sequencedMessagesInOrder;
-	
+
 	///  Number of ordered messages arrived out of order
 	unsigned orderedMessagesOutOfOrder;
 	///  Number of ordered messages arrived in order
 	unsigned orderedMessagesInOrder;
-	
+
 	///  Packets with a good CRC received
 	unsigned packetsReceived;
 	///  Packets with a bad CRC received
@@ -163,10 +163,10 @@ struct RAK_DLL_EXPORT RakNetStatistics
 /// Verbosity level currently supports 0 (low), 1 (medium), 2 (high)
 /// \param[in] s The Statistical information to format out
 /// \param[in] buffer The buffer containing a formated report
-/// \param[in] verbosityLevel 
+/// \param[in] verbosityLevel
 /// 0 low
-/// 1 medium 
-/// 2 high 
+/// 1 medium
+/// 2 high
 void RAK_DLL_EXPORT StatisticsToString( RakNetStatistics *s, char *buffer, int verbosityLevel );
 
 #endif

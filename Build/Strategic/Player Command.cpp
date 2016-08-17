@@ -7,23 +7,23 @@
 	#include "Strategic.h"
 	#include "Strategic Town Loyalty.h"
 	#include "Strategic Mines.h"
-	#include "text.h"
-	#include "laptopsave.h"
-	#include "quests.h"
+	#include "Text.h"
+	#include "LaptopSave.h"
+	#include "Quests.h"
 	#include "Morale.h"
 	#include "Overhead.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Map Screen Helicopter.h"
 	#include "Game Clock.h"
-	#include "meanwhile.h"
-	#include "email.h"
+	#include "Meanwhile.h"
+	#include "Email.h"
 	#include "GameSettings.h"
 	#include "Strategic Status.h"
 	#include "Strategic AI.h"
 	#include "PreBattle Interface.h"
 	#include "Map Screen Interface.h"
 	#include "Tactical Save.h"
-	#include "interface Dialogue.h"
+	#include "Interface Dialogue.h"
 	#include "Random.h"
 	// HEADROCK HAM 3.6: Added for facility string printing...
 	#include "PopUpBox.h"
@@ -32,7 +32,7 @@
 	#include "LuaInitNPCs.h"	// added by Flugente
 #endif
 
-#include "postalservice.h"
+#include "PostalService.h"
 
 #include "GameInitOptionsScreen.h"
 
@@ -260,7 +260,7 @@ BOOLEAN SetThisSectorAsPlayerControlled( INT16 sMapX, INT16 sMapY, INT8 bMapZ, B
 		}
 
 
-		// if player took control away from enemy 
+		// if player took control away from enemy
 		if( fWasEnemyControlled )
 		{
 			// WDS - New AI
@@ -376,7 +376,7 @@ BOOLEAN SetThisSectorAsPlayerControlled( INT16 sMapX, INT16 sMapY, INT8 bMapZ, B
 //Ja25 No strategic ai
 #else
 
-		if( sMapX == gModSettings.ubQueenBasementSectorX && sMapY == gModSettings.ubQueenBasementSectorY 
+		if( sMapX == gModSettings.ubQueenBasementSectorX && sMapY == gModSettings.ubQueenBasementSectorY
 			&& bMapZ == gModSettings.ubQueenBasementSectorZ )
 		{ //Basement sector
 			gfUseAlternateQueenPosition = TRUE;
@@ -400,7 +400,7 @@ BOOLEAN SetThisSectorAsPlayerControlled( INT16 sMapX, INT16 sMapY, INT8 bMapZ, B
 			UINT16 population = GetSectorPopulation( sMapX, sMapY );
 
 			FLOAT loyalpopulation = gTownLoyalty[townid].ubRating * population / 100;
-			
+
 			AddVolunteers( loyalpopulation * gGameExternalOptions.dMilitiaVolunteerGainFactorLiberation );
 		}
 

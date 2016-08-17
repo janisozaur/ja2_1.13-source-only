@@ -1,5 +1,5 @@
 #ifndef __RAK_STRING_H
-#define __RAK_STRING_H 
+#define __RAK_STRING_H
 
 #include "Export.h"
 #include "DS_List.h"
@@ -184,7 +184,7 @@ public:
 		size_t bytesUsed;
 		char *bigString;
 		char *c_str;
-		char smallString[128-sizeof(unsigned int)-sizeof(size_t)-sizeof(char*)*2];		
+		char smallString[128-sizeof(unsigned int)-sizeof(size_t)-sizeof(char*)*2];
 	};
 
 	/// \internal

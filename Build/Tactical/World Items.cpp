@@ -1,32 +1,32 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "items.h"
-	#include "handle Items.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Items.h"
+	#include "Handle Items.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "tiledef.h"
-	#include "worlddef.h"
-	#include "interface.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "Interface.h"
+	#include "RenderWorld.h"
 	#include "Animation Control.h"
-	#include "font control.h"
-	#include "World items.h"
-	#include "debug.h"
-	#include "Isometric utils.h"
-	#include "sys globals.h"
+	#include "Font Control.h"
+	#include "World Items.h"
+	#include "Debug.h"
+	#include "Isometric Utils.h"
+	#include "Sys Globals.h"
 	#include "Tactical Save.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Campaign Types.h"
-	#include "random.h"
+	#include "Random.h"
 	#include "Action Items.h"
 	#include "pits.h"
 	#include "GameSettings.h"
 	#include "Quests.h"
 	#include "Soldier Profile.h"
-	#include "message.h"
-	#include "map screen interface map inventory.h"	// added by Flugente
-#include "connect.h"
+	#include "Message.h"
+	#include "Map Screen Interface Map Inventory.h"	// added by Flugente
+#include "Connect.h"
 #endif
 #ifdef JA2EDITOR//dnl ch84 290114
 #include "Item Statistics.h"
@@ -300,12 +300,12 @@ INT32 FindWorldItemForBuriedBombInGridNo( INT32 sGridNo, INT8 bLevel )
                 {
                         pObj=&gWorldItems[ gWorldBombs[ uiBombIndex ].iItemIndex ].object;
                         if( pObj && pObj->exists() )
-								//if ( ( (*pObj)[0]->data.misc.bDetonatorType != BOMB_TIMED ) && ( (*pObj)[0]->data.misc.bDetonatorType != BOMB_REMOTE ) ) 
-                                if( !HasAttachmentOfClass( pObj, AC_REMOTEDET | AC_DETONATOR ) )								
+								//if ( ( (*pObj)[0]->data.misc.bDetonatorType != BOMB_TIMED ) && ( (*pObj)[0]->data.misc.bDetonatorType != BOMB_REMOTE ) )
+                                if( !HasAttachmentOfClass( pObj, AC_REMOTEDET | AC_DETONATOR ) )
                                         return( gWorldBombs[ uiBombIndex ].iItemIndex );
                 }
         }
-        return( -1 );		
+        return( -1 );
 }
 
 // Flugente: is there a planted tripwire at this gridno? fKnown = TRUE: only return true if we know of that one already
@@ -326,7 +326,7 @@ INT32 FindWorldItemForTripwireInGridNo( INT32 sGridNo, INT8 bLevel, BOOLEAN fKno
 					return( gWorldBombs[ uiBombIndex ].iItemIndex );
 
 				// owned by the player team - we know of this thing
-				if ( (*pObj)[0]->data.ubWireNetworkFlag & TRIPWIRE_NETWORK_OWNER_PLAYER )					
+				if ( (*pObj)[0]->data.ubWireNetworkFlag & TRIPWIRE_NETWORK_OWNER_PLAYER )
 					return( gWorldBombs[ uiBombIndex ].iItemIndex );
 
 				// something is here, as a blue flag is planted
@@ -478,7 +478,7 @@ INT32 AddItemToWorld( INT32 sGridNo, OBJECTTYPE *pObject, UINT8 ubLevel, UINT16 
 	UINT32	iItemIndex;
 	INT32		iReturn;
 
-	// ATE: Check if the gridno is OK	
+	// ATE: Check if the gridno is OK
 	if ( TileIsOutOfBounds(sGridNo))
 	{
 		// Display warning.....
@@ -508,7 +508,7 @@ INT32 AddItemToWorld( INT32 sGridNo, OBJECTTYPE *pObject, UINT8 ubLevel, UINT16 
 		// sevenfm: added flag WORLD_ITEM_ARMED_BOMB
 		// this fixes bug with remote explosives not being removed after activation, if they were armed in inventory and thrown afterwards
 		gWorldItems[ iItemIndex ].usFlags |= WORLD_ITEM_ARMED_BOMB;
-	
+
 		iReturn = AddBombToWorld( iItemIndex );
 		if (iReturn == -1)
 		{
@@ -529,7 +529,7 @@ INT32 AddItemToWorld( INT32 sGridNo, OBJECTTYPE *pObject, UINT8 ubLevel, UINT16 
 						pSoldier = MercPtrs[ soldierID ];
 					}
 				}
-				
+
 				if (pSoldier != NULL)
 				{
 					// if soldier is on our team, or is AI and we are the server
@@ -646,7 +646,7 @@ void LoadWorldItemsFromMap( INT8 **hBuffer, float dMajorMapVersion, int ubMinorM
 				dummyItem.Load(hBuffer, dMajorMapVersion, ubMinorMapVersion);
 			}
 		}
-		else 
+		else
 		{
 			*hBuffer += sizeof ( OLD_WORLDITEM_101 ) * uiNumWorldItems;
 		}
@@ -662,7 +662,7 @@ void LoadWorldItemsFromMap( INT8 **hBuffer, float dMajorMapVersion, int ubMinorM
 		{
 			dummyItem.ubNonExistChance = 0;
 		}
-		if( gfEditMode || dummyItem.ubNonExistChance <= PreRandom( 100 ) || 
+		if( gfEditMode || dummyItem.ubNonExistChance <= PreRandom( 100 ) ||
 			(gGameExternalOptions.ubMapItemChanceOverride > 0 && (gGameExternalOptions.ubMapItemChanceOverride >= PreRandom(100)) ) ) //Madd: map item chance override, note this calc is done in reverse
 		{
 			if( !gfEditMode )
@@ -744,7 +744,7 @@ void LoadWorldItemsFromMap( INT8 **hBuffer, float dMajorMapVersion, int ubMinorM
 				dummyItem.bVisible = BURIED;
 			}
 #if 0//dnl ch74 201013 this is already done in OBJECTTYPE::Load()
-			//Madd: ok, so this drives me nuts -- why bother with default attachments if the map isn't going to load them for you?  
+			//Madd: ok, so this drives me nuts -- why bother with default attachments if the map isn't going to load them for you?
 			//this should fix that...
 			for(UINT8 cnt = 0; cnt < MAX_DEFAULT_ATTACHMENTS; cnt++)
 			{

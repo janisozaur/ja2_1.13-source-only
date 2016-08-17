@@ -1,23 +1,23 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "AI All.h"
 #else
-	#include "ai.h"
+	#include "AI.h"
 	#include "AIInternals.h"
 	#include "Isometric Utils.h"
-	#include "overhead.h"
-	#include "worldman.h"
-	#include "pathai.h"
-	//#include "points.h"
-	#include "message.h"
+	#include "Overhead.h"
+	#include "WorldMan.h"
+	#include "PathAI.h"
+	//#include "Points.h"
+	#include "Message.h"
 	#include "Smell.h"
-	#include "mapscreen.h"
-	#include "strategic.h"
+	#include "MapScreen.h"
+	#include "Strategic.h"
 	#include "Strategic Pathing.h"
 
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Render Fun.h"
 #endif
-#include "connect.h"
+#include "Connect.h"
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
@@ -123,7 +123,7 @@ int LegalNPCDestination(SOLDIERTYPE *pSoldier, INT32 sGridNo, UINT8 ubPathMode, 
 				return(FALSE);
 		}
 	}
-	
+
 	 // something failed - didn't even have to test path
 	return(FALSE);			// illegal destination
 }
@@ -206,7 +206,7 @@ int TryToResumeMovement(SOLDIERTYPE *pSoldier, INT32 sGridNo)
 			// moving, try to find a nearby "next best" destination if possible
 			pSoldier->aiData.usActionData = GoAsFarAsPossibleTowards(pSoldier,sGridNo,pSoldier->aiData.bAction);
 
-			// if it's not possible to get any closer			
+			// if it's not possible to get any closer
 			if (TileIsOutOfBounds(pSoldier->aiData.usActionData))
 			{
 				ubGottaCancel = TRUE;
@@ -288,7 +288,7 @@ INT8 PointPatrolAI(SOLDIERTYPE *pSoldier)
 	do
 	{
 	 sPatrolPoint = NextPatrolPoint(pSoldier);
-	}	
+	}
 	while (( !TileIsOutOfBounds(sPatrolPoint)) && !NewOKDestination(pSoldier,sPatrolPoint,IGNOREPEOPLE, pSoldier->pathing.bLevel) );
 
 	// if we're back where we started, then ALL other patrol points are junk!
@@ -302,7 +302,7 @@ INT8 PointPatrolAI(SOLDIERTYPE *pSoldier)
 	}
 	}
 
- // if we don't have a legal patrol point 
+ // if we don't have a legal patrol point
  if (TileIsOutOfBounds(sPatrolPoint))
 	{
 #ifdef BETAVERSION
@@ -333,7 +333,7 @@ INT8 PointPatrolAI(SOLDIERTYPE *pSoldier)
 
 	pSoldier->aiData.bOrders = bOldOrders;
 
-	// if it's not possible to get any closer, that's OK, but fail this call	
+	// if it's not possible to get any closer, that's OK, but fail this call
 	if (TileIsOutOfBounds(pSoldier->aiData.usActionData))
 	 return(FALSE);
 	}
@@ -372,7 +372,7 @@ INT8 RandomPointPatrolAI(SOLDIERTYPE *pSoldier)
 			bPatrolIndex = (INT8) PreRandom( pSoldier->aiData.bPatrolCnt ) + 1;
 			sPatrolPoint = pSoldier->aiData.sPatrolGrid[ bPatrolIndex];
 			bCnt++;
-		}		
+		}
 		while ( (sPatrolPoint == pSoldier->sGridNo) || ( (!TileIsOutOfBounds(sPatrolPoint)) && (bCnt < pSoldier->aiData.bPatrolCnt) && !NewOKDestination(pSoldier,sPatrolPoint,IGNOREPEOPLE, pSoldier->pathing.bLevel )) );
 
 		if (bCnt == pSoldier->aiData.bPatrolCnt)
@@ -382,7 +382,7 @@ INT8 RandomPointPatrolAI(SOLDIERTYPE *pSoldier)
 			do
 			{
 				sPatrolPoint = NextPatrolPoint(pSoldier);
-			}			
+			}
 			while ((!TileIsOutOfBounds(sPatrolPoint)) && !NewOKDestination(pSoldier,sPatrolPoint,IGNOREPEOPLE, pSoldier->pathing.bLevel) );
 		}
 
@@ -393,7 +393,7 @@ INT8 RandomPointPatrolAI(SOLDIERTYPE *pSoldier)
 		}
 	}
 
-	// if we don't have a legal patrol point	
+	// if we don't have a legal patrol point
 	if (TileIsOutOfBounds(sPatrolPoint))
 	{
 #ifdef BETAVERSION
@@ -423,7 +423,7 @@ INT8 RandomPointPatrolAI(SOLDIERTYPE *pSoldier)
 
 		pSoldier->aiData.bOrders = bOldOrders;
 
-		// if it's not possible to get any closer, that's OK, but fail this call		
+		// if it's not possible to get any closer, that's OK, but fail this call
 		if (TileIsOutOfBounds(pSoldier->aiData.usActionData))
 			return(FALSE);
 	}
@@ -483,7 +483,7 @@ INT32 InternalGoAsFarAsPossibleTowards(SOLDIERTYPE *pSoldier, INT32 sDesGrid, IN
 	{
 		if ( InARoom( pSoldier->aiData.sPatrolGrid[0], &usRoomRequired ) )
 		{
-			// make sure this doesn't interfere with pathing for scripts			
+			// make sure this doesn't interfere with pathing for scripts
 			if (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 			{
 				usRoomRequired = 0;
@@ -623,7 +623,7 @@ INT32 InternalGoAsFarAsPossibleTowards(SOLDIERTYPE *pSoldier, INT32 sDesGrid, IN
 
 	 //sTempDest = NewGridNo( sGoToGrid,DirectionInc( (INT16) (pSoldier->pathing.usPathingData[sLoop] + 1) ) );
 	 //sTempDest = NewGridNo( sGoToGrid,DirectionInc( (UINT8) (pSoldier->pathing.usPathingData[sLoop]) ) );
-	sTempDest = NewGridNo( sTempDest,DirectionInc( (UINT8) (pSoldier->pathing.usPathingData[sLoop]) ) );		
+	sTempDest = NewGridNo( sTempDest,DirectionInc( (UINT8) (pSoldier->pathing.usPathingData[sLoop]) ) );
 
 	// this should NEVER be out of bounds
 	if (sTempDest == sGoToGrid)
@@ -789,7 +789,7 @@ void SoldierTriesToContinueAlongPath(SOLDIERTYPE *pSoldier)
 	{
 		// just set our path to previously decided final destination
 		NewDest(pSoldier,pSoldier->pathing.sFinalDestination);
-		return;	
+		return;
 	}
 	*/
 
@@ -864,7 +864,7 @@ void HaltMoveForSoldierOutOfPoints(SOLDIERTYPE *pSoldier)
 		SStopMerc.sYPos=pSoldier->sY;
 
 		//AddGameEvent( S_STOP_MERC, 0, &SStopMerc ); //hayden.
-		if(pSoldier->ubID>=120 || (!is_server && pSoldier->ubID>=20)) 
+		if(pSoldier->ubID>=120 || (!is_server && pSoldier->ubID>=20))
 			return;//hayden
 
 		if(is_client)
@@ -1011,7 +1011,7 @@ INT32 TrackScent( SOLDIERTYPE * pSoldier )
 							}
 						}
 						else if (ubStrength == ubBestStrength)
-						{							
+						{
 							if (TileIsOutOfBounds(iBestGridNo))
 							{
 								// first place we've found with the same strength
@@ -1048,7 +1048,7 @@ INT32 TrackScent( SOLDIERTYPE * pSoldier )
 	else
 	{
 		// who else can track?
-	}	
+	}
 	if (!TileIsOutOfBounds(iBestGridNo))
 	{
 		pSoldier->aiData.usActionData = iBestGridNo;

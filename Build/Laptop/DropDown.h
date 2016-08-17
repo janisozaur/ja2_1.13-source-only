@@ -1,7 +1,7 @@
 #ifndef __DROPDOWN_H
 #define __DROPDOWN_H
 
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */
@@ -63,7 +63,7 @@ public:
 	*/
 	void SetColorHighLight( UINT16 aCol )	{ mColorHighLight = aCol; }
 	UINT16 GetColorHighLight( )				{ return mColorHighLight; }
-	
+
 private:
 	// declare but don't define
 	WidgetBase( WidgetBase const& );
@@ -117,7 +117,7 @@ enum definedDropDowns
 	DROPDOWNNR_IMPGEAR_GUN_2,
 	DROPDOWNNR_IMPGEAR_AMMO_2,
 	DROPDOWNNR_IMPGEAR_MELEE,
-		
+
 	DROPDOWNNR_IMPGEAR_HELMET,
 	DROPDOWNNR_IMPGEAR_VEST,
 	DROPDOWNNR_IMPGEAR_LEGS,
@@ -151,16 +151,16 @@ enum definedDropDowns
  * If you try to have two instances on the same screen, only one will show, which will be confusing. So simply use a separate N fore each instance. See IMP Prejudice.cpp to get an idea of how that is done.
  *
  * Apart from that, you will only have to implement void SetRefresh(). This function is necessary to refresh the screen after the popup-section is closed, otherwise it will still be shown.
- * 
+ *
  * As this class refreshes itself once you have properly implemented SetRefresh(), you can even move the box around onscreen, it will properly refresh, so moving it with a mouse will be possible
  *
  * You can get an instance by calling DropDownTemplate<int X>.Create(UINT16 usX, UINT16 usY);, the constructor itself is private (singleton).
-  
+
  Usage:
 	std::vector<std::pair<INT16, STR16> > entryvecDropDown_Appearance;
 	for(UINT8 i = 0; i < NUM_APPEARANCES; ++i)
 	entryvecDropDown_Appearance.push_back( std::make_pair<INT16, STR16>(i, szAppearanceText[i]) );
-		
+
 	DropDownTemplate<DROPDOWNNR_APPEARANCE>.SetEntries(entryvecDropDown_Appearance);
 	DropDownTemplate<DROPDOWNNR_APPEARANCE>.Create(usX, usY);
 	...
@@ -206,13 +206,13 @@ public:
 		DROPDOWN_SCROLL_REGION,
 		DROPDOWN_SCROLL_MOVEMENT,
 	};
-			
+
 	/*
 	 * Set the content of a dropdown. Each entry consists of an INT16 key, by which you can later identify which entry was selected, and a STR16 that will be displayed.
 	 * There can be multiple instances of the same key or name.
 	 */
 	void SetEntries( std::vector<std::pair<INT16, STR16> >& arEntryVec )	{ mEntryVector = arEntryVec; mNumDisplayedEntries = min( DROPDOWN_REGIONS, mEntryVector.size( ) ); }
-		
+
 	/*
 	 * Set help text decribing what can be selected
 	 */
@@ -222,15 +222,15 @@ public:
 	 * Get key of selected entry
 	 */
 	INT16	GetSelectedEntryKey()
-	{ 
+	{
 		if ( mEntryVector.empty() )
 			return -1;
-		
+
 		return mEntryVector[mSelectedEntry].first;
 	}
 
 	/*
-	* If aKey exists among our keys, set it as the current one 
+	* If aKey exists among our keys, set it as the current one
 	*/
 	void	SetSelectedEntryKey( INT16 aKey );
 
@@ -282,11 +282,11 @@ public:
 
 private:
 	// declare but don't define
-    DropDownBase(DropDownBase const&); 
+    DropDownBase(DropDownBase const&);
     void operator=(DropDownBase const&);
 
 	/*
-	 * Initialise variables. Called after each creationm which allows moving a dropdown 
+	 * Initialise variables. Called after each creationm which allows moving a dropdown
 	 */
 	void Init(UINT16 sX, UINT16 sY);
 
@@ -310,7 +310,7 @@ private:
 private:
 	UINT16	musHeight;
 	UINT16	musWidth;
-	
+
 	UINT16	musStartX_Drop;
 	UINT16	musStartY_Drop;
 	UINT16	musScrollAreaX;
@@ -323,7 +323,7 @@ private:
 	UINT16	musAreaHeight;
 
 	UINT16	musFontHeight;
-	
+
 	BOOLEAN mfMouseRegionsCreated;
 	BOOLEAN mfMouseRegionsCreated_Drop;
 
@@ -334,7 +334,7 @@ private:
 	MOUSE_REGION	mDropDownRegion[DROPDOWN_REGIONS];
 	MOUSE_REGION	mgSelectedUpDownArrowOnScrollAreaRegion[2];
 	MOUSE_REGION	mSelectedScrollAreaDropDownRegion[DROPDOWN_REGIONS];
-		
+
 	std::vector<std::pair<INT16, STR16> > mEntryVector;
 
 	CHAR16	mHelpText[200];
@@ -356,10 +356,10 @@ public:
                                 // Instantiated on first use.
         return instance;
     }
-	
+
 	// this function has to be implemented!
 	virtual void SetRefresh();
-	
+
 	static void OpenDropDown_DropDown(MOUSE_REGION * pRegion, INT32 iReason )					{ return static_cast<DropDownBase*>(mpSelf)->OpenDropDownRegionCallBack(pRegion, iReason); }
 	static void CloseDropDown_DropDown(MOUSE_REGION * pRegion, INT32 iReason )					{ return static_cast<DropDownBase*>(mpSelf)->CloseDropDownRegionCallBack(pRegion, iReason); }
 	static void SelectRegionDropDown_DropDown(MOUSE_REGION * pRegion, INT32 iReason )			{ return static_cast<DropDownBase*>(mpSelf)->SelectDropDownRegionCallBack(pRegion, iReason); }
@@ -403,12 +403,12 @@ public:
 
 private:
 	static void* mpSelf;
-	
+
 private:
 	DropDownTemplate<N>() {};                   // private constructor, so we cannot create more instances
-    
+
 	// declare but don't define
-    DropDownTemplate(DropDownTemplate const&); 
+    DropDownTemplate(DropDownTemplate const&);
     void operator=(DropDownTemplate const&);
 };
 

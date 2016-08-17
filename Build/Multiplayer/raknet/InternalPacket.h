@@ -47,7 +47,7 @@ struct InternalPacket//<InternalPacket>
 {
 	///True if this is an acknowledgment packet
 	//bool isAcknowledgement;
-	
+
 	/// A unique numerical identifier given to this user message. Used to identify messages on the network
 	MessageNumberType messageNumber;
 	/// Identifies the order in which this number was sent. Used locally

@@ -1,7 +1,7 @@
 #ifndef POPUP_DEFINITION
 	#define POPUP_DEFINITION
 
-#include "sgp.h"	
+#include "sgp.h"
 #include "popup_class.h"
 #include "popup_callback.h"
 
@@ -53,7 +53,7 @@ class popupDefContent{
 public:
 	popupDefContent();
 	~popupDefContent();
-	
+
 	virtual BOOL addToBox(POPUP * popup) = 0;
 
 };
@@ -102,7 +102,7 @@ public:
 
 	BOOL addToBox(POPUP * popup);
 
-protected:	
+protected:
 	UINT16 generatorId;
 };
 

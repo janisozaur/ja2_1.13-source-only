@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Utils All.h"
 #else
-#include "builddefines.h"
-#include "stdio.h"
-#include "Windows.h"
+#include "BuildDefines.h"
+#include <stdio.h>
+#include <windows.h>
 #include "Types.h"
 #include "Multi Language Graphic Utils.h"
 #endif
@@ -273,7 +273,7 @@ BOOLEAN GetMLGFilename( SGPFILENAME filename, UINT16 usMLGGraphicID )
 		//The foreign language defined determines the name of the directory and filename.
 		//For example, the German version of:
 		//
-		//		"LAPTOP\\IMPSymbol.sti" 
+		//		"LAPTOP\\IMPSymbol.sti"
 		//
 		//	would become:
 		//

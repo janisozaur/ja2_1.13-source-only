@@ -12,7 +12,7 @@ void	StopIntroVideo();
 //enums used for when the intro screen can come up, used with 'gbIntroScreenMode'
 enum EIntroType
 {
-#ifdef JA2UB	
+#ifdef JA2UB
 	INTRO_HELI_CRASH,
 #endif
 	INTRO_BEGINNING,			//set when viewing the intro at the begining of the game
@@ -35,7 +35,7 @@ extern INT8 gbIntroScreenMode;
 
 typedef struct
 {
-	UINT16		uiIndex; 
+	UINT16		uiIndex;
 	CHAR16	szFile[MAX_VIDEO_NAMES_CHARS];
 
 } INTRO_NAMES_VALUES;

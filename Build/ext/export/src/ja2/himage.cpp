@@ -1,7 +1,7 @@
 
 #include <cmath>
 #include <cstdlib>
-#include "types.h"
+#include "Types.h"
 #include "string.h"
 #include "himage.h"
 

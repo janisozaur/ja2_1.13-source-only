@@ -68,7 +68,7 @@ public:
 	BOOLEAN IsMouseRegionActive( )				{ return mMouseRegionActive; }
 
 	virtual void RegisterMemberThingy( BaseTable * arP )
-	{ 
+	{
 		if ( mRegisteredMembers.empty() )
 		{
 			mRegisteredMembers.push_back( arP );
@@ -151,7 +151,7 @@ public:
 	*/
 	virtual MOUSE_CALLBACK RegionCallBackWrapper( void* pt2Object, UINT8 arg, void( *pt2Function )(MOUSE_REGION * pRegion, INT32 iReason) )	{ return RegionDummyfunc; }
 	virtual GUI_CALLBACK   ButtonCallBackWrapper( void* pt2Object, UINT8 arg, void( *pt2Function )(GUI_BUTTON * btn, INT32 iReason) )		{ return ButtonDummyfunc; }
-	
+
 	/*
 	* This dummy is needed internally and does nothing when called
 	*/
@@ -183,7 +183,7 @@ public:
 			mMouseRegion_Defined[i] = FALSE;
 		}
 	}
-	
+
 	// general provider functions
 	void				SetNumberOfEntries( UINT32 aVal )	{ mNumberOfEntries = aVal; CalcRequiredLength( ); }
 	UINT32				GetNumberOfEntries( )				{ return mNumberOfEntries; }
@@ -227,12 +227,12 @@ public:
 	{
 		return mFuncStatusBar( aId, arCol1, arVal1, arCol2, arVal2, arCol3, arVal3, arCol4, arVal4 );
 	}
-	
+
 	// callbacks for clicking on a column
 	void				SetCallBackType( CDP_CALLBACKTYPE aVal )	{ mCallbackType = aVal; }
 	CDP_CALLBACKTYPE	GetCallBackType( )							{ return mCallbackType; }
 	static void			RegionClickCallBack( MOUSE_REGION * pRegion, INT32 iReason );
-		
+
 	void				DestroyMouseRegions();
 
 public:
@@ -291,9 +291,9 @@ public:
 		MOUSE_REGION	mMouseRegion;
 		BOOLEAN			mMouseRegion_Defined;
 	};
-	
+
 	virtual void RegisterMemberThingy( BaseTable * arP )
-	{ 
+	{
 		if ( !mRegisteredTables.empty( ) )
 			arP->SetActive( FALSE );
 

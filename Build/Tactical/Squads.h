@@ -129,7 +129,7 @@ void GetSquadPosition( UINT8 *ubNextX, UINT8 *ubNextY, UINT8 *ubPrevX, UINT8 *ub
 
 void ExamineCurrentSquadLights( void );
 
-// get location of this squad 
+// get location of this squad
 void GetLocationOfSquad( INT16 *sX, INT16 *sY, INT8 *bZ, INT8 bSquadValue );
 
 

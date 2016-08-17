@@ -47,26 +47,26 @@ public:
 
 	/// Returns what was passed to SetNetworkIDManager
 	virtual NetworkIDManager * GetNetworkIDManager( void );
-	
+
 	/// Returns the NetworkID that you can use to refer to this object over the network.
 	/// \pre You must first call SetNetworkIDManager before using this function
 	/// \retval UNASSIGNED_NETWORK_ID UNASSIGNED_NETWORK_ID is returned IsNetworkIDAuthority() is false and SetNetworkID() was not previously called.  This is also returned if you call this function in the constructor.
 	/// \retval 0-65534 Any other value is a valid NetworkID.  NetworkIDs start at 0 and go to 65534, wrapping at that point.
 	virtual NetworkID GetNetworkID( void );
-	
+
 	/// Sets the NetworkID for this instance.  Usually this is called by the clients and determined from the servers.  However, if you save multiplayer games you would likely use
-	/// This on load as well.	
+	/// This on load as well.
 	virtual void SetNetworkID( NetworkID id );
-	
+
 	/// Your class does not have to derive from NetworkIDObject, although that is the easiest way to implement this.
 	/// If you want this to be a member object of another class, rather than inherit, then call SetParent() with a pointer to the parent class instance.
 	/// GET_OBJECT_FROM_ID will then return the parent rather than this instance.
 	virtual void SetParent( void *_parent );
-	
+
 	/// Return what was passed to SetParent
 	/// \return The value passed to SetParent, or 0 if it was never called.
 	virtual void* GetParent( void ) const;
-	
+
 	/// Overload this function and return true if you require that SetParent is called before this object is used.
 	/// This is a safety check you should do this if you want this to be
 	/// a member object of another class rather than derive from this class.
@@ -85,13 +85,13 @@ protected:
 	/// Used so I can compare pointers in the ReplicaManager
 	static unsigned int nextAllocationNumber;
 	unsigned int allocationNumber;
-	
+
 	/// Internal function to generate an ID when needed.  This is deferred until needed and is not called from the constructor.
 	void GenerateID(void);
-	
+
 	/// This is crap but is necessary because virtual functions don't work in the constructor
-	bool callGenerationCode; 
-	
+	bool callGenerationCode;
+
 	NetworkIDManager *networkIDManager;
 };
 

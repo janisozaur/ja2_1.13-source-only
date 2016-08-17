@@ -2,7 +2,7 @@
 	#include "Strategic All.h"
 	#include "XML.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "XML.h"
 	#include "expat.h"
@@ -11,7 +11,7 @@
 	#include "FileMan.h"
 	#include "MemMan.h"
 	#include "Debug Control.h"
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 #endif
 
 #define MAX_CHAR_DATA_LENGTH			500
@@ -70,7 +70,7 @@ BloodcatsStartElementHandle(void *userData, const XML_Char *name, const char **a
 					gBloodcatPlacements[x][y].ubAmbushChance = 0;
 					gBloodcatPlacements[x][y].ubMaxBloodcats = 0;
 					gBloodcatPlacements[x][y].ubMinBloodcats = 0;
-				}				
+				}
 			}
 		}
 
@@ -103,7 +103,7 @@ BloodcatsStartElementHandle(void *userData, const XML_Char *name, const char **a
 			pData->curElement = BLOODCAT_ELEMENT_DIFFICULTY;
 			pData->ubCurDifficulty = 1;
 			pData->maxReadDepth++; //we are not skipping this element
-		}		
+		}
 		else if(pData->curElement == BLOODCAT_ELEMENT_SECTOR &&
 			strcmp(name, "EXPERT") == 0)
 		{
@@ -118,7 +118,7 @@ BloodcatsStartElementHandle(void *userData, const XML_Char *name, const char **a
 			pData->ubCurDifficulty = 3;
 			pData->maxReadDepth++; //we are not skipping this element
 		}
-				
+
 		else if(pData->curElement == BLOODCAT_ELEMENT_DIFFICULTY &&
 				(strcmp(name, "ubMinBloodcats") == 0  ||
 				strcmp(name, "ubMaxBloodcats") == 0 ||

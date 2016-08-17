@@ -36,7 +36,7 @@ faceGearStartElementHandle(void *userData, const XML_Char *name, const XML_Char 
 		if(strcmp(name, "FACE_GEAR") == 0 && pData->curElement == ELEMENT_NONE)
 		{
 			pData->curElement = ELEMENT_LIST;
-			
+
 			memset(pData->curArray,0,sizeof(FACE_GEAR_VALUES)*pData->maxArraySize);
 
 			pData->maxReadDepth++; //we are not skipping this element
@@ -44,7 +44,7 @@ faceGearStartElementHandle(void *userData, const XML_Char *name, const XML_Char 
 		else if(strcmp(name, "ITEM") == 0 && pData->curElement == ELEMENT_LIST)
 		{
 			pData->curElement = ELEMENT;
-			
+
 			memset(&pData->curFaceGear,0,sizeof(FACE_GEAR_VALUES));
 
 			pData->maxReadDepth++; //we are not skipping this element
@@ -87,7 +87,7 @@ faceGearEndElementHandle(void *userData, const XML_Char *name)
 
 	faceGearParseData * pData = (faceGearParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "FACE_GEAR") == 0)
 		{
@@ -95,14 +95,14 @@ faceGearEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "ITEM") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
-			
+			pData->curElement = ELEMENT_LIST;
+
+
 			if(pData->curFaceGear.uiIndex < pData->maxArraySize)
 			{
 				pData->curArray[pData->curFaceGear.uiIndex] = pData->curFaceGear;
 			}
-			
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -117,7 +117,7 @@ faceGearEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "szFile") == 0 )
 		{
 			pData->curElement = ELEMENT;
-	
+
 			if(MAX_FACE_GERA_CHARS >= strlen(pData->szCharData))
 				strcpy(pData->curFaceGear.szFile,pData->szCharData);
 			else
@@ -131,7 +131,7 @@ faceGearEndElementHandle(void *userData, const XML_Char *name)
 				temp = pData->szCharData[i];
 				pData->curFaceGear.szFile[i] = temp;
 			}
-			
+
 		}
 		pData->maxReadDepth--;
 	}
@@ -149,7 +149,7 @@ BOOLEAN ReadInFaceGear( FACE_GEAR_VALUES *pFaceGear, STR fileName ) //, BOOLEAN 
 	faceGearParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading FaceGear.xml" );
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -177,7 +177,7 @@ BOOLEAN ReadInFaceGear( FACE_GEAR_VALUES *pFaceGear, STR fileName ) //, BOOLEAN 
 	memset(&pData,0,sizeof(pData));
 	pData.curArray = pFaceGear;
 	pData.maxArraySize = MAXITEMS;
-	
+
 	XML_SetUserData(parser, &pData);
 
 
@@ -209,7 +209,7 @@ BOOLEAN WriteFaceGear()
 	hFile = FileOpen( "TABLEDATA\\FaceGear out.xml", FILE_ACCESS_WRITE | FILE_CREATE_ALWAYS, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	{
 		UINT32 cnt;
 

@@ -5,17 +5,17 @@
 #else
 	#include "DirectDraw Calls.h"
 	#include <stdio.h>
-	#include "debug.h"
+	#include "Debug.h"
 	#if defined( JA2 ) || defined( UTIL )
-		#include "video.h"													// JA2
+		#include "Video.h"													// JA2
 	#else
 		#include "video2.h"				// Wiz8
 	#endif
 	#include "himage.h"
-	#include "vobject.h"
-	#include "wcheck.h"
-	#include "vobject.h"
-	#include "vobject_blitters.h"
+	#include "VObject.h"
+	#include "WCheck.h"
+	#include "VObject.h"
+	#include "VObject_blitters.h"
 	#include "shading.h"
 	#include "sgp_logger.h"
 #endif

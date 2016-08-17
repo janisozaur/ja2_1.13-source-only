@@ -1,4 +1,4 @@
-﻿// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
+// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
 //#pragma setlocale("CHINESE")
 
 #ifdef PRECOMPILEDHEADERS
@@ -6,8 +6,8 @@
 #else
 	#include "Language Defines.h"
 	#if defined( CHINESE )
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 		#include "Scheduling.h"
 		#include "EditorMercs.h"
 		#include "Item Statistics.h"
@@ -20,52 +20,52 @@ void this_is_the_ChineseText_public_symbol(void){;}
 #if defined( CHINESE )
 
 /*
- 
+
 ******************************************************************************************************
 **                                  IMPORTANT TRANSLATION NOTES                                     **
 ******************************************************************************************************
 
 GENERAL INSTRUCTIONS
-- Always be aware that foreign strings should be of equal or shorter length than the English equivalent.  
-	I know that this is difficult to do on many occasions due to the nature of foreign languages when 
-	compared to English.  By doing so, this will greatly reduce the amount of work on both sides.  In 
-	most cases (but not all), JA2 interfaces were designed with just enough space to fit the English word.  
-	The general rule is if the string is very short (less than 10 characters), then it's short because of 
-	interface limitations.  On the other hand, full sentences commonly have little limitations for length.  
+- Always be aware that foreign strings should be of equal or shorter length than the English equivalent.
+	I know that this is difficult to do on many occasions due to the nature of foreign languages when
+	compared to English.  By doing so, this will greatly reduce the amount of work on both sides.  In
+	most cases (but not all), JA2 interfaces were designed with just enough space to fit the English word.
+	The general rule is if the string is very short (less than 10 characters), then it's short because of
+	interface limitations.  On the other hand, full sentences commonly have little limitations for length.
 	Strings in between are a little dicey.
-- Never translate a string to appear on multiple lines.  All strings L"This is a really long string...", 
+- Never translate a string to appear on multiple lines.  All strings L"This is a really long string...",
 	must fit on a single line no matter how long the string is.  All strings start with L" and end with ",
-- Never remove any extra spaces in strings.  In addition, all strings containing multiple sentences only 
-	have one space after a period, which is different than standard typing convention.  Never modify sections 
-	of strings contain combinations of % characters.  These are special format characters and are always 
+- Never remove any extra spaces in strings.  In addition, all strings containing multiple sentences only
+	have one space after a period, which is different than standard typing convention.  Never modify sections
+	of strings contain combinations of % characters.  These are special format characters and are always
 	used in conjunction with other characters.  For example, %s means string, and is commonly used for names,
-	locations, items, etc.  %d is used for numbers.  %c%d is a character and a number (such as A9).  
-	%% is how a single % character is built.  There are countless types, but strings containing these 
-	special characters are usually commented to explain what they mean.  If it isn't commented, then 
+	locations, items, etc.  %d is used for numbers.  %c%d is a character and a number (such as A9).
+	%% is how a single % character is built.  There are countless types, but strings containing these
+	special characters are usually commented to explain what they mean.  If it isn't commented, then
 	if you can't figure out the context, then feel free to ask SirTech.
-- Comments are always started with // Anything following these two characters on the same line are 
-	considered to be comments.  Do not translate comments.  Comments are always applied to the following 
-	string(s) on the next line(s), unless the comment is on the same line as a string.  
-- All new comments made by SirTech will use "//@@@ comment" (without the quotes) notation.  By searching 
+- Comments are always started with // Anything following these two characters on the same line are
+	considered to be comments.  Do not translate comments.  Comments are always applied to the following
+	string(s) on the next line(s), unless the comment is on the same line as a string.
+- All new comments made by SirTech will use "//@@@ comment" (without the quotes) notation.  By searching
 	for @@@ everytime you recieve a new version, it will simplify your task and identify special instructions.
-  Commonly, these types of comments will be used to ask you to abbreviate a string.  Please leave the 
+  Commonly, these types of comments will be used to ask you to abbreviate a string.  Please leave the
 	comments intact, and SirTech will remove them once the translation for that particular area is resolved.
-- If you have a problem or question with translating certain strings, please use "//!!! comment" 
-	(without the quotes).  The syntax is important, and should be identical to the comments used with @@@ 
-	symbols.  SirTech will search for !!! to look for your problems and questions.  This is a more 
+- If you have a problem or question with translating certain strings, please use "//!!! comment"
+	(without the quotes).  The syntax is important, and should be identical to the comments used with @@@
+	symbols.  SirTech will search for !!! to look for your problems and questions.  This is a more
 	efficient method than detailing questions in email, so try to do this whenever possible.
 
 
-	
+
 FAST HELP TEXT -- Explains how the syntax of fast help text works.
 **************
 
 1) BOLDED LETTERS
-	The popup help text system supports special characters to specify the hot key(s) for a button.  
+	The popup help text system supports special characters to specify the hot key(s) for a button.
 	Anytime you see a '|' symbol within the help text string, that means the following key is assigned
-	to activate the action which is usually a button.  
+	to activate the action which is usually a button.
 
-	EX:  L"|Map Screen" 
+	EX:  L"|Map Screen"
 
 	This means the 'M' is the hotkey.  In the game, when somebody hits the 'M' key, it activates that
 	button.  When translating the text to another language, it is best to attempt to choose a word that
@@ -78,10 +78,10 @@ FAST HELP TEXT -- Explains how the syntax of fast help text works.
 
 2) NEWLINE
   Any place you see a \n within the string, you are looking at another string that is part of the fast help
-	text system.  \n notation doesn't need to be precisely placed within that string, but whereever you wish 
-	to start a new line. 
+	text system.  \n notation doesn't need to be precisely placed within that string, but whereever you wish
+	to start a new line.
 
-	EX:  L"Clears all the mercs' positions,\nand allows you to re-enter them manually." 
+	EX:  L"Clears all the mercs' positions,\nand allows you to re-enter them manually."
 
 	Would appear as:
 
@@ -92,10 +92,10 @@ FAST HELP TEXT -- Explains how the syntax of fast help text works.
 	       in the above example, we would see
 
 	WRONG WAY -- spaces before and after the \n
-	EX:  L"Clears all the mercs' positions, \n and allows you to re-enter them manually." 
+	EX:  L"Clears all the mercs' positions, \n and allows you to re-enter them manually."
 
 	Would appear as: (the second line is moved in a character)
-		
+
 				Clears all the mercs' positions,
  				 and allows you to re-enter them manually.
 
@@ -105,7 +105,7 @@ FAST HELP TEXT -- Explains how the syntax of fast help text works.
 
 	Throughout the text files, you'll find an assortment of comments.  Comments are used to describe the
 	text to make translation easier, but comments don't need to be translated.  A good thing is to search for
-	"@@@" after receiving new version of the text file, and address the special notes in this manner.  
+	"@@@" after receiving new version of the text file, and address the special notes in this manner.
 
 !!! NOTATION
 ************
@@ -115,7 +115,7 @@ FAST HELP TEXT -- Explains how the syntax of fast help text works.
 
 */
 
-CHAR16	XMLTacticalMessages[1000][MAX_MESSAGE_NAMES_CHARS] = 
+CHAR16	XMLTacticalMessages[1000][MAX_MESSAGE_NAMES_CHARS] =
 {
 	L"",
 };
@@ -141,14 +141,14 @@ STR16 pMenuStrings[] =
 	L"菜单14", //L"Menu 14",
 	L"菜单15", //L"Menu 15",
 	L"菜单15", // 15 //L"Menu 15",
-	
+
 	//Briefing Room
 	L"进入",	 //L"Enter",
 };
 
 STR16	pOtherButtonsText[] =
 {
-	L"简报", //L"Briefing", 
+	L"简报", //L"Briefing",
 	L"接受", //L"Accept",
 };
 
@@ -177,7 +177,7 @@ STR16	pSectorPageText[] =
 	L"简报室。请点击 '进入' 按钮", //L"Briefing Room. Please click the 'Enter' button.",
 };
 
-STR16	pEncyclopediaTypeText[] = 
+STR16	pEncyclopediaTypeText[] =
 {
 	L"未知", //0 //L"Unknown",
 	L"城市", //1 //L"City",
@@ -189,10 +189,10 @@ STR16	pEncyclopediaTypeText[] =
 	L"工厂设施", //7 //L"Factory Complex",
 	L"医院", //8 //L"Hospital",
 	L"监狱", //9 //L"Prison",
-    L"机场", //10 //L"Airport", 
+    L"机场", //10 //L"Airport",
 };
 
-STR16	pEncyclopediaHelpCharacterText[] = 
+STR16	pEncyclopediaHelpCharacterText[] =
 {
 	L"全部显示", //L"Show All",
 	L"显示AIM成员", //L"Show AIM",
@@ -205,7 +205,7 @@ STR16	pEncyclopediaHelpCharacterText[] =
 	L"过滤", //L"Filter",
 };
 
-STR16	pEncyclopediaShortCharacterText[] = 
+STR16	pEncyclopediaShortCharacterText[] =
 {
 	L"全部", //L"All",
 	L"AIM", //L"AIM",
@@ -218,7 +218,7 @@ STR16	pEncyclopediaShortCharacterText[] =
 	L"过滤", //L"Filter",
 };
 
-STR16	pEncyclopediaHelpText[] = 
+STR16	pEncyclopediaHelpText[] =
 {
 	L"全部显示", //L"Show All",
 	L"显示城市", //L"Show City",
@@ -233,7 +233,7 @@ STR16	pEncyclopediaHelpText[] =
 	L"显示机场", //L"Show Airport",
 };
 
-STR16	pEncyclopediaSkrotyText[] = 
+STR16	pEncyclopediaSkrotyText[] =
 {
 	L"全部", //L"All",
 	L"城市", //L"City",
@@ -321,7 +321,7 @@ STR16	pEncyclopediaSubFilterCharText[] =
 	L"",//reserved. Insert new Other filters above!
 };
 
-STR16	pEncyclopediaFilterItemText[] = 
+STR16	pEncyclopediaFilterItemText[] =
 {//major item filter button text max 7 chars
 //..L"------v"
 	L"全部",//All
@@ -424,14 +424,14 @@ STR16 pEncyclopediaSubFilterQuestText[] =
 };
 
 
-STR16	pEncyclopediaShortInventoryText[] = 
+STR16	pEncyclopediaShortInventoryText[] =
 {
 	L"全部", //0 //L"All",
 	L"枪械", //L"Gun",
 	L"弹药", //L"Ammo",
 	L"携行具", //L"LBE",
 	L"杂货", //L"Misc",
-	
+
 	L"显示全部", //5 //L"Show All",
 	L"显示枪械", //L"Show Gun",
 	L"显示弹药", //L"Show Ammo",
@@ -488,7 +488,7 @@ STR16			BoxFilter[] =
 };
 
 // TODO.Translate
-STR16		QuestDescText[] = 
+STR16		QuestDescText[] =
 {
 	L"Deliver Letter",
 	L"Food Route",
@@ -526,7 +526,7 @@ STR16		QuestDescText[] =
 };
 
 // TODO.Translate
-STR16		FactDescText[] = 
+STR16		FactDescText[] =
 {
 	L"Omerta Liberated",
 	L"Drassen Liberated",
@@ -648,7 +648,7 @@ STR16		FactDescText[] =
 	L"Past club closing time and Darren warned Player. (reset every day)",
 	L"Joey is EPC",
 	L"Joey is in C5",
-	
+
 	L"Joey is within 5 tiles of Martha(109) in sector G8",		//110
 	L"Joey is Dead!",
 	L"At least one player merc within 5 tiles of Martha",
@@ -659,7 +659,7 @@ STR16		FactDescText[] =
 	L"Maria is EPC and inside leather Shop",
 	L"Player wants to buy vest",
 	L"Maria rescue was noticed by KingPin goons and Kingpin now enemy",
-	
+
 	L"Angel left deed on counter",		//120
 	L"Maria quest over",
 	L"Player bandaged NPC today",
@@ -670,7 +670,7 @@ STR16		FactDescText[] =
 	L"Player is giving amount of money >= $1000",
 	L"Player is giving amount less than $1000",
 	L"Waldo agreed to fix helicopter( heli is damaged )",
-	
+
 	L"Helicopter was destroyed",		//130
 	L"Waldo told us about heli pilot",
 	L"Father told us about Deidranna killing sick people",
@@ -681,7 +681,7 @@ STR16		FactDescText[] =
 	L"Loyalty is High",
 	L"Player doing poorly",
 	L"Player gave valid head to Carmen",
-	
+
 	L"Current sector is G9(Cambria)",		//140
 	L"Current sector is C5(SanMona)",
 	L"Current sector is C13(Drassen",
@@ -692,7 +692,7 @@ STR16		FactDescText[] =
 	L"Carmen gave us final warning",
 	L"Vince has explained that he has to charge",
 	L"Vince is expecting cash (reset everyday)",
-	
+
 	L"Player stole some medical supplies once",		//150
 	L"Player stole some medical supplies again",
 	L"Vince can be recruited",
@@ -703,7 +703,7 @@ STR16		FactDescText[] =
 	L"",
 	L"Maria left in wrong sector",
 	L"Skyrider left in wrong sector",
-	
+
 	L"Joey left in wrong sector",		//160
 	L"John left in wrong sector",
 	L"Mary left in wrong sector",
@@ -714,7 +714,7 @@ STR16		FactDescText[] =
 	L"Shank(67) is not in secotr",
 	L"Bloodcat quest on for more than 2 days",
 	L"Effective threat made to Armand",
-	
+
 	L"Queen is DEAD!",												//170
 	L"Speaker is with Aim or Aim person on squad within 10 tiles",
 	L"Current mine is empty",
@@ -723,7 +723,7 @@ STR16		FactDescText[] =
 	L"Creatures invaded current mine",
 	L"Player LOST current mine",
 	L"Current mine is at FULL production",
-	L"Dynamo(66) is Speaker or within 10 tiles of speaker",		
+	L"Dynamo(66) is Speaker or within 10 tiles of speaker",
 	L"Fred told us about creatures",
 
 	L"Matt told us about creatures",				//180
@@ -732,21 +732,21 @@ STR16		FactDescText[] =
 	L"Carl told us about creatures",
 	L"Chalice stolen from museam",
 	L"John(118) is EPC",
-	L"Mary(119) and John (118) are EPC's",	
+	L"Mary(119) and John (118) are EPC's",
 	L"Mary(119) is alive",
-	L"Mary(119)is EPC",					
-	L"Mary(119) is bleeding",		
+	L"Mary(119)is EPC",
+	L"Mary(119) is bleeding",
 
 	L"John(118) is alive",							//190
-	L"John(118) is bleeding",					
+	L"John(118) is bleeding",
 	L"John or Mary close to airport in Drassen(B13)",
 	L"Mary is Dead",
 	L"Miners placed",
 	L"Krott planning to shoot player",
 	L"Madlab explained his situation",
 	L"Madlab expecting a firearm",
-	L"Madlab expecting a video camera.",			
-	L"Item condition is < 70 ",										
+	L"Madlab expecting a video camera.",
+	L"Item condition is < 70 ",
 
 	L"Madlab complained about bad firearm.",					//200
 	L"Madlab complained about bad video camera.",
@@ -756,7 +756,7 @@ STR16		FactDescText[] =
 	L"Robot is ready to go a second time!",
 	L"Second robot destroyed.",
 	L"Mines explained to player.",
-	L"Dynamo (#66) is in sector J9.",			
+	L"Dynamo (#66) is in sector J9.",
 	L"Dynamo (#66) is alive.",
 
 	L"One PC hasn't fought, but is able, and less than 3 fights have occured",							//210
@@ -780,7 +780,7 @@ STR16		FactDescText[] =
 	L"Dave has gas. (randomized daily)",
 	L"Vehicle is present",
 	L"First battle won by player",
-	L"Robot recruited and moved",			
+	L"Robot recruited and moved",
 
 	L"No club fighting allowed",							//230
 	L"Player already fought 3 fights today",
@@ -791,7 +791,7 @@ STR16		FactDescText[] =
 	L"Micky (#96) is drunk",
 	L"Player has attempted to force their way into brothel",
 	L"Rat effectively threatened 3 times",
-	L"Player paid for two people to enter brothel",		
+	L"Player paid for two people to enter brothel",
 
 	L"",						//240
 	L"",
@@ -830,7 +830,7 @@ STR16		FactDescText[] =
 	L"Fact willis heard about joey rescue",//										271
 	L"Fact willis gives discount",//															272
 	L"Fact hillbillies killed",//																273
-	L"Fact keith out of business",	//														274												
+	L"Fact keith out of business",	//														274
 	L"Fact mike available to army",//														275
 	L"Fact kingpin can send assassins",//												276
 	L"Fact estoni refuelling possible",//						277
@@ -1090,8 +1090,8 @@ STR16 iEditorItemStatsButtonsText[] =
 	L"删除物品(|D|e|l)", //L"Delete item (|D|e|l)",
 };
 
-STR16 FaceDirs[8] = 
-{ 
+STR16 FaceDirs[8] =
+{
 	L"北", //L"north",
 	L"东北", //L"northeast",
 	L"东", //L"east",
@@ -1102,20 +1102,20 @@ STR16 FaceDirs[8] =
 	L"西北" //L"northwest"
 };
 
-STR16 iEditorMercsToolbarText[] = 
+STR16 iEditorMercsToolbarText[] =
 {
  L"切换佣兵显示", //0 //L"Toggle viewing of players",
  L"切换敌兵显示", //L"Toggle viewing of enemies",
  L"切换生物显示", //L"Toggle viewing of creatures",
  L"切换反抗军显示", //L"Toggle viewing of rebels",
  L"切换民兵显示", //L"Toggle viewing of civilians",
- 
+
  L"佣兵", //L"Player",
  L"敌兵", //L"Enemy",
  L"生物", //L"Creature",
  L"反抗军", //L"Rebels",
  L"民兵", //L"Civilian",
- 
+
  L"细节", //10 //L"DETAILED PLACEMENT",
  L"一般信息模式", //L"General information mode",
  L"角色体型模式", //L"Physical appearance mode",
@@ -1130,7 +1130,7 @@ STR16 iEditorMercsToolbarText[] =
  L"定位下一个佣兵(|S|p|a|c|e)\n定位上一个佣兵(|C|t|r|l+|S|p|a|c|e)", //L"Find next merc (|S|p|a|c|e)\nFind previous merc (|C|t|r|l+|S|p|a|c|e)",
  L"选择优先级", //L"Toggle priority existance",
  L"选择此人是否可以开关门", //L"Toggle whether or not placement\nhas access to all doors",
- 
+
  //Orders
  L"站立", //L"STATIONARY",
  L"守卫", //L"ON GUARD",
@@ -1140,7 +1140,7 @@ STR16 iEditorMercsToolbarText[] =
  L"长距巡逻", //L"FAR PATROL",
  L"固定巡逻", //30 //L"POINT PATROL",
  L"往返巡逻", //L"RND PT PATROL",
- 
+
  //Attitudes
  L"防守", //L"DEFENSIVE",
  L"大胆独行", //L"BRAVE SOLO",
@@ -1148,40 +1148,40 @@ STR16 iEditorMercsToolbarText[] =
  L"积极进攻", //L"AGGRESSIVE",
  L"偷袭独行", //L"CUNNING SOLO",
  L"偷袭助攻", //L"CUNNING AID",
- 
+
  L"佣兵面向%s方", //L"Set merc to face %s",
- 
+
  L"找到", // L"Find",
  L"糟糕", //40 //L"BAD",
  L"不良", //L"POOR",
  L"一般", //L"AVERAGE",
  L"良好", //L"GOOD",
  L"优秀", //L"GREAT",
- 
+
  L"糟糕", //L"BAD",
  L"不良", //L"POOR",
  L"一般", //L"AVERAGE",
  L"良好", //L"GOOD",
  L"优秀", //L"GREAT",
- 
+
  L"上一个颜色设定", //50 //L"Previous color set",
  L"下一个颜色设定", //L"Next color set",
- 
+
  L"上一个体型", //L"Previous body type",
  L"下一个体型", //L"Next body type",
- 
+
  L"改变游戏时间(增减15分钟)", //L"Toggle time variance (+ or - 15 minutes)",
  L"改变游戏时间(增减15分钟)", //L"Toggle time variance (+ or - 15 minutes)",
  L"改变游戏时间(增减15分钟)", //L"Toggle time variance (+ or - 15 minutes)",
  L"改变游戏时间(增减15分钟)", //L"Toggle time variance (+ or - 15 minutes)",
- 
+
  L"无行动", //L"No action",
  L"无行动", //L"No action",
  L"无行动", //60 //L"No action",
  L"无行动", //L"No action",
- 
+
  L"清空任务列表", //L"Clear Schedule",
- 
+
  L"定位选中佣兵", //L"Find selected merc",
 };
 
@@ -1316,7 +1316,7 @@ STR16 iRenderMapEntryPointsAndLightsText[] =
 	L"南部降落点", //L"South Entry Point",
 	L"中心降落点", //L"Center Entry Point",
 	L"独立降落点", //L"Isolated Entry Point",
-	
+
 	L"最亮", //L"Prime",
 	L"晚上", //L"Night",
 	L"全天", //L"24Hour",
@@ -1328,7 +1328,7 @@ STR16 iBuildTriggerNameText[] =
 	L"惊慌激活2", //L"Panic Trigger2",
 	L"惊慌激活3", //L"Panic Trigger3",
 	L"激活%d", //L"Trigger%d",
-	 
+
 	L"压力下行为", //L"Pressure Action",
 	L"惊慌动作1", //L"Panic Action1",
 	L"惊慌动作2", //L"Panic Action2",
@@ -1377,14 +1377,14 @@ STR16 iRenderDoorEditingWindowText[] =
 
 //EditorItems.cpp
 
-STR16 pInitEditorItemsInfoText[] = 
+STR16 pInitEditorItemsInfoText[] =
 {
 	L"压力下行为", //0 //L"Pressure Action",
 	L"惊慌动作1", //L"Panic Action1",
 	L"惊慌动作2", //L"Panic Action2",
 	L"惊慌动作3", //L"Panic Action3",
 	L"动作%d", //L"Action%d",
-	
+
 	L"惊慌激活1", //5 //L"Panic Trigger1",
 	L"惊慌激活2", //L"Panic Trigger2",
 	L"惊慌激活3", //L"Panic Trigger3",
@@ -1406,7 +1406,7 @@ STR16 pUpdateMapInfoText[] =
 	L"R", //0 //L"R",
 	L"G", //L"G",
 	L"B", //L"B",
-	
+
 	L"最亮", //L"Prime",
 	L"晚上", //L"Night",
 	L"全天", //L"24Hour",
@@ -1447,16 +1447,16 @@ CHAR16 gszScheduleActions[ 11 ][20] =
 };
 
 STR16 zDiffNames[5] =	// NUM_DIFF_LVLS = 5
-{ 
+{
 	L"软弱", //L"Wimp",
-	L"简单", //L"Easy", 
+	L"简单", //L"Easy",
 	L"一般", //L"Average",
 	L"顽强", //L"Tough",
 	L"使用兴奋剂" //L"Steroid Users Only"
 };
 
-STR16 EditMercStat[12] = 
-{ 
+STR16 EditMercStat[12] =
+{
 	L"最大生命值", //L"Max Health",
 	L"治疗后生命值", //L"Cur Health",
 	L"力量", //L"Strength",
@@ -1472,26 +1472,26 @@ STR16 EditMercStat[12] =
 };
 
 
-STR16 EditMercOrders[8] = 
-{ 
+STR16 EditMercOrders[8] =
+{
 	L"站立", //L"Stationary",
 	L"守卫", //L"On Guard",
 	L"近距巡逻", //L"Close Patrol",
 	L"长距巡逻", //L"Far Patrol",
 	L"固定巡逻", //L"Point Patrol",
 	L"呼叫", //L"On Call",
-	L"寻找敌人", //L"Seek Enemy", 
+	L"寻找敌人", //L"Seek Enemy",
 	L"随机巡逻", //L"Random Point Patrol",
 };
 
-STR16 EditMercAttitudes[6] = 
-{ 
+STR16 EditMercAttitudes[6] =
+{
 	L"防守", //L"Defensive",
 	L"大胆独行", //L"Brave Loner",
 	L"大胆协助", //L"Brave Buddy",
 	L"偷袭独行", //L"Cunning Loner",
 	L"偷袭协助", //L"Cunning Loner",
-	L"积极", 
+	L"积极",
 };
 
 STR16 pDisplayEditMercWindowText[] =
@@ -1501,17 +1501,17 @@ STR16 pDisplayEditMercWindowText[] =
 	L"战斗倾向:", //L"Combat Attitude:",
 };
 
-STR16 pCreateEditMercWindowText[] = 
+STR16 pCreateEditMercWindowText[] =
 {
 	L"佣兵颜色", //0 //L"Merc Colors",
 	L"完成", //L"Done",
-	
+
 	L"上一个佣兵站立指令", //L"Previous merc standing orders",
 	L"下一个佣兵站立指令", //L"Next merc standing orders",
-	
+
 	L"上一个佣兵战斗倾向", //L"Previous merc combat attitude",
 	L"下一个佣兵战斗倾向",	//5 //L"Next merc combat attitude",
-	
+
 	L"降低佣兵士气", //L"Decrease merc stat",
 	L"提升佣兵士气", //L"Increase merc stat",
 };
@@ -1549,24 +1549,24 @@ STR16 pDisplayBodyTypeInfoText[] =
 	L"Humvee",		// TODO.Translate
 };
 
-STR16 pUpdateMercsInfoText[] = 
+STR16 pUpdateMercsInfoText[] =
 {
 	L" --=指令=-- ", //0 //L" --=ORDERS=-- ",
 	L"--=倾向=--", //L"--=ATTITUDE=--",
-	
+
 	L"对比", //L"RELATIVE",
 	L"属性", //L"ATTRIBUTES",
-	
+
 	L"对比", //L"RELATIVE",
 	L"装备", //L"EQUIPMENT",
-			
+
 	L"对比", //L"RELATIVE",
 	L"属性", //L"ATTRIBUTES",
-	
+
 	L"军队", //L"Army",
 	L"管理", //L"Admin",
 	L"精英", //10 //L"Elite",
-	
+
 	L"等级", //L"Exp. Level",
 	L"生命值", //L"Life",
 	L"最大生命值", //L"LifeMax",
@@ -1580,26 +1580,26 @@ STR16 pUpdateMercsInfoText[] =
 	L"医疗", //L"Medical",
 	L"机械", //L"Mechanical",
 	L"士气", //L"Morale",
-	
+
 	L"头发颜色:", //L"Hair color:",
 	L"皮肤颜色:", //L"Skin color:",
 	L"上衣颜色:", //L"Vest color:",
 	L"裤子颜色:", //L"Pant color:",
-	
+
 	L"随机", //L"RANDOM",
 	L"随机", //L"RANDOM",
 	L"随机", //30 //L"RANDOM",
 	L"随机", //L"RANDOM",
-	
+
 	L"输入档案ID并从中提取资料，", //L"By specifying a profile index, all of the information will be extracted from the profile ",
 	L"这样回覆盖手动编辑的资料并禁用编辑模式。", //L"and override any values that you have edited.  It will also disable the editing features ",
 	L"你仍然可以查看属性值。按Enter键开始提取", //L"though, you will still be able to view stats, etc.  Pressing ENTER will automatically ",
 	L"你所输入的资料，在此之前你所输入的资料", //L"extract the number you have typed.  A blank field will clear the profile.  The current ",
 	L"会在提取资料的时候全部调整为0。", //L"number of profiles range from 0 to ",
-	
+
 	L"当前档案:n/a", //L"Current Profile:  n/a              ",
 	L"当前档案:%s", //L"Current Profile: %s",
-	
+
 	L"站立", //L"STATIONARY",
 	L"呼叫", //40 //L"ON CALL",
 	L"守卫", //L"ON GUARD",
@@ -1608,7 +1608,7 @@ STR16 pUpdateMercsInfoText[] =
 	L"长距巡逻", //L"FAR PATROL",
 	L"固定巡逻", //L"POINT PATROL",
 	L"往返巡逻", //L"RND PT PATROL",
-	
+
 	L"行动", //L"Action",
 	L"时间", //L"Time",
 	L"V", //L"V",
@@ -1618,12 +1618,12 @@ STR16 pUpdateMercsInfoText[] =
 	L"2)", //L"2)",
 	L"3)", //L"3)",
 	L"4)", //L"4)",
-	
+
 	L"上锁", //L"lock",
 	L"解锁", //L"unlock",
 	L"开门", //L"open",
 	L"关门", //L"close",
-	
+
 	L"点击门相邻的网格号可以%s。", //60 //L"Click on the gridno adjacent to the door that you wish to %s.",
 	L"点击网格号设定你%s后走到什么地方。", //L"Click on the gridno where you wish to move after you %s the door.",
 	L"点击网格号选择你想去的地方。", //L"Click on the gridno where you wish to move to.",
@@ -1649,7 +1649,7 @@ STR16 pCopyMercPlacementText[] =
 	L"放置品已复制。", //L"Placement copied.",
 };
 
-STR16 pPasteMercPlacementText[] = 
+STR16 pPasteMercPlacementText[] =
 {
 	L"因为缓存中无资料，放置品粘贴失败", //L"Placement not pasted as no placement is saved in buffer.",
 	L"放置品成功粘贴", //L"Placement pasted.",
@@ -1657,49 +1657,49 @@ STR16 pPasteMercPlacementText[] =
 };
 
 //editscreen.cpp
-STR16 pEditModeShutdownText[] = 
+STR16 pEditModeShutdownText[] =
 {
 	L"确定退出编辑器?", //L"Exit editor?",
 };
 
-STR16 pHandleKeyboardShortcutsText[] = 
+STR16 pHandleKeyboardShortcutsText[] =
 {
 	L"确定要移除所有光源吗？", //0 //L"Are you sure you wish to remove all lights?",
 	L"确定要撤销所有修改吗?", //L"Are you sure you wish to reverse the schedules?",
 	L"确定要清除所有物品吗?", //L"Are you sure you wish to clear all of the schedules?",
-	
+
 	L"允许操作放置品", //L"Clicked Placement Enabled",
 	L"无法操作放置品", //L"Clicked Placement Disabled",
-	
+
 	L"开启房顶操作", //5 //L"Draw High Ground Enabled",
 	L"关闭房顶操作", //L"Draw High Ground Disabled",
-	
+
 	L"边界点数目: N=%d E=%d S=%d W=%d", //L"Number of edge points: N=%d E=%d S=%d W=%d",
-	
+
 	L"开启随机放置物品", //L"Random Placement Enabled",
 	L"关闭随机放置物品", //L"Random Placement Disabled",
-	
+
 	L"隐藏树顶", //10 //L"Removing Treetops",
 	L"显示树顶", //L"Showing Treetops",
-	
+
 	L"重设地图水平", //L"World Raise Reset",
-	
+
 	L"地图水平还原", //L"World Raise Set Old",
 	L"地图水平设定", //L"World Raise Set",
 };
 
-STR16 pPerformSelectedActionText[] = 
+STR16 pPerformSelectedActionText[] =
 {
 	L"创建%S的雷达图", //0 //L"Creating radar map for %S",
-	
+
 	L"删除当前地图并新建一层地下室？", //L"Delete current map and start a new basement level?",
 	L"删除当前地图并新建一层洞穴？", //L"Delete current map and start a new cave level?",
 	L"删除当前地图并新建一层地面？", //L"Delete current map and start a new outdoor level?",
-	
+
 	L"清除地面区块？", //L" Wipe out ground textures? ",
 };
 
-STR16 pWaitForHelpScreenResponseText[] = 
+STR16 pWaitForHelpScreenResponseText[] =
 {
 	L"HOME", //0 //L"HOME",
 	L"非环境光照开/关", //L"Toggle fake editor lighting ON/OFF",
@@ -1850,7 +1850,7 @@ STR16 pUpdateItemStatsPanelText[] =
 
 STR16 pSetupGameTypeFlagsText[] =
 {
-	L"物品在现实和科幻模式均有效", //0 //L"Item appears in both Sci-Fi and Realistic modes", 
+	L"物品在现实和科幻模式均有效", //0 //L"Item appears in both Sci-Fi and Realistic modes",
 	L"物品只在现实模式出现", //L"Item appears in Realistic mode only",
 	L"物品只在科幻模式出现", //L"Item appears in Sci-Fi mode only",
 };
@@ -1890,7 +1890,7 @@ STR16 pCreateSummaryWindowText[]=
 	L"B1",
 	L"B2",
 	L"B3", //5
-	L"读取", 
+	L"读取",
 	L"保存",
 	L"更新",
 };
@@ -1899,49 +1899,49 @@ STR16 pRenderSectorInformationText[] =
 {
 	L"区块:%s", //0 //L"Tileset:  %s",
 	L"版本信息: 总结: 1.%02d, 地图:%1.2f/%02d", //L"Version Info:  Summary:  1.%02d,  Map:  %1.2f / %02d",
-	L"物品总数:%d", //L"Number of items:  %d", 
+	L"物品总数:%d", //L"Number of items:  %d",
 	L"光照数量:%d", //L"Number of lights:  %d",
 	L"降落点数量:%d", //L"Number of entry points:  %d",
-	
+
 	L"N",
 	L"E",
 	L"S",
 	L"W",
 	L"C",
 	L"I", //10
-	
+
 	L"房间数量:%d", //L"Number of rooms:  %d",
 	L"地图总人口:%d", //L"Total map population:  %d",
 	L"敌人数量:%d", //L"Enemies:  %d",
 	L"督查:%d", //L"Admins:  %d",
-	
+
 	L"(%d自定义，%d来自档案 -- %d有优先存在权)", //L"(%d detailed, %d profile -- %d have priority existance)",
 	L"军队:%d", //L"Troops:  %d",
-	
+
 	L"(%d自定义，%d来自档案 -- %d有优先存在权)", //L"(%d detailed, %d profile -- %d have priority existance)",
 	L"精英:%d",
-	
+
 	L"(%d自定义，%d来自档案 -- %d有优先存在权)", //L"(%d detailed, %d profile -- %d have priority existance)",
 	L"中立:%d",  //20 //L"Civilians:  %d",
-	
+
 	L"(%d自定义，%d来自档案 -- %d有优先存在权)", //L"(%d detailed, %d profile -- %d have priority existance)",
-	
+
 	L"人类:%d", //L"Humans:  %d",
 	L"奶牛:%d", //L"Cows:  %d",
 	L"血猫:%d", //L"Bloodcats:  %d",
-	
+
 	L"生物:%d", //L"Creatures:  %d",
-	
+
 	L"怪物:%d", //L"Monsters:  %d",
 	L"血猫:%d", //L"Bloodcats:  %d",
-	
+
 	L"锁和/或陷阱的数量:%d", //L"Number of locked and/or trapped doors:  %d",
 	L"锁:%d", //L"Locked:  %d",
 	L"陷阱:%d", //30 //L"Trapped:  %d",
 	L"锁或陷阱:%d", //L"Locked & Trapped:  %d",
-	
+
 	L"有任务的市民:%d", //L"Civilians with schedules:  %d",
-	
+
 	L"网格目的地安排超过了4个。", //L"Too many exit grid destinations (more than 4)...",
 	L"离开网格：%d（%d是长距离目的地）。", //L"ExitGrids:  %d (%d with a long distance destination)",
 	L"离开网格：没有。", //L"ExitGrids:  none",
@@ -1962,9 +1962,9 @@ STR16 pRenderItemDetailsText[] =
 	L"R",  //0
 	L"S",
 	L"敌兵", //L"Enemy",
-	
+
 	L"太多物品无法完全完全显示。", //L"TOO MANY ITEMS TO DISPLAY!",
-	
+
 	L"惊慌1", //L"Panic1",
 	L"惊慌2", //L"Panic2",
 	L"惊慌3", //L"Panic3",
@@ -1973,12 +1973,12 @@ STR16 pRenderItemDetailsText[] =
 	L"正常3", //L"Norm3",
 	L"正常4", //10 //L"Norm1",
 	L"压力行为", //L"Pressure Actions",
-	
+
 	L"太多物品无法完全完全显示。", //L"TOO MANY ITEMS TO DISPLAY!",
-	
+
 	L"优先敌兵掉落物品", //L"PRIORITY ENEMY DROPPED ITEMS",
 	L"无", //L"None",
-	
+
 	L"太多物品无法完全完全显示。", //L"TOO MANY ITEMS TO DISPLAY!",
 	L"普通敌兵掉落物品", //L"NORMAL ENEMY DROPPED ITEMS",
 	L"太多物品无法完全完全显示。", //L"TOO MANY ITEMS TO DISPLAY!",
@@ -1996,15 +1996,15 @@ STR16 pRenderSummaryWindowText[] =
 	L"比如一个P200MMX需要大概4分钟时间处理100个地图，", //L"approximately 4 minutes on a P200MMX to analyse 100 maps, so",
 	L"所以所需时间根据电脑硬件条件而定。", //L"depending on your computer, it may vary.",
 	L"你确定要重新处理全部地图的信息吗（是/否）？", //L"Do you wish to regenerate info for ALL these maps at this time (y/n)?",
-	
+
 	L"目前没有选择分区。", //L"There is no sector currently selected.",
-	
+
 	L"输入了一个不符合编辑器规范的临时文件。", //L"Entering a temp file name that doesn't follow campaign editor conventions...",
-	
+
 	L"在进入编辑器之前，你必须读取已有地图或者", //L"You need to either load an existing map or create a new map before being",
 	L"创建新地图，否则无法退出（ESC或Alt+X）。", //10 //L"able to enter the editor, or you can quit (ESC or Alt+x).",
 
-	L"，地面", //L", ground level",		
+	L"，地面", //L", ground level",
 	L"，地下1层", //L", underground level 1",
 	L"，地下2层", //L", underground level 1",
 	L"，地下3层", //L", underground level 1",
@@ -2012,42 +2012,42 @@ STR16 pRenderSummaryWindowText[] =
 	L"，额外B1层", //L", alternate G level",
 	L"，额外B2层", //L", alternate B2 level",
 	L"，额外B3层", //L", alternate B2 level",
-	
+
 	L"物品细节--选区%s", //L"ITEM DETAILS -- sector %s",
 	L"%s选区总结信息：", //20 //L"Summary Information for sector %s:",
-	
+
 	L"%s选区总结信息", //L"Summary Information for sector %s",
 	L"不存在。", //L"does not exist.",
-	
+
 	L"%s选区总结信息", //L"Summary Information for sector %s",
 	L"不存在。", //L"does not exist.",
-	
+
 	L"没有%s选区的可显示信息。", //L"No information exists for sector %s.",
-	
+
 	L"没有%s选区的可显示信息。", //L"No information exists for sector %s.",
-	
+
 	L"文件:%s", //L"FILE:  %s",
-	
+
 	L"文件:%s", //L"FILE:  %s",
-	
+
 	L"覆盖只读文件", //L"Override READONLY",
 	L"覆盖文件", //30 //L"Overwrite File",
-	
+
 	L"你现在没有总结文件，创建一个总结文件，", //L"You currently have no summary data.  By creating one, you will be able to keep track",
 	L"你就可以记录你编辑和保存地图的信息。", //L"of information pertaining to all of the sectors you edit and save.  The creation process",
 	L"这个过程将分析你在\\MAPS文件夹下的所有文件并建立一个新的。", //L"will analyse all maps in your \\MAPS directory, and generate a new one.  This could",
 	L"根据有效地图数量你可能需要几分钟的时间。", //L"take a few minutes depending on how many valid maps you have.  Valid maps are",
 	L"以合适的约定模式入a1.dat - p16.dat命名的文件为有效文件。", //L"maps following the proper naming convention from a1.dat - p16.dat.  Underground maps",
 	L"地底模式地图以在dat前加_b1 - _b3命名（例如a9_b1.dat）。", //L"are signified by appending _b1 to _b3 before the .dat (ex:  a9_b1.dat). ",
-	
+
 	L"你确定（是/否）。", //L"Do you wish to do this now (y/n)?",
-	
+
 	L"没有总结信息，拒绝创建。", //L"No summary info.  Creation denied.",
-	
+
 	L"网格", //L"Grid",
-	L"已编辑", //40 //L"Progress", 
+	L"已编辑", //40 //L"Progress",
 	L"使用别的地图", //L"Use Alternate Maps",
-	
+
 	L"总结", //L"Summary",
 	L"物品", //L"Items",
 };
@@ -2104,8 +2104,8 @@ STR16 wszSelType[6] = {
  L"小", //L"Small",
  L"中", //L"Medium",
  L"大", //L"Large",
- L"超大", //L"XLarge", 
- L"宽:xx", //L"Width: xx", 
+ L"超大", //L"XLarge",
+ L"宽:xx", //L"Width: xx",
  L"区域" //L"Area"
  };
 
@@ -2115,11 +2115,11 @@ CHAR16  gszAimPages[ 6 ][ 20 ] =
 {
 	L"页 1/2", //0
 	L"页 2/2",
-	
+
 	L"页 1/3",
 	L"页 2/3",
 	L"页 3/3",
-	
+
 	L"页 1/1", //5
 };
 
@@ -2180,7 +2180,7 @@ CHAR16 AmmoCaliber[MAXITEMS][20];// =
 //};
 
 // This BobbyRayAmmoCaliber is virtually the same as AmmoCaliber however the bobby version doesnt have as much room for the words.
-// 
+//
 // Different weapon calibres
 // CAWS is Close Assault Weapon System and should probably be left as it is
 // NATO is the North Atlantic Treaty Organization
@@ -2310,7 +2310,7 @@ CHAR16 Message[][STRING_LENGTH] =
 	L"无",
 	L"退出子弹",
 	L"附件",
-	
+
 	//You cannot use "item(s)" and your "other item" at the same time.
 	//Ex:  You cannot use sun goggles and you gas mask at the same time.
 	L"你不能同时使用%s和%s。",
@@ -2343,13 +2343,13 @@ CHAR16 Message[][STRING_LENGTH] =
 
 	L"%s 的沙漠迷彩油已经耗竭失效了。",
 	L"%s 的沙漠迷彩油已经冲刷失效了。",
-	
+
 	L"%s 的丛林迷彩油已经耗竭失效了。",
 	L"%s 的丛林迷彩油已经冲刷失效了。",
-	
+
 	L"%s 的城市迷彩油已经耗竭失效了。",
 	L"%s 的城市迷彩油已经冲刷失效了。",
-	
+
 	L"%s 的雪地迷彩油已经耗竭失效了。",
 	L"%s 的雪地迷彩油已经冲刷失效了。",
 
@@ -2405,7 +2405,7 @@ STR16 sTimeStrings[] =
 };
 
 
-// Assignment Strings: what assignment does the merc  have right now? For example, are they on a squad, training, 
+// Assignment Strings: what assignment does the merc  have right now? For example, are they on a squad, training,
 // administering medical aid (doctor) or training a town. All are abbreviated. 8 letters is the longest it can be.
 
 STR16 pAssignmentStrings[] =
@@ -2558,7 +2558,7 @@ STR16 pPersonnelAssignmentStrings[] =
 	L"秘密告发",	// facility: undercover prisoner (snitch)
 	L"派发传单",	// facility: spread propaganda
 	L"派发传单",	// facility: spread propaganda (globally)
-	L"搜集谣言",			// facility: gather rumours	
+	L"搜集谣言",			// facility: gather rumours
 	L"派发传单",	// spread propaganda
 	L"搜集谣言",			// gather information
 	L"命令民兵", //L"Commanding Militia"  militia movement orders
@@ -2620,7 +2620,7 @@ STR16 pLongAssignmentStrings[] =
 	L"秘密告发",	// facility: undercover prisoner (snitch)
 	L"派发传单",	// facility: spread propaganda
 	L"派发传单",	// facility: spread propaganda (globally)
-	L"搜集谣言",			// facility: gather rumours	
+	L"搜集谣言",			// facility: gather rumours
 	L"派发传单",	// spread propaganda
 	L"搜集谣言",			// gather information
 	L"命令民兵",	// militia movement orders
@@ -2743,9 +2743,9 @@ STR16 pAssignMenuStrings[] =
 {
 	L"编队",
 	L"医生",
-	L"疾病", // merc is a doctor doing diagnosis 
+	L"疾病", // merc is a doctor doing diagnosis
 	L"病人",
-	L"交通工具",	
+	L"交通工具",
 	L"修理",
 	L"无线电扫描", // Flugente: the merc is scanning for patrols in neighbouring sectors
 	L"告发", // anv: snitch actions
@@ -2762,8 +2762,8 @@ STR16 pMilitiaControlMenuStrings[] =
 	L"自动进攻", // set militia to aggresive
 	L"原地坚守", // set militia to stationary
 	L"撤退", // retreat militia
-	L"向我靠拢", 
-	L"卧倒", 
+	L"向我靠拢",
+	L"卧倒",
 	L"蹲下",	// L"Crouch",
 	L"隐蔽",
 	L"全体: 自动进攻",
@@ -2835,7 +2835,7 @@ STR16 pSnitchMenuStrings[] =
 {
 	// snitch
 	L"团队情报员",
-	L"城镇任务",	
+	L"城镇任务",
 	L"取消",
 };
 
@@ -3085,7 +3085,7 @@ STR16 pPersonnelRecordsHelpTexts[] =
 
 
 //These string correspond to enums used in by the SkillTrait enums in SoldierProfileType.h
-STR16 gzMercSkillText[] = 
+STR16 gzMercSkillText[] =
 {
 	// SANDRO - tweaked this
 	L"没有技能",
@@ -3108,7 +3108,7 @@ STR16 gzMercSkillText[] =
 };
 //////////////////////////////////////////////////////////
 // SANDRO - added this
-STR16 gzMercSkillTextNew[] = 
+STR16 gzMercSkillTextNew[] =
 {
 	// Major traits
 	L"没有技能",		// 0
@@ -3120,7 +3120,7 @@ STR16 gzMercSkillTextNew[] =
 	L"格斗家",
 	L"班副",
 	L"技师",
-	L"救护兵",	
+	L"救护兵",
 	// Minor traits
 	L"双持",
 	L"近战",
@@ -3229,7 +3229,7 @@ STR16 pMapScreenMouseRegionHelpText[] =
 	L"睡觉",
 };
 
-// volumes of noises 
+// volumes of noises
 
 STR16 pNoiseVolStr[] =
 {
@@ -3239,7 +3239,7 @@ STR16 pNoiseVolStr[] =
 	L"非常大声的",
 };
 
-// types of noises 
+// types of noises
 
 STR16 pNoiseTypeStr[] = // OBSOLETE
 {
@@ -3259,7 +3259,7 @@ STR16 pNoiseTypeStr[] = // OBSOLETE
 
 // Directions that are used to report noises
 
-STR16 pDirectionStr[] = 
+STR16 pDirectionStr[] =
 {
 	L"东北方",
 	L"东方",
@@ -3271,7 +3271,7 @@ STR16 pDirectionStr[] =
 	L"北方"
 };
 
-// These are the different terrain types. 
+// These are the different terrain types.
 
 STR16 pLandTypeStrings[] =
 {
@@ -3334,7 +3334,7 @@ STR16 gpStrategicString[] =
 	L"敌军给你一个投降的机会。",
 	L"敌军俘虏了昏迷中的佣兵。",
 
-	//The text that goes on the autoresolve buttons							
+	//The text that goes on the autoresolve buttons
 
 	L"撤退",		//The retreat button
 	L"完成",		//The done button				//STR_AR_DONE_BUTTON
@@ -3366,13 +3366,13 @@ STR16 gpStrategicString[] =
 
 	L"战斗用时",						//STR_AR_TIME_ELAPSED,
 
-	//Labels for status of merc if retreating.  (UPPERCASE)			
+	//Labels for status of merc if retreating.  (UPPERCASE)
 
 	L"已撤退",						//STR_AR_MERC_RETREATED,
 	L"正在撤退",						//STR_AR_MERC_RETREATING,
 	L"撤退",						//STR_AR_MERC_RETREAT,
 
-	//PRE BATTLE INTERFACE STRINGS 
+	//PRE BATTLE INTERFACE STRINGS
 	//Goes on the three buttons in the prebattle interface.  The Auto resolve button represents
 	//a system that automatically resolves the combat for the player without having to do anything.
 	//These strings must be short (two lines -- 6-8 chars per line)
@@ -3406,7 +3406,7 @@ STR16 gpStrategicString[] =
 	L"小时",			//One letter abbreviation of hour
 
 	//TACTICAL PLACEMENT USER INTERFACE STRINGS
-	//The four buttons 
+	//The four buttons
 
 	L"清除",
 	L"分散",
@@ -3444,7 +3444,7 @@ STR16 gpStrategicString[] =
 	L"将小队撤退到先前的分区。(|R)",				//singular version
 	L"将所有小队撤退到先前的分区。(|R)", //multiple groups with same previous sector
 
-	//various popup messages for battle conditions.  
+	//various popup messages for battle conditions.
 
 	//%c%d is the sector -- ex:  A9
 	L"敌军向你在%c%d分区的民兵发起了攻击。",
@@ -3468,13 +3468,13 @@ STR16 gpStrategicString[] =
 	L"\n每一个小时刷新一次呼吸: %d", //L"\nBreath regeneration per hour: %d",	// STR_BREATH_REGEN_SLEEP
 };
 
-STR16 gpGameClockString[] = 
+STR16 gpGameClockString[] =
 {
 	//This is the day represented in the game clock.  Must be very short, 4 characters max.
 	L"日",
 };
 
-//When the merc finds a key, they can get a description of it which 
+//When the merc finds a key, they can get a description of it which
 //tells them where and when they found it.
 STR16 sKeyDescriptionStrings[2] =
 {
@@ -3624,7 +3624,7 @@ CHAR16 gMoneyStatsDesc[][ 14 ] =
 };
 
 //The health of various creatures, enemies, characters in the game. The numbers following each are for comment
-//only, but represent the precentage of points remaining. 
+//only, but represent the precentage of points remaining.
 
 CHAR16 zHealthStr[][13] =
 {
@@ -3640,11 +3640,11 @@ CHAR16 zHealthStr[][13] =
 
 STR16 gzHiddenHitCountStr[1] =
 {
-	L"?",	
+	L"?",
 };
 
-STR16	gzMoneyAmounts[6] = 
-{ 
+STR16	gzMoneyAmounts[6] =
+{
 	L"$1000",
 	L"$100",
 	L"$10",
@@ -3653,13 +3653,13 @@ STR16	gzMoneyAmounts[6] =
 	L"提取",
 };
 
-// short words meaning "Advantages" for "Pros" and "Disadvantages" for "Cons." 
-CHAR16		gzProsLabel[10] = 
+// short words meaning "Advantages" for "Pros" and "Disadvantages" for "Cons."
+CHAR16		gzProsLabel[10] =
 {
 	L"优点: ",
 };
 
-CHAR16		gzConsLabel[10] = 
+CHAR16		gzConsLabel[10] =
 {
 	L"缺点: ",
 };
@@ -3684,7 +3684,7 @@ CHAR16 zDealerStrings[4][ SMALL_STRING_LENGTH ]=
 	L"修理",
 };
 
-CHAR16 zDialogActions[1][ SMALL_STRING_LENGTH ] = 
+CHAR16 zDialogActions[1][ SMALL_STRING_LENGTH ] =
 {
 	L"完成",
 };
@@ -3740,7 +3740,7 @@ CHAR16 TacticalStr[][ MED_STRING_LENGTH ] =
 	L"%s发现运来的货品短缺了几件。",
 
 	// The %s is a string from pDoorTrapStrings
-	
+
 	L"锁上有%s。",
 	L"没有上锁。",
 	L"成功！",
@@ -3812,11 +3812,11 @@ CHAR16 TacticalStr[][ MED_STRING_LENGTH ] =
 
 	L"要雇佣%s吗(每日得支付%s)?",
 
-	// This line is used repeatedly to ask player if they wish to participate in a boxing match. 
+	// This line is used repeatedly to ask player if they wish to participate in a boxing match.
 
 	L"你要进行拳击比赛吗?",
 
-	// In the next string, the first %s is an item name and the 
+	// In the next string, the first %s is an item name and the
 	// second %s is an amount of money (including $ sign)
 
 	L"要买%s吗(得支付%s)?",
@@ -3938,7 +3938,7 @@ CHAR16 TacticalStr[][ MED_STRING_LENGTH ] =
 	L"设置引爆频率 (1 - 4) 和拆除频率 (A - D):", //L"Set detonation frequency (1 - 4) and defusing frequency (A - D):",
 	L"设置引爆时间回合数 (1 - 4) 和拆除频率 (A - D):", //L"Set detonation time in turns (1 - 4) and defusing frequency (A - D):",
 	L"选择绊线的分层 (1 - 4) 和网格 (A - D):", //L"Select tripwire hierarchy (1 - 4) and network (A - D):",
-	
+
 	// added by Flugente to display food status
 	L"生命: %d/%d\n精力: %d/%d\n士气: %s\n口渴: %d%s\n饥饿: %d%s",
 
@@ -3993,7 +3993,7 @@ CHAR16 TacticalStr[][ MED_STRING_LENGTH ] =
     L"面具",
     L"夜视仪",
     L"物品",
-        
+
     L"这一功能只能通过新物品携带系统实现",
     L"主手上没有物品",
     L"主手上的物品无处可放",
@@ -4019,7 +4019,7 @@ STR16 pExitingSectorHelpText[] =
 	//If you attempt to leave a sector when you have multiple squads in a hostile sector.
 	L"该分区被敌军占据。你不能将佣兵留在这里。\n在进入其他分区前，你必须把这里的问题解决。",
 
-	//Because you only have one squad in the sector, and the "move all" option is checked, the "go to sector" option is locked to on. 
+	//Because you only have one squad in the sector, and the "move all" option is checked, the "go to sector" option is locked to on.
 	//The helptext explains why it is locked.
 	L"让留下的佣兵离开本分区，\n将立即进入邻近的分区。",
 	L"让留下的佣兵离开本分区，\n你将被立即自动放置在地图屏幕，\n因为你的佣兵要花些时间来行军。",
@@ -4056,7 +4056,7 @@ STR16 pExitingSectorHelpText[] =
 
 
 
-STR16 pRepairStrings[] = 
+STR16 pRepairStrings[] =
 {
 	L"物品",	// tell merc to repair items in inventor
 	L"SAM导弹基地",		// tell merc to repair SAM site - SAM is an acronym for Surface to Air Missile
@@ -4066,7 +4066,7 @@ STR16 pRepairStrings[] =
 
 
 // NOTE: combine prestatbuildstring with statgain to get a line like the example below.
-// "John has gained 3 points of marksmanship skill." 
+// "John has gained 3 points of marksmanship skill."
 
 STR16 sPreStatBuildString[] =
 {
@@ -4106,7 +4106,7 @@ STR16 pHelicopterEtaStrings[] =
 	L"选择Skyrider还是“着陆点”？",
 	L"Skyrider",
 	L"着陆点",
-	L"直升机严重受损，必须降落在敌军领地！",	// warning that the sector the helicopter is going to use for refueling is under enemy control -> 
+	L"直升机严重受损，必须降落在敌军领地！",	// warning that the sector the helicopter is going to use for refueling is under enemy control ->
 	L"直升机将直接返回基地，你希望在此之前丢下乘客吗？",
   	L"剩余燃料：",
 	L"到加油站距离：",
@@ -4415,7 +4415,7 @@ CHAR16 pSenderNameList[500][128] =
 	L"MD",
 	L"Meltdown",
 	//----------
-	L"M.I.S. Insurance",	
+	L"M.I.S. Insurance",
 	L"Bobby Rays",
 	L"Kingpin",
 	L"John Kulba",
@@ -4431,7 +4431,7 @@ STR16 pTraverseStrings[] =
   L"下一个",
 };
 
-// new mail notify string 
+// new mail notify string
 
 STR16 pNewMailStrings[] =
 {
@@ -4550,7 +4550,7 @@ STR16 pTransactionAlternateText[] =
 	L"延长%s的合同两周。",
 };
 
-// helicopter pilot payment 
+// helicopter pilot payment
 
 STR16 pSkyriderText[] =
 {
@@ -4579,7 +4579,7 @@ STR16 pMoralStrings[] =
 // Mercs equipment has now arrived and is now available in Omerta or Drassen.
 
 STR16 pLeftEquipmentString[] =
-{ 
+{
 	L"%s的装备现在可以在Omerta (A9)获得。",
 	L"%s的装备现在可以在Drassen (B13)获得。",
 };
@@ -4618,7 +4618,7 @@ STR16 pTrashItemText[] =
 };
 
 
-STR16 pMapErrorString[] = 
+STR16 pMapErrorString[] =
 {
 	L"小队不能行军，因为有人在睡觉。",
 
@@ -4986,7 +4986,7 @@ STR16 pBookMarkStrings[] =
 	L"简报室",
 	L"战役历史",
 	L"佣兵之家", //L"MeLoDY",
-	L"世界卫生组织", //L"WHO",　
+	L"世界卫生组织", //L"WHO",
 	L"Kerberus安保公司", //L"Kerberus",
 	L"Militia Overview",	// TODO.Translate
 };
@@ -5034,7 +5034,7 @@ STR16 sATMText[ ]=
 	L"必须是$10的倍数", // transfer amount must be a multiple of $10
 };
 
-// Web error messages. Please use foreign language equivilant for these messages. 
+// Web error messages. Please use foreign language equivilant for these messages.
 // DNS is the acronym for Domain Name Server
 // URL is the acronym for Uniform Resource Locator
 
@@ -5278,8 +5278,8 @@ STR16			InsContractText[] =
 //Insurance Info
 // Text on the buttons on the bottom of the screen
 
-STR16		InsInfoText[] = 
-{ 
+STR16		InsInfoText[] =
+{
 	L"上一页",
 	L"下一页",
 };
@@ -5288,7 +5288,7 @@ STR16		InsInfoText[] =
 
 //For use at the M.E.R.C. web site. Text relating to the player's account with MERC
 
-STR16			MercAccountText[] = 
+STR16			MercAccountText[] =
 {
 	// Text on the buttons on the bottom of the screen
 	L"支付",
@@ -5304,7 +5304,7 @@ STR16			MercAccountText[] =
 };
 
 // Merc Account Page buttons
-STR16			MercAccountPageText[] = 
+STR16			MercAccountPageText[] =
 {
 	// Text on the buttons on the bottom of the screen
 	L"上一页",
@@ -5342,7 +5342,7 @@ STR16			MercInfo[] =
 	L"阵亡",	//"Deceased",
 
 	L"你的队伍已经满员了。", //L"You have a full team of mercs already.",
-	L"购买装备？",	//"Buy Equipment?",	
+	L"购买装备？",	//"Buy Equipment?",
 	L"不可雇佣",	//"Unavailable",
 	L"未结账单", //L"Unsettled Bills",
 	L"生平", //L"Bio",
@@ -5401,7 +5401,7 @@ STR16			sFuneralString[] =
 
 // Text for the florist Home page
 
-STR16			sFloristText[] = 
+STR16			sFloristText[] =
 {
 	//Text on the button on the bottom of the page
 
@@ -5431,7 +5431,7 @@ STR16			sFloristText[] =
 
 //Florist OrderForm
 
-STR16			sOrderFormText[] = 
+STR16			sOrderFormText[] =
 {
 	//Text on the buttons
 
@@ -5496,7 +5496,7 @@ STR16			sFloristCards[] =
 
 // Text for Bobby Ray's Mail Order Site
 
-STR16			BobbyROrderFormText[] = 
+STR16			BobbyROrderFormText[] =
 {
 	L"订单",		//"Order Form",		//Title of the page
 	L"数量",			//"Qty",			// The number of items ordered
@@ -5583,7 +5583,7 @@ STR16			BobbyRFilter[] =
 
 // This text is used when on the various Bobby Ray Web site pages that sell items
 
-STR16			BobbyRText[] = 
+STR16			BobbyRText[] =
 {
 	L"订购",				//"To Order",	// Title
 	// instructions on how to order
@@ -5601,7 +5601,7 @@ STR16			BobbyRText[] =
 	L"订货单",	//"ORDER FORM",
 	L"主页",	//"Home",			//10
 
-	//The following 2 lines are used on the Ammunition page.  
+	//The following 2 lines are used on the Ammunition page.
 	//They are used for help text to display how many items the player's merc has
 	//that can use this type of ammo
 
@@ -5764,7 +5764,7 @@ STR16			CharacterInfo[] =
 	L"一周",	//"one week",
 	L"两周",	//"two weeks",
 
-	// text for the buttons that either go to the previous merc, 
+	// text for the buttons that either go to the previous merc,
 	// start talking to the merc, or go to the next merc
 
 	L"上一位",	//"Previous",
@@ -5799,7 +5799,7 @@ STR16			VideoConfercingText[] =
 	L"一周",	//"One Week",
 	L"两周",	//"Two Weeks",
 
-	//Text on the buttons to determine if you want the merc to come with the equipment 
+	//Text on the buttons to determine if you want the merc to come with the equipment
 
 	L"不买装备",	//"No Equipment",
 	L"购买装备",	//"Buy Equipment",
@@ -5976,10 +5976,10 @@ STR16			AimBottomMenuText[] =
 
 
 //ShopKeeper Interface
-// The shopkeeper interface is displayed when the merc wants to interact with 
+// The shopkeeper interface is displayed when the merc wants to interact with
 // the various store clerks scattered through out the game.
 
-STR16 SKI_Text[ ] = 
+STR16 SKI_Text[ ] =
 {
 	L"库存商品",	//"MERCHANDISE IN STOCK",	//Header for the merchandise available
 	L"页面",			//"PAGE",	//The current store inventory page being displayed
@@ -6022,8 +6022,8 @@ STR16	SkiAtmText[] =
 
 
 //Shopkeeper Interface
-STR16	gzSkiAtmText[] = 
-{	
+STR16	gzSkiAtmText[] =
+{
 
 	// Text on the bank machine panel that....
 	L"选择类型",			//"Select Type",	// tells the user to select either to give or take from the merc
@@ -6049,7 +6049,7 @@ STR16	SkiMessageBoxText[] =
 
 //OptionScreen.c
 
-STR16	zOptionsText[] = 
+STR16	zOptionsText[] =
 {
 	//button Text
 	L"保存游戏",	//"Save Game",
@@ -6071,8 +6071,8 @@ STR16	zOptionsText[] =
 };
 
 
-//SaveLoadScreen 
-STR16			zSaveLoadText[] = 
+//SaveLoadScreen
+STR16			zSaveLoadText[] =
 {
 	L"保存游戏",
 	L"载入游戏",
@@ -6158,7 +6158,7 @@ STR16		zMarksMapScreenText[] =
 	L"要给%s花费保险金%s 以延长保险合同%d天。你要付费吗？",
 	L"分区存货",	//"Sector Inventory",
 	L"佣兵有医疗保证金。",	//"Merc has a medical deposit.",
-	
+
 	// other items
 	L"医生", 	//"Medics", // people acting a field medics and bandaging wounded mercs
 	L"病人", 	//"Patients", // people who are being bandaged by a medic
@@ -6219,19 +6219,19 @@ STR16 pMilitiaConfirmStrings[] =
 };
 
 //Strings used in the popup box when withdrawing, or depositing money from the $ sign at the bottom of the single merc panel
-STR16	gzMoneyWithdrawMessageText[] = 
+STR16	gzMoneyWithdrawMessageText[] =
 {
 	L"你每次最多能提取$20,000。",
 	L"你确认要把%s存入你的帐户吗？",
 };
 
-STR16	gzCopyrightText[] = 
+STR16	gzCopyrightText[] =
 {
 	L"Copyright (C) 1999 Sir-tech Canada Ltd.  All rights reserved.",
 };
 
 //option Text
-STR16		zOptionsToggleText[] = 
+STR16		zOptionsToggleText[] =
 {
 	L"语音",		//"Speech",
 	L"确认静默",		//"Mute Confirmations",
@@ -6273,7 +6273,7 @@ STR16		zOptionsToggleText[] =
 	L"替代战略地图颜色", // Change color scheme of Strategic Map
 	L"替代子弹图像", // Show alternate bullet graphics (tracers)
 	L"显示佣兵军衔",	// shows mercs ranks
-	L"显示脸部装备图",				
+	L"显示脸部装备图",
 	L"显示脸部装备图标",
 	L"禁止光标切换",		// Disable Cursor Swap
 	L"佣兵训练时保持沉默",	// Madd: mercs don't say quotes while training
@@ -6336,7 +6336,7 @@ STR16	zOptionsScreenHelpText[] =
 
 	//show misses
 	L"打开时，会显示未击中目标的子弹落点。",
-	
+
 	//Real Time Confirmation
 	L"打开时，进入实时模式会有一个确认对话框。",
 
@@ -6429,7 +6429,7 @@ STR16	gzGIOScreenText[] =
 	L"游戏风格",
 	L"现实",
 	L"科幻",
-#endif	
+#endif
 	L"金版",
 	L"武器数量", // changed by SANDRO
 	L"大量武器",
@@ -6477,7 +6477,7 @@ STR16	gzGIOScreenText[] =
 	L"通缉犯出现方式",
 	L"随机",
 	L"全部",
-#endif	
+#endif
 	L"敌军秘密基地出现方式",
 	L"随机",
 	L"全部",
@@ -6491,7 +6491,7 @@ STR16	gzGIOScreenText[] =
 	L"旧 / 旧",
 	L"新 / 旧",
 	L"新 / 新",
-	
+
 	// Squad Size
 	L"小队人数",//"Max. Squad Size",
 	L"6",
@@ -6499,7 +6499,7 @@ STR16	gzGIOScreenText[] =
 	L"10",
 	//L"Bobby Ray 快速出货", //L"Faster Bobby Ray Shipments",
 	L"战斗时取放物品消耗AP", //L"Inventory Manipulation Costs AP",
-	
+
 	L"新命中率系统（NCTH）", //L"New Chance to Hit System",
 	L"改进的中断系统（IIS）", //L"Improved Interrupt System",
 	L"佣兵故事背景", //L"Merc Story Backgrounds",
@@ -6541,7 +6541,7 @@ STR16 gzMPJHelpText[] =
 	L"确保(UDP, TCP)端口由你的路由器转发，更多信息请看http://portforward.com",   //Be sure that the Port (UDP, TCP) is forwarded on your Router. For more information see: http://portforward.com
 	L"你必须将你的外网IP通过QQ或者什么，告诉其他玩家",   //You have to send (via IRC, ICQ, etc) your external IP (http://www.whatismyip.com) and the Port number to the other players.
 	L"点击“Host”创建一个新的局域网游戏",   //Click on 'Host' to host a new Multiplayer Game.
-	
+
 	L"加入",  //JOIN
 	L"主机需要发送外网IP和端口",               //The host has to send (via IRC, ICQ, etc) you the external IP and the Port number
 	L"输入主机的外网IP和端口号",  //L"Enter the external IP and the Port number from the host.",
@@ -6745,7 +6745,7 @@ STR16 pMessageStrings[] =
 
 	//When firing heavier weapons in close quarters, you may not have enough room to do so.
 	L"没有空间施展你的武器。",	//"There is no room to fire from here.",
-	
+
 	//Can't change stance due to objects in the way...
 	L"现在无法改变姿势。",	//"Cannot change stance at this time.",
 
@@ -6771,7 +6771,7 @@ STR16 pMessageStrings[] =
 	L"%s进入潜行模式。",	//"%s on stealth mode.",
 	L"%s退出潜行模式。",	//"%s off stealth mode.",
 
-	//Wireframes are shown through buildings to reveal doors and windows that can't otherwise be seen in 
+	//Wireframes are shown through buildings to reveal doors and windows that can't otherwise be seen in
 	//an isometric engine.  You can toggle this mode freely in the game.
 	L"打开显示轮廓",	//"Extra Wireframes On",
 	L"关闭显示轮廓",	//"Extra Wireframes Off",
@@ -6812,7 +6812,7 @@ STR16 pMessageStrings[] =
 	L"..\\SavedGames\\MP_SavedGames", //The name of the directory where games are saved
 	L"客户端", //"Client",
 	L"旧携行系统不能与新附件系统同时使用.",
-	
+
 	L"自动存盘 #", //91		// Text des Auto Saves im Load Screen mit ID
 	L"自动存盘专用，可在 ja2_options.ini 里设置 AUTO_SAVE_EVERY_N_HOURS 来开启/关闭", //L"This Slot is reserved for Auto Saves, which can be enabled/disabled (AUTO_SAVE_EVERY_N_HOURS) in the ja2_options.ini.", //92	// The text, when the user clicks on the save screen on an auto save
 	L"... 自动存盘位置 #", //L"Empty Auto Save Slot #", //93	// The text, when the auto save slot (1 - 5) is empty (not saved yet)
@@ -6874,7 +6874,7 @@ STR16 pMapScreenJustStartedHelpText[] =
 #endif
 };
 
-STR16 pAntiHackerString[] = 
+STR16 pAntiHackerString[] =
 {
 	L"错误。丢失或损坏文件。游戏将退出。",
 };
@@ -6943,13 +6943,13 @@ STR16 gzMiscString[] =
 	L"你丢失了加油点。",	//"You have lost a refueling site.",
 };
 
-STR16	gzIntroScreen[] = 
+STR16	gzIntroScreen[] =
 {
 	L"找不到视频文件",
 };
 
 // These strings are combined with a merc name, a volume string (from pNoiseVolStr),
-// and a direction (either "above", "below", or a string from pDirectionStr) to 
+// and a direction (either "above", "below", or a string from pDirectionStr) to
 // report a noise.
 // e.g. "Sidney hears a loud sound of MOVEMENT coming from the SOUTH."
 STR16 pNewNoiseStr[] =
@@ -6988,14 +6988,14 @@ STR16 wMapScreenSortButtonHelpText[] =
 
 
 
-STR16		BrokenLinkText[] = 
+STR16		BrokenLinkText[] =
 {
 	L"错误404",	//"Error 404",
 	L"网站未找到",	//"Site not found.",
 };
 
 
-STR16 gzBobbyRShipmentText[] = 
+STR16 gzBobbyRShipmentText[] =
 {
 	L"近期运货",	//"Recent Shipments",
 	L"订单 #",		//"Order #",
@@ -7130,7 +7130,7 @@ STR16 gzLateLocalizedString[] =
 	//In autoresolve if there were 5 mercs fighting 8 enemies the text would be "5 vs. 8"
 	//"vs." is the abbreviation of versus.
 	L"%d vs. %d",
-	
+
 	L"%s满了。",
 
   L"%s现在不用包扎，他（她）需要认真的治疗和休息。",
@@ -7217,13 +7217,13 @@ STR16 gzLateLocalizedString[] =
 	L"没有找到铁血联盟2光盘，程序即将退出。", //The Jagged Alliance 2 v1.13 PLAY DISK was not found. Program will now exit.
 
 	L"物品组合成功。",
- 
+
 	//58
 	//Displayed with the version information when cheats are enabled.
 	L"当前/最大进展:  %d%％/%d%％",		//"Current/Max Progress: %d%%/%d%%",//zww
 
 	L"护送John和Mary？",
-	
+
 	// 60
 	L"开关被激活",		//"Switch Activated.",
 
@@ -7237,7 +7237,7 @@ STR16 gzLateLocalizedString[] =
 };
 
 // HEADROCK HAM 3.5: Added sector name
-STR16 gzCWStrings[] = 
+STR16 gzCWStrings[] =
 {
 	L"是否呼叫邻近区域的援兵到%s？", //L"Call reinforcements to %s from adjacent sectors?",
 };
@@ -7254,7 +7254,7 @@ STR16 gzTooltipStrings[] =
 	L"%s|属|性: %d\n",
 	L"%s|当|前 |A|Ps: %d\n",
 	L"%s|当|前 |生|命: %d\n",
-	L"%s|当|前|精|力: %d\n",	
+	L"%s|当|前|精|力: %d\n",
 	L"%s|当|前|士|气: %d\n",
 	L"%s|当|前|惊|慌|度: %d\n", //L"%s|Current |S|hock: %d\n",
 	L"%s|当|前|压|制点数: %d\n",//L"%s|Current |S|uppression Points: %d\n",
@@ -7291,7 +7291,7 @@ STR16 gzTooltipStrings[] =
 	L"|护|甲: %s\n",
 	 // Added - SANDRO
 	L"%s|技能 1: %s\n",
-	L"%s|技能 2: %s\n", 
+	L"%s|技能 2: %s\n",
 	L"%s|技能 3: %s\n",
     // Additional suppression effects - sevenfm
     L"%s|火|力|压|制导致的|A|P损失：%d\n",
@@ -7349,10 +7349,10 @@ STR16 New113Message[] =
 	L"%s重获%d点失去的 %s",// L"%s has regained %d points of lost %s",
 	L"你的侦察能力避免了敌人的偷袭！",// L"Your scouting skills prevented you to be ambushed by the enemy!",
 	L"多亏了你的侦查技能，你成功的避开了大群血猫！",// L"Thanks to your scouting skills you have successfuly avoided a pack of bloodcats!",
-	L"%s命根子中弹，痛苦的倒下了！",// L"%s is hit to groin and falls down in pain!",	
+	L"%s命根子中弹，痛苦的倒下了！",// L"%s is hit to groin and falls down in pain!",
 	//////////////////////////////////////////////////////////////////////////////////////
 	L"注意: 敌人尸体被发现!!!",
-	L"%s [%d rnds]\n%s %1.1f %s",		
+	L"%s [%d rnds]\n%s %1.1f %s",
 	L"AP不够！需要%d，你只有%d。", //L"Insufficient AP Points! Cost %d, you have %d.",
 	L"提示: %s",
 	L"玩家力量: %d - 敌人力量: %6.0f",		//Surrender values to be printed, if DISPLAY_SURRENDER_VALUES = TRUE
@@ -7378,7 +7378,7 @@ STR16 New113Message[] =
 	L"病人",
 };
 
-STR16 New113HAMMessage[] = 
+STR16 New113HAMMessage[] =
 {
 	// 0 - 5
 	L"%s 害怕得退缩了！",//	L"%s cowers in fear!",
@@ -7386,7 +7386,7 @@ STR16 New113HAMMessage[] =
 	L"%s 多打了几发子弹！",// L"%s fires more rounds than intended!",
 	L"你不能在这个地区训练民兵。",// L"You cannot train militia in this sector.",
 	L"民兵拾起 %s。",// L"Militia picks up %s.",
-	L"有敌人出没时无法训练民兵！", // L"Cannot train militia with enemies present!", 
+	L"有敌人出没时无法训练民兵！", // L"Cannot train militia with enemies present!",
 	// 6 - 10
 	L"%s 缺乏训练民兵所需要的领导能力。",// L"%s lacks sufficient Leadership score to train militia.",
 	L"此地训练民兵的教官不能超过 %d 名。",// L"No more than %d Mobile Militia trainers are permitted in this sector.",
@@ -7413,7 +7413,7 @@ STR16 New113HAMMessage[] =
 };
 
 // HEADROCK HAM 5: Text dealing exclusively with Item Transformations.
-STR16 gzTransformationMessage[] = 
+STR16 gzTransformationMessage[] =
 {
 	L"没有可用的转换方案", //L"No available adjustments",
 	L"%s被拆开了", //L"%s was split into several parts.",
@@ -7521,7 +7521,7 @@ STR16 MissingIMPSkillsDescriptions[] =
 	L"生还者: 大自然是你第二个家。 ± ", //L"Survival: Nature is a second home to you. ± ",
 };
 
-STR16 NewInvMessage[] = 
+STR16 NewInvMessage[] =
 {
     L"此时无法拾起背包",
 	L"背包中无处可放",
@@ -7589,7 +7589,7 @@ STR16 MPClientMessage[] =
 	L"X: %d, Y: %d",
 	L"坐标值: %d",
 	L"服务器独占模式",
-	L"手动选择服务器优先级:  ('1' - 授权 便携电脑/雇佣)  ('2' - 启动/载入 级别)  ('3' - 解锁 UI)  ('4' - 完成设置)",	
+	L"手动选择服务器优先级:  ('1' - 授权 便携电脑/雇佣)  ('2' - 启动/载入 级别)  ('3' - 解锁 UI)  ('4' - 完成设置)",
 	L"分区=%s, 最大客户端数=%d, 最大佣兵数=%d, 游戏模式=%d, 同一佣兵=%d, 伤害倍数=%f, 时间前进=%d, 秒/Tic=%d, 取消 BobbyRay=%d, 取消 Aim/Merc 装备=%d, 取消士气=%d, 测试=%d",
 	// 25
 	L"",
@@ -7656,9 +7656,9 @@ STR16 MPClientMessage[] =
 	L"客户端初始化失败。结束游戏。",
 	L"客户端连接中断，强行关闭。",
 	L"客户端无响应。",
-	L"提示：如果游戏卡死（对手进度条不动），告知服务端然后按ALT+E获取控制权！",	
+	L"提示：如果游戏卡死（对手进度条不动），告知服务端然后按ALT+E获取控制权！",
 	// 80
-	L"AI回合 - %d剩余",	
+	L"AI回合 - %d剩余",
 };
 
 STR16 gszMPEdgesText[] =
@@ -7743,7 +7743,7 @@ STR16 pSkillTraitBeginIMPStrings[] =
 	L"最多只能选择%d项。这意味着如果你没有选择主技能，你可以选择%d项副技能。如果你选择了两个主技能（或者一个加强技能），你只能再选择%d项副技能。", // L"No more then %d choices altogether are possible. This means that if you choose no major traits, you can choose %d minor traits. If you choose two major traits (or one enhanced), you can then choose only %d minor trait(s)...",
 };
 
-STR16 sgAttributeSelectionText[] = 
+STR16 sgAttributeSelectionText[] =
 {
 	L"请 按 照 你 对 自 己 的 感 觉 ， 调 整 你 的 各 项 能 力 值 。 各 项 能 力 值 的 最 大 值 为",
 	L"IMP能力值和技能概览。",
@@ -7795,7 +7795,7 @@ STR16 gzIMPCharacterTraitText[]=
 	L"I.M.P. 性格特征",
 };
 
-STR16 gzIMPColorChoosingText[] = 
+STR16 gzIMPColorChoosingText[] =
 {
 	L"I.M.P. 颜色及身型",
 	L"I.M.P. 颜色",
@@ -7890,7 +7890,7 @@ STR16 gzFacilityErrorMessage[]=
 	L"%s在%s负伤了。", // <--- This is a log message string.
 	// 31 - 35
 	L"%s在%s负了重伤。", //<--- This is a log message string.
-	L"现在这里有俘虏能认得出%s。", 
+	L"现在这里有俘虏能认得出%s。",
 	L"%s现在是人尽皆知的佣兵告发者。至少需要再等%小时。",
 
 
@@ -7967,12 +7967,12 @@ STR16 Additional113Text[]=
 {
 	L"Jagged Alliance 2 v1.13 窗口模式需要一个16bpp的颜色深度。",
 	L"Jagged Alliance 2 v1.13 全屏模式 (%d x %d) 不支持你当前的屏幕模式。\n请改变游戏的设置或者把屏幕调到16bpp色以下。", //L"Jagged Alliance 2 v1.13 fullscreen mode (%d x %d) is not supported by your primary screen.\nPlease either change the game resolution or use 16bpp windowed mode.",
-	L"存盘文件内部读取错误：存盘文件的“%s”数量跟 Ja2_Options.ini 设置的（$d）不一致。", //L"Internal error in reading %s slots from Savegame: Number of slots in Savegame (%d) differs from defined slots in ja2_options.ini settings (%d)",	
+	L"存盘文件内部读取错误：存盘文件的“%s”数量跟 Ja2_Options.ini 设置的（$d）不一致。", //L"Internal error in reading %s slots from Savegame: Number of slots in Savegame (%d) differs from defined slots in ja2_options.ini settings (%d)",
 	// WANNE: Savegame slots validation against INI file
-	L"佣兵 (MAX_NUMBER_PLAYER_MERCS) / 交通工具 (MAX_NUMBER_PLAYER_VEHICLES)", 
-	L"敌人 (MAX_NUMBER_ENEMIES_IN_TACTICAL)", 
-	L"动物 (MAX_NUMBER_CREATURES_IN_TACTICAL)", 
-	L"民兵 (MAX_NUMBER_MILITIA_IN_TACTICAL)", 
+	L"佣兵 (MAX_NUMBER_PLAYER_MERCS) / 交通工具 (MAX_NUMBER_PLAYER_VEHICLES)",
+	L"敌人 (MAX_NUMBER_ENEMIES_IN_TACTICAL)",
+	L"动物 (MAX_NUMBER_CREATURES_IN_TACTICAL)",
+	L"民兵 (MAX_NUMBER_MILITIA_IN_TACTICAL)",
 	L"平民 (MAX_NUMBER_CIVS_IN_TACTICAL)",
 
 };
@@ -8159,7 +8159,7 @@ STR16 szUDBGenWeaponsStatsTooltipText[]=
 	L"|可|靠|性",
 	L"|修|理|难|度",
 	L"|精|瞄|最|低|有|效|距|离",
-	L"|命|中|率|修|正",	
+	L"|命|中|率|修|正",
 	L"|举|枪|A|P",
 	L"|单|发|A|P",
 	L"|点|射|A|P",
@@ -8185,7 +8185,7 @@ STR16 szUDBGenWeaponsStatsExplanationsTooltipText[]=
 	L"\n \n决定了该武器使用时损耗的快慢。\n \n该数值越高越好。",
 	L"\n \n决定了修理难度以及谁可以完全修复其损坏值\n \n绿色 = 任何人都可以修理\n \n黄色 = 只有工兵和特殊NPC可以修复损坏值\n \n红色 = 这个物品不能被修理\n \n 该数值越高越好",  //L"\n \nDetermines how difficult it is to repair\nthis weapon and who can fully repair it.\n \ngreen = Anybody can repair it.\n \nyellow = Only Technicians and special\nNPCs can repair it beyond repair threshold.\n \nred = This item can't be repaired.\n \nHigher is better.",
 	L"\n \n瞄准镜提供瞄准命中率加成的最短距离。\n（再近就无效了）",
-	L"\n \n激光瞄准器提供的命中率修正。",	
+	L"\n \n激光瞄准器提供的命中率修正。",
 	L"\n \n端枪准备开火所需的AP。\n \n举起该武器后，连续发射不会再消耗\n举枪AP。\n \n但是，除转向和开火之外的其他动作均会放\n下武器。\n \n该数值越低越好。",
 	L"\n \n该武器射出单发弹药所需的AP，\n对于枪械而言，\n该数值显示了在不精瞄的情况下发射\n一发子弹的AP消耗。\n \n如果该图标为灰色，则该武器不可单发射击。\n \n该数值越低越好。",
 	L"\n \n一次点射所需的AP。\n \n每次点射的子弹数由枪支本身决定，\n并显示在该图标上。\n \n如果该图标发灰，则该武器不可点射。\n \n该数值越低越好。",
@@ -8381,12 +8381,12 @@ STR16 szUDBGenSecondaryStatsExplanationsTooltipText[]=
 	L"\n \n该物品能够用于爆破锁具。\n \n使用它需要爆破技能以避免过早引爆。\n \n使用炸药是一个相对简单的破锁手段，但是会\n发出很大噪音，并且对于大部分佣兵来说过于\n危险。",
 	L"\n \n饮用该物品能让你止渴。", //L"\n \nThis item will still your thirst\nif you drink it.",
 	L"\n \n食用该物品能让你充饥。", //L"\n \nThis item will still your hunger\nif you eat it.",
-	L"\n \n使用该供弹带，你可以为他人的机关枪供弹。", //L"\n \nWith this ammo belt you can\nfeed someone else's MG.", 
-	L"\n \n使用该机枪手背包中的供弹带，你可以为他人的机关枪供弹。", //L"\n \nYou can feed an MG with ammo\nbelts stored in this vest.", 
+	L"\n \n使用该供弹带，你可以为他人的机关枪供弹。", //L"\n \nWith this ammo belt you can\nfeed someone else's MG.",
+	L"\n \n使用该机枪手背包中的供弹带，你可以为他人的机关枪供弹。", //L"\n \nYou can feed an MG with ammo\nbelts stored in this vest.",
 	L"\n \n该物品提升你的陷阱解除几率 ", //L"\n \nThis item improves your trap disarm chance by ",
 	L"\n \n该物品及附着其上的所有物品均让怀疑者无从觉察。", //L"\n \nThis item and everything attached/inside\nit is hidden from curious eyes.",
 	L"\n \n这个物品不会被损坏", //L"\n \nThis item cannot be damaged.",
-	L"\n \n这个物品时金属制成的\n 比其他物品更耐磨损", //L"\n \nThis item is made of metal.\nIt takes less damage than other items.", 
+	L"\n \n这个物品时金属制成的\n 比其他物品更耐磨损", //L"\n \nThis item is made of metal.\nIt takes less damage than other items.",
 	L"\n \n这个物品掉在水中会下沉消失", //L"\n \nThis item sinks when put in water.",
 	L"\n \n这个物品需要两只手一起操作使用", //L"\n \nThis item requires both hands to be used.",
 	L"\n \n这个物品会挡住准心\n 你无法再使用准心瞄准", //L"\n \nThis item will block your iron sights\nso you cannot use them.",
@@ -8683,7 +8683,7 @@ STR16 gFoodDesc[] =
 	L"！"// .
 };
 
-CHAR16* ranks[] = 
+CHAR16* ranks[] =
 {	L"",			//ExpLevel 0
 	L"列兵 ", //L"Pvt. ",		//ExpLevel 1
 	L"下士 ", //L"Pfc. ",		//ExpLevel 2
@@ -8711,7 +8711,7 @@ STR16	zNewTacticalMessages[]=
 	L"将发报机装到笔记本电脑上。",
 	L"你无法支付雇佣%s的费用",
 	L"在限定时间内，以上的费用包括了整个行动和下列装备的花费。",
-	L"现在就雇请%s吧。您可以享受我们提供的空前的“一次付费，全部服务”的优惠价格。在这个难以置信的出价里，佣兵的随身装备是免费的哦。",	
+	L"现在就雇请%s吧。您可以享受我们提供的空前的“一次付费，全部服务”的优惠价格。在这个难以置信的出价里，佣兵的随身装备是免费的哦。",
 	L"费用",
 	L"在本分区发现有人……",
 	//L"枪的射程: %d格， 命中率: %d％",
@@ -8719,17 +8719,17 @@ STR16	zNewTacticalMessages[]=
 	L"视距",
 	L"新雇请的佣兵无法到达那里。",
 	L"由于你的笔记本电脑没有发报机，你无法雇请新的队员。也许你得读取存档或者重新开始游戏！",
-	L"%s听到了Jerry的身体下面传来金属的破碎的声音。听起来令人不安，似乎你的笔记本电脑的天线被压断了。", 
+	L"%s听到了Jerry的身体下面传来金属的破碎的声音。听起来令人不安，似乎你的笔记本电脑的天线被压断了。",
 	L"看完副指挥官Morris留下的备忘录后，%s觉得有机会了。备忘录里有向Arulco各个城镇发射导弹的基地的坐标。它还给出了这个罪恶计划的发源地的坐标 —— 导弹工厂。",
 	L"看到了控制面板后， %s发现它正在倒计时，因此导弹会把这个工厂炸毁。%s得找出个脱逃的路线。使用电梯看起来是最快的办法...",
-	L"现在您在铁人模式进行游戏，周围有敌人的时候不能存档。",	
-	L"(不能在战斗时存盘)",	
-	L"当前的战役名称超过了30个字符。",						
+	L"现在您在铁人模式进行游戏，周围有敌人的时候不能存档。",
+	L"(不能在战斗时存盘)",
+	L"当前的战役名称超过了30个字符。",
 	L"无法找到当前的战役。",											// @@@ new text
 	L"战役: 默认 ( %S )",											// @@@ new text
 	L"战役: %S",												// @@@ new text
-	L"你选择了%S战役。 该战役是原版UB战役的玩家自定义游戏版本。你确认你要在 %S 战役下进行游戏吗?",			
-	L"如果你要使用编辑器的话，请选择一个战役，不要用默认战役。",			
+	L"你选择了%S战役。 该战役是原版UB战役的玩家自定义游戏版本。你确认你要在 %S 战役下进行游戏吗?",
+	L"如果你要使用编辑器的话，请选择一个战役，不要用默认战役。",
 	// anv: extra iron man modes
 	L"这是假铁人模式在这模式下你不能在回合制模式下存档。", //L"This is a SOFT IRON MAN game and you cannot save during turn-based combat.",
 	L"这是真铁人模式在这模式下你只能在每天的 %02d:00 下存档。", //L"This is an EXTREME IRON MAN game and you can only save once per day, at %02d:00.",
@@ -8900,7 +8900,7 @@ STR16	szBackgroundText_Value[]=
 	L" 操作背包%s%d%％AP\n", //L" %s%d%% APs needed to access inventory\n",
 	L" 空降时观望其他方向\n 空降后%s%d%％AP\n", //L" looks in other direction on airdrops\n %s%d%% APs after airdrop\n",
 	L" 进入战区第一回合%s%d%％AP\n", //L" %s%d%% APs on first turn when assaulting a sector\n",
-		
+
 	L" %s%d%％步走速度\n", //L" %s%d%% travel speed on foot\n",
 	L" %s%d%％开车速度\n", //L" %s%d%% travel speed on land vehicles\n",
 	L" %s%d%％坐飞机速度\n", //L" %s%d%% travel speed on air vehicles\n",
@@ -8917,7 +8917,7 @@ STR16	szBackgroundText_Value[]=
 	L" %s%d%％买卖弹药武器优惠\n", //L" %s%d%% better prices when trading guns and ammo\n",
 	L" %s%d%％买卖护甲，携行具，刀具，工具箱等优惠\n", //L" %s%d%% better prices when trading armour, lbe, blades, kits etc.\n",
 	L" %s%d%％队伍劝降能力\n", //L" %s%d%% team capitulation strength if we lead negotiations\n",
-	L" %s%d%％跑步速度\n", //L" %s%d%% faster running\n", 
+	L" %s%d%％跑步速度\n", //L" %s%d%% faster running\n",
 	L" %s%d%％包扎速度\n", //L" %s%d%% bandaging speed\n",
 	L" 饮酒可恢复%s%d%％能量\n", //L" drinking restores %s%d%% energy\n",
 	L" %s%d%％负重能力\n", //L" %s%d%% strength to carry items\n",
@@ -8933,7 +8933,7 @@ STR16	szBackgroundText_Value[]=
 	L" %s%d白天听力范围\n", //L" %s%d hearing range during the day\n",
 	L" %s%d解除陷阱效率\n",
 	L" %s%d%% CTH with SAMs\n",	// TODO.Translate
- 
+
 	L" %s%d%％友好对话效果\n", //L" %s%d%% effectiveness to friendly approach\n",
 	L" %s%d%％直接对话效果\n", //L" %s%d%% effectiveness to direct approach\n",
 	L" %s%d%％威胁对话效果\n", //L" %s%d%% effectiveness to threaten approach\n",
@@ -9214,7 +9214,7 @@ STR16	szCampaignHistoryWebSite[]=
 
 	L"%s媒体资源集",
 	L"我们是中立情报部门。我们从%s搜集各种新闻报道。我们不会对这些资料进行评估——我们仅仅将它们发表出来供你自己评估。我们从各类资源中发布文章",
-	
+
 	L"战斗总结",
 	L"战役报告",
 	L"新闻",
@@ -9297,7 +9297,7 @@ STR16	szCampaignHistoryResultString[]=
 	L"反抗军略有损失，最终击败了精英部队。未证实消息称一些士兵可能被俘虏。",
 
 	L"在一场皮洛士式胜利中，反抗军击退了精英部队，但是自己也损失惨重。很难肯定他们在这样的连续攻势下能否坚持得住。",
-	
+
 	L"女王部队占尽了天时地利人和。反抗军毫无逆天之力，他们如不撤退则被俘虏或杀死。",
 	L"尽管反抗军在人数上占用优势，女王部队还是轻易地击退了他们。",
 
@@ -9306,7 +9306,7 @@ STR16	szCampaignHistoryResultString[]=
 
 	L"在激烈的战斗中双方都遭到了巨大损失，不过最终，女王部队以人数上的优势决定了战役的胜利。反抗军被击溃。至于有没有幸存者，我们目前还无法核实。",
 	L"在激烈的交火中，女王部队的优秀训练起到了关键性作用。反抗军被迫撤退。",
-	
+
 	L"双方都不愿轻易认输。虽然女王部队最终扫除了当地的反抗军威胁，但是巨大的损失使得女王军队本身名存实亡。不过很显然，如果女王军队能够耗得起的话，反抗军很快就会消失得一干二净了。",
 };
 
@@ -9443,11 +9443,11 @@ STR16	szCampaignStatsOperationPrefix[] =
 	L"阴魂不散的 %s",  //L"Stalking %s",
 
 	L"冷血的 %s",  //	L"Cold-blooded %s",
-	L"可怕的 %s",  //	L"Fearsome %s",  
-	L"大惊小怪的 %s",  //	L"Trippin' %s", 
-	L"该死的 %s",  //	L"Damned %s",  
+	L"可怕的 %s",  //	L"Fearsome %s",
+	L"大惊小怪的 %s",  //	L"Trippin' %s",
+	L"该死的 %s",  //	L"Damned %s",
 
-	L"食素的 %s",  //	L"Vegetarian %s", 
+	L"食素的 %s",  //	L"Vegetarian %s",
 	L"古怪的 %s",  //	L"Grotesque %s",
 	L"落后的 %s",  //	L"Backward %s",
 	L"优越的 %s",  //	L"Superior %s",
@@ -9471,7 +9471,7 @@ STR16	szCampaignStatsOperationPrefix[] =
 	L"人与 %s 的杂种",  //L"Man-%s hybrid",
 	L"没主见的 %s",  //L"Inane %s",  //
 	L"被高估的 %s",  //L"Overpriced %s",
-	L"午夜 %s",  //L"Midnight %s",  
+	L"午夜 %s",  //L"Midnight %s",
 
 	L"资本家的 %s",  //L"Capitalist %s",
 	L"共产党的 %s",  //L"Communist %s",
@@ -9734,7 +9734,7 @@ STR16	szMercCompareWebSite[] =
 	L"您的团队效率低下。", //L"Your team struggles with itself.",
 	L"您的员工经常内斗。", //L"Your employees waste time working against each other.",
 	L"您的员工离职率很高", //L"Your workforce experiences a high fluctuation rate.",
-	L"您的多数员工都不喜欢这份工作", //L"You constantly receive low marks on workplace satisfaction ratings.",	
+	L"您的多数员工都不喜欢这份工作", //L"You constantly receive low marks on workplace satisfaction ratings.",
 	L"如果您经常观察到以上一项或多项情况，那么您的员工的工作效率并不高，您的生意也就可能会出现问题。幸好我们有易学易操作的专利系统MeLoDY，立马就能让您的单位工作效率翻番，让您的员工喜上眉梢！", //L"If you can say 'yes' to one or more of these statements, then you might have a problem in your business. Your employees likely won't work at peak perfection. Thanks to our patented, easy-to-understand MeLoDY system, you can bring productivity back up in no time, and a happy smile on the faces all your staff!",
 
 	// customer quotes
@@ -9946,7 +9946,7 @@ STR16   szTacticalCoverDialogString[]=
 
 STR16   szTacticalCoverDialogPrintString[]=
 {
-        
+
         L"关闭掩护/陷阱显示模式",
         L"显示危险区域",
         L"显示佣兵视野",
@@ -10550,9 +10550,9 @@ STR16	szDynamicDialogueText[40][17] =
 	L"",
 	L"$VICTIM$ 治好了 $CAUSE$ 的病。你怎么看？",  //"$VICTIM$ has treated $CAUSE$'s diseases. What do you do?",
 	L"你怎么染上这个病的啊？",  //"Where did you get that stuff from in the first place?",
-	L"太好了。我的病完全好了...是吧？", //"Great. Are you sure it's fully treated now?", 
+	L"太好了。我的病完全好了...是吧？", //"Great. Are you sure it's fully treated now?",
 	L"重要的是你的病现在好了...对吧？",  //"The important thing is that it's gone now... It is, right?",
-	L"我早就警告过你们了...这个国家哪里都是病源，所以别乱摸乱碰！", //"I told you people before... this country a dirty place, so beware of what you touch.", 
+	L"我早就警告过你们了...这个国家哪里都是病源，所以别乱摸乱碰！", //"I told you people before... this country a dirty place, so beware of what you touch.",
 	L"我们得小心点，我们不仅仅要对抗那些想让我们死的人。", //"We have to be careful. The army isn't the only thing that wants us dead.",
 	L"很好。该治的病都治好了，我们得找些敌人来治治了。",  //"Great. Everything done? Then let's get back to shooting stuff!",
 	L"",
@@ -10867,14 +10867,14 @@ STR16	szDynamicDialogueText_GenderText[] =
 
 STR16	szDiseaseText[] =
 {
-	L" %s%d%% 敏捷\n",  //　L" %s%d%% agility stat\n", 
-	L" %s%d%% 灵巧\n",  //	L" %s%d%% dexterity stat\n", 
+	L" %s%d%% 敏捷\n",  //　L" %s%d%% agility stat\n",
+	L" %s%d%% 灵巧\n",  //	L" %s%d%% dexterity stat\n",
 	L" %s%d%% 力量\n",  //	L" %s%d%% strength stat\n",
-	L" %s%d%% 智慧\n",  //	L" %s%d%% wisdom stat\n", 
-	L" %s%d%% 有效等级\n",  //L" %s%d%% effective level\n", 
+	L" %s%d%% 智慧\n",  //	L" %s%d%% wisdom stat\n",
+	L" %s%d%% 有效等级\n",  //L" %s%d%% effective level\n",
 
 	L" %s%d%% APs\n",  //L" %s%d%% APs\n",
-	L" %s%d 最大的呼吸次数\n",  //L" %s%d maximum breath\n", 
+	L" %s%d 最大的呼吸次数\n",  //L" %s%d maximum breath\n",
 	L" %s%d%% 负重能力\n",  //L" %s%d%% strength to carry items\n",
 	L" %s%2.2f 生命值回复/小时\n",  //L" %s%2.2f life regeneration/hour\n",
 	L" %s%d 睡眠所需时间\n",  //L" %s%d need for sleep\n",
@@ -10886,7 +10886,7 @@ STR16	szDiseaseText[] =
 
 	L"诊断", //	L"Diagnosis",
 	L"治疗", //L"Treatment",
-	L"取消", //L"Cancel",　
+	L"取消", //L"Cancel",
 
 	L"\n\n%s (undiagnosed) - %d / %d\n",	// TODO.Translate
 };
@@ -10897,7 +10897,7 @@ STR16	szFoodText[] =
 	L"\n\n|食|物: %d%%\n",  //L"\n\n|F|o|o|d: %d%%\n",
 
 	L"最大士气被改变 %s%d\n",  //L"max morale altered by %s%d\n",
-	L" %s%d 需要睡眠\n",  //L" %s%d need for sleep\n", 
+	L" %s%d 需要睡眠\n",  //L" %s%d need for sleep\n",
 	L" %s%d%% 精力回复\n",  //	L" %s%d%% breath regeneration\n",
 	L" %s%d%% 任务效率\n",  //L" %s%d%% assignment efficiency\n",
 	L" %s%d%% 失去能力点的几率\n",  //L" %s%d%% chance to lose stats\n",
@@ -10906,63 +10906,63 @@ STR16	szFoodText[] =
 STR16 szIMPGearWebSiteText[] =
 {
 	// IMP Gear Entrance
-	L"如何选择装备？",  //L"How should gear be selected?", 
+	L"如何选择装备？",  //L"How should gear be selected?",
 	L"旧系统：根据技能和能力随机选择装备",  //L"Old method: Random gear according to your choices",
 	L"新系统：自由选购装备",  //L"New method: Free selection of gear",
-	L"旧系统",  //L"Old method", 
+	L"旧系统",  //L"Old method",
 	L"新系统",  //L"New method",
 
 	// IMP Gear Entrance
-	L"I.M.P 装备",  //	L"I.M.P. Equipment", 
-	L"装备价格: %d$",  //L"Equipment cost: %d$", 
+	L"I.M.P 装备",  //	L"I.M.P. Equipment",
+	L"装备价格: %d$",  //L"Equipment cost: %d$",
 };
 
 STR16 szIMPGearDropDownText[] =
 {
-	L"选择LBE背心",  //L"Select LBE vest",  
-	L"选择LBE战斗包",  //L"Select LBE combat pack", 
+	L"选择LBE背心",  //L"Select LBE vest",
+	L"选择LBE战斗包",  //L"Select LBE combat pack",
 	L"选择LBE背包",  //L"Select LBE backpack",
-	L"选择LBE皮套",  //L"Select LBE holster", 
+	L"选择LBE皮套",  //L"Select LBE holster",
 	L"选择LBE皮套",  //L"Select LBE holster",
 
-	L"选择主枪",  //	L"Select main gun", 
+	L"选择主枪",  //	L"Select main gun",
 	L"选择弹药",  //L"Select ammo",
-	L"选择手枪",  //L"Select sidearm", 
+	L"选择手枪",  //L"Select sidearm",
 	L"选择额外弹药",  //L"Select additional ammo",
-	L"选择武器",  //L"Select melee weapon", 
+	L"选择武器",  //L"Select melee weapon",
 
-	L"选择头盔",  //L"Select helmet", 
-	L"选择背心",  //	L"Select vest", 
+	L"选择头盔",  //L"Select helmet",
+	L"选择背心",  //	L"Select vest",
 	L"选择裤子",  //L"Select pants",
 	L"选择头部装备",  //L"Select face gear",
 	L"选择头部装备",  //	L"Select face gear",
 
 	L"选择附加物品",  //L"Select additional items",
-	L"选择附加物品",  //L"Select additional items", 
 	L"选择附加物品",  //L"Select additional items",
 	L"选择附加物品",  //L"Select additional items",
-	L"选择附加物品",  //L"Select additional items", 
-	L"选择附加物品",  //L"Select additional items", 
-	L"选择附加物品",  //L"Select additional items", 
+	L"选择附加物品",  //L"Select additional items",
+	L"选择附加物品",  //L"Select additional items",
+	L"选择附加物品",  //L"Select additional items",
+	L"选择附加物品",  //L"Select additional items",
 };
 
 STR16 szIMPGearDropDownNoneText[] =
 {
-	L"没有LBE背心",  //L"No LBE vest", 
+	L"没有LBE背心",  //L"No LBE vest",
 	L"没有LBE战斗包",  //	L"No LBE combat pack",
 	L"没有LBE背包",  //L"No LBE backpack",
 	L"没有LBE皮套",  //L"No LBE holster",
 	L"没有LBE皮套",  //L"No LBE holster",
 
 	L"没有枪",  //L"No gun",
-	L"没有弹药",  //L"No ammo", 
-	L"没有枪",  //	L"No gun", 
-	L"没有弹药",  //L"No ammo",  
+	L"没有弹药",  //L"No ammo",
+	L"没有枪",  //	L"No gun",
+	L"没有弹药",  //L"No ammo",
 	L"没有武器",  //L"No weapon",
 
 	L"没有头盔",  //L"No helmet",
 	L"没有背心",  //L"No vest",
-	L"没有裤子",  //L"No pants", 
+	L"没有裤子",  //L"No pants",
 	L"没有头部装备",  //L"No face gear",
 	L"没有头部装备",  //	L"No face gear",
 
@@ -10979,10 +10979,10 @@ STR16 szMilitiaStrategicMovementText[] =
 {
 	L"无法对该地区下达命令，民兵的命令不可用。",  //	L"We cannot relay orders to this sector, militia command not possible.",
 	L"未被分配",  //L"Unassigned",
-	L"小组号码",  //L"Group No.", 
-	L"下一个",  //L"Next", 
+	L"小组号码",  //L"Group No.",
+	L"下一个",  //L"Next",
 
-	L"ETA",  //L"ETA", 
+	L"ETA",  //L"ETA",
 	L"第%d小队（新）",  //L"Group %d (new)",
 	L"第%d小队",  //L"Group %d",
 	L"最终",  //L"Final",

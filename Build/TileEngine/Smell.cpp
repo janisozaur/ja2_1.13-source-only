@@ -1,19 +1,19 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
-	#include "worlddef.h"
+	#include "WorldDef.h"
 	#include "Random.h"
 	#include "Smell.h"
-	#include "worldman.h"
-	#include "renderworld.h"
+	#include "WorldMan.h"
+	#include "RenderWorld.h"
 	#include "SaveLoadMap.h"
-	#include "gamesettings.h"
-	#include "message.h"
-	#include "Isometric utils.h"
+	#include "GameSettings.h"
+	#include "Message.h"
+	#include "Isometric Utils.h"
 	#include "Map Information.h"
 	#include "Game Clock.h"
 	#include "Overhead.h"
-	#include "debug control.h"
+	#include "Debug Control.h"
 #endif
 
 /*
@@ -372,7 +372,7 @@ void InternalDropBlood( INT32 sGridNo, INT8 bLevel, UINT8 ubType, UINT8 ubStreng
 		return;
 	}
 
-	// ATE: Send warning if dropping blood nowhere....	
+	// ATE: Send warning if dropping blood nowhere....
 	if (TileIsOutOfBounds(sGridNo))
 	{
 #ifdef JA2BETAVERSION

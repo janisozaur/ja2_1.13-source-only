@@ -1,31 +1,31 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include <stdio.h>
 #include "Types.h"
-#include "civ quotes.h"
+#include "Civ Quotes.h"
 #include "mousesystem.h"
-#include "strategicmap.h"
+#include "StrategicMap.h"
 #include "WCheck.h"
 #include "FileMan.h"
-#include "encrypted file.h"
+#include "Encrypted File.h"
 #include "MessageBoxScreen.h"
 #include "Queen Command.h"
 #include "Overhead.h"
-#include "render dirty.h"
-#include "merctextbox.h"
-#include "ai.h"
+#include "Render Dirty.h"
+#include "MercTextBox.h"
+#include "AI.h"
 #include "Text.h"
-#include "screenids.h"
+#include "ScreenIds.h"
 #include "Animation Data.h"
 #include "Video.h"
 #include "Font Control.h"
-#include "message.h"
-#include "local.h"
-#include "renderworld.h"
+#include "Message.h"
+#include "Local.h"
+#include "RenderWorld.h"
 #include "Interface.h"
-#include "cursors.h"
+#include "Cursors.h"
 #include "Dialogue Control.h"
 #include "Quests.h"
 #include "Strategic Town Loyalty.h"
@@ -33,12 +33,12 @@
 #include "Strategic Mines.h"
 #include "Random.h"
 #endif
-#include "connect.h"
+#include "Connect.h"
 
 // for enemy taunts
 #include "Soldier Profile.h"
 #include "Campaign.h"
-#include "opplist.h"
+#include "Opplist.h"
 
 #define			DIALOGUE_DEFAULT_WIDTH			200
 #define			EXTREAMLY_LOW_TOWN_LOYALTY	20
@@ -52,7 +52,7 @@ extern void CaptureTimerCallback( void );
 BOOLEAN gfSurrendered = FALSE;
 
 //--------------------------------------------------------------
-//Not used 
+//Not used
 typedef struct
 {
 	UINT16	ubNumEntries;
@@ -60,9 +60,9 @@ typedef struct
 
 } CIV_QUOTE;
 
-CIV_QUOTE	gCivQuotes[ NUM_CIV_QUOTES]; //Not used 
+CIV_QUOTE	gCivQuotes[ NUM_CIV_QUOTES]; //Not used
 
-UINT16	gubNumEntries[ NUM_CIV_QUOTES ] = // Not used 
+UINT16	gubNumEntries[ NUM_CIV_QUOTES ] = // Not used
 {
 	15,
 	15,
@@ -145,15 +145,15 @@ UINT32	uiTauntFinishTimes[ TOTAL_SOLDIERS ];
 TAUNT_VALUES zApplicableTaunts[NUM_TAUNT];
 
 //--------------------------------------------------------------
-void CopyNumEntriesIntoQuoteStruct( ) //  Not used 
+void CopyNumEntriesIntoQuoteStruct( ) //  Not used
 {
 	INT32	cnt;
 
 	for ( cnt = 0; cnt < NUM_CIV_QUOTES; ++cnt )
 	{
-		if (cnt <= 50) 
+		if (cnt <= 50)
 			gCivQuotes[ cnt ].ubNumEntries = gubNumEntries[ cnt ];
-		else 
+		else
 			gCivQuotes[ cnt ].ubNumEntries = 15;
 	}
 
@@ -268,7 +268,7 @@ void ShutDownQuoteBox( BOOLEAN fForce )
 			{
 				DoMessageBox( MSG_BOX_BASIC_STYLE, Message[ STR_SURRENDER ], GAME_SCREEN, ( UINT8 )MSG_BOX_FLAG_YESNO, SurrenderMessageBoxCallBack, NULL );
 			}
-			else 
+			else
 			{
 				ScreenMsg( FONT_LTGREEN, MSG_MPSYSTEM, MPClientMessage[39] );
 				ActionDone( gCivQuoteData.pCiv );
@@ -395,15 +395,15 @@ void QuoteOverlayClickCallback( MOUSE_REGION * pRegion, INT32 iReason )
 void BeginCivQuote( SOLDIERTYPE *pCiv, UINT16 ubCivQuoteID, UINT16 ubEntryID, INT16 sX, INT16 sY )
 {
 	VIDEO_OVERLAY_DESC		VideoOverlayDesc;
-	CHAR16					zQuote[ 320 ];	
-	
+	CHAR16					zQuote[ 320 ];
+
 	// OK, do we have another on?
 	if ( gCivQuoteData.bActive )
 	{
 		// Delete?
 		ShutDownQuoteBox( TRUE );
 	}
-	
+
 	// get text
 	if ( !GetCivQuoteText( ubCivQuoteID, ubEntryID, zQuote ) )
 	{
@@ -426,7 +426,7 @@ void BeginCivQuote( SOLDIERTYPE *pCiv, UINT16 ubCivQuoteID, UINT16 ubEntryID, IN
 	// Prepare text box
 	gCivQuoteData.iDialogueBox = PrepareMercPopupBox( gCivQuoteData.iDialogueBox , BASIC_MERC_POPUP_BACKGROUND, BASIC_MERC_POPUP_BORDER, gzCivQuote, DIALOGUE_DEFAULT_WIDTH, 0, 0, 0, &gusCivQuoteBoxWidth, &gusCivQuoteBoxHeight );
 	//SET_USE_WINFONTS( FALSE );
-	
+
 	// OK, find center for box......
 	sX = sX - ( gusCivQuoteBoxWidth / 2 );
 	sY = sY - ( gusCivQuoteBoxHeight / 2 );
@@ -473,7 +473,7 @@ void BeginCivQuote( SOLDIERTYPE *pCiv, UINT16 ubCivQuoteID, UINT16 ubEntryID, IN
 						CURSOR_NORMAL, MSYS_NO_CALLBACK, QuoteOverlayClickCallback );
 	// Add region
 	MSYS_AddRegion( &(gCivQuoteData.MouseRegion) );
-	
+
 	gCivQuoteData.bActive = TRUE;
 
 	gCivQuoteData.uiTimeOfCreation = GetJA2Clock( );
@@ -499,7 +499,7 @@ UINT16 DetermineCivQuoteEntry( SOLDIERTYPE *pCiv, UINT16 *pubCivHintToUse, BOOLE
 
 	BOOLEAN bMiners = FALSE;
 	UINT16 FileEDTQUoteID;
-	
+
 	(*pubCivHintToUse) = 0;
 
 	ubCivType = GetCivType( pCiv );
@@ -522,8 +522,8 @@ UINT16 DetermineCivQuoteEntry( SOLDIERTYPE *pCiv, UINT16 *pubCivHintToUse, BOOLE
 			}
 		}
 	}
-		
-#ifdef JA2UB		
+
+#ifdef JA2UB
 	if( ubCivType != CIV_TYPE_ENEMY )
 	{
 		//if the civ is not an enemy
@@ -540,7 +540,7 @@ UINT16 DetermineCivQuoteEntry( SOLDIERTYPE *pCiv, UINT16 *pubCivHintToUse, BOOLE
 			//if the civ can fight
 			if( pCiv->ubBodyType == REGMALE || pCiv->ubBodyType == REGFEMALE || pCiv->ubBodyType == BIGMALE )
 			{
-				return( CIV_QUOTE__CIV_ENEMY_CAN_FIGHT); //40 
+				return( CIV_QUOTE__CIV_ENEMY_CAN_FIGHT); //40
 			}
 			else if( pCiv->stats.bLife < pCiv->stats.bLifeMax )
 			{
@@ -582,8 +582,8 @@ UINT16 DetermineCivQuoteEntry( SOLDIERTYPE *pCiv, UINT16 *pubCivHintToUse, BOOLE
 	}
 
 	return( 255 );
-#else	
-			
+#else
+
 	if ( ubCivType == CIV_TYPE_ENEMY )
 	{
 		// Determine what type of quote to say...
@@ -617,7 +617,7 @@ UINT16 DetermineCivQuoteEntry( SOLDIERTYPE *pCiv, UINT16 *pubCivHintToUse, BOOLE
 	// Are we in a town sector?
 	// get town id
 	bTownId = GetTownIdForSector( gWorldSectorX, gWorldSectorY );
-	
+
 	// If a married PC...
 	if ( ubCivType == CIV_TYPE_MARRIED_PC )
 	{
@@ -846,7 +846,7 @@ UINT16 DetermineCivQuoteEntry( SOLDIERTYPE *pCiv, UINT16 *pubCivHintToUse, BOOLE
 			return( CIV_QUOTE_KIDS_HIGH_LOYALTY );
 		}
 	}
-	
+
 	// All purpose quote here....
 	if ( ubCivType == CIV_TYPE_ADULT )
 	{
@@ -881,10 +881,10 @@ void StartCivQuote( SOLDIERTYPE *pCiv )
 	INT16	sScreenX, sScreenY;
 	UINT16	ubCivHintToUse;
 	UINT16 CivQuoteDelta = 0;
-	
+
 	UINT16 ubCivQuoteID2;
 	UINT16 RandomVal;
-	
+
 	// ATE: Check for old quote.....
 	// This could have been stored on last attempt...
 	if ( pCiv->bCurrentCivQuote == CIV_QUOTE_HINT )
@@ -900,29 +900,29 @@ void StartCivQuote( SOLDIERTYPE *pCiv )
 		// Determine which quote to say.....
 		ubCivQuoteID = DetermineCivQuoteEntry( pCiv, &ubCivHintToUse, TRUE );
 	}
-	
-	if (ubCivQuoteID == CIV_QUOTE_ADULTS_REBELS || ubCivQuoteID == CIV_QUOTE_KIDS_REBELS || ubCivQuoteID == CIV_QUOTE_ENEMY_OFFER_SURRENDER ) 
+
+	if (ubCivQuoteID == CIV_QUOTE_ADULTS_REBELS || ubCivQuoteID == CIV_QUOTE_KIDS_REBELS || ubCivQuoteID == CIV_QUOTE_ENEMY_OFFER_SURRENDER )
 	{
 		RandomVal = 5;
 	}
-	else if (ubCivQuoteID == CIV_QUOTE_PC_MARRIED) 
+	else if (ubCivQuoteID == CIV_QUOTE_PC_MARRIED)
 	{
 		RandomVal = 2;
 	}
-	else if (ubCivQuoteID == CIV_QUOTE_HICKS_SEE_US_AT_NIGHT) 
+	else if (ubCivQuoteID == CIV_QUOTE_HICKS_SEE_US_AT_NIGHT)
 	{
 		RandomVal = 3;
 	}
-	else 
+	else
 		RandomVal = 15;
 
-#ifdef JA2UB		
+#ifdef JA2UB
 	if( ubCivQuoteID == 255 )
 	{
 		return;
 	}
-#endif	
-	
+#endif
+
 	// Determine entry id
 	// ATE: Try and get entry from soldier pointer....
 	if ( ubCivQuoteID != CIV_QUOTE_HINT )
@@ -999,7 +999,7 @@ void StartCivQuote( SOLDIERTYPE *pCiv )
 
 void InitCivQuoteSystem( )
 {
-	memset( &gCivQuotes, 0, sizeof( gCivQuotes ) );  //Not used 
+	memset( &gCivQuotes, 0, sizeof( gCivQuotes ) );  //Not used
 
 	memset( &gCivQuoteData, 0, sizeof( gCivQuoteData ) );
 	gCivQuoteData.bActive				= FALSE;
@@ -1037,7 +1037,7 @@ BOOLEAN LoadCivQuotesFromLoadGameFile( HWFILE hFile )
 		return( FALSE );
 	}
 
-	CopyNumEntriesIntoQuoteStruct( ); //Not used 
+	CopyNumEntriesIntoQuoteStruct( ); //Not used
 
 	return( TRUE );
 }
@@ -1067,7 +1067,7 @@ void PossiblyStartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, UINT32 ui
 	// is enemy blocked from taunting at the moment?
 	if( uiTauntFinishTimes[pCiv->ubID] > GetJA2Clock() )
 	{
-		
+
 		return;
 	}
 	// check if generated person
@@ -1247,14 +1247,14 @@ void PossiblyStartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, UINT32 ui
 		default:
 			break;
 	}
-	
+
 	StartEnemyTaunt( pCiv, iTauntType, pTarget );
 }
 
-// SANDRO - soldier taunts 
+// SANDRO - soldier taunts
 void StartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, SOLDIERTYPE *pTarget )
 {
-	CHAR16	sTauntText[ 320 ];	
+	CHAR16	sTauntText[ 320 ];
 	CHAR16	gzTauntQuote[ 320 ];
 	UINT16	iApplicableTaunts = 0;
 
@@ -1872,7 +1872,7 @@ void StartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, SOLDIERTYPE *pTar
 				( zTaunt[ i ].value[TAUNT_TARGET_EXP_LEVEL_LT] != -1 ) ||
 				( zTaunt[ i ].value[TAUNT_TARGET_MORALE_GT] != -1 ) ||
 				( zTaunt[ i ].value[TAUNT_TARGET_MORALE_LT] != -1 ) ||
-				( zTaunt[ i ].value[TAUNT_TARGET_TYPE] != -1 ) || 
+				( zTaunt[ i ].value[TAUNT_TARGET_TYPE] != -1 ) ||
 				( zTaunt[ i ].uiFlags2 & TAUNT_T_ZOMBIE ) )
 					continue;
 
@@ -1888,7 +1888,7 @@ void StartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, SOLDIERTYPE *pTar
 	{
 		// use random one
 		// use censored version if setting is set
-		UINT16 iChosenTaunt = Random(iApplicableTaunts); 
+		UINT16 iChosenTaunt = Random(iApplicableTaunts);
 		if( gTauntsSettings.fTauntCensoredMode == TRUE && zApplicableTaunts[ iChosenTaunt ].szCensoredText[0] != 0 )
 		{
 			swprintf( sTauntText, zApplicableTaunts[ iChosenTaunt ].szCensoredText );
@@ -1901,14 +1901,14 @@ void StartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, SOLDIERTYPE *pTar
 		swprintf( gzTauntQuote, L"\"%s\"", sTauntText );
 
 		// block this enemy from taunting for a time being
-		uiTauntFinishTimes[pCiv->ubID] = GetJA2Clock() + min( gTauntsSettings.sMaxDelay , max( gTauntsSettings.sMinDelay, FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) ); 
+		uiTauntFinishTimes[pCiv->ubID] = GetJA2Clock() + min( gTauntsSettings.sMaxDelay , max( gTauntsSettings.sMinDelay, FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) );
 
 		if( gTauntsSettings.fTauntMakeNoise == TRUE )
 			MakeNoise( pCiv->ubID, pCiv->sGridNo, pCiv->pathing.bLevel, pCiv->bOverTerrainType, gTauntsSettings.sVolume, NOISE_VOICE, gzTauntQuote );
 		else
 		{
 			if(gTauntsSettings.fTauntShowPopupBox == TRUE)
-			{	
+			{
 				if( gbPublicOpplist[gbPlayerNum][pCiv->ubID] == SEEN_CURRENTLY || gTauntsSettings.fTauntAlwaysShowPopupBox == TRUE )
 				{
 					ShowTauntPopupBox( pCiv, gzTauntQuote );
@@ -1936,7 +1936,7 @@ void ShowTauntPopupBox( SOLDIERTYPE *pCiv, STR16 gzTauntQuote )
 	INT16	sScreenX, sScreenY;
 	VIDEO_OVERLAY_DESC		VideoOverlayDesc;
 
-	// stop if other civ quote is already being shown 
+	// stop if other civ quote is already being shown
 	if( gCivQuoteData.bActive == TRUE )
 	{
 		return;
@@ -2004,7 +2004,7 @@ void ShowTauntPopupBox( SOLDIERTYPE *pCiv, STR16 gzTauntQuote )
 	gCivQuoteData.bActive = TRUE;
 
 	gCivQuoteData.uiTimeOfCreation = GetJA2Clock( );
-	
+
 	gCivQuoteData.uiDelayTime = min( gTauntsSettings.sMaxDelay , max( gTauntsSettings.sMinDelay, FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) );
 
 	gCivQuoteData.pCiv = pCiv;

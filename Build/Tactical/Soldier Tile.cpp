@@ -6,32 +6,32 @@
 	#include <string.h>
 	#include "Render Fun.h"
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "MemMan.h"
 	#include "Overhead Types.h"
 
 	#include "Animation Cache.h"
 	#include "Animation Data.h"
 	#include "Animation Control.h"
-	#include "container.h"
-	#include "pathai.h"
+	#include "Container.h"
+	#include "PathAI.h"
 	#include "Random.h"
-	#include "worldman.h"
+	#include "WorldMan.h"
 	#include "Isometric Utils.h"
-	#include "renderworld.h"
-	#include "video.h"
-	#include "points.h"
+	#include "RenderWorld.h"
+	#include "Video.h"
+	#include "Points.h"
 //	#include "Sound Control.h"
-	#include "lighting.h"
-	#include "weapons.h"
-	#include "vobject_blitters.h"
+	#include "Lighting.h"
+	#include "Weapons.h"
+	#include "VObject_blitters.h"
 	#include "Handle UI.h"
-	#include "Event pump.h"
-	#include "opplist.h"
-	#include "ai.h"
-	#include "interface.h"
-	#include "lighting.h"
-	#include "faces.h"
+	#include "Event Pump.h"
+	#include "Opplist.h"
+	#include "AI.h"
+	#include "Interface.h"
+	#include "Lighting.h"
+	#include "Faces.h"
 	#include "Soldier Profile.h"
 
 	#ifdef NETWORKED
@@ -39,16 +39,16 @@
 	#include "NetworkEvent.h"
 	#endif
 
-	#include "items.h"
-	#include "Soundman.h"
-	#include "soldier tile.h"
-	#include "soldier add.h"
+	#include "Items.h"
+	#include "SoundMan.h"
+	#include "Soldier Tile.h"
+	#include "Soldier Add.h"
 	#include "fov.h"
 	#include "Font Control.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Text.h"
 	#include "NPC.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 #endif
 
 extern INT8		gbNumMercsUntilWaitingOver;
@@ -169,7 +169,7 @@ void SetFinalTile( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fGivenUp )
 
 void MarkMovementReserved( SOLDIERTYPE *pSoldier, INT32 sGridNo )
 {
-	// Check if we have one reserrved already, and free it first!	
+	// Check if we have one reserrved already, and free it first!
 	if (!TileIsOutOfBounds(pSoldier->sReservedMovementGridNo))
 	{
 		UnMarkMovementReserved( pSoldier );
@@ -195,14 +195,14 @@ void UnMarkMovementReserved( SOLDIERTYPE *pSoldier )
 	{
 		return;
 	}
-	
+
 	if ( pSoldier->usAnimState == JUMPWINDOWS && pSoldier->sReservedMovementGridNo != sNewGridNo )
 	{
 		return;
 	}
 
 	// For single-tiled mercs, unset this gridno
-	// See if we have one reserved!	
+	// See if we have one reserved!
 	if (!TileIsOutOfBounds(pSoldier->sReservedMovementGridNo))
 	{
 		gpWorldLevelData[ pSoldier->sReservedMovementGridNo ].uiFlags &= (~MAPELEMENT_MOVEMENT_RESERVED);
@@ -217,7 +217,7 @@ INT8 TileIsClear( SOLDIERTYPE *pSoldier, INT8 bDirection,  INT32 sGridNo, INT8 b
 	INT32		sTempDestGridNo;
 	INT32 sNewGridNo;
 	BOOLEAN	fSwapInDoor = FALSE;
-	
+
 	if (TileIsOutOfBounds(sGridNo))
 	{
 		return( MOVE_TILE_CLEAR );
@@ -415,7 +415,7 @@ BOOLEAN HandleNextTile( SOLDIERTYPE *pSoldier, INT8 bDirection, INT32 sGridNo, I
 		if ( bBlocked != MOVE_TILE_CLEAR )
 		{
 			// Is the next gridno our destination?
-			// OK: Let's check if we are NOT walking off screen			
+			// OK: Let's check if we are NOT walking off screen
 			if ( sGridNo == sFinalDestTile && pSoldier->ubWaitActionToDo == 0 && (pSoldier->bTeam == gbPlayerNum || TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination)) )
 			{
 				// Yah, well too bad, stop here.
@@ -594,7 +594,7 @@ BOOLEAN HandleNextTileWaiting( SOLDIERTYPE *pSoldier )
 					{
 						// OK, look around dest for the first one!
 						sCheckGridNo = FindGridNoFromSweetSpot( pSoldier, pSoldier->pathing.sFinalDestination, 6, &ubDirection );
-						
+
 						if (TileIsOutOfBounds(sCheckGridNo))
 						{
 							// If this is nowhere, try harder!
@@ -605,7 +605,7 @@ BOOLEAN HandleNextTileWaiting( SOLDIERTYPE *pSoldier )
 					{
 						// OK, look around dest for the first one!
 						sCheckGridNo = FindGridNoFromSweetSpotThroughPeople( pSoldier, pSoldier->pathing.sFinalDestination, 6, &ubDirection );
-						
+
 						if (TileIsOutOfBounds(sCheckGridNo))
 						{
 							// If this is nowhere, try harder!
@@ -675,7 +675,7 @@ BOOLEAN HandleNextTileWaiting( SOLDIERTYPE *pSoldier )
 					pSoldier->flags.fDelayedMovement = 99;
 				}
 
-				// Do we want to force a swap?				
+				// Do we want to force a swap?
 				if (pSoldier->flags.fDelayedMovement == 3 && (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination) || gTacticalStatus.fAutoBandageMode) )
 				{
 					// with person who is in the way?
@@ -696,11 +696,11 @@ BOOLEAN HandleNextTileWaiting( SOLDIERTYPE *pSoldier )
 						// With these two guys swapped, we should try to continue on our way....
 						pSoldier->flags.fDelayedMovement = FALSE;
 
-						// We must calculate the path here so that we can give it the "through people" parameter						
+						// We must calculate the path here so that we can give it the "through people" parameter
 						if ( gTacticalStatus.fAutoBandageMode && TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination))
 						{
 							FindBestPath( pSoldier, pSoldier->pathing.sFinalDestination, pSoldier->pathing.bLevel, pSoldier->usUIMovementMode, COPYROUTE, PATH_THROUGH_PEOPLE );
-						}						
+						}
 						else if (!TileIsOutOfBounds(pSoldier->sAbsoluteFinalDestination) && !FindBestPath( pSoldier, pSoldier->sAbsoluteFinalDestination, pSoldier->pathing.bLevel, pSoldier->usUIMovementMode, COPYROUTE, PATH_THROUGH_PEOPLE ) )
 						{
 							// check to see if we're there now!
@@ -839,7 +839,7 @@ BOOLEAN CanExchangePlaces( SOLDIERTYPE *pSoldier1, SOLDIERTYPE *pSoldier2, BOOLE
 		if ( pSoldier2->flags.uiStatusFlags & ( SOLDIER_ANIMAL ) )
 			return( FALSE );
 
-		// must NOT be hostile, must NOT have stationary orders OR militia team, must be >= OKLIFE		
+		// must NOT be hostile, must NOT have stationary orders OR militia team, must be >= OKLIFE
 		if( pSoldier2->aiData.bNeutral && pSoldier2->stats.bLife >= OKLIFE &&
 			pSoldier2->ubCivilianGroup != HICKS_CIV_GROUP &&
 			( ( pSoldier2->aiData.bOrders != STATIONARY || pSoldier2->bTeam == MILITIA_TEAM ) ||

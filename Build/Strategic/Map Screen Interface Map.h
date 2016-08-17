@@ -3,7 +3,7 @@
 
 
 #include "Vehicles.h"
-#include "mapscreen.h"
+#include "MapScreen.h"
 
 // functions
 void DrawMapIndexBigMap( BOOLEAN fSelectedCursorIsYellow );
@@ -26,7 +26,7 @@ typedef struct
 	CHAR16 sType[50];
 	UINT16 Type;
 	CHAR16 sMinerals[50];
-	
+
 } MINERALS_VALUES;
 
 // map shading colors
@@ -58,7 +58,7 @@ enum{
 	MAP_SHADE_DK_BLUE,
 
 	MAP_SHADE_LT_PINK,
-	
+
 	MAP_SHADE_ORANGE,
 
 	MAP_SHADE_MAX,
@@ -179,7 +179,7 @@ BOOLEAN CheckForClickOverHelicopterIcon( INT16 sX, INT16 sY );
 // show town markers
 void BlitTownGridMarkers( void );
 
-// load and delete the graphics for the map screen map militia 
+// load and delete the graphics for the map screen map militia
 BOOLEAN LoadMilitiaPopUpBox( void );
 void RemoveMilitiaPopUpBox( void );
 
@@ -193,7 +193,7 @@ void CreateDestroyMilitiaPopUPRegions( void );
 BOOLEAN DrawMilitiaPopUpBox( void );
 
 
-//Returns true if the player knows how many enemies are in the sector if that number is greater than 0.	
+//Returns true if the player knows how many enemies are in the sector if that number is greater than 0.
 //Returns false for all other cases.
 UINT32 WhatPlayerKnowsAboutEnemiesInSector( INT16 sSectorX, INT16 sSectorY );
 
@@ -284,7 +284,7 @@ extern UINT16 MAP_LEVEL_STRING_Y;
 #define			DMAP_GRID_X						( MAP_GRID_X + 1 )
 #define			DMAP_GRID_Y						( MAP_GRID_Y + 1 )
 #define	 DMAP_GRID_ZOOM_X		( MAP_GRID_ZOOM_X+1)
-#define	 DMAP_GRID_ZOOM_Y		( MAP_GRID_ZOOM_Y+1) 
+#define	 DMAP_GRID_ZOOM_Y		( MAP_GRID_ZOOM_Y+1)
 
 
 // Orta position on the map
@@ -356,7 +356,7 @@ extern INT8 bSelectedAssignChar;
 // the info character
 extern INT8 bSelectedInfoChar;
 
-// the contract char 
+// the contract char
 extern INT8 bSelectedContractChar;
 
 // map arrows graphical index value
@@ -374,7 +374,7 @@ extern SGPRect MapScreenRect;
 // the map border eta pop up
 extern UINT32 guiMapBorderEtaPopUp;
 
-// heli pop up 
+// heli pop up
 extern UINT32 guiMapBorderHeliSectors;
 
 // anv: alternate heli pop up for alternative fuel system

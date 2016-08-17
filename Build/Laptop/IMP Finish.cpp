@@ -13,12 +13,12 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Attribute Selection.h"
 	#include "IMP Text System.h"
-	#include "soundman.h"
-	#include "text.h"
+	#include "SoundMan.h"
+	#include "Text.h"
 #endif
 
 
@@ -659,8 +659,8 @@ BOOLEAN LoadCharacterPortrait( void )
 
 	// load it
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
-		
-	
+
+
 		if( fCharacterIsMale )
 		{
 			if (  gIMPMaleValues[ iPortraitNumber ].Enabled == 1 )
@@ -677,9 +677,9 @@ BOOLEAN LoadCharacterPortrait( void )
 				sprintf( VObjectDesc.ImageFile, "IMPFaces\\%02d.sti", gIMPFemaleValues[ iPortraitNumber ].PortraitId );
 			}
 		}
-		
+
 	//FilenameForBPP( pPlayerSelectedFaceFileNames[ iPortraitNumber ] , VObjectDesc.ImageFile);
-	
+
 	CHECKF(AddVideoObject(&VObjectDesc, &guiCHARACTERPORTRAIT));
 
 	return( TRUE );

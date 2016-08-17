@@ -2,14 +2,14 @@
 #define INIREADER_H
 #define NOMINMAX
 #include <algorithm>
-#include <Windows.h>
+#include <windows.h>
 #include <Types.h>
 #include <stack>
 #include <string>
 
 #include <vfs/Tools/vfs_property_container.h>
 
-// Kaiden: This will read any value out of 
+// Kaiden: This will read any value out of
 // an INI file as long as the correct type is specified.
 // Methods should be fairly self explainatory
 //
@@ -49,7 +49,7 @@ public:
 
 	// WANNE - MP: Old version, currently used by Multiplayer
 	STR8 ReadString(const STR8 szSection, const STR8 szKey, const STR8	szDefaultValue);
-	
+
 	BOOLEAN Is_CIniReader_File_Found(void) {return (CIniReader_File_Found);}
 	void Clear();
 

@@ -1,4 +1,4 @@
-﻿// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
+// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
 //#pragma setlocale("RUSSIAN")
 
 #ifdef PRECOMPILEDHEADERS
@@ -7,8 +7,8 @@
 #else
 	#include "Language Defines.h"
 	#ifdef RUSSIAN
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 	#endif
 #endif
 
@@ -260,7 +260,7 @@ STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 
 STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]=
 {
-	L"Может использовать оборудование связи.\n", 
+	L"Может использовать оборудование связи.\n",
 	L"Может запрашивать артиллерийские удары у союзников в соседних квадратах.\n",
 	L"Может обнаруживать вражеские патрули при сканировании частот.\n",
 	L"Радиопереговоры могут быть подавлены во всем квадрате.\n",
@@ -384,7 +384,7 @@ STR16 gzIMPMinorTraitsHelpTextsSnitch[]=
 	L"Может собирать слухи в городах.\n",
 	L"Можно засылать в качестве доносчика в тюрьмы.\n",
 	L"Увеличивает вашу репутацию на %d каждый день, если его боевой дух высок.\n",
-	L"+%d фактической дальности слуха.\n",	
+	L"+%d фактической дальности слуха.\n",
 };
 
 STR16 gzIMPMajorTraitsHelpTextsSurvival[] =

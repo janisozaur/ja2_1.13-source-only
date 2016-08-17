@@ -1,14 +1,14 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "BobbyR.h"
 	#include "BobbyRGuns.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
 	#include "Cursors.h"
-	#include "interface items.h"
+	#include "Interface Items.h"
 	#include "Weapons.h"
 	#include "Store Inventory.h"
 	#include "Game Event Hook.h"
@@ -18,10 +18,10 @@
 	#include "Text.h"
 	#include "Multi Language Graphic Utils.h"
 //	#include "Utility.h"
-	#include "armsdealerinvinit.h"
+	#include "ArmsDealerInvInit.h"
 	#include "GameSettings.h"
-	#include "message.h"
-	#include "postalservice.h"
+	#include "Message.h"
+	#include "PostalService.h"
 #endif
 
 
@@ -175,7 +175,7 @@ UINT8		gubBobbyRPages[]={
 						LAPTOP_MODE_BOBBY_R_AMMO,
 						LAPTOP_MODE_BOBBY_R_ARMOR};
 
-//Dealtar's Airport Externalization.						
+//Dealtar's Airport Externalization.
 BOOLEAN gfBobbyRInitialized = 0;
 extern CPostalService gPostalService;
 extern UINT8 guiNumOfDisplayedCities;

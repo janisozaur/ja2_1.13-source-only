@@ -1,7 +1,7 @@
 #ifndef __STRATEGIC_MOVEMENT_H
 #define __STRATEGIC_MOVEMENT_H
 
-#include "types.h"
+#include "Types.h"
 #include "Soldier Control.h"
 #include "FileMan.h"
 
@@ -84,7 +84,7 @@ typedef struct ENEMYGROUP
 #define GROUPFLAG_SIMULTANEOUSARRIVAL_CHECKED		0x00000002
 //I use this flag when traversing through a list to determine which groups meet whatever conditions,
 //then add this marker flag.	The second time I traverse the list, I simply check for this flag,
-//apply my modifications to the group, and remove the flag.	If you decide to use it, make sure the 
+//apply my modifications to the group, and remove the flag.	If you decide to use it, make sure the
 //flag is cleared.
 #define GROUPFLAG_MARKER												0x00000004
 //Set whenever a group retreats from battle.	If the group arrives in the next sector and enemies are there
@@ -163,7 +163,7 @@ BOOLEAN RemovePlayerFromPGroup( GROUP *pGroup, SOLDIERTYPE *pSoldier );
 BOOLEAN RemoveAllPlayersFromGroup( UINT8 ubGroupId );
 BOOLEAN RemoveAllPlayersFromPGroup( GROUP *pGroup );
 
-// create a vehicle group, it is by itself, 
+// create a vehicle group, it is by itself,
 UINT8 CreateNewVehicleGroupDepartingFromSector( UINT8 ubSectorX, UINT8 ubSectorY , UINT32 uiVehicleId );
 
 
@@ -195,7 +195,7 @@ GROUP* CreateNewEnemyGroupDepartingFromSectorUsingZLevel( UINT32 uiSector, UINT8
 //...............
 //This is called whenever any group arrives in the next sector (player or enemy)
 //This function will first check to see if a battle should start, or if they
-//aren't at the final destination, they will move to the next sector. 
+//aren't at the final destination, they will move to the next sector.
 void GroupArrivedAtSector( UINT8 ubGroupID, BOOLEAN fCheckForBattle, BOOLEAN fNeverLeft );
 //Calculates and posts an event to move the group to the next sector.
 void InitiateGroupMovementToNextSector( GROUP *pGroup );
@@ -289,7 +289,7 @@ void ResetMovementForNonPlayerGroupsInLocation( UINT8 ubSectorX, UINT8 ubSectorY
 void ResetMovementForNonPlayerGroup( GROUP *pGroup );
 
 //Determines if any particular group WILL be moving through a given sector given it's current
-//position in the route and TREATS the pGroup->ubMoveType as ONE_WAY EVEN IF IT ISN'T.	If the 
+//position in the route and TREATS the pGroup->ubMoveType as ONE_WAY EVEN IF IT ISN'T.	If the
 //group is currently IN the sector, or just left the sector, it will return FALSE.
 BOOLEAN GroupWillMoveThroughSector( GROUP *pGroup, UINT8 ubSectorX, UINT8 ubSectorY );
 

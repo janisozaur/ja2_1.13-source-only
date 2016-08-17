@@ -1,7 +1,7 @@
 #ifndef __CAMPAIGNHISTORY_MAIN_H
 #define __CAMPAIGNHISTORY_MAIN_H
 
-/** 
+/**
  * @file
  * @author Flugente (bears-pit.com)
  */

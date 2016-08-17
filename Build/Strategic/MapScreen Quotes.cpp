@@ -9,7 +9,7 @@
 	#include "Soldier Control.h"
 	#include "Overhead.h"
 	#include "Squads.h"
-	#include "Soundman.h"
+	#include "SoundMan.h"
 	#include "Message.h"
 	#include "PopUpBox.h"
 	#include "Handle Items.h"
@@ -19,37 +19,37 @@
 	#include "Game Event Hook.h"
 	#include "Tactical Save.h"
 	#include "Quests.h"
-	#include "Strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Soldier Profile.h"
 	#include "Strategic Movement.h"
 	#include "Dialogue Control.h"
 	#include "Map Screen Interface Border.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Vehicles.h"
-	#include "LINE.H"
+	#include "Line.h"
 	#include "Text.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "Map Screen Helicopter.h"
 	#include "PreBattle Interface.h"
 	#include "WordWrap.h"
 	#include "GameSettings.h"
 	#include "Campaign Types.h"
 	#include "Map Screen Interface Map Inventory.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Keys.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Militia Control.h"
 	#include "Random.h"
 	#include "Cursor Control.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Strategic Mines.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 	#include "Air Raid.h"
 	#include "Queen Command.h"
 	#include "Render Fun.h"
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 
 	#ifdef JA2UB
 
@@ -111,21 +111,21 @@ void JerryMiloDelayedTalk( UINT16 usQuoteNum, UINT32 uiDelay )
 
 void HandleJerryMiloQuotes( BOOLEAN fReset )
 {
-    
+
 	static UINT32 uiLastCount;
 	UINT32	uiCurrentTime = GetJA2Clock();
 
-    
+
 	if( fReset )
 	{
 		uiLastCount = 0;
 		gusWaitingQuote = MILO_NO_QUOTE;
 		return;
 	}
-	
+
 //	if ( gGameUBOptions.InGameHeliCrash == TRUE )
 //	{
-	
+
  //   return;//AA
 	if( gusWaitingQuote == MILO_NO_QUOTE )
 	{
@@ -160,7 +160,7 @@ void HandleJerryMiloQuotes( BOOLEAN fReset )
 
 		uiLastCount = uiCurrentTime;
 	}
-	
+
 //	}
 }
 
@@ -266,7 +266,7 @@ void HaveJerrySayWhyPlayerCantTimeCompressAtBeginningOfGame()
 
 	/*
 	if (gGameOptions.ubSquadSize > 6)
-	{		
+	{
 		if( DoesPlayerHaveLessThen6MercsAndJerryHasNotDoubleCheckedYet() )
 		{
 			JerryMiloTalk( MILO_QUOTE__PLAYER_HAS_LESS_THEN_6_MERCS );
@@ -439,7 +439,7 @@ BOOLEAN DidPlayerInitiallyHaveLessThen6MercsAndNowHaveExactly6AndHasntSaidFullLo
 	UINT8	ubNumMercsOnTeam = NumberOfMercsOnPlayerTeam();
 
 	//If we have been to the sector, make sure we dont say it
-	
+
 	//if( SectorInfo[ SEC_H7].uiFlags & SF_HAS_ENTERED_TACTICAL )
 	if( SectorInfo[ (UINT8)SECTOR(  gGameExternalOptions.ubDefaultArrivalSectorX,  gGameExternalOptions.ubDefaultArrivalSectorY ) ].uiFlags & SF_HAS_ENTERED_TACTICAL )
 	{
@@ -447,8 +447,8 @@ BOOLEAN DidPlayerInitiallyHaveLessThen6MercsAndNowHaveExactly6AndHasntSaidFullLo
 	}
 
 	//if the player has 6 mercs, and has said the regular opening line ( not the line with 6 mercs )
-	if( ubNumMercsOnTeam == 6 && 
-			HasJerryMiloSaidQuoteBefore( MILO_QUOTE__OPENING_GREETING_PART_2 ) && 
+	if( ubNumMercsOnTeam == 6 &&
+			HasJerryMiloSaidQuoteBefore( MILO_QUOTE__OPENING_GREETING_PART_2 ) &&
 			!HasJerryMiloSaidQuoteBefore( MILO_QUOTE__ALREADY_HAS_6_MERCS ) )
 	{
 		return( TRUE );
@@ -460,7 +460,7 @@ BOOLEAN DidPlayerInitiallyHaveLessThen6MercsAndNowHaveExactly6AndHasntSaidFullLo
 
 void InitJerryQuotes()
 {
-	//Clear out the quote flags 
+	//Clear out the quote flags
 	gJa25SaveStruct.uiJerryMiloQuotesFlags = 0;
 }
 

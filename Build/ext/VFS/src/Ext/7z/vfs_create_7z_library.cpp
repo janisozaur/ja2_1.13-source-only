@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Ext/7z/vfs_create_7z_library.cpp
  *  - writes uncompressed 7z archive file
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -129,7 +129,7 @@ vfs::CCreateUncompressed7zLibrary::CCreateUncompressed7zLibrary()
 vfs::CCreateUncompressed7zLibrary::~CCreateUncompressed7zLibrary()
 {
 	m_pLibFile = NULL;
-	
+
 	m_lFileInfo.clear();
 	m_mapDirInfo.clear();
 }
@@ -242,7 +242,7 @@ bool vfs::CCreateUncompressed7zLibrary::writeSignatureHeader(std::ostream& out)
 	count += szExt::WRITEALL(out, (sz::Byte)Minor );
 
 	sz::UInt32 StartHeaderCRC, NextHeaderCRC;
-	
+
 	SFileInfo const& fi = m_lFileInfo.back();
 	sz::UInt64 NextHeaderOffset = fi.offset + fi.size;
 	sz::UInt64 NextHeaderSize = m_ssInfoStream.str().length()*sizeof(char);
@@ -317,7 +317,7 @@ bool vfs::CCreateUncompressed7zLibrary::writeUnPackInfo(std::ostream& out)
 	szExt::WRITE(out, (sz::Byte)sz::k7zIdFolder );
 	szExt::WRITE(out, (sz::UInt64)m_lFileInfo.size() );
 	szExt::WRITE(out, (sz::Byte)0 ); // External
-	
+
 	std::list<SFileInfo>::iterator fit = m_lFileInfo.begin();
 	for(;fit != m_lFileInfo.end(); ++fit)
 	{
@@ -339,14 +339,14 @@ bool vfs::CCreateUncompressed7zLibrary::writeSubStreamsInfo(std::ostream& out)
 {
 	szExt::WRITE(out, (sz::Byte)sz::k7zIdSubStreamsInfo );
 	szExt::WRITE(out, (sz::Byte)sz::k7zIdCRC );
-	
+
 	szExt::WRITE(out, (sz::Byte)1 ); // early out - all CRCs defined
 	std::list<SFileInfo>::iterator fit = m_lFileInfo.begin();
 	for(;fit != m_lFileInfo.end(); ++fit )
 	{
 		szExt::WRITEALL(out, (sz::UInt32)fit->CRC);
 	}
-	
+
 	szExt::WRITE(out, (sz::Byte)sz::k7zIdEnd );
 	return true;
 }
@@ -354,7 +354,7 @@ bool vfs::CCreateUncompressed7zLibrary::writeSubStreamsInfo(std::ostream& out)
 bool vfs::CCreateUncompressed7zLibrary::writeFolder(std::ostream& out)
 {
 	szExt::WRITE(out, (sz::UInt32)1 ); // NumCoders
-	
+
 	szExt::WRITE(out, (sz::Byte)1 ); // MainByte
 
 	szExt::WRITE(out, (sz::Byte)0 ); // Methods

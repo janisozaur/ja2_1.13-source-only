@@ -103,7 +103,7 @@ namespace xml_auto
 			_state_tr_map[tr->StartPoint][tag] = tr;
 			_state_tr_map[tr->EndPoint][tag] = tr;
 			// we use one transition twice -> increment ref counter
-			tr->Register(); 
+			tr->Register();
 		}
 
 		tr_map_t _state_tr_map;
@@ -188,7 +188,7 @@ namespace xml_auto
 
 			SGP_TRYCATCH_RETHROW( rfile->read(&buffer[0],size), L"" );
 			buffer[size] = 0;
-			
+
 			SGP_TRYCATCH_RETHROW( this->parseBuffer(&buffer[0], size),
 				_BS(L"error in file : ") << pFile->getPath() << _BS::wget);
 		}

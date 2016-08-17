@@ -91,12 +91,12 @@ civGroupNamesEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "NAME") == 0)
 		{
 			pData->curElement = ELEMENT_LIST;
-				
+
 			if (!CivGroupNames_TextOnly)
 				{
 					wcscpy(zCivGroupName[pData->curCivGroupNames.uiIndex].szCurGroup, pData->curCivGroupNames.szCurGroup);
 					zCivGroupName[pData->curCivGroupNames.uiIndex].Enabled = pData->curCivGroupNames.Enabled;
-					
+
 					zCivGroupName[pData->curCivGroupNames.uiIndex].AddToBattle = pData->curCivGroupNames.AddToBattle;
 					zCivGroupName[pData->curCivGroupNames.uiIndex].Loyalty = pData->curCivGroupNames.Loyalty;
 					zCivGroupName[pData->curCivGroupNames.uiIndex].fCanBeCaptured = pData->curCivGroupNames.fCanBeCaptured;
@@ -104,8 +104,8 @@ civGroupNamesEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(zCivGroupName[pData->curCivGroupNames.uiIndex].szCurGroup, pData->curCivGroupNames.szCurGroup);
-				}			
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -138,11 +138,11 @@ civGroupNamesEndElementHandle(void *userData, const XML_Char *name)
 
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curCivGroupNames.szCurGroup, sizeof(pData->curCivGroupNames.szCurGroup)/sizeof(pData->curCivGroupNames.szCurGroup[0]) );
 			pData->curCivGroupNames.szCurGroup[sizeof(pData->curCivGroupNames.szCurGroup)/sizeof(pData->curCivGroupNames.szCurGroup[0]) - 1] = '\0';
-	
+
 			#ifdef JA2EDITOR
 			wcscpy(gszCivGroupNames[pData->curCivGroupNames.uiIndex], pData->curCivGroupNames.szCurGroup);
 			#endif
-		
+
 		}
 		pData->maxReadDepth--;
 	}
@@ -160,9 +160,9 @@ BOOLEAN ReadInCivGroupNamesStats( STR fileName, BOOLEAN localizedVersion)
 	civGroupNamesParseData pData;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading CivGroupNames.xml" );
-	
+
 	CivGroupNames_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

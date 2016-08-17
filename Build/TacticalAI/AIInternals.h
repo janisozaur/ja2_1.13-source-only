@@ -1,8 +1,8 @@
-#include "types.h"
+#include "Types.h"
 #include "Isometric Utils.h"
 #include "Animation Control.h"
 #include "Overhead.h"
-#include "random.h"
+#include "Random.h"
 #include "Points.h"
 
 #include <iostream>
@@ -217,7 +217,7 @@ void CreatureDecideAlertStatus( SOLDIERTYPE *pCreature );
 INT8 ZombieDecideAction( SOLDIERTYPE* pSoldier );
 INT8 ArmedVehicleDecideAction( SOLDIERTYPE* pSoldier );
 
-// a variant of ClosestSeenOpponent(...), that allows to find enemies on a roof 
+// a variant of ClosestSeenOpponent(...), that allows to find enemies on a roof
 INT32 ClosestSeenOpponentWithRoof(SOLDIERTYPE *pSoldier, INT32 * psGridNo, INT8 * pbLevel);
 
 INT8 CrowDecideAction( SOLDIERTYPE * pSoldier );

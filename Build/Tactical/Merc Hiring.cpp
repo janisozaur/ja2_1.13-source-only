@@ -1,15 +1,15 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
-	#include "strategic.h"
+	#include "Strategic.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "math.h"
-	#include "worlddef.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
 	#include "Assignments.h"
 
 	#include "Animation Control.h"
@@ -17,23 +17,23 @@
 	#include "Isometric Utils.h"
 	#include "Event Pump.h"
 	#include "Render Fun.h"
-	#include "interface.h"
-	#include "sysutil.h"
+	#include "Interface.h"
+	#include "SysUtil.h"
 	#include "FileMan.h"
 	#include "Random.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Interactive Tiles.h"
-	#include "english.h"
-	#include "overhead.h"
+	#include "English.h"
+	#include "Overhead.h"
 	#include "Soldier Profile.h"
 	#include "Game Clock.h"
-	#include "soldier create.h"
+	#include "Soldier Create.h"
 	#include "Merc Hiring.h"
 	#include "Game Event Hook.h"
-	#include "message.h"
-	#include "strategicmap.h"
-	#include "strategic.h"
-	#include "items.h"
+	#include "Message.h"
+	#include "StrategicMap.h"
+	#include "Strategic.h"
+	#include "Items.h"
 	#include "Soldier Add.h"
 	#include "History.h"
 	#include "Squads.h"
@@ -41,19 +41,19 @@
 	#include "Dialogue Control.h"
 	#include "Map Screen Interface.h"
 	#include "Map Screen Interface Map.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "jascreens.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Merc Contract.h"
 	#include "LaptopSave.h"
-	#include "personnel.h"
+	#include "Personnel.h"
 	#include "Auto Resolve.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Quests.h"
 	#include "GameSettings.h"
 	#include "DynamicDialogue.h"// added by Flugente
 #endif
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2UB
 #include "Soldier Control.h"
@@ -61,7 +61,7 @@
 #include "Ja25_Tactical.h"
 #include "Campaign Types.h"
 #include "MapScreen Quotes.h"
-#include "opplist.h"
+#include "Opplist.h"
 #include "Ja25Update.h"
 #include "ub_config.h"
 #endif
@@ -69,7 +69,7 @@
 #ifdef JA2UB
 #else
 	// anv: for Kulba's odyssey
-	#include "email.h"
+	#include "Email.h"
 #endif
 
 //forward declarations of common classes to eliminate includes
@@ -168,7 +168,7 @@ INT8 HireMerc( MERC_HIRE_STRUCT *pHireMerc)
 	MercCreateStruct.bSectorZ							= pHireMerc->bSectorZ;
 	MercCreateStruct.bTeam								= SOLDIER_CREATE_AUTO_TEAM;
 	MercCreateStruct.fCopyProfileItemsOver= pHireMerc->fCopyProfileItemsOver;
-	
+
 	if(!cAllowMercEquipment && is_networked)
 		MercCreateStruct.fCopyProfileItemsOver=0;//hayden : server overide
 
@@ -341,7 +341,7 @@ INT8 HireMerc( MERC_HIRE_STRUCT *pHireMerc)
 	if( pHireMerc->uiTimeTillMercArrives	!= 0 )
 	{
 		AddStrategicEvent( EVENT_DELAYED_HIRING_OF_MERC, pHireMerc->uiTimeTillMercArrives,	pSoldier->ubID );
-				
+
 		//specify that the merc is hired but hasnt arrived yet
 		pMerc->bMercStatus = MERC_HIRED_BUT_NOT_ARRIVED_YET;
 
@@ -441,7 +441,7 @@ void MercArrivesCallback(	UINT8	ubSoldierID )
 		// I'm taking the initiative and removing this from the code. Mainly because it ends up interfering with
 		// externalized LZs combined with other features like "Always Real Time" and "Forced Turn Based".
 		//if( !DidGameJustStart() && gsMercArriveSectorX == gGameExternalOptions.ubDefaultArrivalSectorX && gsMercArriveSectorY == gGameExternalOptions.ubDefaultArrivalSectorY )
-		//	{ 
+		//	{
 		//		//Mercs arriving in A9.  This sector has been deemed as the always safe sector.
 		//		//Seeing we don't support entry into a hostile sector (except for the beginning),
 		//		//we will nuke any enemies in this sector first.
@@ -472,8 +472,8 @@ void MercArrivesCallback(	UINT8	ubSoldierID )
 		if( LaptopSaveInfo.ubJohnPossibleMissedFlights > 3 )
 			LaptopSaveInfo.ubJohnPossibleMissedFlights = 3;
 		// every time Kulba delays his arrival, chances of next delay decrease
-		if( Random( 100 ) < LaptopSaveInfo.ubJohnPossibleMissedFlights * 25 ) 
-		{			
+		if( Random( 100 ) < LaptopSaveInfo.ubJohnPossibleMissedFlights * 25 )
+		{
 			pSoldier->uiTimeSoldierWillArrive = pSoldier->uiTimeSoldierWillArrive + 720 + Random ( 720 );
 			AddStrategicEvent( EVENT_DELAYED_HIRING_OF_MERC, pSoldier->uiTimeSoldierWillArrive,	pSoldier->ubID );
 			if(LaptopSaveInfo.ubJohnPossibleMissedFlights == 3 )
@@ -561,7 +561,7 @@ void MercArrivesCallback(	UINT8	ubSoldierID )
 			gsSectorLocatorY = pSoldier->sSectorY;
 
 			TacticalCharacterDialogueWithSpecialEvent( pSoldier, 0, DIALOGUE_SPECIAL_EVENT_MINESECTOREVENT, 2, 0 );
-			
+
 //ja25ub
 #ifdef JA2UB
 			//if its the first time in, dont say anything
@@ -685,7 +685,7 @@ void HandleMercArrivesQuotes( SOLDIERTYPE *pSoldier )
 		//we can "leave" this function cause we dont want to do anything with buddy system
 		return;
 	}
-#endif	
+#endif
 	// If we are approaching with helicopter, don't say any ( yet )
 	if ( pSoldier->ubStrategicInsertionCode != INSERTION_CODE_CHOPPER )
 	{
@@ -992,9 +992,9 @@ void InitJerryMiloInfo()
 
 	gMercProfiles[ JERRY_MILO_UB ].ubStrategicInsertionCode = INSERTION_CODE_GRIDNO;
 	gMercProfiles[ JERRY_MILO_UB ].usStrategicInsertionData = gGameUBOptions.JerryGridNo; //15109;
-	
+
 }
-	
+
 if ( gGameUBOptions.InGameHeliCrash == TRUE )
 	{
 	//init Jerry Milo quotes
@@ -1008,29 +1008,29 @@ void UpdateJerryMiloInInitialSector()
 	SOLDIERTYPE	*pSoldier = NULL;
 	SOLDIERTYPE	*pJerrySoldier=NULL;
 
-	
+
     //SectorInfo[ SEC_H7 ].fSurfaceWasEverPlayerControlled = TRUE;
 	  SectorInfo[ (UINT8)SECTOR( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY ) ].fSurfaceWasEverPlayerControlled = TRUE;
     //SectorInfo[ SEC_H7 ].ubNumAdmins = 2;
 	StrategicMap[ (UINT8)SECTOR( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY ) ].fEnemyControlled = FALSE;
-    
+
 if ( gGameUBOptions.InGameHeli == TRUE )
 	return; //AA
 
 if ( gGameUBOptions.InGameHeliCrash == TRUE )
-   { 
+   {
 	//if it is the first sector we are loading up, place Jerry in the map
 	if( !gfFirstTimeInGameHeliCrash )
 		return;
 
-	if ( gGameUBOptions.InJerry == TRUE ) 
+	if ( gGameUBOptions.InJerry == TRUE )
 	{
 	pSoldier = FindSoldierByProfileID( JERRY_MILO_UB, FALSE ); //JERRY
 	if( pSoldier == NULL )
 	{
 		Assert( 0 );
 	}
-	
+
 	}
 
 	//the internet part of the laptop isnt working.  It gets broken in the heli crash.
@@ -1041,8 +1041,8 @@ if ( gGameUBOptions.InGameHeliCrash == TRUE )
 	//SectorInfo[ SEC_H7 ].fSurfaceWasEverPlayerControlled = TRUE;
 	  SectorInfo[ (UINT8)SECTOR( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY ) ].fSurfaceWasEverPlayerControlled = TRUE;
 	  StrategicMap[ (UINT8)SECTOR( gGameExternalOptions.ubDefaultArrivalSectorX, gGameExternalOptions.ubDefaultArrivalSectorY ) ].fEnemyControlled = FALSE;
- 
-	  if ( gGameUBOptions.InJerry == TRUE ) 
+
+	  if ( gGameUBOptions.InJerry == TRUE )
 	{
 	//Set some variable so Jerry will be on the ground
 	pSoldier->fWaitingToGetupFromJA25Start = TRUE;
@@ -1062,8 +1062,8 @@ if ( gGameUBOptions.InGameHeliCrash == TRUE )
 
 //Wont work cause it gets reset every frame
 	//make sure we can see Jerry
-	
-	if ( gGameUBOptions.InJerry == TRUE ) 
+
+	if ( gGameUBOptions.InJerry == TRUE )
 	{
 	pJerrySoldier = FindSoldierByProfileID(JERRY_MILO_UB, FALSE );//JERRY
 	if( pJerrySoldier != NULL )
@@ -1091,16 +1091,16 @@ void AddItemToMerc( UINT8 ubNewMerc, INT16 sItemType )
 	// make an objecttype
         CreateItem(sItemType, 100, &gTempObject);
 
-	// Give it 
+	// Give it
 	fReturn = AutoPlaceObject( MercPtrs[ ubNewMerc ], &gTempObject, FALSE );
-	
+
 			if(!fReturn && (UsingNewInventorySystem() == true))
 			{
 				(MercPtrs[ubNewMerc]->inv[NUM_INV_SLOTS-1]) = gTempObject;
 				fReturn=TRUE;
 			}
 	Assert( fReturn );
-	
+
 
 }
 #endif

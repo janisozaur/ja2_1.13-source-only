@@ -3,7 +3,7 @@
 	#include "IMP Skill Trait.h"
 	#include "GameSettings.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "CharProfile.h"
 	#include "Utilities.h"
 	#include "Debug.h"
@@ -20,7 +20,7 @@
 	#include "Soldier Profile Type.h"
 	#include "Soldier Profile.h"
 	#include "Animation Data.h"
-	#include "random.h"
+	#include "Random.h"
 	#include "LaptopSave.h"
 	// These 4 added - SANDRO
 	#include "IMP Character Trait.h"
@@ -187,8 +187,8 @@ void CreateACharacterFromPlayerEnteredStats( void )
 	gMercProfiles[ LaptopSaveInfo.iIMPIndex ].bHatedNationalityCareLevel	= ( INT8 )bHatedNationalityCareLevel;
 	gMercProfiles[ LaptopSaveInfo.iIMPIndex ].bRacist						= ( INT8 )bRacist;
 	gMercProfiles[ LaptopSaveInfo.iIMPIndex ].bSexist						= ( UINT8 )bSexist;
-		
-	// WDS: Advanced start 
+
+	// WDS: Advanced start
 	//gMercProfiles[ LaptopSaveInfo.iIMPIndex ].bExpLevel = gGameExternalOptions.ubIMPStartingLevel;
 	gMercProfiles[ LaptopSaveInfo.iIMPIndex ].bExpLevel = StartingLevelChosen(); // We now choose the starting level on IMP creation - SANDRO
 
@@ -375,7 +375,7 @@ void ValidateSkillsList( void )
 		// Electronics/Technician check - SANDRO
 		if ( gGameOptions.fNewTraitSystem )
 		{
-			iIndex = FindSkillInSkillsList( TECHNICIAN_NT ); 
+			iIndex = FindSkillInSkillsList( TECHNICIAN_NT );
 			if ( iIndex != -1 )
 				pProfile->bMechanical = 1;
 		}
@@ -384,7 +384,7 @@ void ValidateSkillsList( void )
 			iIndex = FindSkillInSkillsList( ELECTRONICS_OT );
 			if ( iIndex != -1 )
 				pProfile->bMechanical = 1;
-			
+
 			iIndex = FindSkillInSkillsList( LOCKPICKING_OT );
 			if ( iIndex != -1 )
 				pProfile->bMechanical = 1;
@@ -396,7 +396,7 @@ void ValidateSkillsList( void )
 	if ( pProfile->bMedical == 0 && gGameOptions.fNewTraitSystem )
 	{
 		// without medical, Doctor trait is useless
-		iIndex = FindSkillInSkillsList( DOCTOR_NT ); 
+		iIndex = FindSkillInSkillsList( DOCTOR_NT );
 		if ( iIndex != -1 )
 			pProfile->bMedical = 1;
 	}
@@ -404,7 +404,7 @@ void ValidateSkillsList( void )
 	// SANDRO - added to give 1 explosive skill to dmolitions
 	if ( pProfile->bExplosive == 0 && gGameOptions.fNewTraitSystem )
 	{
-		iIndex = FindSkillInSkillsList( DEMOLITIONS_NT ); 
+		iIndex = FindSkillInSkillsList( DEMOLITIONS_NT );
 		if ( iIndex != -1 )
 			pProfile->bExplosive = 1;
 	}
@@ -413,7 +413,7 @@ void ValidateSkillsList( void )
 	if ( pProfile->bLeadership == 0 && gGameOptions.fNewTraitSystem )
 	{
 		// without medical, Doctor trait is useless
-		iIndex = FindSkillInSkillsList( SQUADLEADER_NT ); 
+		iIndex = FindSkillInSkillsList( SQUADLEADER_NT );
 		if ( iIndex != -1 )
 			pProfile->bLeadership = 1;
 	}
@@ -423,7 +423,7 @@ void ValidateSkillsList( void )
 		// without marksmanship, the following traits are useless:
 		// auto weapons, heavy weapons, sniper, ranger, gunslinger
 
-		if ( gGameOptions.fNewTraitSystem ) // old/new traits - SANDRO 
+		if ( gGameOptions.fNewTraitSystem ) // old/new traits - SANDRO
 		{
 			iIndex = FindSkillInSkillsList( AUTO_WEAPONS_NT );
 			if( iIndex != -1 )
@@ -515,7 +515,7 @@ void CreatePlayerPersonality( void )
 	// DELETED UNUSED PART OF THE CODE - SANDRO
 
 	iPersonality = iChosenDisabilityTrait();
-	
+
 	return;
 }
 
@@ -574,7 +574,7 @@ void SelectMercFace( void )
 {
 /*
 UINT32 cnt;
-		
+
 		for ( cnt = 0; cnt < MAX_NEW_IMP_PORTRAITS; cnt++ )
 		{
 			sFacePositions[ cnt ][ 0 ] = 0;
@@ -592,7 +592,7 @@ UINT32 cnt;
 			if( fCharacterIsMale )
 			{
 			//gMercProfiles[ LaptopSaveInfo.iIMPIndex ].ubFaceIndex = 200 + ( UINT8 )iPortraitNumber;
-			
+
 			gMercProfiles[ LaptopSaveInfo.iIMPIndex ].ubFaceIndex = ( UINT8 )iPortraitNumber;
 
 			// eyes
@@ -606,7 +606,7 @@ UINT32 cnt;
 			else
 			{
 			//gMercProfiles[ LaptopSaveInfo.iIMPIndex ].ubFaceIndex = 200 + ( UINT8 )iPortraitNumber;
-			
+
 			gMercProfiles[ LaptopSaveInfo.iIMPIndex ].ubFaceIndex = ( UINT8 )iPortraitNumber;
 
 			// eyes
@@ -617,7 +617,7 @@ UINT32 cnt;
 			gMercProfiles[ LaptopSaveInfo.iIMPIndex ].usMouthX = sFacePositions[ gIMPFemaleValues[iPortraitNumber].uiMouthXPositions ][ 2 ];
 			gMercProfiles[ LaptopSaveInfo.iIMPIndex ].usMouthY = sFacePositions[ gIMPFemaleValues[iPortraitNumber].uiMouthYPositions ][ 3 ];
 
-	
+
 			}
 
 	// now the offsets

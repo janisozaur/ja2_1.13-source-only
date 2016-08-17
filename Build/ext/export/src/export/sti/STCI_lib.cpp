@@ -35,7 +35,7 @@ BOOLEAN ja2xp::LoadSTCIFileToImage(vfs::tReadableFile *pFile, HIMAGE hImage, UIN
 	}
 
 	// Open the file and read the header
-	
+
 	vfs::COpenReadFile file(pFile);
 	VFS_THROW_IFF( STCI_HEADER_SIZE == pFile->read((vfs::Byte*)&Header,STCI_HEADER_SIZE), L"" );
 	VFS_THROW_IFF( memcmp( Header.cID, STCI_ID_STRING, STCI_ID_LEN ) == 0, L"" );
@@ -79,20 +79,20 @@ BOOLEAN ja2xp::LoadSTCIFileToImage(vfs::tReadableFile *pFile, HIMAGE hImage, UIN
 	TempImage.ubBitDepth = Header.ubDepth;
 	*hImage = TempImage;
 
-	return( TRUE );		
+	return( TRUE );
 }
 
 BOOLEAN ja2xp::STCILoadRGB(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 fContents, STCIHeader * pHeader )
 {
 	if (fContents & IMAGE_PALETTE && !(fContents & IMAGE_ALLIMAGEDATA))
-	{ 
+	{
 		// RGB doesn't have a palette!
 		std::cout << "RGB doesn't have a palette!" << std::endl;
 		return( FALSE );
 	}
-	
+
 	if (fContents & IMAGE_BITMAPDATA)
-	{ 
+	{
 		// Allocate memory for the image data and read it in
 		hImage->pImageData = new char[ pHeader->uiStoredSize ];
 		if (hImage->pImageData == NULL)
@@ -102,7 +102,7 @@ BOOLEAN ja2xp::STCILoadRGB(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 fCon
 		try
 		{
 			vfs::size_t size = pHeader->uiStoredSize;
-			VFS_THROW_IFF( size == pFile->read( (vfs::Byte*)hImage->pImageData, size ), L"" ); 
+			VFS_THROW_IFF( size == pFile->read( (vfs::Byte*)hImage->pImageData, size ), L"" );
 		}
 		catch(vfs::Exception& ex)
 		{
@@ -138,7 +138,7 @@ BOOLEAN ja2xp::STCILoadRGB(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 fCon
 						ConvertRGBDistribution565To556( hImage->p16BPPData, pHeader->usWidth * pHeader->usHeight );
 						return( TRUE );
 					}
-					else 
+					else
 					{
 						// take the long route
 						ConvertRGBDistribution565ToAny( hImage->p16BPPData, pHeader->usWidth * pHeader->usHeight );
@@ -167,7 +167,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 	{
 		// Allocate memory for reading in the palette
 		if (pHeader->Indexed.uiNumberOfColours != 256)
-		{ 
+		{
 			return( FALSE );
 		}
 		uiFileSectionSize = pHeader->Indexed.uiNumberOfColours * STCI_PALETTE_ELEMENT_SIZE;
@@ -195,7 +195,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 		{
 			pFile->close();
 			delete[] pSTCIPalette;
-			return( FALSE );	
+			return( FALSE );
 		}
 		hImage->fFlags |= IMAGE_PALETTE;
 		// Free the temporary buffer
@@ -211,11 +211,11 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 		catch(vfs::Exception& ex)
 		{
 			pFile->close();
-			return( FALSE );	
+			return( FALSE );
 		}
 	}
 	if (fContents & IMAGE_BITMAPDATA)
-	{ 	
+	{
 		if (pHeader->fFlags & STCI_ETRLE_COMPRESSED)
 		{
 			// load data for the subimage (object) structures
@@ -226,7 +226,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 			if (hImage->pETRLEObject == NULL)
 			{
 				pFile->close();
-				if (fContents & IMAGE_PALETTE) 
+				if (fContents & IMAGE_PALETTE)
 				{
 					delete[] hImage->pPalette;
 				}
@@ -237,10 +237,10 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 				VFS_THROW_IFF(uiFileSectionSize == pFile->read((vfs::Byte*)hImage->pETRLEObject, uiFileSectionSize), L"")
 			}
 			catch(vfs::Exception& ex)
-			{ 
+			{
 				//FileClose( hFile );
 				pFile->close();
-				if (fContents & IMAGE_PALETTE) 
+				if (fContents & IMAGE_PALETTE)
 				{
 					delete[] hImage->pPalette;
 				}
@@ -255,7 +255,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 		if (hImage->pImageData == NULL)
 		{
 			pFile->close();
-			if (fContents & IMAGE_PALETTE) 
+			if (fContents & IMAGE_PALETTE)
 			{
 				delete[] hImage->pPalette;
 			}
@@ -273,7 +273,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 		{ // Problem reading in the image data!
 			pFile->close();
 			delete[] hImage->pImageData;
-			if (fContents & IMAGE_PALETTE) 
+			if (fContents & IMAGE_PALETTE)
 			{
 				delete[] hImage->pPalette;
 			}
@@ -295,7 +295,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 		{
 			//FileClose( hFile );
 			pFile->close();
-			return( FALSE );	
+			return( FALSE );
 		}
 	}
 
@@ -307,7 +307,7 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 		{
 			pFile->close();
 			delete[] hImage->pAppData;
-			if (fContents & IMAGE_PALETTE) 
+			if (fContents & IMAGE_PALETTE)
 			{
 				delete[] hImage->pPalette;
 			}
@@ -326,10 +326,10 @@ BOOLEAN ja2xp::STCILoadIndexed(vfs::tReadableFile *pFile, HIMAGE hImage, UINT16 
 			VFS_THROW_IFF(pHeader->uiAppDataSize == pFile->read( (vfs::Byte*)hImage->pAppData, pHeader->uiAppDataSize), L"");
 		}
 		catch(vfs::Exception& ex)
-		{ 
+		{
 			pFile->close();
 			delete[] hImage->pAppData;
-			if (fContents & IMAGE_PALETTE) 
+			if (fContents & IMAGE_PALETTE)
 			{
 				delete[] hImage->pPalette;
 			}
@@ -378,7 +378,7 @@ BOOLEAN ja2xp::STCISetPalette(vfs::tReadableFile *pFile, PTR pSTCIPalette, HIMAG
 
 	// Initialize the proper palette entries
 	for (usIndex = 0; usIndex < 256; usIndex++)
-	{ 
+	{
 		hImage->pPalette[ usIndex ].peRed   = pubPalette->ubRed;
 		hImage->pPalette[ usIndex ].peGreen = pubPalette->ubGreen;
 		hImage->pPalette[ usIndex ].peBlue  = pubPalette->ubBlue;
@@ -420,7 +420,7 @@ BOOLEAN ja2xp::IsSTCIETRLEFile(vfs::tReadableFile *pFile, CHAR8 * ImageFile )
 	{
 		return( FALSE );
 	}
-} 
+}
 
 
 

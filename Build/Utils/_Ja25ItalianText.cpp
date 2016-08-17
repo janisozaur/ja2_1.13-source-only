@@ -1,4 +1,4 @@
-﻿// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
+// WANNE: Yes, this should be disabled, otherwise we get weird behavior when running the game with a VS 2005 build!
 //#pragma setlocale("ITALIAN")
 
 #ifdef PRECOMPILEDHEADERS
@@ -7,8 +7,8 @@
 #else
 	#include "Language Defines.h"
 	#ifdef ITALIAN
-		#include "text.h"
-		#include "Fileman.h"
+		#include "Text.h"
+		#include "FileMan.h"
 	#endif
 #endif
 
@@ -258,7 +258,7 @@ STR16 gzIMPMajorTraitsHelpTextsCovertOps[]=
 
 STR16 gzIMPMajorTraitsHelpTextsRadioOperator[]=	// TODO.Translate
 {
-	L"Can use communications equipment.\n", 
+	L"Can use communications equipment.\n",
 	L"Can call in artillery strikes from allies in neighbouring sectors.\n",
 	L"Via Frequency Scan assignment, enemy patrols can be located.\n",
 	L"Communications can be jammed sector-wide.\n",

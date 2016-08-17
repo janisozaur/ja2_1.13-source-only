@@ -1,47 +1,47 @@
-#include "connect.h"
+#include "Connect.h"
 #ifdef PRECOMPILEDHEADERS
 #include "Tactical All.h"
 #else
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include <stdio.h>
 
 #include <memory.h>
 #include <math.h>
-#include "wcheck.h"
+#include "WCheck.h"
 #include "Isometric Utils.h"
-#include "debug.h"
-#include "los.h"
-#include "animation control.h"
+#include "Debug.h"
+#include "LOS.h"
+#include "Animation Control.h"
 #include "Random.h"
-//#include "soldier control.h"
+//#include "Soldier Control.h"
 #include "Event Pump.h"
-#include "overhead.h"
-#include "weapons.h"
+#include "Overhead.h"
+#include "Weapons.h"
 
-#include "opplist.h"
-#include "bullets.h"
+#include "Opplist.h"
+#include "Bullets.h"
 
-#include "lighting.h"
+#include "Lighting.h"
 #include "phys math.h"
-#include "items.h"
+#include "Items.h"
 #include "Soldier Profile.h"
-#include "worldman.h"
-#include "rotting corpses.h"
+#include "WorldMan.h"
+#include "Rotting Corpses.h"
 #include "GameSettings.h"
-#include "keys.h"
-#include "message.h"
+#include "Keys.h"
+#include "Message.h"
 #include "Structure Wrap.h"
-#include "campaign.h"
-#include "environment.h"
-#include "Pathai.h"
-#include "Soldier macros.h"
-#include "strategicmap.h"
+#include "Campaign.h"
+#include "Environment.h"
+#include "PathAI.h"
+#include "Soldier Macros.h"
+#include "StrategicMap.h"
 #include "Interface.h"
-#include "points.h"
+#include "Points.h"
 #include "Smell.h"
 #include "Text.h"
 #include "Quests.h"
-#include "items.h"
+#include "Items.h"
 #include "Item Types.h"
 #include "Vehicles.h"
 #endif
@@ -49,7 +49,7 @@
 #include "WorldDat.h"
 // HEADROCK HAM 3.6: This must be included, for testing whether Bloodcats and Enemies can see one another.
 #include "Campaign Types.h"
-#include "soldier tile.h"		// added by Flugente
+#include "Soldier Tile.h"		// added by Flugente
 #include "Sound Control.h"		// added by Flugente
 #include "Soldier Functions.h"	// added by Flugente for DoesSoldierWearGasMask(...)
 #include "CampaignStats.h"		// added by Flugente
@@ -411,7 +411,7 @@ inline UINT8 GetCurrentHeightOfSoldier( SOLDIERTYPE* pSoldier )
 *          (unfortunatly that's not only programming but alot of content-heavy work, which doesn't seem probable to happen)
 * @precondition camo on soldiertypes are correctly set
 *
-* @param pSoldier 
+* @param pSoldier
 * @return a value generally between 0 and 100 (but who knows if someone wants to use negative values, the basic types allow for that)
 */
 inline INT8 GetJungleCamouflage( SOLDIERTYPE* pSoldier )
@@ -420,7 +420,7 @@ inline INT8 GetJungleCamouflage( SOLDIERTYPE* pSoldier )
 	//if (HAS_SKILL_TRAIT( pSoldier, CAMOUFLAGED )) {
 	//	return 100;
 	//}
-	
+
 	return MINMAX100N(pSoldier->bCamo + pSoldier->wornCamo);
 }
 inline INT8 GetDesertCamouflage( SOLDIERTYPE* pSoldier )
@@ -429,7 +429,7 @@ inline INT8 GetDesertCamouflage( SOLDIERTYPE* pSoldier )
 	//if (HAS_SKILL_TRAIT( pSoldier, CAMOUFLAGED_DESERT )) {
 	//	return 100;
 	//}
-	
+
 	return MINMAX100N(pSoldier->desertCamo + pSoldier->wornDesertCamo);
 }
 inline INT8 GetUrbanCamouflage( SOLDIERTYPE* pSoldier )
@@ -438,7 +438,7 @@ inline INT8 GetUrbanCamouflage( SOLDIERTYPE* pSoldier )
 	//if (HAS_SKILL_TRAIT( pSoldier, CAMOUFLAGED_URBAN )) {
 	//	return 100;
 	//}
-	
+
 	return MINMAX100N(pSoldier->urbanCamo + pSoldier->wornUrbanCamo);
 }
 // anv: added this
@@ -448,7 +448,7 @@ inline INT8 GetSnowCamouflage( SOLDIERTYPE* pSoldier )
 	//if (HAS_SKILL_TRAIT( pSoldier, CAMOUFLAGED_URBAN )) {
 	//	return 100;
 	//}
-	
+
 	return MINMAX100N(pSoldier->snowCamo + pSoldier->wornSnowCamo);
 }
 // should be in lightning, 0-100 definition of brightness
@@ -477,7 +477,7 @@ inline INT8 GetStealth( SOLDIERTYPE* pSoldier )
 
 /**
 * Gives back a valid terrainId for a specified GridNo and bLevel
-* 
+*
 * @param pSoldier
 */
 INT8 GetTerrainTypeForGrid( const INT32& sGridNo, const INT16& bLevel )
@@ -559,10 +559,10 @@ ADDITIONAL_TILE_PROPERTIES_VALUES GetAllAdditonalTilePropertiesForGrid( const IN
 			switch(ubCnt)
 			{
 				case 0:
-					pNode = gpWorldLevelData[ sGridNo ].pShadowHead;			
+					pNode = gpWorldLevelData[ sGridNo ].pShadowHead;
 					break;
 				case 1:
-					pNode = gpWorldLevelData[ sGridNo ].pStructHead;		
+					pNode = gpWorldLevelData[ sGridNo ].pStructHead;
 					break;
 				case 2:
 					pNode = gpWorldLevelData[ sGridNo ].pObjectHead;
@@ -594,7 +594,7 @@ ADDITIONAL_TILE_PROPERTIES_VALUES GetAllAdditonalTilePropertiesForGrid( const IN
 				fFoundBottom = TRUE;
 			}
 		}
-			
+
 	}
 
 	ubAllTileProperties.bWoodCamoAffinity = (INT8)max(0, min(100, iWoodCamoAffinity));
@@ -633,7 +633,7 @@ INT8 GetSightAdjustmentCamouflageOnTerrain( SOLDIERTYPE* pSoldier, const UINT8& 
 	INT8 scaler = -(ANIM_STAND+1 - ubStance); // stand = 7-6 => 10%, crouch = 7-3 => 66%, prone = 7-1 => 100%;
 
 	UINT8 effectiveness = gGameExternalOptions.ubCamouflageEffectiveness;
-	
+
 	effectiveness += (UINT8)(pSoldier->GetBackgroundValue(BG_PERC_CAMO));
 
 	scaler = effectiveness * scaler / 6;
@@ -667,11 +667,11 @@ INT8 GetDetailedSightAdjustmentCamouflageOnTerrain( SOLDIERTYPE* pSoldier, const
 	INT16 iResult = 0;
 
 	INT8 bStanceModifier = zGivenTileProperties.bCamoStanceModifer;
-	
+
 	INT8 scaler = -(ANIM_STAND+1 - max(ANIM_PRONE, ubStance - bStanceModifier)); // stand = 7-6 => 10%, crouch = 7-3 => 66%, prone = 7-1 => 100%;
 
 	UINT8 effectiveness = gGameExternalOptions.ubCamouflageEffectiveness;
-	
+
 	effectiveness += (UINT8)(pSoldier->GetBackgroundValue(BG_PERC_CAMO));
 
 	scaler = effectiveness * scaler / 6;
@@ -736,7 +736,7 @@ INT8 GetSightAdjustmentThroughStance( const UINT8& ubStance )
 /**
 * TODO: Figure out how to find out your equipment cost. Big equipment will make you more visible! we could go after the load itself (kg)
 * TODO: but we still want a backpack to count more than your vest
-* 
+*
 * Calculates a percentage value to be added (or substracted) from sight. it's based on the amount of LBE.
 *
 * @param pSoldier the target
@@ -761,7 +761,7 @@ INT8 GetSightAdjustmentBasedOnLBE( SOLDIERTYPE* pSoldier )
 		{
 			ubScale += max( 0, min( 10, CalculateItemSize( &pSoldier->inv[SECONDHANDPOS] ) ) - 5 );
 		}
-		
+
 		if (pSoldier->inv[CPACKPOCKPOS].exists())
 		{
 			ubScale += 5;
@@ -835,7 +835,7 @@ INT8 GetSightAdjustmentBehindStructure( const INT16& iRange, STRUCTURE* pStructu
 	{
 		return 0; // this structure has no density therefore no additional sight adjustment possible
 	}
-	
+
 	//const UINT8& ubDensityInPercent = pStructure->pDBStructureRef->pDBStructure->ubDensity;
 	UINT16 ubFillInPercent = ubLevels[ubHeightLevel-1];
 
@@ -850,7 +850,7 @@ INT8 GetSightAdjustmentBehindStructure( const INT16& iRange, STRUCTURE* pStructu
 	// we make the fill less effective
 	INT8 ubSolidityInPercent = ubFillInPercent * gGameExternalOptions.ubTreeCoverEffectiveness / 100;
 
-	return MINMAX100N(- ubSolidityInPercent * ubCloseRangeScaler * ubLongRangeScaler); 
+	return MINMAX100N(- ubSolidityInPercent * ubCloseRangeScaler * ubLongRangeScaler);
 }
 
 /*
@@ -1061,7 +1061,7 @@ BOOLEAN ResolveHitOnWall( STRUCTURE * pStructure, INT32 iGridNo, INT8 bLOSIndexX
 			// if no wall of same orientation there, let bullet through
 			if ( fTopRight )
 			{
-				if (!WallOrClosedDoorExistsOfTopRightOrientation( (iGridNo + DirectionInc( NORTH )) ) && 
+				if (!WallOrClosedDoorExistsOfTopRightOrientation( (iGridNo + DirectionInc( NORTH )) ) &&
 						!WallOrClosedDoorExistsOfTopLeftOrientation( (iGridNo + DirectionInc( NORTH )) ) )
 				{
 					return( FALSE );
@@ -1083,7 +1083,7 @@ BOOLEAN ResolveHitOnWall( STRUCTURE * pStructure, INT32 iGridNo, INT8 bLOSIndexX
 			// if no wall of same orientation there, let bullet through
 			if ( fTopLeft )
 			{
-				if (!WallOrClosedDoorExistsOfTopLeftOrientation( (iGridNo + DirectionInc( WEST )) ) && 
+				if (!WallOrClosedDoorExistsOfTopLeftOrientation( (iGridNo + DirectionInc( WEST )) ) &&
 						!WallOrClosedDoorExistsOfTopRightOrientation( (iGridNo + DirectionInc( WEST )) ) )
 				{
 					return( FALSE );
@@ -1098,8 +1098,8 @@ BOOLEAN ResolveHitOnWall( STRUCTURE * pStructure, INT32 iGridNo, INT8 bLOSIndexX
 			if ( (bLocation == LOC_3_4 && fTopLeft) || (bLocation == LOC_4_3 && fTopRight) || (bLocation == LOC_4_4) )
 			{
 				if ( !WallOrClosedDoorExistsOfTopLeftOrientation( (iGridNo + DirectionInc( EAST ) ) ) &&
-						 !WallOrClosedDoorExistsOfTopRightOrientation( (iGridNo + DirectionInc( SOUTH ) ) ) &&						 
-						 !OpenLeftOrientedDoorWithDoorOnLeftOfEdgeExists( (iGridNo + DirectionInc( EAST ) ) ) && 
+						 !WallOrClosedDoorExistsOfTopRightOrientation( (iGridNo + DirectionInc( SOUTH ) ) ) &&
+						 !OpenLeftOrientedDoorWithDoorOnLeftOfEdgeExists( (iGridNo + DirectionInc( EAST ) ) ) &&
 						 !OpenRightOrientedDoorWithDoorOnRightOfEdgeExists( (iGridNo + DirectionInc( SOUTH ) ) )
 					)
 				{
@@ -1806,7 +1806,7 @@ INT32 LineOfSightTest( FLOAT dStartX, FLOAT dStartY, FLOAT dStartZ, FLOAT dEndX,
 												gLOSTestResults.iMaxDistance = iSightLimit;
 #endif
 												// sevenfm: don't stop on trees if testing with no sight limit
-												if (iDistance > iAdjSightLimit && 
+												if (iDistance > iAdjSightLimit &&
 													!cthCalc &&
 													iTileSightLimit < 255)
 												{
@@ -1825,7 +1825,7 @@ INT32 LineOfSightTest( FLOAT dStartX, FLOAT dStartY, FLOAT dStartZ, FLOAT dEndX,
 											{
 												// we're supposed to note the location of this window!
 												// but if a location has already been set then there are two windows, in which case
-												// we abort												
+												// we abort
 												if (TileIsOutOfBounds(*psWindowGridNo))
 												{
 													*psWindowGridNo = iGridNo;
@@ -2237,9 +2237,9 @@ INT32 SoldierToSoldierLineOfSightTest( SOLDIERTYPE * pStartSoldier, SOLDIERTYPE 
 				DiffLev = 4;
 			else
 				DiffLev = 1;
-				
-		if (gBloodcatPlacements[ ubSectorID ][ DiffLev-1 ].ubFactionAffiliation == QUEENS_CIV_GROUP)						
-		//if (gBloodcatPlacements[ ubSectorID ][ gGameOptions.ubDifficultyLevel-1 ].ubFactionAffiliation == QUEENS_CIV_GROUP)	
+
+		if (gBloodcatPlacements[ ubSectorID ][ DiffLev-1 ].ubFactionAffiliation == QUEENS_CIV_GROUP)
+		//if (gBloodcatPlacements[ ubSectorID ][ gGameOptions.ubDifficultyLevel-1 ].ubFactionAffiliation == QUEENS_CIV_GROUP)
 		{
 			// skip sight between army & bloodcats
 			if ( pStartSoldier->bTeam == ENEMY_TEAM && pEndSoldier->bTeam == CREATURE_TEAM && pEndSoldier->ubBodyType == BLOODCAT )
@@ -2350,7 +2350,7 @@ INT32 SoldierToSoldierLineOfSightTest( SOLDIERTYPE * pStartSoldier, SOLDIERTYPE 
 		iTileSightLimit += iTileSightLimit * GetSightAdjustment(pEndSoldier) / 100;
 	}
 
-	// anv: special check for vehicles - since they're no longer transparent, we need to check for visibility 
+	// anv: special check for vehicles - since they're no longer transparent, we need to check for visibility
 	// of all substructures, also vehicle will be noticed even if just part of it is sticking around the corner
 	if ( pEndSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE && (!ARMED_VEHICLE( pEndSoldier ) || gGameExternalOptions.fEnemyTanksAnyPartVisible) )
 	{
@@ -2537,7 +2537,7 @@ INT32 LocationToLocationLineOfSightTest( INT32 sStartGridNo, INT8 bStartLevel, I
 	{
 		iTileSightLimit = MaxNormalDistanceVisible();
 	}
-	else if (iTileSightLimit == NO_DISTANCE_LIMIT) 
+	else if (iTileSightLimit == NO_DISTANCE_LIMIT)
 	{
 		iTileSightLimit = 255 + MaxNormalDistanceVisible();
 	}
@@ -2765,7 +2765,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 					{
 						dZPosRelToMerc -= HEIGHT_UNITS;
 					}
-					
+
 					if ( iskid )
 					{
 						if (dZPosRelToMerc > CROUCHED_HEAD_BOTTOM_POS_KID)
@@ -2805,7 +2805,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 						{
 							FLOAT x = (FLOAT)FIXEDPT_TO_INT32( pBullet->qCurrX + FloatToFixed( 0.5f ) ); // + 0.5);
 							FLOAT y = (FLOAT)FIXEDPT_TO_INT32( pBullet->qCurrY + FloatToFixed( 0.5f ) ); // (dCurrY + 0.5);
-						
+
 							// Flugente: we measure the distance of the bullet's location to the location of the soldier, and to the 2 gridnos his head and leg occupy
 							// From this we can decide what body part was hit
 							FLOAT bodycenterX = (FLOAT)CenterX( pTarget->sGridNo );
@@ -2867,7 +2867,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 			ubOppositeDirection = gOppositeDirection[ ubAttackDirection ];
 
 			if ( ubOppositeDirection == pTarget->ubDirection || ubOppositeDirection == gOneCCDirection[ pTarget->ubDirection ] || ubOppositeDirection == gOneCDirection[ pTarget->ubDirection ] )
-			{				
+			{
 				if ( (pTarget->inv[HEAD1POS].exists() == true) && ( PreRandom( 100 ) < (UINT32) (pTarget->inv[HEAD1POS][0]->data.objectStatus) ) && AmmoTypes[ubAmmoType].monsterSpit )
 				{
 					// lucky bastard was wearing protective stuff
@@ -2927,9 +2927,9 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 		// HEADROCK HAM 5: Fragments not counted as shots.
 		if( pBullet->ubFirerID != NOBODY && pFirer->bTeam == OUR_TEAM && !(pBullet->fFragment) )
 		{
-			// SANDRO - new mercs' records 
+			// SANDRO - new mercs' records
 			// if we shoot with buckshot or similar, do not count a hit for every pellet
-			if ( pBullet->usFlags & BULLET_FLAG_BUCKSHOT ) 
+			if ( pBullet->usFlags & BULLET_FLAG_BUCKSHOT )
 			{
 				// if just one pellet hits the target, record it as successful hit, ignore the rest
 				if ( pTarget->bNumPelletsHitBy == 0 )
@@ -2958,7 +2958,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 		// In NCTH, we have no idea how accurate our bullet is until it hits the target. We know how carefully
 		// we aimed though, so now that the bullet hits the intended target, we can calculate extra experience
 		// based on the aiming value.
-		
+
 		if ( UsingNewCTHSystem() && pBullet->ubFirerID != NOBODY && pFirer->bTeam == gbPlayerNum && pBullet->fAimed) // Only for single shot, first bullet in volley, or first bullet in spread.
 		{
 			UINT16 usExpGain = 10;
@@ -2978,7 +2978,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 					// no exp from shooting a vehicle that you can't damage and can't move!
 					usExpGain = 0;
 				}
-			
+
 				if (!(pBullet->usFlags & BULLET_FLAG_KNIFE))
 				{
 					// MARKSMANSHIP/DEXTERITY GAIN: gun attack
@@ -3051,7 +3051,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 	// check to see if the guy is a friendly?..if so, up the number of times wounded
 	if( ( pTarget->bTeam == gbPlayerNum ) && iDamage > 1 ) // damage of 1 is just a scratch, not a real wound
 	{
-		if ( pBullet->usFlags & BULLET_FLAG_BUCKSHOT ) 
+		if ( pBullet->usFlags & BULLET_FLAG_BUCKSHOT )
 		{
 			// SANDRO - if just one pellet hits the target, record it as being wounded, ignore the rest
 			if ( pTarget->bNumPelletsHitBy == 0 )
@@ -3155,15 +3155,15 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 
 	// handle hit!	Handle damage before deleting the bullet though
 	//hayden
-	if(SWeaponHit.ubAttackerID < 20 ||(is_server && SWeaponHit.ubAttackerID < 120)|| !is_client ) // 124 last possible ai 
+	if(SWeaponHit.ubAttackerID < 20 ||(is_server && SWeaponHit.ubAttackerID < 120)|| !is_client ) // 124 last possible ai
 	{
-		if(is_client) 
+		if(is_client)
 			SWeaponHit.sDamage=(INT16)(SWeaponHit.sDamage * cDamageMultiplier); // adjust damage from external variable //hayden
-		
+
 		WeaponHit( SWeaponHit.usSoldierID, SWeaponHit.usWeaponIndex, SWeaponHit.sDamage, SWeaponHit.sBreathLoss, SWeaponHit.usDirection, SWeaponHit.sXPos, SWeaponHit.sYPos, SWeaponHit.sZPos, SWeaponHit.sRange, SWeaponHit.ubAttackerID, SWeaponHit.fHit, SWeaponHit.ubSpecial, SWeaponHit.ubLocation );
-		
-		
-		if(is_server || (is_client && SWeaponHit.ubAttackerID <20) ) 
+
+
+		if(is_server || (is_client && SWeaponHit.ubAttackerID <20) )
 		{
 			SWeaponHit.fStopped=fStopped;
 			SWeaponHit.iBullet=pBullet->iBullet;
@@ -3230,7 +3230,7 @@ void BulletHitStructure( BULLET * pBullet, UINT16 usStructureID, INT32 iImpact, 
 	SStructureHit.usStructureID = usStructureID;
 	SStructureHit.iImpact		= iImpact;
 	SStructureHit.iBullet		= pBullet->iBullet;
-	
+
 	if (is_networked)
 		SStructureHit.fStopped = fStopped;
 
@@ -4418,9 +4418,9 @@ INT8 FireBullet( UINT8 ubFirer, BULLET * pBullet, BOOLEAN fFake )
 		//		gMercProfiles[ pFirer->ubProfile ].records.usMissilesLaunched++;
 		//	else if ( Item[ pFirer->usAttackingWeapon ].usItemClass == IC_THROWING_KNIFE )
 		//		gMercProfiles[ pFirer->ubProfile ].records.usKnivesThrown++;
-		//	else 
+		//	else
 		//		gMercProfiles[ pFirer->ubProfile ].records.usShotsFired++;
-		//	
+		//
 		//	/////////////////////////////////////////////////////////////////////////////////////
 		//}
 
@@ -4435,11 +4435,11 @@ INT8 FireBullet( UINT8 ubFirer, BULLET * pBullet, BOOLEAN fFake )
 		}
 		else
 		{
-			//afp-start  //always a fast bullet 
+			//afp-start  //always a fast bullet
 			if ( pBullet->usFlags & ( BULLET_FLAG_CREATURE_SPIT | BULLET_FLAG_KNIFE | BULLET_FLAG_MISSILE | BULLET_FLAG_SMALL_MISSILE | BULLET_FLAG_TANK_CANNON | BULLET_FLAG_FLAME /*| BULLET_FLAG_TRACER*/ ) )
 				pBullet->usClockTicksPerUpdate = (Weapon[ pBullet->pFirer->usAttackingWeapon ].ubBulletSpeed + GetBulletSpeedBonus(&pBullet->pFirer->inv[pBullet->pFirer->ubAttackingHand]) ) / 10;
 			else
-				if (gGameSettings.fOptions[TOPTION_ALTERNATE_BULLET_GRAPHICS])				
+				if (gGameSettings.fOptions[TOPTION_ALTERNATE_BULLET_GRAPHICS])
 					pBullet->usClockTicksPerUpdate = (Weapon[ pBullet->pFirer->usAttackingWeapon ].ubBulletSpeed + GetBulletSpeedBonus(&pBullet->pFirer->inv[pBullet->pFirer->ubAttackingHand]) ) / 10;
 				else
 					pBullet->usClockTicksPerUpdate = 1;
@@ -4519,7 +4519,7 @@ INT8 FireBulletGivenTargetNCTH( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, 
 	OBJECTTYPE* pObjAttHand = pFirer->GetUsedWeapon( &(pFirer->inv[pFirer->ubAttackingHand]) );
 
 	BOOLEAN fSecondHandBurst = FALSE;
-	if ( pFirer->ubAttackingHand == SECONDHANDPOS && pFirer->IsValidSecondHandBurst() ) 
+	if ( pFirer->ubAttackingHand == SECONDHANDPOS && pFirer->IsValidSecondHandBurst() )
 		fSecondHandBurst = TRUE;
 
 	//DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("FireBulletGivenTarget"));
@@ -4833,7 +4833,7 @@ INT8 FireBulletGivenTargetNCTH( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, 
 				{
 					FILE      *OutFile;
 					if ((OutFile = fopen("SpreadPatternLog.txt", "a+t")) != NULL)
-					{ 
+					{
 						//To easily cut-and-paste these values from the log into a C/C++ source file for later analysis
 						//Lots of reference debug info in a comment.
 						fprintf(OutFile, "{ % 9.8f , % 9.8f , % 9.8f , % 9.8f }, //DEBUG: merc %4d fired pellet %4d of %4d using method %4d %12s with SpreadPattern %4d %s\n",
@@ -4962,7 +4962,7 @@ INT8 FireBulletGivenTargetNCTH( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, 
 			gMercProfiles[ pFirer->ubProfile ].records.usMissilesLaunched++;
 		else if ( Item[usHandItem].usItemClass == IC_THROWING_KNIFE )
 			gMercProfiles[ pFirer->ubProfile ].records.usKnivesThrown++;
-		else 
+		else
 			gMercProfiles[ pFirer->ubProfile ].records.usShotsFired++;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -5013,7 +5013,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 	OBJECTTYPE* pObjAttHand = pFirer->GetUsedWeapon( &(pFirer->inv[pFirer->ubAttackingHand]) );
 
 	BOOLEAN fSecondHandBurst = FALSE;
-	if ( pFirer->ubAttackingHand == SECONDHANDPOS && pFirer->IsValidSecondHandBurst() ) 
+	if ( pFirer->ubAttackingHand == SECONDHANDPOS && pFirer->IsValidSecondHandBurst() )
 		fSecondHandBurst = TRUE;
 
 	//DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("FireBulletGivenTarget"));
@@ -5050,7 +5050,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 
 	ubShots = 1;
 	fTracer = FALSE;
-		
+
 	// Check if we have spit as a weapon!
 	if ( Weapon[ usHandItem ].ubWeaponClass == MONSTERCLASS )
 	{
@@ -5353,7 +5353,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 				{
 					FILE      *OutFile;
 					if ((OutFile = fopen("SpreadPatternLog.txt", "a+t")) != NULL)
-					{ 
+					{
 						//To easily cut-and-paste these values from the log into a C/C++ source file for later analysis
 						//Lots of reference debug info in a comment.
 						fprintf(OutFile, "{ % 9.8f , % 9.8f , % 9.8f , % 9.8f }, //DEBUG: merc %4d fired pellet %4d of %4d using method %4d %12s with SpreadPattern %4d %s\n",
@@ -5478,7 +5478,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 			gMercProfiles[ pFirer->ubProfile ].records.usMissilesLaunched++;
 		else if ( Item[usHandItem].usItemClass == IC_THROWING_KNIFE )
 			gMercProfiles[ pFirer->ubProfile ].records.usKnivesThrown++;
-		else 
+		else
 			gMercProfiles[ pFirer->ubProfile ].records.usShotsFired++;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -5490,7 +5490,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 
 // HEADROCK HAM 5: This function is similar to FireBulletGivenTargetNCTH above, except it is used for firing fragments
 // out of an explosion. The method is the same: a bullet is created and propelled towards an X/Y/Z location. The difference
-// is that there is no firing weapon - the bullet needs to receive details from the explosive item, and supply the 
+// is that there is no firing weapon - the bullet needs to receive details from the explosive item, and supply the
 // thrower's pointer instead of the "shooter"'s, to ensure proper experience distribution and hostility checks go to the
 // thrower.
 // Note that this function does not make provisions for Fake Firing. There is no need for it, and it would needlessly
@@ -5632,7 +5632,7 @@ INT8 FireFragmentGivenTarget( UINT8 ubOwner, FLOAT dStartX, FLOAT dStartY, FLOAT
 	// this distance limit only applies in a "hard" sense to fake bullets for chance-to-get-through,
 	// but is used for determining structure hits by the regular code
 	pBullet->iDistanceLimit = iDistance;
-	
+
 	pBullet->fTracer = false;
 
 	if(is_client)send_bullet( pBullet, usExplosiveItem );
@@ -5648,7 +5648,7 @@ INT8 FireFragmentGivenTarget( UINT8 ubOwner, FLOAT dStartX, FLOAT dStartY, FLOAT
 			gMercProfiles[ pFirer->ubProfile ].records.usMissilesLaunched++;
 		else if ( Item[usHandItem].usItemClass == IC_THROWING_KNIFE )
 			gMercProfiles[ pFirer->ubProfile ].records.usKnivesThrown++;
-		else 
+		else
 			gMercProfiles[ pFirer->ubProfile ].records.usShotsFired++;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -5670,7 +5670,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 
 	FLOAT	dStartX = 0;
 	FLOAT	dStartY = 0;
-	
+
 	FLOAT	d2DDistance=0;
 	FLOAT	dDeltaX=0;
 	FLOAT	dDeltaY=0;
@@ -5701,7 +5701,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 	BOOLEAN fBuckshot = FALSE;
 	if ( AmmoTypes[(*pObj)[0]->data.gun.ubGunAmmoType].numberOfBullets > 1 )
 		fBuckshot = TRUE;
-		
+
 	dStartX = (FLOAT) CenterX( gridno );
 	dStartY = (FLOAT) CenterY( gridno );
 
@@ -5861,7 +5861,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 
 		// Flugente: we have to set this, otherwise the gun that fired this shot wont be found in WeaponHit()
 		pBullet->fFragment = true;
-		
+
 		//zilpin: pellet spread patterns externalized in XML
 		//Now the first shot will use the pattern, as well.
 		//Single shot weapons will still be stuck with straight-ahead only, though.
@@ -6010,7 +6010,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 				{
 					FILE      *OutFile;
 					if ((OutFile = fopen("SpreadPatternLog.txt", "a+t")) != NULL)
-					{ 
+					{
 						//To easily cut-and-paste these values from the log into a C/C++ source file for later analysis
 						//Lots of reference debug info in a comment.
 						fprintf(OutFile, "{ % 9.8f , % 9.8f , % 9.8f , % 9.8f }, //DEBUG: merc %4d fired pellet %4d of %4d using method %4d %12s with SpreadPattern %4d %s\n",
@@ -6084,7 +6084,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 
 		//pBullet->bStartCubesAboveLevelZ = (INT8) CONVERT_HEIGHTUNITS_TO_INDEX( (INT32)dStartZ - CONVERT_PIXELS_TO_HEIGHTUNITS( gpWorldLevelData[ gridno ].sHeight ) );
 		//pBullet->bEndCubesAboveLevelZ = (INT8) CONVERT_HEIGHTUNITS_TO_INDEX( (INT32)dEndZ - CONVERT_PIXELS_TO_HEIGHTUNITS( gpWorldLevelData[ pBullet->sTargetGridNo ].sHeight ) );
-						
+
 		pBullet->bStartCubesAboveLevelZ = (INT8) CONVERT_HEIGHTUNITS_TO_INDEX( (INT32)dStartZ );
 		pBullet->bEndCubesAboveLevelZ = (INT8) CONVERT_HEIGHTUNITS_TO_INDEX( (INT32)dEndZ );
 
@@ -6108,7 +6108,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 				pBullet->fTracer = FALSE;
 			}
 		}*/
-				
+
 		if(is_client)send_bullet( pBullet, pObj->usItem );
 		FireBullet( pThrower->ubID, pBullet, FALSE );
 	}
@@ -6139,7 +6139,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 
 	// deduct ammo
 	(*pObj)[0]->data.gun.ubGunShotsLeft = max(0, (*pObj)[0]->data.gun.ubGunShotsLeft - 1);
-						
+
 	//gTacticalStatus.ubAttackBusyCount++;
 
 	///////////////////////// SOUND ////////////////////////////
@@ -6201,10 +6201,10 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 	///////////////////////// OVERHEATING AND STATUS REDUCTION ////////////////////////////
 
 	///////////////////////// JAMMING ////////////////////////////
-	// Algorithm for jamming 
-	int maxJamChance = 50; // Externalize this? 
-	int reliability =  GetReliability( pObj ); 
-	int condition = (*pObj)[0]->data.gun.bGunStatus; 
+	// Algorithm for jamming
+	int maxJamChance = 50; // Externalize this?
+	int reliability =  GetReliability( pObj );
+	int condition = (*pObj)[0]->data.gun.bGunStatus;
 
 	int weatherpenalty = 0;
 	if ( pThrower && !pThrower->bSectorZ )
@@ -6224,21 +6224,21 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 		invertedBaseJamChance -= overheatjamfactor;							// lower invertedBaseJamChance	(thereby increasing jamChance later on)
 	}
 
-	if (invertedBaseJamChance < 0) 
-		invertedBaseJamChance = 0; 
-	else if (invertedBaseJamChance > 100) 
-		invertedBaseJamChance = 100; 
-	int jamChance = 100 - (int)sqrt((double)invertedBaseJamChance * (75.0 + (double)invertedBaseJamChance / 2.0)); 
-	if (jamChance < 0) 
-		jamChance = 0; 
-	else if (jamChance > maxJamChance - reliability) 
-		jamChance = maxJamChance - reliability; 
-			 
-				
-	if ((INT32) PreRandom( 100 ) < jamChance  ) 
-	{ 				 
-		// jam! negate the gun ammo status. 
-		(*pObj)[0]->data.gun.bGunAmmoStatus *= -1; 				 
+	if (invertedBaseJamChance < 0)
+		invertedBaseJamChance = 0;
+	else if (invertedBaseJamChance > 100)
+		invertedBaseJamChance = 100;
+	int jamChance = 100 - (int)sqrt((double)invertedBaseJamChance * (75.0 + (double)invertedBaseJamChance / 2.0));
+	if (jamChance < 0)
+		jamChance = 0;
+	else if (jamChance > maxJamChance - reliability)
+		jamChance = maxJamChance - reliability;
+
+
+	if ((INT32) PreRandom( 100 ) < jamChance  )
+	{
+		// jam! negate the gun ammo status.
+		(*pObj)[0]->data.gun.bGunAmmoStatus *= -1;
 	}
 	///////////////////////// JAMMING ////////////////////////////
 
@@ -6373,7 +6373,7 @@ void MoveBullet( INT32 iBullet )
 
 			if(ENABLE_COLLISION)
 					BulletMissed( pBullet, pBullet->pFirer );//only if local origin
-			
+
 			return;
 		}
 
@@ -6585,7 +6585,7 @@ void MoveBullet( INT32 iBullet )
 							{
 								fInflictSuppression = TRUE;
 							}
-							
+
 							if (fInflictSuppression)
 							{
 								// bullet goes whizzing by this guy!
@@ -6692,7 +6692,7 @@ void MoveBullet( INT32 iBullet )
 								{
 									fInflictSuppression = TRUE;
 								}
-								
+
 								if (fInflictSuppression)
 								{
 									// bullet goes whizzing by this guy!
@@ -6744,7 +6744,7 @@ void MoveBullet( INT32 iBullet )
 			// check for collision with the ground
 			iCurrAboveLevelZ = FIXEDPT_TO_INT32( pBullet->qCurrZ - qLandHeight );
 //hayden	not hit	ground
-			if(ENABLE_COLLISION)	
+			if(ENABLE_COLLISION)
 			{
 				if (iCurrAboveLevelZ < 0)
 				{
@@ -6822,7 +6822,7 @@ void MoveBullet( INT32 iBullet )
 
 				// HEADROCK HAM B2.5: Changed condition to read fTracer flag directly from bullet's struct.
 				// This is for the New Tracer System.
-				if (( pBullet->usFlags & ( BULLET_FLAG_MISSILE | BULLET_FLAG_SMALL_MISSILE | BULLET_FLAG_TANK_CANNON | BULLET_FLAG_FLAME | BULLET_FLAG_CREATURE_SPIT /*| BULLET_FLAG_TRACER*/	) ) 
+				if (( pBullet->usFlags & ( BULLET_FLAG_MISSILE | BULLET_FLAG_SMALL_MISSILE | BULLET_FLAG_TANK_CANNON | BULLET_FLAG_FLAME | BULLET_FLAG_CREATURE_SPIT /*| BULLET_FLAG_TRACER*/	) )
 					|| ((gGameExternalOptions.ubRealisticTracers > 0 && gGameExternalOptions.ubNumBulletsPerTracer > 0 && pBullet->fTracer == TRUE) || (gGameExternalOptions.ubRealisticTracers == 0 && fTracer == TRUE)))
 				{
 					INT8 bStepsPerMove = STEPS_FOR_BULLET_MOVE_TRAILS;
@@ -7134,7 +7134,7 @@ void MoveBullet( INT32 iBullet )
 
 					// HEADROCK HAM B2.5: Changed condition to read fTracer flag directly from bullet's struct.
 					// This is for the New Tracer System.
-					if (( pBullet->usFlags & ( BULLET_FLAG_MISSILE | BULLET_FLAG_SMALL_MISSILE | BULLET_FLAG_TANK_CANNON | BULLET_FLAG_FLAME | BULLET_FLAG_CREATURE_SPIT /*| BULLET_FLAG_TRACER */) ) 
+					if (( pBullet->usFlags & ( BULLET_FLAG_MISSILE | BULLET_FLAG_SMALL_MISSILE | BULLET_FLAG_TANK_CANNON | BULLET_FLAG_FLAME | BULLET_FLAG_CREATURE_SPIT /*| BULLET_FLAG_TRACER */) )
 						|| ((gGameExternalOptions.ubRealisticTracers > 0 && gGameExternalOptions.ubNumBulletsPerTracer > 0 && pBullet->fTracer == TRUE) || (gGameExternalOptions.ubRealisticTracers == 0 && fTracer == TRUE)))
 					{
 						INT8 bStepsPerMove = STEPS_FOR_BULLET_MOVE_TRAILS;
@@ -7187,7 +7187,7 @@ void MoveBullet( INT32 iBullet )
 				// since we're doing an increment based on distance, not time, the
 				// decrement is scaled down depending on how fast the bullet is (effective range)
 				//pBullet->qIncrZ -= INT32_TO_FIXEDPT( 100 ) / (pBullet->iRange * 2);
-				pBullet->qIncrZ -= INT32_TO_FIXEDPT( 100 ) / (pBullet->iRange * gGameCTHConstants.GRAVITY_COEFFICIENT); 
+				pBullet->qIncrZ -= INT32_TO_FIXEDPT( 100 ) / (pBullet->iRange * gGameCTHConstants.GRAVITY_COEFFICIENT);
 			}
 			else if ( (pBullet->usFlags & BULLET_FLAG_FLAME) && (dDistanceMoved > pBullet->iRange) )
 			{
@@ -7803,19 +7803,19 @@ BOOLEAN CalculateLOSNormal( 	STRUCTURE *pStructure, INT8 bLOSX, INT8 bLOSY, INT8
 // calculated in several distinct steps, each of which is responsible for one type of
 // effect, such as the sway of the muzzle or tracking the target's movement.
 //
-// This function, which basically drives the whole thing, plays with the location of the 
-// "center point", the point where the gun would shoot if aimed and fired with 100% accuracy. 
+// This function, which basically drives the whole thing, plays with the location of the
+// "center point", the point where the gun would shoot if aimed and fired with 100% accuracy.
 // The idea is to make gunplay more randomal and less exploitable.
 //
-// Related changes include an overhaul of the CalcChanceToHit() formula, as well as 
+// Related changes include an overhaul of the CalcChanceToHit() formula, as well as
 // restructuring of UseGun() and its sub-functions.
- 
+
 void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT *dEndX, FLOAT *dEndY, FLOAT *dEndZ, OBJECTTYPE *pWeapon, UINT32 uiMuzzleSway, INT16 *sApertureRatio )
 {
 	SOLDIERTYPE *pTarget = SimpleFindSoldier( iTargetGridNo, pShooter->bTargetLevel );
 	BOOLEAN fSecondHandBurst = FALSE;
 
-	if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() ) 
+	if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() )
 		fSecondHandBurst = TRUE;
 
 	///////////////////////////////////////////
@@ -7916,7 +7916,7 @@ void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT 
 		iBasicAperture = iBasicAperture * (FLOAT)( (100 - gGameCTHConstants.IRON_SIGHT_PERFORMANCE_BONUS) / 100);
 
 	// laser pointers can provide a percentage bonus to base aperture
-	if ( gCTHDisplay.iBestLaserRange > 0 
+	if ( gCTHDisplay.iBestLaserRange > 0
 		&& ( gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE != 0) )
 	{
 		INT8 bLightLevel = LightTrueLevel(gCTHDisplay.iTargetGridNo, gsInterfaceLevel );
@@ -7961,7 +7961,7 @@ void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT 
 	///////////////////////////////////////////////////////////////
 	// To make things easier for us, we now calculate the Magnification Factor for this shot. A Mag Factor
 	// is a divisor to the sway of the muzzle. It's about the same as multiplying CTH by a certain amount.
-	// Note that both optical magnification devices (like scopes) and dot-projection devices (like lasers and 
+	// Note that both optical magnification devices (like scopes) and dot-projection devices (like lasers and
 	// reflex sights) provide this sort of bonus.
 	FLOAT iMagFactor = CalcMagFactor( pShooter, pWeapon, d2DDistance, iTargetGridNo, (UINT8)pShooter->aiData.bAimTime );
 
@@ -7996,7 +7996,7 @@ void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT 
 	// volley. If a volley continues, subsequent bullets will "inherit" past muzzle movements from one another.
 	// As you'll see, this allows the shooter to readjust the weapon WHILE it is firing, rather than randomize
 	// muzzle movements every time.
-	
+
 	if (pShooter->bDoBurst <= 1 || (fSecondHandBurst && pShooter->bDoBurst == 2))
 	{
 
@@ -8135,8 +8135,8 @@ void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT 
 		// Bullets reaching their maximum flight range will begin to drop towards the ground. Shooters wishing
 		// to fire beyond a gun's range can use the simple ballistic principle of raising the muzzle upwards to
 		// have the bullets fly in a higher angle - allowing the bullet to avoid hitting the ground for a little
-		// longer, and as a result having more actual range. However, this is tricky, and only the most skilled 
-		// shooters will be able to do this reliably. In any case, this can't extend the range of the gun by more 
+		// longer, and as a result having more actual range. However, this is tricky, and only the most skilled
+		// shooters will be able to do this reliably. In any case, this can't extend the range of the gun by more
 		// than a handful of tiles.
 
 		CalcRangeCompensationOffset( pShooter, &dMuzzleOffsetY, (INT32)d2DDistance, pWeapon );
@@ -8169,9 +8169,9 @@ void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT 
 	// flying off in unrealistic directions, such as sideways or upwards. That can happen as a
 	// result of too many modifiers by the previous functions. In addition, the INI value also
 	// affects accuracy of ALL shots in the game, and is enforced here a second time.
-	
+
 	LimitImpactPointByFacing( pShooter, pTarget, &dShotOffsetX, &dShotOffsetY, dEndX, dEndY );
-	LimitImpactPointToMaxAperture( &dShotOffsetX, &dShotOffsetY, iDistanceAperture );				
+	LimitImpactPointToMaxAperture( &dShotOffsetX, &dShotOffsetY, iDistanceAperture );
 
 
 	// DEBUGGING: Remove this!
@@ -8195,7 +8195,7 @@ void AdjustTargetCenterPoint( SOLDIERTYPE *pShooter, INT32 iTargetGridNo, FLOAT 
 		else
 		{
 			swprintf(szUpDown, L"down");
-		}	
+		}
 
 		if (pShooter->bDoBurst == 0 || pShooter->bDoBurst == 1)
 		{
@@ -8280,7 +8280,7 @@ FLOAT CalcProjectionFactor( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT d2
 			iProjectionFactor = __max(iProjectionFactor, 1.0f);
 		}
 	}
-	
+
 	return iProjectionFactor;
 }
 
@@ -8302,7 +8302,7 @@ FLOAT CalcMagFactor( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT d2DDistan
 			iScopeFactor = __min(iScopeFactor, __max(1.0f, iTargetMagFactor/rangeModifier));
 		}
 
-		// With the reworked NCTH code we don't want to use iProjectionFactor anymore. 
+		// With the reworked NCTH code we don't want to use iProjectionFactor anymore.
 		// Instead we use the performance bonus if at least one bonus is != 0. Otherwise -> continue using Projection Factor.
 		if ( (gGameCTHConstants.LASER_PERFORMANCE_BONUS_HIP + gGameCTHConstants.LASER_PERFORMANCE_BONUS_IRON + gGameCTHConstants.LASER_PERFORMANCE_BONUS_SCOPE) != 0 )
 			iProjectionFactor = 1.0;
@@ -8346,8 +8346,8 @@ FLOAT CalcEffectiveMagFactor( SOLDIERTYPE *pShooter, FLOAT fRealMagFactor )
 	FLOAT fFixedPart = fMaxEffectiveMagFactor * (FLOAT)gGameCTHConstants.SCOPE_EFFECTIVENESS_MINIMUM / 100.0f;
 
 	// this is the variable part that is based on the shooters skills (experience and marksmanship)
-	FLOAT fVariablePart = ( fMaxEffectiveMagFactor * (FLOAT)(100 - gGameCTHConstants.SCOPE_EFFECTIVENESS_MINIMUM) / 100.0f ) * 
-		( ( (FLOAT)EffectiveExpLevel( pShooter ) * 10.0f * gGameCTHConstants.AIM_EXP + (FLOAT)EffectiveMarksmanship( pShooter ) * gGameCTHConstants.AIM_MARKS ) / 
+	FLOAT fVariablePart = ( fMaxEffectiveMagFactor * (FLOAT)(100 - gGameCTHConstants.SCOPE_EFFECTIVENESS_MINIMUM) / 100.0f ) *
+		( ( (FLOAT)EffectiveExpLevel( pShooter ) * 10.0f * gGameCTHConstants.AIM_EXP + (FLOAT)EffectiveMarksmanship( pShooter ) * gGameCTHConstants.AIM_MARKS ) /
 		( gGameCTHConstants.AIM_EXP + gGameCTHConstants.AIM_MARKS ) / 100.0f );
 
 	// now add them together and enforce limits
@@ -8361,15 +8361,15 @@ FLOAT CalcEffectiveMagFactor( SOLDIERTYPE *pShooter, FLOAT fRealMagFactor )
 FLOAT CalcBasicAperture()
 {
 	FLOAT iBasicAperture = 0.0;
-	
+
 	// Maximum aperture is the radius of a shot performed with 100% muzzle sway (a completely unstabled gun).
 	// It is the radius of a circle "drawn" at 1xNormal Shooting Distance, at the end of a cone starting at the
 	// tip ofour muzzle.
 	// To get this value, we get a constant read from the INI file which defines the spread angle of the cone - in
 	// other words, the angle between a line running down the center of the cone and a line running down its side.
 	// By default, the angle is 22.5 degrees. This gives a cone with a 45-degree spread, covering the entire area
-	// in front of the shooter. This is done to ensure that shots don't ever appear to go sideways or upwards, 
-	// making weird visuals. 
+	// in front of the shooter. This is done to ensure that shots don't ever appear to go sideways or upwards,
+	// making weird visuals.
 	// Decreasing the value of this angle will make ALL shots tighter, so use discretion.
 
 	// Calculate the angle in radians
@@ -8377,7 +8377,7 @@ FLOAT CalcBasicAperture()
 
 	// Calculate the radius of the aperture circle at a distance of 1xNormal from the muzzle's end.
 	iBasicAperture = (FLOAT)(sin(ddMaxAngleRadians) * gGameCTHConstants.NORMAL_SHOOTING_DISTANCE);
-	
+
 	// Return this as the Shot Aperture value to be used here on in.
 	return iBasicAperture;
 }
@@ -8402,7 +8402,7 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 	// the target. This means that more shots will go behind the target, less in front of it, and generally reduce
 	// our ability to hit that target properly. Aiming the gun well does help, but can't completely eliminate the
 	// penalty.
-	// 
+	//
 	// In addition, skilled shooters can figure out the target's speed and heading if they have sufficient time. That
 	// means that after the target has moved a certain number of tiles, any FURTHER tiles it moves will actually
 	// give the shooter time to adjust, lowering the penalty somewhat. Skilled shooters can start to adjust very
@@ -8449,7 +8449,7 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 	sDistanceMoved /= CELL_X_SIZE; // convert to Tiles.
 
 	//CHRISL: The above all assumes that the target is actually still possibly moving at the same rate
-	//	he was moving at before the end of his turn.  But what happens if a target moves, stops and 
+	//	he was moving at before the end of his turn.  But what happens if a target moves, stops and
 	//	changes stance?  We use usAnimState to figure out what stance we're currently in by looking at
 	//	out current animation state.  And I think usUIMovementMode tells us what animation state we
 	//	last moved in.  So if these two values are different, we should be able to assume that the target
@@ -8472,7 +8472,7 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 
 	// Figure out the angle of movement compared to positive X axis of the tile grid. The result is in RADIANS.
 	DOUBLE ddMovementAngle = atan2( (DOUBLE)sDeltaY, (DOUBLE)sDeltaX );
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Now we need to figure out the relation between the Shooting Angle and the Movement Angle. This
 	// will tell us whether the target is moving perpendicular to our shot, directly at/away from us,
@@ -8480,9 +8480,9 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 
 	DOUBLE ddRelativeAngle = ddMovementAngle - ddShootingAngle;
 
-	// The penalty coefficient is a sinus of the relative angle. That means that if the shooting angle and the movement 
-	// angle are the same or 180-degree opposite, there will be no movement penalty (0%). If the shooting angle is 
-	// perpendicular to the movement angle (90 or 270 degrees), there will be full movement penalty (100%). 
+	// The penalty coefficient is a sinus of the relative angle. That means that if the shooting angle and the movement
+	// angle are the same or 180-degree opposite, there will be no movement penalty (0%). If the shooting angle is
+	// perpendicular to the movement angle (90 or 270 degrees), there will be full movement penalty (100%).
 	// Other relative angles fall in between, according to the sinus curve.
 	FLOAT iPenaltyCoeff = (FLOAT)sin(ddRelativeAngle);
 
@@ -8506,11 +8506,11 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 	UINT32 uiCombinedSkill = (UINT32)__max(__min(iCombinedSkill,100), 0);
 
 	// Here we define the number of tiles the target must move to give our shooter the worst possible penalty.
-	// Again, if the shooter is skilled, this will occur after fewer tiles have been moved. 
+	// Again, if the shooter is skilled, this will occur after fewer tiles have been moved.
 	// If the target moves *more* tiles than this, the movement penalty will begin to diminish. That's our shooter
 	// beginning to compensate for the target's speed, pointing the gun ahead of the target ("Leading the target").
 	INT16 uiTilesForMaxPenalty = (INT16)((100-uiCombinedSkill) / (100 / gGameCTHConstants.MOVEMENT_TRACKING_DIFFICULTY));
-	
+
 	UINT8 stance = gAnimControl[ pShooter->usAnimState ].ubEndHeight;
 
 	// Flugente: new feature: if the next tile in our sight direction has a height so that we could rest our weapon on it, we do that, thereby gaining the prone boni instead. This includes bipods
@@ -8550,7 +8550,7 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 	// By now, we've hit the end of the penalty zone. Either the target has only moved enough tiles to confuse us,
 	// or we're simply done being confused and can now compensate.
 	// If we can start compensating, each further tile of movement will in fact return some of our aim back towards
-	// the center of the target, indicating that the shooter is trying to "lead". 
+	// the center of the target, indicating that the shooter is trying to "lead".
 	// Again, skilled shooters will reach the cutoff point earlier, which translates into receiving more of their
 	// penalty back as the target moves further. In the same situation, a less-experienced shooter will still be
 	// confused by movement, suffering from extra tiles rather than compensating.
@@ -8579,12 +8579,12 @@ void CalcTargetMovementOffset( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, OBJE
 
 	// Now we have a Final Penalty value. This is the distance our muzzle is trailing behind the
 	// target.
-	
+
 	// Let's make sure that the penalty isn't negative. We don't want to over-compensate. That wouldn't be nice.
 	iFinalPenalty = __max(0, iFinalPenalty);
 
 	// Now we need to figure out exactly how much our muzzle has moved in actual distance points. We do this
-	// by applying it as a percentage to the size of our Shot Aperture. Since Shot Aperture is an indicator of 
+	// by applying it as a percentage to the size of our Shot Aperture. Since Shot Aperture is an indicator of
 	// how well our gun is aimed, this means that better-aimed shots will "trail" less than poorly-aimed shots.
 	// In other words, aiming will effectively reduce the size of the penalty, making it easier to hit the target
 	// despite its movement. Note that with an appropriately-sized movement penalty, and an inexperienced shooter,
@@ -8614,7 +8614,7 @@ void CalcRangeCompensationOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetY, 
 	//
 	// Different guns have different ranges. In the real world, a gun is usually measured by its "effective" range,
 	// the range at which it can reliably put shots on a man-sized target. However, guns also have a certain
-	// "maximum" range, the range at which the bullet loses enough velocity to begin tumbling, lose aerodynamic 
+	// "maximum" range, the range at which the bullet loses enough velocity to begin tumbling, lose aerodynamic
 	// stability, and as a result come crashing into the ground. The initial speed of the bullet, its shape and size,
 	// and how fast it is spinning along its axis will all determine how far it can go before this happens.
 	//
@@ -8626,7 +8626,7 @@ void CalcRangeCompensationOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetY, 
 	// the range of their guns artificially. They do this by raising the muzzle of the gun upwards, effectively
 	// aiming *above* the target. This gives the bullet higher vertical velocity, and as a result prolongs the amount
 	// of time it can fall once it reaches Maximum Range, before colliding with the ground. A shot placed properly
-	// this way will arch upwards and then fall directly at the target despite being outside maximum range. 
+	// this way will arch upwards and then fall directly at the target despite being outside maximum range.
 	//
 	// In effect, this can only add a small fraction to the gun's maximum range, but in some cases can be crucial.
 	// However, it is a remarkable feat to be able to guess the correct angle for compensation, and only the most
@@ -8646,7 +8646,7 @@ void CalcRangeCompensationOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetY, 
 
 	// To begin, we calculate something called a Gravity Constant. Once a bullet reaches its maximum flight distance,
 	// it will lose exactly this much vertical movement for every step. In reality, this would be related to the
-	// speed the bullet is traveling in, but since bullet speed is not actually simulated by JA2, we instead use the 
+	// speed the bullet is traveling in, but since bullet speed is not actually simulated by JA2, we instead use the
 	// gun's Range as a measure for how fast the bullet is. After all, guns with longer range almost invariably fire
 	// faster bullets.
 	FLOAT dGravity = (FLOAT)(100.0 / (usGunRange * gGameCTHConstants.GRAVITY_COEFFICIENT));
@@ -8694,7 +8694,7 @@ void CalcRangeCompensationOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetY, 
 
 	// Limit this to a scale of 0-100.
 	UINT32 uiCombinedSkill = (UINT32)__max(__min(iCombinedSkill,100), 0);
-	
+
 	// Invert the value. Now 100=worst, 0=best.
 	uiCombinedSkill = 100-uiCombinedSkill;
 
@@ -8728,14 +8728,14 @@ void CalcMuzzleSway( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuzzl
 	// To determine how far a shot can go from the center, we have the Shot Aperture value, calculated earlier
 	// in the calling function and fed to us here. Imagine it as a circle drawn around the target, with a specific
 	// radius, within which our muzzle may point anywhere.
-	// This only tells us how far our muzzle MIGHT deviate from the center. How much it actually deviates is 
-	// completely randomal, allowing perfect (0 deviation) shots to occur even if the Shot Aperture circle is 
+	// This only tells us how far our muzzle MIGHT deviate from the center. How much it actually deviates is
+	// completely randomal, allowing perfect (0 deviation) shots to occur even if the Shot Aperture circle is
 	// gigantic. Of course, the smaller the Aperture, the more likely we are to deviate only a small distance (or none).
 
 	// Start by randomizing the general distance of the muzzle point from the center of the target.
 	// HEADROCK HAM 5: Using a better distribution system for random values.
 	FLOAT RandomMuzzleSway = sqrt((FLOAT)PreRandom( 1000 ) / (FLOAT)1000);
-	
+
 	// Randomize an angle of deviation, in Radians.
 	FLOAT dRandomAngleRadians = (FLOAT)(PreRandom(6283) / 1000.0f);
 
@@ -8800,7 +8800,7 @@ FLOAT CalcBulletDeviation( SOLDIERTYPE *pShooter, FLOAT *dShotOffsetX, FLOAT *dS
 	OBJECTTYPE* pObjAttHand = pShooter->GetUsedWeapon( &pShooter->inv[ pShooter->ubAttackingHand ] );
 
 	INT16 sAccuracy = GetGunAccuracy( pWeapon );
-	UINT16 sEffRange = (Weapon[Item[pObjAttHand->usItem].ubClassIndex].usRange *GetPercentRangeBonus(pObjAttHand)) / 10000; 
+	UINT16 sEffRange = (Weapon[Item[pObjAttHand->usItem].ubClassIndex].usRange *GetPercentRangeBonus(pObjAttHand)) / 10000;
 	sEffRange +=	GetRangeBonus( pObjAttHand );
 
 	// WANNE: I got a CTD in a multiplayer test game, because sEffRange was 0 (division to zero).
@@ -8810,7 +8810,7 @@ FLOAT CalcBulletDeviation( SOLDIERTYPE *pShooter, FLOAT *dShotOffsetX, FLOAT *dS
 	{
 		iRangeRatio = __max(1.0f, (FLOAT)(uiRange / sEffRange));
 	}
-	
+
 	// This value can be anywhere between 0 and 100. Let's make sure.
 	sAccuracy = __max(0, sAccuracy);
 	sAccuracy = __min(100, sAccuracy);
@@ -8824,7 +8824,7 @@ FLOAT CalcBulletDeviation( SOLDIERTYPE *pShooter, FLOAT *dShotOffsetX, FLOAT *dS
 	FLOAT iBulletDev = (gGameCTHConstants.MAX_BULLET_DEV * (100-sAccuracy)) / 100;
 	if (gGameCTHConstants.RANGE_EFFECTS_DEV == TRUE)
 		iBulletDev *= iRangeRatio;
-	iBulletDev /= 2;	// This compensates for the difference between CellXY and ScreenXY 
+	iBulletDev /= 2;	// This compensates for the difference between CellXY and ScreenXY
 
 	// If the radius is 0, this gun's bullets are flawless, and will never deviate from where
 	// they were fired.
@@ -8852,7 +8852,7 @@ FLOAT CalcBulletDeviation( SOLDIERTYPE *pShooter, FLOAT *dShotOffsetX, FLOAT *dS
 	// Over increasing range, a bullet fired with the same deviation should actually end up
 	// further away from the target than if the target was closer. We use the constant
 	// "Normal Shooting Distance" to determine a "normal" range at which deviation is not multiplied
-	// or divided. At twice that range, bullets will end up twice further from the center of the target. 
+	// or divided. At twice that range, bullets will end up twice further from the center of the target.
 	// At half this range, they'll end up half as far from the center of the target.
 	FLOAT iDistanceRatio = (FLOAT)((FLOAT)uiRange / gGameCTHConstants.NORMAL_SHOOTING_DISTANCE);
 	dDeltaX *= iDistanceRatio;
@@ -8889,7 +8889,7 @@ void LimitImpactPointByFacing( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, FLOA
 	//
 	// I'm going to assume for the moment that the 1/3rd chance only occurs when a target is facing directly perpendicular
 	// to your facing.  I don't know for sure if this is true or not, but it's the assumption I'm going to make.
-	// 
+	//
 	////////////////////////////////////////////////////////////////////////////////////////////
 
 	UINT8	iShooterFacing = pShooter->ubDirection;
@@ -8957,7 +8957,7 @@ void LimitImpactPointByFacing( SOLDIERTYPE *pShooter, SOLDIERTYPE *pTarget, FLOA
 void LimitImpactPointToMaxAperture( FLOAT *dShotOffsetX, FLOAT *dShotOffsetY, FLOAT dDistanceAperture )
 {
 	////////////////////////////////////////////////////////////////////////////////////////////
-	// 
+	//
 	// HEADROCK HAM 4: New Shooting Mechanism, Angle Limits
 	//
 	// The new Shooting Mechanism works primarily by (virtually) never firing the bullet directly at the target's
@@ -9004,8 +9004,8 @@ FLOAT CalcCounterForceMax(SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, UINT8 uiSt
 	iCounterForceMax += gGameCTHConstants.RECOIL_MAX_COUNTER_AGI * EffectiveAgility(pShooter, FALSE);
 	iCounterForceMax += gGameCTHConstants.RECOIL_MAX_COUNTER_EXP_LEVEL * EffectiveExpLevel(pShooter) * 10;
 
-	FLOAT iDivisor = gGameCTHConstants.RECOIL_MAX_COUNTER_STR + 
-						gGameCTHConstants.RECOIL_MAX_COUNTER_AGI + 
+	FLOAT iDivisor = gGameCTHConstants.RECOIL_MAX_COUNTER_STR +
+						gGameCTHConstants.RECOIL_MAX_COUNTER_AGI +
 						gGameCTHConstants.RECOIL_MAX_COUNTER_EXP_LEVEL;
 	iCounterForceMax /= iDivisor;
 
@@ -9031,9 +9031,9 @@ UINT32 CalcCounterForceAccuracy(SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, UINT
 	iCounterForceAccuracy += gGameCTHConstants.RECOIL_COUNTER_ACCURACY_AGI * EffectiveAgility(pShooter, FALSE);
 	iCounterForceAccuracy += gGameCTHConstants.RECOIL_COUNTER_ACCURACY_EXP_LEVEL * EffectiveExpLevel(pShooter) * 10;
 
-	FLOAT iDivisor = gGameCTHConstants.RECOIL_COUNTER_ACCURACY_DEX + 
-						gGameCTHConstants.RECOIL_COUNTER_ACCURACY_WIS + 
-						gGameCTHConstants.RECOIL_COUNTER_ACCURACY_AGI + 
+	FLOAT iDivisor = gGameCTHConstants.RECOIL_COUNTER_ACCURACY_DEX +
+						gGameCTHConstants.RECOIL_COUNTER_ACCURACY_WIS +
+						gGameCTHConstants.RECOIL_COUNTER_ACCURACY_AGI +
 						gGameCTHConstants.RECOIL_COUNTER_ACCURACY_EXP_LEVEL;
 	iCounterForceAccuracy /= iDivisor;
 
@@ -9058,17 +9058,17 @@ UINT32 CalcCounterForceAccuracy(SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, UINT
 		if ( gGameOptions.fNewTraitSystem )
 		{
 			if ( !(HAS_SKILL_TRAIT( pShooter, AMBIDEXTROUS_NT )) )
-				uiCounterForceAccuracy = uiCounterForceAccuracy*9/10; // -10% 
+				uiCounterForceAccuracy = uiCounterForceAccuracy*9/10; // -10%
 		}
 		else
 		{
 			if ( !(HAS_SKILL_TRAIT( pShooter, AMBIDEXT_OT )) )
-				uiCounterForceAccuracy = uiCounterForceAccuracy*9/10; // -10% 
+				uiCounterForceAccuracy = uiCounterForceAccuracy*9/10; // -10%
 		}
 	}
 
-	// Now add the effect of the AutoWeapons skill. It "bridges" a portion of the gap between shooter's actual accuracy 
-	// and 100% accuracy. For instance, if the divisor is set to 2 in the INI, the first skill level will close 50% of 
+	// Now add the effect of the AutoWeapons skill. It "bridges" a portion of the gap between shooter's actual accuracy
+	// and 100% accuracy. For instance, if the divisor is set to 2 in the INI, the first skill level will close 50% of
 	// the gap, the second skill level closes another 25%.
 	if(gGameOptions.fNewTraitSystem)
 		traitLoop = NUM_SKILL_TRAITS( pShooter, AUTO_WEAPONS_NT );
@@ -9167,7 +9167,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 	FLOAT dOffsetY = 0.0f;
 	FLOAT dCounterForceX = 0.0f;
 	FLOAT dCounterForceY = 0.0f;
-	
+
 	UINT32 uiIntendedBullets;
 	if ( pShooter->bDoAutofire > 0 )
 	{
@@ -9213,7 +9213,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 	FLOAT moda = CalcCounterForceMax(pShooter, pWeapon, stance);
 	FLOAT modb = CalcCounterForceMax(pShooter, pWeapon, gAnimControl[ pShooter->usAnimState ].ubEndHeight);
 	FLOAT iCounterForceMax = ((gGameExternalOptions.ubProneModifierPercentage * moda + (100 - gGameExternalOptions.ubProneModifierPercentage) * modb)/100);
-	
+
 	UINT32 uiCounterForceAccuracy = CalcCounterForceAccuracy(pShooter, pWeapon, uiRange, FALSE, true);
 
 	////////////////////////////////////////////////////////////
@@ -9224,7 +9224,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 	iCombinedSkill += gGameCTHConstants.PRE_RECOIL_EXP_LEVEL * EffectiveExpLevel(pShooter) * 10;
 
 	// Average
-	FLOAT iDivisor = gGameCTHConstants.PRE_RECOIL_WIS + 
+	FLOAT iDivisor = gGameCTHConstants.PRE_RECOIL_WIS +
 						gGameCTHConstants.PRE_RECOIL_EXP_LEVEL;
 	iCombinedSkill /= iDivisor;
 
@@ -9250,7 +9250,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 	// HEADROCK HAM 5: We'll begin by checking whether the soldier was smart/experienced enough
 	// to aim AWAY from the target's center before firing his volley. By aiming low and to the left, for
 	// example, the soldier should have an easier time leading his volley into the target with
-	// subsequent bullets (assuming the gun is pulling up and right, of course). 
+	// subsequent bullets (assuming the gun is pulling up and right, of course).
 	// We can adjust by up to one recoil-length away - not much, but helpful.
 
 	// Randomly determine whether the soldier has compensated by moving his muzzle.
@@ -9259,7 +9259,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 		// The soldier is smart enough to compensate for recoil by not aiming for the center of the target.
 		// He will attempt to adjust his aim by one recoil's length, causing the second bullet to impact
 		// with the target's center. This will increase controllability of the remainder of the volley.
-	
+
 		FLOAT dIdealOffsetX = (FLOAT)-bGunRecoilX;
 		FLOAT dIdealOffsetY = (FLOAT)-bGunRecoilY;
 
@@ -9306,14 +9306,14 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 		// Maximum velocity change. This is how fast the muzzle can move while still being easy to stop moving
 		// within one bullet cycle.
 		FLOAT dMaxChange = gGameCTHConstants.RECOIL_COUNTER_INCREMENT;
-		
+
 		// For X:
 		INT8 bMuzzleDirectionX = (INT8)(*dMuzzleOffsetX / abs(*dMuzzleOffsetX));
 		dIdealCounterForceX += (-1) * bMuzzleDirectionX * dMaxChange;
 		// For Y:
 		INT8 bMuzzleDirectionY = (INT8)(*dMuzzleOffsetY / abs(*dMuzzleOffsetY));
 		dIdealCounterForceY += (-1) * bMuzzleDirectionY * dMaxChange;
-		
+
 		// Lets figure out how close we come to actually applying this exact amount of CF?
 		FLOAT dMaxError = 0.0f;
 		FLOAT dError = 0.0f;
@@ -9330,7 +9330,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 			dError = ((FLOAT)Random((INT32)(abs(dMaxError) * 1000))) / 1000.0f;
 			bErrorDirection = Random(2) ? 1 : (-1);
 			// Set final counter-force
-			dCounterForceY = dIdealCounterForceY + (dError * bErrorDirection);		
+			dCounterForceY = dIdealCounterForceY + (dError * bErrorDirection);
 
 		// We obviously can't apply more than our shooter's Max Counter-Force, so lets use Pythagorean Theorem
 		// to "nerf" counterforce on both axes to the given limit.
@@ -9357,7 +9357,7 @@ void CalcPreRecoilOffset( SOLDIERTYPE *pShooter, OBJECTTYPE *pWeapon, FLOAT *dMu
 
 	// Also, lets set our shooter's Counter Force variables. These will apply for the next bullet in the
 	// volley.
-	if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() ) 
+	if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() )
 	{
 		pShooter->dPrevCounterForceX[1] = dCounterForceX;
 		pShooter->dPrevCounterForceY[1] = dCounterForceY;
@@ -9376,7 +9376,7 @@ void CalcRecoilOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuz
 	FLOAT dAppliedCounterForceX, dAppliedCounterForceY;
 	FLOAT dCounterForceChangeX, dCounterForceChangeY;
 	BOOLEAN fSecondHandBurst = FALSE;
-	if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() ) 
+	if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() )
 		fSecondHandBurst = TRUE;
 	//////////////////////////////////////////////////////////////////////////////////////
 	// Recoil Calculation
@@ -9433,7 +9433,7 @@ void CalcRecoilOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuz
 	}
 
 	BOOLEAN fTracer = WasPrevBulletATracer( pShooter, pWeapon );
-	
+
 	///////////////////////////////////////////////////////////////////////////////////
 	// STEP 2:
 	//
@@ -9491,7 +9491,7 @@ void CalcRecoilOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuz
 	FLOAT moda = CalcCounterForceMax(pShooter, pWeapon, stance);
 	FLOAT modb = CalcCounterForceMax(pShooter, pWeapon, gAnimControl[ pShooter->usAnimState ].ubEndHeight);
 	FLOAT iCounterForceMax = ((gGameExternalOptions.ubProneModifierPercentage * moda + (100 - gGameExternalOptions.ubProneModifierPercentage) * modb)/100);
-		
+
 	// iCounterForceMax is now the absolute limit.
 
 	// STEP 2: Now we need to determine how accurate the shooter is when applying counter-force. He won't always apply
@@ -9505,17 +9505,17 @@ void CalcRecoilOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuz
 	// STEP 3: Now let's determine how much counter-force would be ideal. If the gun isn't kicking too powerfully,
 	// and/or not too much recoil has built up from previous bullets, the shooter should potentially be able to compensate
 	// for ALL of it. However, in some cases, the shooter simply can't exert enough force to counter ALL recoil.
-	
+
 	// HEADROCK HAM 5: Unfortunately, In an attempt to correct a conceptual problem with calculating ideal CF,
 	// ChrisL created a formula that was impossible to decypher. Supposedly, the formula would cause autofire to
 	// move towards a different point than the center, then slowly correct that point. I got three different coders
-	// to look at it and they couldn't see how it works. 
+	// to look at it and they couldn't see how it works.
 	// Unfortunately, short of asking Chris to redo it, I couldn't see any other way to rewrite the
 	// formula so that it is legible. Instead of bothering Chris about it I decided to just rewrite the entire system
 	// for additional realism, based on a superior idea I had before work on NCTH began.
-	
-	// Instead of being forced to use the same CF for several consecutive shots, the shooter's CF will actually 
-	// increase or decrease as required with every bullet. In other words, with each bullet fired, CF can 
+
+	// Instead of being forced to use the same CF for several consecutive shots, the shooter's CF will actually
+	// increase or decrease as required with every bullet. In other words, with each bullet fired, CF can
 	// be changed. However, we enforce a given cap which is significantly lower than Max CF or any common recoil values,
 	// meaning that the shooter needs to make many adjustments in order to keep the volley going in the right,
 	// with inherent errors causing it to be much more difficult overall to keep the gun trained directly at the
@@ -9527,18 +9527,18 @@ void CalcRecoilOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuz
 		dAppliedCounterForceX = pShooter->dPrevCounterForceX[1];
 		dAppliedCounterForceY = pShooter->dPrevCounterForceY[1];
 		// CALCULATE FOR X
-		dCounterForceChangeX = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetX / dDistanceRatio, bGunRecoilX, pShooter->dPrevCounterForceX[1], uiIntendedBullets ); 
+		dCounterForceChangeX = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetX / dDistanceRatio, bGunRecoilX, pShooter->dPrevCounterForceX[1], uiIntendedBullets );
 		// CALCULATE FOR Y
-		dCounterForceChangeY = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetY / dDistanceRatio, bGunRecoilY, pShooter->dPrevCounterForceY[1], uiIntendedBullets ); 
+		dCounterForceChangeY = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetY / dDistanceRatio, bGunRecoilY, pShooter->dPrevCounterForceY[1], uiIntendedBullets );
 	}
 	else
 	{
 		dAppliedCounterForceX = pShooter->dPrevCounterForceX[0];
 		dAppliedCounterForceY = pShooter->dPrevCounterForceY[0];
 		// CALCULATE FOR X
-		dCounterForceChangeX = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetX / dDistanceRatio, bGunRecoilX, pShooter->dPrevCounterForceX[0], uiIntendedBullets ); 
+		dCounterForceChangeX = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetX / dDistanceRatio, bGunRecoilX, pShooter->dPrevCounterForceX[0], uiIntendedBullets );
 		// CALCULATE FOR Y
-		dCounterForceChangeY = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetY / dDistanceRatio, bGunRecoilY, pShooter->dPrevCounterForceY[0], uiIntendedBullets ); 
+		dCounterForceChangeY = CalcCounterForceChange( pShooter, uiCounterForceAccuracy, dCounterForceMax, *dMuzzleOffsetY / dDistanceRatio, bGunRecoilY, pShooter->dPrevCounterForceY[0], uiIntendedBullets );
 	}
 
 	dAppliedCounterForceX += dCounterForceChangeX;
@@ -9584,7 +9584,7 @@ void CalcRecoilOffset( SOLDIERTYPE *pShooter, FLOAT *dMuzzleOffsetX, FLOAT *dMuz
 	*dMuzzleOffsetX += dAppliedCounterForceX;
 	*dMuzzleOffsetY += dAppliedCounterForceY;
 
-	
+
 }
 
 FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccuracy, FLOAT dCounterForceMax, FLOAT dMuzzleOffset, FLOAT bRecoil, FLOAT dPrevCounterForce, UINT32 uiIntendedBullets )
@@ -9598,14 +9598,14 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 	// Counter-Force (CF) is the power used by the shooter to control his gun as it jerks back
 	// (Recoil, or Muzzle Climb). CF can be exerted to reduce recoil, it can be loosened up to let recoil
 	// move the gun on its own, or it can be used to push the muzzle of the gun in any necessary direction.
-	// The goal is to bring the muzzle towards that "perfect" trajectory needed to fire subsequent 
+	// The goal is to bring the muzzle towards that "perfect" trajectory needed to fire subsequent
 	// bullets into the exact center of the target (coordinate 0,0).
 	//
 	// After each bullet is fired, the muzzle moves a certain amount either towards or away
 	// from the target's center - depending on the difference between Recoil and Counter Force
 	// at the time. Positive movement on the X axis means the muzzle is moving towards the right,
 	// negative means it is moving towards the left. For the Y axis this is up and down respectively.
-	// Again, the shooter's goal is to move the muzzle from whereever it currently is pointing towards 
+	// Again, the shooter's goal is to move the muzzle from whereever it currently is pointing towards
 	// coordinates 0,0.
 	// Recoil (usually) remains consistent throughout the volley, so to move the muzzle correctly to 0,0
 	// our shooter must constantly adjust the amount of counter-force he is applying - affecting the
@@ -9627,15 +9627,15 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 	// is moving fast towards 0,0, it may sweep over that coordinate. Optimally, the shooter wants to
 	// reach 0,0 while at the same time having the right amount of CF to hold the muzzle there against
 	// the gun's recoil - resulting in the muzzle being both pointed directly at the target AND completely
-	// stationary. Doing so is very hard, especially due to the program enforcing "mandatory errors" in 
-	// CF application - mimicing the virtual impossibility for the human body to fully stabilize an 
-	// autofiring gun. Radical errors could send the muzzle flying in some direction, wasting several 
+	// stationary. Doing so is very hard, especially due to the program enforcing "mandatory errors" in
+	// CF application - mimicing the virtual impossibility for the human body to fully stabilize an
+	// autofiring gun. Radical errors could send the muzzle flying in some direction, wasting several
 	// more bullets on empty space while the shooter struggles to regain control.
 	//
-	// The formula below handles the majority of this process. It calculates how much CHANGE must be 
-	// made to our current Counter-Force before the next bullet is fired. It factors in the acceleration and 
-	// deceleration required to finesse the muzzle back to coordinate 0,0. It calculates how many 
-	// rounds it would take to get there. It also enforces both a maximum amount of change per 
+	// The formula below handles the majority of this process. It calculates how much CHANGE must be
+	// made to our current Counter-Force before the next bullet is fired. It factors in the acceleration and
+	// deceleration required to finesse the muzzle back to coordinate 0,0. It calculates how many
+	// rounds it would take to get there. It also enforces both a maximum amount of change per
 	// bullet as well as the mandatory ERROR in shooter CF application.
 	// Finally, the function returns the amount of CF Change to be applied this cycle.
 	//
@@ -9676,7 +9676,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 	INT8 bDirectionIdeal = (INT8)(dIdealCF / abs(dIdealCF));
 
 	// We now know how much CF we need to get back to the target's center. Let's subtract
-	// the amount of CF we're already applying from the previous bullet. This tells us by how much we 
+	// the amount of CF we're already applying from the previous bullet. This tells us by how much we
 	// need to change the current CF in order to get the muzzle all the way back to 0,0 with our
 	// current bullet.
 	FLOAT dIdealDelta = dIdealCF - dPrevCounterForce;
@@ -9741,7 +9741,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 			// point is to decelerate muzzle movement. The change, therefore, should attempt to cancel
 			// out recoil and no more. To do so, calculate our current speed, then invert it.
 			dIdealDelta = bRecoil + dPrevCounterForce;
-			dIdealDelta *= -1; 
+			dIdealDelta *= -1;
 			if (gGameSettings.fOptions[TOPTION_REPORT_MISS_MARGIN])
 			{
 				ScreenMsg( FONT_ORANGE, MSG_INTERFACE, L"CF CHANGE: Muzzle at target but in motion :: Reversing CF.");
@@ -9760,7 +9760,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 
 			// The sign tells us which way we are going.
 			INT8 bDirectionMuzzle = (INT8)(dVelocity / abs(dVelocity));
-			
+
 			// Is the muzzle heading AWAY from the target at the moment?
 			if (bDirectionMuzzle != bDirectionTarget)
 			{
@@ -9797,7 +9797,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 				dVelocity = abs(dVelocity);
 
 				// Start a loop to measure the distance our muzzle will travel after
-				// each bullet. With each cycle, we will decrease our speed by the 
+				// each bullet. With each cycle, we will decrease our speed by the
 				// maximum allowed amount, and add the distance traveled to a counter.
 				// We only stop once we've arrived at or overpassed the target 0,0.
 				// As we go, we'll count the number of steps we've taken.
@@ -9808,24 +9808,24 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 
 					// Reduce speed by one full increment.
 					dVelocity = dVelocity - dMaxIncrement;
-					// But, make sure we stay in motion by enforcing a minimum velocity. 
-					// This minimum is equal to the maximum allowed delta. While traveling at this 
-					// speed we can stop muzzle movement in exactly one step. In other words, it 
-					// is the highest speed at which we are simultaneously both in motion and in 
+					// But, make sure we stay in motion by enforcing a minimum velocity.
+					// This minimum is equal to the maximum allowed delta. While traveling at this
+					// speed we can stop muzzle movement in exactly one step. In other words, it
+					// is the highest speed at which we are simultaneously both in motion and in
 					// total control of the gun.
 					dVelocity = __max(dVelocity, dMaxIncrement);
 
 					// Measure the distance we've traveled so far based on the current speed.
-					dDistanceTraveled += dVelocity; 
+					dDistanceTraveled += dVelocity;
 				}
-		
+
 				// We now know how many steps it would take to stop the muzzle from moving, and how
 				// many steps it will take to reach 0,0 if we decelerate constantly.
 
 				// However, before using these values we need to ask: are we actually intending to
 				// fire that many bullets?
 				UINT32 uiRoundsRemaining;
-				if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() ) 
+				if ( pShooter->ubAttackingHand == SECONDHANDPOS && pShooter->IsValidSecondHandBurst() )
 					uiRoundsRemaining = uiIntendedBullets - (pShooter->bDoBurst/2);
 				else
 				{
@@ -9846,13 +9846,13 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 				if (uiRoundsRemaining < uiStepsToReachTargetWhileDecelerating)
 				{
 					// Setting this flag to false means we don't intend to fire enough bullets
-					// to use a "smooth and controllable" deceleration as seen above. The flag will 
+					// to use a "smooth and controllable" deceleration as seen above. The flag will
 					// then signal to the code below that we're in a hurry. As a result, the program
-					// will force MORE acceleration towards 0,0, increasing the chance of sweeping 
+					// will force MORE acceleration towards 0,0, increasing the chance of sweeping
 					// across it before the volley ends.
 					fEnoughBullets = false;
 				}
-			
+
 				// We are now ready to compare the two Step Counts. By determining whether it would
 				// take more steps to stop the muzzle or more steps to reach 0,0, we can decide whether
 				// acceleration or deceleration are preferable at this time.
@@ -9861,8 +9861,8 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 				// we have enough bullets to reach 0,0 while slowing down...)
 				if (uiStepsToReachTargetWhileDecelerating <= uiStepsToStopMovement && fEnoughBullets )
 				{
-					// We are already traveling too fast. Even if we decelerate constantly, we will 
-					// reach 0,0 before the muzzle can be fully stopped. Therefore, we have to start 
+					// We are already traveling too fast. Even if we decelerate constantly, we will
+					// reach 0,0 before the muzzle can be fully stopped. Therefore, we have to start
 					// slowing down immediately. We're going to overshoot the target, but at least lets
 					// not overshoot too much...
 
@@ -9885,7 +9885,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 					// we accelerate once (this turn) and THEN start decelerating. If the check goes ok,
 					// that means we can afford to accelerate this turn.
 
-					// First, increase the number of steps to stop by two (one extra step to accelerate, 
+					// First, increase the number of steps to stop by two (one extra step to accelerate,
 					// one extra step to decelerate).
 					uiStepsToStopMovement += 2;
 
@@ -9908,7 +9908,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 						// Reduce speed, but keep up moving at least fast enough that we could stop whenever we want.
 						dVelocity = __max(dVelocity - dMaxIncrement, dMaxIncrement);
 						// Measure the distance we've traveled so far.
-						dDistanceTraveled += dVelocity; 
+						dDistanceTraveled += dVelocity;
 					}
 
 					// Check whether we have enough bullets to reach the target while decelerating.
@@ -9956,7 +9956,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 
 	// Phew! We now have our orders regarding how much velocity change is ideal given
 	// the muzzle's current velocity and its position compared to the target.
-	
+
 	// However, we're not done yet. First we need to enforce the maximum possible velocity
 	// change per round, as dictated by the INI file. Then we need to apply a minimum amount
 	// of shooter error, to add some randomality to this formula - otherwise we're going
@@ -9999,7 +9999,7 @@ FLOAT CalcCounterForceChange( SOLDIERTYPE * pShooter, UINT32 uiCounterForceAccur
 	// Compute the error!
 	FLOAT dError = (FLOAT)(Random( (UINT32)(dMaxError * 1000) )) / 1000.0f;
 	INT8 bErrorSign = (Random(2) ? 1 : (-1));
-	
+
 	dDelta += (dMinError + dError) * bErrorSign;
 	if (bDeltaSign == 1)
 	{

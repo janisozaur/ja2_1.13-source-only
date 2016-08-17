@@ -1,9 +1,9 @@
 #ifndef _DIALOG_CONTROL_H
 #define _DIALOG_CONTROL_H
 
-#include "faces.h"
-#include "gamescreen.h"
-#include "soldier profile type.h"
+#include "Faces.h"
+#include "GameScreen.h"
+#include "Soldier Profile Type.h"
 #include <vector>
 
 typedef struct
@@ -106,7 +106,7 @@ enum DialogQuoteIDs
 	QUOTE_KILLED_FACTORY_MANAGER,
 	QUOTE_SPOTTED_BLOODCAT,
 	QUOTE_END_GAME_COMMENT,
-	
+
 	//70
 	QUOTE_ENEMY_RETREATED,
 	QUOTE_GOING_TO_AUTO_SLEEP,
@@ -125,7 +125,7 @@ enum DialogQuoteIDs
 	QUOTE_DEATH_RATE_REFUSAL, //= 81,
 	QUOTE_NON_AIM_BUDDY_FOUR_KILLED = QUOTE_DEATH_RATE_REFUSAL,
 	QUOTE_LAME_REFUSAL, //= 82,
-	QUOTE_NON_AIM_BUDDY_FIVE_KILLED = QUOTE_LAME_REFUSAL,	
+	QUOTE_NON_AIM_BUDDY_FIVE_KILLED = QUOTE_LAME_REFUSAL,
 	QUOTE_WONT_RENEW_CONTRACT_LAME_REFUSAL,	//=83,
 	QUOTE_NON_AIM_HATED_MERC_THREE = QUOTE_WONT_RENEW_CONTRACT_LAME_REFUSAL,
 	QUOTE_ANSWERING_MACHINE_MSG, //= 84,
@@ -140,7 +140,7 @@ enum DialogQuoteIDs
 	QUOTE_NON_AIM_BUDDY_5_GOOD = QUOTE_LEARNED_TO_HATE_MERC_ON_TEAM,
 	QUOTE_CONTRACTS_OVER,// = 89,
 	QUOTE_MERC_QUIT_HATED3 = QUOTE_CONTRACTS_OVER,
-	
+
 	//90
 	QUOTE_ACCEPT_CONTRACT_RENEWAL, // =90,
 	QUOTE_MERC_QUIT_HATED4 = QUOTE_ACCEPT_CONTRACT_RENEWAL,
@@ -168,7 +168,7 @@ enum DialogQuoteIDs
 	QUOTE_SMALL_TALK,
 
 	//110
-	QUOTE_IMPATIENT_QUOTE,					
+	QUOTE_IMPATIENT_QUOTE,
 	QUOTE_LENGTH_OF_CONTRACT,
 	QUOTE_COMMENT_BEFORE_HANG_UP,
 	QUOTE_PERSONALITY_BIAS_WITH_MERC_1,
@@ -193,7 +193,7 @@ enum DialogQuoteIDs
 	QUOTE_HATED_5_ARRIVES,
 	QUOTE_AIM_BUDDY_3_GOOD,
 	QUOTE_AIM_BUDDY_4_GOOD,
-	
+
 	//130
 	QUOTE_AIM_BUDDY_5_GOOD,
 	QUOTE_HATE_MERC_3_ON_TEAM,
@@ -240,7 +240,7 @@ enum DialogQuoteIDs
 #define	 DIALOGUE_SPECIAL_EVENT_BEGINPREBATTLEINTERFACE		0x00000040
 #define			DIALOGUE_SPECIAL_EVENT_SKYRIDERMAPSCREENEVENT			0x00000080
 #define	 DIALOGUE_SPECIAL_EVENT_SHOW_CONTRACT_MENU		 0x00000100
-#define			DIALOGUE_SPECIAL_EVENT_MINESECTOREVENT						0x00000200	
+#define			DIALOGUE_SPECIAL_EVENT_MINESECTOREVENT						0x00000200
 #define			DIALOGUE_SPECIAL_EVENT_SHOW_UPDATE_MENU			0x00000400
 #define			DIALOGUE_SPECIAL_EVENT_ENABLE_AI									0x00000800
 #define			DIALOGUE_SPECIAL_EVENT_USE_ALTERNATE_FILES				0x00001000
@@ -354,8 +354,8 @@ BOOLEAN DelayedTacticalCharacterDialogue( SOLDIERTYPE *pSoldier, UINT16 usQuoteN
 BOOLEAN CharacterDialogue( UINT8 ubCharacterNum, UINT16 usQuoteNum, INT32 iFaceIndex, UINT8 bUIHandlerID, BOOLEAN fFromSoldier, BOOLEAN fDelayed );
 
 BOOLEAN SnitchCharacterDialogue( UINT8 ubCharacterNum, UINT16 usQuoteNum, INT32 iFaceIndex,
-	UINT32 uiSpecialEventFlag, UINT32 uiSpecialEventData1, UINT32 uiSpecialEventData2, 
-	UINT32 uiSpecialEventData3, UINT32 uiSpecialEventData4, 
+	UINT32 uiSpecialEventFlag, UINT32 uiSpecialEventData1, UINT32 uiSpecialEventData2,
+	UINT32 uiSpecialEventData3, UINT32 uiSpecialEventData4,
 	UINT8 bUIHandlerID, BOOLEAN fFromSoldier, BOOLEAN fDelayed );
 
 // A special event can be setup which can be queued with other speech
@@ -385,7 +385,7 @@ BOOLEAN	DialogueQueueIsEmptyOrSomebodyTalkingNow( );
 // Adjust the face, etc when switching from panel to extern panel...
 void HandleDialogueUIAdjustments( );
 
-// pause game time during 
+// pause game time during
 void PauseTimeDuringNextQuote( );
 void UnPauseGameDuringNextQuote( void );
 

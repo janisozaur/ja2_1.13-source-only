@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 /****************************************************************************************
 * JA2 Lighting Module
@@ -23,31 +23,31 @@
 	#include <stdio.h>
 	#include <errno.h>
 
-	#include "worlddef.h"
-	#include "renderworld.h"
-	#include "vsurface.h"
-	#include "input.h"
-	#include "sysutil.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
+	#include "VSurface.h"
+	#include "Input.h"
+	#include "SysUtil.h"
 	#include "wchar.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "debug.h"
-	#include "wcheck.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Debug.h"
+	#include "WCheck.h"
 	#include "jascreens.h"
 	#include "Isometric Utils.h"
-	#include "line.h"
+	#include "Line.h"
 	#include "Animation Control.h"
 	#include "Animation Data.h"
 	#include "Sys Globals.h"
 	#include "tiledef.h"
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Structure Internals.h"
-	#include "structure wrap.h"
+	#include "Structure Wrap.h"
 	#include "Shade Table Util.h"
-	#include "rotting corpses.h"
-	#include "Fileman.h"
-	#include "environment.h"
-	#include "PATHAI.H"
+	#include "Rotting Corpses.h"
+	#include "FileMan.h"
+	#include "Environment.h"
+	#include "PathAI.h"
 #endif
 
 #define LVL1_L1_PER			(50)
@@ -546,7 +546,7 @@ UINT8		ubTravelCost;
 	{
 		return( FALSE );
 	}
-	
+
 	if ( TileIsOutOfBounds(usTileNo))
 	{
 		return( FALSE );
@@ -868,7 +868,7 @@ BOOLEAN fFake;
 	Assert(gpWorldLevelData!=NULL);
 
 	uiTile= MAPROWCOLTOPOS( iY, iX );
-	
+
 	if ( TileIsOutOfBounds( uiTile ) )
 	{
 		return( FALSE );
@@ -1010,7 +1010,7 @@ BOOLEAN fFake; // only passed in to land and roof layers; others get fed FALSE
 	Assert(gpWorldLevelData!=NULL);
 
 	uiTile= MAPROWCOLTOPOS( iY, iX );
-	
+
 	if ( TileIsOutOfBounds( uiTile ) )
 	{
 		return( FALSE );

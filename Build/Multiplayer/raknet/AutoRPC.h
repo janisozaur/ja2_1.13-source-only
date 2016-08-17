@@ -374,7 +374,7 @@ public:
 		SetTimestamp(timeStamp);
 		SetSendParams(priority, reliability, orderingChannel);
 		SetRecipientAddress(systemAddress, broadcast);
-		SetRecipientObject(networkID);		
+		SetRecipientObject(networkID);
 		char stack[ARPC_MAX_STACK_SIZE];
 		unsigned int bytesOnStack = GenRPC::BuildStack(stack);
 		return SendCall(uniqueIdentifier, stack, bytesOnStack, 0);

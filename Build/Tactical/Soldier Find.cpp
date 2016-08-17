@@ -4,11 +4,11 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "math.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "RenderWorld.h"
 	#include "Assignments.h"
 	#include "Soldier Control.h"
 	#include "Animation Control.h"
@@ -17,32 +17,32 @@
 	#include "Event Pump.h"
 	#include "Render Fun.h"
 	#include "mousesystem.h"
-	#include "interface.h"
-	#include "sysutil.h"
+	#include "Interface.h"
+	#include "SysUtil.h"
 	#include "FileMan.h"
 	#include "Random.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "Interactive Tiles.h"
-	#include "english.h"
-	#include "overhead.h"
+	#include "English.h"
+	#include "Overhead.h"
 	//#include "Sound Control.h"
-	#include "lighting.h"
-	#include "pathai.h"
-	#include "screenids.h"
-	#include "weapons.h"
-	#include "lighting.h"
+	#include "Lighting.h"
+	#include "PathAI.h"
+	#include "ScreenIds.h"
+	#include "Weapons.h"
+	#include "Lighting.h"
 	#include "Handle UI Plan.h"
 	#include "structure.h"
-	#include "message.h"
-	#include "items.h"
+	#include "Message.h"
+	#include "Items.h"
 	#include "Soldier Profile.h"
 	#include "fov.h"
-	#include "Soldier macros.h"
-	#include "soldier tile.h"
-	#include "soldier find.h"
+	#include "Soldier Macros.h"
+	#include "Soldier Tile.h"
+	#include "Soldier Find.h"
 	#include "Vehicles.h"
 	#include "GameSettings.h"
-	#include "ui cursors.h"
+	#include "UI Cursors.h"
 #endif
 
 
@@ -953,7 +953,7 @@ BOOLEAN FindRelativeSoldierPosition( SOLDIERTYPE *pSoldier, UINT16 *usFlags, INT
 
 			case ANIM_PRONE:
 				{
-					// Flugente: if we are prone, determining what part of the body we are aiming for is trickier. 
+					// Flugente: if we are prone, determining what part of the body we are aiming for is trickier.
 					// Instead of focusing on relative height, we simply determine whether we are looking at the gridno the body itself is at, or an adjacent gridno.
 					// Then, depending on whether this is the gridno we are looking at, this will be head or legs
 					if ( gGameExternalOptions.fAllowTargetHeadAndLegIfProne )
@@ -967,13 +967,13 @@ BOOLEAN FindRelativeSoldierPosition( SOLDIERTYPE *pSoldier, UINT16 *usFlags, INT
 						FLOAT bodycenterY = (FLOAT)CenterY( pSoldier->sGridNo );
 
 						FLOAT difftobodycenter = std::sqrt( (bodycenterX - sWorldX) * (bodycenterX - sWorldX) + (bodycenterY - sWorldY) * (bodycenterY - sWorldY) );
-						
+
 						INT32 viewdirectiongridno = NewGridNo( pSoldier->sGridNo, DirectionInc( pSoldier->ubDirection ) );
 						FLOAT nextgridnocenterX = (FLOAT)CenterX( viewdirectiongridno );
 						FLOAT nextgridnocenterY = (FLOAT)CenterY( viewdirectiongridno );
 
 						FLOAT difftonextgridno = std::sqrt( (nextgridnocenterX - sWorldX) * (nextgridnocenterX - sWorldX) + (nextgridnocenterY - sWorldY) * (nextgridnocenterY - sWorldY) );
-						
+
 						INT32 oppositeviewdirectiongridno = NewGridNo( pSoldier->sGridNo, DirectionInc( gOppositeDirection[pSoldier->ubDirection] ) );
 						FLOAT oppositenextgridnocenterX = (FLOAT)CenterX( oppositeviewdirectiongridno );
 						FLOAT oppositenextgridnocenterY = (FLOAT)CenterY( oppositeviewdirectiongridno );

@@ -2,7 +2,7 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
+	#include "Overhead.h"
 	#include "Food.h"
 	#include "Debug Control.h"
 	#include "expat.h"
@@ -51,7 +51,7 @@ foodStartElementHandle(void *userData, const XML_Char *name, const XML_Char **at
 				strcmp(name, "szName") == 0 ||
 				strcmp(name, "bFoodPoints") == 0 ||
 				strcmp(name, "bDrinkPoints") == 0 ||
-				strcmp(name, "usDecayRate") == 0 )) 
+				strcmp(name, "usDecayRate") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 

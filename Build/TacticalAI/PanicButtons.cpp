@@ -2,11 +2,11 @@
 	#include "AI All.h"
 #else
 	#include "AIInternals.h"
-	#include "ai.h"
-	#include "pathai.h"
-	#include "items.h"
+	#include "AI.h"
+	#include "PathAI.h"
+	#include "Items.h"
 	#include "World Items.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Map Screen Interface Map.h"
 	#include "Soldier Profile.h"
 	#include "Quests.h"
@@ -101,7 +101,7 @@ void MakeClosestEnemyChosenOne()
 			continue; // next soldier
 		}
 
-		sPanicTriggerGridNo = gTacticalStatus.sPanicTriggerGridNo[ bPanicTrigger ];		
+		sPanicTriggerGridNo = gTacticalStatus.sPanicTriggerGridNo[ bPanicTrigger ];
 		if (TileIsOutOfBounds(sPanicTriggerGridNo))
 		{
 			// this should never happen!
@@ -433,7 +433,7 @@ INT8 ClosestPanicTrigger( SOLDIERTYPE * pSoldier )
 		 uiPercentEnemiesKilled = (UINT32)(100 * (UINT32)(gTacticalStatus.ubArmyGuysKilled) / (UINT32)(gTacticalStatus.Team[ENEMY_TEAM].bMenInSector + gTacticalStatus.ubArmyGuysKilled));
 
 	for ( bLoop = 0; bLoop < NUM_PANIC_TRIGGERS; ++bLoop )
-	{		
+	{
 		if (!TileIsOutOfBounds(gTacticalStatus.sPanicTriggerGridNo[ bLoop ]))
 		{
 			if ( gTacticalStatus.ubPanicTolerance[ bLoop ] > uiPercentEnemiesKilled )
@@ -451,7 +451,7 @@ INT8 ClosestPanicTrigger( SOLDIERTYPE * pSoldier )
 					break;
 				}
 
-				// screen out the second/later panic trigger if the first one hasn't been triggered				
+				// screen out the second/later panic trigger if the first one hasn't been triggered
 				if ( bLoop > 0 && !TileIsOutOfBounds(gTacticalStatus.sPanicTriggerGridNo[ bLoop - 1 ]) )
 				{
 					break;
@@ -501,7 +501,7 @@ BOOLEAN NeedToRadioAboutPanicTrigger( void )
 
 	for ( bLoop = 0; bLoop < NUM_PANIC_TRIGGERS; bLoop++ )
 	{
-		// if the bomb exists and its tolerance has been exceeded		
+		// if the bomb exists and its tolerance has been exceeded
 		if ( (!TileIsOutOfBounds(gTacticalStatus.sPanicTriggerGridNo[ bLoop ])) && ( uiPercentEnemiesKilled >= gTacticalStatus.ubPanicTolerance[ bLoop ] ) )
 		{
 			return( TRUE );

@@ -2,8 +2,8 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -65,7 +65,7 @@ explosiveStartElementHandle(void *userData, const XML_Char *name, const XML_Char
 				strcmp(name, "ubFragRange") == 0 ||
 				strcmp(name, "ubHorizontalDegree") == 0 ||
 				strcmp(name, "ubVerticalDegree") == 0 ||
-				strcmp(name, "bIndoorModifier") == 0 ))  
+				strcmp(name, "bIndoorModifier") == 0 ))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
 

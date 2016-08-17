@@ -22,16 +22,16 @@ enum eJA2Events
 	S_STRUCTUREHIT,
 	S_WINDOWHIT,
 	S_MISS,
-	S_NOISE,	
+	S_NOISE,
 	S_STOP_MERC,
 
 	EVENTS_LOCAL_AND_NETWORK,				// Events above here are sent locally and over network
-	
+
 	S_GETNEWPATH,
 	S_SETPOSITION,
 	S_CHANGESTATE,
 	S_SETDIRECTION,
-	EVENTS_ONLY_USED_LOCALLY,			// Events above are only used locally 
+	EVENTS_ONLY_USED_LOCALLY,			// Events above are only used locally
 
 	S_SENDPATHTONETWORK,
 	S_UPDATENETWORKSOLDIER,
@@ -95,7 +95,7 @@ typedef struct
 	UINT16	usSoldierID;
 	UINT32	uiUniqueId;
 	INT32 sDestGridNo;
-	UINT16		usMovementAnim;		
+	UINT16		usMovementAnim;
 
 } EV_S_GETNEWPATH;
 
@@ -249,7 +249,7 @@ typedef struct
 
 typedef struct
 {
-	UINT8		usSoldierID;	
+	UINT8		usSoldierID;
 	//UINT32  uiUniqueId;
 	INT32 sAtGridNo;					// Owner merc is at this tile when sending packet
 	INT8		bActionPoints;			// current A.P. value

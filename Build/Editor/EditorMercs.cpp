@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -10,29 +10,29 @@
 	#include <windows.h>
 	#include "tiledef.h"
 	#include "edit_sys.h"
-	#include "vsurface.h"
-	#include "vobject.h"
+	#include "VSurface.h"
+	#include "VObject.h"
 	#include "mousesystem.h"
 	#include "Button System.h"
-	#include "wcheck.h"
-	#include "vsurface.h"
-	#include "line.h"
-	#include "input.h"
-	#include "sysutil.h"
-	#include "font.h"
+	#include "WCheck.h"
+	#include "VSurface.h"
+	#include "Line.h"
+	#include "Input.h"
+	#include "SysUtil.h"
+	#include "Font.h"
 	#include "Font Control.h"
-	#include "editscreen.h"
+	#include "EditScreen.h"
 	#include "selectwin.h"
-	#include "video.h"
-	#include "vobject_blitters.h"
-	#include "interface panels.h"
-	#include "interface items.h"
-	#include "text.h"
-	#include "utilities.h"
+	#include "Video.h"
+	#include "VObject_blitters.h"
+	#include "Interface Panels.h"
+	#include "Interface Items.h"
+	#include "Text.h"
+	#include "Utilities.h"
 	#include "World Items.h"
-	#include "worldman.h"
-	#include "overhead.h"	//GetSoldier
-	#include "renderworld.h"
+	#include "WorldMan.h"
+	#include "Overhead.h"	//GetSoldier
+	#include "RenderWorld.h"
 	#include "Animation Data.h"
 	#include "Animation Control.h"
 	#include "EditorDefines.h"
@@ -42,13 +42,13 @@
 															//to the saved map and the game itself.
 	#include "Inventory Choosing.h"
 	#include "Soldier Init List.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Soldier Add.h"
 	#include "Soldier Profile Type.h"
 	#include "Soldier Profile.h"
 	#include "Text Input.h"
 	#include "Random.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "EditorItems.h"
 	#include "Editor Taskbar Utils.h"
 	#include "Exit Grids.h"
@@ -61,9 +61,9 @@
 	#include "popupmenu.h"
 	#include "Scheduling.h"
 	#include "Timer Control.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "InterfaceItemImages.h"
-	#include "english.h"
+	#include "English.h"
 #endif
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
@@ -316,18 +316,18 @@ STR16 EditMercAttitudes[6] = { L"Defensive",L"Brave Loner",L"Brave Buddy",
 INT8 bEnemyArray[MAX_ENEMYTYPES]={ RANDOM, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE };
 INT8 bCreatureArray[MAX_CREATURETYPES]={ ADULTFEMALEMONSTER };
 INT8 bRebelArray[MAX_REBELTYPES]={ RANDOM, MANCIV, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE };
-INT8 bCivArray[MAX_CIVTYPES]={ RANDOM, MANCIV, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE };														
-#else													
+INT8 bCivArray[MAX_CIVTYPES]={ RANDOM, MANCIV, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE };
+#else
 INT8 bEnemyArray[MAX_ENEMYTYPES] = {RANDOM, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE, TANK_NW, TANK_NE, COMBAT_JEEP};
 INT8 bCreatureArray[MAX_CREATURETYPES]={ BLOODCAT, LARVAE_MONSTER, INFANT_MONSTER, YAF_MONSTER, YAM_MONSTER, ADULTFEMALEMONSTER, AM_MONSTER, QUEENMONSTER };
 INT8 bRebelArray[MAX_REBELTYPES]={ RANDOM, FATCIV, MANCIV, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE };
 INT8 bCivArray[MAX_CIVTYPES]={ RANDOM, FATCIV, MANCIV, MINICIV, DRESSCIV, HATKIDCIV, KIDCIV, REGMALE, BIGMALE, STOCKYMALE, REGFEMALE,
-														HUMVEE, ELDORADO, ICECREAMTRUCK, JEEP, CRIPPLECIV, ROBOTNOWEAPON, COW };													
-#endif															
-															
+														HUMVEE, ELDORADO, ICECREAMTRUCK, JEEP, CRIPPLECIV, ROBOTNOWEAPON, COW };
+#endif
+
 #ifdef JA113DEMO
 INT8 gbCurrCreature = ADULTFEMALEMONSTER;
-#else															
+#else
 INT8 gbCurrCreature = BLOODCAT;
 #endif
 
@@ -344,15 +344,15 @@ extern SOLDIERCREATE_STRUCT gSaveBufferDetailedPlacement;
 wchar_t *GetGrupaString( SOLDIERTYPE *pSoldier ) //Legion 2
 {
 	INT32 cnt, cntStart,par;
-	
+
 	cntStart = 0;
 	for ( cnt = cntStart; cnt < NUM_CIV_GROUPS; cnt ++ )
 	{
-			if (pSoldier->ubCivilianGroup == cnt)	
+			if (pSoldier->ubCivilianGroup == cnt)
 			{
 			par = cnt;
 			}
-			
+
 	}
 	return gszCivGroupNames[ par ];
 }
@@ -2678,7 +2678,7 @@ void UpdateMercsInfo()
 					case SCHEDULE_ACTION_UNLOCKDOOR:		swprintf( keyword, pUpdateMercsInfoText[57] );		break;
 					case SCHEDULE_ACTION_OPENDOOR:			swprintf( keyword, pUpdateMercsInfoText[58] );		break;
 					case SCHEDULE_ACTION_CLOSEDOOR:			swprintf( keyword, pUpdateMercsInfoText[59] );		break;
-				}	
+				}
 				switch( gubScheduleInstructions )
 				{
 					case SCHEDULE_INSTRUCTIONS_DOOR1:
@@ -2695,9 +2695,9 @@ void UpdateMercsInfo()
 					default:
 						return;
 				}
-				
+
 				if ( gCurrSchedule.ubAction[ gubCurrentScheduleActionIndex ] == SCHEDULE_ACTION_SLEEP ) swprintf( str, pUpdateMercsInfoText[63] );
-				
+
 				wcscat( str, pUpdateMercsInfoText[64] );
 				DisplayWrappedString( iScreenWidthOffset + 436, 2 * iScreenHeightOffset + 392, 149, 2, FONT10ARIAL, FONT_YELLOW, str, FONT_BLACK, FALSE, LEFT_JUSTIFIED );
 			}
@@ -3257,13 +3257,13 @@ void RenderMercStrings()
 					mprintf( sX, sY, str );
 				}
 				sYPos += 10;
-				
-				
+
+
 				if (pSoldier->bTeam == CIV_TEAM )
 				{
 				//legion2
 				pStr2 = GetGrupaString( pSoldier );
-				
+
 				SetFontBackground( FONT_MCOLOR_BLACK );
 				SetFontForeground( FONT_YELLOW ); //FONT_MCOLOR_WHITE
 				FindFontCenterCoordinates( sXPos, sYPos, 80, 1, pStr2, TINYFONT1, &sX, &sY );
@@ -3274,7 +3274,7 @@ void RenderMercStrings()
 				}
 				sYPos += 10;
 				}
-				
+
 			}
 			else
 			{
@@ -3301,13 +3301,13 @@ void RenderMercStrings()
 					mprintf( sX, sY, str );
 				}
 				sYPos += 10;
-				
+
 				//legion
-				if (pSoldier->bTeam == CIV_TEAM ) //(pSoldier->bTeam == ENEMY_TEAM || pSoldier->bTeam == CREATURE_TEAM || pSoldier->bTeam == MILITIA_TEAM) 
-				{		
+				if (pSoldier->bTeam == CIV_TEAM ) //(pSoldier->bTeam == ENEMY_TEAM || pSoldier->bTeam == CREATURE_TEAM || pSoldier->bTeam == MILITIA_TEAM)
+				{
 				//legion 2
 				pStr2 = GetGrupaString( pSoldier );
-				
+
 				//SetFont( TINYFONT1 );
 				SetFontBackground( FONT_MCOLOR_BLACK );
 				SetFontForeground( FONT_YELLOW ); //FONT_MCOLOR_WHITE
@@ -3319,7 +3319,7 @@ void RenderMercStrings()
 				}
 				sYPos += 10;
 				}
-				
+
 			}
 			if( curr->pBasicPlacement->bOrders == RNDPTPATROL || curr->pBasicPlacement->bOrders == POINTPATROL )
 			{ //make sure the placement has at least one waypoint.

@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Ext/slf/vfs_slf_library.cpp
  *  - implements Library interface, creates library object from SLF archive files
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -70,7 +70,7 @@ namespace slf
 		vfs::UInt32		uiLength;
 		vfs::UInt8		ubState;
 		vfs::UInt8		ubReserved;
-		FILETIME		sFileTime; 
+		FILETIME		sFileTime;
 		vfs::UInt16		usReserved2;
 	};
 }; // end namespace slf
@@ -83,7 +83,7 @@ vfs::CSLFLibrary::CSLFLibrary(tReadableFile *pLibraryFile, vfs::Path const& sMou
 : vfs::CUncompressedLibraryBase(pLibraryFile,sMountPoint,bOwnFile)
 {};
 
-vfs::CSLFLibrary::~CSLFLibrary() 
+vfs::CSLFLibrary::~CSLFLibrary()
 {
 }
 
@@ -122,7 +122,7 @@ bool vfs::CSLFLibrary::init()
 		}
 
 		//place the file pointer at the begining of the file headers ( they are at the end of the file )
-		m_libraryFile->setReadPosition(-( LibFileHeader.iEntries * (vfs::Int32)sizeof(slf::DIRENTRY) ), vfs::IBaseFile::SD_END); 
+		m_libraryFile->setReadPosition(-( LibFileHeader.iEntries * (vfs::Int32)sizeof(slf::DIRENTRY) ), vfs::IBaseFile::SD_END);
 
 		//loop through the library and determine the number of files that are FILE_OK
 		//ie.  so we dont load the old or deleted files

@@ -1,7 +1,7 @@
 #ifndef _ROTTING_CORPSES_H
 #define _ROTTING_CORPSES_H
 
-#include "tile animation.h"
+#include "Tile Animation.h"
 
 #define	NUM_CORPSE_SHADES		17
 
@@ -30,7 +30,7 @@ enum RottingCorpseDefines
 	FMERC_BCK,		// body lying backward
 	FMERC_FWD,		// body lying forward
 	FMERC_DHD,
-	FMERC_PRN,		// body lying on the belly while looking forward, one leg to the side 
+	FMERC_PRN,		// body lying on the belly while looking forward, one leg to the side
 	FMERC_WTR,		// body lying in water
 	FMERC_FALL,		// body lying backward, fallen from roof
 	FMERC_FALLF,	// body lying forward, fallen from roof
@@ -104,9 +104,9 @@ typedef struct
 	INT16												sHeightAdjustment;
 
 	PaletteRepID										HeadPal;			// Palette reps
-	PaletteRepID										PantsPal;	
-	PaletteRepID										VestPal;	
-	PaletteRepID										SkinPal;	
+	PaletteRepID										PantsPal;
+	PaletteRepID										VestPal;
+	PaletteRepID										SkinPal;
 
 	UINT8												ubDirection;
 	UINT32												uiTimeOfDeath;
@@ -136,9 +136,9 @@ typedef struct
 
 	ANITILE											*pAniTile;
 
-	SGPPaletteEntry							*p8BPPPalette; 
+	SGPPaletteEntry							*p8BPPPalette;
 	UINT16											*p16BPPPalette;
-	UINT16											*pShades[ NUM_CORPSE_SHADES ]; 
+	UINT16											*pShades[ NUM_CORPSE_SHADES ];
 	INT16												sGraphicNum;
 	INT32												iCachedTileID;
 	FLOAT												dXPos;
@@ -149,7 +149,7 @@ typedef struct
 
 	// Flugente: added name so we can display individual name if corpse gets resurrected...
 	CHAR16												name[ 10 ];
-		
+
 } ROTTING_CORPSE;
 
 

@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "Strategic All.h"
@@ -7,41 +7,41 @@
 	#include "Merc Contract.h"
 	#include "Soldier Profile.h"
 	#include "History.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Game Clock.h"
 	#include "Soldier Add.h"
 	#include "Dialogue Control.h"
 	#include "Soldier Create.h"
 	#include "Message.h"
 	#include "Font Control.h"
-	#include "personnel.h"
+	#include "Personnel.h"
 	#include "LaptopSave.h"
 	#include "Map Screen Interface.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
 	#include "Quests.h"
-	#include "worlddef.h"
+	#include "WorldDef.h"
 	#include "Animation Control.h"
 	#include "Tactical Save.h"
 	#include "Interface Control.h"
-	#include "gamescreen.h"
+	#include "GameScreen.h"
 	#include "jascreens.h"
 	#include "Random.h"
 	#include "Assignments.h"
 	#include "Strategic Movement.h"
 	#include "Squads.h"
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "Text.h"
 	#include "Strategic Status.h"
-	#include "mercs.h"
-	#include "insurance contract.h"
+	#include "Mercs.h"
+	#include "Insurance Contract.h"
 	#include "Vehicles.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "Map Screen Helicopter.h"
 #endif
 
 #include "GameSettings.h"
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2UB
 #include "ub_config.h"
@@ -1067,7 +1067,7 @@ BOOLEAN StrategicRemoveMerc( SOLDIERTYPE *pSoldier )
 
 	// ATE: update team panels....
 	UpdateTeamPanelAssignments( );
- 
+
 	// And unpause the @#$@#$ interface
 	UnLockPauseState();
 	UnPauseGame();

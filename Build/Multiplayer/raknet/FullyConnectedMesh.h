@@ -52,7 +52,7 @@ public:
 	virtual void OnShutdown(RakPeerInterface *peer);
 	virtual void Update(RakPeerInterface *peer);
 	virtual PluginReceiveResult OnReceive(RakPeerInterface *peer, Packet *packet);
-	
+
 
 protected:
 	char *pw;

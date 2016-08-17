@@ -3,39 +3,39 @@
 #else
 	#include <stdlib.h>
 	#include "Isometric Utils.h"
-	#include "ai.h"
+	#include "AI.h"
 	#include "AIInternals.h"
-	#include "los.h"
+	#include "LOS.h"
 	#include "Weapons.h"
 	#include "Opplist.h"
-	#include "pathai.h"
-	#include "items.h"
+	#include "PathAI.h"
+	#include "Items.h"
 	#include "World Items.h"
 	#include "Points.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Map Edgepoints.h"
-	#include "renderworld.h"
+	#include "RenderWorld.h"
 	#include "Render Fun.h"
 	#include "Boxing.h"
 	#include "Text.h"
 	#ifdef _DEBUG
-		#include "renderworld.h"
-		#include "video.h"
+		#include "RenderWorld.h"
+		#include "Video.h"
 	#endif
-	#include "worldman.h"
-	#include "strategicmap.h"
-	#include "environment.h"
-	#include "lighting.h"
+	#include "WorldMan.h"
+	#include "StrategicMap.h"
+	#include "Environment.h"
+	#include "Lighting.h"
 	#include "Buildings.h"
 	#include "GameSettings.h"
 	#include "Soldier Profile.h"
-	#include "rotting corpses.h"	// sevenfm
+	#include "Rotting Corpses.h"	// sevenfm
 #endif
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SANDRO - all "APBPConstants[AP_CROUCH]" and "APBPConstants[AP_PRONE]" here    
-//           were changed to GetAPsCrouch() and GetAPsProne()					 
+// SANDRO - all "APBPConstants[AP_CROUCH]" and "APBPConstants[AP_PRONE]" here
+//           were changed to GetAPsCrouch() and GetAPsProne()
 //		  - also all "APBPConstants[AP_PICKUP_ITEM]" were replaced by GetBasicAPsToPickupItem()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -347,7 +347,7 @@ INT32 CalcCoverValue(SOLDIERTYPE *pMe, INT32 sMyGridNo, INT32 iMyThreat, INT32 i
 	if (bHisActualCTGT < 100)
 	{
 		// if we didn't remember his real gridno earlier up above, we got to now,
-		// because calculating worst case is about to play with it in a big way!		
+		// because calculating worst case is about to play with it in a big way!
 		if (TileIsOutOfBounds(sHisRealGridNo))
 		{
 			sHisRealGridNo = pHim->sGridNo;		// remember where he REALLY is
@@ -398,14 +398,14 @@ INT32 CalcCoverValue(SOLDIERTYPE *pMe, INT32 sMyGridNo, INT32 iMyThreat, INT32 i
 		}
 	}
 
-	// UNDO ANY TEMPORARY "DAMAGE" DONE ABOVE	
+	// UNDO ANY TEMPORARY "DAMAGE" DONE ABOVE
 	if (!TileIsOutOfBounds(sMyRealGridNo))
 	{
 		pMe->sGridNo = sMyRealGridNo;		// put me back where I belong!
 		pMe->dXPos = dMyX;						// also change the 'x'
 		pMe->dYPos = dMyY;						// and the 'y'
 	}
-	
+
 	if (!TileIsOutOfBounds(sHisRealGridNo))
 	{
 		pHim->sGridNo = sHisRealGridNo;		// put HIM back where HE belongs!
@@ -812,7 +812,7 @@ INT32 FindBestNearbyCover(SOLDIERTYPE *pSoldier, INT32 morale, INT32 *piPercentB
 			{
 				fProneCover = FALSE;
 			}
-		}		
+		}
 		//sprintf(tempstr,"iCurrentCoverValue after opponent %d is now %d",iLoop,iCurrentCoverValue);
 		//PopMessage(tempstr);
 	}
@@ -849,7 +849,7 @@ INT32 FindBestNearbyCover(SOLDIERTYPE *pSoldier, INT32 morale, INT32 *piPercentB
 		{
 			iCurrentCoverValue -= abs(iCurrentCoverValue) / (8-ubDiff);
 		}
-	}	
+	}
 
 #ifdef DEBUGCOVER
 //	AINumMessage("Search Range = ",iSearchRange);
@@ -869,7 +869,7 @@ INT32 FindBestNearbyCover(SOLDIERTYPE *pSoldier, INT32 morale, INT32 *piPercentB
 
 	iRoamRange = RoamingRange(pSoldier,&sOrigin);
 
-	// if status isn't black (life & death combat), and roaming range is limited	
+	// if status isn't black (life & death combat), and roaming range is limited
 	if ((pSoldier->aiData.bAlertStatus != STATUS_BLACK) && (iRoamRange < MAX_ROAMING_RANGE) &&
 		(!TileIsOutOfBounds(sOrigin)))
 	{
@@ -1074,7 +1074,7 @@ INT32 FindBestNearbyCover(SOLDIERTYPE *pSoldier, INT32 morale, INT32 *piPercentB
 				{
 					iCoverValue -= abs(iCoverValue) / (8-ubDiff);
 				}
-			}			
+			}
 
 			if ( fNight && !( InARoom( sGridNo, NULL ) ) ) // ignore in buildings in case placed there
 			{
@@ -1083,7 +1083,7 @@ INT32 FindBestNearbyCover(SOLDIERTYPE *pSoldier, INT32 morale, INT32 *piPercentB
 				// light for this tile
 				//ubLightPercentDifference = (gbLightSighting[ 0 ][ LightTrueLevel( sGridNo, pSoldier->pathing.bLevel ) ] - ubBackgroundLightPercent );
 				ubLightPercentDifference = (gGameExternalOptions.ubBrightnessVisionMod[ LightTrueLevel( sGridNo, pSoldier->pathing.bLevel ) ] - ubBackgroundLightPercent );
-				
+
 				if ( iCoverValue >= 0 )
 				{
 					iCoverValue -= (iCoverValue / 100) * ubLightPercentDifference;
@@ -1167,7 +1167,7 @@ INT32 FindBestNearbyCover(SOLDIERTYPE *pSoldier, INT32 morale, INT32 *piPercentB
 	}
 	#endif
 
-	// if a better cover location was found	
+	// if a better cover location was found
 	if (!TileIsOutOfBounds(sBestCover))
 	{
 		#if defined( _DEBUG ) && !defined( PATHAI_VISIBLE_DEBUG )
@@ -1590,7 +1590,7 @@ INT32 FindNearestUngassedLand(SOLDIERTYPE *pSoldier)
 			}
 		}
 
-		// if we found a piece of land in this search area		
+		// if we found a piece of land in this search area
 		if (!TileIsOutOfBounds(sClosestLand))	// quit now, no need to look any farther
 			break;
 	}
@@ -1722,7 +1722,7 @@ INT16 FindNearbyDarkerSpot( SOLDIERTYPE *pSoldier )
 			}
 		}
 
-		// if we found a piece of land in this search area		
+		// if we found a piece of land in this search area
 		if (!TileIsOutOfBounds(sClosestSpot))	// quit now, no need to look any farther
 		{
 			break;
@@ -2051,7 +2051,7 @@ INT8 SearchForItems( SOLDIERTYPE * pSoldier, INT8 bReason, UINT16 usItem )
 			}
 		}
 	}
-	
+
 	if (!TileIsOutOfBounds(sBestSpot))
 	{
 		DebugAI( String( "%d decides to pick up %S", pSoldier->ubID, ItemNames[ gWorldItems[ iBestItemIndex ].object.usItem ] ) );
@@ -2602,7 +2602,7 @@ INT32 FindFlankingSpot(SOLDIERTYPE *pSoldier, INT32 sPos, INT8 bAction )
 
 			// sevenfm: allow water flanking only for CUNNINGSOLO soldiers
 			if( Water( sGridNo, pSoldier->pathing.bLevel ) &&
-				pSoldier->aiData.bAttitude != CUNNINGSOLO && 
+				pSoldier->aiData.bAttitude != CUNNINGSOLO &&
 				pSoldier->aiData.bAttitude != CUNNINGAID )
 			{
 				continue;
@@ -2739,7 +2739,7 @@ INT32 FindClosestClimbPoint (SOLDIERTYPE *pSoldier, BOOLEAN fClimbUp )
 				if ( sGridNo == pSoldier->pathing.sBlackList )
 				{
 					continue;
-				}			
+				}
 
 				// exclude locations with tear/mustard gas (at this point, smoke is cool!)
 				if ( InGas( pSoldier, sGridNo ) )
@@ -2927,7 +2927,7 @@ INT32 FindBestCoverNearTheGridNo(SOLDIERTYPE *pSoldier, INT32 sGridNo, UINT8 ubS
 
 	pSoldier->stats.bWisdom = bRealWisdom;
 //	pSoldier->sGridNo = sTrueGridNo;
-	
+
 	if(!TileIsOutOfBounds(sResultGridNo))
 		return sResultGridNo;
 	else

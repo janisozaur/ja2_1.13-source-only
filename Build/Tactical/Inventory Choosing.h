@@ -1,7 +1,7 @@
 #ifndef __INVENTORY_CHOOSING_H
 #define __INVENTORY_CHOOSING_H
 
-#include "types.h"
+#include "Types.h"
 #include "Soldier Create.h"
 #include "Strategic Status.h"
 
@@ -14,7 +14,7 @@ typedef struct ARMY_GUN_CHOICE_TYPE
 	UINT8		ubChoices;						// how many valid choices there are in this category
 	INT16		bItemNo[50];						// room for up to 50 choices of gun in each category
 
-	UINT32		uiIndex;						
+	UINT32		uiIndex;
 } ARMY_GUN_CHOICE_TYPE;
 
 
@@ -54,19 +54,19 @@ enum
 // Selects at the start of the game the set of guns the Queen's army will use during this game
 void InitArmyGunTypes(void);
 
-//Chooses equipment based on the equipment level (1-11) with best being 11.	It allocates a range 
+//Chooses equipment based on the equipment level (1-11) with best being 11.	It allocates a range
 //of equipment to choose from.
 void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8 bEquipmentRating);
 
-void ChooseWeaponForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bWeaponClass, 
+void ChooseWeaponForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bWeaponClass,
 																				INT8 bAmmoClips, INT8 bAttachClass, BOOLEAN fAttachment );
 
 void ChooseGrenadesForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bGrenades, INT8 bGrenadeClass, BOOLEAN fGrenadeLauncher );
 
-void ChooseArmourForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bHelmetClass, 
+void ChooseArmourForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bHelmetClass,
 																				INT8 bArmourClass, INT8 bLeggingsClass );
 
-void ChooseSpecialWeaponsForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bKnifeClass, 
+void ChooseSpecialWeaponsForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bKnifeClass,
 																								BOOLEAN fGrenadeLauncher, BOOLEAN fLAW, BOOLEAN fMortar, BOOLEAN fRPG );
 
 void ChooseFaceGearForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp );

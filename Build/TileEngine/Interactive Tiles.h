@@ -34,7 +34,7 @@ void BeginCurInteractiveTileCheck( UINT8 bCheckFlags );
 void EndCurInteractiveTileCheck( );
 void LogMouseOverInteractiveTile( INT32 sGridNo );
 BOOLEAN ShouldCheckForMouseDetections( );
- 
+
 void CycleIntTileFindStack( INT32 usMapPos );
 void SetActionModeDoorCursorText( );
 

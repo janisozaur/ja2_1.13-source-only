@@ -1,7 +1,7 @@
 #ifndef __CHARPROFILE_H
 #define __CHARPROFILE_H
 
-#include "types.h"
+#include "Types.h"
 void GameInitCharProfile();
 void EnterCharProfile();
 void ExitCharProfile();
@@ -24,7 +24,7 @@ extern INT32 iHealth;
 
 // skills
 extern INT32 iMarksmanship;
-extern INT32 iMedical; 
+extern INT32 iMedical;
 extern INT32 iExplosives;
 extern INT32 iMechanical;
 
@@ -41,7 +41,7 @@ extern INT32 iSkillB;
 extern INT32 iSkillC; // Added by SANDRO
 
 // persoanlity
-extern INT32 iPersonality; 
+extern INT32 iPersonality;
 
 // attitude
 extern INT32 iAttitude;
@@ -65,7 +65,7 @@ extern UINT8 bSexist;
 extern INT32 iAddStrength;
 extern INT32 iAddDexterity;
 extern INT32 iAddAgility;
-extern INT32 iAddWisdom; 
+extern INT32 iAddWisdom;
 extern INT32 iAddHealth ;
 extern INT32 iAddLeadership ;
 
@@ -115,6 +115,6 @@ enum{
 
 
 
- 
+
 
 

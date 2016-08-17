@@ -137,7 +137,7 @@ namespace DataStructures
 
 			minRange=maxRange=queueAndWeight->randResultQueue[index]*1.00000001;
 		}
-		
+
 #ifdef _DEBUG
 		RakAssert(maxRange!=0.0);
 #endif

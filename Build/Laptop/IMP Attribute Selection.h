@@ -13,7 +13,7 @@ extern BOOLEAN fSkillAtZeroWarning;
 
 extern BOOLEAN fFirstIMPAttribTime;
 
-extern BOOLEAN fReturnStatus; 
+extern BOOLEAN fReturnStatus;
 // starting point of skill boxes on bar
 #define SKILL_SLIDE_START_X 186
 

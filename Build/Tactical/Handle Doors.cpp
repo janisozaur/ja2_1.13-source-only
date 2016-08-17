@@ -2,50 +2,50 @@
 	#include "Tactical All.h"
 	#include "language defines.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include <time.h>
 	#include "sgp.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "RenderWorld.h"
 	#include "structure.h"
 	#include "Animation Control.h"
-	#include "points.h"
-	#include "overhead.h"
-	#include "tile animation.h"
+	#include "Points.h"
+	#include "Overhead.h"
+	#include "Tile Animation.h"
 	#include "Interactive Tiles.h"
-	#include "handle doors.h"
+	#include "Handle Doors.h"
 	#include "Sound Control.h"
-	#include "interface.h"
-	#include "keys.h"
-	#include "message.h"
-	#include "text.h"
-	#include "random.h"
+	#include "Interface.h"
+	#include "Keys.h"
+	#include "Message.h"
+	#include "Text.h"
+	#include "Random.h"
 	#include "SkillCheck.h"
 	#include "Dialogue Control.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "Quests.h"
 	#include "Render Fun.h"
 	#include "Map Screen Interface Map.h"
 	#include "Soldier Profile.h"
 	#include "Isometric Utils.h"
-	#include "ai.h"
-	#include "Soldier macros.h"
+	#include "AI.h"
+	#include "Soldier Macros.h"
 	#include "Event Pump.h"
 	#include "GameSettings.h"
 #endif
 #include "fresh_header.h"
-#include "connect.h"
+#include "Connect.h"
 
 #ifdef JA2UB
 #include "Explosion Control.h"
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "interface Dialogue.h"
-#include "mercs.h"
+#include "Email.h"
+#include "Interface Dialogue.h"
+#include "Mercs.h"
 #include "ub_config.h"
 #endif
 
@@ -625,8 +625,8 @@ BOOLEAN HandleOpenableStruct( SOLDIERTYPE *pSoldier, INT32 sGridNo, STRUCTURE *p
 								//JA25 UB
 								//If this is the tunnel sector, and the merc failed opening the fence door, play a quote
 								HandlePlayerSayingQuoteWhenFailingToOpenGateInTunnel( pSoldier, FALSE );
-#endif								
-								
+#endif
+
 								// Do we have a quote for locked stuff?
 								// Now just show on message bar
 								if ( !AM_AN_EPC( pSoldier ) )
@@ -836,7 +836,7 @@ BOOLEAN HandleOpenableStruct( SOLDIERTYPE *pSoldier, INT32 sGridNo, STRUCTURE *p
 						}
 						else
 						{
-#ifdef JA2UB						
+#ifdef JA2UB
 							//If this is the tunnel sector, and the merc failed opening the fence door, play a quote
 							HandlePlayerSayingQuoteWhenFailingToOpenGateInTunnel( pSoldier, FALSE ); //JA25 UB
 #endif
@@ -905,7 +905,7 @@ BOOLEAN HandleOpenableStruct( SOLDIERTYPE *pSoldier, INT32 sGridNo, STRUCTURE *p
 								// Now just show on message bar
 								//ScreenMsg( MSG_FONT_YELLOW, MSG_INTERFACE, TacticalStr[ DOOR_NOT_PROPER_KEY_STR ], pSoldier->GetName() );
 
-#ifdef JA2UB								
+#ifdef JA2UB
 								//If this is the tunnel sector, and the merc failed opening the fence door, play a quote
 								if( HandlePlayerSayingQuoteWhenFailingToOpenGateInTunnel( pSoldier, FALSE ) ) //JA25 UB
 								{
@@ -1053,7 +1053,7 @@ BOOLEAN HandleOpenableStruct( SOLDIERTYPE *pSoldier, INT32 sGridNo, STRUCTURE *p
 					if (pSoldier->ubID <= 19)
 						HandleDoorChangeFromGridNo( pSoldier, sGridNo, FALSE );
 				}
-				
+
 				// WANNE - MP: The "receive_door" method only gets called for the pure clients and not for the server!
 				// WANNE - MP: General Info!
 				// If pure client calls "send_door" also the method "receive_door" (client.cpp) gets called

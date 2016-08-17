@@ -9,8 +9,8 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Attribute Selection.h"
 	#include "IMP Text System.h"
 	#include "IMP Finish.h"
@@ -18,7 +18,7 @@
 	#include "Merc Hiring.h"
 	#include "LaptopSave.h"
 	#include "IMP Portraits.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "GameSettings.h"
 	#include "Soldier Profile.h"
 	#include "Squads.h"
@@ -1117,7 +1117,7 @@ BOOLEAN LoadCharacterPortraitForMainPage( void )
 	{
 		// load it
 		VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
-		
+
 		if( fCharacterIsMale )
 		{
 			if (  gIMPMaleValues[ iPortraitNumber ].Enabled == 1 )
@@ -1135,7 +1135,7 @@ BOOLEAN LoadCharacterPortraitForMainPage( void )
 			}
 		}
 		//FilenameForBPP( pPlayerSelectedFaceFileNames[ iPortraitNumber ] , VObjectDesc.ImageFile);
-		
+
 		CHECKF(AddVideoObject(&VObjectDesc, &guiCHARACTERPORTRAITFORMAINPAGE));
 
 

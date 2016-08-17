@@ -2,29 +2,29 @@
 	#include "JA2 All.h"
 #else
 	#include "sgp.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Timer Control.h"
-	#include "fade screen.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
+	#include "Fade Screen.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
 	#include "MercTextBox.h"
-	#include "cursors.h"
-	#include "font control.h"
+	#include "Cursors.h"
+	#include "Font Control.h"
 	#include "Map Screen Interface.h"
-	#include "renderworld.h"
-	#include "gameloop.h"
-	#include "english.h"
+	#include "RenderWorld.h"
+	#include "GameLoop.h"
+	#include "English.h"
 	#include "GameSettings.h"
-	#include "cursor control.h"
-	#include "laptop.h"
-	#include "text.h"
+	#include "Cursor Control.h"
+	#include "Laptop.h"
+	#include "Text.h"
 	#include "Text Input.h"
-	#include "overhead map.h"
+	#include "Overhead Map.h"
 	#include "MPChatScreen.h"
 	#include "WordWrap.h"
-#include "message.h"
-#include "utilities.h"
-#include "connect.h"
+#include "Message.h"
+#include "Utilities.h"
+#include "Connect.h"
 #endif
 
 #define		CHATBOX_WIDTH							310 // 350 is the max size, the PrepareMercPopupBox will add the X_MARGIN to both sides
@@ -231,7 +231,7 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 	ubFontShadowColor = DEFAULT_SHADOW;
 	usCursor = CURSOR_NORMAL;
 
-			
+
 
 
 	// Use default!
@@ -350,7 +350,7 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 		CHATLOG_SCROLL_AREA_END_Y = gChatMessageLogRegion.iBottom-20;
 		CHATLOG_SCROLL_AREA_HEIGHT = ( CHATLOG_SCROLL_AREA_END_Y - CHATLOG_SCROLL_AREA_START_Y + 1 );
 
-		CHATLOG_SCROLL_AREA_START_X = gChatMessageLogRegion.iRight + CHATBOX_SLIDER_GAP + 1; 
+		CHATLOG_SCROLL_AREA_START_X = gChatMessageLogRegion.iRight + CHATBOX_SLIDER_GAP + 1;
 		CHATLOG_SCROLL_AREA_END_X = gChatMessageLogRegion.iRight + CHATBOX_SLIDER_GAP + 1 + CHAT_SLIDER_WIDTH;
 		CHATLOG_SCROLL_AREA_WIDTH = ( CHATLOG_SCROLL_AREA_END_X - CHATLOG_SCROLL_AREA_START_X + 1 );
 
@@ -360,7 +360,7 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 
 		// Load Scroll button images
 		guiChatLogScrollButtonsImage[ CHAT_SCROLL_MESSAGE_UP ]=  LoadButtonImage( "INTERFACE\\map_screen_bottom_arrows.sti" ,11,4,-1,6,-1 );
- 
+
 		guiChatLogScrollButtonsImage[ CHAT_SCROLL_MESSAGE_DOWN ]=  LoadButtonImage( "INTERFACE\\map_screen_bottom_arrows.sti" ,12,5,-1,7,-1 );
 
 		// Create buttons
@@ -378,7 +378,7 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 	}
 	else
 		usPosY = gChatBox.sY + CHATBOX_Y_MARGIN_NOLOG + (CHATBOX_Y_GAP * 2) + GetFontHeight(FONT12ARIAL);
-	
+
 	// get the middle of the box
 	UINT16 middleBox = ( usTextBoxWidth / 2 );
 
@@ -427,9 +427,9 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 	SetCursorColor( Get16BPPColor(FROMRGB(255, 255, 255) ) );
 
 	usPosX = gChatBox.sX + (CHATBOX_X_MARGIN / 2);
-	//Add Player Name textbox 
+	//Add Player Name textbox
 	AddTextInputField(	usPosX ,
-						usPosY , 
+						usPosY ,
 						usTextBoxWidth - CHATBOX_X_MARGIN,
 						20,
 						MSYS_PRIORITY_HIGH+2,
@@ -471,7 +471,7 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 	{
 		SimulateMouseMovement( ( gChatBox.sX + sButtonX + 27 ), ( gChatBox.sY + sButtonY + 10) );
 	}
-	
+
 	// Create Cancel Button
 	sButtonX = ((middleBox - btnWidth)/2);
 	sButtonY = usTextBoxHeight - CHATBOX_BUTTON_HEIGHT - 10;
@@ -521,11 +521,11 @@ UINT32	ExitChatBox( INT8 ubExitCode )
 	RemoveMercPopupBoxFromIndex( gChatBox.iBoxId );
 	gChatBox.iBoxId = -1;
 
-	
+
 	// OJW - 20090208 - Add text input box type
 	// exit text input mode in this screen and clean up text boxes
 	KillAllTextInputModes();
-	
+
 	RemoveButton( gChatBox.uiOKButton );
 	RemoveButton( gChatBox.uiNOButton );
 
@@ -689,10 +689,10 @@ UINT32	MPChatScreenHandle( )
 	// Render the box!
 	if ( gChatBox.fRenderBox )
 	{
-	
+
 		// Render the Background ( this includes the text string)
 		RenderMercPopUpBoxFromIndex( gChatBox.iBoxId, gChatBox.sX, gChatBox.sY,	FRAME_BUFFER );
-		
+
 
 		UINT16 usWidth = StringPixLength( gzMPChatboxText[0], CHATBOX_FONT_TITLE );
 		int usPosY = 0;
@@ -745,7 +745,7 @@ UINT32	MPChatScreenHandle( )
 	RenderAllTextFields(); // textbox system call
 	SetFontDestBuffer( FRAME_BUFFER, 0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT , FALSE );
 	//RestoreFontSettings();
-	
+
 
 	EndFrameBufferRender( );
 
@@ -765,7 +765,7 @@ UINT32	MPChatScreenHandle( )
 				memset(gszChatBoxInputString,0,sizeof(CHAR16)*255);
 				bHandled = true;
 			}
-			
+
 			if( InputEvent.usParam == ENTER )
 			{
 				// retrieve the string from the text box
@@ -1380,7 +1380,7 @@ void ChatLogMessage( UINT16 usColor, UINT8 ubPriority, STR16 pStringA, ... )
 
 	// send message to tactical screen and map screen
 	ScreenMsg( usColor, ubPriority, DestString );
-	
+
 	pStringWrapperHead=LineWrap(uiFont, CHAT_LINE_WIDTH, &usLineWidthIfWordIsWiderThenWidth, DestString);
 	pStringWrapper=pStringWrapperHead;
 	if(!pStringWrapper)

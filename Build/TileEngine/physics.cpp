@@ -1,35 +1,35 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 #include "TileEngine All.h"
 #else
-#include "physics.h"
-#include "wcheck.h"
-#include "timer control.h"
-#include "isometric utils.h"
-#include "los.h"
-#include "worldman.h"
-#include "event pump.h"
+#include "Physics.h"
+#include "WCheck.h"
+#include "Timer Control.h"
+#include "Isometric Utils.h"
+#include "LOS.h"
+#include "WorldMan.h"
+#include "Event Pump.h"
 #include "Sound Control.h"
-//#include "soldier control.h"
-#include "interface.h"
-#include "interface items.h"
-#include "weapons.h"
-#include "explosion control.h"
+//#include "Soldier Control.h"
+#include "Interface.h"
+#include "Interface Items.h"
+#include "Weapons.h"
+#include "Explosion Control.h"
 #include "Debug Control.h"
-#include "tile animation.h"
-#include "message.h"
-#include "weapons.h"
-#include "structure wrap.h"
-#include "physics.h"
-#include "overhead.h"
-#include "animation control.h"
-#include "text.h"
+#include "Tile Animation.h"
+#include "Message.h"
+#include "Weapons.h"
+#include "Structure Wrap.h"
+#include "Physics.h"
+#include "Overhead.h"
+#include "Animation Control.h"
+#include "Text.h"
 #include "Random.h"
-#include "lighteffects.h"
-#include "opplist.h"
+#include "LightEffects.h"
+#include "Opplist.h"
 #include "World Items.h"
-#include "environment.h"
+#include "Environment.h"
 #include "GameSettings.h"
 #include "Buildings.h"
 #endif
@@ -37,7 +37,7 @@
 #include "Campaign.h"
 #include "SkillCheck.h"
 
-#include "connect.h"
+#include "Connect.h"
 
 #include "GameInitOptionsScreen.h"
 
@@ -302,7 +302,7 @@ INT32	CreatePhysicalObject( OBJECTTYPE *pGameObj, real dLifeLength, real xPos, r
 	pObject->pNode = NULL;
 	pObject->pShadow = NULL;
 
-	// If gridno not equal to NOWHERE, use sHeight of alnd....	
+	// If gridno not equal to NOWHERE, use sHeight of alnd....
 	if (!TileIsOutOfBounds(pObject->sGridNo))
 	{
 		pObject->Position.z += CONVERT_PIXELS_TO_HEIGHTUNITS( gpWorldLevelData[ pObject->sGridNo ].sHeight );
@@ -2005,7 +2005,7 @@ void CalculateLaunchItemBasicParams( SOLDIERTYPE *pSoldier, OBJECTTYPE *pItem, I
 	{
 		sInterGridNo = NOWHERE;
 	}
-	
+
 	if (!TileIsOutOfBounds(sInterGridNo))
 	{
 		// IF so, adjust target height, gridno....
@@ -2899,7 +2899,7 @@ BOOLEAN GetArtilleryLaunchParams( UINT32 sStartingGridNo, UINT32 sTargetGridNo, 
 	INT32 uiMaxRange = GetModifiedGunRange(usLauncher) / CELL_X_SIZE;
 
 	dMaxForce = CalculateForceFromRange( NULL, (INT16) uiMaxRange, (FLOAT)( PI/4 ) );
-			
+
 	if ( dMagForce > dMaxForce )
 		dMagForce = dMaxForce;
 
@@ -2907,7 +2907,7 @@ BOOLEAN GetArtilleryLaunchParams( UINT32 sStartingGridNo, UINT32 sTargetGridNo, 
 
 	if ( dMagForce < dMinForce )
 		dMagForce = dMinForce;
-		
+
 	(*pdForce)		= dMagForce;
 	(*pdDegrees) 	= dDegrees;
 

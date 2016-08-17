@@ -84,7 +84,7 @@ enemyRankEndElementHandle(void *userData, const XML_Char *name)
 {
 	enemyRankParseData * pData = (enemyRankParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "ENEMY_RANK") == 0)
 		{
@@ -92,8 +92,8 @@ enemyRankEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "RANK") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!EnemyRank_TextOnly)
 				{
 					wcscpy(zEnemyRank[pData->curEnemyRank.uiIndex].szCurRank, pData->curEnemyRank.szCurRank);
@@ -106,8 +106,8 @@ enemyRankEndElementHandle(void *userData, const XML_Char *name)
 				else
 				{
 					wcscpy(zEnemyRank[pData->curEnemyRank.uiIndex].szCurRank, pData->curEnemyRank.szCurRank);
-				}		
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -138,7 +138,7 @@ enemyRankEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curEnemyRank.StatsMin	= (UINT16) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "szRank") == 0 )
 		{
 			pData->curElement = ELEMENT;
@@ -164,7 +164,7 @@ BOOLEAN ReadInEnemyRank(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading EnemyRank.xml" );
 
 	EnemyRank_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -233,10 +233,10 @@ BOOLEAN WriteEnemyRank( STR fileName)
 			FilePrintf(hFile,"\t<RANK>\r\n");
 			FilePrintf(hFile,"\t\t<uiIndex>%d</uiIndex>\r\n", cnt);
 			FilePrintf(hFile,"\t\t<Enabled>%d</Enabled>\r\n", zEnemyRank[cnt].Enabled);
-			FilePrintf(hFile,"\t\t<ExpLevel>%d</ExpLevel>\r\n", zEnemyRank[cnt].ExpLevel);		
-			FilePrintf(hFile,"\t\t<Stats>%d</Stats>\r\n", zEnemyRank[cnt].Stats);	
-			FilePrintf(hFile,"\t\t<StatsMax>%d</StatsMax>\r\n", zEnemyRank[cnt].StatsMax);	
-			FilePrintf(hFile,"\t\t<StatsMin>%d</StatsMin>\r\n", zEnemyRank[cnt].StatsMin);				
+			FilePrintf(hFile,"\t\t<ExpLevel>%d</ExpLevel>\r\n", zEnemyRank[cnt].ExpLevel);
+			FilePrintf(hFile,"\t\t<Stats>%d</Stats>\r\n", zEnemyRank[cnt].Stats);
+			FilePrintf(hFile,"\t\t<StatsMax>%d</StatsMax>\r\n", zEnemyRank[cnt].StatsMax);
+			FilePrintf(hFile,"\t\t<StatsMin>%d</StatsMin>\r\n", zEnemyRank[cnt].StatsMin);
 			FilePrintf(hFile,"\t</RANK>\r\n");
 		}
 		FilePrintf(hFile,"</ENEMY_RANK>\r\n");

@@ -9,26 +9,26 @@
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "laptop.h"
+	#include "Cursors.h"
+	#include "Laptop.h"
 	#include "IMP Compile Character.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Text System.h"
 	#include "IMP Confirm.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Soldier Profile.h"
 	#include "Soldier Profile Type.h"
 	#include "Soldier Control.h"
 	#include "IMP Portraits.h"
 	#include "Overhead.h"
-	#include "finances.h"
-	#include "history.h"
+	#include "Finances.h"
+	#include "History.h"
 	#include "Game Clock.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "Game Event Hook.h"
 	#include "LaptopSave.h"
-	#include "strategic.h"
-	#include "weapons.h"
+	#include "Strategic.h"
+	#include "Weapons.h"
 	#include "Random.h"
 	#include "GameVersion.h"
 	#include "GameSettings.h"
@@ -61,7 +61,7 @@ typedef struct
 }	INVNODE;
 
 IMP_ITEM_CHOICE_TYPE gIMPItemChoices[MAX_IMP_ITEM_TYPES];
-	
+
 void GiveIMPRandomItems( MERCPROFILESTRUCT *pProfile, UINT8 typeIndex );
 void GiveIMPItems( MERCPROFILESTRUCT *pProfile, INT8 abilityValue, UINT8 typeIndex );
 
@@ -285,7 +285,7 @@ BOOLEAN AddCharacterToPlayersTeam( void )
 	HireMercStruct.ubInsertionCode	= INSERTION_CODE_ARRIVING_GAME;
 	HireMercStruct.uiTimeTillMercArrives = GetMercArrivalTimeOfDay( );
 
-	
+
 		if( fCharacterIsMale )
 		{
 			if ( gIMPMaleValues[ iPortraitNumber ].PortraitId !=0 )
@@ -299,9 +299,9 @@ BOOLEAN AddCharacterToPlayersTeam( void )
 			{
 				SetProfileFaceData( HireMercStruct.ubProfileID , (UINT8)(gIMPFemaleValues[ iPortraitNumber ].PortraitId), gIMPFemaleValues[ iPortraitNumber ].uiEyeXPositions, gIMPFemaleValues[ iPortraitNumber ].uiEyeYPositions, gIMPFemaleValues[ iPortraitNumber ].uiMouthXPositions, gIMPFemaleValues[ iPortraitNumber ].uiMouthYPositions );
 			}
-		}		
-		
-		
+		}
+
+
 	//if we succesfully hired the merc
 	if( !HireMerc( &HireMercStruct ) )
 	{
@@ -345,7 +345,7 @@ void	BtnIMPConfirmYes(GUI_BUTTON *btn,INT32 reason)
 			// silversurfer: We need to store the profile cost here because right now our new IMP doesn't occupy a slot yet.
 			// However function iGetProfileCost() will already calculate price including that slot. We would charge too much money after the IMP is created below.
 			INT32 iIMPCost = iGetProfileCost();
-			if( LaptopSaveInfo.iCurrentBalance < iIMPCost ) 
+			if( LaptopSaveInfo.iCurrentBalance < iIMPCost )
 			{
 				// not enough
 				 return;
@@ -424,7 +424,7 @@ void BtnIMPConfirmNo( GUI_BUTTON *btn,INT32 reason )
 			/*
 			if( fNoAlreadySelected == TRUE )
 			{
-				// already selected no 
+				// already selected no
 				fButtonPendingFlag = TRUE;
 				iCurrentImpPage = IMP_HOME_PAGE;
 			}
@@ -438,7 +438,7 @@ void BtnIMPConfirmNo( GUI_BUTTON *btn,INT32 reason )
 /*
 void BtnIMPConfirmNo( GUI_BUTTON *btn,INT32 reason )
 {
-	
+
 
 		// btn callback for IMP Homepage About US button
 	if (!(btn->uiFlags & BUTTON_ENABLED))
@@ -455,7 +455,7 @@ void BtnIMPConfirmNo( GUI_BUTTON *btn,INT32 reason )
 			LaptopSaveInfo.fIMPCompletedFlag = TRUE;
 			if( fNoAlreadySelected == TRUE )
 			{
-				// already selected no 
+				// already selected no
 				fButtonPendingFlag = TRUE;
 				iCurrentImpPage = IMP_HOME_PAGE;
 			}
@@ -639,13 +639,13 @@ void GiveItemsToPC( UINT8 ubProfileId )
 
 		// check for special skills
 		/////////////////////////////////////////////////////////////////////
-		// Check for new traits - SANDRO 
+		// Check for new traits - SANDRO
 		// DBrot: experts get other stuff
 		if ( gGameOptions.fNewTraitSystem )
 		{
 			// MAJOR TRAITS
 			if (PROFILE_HAS_SKILL_TRAIT(ubProfileId, AUTO_WEAPONS_NT))
-			{	
+			{
 				if( gGameExternalOptions.fExpertsGetDifferentChoices && PROFILE_HAS_EXPERT_TRAIT(ubProfileId, AUTO_WEAPONS_NT))
 				{
  					GiveIMPRandomItems(pProfile,IMP_AUTO_WEAPONS_EXP);
@@ -697,7 +697,7 @@ void GiveItemsToPC( UINT8 ubProfileId )
 				else
 				{
 					GiveIMPRandomItems(pProfile, IMP_GUNSLINGER);
-				}		
+				}
 			}
 			if (PROFILE_HAS_SKILL_TRAIT(ubProfileId, MARTIAL_ARTS_NT))
 			{
@@ -845,7 +845,7 @@ void GiveItemsToPC( UINT8 ubProfileId )
 					GiveIMPRandomItems(pProfile, IMP_NIGHT_OPS);
 				}
 			}
-		
+
 			if (PROFILE_HAS_SKILL_TRAIT(ubProfileId, HANDTOHAND_OT))
 			{
 				//MakeProfileInvItemAnySlot(pProfile, BRASS_KNUCKLES, 100, 1);
@@ -1378,7 +1378,7 @@ void WriteOutCurrentImpCharacter( INT32 iProfileId )
 
 void WriteOutCurrentImpCharacter( INT32 iProfileId, STR fileName )
 {
-	// grab the profile number and write out what is contained there in 
+	// grab the profile number and write out what is contained there in
 	HWFILE hFile;
 	UINT32 uiBytesWritten = 0;
 
@@ -1572,7 +1572,7 @@ BOOLEAN LoadImpCharacter( STR nickName )
 			// not enough
 			return FALSE;
 		}
-		
+
 		/*
 			//new camo face
 			if ( gGameExternalOptions.fShowCamouflageFaces == TRUE )
@@ -1620,7 +1620,7 @@ BOOLEAN LoadImpCharacter( STR nickName )
 void ResetIMPCharactersEyesAndMouthOffsets( UINT8 ubMercProfileID )
 {
 	// ATE: Check boundary conditions!
-/*	
+/*
     if( ( ( gMercProfiles[ ubMercProfileID ].ubFaceIndex - 200 ) > MAX_NEW_IMP_PORTRAITS ) || ( ubMercProfileID >= PROF_HUMMER ) )  // 16
 	{
 	return;
@@ -1652,7 +1652,7 @@ void ResetIMPCharactersEyesAndMouthOffsets( UINT8 ubMercProfileID )
 		gMercProfiles[ ubMercProfileID ].usMouthY = gIMPFemaleValues[ gMercProfiles[ ubMercProfileID ].ubFaceIndex - 200 ].uiMouthYPositions;
 	}
 	*/
-	
+
 	if( gMercProfiles[ ubMercProfileID ].bSex == 0 )
 	{
 		gMercProfiles[ ubMercProfileID ].usEyesX = gIMPMaleValues[ gMercProfiles[ ubMercProfileID ].ubFaceIndex ].uiEyeXPositions;
@@ -1700,7 +1700,7 @@ void GiveIMPRandomItems( MERCPROFILESTRUCT *pProfile, UINT8 typeIndex )
 	// if no valid items found, bail out
 	if ( ubValidChoices <= 0 )
 		return;
-	
+
 	// define how many items we get
 	if ( ubValidChoices < gIMPItemChoices[typeIndex].ubNumItems )
 		// if there are less legal items than the number we should get, we only get the number of legal items

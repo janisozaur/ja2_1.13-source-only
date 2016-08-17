@@ -24,7 +24,7 @@
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 	#include "WIZ8 SGP ALL.H"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include <stdlib.h>
 	#include <malloc.h>
 	#include <stdio.h>
@@ -33,7 +33,7 @@
 	#include "Debug.h"
 	#include "Container.h"
 	#if _MSC_VER < 1300 //(iostream.h was removed from VC.NET2003)
-	#include <iostream.h>
+	#include <iostream>
 	#endif
 #endif
 

@@ -1,12 +1,12 @@
 // Lesh:
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
 #else
 	#include <stdio.h>
 	#include <string.h>
-	#include "explosion control.h"
+	#include "Explosion Control.h"
 	#include "Debug.h"
 	#include "FileMan.h"
 	#include "Debug Control.h"
@@ -23,7 +23,7 @@ struct
 
 	EXPLOSION_DATA	expData;
 	INT32			maxArraySize;
-	INT32			curIndex;	
+	INT32			curIndex;
 	INT32			currentDepth;
 	INT32			maxReadDepth;
 }

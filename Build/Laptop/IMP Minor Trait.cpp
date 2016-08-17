@@ -1,27 +1,27 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Skill Trait.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Minor Trait.h"
 	#include "IMP Skill Trait.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "_Ja25EnglishText.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 	#include "IMP Compile Character.h"
 	#include "GameSettings.h"
-	#include "personnel.h"		// added by Flugente
+	#include "Personnel.h"		// added by Flugente
 #endif
 
 
@@ -186,7 +186,7 @@ void EnterIMPMinorTrait( void )
 						(usPosX + 156), ( usPosY + 17), MSYS_PRIORITY_HIGH,
 							MSYS_NO_CURSOR, MSYS_NO_CALLBACK, NULL );
 		MSYS_AddRegion( &gMR_MinorTraitHelpTextRegions[ubCnt] );
-		
+
 		//Determine the next x location
 		if( ubCnt < IMP_MINOR_TRAIT__TRAITS_TO_START_RIGHT_COL )
 			usPosX = IMP_MINOR_TRAIT__LEFT_COLUMN_START_X + 62;
@@ -236,7 +236,7 @@ void ExitIMPMinorTrait( void )
 			RemoveButton(giIMPMinorTraitAnswerButton[ iCnt ] );
 			UnloadButtonImage(giIMPMinorTraitAnswerButtonImage[ iCnt ] );
 		}
-		
+
 		MSYS_RemoveRegion( &gMR_MinorTraitHelpTextRegions[iCnt] );
 	}
 
@@ -452,7 +452,7 @@ void IMPMinorTraitDisplaySkills()
 	UINT32 uiCnt;
 	UINT16 usPosX, usPosY;
 	UINT16 usBoxPosX, usBoxPosY;
-	HVOBJECT	hImageHandle;	
+	HVOBJECT	hImageHandle;
 
 	//Display the title
 	DrawTextToScreen( gzIMPSkillTraitsTextNewMinor[ IMP_SKILL_TRAITS_NEW_NUMBER_MINOR_SKILLS ], IMP_MINOR_TRAIT__TITLE_X, LAPTOP_TITLE_Y, LAPTOP_TEXT_WIDTH, IMP_MINOR_TRAIT__TITLE_FONT, IMP_MINOR_TRAIT__COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
@@ -482,7 +482,7 @@ void IMPMinorTraitDisplaySkills()
 
 		//draw the text to the screenx
 		DrawTextToScreen( gzIMPSkillTraitsTextNewMinor[ uiCnt ], usPosX, usPosY, 0, IMP_MINOR_TRAIT__FONT, IMP_MINOR_TRAIT__COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
-		
+
 		CHAR16	apStr[5000];
 		swprintf( apStr, L"" );
 		AssignPersonnelSkillTraitHelpText( gusNewMinorTraitRemap[uiCnt], FALSE, FALSE, apStr );
@@ -540,7 +540,7 @@ void BtnIMPMinorTraitFinishCallback(GUI_BUTTON *btn,INT32 reason)
 		{
 			iCurrentImpPage = IMP_MAIN_PAGE;
 
-			fButtonPendingFlag = TRUE;	
+			fButtonPendingFlag = TRUE;
 
 			if( CameBackToMinorTraitPageButNotFinished() )
 			{
@@ -620,7 +620,7 @@ void AddSelectedMinorTraitsToSkillsList()
 		{
 			gfMinorTraitQuestions[ uiCnt ] = FALSE;
 		}
-		gfMinorTraitQuestions[ IMP_SKILL_TRAITS_NEW_MINOR_NONE ] = TRUE;	
+		gfMinorTraitQuestions[ IMP_SKILL_TRAITS_NEW_MINOR_NONE ] = TRUE;
 	}
 
 	// OK, now add what we have to the list
@@ -655,7 +655,7 @@ void AddSelectedMinorTraitsToSkillsList()
 				case IMP_SKILL_TRAITS_NEW_ATHLETICS:
 					AddSkillToSkillList( ATHLETICS_NT );
 					break;
-	
+
 				case IMP_SKILL_TRAITS_NEW_BODYBUILDING:
 					AddSkillToSkillList( BODYBUILDING_NT );
 					break;
@@ -679,7 +679,7 @@ void AddSelectedMinorTraitsToSkillsList()
 				case IMP_SKILL_TRAITS_NEW_SURVIVAL:
 					AddSkillToSkillList( SURVIVAL_NT );
 					break;
-						
+
 				default:
 					break;
 			}
@@ -703,7 +703,7 @@ void HandleLastSelectedMinorTrait( INT8 bNewTrait )
 				break;
 			}
 		}
-		
+
 	}
 	else
 	{
@@ -726,21 +726,21 @@ void HandleLastSelectedMinorTrait( INT8 bNewTrait )
 
 	if( gfMinorTraitQuestions[ gbLastSelectedMinorTrait[ 0 ] ] == FALSE )
 		gbLastSelectedMinorTrait[ 0 ] = -1;
-	if( gfMinorTraitQuestions[ gbLastSelectedMinorTrait[ 1 ] ] == FALSE ) 
+	if( gfMinorTraitQuestions[ gbLastSelectedMinorTrait[ 1 ] ] == FALSE )
 		gbLastSelectedMinorTrait[ 1 ] = -1;
-	if( gfMinorTraitQuestions[ gbLastSelectedMinorTrait[ 2 ] ] == FALSE ) 
+	if( gfMinorTraitQuestions[ gbLastSelectedMinorTrait[ 2 ] ] == FALSE )
 		gbLastSelectedMinorTrait[ 2 ] = -1;
 
 	if( gbLastSelectedMinorTrait[ 0 ] == -1 )
 	{
-		if( gbLastSelectedMinorTrait[ 1 ] != -1 ) 
-			gbLastSelectedMinorTrait[ 0 ] = gbLastSelectedMinorTrait[ 1 ];	
-		else if( gbLastSelectedMinorTrait[ 2 ] != -1 ) 
-			gbLastSelectedMinorTrait[ 0 ] = gbLastSelectedMinorTrait[ 2 ];	
+		if( gbLastSelectedMinorTrait[ 1 ] != -1 )
+			gbLastSelectedMinorTrait[ 0 ] = gbLastSelectedMinorTrait[ 1 ];
+		else if( gbLastSelectedMinorTrait[ 2 ] != -1 )
+			gbLastSelectedMinorTrait[ 0 ] = gbLastSelectedMinorTrait[ 2 ];
 	}
 	else if( gbLastSelectedMinorTrait[ 1 ] == -1 && gbLastSelectedMinorTrait[ 2 ] != -1 )
 	{
-		gbLastSelectedMinorTrait[ 1 ] = gbLastSelectedMinorTrait[ 2 ];	
+		gbLastSelectedMinorTrait[ 1 ] = gbLastSelectedMinorTrait[ 2 ];
 	}
 
 	if( NumAvailableMinorTraits() == 1 )
@@ -757,7 +757,7 @@ void HandleLastSelectedMinorTrait( INT8 bNewTrait )
 		{
 			gbLastSelectedMinorTrait[ 1 ] = bNewTrait;
 		}
-		else 
+		else
 		{
 			gbLastSelectedMinorTrait[ 0 ] = gbLastSelectedMinorTrait[ 1 ];
 			gbLastSelectedMinorTrait[ 1 ] = bNewTrait;
@@ -822,7 +822,7 @@ UINT8 StrengthRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -846,7 +846,7 @@ UINT8 DexterityRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 70 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 20 );
@@ -860,7 +860,7 @@ UINT8 DexterityRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -874,7 +874,7 @@ UINT8 DexterityRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -899,7 +899,7 @@ UINT8 AgilityRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 70 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 20 );
@@ -913,7 +913,7 @@ UINT8 AgilityRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -927,7 +927,7 @@ UINT8 AgilityRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -952,7 +952,7 @@ UINT8 HealthRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -977,7 +977,7 @@ UINT8 WisdomRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 70 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 20 );
@@ -991,7 +991,7 @@ UINT8 WisdomRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -1005,7 +1005,7 @@ UINT8 WisdomRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 60 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -1030,7 +1030,7 @@ UINT8 LeaderShipRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 45 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );
@@ -1070,7 +1070,7 @@ UINT8 ExplosivesRequiredAdjustmentForMinorTraits( INT32 iInitialValue )
 			// if less than minimum, add how much we need
 			return ( 45 - iInitialValue );
 		}
-		else 
+		else
 		{
 			// otherwise just add 10 on top
 			return ( 10 );

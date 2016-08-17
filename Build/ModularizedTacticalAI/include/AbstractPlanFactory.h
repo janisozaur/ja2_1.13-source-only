@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author feynman (bears-pit.com)
  */
@@ -16,7 +16,7 @@ namespace AI
     {
         /**@class AIInputData
          * @brief Wrapper class around the environmental data required to build or update an AI plan
-         * 
+         *
          * The data contained in objects of this class are currently collected in HanldeNoise() and ManSeesMan(), both
          * defined in Tactical/opplist.cpp
          * Future versions might require more or different data; without the wrapper, *every* Concrete Factory ever
@@ -60,7 +60,7 @@ namespace AI
         class Plan;
         /**@class AbstractPlanFactory
          * @brief Abstract Factory. Base class for all plan factories.
-         * 
+         *
          * The Abstract Factory design pattern is used to create instances of Plan object hierarchies. The concrete
          * factories differ not necessarily in the concrete product they produce (as is otherwise the case when using
          * this design pattern), but in the structure of the compositions (plans are Composites) instead. Public

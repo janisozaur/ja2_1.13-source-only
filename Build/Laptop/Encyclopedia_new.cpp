@@ -1,6 +1,6 @@
 /*TODOs:
 *remove every unneeded data (temp arrays, save arrays, backup arrays, data arrays, ec.)
-*Items:		- needs three state ini option to either be saved into file (any new item in inventory or sector stash will be added) 
+*Items:		- needs three state ini option to either be saved into file (any new item in inventory or sector stash will be added)
 *				UINT8 array [MAX_ITEMS]: 0 not yet discovered (invisible), 1 in sector stash (unreachable) or on enemy, 2 seen at bobby ray, 3 seen in dealer inventory, 4 in sector stash (reachable) or solder inventory
 *			- or to gather data from all sector inventories (mark all as reachable, as there is no way to figure out in unloaded sectors), bobby rays current inventory, known dealers, soldier inventory
 *			- or to reveal all items from game (thats the old encyclopedia behavier)
@@ -34,11 +34,11 @@
 #else
 	#include "Types.h"
 	#include "WCheck.h"
-	#include "DEBUG.H"
+	#include "Debug.h"
 	#include "GameSettings.h"
-	#include "laptop.h"//UI dimensions, mouse regions
+	#include "Laptop.h"//UI dimensions, mouse regions
 	#include "Utilities.h"//file names
-	#include "vobject.h"//video objects
+	#include "VObject.h"//video objects
 	#include "Utils/Cursors.h"
 	#include "Text.h"//button text
 #ifdef ENC_USE_BUTTONSYSTEM
@@ -54,7 +54,7 @@
 	//#include "Quests.h"
 	//#include "Tactical Save.h"
 	#include "Encyclopedia_Data_new.h"
-#endif	
+#endif
 
 #ifdef ENCYCLOPEDIA_WORKS
 /** @defgroup ENCYCLOPEDIA Encyclopedia
@@ -141,7 +141,7 @@ error:
 }
 
 /**
-* Helper function gets called AFTER rendering by game loop. 
+* Helper function gets called AFTER rendering by game loop.
 * Can be used to poll keyboard or mouse events.
 * Can also be used for animations (e.g. showing blinking position of person on a map, simulate loading of commercials, animated zoom ec.).
 */
@@ -246,7 +246,7 @@ BOOLEAN EnterEncyclopedia_NEW(  )
 BOOLEAN ExitEncyclopedia_NEW(  )
 {
 	BOOLEAN success = TRUE;
-	
+
 	//error if not enabled
 	success &= !gGameExternalOptions.gEncyclopedia;
 	//error if the laptop mode does not match encyclopedia
@@ -311,7 +311,7 @@ void RenderEncyclopedia_NEW(  )
 	RenderButtons();
 #else
 	for ( UINT8 i = 0; i < ENC_NUM_SUBPAGES; i++ )
-	{ 
+	{
 		x = gEncyclopediaBtnRegions[ i ].RegionTopLeftX;
 		y = gEncyclopediaBtnRegions[ i ].RegionTopLeftY;
 		//Btn graphic
@@ -323,7 +323,7 @@ void RenderEncyclopedia_NEW(  )
 #endif
 	// finish render
 	CHECKV ( RenderWWWProgramTitleBar() );
-	InvalidateRegion(LAPTOP_SCREEN_UL_X,LAPTOP_SCREEN_WEB_UL_Y,LAPTOP_SCREEN_LR_X,LAPTOP_SCREEN_WEB_LR_Y);	
+	InvalidateRegion(LAPTOP_SCREEN_UL_X,LAPTOP_SCREEN_WEB_UL_Y,LAPTOP_SCREEN_LR_X,LAPTOP_SCREEN_WEB_LR_Y);
 }
 
 /**

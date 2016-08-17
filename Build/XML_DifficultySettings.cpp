@@ -49,7 +49,7 @@ DifficultySettingsParseDataStartElementHandle(void *userData, const XML_Char *na
 		else if(pData->curElement == ELEMENT &&
 			   (strcmp(name, "uiIndex") == 0 ||
 				strcmp(name, "Name") == 0 ||
-				strcmp(name, "ConfirmText") == 0 ||	
+				strcmp(name, "ConfirmText") == 0 ||
 				strcmp(name, "StartingCash") == 0 ||
 				strcmp(name, "EnemyAPBonus") == 0 ||
 				strcmp(name, "NumKillsPerProgressPoint") == 0 ||
@@ -109,7 +109,7 @@ DifficultySettingsParseDataStartElementHandle(void *userData, const XML_Char *na
 				strcmp(name, "EnemyMoraleWorried") == 0 ||
 				strcmp(name, "MaxMortarsPerTeam" ) == 0 ||
 				strcmp(name, "CthConstantsAimDifficulty") == 0	||
-				strcmp(name, "CthConstantsBaseDifficulty") == 0	
+				strcmp(name, "CthConstantsBaseDifficulty") == 0
 				))
 		{
 			pData->curElement = ELEMENT_PROPERTY;
@@ -151,11 +151,11 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "DIFFICULTY") == 0)
 		{
 			pData->curElement = ELEMENT_LIST;
-				
+
 			if (!DifficultySettings_TextOnly)
 				{
 				    wcscpy(zDiffSetting[pData->curDifficultySettings.uiIndex].szDiffName, pData->curDifficultySettings.szDiffName);
-					wcscpy(zDiffSetting[pData->curDifficultySettings.uiIndex].szConfirmText, pData->curDifficultySettings.szConfirmText);					
+					wcscpy(zDiffSetting[pData->curDifficultySettings.uiIndex].szConfirmText, pData->curDifficultySettings.szConfirmText);
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iStartingCash = pData->curDifficultySettings.iStartingCash;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iEnemyAPBonus = pData->curDifficultySettings.iEnemyAPBonus;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iNumKillsPerProgressPoint = pData->curDifficultySettings.iNumKillsPerProgressPoint;
@@ -164,13 +164,13 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bUnlimitedPoolOfTroops = pData->curDifficultySettings.bUnlimitedPoolOfTroops;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iQueensInitialPoolOfTroops = pData->curDifficultySettings.iQueensInitialPoolOfTroops;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iQueenPoolIncrementPerDifficultyLevel = pData->curDifficultySettings.iQueenPoolIncrementPerDifficultyLevel;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].iEnemyStartingAlertLevel = pData->curDifficultySettings.iEnemyStartingAlertLevel;				
+					zDiffSetting[pData->curDifficultySettings.uiIndex].iEnemyStartingAlertLevel = pData->curDifficultySettings.iEnemyStartingAlertLevel;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iEnemyAlertDecay = pData->curDifficultySettings.iEnemyAlertDecay;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iNumAwareBattles = pData->curDifficultySettings.iNumAwareBattles;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iBaseDelayInMinutesBetweenEvaluations = pData->curDifficultySettings.iBaseDelayInMinutesBetweenEvaluations;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].iEvaluationDelayVariance = pData->curDifficultySettings.iEvaluationDelayVariance;			
+					zDiffSetting[pData->curDifficultySettings.uiIndex].iEvaluationDelayVariance = pData->curDifficultySettings.iEvaluationDelayVariance;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iGracePeriodInHoursAfterSectorLiberation = pData->curDifficultySettings.iGracePeriodInHoursAfterSectorLiberation;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].iGracePeriodInDaysAfterPatrolDestroyed = pData->curDifficultySettings.iGracePeriodInDaysAfterPatrolDestroyed;					
+					zDiffSetting[pData->curDifficultySettings.uiIndex].iGracePeriodInDaysAfterPatrolDestroyed = pData->curDifficultySettings.iGracePeriodInDaysAfterPatrolDestroyed;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bAggressiveQueenAi = pData->curDifficultySettings.bAggressiveQueenAi;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iMaxMercDeaths = pData->curDifficultySettings.iMaxMercDeaths;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].usLootStatusModifier = pData->curDifficultySettings.usLootStatusModifier;
@@ -181,7 +181,7 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iQueenReproductionBonus = pData->curDifficultySettings.iQueenReproductionBonus;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iQueenInitBonusSpread = pData->curDifficultySettings.iQueenInitBonusSpread;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iCreaturePopulationModifier = pData->curDifficultySettings.iCreaturePopulationModifier;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].iCreatureTownAggressiveness = pData->curDifficultySettings.iCreatureTownAggressiveness;			
+					zDiffSetting[pData->curDifficultySettings.uiIndex].iCreatureTownAggressiveness = pData->curDifficultySettings.iCreatureTownAggressiveness;
 
 					//sectors
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iJ9B1NumTroops = pData->curDifficultySettings.iJ9B1NumTroops;
@@ -191,23 +191,23 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iO3B1NumTroops = pData->curDifficultySettings.iO3B1NumTroops;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iO3B1NumElites = pData->curDifficultySettings.iO3B1NumElites;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iP3B1NumElites = pData->curDifficultySettings.iP3B1NumElites;
-					
+
 					//Other
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bStrategicAiActionWakeQueen = pData->curDifficultySettings.bStrategicAiActionWakeQueen;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iUpdateLastDayOfPlayerActivity = pData->curDifficultySettings.iUpdateLastDayOfPlayerActivity;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].iChanceOfEnemyAmbushes = pData->curDifficultySettings.iChanceOfEnemyAmbushes;					
+					zDiffSetting[pData->curDifficultySettings.uiIndex].iChanceOfEnemyAmbushes = pData->curDifficultySettings.iChanceOfEnemyAmbushes;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bAllowReinforcements = pData->curDifficultySettings.bAllowReinforcements;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].bAllowReinforcementsOmerta = pData->curDifficultySettings.bAllowReinforcementsOmerta;				
+					zDiffSetting[pData->curDifficultySettings.uiIndex].bAllowReinforcementsOmerta = pData->curDifficultySettings.bAllowReinforcementsOmerta;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iPercentElitesBonus = pData->curDifficultySettings.iPercentElitesBonus;
-					zDiffSetting[pData->curDifficultySettings.uiIndex].iDesiredPopulationL2 = pData->curDifficultySettings.iDesiredPopulationL2;				
+					zDiffSetting[pData->curDifficultySettings.uiIndex].iDesiredPopulationL2 = pData->curDifficultySettings.iDesiredPopulationL2;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iDesiredPopulationL3 = pData->curDifficultySettings.iDesiredPopulationL3;
-						
+
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iWeaponCacheTroops1 = pData->curDifficultySettings.iWeaponCacheTroops1;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iWeaponCacheTroops2 = pData->curDifficultySettings.iWeaponCacheTroops2;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iWeaponCacheTroops3 = pData->curDifficultySettings.iWeaponCacheTroops3;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iWeaponCacheTroops4 = pData->curDifficultySettings.iWeaponCacheTroops4;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iWeaponCacheTroops5 = pData->curDifficultySettings.iWeaponCacheTroops5;
-					
+
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bUpgradeAdminsToTroops = pData->curDifficultySettings.bUpgradeAdminsToTroops;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bUpgradeGarrisonsAdminsToTroops = pData->curDifficultySettings.bUpgradeGarrisonsAdminsToTroops;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].usAlwaysUpGradeAdminsToTroopsProgress = pData->curDifficultySettings.usAlwaysUpGradeAdminsToTroopsProgress;
@@ -219,33 +219,33 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bBloodcatAmbush = pData->curDifficultySettings.bBloodcatAmbush;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bAirRaidLookForDive = pData->curDifficultySettings.bAirRaidLookForDive;
-					
-				
+
+
 					zDiffSetting[pData->curDifficultySettings.uiIndex].iGetNumberOfTurnsPowerGenFanWillBeStoppedFor = pData->curDifficultySettings.iGetNumberOfTurnsPowerGenFanWillBeStoppedFor;
-					
-					
+
+
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bRadioSightings = pData->curDifficultySettings.bRadioSightings;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bRadioSightings2 = pData->curDifficultySettings.bRadioSightings2;
 
 					zDiffSetting[pData->curDifficultySettings.uiIndex].NewDifficultySettingsAIM_DIFFICULTY = pData->curDifficultySettings.NewDifficultySettingsAIM_DIFFICULTY;
 					zDiffSetting[pData->curDifficultySettings.uiIndex].NewDifficultySettingsBASE_DIFFICULTY = pData->curDifficultySettings.NewDifficultySettingsBASE_DIFFICULTY;
-					
+
 					zDiffSetting[pData->curDifficultySettings.uiIndex].bEnemyMoraleWorried = pData->curDifficultySettings.bEnemyMoraleWorried;
-					
+
 					zDiffSetting[pData->curDifficultySettings.uiIndex].usMaxMortarsPerTeam = pData->curDifficultySettings.usMaxMortarsPerTeam;
 				}
 				else
-				{			
+				{
 					wcscpy(zDiffSetting[pData->curDifficultySettings.uiIndex].szDiffName, pData->curDifficultySettings.szDiffName);
 					wcscpy(zDiffSetting[pData->curDifficultySettings.uiIndex].szConfirmText, pData->curDifficultySettings.szConfirmText);
-				}			
-		
+				}
+
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.uiIndex	= (UINT16) atol(pData->szCharData);
-			MaxDifficultySettingsValues++; 
+			MaxDifficultySettingsValues++;
 		}
 		else if(strcmp(name, "Name") == 0 )
 		{
@@ -260,7 +260,7 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 
 			MultiByteToWideChar( CP_UTF8, 0, pData->szCharData, -1, pData->curDifficultySettings.szConfirmText, sizeof(pData->curDifficultySettings.szConfirmText)/sizeof(pData->curDifficultySettings.szConfirmText[0]) );
 			pData->curDifficultySettings.szConfirmText[sizeof(pData->curDifficultySettings.szConfirmText)/sizeof(pData->curDifficultySettings.szConfirmText[0]) - 1] = '\0';
-		}		
+		}
 		else if(strcmp(name, "StartingCash") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -290,7 +290,7 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iPercentElitesBonus	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "UnlimitedPoolOfTroops") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -305,7 +305,7 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iQueenPoolIncrementPerDifficultyLevel	= (UINT32) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "EnemyStartingAlertLevel") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -361,43 +361,43 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iCreatureSpreadTime	= (UINT16) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "QueenReproductionBase") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iQueenReproductionBase	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "QueenReproductionBonus") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iQueenReproductionBonus	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "QueenInitBonusSpread") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iQueenInitBonusSpread	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "CreaturePopulationModifier") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iCreaturePopulationModifier	= (INT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "CreatureTownAggressiveness") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iCreatureTownAggressiveness	= (INT8) atol(pData->szCharData);
-		}	
+		}
 		//sectors
 		else if(strcmp(name, "SectorJ9B1NumTroops") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iJ9B1NumTroops	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "SectorJ9B2NumCreatures") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iJ9B2NumCreatures	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "SectorK4B1NumTroops") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -428,37 +428,37 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bStrategicAiActionWakeQueen	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "UpdateLastDayOfPlayerActivity") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iUpdateLastDayOfPlayerActivity	= (UINT16) atol(pData->szCharData);
-		}				
+		}
 		else if(strcmp(name, "ChanceOfEnemyAmbushes") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iChanceOfEnemyAmbushes	= (INT32) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "AllowReinforcements") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bAllowReinforcements	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "AllowReinforcementsOmerta") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bAllowReinforcementsOmerta	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "PopulationLevel2") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iDesiredPopulationL2	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "PopulationLevel3") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iDesiredPopulationL3	= (BOOLEAN) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "WeaponCacheTroops1") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -473,7 +473,7 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iWeaponCacheTroops3	= (UINT8) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "WeaponCacheTroops4") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -483,12 +483,12 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iWeaponCacheTroops5	= (UINT8) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "UpgradeAdminsToTroops") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bUpgradeAdminsToTroops	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "UpgradeGarrisonsAdminsToTroops") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -516,37 +516,37 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bAllowUnrestrictedXPLevels	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "QueenAttackLosingControlOfSector") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bQueenLosingControlOfSector	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "BloodcatAmbushSectors") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bBloodcatAmbush	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "AirRaidLookForDive") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bAirRaidLookForDive	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "NumberOfTurnsPowerGenFanWillBeStoppedFor") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.iGetNumberOfTurnsPowerGenFanWillBeStoppedFor	= (UINT32) atol(pData->szCharData);
-		}		
+		}
 		else if(strcmp(name, "RadioSightings") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bRadioSightings	= (BOOLEAN) atol(pData->szCharData);
-		}			
+		}
 		else if(strcmp(name, "RadioSightings2") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.bRadioSightings2	= (BOOLEAN) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "EnemyMoraleWorried") == 0)
 		{
 			pData->curElement = ELEMENT;
@@ -561,12 +561,12 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.NewDifficultySettingsAIM_DIFFICULTY	= (FLOAT) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "CthConstantsBaseDifficulty") == 0)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.NewDifficultySettingsBASE_DIFFICULTY	= (FLOAT) atol(pData->szCharData);
-		}			
+		}
 		pData->maxReadDepth--;
 	}
 	pData->currentDepth--;
@@ -581,13 +581,13 @@ BOOLEAN ReadInDifficultySettings( STR fileName, BOOLEAN localizedVersion)
 	XML_Parser	parser = XML_ParserCreate(NULL);
 
 	difficultySettingsParseData pData;
-	
+
 	MaxDifficultySettingsValues = 0;
 
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading DifficultySettings.xml" );
-	
+
 	DifficultySettings_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
@@ -632,7 +632,7 @@ BOOLEAN ReadInDifficultySettings( STR fileName, BOOLEAN localizedVersion)
 
 	XML_ParserFree(parser);
 
-	MaxDifficultySettingsValues--; 
-	
+	MaxDifficultySettingsValues--;
+
 	return( TRUE );
 }

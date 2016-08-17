@@ -16,7 +16,7 @@ class HelpCommand : public ja2xp::IExporterBase
 {
 public:
 	typedef ja2xp::IExporterBase::param_list_t param_list_t;
-	
+
 	static const wchar_t* commandString;// = L"help";
 
 	virtual void handleCommand(param_list_t const& params)
@@ -38,7 +38,7 @@ public:
 
 	void printBasicUsage()
 	{
-		std::wcout 
+		std::wcout
 			<< L"*** ja2export : version " << VERSION_STRING << " ***" << std::endl
 			<< std::endl
 			<< L"Usage : ja2export command [OPTIONS] source destination" << std::endl
@@ -49,7 +49,7 @@ public:
 	}
 	virtual void printHelp()
 	{
-		std::wcout 
+		std::wcout
 			<< L" * if \"source\" is a file pattern with the wildcard *, then all files that" << std::endl
 			<< L"   match this pattern will be converted" << std::endl
 			<< L" * if \"destination\" is a file name, the converted file will take exactly " << std::endl
@@ -83,13 +83,13 @@ int wmain(int argc, wchar_t **argv)
 
 	std::auto_ptr<HelpCommand> cmd_help(new HelpCommand());
 	g_command_map[HelpCommand::commandString] = cmd_help.get();
-	
+
 	std::auto_ptr<ja2xp::CExportSTI> cmd_sti(new ja2xp::CExportSTI());
 	g_command_map[ja2xp::CExportSTI::commandString] = cmd_sti.get();
-	
+
 	std::auto_ptr<ja2xp::CExportSLF> cmd_slf(new ja2xp::CExportSLF());
 	g_command_map[ja2xp::CExportSLF::commandString] = cmd_slf.get();
-	
+
 	std::auto_ptr<ja2xp::CExportJSD> cmd_jsd(new ja2xp::CExportJSD());
 	g_command_map[ja2xp::CExportJSD::commandString] = cmd_jsd.get();
 

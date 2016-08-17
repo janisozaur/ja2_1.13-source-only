@@ -2,8 +2,8 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -20,7 +20,7 @@ struct
 	UINT8				curIndex; // Holds the number of the current profile for whom we're reading gear.
 	UINT8				curGears; // Holds the number of gears read so far for one index number.
 	UINT32				maxArraySize;
-	
+
 	UINT32				currentDepth;
 	UINT32				maxReadDepth;
 }
@@ -28,7 +28,7 @@ typedef MercStartingGearParseData;
 
 BOOLEAN localizedTextOnly_MercStartingGear;
 
-static void XMLCALL 
+static void XMLCALL
 MercStartingGearStartElementHandle(void *userData, const XML_Char *name, const XML_Char **atts)
 {
 	MercStartingGearParseData * pData = (MercStartingGearParseData *)userData;
@@ -583,7 +583,7 @@ BOOLEAN ReadInMercStartingGearStats(STR fileName, BOOLEAN localizedVersion)
 	UINT32		uiFSize;
 	CHAR8 *		lpcBuffer;
 	XML_Parser	parser = XML_ParserCreate(NULL);
-	
+
 	MercStartingGearParseData pData;
 
 	localizedTextOnly_MercStartingGear = localizedVersion;
@@ -594,7 +594,7 @@ BOOLEAN ReadInMercStartingGearStats(STR fileName, BOOLEAN localizedVersion)
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	uiFSize = FileGetSize(hFile);
 	lpcBuffer = (CHAR8 *) MemAlloc(uiFSize+1);
 
@@ -609,17 +609,17 @@ BOOLEAN ReadInMercStartingGearStats(STR fileName, BOOLEAN localizedVersion)
 
 	FileClose( hFile );
 
-	
+
 	XML_SetElementHandler(parser, MercStartingGearStartElementHandle, MercStartingGearEndElementHandle);
 	XML_SetCharacterDataHandler(parser, MercStartingGearCharacterDataHandle);
 
-	
+
 	memset(&pData,0,sizeof(pData));
 
 	pData.curArray = gMercProfileGear;
 
-	pData.maxArraySize = NUM_PROFILES; 
-	
+	pData.maxArraySize = NUM_PROFILES;
+
 	XML_SetUserData(parser, &pData);
 
 	if (!localizedTextOnly_MercStartingGear)
@@ -664,7 +664,7 @@ BOOLEAN WriteMercStartingGearStats()
 	hFile = FileOpen( "TABLEDATA\\MercStartingGear out.xml", FILE_ACCESS_WRITE | FILE_CREATE_ALWAYS, FALSE );
 	if ( !hFile )
 		return( FALSE );
-	
+
 	{
 		UINT32 cnt, gearkit;
 		CHAR16 str[100];
@@ -677,7 +677,7 @@ BOOLEAN WriteMercStartingGearStats()
 			FilePrintf(hFile,"\t\t<mIndex>%d</mIndex>\r\n",								cnt );
 			//FilePrintf(hFile,"\t\t<mName>%d</mName>\r\n",								gMercProfileGear[cnt].mName  );
 
-			
+
 			int j = -1;
 			for (int i=0;i<80;i++)
 			{
@@ -697,7 +697,7 @@ BOOLEAN WriteMercStartingGearStats()
 			{
 				UINT32 uiCharLoc = wcscspn(szRemainder, L"&<>\'\"\0");
 				CHAR16 invChar = szRemainder[uiCharLoc];
-				
+
 				if(uiCharLoc)
 				{
 					szRemainder[uiCharLoc] = '\0';

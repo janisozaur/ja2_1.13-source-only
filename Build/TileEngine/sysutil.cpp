@@ -5,9 +5,9 @@
 	#include <time.h>
 	#include "sgp.h"
 	#include "himage.h"
-	#include "vsurface.h"
-	#include "wcheck.h"
-	#include "sysutil.h"
+	#include "VSurface.h"
+	#include "WCheck.h"
+	#include "SysUtil.h"
 #endif
 
 UINT32					guiBOTTOMPANEL = 0;

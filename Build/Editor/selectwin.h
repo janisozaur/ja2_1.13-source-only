@@ -5,7 +5,7 @@
 #define _SELECTION_WIN_H_
 
 #include "Types.h"
-#include "vobject.h"
+#include "VObject.h"
 
 #include "mousesystem.h"
 #include "Button System.h"
@@ -171,7 +171,7 @@ extern INT32 iDrawMode;
 extern DisplayList *TrashList( DisplayList *pNode );
 
 extern BOOLEAN BuildDisplayWindow( DisplaySpec *pDisplaySpecs, UINT16 usNumSpecs, DisplayList **pDisplayList,
-														SGPPoint * pUpperLeft, SGPPoint * pBottomRight, 
+														SGPPoint * pUpperLeft, SGPPoint * pBottomRight,
 														SGPPoint * pSpacing, UINT16 fFlags );
 
 extern BOOLEAN DisplayWindowFunc( DisplayList *pNode, INT16 iTopCutOff, INT16 iBottomCutOff, SGPPoint *pUpperLeft, UINT16 fFlags);
@@ -181,6 +181,6 @@ extern BOOLEAN DisplayWindowFunc( DisplayList *pNode, INT16 iTopCutOff, INT16 iB
 
 
 
- 
+
 
 

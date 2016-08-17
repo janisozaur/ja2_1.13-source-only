@@ -2,27 +2,27 @@
 	#include "TileEngine All.h"
 #else
 	#include <string.h>
-	#include "types.h"
-	#include "wcheck.h"
-	#include "debug.h"
+	#include "Types.h"
+	#include "WCheck.h"
+	#include "Debug.h"
 	#include "FileMan.h"
 	#include "MemMan.h"
 	#include "structure.h"
 	#include "tiledef.h"
-	#include "worlddef.h"
-	#include "worldman.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
 
-	#include "interface.h"
+	#include "Interface.h"
 
-	#include "isometric utils.h"
-	#include "font.h"
-	#include "font control.h"
-	#include "los.h"
+	#include "Isometric Utils.h"
+	#include "Font.h"
+	#include "Font Control.h"
+	#include "LOS.h"
 
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Smell.h"
 	#include "SaveLoadMap.h"
-	#include "strategicmap.h"
+	#include "StrategicMap.h"
 	#include "sgp_logger.h"
 
 	#include "Sys Globals.h"	//for access to gfEditMode flag
@@ -32,7 +32,7 @@
 	#include "Editor Undo.h"	//for access to AddToUndoList( iMapIndex )
 	#endif
 
-	#include "explosion control.h"
+	#include "Explosion Control.h"
 	#include "Sound Control.h"
 
 	#include "Buildings.h"
@@ -43,7 +43,7 @@
 	#include "Explosion Control.h"	// added by Flugente
 
 	// anv: for ramming people with vehicles
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Overhead.h"
 	#include "Soldier Functions.h"
 	#include "Animation Control.h"
@@ -478,11 +478,11 @@ void checkStructureValidity(STRUCTURE_FILE_REF *str1, STRUCTURE_FILE_REF* str2, 
 			SGP_THROW_IFFALSE( 0 == memcmp(&str1->pAuxData[i], &str2->pAuxData[i], sizeof(AuxObjectData)), _BS(L"bad aux_image : ") << i << _BS::wget );
 		}
 
-		for(int i = 0; i < str1->usNumberOfStructures; ++i){ 
-			count_tiles_1 += str1->pAuxData[i].ubNumberOfTiles; 
+		for(int i = 0; i < str1->usNumberOfStructures; ++i){
+			count_tiles_1 += str1->pAuxData[i].ubNumberOfTiles;
 		}
-		for(int j = 0; j < str2->usNumberOfStructures; ++j){ 
-			count_tiles_2 += str2->pAuxData[j].ubNumberOfTiles; 
+		for(int j = 0; j < str2->usNumberOfStructures; ++j){
+			count_tiles_2 += str2->pAuxData[j].ubNumberOfTiles;
 		}
 		SGP_THROW_IFFALSE(count_tiles_1 == count_tiles_2, L"");
 	}
@@ -519,10 +519,10 @@ STRUCTURE_FILE_REF * LoadStructureFile( STR szFileName )
 		{
 			pFileRef = (STRUCTURE_FILE_REF *) MemAlloc( sizeof( STRUCTURE_FILE_REF ) );
 			memset( pFileRef, 0, sizeof( STRUCTURE_FILE_REF ) );
-		
+
 			CStructureDataReader str_reader(pFileRef);
 			xml_auto::TGenericXMLParser<CStructureDataReader> str_parser(&str_reader);
-		
+
 			SGP_TRYCATCH_RETHROW( str_parser.parseFile(filename), _BS(L"Could not parse file : ") << filename << _BS::wget);
 
 			uiDataSize = str_reader.structure_data_size;
@@ -734,13 +734,13 @@ BOOLEAN OkayToAddStructureToTile( INT32 sBaseGridNo, INT16 sCubeOffset, DB_STRUC
 
 				if ( fVehicleIgnoreObstacles && !(pExistingStructure->fFlags & STRUCTURE_PASSABLE) && !(ppTile[ubTileIndex]->fFlags & TILE_PASSABLE) )
 				{
-					// anv: drive through people 
+					// anv: drive through people
 					if ( pExistingStructure->usStructureID < TOTAL_SOLDIERS )
-					{	
+					{
 						SOLDIERTYPE *pSoldier = MercPtrs[ pExistingStructure->usStructureID ];
 						// but not monsters and such (they can't fall down due to lack of animations)
 						// also make sure AI won't flatten their allies
-						if( !( pSoldier->flags.uiStatusFlags & ( SOLDIER_VEHICLE | SOLDIER_ROBOT | SOLDIER_MONSTER ) ) && 
+						if( !( pSoldier->flags.uiStatusFlags & ( SOLDIER_VEHICLE | SOLDIER_ROBOT | SOLDIER_MONSTER ) ) &&
 							((!ARMED_VEHICLE( MercPtrs[sSoldierID] ) && gGameExternalOptions.fAllowCarsDrivingOverPeople) ||
 							(ARMED_VEHICLE( MercPtrs[sSoldierID] ) && gGameExternalOptions.fAllowTanksDrivingOverPeople)) &&
 							( MercPtrs[ sSoldierID ]->bTeam == gbPlayerNum || MercPtrs[ sSoldierID ]->bTeam != pSoldier->bTeam ) )
@@ -748,7 +748,7 @@ BOOLEAN OkayToAddStructureToTile( INT32 sBaseGridNo, INT16 sCubeOffset, DB_STRUC
 							pExistingStructure = pExistingStructure->pNext;
 							// damage people when driving on them
 							if( fAddingForReal )
-							{	
+							{
 								if ( TANK( MercPtrs[sSoldierID] ) )
 								{
 									pSoldier->EVENT_SoldierGotHit( 0, Random(10)+5, Random(200)+Random(200), MercPtrs[ sSoldierID ]->ubDirection, 0, sSoldierID, FIRE_WEAPON_VEHICLE_TRAUMA, 0, 0, pSoldier->sGridNo );
@@ -793,7 +793,7 @@ BOOLEAN OkayToAddStructureToTile( INT32 sBaseGridNo, INT16 sCubeOffset, DB_STRUC
 								pExistingStructure = pExistingStructure->pNext;
 								continue;
 							}
-						}		
+						}
 					}
 				}
 
@@ -923,7 +923,7 @@ BOOLEAN OkayToAddStructureToTile( INT32 sBaseGridNo, INT16 sCubeOffset, DB_STRUC
 					if( sSoldierID != NOBODY && pExistingStructure->usStructureID < TOTAL_SOLDIERS )
 					{
 						if( MercPtrs[ pExistingStructure->usStructureID ] != NULL && MercPtrs[ pExistingStructure->usStructureID ]->flags.uiStatusFlags & SOLDIER_VEHICLE )
-						{						
+						{
 							if( MercPtrs[ sSoldierID ]->flags.fInNonintAnim == TRUE || gAnimControl[ MercPtrs[ sSoldierID ]->usAnimState ].ubEndHeight == ANIM_PRONE )
 							{
 								pExistingStructure = pExistingStructure->pNext;
@@ -1467,7 +1467,7 @@ STRUCTURE * FindStructure( INT32 sGridNo, UINT32 fFlags )
 {
 	// finds a structure that matches any of the given flags
 	STRUCTURE * pCurrent;
-	
+
 	//bug fix for win98 crash when traveling between sectors
 	if ( TileIsOutOfBounds( sGridNo ) )
 	{
@@ -1788,14 +1788,14 @@ BOOLEAN DamageStructure( STRUCTURE * pStructure, UINT8 ubDamage, UINT8 ubReason,
 	// do damage to a structure; returns TRUE if the structure should be removed
 	STRUCTURE			*pBase;
 	UINT8				ubArmour;
-	
+
 	CHECKF( pStructure );
 	if (pStructure->fFlags & STRUCTURE_PERSON || pStructure->fFlags & STRUCTURE_CORPSE)
 	{
 		// don't hurt this structure, it's used for hit detection only!
 		return( FALSE );
 	}
-	
+
 	if ( (pStructure->pDBStructureRef->pDBStructure->ubArmour == MATERIAL_INDESTRUCTABLE_METAL) || (pStructure->pDBStructureRef->pDBStructure->ubArmour == MATERIAL_INDESTRUCTABLE_STONE) )
 	{
 		return( FALSE );
@@ -1832,7 +1832,7 @@ BOOLEAN DamageStructure( STRUCTURE * pStructure, UINT8 ubDamage, UINT8 ubReason,
 	}
 
 	// Flugente: is there a wall at the loation we are damaging?
-	BOOLEAN fWallHere = FALSE;	
+	BOOLEAN fWallHere = FALSE;
 	if ( FindStructure( sGridNo, STRUCTURE_WALL ) )
 		fWallHere = TRUE;
 
@@ -1885,7 +1885,7 @@ BOOLEAN DamageStructure( STRUCTURE * pStructure, UINT8 ubDamage, UINT8 ubReason,
 		{
 			// we will run into this exact function again. In order to damage the object, we need to do damage of at least half the armour value
 			INT16 damage = ubBaseArmour / 2;
-			
+
 			// this is the damage we will cause. The higher our damage, the faster can we destroy a structure
 			damage += max(1, 2 * sAntiMaterialImpact / ubBaseArmour);
 

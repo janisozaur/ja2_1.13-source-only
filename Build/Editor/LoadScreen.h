@@ -1,5 +1,5 @@
 #include "BuildDefines.h"
-#include "Fileman.h"
+#include "FileMan.h"
 
 #define FILENAME_BUFLEN (20 + 4 + 1)//dnl ch39 190909 +4 is for ".dat", +1 is for '\0' //dnl ch81 021213
 

@@ -2,8 +2,8 @@
 	#include "Laptop All.h"
 #else
 	//#include "Laptop All.h"
-	#include "laptop.h"
-	#include "aim.h"
+	#include "Laptop.h"
+	#include "Aim.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "WordWrap.h"
@@ -15,7 +15,7 @@
 	#include "Quests.h"
 	#include "Tactical Save.h"
 	#include "BriefingRoom_Data.h"
-#endif	
+#endif
 
 
 #define MAX_FILTR_LOCATION_BUTTONS 11
@@ -175,7 +175,7 @@ BOOLEAN DrawEncyclopediaDefaults()
 
 BOOLEAN RemoveEncyclopediaDefaults()
 {
-#ifdef ENABLE_BRIEFINGROOM 
+#ifdef ENABLE_BRIEFINGROOM
 	DeleteVideoObjectFromIndex(guiRustEncyclopediaBackGround);
 #endif // ENABLE_BRIEFINGROOM
 	return(TRUE);
@@ -183,7 +183,7 @@ BOOLEAN RemoveEncyclopediaDefaults()
 
 BOOLEAN InitEncyclopediaDefaults()
 {
-#ifdef ENABLE_BRIEFINGROOM 
+#ifdef ENABLE_BRIEFINGROOM
   VOBJECT_DESC    VObjectDesc;
 
 	// load the Rust bacground graphic and add it
@@ -203,53 +203,53 @@ BOOLEAN DisplayEncyclopediaLocationText()
 
 void ResetTemp()
 {
-#ifdef ENABLE_BRIEFINGROOM 
+#ifdef ENABLE_BRIEFINGROOM
 
 	UINT32 i,NUM_TEMP;
-  
+
 	NUM_TEMP = NUM_MISSION;
-		
+
   	for(i=0; i<NUM_TEMP; i++)
 	{
-			gbriefingRoomDataTemp[i].uiIndex = i;		
-			gbriefingRoomDataTemp[i].Name[ENCYCLOPEDIA_NAME_SIZE]  = '\0';	
-			gbriefingRoomDataTemp[i].sCode[ENCYCLOPEDIA_DECRIPTION_SIZE] = '\0';	
+			gbriefingRoomDataTemp[i].uiIndex = i;
+			gbriefingRoomDataTemp[i].Name[ENCYCLOPEDIA_NAME_SIZE]  = '\0';
+			gbriefingRoomDataTemp[i].sCode[ENCYCLOPEDIA_DECRIPTION_SIZE] = '\0';
 			gbriefingRoomDataTemp[i].sImagePositionX[0] = 0;
-			gbriefingRoomDataTemp[i].sImagePositionY[0] = 0;	
+			gbriefingRoomDataTemp[i].sImagePositionY[0] = 0;
 			gbriefingRoomDataTemp[i].Hidden = FALSE;
 			gbriefingRoomDataTemp[i].MaxPages = 0;
 			gbriefingRoomDataTemp[i].MaxImages = -1;
-						
+
 			//Mission
 			gbriefingRoomDataTemp[i].MissionID = i;
 			gbriefingRoomDataTemp[i].NextMission = -1;
-			gbriefingRoomDataTemp[i].CheckMission = 0;			
+			gbriefingRoomDataTemp[i].CheckMission = 0;
 	}
 #endif // ENABLE_BRIEFINGROOM
 }
 
 void BackupBRandEncyclopedia ( BRIEFINGROOM_M_DATA *EncyBackup, BRIEFINGROOM_M_DATA *Ency, UINT32 NUM)
 {
-#ifdef ENABLE_BRIEFINGROOM 
+#ifdef ENABLE_BRIEFINGROOM
 
 	UINT32 i,NUM_TEMP;
 
 	NUM_TEMP = NUM_MISSION;
-		
+
   	for(i=0; i<NUM_TEMP; i++)
 	{
 		Ency[i].uiIndex = EncyBackup[i].uiIndex;
-		
+
 		Ency[i].Hidden = EncyBackup[i].Hidden;
 
-		Ency[i].bvisible = EncyBackup[i].bvisible;	
+		Ency[i].bvisible = EncyBackup[i].bvisible;
 
 		Ency[i].MissionID = EncyBackup[i].MissionID;
 		Ency[i].NextMission = EncyBackup[i].NextMission;
-			
-		Ency[i].CheckMission = EncyBackup[i].CheckMission;		
+
+		Ency[i].CheckMission = EncyBackup[i].CheckMission;
 	}
-	
+
 #endif // ENABLE_BRIEFINGROOM
 }
 
@@ -257,7 +257,7 @@ void CopyToTemp ( BRIEFINGROOM_M_DATA *Ency, BOOLEAN bFiltr, INT32 sort, INT32 T
 {
 #ifdef ENABLE_BRIEFINGROOM
 	UINT32 i, NUM_TEMP;
-	
+
 	BOOLEAN bBoxShow;
 	ID = 0;
 	IDimage = 0;
@@ -267,67 +267,67 @@ void CopyToTemp ( BRIEFINGROOM_M_DATA *Ency, BOOLEAN bFiltr, INT32 sort, INT32 T
 	MaxLocation = 0;
     bBoxShow = TRUE;
 	ResetVal = FALSE;
-	
+
 	NUM_TEMP = NUM_MISSION;
-		
+
   	for(i=0; i<NUM_TEMP; i++)
 	{
-	
+
 		gbriefingRoomDataTemp[i].uiIndex = i;
 		Ency[i].uiIndex = i;
-			
-			
+
+
 		if ( bBriefingRoomSpecialMission  == TRUE )
 		{
-			
+
 		}
 		else if ( bBriefingRoom == TRUE )
 		{
-			
+
 			//Mission ID
 			gbriefingRoomDataTemp[MaxLocation].MissionID = Ency[i].MissionID;
 			gbriefingRoomDataTemp[MaxLocation].NextMission = Ency[i].NextMission;
 			gbriefingRoomDataTemp[MaxLocation].CheckMission = Ency[i].CheckMission;
-		/*	
-			if ( saveMissionData[i].CheckMission == MISSIONEND || saveMissionData[i].CheckMission == MISSIONNOSTARTED ) 
+		/*
+			if ( saveMissionData[i].CheckMission == MISSIONEND || saveMissionData[i].CheckMission == MISSIONNOSTARTED )
 			{
 				saveMissionData[i].CheckMission = MISSIONNOSTARTED;
 				Ency[i].Hidden = TRUE;
 			}
-			else 
+			else
 			{
 				saveMissionData[i].CheckMission = MISSIONNOSTARTED;
-				Ency[i].Hidden = FALSE; 
+				Ency[i].Hidden = FALSE;
 			}
-		*/	
-		
-		}	
-		
-			
-		if ( Ency[i].Hidden == TRUE && TypFiltr == NO_FILTR ) //&& Ency[i].Filtr != FALSE ) 
-		{	
+		*/
 
-			bBoxShow = FALSE;	
-					
+		}
+
+
+		if ( Ency[i].Hidden == TRUE && TypFiltr == NO_FILTR ) //&& Ency[i].Filtr != FALSE )
+		{
+
+			bBoxShow = FALSE;
+
 			wcscpy(gbriefingRoomDataTemp[MaxLocation].Name, Ency[i].Name);
-			
+
 			gbriefingRoomDataTemp[MaxLocation].sImagePositionX[0] = Ency[i].sImagePositionX[0];
 			gbriefingRoomDataTemp[MaxLocation].sImagePositionY[0] = Ency[i].sImagePositionY[0];
-			
-			
+
+
 			gbriefingRoomDataTemp[MaxLocation].bvisible = Ency[i].bvisible;
-			gbriefingRoomDataTemp[MaxLocation].Hidden = Ency[i].Hidden;	
-				
+			gbriefingRoomDataTemp[MaxLocation].Hidden = Ency[i].Hidden;
+
 			gbriefingRoomDataTemp[MaxLocation].MaxImages = Ency[i].MaxImages;
-			
+
 			gbriefingRoomDataTemp[MaxLocation].MaxPages = Ency[i].MaxPages;
-			
+
 			MaxLocation++;
-			
+
 		}
 	}
-	
-	if ( bBoxShow == TRUE && ShowBox == TRUE ) 
+
+	if ( bBoxShow == TRUE && ShowBox == TRUE )
 	{
 		ResetVal = TRUE;
 		//DoLapTopMessageBox( MSG_BOX_LAPTOP_DEFAULT, pSectorPageText[ 4 ], LAPTOP_SCREEN, MSG_BOX_FLAG_OK, NULL);
@@ -352,9 +352,9 @@ void InitSoundButtons()
 		SetButtonCursor(guiSoundButtons[i], CURSOR_WWW);
 		MSYS_SetBtnUserData( guiSoundButtons[i], 0, i);
 		usPosY += ENCYCLOPEDIA_FILTR_BUTTON_GAP;
-		
+
 		SetRegionFastHelpText( &gSelectedSoundButtonTextRegion[ i ], pOtherButtonsHelpText[i] );
-		SetButtonFastHelpText( guiSoundButtons[ i ], pOtherButtonsHelpText[i]  );	
+		SetButtonFastHelpText( guiSoundButtons[ i ], pOtherButtonsHelpText[i]  );
 	}
 }
 
@@ -369,11 +369,11 @@ void InitData ( BOOLEAN bInit)
   IDNewLocation = 0;
   MaxLocation = 0;
   ENCYCLOPEDIA_PAGE = 0;
-  
-  
+
+
   ResetTemp();
-  
-  
+
+
   if ( bBriefingRoom == TRUE )
 	{
 		#ifdef ENABLE_BRIEFINGROOM
@@ -386,12 +386,12 @@ void InitData ( BOOLEAN bInit)
 		CopyToTemp (gBriefingRoomSpecialMissionData, TRUE, NONE_FILTR , NO_FILTR, FALSE );
 		#endif
 	}
-	
+
     if ( bBriefingRoomSpecialMission  == TRUE || bBriefingRoom == TRUE ) bSoundButtons = TRUE; else bSoundButtons = FALSE;
-	
+
 	if ( bSoundButtons == TRUE )
 		InitSoundButtons();
-		
+
 	ResetVal = bInit;
 #endif // ENABLE_BRIEFINGROOM
 }
@@ -400,13 +400,13 @@ BOOLEAN EnterEncyclopediaLocation()
 {
 #ifdef ENABLE_BRIEFINGROOM
 	CHAR8 str[MAX_ENCYCLOPEDIA_CHARS];
-    
+
 	InitData (ResetVal);
 
 #ifdef ENCYCLOPEDIA_WORKS
 	UINT16	usPosX, usPosY, i;
 	InitEncyclopediaDefaults();
-	
+
 	guiEncyclopediaLocationPageButtonImage =	LoadButtonImage("ENCYCLOPEDIA\\BottomButtons2.sti", -1,0,-1,1,-1 );
 
 	usPosX = ENCYCLOPEDIA_LOCATION_PAGE1_X+15;
@@ -424,7 +424,7 @@ BOOLEAN EnterEncyclopediaLocation()
 		MSYS_SetBtnUserData( guiEncyclopediaLocationPageButton[i], 0, i);
 		usPosX += ENCYCLOPEDIA_LOCATION_PAGE_GAP;
 	}
-	
+
 	usPosX=0;
 	//Load graphic for buttons
 	guiEncyclopediaiPageButtonImage =	LoadButtonImage("ENCYCLOPEDIA\\BottomButtons2.sti", -1,0,-1,1,-1 );
@@ -446,25 +446,25 @@ BOOLEAN EnterEncyclopediaLocation()
 		usPosX += ENCYCLOPEDIA_LOCATION_PAGE_GAP+60;
 	}
 #endif
-	
+
 	fFirstTimeInEncyclopediaLocation = FALSE;
 
 	RenderEncyclopediaLocation(FALSE);
-	
+
 	RenderButtonDisabled();
-	
+
 #ifdef ENCYCLOPEDIA_WORKS
-	DisableButton( guiEncyclopediaPageButton[0] );	
-	DisableButton( guiEncyclopediaLocationPageButton[0] );	
+	DisableButton( guiEncyclopediaPageButton[0] );
+	DisableButton( guiEncyclopediaLocationPageButton[0] );
 #endif
 
-	if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONSTART || gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONEND )				
+	if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONSTART || gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONEND )
 		DisableButton ( guiSoundButtons[1] );
-	else if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONNOSTARTED )	
+	else if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONNOSTARTED )
 		EnableButton ( guiSoundButtons[1] );
-	
+
 #ifdef ENCYCLOPEDIA_WORKS
-	if ( MaxLocation == -1 || MaxLocation == 0 || MaxLocation == 1 ) 
+	if ( MaxLocation == -1 || MaxLocation == 0 || MaxLocation == 1 )
 		DisableButton( guiEncyclopediaLocationPageButton[2] );
 #endif
 
@@ -476,7 +476,7 @@ BOOLEAN EnterEncyclopediaLocation()
 
 	RenderMap();
 
-#endif // ENABLE_BRIEFINGROOM 
+#endif // ENABLE_BRIEFINGROOM
 
 	return(TRUE);
 }
@@ -492,16 +492,16 @@ void ExitEncyclopediaLocation()
 
 #ifdef ENCYCLOPEDIA_WORKS
 	RemoveEncyclopediaDefaults();
-	
+
 	if (guiEncyclopediaiPageButtonImage != -1 )
 		UnloadButtonImage( guiEncyclopediaiPageButtonImage );
-	
+
 	if (guiEncyclopediaLocationPageButtonImage != -1 )
 		UnloadButtonImage( guiEncyclopediaLocationPageButtonImage );
 
 	for(i=0; i<3; i++)
  		RemoveButton( guiEncyclopediaPageButton[i] );
-		
+
 	for(i=0; i<3; i++)
  		RemoveButton( guiEncyclopediaLocationPageButton[i] );
 #endif
@@ -511,7 +511,7 @@ void ExitEncyclopediaLocation()
 		if ( guiSoundButtonsImage != -1 )
 		{
 			UnloadButtonImage( guiSoundButtonsImage );
-		
+
 			for(i=0; i<MAX_MISSION_BUTTONS; i++)
 			{
 				RemoveButton( guiSoundButtons[i] );
@@ -519,13 +519,13 @@ void ExitEncyclopediaLocation()
 			}
 		}
 	}
-	
+
 
 	bSoundButtons = FALSE;
-		
+
 	bBriefingRoom  = FALSE;
 	bBriefingRoomSpecialMission = FALSE;
-	
+
 }
 
 void HandleEncyclopediaLocation()
@@ -537,7 +537,7 @@ void RenderButtonDisabled()
 {
 #ifdef ENABLE_BRIEFINGROOM
 #ifdef ENCYCLOPEDIA_WORKS
-	if ( bPage2 == FALSE && bPage3 == FALSE ) 
+	if ( bPage2 == FALSE && bPage3 == FALSE )
 	{
 		DisableButton( guiEncyclopediaPageButton[0] );
 		DisableButton( guiEncyclopediaPageButton[2] );
@@ -565,8 +565,8 @@ void RenderButtonDisabled3()
 #ifdef ENABLE_BRIEFINGROOM
 #ifdef ENCYCLOPEDIA_WORKS
 	DisableButton( guiEncyclopediaLocationPageButton[0] );
-	
-	if ( MaxLocation == -1 || MaxLocation == 0 || MaxLocation == 1 ) 
+
+	if ( MaxLocation == -1 || MaxLocation == 0 || MaxLocation == 1 )
 		DisableButton( guiEncyclopediaLocationPageButton[2] );
 	else
 		EnableButton( guiEncyclopediaLocationPageButton[2] );
@@ -590,13 +590,13 @@ void RenderBoxDisabledButton()
 	MaxImages = 1;
 	MaxLocation = 0;
 	IDimage = 0;
-	
+
 #ifdef ENCYCLOPEDIA_WORKS
 	DisableButton( guiEncyclopediaLocationPageButton[0] );
 	//DisableButton( guiEncyclopediaLocationPageButton[1] );
 	DisableButton( guiEncyclopediaLocationPageButton[2] );
-		
-	DisableButton( guiEncyclopediaPageButton[0] );	
+
+	DisableButton( guiEncyclopediaPageButton[0] );
 	DisableButton( guiEncyclopediaPageButton[1] );
 	DisableButton( guiEncyclopediaPageButton[2] );
 #endif
@@ -609,11 +609,11 @@ BOOLEAN  RenderMap()
   VOBJECT_DESC	VObjectDesc;
   char fileName[500];
   CHAR8	zImage[MAX_ENCYCLOPEDIA_CHARS];
-  
+
   BOOLEAN bImage = TRUE;
 
-    VObjectDesc.fCreateFlags = VSURFACE_CREATE_FROMFILE;	
-	
+    VObjectDesc.fCreateFlags = VSURFACE_CREATE_FROMFILE;
+
 	if ( IDimage > -1  )
 	{
 		sprintf(zImage, "BriefingRoom\\mission%d_%d.STI", gbriefingRoomDataTemp[LocationID].MissionID,IDimage);
@@ -623,20 +623,20 @@ BOOLEAN  RenderMap()
 			bImage = TRUE;
 		}
 	}
-	
+
 	if (IDimage == -1 || IDimage > MaxImages ) //|| IDimage > 4 )
 		{
 			IDimage = 0;
 		}
-			
+
 	if (IDimage == -1 ) IDimage = 0;
-	
-	
+
+
 	if( !FileExists(fileName) )
 	{
 		IDimage = -1;
-	}	
-	
+	}
+
 	if ( IDimage > -1 && gbriefingRoomDataTemp[LocationID].MaxImages != -1 && (bBriefingRoom == TRUE || bBriefingRoomSpecialMission == TRUE ) )
 	{
 		strcpy(VObjectDesc.ImageFile, fileName);
@@ -644,9 +644,9 @@ BOOLEAN  RenderMap()
 		//BltVideoObjectFromIndex( FRAME_BUFFER, gbriefingRoomDataTemp[LocationID].uiIndex, 0 , ENCYCLOPEDIA_LOCATION_BOX_X + 50 ,  ENCYCLOPEDIA_LOCATION_BOX_Y - 210, VO_BLT_SRCTRANSPARENCY, NULL );
 		BltVideoObjectFromIndex( FRAME_BUFFER, gbriefingRoomDataTemp[LocationID].uiIndex, 0 , ENCYCLOPEDIA_IMAGE_X + gbriefingRoomDataTemp[LocationID].sImagePositionX[0] ,  ENCYCLOPEDIA_IMAGE_Y + gbriefingRoomDataTemp[LocationID].sImagePositionY[0], VO_BLT_SRCTRANSPARENCY, NULL );
 	}
-	
-	
-	
+
+
+
 
 #endif // ENABLE_BRIEFINGROOM
 	return(TRUE);
@@ -656,26 +656,26 @@ void RenderEncyclopediaLocation( BOOLEAN bHidden )
 {
 #ifdef ENABLE_BRIEFINGROOM
   UINT16	i;
-  UINT8		ubNumLines=11; 
+  UINT8		ubNumLines=11;
   UINT16	usPosY;
   //UINT8			ubFontHeight;
   UINT16	usStringPixLength;
-  CHAR16	zString[512]; 
+  CHAR16	zString[512];
   CHAR16	zString2[512];
-  
+
  CHAR16 P1[1120],P2[1120];
  CHAR8 fileNameEdt[80];
-			
+
   P1[0] = 0;
   P2[0] = 0;
 
 
 	DrawEncyclopediaDefaults();
-	
+
 	DisplayEncyclopediaLocationText();
-	
+
 	//ubFontHeight = (UINT8)GetFontHeight(ENCYCLOPEDIA_LOCATION_BOX_FONT);
-	
+
     sprintf(fileNameEdt, "BriefingRoom\\EDT\\mission%d.edt", gbriefingRoomDataTemp[LocationID].MissionID);
 	LoadEncryptedDataFromFile(fileNameEdt, P1, 1120*2*ID, 1120);
 
@@ -683,43 +683,43 @@ void RenderEncyclopediaLocation( BOOLEAN bHidden )
 	bPage3 = TRUE;
 
 	ENCYCLOPEDIA_PAGE = gbriefingRoomDataTemp[LocationID].MaxPages-1;
-	
+
 	MaxImages = gbriefingRoomDataTemp[LocationID].MaxImages;//-1;
-	
+
 
 	if ( bBriefingRoom == TRUE || bBriefingRoomSpecialMission == TRUE && ResetVal == FALSE )
 	{
 		swprintf( zString, gbriefingRoomDataTemp[LocationID].Name );
         wcscpy( zString2,zString );
 	}
-	
+
 	ShadowVideoSurfaceRect( FRAME_BUFFER, ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, ENCYCLOPEDIA_LOCATION_BOX_Y + 13 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 227 , ENCYCLOPEDIA_LOCATION_BOX_X + ENCYCLOPEDIA_LOCATION_BOX_WIDTH + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, ENCYCLOPEDIA_LOCATION_BOX_Y + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP-42);
 
 	ShadowVideoSurfaceRect( FRAME_BUFFER, ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, ENCYCLOPEDIA_LOCATION_BOX_Y + 13 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 50 , ENCYCLOPEDIA_LOCATION_BOX_X + ENCYCLOPEDIA_LOCATION_BOX_WIDTH + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, ENCYCLOPEDIA_LOCATION_BOX_Y + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP-20);
-	
+
 	//Reset
     //if ( ResetVal == TRUE )
 	//DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X, ENCYCLOPEDIA_LOCATION_BOX_Y-225, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, FONT14ARIAL, ENCYCLOPEDIA_LOCATION_BOX_COLOR, pSectorPageText[ 4 ], FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED);
-	
+
 	//Reset
 	if ( ResetVal == TRUE )
 	DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP + 3, ENCYCLOPEDIA_LOCATION_BOX_Y + 18 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 65, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, L"", FONT_MCOLOR_BLACK, FALSE, RIGHT_JUSTIFIED);
-	
+
 	if ( /* gbriefingRoomDataTemp[LocationID].SpecialQuestImage == FALSE && */ ResetVal == FALSE)
 	{
-	
-	if ( IDimage == -1 || MaxImages == -1 ) IDimage = 0;	
-	
+
+	if ( IDimage == -1 || MaxImages == -1 ) IDimage = 0;
+
     sprintf(fileNameEdt, "BriefingRoom\\EDT\\description%d.edt", gbriefingRoomDataTemp[LocationID].MissionID);
 	if ( FileExists(fileNameEdt)  )
 		LoadEncryptedDataFromFile(fileNameEdt, P2, 1120*2*IDimage, 1120);
-	
+
 	if ( FileExists(fileNameEdt)  )
 		DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP + 3, ENCYCLOPEDIA_LOCATION_BOX_Y + 18 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 50, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, P2, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 	else
 		DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP + 3, ENCYCLOPEDIA_LOCATION_BOX_Y + 18 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 50, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, L"", FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
-/*	
+
+/*
 	if ( IDimage == 1 )
 		DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP + 3, ENCYCLOPEDIA_LOCATION_BOX_Y + 18 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 50, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, gbriefingRoomDataTemp[LocationID].sImageDesc1, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 	else if (IDimage == 2 && gbriefingRoomDataTemp[LocationID].sImageDesc2 != '\0' )
@@ -730,11 +730,11 @@ void RenderEncyclopediaLocation( BOOLEAN bHidden )
 		DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP + 3, ENCYCLOPEDIA_LOCATION_BOX_Y + 18 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 50, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, gbriefingRoomDataTemp[LocationID].sImageDesc4, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 */
 	}
-	
+
 	//Reset
 	if ( ResetVal == TRUE )
 	DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP + 3, ENCYCLOPEDIA_LOCATION_BOX_Y + 18 + ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP - 50, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, L"", FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-	
+
 	/*
 	if ( ID == 0 )
 		usStringPixLength = StringPixLength( P1, ENCYCLOPEDIA_LOCATION_BOX_FONT);
@@ -745,17 +745,17 @@ void RenderEncyclopediaLocation( BOOLEAN bHidden )
 	else if (ID == 3 ) // && gbriefingRoomDataTemp[LocationID].sDesc4 != '\0' )
 	*/
 		usStringPixLength = StringPixLength( P2, ENCYCLOPEDIA_LOCATION_BOX_FONT);
-		
+
 	//Inventory name
-	if (bBriefingRoom == TRUE || ResetVal == FALSE ) 
+	if (bBriefingRoom == TRUE || ResetVal == FALSE )
 	DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_X, ENCYCLOPEDIA_LOCATION_BOX_Y-225, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, FONT14ARIAL, ENCYCLOPEDIA_LOCATION_BOX_COLOR, zString2, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED);
 
 	//reset
 	if ( ResetVal == TRUE )
 	usStringPixLength = StringPixLength( L"", ENCYCLOPEDIA_LOCATION_BOX_FONT);
-		
+
 	usPosY = ENCYCLOPEDIA_LOCATION_BOX_Y + 13;
-	
+
 	//draw top line of the popup background
 	ShadowVideoSurfaceRect( FRAME_BUFFER, ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, usPosY+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, ENCYCLOPEDIA_LOCATION_BOX_X + ENCYCLOPEDIA_LOCATION_BOX_WIDTH+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, usPosY + ENCYCLOPEDIA_LOCATION_BOX_SECTION_HEIGHT+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP-1);
 
@@ -766,48 +766,48 @@ void RenderEncyclopediaLocation( BOOLEAN bHidden )
 		ShadowVideoSurfaceRect( FRAME_BUFFER, ENCYCLOPEDIA_LOCATION_BOX_X+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, usPosY+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, ENCYCLOPEDIA_LOCATION_BOX_X + ENCYCLOPEDIA_LOCATION_BOX_WIDTH+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP, usPosY + ENCYCLOPEDIA_LOCATION_BOX_SECTION_HEIGHT+ENCYCLOPEDIA_LOCATION_BOX_SHADOW_GAP-1);
 		usPosY += ENCYCLOPEDIA_LOCATION_BOX_SECTION_HEIGHT;
 	}
-		
-	if ( ResetVal == FALSE ) 
+
+	if ( ResetVal == FALSE )
 		DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_DESC_X, ENCYCLOPEDIA_LOCATION_BOX_DESC_Y + 13, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, P1, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 
 	//Reset
 	if ( ResetVal == TRUE )
 	   DisplayWrappedString(ENCYCLOPEDIA_LOCATION_BOX_DESC_X, ENCYCLOPEDIA_LOCATION_BOX_DESC_Y + 13, ENCYCLOPEDIA_LOCATION_BOX_TEXT_WIDTH, 6, ENCYCLOPEDIA_LOCATION_BOX_FONT, ENCYCLOPEDIA_LOCATION_BOX_COLOR, L"", FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
-		
+
 	MarkButtonsDirty( );
 	RenderWWWProgramTitleBar( );
-	
+
 	if ( ENCYCLOPEDIA_PAGE == -1 || ENCYCLOPEDIA_PAGE == 0 )
 		RenderButtonDisabled4();
-		
+
 #ifdef ENCYCLOPEDIA_WORKS
 	if ( bHidden == TRUE && ( MaxImages == 0 || MaxImages == -1 || MaxImages == 1 ) ) //|| gbriefingRoomDataTemp[0].MaxImages == 1 ) )
 		DisableButton( guiEncyclopediaPageButton[1] );
 	else if ( bHidden == FALSE && MaxImages > 1 )
 		EnableButton( guiEncyclopediaPageButton[1] );
-		
+
 	//Reset
-	if ( ResetVal == TRUE )	
+	if ( ResetVal == TRUE )
 		DisableButton( guiEncyclopediaPageButton[1] );
 #endif
 
-	if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONSTART || gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONEND )				
+	if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONSTART || gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONEND )
 		DisableButton ( guiSoundButtons[1] );
-	else if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONNOSTARTED )	
+	else if ( gbriefingRoomDataTemp[LocationID].CheckMission == MISSIONNOSTARTED )
 		EnableButton ( guiSoundButtons[1] );
-	
-	//if ( ResetVal == TRUE ) 
+
+	//if ( ResetVal == TRUE )
 	//DoLapTopMessageBox( MSG_BOX_LAPTOP_DEFAULT, pSectorPageText[ 4 ], LAPTOP_SCREEN, MSG_BOX_FLAG_OK, NULL);
 
   InvalidateRegion(LAPTOP_SCREEN_UL_X,LAPTOP_SCREEN_WEB_UL_Y,LAPTOP_SCREEN_LR_X,LAPTOP_SCREEN_WEB_LR_Y);
-#endif // ENABLE_BRIEFINGROOM  
+#endif // ENABLE_BRIEFINGROOM
 }
 
 void SelectEncyclopediaLocationPageRegionCallBack(GUI_BUTTON * btn, INT32 reason )
-{ 
+{
 #ifdef ENABLE_BRIEFINGROOM
 	UINT8	ubRetValue = (UINT8)MSYS_GetBtnUserData( btn, 0 );
-	
+
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags |= BUTTON_CLICKED_ON;
@@ -817,11 +817,11 @@ void SelectEncyclopediaLocationPageRegionCallBack(GUI_BUTTON * btn, INT32 reason
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
 			btn->uiFlags &= (~BUTTON_CLICKED_ON );
-			
+
 			if ( ubRetValue == 2 )
 			{
 				ID++;
-				
+
 #ifdef ENCYCLOPEDIA_WORKS
 				if ( ID == ENCYCLOPEDIA_PAGE || ID > ENCYCLOPEDIA_PAGE ) DisableButton( guiEncyclopediaPageButton[2] );
 				if ( ID > 0 ) EnableButton( guiEncyclopediaPageButton[0] );
@@ -845,9 +845,9 @@ void SelectEncyclopediaLocationPageRegionCallBack(GUI_BUTTON * btn, INT32 reason
 			else if ( ubRetValue == 1 )
 			{
 				IDimage++;
-				
+
 				if (  IDimage > MaxImages || IDimage == -1 ) IDimage = 0;
-	
+
 				RenderEncyclopediaLocation(FALSE);
 				RenderMap();
 			}
@@ -864,7 +864,7 @@ void SelectEncyclopediaLocationRegionCallBack(GUI_BUTTON * btn, INT32 reason )
 {
 #ifdef ENABLE_BRIEFINGROOM
 	UINT8	ubRetValue = (UINT8)MSYS_GetBtnUserData( btn, 0 );
-	
+
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags |= BUTTON_CLICKED_ON;
@@ -878,22 +878,22 @@ void SelectEncyclopediaLocationRegionCallBack(GUI_BUTTON * btn, INT32 reason )
 			{
 				IDNewLocation++;
 				ID = 0;
-				
+
 				LocationID = IDNewLocation;
-				
+
 #ifdef ENCYCLOPEDIA_WORKS
 				if ( IDNewLocation == MaxLocation - 1 || IDNewLocation == -1 ) DisableButton( guiEncyclopediaLocationPageButton[2] );
 				if ( IDNewLocation > 0 ) EnableButton( guiEncyclopediaLocationPageButton[0] );
 #endif
 
 				IDimage = 0;
-				
+
 				RenderEncyclopediaLocation(FALSE);
 				RenderButtonDisabled2();
-				
+
 					if ( ENCYCLOPEDIA_PAGE == -1 || ENCYCLOPEDIA_PAGE == 0 )
 						RenderButtonDisabled4();
-						
+
 #ifdef ENCYCLOPEDIA_WORKS
 					if ( MaxImages == -1 || MaxImages == 0 || MaxImages == 1 )
 						DisableButton( guiEncyclopediaPageButton[1] );
@@ -904,32 +904,32 @@ void SelectEncyclopediaLocationRegionCallBack(GUI_BUTTON * btn, INT32 reason )
 					if( uiSoundSampleBR!=NO_SAMPLE )
 					{
 						SoundStop( uiSoundSampleBR );
-					}	
-						
+					}
+
 				RenderMap();
 
 			}
 			else if ( ubRetValue == 0 )
 			{
 				ID = 0;
-				
+
 				IDNewLocation--;
-				
+
 				LocationID = IDNewLocation;
-				
+
 #ifdef ENCYCLOPEDIA_WORKS
 				if ( IDNewLocation == 0 || IDNewLocation == -1 ) DisableButton( guiEncyclopediaLocationPageButton[0] );
 				if ( IDNewLocation < MaxLocation-1) EnableButton( guiEncyclopediaLocationPageButton[2] );
 #endif
 
 				IDimage = 0;
-				
+
 				RenderEncyclopediaLocation(FALSE);
 				RenderButtonDisabled2();
-				
+
 				if ( ENCYCLOPEDIA_PAGE == -1 || ENCYCLOPEDIA_PAGE == 0 )
 					RenderButtonDisabled4();
-				
+
 #ifdef ENCYCLOPEDIA_WORKS
 				if ( MaxImages == -1 || MaxImages == 0 || MaxImages == 1 )
 					DisableButton( guiEncyclopediaPageButton[1] );
@@ -940,20 +940,20 @@ void SelectEncyclopediaLocationRegionCallBack(GUI_BUTTON * btn, INT32 reason )
 				if( uiSoundSampleBR!=NO_SAMPLE )
 				{
 					SoundStop( uiSoundSampleBR );
-				}	
-						
+				}
+
 				RenderMap();
 
 			}
 			else if ( ubRetValue == 1 )
 			{
 				//ExitEncyclopediaLocation();
-				
+
 				if( uiSoundSampleBR!=NO_SAMPLE )
 				{
 					SoundStop( uiSoundSampleBR );
-				}	
-				
+				}
+
 				if ( bBriefingRoom == TRUE || bBriefingRoomSpecialMission == TRUE )
 				{
 					if(!fFirstTimeInEncyclopediaLocation) guiCurrentLaptopMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;
@@ -980,7 +980,7 @@ void SelectSoundButtonsRegionCallBack(GUI_BUTTON * btn, INT32 reason )
 #ifdef ENABLE_BRIEFINGROOM
 	UINT8	ubRetValue = (UINT8)MSYS_GetBtnUserData( btn, 0 );
 	CHAR8 str[MAX_ENCYCLOPEDIA_CHARS];
-	
+
 	if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 	{
 		btn->uiFlags |= BUTTON_CLICKED_ON;
@@ -990,55 +990,55 @@ void SelectSoundButtonsRegionCallBack(GUI_BUTTON * btn, INT32 reason )
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
 			btn->uiFlags &= (~BUTTON_CLICKED_ON );
-			
-		
+
+
 		   if ( bBriefingRoom == TRUE )
 			{
-			
+
 				if ( ubRetValue == 0 )
 				{
-				
+
 					if( uiSoundSampleBR!=NO_SAMPLE )
 					{
 						SoundStop( uiSoundSampleBR );
-					}			
-					
+					}
+
 					sprintf(str, "BriefingRoom\\mission%d.wav", gbriefingRoomDataTemp[LocationID].MissionID);
 					uiSoundSampleBR = PlayJA2SampleFromFile( str, RATE_11025, HIGHVOLUME, 1, MIDDLE );
-					
+
 				}
-				
+
 				if ( ubRetValue == 1 )
 				{
 					if ( gBriefingRoomData[gbriefingRoomDataTemp[LocationID].MissionID].CheckMission == MISSIONNOSTARTED )
 					{
-					
+
 						gbriefingRoomDataTemp[LocationID].CheckMission = MISSIONSTART;
-						gBriefingRoomData[gbriefingRoomDataTemp[LocationID].MissionID].CheckMission = MISSIONSTART;	
-						
+						gBriefingRoomData[gbriefingRoomDataTemp[LocationID].MissionID].CheckMission = MISSIONSTART;
+
 						DisableButton ( guiSoundButtons[1] );
 					}
 				}
-				
+
 			}
 			else if ( bBriefingRoomSpecialMission == TRUE )
 			{
-			
+
 				if ( ubRetValue == 0 )
 				{
 					if( uiSoundSampleBR!=NO_SAMPLE )
 					{
 						SoundStop( uiSoundSampleBR );
-					}			
-					
+					}
+
 					//sprintf(str, gbriefingRoomDataTemp[LocationID].sSounds);
 					sprintf(str, "BriefingRoom\\mission%d.wav", gbriefingRoomDataTemp[LocationID].MissionID);
 					uiSoundSampleBR = PlayJA2SampleFromFile( str, RATE_11025, HIGHVOLUME, 1, MIDDLE );
-			
+
 				}
-			
+
 			}
-				
+
 		}
 	}
 	if(reason & MSYS_CALLBACK_REASON_LOST_MOUSE)
@@ -1058,9 +1058,9 @@ BOOLEAN SaveBriefingRoomToSaveGameFile( HWFILE hFile )
 	UINT32	uiNumBytesWritten;
 	UINT32 i;
 #endif
-	
 
-#ifdef ENABLE_BRIEFINGROOM 
+
+#ifdef ENABLE_BRIEFINGROOM
 	//Briefing room
 	for(i=0; i<NUM_MISSION; i++)
 	{
@@ -1073,8 +1073,8 @@ BOOLEAN SaveBriefingRoomToSaveGameFile( HWFILE hFile )
 	{
 		return( FALSE );
 	}
-	
-	//Briefing room , special mission 
+
+	//Briefing room , special mission
 	for(i=0; i<NUM_MISSION; i++)
 	{
 		saveBriefingRoomSpecialMissionData[i].Hidden = gBriefingRoomSpecialMissionData[ i ].Hidden;
@@ -1111,7 +1111,7 @@ BOOLEAN SaveBriefingRoomToSaveGameFile( HWFILE hFile )
 	{
 		return( FALSE );
 	}
-	
+
 	//ReservedData2
 	for(i=0; i<NUM_PROFILES; i++)
 	{
@@ -1124,7 +1124,7 @@ BOOLEAN SaveBriefingRoomToSaveGameFile( HWFILE hFile )
 	{
 		return( FALSE );
 	}
-	
+
 	//ReservedData3
 	for(i=0; i<MAXITEMS; i++)
 	{
@@ -1149,7 +1149,7 @@ BOOLEAN SaveBriefingRoomToSaveGameFile( HWFILE hFile )
 		return( FALSE );
 	}
 */
-	
+
 	return( TRUE );
 }
 
@@ -1166,7 +1166,7 @@ BOOLEAN LoadBriefingRoomFromLoadGameFile( HWFILE hFile )
 	FileRead( hFile, &saveBriefingRoomData, sizeof( saveBriefingRoomData), &uiNumBytesRead );
 	if( uiNumBytesRead != sizeof( saveBriefingRoomData ) )
 	{
-		// Flugente: one can start a game without this feature and later switch to an exe where it is enabled. At that point, loading the savgame would not be possible - 
+		// Flugente: one can start a game without this feature and later switch to an exe where it is enabled. At that point, loading the savgame would not be possible -
 		// the game expects saveBriefingRoomData but doesn't get any. Pretty odd, considering that the data has ALREADY BEEN READ into gBriefingRoomData at this point. Sigh.
 		// For this reason, we don't return with an error here an simply use what the xml gave us here.
 		// Of course, I'm not familiar with this feature. It would be good if someone who knows this fixes this.
@@ -1183,7 +1183,7 @@ BOOLEAN LoadBriefingRoomFromLoadGameFile( HWFILE hFile )
 			gBriefingRoomData[ i ].Hidden = saveBriefingRoomData[i].Hidden;
 			gBriefingRoomData[ i ].CheckMission = saveBriefingRoomData[i].CheckMission;
 		}
-		
+
 		//Briefing room , special mission
 		FileRead( hFile, &saveBriefingRoomSpecialMissionData, sizeof( saveBriefingRoomSpecialMissionData), &uiNumBytesRead );
 		if( uiNumBytesRead != sizeof( saveBriefingRoomSpecialMissionData ) )
@@ -1205,8 +1205,8 @@ BOOLEAN LoadBriefingRoomFromLoadGameFile( HWFILE hFile )
 	if( uiNumBytesRead != sizeof( saveBriefingRoomReservedData5 ) )
 	{
 		return( FALSE );
-	}	
-	
+	}
+
 	for(i=0; i<MAX_QUESTS; i++)
 	{
 		gLoadBriefingRoomReservedData5[ i ].Hidden = FALSE;
@@ -1218,44 +1218,44 @@ BOOLEAN LoadBriefingRoomFromLoadGameFile( HWFILE hFile )
 	{
 		return( FALSE );
 	}
-	
+
 	for(i=0; i<NUM_SECTOR; i++)
 	{
 		gLoadBriefingRoomReservedData1[ i ].Hidden = saveBriefingRoomReservedData1[i];
 	}
-	
+
 	//ReservedData2
 	FileRead( hFile, &saveBriefingRoomReservedData2, sizeof( saveBriefingRoomReservedData2), &uiNumBytesRead );
 	if( uiNumBytesRead != sizeof( saveBriefingRoomReservedData2 ) )
 	{
 		return( FALSE );
 	}
-	
+
 	for(i=0; i<NUM_PROFILES; i++)
 	{
 		gLoadBriefingRoomReservedData2[ i ].Hidden = saveBriefingRoomReservedData2[i].Hidden;
 		gLoadBriefingRoomReservedData2[ i ].bvisible = saveBriefingRoomReservedData2[i].bvisible;
-	}	
-	
+	}
+
 	//ReservedData3
 	FileRead( hFile, &saveBriefingRoomReservedData3, sizeof( saveBriefingRoomReservedData3), &uiNumBytesRead );
 	if( uiNumBytesRead != sizeof( saveBriefingRoomReservedData3 ) )
 	{
 		return( FALSE );
 	}
-	
+
 	for(i=0; i<MAXITEMS; i++)
 	{
 		gLoadBriefingRoomReservedData3[ i ].Hidden = saveBriefingRoomReservedData3[i];
 	}
-	
+
 	//ReservedData4
 	FileRead( hFile, &saveBriefingRoomReservedData4, sizeof( saveBriefingRoomReservedData4), &uiNumBytesRead );
 	if( uiNumBytesRead != sizeof( saveBriefingRoomReservedData4 ) )
 	{
 		return( FALSE );
 	}
-	
+
 	for(i=0; i<NUM_PROFILES; i++)
 	{
 		gLoadBriefingRoomReservedData4[ i ].Hidden = saveBriefingRoomReservedData4[i];

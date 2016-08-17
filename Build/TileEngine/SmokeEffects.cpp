@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
@@ -6,31 +6,31 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "stdlib.h"
-	#include "debug.h"
-	//#include "soldier control.h"
-	#include "weapons.h"
-	#include "handle items.h"
-	#include "worlddef.h"
-	#include "worldman.h"
-	#include "animation control.h"
-	#include "tile animation.h"
-	#include "handle items.h"
-	#include "smokeeffects.h"
-	#include "message.h"
-	#include "isometric utils.h"
-	#include "renderworld.h"
-	#include "explosion control.h"
+	#include "Debug.h"
+	//#include "Soldier Control.h"
+	#include "Weapons.h"
+	#include "Handle Items.h"
+	#include "WorldDef.h"
+	#include "WorldMan.h"
+	#include "Animation Control.h"
+	#include "Tile Animation.h"
+	#include "Handle Items.h"
+	#include "SmokeEffects.h"
+	#include "Message.h"
+	#include "Isometric Utils.h"
+	#include "RenderWorld.h"
+	#include "Explosion Control.h"
 	#include "Random.h"
 	#include "Game Clock.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "Campaign Types.h"
 	#include "Tactical Save.h"
 #endif
 
 #include "SaveLoadGame.h"
-#include "debug control.h"
+#include "Debug Control.h"
 
-#include "connect.h"
+#include "Connect.h"
 
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
@@ -134,7 +134,7 @@ INT8 FromWorldFlagsToSmokeType( UINT16 ubWorldFlags )
 	{
 		return(DEBRIS_SMOKE_EFFECT);
 	}
-	
+
 	return(NO_SMOKE_EFFECT);
 }
 
@@ -639,7 +639,7 @@ void DecaySmokeEffects( UINT32 uiTime )
 				for ( cnt2 = 0; cnt2 < usNumUpdates; ++cnt2 )
 				{
 					pSmoke->bAge++;
-	
+
 					if ( pSmoke->bAge == 1 )
 					{
 						// ATE: At least mark for update!

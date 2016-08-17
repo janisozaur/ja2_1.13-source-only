@@ -1,21 +1,21 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 	#include "IMP Character Trait.h"
-	#include "_Ja25Englishtext.h"
+	#include "_Ja25EnglishText.h"
 #else
 	#include "IMP Character Trait.h"
 	#include "Button System.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Debug.h"
 	#include "Text.h"
 	#include "Font Control.h"
-	#include "font.h"
-	#include "laptop.h"
-	#include "cursors.h"
+	#include "Font.h"
+	#include "Laptop.h"
+	#include "Cursors.h"
 	#include "IMP MainPage.h"
 	#include "IMPVideoObjects.h"
 	#include "_Ja25EnglishText.h"
-	#include "wordwrap.h"
+	#include "WordWrap.h"
 	#include "CharProfile.h"
 	#include "GameSettings.h"
 #endif
@@ -40,7 +40,7 @@
 
 #define	IMP_CHARACTER_TRAIT__SPACE_BTN_BUTTONS									38
 
-//#define	IMP_CHARACTER_TRAIT_NUMBER_TO_START_2ND_COLUMN			5 
+//#define	IMP_CHARACTER_TRAIT_NUMBER_TO_START_2ND_COLUMN			5
 
 #define	IMP_CHARACTER_TRAIT__TEXT_OFFSET_X											65
 #define	IMP_CHARACTER_TRAIT__TEXT_OFFSET_Y											12
@@ -151,7 +151,7 @@ void EnterIMPCharacterTrait( void )
 							(usPosX + 156), ( usPosY + 17), MSYS_PRIORITY_HIGH,
 								MSYS_NO_CURSOR, MSYS_NO_CALLBACK, NULL );
 			MSYS_AddRegion( &gMR_CharacterTraitHelpTextRegions[ubCnt] );
-			
+
 			//Determine the next x location
 			if( ubCnt < (gGameOptions.fNewTraitSystem ? 6 : 5) )
 				usPosX = IMP_CHARACTER_1ST_COLUMN_START_X + 62;
@@ -169,7 +169,7 @@ void EnterIMPCharacterTrait( void )
 
 
 void RenderIMPCharacterTrait( void )
-{	
+{
 	//render the metal background graphic
 	RenderProfileBackGround();
 

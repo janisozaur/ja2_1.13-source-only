@@ -15,8 +15,8 @@
 
 #ifdef JA2UB
 #include "Ja25Update.h"
-#include "message.h"
-#include "strategicmap.h"
+#include "Message.h"
+#include "StrategicMap.h"
 #include "Map Screen Interface Map.h"
 #include "Strategic Movement.h"
 //#include "Summary Info.h"
@@ -3917,7 +3917,7 @@ void InitStrategicRowD()
 	pSector->ubTraversability[ EAST_STRATEGIC_MOVE ]		= EDGEOFWORLD;
 	pSector->ubTraversability[ SOUTH_STRATEGIC_MOVE ]		= EDGEOFWORLD;
 	pSector->ubTraversability[ WEST_STRATEGIC_MOVE ]		= EDGEOFWORLD;
-	pSector->ubTraversability[ THROUGH_STRATEGIC_MOVE ] = EDGEOFWORLD;	
+	pSector->ubTraversability[ THROUGH_STRATEGIC_MOVE ] = EDGEOFWORLD;
 
 	pSector = &SectorInfo[ SEC_D16 ];
 	pSector->ubTravelRating = 5;
@@ -5575,7 +5575,7 @@ if ( gGameUBOptions.StrategicMovementCostsXML == TRUE )
 	InitStrategicRowO();
 	InitStrategicRowP();
 	}
-#endif	
+#endif
 	//WriteInStrategicMovementCosts("TABLEDATA\\~MovementCosts.xml");
 
 
@@ -5628,13 +5628,13 @@ if ( gGameUBOptions.StrategicMovementCostsXML == TRUE )
 		}
 	}
 	#endif
-	
+
 	#ifdef JA2UB
 	if ( gGameUBOptions.MakeStrategicMovementCosts == TRUE )
 		UpdateCustomMapMovementCosts(); //Ja25 UB
 	//MakeBadSectorListFromMapsOnHardDrive( TRUE ); //ja25 UB
 	#endif
-	
+
 
 
 	return( TRUE );
@@ -5660,7 +5660,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 
 	for ( bLevel = 0; bLevel < 4; bLevel++ )
 	{
-		
+
 		// ATE: Check for existance of 'remove' file - if so, remove this sector from list, adjust
 		// movement costs accordingly...
 		if ( bLevel == 0 )
@@ -5683,17 +5683,17 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 				{
 					SectorInfo[ ( SECTOR( iCol, iRow-1 ) ) ].ubTraversability[ SOUTH_STRATEGIC_MOVE ] = EDGEOFWORLD;
 				}
-					
+
 				if( iCol > 1 )
 				{
 					SectorInfo[ ( SECTOR( iCol-1, iRow ) ) ].ubTraversability[ EAST_STRATEGIC_MOVE ] = EDGEOFWORLD;
 				}
-					
+
 				if( iRow < 16 )
 				{
 					SectorInfo[ ( SECTOR( iCol, iRow+1 ) ) ].ubTraversability[ NORTH_STRATEGIC_MOVE ] = EDGEOFWORLD;
 				}
-					
+
 				if( iCol < 16 )
 				{
 					SectorInfo[ ( SECTOR( iCol+1, iRow ) ) ].ubTraversability[ WEST_STRATEGIC_MOVE ] = EDGEOFWORLD;
@@ -5737,7 +5737,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 		}
 
 		// OK, now check a bunch of conditions...
-		
+
 		// Is this level a virgin?
 		if ( bLevel == 0 )
 		{
@@ -5747,13 +5747,13 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 				{
 					ScreenMsg( MSG_FONT_RED, MSG_CHAT, L"Failed to add map: %S.", zMapName );
 					ScreenMsg( FONT_MCOLOR_DKRED, MSG_INTERFACE, L"Map has already been visited." );
-					
+
 					SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fValidSector = TRUE;
-					sBadSectorsList[iCol][iRow] = 0;					
+					sBadSectorsList[iCol][iRow] = 0;
 				}
 				continue;
 			}
-			
+
 		}
 		else
 		{
@@ -5773,7 +5773,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 				}
 			}
 		}
-		
+
 		// Is this the current sector?
 		if ( gWorldSectorX == iCol && gWorldSectorY == iRow && gbWorldSectorZ == bLevel )
 		{
@@ -5785,14 +5785,14 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 			}
 			continue;
 		}
-		
-		
+
+
 			//We're good!
 			if ( fDisplayMessages )
 			{
 				ScreenMsg( FONT_MCOLOR_WHITE, MSG_CHAT, L"Added Custom map: %S.", zMapName );
 			}
-			
+
 			if ( bLevel == 0 )
 			{
 				if ( SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fCampaignSector )
@@ -5803,7 +5803,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 					continue;
 				}
 			}
-			
+
 			else
 			{
 				// See if this sector exists, and if so is it a campagin sectior?
@@ -5820,14 +5820,14 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 					}
 				}
 			}
-					
+
 			if ( bLevel == 0 )
 			{
 				SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fValidSector = TRUE;
 				sBadSectorsList[iCol][iRow] = 0;
 				SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fCustomSector = TRUE;
-				
-								
+
+
 				if ( gGameUBOptions.AddRandomEnemyToSector == TRUE )
 					{
 						if ( SECTOR( iCol , iRow ) == SEC_H7 || SECTOR( iCol , iRow )  == SEC_H8  || SECTOR( iCol , iRow ) == SEC_H9  ||
@@ -5835,7 +5835,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 							 SECTOR( iCol , iRow ) == SEC_I10 || SECTOR( iCol , iRow ) == SEC_I11 || SECTOR( iCol , iRow ) == SEC_I12 ||
 							 SECTOR( iCol , iRow ) == SEC_I13 || SECTOR( iCol , iRow ) == SEC_J11 || SECTOR( iCol , iRow ) == SEC_J12 ||
 							 SECTOR( iCol , iRow ) == SEC_J13 || SECTOR( iCol , iRow ) == SEC_K14 || SECTOR( iCol , iRow ) == SEC_K15 ||
-							 SECTOR( iCol , iRow ) == SEC_K16 || SECTOR( iCol , iRow ) == SEC_L15 || 
+							 SECTOR( iCol , iRow ) == SEC_K16 || SECTOR( iCol , iRow ) == SEC_L15 ||
 							 ( SECTOR( iCol , iRow ) == SEC_I13 && bLevel == 1) || ( SECTOR( iCol , iRow ) == SEC_J13 && bLevel == 1) ||
 							 ( SECTOR( iCol , iRow ) == SEC_J14 && bLevel == 1) || ( SECTOR( iCol , iRow ) == SEC_K15 && bLevel == 1) ||
 							 ( SECTOR( iCol , iRow ) == SEC_K15 && bLevel == 2) || ( SECTOR( iCol , iRow ) == SEC_L15 && bLevel == 2) ||
@@ -5848,12 +5848,12 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 								RandomAddEnemy( iCol, iRow, bLevel );
 							 }
 					}
-			
-			
+
+
 			}
 			else
 			{
-			
+
 				pSector = FindUnderGroundSector( (UINT8)iCol, (UINT8)iRow, bLevel );
 				if ( pSector )
 				{
@@ -5871,7 +5871,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 							 SECTOR( iCol , iRow ) == SEC_I10 || SECTOR( iCol , iRow ) == SEC_I11 || SECTOR( iCol , iRow ) == SEC_I12 ||
 							 SECTOR( iCol , iRow ) == SEC_I13 || SECTOR( iCol , iRow ) == SEC_J11 || SECTOR( iCol , iRow ) == SEC_J12 ||
 							 SECTOR( iCol , iRow ) == SEC_J13 || SECTOR( iCol , iRow ) == SEC_K14 || SECTOR( iCol , iRow ) == SEC_K15 ||
-							 SECTOR( iCol , iRow ) == SEC_K16 || SECTOR( iCol , iRow ) == SEC_L15 || 
+							 SECTOR( iCol , iRow ) == SEC_K16 || SECTOR( iCol , iRow ) == SEC_L15 ||
 							 ( SECTOR( iCol , iRow ) == SEC_I13 && bLevel == 1) || ( SECTOR( iCol , iRow ) == SEC_J13 && bLevel == 1) ||
 							 ( SECTOR( iCol , iRow ) == SEC_J14 && bLevel == 1) || ( SECTOR( iCol , iRow ) == SEC_K15 && bLevel == 1) ||
 							 ( SECTOR( iCol , iRow ) == SEC_K15 && bLevel == 2) || ( SECTOR( iCol , iRow ) == SEC_L15 && bLevel == 2) ||
@@ -5883,12 +5883,12 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 								ScreenMsg( FONT_MCOLOR_WHITE, MSG_CHAT, L"Added Random Enemy to sector : %S.", zMapName );
 								RandomAddEnemy( iCol, iRow, bLevel );
 							 }
-			
+
 						}
-				
+
 				}
 			}
-	
+
 		// I guess we need to load level to get the map information....?
 		// we don't want to destroy the level we're in, however....
 		//pSummary = (SUMMARYFILE*)MemAlloc( sizeof( SUMMARYFILE ) );
@@ -5900,7 +5900,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 			{
 				// Spew message
 				ScreenMsg( MSG_FONT_RED, MSG_CHAT, L"Failed to add map: %S.", zMapName );
-				
+
 				if ( gfTriedToLoadOldMapVersion )
 				{
 					ScreenMsg( FONT_MCOLOR_DKRED, MSG_INTERFACE, L"Incompatible map." );
@@ -5911,7 +5911,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 		{
 			//JA25_SECTOR_AI		SectorAIInfo;
 			UINT8							ubNumAdmins, ubNumTroops, ubNumElites, ubNumBloodcats;
-			
+
 			//Test some stuff here, like the total # of placements, enemies, etc
 			switch( gGameOptions.ubDifficultyLevel )
 			{
@@ -5934,7 +5934,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 					ubNumBloodcats = pSummary->MapInfo.ubNumBloodcatsD;
 					break;
 			}
-			
+
 			/*if( pSummary->MapInfo.sNorthGridNo	== -1 )
 			{
 				if ( fDisplayMessages )
@@ -5990,7 +5990,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 				continue;
 			}
 
-			
+
 			if ( ( pSummary->ubAdminDetailed + pSummary->ubTroopDetailed + pSummary->ubEliteDetailed ) != 32 )
 			{
 				if ( fDisplayMessages )
@@ -6001,7 +6001,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 				MemFree( pSummary );
 				continue;
 			}
-			
+
 			// Check total populations
 			if ( ( ubNumTroops + ubNumAdmins + ubNumElites ) > 32 )
 			{
@@ -6013,7 +6013,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 				MemFree( pSummary );
 				continue;
 			}
-			
+
 			// Check insertion gridno if baaenment
 			if ( bLevel > 0 )
 			{
@@ -6025,16 +6025,16 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 						ScreenMsg( FONT_MCOLOR_DKRED, MSG_INTERFACE, L"Underground level needs invasion insertion gridno value." );
 					}
 					MemFree( pSummary );
-					continue;					
+					continue;
 				}
 			}
-			
+
 			//We're good!
 			if ( fDisplayMessages )
 			{
 				ScreenMsg( FONT_MCOLOR_WHITE, MSG_CHAT, L"Added Custom map: %S.", zMapName );
 			}
-			
+
 			//if the sector shoulnd have a map there
 			if ( bLevel == 0 )
 			{
@@ -6060,7 +6060,7 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 					}
 				}
 			}
-			
+
 			if ( bLevel == 0 )
 			{
 				SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fValidSector = TRUE;
@@ -6085,10 +6085,10 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 
 				wcscpy( pSector->zCustomLevelName, pSummary->MapInfo.zLevelName );
 			}
-			
+
 			// Seed AI
 			memset( &SectorAIInfo, 0, sizeof( SectorAIInfo ) );
-			
+
 			SectorAIInfo.iSectorID = SECTOR( iCol , iRow ) ;
 			SectorAIInfo.bSectorZ = bLevel;
 			SectorAIInfo.bBaseNumEnemies = pSummary->MapInfo.ubBaseNumEnemies;
@@ -6108,21 +6108,21 @@ void AddCustomMap( INT32 iRow, INT32 iCol, BOOLEAN fDisplayMessages, BOOLEAN fMe
 			{
 				SetNumberOfJa25BloodCatsInSector( SectorAIInfo.iSectorID, ubNumBloodcats, pSummary->CreatureTeam.ubNumAnimals );
 			}
-			
+
 		}
 
 		MemFree( pSummary );
 		*/
-		
-	}	
+
+	}
 
 }
 
 void MakeBadSectorListFromMapsOnHardDrive( BOOLEAN fDisplayMessages )
 {
 	INT32			iRow, iCol;
-	
-	
+
+
 	for( iRow=1; iRow<=16; iRow++ )
 	{
 		for( iCol=1; iCol<=16; iCol++ )
@@ -6141,7 +6141,7 @@ void MakeBadSectorListFromMapsOnHardDrive( BOOLEAN fDisplayMessages )
 			AddCustomMap( iRow, iCol, fDisplayMessages, FALSE );
 		}
 	}
-	
+
 if ( gGameUBOptions.MakeStrategicMovementCosts == TRUE )
 	UpdateCustomMapMovementCosts();
 }
@@ -6155,26 +6155,26 @@ void UpdateCustomMapMovementCosts()
 	{
 		for( iCol=1; iCol<=16; iCol++ )
 		{
-		
-		
+
+
 			if( SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fValidSector && SectorInfo[ ( SECTOR( iCol , iRow ) ) ].fCustomSector )
 			{
-				
+
 				//if ( SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ THROUGH_STRATEGIC_MOVE ] == EDGEOFWORLD )
 					SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ THROUGH_STRATEGIC_MOVE ] = PLAINS;
-				
+
 				//sector above is clear
 				if( iRow > 1 && SectorInfo[ ( SECTOR( iCol , iRow - 1 ) ) ].fValidSector )
 				{
-				
+
 					//if ( SectorInfo[ ( SECTOR( iCol, iRow-1 ) ) ].ubTraversability[ SOUTH_STRATEGIC_MOVE ] == EDGEOFWORLD )
 						SectorInfo[ ( SECTOR( iCol, iRow-1 ) ) ].ubTraversability[ SOUTH_STRATEGIC_MOVE ] = PLAINS;
 					//if ( SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ NORTH_STRATEGIC_MOVE ] == EDGEOFWORLD )
 						SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ NORTH_STRATEGIC_MOVE ] = PLAINS;
-					
-					
+
+
 				}
-					
+
 				//sector west is clear
 				if( iCol > 1 && SectorInfo[ ( SECTOR( iCol - 1 , iRow ) ) ].fValidSector )
 				{
@@ -6183,7 +6183,7 @@ void UpdateCustomMapMovementCosts()
 					//if ( SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ WEST_STRATEGIC_MOVE ] == EDGEOFWORLD )
 						SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ WEST_STRATEGIC_MOVE ] = PLAINS;
 				}
-					
+
 				//sector south is clear
 				if( iRow < 16 && SectorInfo[ ( SECTOR( iCol , iRow + 1 ) ) ].fValidSector )
 				{
@@ -6192,7 +6192,7 @@ void UpdateCustomMapMovementCosts()
 					//if ( SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ SOUTH_STRATEGIC_MOVE ] == EDGEOFWORLD )
 						SectorInfo[ ( SECTOR( iCol, iRow ) ) ].ubTraversability[ SOUTH_STRATEGIC_MOVE ] = PLAINS;
 				}
-					
+
 				//sector east is clear
 				if( iCol < 16 && SectorInfo[ ( SECTOR( iCol + 1 , iRow ) ) ].fValidSector )
 				{

@@ -2,8 +2,8 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "weapons.h"
-	#include "overhead.h"
+	#include "Weapons.h"
+	#include "Overhead.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
@@ -342,7 +342,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			// reasonable values only
 			pData->curAmmoType.dDamageModifierZombie = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierZombie ) );
 		}
-		
+
 		pData->maxReadDepth--;
 	}
 
@@ -471,7 +471,7 @@ BOOLEAN WriteAmmoTypeStats()
 			FilePrintf(hFile,"\t\t<dDamageModifierArmouredVehicle>%4.2f</dDamageModifierArmouredVehicle>\r\n",			AmmoTypes[cnt].dDamageModifierArmouredVehicle );
 			FilePrintf(hFile,"\t\t<dDamageModifierCivilianVehicle>%4.2f</dDamageModifierCivilianVehicle>\r\n",			AmmoTypes[cnt].dDamageModifierCivilianVehicle );
 			FilePrintf(hFile,"\t\t<dDamageModifierZombie>%4.2f</dDamageModifierZombie>\r\n",							AmmoTypes[cnt].dDamageModifierZombie );
-									
+
 			FilePrintf(hFile,"\t</AMMOTYPE>\r\n");
 		}
 		FilePrintf(hFile,"</AMMOTYPELIST>\r\n");

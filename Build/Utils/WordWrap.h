@@ -1,9 +1,9 @@
 #ifndef	__WORDWRAP_H_
 #define	__WORDWRAP_H_
 
-#include "types.h"
-#include "LAPTOP\files.h"
-#include "LAPTOP\email.h"
+#include "Types.h"
+#include "Laptop/Files.h"
+#include "Laptop/Email.h"
 
 //Flags for DrawTextToScreen()
 
@@ -47,12 +47,12 @@ UINT16 DisplayWrappedString(UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT8 
 
 UINT16 DeleteWrappedString(WRAPPED_STRING *pWrappedString);
 void CleanOutControlCodesFromString(STR16 pSourceString, STR16 pDestString);
-INT16 IanDisplayWrappedStringToPages(UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT16 usPageHeight, UINT16 usTotalHeight, UINT16 usPageNumber,UINT8 ubGap, 
-															UINT32 uiFont, UINT8 ubColor, STR16 pString, 
+INT16 IanDisplayWrappedStringToPages(UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT16 usPageHeight, UINT16 usTotalHeight, UINT16 usPageNumber,UINT8 ubGap,
+															UINT32 uiFont, UINT8 ubColor, STR16 pString,
 															UINT8 ubBackGroundColor, BOOLEAN fDirty, UINT32 uiFlags, BOOLEAN *fOnLastPageFlag);
 BOOLEAN DrawTextToScreen(STR16 pStr, UINT16 LocX, UINT16 LocY, UINT16 usWidth, UINT32 ulFont, UINT8 ubColor, UINT8 ubBackGroundColor, BOOLEAN fDirty, UINT32 FLAGS);
-UINT16 IanWrappedStringHeight(UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT8 ubGap, 
-															UINT32 uiFont, UINT8 ubColor, STR16 pString, 
+UINT16 IanWrappedStringHeight(UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT8 ubGap,
+															UINT32 uiFont, UINT8 ubColor, STR16 pString,
 															UINT8 ubBackGroundColor, BOOLEAN fDirty, UINT32 uiFlags);
 
 BOOLEAN WillThisStringGetCutOff( INT32 iCurrentYPosition, INT32 iBottomOfPage, INT32 iWrapWidth, UINT32 uiFont, STR16 pString, INT32 iGap, INT32 iPage	);

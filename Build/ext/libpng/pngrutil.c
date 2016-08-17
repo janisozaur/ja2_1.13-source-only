@@ -2365,7 +2365,7 @@ png_handle_acTL(png_structp png_ptr, png_infop info_ptr, png_uint_32 length)
     png_uint_32 num_frames;
     png_uint_32 num_plays;
     png_uint_32 didSet;
-    
+
     png_debug(1, "in png_handle_acTL");
 
     if (!(png_ptr->mode & PNG_HAVE_IHDR))
@@ -2390,13 +2390,13 @@ png_handle_acTL(png_structp png_ptr, png_infop info_ptr, png_uint_32 length)
         png_crc_finish(png_ptr, length);
         return;
     }
-    
+
     png_crc_read(png_ptr, data, 8);
     png_crc_finish(png_ptr, 0);
-    
+
     num_frames = png_get_uint_31(png_ptr, data);
     num_plays = png_get_uint_31(png_ptr, data + 4);
-    
+
     /* the set function will do error checking on num_frames */
     didSet = png_set_acTL(png_ptr, info_ptr, num_frames, num_plays);
     if(didSet)
@@ -2493,8 +2493,8 @@ void /* PRIVATE */
 png_handle_fdAT(png_structp png_ptr, png_infop info_ptr, png_uint_32 length)
 {
     png_ensure_sequence_number(png_ptr, length);
-    
-    /* This function is only called from png_read_end(), png_read_info(), 
+
+    /* This function is only called from png_read_end(), png_read_info(),
     * and png_push_read_chunk() which means that:
     * - the user doesn't want to read this frame
     * - or this is an out-of-place fdAT
@@ -2508,17 +2508,17 @@ png_ensure_sequence_number(png_structp png_ptr, png_uint_32 length)
 {
     png_byte data[4];
     png_uint_32 sequence_number;
-    
+
     if (length < 4)
         png_error(png_ptr, "invalid fcTL or fdAT chunk found");
-    
+
     png_crc_read(png_ptr, data, 4);
     sequence_number = png_get_uint_31(png_ptr, data);
-    
+
     if (sequence_number != png_ptr->next_seq_num)
         png_error(png_ptr, "fcTL or fdAT chunk with out-of-order sequence "
                            "number found");
-    
+
     png_ptr->next_seq_num++;
 }
 #endif /* PNG_READ_APNG_SUPPORTED */
@@ -3597,7 +3597,7 @@ png_progressive_read_reset(png_structp png_ptr)
     const int FARDATA png_pass_yinc[] = {8, 8, 8, 4, 4, 2, 2};
 #endif
     png_uint_32 row_bytes;
-    
+
     if (png_ptr->interlaced)
     {
         if (!(png_ptr->transformations & PNG_INTERLACE))

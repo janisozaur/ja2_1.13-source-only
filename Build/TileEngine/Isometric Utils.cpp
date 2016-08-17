@@ -2,20 +2,20 @@
 	#include "TileEngine All.h"
 #else
 	#include <stdio.h>
-	#include "debug.h"
+	#include "Debug.h"
 	#include "mousesystem.h"
 	#include "jascreens.h"
-	#include "worlddef.h"
-	#include "renderworld.h"
+	#include "WorldDef.h"
+	#include "RenderWorld.h"
 	#include "Isometric Utils.h"
-	#include "interface.h"
+	#include "Interface.h"
 	#include "math.h"
-	#include "worldman.h"
+	#include "WorldMan.h"
 	#include "Structure Wrap.h"
-	#include "sys globals.h"
-	#include "overhead.h"
+	#include "Sys Globals.h"
+	#include "Overhead.h"
 	#include "Random.h"
-	#include "Pathai.h"
+	#include "PathAI.h"
 	#include "GameSettings.h"	// added by Flugente
 #endif
 
@@ -222,7 +222,7 @@ BOOLEAN FindWindowJumpDirection( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bSta
 		if (cnt != direction2)
 			continue;
 
-		// get the fence tile		
+		// get the fence tile
 		if (cnt == NORTH || cnt == WEST)
 		{
 			sNewGridNo = NewGridNo( sGridNo, (UINT16)DirectionInc( (UINT8)cnt ) );
@@ -289,7 +289,7 @@ BOOLEAN FindWallJumpDirection( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStart
 		// go out *2* tiles
 		sNewGridNo = NewGridNo( sGridNo, (UINT16)DirectionInc( (UINT8)cnt ) );
 		sOtherSideOfFence = NewGridNo( sNewGridNo, (UINT16)DirectionInc( (UINT8)cnt ) );
-	
+
 		if ( NewOKDestination( pSoldier, sOtherSideOfFence, TRUE, 0 ) )
 		{
 			// ATE: Check if there is somebody waiting here.....
@@ -310,7 +310,7 @@ BOOLEAN FindWallJumpDirection( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStart
 				}
 			}
 	}
-	
+
 	}
 
 	if ( fFound )
@@ -367,14 +367,14 @@ BOOLEAN FindHeigherLevelOkno( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStarti
 	}
 
 	return( FALSE );
-	
+
 /*	INT32			cnt;
 	INT32			sNewGridNo;
 	BOOLEAN		fFound = FALSE;
 	UINT8			bMinNumTurns = 100;
 	INT8			bNumTurns;
 	INT8			bMinDirection = 0;
-	
+
 	//STRUCTURE * pStructure;
 
 	// IF there is a roof over our heads, this is an ivalid....
@@ -383,12 +383,12 @@ BOOLEAN FindHeigherLevelOkno( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStarti
 	{
 
 		return( FALSE );
-	} 
-	
+	}
+
 	for ( cnt = 0; cnt < NUM_WORLD_DIRECTIONS; cnt+= 2 )
 	{
 		sNewGridNo = NewGridNo( sGridNo, (UINT16)DirectionInc( (UINT8)cnt ) );
-	
+
 		if ( NewOKDestination( pSoldier, sNewGridNo, TRUE, 0 ) )
 		{
 			// Check if this tile has a higher level
@@ -406,10 +406,10 @@ BOOLEAN FindHeigherLevelOkno( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStarti
 				}
 			}
 		}
-		
+
 	}
-	
-	
+
+
 
 	if ( fFound )
 	{
@@ -429,7 +429,7 @@ BOOLEAN FindHeigherLevelFence( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStart
 	UINT8			bMinNumTurns = 100;
 	INT8			bNumTurns;
 	INT8			bMinDirection = 0;
-	
+
 	//STRUCTURE * pStructure;
 
 	// IF there is a roof over our heads, this is an ivalid....
@@ -438,12 +438,12 @@ BOOLEAN FindHeigherLevelFence( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStart
 	{
 
 		return( FALSE );
-	} 
-	
+	}
+
 	for ( cnt = 0; cnt < NUM_WORLD_DIRECTIONS; cnt += 2 )
 	{
 		sNewGridNo = NewGridNo( sGridNo, (UINT16)DirectionInc( (UINT8)cnt ) );
-	
+
 		if ( NewOKDestination( pSoldier, sNewGridNo, TRUE, 0 ) )
 		{
 			// Check if this tile has a higher level
@@ -461,10 +461,10 @@ BOOLEAN FindHeigherLevelFence( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStart
 				}
 			}
 		}
-		
+
 	}
-	
-	
+
+
 
 	if ( fFound )
 	{
@@ -488,7 +488,7 @@ BOOLEAN FindLowerLevelWall( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bStarting
 	for ( cnt = 0; cnt < NUM_WORLD_DIRECTIONS; cnt += 2 )
 	{
 		sNewGridNo = NewGridNo( sGridNo, (UINT16)DirectionInc( (UINT8)cnt ) );
-	
+
 			// Make sure there is NOT a roof here...
 			// Check OK destination
 			if ( NewOKDestination( pSoldier, sNewGridNo, TRUE, 0 ) )
@@ -956,7 +956,7 @@ INT32 GetRangeFromGridNoDiff( INT32 sGridNo1, INT32 sGridNo2 )
 	// Convert our grid-not into an XY
 	ConvertGridNoToXY( sGridNo2, &sXPos2, &sYPos2 );
 
-	uiDist = (INT32)(sqrt((double) ( sXPos2 - sXPos )*( sXPos2 - sXPos ) + ( sYPos2 - sYPos ) * ( sYPos2 - sYPos ) ));	
+	uiDist = (INT32)(sqrt((double) ( sXPos2 - sXPos )*( sXPos2 - sXPos ) + ( sYPos2 - sYPos ) * ( sYPos2 - sYPos ) ));
 
 	return( uiDist );
 }
@@ -1029,7 +1029,7 @@ INT16 SpacesAway(INT32 sOrigin, INT32 sDest)
 	return( __max( sRows, sCols ) );
 }
 
-INT16 CardinalSpacesAway(INT32 sOrigin, INT32 sDest) 
+INT16 CardinalSpacesAway(INT32 sOrigin, INT32 sDest)
 // distance away, ignoring diagonals!
 {
  INT16 sRows,sCols;
@@ -1240,7 +1240,7 @@ INT16 ExtQuickestDirection(INT16 origin, INT16 dest)
 
 
 // Returns the (center ) cell coordinates in X
-INT16 CenterX( INT32 sGridNo ) 
+INT16 CenterX( INT32 sGridNo )
 {
 	INT32 sYPos, sXPos;
 
@@ -1252,7 +1252,7 @@ INT16 CenterX( INT32 sGridNo )
 
 
 // Returns the (center ) cell coordinates in Y
-INT16 CenterY( INT32 sGridNo ) 
+INT16 CenterY( INT32 sGridNo )
 {
 	INT32 sYPos, sXPos;
 
@@ -1263,7 +1263,7 @@ INT16 CenterY( INT32 sGridNo )
 }
 
 
-INT16 MapX( INT32 sGridNo ) 
+INT16 MapX( INT32 sGridNo )
 {
 	INT32 sYPos, sXPos;
 
@@ -1274,7 +1274,7 @@ INT16 MapX( INT32 sGridNo )
 }
 
 
-INT16 MapY( INT32 sGridNo ) 
+INT16 MapY( INT32 sGridNo )
 {
 	INT32 sYPos, sXPos;
 
@@ -1434,6 +1434,6 @@ BOOLEAN GridNoNearPlayerMercs( INT32 sGridNo, INT16 sRadius )
 				return( TRUE );
 		}
 	}
-		
+
 	return( FALSE );
 }

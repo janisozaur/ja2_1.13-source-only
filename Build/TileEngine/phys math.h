@@ -15,13 +15,13 @@ typedef float real;
 #define			Epsilon2 			0.00001
 
 
-typedef struct 
+typedef struct
 {
 	real x, y, z;
 
 } vector_3;
 
-typedef struct 
+typedef struct
 {
 	real aElements[3][3];
 
@@ -37,7 +37,7 @@ extern "C" {
 #endif
 
 
-vector_3	VSetEqual( vector_3 *a );	
+vector_3	VSetEqual( vector_3 *a );
 vector_3	VSubtract( vector_3 *a, vector_3 *b );
 vector_3	VAdd( vector_3 *a, vector_3 *b );
 vector_3	VMultScalar( vector_3 *a, real b );

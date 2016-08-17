@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 // From http://www.azillionmonkeys.com/qed/hash.html
-// Author of main code is Paul Hsieh 
+// Author of main code is Paul Hsieh
 // I just added some convenience functions
 // Also note http://burtleburtle.net/bob/hash/doobs.html, which shows that this is 20% faster than the one on that page but has more collisions
 

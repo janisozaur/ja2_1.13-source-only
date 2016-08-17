@@ -26,7 +26,7 @@
 #include "RakNetTypes.h"
 #include "Export.h"
 
-/// \ingroup RAKNET_RPC 
+/// \ingroup RAKNET_RPC
 /// \internal
 /// \brief A container class for a list of RPCNodes
 struct RAK_DLL_EXPORT RPCMap

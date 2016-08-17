@@ -9,7 +9,7 @@
 	#include "XML.h"
 	#include "Interface.h"
 	#include "LuaInitNPCs.h"
-	#include "email.h"
+	#include "Email.h"
 #endif
 
 struct
@@ -83,7 +83,7 @@ emailMercLevelUpEndElementHandle(void *userData, const XML_Char *name)
 {
 	emailMercLevelUpParseData * pData = (emailMercLevelUpParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "EMAIL_MERC_LEVEL_UP") == 0)
 		{
@@ -91,8 +91,8 @@ emailMercLevelUpEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "EMAIL") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!EmailMercLevelUp_TextOnly)
 				{
 					wcscpy(EmailMercLevelUpText[pData->curEmailMercLevelUp.uiIndex].szSubject, pData->curEmailMercLevelUp.szSubject);
@@ -102,7 +102,7 @@ emailMercLevelUpEndElementHandle(void *userData, const XML_Char *name)
 				{
 					wcscpy(EmailMercLevelUpText[pData->curEmailMercLevelUp.uiIndex].szSubject, pData->curEmailMercLevelUp.szSubject);
 					wcscpy(EmailMercLevelUpText[pData->curEmailMercLevelUp.uiIndex].szMessage, pData->curEmailMercLevelUp.szMessage);
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -141,7 +141,7 @@ BOOLEAN ReadInEmailMercLevelUp(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading EmailMercLevelUp.xml" );
 
 	EmailMercLevelUp_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

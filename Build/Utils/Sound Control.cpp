@@ -5,10 +5,10 @@
 #else
 	#include "sgp.h"
 	#include "Sound Control.h"
-	#include "soundman.h"
-	#include "overhead.h"
-	#include "isometric utils.h"
-	#include "renderworld.h"
+	#include "SoundMan.h"
+	#include "Overhead.h"
+	#include "Isometric Utils.h"
+	#include "RenderWorld.h"
 	#include "GameSettings.h"
 	#include "math.h"
 #endif
@@ -664,7 +664,7 @@ INT32 SoundDir( INT32 sGridNo )
 	INT16 sScreenX, sScreenY;
 	INT16 sMiddleX;
 	INT16 sDif, sAbsDif;
-	
+
 	if (TileIsOutOfBounds(sGridNo))
 	{
 		return( MIDDLEPAN );
@@ -717,7 +717,7 @@ INT32 SoundVolume( INT8 bInitialVolume, INT32 sGridNo )
 	INT16	sMiddleX, sMiddleY;
 	INT16	sDifX, sAbsDifX;
 	INT16	sDifY, sAbsDifY;
-	
+
 	if (TileIsOutOfBounds(sGridNo))
 	{
 		return( bInitialVolume );
@@ -975,7 +975,7 @@ UINT8 PositionSoundDir( INT32 sGridNo )
 	INT16 sScreenX, sScreenY;
 	INT16	sMiddleX;
 	INT16	sDif, sAbsDif;
-	
+
 	if (TileIsOutOfBounds(sGridNo))
 	{
 		return( MIDDLEPAN );
@@ -1032,7 +1032,7 @@ INT8 PositionSoundVolume( INT8 bInitialVolume, INT32 sGridNo )
 	INT16	sDifY, sAbsDifY;
 	INT16 sMaxDistX, sMaxDistY;
 	double sMaxSoundDist, sSoundDist;
-	
+
 	if (TileIsOutOfBounds(sGridNo))
 	{
 		return( bInitialVolume );

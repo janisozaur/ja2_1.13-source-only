@@ -1,7 +1,7 @@
 #ifndef ITEM_TYPES_H
 #define ITEM_TYPES_H
 
-#include "types.h"
+#include "Types.h"
 #include <vector>
 #include <list>
 // THE_BOB : added for pocket popup definitions
@@ -312,7 +312,7 @@ namespace Version101
 		struct
 		{
 			INT8		bStatus[OLD_MAX_OBJECTS_PER_SLOT_101];
-		};		
+		};
 		struct
 		{
 			INT8		bMoneyStatus;
@@ -343,11 +343,11 @@ namespace Version101
 				{
 					UINT8 ubTolerance; // tolerance value for panic triggers
 				};
-				struct 
+				struct
 				{
 					UINT8 ubLocationID; // location value for remote non-bomb (special!) triggers
 				};
-			};		
+			};
 		};
 		struct
 		{
@@ -470,7 +470,7 @@ public:
 	UINT8		fUsed;			// flags for whether the item is used or not
 	UINT8		ubImprintID;	// ID of merc that item is imprinted on
 
-	// Flugente: due do inconsistencies with WF maps, where data from a map is laoded differently, I had to add this marker. 
+	// Flugente: due do inconsistencies with WF maps, where data from a map is laoded differently, I had to add this marker.
 	// New values, like bTemperature, have to come after this. And please, don't destroy ObjectData's POD-ness.
 	char		endOfPOD;
 
@@ -534,7 +534,7 @@ public:
 	const StackedObjectData* operator[](const unsigned int index) const;
 	StackedObjectData* operator[](const unsigned int index);
 
-	// Initialize the soldier.  
+	// Initialize the soldier.
 	//  Use this instead of the old method of calling memset.
 	//  Note that the constructor does this automatically.
 	void	initialize();
@@ -927,7 +927,7 @@ extern OBJECTTYPE gTempObject;
 // character is standing. [1] represents crouched, and [2] represents prone. Read more about how this is read from XML
 // in the XML-reader formula.
 // Removed vars:
-// bipod, 
+// bipod,
 // tohitbonus,
 // bestlaserrange,
 // aimbonus,
@@ -938,11 +938,11 @@ extern OBJECTTYPE gTempObject;
 typedef struct
 {
 	UINT32		usItemClass;
-	UINT64		nasAttachmentClass;	//CHRISL: Identify the class of attachment 
+	UINT64		nasAttachmentClass;	//CHRISL: Identify the class of attachment
 	UINT64		nasLayoutClass;
 //Madd: Common Attachment Framework:  attach items based on matching connection points rather than using the old long attachmentinfo method
-	UINT64		ulAvailableAttachmentPoint; 
-	UINT64		ulAttachmentPoint; 
+	UINT64		ulAvailableAttachmentPoint;
+	UINT64		ulAttachmentPoint;
 	UINT8		ubAttachToPointAPCost; // cost to attach to any matching point
 	UINT16			ubClassIndex;
 	UINT8			ubCursor;
@@ -977,7 +977,7 @@ typedef struct
 	BOOLEAN defaultundroppable;
 	BOOLEAN unaerodynamic;
 	BOOLEAN electronic;
-	UINT8 inseparable; //Madd:Normally, an inseparable attachment can never be removed.  
+	UINT8 inseparable; //Madd:Normally, an inseparable attachment can never be removed.
 						//But now we will make it so that these items can be replaced, but still not removed directly.
 						//0 = removeable (as before)
 						//1 = inseparable (as before)
@@ -1055,10 +1055,10 @@ typedef struct
 	BOOLEAN gascan;
 	BOOLEAN containsliquid;
 	BOOLEAN rock;
-	
+
 	INT16 damagebonus;
 	INT16 meleedamagebonus;
-	
+
 	INT16 magsizebonus;
 	INT16 percentautofireapreduction;
 	INT16 autofiretohitbonus;
@@ -1123,11 +1123,11 @@ typedef struct
 	BOOLEAN tripwireactivation;						// item (mine) can be activated by nearby tripwire
 	BOOLEAN tripwire;								// item is tripwire
 	BOOLEAN	directional;							// item is a directional mine/bomb (actual direction is set upon planting)
-	
+
 	UINT32	drugtype;								// this flagmask determines what different components are used in a drug, which results in different effects
 
 	BOOLEAN blockironsight;							// if a gun or any attachment have this property, the iron sight won't be usable (if there is at least one other usable sight)
-	
+
 	UINT32	usItemFlag;								// bitflags to store various item properties (better than introducing 32 BOOLEAN values). If I only had thought of this earlier....
 
 	// Flugente: food type
@@ -1171,12 +1171,12 @@ typedef struct
 	// Flugente: spoting effectiveness
 	INT16	usSpotting;
 
-	//JMich.BackpackClimb 
+	//JMich.BackpackClimb
 	INT16	sBackpackWeightModifier; //modifier to weight calculation to climb.
 	BOOLEAN fAllowClimbing; //does item allow climbing while wearing it
 
 	BOOLEAN cigarette;				// Flugenete: this item can be smoked
-	UINT8	usPortionSize;			// Flugente: for consumables: how much of this item is consumed at once	
+	UINT8	usPortionSize;			// Flugente: for consumables: how much of this item is consumed at once
 
 } INVTYPE;
 
@@ -1319,7 +1319,7 @@ typedef enum
 	ROCK,
 	GLAUNCHER,	//40
 
-	MORTAR,					
+	MORTAR,
 	ROCK2,
 	CREATURE_YOUNG_MALE_CLAWS,
 	CREATURE_OLD_MALE_CLAWS,
@@ -1352,10 +1352,10 @@ typedef enum
 	VAL_SILENT, //previously unused
 	PSG, //previously unused
 	TAR21, //previously unused
-	
-	MAX_WEAPONS							= ( FIRST_AMMO - 1 ), 
 
-	CLIP9_15							= FIRST_AMMO, 
+	MAX_WEAPONS							= ( FIRST_AMMO - 1 ),
+
+	CLIP9_15							= FIRST_AMMO,
 	CLIP9_30,
 	CLIP9_15_AP,
 	CLIP9_30_AP,
@@ -1364,7 +1364,7 @@ typedef enum
 	CLIP38_6,
 	CLIP38_6_AP,
 	CLIP38_6_HP,
-	CLIP45_7,  
+	CLIP45_7,
 
 	CLIP45_30,
 	CLIP45_7_AP,
@@ -1406,11 +1406,11 @@ typedef enum
 
 	CLIPFLAME,
 // MADD MARKER
-	CLIP50_11, // unused 
-	CLIP9H_20, // unused 
-	CLIP9_50, 
-	CLIP9_50_AP, 
-	CLIP9_50_HP, 
+	CLIP50_11, // unused
+	CLIP9H_20, // unused
+	CLIP9_50,
+	CLIP9_50_AP,
+	CLIP9_50_HP,
 	DRUM545_75_AP,
 	DRUM545_75_HP,
 	BELT556_200_AP,
@@ -1419,8 +1419,8 @@ typedef enum
 	BELT762N_100_HP,
 	CLIP57_20_AP,
 	CLIP57_20_HP,
-	// unused 
-	// unused 
+	// unused
+	// unused
 
 	// explosives
 	STUN_GRENADE					= FIRST_EXPLOSIVE,
@@ -1493,7 +1493,7 @@ typedef enum
 	LEATHER_JACKET,
 	LEATHER_JACKET_W_KEVLAR,
 	LEATHER_JACKET_W_KEVLAR_18,
-	
+
 	LEATHER_JACKET_W_KEVLAR_Y,
 	CREATURE_YOUNG_FEMALE_HIDE,
 	CREATURE_OLD_FEMALE_HIDE,
@@ -1530,7 +1530,7 @@ typedef enum
 	JAR_CREATURE_BLOOD,
 	ADRENALINE_BOOSTER,
 	DETONATOR,
-	REMDETONATOR,	
+	REMDETONATOR,
 	VIDEOTAPE,
 	DEED,
 	LETTER,
@@ -1647,7 +1647,7 @@ typedef enum
 	M950, //UNUSED_27,
 	M960, //UNUSED_28,
 	MICRO_UZI, // UNUSED_29,
-	
+
 	ENFIELD, // UNUSED_30,
 	MP5,
 	MP5SD,
@@ -1743,7 +1743,7 @@ typedef struct
 	UINT8	ubPocketMapping;
 } AttachmentSlotStruct;
 
-extern AttachmentSlotStruct AttachmentSlots[MAXITEMS+1]; 
+extern AttachmentSlotStruct AttachmentSlots[MAXITEMS+1];
 
 typedef struct
 {
@@ -1821,7 +1821,7 @@ typedef struct IMP_ITEM_CHOICE_TYPE
 	INT16		bItemNo[50];						// room for up to 50 choices in each category
 	UINT8		ubNumItems;						// # of items to select
 
-	UINT32		uiIndex;						
+	UINT32		uiIndex;
 } IMP_ITEM_CHOICE_TYPE;
 
 enum
@@ -1862,7 +1862,7 @@ enum
 	IMP_LOCKPICKING,
 	IMP_ELECTRONICS,
 	IMP_CAMOUFLAGED,
-// DBrot: added seperate choices for experts	
+// DBrot: added seperate choices for experts
 	IMP_AUTO_WEAPONS_EXP,
 	IMP_HEAVY_WEAPONS_EXP,
 	IMP_SNIPER_EXP,
@@ -1903,8 +1903,8 @@ enum
 	INV_ITEM_TYPE_HANDCUFFS = -4,
 	INV_ITEM_TYPE_SIDEARM = -5,
 	INV_ITEM_TYPE_FIRSTAID = -6,
-	INV_ITEM_TYPE_BINOCULARS = -7,	
-	INV_ITEM_TYPE_XRAY = -8,	
+	INV_ITEM_TYPE_BINOCULARS = -7,
+	INV_ITEM_TYPE_XRAY = -8,
 	INV_ITEM_TYPE_METALDETECTOR = -9,
 };
 

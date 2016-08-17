@@ -1,8 +1,8 @@
 #include "InterfaceItemImages.h"
 
-#include "DEBUG.H"
-#include "vobject.h"
-#include "utilities.h"
+#include "Debug.h"
+#include "VObject.h"
+#include "Utilities.h"
 #include "GameSettings.h"
 #include <vfs/Core/vfs.h>
 
@@ -31,7 +31,7 @@ UINT32 MDItemVideoObjects::getVObjectForItem(UINT32 key)
 	{
 		return it->second;
 	}
-	SGP_THROW(_BS(L"Item key not registered : ") << key << _BS::wget);	
+	SGP_THROW(_BS(L"Item key not registered : ") << key << _BS::wget);
 }
 
 void MDItemVideoObjects::registerItem(UINT32 key, vfs::Path const& sFileName)
@@ -46,7 +46,7 @@ void MDItemVideoObjects::registerItem(UINT32 key, vfs::Path const& sFileName)
 	VOBJECT_DESC VObjectDesc;
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP(const_cast<STR>(sFileName.to_string().c_str()), VObjectDesc.ImageFile);
-	if(! AddVideoObject( &VObjectDesc, &uiVObject )) 
+	if(! AddVideoObject( &VObjectDesc, &uiVObject ))
 	{
 		SGP_THROW(_BS(L"Could not add video object for file \"") << sFileName << _BS::wget);
 	}

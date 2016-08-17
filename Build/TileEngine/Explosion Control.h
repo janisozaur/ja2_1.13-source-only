@@ -29,7 +29,7 @@ typedef struct
 	UINT8												ubUnsed[1];
 
 } EXPLOSION_PARAMS;
- 
+
 
 typedef struct
 {
@@ -50,7 +50,7 @@ enum EXPLOSION_TYPES
 	BLAST_1,
 	BLAST_2,
 	BLAST_3,
-	STUN_BLAST,	
+	STUN_BLAST,
 	WATER_BLAST,
 	TARGAS_EXP,
 	SMOKE_EXP,

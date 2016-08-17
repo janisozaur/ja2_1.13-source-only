@@ -1,9 +1,9 @@
-/* 
+/*
  * bfVFS : vfs/Tools/vfs_profiler.cpp
  *  - basic profiler class and macros to measure execution time of code blocks
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -154,7 +154,7 @@ bool vfs::Profiler::printProfilerState(vfs::Path const& file)
 			unsigned int num_stars = (unsigned int)(WIDTH * (m_vMarker[i].time / max_time));
 			ld_success = perCent(m_vMarker[i].success_count,m_vMarker[i].call_count);
 			ld_failure = perCent(m_vMarker[i].fail_count,m_vMarker[i].call_count);
-			line << "[" << oneDigit(ld_success)	 << "|" << oneDigit(ld_failure) << "] " 
+			line << "[" << oneDigit(ld_success)	 << "|" << oneDigit(ld_failure) << "] "
 				 << multChar('*', num_stars) << multChar(' ', WIDTH - num_stars) << " | ";
 		}
 		line << "C: " << m_vMarker[i].call_count << ", T: " << m_vMarker[i].time << std::endl;

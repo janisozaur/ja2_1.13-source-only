@@ -6,14 +6,14 @@
 /* ============================================================================
  * ONLY ONE OF THESE LANGUAGES CAN BE DEFINED AT A TIME!
  * BUT now You can define it _here_ by uncommenting one _or_ (better):
- * You can comment them all out and then set it _global_ in "Preprocessor 
+ * You can comment them all out and then set it _global_ in "Preprocessor
  * options" (do it for ALL projects in the workspace and both debug & release)
  *   _or_
- * give it do Your MAKEFILE, f.i. make ENGLISH, but keep in mind that some 
+ * give it do Your MAKEFILE, f.i. make ENGLISH, but keep in mind that some
  * weird make tools will require 'make ENGLISH=1' instead
- * 
+ *
  * using one of the two later methods will keep this SVN file unchanged for the
- * future, only Your private project files (workspace/solution) will differ 
+ * future, only Your private project files (workspace/solution) will differ
  * from the SVN stuff.
  *											 (2006-10-10, Sergeant_Kolja)
  */
@@ -42,16 +42,16 @@
 	Note: If you want to build "Unfinished Business" version, just append the /p:JA2Config=JA2UB in the command line
 	msbuild.exe /p:Configuration=Release /p:JA2Config=JA2UB ja2_VS2010.sln
 	msbuild.exe /p:Configuration=Release /p:JA2LangPrefix=DE /p:JA2Language=GERMAN /p:JA2Config=JA2UB ja2_VS2010.sln
-	
+
 	Note2: You can also specify the target output name with the parameter /p:TargetName
 	msbuild.exe /p:Configuration=Release /p:JA2LangPrefix=DE /p:JA2Language=GERMAN /p:JA2Config=JA2UB /p:TargetName="JA2UB_113" ja2_VS2010.sln
 
 	// --------------------------------------------------------
-	// 2. Editing the ja2.props file and then build in VS 2010 
+	// 2. Editing the ja2.props file and then build in VS 2010
 	// -------------------------------------------------------
-	
+
 	1. Open the "ja2.props" file in a text editor and set the <BuildMacro> tags to your likeing.
-	
+
 	For example: If you want to build Russian Version (normal JA2, not UB) then set the following:
 
 	<BuildMacro Include="JA2Config">

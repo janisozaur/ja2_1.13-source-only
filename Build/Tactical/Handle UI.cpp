@@ -1,99 +1,99 @@
-#include "connect.h"
+#include "Connect.h"
 #ifdef PRECOMPILEDHEADERS
 #include "Tactical All.h"
 #include "BuildDefines.h"
 
 #else
-#include "builddefines.h"
+#include "BuildDefines.h"
 #include <stdio.h>
 #include <string.h>
 #include "stdlib.h"
-#include "debug.h"
+#include "Debug.h"
 #include "math.h"
 #include "jascreens.h"
-#include "pathai.h"
+#include "PathAI.h"
 #include "Soldier Control.h"
 #include "Animation Control.h"
 #include "Animation Data.h"
 #include "Event Pump.h"
 #include "Timer Control.h"
 #include "mousesystem.h"
-#include "cursors.h"
+#include "Cursors.h"
 #include "Handle UI.h"
 #include "Isometric Utils.h"
-#include "input.h"
-#include "overhead.h"
+#include "Input.h"
+#include "Overhead.h"
 #include "Sys Globals.h"
-#include "screenids.h"
-#include "interface.h"
-#include "cursor control.h"
-#include "points.h"
+#include "ScreenIds.h"
+#include "Interface.h"
+#include "Cursor Control.h"
+#include "Points.h"
 #include "Interactive Tiles.h"
-#include "interface cursors.h"
-#include "opplist.h"
-#include "worldman.h"
-#include "weapons.h"
-#include "renderworld.h"
+#include "Interface Cursors.h"
+#include "Opplist.h"
+#include "WorldMan.h"
+#include "Weapons.h"
+#include "RenderWorld.h"
 #include "structure.h"
-#include "interface panels.h"
-#include "weapons.h"
-#include "Handle items.h"
-#include "UI cursors.h"
-#include "Handle UI plan.h"
+#include "Interface Panels.h"
+#include "Weapons.h"
+#include "Handle Items.h"
+#include "UI Cursors.h"
+#include "Handle UI Plan.h"
 #include "Message.h"
-#include "Render fun.h"
-#include "interface items.h"
-#include "physics.h"
+#include "Render Fun.h"
+#include "Interface Items.h"
+#include "Physics.h"
 #include "Soldier Profile.h"
-#include "strategicmap.h"
-#include "soldier profile.h"
-#include "soldier create.h"
-#include "soldier add.h"
-#include "interface dialogue.h"
-#include "soldier macros.h"
-#include "soldier functions.h"
+#include "StrategicMap.h"
+#include "Soldier Profile.h"
+#include "Soldier Create.h"
+#include "Soldier Add.h"
+#include "Interface Dialogue.h"
+#include "Soldier Macros.h"
+#include "Soldier Functions.h"
 #include "Assignments.h"
-#include "squads.h"
+#include "Squads.h"
 #include "Strategic Pathing.h"
-#include "strategic movement.h"
-#include "strategic.h"
-#include "exit grids.h"
-#include "structure wrap.h"
-#include "soldier add.h"
+#include "Strategic Movement.h"
+#include "Strategic.h"
+#include "Exit Grids.h"
+#include "Structure Wrap.h"
+#include "Soldier Add.h"
 #include "Random.h"
-#include "english.h"
+#include "English.h"
 #include "Random.h"
-#include "english.h"
-#include "vehicles.h"
-#include "messageboxscreen.h"
-#include "text.h"
-#include "dialogue control.h"
-#include "line.h"
+#include "English.h"
+#include "Vehicles.h"
+#include "MessageBoxScreen.h"
+#include "Text.h"
+#include "Dialogue Control.h"
+#include "Line.h"
 #include "GameSettings.h"
-#include "los.h"
+#include "LOS.h"
 #include "Campaign Types.h"
 #include "Queen Command.h"
 #include "Options Screen.h"
 #include "SaveLoadGame.h"
-#include "Spread Burst.h"
-#include "ai.h"
+#include "Spread burst.h"
+#include "AI.h"
 #include "Game Clock.h"
-#include "civ quotes.h"
+#include "Civ Quotes.h"
 #include "Militia Control.h"
 #include "qarray.h"
-#include "environment.h"
+#include "Environment.h"
 #include "Map Information.h"
 #include "Soldier Control.h"
 #include "DisplayCover.h"
 	//ddd optimization of enemy turn
-	#include "aiinternals.h"
-	//#include "los.h"
-	//#include "structure wrap.h"
+	#include "AIInternals.h"
+	//#include "LOS.h"
+	//#include "Structure Wrap.h"
 	//#include "DisplayCover.h"
 	//ddd optimization of enemy turn
 #endif
 
-#include "teamturns.h"
+#include "TeamTurns.h"
 #include "Options Screen.h"
 #include "SaveLoadScreen.h"
 #include "Map Screen Interface.h"	// added by Flugente for SquadNames
@@ -283,7 +283,7 @@ UINT16	gusUISelectiveTargetID;
 
 SOLDIERTYPE			*gpRequesterMerc = NULL;
 SOLDIERTYPE			*gpRequesterTargetMerc = NULL;
-INT32						gsRequesterGridNo;	
+INT32						gsRequesterGridNo;
 INT32						gsOverItemsGridNo = NOWHERE;
 INT16						gsOverItemsLevel	= 0;
 BOOLEAN					gfUIInterfaceSetBusy = FALSE;
@@ -504,7 +504,7 @@ void GetMercOknoDirection( UINT8 ubSoldierID, BOOLEAN *pfGoDown, BOOLEAN *pfGoUp
 
 	*pfGoDown = FALSE;
 	*pfGoUp   = FALSE;
-	
+
 	if ( !GetSoldier( &pSoldier, ubSoldierID ) )
 	{
 		return;
@@ -919,7 +919,7 @@ void SetUIMouseCursor( )
 
 				MSYS_DefineRegion( &gViewportRegion, 0, 0 ,gsVIEWPORT_END_X, gsVIEWPORT_WINDOW_END_Y, MSYS_PRIORITY_NORMAL,
 					VIDEO_NO_CURSOR, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
-				
+
 				// Adjust where we blit our cursor!
 				gsGlobalCursorYOffset = 0;
 				SetCurrentCursorFromDatabase( CURSOR_NORMAL );
@@ -1155,7 +1155,7 @@ UINT32 UIHandleNewBadMerc( UI_EVENT *pUIEvent )
 		{
 			return( GAME_SCREEN );
 		}
-		
+
 		usRandom = (UINT16)Random( 20 );
 		if( usRandom < 5 )
 			pSoldier = TacticalCreateAdministrator();
@@ -1257,13 +1257,13 @@ UINT32 UIHandleNewBadMerc( UI_EVENT *pUIEvent )
 			if( pSoldier )
 			{
 				pSoldier->ubSoldierClass = SOLDIER_CLASS_ELITE_MILITIA;
-				
+
 				if( !gbWorldSectorZ )
 				{
 					SECTORINFO *pSector = &SectorInfo[ SECTOR( gWorldSectorX, gWorldSectorY ) ];
 					pSector->ubNumberOfCivsAtLevel[ELITE_MILITIA]++;
 				}
-				
+
 
 				pSoldier->ubStrategicInsertionCode = INSERTION_CODE_SOUTH;
 				//pSoldier->usStrategicInsertionData = gMapInformation.sSouthGridNo;
@@ -1288,7 +1288,7 @@ UINT32 UIHandleEnterPalEditMode( UI_EVENT *pUIEvent )
 
 UINT32 UIHandleEndTurn( UI_EVENT *pUIEvent )
 {
-	CHAR16	zString[128]; 
+	CHAR16	zString[128];
 
 	// CANCEL FROM PLANNING MODE!
 	if ( InUIPlanMode( ) )
@@ -1298,7 +1298,7 @@ UINT32 UIHandleEndTurn( UI_EVENT *pUIEvent )
 
 	// ATE: If we have an item pointer end it!
 	CancelItemPointer( );
-	
+
 	if ( CheckForEndOfCombatMode( FALSE ) )
 	{
 		// do nothing...
@@ -1317,30 +1317,30 @@ UINT32 UIHandleEndTurn( UI_EVENT *pUIEvent )
 			++guiLastSaveGameNum;
 			if( guiLastSaveGameNum == 2 )
 				guiLastSaveGameNum = 0;
-			
+
 			swprintf( zString, L"%s%d",pMessageStrings[ MSG_SAVE_END_TURN_SAVE_TEXT ], guiLastSaveGameNum + 1);
-			SaveGame(SAVE__END_TURN_NUM, zString ); 
+			SaveGame(SAVE__END_TURN_NUM, zString );
 		}
 
 		// Flugente: this stuff is only ever used in AStar pathing and is a unnecessary waste of resources otherwise, so I'm putting an end to this
 #ifdef USE_ASTAR_PATHS
 		////ddd enemy turn optimization
-		if ( (gTacticalStatus.uiFlags & TURNBASED) && (gTacticalStatus.uiFlags & INCOMBAT ) )	
+		if ( (gTacticalStatus.uiFlags & TURNBASED) && (gTacticalStatus.uiFlags & INCOMBAT ) )
 		{
 			memset( gubWorldTileInLight, FALSE, sizeof( gubWorldTileInLight ) );
  			memset( gubIsCorpseThere, FALSE, sizeof( gubIsCorpseThere ) );
  			memset( gubMerkCanSeeThisTile, FALSE, sizeof( gubMerkCanSeeThisTile ) );
-	 	 
+
 			//sevenfm translated: unwinding of loop. When changing WORLD_MAX to another value will need some cleaning! dangerous code! ;)
 
 			// WANNE: We had a custom user map (Tixa, J9), where the following loop caused an unhandled exception.
 			// The crash occurd at ~index 16000 when calling the method IsCorpseAtGridNo() ...
 			// I don't know what causes it ...
-			// Just try/catch (ugly, but works).	 
+			// Just try/catch (ugly, but works).
 			__try
-			{		 
-				for(UINT32 i=0; i<(UINT32)WORLD_MAX; i+=4) 
-				{			
+			{
+				for(UINT32 i=0; i<(UINT32)WORLD_MAX; i+=4)
+				{
 					gubWorldTileInLight[i]		= InLightAtNight(i, gpWorldLevelData[ i ].sHeight);
 					gubIsCorpseThere[i]			= IsCorpseAtGridNo( i, gpWorldLevelData[ i ].sHeight );
 					gubWorldTileInLight[i+1]	= InLightAtNight(i+1, gpWorldLevelData[ i+1 ].sHeight);
@@ -1349,7 +1349,7 @@ UINT32 UIHandleEndTurn( UI_EVENT *pUIEvent )
 					gubIsCorpseThere[i+2]		= IsCorpseAtGridNo( i+2, gpWorldLevelData[ i+2 ].sHeight );
 					gubWorldTileInLight[i+3]	= InLightAtNight(i+3, gpWorldLevelData[ i+3 ].sHeight);
 					gubIsCorpseThere[i+3]		= IsCorpseAtGridNo( i+3, gpWorldLevelData[ i+3 ].sHeight );
-				}	
+				}
 			}
 			__except( EXCEPTION_EXECUTE_HANDLER  )
 			{
@@ -1374,7 +1374,7 @@ UINT32 UIHandleEndTurn( UI_EVENT *pUIEvent )
 						{
 							sGridNo = tS->sGridNo + sXOffset + (MAXCOL * sYOffset);
 
-							if ( sGridNo <= 0 || sGridNo >= WORLD_MAX ) 
+							if ( sGridNo <= 0 || sGridNo >= WORLD_MAX )
 								continue;
 
 							//usSightLimit = tS->GetMaxDistanceVisible(sGridNo, FALSE, CALC_FROM_WANTED_DIR);
@@ -2096,7 +2096,7 @@ UINT32 UIHandleCMoveMerc( UI_EVENT *pUIEvent )
 
 					// Remove any previous actions
 					pSoldier->aiData.ubPendingAction		= NO_PENDING_ACTION;
-					
+
 					//if ( !( gTacticalStatus.uiFlags & INCOMBAT ) && ( gAnimControl[ pSoldier->usAnimState ].uiFlags & ANIM_MOVING ) )
 					//{
 					//	pSoldier->sRTPendingMovementGridNo = sMapPos;
@@ -2164,7 +2164,7 @@ UINT32 UIHandleCMoveMerc( UI_EVENT *pUIEvent )
 				{
 					pSoldier->usUIMovementMode =	pSoldier->GetMoveStateBasedOnStance( gAnimControl[ pSoldier->usAnimState ].ubEndHeight );
 				}
-				
+
 				sDestGridNo = usMapPos;
 
 				// Get structure info for in tile!
@@ -2817,11 +2817,11 @@ UINT32 UIHandleCAMercShoot( UI_EVENT *pUIEvent )
 			if ( pTSoldier != NULL )
 			{
 				// If this is one of our own guys.....pop up requiester...
-				if ( ( pTSoldier->bTeam == gbPlayerNum || pTSoldier->bTeam == MILITIA_TEAM ) 
-					&& Item[ pSoldier->inv[ HANDPOS ].usItem ].usItemClass != IC_MEDKIT 
+				if ( ( pTSoldier->bTeam == gbPlayerNum || pTSoldier->bTeam == MILITIA_TEAM )
+					&& Item[ pSoldier->inv[ HANDPOS ].usItem ].usItemClass != IC_MEDKIT
 					&& !Item[pSoldier->inv[ HANDPOS ].usItem].gascan
 					&& !ItemCanBeAppliedToOthers( pSoldier->inv[ HANDPOS ].usItem )
-					&& gTacticalStatus.ubLastRequesterTargetID != pTSoldier->ubProfile 
+					&& gTacticalStatus.ubLastRequesterTargetID != pTSoldier->ubProfile
 					&& ( pTSoldier->ubID != pSoldier->ubID ) )
 				{
 					CHAR16	zStr[200];
@@ -2839,9 +2839,9 @@ UINT32 UIHandleCAMercShoot( UI_EVENT *pUIEvent )
 				////////////////////////////////////////////////////////////////////////////////////////////////
 				// SANDRO - Should we ask if we really want to do the surgery?
 				else if (Item[ pSoldier->inv[ HANDPOS ].usItem ].medicalkit && (NUM_SKILL_TRAITS( pSoldier, DOCTOR_NT ) >= gSkillTraitValues.ubDONumberTraitsNeededForSurgery)
-					&& (pTSoldier->bTeam == OUR_TEAM || pTSoldier->bTeam == MILITIA_TEAM) 
-					&& (IS_MERC_BODY_TYPE( pTSoldier ) || IS_CIV_BODY_TYPE( pTSoldier )) 
-					&& gGameOptions.fNewTraitSystem && pTSoldier->iHealableInjury >= 100 
+					&& (pTSoldier->bTeam == OUR_TEAM || pTSoldier->bTeam == MILITIA_TEAM)
+					&& (IS_MERC_BODY_TYPE( pTSoldier ) || IS_CIV_BODY_TYPE( pTSoldier ))
+					&& gGameOptions.fNewTraitSystem && pTSoldier->iHealableInjury >= 100
 					&& pTSoldier->ubID != pSoldier->ubID && gTacticalStatus.ubLastRequesterSurgeryTargetID != pTSoldier->ubID )
 				{
 					CHAR16	zStr[200];
@@ -2849,9 +2849,9 @@ UINT32 UIHandleCAMercShoot( UI_EVENT *pUIEvent )
 					gpRequesterMerc			= pSoldier;
 					gpRequesterTargetMerc = pTSoldier;
 					gsRequesterGridNo = usMapPos;
-	
+
 					fDidRequester = TRUE;
-	
+
 					if (pTSoldier->bBleeding)
 						swprintf( zStr, New113Message[ MSG113_DO_WE_WANT_SURGERY_FIRST ], pTSoldier->GetName(), (pTSoldier->iHealableInjury * (gSkillTraitValues.ubDOSurgeryHealPercentBase + gSkillTraitValues.ubDOSurgeryHealPercentOnTop * NUM_SKILL_TRAITS( pSoldier, DOCTOR_NT )) / 10000) );
 					else
@@ -3319,7 +3319,7 @@ UINT32 UIHandleHCOnTerrain( UI_EVENT *pUIEvent )
 		guiNewUICursor = INVALID_ACTION_UICURSOR;
 	}
 	else
-	{		
+	{
 		if (!TileIsOutOfBounds(gsOverItemsGridNo) && ( usMapPos != gsOverItemsGridNo || gsInterfaceLevel != gsOverItemsLevel ) )
 		{
 			gsOverItemsGridNo = NOWHERE;
@@ -4150,7 +4150,7 @@ INT8 DrawUIMovementPath( SOLDIERTYPE *pSoldier, INT32 usMapPos, UINT32 uiFlags )
 			UINT8	ubDirection;
 
 			sNewGridNo = FindGridNoFromSweetSpotWithStructDataFromSoldier( pSoldier, pSoldier->usUIMovementMode, 5, &ubDirection, 0, MercPtrs[ ubMercID ] );
-			
+
 			if (!TileIsOutOfBounds(sNewGridNo))
 			{
 				usMapPos = sNewGridNo;
@@ -4182,7 +4182,7 @@ INT8 DrawUIMovementPath( SOLDIERTYPE *pSoldier, INT32 usMapPos, UINT32 uiFlags )
 			UINT8	ubDirection;
 
 			sNewGridNo = FindGridNoFromSweetSpotWithStructDataFromSoldier( pSoldier, pSoldier->usUIMovementMode, 5, &ubDirection, 0, MercPtrs[ ubMercID ] );
-			
+
 			if (!TileIsOutOfBounds(sNewGridNo))
 			{
 				usMapPos = sNewGridNo;
@@ -4268,7 +4268,7 @@ INT8 DrawUIMovementPath( SOLDIERTYPE *pSoldier, INT32 usMapPos, UINT32 uiFlags )
 
 		UINT16 structindex;
 		UINT16 possibleaction = InteractiveActionPossibleAtGridNo( usMapPos, pSoldier->pathing.bLevel, structindex );
-		
+
 		sAPCost = GetAPsForInteractiveAction( pSoldier, possibleaction );
 		sAPCost += UIPlotPath( pSoldier, sActionGridNo, NO_COPYROUTE, fPlot, TEMPORARY, (UINT16)pSoldier->usUIMovementMode, NOT_STEALTH, FORWARD, pSoldier->bActionPoints );
 
@@ -4287,7 +4287,7 @@ INT8 DrawUIMovementPath( SOLDIERTYPE *pSoldier, INT32 usMapPos, UINT32 uiFlags )
 		if ( gfUIFullTargetFound )
 		{
 			INT32		cnt;
-		    INT32		sSpot;	
+		    INT32		sSpot;
 			UINT8		ubGuyThere;
 
 			for ( cnt = 0; cnt < NUM_WORLD_DIRECTIONS; cnt++ )
@@ -4314,7 +4314,7 @@ INT8 DrawUIMovementPath( SOLDIERTYPE *pSoldier, INT32 usMapPos, UINT32 uiFlags )
 					break;
 				}
 			}
-			
+
 			if (TileIsOutOfBounds(sGotLocation))
 			{
 				sActionGridNo =	FindAdjacentGridEx( pSoldier, MercPtrs[ gusUIFullTargetID ]->sGridNo, &ubDirection, &sAdjustedGridNo, TRUE, FALSE );
@@ -4648,7 +4648,7 @@ BOOLEAN UIMouseOnValidAttackLocation( SOLDIERTYPE *pSoldier )
 				return( TRUE );
 			}
 		}
-				
+
 		return( FALSE );
 	}
 
@@ -4663,7 +4663,7 @@ BOOLEAN UIMouseOnValidAttackLocation( SOLDIERTYPE *pSoldier )
 				return( TRUE );
 			}
 		}
-				
+
 		return( FALSE );
 	}
 
@@ -5171,14 +5171,14 @@ BOOLEAN MakeSoldierTurn( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos )
 			//since this is a reset animation function, we should be VERY specific about when and what we dont reset
 
 			UINT16	test;
-			test = pSoldier->usAnimState; 
+			test = pSoldier->usAnimState;
 			if (!( 	test == AIM_RIFLE_STAND ||	test == AIM_RIFLE_CROUCH ||
 					test == AIM_RIFLE_PRONE ||	test == AIM_DUAL_STAND 	 ||
 					test == AIM_DUAL_CROUCH ||	test == AIM_DUAL_PRONE
-				)) 
+				))
 			{
 				pSoldier->SoldierGotoStationaryStance( );
-			}// arynn : fix lower ready weapon end_if	
+			}// arynn : fix lower ready weapon end_if
 		}
 
 		//DEF:	made it an event
@@ -5208,7 +5208,7 @@ BOOLEAN MakeSoldierTurn( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos )
 		if( pSoldier->sLastTarget != sXPos + (MAXCOL * sYPos ) && pTarget != NULL )
 			sAPCost = APBPConstants[AP_CHANGE_TARGET];
 
-		if ( pSoldier->bScopeMode == USE_ALT_WEAPON_HOLD && gGameExternalOptions.ubAllowAlternativeWeaponHolding == 3 ) 
+		if ( pSoldier->bScopeMode == USE_ALT_WEAPON_HOLD && gGameExternalOptions.ubAllowAlternativeWeaponHolding == 3 )
 			sAPCost /= 2;
 
 		if( usAnimState != INVALID_ANIMATION )
@@ -5240,7 +5240,7 @@ BOOLEAN MakeSoldierTurn( SOLDIERTYPE *pSoldier, INT16 sXPos, INT16 sYPos )
 		// SANDRO - get BP cost for weapon manipulating
 		if ( gGameExternalOptions.ubEnergyCostForWeaponWeight)
 			iBPCpst = sAPCost * GetBPCostPer10APsForGunHolding( pSoldier ) / 10;
-		else 
+		else
 			iBPCpst = 0;
 
 		DeductPoints( pSoldier, sAPCost, iBPCpst, AFTERACTION_INTERRUPT );
@@ -5286,7 +5286,7 @@ UINT32 UIHandleLCLook( UI_EVENT *pUIEvent )
 		if ( MakeSoldierTurn( pSoldier, sXPos, sYPos ) )
 		{
 			// 0verhaul:  Why do we set UI busy for a single soldier but not for a group of selected soldiers?
-			//SetUIBusy( pSoldier->ubID );		
+			//SetUIBusy( pSoldier->ubID );
 		}
 	}
 	return( GAME_SCREEN );
@@ -6125,8 +6125,8 @@ BOOLEAN IsValidTalkableNPC( UINT8 ubSoldierID, BOOLEAN fGive , BOOLEAN fAllowMer
 	}
 
 //	if ( pSoldier->ubProfile != NO_PROFILE && pSoldier->ubProfile >= FIRST_RPC && pSoldier->ubProfile < GASTON && !RPC_RECRUITED( pSoldier ) && !AM_AN_EPC( pSoldier ) )
-	//new profiles by Jazz	
-	if ( pSoldier->ubProfile != NO_PROFILE && ( gProfilesRPC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || gProfilesNPC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile ) && !RPC_RECRUITED( pSoldier ) && !AM_AN_EPC( pSoldier ) )	
+	//new profiles by Jazz
+	if ( pSoldier->ubProfile != NO_PROFILE && ( gProfilesRPC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile || gProfilesNPC[pSoldier->ubProfile].ProfilId == pSoldier->ubProfile ) && !RPC_RECRUITED( pSoldier ) && !AM_AN_EPC( pSoldier ) )
 	{
 		fValidGuy = TRUE;
 	}
@@ -6433,7 +6433,7 @@ void UnSetUIBusy( UINT8 ubID )
 		{
 			if ( !gTacticalStatus.fUnLockUIAfterHiddenInterrupt )
 			{
-				if ( gusSelectedSoldier == ubID && (gTacticalStatus.ubCurrentTeam == OUR_TEAM || !is_networked))// now that mp 
+				if ( gusSelectedSoldier == ubID && (gTacticalStatus.ubCurrentTeam == OUR_TEAM || !is_networked))// now that mp
 				{
 					guiPendingOverrideEvent	= LA_ENDUIOUTURNLOCK;
 					HandleTacticalUI( );
@@ -6472,7 +6472,7 @@ INT8 UIHandleInteractiveTilesAndItemsOnTerrain( SOLDIERTYPE *pSoldier, INT32 usM
 	STRUCTURE					*pStructure = NULL;
 	BOOLEAN						fPoolContainsHiddenItems = FALSE;
 	SOLDIERTYPE		*pTSoldier;
-	
+
 	if ( gfResetUIItemCursorOptimization )
 	{
 		gfResetUIItemCursorOptimization = FALSE;
@@ -6714,7 +6714,7 @@ INT8 UIHandleInteractiveTilesAndItemsOnTerrain( SOLDIERTYPE *pSoldier, INT32 usM
 			}
 		}
 	}
-	
+
 	if ( pIntTile == NULL )
 	{
 		return( 0 );
@@ -6982,7 +6982,7 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 	{
 		return( FALSE );
 	}*/
-	
+
 	// Loop through positions...
 	for (INT8 cnt = 0; cnt < 4; ++cnt)
 	{
@@ -7022,7 +7022,7 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 				{
 					// OK, NOW check if there is a guy in between us
 					//
-					// SANDRO: made this a bit different - if we hold down the shift key, and pointing at a spot 2 tiles away, we check if jumping 
+					// SANDRO: made this a bit different - if we hold down the shift key, and pointing at a spot 2 tiles away, we check if jumping
 					// there is possible for all cases, and if it is, then we juuuuumpppp!
 					// So we don't care if there is a guy on the ground there, and the cursor wont appear atutomatically anymore
 					//
@@ -7088,7 +7088,7 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 
 					// Get the height of stuff on the tile, we can only jump over low obstacles like this
 					bTileHeight = GetTallestStructureHeight( sInBetween, pSoldier->pathing.bLevel );
-					if ( bTileHeight > 0 && !IsLocationSittableExcludingPeople( sInBetween, pSoldier->pathing.bLevel ) && !( pSoldier->pathing.bLevel && FlatRoofAboveGridNo( sInBetween ) )) 
+					if ( bTileHeight > 0 && !IsLocationSittableExcludingPeople( sInBetween, pSoldier->pathing.bLevel ) && !( pSoldier->pathing.bLevel && FlatRoofAboveGridNo( sInBetween ) ))
 					{
 						return( FALSE );
 					}
@@ -7097,10 +7097,10 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 					if (( FindStructure( sInBetween, STRUCTURE_TREE ) != NULL || FindStructure( sInBetween, STRUCTURE_FENCE ) != NULL ||
 						 FindStructure( sInBetween, STRUCTURE_WIREFENCE ) != NULL || FindStructure( sInBetween, STRUCTURE_VEHICLE ) != NULL ||
 						 FindStructure( sInBetween, STRUCTURE_CAVEWALL ) != NULL ) && !IsLocationSittableExcludingPeople( sInBetween, pSoldier->pathing.bLevel ))
-					{	
+					{
 						return( FALSE );
 					}
-					
+
 					if( !(_KeyDown( SHIFT ) && _KeyDown( ALT )) )
 					{
 						return( FALSE );
@@ -7115,7 +7115,7 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 		else
 		{
 			// 3 TILES FAR!
-			sInBetween2 = sSpot; 
+			sInBetween2 = sSpot;
 			sSpot = NewGridNo( sInBetween2, DirectionInc( sDirs[ cnt ] ) );
 
 			// Is the soldier we're looking at here?
@@ -7129,7 +7129,7 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 				{
 					// If the soldier in the middle of doing stuff?
 					if ( !pSoldier->flags.fTurningUntilDone )
-					{			
+					{
 						// Can't jump from a water tile (but we can jumpt TO a water tile)
 						if ( pSoldier->MercInWater() )
 						{
@@ -7162,12 +7162,12 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 
 						// Get the height of stuff on both middle tiles, we can only jump over low obstacles
 						bTileHeight = GetTallestStructureHeight( sInBetween, pSoldier->pathing.bLevel );
-						if ( bTileHeight > 0 && !IsLocationSittableExcludingPeople( sInBetween, pSoldier->pathing.bLevel ) && !( pSoldier->pathing.bLevel && FlatRoofAboveGridNo( sInBetween ) )) 
+						if ( bTileHeight > 0 && !IsLocationSittableExcludingPeople( sInBetween, pSoldier->pathing.bLevel ) && !( pSoldier->pathing.bLevel && FlatRoofAboveGridNo( sInBetween ) ))
 						{
 							return( FALSE );
 						}
 						bTileHeight = GetTallestStructureHeight( sInBetween2, pSoldier->pathing.bLevel );
-						if ( bTileHeight > 0 && !IsLocationSittableExcludingPeople( sInBetween2, pSoldier->pathing.bLevel ) && !( pSoldier->pathing.bLevel && FlatRoofAboveGridNo( sInBetween2 ) )) 
+						if ( bTileHeight > 0 && !IsLocationSittableExcludingPeople( sInBetween2, pSoldier->pathing.bLevel ) && !( pSoldier->pathing.bLevel && FlatRoofAboveGridNo( sInBetween2 ) ))
 						{
 							return( FALSE );
 						}
@@ -7176,13 +7176,13 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 						if (( FindStructure( sInBetween, STRUCTURE_TREE ) != NULL || FindStructure( sInBetween, STRUCTURE_FENCE ) != NULL ||
 							 FindStructure( sInBetween, STRUCTURE_WIREFENCE ) != NULL || FindStructure( sInBetween, STRUCTURE_VEHICLE ) != NULL ||
 							 FindStructure( sInBetween, STRUCTURE_CAVEWALL ) != NULL ) && !IsLocationSittableExcludingPeople( sInBetween, pSoldier->pathing.bLevel ))
-						{	
+						{
 							return( FALSE );
 						}
 						if (( FindStructure( sInBetween2, STRUCTURE_TREE ) != NULL || FindStructure( sInBetween2, STRUCTURE_FENCE ) != NULL ||
 							 FindStructure( sInBetween2, STRUCTURE_WIREFENCE ) != NULL || FindStructure( sInBetween2, STRUCTURE_VEHICLE ) != NULL ||
 							 FindStructure( sInBetween2, STRUCTURE_CAVEWALL ) != NULL ) && !IsLocationSittableExcludingPeople( sInBetween2, pSoldier->pathing.bLevel ))
-						{	
+						{
 							return( FALSE );
 						}
 
@@ -7213,11 +7213,11 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 						ubDirection = GetDirectionToGridNoFromGridNo( sInBetween2, sInBetween );
 						switch (ubDirection)
 						{
-						case NORTH: 
+						case NORTH:
 							if ( WallOrClosedDoorExistsOfTopLeftOrientation( sInBetween ) )
 								return( FALSE );
 							break;
-						case EAST: 
+						case EAST:
 							if ( WallOrClosedDoorExistsOfTopRightOrientation( sInBetween2 ) )
 								return( FALSE );
 							break;
@@ -7228,16 +7228,16 @@ BOOLEAN IsValidJumpLocation( SOLDIERTYPE *pSoldier, INT32 sGridNo, BOOLEAN fChec
 						case WEST:
 							if ( WallOrClosedDoorExistsOfTopRightOrientation( sInBetween ) )
 								return( FALSE );
-							break;	
+							break;
 						default:
 							return( FALSE );
-							break;							
+							break;
 						}
-						
+
 						if( !(_KeyDown( SHIFT ) && _KeyDown( ALT )) )
 						{
 							return( FALSE );
-						}						
+						}
 
 						// If we got here, we are good to go
 						return ( TRUE );

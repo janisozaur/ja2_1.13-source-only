@@ -1,7 +1,7 @@
 #ifndef __ANIMATED_PROGRESSBAR_H
 #define __ANIMATED_PROGRESSBAR_H
 
-#include "types.h"
+#include "Types.h"
 
 #define MAX_PROGRESSBARS 4
 
@@ -36,7 +36,7 @@ typedef struct
 {
 	UINT16			uiIndex;
 	CHAR16			szName[190];			// text of the hint. Note that this size + any text it is used in must be < than CHAR16	pzText[ 200 ]; of VIDEO_OVERLAY_DESC if you display this in any logs
-	
+
 	UINT32			usFlags;				// flags that can be used to determine wether a hint is currently appropriate
 	BOOLEAN			fAlreadyShown;			// to remember if this hint has already been shown in this game (reset on starting exe)
 } LOADSCREENHINT_STRUCT;
@@ -130,7 +130,7 @@ void SetRelativeStartAndEndPercentage( UINT8 ubID, UINT16 uiRelStartPerc, UINT16
 
 //This part renders the progress bar at the percentage level that you specify.	If you have set relative
 //percentage values in the above function, then the uiPercentage will be reflected based off of the relative
-//percentages.	
+//percentages.
 void RenderProgressBar( UINT8 ubID, UINT32 uiPercentage );
 
 

@@ -1,9 +1,9 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "laptop.h"
+	#include "Laptop.h"
 	#include "AimPolicies.h"
-	#include "aim.h"
+	#include "Aim.h"
 	#include "WCheck.h"
 	#include "Utilities.h"
 	#include "WordWrap.h"
@@ -584,7 +584,7 @@ BOOLEAN	DisplayAimPolicyTitleText(void)
 	else
 		if(gGameExternalOptions.gfUseNewStartingGearInterface) DrawTextToScreen(sText, AIM_POLICY_TITLE_X, AIM_POLICY_TITLE_Y_NSGI, AIM_POLICY_TITLE_WIDTH, AIM_POLICY_TITLE_FONT, AIM_POLICY_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED);
 		else DrawTextToScreen(sText, AIM_POLICY_TITLE_X, AIM_POLICY_TITLE_Y, AIM_POLICY_TITLE_WIDTH, AIM_POLICY_TITLE_FONT, AIM_POLICY_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED);
-	
+
 	return(TRUE);
 }
 
@@ -689,7 +689,7 @@ BOOLEAN	DisplayAimPolicyTitle(UINT16 usPosY, UINT8	ubPageNum, FLOAT fNumber)
 	}
 	else
 	{
-		Loc::GetString(Loc::AIM_POLICY,L"Line", ubPageNum, sText, 400); 
+		Loc::GetString(Loc::AIM_POLICY,L"Line", ubPageNum, sText, 400);
 	}
 	DrawTextToScreen(sText, AIM_POLICY_SUBTITLE_NUMBER, usPosY, 0, AIM_POLICY_SUBTITLE_FONT, AIM_POLICY_SUBTITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED);
 

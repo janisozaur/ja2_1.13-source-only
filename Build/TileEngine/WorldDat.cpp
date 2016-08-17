@@ -1,4 +1,4 @@
-#include "builddefines.h"
+#include "BuildDefines.h"
 
 #ifdef PRECOMPILEDHEADERS
 	#include "TileEngine All.h"
@@ -6,12 +6,12 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include <wchar.h>
-	#include "worlddat.h"
-	#include "worlddef.h"
+	#include "WorldDat.h"
+	#include "WorldDef.h"
 	#include "tiledef.h"
-	#include "sys globals.h"
-	#include "tile surface.h"
-	#include "fileMan.h"
+	#include "Sys Globals.h"
+	#include "Tile Surface.h"
+	#include "FileMan.h"
 	#include "Debug.h"
 #endif
 
@@ -46,12 +46,12 @@ void InitEngineTilesets( )
 			SGP_TRYCATCH_RETHROW( ExportTilesets(tileset_filename), L"Could not export tileset XML file");
 		}
 		vfs::tReadableFile* file = getVFS()->getReadFile(tileset_filename);
-		SGP_THROW_IFFALSE(file, 
+		SGP_THROW_IFFALSE(file,
 			_BS(L"File '") << tileset_filename << L"' does not exist and could not be created" << _BS::wget);
 
 		CTilesetReader tileset_reader(gTilesets);
 		xml_auto::TGenericXMLParser<CTilesetReader> pars(&tileset_reader,NULL);
-		
+
 		SGP_TRYCATCH_RETHROW( pars.parseFile(file),
 			_BS(L"Parser Error in file : ") << file->getPath() << _BS::wget );
 	}
@@ -165,7 +165,7 @@ void ExportTilesets(vfs::Path const& filename)
 	// READ # TILESETS and compare
 	UINT8 numSets = 0;
 	FileRead( hfile, &numSets, sizeof( numSets ), &uiNumBytesRead );
-	
+
 	// CHECK
 	SGP_THROW_IFFALSE( numSets <= MAX_TILESETS, L"Too many tilesets in the data file" );
 	xmlw.addAttributeToNextValue("numTilesets",(int)numSets);
@@ -216,7 +216,7 @@ void ExportTilesets(vfs::Path const& filename)
 //				xmlw.AddValue("file",std::string("okop.sti"));
 //		}
 //ddd}
-			
+
 		}
 		xmlw.closeNode(); // Files
 		xmlw.closeNode(); // tileset

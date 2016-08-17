@@ -2,59 +2,59 @@
 	#include "Strategic All.h"
 	#include "HelpScreen.h"
 #else
-	#include "mapscreen.h"
+	#include "MapScreen.h"
 	#include <stdio.h>
 	#include <stdarg.h>
 	#include <time.h>
-	#include "gameloop.h"
+	#include "GameLoop.h"
 	#include "sgp.h"
-	#include "vobject.h"
-	#include "wcheck.h"
-	#include "worlddef.h"
-	#include "input.h"
-	#include "font.h"
-	#include "screenids.h"
-	#include "screens.h"
-	#include "gameloop.h"
-	#include "overhead.h"
-	#include "sysutil.h"
-	#include "input.h"
+	#include "VObject.h"
+	#include "WCheck.h"
+	#include "WorldDef.h"
+	#include "Input.h"
+	#include "Font.h"
+	#include "ScreenIds.h"
+	#include "Screens.h"
+	#include "GameLoop.h"
+	#include "Overhead.h"
+	#include "SysUtil.h"
+	#include "Input.h"
 	#include "Event Pump.h"
 	#include "Font Control.h"
 	#include "Timer Control.h"
 	#include "Interface.h"
 	#include "Handle UI.h"
 	#include "Interface Items.h"
-	#include "interface utils.h"
-	#include "lighting.h"
+	#include "Interface Utils.h"
+	#include "Lighting.h"
 	#include <wchar.h>
 	#include <tchar.h>
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Soldier Profile.h"
 	#include "Interface Panels.h"
 	#include "Interface Control.h"
-	#include "sys globals.h"
+	#include "Sys Globals.h"
 	#include "Radar Screen.h"
 	#include "Render Dirty.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Game Init.h"
-	#include "renderworld.h"
-	#include "finances.h"
-	#include "message.h"
+	#include "RenderWorld.h"
+	#include "Finances.h"
+	#include "Message.h"
 	#include "math.h"
-	#include "vsurface.h"
-	#include "vobject_blitters.h"
-	#include "faces.h"
+	#include "VSurface.h"
+	#include "VObject_blitters.h"
+	#include "Faces.h"
 	#include "PopUpBox.h"
 	#include "Game Clock.h"
-	#include "items.h"
-	#include "vobject.h"
+	#include "Items.h"
+	#include "VObject.h"
 	#include "Cursor Control.h"
-	#include "text.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
-	#include "interface.h"
-	#include "strategic pathing.h"
+	#include "Text.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
+	#include "Interface.h"
+	#include "Strategic Pathing.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Map Screen Interface Border.h"
 	#include "Map Screen Interface Map.h"
@@ -64,7 +64,7 @@
 	#include "Squads.h"
 	#include "Merc Contract.h"
 	#include "Sound Control.h"
-	#include "strategic turns.h"
+	#include "Strategic Turns.h"
 	#include "Dialogue Control.h"
 	#include "Map Screen Interface TownMine Info.h"
 	#include "PreBattle Interface.h"
@@ -75,34 +75,34 @@
 	#include "Map Screen Interface Map Inventory.h"
 	#include "Vehicles.h"
 	#include "Map Screen Helicopter.h"
-	#include "gamescreen.h"
-	#include "line.h"
-	#include "english.h"
+	#include "GameScreen.h"
+	#include "Line.h"
+	#include "English.h"
 	#include "Fade Screen.h"
 	#include "Strategic Mines.h"
 	#include "SaveLoadScreen.h"
 	#include "Options Screen.h"
 	#include "Auto Resolve.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Campaign.h"
 	#include "Random.h"
 	#include "Air Raid.h"
-	#include "quests.h"
+	#include "Quests.h"
 	#include "Town Militia.h"
-	#include "weapons.h"
+	#include "Weapons.h"
 	#include "Player Command.h"
 	#include "Multi Language Graphic Utils.h"
 	#include "HelpScreen.h"
-	#include "Soldier macros.h"
+	#include "Soldier Macros.h"
 	#include "Map Information.h"
-	#include "cheats.h"
+	#include "Cheats.h"
 	#include "Strategic Town Loyalty.h"
 	#include "GameSettings.h"
 	#include "Militia Control.h"
 	#include "Tactical Save.h"
 	#include "Explosion Control.h"
 	#include "Creature Spreading.h"
-	#include "email.h"
+	#include "Email.h"
 	#include "Strategic Status.h"
 	#include "Soldier Create.h"
 	#include "Animation Control.h"
@@ -115,11 +115,11 @@
 	#include "Drugs And Alcohol.h"	// added by Flugente
 #endif
 
-#include "connect.h" //hayden
+#include "Connect.h" //hayden
 #include "InterfaceItemImages.h"
 
 #ifdef JA2UB
-#include "laptop.h"
+#include "Laptop.h"
 
 #include "Strategic Movement.h"
 
@@ -1148,7 +1148,7 @@ BOOLEAN InitializeInvPanelCoordsOld()
 	PLAYER_INFO_Y					= yResOffset + 107;
 	TOWN_INFO_Y						= yResOffset + 1;
 
-		  
+
 	PLAYER_INFO_X					= xResOffset + 0;
 	TOWN_INFO_X						= xResOffset + 0;
 	MAP_ITEMDESC_START_X			= xResOffset + 0;
@@ -1156,27 +1156,27 @@ BOOLEAN InitializeInvPanelCoordsOld()
 	MAP_WEIGHT_LABEL_X				= xResOffset + 173;
 	MAP_ARMOR_LABEL_X				= xResOffset + 208;
 	MAP_ARMOR_X						= xResOffset + 209;
-	MAP_ARMOR_PERCENT_X				= xResOffset + 229;	
+	MAP_ARMOR_PERCENT_X				= xResOffset + 229;
 	MAP_WEIGHT_X					= xResOffset + 176;
 	MAP_WEIGHT_PERCENT_X			= xResOffset + 196;
 	MAP_CAMMO_LABEL_X				= xResOffset + 178;
 	MAP_CAMMO_X					 	= xResOffset + 176;
-	MAP_CAMMO_PERCENT_X				= xResOffset + 196;	
-	PLAYER_INFO_FACE_START_X		= xResOffset + 9;	
-	PLAYER_INFO_FACE_END_X			= xResOffset + 60;	
-	INV_BODY_X						= xResOffset + 71;	
+	MAP_CAMMO_PERCENT_X				= xResOffset + 196;
+	PLAYER_INFO_FACE_START_X		= xResOffset + 9;
+	PLAYER_INFO_FACE_END_X			= xResOffset + 60;
+	INV_BODY_X						= xResOffset + 71;
 	NAME_X							= xResOffset + 4;
-	ASSIGN_X						= xResOffset + 60;	
-	SLEEP_X							= xResOffset + 116;	
+	ASSIGN_X						= xResOffset + 60;
+	SLEEP_X							= xResOffset + 116;
 	LOC_X							= xResOffset + 140;
-	DEST_ETA_X						= xResOffset + 177;	
-	TIME_REMAINING_X				= xResOffset + 215;	
+	DEST_ETA_X						= xResOffset + 177;
+	TIME_REMAINING_X				= xResOffset + 215;
 	CONTRACT_X						= xResOffset + 185;
-	TRASH_CAN_X						= xResOffset + 176;	
+	TRASH_CAN_X						= xResOffset + 176;
 	MAP_KEYRING_X					= xResOffset + 217;	//218/165 on Inventory_Bottom_Panel.sti
-	POP_UP_BOX_X					= xResOffset + 120;	
-	STR_X							= xResOffset + 112;	
-	LVL_X							= xResOffset + 159;	
+	POP_UP_BOX_X					= xResOffset + 120;
+	STR_X							= xResOffset + 112;
+	LVL_X							= xResOffset + 159;
 	CHAR_HP_X						= xResOffset + 133;
 	CROSS_X							= xResOffset + 195;
 	CHAR_PAY_X						= xResOffset + 150;
@@ -1213,15 +1213,15 @@ BOOLEAN InitializeInvPanelCoordsOld()
 	// item description
 	NAME_WIDTH						= 51;
 	ASSIGN_WIDTH					= 51;
-	SLEEP_WIDTH						= 19; 
+	SLEEP_WIDTH						= 19;
 	LOC_WIDTH						= 32;
 	DEST_ETA_WIDTH					= 33;
-	TIME_REMAINING_WIDTH			= 28;	
+	TIME_REMAINING_WIDTH			= 28;
 	CHAR_HP_WID						= 42;
-	CHAR_MORALE_WID					= 42;	
+	CHAR_MORALE_WID					= 42;
 	PIC_NAME_WID					= 52;
 	CHAR_NAME_WID					= 150;
-	CHAR_TIME_REMAINING_WID			= 51;		
+	CHAR_TIME_REMAINING_WID			= 51;
 	MAP_ITEMDESC_START_Y			= PLAYER_INFO_Y;
 	INV_REGION_X					= PLAYER_INFO_X;
 	INV_REGION_Y					= PLAYER_INFO_Y;
@@ -1366,7 +1366,7 @@ BOOLEAN InitializeInvPanelCoordsOld()
 	SOLDIER_PIC_Y					= yResOffset + 20;
 	SOLDIER_HAND_Y					= yResOffset + 81;
 
-	gSCamoXY.sX = INV_BODY_X;	
+	gSCamoXY.sX = INV_BODY_X;
 	gSCamoXY.sY = INV_BODY_Y;	// X, Y Location of Map screen's Camouflage region
 
 	//OJW - MP interface changes
@@ -1382,7 +1382,7 @@ BOOLEAN InitializeInvPanelCoordsNew()
 	PLAYER_INFO_X					= xResOffset + 0;
 	TOWN_INFO_X						= xResOffset + 0;
 	MAP_ITEMDESC_START_X			= xResOffset + 0;
-	MAP_ARMOR_LABEL_X				= xResOffset + 136;	
+	MAP_ARMOR_LABEL_X				= xResOffset + 136;
 	MAP_ARMOR_X					   	= xResOffset + 138;
 	MAP_ARMOR_PERCENT_X				= xResOffset + 158;
 	MAP_WEIGHT_LABEL_X				= xResOffset + 185;
@@ -1393,30 +1393,30 @@ BOOLEAN InitializeInvPanelCoordsNew()
 	MAP_CAMMO_PERCENT_X				= xResOffset + 244;
 	PLAYER_INFO_FACE_START_X		= xResOffset + 9;
 	PLAYER_INFO_FACE_END_X			= xResOffset + 60;
-	INV_BODY_X						= xResOffset + 31;	
+	INV_BODY_X						= xResOffset + 31;
 	NAME_X							= xResOffset + 4;
 	ASSIGN_X						= xResOffset + 60;
 	SLEEP_X							= xResOffset + 116;
 	LOC_X							= xResOffset + 140;
 	DEST_ETA_X						= xResOffset + 177;
-	TIME_REMAINING_X				= xResOffset + 215;	
+	TIME_REMAINING_X				= xResOffset + 215;
 	CONTRACT_X						= xResOffset + 185;
 	TRASH_CAN_X						= xResOffset + 209;
 	MAP_KEYRING_X					= xResOffset + 186; //184/19 on Inventory_Bottom_Panel.sti
 	POP_UP_BOX_X					= xResOffset + 120;
-	STR_X							= xResOffset + 112;	
+	STR_X							= xResOffset + 112;
 	LVL_X							= xResOffset + 159;
 	PIC_NAME_X						= xResOffset + 8;
-	CHAR_NAME_X						= xResOffset + 14;	
+	CHAR_NAME_X						= xResOffset + 14;
 	CHAR_LOC_X						= xResOffset + 76;
 	CHAR_TIME_REMAINING_X			= xResOffset + 207;
-	CHAR_ASSIGN_X					= xResOffset + 182;			
+	CHAR_ASSIGN_X					= xResOffset + 182;
 	CHAR_HP_X						= xResOffset + 133;
-	CHAR_MORALE_X					= xResOffset + 133;	
+	CHAR_MORALE_X					= xResOffset + 133;
 	CROSS_X							= xResOffset + 195;
 	CHAR_PAY_X						= xResOffset + 150;
 	SOLDIER_PIC_X					= xResOffset + 9;
-	SOLDIER_HAND_X					= xResOffset + 6;	
+	SOLDIER_HAND_X					= xResOffset + 6;
 
 	// Inventory slots
 	if (iResolution >= _640x480 && iResolution < _800x600)
@@ -1453,7 +1453,7 @@ BOOLEAN InitializeInvPanelCoordsNew()
 		gMapScreenInvPocketXY[29].sX = PLAYER_INFO_X + 166;	gMapScreenInvPocketXY[29].sY = PLAYER_INFO_Y + 155;		// SMALLPOCK5
 		gMapScreenInvPocketXY[30].sX = PLAYER_INFO_X + 22;	gMapScreenInvPocketXY[30].sY = PLAYER_INFO_Y + 176;		// SMALLPOCK6
 		gMapScreenInvPocketXY[31].sX = PLAYER_INFO_X + 58;	gMapScreenInvPocketXY[31].sY = PLAYER_INFO_Y + 176;		// SMALLPOCK7
-		gMapScreenInvPocketXY[32].sX = PLAYER_INFO_X + 94;	gMapScreenInvPocketXY[32].sY = PLAYER_INFO_Y + 176;		// SMALLPOCK8	
+		gMapScreenInvPocketXY[32].sX = PLAYER_INFO_X + 94;	gMapScreenInvPocketXY[32].sY = PLAYER_INFO_Y + 176;		// SMALLPOCK8
 		gMapScreenInvPocketXY[33].sX = PLAYER_INFO_X + 130;	gMapScreenInvPocketXY[33].sY = PLAYER_INFO_Y + 176;		// SMALLPOCK9
 		gMapScreenInvPocketXY[34].sX = PLAYER_INFO_X + 166;	gMapScreenInvPocketXY[34].sY = PLAYER_INFO_Y + 176;		// SMALLPOCK10
 		gMapScreenInvPocketXY[35].sX = PLAYER_INFO_X + 18;	gMapScreenInvPocketXY[35].sY = PLAYER_INFO_Y + 218;		// SMALLPOCK11
@@ -1511,7 +1511,7 @@ BOOLEAN InitializeInvPanelCoordsNew()
 		gMapScreenInvPocketXY[29].sX = PLAYER_INFO_X + 166;	gMapScreenInvPocketXY[29].sY = PLAYER_INFO_Y + 188;		// SMALLPOCK5
 		gMapScreenInvPocketXY[30].sX = PLAYER_INFO_X + 22;	gMapScreenInvPocketXY[30].sY = PLAYER_INFO_Y + 212;		// SMALLPOCK6
 		gMapScreenInvPocketXY[31].sX = PLAYER_INFO_X + 58;	gMapScreenInvPocketXY[31].sY = PLAYER_INFO_Y + 212;		// SMALLPOCK7
-		gMapScreenInvPocketXY[32].sX = PLAYER_INFO_X + 94;	gMapScreenInvPocketXY[32].sY = PLAYER_INFO_Y + 212;		// SMALLPOCK8	
+		gMapScreenInvPocketXY[32].sX = PLAYER_INFO_X + 94;	gMapScreenInvPocketXY[32].sY = PLAYER_INFO_Y + 212;		// SMALLPOCK8
 		gMapScreenInvPocketXY[33].sX = PLAYER_INFO_X + 130;	gMapScreenInvPocketXY[33].sY = PLAYER_INFO_Y + 212;		// SMALLPOCK9
 		gMapScreenInvPocketXY[34].sX = PLAYER_INFO_X + 166;	gMapScreenInvPocketXY[34].sY = PLAYER_INFO_Y + 212;		// SMALLPOCK10
 		gMapScreenInvPocketXY[35].sX = PLAYER_INFO_X + 18;	gMapScreenInvPocketXY[35].sY = PLAYER_INFO_Y + 288;		// SMALLPOCK11
@@ -1669,7 +1669,7 @@ BOOLEAN InitializeInvPanelCoordsNew()
 	SOLDIER_PIC_Y					= yResOffset + 20;
 	SOLDIER_HAND_Y					= yResOffset + 81;
 
-	gSCamoXY.sX = INV_BODY_X;	
+	gSCamoXY.sX = INV_BODY_X;
 	gSCamoXY.sY = INV_BODY_Y;	// X, Y Location of Map screen's Camouflage region
 
 	//OJW - MP interface changes
@@ -1709,7 +1709,7 @@ void InitializeMPCoordinates()
 BOOLEAN InitializeInvPanelCoordsVehicle( )
 {
 	InitializeInvPanelCoordsNew();
-	
+
 	// Inventory slots
 	if (iResolution >= _640x480 && iResolution < _800x600)
 	{
@@ -2009,10 +2009,10 @@ void GlowFace( void )
 	RectangleDraw( TRUE, xResOffset + 9, yResOffset + 18, xResOffset + 60, yResOffset + 63 , usColor, pDestBuf );
 	InvalidateRegion( xResOffset + 9, yResOffset + 18, xResOffset + 61, yResOffset + 64 );
 	UnLockVideoSurface( FRAME_BUFFER );
-	
+
 	// restore background
 	if((iColorNum==0)||(iColorNum==1))
-		RestoreExternBackgroundRect( xResOffset + 9, yResOffset + 18, 61 - 9 , ( UINT16 )( 64 - 18 ) );  
+		RestoreExternBackgroundRect( xResOffset + 9, yResOffset + 18, 61 - 9 , ( UINT16 )( 64 - 18 ) );
 }
 
 
@@ -2416,7 +2416,7 @@ void DrawCharStats( INT16 sCharNum )
 
 	// agility
 	swprintf( sString, L"%d", pSoldier->stats.bAgility + pSoldier->bExtraAgility );
-	
+
 	// SANDRO - if damaged stat we could regain, show in red until repaired
 	if( gGameOptions.fNewTraitSystem && ( pSoldier->ubCriticalStatDamage[DAMAGED_STAT_AGILITY] > 0 ))
 	{
@@ -2448,7 +2448,7 @@ void DrawCharStats( INT16 sCharNum )
 
 	// wisdom
 	swprintf( sString, L"%d", pSoldier->stats.bWisdom + pSoldier->bExtraWisdom );
-	
+
 	// SANDRO - if damaged stat we could regain, show in red until repaired
 	if( gGameOptions.fNewTraitSystem && ( pSoldier->ubCriticalStatDamage[DAMAGED_STAT_WISDOM] > 0 ))
 	{
@@ -2480,7 +2480,7 @@ void DrawCharStats( INT16 sCharNum )
 
 	// leadership
 	swprintf( sString, L"%d", pSoldier->stats.bLeadership );
-	
+
 	// SANDRO - if damaged stat we could regain, show in red until repaired
 	if( gGameOptions.fNewTraitSystem && ( pSoldier->ubCriticalStatDamage[DAMAGED_STAT_LEADERSHIP] > 0 ))
 	{
@@ -2563,7 +2563,7 @@ void DrawCharStats( INT16 sCharNum )
 
 	// mechanical
 	swprintf( sString, L"%d", pSoldier->stats.bMechanical );
-	
+
 	// SANDRO - if damaged stat we could regain, show in red until repaired
 	if( gGameOptions.fNewTraitSystem && ( pSoldier->ubCriticalStatDamage[DAMAGED_STAT_MECHANICAL] > 0 ))
 	{
@@ -2588,10 +2588,10 @@ void DrawCharStats( INT16 sCharNum )
 	// right justify
 	FindFontRightCoordinates(MEC_X,MEC_Y,STAT_WID ,STAT_HEI,sString , CHAR_FONT, &usX, &usY);
 	DrawString(sString,usX, MEC_Y,CHAR_FONT );
-	
+
 	// explosives
 	swprintf( sString, L"%d", pSoldier->stats.bExplosive );
-	
+
 	// SANDRO - if damaged stat we could regain, show in red until repaired
 	if( gGameOptions.fNewTraitSystem && ( pSoldier->ubCriticalStatDamage[DAMAGED_STAT_EXPLOSIVES] > 0 ))
 	{
@@ -2813,7 +2813,7 @@ void DrawCharacterInfo(INT16 sCharNumber)
 		// vehicle
 		//wcscpy(sString, pVehicleStrings[ pVehicleList[ pSoldier->bVehicleID ].ubVehicleType ]);
 		wcscpy(sString, gNewVehicle[ pVehicleList[ pSoldier->bVehicleID ].ubVehicleType ].NewVehicleStrings);
-		
+
 	}
 	else
 	{
@@ -2839,7 +2839,7 @@ void DrawCharacterInfo(INT16 sCharNumber)
 	{
 		// show vehicle type
 	//	wcscpy( sString, pShortVehicleStrings[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ] );
-		wcscpy( sString, gNewVehicle[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ].NewShortVehicleStrings );	
+		wcscpy( sString, gNewVehicle[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ].NewShortVehicleStrings );
 	}
 	else
 	{
@@ -2896,7 +2896,7 @@ void DrawCharacterInfo(INT16 sCharNumber)
 		{
 			// vehicle
 		//	wcscpy( sString, pShortVehicleStrings[ pVehicleList[ pSoldier->bVehicleUnderRepairID ].ubVehicleType ] );
-			wcscpy( sString, gNewVehicle[ pVehicleList[ pSoldier->bVehicleUnderRepairID ].ubVehicleType ].NewShortVehicleStrings );		
+			wcscpy( sString, gNewVehicle[ pVehicleList[ pSoldier->bVehicleUnderRepairID ].ubVehicleType ].NewShortVehicleStrings );
 		}
 		else
 		{
@@ -3165,7 +3165,7 @@ void DisplayCharacterInfo( void )
 	if ( gGameSettings.fOptions[TOPTION_STAT_PROGRESS_BARS] )
 	{
 		SOLDIERTYPE *pSoldier = MercPtrs[ gCharactersList[bSelectedInfoChar].usSolID ];
-	
+
 		UINT8	*pDestBuf;
 		UINT32 uiDestPitchBYTES = 0;
 		SGPRect ClipRect;
@@ -3441,7 +3441,7 @@ INT32 GetPathTravelTimeDuringPlotting( PathStPtr pPath )
 void DisplayGroundEta( void )
 {
 	UINT32 iTotalTime = 0;
-	
+
 	if( fPlotForHelicopter )
 		return;
 
@@ -3529,11 +3529,11 @@ void HighLightAssignLine()
 	else
 		iColorNum--;
 
-	usY = ( Y_OFFSET * giAssignHighLine - 1 ) + ( Y_START + ( giAssignHighLine * Y_SIZE ) );	
+	usY = ( Y_OFFSET * giAssignHighLine - 1 ) + ( Y_START + ( giAssignHighLine * Y_SIZE ) );
 
 	pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES );
 	SetClippingRegionAndImageWidth( uiDestPitchBYTES, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	
+
 	// marke strogg more mercs
 	for( usCount = 0; usCount < maxNumberOfMercVisibleInStrategyList; usCount++ )
 	{
@@ -3611,7 +3611,7 @@ void HighLightDestLine()
 
 	pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES );
 	SetClippingRegionAndImageWidth( uiDestPitchBYTES, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	
+
 	// marke strogg more mercs
 	for( usCount = 0; usCount < maxNumberOfMercVisibleInStrategyList; usCount++ )
 	{
@@ -3946,7 +3946,7 @@ void DrawMPPlayerList ()
 				if (client_downloading[i] == 1 && pbar_id_player[i] == 0)
 				{
 					fTeamPanelDirty = true;
-					
+
 					CreateProgressBarNoBorder(i,l,t,r,b);
 					SetProgressBarColor(i,112,154,209);
 					SetProgressBarRenderBuffer(i,guiSAVEBUFFER);
@@ -3958,7 +3958,7 @@ void DrawMPPlayerList ()
 					RemoveProgressBar(i);
 					pbar_id_player[i] = 0;
 				}
-				
+
 				// render the progress bar if needed
 				if (client_downloading[i] == 1 && pbar_id_player[i] == 1)
 				{
@@ -4458,7 +4458,7 @@ UINT32 MapScreenInit(void)
 
 	// set up leave list arrays for dismissed mercs
 	InitLeaveList( );
-	
+
 	InitializeMilitiaPopup();
 
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
@@ -4624,7 +4624,7 @@ UINT32 MapScreenHandle(void)
 		if(fPreLoadedMapGraphics == FALSE )
 		{
 			vs_desc.fCreateFlags = VSURFACE_CREATE_FROMFILE | VSURFACE_SYSTEM_MEM_USAGE;
-		
+
 			if (iResolution >= _640x480 && iResolution < _800x600)
 			{
 				// ------------
@@ -4632,7 +4632,7 @@ UINT32 MapScreenHandle(void)
 				// Important:	The size (including black area on top and left) of the PCX file has to be an even number for width and height,
 				//				otherwise the blitting method which shrinks the image by 50% does not work.
 				// ------------
-				
+
 				MAP_GRID_X = 21;		// Horizontal size of a square
 				MAP_GRID_Y = 18;		// Vertical size of a square
 
@@ -4641,12 +4641,12 @@ UINT32 MapScreenHandle(void)
 
 				MAP_VIEW_START_X = (MAP_BORDER_X + MAP_BORDER_X_OFFSET + 9);	// 9: Constant, do not change it.
 				MAP_VIEW_START_Y = (MAP_BORDER_Y + MAP_BORDER_Y_OFFSET + 10);	// 10: Constant, do not change it.
-				
+
 				// Maus Area (Ist die reine Größe der Karte/2 (ohne dem schwarzen Rand (links und oben))
 				MAP_VIEW_WIDTH = 336;			// Width of the map (without the black area on the left)
 				MAP_VIEW_HEIGHT	= 288 + 10;		// Height of the map (without the black area on the top) + constant value of 10
 
-				
+
 				MAP_FONT = BLOCKFONT2;
 
 				// The postion of the map numbers (1-16) above the map (horizontal)
@@ -4657,7 +4657,7 @@ UINT32 MapScreenHandle(void)
 				// The position of the latters (A-P) on the left side of the map (vertical)
 				MAP_VERT_INDEX_X = (MAP_BORDER_X + MAP_BORDER_X_OFFSET + 15);
 				MAP_VERT_INDEX_Y = (MAP_BORDER_Y + MAP_BORDER_Y_OFFSET + 29);
-				
+
 				MAP_VERT_WIDTH = GetFontHeight(MAP_FONT);
 
 				ETA_FONT = BLOCKFONT2;
@@ -4698,8 +4698,8 @@ UINT32 MapScreenHandle(void)
 
 				MAP_VIEW_START_X = (MAP_BORDER_X + MAP_BORDER_X_OFFSET + 9);
 				MAP_VIEW_START_Y = (MAP_BORDER_Y + MAP_BORDER_Y_OFFSET + 10);
-				
-				MAP_VIEW_WIDTH = 480;				
+
+				MAP_VIEW_WIDTH = 480;
 				MAP_VIEW_HEIGHT	= 400 + 10 + 7;
 
 				// The numbers on the horizontal line
@@ -4752,7 +4752,7 @@ UINT32 MapScreenHandle(void)
 				MAP_VIEW_START_X = (MAP_BORDER_X + MAP_BORDER_X_OFFSET + 9);
 				MAP_VIEW_START_Y = (MAP_BORDER_Y + MAP_BORDER_Y_OFFSET + 10);
 
-				MAP_VIEW_WIDTH = 688;			
+				MAP_VIEW_WIDTH = 688;
 				MAP_VIEW_HEIGHT = 560 + 10 + 17;
 
 				MAP_FONT = FONT12ARIAL;
@@ -4794,10 +4794,10 @@ UINT32 MapScreenHandle(void)
 
 		//fInterfacePanelDirty=DIRTYLEVEL2;
 		//RenderTacticalInterface();
-		
+
 		// Grab the Map image
 
-		
+
 		CHECKF(AddVideoSurface(&vs_desc, &guiBIGMAP));
 
 		vs_desc.fCreateFlags = VSURFACE_CREATE_FROMFILE | VSURFACE_SYSTEM_MEM_USAGE;
@@ -4824,7 +4824,7 @@ UINT32 MapScreenHandle(void)
 			FilenameForBPP("INTERFACE\\map_pathing_arrows_800.sti", VObjectDesc.ImageFile);
 		else
 			FilenameForBPP("INTERFACE\\map_pathing_arrows_1024.sti", VObjectDesc.ImageFile);
-		
+
 		CHECKF(AddVideoObject(&VObjectDesc, &guiMapPathingArrows));
 
 		VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
@@ -4930,7 +4930,7 @@ UINT32 MapScreenHandle(void)
 
 		if(!AddVideoObject(&VObjectDesc, &guiMAPINV))
 		{
-			FilenameForBPP("INTERFACE\\mapinv.sti", VObjectDesc.ImageFile);		
+			FilenameForBPP("INTERFACE\\mapinv.sti", VObjectDesc.ImageFile);
 			CHECKF(AddVideoObject(&VObjectDesc, &guiMAPINV));
 		}
 
@@ -4950,11 +4950,11 @@ UINT32 MapScreenHandle(void)
 		VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 		FilenameForBPP("INTERFACE\\prison.sti", VObjectDesc.ImageFile);
 		CHECKF(AddVideoObject(&VObjectDesc, &guiTIXAICON));
-		
+
 		for( iCounter2 = 1; iCounter2 < NUM_TOWNS; iCounter2++ )
 		{
 			VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
-			
+
 			if ( gfIconTown[iCounter2] == TRUE )
 			{
 				strcpy(VObjectDesc.ImageFile, gHiddenIcon[iCounter2].IconSti);
@@ -4963,13 +4963,13 @@ UINT32 MapScreenHandle(void)
 			{
 				FilenameForBPP("INTERFACE\\PRISON.sti", VObjectDesc.ImageFile);
 			}
-				
+
 			if (!FileExists(VObjectDesc.ImageFile))
 			{
 				FilenameForBPP("INTERFACE\\PRISON.sti", VObjectDesc.ImageFile);
 			}
-				
-				
+
+
 			CHECKF(AddVideoObject(&VObjectDesc, &guiIcon2[iCounter2]));
 		}
 
@@ -4979,7 +4979,7 @@ UINT32 MapScreenHandle(void)
 			FilenameForBPP("INTERFACE\\merc_between_sector_icons_640.sti", VObjectDesc.ImageFile);
 		else if (iResolution < _1024x768)
 			FilenameForBPP("INTERFACE\\merc_between_sector_icons_800.sti", VObjectDesc.ImageFile);
-		else 
+		else
 			FilenameForBPP("INTERFACE\\merc_between_sector_icons_1024.sti", VObjectDesc.ImageFile);
 
 		CHECKF(AddVideoObject(&VObjectDesc, &guiCHARBETWEENSECTORICONS));
@@ -4991,7 +4991,7 @@ UINT32 MapScreenHandle(void)
 			FilenameForBPP("INTERFACE\\enemy_between_sector_icons_640.sti", VObjectDesc.ImageFile);
 		else if (iResolution < _1024x768)
 			FilenameForBPP("INTERFACE\\enemy_between_sector_icons_800.sti", VObjectDesc.ImageFile);
-		else 
+		else
 			FilenameForBPP("INTERFACE\\enemy_between_sector_icons_1024.sti", VObjectDesc.ImageFile);
 
 		CHECKF(AddVideoObject(&VObjectDesc, &guiENEMYBETWEENSECTORICONS));
@@ -5007,7 +5007,7 @@ UINT32 MapScreenHandle(void)
 			FilenameForBPP("INTERFACE\\Helicopter_Map_Icon_640.sti", VObjectDesc.ImageFile);
 		else if (iResolution < _1024x768)
 			FilenameForBPP("INTERFACE\\Helicopter_Map_Icon_800.sti", VObjectDesc.ImageFile);
-		else 
+		else
 			FilenameForBPP("INTERFACE\\Helicopter_Map_Icon_1024.sti", VObjectDesc.ImageFile);
 
 		CHECKF(AddVideoObject(&VObjectDesc, &guiHelicopterIcon));
@@ -5047,14 +5047,14 @@ UINT32 MapScreenHandle(void)
 			CHECKF( AddVideoObject( &VObjectDesc, &guiMINEICON ) );
 
 			VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
-			
+
 			if (iResolution >= _640x480 && iResolution < _800x600)
 				sprintf( VObjectDesc.ImageFile, "INTERFACE\\hilite.sti" );
 			else if (iResolution < _1024x768)
 				sprintf( VObjectDesc.ImageFile, "INTERFACE\\hilite_800x600.sti" );
 			else
 				sprintf( VObjectDesc.ImageFile, "INTERFACE\\hilite_1024x768.sti" );
-			
+
 			AddVideoObject( &VObjectDesc, &guiSectorLocatorGraphicID );
 
 			VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
@@ -5065,7 +5065,7 @@ UINT32 MapScreenHandle(void)
 
 			// load the militia pop up box
 			LoadMilitiaPopUpBox( );
-			
+
 			// graphic for pool inventory
 			LoadInventoryPoolGraphic( );
 
@@ -5172,7 +5172,7 @@ UINT32 MapScreenHandle(void)
 		// set up regions
 		MSYS_DefineRegion( &gMapViewRegion, MAP_VIEW_START_X + MAP_GRID_X, MAP_VIEW_START_Y + MAP_GRID_Y,MAP_VIEW_START_X + MAP_VIEW_WIDTH+MAP_GRID_X-1, MAP_VIEW_START_Y + MAP_VIEW_HEIGHT-1 + 8, MSYS_PRIORITY_HIGH - 3,
 							MSYS_NO_CURSOR, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
-		
+
 		MSYS_DefineRegion( &gCharInfoHandRegion, ((INT16)( xResOffset + 4 )), ((INT16)( yResOffset + 81 )) ,((INT16)( xResOffset + 62 )), ((INT16)( yResOffset + 103 )), MSYS_PRIORITY_HIGH,
 								MSYS_NO_CURSOR, ItemRegionMvtCallback , ItemRegionBtnCallback );
 
@@ -5281,7 +5281,7 @@ UINT32 MapScreenHandle(void)
 			// now do the warning box
 			DoMapMessageBox( MSG_BOX_BASIC_STYLE, pMapErrorString[ 4 ], MAP_SCREEN, MSG_BOX_FLAG_OK, MapScreenDefaultOkBoxCallback );
 		}
-		
+
 		fFirstTimeInMapScreen = FALSE;
 
 		if( gpCurrentTalkingFace != NULL )
@@ -5334,7 +5334,7 @@ UINT32 MapScreenHandle(void)
 			return( MAP_SCREEN );
 		}
 	}
-#ifdef JA2UB	
+#ifdef JA2UB
 	//Ja25 UB
 	if ( gfProcessCustomMaps )
 	{
@@ -5515,7 +5515,7 @@ UINT32 MapScreenHandle(void)
 
 	InterruptTimeForMenus( );
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 UB
 	//Handle Jerry Milo quotes
 	if ( gGameUBOptions.JerryQuotes == TRUE )
@@ -5860,8 +5860,8 @@ UINT32 MapScreenHandle(void)
 #ifdef JA2UB
 /* UB */
 #else
-	CheckForMeanwhileOKStart( );	
-#endif	
+	CheckForMeanwhileOKStart( );
+#endif
 	// save background rects
 	// ATE: DO this BEFORE rendering help text....
 	SaveBackgroundRects( );
@@ -5974,7 +5974,7 @@ UINT32 MapScreenHandle(void)
 		HandleExitsFromMapScreen( );
 	}
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//Ja25 ub
 	//Handle the strategic AI
 	JA25_HandleUpdateOfStrategicAi();
@@ -6126,7 +6126,7 @@ void DrawName(STR16 pName, INT16 sRowIndex, INT32 iFont)
 	INT16 usY=0;
 
 	FindFontCenterCoordinates((short)NAME_X + 1, (short)(Y_START+(sRowIndex*Y_SIZE)), (short)NAME_WIDTH, (short)Y_SIZE, pName, (long)iFont, &usX, &usY);
-	
+
 	DrawString( pName, (UINT16)usX, ((UINT16)(usY+(Y_OFFSET*sRowIndex+1))), iFont);
 }
 
@@ -6141,7 +6141,7 @@ void DrawAssignment(INT16 sCharNumber, INT16 sRowIndex, INT32 iFont)
 	GetMapscreenMercAssignmentString( MercPtrs[ gCharactersList[ sCharNumber ].usSolID ], sString );
 
 	FindFontCenterCoordinates((short)ASSIGN_X + 1, (short)(Y_START+(sRowIndex*Y_SIZE)), (short)ASSIGN_WIDTH, (short)Y_SIZE, sString, (long)iFont, &usX, &usY);
-	
+
 	SOLDIERTYPE *pSoldier = MercPtrs[ gCharactersList[ sCharNumber ].usSolID ];
 
 	if( fFlashAssignDone == TRUE )
@@ -6243,7 +6243,7 @@ void DrawAssignment(INT16 sCharNumber, INT16 sRowIndex, INT32 iFont)
 
 		UnLockVideoSurface( uiDestBuffer );
 	}
-	
+
 	DrawString(sString, (UINT16)usX, ((UINT16)(usY+(Y_OFFSET*sRowIndex+1))), iFont);
 }
 
@@ -6257,7 +6257,7 @@ void DrawLocation(INT16 sCharNumber, INT16 sRowIndex, INT32 iFont)
 	GetMapscreenMercLocationString( MercPtrs[ gCharactersList[ sCharNumber ].usSolID ], sString );
 
 	FindFontCenterCoordinates((short)LOC_X + 1, (short)(Y_START+(sRowIndex*Y_SIZE)), (short)LOC_WIDTH, (short)Y_SIZE, sString, (long)iFont, &usX, &usY);
-	
+
 	// draw string
 	DrawString( sString,((UINT16)(usX)), ((UINT16)(usY+(Y_OFFSET*sRowIndex+1))), ((UINT32)iFont));
 }
@@ -6277,7 +6277,7 @@ void DrawDestination(INT16 sCharNumber, INT16 sRowIndex, INT32 iFont)
 	}
 
 	FindFontCenterCoordinates((short)DEST_ETA_X + 1, (short)(Y_START+(sRowIndex*Y_SIZE)), (short)DEST_ETA_WIDTH, (short)Y_SIZE, sString, (long)iFont, &usX, &usY);
-	
+
 	DrawString( sString,((UINT16)(usX)), ((UINT16)(usY+(Y_OFFSET*sRowIndex+1))), ((UINT32)iFont));
 }
 
@@ -6301,7 +6301,7 @@ void DrawTimeRemaining( INT16 sCharNumber, INT32 iFont, UINT8 ubFontColor )
 	SetFontForeground( ubFontColor );
 
 	FindFontCenterCoordinates((short)TIME_REMAINING_X + 1, (short)(Y_START+(sCharNumber*Y_SIZE)), (short)TIME_REMAINING_WIDTH, (short)Y_SIZE, sString, (long)iFont, &usX, &usY);
-	
+
 	DrawString(sString,((UINT16)(usX)), ((UINT16)(usY+(Y_OFFSET*sCharNumber+1))), ((UINT32)iFont));
 }
 
@@ -6857,7 +6857,7 @@ void InitializeWorldSize(INT16 sSectorX, INT16 sSectorY , INT8 bSectorZ)
 		// Read JA2 Version ID
 		LOADDATA( &dMajorMapVersion, pBuffer, sizeof( FLOAT ) );
 		LOADDATA( &ubMinorMapVersion, pBuffer, sizeof( UINT8 ) );
-		
+
 		if(dMajorMapVersion < 7.00)
 			// old map - always 160x160
 			SetWorldSize(OLD_WORLD_ROWS, OLD_WORLD_COLS);
@@ -6880,7 +6880,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 	BOOLEAN fCtrl, fAlt;
 
 	INT16 sMapX, sMapY;
-	
+
 	INT32 iCounter2 = 0;
 
 	fCtrl = _KeyDown( CTRL );
@@ -7183,8 +7183,8 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 					if( fCtrl )
 					{
 						if( InItemDescriptionBox( ) && gGameSettings.fOptions[ TOPTION_ENHANCED_DESC_BOX ] == TRUE )
-						{			
-							if ( (Item[ gpItemDescObject->usItem ].usItemClass & IC_WEAPON || Item[ gpItemDescObject->usItem ].usItemClass & IC_PUNCH) 
+						{
+							if ( (Item[ gpItemDescObject->usItem ].usItemClass & IC_WEAPON || Item[ gpItemDescObject->usItem ].usItemClass & IC_PUNCH)
 								&& gubDescGenPage == 0 && gubDescBoxPage == 1 )
 							{
 								gubDescGenPage = 1;
@@ -7195,7 +7195,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 								gubDescBoxPage++;
 							}
 							else
-							{					
+							{
 								gubDescBoxPage = 0;
 							}
 							HandleItemDescTabButton( );
@@ -7355,7 +7355,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 					#endif
 					break;
 
-				case ',': 
+				case ',':
 					if( fShowMapInventoryPool == TRUE )
 					{
 						// if can go to previous page, go there
@@ -7367,7 +7367,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 					}
 					break;
 
-				case '.': 
+				case '.':
 					if( fShowMapInventoryPool == TRUE )
 					{
 						// if can go to next page, go there
@@ -7453,7 +7453,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 						SwitchToInventoryPoolQ('0');
 						break;
 					}
-					SelectAllCharactersInSquad( 9 ); // internal squad #s start at 0					
+					SelectAllCharactersInSquad( 9 ); // internal squad #s start at 0
 					break;
 
 				case '!':
@@ -7730,7 +7730,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 														}
 													}
 												}
-											}									
+											}
 										}
 
 										fTeamPanelDirty = TRUE;
@@ -7853,7 +7853,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 						SOLDIERTYPE *pSoldier = MercPtrs[ gCharactersList[ bSelectedInfoChar ].usSolID ];
 						UINT16 usOldHandItem = pSoldier->inv[HANDPOS].usItem;
 						SwapHandItems( pSoldier );
-						
+
 						fTeamPanelDirty = TRUE;
 						fMapPanelDirty = TRUE;
 						fInterfacePanelDirty = DIRTYLEVEL2;
@@ -7902,7 +7902,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 					break;
 
 					// haydent
-				case 'k':					
+				case 'k':
 					if(gGameExternalOptions.fEnableInventoryPoolQ && fShowMapInventoryPool == TRUE)//dnl ch51 081009
 					{
 						CopySectorInventoryToInventoryPoolQs(0);
@@ -7996,13 +7996,13 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 						#ifdef JA2TESTVERSION
 							fFoundOrta = !fFoundOrta;
 							fFoundTixa = !fFoundTixa;
-								
+
 							for( iCounter2 = 1; iCounter2 < NUM_TOWNS; iCounter2++ )
 								{
 									gfHiddenTown [ iCounter2 ] = TRUE;
-									gfDrawHiddenTown[ iCounter2 ] = TRUE; 
+									gfDrawHiddenTown[ iCounter2 ] = TRUE;
 								}
-	
+
 							fMapPanelDirty = TRUE;
 						#endif
 					}
@@ -8277,7 +8277,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 						fShowMapInventoryPool = TRUE;
 						CreateDestroyMapInventoryPoolButtons( TRUE );
 					}
-					break;				
+					break;
 				case 'v':
 					if( fCtrl )
 					{
@@ -8449,7 +8449,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 					// down a page
 					MapScreenMsgScrollDown( MAX_MESSAGES_ON_MAP_BOTTOM );
 					break;
-				case ',': 
+				case ',':
 					if( fShowMapInventoryPool == TRUE )
 					{
 						// if can go to previous page, go there
@@ -8460,7 +8460,7 @@ void GetMapKeyboardInput( UINT32 *puiNewEvent )
 						}
 					}
 					break;
-				case '.': 
+				case '.':
 					if( fShowMapInventoryPool == TRUE )
 					{
 						// if can go to next page, go there
@@ -8705,7 +8705,7 @@ INT32 iCounter2 = 0;
 		DeleteVideoObjectFromIndex( guiEnemyHelicopterIcon );
 		DeleteVideoObjectFromIndex( guiMINEICON );
 		DeleteVideoObjectFromIndex( guiSectorLocatorGraphicID );
-		
+
         //----------- Legion 2
 		for( iCounter2 = 1; iCounter2 < NUM_TOWNS; iCounter2++ )
 		{
@@ -8793,7 +8793,7 @@ INT32 iCounter2 = 0;
 	if( !gfDontStartTransitionFromLaptop )
 	{
 		// WANNE: This code blocks never gets called, but this is fine, cause we don't need it. That seems to be an "old" unused code block!
-		
+
 		VOBJECT_DESC	VObjectDesc;
 		UINT32 uiLaptopOn;
 
@@ -8962,8 +8962,8 @@ void PollLeftButtonInMapView( UINT32 *puiNewEvent )
 
 				// ignore left clicks in the map screen if:
 				// game just started or we're in the prebattle interface or if we are about to hit pre-battle
-				
-				
+
+
 				if (is_networked)
 				{
 					if ( /*( gTacticalStatus.fDidGameJustStart == TRUE ) || */
@@ -9191,7 +9191,7 @@ void PopupText( STR16 pFontString, ...	)
 	va_end(argptr);
 
 	FindFontCenterCoordinates( 0, 0, SCREEN_WIDTH, INTERFACE_START_Y, PopupString, LARGEFONT1, &sX, &sY );
-	
+
 	BltVideoSurface( FRAME_BUFFER, guiINTEXT, 0, xResOffset + 85, yResOffset + 160, VS_BLT_FAST | VS_BLT_USECOLORKEY, NULL );
 
 	pDestBuf = LockVideoSurface( FRAME_BUFFER, &uiDestPitchBYTES);
@@ -9357,8 +9357,8 @@ void BltCharInvPanel()
 	}
 
 	Blt8BPPDataTo16BPPBufferTransparent( pDestBuf, uiDestPitchBYTES, hCharListHandle, PLAYER_INFO_X, PLAYER_INFO_Y, disOpt);
-	UnLockVideoSurface( guiSAVEBUFFER ); 
-	
+	UnLockVideoSurface( guiSAVEBUFFER );
+
 	Assert( pSoldier );
 	CreateDestroyMapInvButton();
 
@@ -9412,7 +9412,7 @@ void BltCharInvPanel()
 		#endif
 
 		mprintf( MAP_WEIGHT_LABEL_X, MAP_WEIGHT_LABEL_Y, pInvPanelTitleStrings[ 1 ]  );
-		
+
 		#ifdef CHINESE
 			mprintf( MAP_WEIGHT_PERCENT_X, MAP_WEIGHT_PERCENT_Y, ChineseSpecString1 );
 		#else
@@ -9420,7 +9420,7 @@ void BltCharInvPanel()
 		#endif
 
 		mprintf( MAP_CAMMO_LABEL_X, MAP_CAMMO_LABEL_Y, pInvPanelTitleStrings[ 2 ]  );
-		
+
 		#ifdef CHINESE
 			mprintf( MAP_CAMMO_PERCENT_X, MAP_CAMMO_PERCENT_Y, ChineseSpecString1 );
 		#else
@@ -9430,12 +9430,12 @@ void BltCharInvPanel()
 		// display armor value
 		swprintf( sString, L"%3d", ArmourPercent( pSoldier ) );
 		FindFontRightCoordinates(MAP_ARMOR_X, MAP_ARMOR_Y, MAP_PERCENT_WIDTH, MAP_PERCENT_HEIGHT, sString, BLOCKFONT2, &usX, &usY);
-		mprintf( usX, usY, sString ); 
+		mprintf( usX, usY, sString );
 
 		// Display weight value
 		swprintf( sString, L"%3d", CalculateCarriedWeight( pSoldier ) );
 		FindFontRightCoordinates(MAP_WEIGHT_X, MAP_WEIGHT_Y, MAP_PERCENT_WIDTH, MAP_PERCENT_HEIGHT, sString, BLOCKFONT2, &usX, &usY);
-		mprintf( usX, usY, sString ); 
+		mprintf( usX, usY, sString );
 
 		ApplyEquipmentBonuses(pSoldier);
 
@@ -9476,7 +9476,7 @@ void BltCharInvPanel()
 				wcscat( pStr, pStrCamo);
 				swprintf( pStrCamo, L"" );
 			}
-		
+
 			// anv: display stealth together with camo
 			INT16 wornstealth = GetWornStealth(pSoldier) - pSoldier->GetBackgroundValue(BG_PERC_STEALTH);
 			INT16 bonusstealth = pSoldier->GetBackgroundValue(BG_PERC_STEALTH);
@@ -9567,9 +9567,9 @@ void MAPInvClickCamoCallback( MOUSE_REGION *pRegion, INT32 iReason )
 		SOLDIERTYPE* pSoldier = NULL;
 		if( (bSelectedInfoChar != -1) && (gCharactersList[bSelectedInfoChar].fValid == TRUE) )
 		{
-			pSoldier = MercPtrs[gCharactersList[bSelectedInfoChar].usSolID]; 
+			pSoldier = MercPtrs[gCharactersList[bSelectedInfoChar].usSolID];
 		}
-			
+
 		if ( gpItemPointer && pSoldier )
 		{
 			// We are doing this ourselve, continue
@@ -9714,7 +9714,7 @@ void MAPInvClickCallback( MOUSE_REGION *pRegion, INT32 iReason )
 		// If we do not have an item in hand, start moving it
 		if ( gpItemPointer == NULL )
 		{
-			
+
 			if ( pSoldier->inv[ uiHandPos ].exists() == false )
 			{
 				if (gGameSettings.fOptions[ TOPTION_ENABLE_INVENTORY_POPUPS ] == TRUE) // the_bob : enable popups for picking items from sector inv
@@ -9722,8 +9722,8 @@ void MAPInvClickCallback( MOUSE_REGION *pRegion, INT32 iReason )
 					if ( _KeyDown(CTRL) )
 					{
 						PocketPopupFull( pSoldier, uiHandPos );	// if ctrl is pressed, display all options
-					} 
-					else 
+					}
+					else
 					{
 						PocketPopupDefault( pSoldier, uiHandPos );	// display pocket-specific options
 					}
@@ -9740,7 +9740,7 @@ void MAPInvClickCallback( MOUSE_REGION *pRegion, INT32 iReason )
 
 			/* CHRISL: For New Inventory system.  Are we removing an existing LBE item?  If so, we need to pull
 			all items in the relevant IC Group pockets out of the soldiers inventory and put them into the LBE items
-			inventory. But first, find out if we already have a LBE item inventory for this item and this merc.  If we 
+			inventory. But first, find out if we already have a LBE item inventory for this item and this merc.  If we
 			do, remove the items from it and place them into the sector the LBE inventory is located in.*/
 			if((UsingNewInventorySystem() == true) && !(pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE))
 			{
@@ -9803,9 +9803,9 @@ void MAPInvClickCallback( MOUSE_REGION *pRegion, INT32 iReason )
 					else //Madd: attach / merge object, merge only works on single objects for now
 					{
 						UINT8 cnt = pSoldier->inv[ uiHandPos ].ubNumberOfObjects;
-						if ( gpItemPointer->ubNumberOfObjects < cnt ) 
+						if ( gpItemPointer->ubNumberOfObjects < cnt )
 							cnt = gpItemPointer->ubNumberOfObjects;
-						
+
 						for (UINT8 i = 0; i<cnt;i++)
 						{
 							pSoldier->inv[ uiHandPos ].AttachObject(pSoldier,gpItemPointer,TRUE,i);
@@ -9832,7 +9832,7 @@ void MAPInvClickCallback( MOUSE_REGION *pRegion, INT32 iReason )
 				if ( !InItemDescriptionBox( ) )
 				{
 					// HEADROCK HAM 5: Sector Inventory Item Desc Box no longer accessible during combat.
-					
+
 					if( gTacticalStatus.uiFlags & INCOMBAT )
 					{
 						DoScreenIndependantMessageBox( New113HAMMessage[ 23 ], MSG_BOX_FLAG_OK, NULL );
@@ -9856,7 +9856,7 @@ void MAPInvClickCallback( MOUSE_REGION *pRegion, INT32 iReason )
 					if ( !InItemDescriptionBox( ) )
 					{
 						// HEADROCK HAM 5: Sector Inventory Item Desc Box no longer accessible during combat.
-						
+
 						if( gTacticalStatus.uiFlags & INCOMBAT )
 						{
 							DoScreenIndependantMessageBox( New113HAMMessage[ 24 ], MSG_BOX_FLAG_OK, NULL );
@@ -10090,7 +10090,7 @@ void MAPBeginItemPointer( SOLDIERTYPE *pSoldier, UINT8 ubHandPos )
 	}
 
 	pSoldier->inv[ubHandPos].MoveThisObjectTo(gItemPointer, numToMove, pSoldier, ubHandPos);
-	
+
 	//Autoplace to map sector inventory
 	if ( _KeyDown(CTRL) )
 	{
@@ -10378,7 +10378,7 @@ void AbortMovementPlottingMode( void )
 	// cancel movement mode
 	bSelectedDestChar = -1;
 	fPlotForHelicopter = FALSE;
-	
+
 	if ( fPlotForMilitia )
 	{
 		if ( gMilitiaPath[gMilitiaGroupId].sGroupid > -1 )
@@ -10462,12 +10462,12 @@ void BlitBackgroundToSaveBuffer( void )
 
 	// render map
   RenderMapRegionBackground( );
-	
+
 	// Headrock: Moved the following line here from the marker below, so that the Inventory Bottom panel
 	// renders underneath the character info panel (and so doesn't truncate the large open inventory). We may
 	// need to put TRUE here if there's any problem, but I doubt it.
 	RenderMapScreenInterfaceBottom( TRUE );
- 
+
 	if( fDisableDueToBattleRoster == FALSE )
 	{
 		// render team
@@ -10504,7 +10504,7 @@ void CreateMouseRegionsForTeamList( void )
 	for( sCounter = 0; sCounter < max_rows; sCounter++ )
 	{
 		sYAdd = 0;
-		
+
 		// name region
 		MSYS_DefineRegion( &gTeamListNameRegion[ sCounter ], NAME_X, ( INT16 )( Y_START + ( sCounter ) * ( Y_SIZE + 2 ) + sYAdd ), NAME_X + NAME_WIDTH, ( INT16 )( yResOffset + 145 + ( sCounter + 1 ) * ( Y_SIZE + 2 ) + sYAdd ), MSYS_PRIORITY_NORMAL,
 							MSYS_NO_CURSOR, TeamListInfoRegionMvtCallBack, TeamListInfoRegionBtnCallBack );
@@ -10573,7 +10573,7 @@ void MPReadyButtonCallback( GUI_BUTTON *btn, INT32 reason )
 	{
 		if(reason & MSYS_CALLBACK_REASON_LBUTTON_DWN )
 		{
-			btn->uiFlags|=(BUTTON_CLICKED_ON);			
+			btn->uiFlags|=(BUTTON_CLICKED_ON);
 		}
 		else if(reason & MSYS_CALLBACK_REASON_LBUTTON_UP )
 		{
@@ -10875,7 +10875,7 @@ void TeamListInfoRegionBtnCallBack(MOUSE_REGION *pRegion, INT32 iReason )
 
 			// select this character
 			ChangeSelectedInfoChar( ( INT8 ) iValue+ FIRSTmercTOdisplay, TRUE );
-			
+
 			RequestToggleMercInventoryPanel();
 
 			// highlight
@@ -11171,7 +11171,7 @@ void TeamListAssignmentRegionMvtCallBack(MOUSE_REGION *pRegion, INT32 iReason )
 	}
 	else if( iReason & MSYS_CALLBACK_REASON_GAIN_MOUSE )
 	{
-		if( ( gCharactersList[ iValue + FIRSTmercTOdisplay ].fValid == TRUE ) && 
+		if( ( gCharactersList[ iValue + FIRSTmercTOdisplay ].fValid == TRUE ) &&
 		!( Menptr[ gCharactersList[ iValue + FIRSTmercTOdisplay].usSolID ].flags.uiStatusFlags & SOLDIER_VEHICLE ) )
 		{
 			// play click
@@ -11854,7 +11854,7 @@ void RenderTeamRegionBackground( void )
 	}
 
 	fDrawCharacterList = FALSE;
-	
+
 	// display arrows by selected people
 	HandleDisplayOfSelectedMercArrows( );
 	DisplayIconsForMercsAsleep(	);
@@ -11883,7 +11883,7 @@ void RenderTeamRegionBackground( void )
 	{
 		RestoreExternBackgroundRect( 0 + xResOffset, 107 + yResOffset, 261, SCREEN_HEIGHT - 107 - 121 - yResOffset );
 	}
-	
+
 	MapscreenMarkButtonsDirty();
 }
 
@@ -11948,7 +11948,7 @@ void DetermineIfContractMenuCanBeShown( void )
 		{
 			HideBox( ghRemoveMercAssignBox );
 		}
-		
+
 		return;
 	}
 
@@ -12419,7 +12419,7 @@ void ResetAllSelectedCharacterModes( void )
 
 	// unhilight contract line
 	giContractHighLine = -1;
-	
+
 	// if we were plotting movement
 	if ( (bSelectedDestChar != -1) || fPlotForHelicopter || fPlotForMilitia )
 	{
@@ -13576,7 +13576,7 @@ void HandleRemovalOfPreLoadedMapGraphics( void )
 		DeleteVideoObjectFromIndex( guiNewMailIcons );
 
 		DeleteVideoObjectFromIndex( guiBULLSEYE );
-		
+
         //----------- Legion 2
 		for ( INT32 iCounter2 = 1; iCounter2 < NUM_TOWNS; ++iCounter2 )
 		{
@@ -13838,7 +13838,7 @@ void TellPlayerWhyHeCantCompressTime( void )
 	else if( !WillJerryMiloAllowThePlayerToCompressTimeAtBeginingOfGame() )
 	{
 		// TODO.RW: JA2UB
-		//Have jerry say why the player cant compress time 
+		//Have jerry say why the player cant compress time
 		HaveJerrySayWhyPlayerCantTimeCompressAtBeginningOfGame();
 	}
 #endif
@@ -13950,9 +13950,9 @@ void AddMPButtonsForMapScreen( void )
 	INT32 iPressedIndex[ MAX_MP_BUTTONS+1 ] = { 0 , 2 , 4 , 6 , 8 };
 
 	GetMLGFilename( filename, MLG_MP_GOLDPIECEBUTTONS );
-	
+
 	for( iCounter = 0; iCounter < MAX_MP_BUTTONS+1; iCounter++ )
-	{		
+	{
 		giMapMPButtonImage[ iCounter ] = LoadButtonImage( filename, -1, iImageIndex[ iCounter ] , -1, iPressedIndex[ iCounter ] , -1 );
 
 		if (iCounter < MAX_MP_BUTTONS)
@@ -14327,7 +14327,7 @@ void RemoveMPButtonsForMapScreen( void )
 		if(iCounter < MAX_MP_BUTTONS)
 		{
 			RemoveButton( giMapMPButton[ iCounter ] );
-			giMapMPButton[ iCounter ] = -1;	
+			giMapMPButton[ iCounter ] = -1;
 		}
 
 		giMapMPButtonImage[ iCounter ] = -1;
@@ -14443,12 +14443,12 @@ void CheckForAndRenderNewMailOverlay()
 		if( GetJA2Clock() % 1000 < 667 )
 		{
 			if( ButtonList[ guiMapBottomExitButtons[ MAP_EXIT_TO_LAPTOP ] ]->uiFlags & BUTTON_CLICKED_ON )
-			{ 
+			{
 				BltVideoObjectFromIndex( FRAME_BUFFER, guiNewMailIcons, 1, xResOffset + (xResSize - 175), (SCREEN_HEIGHT - 62), VO_BLT_SRCTRANSPARENCY, NULL );
 				InvalidateRegion( xResOffset + (xResSize - 175), (SCREEN_HEIGHT - 62), xResOffset + (xResSize - 160), (SCREEN_HEIGHT - 52 ));
 			}
 			else
-			{	
+			{
 				//button is up, so draw the icon normally
 				//BltVideoObjectFromIndex( FRAME_BUFFER, guiNewMailIcons, 0, 464, 417, VO_BLT_SRCTRANSPARENCY, NULL );
 				BltVideoObjectFromIndex( FRAME_BUFFER, guiNewMailIcons, 0, xResOffset + (xResSize - 176), (SCREEN_HEIGHT - 63), VO_BLT_SRCTRANSPARENCY, NULL );
@@ -14467,7 +14467,7 @@ void CheckForAndRenderNewMailOverlay()
 			}
 		}
 		else
-		{ 
+		{
 			//The blink is now off, so mark the button dirty so that it'll render next frame.
 			MarkAButtonDirty( guiMapBottomExitButtons[ MAP_EXIT_TO_LAPTOP ] );
 		}
@@ -14782,7 +14782,7 @@ void CancelOrShortenPlottedPath( void )
 {
 	INT16 sMapX, sMapY;
 	UINT32 uiReturnValue;
-	
+
 	GetMouseMapXY(&sMapX, &sMapY);
 
 	// check if we are in aircraft mode
@@ -14910,7 +14910,7 @@ BOOLEAN HandleCtrlOrShiftInTeamPanel( INT8 bCharNumber, BOOLEAN fFromRightClickA
 									SetEntryInSelectedCharacterList( ( INT8 ) iCounter );
 								}
 							}
-								
+
 							else if ( pSoldier->bAssignment == pSelected->bAssignment &&
 								pSoldier->sSectorX == pSelected->sSectorX &&
 								pSoldier->sSectorY == pSelected->sSectorY &&
@@ -14965,7 +14965,7 @@ BOOLEAN HandleCtrlOrShiftInTeamPanel( INT8 bCharNumber, BOOLEAN fFromRightClickA
 									ResetEntryForSelectedList( ( INT8 ) iCounter );
 								}
 							}
-								
+
 							else if ( pSoldier->bAssignment == pSelected->bAssignment &&
 								pSoldier->sSectorX == pSelected->sSectorX &&
 								pSoldier->sSectorY == pSelected->sSectorY &&
@@ -15028,7 +15028,7 @@ INT32 GetContractExpiryTime( SOLDIERTYPE *pSoldier )
 	{
 		return ( pSoldier->iEndofContractTime );
 	}
-	else	
+	else
 #endif
 	{
 		// never - really high number
@@ -15424,7 +15424,7 @@ BOOLEAN RequestGiveSkyriderNewDestination( void )
 		}
 
 		// say Yo!
-		if( !gGameSettings.fOptions[ TOPTION_SILENT_SKYRIDER ]) 
+		if( !gGameSettings.fOptions[ TOPTION_SILENT_SKYRIDER ])
 			SkyRiderTalk( SKYRIDER_SAYS_HI );
 
 		// start plotting helicopter movement
@@ -15643,10 +15643,10 @@ void DestinationPlottingCompleted( void )
 	// clear previous paths for selected characters and helicopter
 	ClearPreviousPaths();
 
-	fPlotForHelicopter = FALSE;	
+	fPlotForHelicopter = FALSE;
 	bSelectedDestChar = - 1;
 	giDestHighLine = -1;
-	
+
 	// Flugente: add militia from the starting sector to the group
 	if ( fPlotForMilitia )
 	{
@@ -15699,9 +15699,9 @@ void HandleMilitiaRedistributionClick( void )
 	{
 		bTownId = GetTownIdForSector( sSelMapX, sSelMapY );
 		//fTownStillHidden = ( ( bTownId == TIXA ) && !fFoundTixa ) || ( ( bTownId == ORTA ) && !fFoundOrta );
-		
+
 	//	fTownStillHidden = ( ( bTownId == TIXA ) && !gfHiddenTown[ TIXA ] ) || ( ( bTownId == ORTA ) && !gfHiddenTown[ ORTA ] );
-		
+
 		// WANNE: if gfHiddenTown[townID] == TRUE, then it is not HIDDEN!!!
 		if( ( bTownId != BLANK_SECTOR ) && gfHiddenTown[ bTownId ] ) //&& !fTownStillHidden )
 		{
@@ -15747,8 +15747,8 @@ void DumpSectorDifficultyInfo( void )
 	// NOTE: This operates on the selected map sector!
 	CHAR16 wSectorName[ 128 ];
 
-	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_TESTVERSION, L"Playing Difficulty: %s", zDiffSetting[gGameOptions.ubDifficultyLevel].szDiffName );		
-	
+	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_TESTVERSION, L"Playing Difficulty: %s", zDiffSetting[gGameOptions.ubDifficultyLevel].szDiffName );
+
 	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_TESTVERSION, L"Highest Progress (0-100) = %d%%", HighestPlayerProgressPercentage() );
 	ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_TESTVERSION, L"Player Kills = %d", gStrategicStatus.usPlayerKills );
 
@@ -15937,7 +15937,7 @@ void GetMapscreenMercAssignmentString( SOLDIERTYPE *pSoldier, CHAR16 sString[] )
 	if ( pSoldier->bAssignment == VEHICLE )
 	{
 	//	wcscpy( sString, pShortVehicleStrings[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ] );
-		wcscpy( sString, gNewVehicle[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ].NewShortVehicleStrings);	
+		wcscpy( sString, gNewVehicle[ pVehicleList[ pSoldier->iVehicleId ].ubVehicleType ].NewShortVehicleStrings);
 	}
 	else
 	{
@@ -16431,7 +16431,7 @@ void RequestToggleMercInventoryPanel( void )
 	{
 		AbortMovementPlottingMode( );
 	}
-	
+
 	if ( !CanToggleSelectedCharInventory() )
 	{
 		return;
@@ -16456,7 +16456,7 @@ void RequestToggleMercInventoryPanel( void )
 		{
 			// Headrock. New line forces InvBottom rerender when the inventory is opened and closed.
 			fEndShowInventoryFlag = TRUE;
-			RenderMapScreenInterfaceBottom ( TRUE ); 
+			RenderMapScreenInterfaceBottom ( TRUE );
 			SetRegionFastHelpText( &gCharInfoHandRegion, pMiscMapScreenMouseRegionHelpText[ 0 ] );
 		}
 	}
@@ -16628,7 +16628,7 @@ void HandleWhenPlayerHasNoMercsAndNoLaptop()
 {
 	const UINT8	ubNumLoopsToDisplay=50;
 
-	if( gJa25SaveStruct.ubDisplayPlayerLostMsgBox == 0 || 
+	if( gJa25SaveStruct.ubDisplayPlayerLostMsgBox == 0 ||
 			gJa25SaveStruct.ubDisplayPlayerLostMsgBox >= ubNumLoopsToDisplay ||
 			guiCurrentScreen == MSG_BOX_SCREEN )
 	{
@@ -16662,7 +16662,7 @@ BOOLEAN RequestGiveMilitiaNewDestination( void )
 	BOOLEAN fGroupAlreadyExists = FALSE;
 	if ( MilitiaInSectorOfRankStationary( sSelMapX, sSelMapY, GREEN_MILITIA ) + MilitiaInSectorOfRankStationary( sSelMapX, sSelMapY, REGULAR_MILITIA ) + MilitiaInSectorOfRankStationary( sSelMapX, sSelMapY, ELITE_MILITIA ) == 0 )
 	{
-		UINT8 groupid = 0;		
+		UINT8 groupid = 0;
 		if ( GetLastMilitiaGroupInSector( sSelMapX, sSelMapY, groupid ) )
 		{
 			INT16 internalslot = GetMilitiaPathSlot( groupid );
@@ -16674,7 +16674,7 @@ BOOLEAN RequestGiveMilitiaNewDestination( void )
 				gMilitiaGroupId = internalslot;
 
 				gNewMilitiaGroupId = gMilitiaPath[gMilitiaGroupId].sGroupid;
-				
+
 				// yes, we intentionally use a different sector number here
 				gMilitiaPlotStartSector = (INT16)(sSelMapX + sSelMapY*(MAP_WORLD_X));
 			}
@@ -16792,7 +16792,7 @@ BOOLEAN MilitiaPlotStart( )
 	// no free slot - abort
 	if ( !found )
 		return FALSE;
-	
+
 	SECTORINFO *pSector = &SectorInfo[SECTOR( sSelMapX, sSelMapY )];
 
 	if ( !pSector )
@@ -16809,7 +16809,7 @@ BOOLEAN MilitiaPlotStart( )
 	pSector->ubNumberOfCivsAtLevel[0] -= greens;
 	pSector->ubNumberOfCivsAtLevel[1] -= regulars;
 	pSector->ubNumberOfCivsAtLevel[2] -= elites;
-	
+
 	gMilitiaPath[gMilitiaGroupId].sGroupid = pGroup->ubGroupID;
 	gNewMilitiaGroupId = pGroup->ubGroupID;
 
@@ -16831,8 +16831,8 @@ void MilitiaplotFinish()
 	{
 		GROUP* pGroup = GetGroup( (UINT8)gMilitiaPath[gMilitiaGroupId].sGroupid );
 
-		// if the group has no members, or if it is not given any movement orders, destroy it 
-		if ( pGroup && pGroup->usGroupTeam == MILITIA_TEAM 
+		// if the group has no members, or if it is not given any movement orders, destroy it
+		if ( pGroup && pGroup->usGroupTeam == MILITIA_TEAM
 			 && (!pGroup->ubGroupSize || (pGroup->ubNextX == pGroup->ubSectorX && pGroup->ubNextY == pGroup->ubSectorY) || (pGroup->ubNextX == 0 && pGroup->ubNextY == 0) ) )
 		{
 			StrategicAddMilitiaToSector( pGroup->ubSectorX, pGroup->ubSectorY, GREEN_MILITIA, pGroup->pEnemyGroup->ubNumAdmins );
@@ -16917,7 +16917,7 @@ BOOLEAN CanGiveStrategicMilitiaMoveOrder( INT16 sMapX, INT16 sMapY )
 	// town this sector is a part of
 	UINT8 townid = GetTownIdForSector( sMapX, sMapY );
 
-	// we require mercs to 'give' the orders to militia. 
+	// we require mercs to 'give' the orders to militia.
 	// For simplicity, we require the mercs simply to not be in a coma, asleep is okay (otherwsie we have to wake them up, give the order, set them asleep again - tedious!).
 	// Mercs can give these orders if one of these is true
 	// 1. they are in the same sector

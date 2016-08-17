@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "stdlib.h"
-#include "debug.h"
+#include "Debug.h"
 #include "math.h"
 #include "jascreens.h"
-#include "pathai.h"
+#include "PathAI.h"
 //#include "Soldier Control.h"
 #include "Animation Control.h"
 #include "Animation Data.h"
@@ -15,48 +15,48 @@
 #include "Timer Control.h"
 #include "Handle UI.h"
 #include "Isometric Utils.h"
-#include "input.h"
-#include "overhead.h"
+#include "Input.h"
+#include "Overhead.h"
 #include "Sys Globals.h"
-#include "screenids.h"
-#include "interface.h"
-#include "cursor control.h"
+#include "ScreenIds.h"
+#include "Interface.h"
+#include "Cursor Control.h"
 #include "Interactive Tiles.h"
-#include "spread burst.h"
-#include "world items.h"
-#include "interface items.h"
-#include "physics.h"
-#include "ui cursors.h"
-#include "strategicmap.h"
-#include "soldier profile.h"
-#include "soldier create.h"
-#include "soldier add.h"
-#include "dialogue control.h"
-#include "interface dialogue.h"
-#include "interactive tiles.h"
-#include "messageboxscreen.h"
-#include "gameloop.h"
-#include "spread burst.h"
-#include "explosion control.h"
-#include "message.h"
+#include "Spread burst.h"
+#include "World Items.h"
+#include "Interface Items.h"
+#include "Physics.h"
+#include "UI Cursors.h"
+#include "StrategicMap.h"
+#include "Soldier Profile.h"
+#include "Soldier Create.h"
+#include "Soldier Add.h"
+#include "Dialogue Control.h"
+#include "Interface Dialogue.h"
+#include "Interactive Tiles.h"
+#include "MessageBoxScreen.h"
+#include "GameLoop.h"
+#include "Spread burst.h"
+#include "Explosion Control.h"
+#include "Message.h"
 #include "Strategic Exit GUI.h"
 #include "Assignments.h"
 #include "Map Screen Interface.h"
-#include "renderworld.h"
+#include "RenderWorld.h"
 #include	"GameSettings.h"
-#include "english.h"
-#include "text.h"
-#include "soldier macros.h"
-#include "render dirty.h"
+#include "English.h"
+#include "Text.h"
+#include "Soldier Macros.h"
+#include "Render Dirty.h"
 #include "Militia Control.h"
-#include "render dirty.h"
+#include "Render Dirty.h"
 #include "Militia Control.h"
 ///***dddd
 #include "Squads.h"
 #include "Interface Panels.h"
-#include "Soldier functions.h"
+#include "Soldier Functions.h"
 #include "SaveLoadMap.h"
-#include "worlddat.h" //for gtileset
+#include "WorldDat.h" //for gtileset
 #include "Debug Control.h" //for livelog
 
 #include "SkillMenu.h"						// sevenfm: need this for TraitsMenu
@@ -1239,7 +1239,7 @@ void	QueryRTRightButton( UINT32 *puiNewEvent )
 									if(_KeyDown(ALT))
 									{
 										switch( gCurrentUIMode )
-										{										
+										{
 										case MOVE_MODE:
 										case TALKCURSOR_MODE:
 										case ACTION_MODE:
@@ -1254,7 +1254,7 @@ void	QueryRTRightButton( UINT32 *puiNewEvent )
 									else if(_KeyDown(CTRL))
 									{
 										switch( gCurrentUIMode )
-										{										
+										{
 										case HANDCURSOR_MODE:
 											HandleHandCursorRightClick( usMapPos, puiNewEvent );
 											break;
@@ -1689,7 +1689,7 @@ void GetRTMousePositionInput( UINT32 *puiNewEvent )
 //		return;
 //	}
 //
-//	if( gWorldSectorX != -1 && gWorldSectorY != -1 && gWorldSectorX != 0 && gWorldSectorY != 0 && 
+//	if( gWorldSectorX != -1 && gWorldSectorY != -1 && gWorldSectorX != 0 && gWorldSectorY != 0 &&
 //		NumEnemiesInAnySector( gWorldSectorX, gWorldSectorY, gbWorldSectorZ ) > 0 )
 //	{
 //		return;
@@ -1774,7 +1774,7 @@ void	QueryRTMButton( UINT32 *puiNewEvent )
 	{
 		if (!GetMouseMapPos( &sMapPos ) )
 			return;
-		
+
 		if (gViewportRegion.ButtonState & MSYS_MIDDLE_BUTTON) // MID MOUSE BUTTON
 		{
 			if ( !fMiddleButtonDown )
@@ -1827,7 +1827,7 @@ void	QueryRTWheels( UINT32 *puiNewEvent )
 								HandleMouseRTWheel();
 							break;
 						case ACTION_MODE:
-						case CONFIRM_MOVE_MODE:						
+						case CONFIRM_MOVE_MODE:
 						case LOOKCURSOR_MODE:
 						case TALKCURSOR_MODE:
 						case MENU_MODE:
@@ -1836,7 +1836,7 @@ void	QueryRTWheels( UINT32 *puiNewEvent )
 								break;
 					}//switch
 				}//if ( gusSelectedSoldier != NOBODY )
-			}//if ( gpItemPointer == NULL 
+			}//if ( gpItemPointer == NULL
 			ResetWheelState( &gViewportRegion );
 		}//if ( gViewportRegion.WheelState != 0 )
 	}
@@ -1851,7 +1851,7 @@ void QueryRTX1Button( UINT32 *puiNewEvent  )
 	{
 		if (!GetMouseMapPos( &sMapPos ) )
 			return;
-		
+
 		if (gViewportRegion.ButtonState & MSYS_X1_BUTTON) // MID MOUSE BUTTON
 		{
 			if ( !fX1ButtonDown )
@@ -1877,7 +1877,7 @@ void QueryRTX2Button( UINT32 *puiNewEvent )
 	{
 		if (!GetMouseMapPos( &sMapPos ) )
 			return;
-		
+
 		if (gViewportRegion.ButtonState & MSYS_X2_BUTTON) // MID MOUSE BUTTON
 		{
 			if ( !fX2ButtonDown )
@@ -1904,13 +1904,13 @@ void HandleAltMouseRTWheel( void )
 	{
 		if ( gViewportRegion.WheelState > 0 )	// wheel up
 		{
-			if ( _KeyDown( ALT ) )				
-				if( _KeyDown( SHIFT ) )	
+			if ( _KeyDown( ALT ) )
+				if( _KeyDown( SHIFT ) )
 				{
 					if( _KeyDown( CTRL ) )			// SHIFT+CTRL+ALT
 						HandleTBPickUpBackpacks();
 					else							// SHIFT+ALT
-						CycleThroughKnownEnemies(); 
+						CycleThroughKnownEnemies();
 				}
 				else if ( _KeyDown( CTRL ) )		// CTRL+ALT
 					HandleTBSwapGoogles();
@@ -1925,13 +1925,13 @@ void HandleAltMouseRTWheel( void )
 			}
 			else if( _KeyDown( SHIFT ) )			// SHIFT
 				HandleTBCycleThroughVisibleEnemies();
-			else									
+			else
 				HandleTBLocatePrevMerc();
 		}
 		else										// wheel down
 		{
-			if ( _KeyDown( ALT ) )				
-				if( _KeyDown( SHIFT ) )	
+			if ( _KeyDown( ALT ) )
+				if( _KeyDown( SHIFT ) )
 				{
 					if( _KeyDown( CTRL ) )			// SHIFT+CTRL+ALT
 						HandleTBDropBackpacks();
@@ -1951,7 +1951,7 @@ void HandleAltMouseRTWheel( void )
 			}
 			else if( _KeyDown( SHIFT ) )			// SHIFT
 				HandleTBCycleThroughVisibleEnemiesBackward();
-			else									
+			else
 				HandleTBLocateNextMerc();
 		}
 	}
@@ -1961,8 +1961,8 @@ void HandleAltMouseRTMButton( UINT32 *puiNewEvent )
 	INT32 usMapPos;
 	GetMouseMapPos( &usMapPos );
 
-	if ( _KeyDown( ALT ) )				
-		if( _KeyDown( SHIFT ) )	
+	if ( _KeyDown( ALT ) )
+		if( _KeyDown( SHIFT ) )
 		{
 			if( _KeyDown( CTRL ) )			// SHIFT+CTRL+ALT
 				HandleRTJumpThroughWindow();
@@ -1984,12 +1984,12 @@ void HandleAltMouseRTMButton( UINT32 *puiNewEvent )
 		HandleTBLocateSoldier();
 	else									// Button
 		HandleRTLook( puiNewEvent );
-	
+
 }
 void HandleAltMouseRTX1Button( UINT32 *puiNewEvent )
 {
-	if ( _KeyDown( ALT ) )				
-		if( _KeyDown( SHIFT ) )	
+	if ( _KeyDown( ALT ) )
+		if( _KeyDown( SHIFT ) )
 		{
 			if( _KeyDown( CTRL ) )		// SHIFT+CTRL+ALT
 				HandleTBToggleSneak();
@@ -2011,12 +2011,12 @@ void HandleAltMouseRTX1Button( UINT32 *puiNewEvent )
 		HandleTBSwapGunsling();
 	else								// Button
 		HandleTBSwapHands();
-	
+
 }
 void HandleAltMouseRTX2Button( UINT32 *puiNewEvent )
 {
-	if ( _KeyDown( ALT ) )				
-		if( _KeyDown( SHIFT ) )	
+	if ( _KeyDown( ALT ) )
+		if( _KeyDown( SHIFT ) )
 		{
 			if( _KeyDown( CTRL ) )		// SHIFT+CTRL+ALT
 				HandleTBToggleTrapNetworkView();
@@ -2037,7 +2037,7 @@ void HandleAltMouseRTX2Button( UINT32 *puiNewEvent )
 	else if( _KeyDown( SHIFT ) )		// SHIFT
 		HandleTBReload();
 	else								// Button
-		HandleTBToggleStealth();	
+		HandleTBToggleStealth();
 }
 
 // sevenfm: original mouse commands functionality
@@ -2052,7 +2052,7 @@ void HandleMouseRTWheel( void )
 										{
 											//change stance ->DOWN
 											if ( _KeyDown( ALT ) )
-			{	
+			{
 				if ( (gusSelectedSoldier != NOBODY) && ( gpItemPointer == NULL ) )
 												GotoLowerStance(MercPtrs[ gusSelectedSoldier ]);
 				return;
@@ -2070,7 +2070,7 @@ void HandleMouseRTWheel( void )
 										{
 											//change stance ->UP
 											if ( _KeyDown( ALT ) )
-			{	
+			{
 				if ( (gusSelectedSoldier != NOBODY) && ( gpItemPointer == NULL ) )
 													GotoHeigherStance( MercPtrs[ gusSelectedSoldier ] );
 				return;
@@ -2152,10 +2152,10 @@ void HandleMouseRTX1Button( UINT32 *puiNewEvent )
 
 					if ( fNearLowerLevel )
 						pjSoldier->BeginSoldierClimbDownRoof( );
-					
+
 					if ( fNearHeigherLevel )
 						pjSoldier->BeginSoldierClimbUpRoof(	);
-					
+
 					if ( FindFenceJumpDirection( pjSoldier, pjSoldier->sGridNo, pjSoldier->ubDirection, &bDirection ) )
 						pjSoldier->BeginSoldierClimbFence(	);
 				}
@@ -2249,10 +2249,10 @@ void HandleRTJump( void )
 
 		if ( fNearLowerLevel )
 			pjSoldier->BeginSoldierClimbDownRoof( );
-		
+
 		if ( fNearHeigherLevel )
 			pjSoldier->BeginSoldierClimbUpRoof(	);
-					
+
 		if ( FindFenceJumpDirection( pjSoldier, pjSoldier->sGridNo, pjSoldier->ubDirection, &bDirection ) )
 			pjSoldier->BeginSoldierClimbFence(	);
 	}

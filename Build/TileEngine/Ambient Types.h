@@ -14,7 +14,7 @@ typedef struct
 	UINT32				uiMinTime;
 	UINT32				uiMaxTime;
 	UINT8					ubTimeCatagory;
-	SGPFILENAME		zFilename;	
+	SGPFILENAME		zFilename;
 	UINT32				uiVol;
 
 } AMBIENTDATA_STRUCT;

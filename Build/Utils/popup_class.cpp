@@ -1,16 +1,16 @@
 	#include "Map Screen Interface.h"
-	#include "popupbox.h"
-	#include "interface control.h"
-	#include "renderworld.h"
+	#include "PopUpBox.h"
+	#include "Interface Control.h"
+	#include "RenderWorld.h"
 	#include "Text.h"
-	#include "utilities.h"
+	#include "Utilities.h"
 	#include "Interface.h"
 	#include "GameSettings.h"
 	#include "Input.h"
 
 	#include "Console.h"
 	#include "lwstring.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "mousesystem.h"
 
 	#include "Lua Interpreter.h"
@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////
 
 vector<PopupIndex>	gPopupRegionIndex;
-vector<POPUP*>		gPopupIndex;	
+vector<POPUP*>		gPopupIndex;
 UINT32			gPopupRegionIndexCounter = 0;
 UINT32			gPopupIndexCounter = 0;
 UINT32			POPUP::nextid = 0;
@@ -51,7 +51,7 @@ void initPopupIndex(void)
 		{
 		gPopupIndex[i] = NULL;
 		}
-	*/	
+	*/
 }
 
 void reinitPopupIndex(void)
@@ -438,19 +438,19 @@ BOOLEAN POPUP::setCallback(UINT8 type, popupCallback * callback){
 	if(callback == NULL) return FALSE;
 
 	switch(type){
-		case POPUP_CALLBACK_INIT: 
+		case POPUP_CALLBACK_INIT:
 			if (this->initCallback) this->initCallback->~popupCallback();
 			this->initCallback = callback;
 			break;
-		case POPUP_CALLBACK_END:  
+		case POPUP_CALLBACK_END:
 			if (this->EndCallback) this->EndCallback->~popupCallback();
 			this->EndCallback = callback;
 			break;
-		case POPUP_CALLBACK_SHOW: 
+		case POPUP_CALLBACK_SHOW:
 			if (this->ShowCallback) this->ShowCallback->~popupCallback();
 			this->ShowCallback = callback;
 			break;
-		case POPUP_CALLBACK_HIDE: 
+		case POPUP_CALLBACK_HIDE:
 			if (this->HideCallback) this->HideCallback->~popupCallback();
 			this->HideCallback = callback;
 			break;
@@ -460,7 +460,7 @@ BOOLEAN POPUP::setCallback(UINT8 type, popupCallback * callback){
 
 	return true;
 }
-		
+
 BOOLEAN POPUP::isCallbackSet(UINT8 type){
 
 	switch(type){
@@ -480,10 +480,10 @@ BOOLEAN POPUP::isCallbackSet(UINT8 type){
 BOOLEAN POPUP::addToIndex()
 {
 	/*
-	if (gPopupIndexCounter == MAX_POPUPS) 
+	if (gPopupIndexCounter == MAX_POPUPS)
 	{
 		rebuildPopupIndex(); // if index full, try to rebuild it before giving up
-		if (gPopupIndexCounter == MAX_POPUPS) 
+		if (gPopupIndexCounter == MAX_POPUPS)
 			return FALSE;
 	}
 	*/
@@ -564,7 +564,7 @@ void POPUP::setInitialValues(void)
 // setup functions
 
 POPUP_OPTION *  POPUP::addOption(wstring * name, popupCallback* action)
-{	
+{
 	if (this->optionCount < POPUP_MAX_OPTIONS)
 	{
 		this->options.push_back( new POPUP_OPTION ( name, action ) );
@@ -588,21 +588,21 @@ INT16 POPUP::findFreeOptionIndex()
 BOOLEAN POPUP::addOption(POPUP_OPTION &option)
 {
 	if (this->optionCount < POPUP_MAX_OPTIONS)
-	{	
+	{
 		this->options.push_back( &option );
 		this->optionCount++;
 		return TRUE;
 	}
 	else
 		return FALSE;
-	
+
 }
 
 POPUP_OPTION * POPUP::getOption(UINT16 n)
 {
 	if (n < this->options.size() && this->options[n])
 		return this->options[n];
-	
+
 	return NULL;
 }
 
@@ -654,7 +654,7 @@ INT16 POPUP::getCurrentWidth(void){
 
 		for(std::vector<POPUP_SUB_POPUP_OPTION*>::iterator cOption=this->subPopupOptions.begin(); cOption != this->subPopupOptions.end(); ++cOption)
 		{
-			swprintf( sString, (*cOption)->name.c_str() );	  
+			swprintf( sString, (*cOption)->name.c_str() );
 			longestStringTmp = StringPixLength(	sString, MAP_SCREEN_FONT);
 			if( longestString < longestStringTmp ) longestString = longestStringTmp;
 		}
@@ -662,7 +662,7 @@ INT16 POPUP::getCurrentWidth(void){
 	if (this->optionCount > 0)
 		for(std::vector<POPUP_OPTION*>::iterator cOption=this->options.begin(); cOption != this->options.end(); ++cOption)
 		{
-			swprintf( sString, (*cOption)->name.c_str() );	  
+			swprintf( sString, (*cOption)->name.c_str() );
 			longestStringTmp = StringPixLength(	sString, MAP_SCREEN_FONT);
 			if( longestString < longestStringTmp ) longestString = longestStringTmp;
 		}
@@ -735,7 +735,7 @@ BOOLEAN POPUP::show()
 
 	if (this->ShowCallback) this->ShowCallback->call();
 
-	// can't show an empty popup. 
+	// can't show an empty popup.
 	if ( (this->optionCount + this->subPopupOptionCount) == 0) return FALSE;
 
 	// set the box to visible
@@ -751,7 +751,7 @@ BOOLEAN POPUP::show()
 	this->CheckAndUpdateTacticalPopUpPositions();
 	// shade unavaliable options
 	this->HandleShadingOfLines();
-	
+
 	#ifdef JA2TESTVERSION
 		CHAR8 debugStr[120];
 		wsprintf(debugStr,"Showing popup id: %i \n",this->boxId);
@@ -793,7 +793,7 @@ BOOLEAN POPUP::hide()
 		OutputDebugString( debugStr );
 	#endif
 
-	this->DestroyMouseRegions();	
+	this->DestroyMouseRegions();
 	this->DestroyScreenMask();
 
 	HideBox(this->boxId);
@@ -813,13 +813,13 @@ BOOLEAN POPUP::callOption(int optIndex)
 {
 	this->hideAfterRun = FALSE;
 
-	if (	this->optionCount > 0 
+	if (	this->optionCount > 0
 	&&		optIndex < POPUP_MAX_OPTIONS
 	&&		optIndex < optionCount
 	&&		optIndex >= 0)
-	{	
+	{
 		BOOLEAN callbackStatus = this->options[optIndex]->run();
-		
+
 		if(!this->hideAfterRun)
 		{
 			return callbackStatus;
@@ -830,7 +830,7 @@ BOOLEAN POPUP::callOption(int optIndex)
 	}
 	else
 		return FALSE;
-	
+
 }
 
 BOOLEAN POPUP::forceDraw(){
@@ -849,7 +849,7 @@ BOOLEAN POPUP::forceDraw(){
 	this->CheckAndUpdateTacticalPopUpPositions();
 	// shade unavaliable options
 	this->HandleShadingOfLines();
-	
+
 
 	// showtime !
 	ShowBox(this->boxId);
@@ -924,7 +924,7 @@ void POPUP::setRenderPBInterface(BOOLEAN flag )
 // less expensive then hide();show();
 void POPUP::RebuildBox( void )
 {	if ( this->boxId != -1 && this->id < POPUP::nextid )
-	{	
+	{
 		// make sure we're working with the right popup!
 		SetCurrentBox( this->boxId );
 
@@ -988,11 +988,11 @@ BOOLEAN POPUP::CreateBox()
 
 
 	// add the sub popups (they go first)
-		
+
 	this->AddSubPopupStrings();
 
 	// add the options
-		
+
 	this->AddOptionStrings();
 
 	// set fonts and what not
@@ -1016,7 +1016,7 @@ void POPUP::AddSubPopupStrings()
 			swprintf( sString, (*cOption)->name.c_str() );
 
 			AddMonoString((UINT32 *)&hStringHandle, sString );
-	  
+
 			// make sure it is unhighlighted
 			UnHighLightLine(hStringHandle);
 			// update options string handle for setting colors
@@ -1035,7 +1035,7 @@ void POPUP::AddOptionStrings()
 			swprintf( sString, (*cOption)->name.c_str() );
 
 			AddMonoString((UINT32 *)&hStringHandle, sString );
-	  
+
 			// make sure it is unhighlighted
 			UnHighLightLine(hStringHandle);
 			// update options string handle for setting colors
@@ -1103,7 +1103,7 @@ BOOLEAN POPUP::CreateDestroyPopUpBoxes( void )
 	else if( ( this->PopupVisible  == FALSE ) && ( fCreated == TRUE ) )
 	{
 		returnStatus = this->DestroyPopUpBoxes();
-		fCreated = FALSE;		
+		fCreated = FALSE;
 	}
 
 
@@ -1113,7 +1113,7 @@ BOOLEAN POPUP::CreateDestroyPopUpBoxes( void )
 BOOLEAN POPUP::CreatePopUpBoxes()
 {
 	VSURFACE_DESC		vs_desc;
-	VOBJECT_DESC    VObjectDesc; 
+	VOBJECT_DESC    VObjectDesc;
 
 	// load textures
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
@@ -1126,7 +1126,7 @@ BOOLEAN POPUP::CreatePopUpBoxes()
 
 	// does some other stff
 	this->CreateBox();
-	
+
 	return TRUE;
 }
 
@@ -1166,16 +1166,16 @@ void POPUP::CreateScreenMask( void )
 	ScreenMaskBtnCallbackMethod = &POPUP::ScreenMaskBtnCallback;
 */
 	// will create a screen mask to catch mouse input to disable LPC menus
-	
 
-	MSYS_DefineRegion( 	&this->ScreenMaskRegion, 
-						0, 
-						0, 
-						SCREEN_WIDTH, 
-						SCREEN_HEIGHT, 
+
+	MSYS_DefineRegion( 	&this->ScreenMaskRegion,
+						0,
+						0,
+						SCREEN_WIDTH,
+						SCREEN_HEIGHT,
 						POPUP_SCREEN_MASK_PRIORITY ,
-						MSYS_NO_CURSOR, 
-						MSYS_NO_CALLBACK, 
+						MSYS_NO_CURSOR,
+						MSYS_NO_CALLBACK,
 						popupMaskCallback );
 
 	// if in tactical...
@@ -1190,7 +1190,7 @@ void POPUP::CreateScreenMask( void )
 		#endif
 	}
 
-	
+
 	return;
 }
 
@@ -1234,13 +1234,13 @@ void POPUP::CreateMouseRegions( void )
 
 	gfIgnoreScrolling = FALSE;
 
-	if( ( guiCurrentScreen == MAP_SCREEN ) ) 
+	if( ( guiCurrentScreen == MAP_SCREEN ) )
 	{
 	  SetBoxPosition( this->boxId, this->Position );
 	}
 
 	// grab height of font
-	iFontHeight = GetLineSpace( this->boxId ) + GetFontHeight( GetBoxFont( this->boxId ) ); 
+	iFontHeight = GetLineSpace( this->boxId ) + GetFontHeight( GetBoxFont( this->boxId ) );
 
 	// get x.y position of box
 	GetBoxPosition( this->boxId, &pPosition);
@@ -1256,52 +1256,52 @@ void POPUP::CreateMouseRegions( void )
 	iBoxWidth = pDimensions.iRight;
 
 	SetCurrentBox( this->boxId );
-	
-	// define regions for sub popups 
+
+	// define regions for sub popups
 	for( iCounter = 0; iCounter < this->subPopupOptionCount ; iCounter++ )
 	{
 		// add mouse region for each line of text..and set user data
-		
-		MSYS_DefineRegion(	&this->MenuRegion[ iTotal ], 	
-							( INT16 )( iBoxXPosition ), 
-							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) + 
-							( iFontHeight ) * iTotal ), 
-							( INT16 )( iBoxXPosition + iBoxWidth ), 
-							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) + 
-							( iFontHeight ) * ( iTotal + 1 ) ), 
+
+		MSYS_DefineRegion(	&this->MenuRegion[ iTotal ],
+							( INT16 )( iBoxXPosition ),
+							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) +
+							( iFontHeight ) * iTotal ),
+							( INT16 )( iBoxXPosition + iBoxWidth ),
+							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) +
+							( iFontHeight ) * ( iTotal + 1 ) ),
 							POPUP_OPTION_PRIORITY ,
-							MSYS_NO_CURSOR, 
-							popupMouseMoveCallback, 
+							MSYS_NO_CURSOR,
+							popupMouseMoveCallback,
 							popupMouseClickCallback );
-	
+
 		MSYS_SetRegionUserData( &this->MenuRegion[ iTotal ], 0, iCounter );
 		MSYS_SetRegionUserData( &this->MenuRegion[ iTotal ], 1, REGION_SUB_POPUP );
 		MSYS_SetRegionUserData( &this->MenuRegion[ iTotal ], 2, iTotal );
-	
+
 		if (!registerPopupRegion( this->MenuRegion[ iTotal ].IDNumber, this->id)){}
-	
+
 		iTotal++;
 	}
 
-	// define regions for options 
+	// define regions for options
 	for( iCounter = 0; iCounter < this->optionCount ; iCounter++ )
 	{
 		// add mouse region for each line of text..and set user data
-		
-		MSYS_DefineRegion(	&this->MenuRegion[ iTotal ], 	
-							( INT16 )( iBoxXPosition ), 
-							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) + ( iFontHeight ) * iTotal ), 
-							( INT16 )( iBoxXPosition + iBoxWidth ), 
-							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) + ( iFontHeight ) * ( iTotal + 1 ) ), 
+
+		MSYS_DefineRegion(	&this->MenuRegion[ iTotal ],
+							( INT16 )( iBoxXPosition ),
+							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) + ( iFontHeight ) * iTotal ),
+							( INT16 )( iBoxXPosition + iBoxWidth ),
+							( INT16 )( iBoxYPosition + GetTopMarginSize( this->boxId ) + ( iFontHeight ) * ( iTotal + 1 ) ),
 							POPUP_OPTION_PRIORITY ,
-							MSYS_NO_CURSOR, 
-							popupMouseMoveCallback, 
+							MSYS_NO_CURSOR,
+							popupMouseMoveCallback,
 							popupMouseClickCallback );
-	
+
 		MSYS_SetRegionUserData( &this->MenuRegion[ iTotal ], 0, iCounter );
 		MSYS_SetRegionUserData( &this->MenuRegion[ iTotal ], 1, REGION_OPTION );
 		MSYS_SetRegionUserData( &this->MenuRegion[ iTotal ], 2, iTotal );
-	
+
 		if (!registerPopupRegion( this->MenuRegion[ iTotal ].IDNumber, this->id)){}
 
 		iTotal++;
@@ -1317,7 +1317,7 @@ void POPUP::CreateMouseRegions( void )
 void POPUP::DestroyMouseRegions( void )
 {
 	UINT32 iCounter = 0;
-	
+
 	for( iCounter = 0; iCounter < GetNumberOfLinesOfTextInBox( this->boxId ); iCounter++ )
 	{
 		unregisterPopupRegion(this->MenuRegion[ iCounter ].IDNumber);
@@ -1341,7 +1341,7 @@ void POPUP::AdjustMouseRegions( void )
 	SGPRect pDimensions={0,0,0,0};
 
 	// grab height of font
-	iFontHeight = GetLineSpace( this->boxId ) + GetFontHeight( GetBoxFont( this->boxId ) ); 
+	iFontHeight = GetLineSpace( this->boxId ) + GetFontHeight( GetBoxFont( this->boxId ) );
 
 	// get x.y position of box
 	GetBoxPosition( this->boxId, &pPosition);
@@ -1356,32 +1356,32 @@ void POPUP::AdjustMouseRegions( void )
 	// get width
 	iBoxWidth = pDimensions.iRight;
 
-	// adjust regions for sub popups 
+	// adjust regions for sub popups
 	for( iCounter = 0; iCounter < this->subPopupOptionCount ; iCounter++ )
 	{
 		this->MenuRegion[ iTotal ].RegionTopLeftX = ( INT16 )( iBoxXPosition );
-		this->MenuRegion[ iTotal ].RegionTopLeftY = ( INT16 )( iBoxYPosition 
-												+ GetTopMarginSize( this->boxId ) 
+		this->MenuRegion[ iTotal ].RegionTopLeftY = ( INT16 )( iBoxYPosition
+												+ GetTopMarginSize( this->boxId )
 												+ ( iFontHeight ) * iTotal );
 
 		this->MenuRegion[ iTotal ].RegionBottomRightX = ( INT16 )( iBoxXPosition + iBoxWidth );
-		this->MenuRegion[ iTotal ].RegionBottomRightY = ( INT16 )( iBoxYPosition 
-												+ GetTopMarginSize( this->boxId ) 
+		this->MenuRegion[ iTotal ].RegionBottomRightY = ( INT16 )( iBoxYPosition
+												+ GetTopMarginSize( this->boxId )
 												+ ( iFontHeight ) * ( iTotal + 1 ) );
 		iTotal++;
 	}
 
-	// adjust regions for options 
+	// adjust regions for options
 	for( iCounter = 0; iCounter < this->optionCount ; iCounter++ )
 	{
 		this->MenuRegion[ iTotal ].RegionTopLeftX = ( INT16 )( iBoxXPosition );
-		this->MenuRegion[ iTotal ].RegionTopLeftY = ( INT16 )( iBoxYPosition 
-												+ GetTopMarginSize( this->boxId ) 
+		this->MenuRegion[ iTotal ].RegionTopLeftY = ( INT16 )( iBoxYPosition
+												+ GetTopMarginSize( this->boxId )
 												+ ( iFontHeight ) * iTotal );
 
 		this->MenuRegion[ iTotal ].RegionBottomRightX = ( INT16 )( iBoxXPosition + iBoxWidth );
-		this->MenuRegion[ iTotal ].RegionBottomRightY = ( INT16 )( iBoxYPosition 
-												+ GetTopMarginSize( this->boxId ) 
+		this->MenuRegion[ iTotal ].RegionBottomRightY = ( INT16 )( iBoxYPosition
+												+ GetTopMarginSize( this->boxId )
 												+ ( iFontHeight ) * ( iTotal + 1 ) );
 		iTotal++;
 	}
@@ -1390,7 +1390,7 @@ void POPUP::AdjustMouseRegions( void )
 void POPUP::ScreenMaskBtnCallback(MOUSE_REGION * pRegion, INT32 iReason )
 {
 	// btn callback handler for screen mask region
-	
+
 	if( ( iReason & MSYS_CALLBACK_REASON_LBUTTON_UP ) || ( iReason & MSYS_CALLBACK_REASON_RBUTTON_UP ) )
 	{
 		if( this->FirstClickInScreenMask == TRUE )
@@ -1440,21 +1440,21 @@ void POPUP::MenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 
 	switch (iType)
 	{
-	case REGION_OPTION:	
+	case REGION_OPTION:
 		if (iReason & MSYS_CALLBACK_REASON_LBUTTON_UP)
 		{
 			UnHighLightBox( this->boxId );
 
 			if (iValue < POPUP_MAX_OPTIONS
-			&&	iValue < this->optionCount 
+			&&	iValue < this->optionCount
 			&&	iValue >= 0
 			&&	this->options[iValue] != NULL)
 			{
 				this->options[iValue]->run();	// run the option's callback
 
 				// sanity check #2
-				// if this popup was fine in check #1 but is broken now, chances are 
-				// we got deleted (or just plain broken) by the callback. 
+				// if this popup was fine in check #1 but is broken now, chances are
+				// we got deleted (or just plain broken) by the callback.
 				if (!this || this->id > POPUP::nextid){
 					#ifdef JA2TESTVERSION
 						 __debugbreak();
@@ -1471,14 +1471,14 @@ void POPUP::MenuBtnCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 			}
 		}
 		break;
-	
-	case REGION_SUB_POPUP:	
+
+	case REGION_SUB_POPUP:
 		if (iReason & MSYS_CALLBACK_REASON_LBUTTON_UP)
 		{
 			UnHighLightBox( this->boxId );
 
 			if (iValue < POPUP_MAX_SUB_POPUPS
-				&&	iValue < this->subPopupOptionCount 
+				&&	iValue < this->subPopupOptionCount
 				&&	iValue >= 0
 				&&	this->subPopupOptions[iValue] != NULL)
 			{
@@ -1500,7 +1500,7 @@ void POPUP::MenuMvtCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 	if (!this || this->boxId < 0){
 		__debugbreak();
 	}
-	
+
 	iTotal = MSYS_GetRegionUserData( pRegion, 2 );	// set this to the total value of all mouse regions
 	iType  = MSYS_GetRegionUserData( pRegion, 1 );
 	iValue = MSYS_GetRegionUserData( pRegion, 0 );
@@ -1527,7 +1527,7 @@ void POPUP::MenuMvtCallBack(MOUSE_REGION * pRegion, INT32 iReason )
 		if( iType == REGION_OPTION && this->options[iValue]->HoverFunctionSet() && GetBoxShadeFlag( this->boxId, iTotal ) == FALSE )
 		{
 			this->options[iValue]->runHoverCallback(pRegion);	// run the custom mouse callback
-			
+
 			if ( (pRegion->ButtonState & MSYS_LEFT_BUTTON) || (pRegion->ButtonState & MSYS_RIGHT_BUTTON) )
 			{	// if drag detedted,rebuild the boxstrings
 				this->RebuildBox();
@@ -1543,14 +1543,14 @@ void POPUP::HandleShadingOfLines( void )
 	{
 		return;
 	}
-	
+
 	UINT8 i = 0;
 	// subPopups with no options are shaded
 	for(std::vector<POPUP_SUB_POPUP_OPTION*>::iterator cOption=this->subPopupOptions.begin(); cOption != this->subPopupOptions.end(); ++cOption)
 	{
 		if ( (*cOption)->subPopup->optionCount + (*cOption)->subPopup->subPopupOptionCount > 0 )
-			UnShadeStringInBox( this->boxId, i);	
-		else																
+			UnShadeStringInBox( this->boxId, i);
+		else
 			ShadeStringInBox( this->boxId, i);
 		i++;
 	}
@@ -1560,12 +1560,12 @@ void POPUP::HandleShadingOfLines( void )
 	for(std::vector<POPUP_OPTION*>::iterator cOption=this->options.begin(); cOption != this->options.end(); ++cOption)
 	{
 		if ( (*cOption)->checkAvailability() )
-			UnShadeStringInBox( this->boxId, i+this->subPopupOptionCount);	
-		else																
+			UnShadeStringInBox( this->boxId, i+this->subPopupOptionCount);
+		else
 			ShadeStringInBox( this->boxId, i+this->subPopupOptionCount);
 		i++;
 	}
-		
+
 	return;
 }
 
@@ -1663,7 +1663,7 @@ void POPUP::DetermineBoxPositions( void )
 void POPUP::CheckAndUpdateTacticalPopUpPositions( void )
 {
 	SGPRect pDimensions2;
-	SGPPoint pPoint;	
+	SGPPoint pPoint;
 
 	if( this->PopupVisible == FALSE )
 	{
@@ -1677,7 +1677,7 @@ void POPUP::CheckAndUpdateTacticalPopUpPositions( void )
 
 	GetBoxSize( this->boxId, &pDimensions2 );
 
-	if( this->BoxesX + pDimensions2.iRight  >= SCREEN_WIDTH ) 
+	if( this->BoxesX + pDimensions2.iRight  >= SCREEN_WIDTH )
 	{
 		this->BoxesX = ( INT16 ) ( SCREEN_WIDTH - 1 - ( pDimensions2.iRight  ) );
 		SetRenderFlags( RENDER_FLAG_FULL );
@@ -1734,8 +1734,8 @@ void POPUP::PositionCursorForBox(void)
 	// get dimensions..mostly for width
 	GetBoxSize( this->boxId, &pDimensions );
 
-	iFontHeight = GetLineSpace( this->boxId ) + GetFontHeight( GetBoxFont( this->boxId ) ); 
-	
+	iFontHeight = GetLineSpace( this->boxId ) + GetFontHeight( GetBoxFont( this->boxId ) );
+
 	if( gGameSettings.fOptions[ TOPTION_DONT_MOVE_MOUSE ] == FALSE )
 	{
 		SimulateMouseMovement( pPosition.iX + pDimensions.iRight - 6, pPosition.iY + ( iFontHeight / 2 ) + 2 );
@@ -1768,7 +1768,7 @@ BOOLEAN registerPopupRegion(UINT16 rID, UINT32 cID)
 	if (gPopupRegionIndexCounter == MAX_REGIONS_IN_INDEX)
 	{	// If we can't fit in any more regions, try to rebuild the index before giving up
 		rebuildPopupRegionIndex();	  // since there may be some unregistered regions
-		if (gPopupRegionIndexCounter == MAX_REGIONS_IN_INDEX) 
+		if (gPopupRegionIndexCounter == MAX_REGIONS_IN_INDEX)
 			return FALSE;	// if index still full, return false
 	}
 	*/
@@ -1830,7 +1830,7 @@ void popupMaskCallback(MOUSE_REGION *pRegion, INT32 iReason)
 
 	POPUP * p = findPopupInIndex(cID);
 	if (p) { p->ScreenMaskBtnCallback(pRegion, iReason); }
-	
+
 }
 
 void popupMouseMoveCallback(MOUSE_REGION *pRegion, INT32 iReason)

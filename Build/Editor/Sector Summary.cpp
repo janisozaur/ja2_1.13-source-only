@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -9,33 +9,33 @@
 
 #ifndef PRECOMPILEDHEADERS
 	#include <stdio.h>
-	#include "types.h"
+	#include "Types.h"
 	#include "Sector Summary.h"
 	#include "Timer Control.h"
-	#include "vsurface.h"
+	#include "VSurface.h"
 	#include "Button System.h"
 	#include "Font Control.h"
 	#include "Simple Render Utils.h"
 	#include "Editor Taskbar Utils.h"
-	#include "line.h"
-	#include "input.h"
-	#include "vobject_blitters.h"
+	#include "Line.h"
+	#include "Input.h"
+	#include "VObject_blitters.h"
 	#include "loadscreen.h"
 	#include "Text Input.h"
 	#include "mousesystem.h"
-	#include "strategicmap.h"
-	#include "Fileman.h"
+	#include "StrategicMap.h"
+	#include "FileMan.h"
 	#include "Exit Grids.h"
 	#include "Map Information.h"
 	#include "Summary Info.h"
 	#include "Animated ProgressBar.h"
-	#include "worlddef.h"
-	#include "worlddat.h"
+	#include "WorldDef.h"
+	#include "WorldDat.h"
 	#include "EditorDefines.h"
-	#include "editscreen.h"
-	#include "english.h"
+	#include "EditScreen.h"
+	#include "English.h"
 	#include "World Items.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Soldier Create.h"
 	#include "GameVersion.h"
 	#include "Campaign Types.h"
@@ -155,18 +155,18 @@ BOOLEAN gfRenderProgress;
 //When set, only the map section is rerendered.
 
 extern BOOLEAN gfRenderMap; // symbol already declared globally in AI Viewer.cpp (jonathanl)
-//Set whenever the ctrl key is held down.  This is used in conjunction with gfFileIO to determine whether the 
+//Set whenever the ctrl key is held down.  This is used in conjunction with gfFileIO to determine whether the
 //selected sector is to be saved instead of loaded when clear.
 BOOLEAN gfCtrlPressed;
-//When set, it is time to load or save the selected sector.  If gfCtrlPressed is set, the the map is saved, 
+//When set, it is time to load or save the selected sector.  If gfCtrlPressed is set, the the map is saved,
 //instead of loaded.  It is impossible to load a map that doesn't exist.
 BOOLEAN gfFileIO;
-//When set, then we are overriding the ability to use normal methods for selecting sectors for saving and 
+//When set, then we are overriding the ability to use normal methods for selecting sectors for saving and
 //loading.  Immediately upon entering the text input mode; for the temp file; then we are assuming that
-//the user will type in a name that doesn't follow standard naming conventions for the purposes of the 
+//the user will type in a name that doesn't follow standard naming conventions for the purposes of the
 //campaign editor.  This is useful for naming a temp file for saving or loading.
 BOOLEAN gfTempFile;
-//When set, only the alternate version of the maps will be displayed.  This is used for alternate maps in 
+//When set, only the alternate version of the maps will be displayed.  This is used for alternate maps in
 //particular sectors, such as the SkyRider quest which could be located at one of four maps randomly.  If
 //that particular map is chosen, then the alternate map will be used.
 BOOLEAN gfAlternateMaps = FALSE;
@@ -199,7 +199,7 @@ BOOLEAN gfMapFileDirty;
 
 //Override status.  Hide is when there is nothing to override, readonly, when checked is to override a
 //readonly status file, so that you can write to it, and overwrite, when checked, allows you to save,
-//replacing the existing file.  These states are not persistant, which forces the user to check the 
+//replacing the existing file.  These states are not persistant, which forces the user to check the
 //box before saving.
 enum{ INACTIVE, READONLY, OVERWRITE };
 UINT8 gubOverrideStatus;
@@ -261,13 +261,13 @@ INT32 iSummaryButton[ NUM_SUMMARY_BUTTONS ];
 void CreateSummaryWindow()
 {
 	INT32 i;
-	
+
 	if( !gfGlobalSummaryLoaded )
 	{
 		LoadGlobalSummary();
 		gfGlobalSummaryLoaded = TRUE;
 	}
-	
+
 	if( gfSummaryWindowActive )
 		return;
 
@@ -289,97 +289,97 @@ void CreateSummaryWindow()
 	if( gfWorldLoaded )
 		gfMapFileDirty = TRUE;
 	//Create all of the buttons here
-	iSummaryButton[ SUMMARY_BACKGROUND ] = 
-		CreateTextButton( 0, 0, 0, 0, BUTTON_USE_DEFAULT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 120, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH - 1, 
+	iSummaryButton[ SUMMARY_BACKGROUND ] =
+		CreateTextButton( 0, 0, 0, 0, BUTTON_USE_DEFAULT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 120, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH - 1,
 		BUTTON_NO_CALLBACK, BUTTON_NO_CALLBACK );
 	SpecifyDisabledButtonStyle( iSummaryButton[ SUMMARY_BACKGROUND ], DISABLED_STYLE_NONE );
 	DisableButton( iSummaryButton[ SUMMARY_BACKGROUND ] );
 
-	iSummaryButton[ SUMMARY_OKAY ] = 
+	iSummaryButton[ SUMMARY_OKAY ] =
 		CreateTextButton(pCreateSummaryWindowText[0], FONT12POINT1, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT, MAP_LEFT+160, MAP_BOTTOM+99, 50, 30, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK, SummaryOkayCallback);//dnl ch36 190909
 	//GiveButtonDefaultStatus( iSummaryButton[ SUMMARY_OKAY ], DEFAULT_STATUS_WINDOWS95 );
 
-	iSummaryButton[ SUMMARY_GRIDCHECKBOX ] = 
+	iSummaryButton[ SUMMARY_GRIDCHECKBOX ] =
 		CreateCheckBoxButton(	MAP_LEFT, ( INT16 ) ( MAP_BOTTOM + 5 ), "EDITOR//smcheckbox.sti", MSYS_PRIORITY_HIGH, SummaryToggleGridCallback );
 	ButtonList[ iSummaryButton[ SUMMARY_GRIDCHECKBOX ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	gfRenderGrid = TRUE;
 
-	iSummaryButton[ SUMMARY_PROGRESSCHECKBOX ] = 
+	iSummaryButton[ SUMMARY_PROGRESSCHECKBOX ] =
 		CreateCheckBoxButton(	( INT16 ) ( MAP_LEFT + 50 ), ( INT16 ) ( MAP_BOTTOM + 5 ), "EDITOR//smcheckbox.sti", MSYS_PRIORITY_HIGH, SummaryToggleProgressCallback );
 	ButtonList[ iSummaryButton[ SUMMARY_PROGRESSCHECKBOX ] ]->uiFlags |= BUTTON_CLICKED_ON;
 	gfRenderProgress = TRUE;
-	
-	iSummaryButton[ SUMMARY_ALL ] = 
+
+	iSummaryButton[ SUMMARY_ALL ] =
 		CreateTextButton( pCreateSummaryWindowText[1], SMALLCOMPFONT, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT+110, MAP_BOTTOM+5, 16, 16, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryToggleLevelCallback );
 	if( giCurrentViewLevel == ALL_LEVELS_MASK || giCurrentViewLevel == ALTERNATE_LEVELS_MASK )
 		ButtonList[ iSummaryButton[ SUMMARY_ALL ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	iSummaryButton[ SUMMARY_G ] = 
+	iSummaryButton[ SUMMARY_G ] =
 		CreateTextButton( pCreateSummaryWindowText[2], SMALLCOMPFONT, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT+128, MAP_BOTTOM+5, 16, 16, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryToggleLevelCallback );
 	if( giCurrentViewLevel == GROUND_LEVEL_MASK || giCurrentViewLevel == ALTERNATE_GROUND_MASK )
 		ButtonList[ iSummaryButton[ SUMMARY_G ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	iSummaryButton[ SUMMARY_B1 ] = 
+	iSummaryButton[ SUMMARY_B1 ] =
 		CreateTextButton( pCreateSummaryWindowText[3], SMALLCOMPFONT, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT+146, MAP_BOTTOM+5, 16, 16, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryToggleLevelCallback );
 	if( giCurrentViewLevel == BASEMENT1_LEVEL_MASK || giCurrentViewLevel == ALTERNATE_B1_MASK )
 		ButtonList[ iSummaryButton[ SUMMARY_B1 ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	iSummaryButton[ SUMMARY_B2 ] = 
+	iSummaryButton[ SUMMARY_B2 ] =
 		CreateTextButton( pCreateSummaryWindowText[4], SMALLCOMPFONT, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT+164, MAP_BOTTOM+5, 16, 16, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryToggleLevelCallback );
 	if( giCurrentViewLevel == BASEMENT2_LEVEL_MASK || giCurrentViewLevel == ALTERNATE_B2_MASK )
 		ButtonList[ iSummaryButton[ SUMMARY_B2 ] ]->uiFlags |= BUTTON_CLICKED_ON;
-	iSummaryButton[ SUMMARY_B3 ] = 
+	iSummaryButton[ SUMMARY_B3 ] =
 		CreateTextButton( pCreateSummaryWindowText[5], SMALLCOMPFONT, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT+182, MAP_BOTTOM+5, 16, 16, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryToggleLevelCallback );
 	if( giCurrentViewLevel == BASEMENT3_LEVEL_MASK || giCurrentViewLevel == ALTERNATE_B3_MASK )
 		ButtonList[ iSummaryButton[ SUMMARY_B3 ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
-	iSummaryButton[ SUMMARY_ALTERNATE ] = 
+	iSummaryButton[ SUMMARY_ALTERNATE ] =
 		CreateCheckBoxButton(	MAP_LEFT, ( INT16 ) ( MAP_BOTTOM + 25 ), "EDITOR//smcheckbox.sti", MSYS_PRIORITY_HIGH, SummaryToggleAlternateCallback );
 	if( gfAlternateMaps )
 		ButtonList[ iSummaryButton[ SUMMARY_ALTERNATE ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
-	iSummaryButton[ SUMMARY_LOAD ] = 
+	iSummaryButton[ SUMMARY_LOAD ] =
 		CreateTextButton( pCreateSummaryWindowText[6], FONT12POINT1, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT, MAP_BOTTOM+45, 50, 26, BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryLoadMapCallback );
-	iSummaryButton[ SUMMARY_SAVE ] = 
+	iSummaryButton[ SUMMARY_SAVE ] =
 		CreateTextButton( pCreateSummaryWindowText[7], FONT12POINT1, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		MAP_LEFT+55, MAP_BOTTOM+45, 50, 26, BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummarySaveMapCallback );
-	iSummaryButton[ SUMMARY_OVERRIDE ] = 
+	iSummaryButton[ SUMMARY_OVERRIDE ] =
 		CreateCheckBoxButton( ( INT16 ) ( MAP_LEFT + 110 ), ( INT16 ) ( MAP_BOTTOM + 59 ), "EDITOR\\smcheckbox.sti", MSYS_PRIORITY_HIGH, SummaryOverrideCallback );
 
-	
+
 #if 0
-	iSummaryButton[ SUMMARY_NEW_GROUNDLEVEL ] = 
+	iSummaryButton[ SUMMARY_NEW_GROUNDLEVEL ] =
 		CreateSimpleButton( MAP_LEFT, MAP_BOTTOM+58, "EDITOR\\new.sti", BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, SummaryNewGroundLevelCallback );
 	SetButtonFastHelpText( iSummaryButton[ SUMMARY_NEW_GROUNDLEVEL ], L"New map" );
-	iSummaryButton[ SUMMARY_NEW_BASEMENTLEVEL ] = 
+	iSummaryButton[ SUMMARY_NEW_BASEMENTLEVEL ] =
 		CreateSimpleButton( MAP_LEFT+32, MAP_BOTTOM+58, "EDITOR\\new.sti", BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, SummaryNewBasementLevelCallback );
 	SetButtonFastHelpText( iSummaryButton[ SUMMARY_NEW_BASEMENTLEVEL ], L"New basement" );
-	iSummaryButton[ SUMMARY_NEW_CAVELEVEL ] = 
+	iSummaryButton[ SUMMARY_NEW_CAVELEVEL ] =
 		CreateSimpleButton( MAP_LEFT+64, MAP_BOTTOM+58, "EDITOR\\new.sti", BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, SummaryNewCaveLevelCallback );
 	SetButtonFastHelpText( iSummaryButton[ SUMMARY_NEW_CAVELEVEL ], L"New cave level" );
 #endif
-	
 
-	iSummaryButton[ SUMMARY_UPDATE ] = 
+
+	iSummaryButton[ SUMMARY_UPDATE ] =
 		CreateTextButton( pCreateSummaryWindowText[8], FONT12POINT1, FONT_BLACK, FONT_BLACK, BUTTON_USE_DEFAULT,
 		iScreenWidthOffset + 255, iScreenHeightOffset + 15, 40, 16, BUTTON_NO_TOGGLE, MSYS_PRIORITY_HIGH, DEFAULT_MOVE_CALLBACK,
 		SummaryUpdateCallback );
 
-	iSummaryButton[ SUMMARY_REAL ] = 
+	iSummaryButton[ SUMMARY_REAL ] =
 		CreateCheckBoxButton( iScreenWidthOffset + 350, iScreenHeightOffset + 47, "EDITOR\\radiobutton.sti", MSYS_PRIORITY_HIGH, SummaryRealCallback );
-	iSummaryButton[ SUMMARY_SCIFI ] = 
+	iSummaryButton[ SUMMARY_SCIFI ] =
 		CreateCheckBoxButton( iScreenWidthOffset + 376, iScreenHeightOffset + 47, "EDITOR\\radiobutton.sti", MSYS_PRIORITY_HIGH, SummarySciFiCallback );
-	iSummaryButton[ SUMMARY_ENEMY ] = 
+	iSummaryButton[ SUMMARY_ENEMY ] =
 		CreateCheckBoxButton( iScreenWidthOffset + 350, iScreenHeightOffset + 60, "EDITOR\\radiobutton.sti", MSYS_PRIORITY_HIGH, SummaryEnemyCallback );
 
 	//SetButtonFastHelpText( iSummaryButton[ SUMMARY_SCIFI ], L"Display items that appear in SciFi mode." );
@@ -524,24 +524,24 @@ void RenderSectorInformation()
 	UINT8 ePoints = 0;
 	UINT16 usLine = 35;
 	INT32 iOverall;
-	
+
 	SetFont( FONT10ARIAL );
 	SetFontShadow( FONT_NEARBLACK );
 
 	s = gpCurrentSectorSummary;
 	m = &gpCurrentSectorSummary->MapInfo;
 
-	if( m->sNorthGridNo != -1 ) 
+	if( m->sNorthGridNo != -1 )
 		ePoints++;
-	if( m->sEastGridNo != -1 ) 
+	if( m->sEastGridNo != -1 )
 		ePoints++;
-	if( m->sSouthGridNo != -1 ) 
+	if( m->sSouthGridNo != -1 )
 		ePoints++;
-	if( m->sWestGridNo != -1 ) 
+	if( m->sWestGridNo != -1 )
 		ePoints++;
-	if( m->sCenterGridNo != -1 ) 
+	if( m->sCenterGridNo != -1 )
 		ePoints++;
-	if( m->sIsolatedGridNo != -1 ) 
+	if( m->sIsolatedGridNo != -1 )
 		ePoints++;
 	//start at 10,35
 	SetFontForeground( FONT_ORANGE );
@@ -581,7 +581,7 @@ void RenderSectorInformation()
 		mprintf( iScreenWidthOffset + 100, iScreenHeightOffset + 135,		pRenderSectorInformationText[19], s->ubEliteDetailed, s->ubEliteProfile, s->ubEliteExistance );
 	mprintf( iScreenWidthOffset + 20, iScreenHeightOffset + 145,			pRenderSectorInformationText[20], s->CivTeam.ubTotal );
 	if( s->CivTeam.ubTotal )
-		mprintf( iScreenWidthOffset + 100, iScreenHeightOffset + 145,		pRenderSectorInformationText[21], s->CivTeam.ubDetailed, s->CivTeam.ubProfile, s->CivTeam.ubExistance ); 
+		mprintf( iScreenWidthOffset + 100, iScreenHeightOffset + 145,		pRenderSectorInformationText[21], s->CivTeam.ubDetailed, s->CivTeam.ubProfile, s->CivTeam.ubExistance );
 	if( s->ubSummaryVersion >= 9 )
 	{
 		mprintf( iScreenWidthOffset + 30, iScreenHeightOffset + 155,		pRenderSectorInformationText[22], s->CivTeam.ubTotal - s->ubCivCows - s->ubCivBloodcats );
@@ -633,11 +633,11 @@ void RenderSectorInformation()
 					mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 265, pRenderSectorInformationText[37], s->usExitGridSize[0], s->usExitGridSize[1] );
 					break;
 				case 3:
-					mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 265, pRenderSectorInformationText[38], 
+					mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 265, pRenderSectorInformationText[38],
 						s->usExitGridSize[0], s->usExitGridSize[1], s->usExitGridSize[2] );
 					break;
 				case 4:
-					mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 265, pRenderSectorInformationText[39], 
+					mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 265, pRenderSectorInformationText[39],
 						s->usExitGridSize[0], s->usExitGridSize[1], s->usExitGridSize[2], s->usExitGridSize[3] );
 					break;
 			}
@@ -646,19 +646,19 @@ void RenderSectorInformation()
 	iOverall = - ( 2 * s->EnemyTeam.ubBadA ) - s->EnemyTeam.ubPoorA + s->EnemyTeam.ubGoodA + ( 2 * s->EnemyTeam.ubGreatA );
 	usLine = iScreenHeightOffset + 275;
 	mprintf( iScreenWidthOffset + 10, usLine, pRenderSectorInformationText[40],
-		s->EnemyTeam.ubBadA, 
-		s->EnemyTeam.ubPoorA, 
-		s->EnemyTeam.ubAvgA, 
-		s->EnemyTeam.ubGoodA, 
+		s->EnemyTeam.ubBadA,
+		s->EnemyTeam.ubPoorA,
+		s->EnemyTeam.ubAvgA,
+		s->EnemyTeam.ubGoodA,
 		s->EnemyTeam.ubGreatA,
 		iOverall );
 	iOverall = - ( 2 * s->EnemyTeam.ubBadE ) - s->EnemyTeam.ubPoorE + s->EnemyTeam.ubGoodE + ( 2 * s->EnemyTeam.ubGreatE );
 	usLine += 10;
 	mprintf( iScreenWidthOffset + 10, usLine, pRenderSectorInformationText[41],
-		s->EnemyTeam.ubBadE, 
-		s->EnemyTeam.ubPoorE, 
-		s->EnemyTeam.ubAvgE, 
-		s->EnemyTeam.ubGoodE, 
+		s->EnemyTeam.ubBadE,
+		s->EnemyTeam.ubPoorE,
+		s->EnemyTeam.ubAvgE,
+		s->EnemyTeam.ubGoodE,
 		s->EnemyTeam.ubGreatE,
 		iOverall );
 	usLine += 10;
@@ -730,7 +730,7 @@ void RenderItemDetails()
 				{
 					if( gpWorldItemsSummaryArray[ i ].object.usItem == index )
 					{
-						if( gubSummaryItemMode == ITEMMODE_SCIFI && !(gpWorldItemsSummaryArray[ i ].usFlags & WORLD_ITEM_REALISTIC_ONLY) || 
+						if( gubSummaryItemMode == ITEMMODE_SCIFI && !(gpWorldItemsSummaryArray[ i ].usFlags & WORLD_ITEM_REALISTIC_ONLY) ||
 							gubSummaryItemMode == ITEMMODE_REAL && !(gpWorldItemsSummaryArray[ i ].usFlags & WORLD_ITEM_SCIFI_ONLY) )
 						{
 							pItem = &gpWorldItemsSummaryArray[ i ].object;
@@ -768,7 +768,7 @@ void RenderItemDetails()
 				}
 				if( gpWorldItemsSummaryArray[ i ].object.usItem == index )
 				{
-					if( gubSummaryItemMode == ITEMMODE_SCIFI && !(gpWorldItemsSummaryArray[ i ].usFlags & WORLD_ITEM_REALISTIC_ONLY) || 
+					if( gubSummaryItemMode == ITEMMODE_SCIFI && !(gpWorldItemsSummaryArray[ i ].usFlags & WORLD_ITEM_REALISTIC_ONLY) ||
 						gubSummaryItemMode == ITEMMODE_REAL	&& !(gpWorldItemsSummaryArray[ i ].usFlags & WORLD_ITEM_SCIFI_ONLY) )
 					{
 						pItem = &gpWorldItemsSummaryArray[ i ].object;
@@ -790,7 +790,7 @@ void RenderItemDetails()
 				//Display stats.
 				LoadShortNameItemInfo( (UINT16)index, str );
 				mprintf( xp, yp, L"%s", str );
-				mprintf( xp + 85, yp, L"%3.02f", dAvgExistChance ); 
+				mprintf( xp + 85, yp, L"%3.02f", dAvgExistChance );
 				mprintf( xp + 110, yp, L"@ %3.02f%%", dAvgStatus );
 				yp += 10;
 				if( yp >= (UINT32)(iScreenHeightOffset + 355 ))
@@ -834,7 +834,7 @@ void RenderItemDetails()
 					dAvgStatus = (FLOAT)(uiActionExistChance[i] / 100.0);
 					mprintf( xp, yp, L"%s:  %3.02f trigger(s), %3.02f action(s)", str, dAvgExistChance, dAvgStatus );
 				}
-				else 
+				else
 				{
 					dAvgExistChance = (FLOAT)(uiActionExistChance[i] / 100.0);
 					mprintf( xp, yp, L"%s:  %3.02f", str, dAvgExistChance );
@@ -856,7 +856,7 @@ void RenderItemDetails()
 	}
 	else if( gubSummaryItemMode == ITEMMODE_ENEMY )
 	{
-		
+
 		SetFontForeground( FONT_YELLOW );
 		mprintf( xp, yp, pRenderItemDetailsText[13] );
 		yp += 10;
@@ -897,7 +897,7 @@ void RenderItemDetails()
 				//Display stats.
 				LoadShortNameItemInfo( (UINT16)index, str );
 				mprintf( xp, yp, L"%s", str );
-				mprintf( xp + 85, yp, L"%3.02f", dAvgExistChance ); 
+				mprintf( xp + 85, yp, L"%3.02f", dAvgExistChance );
 				mprintf( xp + 110, yp, L"@ %3.02f%%", dAvgStatus );
 				yp += 10;
 				if( yp >= (UINT32)(iScreenHeightOffset + 355 ))
@@ -917,7 +917,7 @@ void RenderItemDetails()
 		}
 
 		yp += 5;
-	
+
 		SetFontForeground( FONT_YELLOW );
 		mprintf( xp, yp, pRenderItemDetailsText[16] );
 		yp += 10;
@@ -969,7 +969,7 @@ void RenderItemDetails()
 				//Display stats.
 				LoadShortNameItemInfo( (UINT16)index, str );
 				mprintf( xp, yp, L"%s", str );
-				mprintf( xp + 85, yp, L"%3.02f", dAvgExistChance ); 
+				mprintf( xp + 85, yp, L"%3.02f", dAvgExistChance );
 				mprintf( xp + 110, yp, L"@ %3.02f%%", dAvgStatus );
 				yp += 10;
 				if( yp >= (UINT32)(iScreenHeightOffset + 355 ))
@@ -985,9 +985,9 @@ void RenderItemDetails()
 				}
 			}
 		}
-	
-	
-	
+
+
+
 	}
 	else
 	{
@@ -1021,17 +1021,17 @@ void RenderSummaryWindow()
 
 		DrawButton( iSummaryButton[ SUMMARY_BACKGROUND ] );
 		InvalidateRegion( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 120 );
-		
+
 		SetFont( BLOCKFONT2 );
 		SetFontForeground( FONT_LTKHAKI );
 		SetFontShadow( FONT_DKKHAKI );
 		SetFontBackground( 0 );
 		if( !gfItemDetailsMode )
 		{
-			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 5, pRenderSummaryWindowText[0], 
+			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 5, pRenderSummaryWindowText[0],
 				gszVersionType[ GLOBAL_SUMMARY_STATE ], GLOBAL_SUMMARY_VERSION );
 		}
-		
+
 		//This section builds the proper header to be displayed for an existing global summary.
 		if( !gfWorldLoaded )
 		{
@@ -1172,44 +1172,44 @@ void RenderSummaryWindow()
 				{
 					switch( giCurrLevel )
 					{
-						case GROUND_LEVEL_MASK:			
+						case GROUND_LEVEL_MASK:
 							giCurrLevel = 0;
-							wcscat( str, pRenderSummaryWindowText[11] );					
+							wcscat( str, pRenderSummaryWindowText[11] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][0];
 							break;
-						case BASEMENT1_LEVEL_MASK:	
+						case BASEMENT1_LEVEL_MASK:
 							giCurrLevel = 1;
-							wcscat( str, pRenderSummaryWindowText[12] );	
+							wcscat( str, pRenderSummaryWindowText[12] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][1];
 							break;
-						case BASEMENT2_LEVEL_MASK:	
+						case BASEMENT2_LEVEL_MASK:
 							giCurrLevel = 2;
-							wcscat( str, pRenderSummaryWindowText[13] );	
+							wcscat( str, pRenderSummaryWindowText[13] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][2];
 							break;
-						case BASEMENT3_LEVEL_MASK:	
+						case BASEMENT3_LEVEL_MASK:
 							giCurrLevel = 3;
-							wcscat( str, pRenderSummaryWindowText[14] );	
+							wcscat( str, pRenderSummaryWindowText[14] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][3];
 							break;
-						case ALTERNATE_GROUND_MASK:			
+						case ALTERNATE_GROUND_MASK:
 							giCurrLevel = 4;
-							wcscat( str, pRenderSummaryWindowText[15] );					
+							wcscat( str, pRenderSummaryWindowText[15] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][4];
 							break;
-						case ALTERNATE_B1_MASK:	
+						case ALTERNATE_B1_MASK:
 							giCurrLevel = 5;
-							wcscat( str, pRenderSummaryWindowText[16] );	
+							wcscat( str, pRenderSummaryWindowText[16] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][5];
 							break;
-						case ALTERNATE_B2_MASK:	
+						case ALTERNATE_B2_MASK:
 							giCurrLevel = 6;
-							wcscat( str, pRenderSummaryWindowText[17] );	
+							wcscat( str, pRenderSummaryWindowText[17] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][6];
 							break;
-						case ALTERNATE_B3_MASK:	
+						case ALTERNATE_B3_MASK:
 							giCurrLevel = 7;
-							wcscat( str, pRenderSummaryWindowText[18] );	
+							wcscat( str, pRenderSummaryWindowText[18] );
 							gpCurrentSectorSummary = gpSectorSummary[x][y][7];
 							break;
 					}
@@ -1356,7 +1356,7 @@ void RenderSummaryWindow()
 			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 30, pRenderSummaryWindowText[32] );
 			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 40, pRenderSummaryWindowText[33] );
 			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 50, pRenderSummaryWindowText[34] );
-			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 60, pRenderSummaryWindowText[35] );  
+			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 60, pRenderSummaryWindowText[35] );
 			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 70, pRenderSummaryWindowText[36] );
 			SetFontForeground( FONT_LTRED );
 			mprintf( iScreenWidthOffset + 10, iScreenHeightOffset + 85, pRenderSummaryWindowText[37] );
@@ -1380,8 +1380,8 @@ void RenderSummaryWindow()
 		RectangleDraw( TRUE, iScreenWidthOffset + 350, iScreenHeightOffset + 15, iScreenWidthOffset + 405, iScreenHeightOffset + 28, 0, pDestBuf );
 		UnLockVideoSurface( FRAME_BUFFER );
 		ShadowVideoSurfaceRectUsingLowPercentTable( FRAME_BUFFER, iScreenWidthOffset + 351, iScreenHeightOffset + 16, iScreenWidthOffset + 404, iScreenHeightOffset + 27 );
-		if( gpCurrentSectorSummary ) 
-			/*&& gpCurrentSectorSummary->usNumItems || 
+		if( gpCurrentSectorSummary )
+			/*&& gpCurrentSectorSummary->usNumItems ||
 				gpPEnemyItemsSummaryArray && gusPEnemyItemsSummaryArraySize ||
 				gpNEnemyItemsSummaryArray && gusNEnemyItemsSummaryArraySize )*/
 		{
@@ -1397,7 +1397,7 @@ void RenderSummaryWindow()
 		RectangleDraw( TRUE, iScreenWidthOffset + 350, iScreenHeightOffset + 30, iScreenWidthOffset + 405, iScreenHeightOffset + 43, 0, pDestBuf );
 		UnLockVideoSurface( FRAME_BUFFER );
 		if( gpCurrentSectorSummary )
-			/*&& gpCurrentSectorSummary->usNumItems || 
+			/*&& gpCurrentSectorSummary->usNumItems ||
 				gpPEnemyItemsSummaryArray && gusPEnemyItemsSummaryArraySize ||
 				gpNEnemyItemsSummaryArray && gusNEnemyItemsSummaryArraySize )
 				*/
@@ -1451,7 +1451,7 @@ void RenderSummaryWindow()
 		{
 			UINT8 ubNumUndergroundLevels;
 			CHAR16 str[2];
-			for( y = 0; y < 16; y++ ) 
+			for( y = 0; y < 16; y++ )
 			{
 				ClipRect.iTop = MAP_TOP + y*13;
 				ClipRect.iBottom = ClipRect.iTop + 12;
@@ -1508,7 +1508,7 @@ void RenderSummaryWindow()
 					Blt16BPPBufferShadowRect( (UINT16*)pDestBuf, uiDestPitchBYTES, &ClipRect );
 					if( giCurrentViewLevel == BASEMENT1_LEVEL_MASK ||
 						  giCurrentViewLevel == BASEMENT2_LEVEL_MASK ||
-							giCurrentViewLevel == BASEMENT3_LEVEL_MASK || 
+							giCurrentViewLevel == BASEMENT3_LEVEL_MASK ||
 							giCurrentViewLevel == ALTERNATE_B1_MASK		 ||
 							giCurrentViewLevel == ALTERNATE_B2_MASK		 ||
 							giCurrentViewLevel == ALTERNATE_B3_MASK		 )
@@ -1554,7 +1554,7 @@ void RenderSummaryWindow()
 		if( !gfItemDetailsMode )
 		{
 			if( gpCurrentSectorSummary )
-				/*&& gpCurrentSectorSummary->usNumItems || 
+				/*&& gpCurrentSectorSummary->usNumItems ||
 					gpPEnemyItemsSummaryArray && gusPEnemyItemsSummaryArraySize ||
 					gpNEnemyItemsSummaryArray && gusNEnemyItemsSummaryArraySize )*/
 			{
@@ -1915,7 +1915,7 @@ BOOLEAN HandleSummaryInput( InputAtom *pEvent )
 				break;
 			case 'x':
 				if (pEvent->usKeyState & ALT_DOWN )
-				{ 
+				{
 					DestroySummaryWindow();
 					return FALSE;
 				}
@@ -1953,7 +1953,7 @@ BOOLEAN HandleSummaryInput( InputAtom *pEvent )
 					gsSelSectorY = 1;
 				break;
 			case SHIFT_LEFTARROW:
-				
+
 				break;
 			case SHIFT_RIGHTARROW:
 
@@ -2126,7 +2126,7 @@ void MapClickCallback( MOUSE_REGION *reg, INT32 reason )
 			if( gfItemDetailsMode )
 			{
 				if( gpCurrentSectorSummary )
-					/*&& gpCurrentSectorSummary->usNumItems || 
+					/*&& gpCurrentSectorSummary->usNumItems ||
 						gpPEnemyItemsSummaryArray && gusPEnemyItemsSummaryArraySize ||
 						gpNEnemyItemsSummaryArray && gusNEnemyItemsSummaryArraySize )*/
 				{
@@ -2142,7 +2142,7 @@ void MapClickCallback( MOUSE_REGION *reg, INT32 reason )
 				gfFileIO = TRUE;
 			}
 			iLastClickTime = iNewClickTime;
-		}	
+		}
 		gfRenderSummary = TRUE;
 	}
 }
@@ -2197,7 +2197,7 @@ void SummaryLoadMapCallback( GUI_BUTTON *btn, INT32 reason )
 		STR16 ptr;
 		CHAR16 str[ 50 ];
 		gfRenderSummary = TRUE;
-		
+
 		SetFont( FONT10ARIAL );
 		SetFontForeground( FONT_LTKHAKI );
 		SetFontShadow( FONT_NEARBLACK );
@@ -2207,7 +2207,7 @@ void SummaryLoadMapCallback( GUI_BUTTON *btn, INT32 reason )
 		//swprintf( str, L"Loading map:  %s...", gszDisplayName );
 		//mprintf( MAP_LEFT, MAP_BOTTOM+100, str );
 		//InvalidateRegion( MAP_LEFT, MAP_BOTTOM+100, MAP_LEFT+150,	MAP_BOTTOM+110 );
-		
+
 		CreateProgressBar( 0, MAP_LEFT+5, MAP_BOTTOM+110, iScreenWidthOffset + 573, MAP_BOTTOM+120 );
 
 		//DefineProgressBarPanel( 0, 65, 79, 94, MAP_LEFT, iScreenHeightOffset + 318, iScreenWidthOffset + 578, iScreenHeightOffset + 356 );
@@ -2259,7 +2259,7 @@ void SummarySaveMapCallback( GUI_BUTTON *btn, INT32 reason )
 				CHAR8 filename[40];
 				sprintf( filename, "MAPS\\%S", gszDisplayName );
 				FileClearAttributes( filename );
-			}	
+			}
 			if(	ExternalSaveMap( gszDisplayName ) )
 			{
 				if( gsSelSectorX && gsSelSectorY )
@@ -2379,12 +2379,12 @@ void LoadGlobalSummary()
 	}
 #endif
 	gfGlobalSummaryExists = TRUE;
-	
+
 	//Analyse all sectors to see if matching maps exist.  For any maps found, the information
 	//will be stored in the gbSectorLevels array.  Also, it attempts to load summaries for those
 	//maps.  If the summary information isn't found, then the occurrences are recorded and reported
 	//to the user when finished to give the option to generate them.
-	for( y = 0; y < 16; y++ ) 
+	for( y = 0; y < 16; y++ )
 	{
 		for( x = 0; x < 16; x++ )
 		{
@@ -3052,7 +3052,7 @@ void SummaryUpdateCallback( GUI_BUTTON *btn, INT32 reason )
 		// ADB: The current sector summary should be set to the array value, not the other way around.
 		// Also the sector X and Y values are 1-based and the array is 0-based.  So subtract 1 from X and Y
 		gpCurrentSectorSummary = gpSectorSummary[ gsSelSectorX - 1][ gsSelSectorY - 1][ giCurrLevel ];
-	
+
 		gfRenderSummary = TRUE;
 		if(gfItemDetailsMode)//dnl ch81 041213
 			gfSetupItemDetailsMode = TRUE;
@@ -3132,8 +3132,8 @@ void ApologizeOverrideAndForceUpdateEverything()
 	SUMMARYFILE *pSF;
 	//Create one huge assed button
 	gfMajorUpdate = TRUE;
-	iSummaryButton[ SUMMARY_BACKGROUND ] = 
-		CreateTextButton( 0, 0, 0, 0, BUTTON_USE_DEFAULT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH - 1, 
+	iSummaryButton[ SUMMARY_BACKGROUND ] =
+		CreateTextButton( 0, 0, 0, 0, BUTTON_USE_DEFAULT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BUTTON_TOGGLE, MSYS_PRIORITY_HIGH - 1,
 		BUTTON_NO_CALLBACK, BUTTON_NO_CALLBACK );
 	SpecifyDisabledButtonStyle( iSummaryButton[ SUMMARY_BACKGROUND ], DISABLED_STYLE_NONE );
 	DisableButton( iSummaryButton[ SUMMARY_BACKGROUND ] );
@@ -3150,7 +3150,7 @@ void ApologizeOverrideAndForceUpdateEverything()
 	swprintf( str, pApologizeOverrideAndForceUpdateEverythingText[1], gusNumberOfMapsToBeForceUpdated );
 	mprintf( (iScreenWidthOffset + 320) - StringPixLength( str, FONT10ARIAL )/2, iScreenHeightOffset + 130, str );
 
-	CreateProgressBar( 2, iScreenWidthOffset + 120, iScreenHeightOffset + 170, iScreenWidthOffset + 520, iScreenHeightOffset + 202 ); 
+	CreateProgressBar( 2, iScreenWidthOffset + 120, iScreenHeightOffset + 170, iScreenWidthOffset + 520, iScreenHeightOffset + 202 );
 	DefineProgressBarPanel( 2, 65, 79, 94, iScreenWidthOffset + 100, iScreenHeightOffset + 150, iScreenWidthOffset + 540, iScreenHeightOffset + 222 );
 	SetProgressBarTitle( 2, pApologizeOverrideAndForceUpdateEverythingText[2], BLOCKFONT2, FONT_RED, 0 );
 	SetProgressBarMsgAttributes( 2, SMALLCOMPFONT, FONT_BLACK, FONT_BLACK );
@@ -3355,7 +3355,7 @@ void SetupItemDetailsMode( BOOLEAN fAllowRecursion )
 	//NOW, do the enemy's items!
 	//We need to do two passes.  The first pass simply processes all the enemies and counts all the droppable items
 	//keeping track of two different values.  The first value is the number of droppable items that come off of
-	//enemy detailed placements, the other counter keeps track of the number of droppable items that come off of 
+	//enemy detailed placements, the other counter keeps track of the number of droppable items that come off of
 	//normal enemy placements.  After doing this, the memory is allocated for the tables that will store all the item
 	//summary information, then the second pass will repeat the process, except it will record the actual items.
 
@@ -3374,7 +3374,7 @@ void SetupItemDetailsMode( BOOLEAN fAllowRecursion )
 			return;
 		}
 		if( basic.fDetailedPlacement )
-		{ //skip static priority placement 
+		{ //skip static priority placement
 			if ( !priority.Load(hfile, SAVE_GAME_VERSION, false) )
 			{ //Invalid situation.
 				FileClose( hfile );
@@ -3435,7 +3435,7 @@ void SetupItemDetailsMode( BOOLEAN fAllowRecursion )
 			return;
 		}
 		if( basic.fDetailedPlacement )
-		{ //skip static priority placement 
+		{ //skip static priority placement
 			if ( !priority.Load(hfile, SAVE_GAME_VERSION, false) )
 			{ //Invalid situation.
 				FileClose( hfile );

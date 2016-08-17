@@ -3,52 +3,52 @@
 	#include "Tactical All.h"
 	#include "PreBattle Interface.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
 	#include "sgp.h"
 	#include "Encrypted File.h"
-	#include "faces.h"
-	#include "wcheck.h"
-	#include "soldier profile.h"
-	#include "wordwrap.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
-	#include "interface dialogue.h"
-	#include "font control.h"
-	#include "dialogue control.h"
-	#include "renderworld.h"
-	#include "npc.h"
-	#include "interface dialogue.h"
-	#include "merctextbox.h"
-	#include "message.h"
-	#include "items.h"
-	#include "text.h"
-	#include "overhead.h"
-	#include "assignments.h"
-	#include "strategic.h"
-	#include "strategicmap.h"
-	#include "gamescreen.h"
-	#include "ai.h"
-	#include "aiinternals.h"
-	#include "interactive tiles.h"
-	#include "soldier profile.h"
-	#include "interface panels.h"
-	#include "quests.h"
-	#include "squads.h"
-	#include "game event hook.h"
-	#include "game clock.h"
+	#include "Faces.h"
+	#include "WCheck.h"
+	#include "Soldier Profile.h"
+	#include "WordWrap.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
+	#include "Interface Dialogue.h"
+	#include "Font Control.h"
+	#include "Dialogue Control.h"
+	#include "RenderWorld.h"
+	#include "NPC.h"
+	#include "Interface Dialogue.h"
+	#include "MercTextBox.h"
+	#include "Message.h"
+	#include "Items.h"
+	#include "Text.h"
+	#include "Overhead.h"
+	#include "Assignments.h"
+	#include "Strategic.h"
+	#include "StrategicMap.h"
+	#include "GameScreen.h"
+	#include "AI.h"
+	#include "AIInternals.h"
+	#include "Interactive Tiles.h"
+	#include "Soldier Profile.h"
+	#include "Interface Panels.h"
+	#include "Quests.h"
+	#include "Squads.h"
+	#include "Game Event Hook.h"
+	#include "Game Clock.h"
 	#include "MessageBoxScreen.h"
 	#include "Tactical Save.h"
-	#include "interface control.h"
-	#include "cursors.h"
-	#include "fade screen.h"
-	#include "gameloop.h"
-	#include "finances.h"
-	#include "saveloadmap.h"
+	#include "Interface Control.h"
+	#include "Cursors.h"
+	#include "Fade Screen.h"
+	#include "GameLoop.h"
+	#include "Finances.h"
+	#include "SaveLoadMap.h"
 	#include "Arms Dealer Init.h"
 	#include "ShopKeeper Interface.h"
 	#include "Strategic Town Loyalty.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "GameSettings.h"
 	#include "Strategic Mines.h"
 	#include "Boxing.h"
@@ -58,20 +58,20 @@
 	// including this for Strategic AI.h
 	#include "Strategic Movement.h"
 	#include "Strategic AI.h"
-	#include "Soldier create.h"
+	#include "Soldier Create.h"
 	#include "SkillCheck.h"
 	#include "Sound Control.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "PreBattle Interface.h"
-	#include "history.h"
+	#include "History.h"
 	#include "Keys.h"
 	#include "Morale.h"
-	#include "personnel.h"
+	#include "Personnel.h"
 	#include "Map Screen Interface.h"
 	#include "Queen Command.h"
 	#include "Campaign.h"
 	#include "BobbyRMailOrder.h"
-	#include "end game.h"
+	#include "End Game.h"
 	#include "Map Screen Helicopter.h"
 	#include "Cheats.h"
 	#include "Overhead.h"
@@ -87,8 +87,8 @@
 #include "Ja25_Tactical.h"
 #include "Ja25 Strategic Ai.h"
 #include "MapScreen Quotes.h"
-#include "email.h"
-#include "Soldier macros.h"
+#include "Email.h"
+#include "Soldier Macros.h"
 #include "LOS.h"
 #include "Soldier Control.h"
 #include "Ja25Update.h"
@@ -99,7 +99,7 @@
 #else
 	// anv: for playable Speck
 	#include "Speck Quotes.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 #endif
 
 //forward declarations of common classes to eliminate includes
@@ -1621,7 +1621,7 @@ void HandleNPCTrigger( )
 			else
 			{
 				sPlayerGridNo = ClosestPC( pSoldier, NULL );
-				
+
 				if (!TileIsOutOfBounds(sPlayerGridNo))
 				{
 					ubPlayerID = WhoIsThere2( sPlayerGridNo, 0 );
@@ -1781,7 +1781,7 @@ void HandleStuffForNPCEscorted( UINT8 ubNPC )
 			}
 			break;
 	}
-	
+
 #endif
 }
 
@@ -2308,7 +2308,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				if (pSoldier)
 				{
 					sGridNo = ClosestPC( pSoldier, NULL );
-					
+
 					if (!TileIsOutOfBounds(sGridNo))
 					{
 						// see if we are facing this person
@@ -2696,7 +2696,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				{
 					TriggerNPCRecord( QUEEN, 8 );
 				}
-			
+
 				/*
 				if ( !( gGameOptions.ubGameStyle == STYLE_SCIFI && gGameExternalOptions.fEnableCrepitus) )
 				{
@@ -2973,7 +2973,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				// increment number of heads on hand
 				gMercProfiles[ 78 ].bNPCData2++;
 
-				if (gWorldSectorX == gModSettings.ubCarmenGiveRewardSectorX && gWorldSectorY == gModSettings.ubCarmenGiveRewardSectorY && 
+				if (gWorldSectorX == gModSettings.ubCarmenGiveRewardSectorX && gWorldSectorY == gModSettings.ubCarmenGiveRewardSectorY &&
 					gbWorldSectorZ == gModSettings.ubCarmenGiveRewardSectorZ) //13, 3, 0
 				{
 					TriggerNPCRecord( 78, 20 );
@@ -3085,7 +3085,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 
 			case NPC_ACTION_START_BLOODCAT_QUEST:
 				StartQuest( QUEST_BLOODCATS, gWorldSectorX, gWorldSectorY );
-				SetFactTrue( FACT_PLAYER_KNOWS_ABOUT_BLOODCAT_LAIR); 
+				SetFactTrue( FACT_PLAYER_KNOWS_ABOUT_BLOODCAT_LAIR);
 				break;
 
 			case NPC_ACTION_START_MINE:
@@ -3183,7 +3183,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				// WANNE: This is out first robot. Recruit it AFTER we gave him the weapon!
 				if (gubFact[FACT_ROBOT_READY_SECOND_TIME] == FALSE)
 					RecruitEPC( ROBOT );
-				
+
 				break;
 
 			case NPC_ACTION_READY_ROBOT:
@@ -3220,7 +3220,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 					INT8		bEmptySlot;
 
 					sNearestPC = ClosestPC( pSoldier, NULL );
-					
+
 					if (!TileIsOutOfBounds(sNearestPC))
 					{
 						ubID = WhoIsThere2( sNearestPC, 0 );
@@ -3898,7 +3898,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 					{
 						pSoldier2 = NULL;
 
-						sNearestPC = ClosestPC( pSoldier, NULL );						
+						sNearestPC = ClosestPC( pSoldier, NULL );
 						if (!TileIsOutOfBounds(sNearestPC))
 						{
 							ubID = WhoIsThere2( sNearestPC, 0 );
@@ -4125,7 +4125,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				if ( gfLastBoxingMatchWonByPlayer && !BoxerAvailable() )
 				{
 					TriggerNPCRecord( KINGPIN, 15 );
-					
+
 					// WANNE: Disabled the quest reward points, because the whole team gets experience points too fast when doing some boxing
 					// SANDRO - merc records - quest counter (Kingpin impressed)
 					//GiveQuestRewardPoint( gWorldSectorX, gWorldSectorY, 4, NO_PROFILE );
@@ -4372,7 +4372,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				pSoldier = FindSoldierByProfileID( BREWSTER, FALSE );
 				if ( pSoldier )
 				{
-					sGridNo = GetGridNoOfCorpseGivenProfileID( WARDEN );					
+					sGridNo = GetGridNoOfCorpseGivenProfileID( WARDEN );
 					if (!TileIsOutOfBounds(sGridNo) && PythSpacesAway( pSoldier->sGridNo, sGridNo ) <= 10 )
 					{
 						TriggerNPCRecord( BREWSTER, 16 );
@@ -4427,11 +4427,11 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				}
 				break;
 #ifdef JA2UB
-			//JA25 UB	
+			//JA25 UB
 			case NPC_ACTION_TRIGGER_JERRY_CONVERSATION_WITH_PGC_1:
 				PerformJerryMiloAction301();
 				break;
-			
+
 			case NPC_ACTION_TRIGGER_JERRY_CONVERSATION_WITH_PGC_2:
 				PerformJerryMiloAction302();
 				break;
@@ -4471,7 +4471,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 							RecruitEPC( ubTargetNPC );
 						//}
 				break;
-				
+
 			case NPC_ACTION_UNRECRUIT_EPC:
 					//if ( CheckNPCIsEPC(ubTargetNPC) )
 					//	{
@@ -4488,7 +4488,7 @@ void HandleNPCDoAction( UINT8 ubTargetNPC, UINT16 usActionCode, UINT8 ubQuoteNum
 				ScreenMsg( FONT_MCOLOR_RED, MSG_TESTVERSION, L"No code support for NPC action %d", usActionCode );
 				break;
 		}
-		
+
 				//Lua
 	//	LuaHandleNPCDoAction( ubTargetNPC, usActionCode, ubQuoteNum , 0);
 	}
@@ -4515,7 +4515,7 @@ UINT32 CalcPatientMedicalCost( SOLDIERTYPE * pSoldier )
 		// charge additional $25 for every point below OKLIFE he is
 		uiCost += ( 25 * ( OKLIFE - pSoldier->stats.bLife ) );
 	}
-	
+
 	// also charge $2 for each point of bleeding that must be stopped
 	if ( pSoldier->bBleeding > 0 )
 	{
@@ -4677,7 +4677,7 @@ void StartDialogueMessageBox( UINT8 ubProfileID, UINT16 usMessageBoxType )
 		case NPC_ACTION_WALDO_REPAIR_REQUESTOR:
 			swprintf( zTemp, TacticalStr[ STR_HELI_RR_REPAIR_PROMPT ], gMercProfiles[ubProfileID].zNickname );
 			if( CheckFact(FACT_HELI_DAMAGED_CAN_START_REPAIR, 0) == TRUE )
-			{	
+			{
 				swprintf( zTemp, pHelicopterRepairRefuelStrings[ STR_HELI_RR_REPAIR_PROMPT ], gMercProfiles[ WALDO ].zNickname, CalculateHelicopterRepairCost( FALSE ), gHelicopterSettings.ubHelicopterBasicRepairTime);
 			}
 			else
@@ -4775,7 +4775,7 @@ void DialogueMessageBoxCallBack( UINT8 ubExitValue )
 				TriggerNPCRecord( ubProfile, 0 );
 			}
 #else
-			
+
 			if ( ubExitValue == MSG_BOX_RETURN_YES )
 			{
 				TriggerNPCRecord( ubProfile, 1 );
@@ -5108,7 +5108,7 @@ BOOLEAN NPCOpenThing( SOLDIERTYPE *pSoldier, BOOLEAN fDoor )
 	if ( fDoor )
 	{
 		sStructGridNo = FindClosestDoor( pSoldier );
-		
+
 		if (TileIsOutOfBounds(sStructGridNo))
 		{
 			return( FALSE );
@@ -5127,7 +5127,7 @@ BOOLEAN NPCOpenThing( SOLDIERTYPE *pSoldier, BOOLEAN fDoor )
 		{
 			sStructGridNo = FindNearestOpenableNonDoor( pSoldier->sGridNo );
 		}
-		
+
 		if (TileIsOutOfBounds(sStructGridNo))
 		{
 			return( FALSE );
@@ -5277,7 +5277,7 @@ void PerformJerryMiloAction302()
 	INT8	bNumMercsPresent=-1;
 	SOLDIERTYPE	*pSoldier=NULL;
 	UINT8		ubId;
-	
+
 	//off jazz
 	//Get the number and array of the new soldiers
 	bNumMercsPresent = GetNumSoldierIdAndProfileIdOfTheNewMercsOnPlayerTeam( ubMercsPresent, NULL );
@@ -5318,7 +5318,7 @@ void PerformJerryMiloAction302()
 
 		//Say the quote in 15 seconds
 		DelayedMercQuote( ubProfileID, QUOTE_DEPARTING_COMMENT_CONTRACT_NOT_RENEWED_OR_48_OR_MORE, GetWorldTotalSeconds( ) + 15 );
-		
+
 	}
 
 	//handle the merc arrives quotes now
@@ -5483,7 +5483,7 @@ void CheckForValidQuotesWhenLeavingDealer( UINT8 ubProfile )
 	if( gTalkPanel.bCurSelect != -1 && ubTalkMenuApproachIDs[ gTalkPanel.bCurSelect ] == APPROACH_BUYSELL )
 	{
 		return;
-	} 
+	}
 
 	//if their scripting event going on, leave
 	if( gTacticalStatus.uiFlags & ENGAGED_IN_CONV )
@@ -5494,7 +5494,7 @@ void CheckForValidQuotesWhenLeavingDealer( UINT8 ubProfile )
 
 	if( CheckFact( FACT_MERC_SAY_QUOTE_WHEN_TALK_MENU_CLOSES, 0 ) )
 	{
-		if ( ubProfile == BETTY_UB ) 
+		if ( ubProfile == BETTY_UB )
 			HaveQualifiedMercSayQuoteAboutNpcWhenLeavingTalkScreen( ubProfile, QUOTE_JOINING_CAUSE_BUDDY_1_ON_TEAM );
 		else if ( ubProfile == RAUL_UB )
 		{
@@ -5552,7 +5552,7 @@ void ReplaceMineEntranceGraphicWithCollapsedEntrance()
 		return;
 
 	//Remeber that biggens detonated the explosives
-	gJa25SaveStruct.fBiggensUsedDetonator = TRUE;  
+	gJa25SaveStruct.fBiggensUsedDetonator = TRUE;
 
 	// Turn on permenant changes....
 	ApplyMapChangesToMapTempFile( TRUE );
@@ -5656,7 +5656,7 @@ void HandleMercArrivesQuotesFromHeliCrashSequence()
 
 	uiCnt = gTacticalStatus.Team[ gbPlayerNum ].bFirstID;
 
-	// look for all mercs on the same team, 
+	// look for all mercs on the same team,
 	for ( pSoldier = MercPtrs[ uiCnt ]; uiCnt <= gTacticalStatus.Team[ gbPlayerNum ].bLastID; uiCnt++,pSoldier++)
 	{
 		if ( pSoldier->bActive && pSoldier->stats.bLife >= OKLIFE && pSoldier->bInSector )
@@ -5738,8 +5738,8 @@ void DisplayJerryBreakingLaptopTransmitterPopup()
 {
 	CHAR16	zString[512];
 	INT8		bID=-1;
-	UINT32	uiStartLoc=0;  	
-	
+	UINT32	uiStartLoc=0;
+
 	#define			LANGMESSAGEFILE		"BinaryData\\TacticalMessages.EDT"
 	#define 		EDT_SIZE 400 * 2
 
@@ -5757,13 +5757,13 @@ void DisplayJerryBreakingLaptopTransmitterPopup()
 		//Assert( 0 );
 		return;
 	}
-/*	
+/*
 	if ( FileExists(LANGMESSAGEFILE) )
 	{
-	
+
 		uiStartLoc = EDT_SIZE * 10;
-		LoadEncryptedDataFromFile(LANGMESSAGEFILE, sText, uiStartLoc, EDT_SIZE);	
-	
+		LoadEncryptedDataFromFile(LANGMESSAGEFILE, sText, uiStartLoc, EDT_SIZE);
+
 		swprintf( zString, sText, Menptr[ bID ].name );
 	}
 	else
@@ -5777,7 +5777,7 @@ void DisplayJerryBreakingLaptopTransmitterPopup()
 	#else
 		swprintf( zString, zNewTacticalMessages[TCTL_MSG__JERRY_BREAKIN_LAPTOP_ANTENA], Menptr[ bID ].name ); //UB
 	#endif
-	
+
 
 	//Display it
 	ExecuteTacticalTextBox( 110, zString );

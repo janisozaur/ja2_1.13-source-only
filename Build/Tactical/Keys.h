@@ -1,7 +1,7 @@
 #ifndef		_KEYS_H_
 #define		_KEYS_H_
 
-#include "types.h"
+#include "Types.h"
 #include "FileMan.h"
 
 //forward declarations of common classes to eliminate includes
@@ -41,7 +41,7 @@ typedef struct
 } LOCK;
 */
 
-#define MAXLOCKDESCLENGTH 40 
+#define MAXLOCKDESCLENGTH 40
 typedef struct
 {
 	UINT8		ubEditorName[ MAXLOCKDESCLENGTH ];	// name to display in editor
@@ -142,7 +142,7 @@ typedef struct
 
 
 
-// This is the number of different types of doors we can have 
+// This is the number of different types of doors we can have
 // in one map at a time...
 
 #define NUM_KEYS 255
@@ -179,7 +179,7 @@ extern DOOR *DoorTable;
 
 //Current number of doors in world.
 extern UINT8 gubNumDoors;
-//Current max number of doors.	This is only used by the editor.	When adding doors to the 
+//Current max number of doors.	This is only used by the editor.	When adding doors to the
 //world, we may run out of space in the DoorTable, so we will allocate a new array with extra slots,
 //then copy everything over again.	gubMaxDoors holds the arrays actual number of slots, even though
 //the current number (gubNumDoors) will be <= to it.
@@ -196,7 +196,7 @@ extern void AddDoorInfoToTable( DOOR *pDoor );
 //information.	If the entry is not the last entry, the last entry is move to it's current slot, to keep
 //everything contiguous.
 extern void RemoveDoorInfoFromTable( INT32 iMapIndex );
-//This is the link to see if a door exists at a gridno.	
+//This is the link to see if a door exists at a gridno.
 DOOR * FindDoorInfoAtGridNo( INT32 iMapIndex );
 //Upon world deallocation, the door table needs to be deallocated.
 extern void TrashDoorTable();

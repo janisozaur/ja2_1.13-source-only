@@ -15,13 +15,13 @@ class XMLWriter
 public:
 	typedef std::pair<std::string, std::string> attribute_type;
 public:
-	XMLWriter() : m_iIndentLevel(0)  
+	XMLWriter() : m_iIndentLevel(0)
 	{
 		m_ssBuffer << "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" ;
 	};
 	~XMLWriter()
 	{};
-	
+
 	template<typename ValueType>
 	void addAttributeToNextValue(vfs::String const& attribute, ValueType const& value)
 	{
@@ -54,7 +54,7 @@ public:
 
 	void		openNode(vfs::String const& key);
 	bool		closeNode();
-	
+
 	bool		writeToFile(vfs::Path const& sFileName);
 	bool		writeToFile(vfs::tWritableFile* pFile);
 

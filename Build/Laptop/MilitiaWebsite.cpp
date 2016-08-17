@@ -6,9 +6,9 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Laptop All.h"
 #else
-#include "laptop.h"
+#include "Laptop.h"
 #include "insurance.h"
-#include "insurance Contract.h"
+#include "Insurance Contract.h"
 #include "WCheck.h"
 #include "Utilities.h"
 #include "WordWrap.h"
@@ -19,7 +19,7 @@
 #include "Text.h"
 #include "Multi Language Graphic Utils.h"
 #include "MilitiaWebsite.h"
-#include "random.h"
+#include "Random.h"
 #include "Interface.h"
 #include "Soldier Add.h"
 #include "Soldier Profile.h"
@@ -27,15 +27,15 @@
 #include "Overhead.h"
 #include "Map Screen Interface.h"
 #include "Quests.h"
-#include "finances.h"
+#include "Finances.h"
 #include "Game Clock.h"
 #include "Animation Data.h"
 
 #include "SaveLoadGame.h"
 #include "GameVersion.h"
-#include "message.h"
+#include "Message.h"
 #include "Game Event Hook.h"
-#include "militia control.h"
+#include "Militia Control.h"
 #include "Town Militia.h"
 #include "Strategic Town Loyalty.h"
 
@@ -274,7 +274,7 @@ void FilterIndividualMilitia( InidivualMilitiaLifeState aLifeState, InidivualMil
 	std::vector<MILITIA>::iterator itend = gIndividualMilitiaVector.end( );
 	for ( std::vector<MILITIA>::iterator it = gIndividualMilitiaVector.begin( ); it != itend; ++it )
 	{
-		if ( ( aLifeState == IMLS_DEAD && !((*it).flagmask & MILITIAFLAG_DEAD) ) 
+		if ( ( aLifeState == IMLS_DEAD && !((*it).flagmask & MILITIAFLAG_DEAD) )
 			 || (aLifeState == IMLS_ALIVE && ((*it).flagmask & MILITIAFLAG_DEAD)) )
 			continue;
 
@@ -311,7 +311,7 @@ BOOLEAN EnterMilitiaWebsiteMain( )
 
 	if ( !gGameExternalOptions.fIndividualMilitia )
 		return TRUE;
-	
+
 	// we add several filter dropdowns here (otherwise this list will become tedious to use later on when there are hundreds of militia)
 	{
 		UINT16 usDropX = LAPTOP_SCREEN_UL_X + 4;
@@ -377,7 +377,7 @@ BOOLEAN EnterMilitiaWebsiteMain( )
 
 		{
 			std::vector<std::pair<INT16, STR16> > filtervector = GetMilitiaSectorDropVector();
-			
+
 			if ( !filtervector.empty( ) )
 			{
 				DropDownTemplate<DROPDOWN_MILTIAWEBSITE_FILTER_SECTOR>::getInstance( ).SetEntries( filtervector );
@@ -399,7 +399,7 @@ BOOLEAN EnterMilitiaWebsiteMain( )
 
 	// as we might filter out militia, we use a vector that contains all currently used militia IDs, and access data via that
 	FilterIndividualMilitia( (InidivualMilitiaLifeState)key_dead, (InidivualMilitiaRankState)key_rank, (InidivualMilitiaOriginState)key_origin, key_sector );
-			
+
 	gTestPanel3.Create( LAPTOP_SCREEN_UL_X, MCA_START_CONTENT_Y, LAPTOP_SCREEN_LR_X, LAPTOP_SCREEN_WEB_LR_Y );
 
 	TestTableTemplate<3>::getInstance( ).Create( LAPTOP_SCREEN_UL_X + 4, MCA_START_CONTENT_Y + 44, LAPTOP_SCREEN_LR_X - 4, LAPTOP_SCREEN_WEB_LR_Y - 4 );
@@ -408,7 +408,7 @@ BOOLEAN EnterMilitiaWebsiteMain( )
 
 	// militia details (opens upon interacting with militia list)
 	militiaindividualmainwidget.Create( LAPTOP_SCREEN_UL_X + 50, MCA_START_CONTENT_Y + 40, LAPTOP_SCREEN_LR_X, LAPTOP_SCREEN_WEB_LR_Y );
-		
+
 	gfMilitiaDetailsOpen = FALSE;
 
 	militiaindividualmainwidget.SetMouseRegionActive( FALSE );
@@ -450,7 +450,7 @@ void HandleMilitiaWebsiteMain( )
 				FilterIndividualMilitia( (InidivualMilitiaLifeState)key_dead, (InidivualMilitiaRankState)key_rank, (InidivualMilitiaOriginState)key_origin, key_sector );
 
 				TestTableTemplate<3>::getInstance( ).Create( TestTableTemplate<3>::getInstance( ).GetX( ), TestTableTemplate<3>::getInstance( ).GetY( ),
-														   TestTableTemplate<3>::getInstance( ).GetX( ) + TestTableTemplate<3>::getInstance( ).GetWidth( ), 
+														   TestTableTemplate<3>::getInstance( ).GetX( ) + TestTableTemplate<3>::getInstance( ).GetWidth( ),
 														   TestTableTemplate<3>::getInstance( ).GetY( ) + TestTableTemplate<3>::getInstance( ).GetHeight() );
 
 				gfMilitiaWebsiteRedoFilters = FALSE;
@@ -468,7 +468,7 @@ void RenderMilitiaWebsiteMain( )
 	DisplayDefaults_MilitiaWebsite( );
 
 	SetFontShadow( NO_SHADOW );
-	
+
 	if ( gGameExternalOptions.fIndividualMilitia )
 	{
 		gTestPanel3.Display( );
@@ -529,7 +529,7 @@ STR16 OperationText( UINT32 aNum )
 	if ( GetMilitia( gusCurrentMilitia, &militia ) && aNum < militia.history.size( ) )
 	{
 		MILITIA_BATTLEREPORT battlereport = militia.history[aNum];
-		
+
 		UINT32 day		= battlereport.id / (1440);
 		UINT32 hours	= (battlereport.id - day * 1440) / 60;
 		UINT32 minutes  = battlereport.id - day * 1440 - hours * 60;
@@ -754,7 +754,7 @@ template<>  void	TestTableTemplate<2>::Init( UINT16 sX, UINT16 sY, UINT16 sX_End
 
 	ColumnDataProvider namcol( szIdividualMilitiaWebsiteText[0] );
 	namcol.SetMethodString( OperationText );
-	
+
 	MILITIA militia;
 	if ( GetMilitia( gusCurrentMilitia, &militia ) )
 		namcol.SetNumberOfEntries( militia.history.size( ) );

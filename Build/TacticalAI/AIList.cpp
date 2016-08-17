@@ -15,10 +15,10 @@
 #else
 	#include "AIList.h"
 	#include "Overhead.h"
-	#include "debug.h"
+	#include "Debug.h"
 	#include "AIInternals.h"
-	#include "ai.h"
-	#include "opplist.h"
+	#include "AI.h"
+	#include "Opplist.h"
 	#include "Interface.h"
 	#include "Tactical Save.h"
 #endif

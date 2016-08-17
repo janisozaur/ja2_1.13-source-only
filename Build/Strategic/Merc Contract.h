@@ -15,7 +15,7 @@ enum
 };
 
 
-typedef struct 
+typedef struct
 {
 	UINT8 ubProfileID;
 	UINT8	ubFiller[ 3 ];
@@ -26,7 +26,7 @@ typedef struct
 // WDS - make number of mercenaries, etc. be configurable
 //extern CONTRACT_NEWAL_LIST_NODE	ContractRenewalList[ CODE_MAXIMUM_NUMBER_OF_PLAYER_SLOTS ];
 //extern UINT8										ubNumContractRenewals;
-extern BOOLEAN									gfContractRenewalSquenceOn;		
+extern BOOLEAN									gfContractRenewalSquenceOn;
 //extern UINT8										ubCurrentContractRenewal;
 extern BOOLEAN									gfInContractMenuFromRenewSequence;
 
@@ -80,7 +80,7 @@ BOOLEAN SaveContractRenewalDataToSaveGameFile( HWFILE hFile );
 
 
 
-// rehiring of mercs from leave equipment pop up 
+// rehiring of mercs from leave equipment pop up
 extern BOOLEAN	fEnterMapDueToContract;
 extern SOLDIERTYPE *pContractReHireSoldier;
 extern SOLDIERTYPE *pLeaveSoldier;

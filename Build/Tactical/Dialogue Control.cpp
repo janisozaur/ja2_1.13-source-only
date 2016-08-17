@@ -3,63 +3,63 @@
 	#include "PreBattle Interface.h"
 #else
 	#include "sgp.h"
-	//#include "soldier control.h"
+	//#include "Soldier Control.h"
 	#include "Encrypted File.h"
-	#include "faces.h"
-	#include "wcheck.h"
-	#include "gap.h"
-	#include "overhead.h"
+	#include "Faces.h"
+	#include "WCheck.h"
+	#include "Gap.h"
+	#include "Overhead.h"
 	#include "Sound Control.h"
-	#include "dialogue control.h"
+	#include "Dialogue Control.h"
 	#include "Message.h"
-	#include "render dirty.h"
-	#include "soldier profile.h"
-	#include "wordwrap.h"
-	#include "sysutil.h"
-	#include "vobject_blitters.h"
+	#include "Render Dirty.h"
+	#include "Soldier Profile.h"
+	#include "WordWrap.h"
+	#include "SysUtil.h"
+	#include "VObject_blitters.h"
 	#include "AimMembers.h"
-	#include "mercs.h"
-	#include "interface dialogue.h"
-	#include "merctextbox.h"
-	#include "renderworld.h"
-	#include "soldier macros.h"
-	#include "squads.h"
-	#include "screenids.h"
-	#include "interface utils.h"
-	#include "strategicmap.h"
+	#include "Mercs.h"
+	#include "Interface Dialogue.h"
+	#include "MercTextBox.h"
+	#include "RenderWorld.h"
+	#include "Soldier Macros.h"
+	#include "Squads.h"
+	#include "ScreenIds.h"
+	#include "Interface Utils.h"
+	#include "StrategicMap.h"
 	#include "PreBattle Interface.h"
 	#include "Game Clock.h"
 	#include "Quests.h"
-	#include "cursors.h"
-	#include "gamescreen.h"
+	#include "Cursors.h"
+	#include "GameScreen.h"
 	#include "Random.h"
 	#include "Map Screen Helicopter.h"
 	#include	"GameSettings.h"
 	#include "ShopKeeper Interface.h"
 	#include "Map Screen Interface.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Merc Contract.h"
 	#include "Town Militia.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "SkillCheck.h"
 	#include "Interface Control.h"
-	#include "finances.h"
-	#include "civ quotes.h"
+	#include "Finances.h"
+	#include "Civ Quotes.h"
 	#include "Map Screen Interface Map.h"
-	#include "opplist.h"
-	#include "ai.h"
-	#include "worldman.h"
+	#include "Opplist.h"
+	#include "AI.h"
+	#include "WorldMan.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Campaign.h"
-	#include "end game.h"
-	#include "los.h"
+	#include "End Game.h"
+	#include "LOS.h"
 	#include "qarray.h"
 	#include "Soldier Profile.h"
 #endif
 #include <vector>
 #include "Auto Resolve.h"
 
-#include "connect.h"
+#include "Connect.h"
 #ifdef JA2UB
 #include "Intro.h"
 #include "MapScreen Quotes.h"
@@ -70,7 +70,7 @@
 
 #include "ub_config.h"
 
-#include "history.h"
+#include "History.h"
 
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
@@ -475,7 +475,7 @@ void StopAnyCurrentlyTalkingSpeech( )
 	{
 		InternalShutupaYoFace( gpCurrentTalkingFace->iID, TRUE );
 	}
-#ifdef JA2UB	
+#ifdef JA2UB
 	RemoveJerryMiloBrokenLaptopOverlay();
 #endif
 }
@@ -717,8 +717,8 @@ void HandleDialogue( )
 		UnPauseGame();
 
 	}
-	
-#ifdef JA2UB	
+
+#ifdef JA2UB
 	if ( iQSize == 0 )
 	{
 		if( gfMorrisShouldSayHi )
@@ -792,7 +792,7 @@ void HandleDialogue( )
 			pMike = FindSoldierByProfileID( MIKE, FALSE );
 			if ( pMike )
 			{
-				sPlayerGridNo = ClosestPC( pMike, NULL );				
+				sPlayerGridNo = ClosestPC( pMike, NULL );
 				if (!TileIsOutOfBounds(sPlayerGridNo))
 				{
 					ubPlayerID = WhoIsThere2( sPlayerGridNo, 0 );
@@ -918,7 +918,7 @@ void HandleDialogue( )
 
 		gTacticalStatus.ubLastQuoteSaid = (UINT8)QItem->usQuoteNum;
 		gTacticalStatus.ubLastQuoteProfileNUm = (UINT8)QItem->ubCharacterNum;
-				
+
 		// Flugente: only set up face if we can access correctly
 		if ( QItem->iFaceIndex >= 0 )
 		{
@@ -927,7 +927,7 @@ void HandleDialogue( )
 		}
 
 		gubCurrentTalkingID	= QItem->ubCharacterNum;
-#ifdef JA2UB		
+#ifdef JA2UB
 		//Ja25: test
 		if( QItem->ubCharacterNum == MORRIS_UB ) //MORRIS
 		{
@@ -984,7 +984,7 @@ void HandleDialogue( )
 		if ( QItem->uiSpecialEventFlag & DIALOGUE_SPECIAL_EVENT_USE_ALTERNATE_FILES )
 		{
 			gfUseAlternateDialogueFile = TRUE;
-			
+
 			// Flugente: only set up face if we can access correctly
 			if ( QItem->iFaceIndex >= 0 )
 			{
@@ -1289,7 +1289,7 @@ void HandleDialogue( )
 		{
 			//switch on the quote that is being spoken
 			switch( QItem->uiSpecialEventData )
-			{				
+			{
 				case JM_SE__SHOW_RADIO_LOCATOR:
 					HandleShowingRadioLocatorsInMorrisArea();
 					break;
@@ -1361,7 +1361,7 @@ void HandleDialogue( )
 			{
 				gTacticalStatus.ubLastQuoteSaid = (UINT8)QItem->usQuoteNum;
 				gTacticalStatus.ubLastQuoteProfileNUm = (UINT8)QItem->ubCharacterNum;
-				
+
 				// Flugente: only set up face if we can access correctly
 				if ( QItem->iFaceIndex >= 0 )
 				{
@@ -1374,7 +1374,7 @@ void HandleDialogue( )
 				//ExecuteCharacterDialogue( QItem->ubCharacterNum, QItem->usQuoteNum, QItem->iFaceIndex, DIALOGUE_TACTICAL_UI, TRUE );
 				ExecuteSnitchCharacterDialogue( QItem->ubCharacterNum, QItem->usQuoteNum, QItem->iFaceIndex, QItem->bUIHandlerID, QItem->uiSpecialEventData2, QItem->uiSpecialEventData3, QItem->uiSpecialEventData4 );
 			}
-			
+
 #ifdef JA2UB
 			//JA25 UB
 			if ( QItem->uiSpecialEventData & MULTIPURPOSE_SPECIAL_EVENT_TEAM_MEMBERS_DONE_TALKING )
@@ -1407,7 +1407,7 @@ void HandleDialogue( )
 				if( AreAllTheMercsFinishedSayingThereInitialHeliCrashQuotes() )
 				{
 					//Trigger Jerry Milo's script record 10 ( call action 301 )
-					//AA 
+					//AA
 					//if ( gGameUBOptions.InGameHeliCrash == TRUE )
 					if ( gGameUBOptions.JerryQuotes == TRUE )
 					DelayedMercQuote( JERRY_MILO_UB , 0xffff, 4 ); //JERRY
@@ -1659,7 +1659,7 @@ BOOLEAN SnitchTacticalCharacterDialogue( SOLDIERTYPE *pSoldier, UINT16 usQuoteNu
 		return( FALSE );
 	}
 
-#if (defined JA2UB) 
+#if (defined JA2UB)
 	//Ja25 no meanwhiles
 #else
 	if ( AreInMeanwhile( ) )
@@ -1696,7 +1696,7 @@ BOOLEAN SnitchTacticalCharacterDialogue( SOLDIERTYPE *pSoldier, UINT16 usQuoteNu
 	if ( AM_AN_EPC( pSoldier ) && !(gMercProfiles[ pSoldier->ubProfile ].ubMiscFlags & PROFILE_MISC_FLAG_FORCENPCQUOTE) )
 		return( FALSE );
 
-	return( SnitchCharacterDialogue( pSoldier->ubProfile, usQuoteNum, pSoldier->iFaceIndex, 
+	return( SnitchCharacterDialogue( pSoldier->ubProfile, usQuoteNum, pSoldier->iFaceIndex,
 		DIALOGUE_SPECIAL_EVENT_MULTIPURPOSE, MULTIPURPOSE_SPECIAL_EVENT_SNITCH_DIALOGUE,
 		ubTargetProfile, ubTargetProfile, ubSecondaryTargetProfile,
 		DIALOGUE_TACTICAL_UI, TRUE, FALSE ) );
@@ -1816,8 +1816,8 @@ BOOLEAN CharacterDialogue( UINT8 ubCharacterNum, UINT16 usQuoteNum, INT32 iFaceI
 }
 
 BOOLEAN SnitchCharacterDialogue( UINT8 ubCharacterNum, UINT16 usQuoteNum, INT32 iFaceIndex,
-	UINT32 uiSpecialEventFlag, UINT32 uiSpecialEventData1, UINT32 uiSpecialEventData2, 
-	UINT32 uiSpecialEventData3, UINT32 uiSpecialEventData4, 
+	UINT32 uiSpecialEventFlag, UINT32 uiSpecialEventData1, UINT32 uiSpecialEventData2,
+	UINT32 uiSpecialEventData3, UINT32 uiSpecialEventData4,
 	UINT8 bUIHandlerID, BOOLEAN fFromSoldier, BOOLEAN fDelayed )
 {
 	DIALOGUE_Q_STRUCT				*QItem;
@@ -2179,7 +2179,7 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 	}
 	//else if ( ubCharacterNum >= FIRST_RPC && ubCharacterNum < GASTON &&
 	//new profiles by Jazz
-	else if ( ( gProfilesRPC[ubCharacterNum].ProfilId == ubCharacterNum || gProfilesNPC[ubCharacterNum].ProfilId == ubCharacterNum ) && //|| gProfilesVehicle[ubCharacterNum].ProfilId == ubCharacterNum ) &&	
+	else if ( ( gProfilesRPC[ubCharacterNum].ProfilId == ubCharacterNum || gProfilesNPC[ubCharacterNum].ProfilId == ubCharacterNum ) && //|| gProfilesVehicle[ubCharacterNum].ProfilId == ubCharacterNum ) &&
 			( !( gMercProfiles[ ubCharacterNum ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED )
 			|| ProfileCurrentlyTalkingInDialoguePanel( ubCharacterNum )
 			|| (gMercProfiles[ ubCharacterNum ].ubMiscFlags & PROFILE_MISC_FLAG_FORCENPCQUOTE) )
@@ -2187,11 +2187,11 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 
 	{
 		ubFileNumID = ubCharacterNum;
-		
+
 		if ( ubCharacterNum == HERVE )
 		{
 			isBartenderSantos = TRUE;
-			ubFileNumID = HERVE;	
+			ubFileNumID = HERVE;
 		}
 		else if ( ubCharacterNum == PETER )
 		{
@@ -2227,73 +2227,73 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", MANUEL_UB );
 			ubFileNumID = MANUEL_UB;
 		}
-		
+
 		if ( ubCharacterNum == BIGGENS_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", BIGGENS_UB );
 			ubFileNumID = BIGGENS_UB;
 		}
-		
+
 		if ( ubCharacterNum == JOHN_K_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", JOHN_K_UB );
 			ubFileNumID = JOHN_K_UB;
 		}
-		
+
 		if ( ubCharacterNum == TEX_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", TEX_UB );
 			ubFileNumID = TEX_UB;
 		}
-		
+
 		if ( ubCharacterNum == GASTON_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", GASTON_UB );
 			ubFileNumID = GASTON_UB;
 		}
-		
+
 		if ( ubCharacterNum == STOGIE_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", STOGIE_UB );
 			ubFileNumID = STOGIE_UB;
 		}
-		
+
 		if ( ubCharacterNum == JERRY_MILO_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", JERRY_MILO_UB );
 			ubFileNumID = JERRY_MILO_UB;
 		}
-		
+
 		if ( ubCharacterNum == PGMALE4_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", PGMALE4_UB );
 			ubFileNumID = PGMALE4_UB;
 		}
-		
+
 		if ( ubCharacterNum == BETTY_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", BETTY_UB );
 			ubFileNumID = BETTY_UB;
 		}
-		
+
 		if ( ubCharacterNum == RAUL_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", RAUL_UB );
 			ubFileNumID = RAUL_UB;
 		}
-		
+
 		if ( ubCharacterNum == MORRIS_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", MORRIS_UB );
 			ubFileNumID = MORRIS_UB;
 		}
-		
+
 		if ( ubCharacterNum == RUDY_UB )
 		{
 			sprintf( (char *)zFileNameExists,"NPCDATA\\%03d.EDT", RUDY_UB );
 			ubFileNumID = RUDY_UB;
 		}
-		
+
 		#endif
 
 		// If we are character #155, check fact!
@@ -2308,7 +2308,7 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 			{
 				// Lesh: patch to allow playback ogg speech files
 				sprintf( zFileName,"NPC_SPEECH\\%03d_%03d.ogg",ubFileNumID,usQuoteNum );
-				
+
 				// WANNE: We do not have any speech files for the other (!= HERVE) santos bartenders, take HERVE speech files
 				if (isBartenderSantos && HERVE != ubFileNumID && !FileExists(zFileName))
 				{
@@ -2318,16 +2318,16 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 
 				// We do not have *.ogg file, take *.WAV file
 				if ( !FileExists( zFileName ) )
-				{					
+				{
 					sprintf( zFileName,"NPC_SPEECH\\%03d_%03d.wav",ubFileNumID,usQuoteNum );
-				}				
+				}
 			}
 		}
 		else
 		{
 			// assume EDT files are in EDT directory on HARD DRIVE
 			sprintf( zFileName,"NPCDATA\\%03d.EDT", ubFileNumID );
-			
+
 			// WANNE: We do not have any edt files for the other (!= HERVE) santos bartenders, take HERVE speech files
 			if (isBartenderSantos && HERVE != ubFileNumID && !FileExists(zFileName))
 			{
@@ -2342,18 +2342,18 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 			#ifdef RUSSIAN
 			//	if( ubCharacterNum >= FIRST_RPC && ubCharacterNum < GASTON && gMercProfiles[ ubCharacterNum ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED )
 				//new profiles by Jazz
-				if ( ( gProfilesRPC[ubCharacterNum].ProfilId == ubCharacterNum || gProfilesNPC[ubCharacterNum].ProfilId == ubCharacterNum || gProfilesVehicle[ubCharacterNum].ProfilId == ubCharacterNum ) && gMercProfiles[ ubCharacterNum ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED )	
+				if ( ( gProfilesRPC[ubCharacterNum].ProfilId == ubCharacterNum || gProfilesNPC[ubCharacterNum].ProfilId == ubCharacterNum || gProfilesVehicle[ubCharacterNum].ProfilId == ubCharacterNum ) && gMercProfiles[ ubCharacterNum ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED )
 				{
 				//inshy: fix for UB-1.13 version only					sprintf( zFileName,"SPEECH\\r_%03d_%03d.ogg",ubCharacterNum,usQuoteNum );
 				if ( gSoundProfileValue[ubCharacterNum].EnabledSound == TRUE )
 				{
-			
+
 					#ifdef JA2UB
 					sprintf( zFileName,"SPEECH\\%03d_%03d.ogg",ubCharacterNum,usQuoteNum );
 					if ( !FileExists( zFileName ) )
 					{
 						sprintf( zFileName,"SPEECH\\%03d_%03d.ogg",ubCharacterNum,usQuoteNum );
-					}					
+					}
 					#else
 					sprintf( zFileName,"SPEECH\\r_%03d_%03d.ogg",ubCharacterNum,usQuoteNum );
 					#endif
@@ -2362,11 +2362,11 @@ CHAR8 *GetDialogueDataFilename( UINT8 ubCharacterNum, UINT16 usQuoteNum, BOOLEAN
 					//inshy: fix for UB-1.13 version only
 					#ifdef JA2UB
 					sprintf( zFileName,"SPEECH\\%03d_%03d.wav",ubCharacterNum,usQuoteNum );
-						
+
 					if ( !FileExists( zFileName ) )
 					{
 						sprintf( zFileName,"SPEECH\\%03d_%03d.wav",ubCharacterNum,usQuoteNum );
-					}	
+					}
 					#else
 						sprintf( zFileName,"SPEECH\\r_%03d_%03d.wav",ubCharacterNum,usQuoteNum );
 					#endif
@@ -2627,7 +2627,7 @@ BOOLEAN GetSnitchDialogue( UINT8 ubCharacterNum, UINT16 usQuoteNum, UINT32 iData
 	{
 
 		if ( SnitchDialogueDataFileExistsForProfile( ubCharacterNum, 0, FALSE, &pFilename1, FALSE ) )
-			 //SnitchDialogueDataFileExistsForProfile( ubCharacterNum, 0, FALSE, &pFilename, TRUE ) && 
+			 //SnitchDialogueDataFileExistsForProfile( ubCharacterNum, 0, FALSE, &pFilename, TRUE ) &&
 			 //SnitchDialogueDataFileExistsForProfile( ubCharacterNum, 0, FALSE, &pFilename, TRUE ) && )
 		{
 
@@ -2758,7 +2758,7 @@ void HandleTacticalTextUI( INT32 iFaceIndex, SOLDIERTYPE *pSoldier, STR16 zQuote
 	{
 		sLeft = 110 + xResOffset;
 		gsTopPosition += yResOffset;
-	}	
+	}
 
 	//previous version
 	//sLeft = 110;
@@ -2937,7 +2937,7 @@ void HandleTacticalSpeechUI( UINT8 ubCharacterNum, INT32 iFaceIndex	)
 		}
 
 		// Setup video overlay!
-		VideoOverlayDesc.sLeft = 10;	
+		VideoOverlayDesc.sLeft = 10;
 		VideoOverlayDesc.sTop = 20;
 		VideoOverlayDesc.sRight			= VideoOverlayDesc.sLeft + 99;
 		VideoOverlayDesc.sBottom		= VideoOverlayDesc.sTop + 98;
@@ -3057,12 +3057,12 @@ void HandleDialogueEnd( FACETYPE *pFace )
 					fTextBoxMouseRegionCreated = FALSE;
 				}
 				// anv: show repair prompt afer Waldo offered repairs
-				if ( gbUIHandlerID == DIALOGUE_EXTERNAL_NPC_UI && gTacticalStatus.ubLastQuoteProfileNUm == WALDO && 
+				if ( gbUIHandlerID == DIALOGUE_EXTERNAL_NPC_UI && gTacticalStatus.ubLastQuoteProfileNUm == WALDO &&
 					( gTacticalStatus.ubLastQuoteSaid == WALDO_REPAIR_PROPOSITION || gTacticalStatus.ubLastQuoteSaid == WALDO_SERIOUS_REPAIR_PROPOSITION ) )
 				{
 					CHAR16	sHelicopterRepairPromptText[ 320 ];
 					if( CheckFact(FACT_HELI_DAMAGED_CAN_START_REPAIR, 0) == TRUE )
-					{	
+					{
 						swprintf( sHelicopterRepairPromptText, pHelicopterRepairRefuelStrings[ STR_HELI_RR_REPAIR_PROMPT ], gMercProfiles[ WALDO ].zNickname, CalculateHelicopterRepairCost( FALSE ), gHelicopterSettings.ubHelicopterBasicRepairTime );
 					}
 					else
@@ -3081,8 +3081,8 @@ void HandleDialogueEnd( FACETYPE *pFace )
 						UINT8 ubSeenEnemies[ MAX_NUM_SOLDIERS ];
 						UINT8 ubSeenEnemiesCnt = 0;
 						switch( gTacticalStatus.ubLastQuoteSaid )
-						{					
-							case QUOTE_CLOSE_CALL:					
+						{
+							case QUOTE_CLOSE_CALL:
 							case QUOTE_UNDER_HEAVY_FIRE:
 							case QUOTE_TAKEN_A_BREATING:
 								if( pSoldier->ubPreviousAttackerID != NOBODY && !( MercPtrs[pSoldier->ubPreviousAttackerID]->bDeafenedCounter > 0 ) )
@@ -3092,10 +3092,10 @@ void HandleDialogueEnd( FACETYPE *pFace )
 								// select random enemy, who we see, who sees us and isn't deaf
 								for(UINT8 cnt = gTacticalStatus.Team[ ENEMY_TEAM ].bFirstID; cnt < gTacticalStatus.Team[ ENEMY_TEAM ].bLastID ; cnt++ )
 								{
-									if( MercPtrs[cnt] != NULL && MercPtrs[cnt]->aiData.bOppList[pSoldier->ubID] == SEEN_CURRENTLY 
+									if( MercPtrs[cnt] != NULL && MercPtrs[cnt]->aiData.bOppList[pSoldier->ubID] == SEEN_CURRENTLY
 										&& MercPtrs[pSoldier->ubID]->aiData.bOppList[cnt] == SEEN_CURRENTLY && !( MercPtrs[cnt]->bDeafenedCounter > 0 ) )
 									{
-										ubSeenEnemies[ubSeenEnemiesCnt] = cnt; 
+										ubSeenEnemies[ubSeenEnemiesCnt] = cnt;
 										ubSeenEnemiesCnt++;
 									}
 								}
@@ -3280,7 +3280,7 @@ void SayQuoteFromAnyBodyInSector( UINT16 usQuoteNum )
 		{
 			if ( gTacticalStatus.bNumFoughtInBattle[ ENEMY_TEAM ] == 0 )
 			{
-			
+
 #ifdef JA2UB
 //Ja25 No Ira, Miguel etc.
 #else
@@ -3494,7 +3494,7 @@ void TextOverlayClickCallback( MOUSE_REGION * pRegion, INT32 iReason )
 				ShutDownLastQuoteTacticalTextBox( );
 			}
 		}
-#ifdef JA2UB		
+#ifdef JA2UB
 		//JA25 UB
 		//if we are in the heli crash sequence
 		else if( gJa25SaveStruct.fJerryBreakingLaptopOccuring )
@@ -3782,9 +3782,9 @@ BOOLEAN AreAllTheMercsFinishedSayingThereInitialHeliCrashQuotes()
 	// IF IT'S THE SELECTED GUY, MAKE ANOTHER SELECTED!
 	cnt = gTacticalStatus.Team[ OUR_TEAM ].bFirstID;
 
-	// look for all mercs on the same team, 
+	// look for all mercs on the same team,
 	for ( pSoldier = MercPtrs[ cnt ]; cnt <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; cnt++,pSoldier++)
-	{       
+	{
 		//if the merc is alive, in sector, etc...
 		if ( OK_CONTROLLABLE_MERC( pSoldier )  )
 		{
@@ -3835,7 +3835,7 @@ void RemoveJerryMiloBrokenLaptopOverlay()
 		if( fTextBoxMouseRegionCreated )
 		{
 			MSYS_RemoveRegion( &gTextBoxMouseRegion );
-			fTextBoxMouseRegionCreated = FALSE; 
+			fTextBoxMouseRegionCreated = FALSE;
 		}
 	}
 }
@@ -3848,7 +3848,7 @@ void HandlePlayerClosingMorrisNoteDisplayedOnScreen()
 	if ( fTextBoxMouseRegionCreated )
 	{
 		MSYS_RemoveRegion( &gTextBoxMouseRegion );
-		fTextBoxMouseRegionCreated = FALSE; 
+		fTextBoxMouseRegionCreated = FALSE;
 	}
 
 	if( gJa25SaveStruct.ubDisplayCommanderMorrisNote == DMN__DISPLAY_PART_2 )

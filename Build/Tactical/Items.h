@@ -85,8 +85,8 @@ void SetMoneyInSoldierProfile( UINT8 ubProfile, UINT32 uiMoney );
 void CheckEquipmentForDamage( SOLDIERTYPE *pSoldier, INT32 iDamage );
 BOOLEAN ArmBomb( OBJECTTYPE * pObj, INT8 bSetting );
 
-// NOTE TO ANDREW: 
-// 
+// NOTE TO ANDREW:
+//
 // The following functions expect that pObj points to the object
 // "in the cursor", which should have memory allocated for it already
 BOOLEAN PlaceObject( SOLDIERTYPE * pSoldier, INT8 bPos, OBJECTTYPE * pObj );
@@ -157,7 +157,7 @@ BOOLEAN ValidAttachment( UINT16 usAttachment, UINT16 usItem, UINT8* ubAPCost = N
 BOOLEAN ValidAttachment( UINT16 usAttachment, OBJECTTYPE * pObj, UINT8* ubAPCost = NULL, UINT8 subObject = 0, std::vector<UINT16> usAttachmentSlotIndexVector = std::vector<UINT16>());
 BOOLEAN ValidItemAttachmentSlot( OBJECTTYPE * pObj, UINT16 usAttachment, BOOLEAN fAttemptingAttachment, BOOLEAN fDisplayMessage = TRUE, UINT8 subObject = 0, INT16 slotCount = -1, BOOLEAN fIgnoreAttachmentInSlot = FALSE, OBJECTTYPE ** ppAttachInSlot = NULL, std::vector<UINT16> usAttachmentSlotIndexVector = std::vector<UINT16>());
 
-// Determines if it is possible to merge an item with any item whose class 
+// Determines if it is possible to merge an item with any item whose class
 // is the same as the indicated item
 BOOLEAN ValidAttachmentClass( UINT16 usAttachment, UINT16 usItem );
 
@@ -505,8 +505,8 @@ typedef struct
 
 	UINT16		usCivilianPopulation;	// total amount of civilians that are supposed to be in this sector. This does not have to be the number of civilians in tactical
 
-	UINT8		rainchance;				// chance that it rains in this sector 
-	UINT8		sandstormchance;		// chance that a sandstorm happens in this sector 
+	UINT8		rainchance;				// chance that it rains in this sector
+	UINT8		sandstormchance;		// chance that a sandstorm happens in this sector
 	UINT8		snowchance;				// chance that it snows in this sector
 
 	UINT8		snakechance;			// if positive, snakes can attack in water, the higher the number, the more often it happens

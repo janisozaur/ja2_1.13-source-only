@@ -3,10 +3,10 @@
 
 #include "Overhead.h"
 #include "Isometric Utils.h"
-#include "soldier tile.h"
+#include "Soldier Tile.h"
 #include "Soldier Profile.h"
 #include "Soldier Functions.h"
-#include "ai.h"
+#include "AI.h"
 
 #define SOLDIER_CLASS "ja2_SoldierClass"
 

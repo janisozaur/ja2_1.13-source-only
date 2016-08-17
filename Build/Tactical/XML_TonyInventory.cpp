@@ -2,15 +2,15 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "weapons.h"
+	#include "Overhead.h"
+	#include "Weapons.h"
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
     #include "Arms Dealer Init.h"
     #include "Font Control.h"
 	#include "WordWrap.h"
-	#include "soldier profile type.h"
+	#include "Soldier Profile Type.h"
 #endif
 
 struct
@@ -218,7 +218,7 @@ inventoryStartElementHandle(void *userData, const XML_Char *name, const XML_Char
 			pData.curElement = MERCHANT_FLAGS;
 			pData.maxReadDepth++; //we are not skipping this element
 		}
-		else if (pData.curElement == MERCHANT_FLAGS && 
+		else if (pData.curElement == MERCHANT_FLAGS &&
 				  (NameIs("ARMS_DEALER_HANDGUNCLASS") ||
 				  NameIs("ARMS_DEALER_SMGCLASS") ||
 				  NameIs("ARMS_DEALER_RIFLECLASS") ||

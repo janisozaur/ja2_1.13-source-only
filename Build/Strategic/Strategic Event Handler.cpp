@@ -3,7 +3,7 @@
 #else
 	#include "Strategic Event Handler.h"
 	#include "MemMan.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Items.h"
 	#include "Handle Items.h"
 	#include "LaptopSave.h"
@@ -21,16 +21,16 @@
 	#include "SaveLoadMap.h"
 	#include "Soldier Create.h"
 	#include "Soldier Add.h"
-	#include "Renderworld.h"
+	#include "RenderWorld.h"
 	#include "Soldier Profile.h"
-	#include "email.h"
-	#include "strategic.h"
+	#include "Email.h"
+	#include "Strategic.h"
 	#include "GameSettings.h"
-	#include "history.h"
+	#include "History.h"
 #endif
 
 #include "Luaglobal.h"
-#include "connect.h"
+#include "Connect.h"
 #include "LuaInitNPCs.h"
 
 //forward declarations of common classes to eliminate includes
@@ -697,7 +697,7 @@ void HandleNPCSystemEvent( UINT32 uiEvent )
 
 #ifdef JA2UB
 // no UB
-#else						
+#else
 						AddEmail( KING_PIN_LETTER, KING_PIN_LETTER_LENGTH, KING_PIN, GetWorldTotalMin(), -1, -1 , TYPE_EMAIL_EMAIL_EDT );
 #endif
 						StartQuest( QUEST_KINGPIN_MONEY, gMercProfiles[ KINGPIN ].sSectorX, gMercProfiles[ KINGPIN ].sSectorY );
@@ -818,7 +818,7 @@ void HandleNPCSystemEvent( UINT32 uiEvent )
 				break;
 		}
 	}
-	
+
 //#endif
 }
 
@@ -832,7 +832,7 @@ void HandleEarlyMorningEvents( void )
 			UINT8 sector = SECTOR( sX, sY );
 
 			SECTORINFO *pSectorInfo = &(SectorInfo[sector]);
-			
+
 			// A flag prevents us from exploiting the civilian recruitment mechanic. Every x hours, we reset it
 			if ( pSectorInfo )
 			{
@@ -885,7 +885,7 @@ void HandleEarlyMorningEvents( void )
 
 	if( gMercProfiles[ TONY ].ubLastDateSpokenTo > 0 && !( gWorldSectorX == 5 && gWorldSectorY == MAP_ROW_C && gbWorldSectorZ == 0 ) )
 	{
-		// San Mona C5 is not loaded so make Tony possibly not availableif 
+		// San Mona C5 is not loaded so make Tony possibly not availableif
 		if (Random( 99 ) < gGameExternalOptions.ubChanceTonyAvailable) // silversurfer/SANDRO
 		{
 			// Tony IS available

@@ -6,9 +6,9 @@
 #ifdef PRECOMPILEDHEADERS
 #include "Laptop All.h"
 #else
-#include "laptop.h"
+#include "Laptop.h"
 #include "insurance.h"
-#include "insurance Contract.h"
+#include "Insurance Contract.h"
 #include "WCheck.h"
 #include "Utilities.h"
 #include "WordWrap.h"
@@ -18,8 +18,8 @@
 #include "Encrypted File.h"
 #include "Text.h"
 #include "Multi Language Graphic Utils.h"
-#include "merccompare.h"
-#include "random.h"
+#include "MercCompare.h"
+#include "Random.h"
 #include "Interface.h"
 #include "Soldier Add.h"
 #include "Soldier Profile.h"
@@ -230,7 +230,7 @@ void RenderMercCompareMain( )
 	{
 		// display bullet
 		BltVideoObject( FRAME_BUFFER, hPixHandle, 0, usPosX, usPosY, VO_BLT_SRCTRANSPARENCY, NULL );
-				
+
 		swprintf( sText, szMercCompareWebSite[i] );
 		DrawTextToScreen( sText, usPosX + 25, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, FONT_MCOLOR_BLACK, FALSE, 0 );
 
@@ -253,9 +253,9 @@ void RenderMercCompareMain( )
 ////////////////////////// MERC COMPARE CUSTOMERS ////////////////////////////////
 
 BOOLEAN EnterMercCompareCustomers( )
-{	
+{
 	InitDefaults( );
-	
+
 	RenderMercCompareCustomers( );
 
 	return(TRUE);
@@ -299,7 +299,7 @@ void RenderMercCompareCustomers( )
 		quoteset.insert( Random( TEXT_MERCCOMPARE_CUSTOMERSTATEMENTS ) );
 		++safetycounter;
 	}
-	
+
 	std::set<UINT8>::iterator itend = quoteset.end();
 	for ( std::set<UINT8>::iterator it = quoteset.begin(); it != itend; ++it )
 	{
@@ -315,7 +315,7 @@ void RenderMercCompareCustomers( )
 		usPosY += DisplayWrappedString( usPosX + 180, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X - 25, 2, FONT12ROMAN, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 		usPosY += 30;
 	}
-	
+
 	SetFontShadow( DEFAULT_SHADOW );
 
 	MarkButtonsDirty( );
@@ -352,7 +352,7 @@ BOOLEAN EnterMercCompareAnalyze()
 		if ( pSoldier->bActive && pSoldier->ubProfile != NO_PROFILE )
 			mercvector.push_back( std::make_pair( pSoldier->ubProfile, gMercProfiles[pSoldier->ubProfile].zNickname ) );
 	}
-	
+
 	DropDownTemplate<DROPDOWNNR_MERCCOMPARE1>::getInstance( ).SetEntries( mercvector );
 	DropDownTemplate<DROPDOWNNR_MERCCOMPARE1>::getInstance( ).SetHelpText( szMercCompareWebSite[TEXT_MERCCOMPARE_DROPDOWNTEXT] );
 	DropDownTemplate<DROPDOWNNR_MERCCOMPARE1>::getInstance( ).Create( MCA_DROPDOWN_X, MCA_START_CONTENT_Y );
@@ -372,7 +372,7 @@ BOOLEAN EnterMercCompareAnalyze()
 	}
 
 	RenderMercCompareAnalyze( );
-			
+
 	return(TRUE);
 }
 
@@ -409,12 +409,12 @@ void RenderMercCompareAnalyze()
 
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = MCA_START_CONTENT_Y;
-		
+
 	if ( DropDownTemplate<DROPDOWNNR_MERCCOMPARE1>::getInstance( ).HasEntries( ) && DropDownTemplate<DROPDOWNNR_MERCCOMPARE2>::getInstance( ).HasEntries( ) )
 	{
 		gMercCompareProfile1 = (UINT8)DropDownTemplate<DROPDOWNNR_MERCCOMPARE1>::getInstance( ).GetSelectedEntryKey( );
 		gMercCompareProfile2 = (UINT8)DropDownTemplate<DROPDOWNNR_MERCCOMPARE2>::getInstance( ).GetSelectedEntryKey( );
-	
+
 		DisplayMercData( gMercCompareProfile1, gMercCompareProfile2 );
 
 		DropDownTemplate<DROPDOWNNR_MERCCOMPARE1>::getInstance( ).Display( );
@@ -425,7 +425,7 @@ void RenderMercCompareAnalyze()
 		swprintf( sText, szMercCompareWebSite[TEXT_MERCCOMPARE_ERROR_NOBODYTHERE] );
 		usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 	}
-	
+
 	SetFontShadow( DEFAULT_SHADOW );
 
 	MarkButtonsDirty( );
@@ -445,7 +445,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 	char			sTemp[100];
 	CHAR16			sText[800];
 	BOOLEAN			fDisplayMercContractStateTextColorInRed = FALSE;
-	
+
 	// we need a valid ID here
 	if ( !OKToCheckOpinion( usProfileA ) || !OKToCheckOpinion( usProfileB ) )
 		return FALSE;
@@ -470,7 +470,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 
 	usPosX = LAPTOP_SCREEN_UL_X;
 	usPosY = MCA_START_CONTENT_Y;
-		
+
 	// load the mercs face graphic and add it
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;
 
@@ -560,7 +560,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 	val = pProfileB->bMercOpinion[usProfileA];
 	swprintf( sText, L"%d", val );
 	usPosY += DisplayWrappedString( usPosX + MCA_SIDEOFFSET + MCA_NUMBEROFFSET, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, (val > 0) ? FONT_MCOLOR_LTGREEN : (val < 0) ? FONT_MCOLOR_LTRED : MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	// refinement
 	BOOLEAN fRefinementfoundA = FALSE;
 	// if we don't care, doesn't matter
@@ -589,7 +589,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 
 		fRefinementfoundA = TRUE;
 	}
-	
+
 	if ( fRefinementfoundA )
 	{
 		swprintf( sText, (val < 0) ? gzMercCompare[2] : gzMercCompare[3], szRefinementTextTypes[pProfileB->bRefinement], szCareLevelText[pProfileA->bRefinementCareLevel] );
@@ -684,7 +684,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 				val = -gGameExternalOptions.sMoraleModRacism * 2;
 			else
 				val = 0;
-				
+
 			swprintf( sText, pProfileA->bRacist == RACIST_VERY ? gzMercCompare[6] : gzMercCompare[7], szRaceText[pProfileB->bRace] );
 			DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 			swprintf( sText, L"%d", val );
@@ -819,7 +819,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 		DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 		swprintf( sText, L"%d", val );
 		DisplayWrappedString( usPosX + MCA_NUMBEROFFSET, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, (val > 0) ? FONT_MCOLOR_LTGREEN : (val < 0) ? FONT_MCOLOR_LTRED : MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-		
+
 		swprintf( sText, gzMercCompare[12] );
 		DisplayWrappedString( usPosX + MCA_SIDEOFFSET, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 		swprintf( sText, L"%d", val );
@@ -931,7 +931,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 	else
 		swprintf( sText, L"%d", val );
 	usPosY += DisplayWrappedString( usPosX + MCA_NUMBEROFFSET, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, (val > 0) ? FONT_MCOLOR_LTGREEN : (val < 0) ? FONT_MCOLOR_LTRED : MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	val = SoldierRelation( pSoldierB, pSoldierA );
 	BOOLEAN addhint2 = (val >= BUDDY_OPINION || val <= HATED_OPINION);
 
@@ -943,7 +943,7 @@ BOOLEAN DisplayMercData( UINT8 usProfileA, UINT8 usProfileB )
 	else
 		swprintf( sText, L"%d", val );
 	usPosY2 += DisplayWrappedString( usPosX + MCA_SIDEOFFSET + MCA_NUMBEROFFSET, usPosY2, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, (val > 0) ? FONT_MCOLOR_LTGREEN : (val < 0) ? FONT_MCOLOR_LTRED : MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
-	
+
 	// add a note that opinion is always between HATED_OPINION and BUDDY_OPINION otherwise players will shout 'bug!'
 	if ( addhint1 || addhint2 )
 	{
@@ -1108,7 +1108,7 @@ void RenderMercCompareMatrix( )
 		usPosX = LAPTOP_SCREEN_UL_X;
 
 		DisplaySmallColouredLineWithShadow( usPosX, usPosY - 5, usPosX + spacepermerc * (squadvector.size( ) + 1), usPosY - 5, FROMRGB( 0, 255, 0 ) );
-	
+
 		UINT16 currentmouseregion = 0;
 
 		for ( std::vector<UINT8>::iterator it = squadvector.begin(); it != itend; ++it )
@@ -1127,7 +1127,7 @@ void RenderMercCompareMatrix( )
 			usPosX = LAPTOP_SCREEN_UL_X;
 
 			DisplaySmallColouredLineWithShadow( usPosX, usPosY - 5, usPosX + spacepermerc * (squadvector.size( ) + 1), usPosY - 5, FROMRGB( 0, 255, 0 ) );
-		
+
 			// write name on the left side
 			swprintf( sText, gMercProfiles[pSoldierA->ubProfile].zNickname );
 			DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
@@ -1164,8 +1164,8 @@ void RenderMercCompareMatrix( )
 					gMercCompareMatrixLinkDefined[currentmouseregion] = TRUE;
 					++currentmouseregion;
 				}
-						
-				// write down both relations						
+
+				// write down both relations
 				INT8 val = SoldierRelation( pSoldierA, pSoldierB );
 				swprintf( sText, L"%d", val );
 				DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, (val > 0) ? FONT_MCOLOR_LTGREEN : (val < 0) ? FONT_MCOLOR_LTRED : MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
@@ -1193,7 +1193,7 @@ void RenderMercCompareMatrix( )
 		swprintf( sText, szMercCompareWebSite[TEXT_MERCCOMPARE_ERROR_NOBODYTHERE] );
 		usPosY += DisplayWrappedString( usPosX, usPosY, LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X, 2, CAMPHIS_FONT_MED, MERCOMP_FONT_COLOR, sText, FONT_MCOLOR_BLACK, FALSE, 0 );
 	}
-	
+
 	SetFontShadow( DEFAULT_SHADOW );
 
 	MarkButtonsDirty( );

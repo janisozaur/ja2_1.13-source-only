@@ -5,27 +5,27 @@
 	#include "MPJoinScreen.h"
 	#include "GameSettings.h"
 	#include "Utilities.h"
-	#include "wCheck.h"
+	#include "WCheck.h"
 	#include "Font Control.h"
 	#include "WordWrap.h"
 	#include "Render Dirty.h"
 	#include "Input.h"
 	#include "Options Screen.h"
 	#include "English.h"
-	#include "Sysutil.h"
+	#include "SysUtil.h"
 	#include "Fade Screen.h"
 	#include "Cursor Control.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Text.h"
 	#include "Text Input.h"
 	#include "Soldier Profile.h"
 #endif
 
-#include "gameloop.h"
-#include "connect.h"
+#include "GameLoop.h"
+#include "Connect.h"
 #include "network.h" // for client name
-#include "saveloadscreen.h"
-#include "game init.h"
+#include "SaveLoadScreen.h"
+#include "Game Init.h"
 
 #include <vfs/Core/vfs.h>
 #include <vfs/Core/vfs_init.h>
@@ -247,7 +247,7 @@ void		SaveJoinSettings(bool ReSaving)
 		Get16BitStringFromField( 1, gzServerIPField, 16 );
 		Get16BitStringFromField( 2, gzServerPortField, 6 );
 	}
-	
+
 	MpIniExists();
 	vfs::PropertyContainer props;
 	props.initFromIniFile(JA2MP_INI_FILENAME);
@@ -294,7 +294,7 @@ bool	ValidateJoinSettings(bool bSkipServerAddress, bool bSkipSyncDir)
 				break;
 			}
 
-			if (oct < 0 || oct > 255) // allow 255 
+			if (oct < 0 || oct > 255) // allow 255
 			{
 				// bad octet, error
 				numOctets=0;
@@ -311,7 +311,7 @@ bool	ValidateJoinSettings(bool bSkipServerAddress, bool bSkipSyncDir)
 			DoMPJMessageBox( MSG_BOX_BASIC_STYLE, gzMPJScreenText[MPJ_SERVERIP_INVALID], MP_JOIN_SCREEN, MSG_BOX_FLAG_OK, NULL );
 			return false;
 		}
-		
+
 		// Verify the Server Port
 		Get16BitStringFromField( 2, gzServerPortField, 6 );
 		INT32 svrPort = _wtoi(gzServerPortField);
@@ -355,7 +355,7 @@ UINT32	MPJoinScreenHandle( void )
 
 	// render text boxes
 	RenderAllTextFields(); // textbox system call
-	
+
 	ExecuteBaseDirtyRectQueue();
 	EndFrameBufferRender();
 
@@ -466,9 +466,9 @@ BOOLEAN		EnterMPJScreen()
 
 	//AddUserInputField( NULL ); // API Call that sets a special input-handling routine and method for the TAB key
 
-	//Add Player Name textbox 
+	//Add Player Name textbox
 	AddTextInputField(	MPJ_TXT_HANDLE_X,
-						MPJ_TXT_HANDLE_Y, 
+						MPJ_TXT_HANDLE_Y,
 						MPJ_TXT_HANDLE_WIDTH,
 						MPJ_TXT_HANDLE_HEIGHT,
 						MSYS_PRIORITY_HIGH+2,
@@ -476,9 +476,9 @@ BOOLEAN		EnterMPJScreen()
 						11,
 						INPUTTYPE_ASCII );//23
 
-	//Add Server IP textbox 
+	//Add Server IP textbox
 	AddTextInputField(	MPJ_TXT_IP_X,
-						MPJ_TXT_IP_Y, 
+						MPJ_TXT_IP_Y,
 						MPJ_TXT_IP_WIDTH,
 						MPJ_TXT_IP_HEIGHT,
 						MSYS_PRIORITY_HIGH+2,
@@ -486,9 +486,9 @@ BOOLEAN		EnterMPJScreen()
 						15,
 						INPUTTYPE_ASCII );//23
 
-	//Add Server Port textbox 
+	//Add Server Port textbox
 	AddTextInputField(	MPJ_TXT_PORT_X,
-						MPJ_TXT_PORT_Y, 
+						MPJ_TXT_PORT_Y,
 						MPJ_TXT_PORT_WIDTH,
 						MPJ_TXT_PORT_HEIGHT,
 						MSYS_PRIORITY_HIGH+2,
@@ -556,7 +556,7 @@ void HandleMPJScreen()
 				gubMPJExitScreen = MAINMENU_SCREEN;
 				gfMPJScreenExit	= TRUE;
 				break;
-			
+
 			case MPJ_HOST:
 				gubMPJExitScreen = MP_HOST_SCREEN;
 				gfMPJScreenExit	= TRUE;
@@ -593,13 +593,13 @@ void HandleMPJScreen()
 void DrawHelpText()
 {
 	int x = MPJ_LABEL_HANDLE_X;
-	int y = iScreenHeightOffset + 60;	
+	int y = iScreenHeightOffset + 60;
 	int width = 640 - (2 * 50);
 	int lineSpacing = 12;
 
 	// Visit IRC
 	DrawTextToScreen( gzMPJHelpText[ 0 ], x, y, width, FONT10ARIAL, MPJ_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
-	
+
 	y+= lineSpacing;
 	DrawTextToScreen( gzMPJHelpText[ 1 ], x, y, width, FONT10ARIAL, MPJ_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
@@ -647,9 +647,9 @@ BOOLEAN		RenderMPJScreen()
 	DrawTextToScreen( gzMPJScreenText[ MPJ_TITLE_TEXT ], MPJ_MAIN_TITLE_X, MPJ_MAIN_TITLE_Y, MPJ_MAIN_TITLE_WIDTH, MPJ_TITLE_FONT, MPJ_TITLE_COLOR, FONT_MCOLOR_BLACK, FALSE, CENTER_JUSTIFIED );
 
 	DrawHelpText();
-	
+
 	// Player name text label
-	DisplayWrappedString( MPJ_LABEL_HANDLE_X, MPJ_LABEL_HANDLE_Y, MPJ_LABEL_HANDLE_WIDTH, 2, MPJ_LABEL_TEXT_FONT, MPJ_LABEL_TEXT_COLOR, gzMPJScreenText[ MPJ_HANDLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );		
+	DisplayWrappedString( MPJ_LABEL_HANDLE_X, MPJ_LABEL_HANDLE_Y, MPJ_LABEL_HANDLE_WIDTH, 2, MPJ_LABEL_TEXT_FONT, MPJ_LABEL_TEXT_COLOR, gzMPJScreenText[ MPJ_HANDLE_TEXT ], FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
 
 	// Server IP text label
 	DisplayWrappedString( MPJ_LABEL_IP_X, MPJ_LABEL_IP_Y, MPJ_LABEL_IP_WIDTH, 2, MPJ_LABEL_TEXT_FONT, MPJ_LABEL_TEXT_COLOR, gzMPJScreenText[ MPJ_SERVERIP_TEXT ], FONT_MCOLOR_BLACK, FALSE, LEFT_JUSTIFIED );
@@ -691,7 +691,7 @@ void GetMPJScreenUserInput()
 			}
 		}
 	}
-} 
+}
 
 // CALLBACKS
 void BtnMPJoinCallback(GUI_BUTTON *btn,INT32 reason)
@@ -769,7 +769,7 @@ BOOLEAN DoMPJMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen
 
 void DoneFadeOutForExitMPJScreen( void )
 {
-	// As we bypassed the GIO screen, set up some game options for multiplayer here	
+	// As we bypassed the GIO screen, set up some game options for multiplayer here
 	is_networked = true;
 	is_host = false; // we want to be a client, not we ARE a client yet (is_client)
 	auto_retry = true;
@@ -783,7 +783,7 @@ void DoneFadeOutForExitMPJScreen( void )
 		gGameOptions.fTurnTimeLimit = TRUE;
 	else
 		gGameOptions.fTurnTimeLimit = FALSE;
-	
+
 	// Bobby Rays - why would we want anything less than the best
 	gGameOptions.ubBobbyRayQuality = BR_AWESOME;
 	gGameOptions.ubBobbyRayQuantity = BR_AWESOME;

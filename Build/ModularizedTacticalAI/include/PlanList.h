@@ -10,13 +10,13 @@ namespace AI
     {
         /**@class PlanList
          * @brief Composition/Abstract Product. Used to concatenate plans.
-         * 
+         *
          * Plan lists can comprise an arbitrary number of sub-plans, executed in the order they were added via
          * add_subplan(), and switched to the next one once the done()-flag of a sub-plan becomes true.
          */
         class PlanList : public Plan
         {
-            private: 
+            private:
                 /// The sub-plan sequence
                 std::deque<Plan*> subplans_;
             public:

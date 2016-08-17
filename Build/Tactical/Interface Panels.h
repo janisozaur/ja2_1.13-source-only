@@ -18,7 +18,7 @@ typedef enum
 	MUTE_BUTTON,
 	SM_DONE_BUTTON,
 	SM_MAP_SCREEN_BUTTON,
-	//HOP_BUTTON, //Legion by Jazz 
+	//HOP_BUTTON, //Legion by Jazz
 	NUM_SM_BUTTONS
 };
 
@@ -63,9 +63,9 @@ void EnableSMPanelButtons( BOOLEAN fEnable, BOOLEAN fFromItemPickup );
  * and when we will read all values we return TRUE if not we will retunf FALSE
  * any questions? joker
  */
-//BOOLEAN InitializeSMPanelCoords( ); 
+//BOOLEAN InitializeSMPanelCoords( );
 BOOLEAN InitializeSMPanelCoordsNew();
-BOOLEAN InitializeSMPanelCoordsOld(); 
+BOOLEAN InitializeSMPanelCoordsOld();
 
 
 BOOLEAN CreateTEAMPanelButtons( );
@@ -78,7 +78,7 @@ void UpdateTEAMPanel( );
 /*
  * Just like b4 we will initialize all coords but now for TEAMPanel
  */
-BOOLEAN InitializeTEAMPanelCoords( ); 
+BOOLEAN InitializeTEAMPanelCoords( );
 
 void SetSMPanelCurrentMerc( UINT8 ubNewID );
 void SetTEAMPanelCurrentMerc( UINT8 ubNewID );

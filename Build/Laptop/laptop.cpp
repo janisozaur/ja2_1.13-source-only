@@ -8,12 +8,12 @@
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "Render Dirty.h"
-	#include "sysutil.h"
-	#include "screens.h"
-	#include "cursors.h"
+	#include "SysUtil.h"
+	#include "Screens.h"
+	#include "Cursors.h"
 	#include "Event Pump.h"
-	#include "laptop.h"
-	#include "aim.h"
+	#include "Laptop.h"
+	#include "Aim.h"
 	#include "AimMembers.h"
 	#include "AimFacialIndex.h"
 	#include "AimSort.h"
@@ -21,7 +21,7 @@
 	#include "AimHistory.h"
 	#include "AimLinks.h"
 	#include "AimPolicies.h"
-	#include "mercs.h"
+	#include "Mercs.h"
 	#include "mercs Files.h"
 	#include "mercs Account.h"
 	#include "mercs No Account.h"
@@ -35,41 +35,41 @@
 	#include "CharProfile.h"
 	#include "florist.h"
 	#include "florist Cards.h"
-	#include "florist Gallery.h"
+	#include "Florist Gallery.h"
 	#include "florist Order Form.h"
 	#include "insurance.h"
-	#include "insurance Contract.h"
+	#include "Insurance Contract.h"
 	#include "insurance Info.h"
-	#include "insurance Comments.h"
+	#include "Insurance Comments.h"
 	#include "funeral.h"
-	#include "sirtech.h"
-	#include "finances.h"
-	#include "personnel.h"
-	#include "history.h"
-	#include "files.h"
-	#include "email.h"
+	#include "SirTech.h"
+	#include "Finances.h"
+	#include "Personnel.h"
+	#include "History.h"
+	#include "Files.h"
+	#include "Email.h"
 	#include "Interface Control.h"
 	#include "Game Event Hook.h"
 	#include "WordWrap.h"
-	#include "Game init.h"
+	#include "Game Init.h"
 	#include "Game Clock.h"
-	#include "vobject_blitters.h"
+	#include "VObject_blitters.h"
 	#include "Soldier Profile.h"
 	#include "Overhead.h"
-	#include "environment.h"
+	#include "Environment.h"
 	#include "LibraryDataBase.h"
-	#include "music control.h"
+	#include "Music Control.h"
 	#include "SaveLoadGame.h"
 	#include "LaptopSave.h"
 	#include "RenderWorld.h"
-	#include "gameloop.h"
-	#include "english.h"
-	#include "random.h"
+	#include "GameLoop.h"
+	#include "English.h"
+	#include "Random.h"
 	#include "Merc Hiring.h"
 	#include "Map Screen Interface.h"
-	#include "ambient control.h"
+	#include "Ambient Control.h"
 	#include "Sound Control.h"
-	#include "text.h"
+	#include "Text.h"
 	#include "Message.h"
 	#include "Map Screen Interface Bottom.h"
 	#include "Cursor Control.h"
@@ -78,8 +78,8 @@
 	#include "BrokenLink.h"
 	#include "BobbyRShipments.h"
 	#include "Dialogue Control.h"
-	#include "helpscreen.h"
-	#include "cheats.h"
+	#include "HelpScreen.h"
+	#include "Cheats.h"
 	#include "Strategic Status.h"
 	#include "Arms Dealer Init.h"
 	#include "GameSettings.h"
@@ -93,7 +93,7 @@
 	#include "MilitiaWebsite.h"				// added by Flugente
 #endif
 
-#include "connect.h"
+#include "Connect.h"
 #include "BriefingRoom_Data.h"
 #include "BriefingRoom.h"
 #include "BriefingRoomM.h"
@@ -735,7 +735,7 @@ UINT32 LaptopScreenInit()
 	//reset the flag that enables the 'just hired merc' popup
 	LaptopSaveInfo.sLastHiredMerc.fHaveDisplayedPopUpInLaptop = FALSE;
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	//JA25 UB
 	//Set the internet as WORKING
 	if ( gGameUBOptions.LaptopQuestEnabled == TRUE )
@@ -778,7 +778,7 @@ UINT32 LaptopScreenInit()
 	GameInitInsurance();
 	GameInitInsuranceContract();
 	}
-//JA25:	
+//JA25:
 #else
 	GameInitInsurance();
 	GameInitInsuranceContract();
@@ -787,7 +787,7 @@ UINT32 LaptopScreenInit()
 	GameInitSirTech();
 	GameInitFiles();
 	GameInitPersonnel();
-	
+
 #ifdef ENCYCLOPEDIA_WORKS
 	//legion
 /*	GameInitEncyclopedia();
@@ -808,7 +808,7 @@ UINT32 LaptopScreenInit()
 	gfAtLeastOneMercWasHired = FALSE;
 
 	//No longer inits the laptop screens, now InitLaptopAndLaptopScreens() does
-#ifdef JA2UB	
+#ifdef JA2UB
 	InitJa25SaveStruct();
 #endif
 	return( 1 );
@@ -865,7 +865,7 @@ UINT32 LaptopScreenShutdown()
 #ifdef JA2UB
 	if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 		InsuranceContractEndGameShutDown();
-//JA25:	
+//JA25:
 #else
 	InsuranceContractEndGameShutDown();
 #endif
@@ -1039,8 +1039,8 @@ INT32 EnterLaptop()
 
 	gfShowBookmarks=FALSE;
 	LoadBookmark( );
-	
-#ifdef JA2UB		
+
+#ifdef JA2UB
 	//JA25 UB
 	SetBookMark(MERC_BOOKMARK);
 #endif
@@ -1265,31 +1265,31 @@ void RenderLaptop()
 		case( LAPTOP_MODE_NONE ):
 			DrawDeskTopBackground( );
 			break;
-		
+
 #ifdef ENCYCLOPEDIA_WORKS
 		case LAPTOP_MODE_ENCYCLOPEDIA: //LEGION
 //			RenderEncyclopedia();
 			RenderEncyclopedia_NEW();
 			break;
-			
+
 		case LAPTOP_MODE_ENCYCLOPEDIA_DATA:
 //			RenderEncyclopediaLocation(FALSE);
 			RenderEncyclopediaData_NEW();
 			break;
 #endif
-			
+
 		case LAPTOP_MODE_BRIEFING_ROOM_PAGE:
 			RenderBriefingRoom();
 			break;
-			
+
 		case LAPTOP_MODE_BRIEFING_ROOM_ENTER:
 			RenderBriefingRoomEnter();
 			 break;
-		
+
 		case LAPTOP_MODE_BRIEFING_ROOM:
 			RenderEncyclopediaLocation(FALSE);
 			break;
-			
+
 		case LAPTOP_MODE_AIM:
 		RenderAIM();
 			break;
@@ -1644,7 +1644,7 @@ void EnterNewLaptopMode()
 		default:
 		if( gLaptopProgramStates[ LAPTOP_PROGRAM_WEB_BROWSER ] == LAPTOP_PROGRAM_MINIMIZED )
 		{
-		
+
 			if ( guiCurrentLaptopMode == LAPTOP_MODE_BRIEFING_ROOM_PAGE || guiCurrentLaptopMode == LAPTOP_MODE_BRIEFING_ROOM || guiCurrentLaptopMode == LAPTOP_MODE_BRIEFING_ROOM_ENTER )
 			{
 				guiCurrentLaptopMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;
@@ -1655,7 +1655,7 @@ void EnterNewLaptopMode()
 				guiCurrentLaptopMode = LAPTOP_MODE_ENCYCLOPEDIA;
 			}
 #endif
-			
+
 			// minized, maximized
 			if(	fMaximizingProgram == FALSE )
 			{
@@ -1748,21 +1748,21 @@ void EnterNewLaptopMode()
 //			EnterEncyclopedia();
 			EnterEncyclopedia_NEW();
 			break;
-			
+
 		case LAPTOP_MODE_ENCYCLOPEDIA_DATA:
 //			EnterEncyclopediaLocation();
 			EnterEncyclopediaData_NEW();
 			break;
 #endif
-			
+
 		case LAPTOP_MODE_BRIEFING_ROOM_PAGE:
 			EnterBriefingRoom();
 			break;
-			
+
 		case LAPTOP_MODE_BRIEFING_ROOM_ENTER:
 			EnterBriefingRoomEnter();
 			break;
-		
+
 		case LAPTOP_MODE_BRIEFING_ROOM:
 			EnterEncyclopediaLocation();
 			break;
@@ -2015,25 +2015,25 @@ void HandleLapTopHandles()
 		case LAPTOP_MODE_ENCYCLOPEDIA:
 //			HandleEncyclopedia();
 			HandleEncyclopedia_NEW();
-			break; 
-			
+			break;
+
 		case LAPTOP_MODE_ENCYCLOPEDIA_DATA:
 //			HandleEncyclopediaLocation();
 			HandleEncyclopediaData_NEW();
-			break; 				
+			break;
 #endif
 
 		case LAPTOP_MODE_BRIEFING_ROOM_PAGE:
 			HandleBriefingRoom();
 			break;
-			
+
 		case LAPTOP_MODE_BRIEFING_ROOM_ENTER:
 			HandleBriefingRoomEnter();
 			break;
-		
+
 		case LAPTOP_MODE_BRIEFING_ROOM:
 			HandleEncyclopediaLocation();
-			break; 				
+			break;
 
 		case LAPTOP_MODE_AIM:
 
@@ -2138,7 +2138,7 @@ void HandleLapTopHandles()
 		if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 			HandleInsuranceContract();
 			break;
-			
+
 		case LAPTOP_MODE_INSURANCE_COMMENTS:
 		//	Assert( 0 );
 		if (gGameUBOptions.LaptopLinkInsurance == TRUE )
@@ -2190,7 +2190,7 @@ void HandleLapTopHandles()
 		case LAPTOP_MODE_BOBBYR_SHIPMENTS:
 			HandleBobbyRShipments();
 			break;
-			
+
 		case LAPTOP_MODE_CAMPAIGNHISTORY_SUMMARY:
 			HandleCampaignHistorySummary();
 			break;
@@ -2298,10 +2298,10 @@ UINT32 LaptopScreenHandle()
 	if( gfStartMapScreenToLaptopTransition )
 	{
 		SetCurrentCursorFromDatabase( VIDEO_NO_CURSOR );
-		
+
 		gfStartMapScreenToLaptopTransition = FALSE;
 
-		//Step 1:	Build the laptop image into the save buffer.		
+		//Step 1:	Build the laptop image into the save buffer.
 		RestoreBackgroundRects();
 		RenderLapTopImage();
 		HighLightRegion(giCurrentRegion);
@@ -2474,7 +2474,7 @@ UINT32 LaptopScreenHandle()
 
 	// get keyboard input, handle it
 	GetLaptopKeyboardInput();
-		
+
 	// check to see if new mail box needs to be displayed
 	DisplayNewMailBox( );
 	CreateDestroyNewMailButton( );
@@ -2605,8 +2605,8 @@ UINT32 ExitLaptopMode(UINT32 uiMode)
 			ExitEncyclopedia_NEW();
 //			ExitEncyclopedia();
 			//InitEncyklopediaBool();
-			break;			
-			
+			break;
+
 		case LAPTOP_MODE_ENCYCLOPEDIA_DATA:
 //			ExitEncyclopediaLocation();
 			ExitEncyclopediaData_NEW();
@@ -2616,16 +2616,16 @@ UINT32 ExitLaptopMode(UINT32 uiMode)
 		case LAPTOP_MODE_BRIEFING_ROOM_PAGE:
 			ExitBriefingRoom();
 			break;
-			
+
 		case LAPTOP_MODE_BRIEFING_ROOM_ENTER:
 			ExitBriefingRoomEnter();
 			break;
-		
+
 		case LAPTOP_MODE_BRIEFING_ROOM:
 			ExitEncyclopediaLocation();
 			//InitEncyklopediaBool();
-			break;	
-			
+			break;
+
 		case LAPTOP_MODE_AIM:
 			ExitAIM();
 			break;
@@ -2711,7 +2711,7 @@ UINT32 ExitLaptopMode(UINT32 uiMode)
 		case LAPTOP_MODE_FLORIST_CARD_GALLERY:
 			ExitFloristCards();
 			break;
-#ifdef JA2UB			
+#ifdef JA2UB
 		case LAPTOP_MODE_INSURANCE:
 		//	Assert( 0 );
 			if (gGameUBOptions.LaptopLinkInsurance == TRUE )
@@ -2728,7 +2728,7 @@ UINT32 ExitLaptopMode(UINT32 uiMode)
 			if (gGameUBOptions.LaptopLinkInsurance == TRUE )
 				ExitInsuranceContract();
 			break;
-			
+
 		case LAPTOP_MODE_INSURANCE_COMMENTS:
 		//	Assert( 0 );
 			if (gGameUBOptions.LaptopLinkInsurance == TRUE )
@@ -3041,7 +3041,7 @@ BOOLEAN LeaveLapTopScreen( void )
 				fExitingLaptopFlag = TRUE;
 				InitNewGame( FALSE );
 				gfDontStartTransitionFromLaptop = TRUE;
-#ifdef JA2UB				
+#ifdef JA2UB
 				//Ja25 UB
 				// ATE: Set flag to look for custom maps
 				gfProcessCustomMaps = TRUE;
@@ -3188,7 +3188,7 @@ BOOLEAN HandleExit( void )
 			return( FALSE );
 		}
 	}
-	
+
 	return ( TRUE );
 }
 
@@ -3226,11 +3226,11 @@ BOOLEAN
 CreateLapTopMouseRegions()
 {
 	// define regions
-	
+
 	// the entire laptop display region
 	MSYS_DefineRegion( &gLapTopScreenRegion, ( UINT16 )( LaptopScreenRect.iLeft ),( UINT16 )( LaptopScreenRect.iTop ),( UINT16 ) ( LaptopScreenRect.iRight ),( UINT16 )( LaptopScreenRect.iBottom ), MSYS_PRIORITY_NORMAL+1,
 							CURSOR_LAPTOP_SCREEN, ScreenRegionMvtCallback, LapTopScreenCallBack );
-	
+
 	//MSYS_AddRegion(&gLapTopScreenRegion);
 
 	return (TRUE);
@@ -3264,7 +3264,7 @@ void FinancialRegionButtonCallback(GUI_BUTTON *btn,INT32 reason)
 				giOldRegion=giCurrentRegion;
 
 			giCurrentRegion=FINANCIAL_REGION;
-			
+
 			if(gfShowBookmarks)
 			{
 				gfShowBookmarks=FALSE;
@@ -3384,8 +3384,8 @@ void WWWRegionButtonCallback(GUI_BUTTON *btn,INT32 reason )
 	{
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
-			btn->uiFlags&=~(BUTTON_CLICKED_ON);	
-			
+			btn->uiFlags&=~(BUTTON_CLICKED_ON);
+
 			if(giCurrentRegion!=WWW_REGION)
 				giOldRegion=giCurrentRegion;
 			if(!fNewWWW)
@@ -3427,21 +3427,21 @@ void WWWRegionButtonCallback(GUI_BUTTON *btn,INT32 reason )
 				}
 			}
 			giCurrentRegion=WWW_REGION;
-			RestoreOldRegion(giOldRegion);	
-			
+			RestoreOldRegion(giOldRegion);
+
 			if ( guiCurrentWWWMode >= LAPTOP_MODE_FINANCES && guiCurrentWWWMode  <= LAPTOP_MODE_BOBBYR_SHIPMENTS )
-			{ 
+			{
 			    IDPageEncyData = PAGENONE;
 				UnLoadMenuButtons ();
 				bBriefingRoom  = FALSE;
-				bBriefingRoomSpecialMission = FALSE;	
+				bBriefingRoomSpecialMission = FALSE;
 			}
-	
+
 			if ( IDPageEncyData == PAGEBRIEFINGROOM )
 				guiCurrentWWWMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;//{ bBriefingRoom = TRUE; InitData (); }
 			else if ( IDPageEncyData == PAGEBRIEFINGROOMSPECIALMISSION )
-				guiCurrentWWWMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;//{ bBriefingRoomSpecialMission = TRUE; InitData (); } 
-			
+				guiCurrentWWWMode = LAPTOP_MODE_BRIEFING_ROOM_ENTER;//{ bBriefingRoomSpecialMission = TRUE; InitData (); }
+
 			if(guiCurrentWWWMode!=LAPTOP_MODE_NONE)
 				guiCurrentLaptopMode = guiCurrentWWWMode;
 			else
@@ -3494,11 +3494,11 @@ void HistoryRegionButtonCallback(GUI_BUTTON *btn,INT32 reason )
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
 			btn->uiFlags&=~(BUTTON_CLICKED_ON);
-			
+
 			// if not in history, update to the fact
 			if(giCurrentRegion!=HISTORY_REGION)
 				giOldRegion=giCurrentRegion;
-			
+
 			if(gfShowBookmarks)
 			{
 				// stop showing WWW bookmarks
@@ -3542,7 +3542,7 @@ void FilesRegionButtonCallback( GUI_BUTTON *btn,INT32 reason )
 		if (btn->uiFlags & BUTTON_CLICKED_ON)
 		{
 			btn->uiFlags&=~(BUTTON_CLICKED_ON);
-			
+
 			// reset old region
 			if(giCurrentRegion!=FILES_REGION)
 				giOldRegion=giCurrentRegion;
@@ -3906,7 +3906,7 @@ BOOLEAN LoadBookmark()
 	VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 	FilenameForBPP("LAPTOP\\Bookmarkbottom.sti", VObjectDesc.ImageFile);
 	CHECKF(AddVideoObject(&VObjectDesc, &guiBOOKBOT));
-	
+
 	return( TRUE );
 }
 
@@ -3955,7 +3955,7 @@ void DisplayBookMarks( void )
 			SetFontForeground( FONT_BLACK );
 			SetFontBackground( FONT_BLACK );
 		}
-		
+
 		FindFontCenterCoordinates(BOOK_X + 3, (UINT16)(BOOK_TOP_Y+2+(iCounter*( BOOK_HEIGHT + 6 ) ) + 6),BOOK_WIDTH - 3,BOOK_HEIGHT+6, pBookMarkStrings[ LaptopSaveInfo.iBookMarkList[iCounter-1] ] , BOOK_FONT, &sX, &sY );
 
 		mprintf(sX, sY,pBookMarkStrings[ LaptopSaveInfo.iBookMarkList[iCounter-1] ] );
@@ -4206,7 +4206,7 @@ void GoToWebPage(INT32 iPageId )
 				fFastLoadFlag =	TRUE;
 			}
 		break;
-		
+
 		//LEGION
 		case ENCYCLOPEDIA_BOOKMARK:
 #ifdef ENCYCLOPEDIA_WORKS
@@ -4228,7 +4228,7 @@ void GoToWebPage(INT32 iPageId )
 			}
 #endif
 		break;
-		
+
 		case BRIEFING_ROOM_BOOKMARK:
 		  guiCurrentWWWMode=LAPTOP_MODE_BRIEFING_ROOM_PAGE;
 		  guiCurrentLaptopMode=LAPTOP_MODE_BRIEFING_ROOM_PAGE;
@@ -4247,7 +4247,7 @@ void GoToWebPage(INT32 iPageId )
 				fFastLoadFlag =  TRUE;
 			}
 		break;
-		
+
 		case BOBBYR_BOOKMARK:
 			guiCurrentWWWMode=LAPTOP_MODE_BOBBY_R;
 		guiCurrentLaptopMode=LAPTOP_MODE_BOBBY_R;
@@ -4401,7 +4401,7 @@ void GoToWebPage(INT32 iPageId )
 			break;
 
 		case MERCCOMPARE_BOOKMARK:
-			{		
+			{
 				guiCurrentWWWMode = LAPTOP_MODE_MERCCOMPARE_MAIN;
 				guiCurrentLaptopMode = LAPTOP_MODE_MERCCOMPARE_MAIN;
 
@@ -4485,7 +4485,7 @@ void GoToWebPage(INT32 iPageId )
 		break;
 	}
 
-#ifdef JA2UB	
+#ifdef JA2UB
 	}
 	//the web is not working
 	else
@@ -4548,7 +4548,7 @@ BOOLEAN DisplayLoadPending( void )
 	INT32 iUnitTime;
 	INT16 sXPosition = 0, sYPosition = 0;
 
-	if (gGameExternalOptions.fFastWWWSitesLoading)	
+	if (gGameExternalOptions.fFastWWWSitesLoading)
 		gfTemporaryDisablingOfLoadPendingFlag = TRUE;
 
 	// if merc webpage, make it longer
@@ -4582,9 +4582,9 @@ BOOLEAN DisplayLoadPending( void )
 		{
 			iUnitTime=UNIT_TIME;
 		}
-		
+
 		iLoadTime = iUnitTime * 30;
-#ifdef JA2UB		
+#ifdef JA2UB
 		//if the site we are going to is the web poage not found page
 		if( guiCurrentLaptopMode == LAPTOP_MODE_BROKEN_LINK )
 		{
@@ -5069,7 +5069,7 @@ void HandleLapTopEnterKey( void )
 		fReDrawScreenFlag = TRUE;
 		RenderLaptop( );
 	}
-	
+
 	return;
 }
 
@@ -5715,7 +5715,7 @@ BOOLEAN ExitLaptopDone( void )
 		fOldLeaveLaptopState = FALSE;
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }
 
@@ -5954,7 +5954,7 @@ void SetCurrentToLastProgramOpened( void )
 			{
 				guiCurrentLaptopMode = LAPTOP_MODE_WWW;
 			}
-			
+
 				guiCurrentLaptopMode = LAPTOP_MODE_WWW;
 			//gfShowBookmarks = TRUE;
 			fShowBookmarkInfo = TRUE;
@@ -6334,7 +6334,7 @@ void HandleKeyBoardShortCutsForLapTop( UINT16 usEvent, UINT32 usParam, UINT16 us
 			MarkButtonsDirty( );
 		}
 	}
-	
+
 	//subtracting lots of money
 	else if( (usEvent == KEY_DOWN ) && ( usParam == '_' ) )
 	{
@@ -6485,7 +6485,7 @@ BOOLEAN RenderWWWProgramTitleBar( void )
 	// blit title
 	GetVideoObject(&hHandle, uiTITLEFORWWW);
 	BltVideoObject( FRAME_BUFFER, hHandle, 0,LAPTOP_SCREEN_UL_X, LAPTOP_SCREEN_UL_Y - 2, VO_BLT_SRCTRANSPARENCY,NULL );
-	
+
 	// now delete
 	DeleteVideoObjectFromIndex( uiTITLEFORWWW );
 
@@ -6511,11 +6511,11 @@ BOOLEAN RenderWWWProgramTitleBar( void )
 			swprintf( sTemp, pWebPagesTitles[ iIndex ], pCountryNames[COUNTRY_NAME] );
 			swprintf( sString, L"%s - %s", pWebTitle[0], sTemp );
 		}
-		else 
+		else
 			swprintf( sString, L"%s - %s", pWebTitle[0], pWebPagesTitles[ iIndex ] );
 		mprintf(iScreenWidthOffset + 140 ,iScreenHeightOffset + 33 ,sString);
 	}
-	
+
 	BlitTitleBarIcons( );
 
 	DisplayProgramBoundingBox( FALSE );
@@ -6642,7 +6642,7 @@ void DisplayProgramBoundingBox( BOOLEAN fMarkButtons )
 		MarkButtonsDirty( );
 		RenderButtons( );
 	}
-	
+
 	PrintDate( );
 
 	PrintBalance( );
@@ -7108,7 +7108,7 @@ BOOLEAN LoadLaptopInfoFromSavedGame( HWFILE hFile )
 		LaptopSaveInfo.usNumberOfBobbyRayOrderItems = 0;
 		LaptopSaveInfo.BobbyRayOrdersOnDeliveryArray = NULL;
 	}
-	
+
 	//If there is any Insurance Payouts in progress
 	if( LaptopSaveInfo.ubNumberLifeInsurancePayoutUsed )
 	{
@@ -7130,7 +7130,7 @@ BOOLEAN LoadLaptopInfoFromSavedGame( HWFILE hFile )
 		LaptopSaveInfo.ubNumberLifeInsurancePayouts = 0;
 		LaptopSaveInfo.pLifeInsurancePayouts = NULL;
 	}
-	
+
 	return( TRUE );
 }
 
@@ -7140,10 +7140,10 @@ void LaptopSaveVariablesInit()
 
 /*BOOLEAN IsItRaining()
 {
-	if ( (SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_RAIN || SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_THUNDERSHOWERS 
+	if ( (SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_RAIN || SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_THUNDERSHOWERS
 		|| SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_SANDSTORM || SectorInfo[SECTOR( gWorldSectorX, gWorldSectorY )].usWeather == WEATHER_FORECAST_SNOW) )
 		return( TRUE );
-	
+
 	return( FALSE );
 }*/
 

@@ -16,7 +16,7 @@
 /// option) any later version.
 
 #ifndef __PACKET_PRIORITY_H
-#define __PACKET_PRIORITY_H 
+#define __PACKET_PRIORITY_H
 
 /// These enumerations are used to describe when packets are delivered.
 enum PacketPriority
@@ -28,7 +28,7 @@ enum PacketPriority
 	HIGH_PRIORITY,
 
 	/// Medium priority messages are send before low priority messages.
-	MEDIUM_PRIORITY,   
+	MEDIUM_PRIORITY,
 
 	/// Low priority messages are only sent when no other messages are waiting.
 	LOW_PRIORITY,

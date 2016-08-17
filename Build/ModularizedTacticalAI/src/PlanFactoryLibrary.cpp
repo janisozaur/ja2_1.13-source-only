@@ -1,4 +1,4 @@
-/** 
+/**
  * @file
  * @author feynman (bears-pit.com)
  */
@@ -26,7 +26,7 @@ namespace AI
         /*@brief Initialize all PlanFactories and map them to the slots defined by the configuration file
           *
           * This is the place where new factories need to be "registred" in order for them to be available using the
-          * settings in AI.ini 
+          * settings in AI.ini
           * The constructor is private due to the singleton pattern
           */
         PlanFactoryLibrary::PlanFactoryLibrary()

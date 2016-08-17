@@ -36,7 +36,7 @@ typedef int SOCKET;
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-#include <unistd.h> 
+#include <unistd.h>
 //#include "RakMemoryOverride.h"
 /// Unix/Linux uses ints for sockets
 typedef int SOCKET;
@@ -50,15 +50,15 @@ class SocketLayer
 {
 
 public:
-	
+
 	/// Default Constructor
 	SocketLayer();
-	
-	/// Destructor	
+
+	/// Destructor
 	~SocketLayer();
-	
+
 	// Get the singleton instance of the Socket Layer.
-	/// \return unique instance 
+	/// \return unique instance
 	static inline SocketLayer* Instance()
 	{
 		return & I;
@@ -70,52 +70,52 @@ public:
 	/// \param[in] port the remote port.
 	/// \return A new socket used for communication.
 	SOCKET Connect( SOCKET writeSocket, unsigned int binaryAddress, unsigned short port );
-	
+
 	/// Creates a bound socket to listen for incoming connections on the specified port
-	/// \param[in] port the port number 
-	/// \param[in] blockingSocket 
-	/// \return A new socket used for accepting clients 
+	/// \param[in] port the port number
+	/// \param[in] blockingSocket
+	/// \return A new socket used for accepting clients
 	SOCKET CreateBoundSocket( unsigned short port, bool blockingSocket, const char *forceHostAddress );
 	SOCKET CreateBoundSocket_PS3Lobby( unsigned short port, bool blockingSocket, const char *forceHostAddress );
 
 	/// Returns if this specified port is in use, for UDP
-	/// \param[in] port the port number 
+	/// \param[in] port the port number
 	/// \return If this port is already in use
 	static bool IsPortInUse(unsigned short port);
 
 	#if !defined(_XBOX) && !defined(X360)
 	const char* DomainNameToIP( const char *domainName );
 	#endif
-	
+
 	/// Start an asynchronous read using the specified socket.  The callback will use the specified SystemAddress (associated with this socket) and call either the client or the server callback (one or
 	/// the other should be 0)
-	/// \note Was used for depreciated IO completion ports.	
+	/// \note Was used for depreciated IO completion ports.
 	bool AssociateSocketWithCompletionPortAndRead( SOCKET readSocket, unsigned int binaryAddress, unsigned short port, RakPeer* rakPeer );
-	
+
 	/// Write \a data of length \a length to \a writeSocket
 	/// \param[in] writeSocket The socket to write to
 	/// \param[in] data The data to write
-	/// \param[in] length The length of \a data	
+	/// \param[in] length The length of \a data
 	void Write( const SOCKET writeSocket, const char* data, const int length );
-	
-	/// Read data from a socket 
-	/// \param[in] s the socket 
+
+	/// Read data from a socket
+	/// \param[in] s the socket
 	/// \param[in] rakPeer The instance of rakPeer containing the recvFrom C callback
 	/// \param[in] errorCode An error code if an error occured .
 	/// \param[in] connectionSocketIndex Which of the sockets in RakPeer we are using
 	/// \return Returns true if you successfully read data, false on error.
 	int RecvFrom( const SOCKET s, RakPeer *rakPeer, int *errorCode, unsigned connectionSocketIndex, bool isPs3LobbySocket );
-	
+
 #if !defined(_XBOX) && !defined(_X360)
 	/// Retrieve all local IP address in a string format.
 	/// \param[in] s The socket whose port we are referring to
 	/// \param[in] ipList An array of ip address in dotted notation.
 	void GetMyIP( char ipList[ MAXIMUM_NUMBER_OF_INTERNAL_IDS ][ 16 ] );
 #endif
-	
+
 	/// Call sendto (UDP obviously)
 	/// \param[in] s the socket
-	/// \param[in] data The byte buffer to send 
+	/// \param[in] data The byte buffer to send
 	/// \param[in] length The length of the \a data in bytes
 	/// \param[in] ip The address of the remote host in dotted notation.
 	/// \param[in] port The port number to send to.
@@ -126,7 +126,7 @@ public:
 	/// It won't reach the recipient, except on a LAN
 	/// However, this is good for opening routers / firewalls
 	/// \param[in] s the socket
-	/// \param[in] data The byte buffer to send 
+	/// \param[in] data The byte buffer to send
 	/// \param[in] length The length of the \a data in bytes
 	/// \param[in] ip The address of the remote host in dotted notation.
 	/// \param[in] port The port number to send to.
@@ -136,7 +136,7 @@ public:
 
 	/// Call sendto (UDP obviously)
 	/// \param[in] s the socket
-	/// \param[in] data The byte buffer to send 
+	/// \param[in] data The byte buffer to send
 	/// \param[in] length The length of the \a data in bytes
 	/// \param[in] binaryAddress The address of the remote host in binary format.
 	/// \param[in] port The port number to send to.

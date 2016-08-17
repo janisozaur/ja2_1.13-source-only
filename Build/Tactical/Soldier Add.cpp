@@ -3,29 +3,29 @@
 #else
 	#include "sgp.h"
 
-	#include "overhead.h"
-	#include "overhead types.h"
-	#include "isometric utils.h"
-	#include "interface panels.h"
-	#include "soldier macros.h"
-	#include "strategicmap.h"
-	#include "strategic.h"
-	#include "animation control.h"
-	#include "soldier create.h"
+	#include "Overhead.h"
+	#include "Overhead Types.h"
+	#include "Isometric Utils.h"
+	#include "Interface Panels.h"
+	#include "Soldier Macros.h"
+	#include "StrategicMap.h"
+	#include "Strategic.h"
+	#include "Animation Control.h"
+	#include "Soldier Create.h"
 	#include "Soldier Init List.h"
-	#include "soldier add.h"
+	#include "Soldier Add.h"
 	#include "Map Information.h"
 	#include "fov.h"
-	#include "pathai.h"
+	#include "PathAI.h"
 	#include "Random.h"
 	#include "Render Fun.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 	#include "Exit Grids.h"
 	#include "Interface.h"			// added by Flugente for zBackground
-	#include "renderworld.h"		// added by Flugente
+	#include "RenderWorld.h"		// added by Flugente
 	#include "Vehicles.h"			// added by Flugente
 	#include "CampaignStats.h"		// added by Flugente
-	#include "worldman.h"			// added by Flugente for Water(...)
+	#include "WorldMan.h"			// added by Flugente for Water(...)
 #endif
 
 #ifdef JA2UB
@@ -35,10 +35,10 @@
 #endif
 
 #include "GameSettings.h"	// ary-05/05/2009 : add forced turn mode
-#include "text.h"			//	: add forced turn mode
-#include "font control.h"	//	: add forced turn mode
-#include "message.h"		//  : add forced turn mode
-#include "connect.h"
+#include "Text.h"			//	: add forced turn mode
+#include "Font Control.h"	//	: add forced turn mode
+#include "Message.h"		//  : add forced turn mode
+#include "Connect.h"
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
@@ -1058,9 +1058,9 @@ INT32 FindRandomGridNoFromSweetSpotExcludingSweetSpot( SOLDIERTYPE *pSoldier, IN
 	{
 		sX = (UINT16)Random( 2 * ubRadius ) - ubRadius;
 		sY = (UINT16)Random( 2 * ubRadius ) - ubRadius;
-		
+
 		sGridNo = sSweetGridNo + (WORLD_COLS * sY ) + sX;
-		
+
 		if ( sGridNo == sSweetGridNo || TileIsOutOfBounds( sGridNo ) || PythSpacesAway( sGridNo, sSweetGridNo ) >= ubRadius || !IsLocationSittable( sGridNo, 0 ) )
 			sGridNo = NOWHERE;
 		else
@@ -1114,7 +1114,7 @@ INT32 FindRandomGridNoBetweenCircles( INT32 sCenterGridNo, UINT8 uInnerRadius, U
 
 		sX = (UINT16)Random( 2 * uOuterRadius ) - uOuterRadius;
 		sY = (UINT16)Random( 2 * uOuterRadius ) - uOuterRadius;
-		
+
 		sGridNo = sCenterGridNo + (WORLD_COLS * sY) + sX;
 
 		if ( TileIsOutOfBounds( sGridNo ) || Water( sGridNo, 0 ) || !IsLocationSittable( sGridNo, 0 ) || PythSpacesAway( sGridNo, sCenterGridNo ) <= uInnerRadius || PythSpacesAway( sGridNo, sCenterGridNo ) > uOuterRadius )
@@ -1204,18 +1204,18 @@ BOOLEAN InternalAddSoldierToSector( UINT8 ubID, BOOLEAN fCalculateDirection, BOO
 				ubDirection = pSoldier->ubInsertionDirection;
 		}
 		else
-		{			
+		{
 			if(TileIsOutOfBounds(pSoldier->sInsertionGridNo))
 			{ //Add the soldier to the respective entrypoint.	This is an error condition.
 				// So treat it like an error already then
-				
+
 				// WANNE: ASSERTION: Removed the assertion until we find the bug!
 				//Assert(0);
 			}
 			if( pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE )
 			{
 				sGridNo = FindGridNoFromSweetSpotWithStructDataUsingGivenDirectionFirst( pSoldier, STANDING, pSoldier->sInsertionGridNo, 12, &ubCalculatedDirection, FALSE, pSoldier->ubInsertionDirection );
-				// ATE: Override insertion direction				
+				// ATE: Override insertion direction
 				if (TileIsOutOfBounds(sGridNo))
 				{
 					// Well, we gotta place this soldier/vehicle somewhere.	Just use the first position for now
@@ -1228,15 +1228,15 @@ BOOLEAN InternalAddSoldierToSector( UINT8 ubID, BOOLEAN fCalculateDirection, BOO
 			}
 			else
 			{
-				if(is_client && (pSoldier->ubStrategicInsertionCode == INSERTION_CODE_GRIDNO)) 
+				if(is_client && (pSoldier->ubStrategicInsertionCode == INSERTION_CODE_GRIDNO))
 				{
 					sGridNo = pSoldier->sInsertionGridNo;
 					ubCalculatedDirection = pSoldier->ubDirection;
 				}
-				else 
+				else
 					sGridNo = FindGridNoFromSweetSpot( pSoldier, pSoldier->sInsertionGridNo, 7, &ubCalculatedDirection );
 				//hayden
-				// ATE: Error condition - if nowhere use insertion gridno!				
+				// ATE: Error condition - if nowhere use insertion gridno!
 				if (TileIsOutOfBounds(sGridNo))
 				{
 					sGridNo = pSoldier->sInsertionGridNo;
@@ -1280,7 +1280,7 @@ BOOLEAN InternalAddSoldierToSector( UINT8 ubID, BOOLEAN fCalculateDirection, BOO
 
 			// add this flag whenever we enter strategically enter a sector (= we attack a sector)
 			pSoldier->usSoldierFlagMask |= SOLDIER_ASSAULT_BONUS;
-			
+
 			// Override calculated direction if we were told to....
 			if ( pSoldier->ubInsertionDirection >= 100 )
 			{
@@ -1299,7 +1299,7 @@ BOOLEAN InternalAddSoldierToSector( UINT8 ubID, BOOLEAN fCalculateDirection, BOO
 
 					// OK, we know there must be an exit gridno SOMEWHERE close...
 					sExitGridNo = FindClosestExitGrid( pSoldier, sGridNo, 10 );
-					
+
 					if (!TileIsOutOfBounds(sExitGridNo))
 					{
 						// We found one
@@ -1584,10 +1584,10 @@ void AddSoldierToSectorGridNo( SOLDIERTYPE *pSoldier, INT32 sGridNo, UINT8 ubDir
 			gfIgnoreScrolling = FALSE;
 			INT16 sNewCenterWorldX, sNewCenterWorldY;
 			ConvertGridNoToCenterCellXY( sGridNo, &sNewCenterWorldX, &sNewCenterWorldY );
-		
+
 			SetRenderCenter( sNewCenterWorldX, sNewCenterWorldY );
 			gfIgnoreScrolling = TRUE;
-			
+
 			pSoldier->RemoveSoldierFromGridNo( );
 			pSoldier->bInSector = FALSE;
 
@@ -1688,7 +1688,7 @@ void AddSoldierToSectorGridNo( SOLDIERTYPE *pSoldier, INT32 sGridNo, UINT8 ubDir
 				// default to standing on arrival
 				if ( pSoldier->usAnimState != HELIDROP )
 				{
-#ifdef JA2UB				
+#ifdef JA2UB
 					// DAVE!!!!
 					if ( gfFirstTimeInGameHeliCrash && gGameUBOptions.InGameHeli == FALSE )
 					{
@@ -1700,7 +1700,7 @@ void AddSoldierToSectorGridNo( SOLDIERTYPE *pSoldier, INT32 sGridNo, UINT8 ubDir
 
 						pSoldier->bCollapsed = TRUE;
 
-					}					
+					}
 					else if ( fUseAnimation )
 					{
 						pSoldier->EVENT_InitNewSoldierAnim( usAnimState, usAnimCode, TRUE );

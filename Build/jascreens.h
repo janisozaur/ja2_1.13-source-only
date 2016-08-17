@@ -154,7 +154,7 @@ extern CHAR8					gubFilename[ 200 ];
 extern UINT32				guiCurrentScreen;
 extern UINT32				guiPendingScreen;
 
-typedef void (*RENDER_HOOK)( void );	
+typedef void (*RENDER_HOOK)( void );
 
 void SetRenderHook( RENDER_HOOK pRenderOverride );
 void SetCurrentScreen( UINT32 uiNewScreen );

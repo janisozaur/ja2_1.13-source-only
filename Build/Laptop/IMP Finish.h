@@ -7,7 +7,7 @@ void RenderIMPFinish( void );
 void ExitIMPFinish( void );
 void HandleIMPFinish( void );
 
-extern BOOLEAN fFinishedCharGeneration; 
+extern BOOLEAN fFinishedCharGeneration;
 
 
 #endif

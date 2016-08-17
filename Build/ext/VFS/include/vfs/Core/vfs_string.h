@@ -1,10 +1,10 @@
-/* 
+/*
  * bfVFS : vfs/Core/vfs_string.h
  *  - string class that allows conversions to/from Unicode representation (uses wchar_t internally)
  *  - comparison, concatenation, stream output class/functions
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -40,7 +40,7 @@ namespace vfs
 		typedef std::wstring		str_t;
 		typedef str_t::value_type	char_t;
 		typedef str_t::value_type*	ptr_t;
-		
+
 		typedef str_t::size_type	size_t;
 		////////////////////////////////////////////////////////////////////
 		static bool less(const vfs::String::char_t* s1, const vfs::String::char_t* s2);
@@ -49,7 +49,7 @@ namespace vfs
 		static bool lessCase(const vfs::String::char_t*  s1, const vfs::String::char_t* s2);
 		static bool equalCase(const vfs::String::char_t* s1, const vfs::String::char_t* s2);
 
-		template<bool (*funName)(const vfs::String::char_t* s1, const vfs::String::char_t* s2)> 
+		template<bool (*funName)(const vfs::String::char_t* s1, const vfs::String::char_t* s2)>
 		class Op{
 		public:
 			bool operator()(const vfs::String& s1, const vfs::String& s2) const
@@ -78,11 +78,11 @@ namespace vfs
 		static std::string			as_utf8(std::wstring const& str);
 		// if 'strlen' is 0, length is determined automatically
 		static std::string			as_utf8(const wchar_t* str, vfs::String::size_t strlength=0);
-		// 
+		//
 		static std::string			narrow(wchar_t const* str, vfs::String::size_t length);
 		static vfs::String::size_t	narrow(wchar_t const* src_str, vfs::String::size_t src_len, char* dst_str, vfs::String::size_t dst_len);
 		static vfs::String::size_t	narrow(std::wstring const& src, std::string& dst);
-		// 
+		//
 		static std::wstring			widen(char const* str, vfs::String::size_t length);
 		static vfs::String::size_t	widen(char const* src_str, vfs::String::size_t src_len, wchar_t* dst_str, vfs::String::size_t dst_len);
 		static vfs::String::size_t	widen(std::string const& src, std::wstring& dst);

@@ -5,14 +5,14 @@
 
 #include "DropDown.h"
 #include "Font.h"
-#include "laptop.h"
+#include "Laptop.h"
 #include "Cursors.h"
 #include "Utilities.h"
-#include "vobject.h"
+#include "VObject.h"
 #include "WCheck.h"
-#include "line.h"
+#include "Line.h"
 #include "WordWrap.h"
-#include "input.h"		// for gfLeftButtonState
+#include "Input.h"		// for gfLeftButtonState
 
 // define now, make a parameter later
 #define		DEF_DROPDOWN_FONT							FONT12ARIAL

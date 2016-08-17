@@ -21,7 +21,7 @@ bool ja2xp::convertSLFto7z(vfs::tReadableFile* pInFile, vfs::tWritableFile *pOut
 		std::wcout << L"Could not init SLF Library \"" << pInFile->getPath().c_wcs() << L"\"" << std::endl;
 		return false;
 	}
-	
+
 	vfs::CCreateUncompressed7zLibrary create7zLib;
 
 	vfs::CSLFLibrary::Iterator it = src_lib.begin();
@@ -105,7 +105,7 @@ bool ja2xp::convertSLFto7z(vfs::Path const& sSrc, vfs::Path const& sDst, bool bC
 		{
 			out_name = sDst;
 		}
-		 
+
 		std::wcout << L"Converting file \"" << it.value()->getPath().c_wcs() << L"\"" << std::endl;
 
 		vfs::COpenWriteFile wfile(out_name,true,true);

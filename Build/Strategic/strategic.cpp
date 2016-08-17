@@ -10,15 +10,15 @@
 	#include "Overhead.h"
 	#include "Soldier Profile.h"
 	#include "Dialogue Control.h"
-	#include "personnel.h"
+	#include "Personnel.h"
 	#include "Tactical Save.h"
 	#include "Isometric Utils.h"
 	#include "Vehicles.h"
 	#include "Game Clock.h"
 	#include "CampaignStats.h"		// added by Flugente
-	#include "militiasquads.h"		// added by Flugente
+	#include "MilitiaSquads.h"		// added by Flugente
 	#include "Game Event Hook.h"	// added by Flugente
-	#include "message.h"			// added by Flugente
+	#include "Message.h"			// added by Flugente
 	#include "Text.h"				// added by Flugente
 	#include "Queen Command.h"		// added by Flugente
 #endif
@@ -26,7 +26,7 @@
 #ifdef JA2UB
 #else
 	// anv: for playable Speck
-	#include "mercs.h"
+	#include "Mercs.h"
 #endif
 
 StrategicMapElement StrategicMap[MAP_WORLD_X*MAP_WORLD_Y];
@@ -96,7 +96,7 @@ BOOLEAN HandleStrategicDeath( SOLDIERTYPE *pSoldier )
 
 		StopTimeCompression();
 	}
-	
+
 	return( TRUE );
 }
 
@@ -172,7 +172,7 @@ BOOLEAN SetMilitiaMovementOrder(INT16 sX, INT16 sY, INT8 sZ, UINT32 dir)
 	// militia can only move on the surface
 	if ( sZ )
 		return FALSE;
-	
+
 	// militia needs to be here...
 	if ( !NumNonPlayerTeamMembersInSector( sX, sY, MILITIA_TEAM ) )
 		return FALSE;
@@ -243,14 +243,14 @@ BOOLEAN SetMilitiaMovementOrder(INT16 sX, INT16 sY, INT8 sZ, UINT32 dir)
 	if( ubTraverseMod )
 	{
 		UINT32 timeneeded = FOOT_TRAVEL_TIME * 100 / ubTraverseMod;
-		
+
 		SECTORINFO *pSectorInfo = &( SectorInfo[ SECTOR( sX, sY ) ] );
 
 		StrategicMap[ sX + ( sY * MAP_WORLD_X ) ].usFlags &= ~MILITIA_MOVE_ALLDIRS;
 		StrategicMap[ sX + ( sY * MAP_WORLD_X ) ].usFlags |= dir;
 
 		AddStrategicEvent( EVENT_MILITIA_MOVEMENT_ORDER, GetWorldTotalMin() + timeneeded, SECTOR( sX, sY ) );
-			
+
 		fMapPanelDirty = TRUE;
 
 		return TRUE;

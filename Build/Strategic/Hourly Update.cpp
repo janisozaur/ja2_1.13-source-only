@@ -11,11 +11,11 @@
 	#include "Game Clock.h"
 	#include "Overhead.h"
 	#include "jascreens.h"
-	#include "screenids.h"
+	#include "ScreenIds.h"
 	#include "Items.h"
 	#include "Random.h"
-	#include "finances.h"
-	#include "history.h"
+	#include "Finances.h"
+	#include "History.h"
 	#include "Dialogue Control.h"
 	#include "Strategic AI.h"
 	#include "Tactical Save.h"		// added by Flugente
@@ -29,7 +29,7 @@
 #include "LuaInitNPCs.h"
 #include "SaveLoadGame.h"
 #include "GameSettings.h"
-#include "connect.h"
+#include "Connect.h"
 #include "Options Screen.h"
 #include "SaveLoadScreen.h"
 #include "Text.h"
@@ -38,9 +38,9 @@
 #include "Food.h"	// added by Flugente
 // anv: for hourly heli repair
 #include "Vehicles.h"
-#include "Map Screen Helicopter.h" 
+#include "Map Screen Helicopter.h"
 // anv: transition to save screen in extreme iron man mode
-#include "gameloop.h" 
+#include "GameLoop.h"
 
 void HourlyQuestUpdate();
 void HourlyLarryUpdate();
@@ -74,7 +74,7 @@ void HandleMinuteUpdate()
 
 void HandleHourlyUpdate()
 {
-CHAR16	zString[128]; 
+CHAR16	zString[128];
 	//if the game hasnt even started yet ( we havent arrived in the sector ) dont process this
 	if ( DidGameJustStart() )
 		return;
@@ -142,7 +142,7 @@ CHAR16	zString[128];
 
 	HourlyHelicopterRepair();
 #endif
-	
+
 	HourlyDrugUpdate();
 
 	// WANNE: This check should avoid the resaving of a loaded auto-save game, when entering tactical
@@ -157,7 +157,7 @@ CHAR16	zString[128];
 		if ( AutoSaveToSlot[1] == FALSE && AutoSaveToSlot[2] == FALSE && AutoSaveToSlot[3] == FALSE && AutoSaveToSlot[4] == FALSE )
 			AutoSaveToSlot[0] = TRUE;
 
-		if ((gGameExternalOptions.autoSaveTime != 0) && (GetWorldHour() % gGameExternalOptions.autoSaveTime == 0)) 
+		if ((gGameExternalOptions.autoSaveTime != 0) && (GetWorldHour() % gGameExternalOptions.autoSaveTime == 0))
 		{
 				if ( AutoSaveToSlot[0] == TRUE )
 				{
@@ -187,7 +187,7 @@ CHAR16	zString[128];
 						AutoSaveToSlot[2] = TRUE;
 						AutoSaveToSlot[3] = FALSE;
 						AutoSaveToSlot[4] = FALSE;
-					}			
+					}
 				}
 				else if ( AutoSaveToSlot[2] == TRUE )
 				{
@@ -217,7 +217,7 @@ CHAR16	zString[128];
 						AutoSaveToSlot[2] = FALSE;
 						AutoSaveToSlot[3] = FALSE;
 						AutoSaveToSlot[4] = TRUE;
-					}					
+					}
 				}
 				else if ( AutoSaveToSlot[4] == TRUE )
 				{
@@ -232,7 +232,7 @@ CHAR16	zString[128];
 						AutoSaveToSlot[2] = FALSE;
 						AutoSaveToSlot[3] = FALSE;
 						AutoSaveToSlot[4] = FALSE;
-					}			
+					}
 				}
 		}
 	}
@@ -242,7 +242,7 @@ CHAR16	zString[128];
 	{
 		// pause game
 		if( gGameExternalOptions.ubExtremeIronManSavingTimeNotification == 1 )
-		{		
+		{
 			// not really player's doing but oh well
 			HandlePlayerPauseUnPauseOfGame();
 		}
@@ -269,7 +269,7 @@ void HandleQuarterHourUpdate()
 void HourlyQuestUpdate()
 {
 	UINT32 uiHour = GetWorldHour();
-		
+
 #ifdef LUA_HOURLY_QUEST_UPDATE
 	LetLuaHourlyQuestUpdate(0);
 #else
@@ -406,7 +406,7 @@ void HourlyLarryUpdate()
 					// anv: snitches stop mercs from getting wasted
 					BOOLEAN fSnitchStoppedBehaviour = FALSE;
 					for( INT32 cnt2 = gTacticalStatus.Team[ OUR_TEAM ].bFirstID; cnt2 <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; ++cnt2 )
-					{					
+					{
 						pOtherSoldier = MercPtrs[ cnt2 ];
 						// note - snitches stop others, but can get wasted themselves (if they have drug use specifically set in background...)
 						if( pOtherSoldier && !pOtherSoldier->flags.fBetweenSectors && pOtherSoldier->bActive && !pOtherSoldier->flags.fMercAsleep && pSoldier->ubProfile != pOtherSoldier->ubProfile )
@@ -442,7 +442,7 @@ void HourlyLarryUpdate()
 							}
 						}
 					}
-					
+
 					if ( fSnitchStoppedBehaviour )
 						continue;
 
@@ -574,7 +574,7 @@ void HourlyStealUpdate()
 		pSoldier = MercPtrs[ cnt ];
 
 		// merc must be alive, not travelling and awake. If he is in the currently loaded sector, we may not be in tactical (we would see an item suddenly disappearing) and not in combat
-		if ( pSoldier && !pSoldier->flags.fBetweenSectors && pSoldier->bActive && !pSoldier->flags.fMercAsleep && 
+		if ( pSoldier && !pSoldier->flags.fBetweenSectors && pSoldier->bActive && !pSoldier->flags.fMercAsleep &&
 			!( ( ( gWorldSectorX == pSoldier->sSectorX ) && ( gWorldSectorY == pSoldier->sSectorY ) && (gbWorldSectorZ == pSoldier->bSectorZ ) ) && (gTacticalStatus.fEnemyInSector || guiCurrentScreen == GAME_SCREEN ))  )
 		{
 			if ( pSoldier->HasBackgroundFlag( BACKGROUND_SCROUNGING ) )
@@ -585,7 +585,7 @@ void HourlyStealUpdate()
 					// anv: snitches prevent scrounging in the same sector
 					BOOLEAN fSnitchStoppedBehaviour = FALSE;
 					for( INT32 cnt2 = gTacticalStatus.Team[ OUR_TEAM ].bFirstID; cnt2 <= gTacticalStatus.Team[ OUR_TEAM ].bLastID; ++cnt2 )
-					{					
+					{
 						pOtherSoldier = MercPtrs[ cnt2 ];
 						// note - snitches stop others, but can scrounge themselves (if they have scrounging specifically set in background...)
 						if( pOtherSoldier && !pOtherSoldier->flags.fBetweenSectors && pOtherSoldier->bActive && !pOtherSoldier->flags.fMercAsleep && pSoldier->ubProfile != pOtherSoldier->ubProfile )
@@ -716,7 +716,7 @@ void HourlyStealUpdate()
 						//Save the Items to the the file
 						SaveWorldItemsToTempItemFile( pSoldier->sSectorX, pSoldier->sSectorY, pSoldier->bSectorZ, uiTotalNumberOfRealItems, pWorldItem );
 					}
-				}				
+				}
 			}
 		}
 	}
@@ -724,7 +724,7 @@ void HourlyStealUpdate()
 
 #ifdef JA2UB
 // no JA25 UB
-#else 
+#else
 void HourlyCheckIfSlayAloneSoHeCanLeave()
 {
 	SOLDIERTYPE *pSoldier;
@@ -754,7 +754,7 @@ void HourlyCheckIfSlayAloneSoHeCanLeave()
 
 #ifdef JA2UB
 // no JA25 UB
-#else 
+#else
 void HourlyHelicopterRepair()
 {
 	if( gubHelicopterHoursToRepair == 0 )

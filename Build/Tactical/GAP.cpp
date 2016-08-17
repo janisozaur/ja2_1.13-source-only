@@ -1,13 +1,13 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Tactical All.h"
 #else
-	#include "builddefines.h"
-	#include "debug.h"
-	#include "types.h"
+	#include "BuildDefines.h"
+	#include "Debug.h"
+	#include "Types.h"
 	//#include "mssw.h"
-	#include "gap.h"
+	#include "Gap.h"
 	#include "Sound Control.h"
-	#include "soundman.h"
+	#include "SoundMan.h"
 	#include <stdio.h>
 	#include "FileMan.h"
 #endif

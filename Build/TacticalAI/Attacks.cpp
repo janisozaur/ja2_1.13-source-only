@@ -1,27 +1,27 @@
 #ifdef PRECOMPILEDHEADERS
 #include "AI All.h"
 #else
-#include "ai.h"
+#include "AI.h"
 #include "Weapons.h"
-#include "opplist.h"
+#include "Opplist.h"
 #include "AIInternals.h"
 #include "LOS.h"
 #include "Physics.h"
 #include "Items.h"
 #include "Weapons.h"
-#include "Spread Burst.h"
-#include "overhead.h"
+#include "Spread burst.h"
+#include "Overhead.h"
 #include "SkillCheck.h"
 #include "Soldier Profile.h"
 #include "Isometric Utils.h"
-#include "Soldier macros.h"
-#include "PATHAI.H"
+#include "Soldier Macros.h"
+#include "PathAI.h"
 #include "GameSettings.h"
-#include "strategicmap.h"
-#include "environment.h"
-#include "lighting.h"
+#include "StrategicMap.h"
+#include "Environment.h"
+#include "Lighting.h"
 #include "Sound Control.h"
-#include "message.h"
+#include "Message.h"
 #include "Vehicles.h"
 #include "Soldier Functions.h"//dnl ch69 140913
 #include "Reinforcement.h"		// added by Flugente
@@ -237,9 +237,9 @@ void CalcBestShot(SOLDIERTYPE *pSoldier, ATTACKTYPE *pBestShot, BOOLEAN shootUns
 		if ( gGameExternalOptions.ubAllowAlternativeWeaponHolding )
 		{
 			if (!WeaponReady( pSoldier )) // but only if we are not already in raised weapon stance
-				pSoldier->bScopeMode = USE_ALT_WEAPON_HOLD; 
-			else 
-				pSoldier->bScopeMode = USE_BEST_SCOPE; 
+				pSoldier->bScopeMode = USE_ALT_WEAPON_HOLD;
+			else
+				pSoldier->bScopeMode = USE_BEST_SCOPE;
 		}
 		ubMinAPcost = MinAPsToAttack(pSoldier,pOpponent->sGridNo,ADDTURNCOST,0);
 		// What the.... The APs to attack on the HandleItem side does not make a test like this.	It always uses the MinAPs as a base.
@@ -314,31 +314,31 @@ void CalcBestShot(SOLDIERTYPE *pSoldier, ATTACKTYPE *pBestShot, BOOLEAN shootUns
 		iBestHitRate = 0;					 // reset best hit rate to minimum
 #ifndef dnlCALCBESTSHOT//dnl ch69 130913 although there is nothing wrong with code unfortunately below and later in DecideAction is not use properly with missing conditions so AI get invalid action handling due to improper APs calculation, also try to optimize a bit to get less AICalcChanceToHitGun calls and to use with different stance decisions
 		// SANDRO: decide here, whether to use the alternative holding or normal holding
-		bScopeMode = USE_BEST_SCOPE; 
+		bScopeMode = USE_BEST_SCOPE;
 		if ( gGameExternalOptions.ubAllowAlternativeWeaponHolding )
 		{
-			pSoldier->bScopeMode = USE_ALT_WEAPON_HOLD; 
+			pSoldier->bScopeMode = USE_ALT_WEAPON_HOLD;
 			ubChanceToHit = (INT16) AICalcChanceToHitGun(pSoldier, pOpponent->sGridNo, 0, AIM_SHOT_TORSO, pOpponent->pathing.bLevel, STANDING);//dnl ch59 130813 get CtH from alternative hold, without aiming
-			pSoldier->bScopeMode = USE_BEST_SCOPE; 
+			pSoldier->bScopeMode = USE_BEST_SCOPE;
 			// CASE #1 - Enemy very close, or we have very good chance to hit from hip with no aiming
 			if (( PythSpacesAway( pSoldier->sGridNo, pOpponent->sGridNo ) < 5 || ubChanceToHit > 80 ) && !WeaponReady(pSoldier) )
-				bScopeMode = USE_ALT_WEAPON_HOLD; 
+				bScopeMode = USE_ALT_WEAPON_HOLD;
 			// CASE #2 - HeavyGun tag, or heavy LMG in hand
 			if (Weapon[pSoldier->usAttackingWeapon].HeavyGun || (Weapon[pSoldier->usAttackingWeapon].ubWeaponType == GUN_LMG && GetBPCostPer10APsForGunHolding( pSoldier, TRUE ) > 50))
-				bScopeMode = USE_ALT_WEAPON_HOLD; 
+				bScopeMode = USE_ALT_WEAPON_HOLD;
 			// reset the mode back
 			// CASE #3 - We don't have enough APs for shot from regular stance, and there is at least some reasonable chance we hit target from alternative mode
-			if ( (MinAPsToAttack(pSoldier,pOpponent->sGridNo,ADDTURNCOST,0) > pSoldier->bActionPoints) && (ubChanceToHit > 30) ) 
-				bScopeMode = USE_ALT_WEAPON_HOLD; 
+			if ( (MinAPsToAttack(pSoldier,pOpponent->sGridNo,ADDTURNCOST,0) > pSoldier->bActionPoints) && (ubChanceToHit > 30) )
+				bScopeMode = USE_ALT_WEAPON_HOLD;
 			// CASE #4 - CtH with alternative hold is simply better than with normal hold (probably due to scope giving penalty on short range)
 			else if ( !WeaponReady(pSoldier) ) // ... and we are not in ready weapon stance yet
 			{
-				pSoldier->bScopeMode = USE_ALT_WEAPON_HOLD; 
+				pSoldier->bScopeMode = USE_ALT_WEAPON_HOLD;
 				ubChanceToHit = (INT16) AICalcChanceToHitGun(pSoldier, pOpponent->sGridNo, AllowedAimingLevels( pSoldier, pOpponent->sGridNo ), AIM_SHOT_TORSO, pOpponent->pathing.bLevel, STANDING);//dnl ch59 130813
-				pSoldier->bScopeMode = USE_BEST_SCOPE; 
+				pSoldier->bScopeMode = USE_BEST_SCOPE;
 				ubChanceToHit2 = (INT16) AICalcChanceToHitGun(pSoldier, pOpponent->sGridNo, AllowedAimingLevels( pSoldier, pOpponent->sGridNo ), AIM_SHOT_TORSO, pOpponent->pathing.bLevel, STANDING);//dnl ch59 130813
 				if ( ubChanceToHit > ubChanceToHit2 && ubChanceToHit > 30 && (ubChanceToHit-ubChanceToHit2) >= 15 )
-					bScopeMode = USE_ALT_WEAPON_HOLD; 
+					bScopeMode = USE_ALT_WEAPON_HOLD;
 			}
 		}
 		if ( gGameExternalOptions.fScopeModes )
@@ -1113,7 +1113,7 @@ void CalcBestThrow(SOLDIERTYPE *pSoldier, ATTACKTYPE *pBestThrow)
 		case 1:
 			// they won't use them until they have 2+ opponents as long as half life left
 			// anv: tanks don't care
-			if ( ( ubOpponentCnt < 2 ) && ( pSoldier->stats.bLife > pSoldier->stats.bLifeMax / 2  ) && 
+			if ( ( ubOpponentCnt < 2 ) && ( pSoldier->stats.bLife > pSoldier->stats.bLifeMax / 2  ) &&
 				 (!gGameExternalOptions.fEnemyTanksDontSpareShells || !ARMED_VEHICLE( pSoldier )) && !gGameExternalOptions.fEnemiesDontSpareLaunchables )
 			{
 				return;
@@ -2246,7 +2246,7 @@ INT32 EstimateStabDamage( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pOpponent,
 				// Add melee damage multiplier to bare HtH attacks as well - SANDRO
 				// actually I make the influence a little lesser, because to the blades and so,
 				// only the item impact is multiplied, not the level and strength bonus, but here it does
-				iImpact += iImpact * gGameExternalOptions.iMeleeDamageModifier / 120; 
+				iImpact += iImpact * gGameExternalOptions.iMeleeDamageModifier / 120;
 			}
 		}
 		else
@@ -2333,12 +2333,12 @@ INT32 EstimateStabDamage( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pOpponent,
 		//iImpact = iImpact / PUNCH_REAL_DAMAGE_PORTION;
 	}
 	// SANDRO - damage bonus to melee trait
-	else 
+	else
 	{
 		if ( HAS_SKILL_TRAIT( pSoldier, MELEE_NT ) && (gGameOptions.fNewTraitSystem) )
 		{
 			iImpact += (iImpact * (100 + gSkillTraitValues.ubMEDamageBonusBlades ) / 100); // +30% damage
-			
+
 			//if (pSoldier->aiData.bAimTime > 0)
 			//{
 			//	iImpact += (iImpact * ( 100 + gSkillTraitValues.usMEAimedMeleeAttackDamageBonus ) / 100);  // 50% incresed damage if focused melee attack
@@ -3088,7 +3088,7 @@ BOOLEAN AIDetermineStealingWeaponAttempt( SOLDIERTYPE * pSoldier, SOLDIERTYPE * 
 		return( FALSE );
 	}
 
-	if( (pOpponent->inv[HANDPOS].exists() != true) )	
+	if( (pOpponent->inv[HANDPOS].exists() != true) )
 	{
 		return( FALSE );
 	}
@@ -3103,25 +3103,25 @@ BOOLEAN AIDetermineStealingWeaponAttempt( SOLDIERTYPE * pSoldier, SOLDIERTYPE * 
 	{
 		sChance = 90;
 	}
-	else if ( uiSuccessChance >= 85 ) 
+	else if ( uiSuccessChance >= 85 )
 	{
 		sChance = 75;
 	}
-	else if ( uiSuccessChance >= 70 ) 
+	else if ( uiSuccessChance >= 70 )
 	{
 		sChance = 60;
 	}
-	else if ( uiSuccessChance >= 50 ) 
+	else if ( uiSuccessChance >= 50 )
 	{
 		sChance = 40;
 	}
-	else if ( uiSuccessChance >= 25 ) 
+	else if ( uiSuccessChance >= 25 )
 	{
 		sChance = 15;
 	}
-	else 
+	else
 	{
-		return( FALSE );	
+		return( FALSE );
 	}
 
 	if( gGameOptions.fNewTraitSystem )
@@ -3135,7 +3135,7 @@ BOOLEAN AIDetermineStealingWeaponAttempt( SOLDIERTYPE * pSoldier, SOLDIERTYPE * 
 			sChance += 50;
 		}
 	}
-	else 
+	else
 	{
 		if( !HAS_SKILL_TRAIT( pSoldier, MARTIALARTS_OT ) && !HAS_SKILL_TRAIT( pSoldier, HANDTOHAND_OT ) )
 		{
@@ -3173,7 +3173,7 @@ BOOLEAN AIDetermineStealingWeaponAttempt( SOLDIERTYPE * pSoldier, SOLDIERTYPE * 
 	{
 		sChance += 20;
 	}
-	else 
+	else
 	{
 		sChance -= 10;
 	}
@@ -3184,12 +3184,12 @@ BOOLEAN AIDetermineStealingWeaponAttempt( SOLDIERTYPE * pSoldier, SOLDIERTYPE * 
 	}
 	else
 	{
-		return( FALSE );	
+		return( FALSE );
 	}
 }
 
 // HEADROCK HAM 4: This is required for the AI to be able to assess the length of autofire volleys using the new
-// recoil system. 
+// recoil system.
 FLOAT AICalcRecoilForShot( SOLDIERTYPE *pSoldier, OBJECTTYPE *pWeapon, UINT8 ubShotNum)
 {
 	FLOAT bRecoilX = 0;
@@ -3274,7 +3274,7 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 	INT32 highestX = 0;
 	INT32 lowestY  = 999999;
 	INT32 highestY = 0;
-	
+
 	// make lists of enemies and friends
 	for (ubLoop = 0; ubLoop < guiNumMercSlots; ++ubLoop)
 	{
@@ -3311,7 +3311,7 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 			// check wether this guy fulfills the target condition
 			if ( !cond(pFriend) )
 				continue;
-			
+
 			bPersOL = pSoldier->aiData.bOppList[pFriend->ubID];
 			bPublOL = gbPublicOpplist[pSoldier->bTeam][pFriend->ubID];
 
@@ -3327,7 +3327,7 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 				{
 					sOpponentTile[ubOpponentCnt] = gsLastKnownOppLoc[ pSoldier->ubID ][ pFriend->ubID ];
 				}
-			}			
+			}
 			else
 			{
 				continue;
@@ -3354,11 +3354,11 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 	INT32 bestGridNo = -1;
 	INT8 bestGridNoCnt = aMinRating;
 
-	INT32 currentSoldierGridNo = -1;	
+	INT32 currentSoldierGridNo = -1;
 
 	INT8 enemiesnear = 0;
 	INT8 friendsnear = 0;
-		
+
 	// look at the squares near each known opponent and try to find the one
 	// place where a tossed projectile would do the most harm to the opponents
 	// while avoiding one's friends
@@ -3395,7 +3395,7 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 					if (sTabooTile[ubLoop2] == sGridNo)
 						continue;
 				}
-								
+
 				// Check to see if we have considered this tile before:
 				for (ubLoop2 = 0; ubLoop2 < ubNumExcludedTiles; ++ubLoop2)
 				{
@@ -3409,7 +3409,7 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 					sExcludeTile[ubNumExcludedTiles] = sGridNo;
 					++ubNumExcludedTiles;
 				}
-				
+
 				// loop over all enemies and friends to determine how many are in range
 				enemiesnear = 0;
 				friendsnear = 0;
@@ -3440,7 +3440,7 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 
 					bestGridNo = sGridNo;
 					fGridNoFound = TRUE;
-				}		
+				}
 			}
 		}
 	}
@@ -3461,7 +3461,7 @@ BOOLEAN GetFarthestOpponent(SOLDIERTYPE *pSoldier, UINT8* puID, INT16 sRange)
 	INT8	*pbPersOL;
 	SOLDIERTYPE * pOpp;
 	BOOLEAN found = FALSE;
-	
+
 	*puID = NOBODY;
 
 	// look through this man's personal & public opplists for opponents known

@@ -36,25 +36,25 @@ typedef struct
 {
 	//Profiles/Locations
 	UINT32   	uiIndex;
-	
+
 	CHAR16		Name[ENCYCLOPEDIA_NAME_SIZE];
 
 	BOOLEAN   	Hidden;
-	
+
 	UINT32 sImagePositionX[4];
 	UINT32 sImagePositionY[4];
-	
+
 	UINT32 MaxPages;
 	INT32 MaxImages;
-	
+
 	BOOLEAN bvisible;
-	
+
 	CHAR16		sCode[150];
-	
+
 	INT32 NextMission;
 	UINT32 MissionID;
 	INT32 CheckMission;
-	
+
 }	BRIEFINGROOM_M_DATA;
 
 #define MAX_IMAGES 4

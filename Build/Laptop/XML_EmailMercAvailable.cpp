@@ -9,7 +9,7 @@
 	#include "XML.h"
 	#include "Interface.h"
 	#include "LuaInitNPCs.h"
-	#include "email.h"
+	#include "Email.h"
 #endif
 
 struct
@@ -83,7 +83,7 @@ emailMercAvailableEndElementHandle(void *userData, const XML_Char *name)
 {
 	emailMercAvailableParseData * pData = (emailMercAvailableParseData *)userData;
 
-	if(pData->currentDepth <= pData->maxReadDepth) 
+	if(pData->currentDepth <= pData->maxReadDepth)
 	{
 		if(strcmp(name, "EMAIL_MERC_AVAILABLE") == 0)
 		{
@@ -91,8 +91,8 @@ emailMercAvailableEndElementHandle(void *userData, const XML_Char *name)
 		}
 		else if(strcmp(name, "EMAIL") == 0)
 		{
-			pData->curElement = ELEMENT_LIST;	
-			
+			pData->curElement = ELEMENT_LIST;
+
 			if (!EmailMercAvailable_TextOnly)
 				{
 					wcscpy(EmailMercAvailableText[pData->curEmailMercAvailable.uiIndex].szSubject, pData->curEmailMercAvailable.szSubject);
@@ -102,7 +102,7 @@ emailMercAvailableEndElementHandle(void *userData, const XML_Char *name)
 				{
 					wcscpy(EmailMercAvailableText[pData->curEmailMercAvailable.uiIndex].szSubject, pData->curEmailMercAvailable.szSubject);
 					wcscpy(EmailMercAvailableText[pData->curEmailMercAvailable.uiIndex].szMessage, pData->curEmailMercAvailable.szMessage);
-				}		
+				}
 		}
 		else if(strcmp(name, "uiIndex") == 0)
 		{
@@ -141,7 +141,7 @@ BOOLEAN ReadInEmailMercAvailable(STR fileName, BOOLEAN localizedVersion)
 	DebugMsg(TOPIC_JA2, DBG_LEVEL_3, "Loading EmailMercAvailable.xml" );
 
 	EmailMercAvailable_TextOnly = localizedVersion;
-	
+
 	// Open file
 	hFile = FileOpen( fileName, FILE_ACCESS_READ, FALSE );
 	if ( !hFile )

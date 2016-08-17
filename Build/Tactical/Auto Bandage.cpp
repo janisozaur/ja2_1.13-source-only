@@ -2,30 +2,30 @@
 	#include "Tactical All.h"
 #else
 	#include "sgp.h"
-	#include "overhead.h"
-	#include "messageboxscreen.h"
-	#include "screenids.h"
+	#include "Overhead.h"
+	#include "MessageBoxScreen.h"
+	#include "ScreenIds.h"
 	#include "Handle UI.h"
-	#include "message.h"
-	#include "game clock.h"
-	#include "items.h"
+	#include "Message.h"
+	#include "Game Clock.h"
+	#include "Items.h"
 	#include "Text.h"
 	#include "MercTextBox.h"
-	#include "interface.h"
-	#include "auto bandage.h"
-	#include "renderworld.h"
-	#include "strategic turns.h"
+	#include "Interface.h"
+	#include "Auto Bandage.h"
+	#include "RenderWorld.h"
+	#include "Strategic Turns.h"
 	#include "Event Pump.h"
-	#include "dialogue control.h"
-	#include "ai.h"
-	#include "interface control.h"
-	#include "strategicmap.h"
-	#include "animation control.h"
+	#include "Dialogue Control.h"
+	#include "AI.h"
+	#include "Interface Control.h"
+	#include "StrategicMap.h"
+	#include "Animation Control.h"
 	#include "Map Screen Interface.h"
 	#include "Soldier Profile.h"
 	#include "Assignments.h"
 	#include "WordWrap.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "English.h"
 	#include "SkillCheck.h"		// added by Flugente
 #endif
@@ -97,7 +97,7 @@ void BeginAutoBandage( )
 	BOOLEAN				fFoundAGuy = FALSE;
 	SOLDIERTYPE *		pSoldier;
 	BOOLEAN				fFoundAMedKit = FALSE;
-	
+
 	// If we are in combat, we con't...
 	if ( (gTacticalStatus.uiFlags & INCOMBAT) || (NumEnemyInSector() != 0) )
 	{
@@ -120,7 +120,7 @@ void BeginAutoBandage( )
 			fFoundAGuy = TRUE;
 
 		if ( FindObjClass( pSoldier, IC_MEDKIT ) != NO_SLOT )
-			fFoundAMedKit = TRUE;	
+			fFoundAMedKit = TRUE;
 
 		if ( fFoundAGuy && fFoundAMedKit )
 			break;
@@ -146,7 +146,7 @@ void BeginAutoBandage( )
 			DoMessageBox( MSG_BOX_BASIC_STYLE, TacticalStr[ BEGIN_AUTOBANDAGE_PROMPT_STR ], GAME_SCREEN, ( UINT8 )MSG_BOX_FLAG_YESNO, BeginAutoBandageCallBack, NULL );
 		}
 	}
-	
+
 #ifdef NEWMUSIC
 	GlobalSoundID  = MusicSoundValues[ SECTOR( gWorldSectorX, gWorldSectorY ) ].SoundTacticalNothing[gbWorldSectorZ];
 	if ( MusicSoundValues[ SECTOR( gWorldSectorX, gWorldSectorY ) ].SoundTacticalNothing[gbWorldSectorZ] != -1 )
@@ -297,7 +297,7 @@ BOOLEAN HandleAutoBandage( )
 
 		return( TRUE );
 	}
-	
+
 	return( FALSE );
 }
 
@@ -436,7 +436,7 @@ void AutoBandage( BOOLEAN fStart )
 		// Determine position ( centered in rect )
 		gsX = (INT16)( ( ( ( aRect.iRight	- aRect.iLeft ) - gusTextBoxWidth ) / 2 ) + aRect.iLeft );
 		gsY = (INT16)( ( ( ( aRect.iBottom - aRect.iTop ) - gusTextBoxHeight ) / 2 ) + aRect.iTop );
-		
+
 		// build a mask
 		MSYS_DefineRegion( &gAutoBandageRegion, 0,0, SCREEN_WIDTH, SCREEN_HEIGHT, MSYS_PRIORITY_HIGHEST - 1,
 						CURSOR_NORMAL, MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
@@ -715,7 +715,7 @@ void DisplayAutoBandageUpdatePanel( void )
 		// now the patients
 		iNumberPatientsHigh = ( iNumberPatients / ( NUMBER_MERC_FACES_AUTOBANDAGE_BOX )	);
 	}
-	
+
 	// now the actual pixel dimensions
 
 	iTotalPixelsHigh = ( iNumberPatientsHigh + iNumberDoctorsHigh ) * TACT_UPDATE_MERC_FACE_X_HEIGHT;
@@ -735,10 +735,10 @@ void DisplayAutoBandageUpdatePanel( void )
 	// now get the x and y position for the box
 	sXPosition = ( SCREEN_WIDTH - iTotalPixelsWide ) / 2;
 	sYPosition = ( INV_INTERFACE_START_Y - iTotalPixelsHigh ) / 2;
-	
+
 	// now blit down the background
 	GetVideoObject( &hBackGroundHandle, guiUpdatePanelTactical );
-	
+
 	// first the doctors on top
 	for( iCounterA = 0; iCounterA < iNumberDoctorsHigh; iCounterA++ )
 	{
@@ -749,7 +749,7 @@ void DisplayAutoBandageUpdatePanel( void )
 
 			// slap down background piece
 			BltVideoObject( FRAME_BUFFER , hBackGroundHandle, 15, sCurrentXPosition, sCurrentYPosition, VO_BLT_SRCTRANSPARENCY, NULL );
-			
+
 			iIndex = iCounterA * iNumberDoctorsWide + iCounterB;
 
 			if( iDoctorList[ iIndex ] != -1 )
@@ -796,14 +796,14 @@ void DisplayAutoBandageUpdatePanel( void )
 
 //	iCurPixelY = sYPosition;
 	iCurPixelY = sYPosition + ( ( iCounterA - 1 ) * TACT_UPDATE_MERC_FACE_X_HEIGHT );
-	
+
 	swprintf( sString, L"%s", zMarksMapScreenText[ 13 ] );
 	FindFontCenterCoordinates( ( INT16 )( sXPosition ), ( INT16 )( sCurrentYPosition ),	( INT16 )( iTotalPixelsWide ), 0, sString, TINYFONT1, &sX, &sY );
 	// print medic
 	mprintf( sX, sYPosition - 7 , sString );
 
 	//DisplayWrappedString( ( INT16 )( sXPosition ),	( INT16 )( sCurrentYPosition - 40 ), ( INT16 )( iTotalPixelsWide ), 0, TINYFONT1, FONT_WHITE, pUpdateMercStrings[ 0 ], FONT_BLACK, 0, 0 );
-	
+
 	sYPosition += 9;
 
 	// now the patients
@@ -813,10 +813,10 @@ void DisplayAutoBandageUpdatePanel( void )
 		{
 			sCurrentXPosition = sXPosition + ( iCounterB * TACT_UPDATE_MERC_FACE_X_WIDTH );
 			sCurrentYPosition = sYPosition + ( ( iCounterA + iNumberDoctorsHigh ) * TACT_UPDATE_MERC_FACE_X_HEIGHT );
-			
+
 			// slap down background piece
 			BltVideoObject( FRAME_BUFFER , hBackGroundHandle, 15, sCurrentXPosition, 	sCurrentYPosition , VO_BLT_SRCTRANSPARENCY, NULL );
-			
+
 			iIndex = iCounterA * iNumberPatientsWide + iCounterB;
 
 			if( iPatientList[ iIndex ] != -1 )
@@ -1034,8 +1034,8 @@ BOOLEAN AddFacesToAutoBandageBox( void )
 		// find a free slot
 		if( iDoctorList[ iCounter ] != -1 )
 		{
-		
-			
+
+
 			if( gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 )
 			{
 				// grab filename of face
@@ -1052,27 +1052,27 @@ BOOLEAN AddFacesToAutoBandageBox( void )
 				else
 					sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 			}
-			
-		
+
+
 		/*
 		if ( ( gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 ) && ( gProfilesIMP[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ProfilId == ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ) )
 		{
-			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );	
-		} 
+			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
+		}
 		else if ( ( gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex > 99 ) && ( gProfilesIMP[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ProfilId == ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ) )
-		{			
-			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );		
+		{
+			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 		}
 		else if(( gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 ) && ( gProfilesIMP[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ProfilId == -1 ))
-		{			
-			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );	
+		{
+			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 		}
 		else if(( gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex > 99 ) && ( gProfilesIMP[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ProfilId == -1 ))
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 		}
-		
-			
+
+
 			if( gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 )
 			{
 				// grab filename of face
@@ -1083,18 +1083,18 @@ BOOLEAN AddFacesToAutoBandageBox( void )
 				// grab filename of face
 				sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iDoctorList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 			}
-			*/		
+			*/
 
 			// load the face
 		//	AddVideoObject( &VObjectDesc, (UINT32 *)&giAutoBandagesSoldierFaces[ iCounter ] );
-			
+
 			if( !AddVideoObject( &VObjectDesc, (UINT32 *)&giAutoBandagesSoldierFaces[ iCounter ] ) )
 			{
 				sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\speck.sti" );
 				AddVideoObject( &VObjectDesc, (UINT32 *)&giAutoBandagesSoldierFaces[ iCounter ] );
 
 			}
-			
+
 			iNumberOfDoctors++;
 
 		}
@@ -1105,7 +1105,7 @@ BOOLEAN AddFacesToAutoBandageBox( void )
 		// find a free slot
 		if( iPatientList[ iCounter ] != -1 )
 		{
-		
+
 			if( gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 )
 			{
 				// grab filename of face
@@ -1122,26 +1122,26 @@ BOOLEAN AddFacesToAutoBandageBox( void )
 				else
 					sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 			}
-		
-	/*	
+
+	/*
 		if ( ( gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 ) && ( gProfilesIMP[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ProfilId == ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ) )
 		{
-			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );	
-		} 
+			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
+		}
 		else if ( ( gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex > 99 ) && ( gProfilesIMP[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ProfilId == ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ) )
-		{			
-			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );		
+		{
+			sprintf( VObjectDesc.ImageFile, "IMPFaces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 		}
 		else if(( gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 ) && ( gProfilesIMP[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ProfilId == -1 ))
-		{			
-			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );	
+		{
+			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%02d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 		}
 		else if(( gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex > 99 ) && ( gProfilesIMP[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ProfilId == -1 ))
-		{			
+		{
 			sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\%03d.sti", gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex );
 		}
-			
-		
+
+
 			if( gMercProfiles[ ( Menptr[ iPatientList[ iCounter ] ] ).ubProfile ].ubFaceIndex < 100 )
 			{
 				// grab filename of face
@@ -1155,14 +1155,14 @@ BOOLEAN AddFacesToAutoBandageBox( void )
 			*/
 			// load the face
 		//	AddVideoObject( &VObjectDesc, (UINT32 *)&giAutoBandagesSoldierFaces[ iCounter + iNumberOfDoctors ] );
-		
+
 			if( !AddVideoObject( &VObjectDesc, (UINT32 *)&giAutoBandagesSoldierFaces[ iCounter + iNumberOfDoctors ] ) )
 			{
 				sprintf( VObjectDesc.ImageFile, "Faces\\65Face\\speck.sti" );
 				AddVideoObject( &VObjectDesc, (UINT32 *)&giAutoBandagesSoldierFaces[ iCounter + iNumberOfDoctors ] );
 
 			}
-		
+
 		}
 	}
 
@@ -1253,7 +1253,7 @@ BOOLEAN RenderSoldierSmallFaceForAutoBandagePanel( INT32 iIndex, INT16 sCurrentX
 	// is the merc alive?
 	if( !pSoldier->stats.bLife )
 		return( FALSE );
-	
+
 	//yellow one for bleeding
 	iStartY = sCurrentYPosition + 29 - 27*pSoldier->stats.bLifeMax/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, sCurrentXPosition+36, iStartY, sCurrentXPosition+37, sCurrentYPosition+29, Get16BPPColor( FROMRGB( 107, 107, 57 ) ) );
@@ -1263,12 +1263,12 @@ BOOLEAN RenderSoldierSmallFaceForAutoBandagePanel( INT32 iIndex, INT16 sCurrentX
 	iStartY = sCurrentYPosition + 29 - 27*(pSoldier->stats.bLifeMax - pSoldier->bBleeding)/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, sCurrentXPosition+36, iStartY, sCurrentXPosition+37, sCurrentYPosition+29, Get16BPPColor( FROMRGB( 156, 57, 57 ) ) );
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, sCurrentXPosition+37, iStartY, sCurrentXPosition+38, sCurrentYPosition+29, Get16BPPColor( FROMRGB( 222, 132, 132 ) ) );
-		
+
 	//red one for actual health
 	iStartY = sCurrentYPosition + 29 - 27*pSoldier->stats.bLife/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, sCurrentXPosition+36, iStartY, sCurrentXPosition+37, sCurrentYPosition+29, Get16BPPColor( FROMRGB( 107, 8, 8 ) ) );
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, sCurrentXPosition+37, iStartY, sCurrentXPosition+38, sCurrentYPosition+29, Get16BPPColor( FROMRGB( 206, 0, 0 ) ) );
-		
+
 	//BREATH BAR
 	iStartY = sCurrentYPosition + 29 - 27*pSoldier->bBreathMax/100;
 	ColorFillVideoSurfaceArea( FRAME_BUFFER, sCurrentXPosition+39, iStartY, sCurrentXPosition+40, sCurrentYPosition+29, Get16BPPColor( FROMRGB( 8, 8, 132 ) ) );
@@ -1335,7 +1335,7 @@ void HandleRetreatBandaging()
 	// third, set flag that calls this function off
 
 	// for each call, we only do this for one sector, thereby only for one group retreating from a sector
-	// we can do this because a) it is unlikely that two wounded groups will retreat from combat at the same time, and b) bleeding calls this function again. 
+	// we can do this because a) it is unlikely that two wounded groups will retreat from combat at the same time, and b) bleeding calls this function again.
 	// As long as people bleed, this function will be called, thereby we will get to the group in question at some point
 
 	BOOLEAN needhelpinsector = FALSE;
@@ -1383,7 +1383,7 @@ void HandleRetreatBandaging()
 					}
 				}
 			}
-				
+
 			// if we are still bleeding, other mercs have to help us
 			if ( pSoldier->bBleeding && !needhelpinsector )
 			{
@@ -1400,7 +1400,7 @@ void HandleRetreatBandaging()
 	{
 		// find the best doctor here
 		UINT16 bestdoctorid = GetBestRetreatingMercDoctor( MercPtrs[possiblepatient] );
-		
+
 		if ( bestdoctorid != NOBODY )
 		{
 			// have the doctor treat people

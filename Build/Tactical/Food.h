@@ -2,7 +2,7 @@
 #define __FOOD_H
 
 #include "Soldier Control.h"
-#include "soldier profile type.h"
+#include "Soldier Profile Type.h"
 
 #define FOOD_MIN									- 20000
 #define FOOD_MAX									20000
@@ -48,7 +48,7 @@ extern	UINT8	gbPlayerNum;
 
 typedef struct
 {
-	UINT16		uiIndex;	
+	UINT16		uiIndex;
 	CHAR16		szName[80];				// name of this food
 	INT32		bFoodPoints;			// points that will be added to our drink level
 	INT32		bDrinkPoints;			// points that will be added to our drink level

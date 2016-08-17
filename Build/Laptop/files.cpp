@@ -1,19 +1,19 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Laptop All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <stdio.h>
-	#include "laptop.h"
-	#include "files.h"
-	#include "Game clock.h"
+	#include "Laptop.h"
+	#include "Files.h"
+	#include "Game Clock.h"
 	#include "Utilities.h"
 	#include "WCheck.h"
 	#include "Debug.h"
 	#include "WordWrap.h"
 	#include "Encrypted File.h"
-	#include "cursors.h"
-	#include "email.h"
-	#include "text.h"
+	#include "Cursors.h"
+	#include "Email.h"
+	#include "Text.h"
 	// HEADROCK PROFEX: This is required to display the proper facial image.
 	#include "Soldier Profile.h"
 	#include "GameSettings.h"
@@ -248,7 +248,7 @@ void GameInitFiles( )
 	//#else
 	AddFilesToPlayersLog( ENRICO_BACKGROUND, 0,255, NULL, NULL );
 	//#endif
-	
+
 	//mission briefing by Jazz
 	//AddFilesToPlayersLog( MISSION_BRIEFING, 0,4, NULL, NULL );
 }
@@ -1099,9 +1099,9 @@ BOOLEAN HandleMissionBriefingFiles( UINT8 ubFormat )
 
 			WidthList = CreateWidthRecordsForMissionBriefingFile( );
 		while( iCounter < 250 )
-			{			
+			{
 				LoadEncryptedDataFromFile( "binarydata\\MissionBriefing.EDT", sString, FILE_STRING_SIZE * ( iCounter ) * 2, FILE_STRING_SIZE * 2 );
-				
+
 				AddStringToFilesList( sString );
 				iCounter++;
 			}
@@ -1149,9 +1149,9 @@ BOOLEAN HandleMissionBriefingFiles( UINT8 ubFormat )
 
 					}
 				}
-				
+
 				if( iCounter == 0 )
-				{			
+				{
 				// reset width
 				iFileLineWidth = 350;
 				iFileStartX = (UINT16) ( FILE_VIEWER_X +	10 );
@@ -1208,7 +1208,7 @@ BOOLEAN HandleMissionBriefingFiles( UINT8 ubFormat )
 	{
 		// title bar
 		VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
-		//Ja25, new map	
+		//Ja25, new map
 #ifdef JA2UB
 		if (FileExists(MAP_JA25))
 		{
@@ -1236,7 +1236,7 @@ BOOLEAN HandleMissionBriefingFiles( UINT8 ubFormat )
 	{
 		// title bar
 		VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
-		//Ja25, new map	
+		//Ja25, new map
 #ifdef JA2UB
 		if (FileExists(MAP_JA25))
 		{
@@ -1297,7 +1297,7 @@ BOOLEAN HandleSpecialFiles( UINT8 ubFormat )
 			WidthList = CreateWidthRecordsForAruloIntelFile( );
 		while( iCounter < LENGTH_OF_ENRICO_FILE )
 			{
-#ifdef JA2UB			
+#ifdef JA2UB
 				if (FileExists(RIS_EDT_FILE_JA25))
 				{
 				LoadEncryptedDataFromFile( RIS_EDT_FILE_JA25, sString, FILE_STRING_SIZE * ( iCounter ) * 2, FILE_STRING_SIZE * 2 );
@@ -1457,7 +1457,7 @@ BOOLEAN HandleSpecialFiles( UINT8 ubFormat )
 		// title bar
 		VObjectDesc.fCreateFlags=VOBJECT_CREATE_FROMFILE;
 #ifdef JA2UB
-		//Ja25, new map	
+		//Ja25, new map
 		if (FileExists(MAP_JA25))
 		{
 		FilenameForBPP("LAPTOP\\TraconaMap.sti", VObjectDesc.ImageFile);
@@ -1503,7 +1503,7 @@ BOOLEAN HandleSpecialFiles( UINT8 ubFormat )
 #endif
 
 #ifdef JA2UB
-//Ja25 No picture 
+//Ja25 No picture
 #else
 	else if( giFilesPage == 5 )
 	{
@@ -1522,7 +1522,7 @@ BOOLEAN HandleSpecialFiles( UINT8 ubFormat )
 
 		DeleteVideoObjectFromIndex( uiPicture );
 	}
-#endif	
+#endif
 	return ( TRUE );
 }
 

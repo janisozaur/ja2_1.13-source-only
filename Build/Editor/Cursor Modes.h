@@ -4,7 +4,7 @@
 #ifndef __CURSOR_MODES_H
 #define __CURSOR_MODES_H
 
-enum 
+enum
 {
 	SMALLSELECTION,		// 1x1
 	MEDIUMSELECTION,	// 3x3

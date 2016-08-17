@@ -10,9 +10,9 @@
 
 #include "Debug.h"
 #include "FileMan.h"
-#include "smack.h"
-#include "DDraw.h"
-#include "mss.h"
+#include "SMACK.h"
+#include <ddraw.h>
+#include "Mss.h"
 #include "DirectX Common.h"
 #include "DirectDraw Calls.h"
 #include "SoundMan.h"
@@ -50,7 +50,7 @@
 //
 //*******************************************************************
 
-BINKFLIC BinkList[BINK_NUM_FLICS];					
+BINKFLIC BinkList[BINK_NUM_FLICS];
 UINT32	 guiBinkPixelFormat=0;
 
 //LPDIRECTDRAWSURFACE lpBinkVideoPlayback=NULL;
@@ -210,7 +210,7 @@ BINKFLIC *BinkOpenFlic( const CHAR8 *cFilename )
 #endif
 
 #ifndef USE_VFS
-	if( !( pBink->BinkHandle = BinkOpen((CHAR8 *)hFile, BINKFILEHANDLE ) ) ) //| SMACKTRACKS 
+	if( !( pBink->BinkHandle = BinkOpen((CHAR8 *)hFile, BINKFILEHANDLE ) ) ) //| SMACKTRACKS
 #else
 	vfs::Path tempfilename;
 	try
@@ -225,7 +225,7 @@ BINKFLIC *BinkOpenFlic( const CHAR8 *cFilename )
 	{
 		SGP_RETHROW(L"Temporary intro file could not be read", ex);
 	}
-	if( !( pBink->BinkHandle = BinkOpen(tempfilename.to_string().c_str(), BINKNOTHREADEDIO /*BINKFILEHANDLE*/ ) ) ) //| SMACKTRACKS 
+	if( !( pBink->BinkHandle = BinkOpen(tempfilename.to_string().c_str(), BINKNOTHREADEDIO /*BINKFILEHANDLE*/ ) ) ) //| SMACKTRACKS
 #endif
 	{
 		ErrorMsg("BINK ERROR: Bink won't open the BINK file");
@@ -272,7 +272,7 @@ void BinkSetBlitPosition( BINKFLIC *pBink, UINT32 uiLeft, UINT32 uiTop )
 	pBink->uiLeft = uiLeft;
 	pBink->uiTop = uiTop;
 }
-	
+
 void BinkCloseFlic( BINKFLIC *pBink )
 {
 	// Deallocate the smack buffers
@@ -313,7 +313,7 @@ BOOLEAN			BinkPollFlics(void)
 
 				BinkDoFrame( pBink->BinkHandle );
 
-				BinkCopyToBuffer( pBink->BinkHandle, 
+				BinkCopyToBuffer( pBink->BinkHandle,
 													SurfaceDescription.lpSurface,
 													SurfaceDescription.lPitch,
 													pBink->BinkHandle->Height,
@@ -371,7 +371,7 @@ void				BinkSetupVideo(void)
     DirectXAttempt ( ReturnCode, __LINE__, __FILE__ );
     return;
   }
- /* 
+ /*
 	usRed   = (UINT16) SurfaceDescription.ddpfPixelFormat.dwRBitMask;
 	usGreen = (UINT16) SurfaceDescription.ddpfPixelFormat.dwGBitMask;
 	usBlue  = (UINT16) SurfaceDescription.ddpfPixelFormat.dwBBitMask;
@@ -419,12 +419,12 @@ UINT16 GetNumberOfBits( UINT32 uiMask )
 
   while( uiMask )
   {
-      uiMask = uiMask & ( uiMask - 1 );  
+      uiMask = uiMask & ( uiMask - 1 );
       usBits++;
   }
   return usBits;
 }
- 
+
 
 void				BinkShutdownVideo(void)
 {

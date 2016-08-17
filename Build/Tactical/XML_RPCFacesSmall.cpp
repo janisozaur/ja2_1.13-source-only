@@ -5,7 +5,7 @@
 	#include "Debug Control.h"
 	#include "expat.h"
 	#include "XML.h"
-	#include "faces.h"
+	#include "Faces.h"
 #endif
 
 struct
@@ -108,7 +108,7 @@ smallFacesEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curSmallFaces.FaceIndex	= (UINT16) atol(pData->szCharData);
-		}	
+		}
 		else if(strcmp(name, "EyesX") == 0)
 		{
 			pData->curElement = ELEMENT;

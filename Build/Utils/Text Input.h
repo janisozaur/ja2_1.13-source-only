@@ -1,7 +1,7 @@
 #ifndef __TEXT_INPUT_H
 #define __TEXT_INPUT_H
 
-#include "input.h"
+#include "Input.h"
 
 //AUTHOR:	Kris Morness
 //Intended for inclusion with SGP.
@@ -11,10 +11,10 @@
 //screen that has fields, then somehow, hit a key to go into another mode with text input,
 //it will automatically disable the current fields, as you go on to define new ones.	Previously,
 //you would have to make sure the mode was removed before initializing a new one.	There were
-//potential side effects of crashes, and unpredictable results, as the new fields would cook the 
+//potential side effects of crashes, and unpredictable results, as the new fields would cook the
 //existing ones.
 //NOTE:	You may have to modify you code now, so that you don't accidentally kill a text input mode
-//when you don't one to begin with.	(like removing an already deleted button).	Also, remember that 
+//when you don't one to begin with.	(like removing an already deleted button).	Also, remember that
 //this works like a stack system and you can't flip through existing defined text input modes at will.
 
 //NOTES ON LIMITATIONS:
@@ -33,7 +33,7 @@
 #define INPUTTYPE_UPPERCASE			0x0010 //converts all lowercase to uppercase
 #define INPUTTYPE_LOWERCASE			0x0020 //converts all uppercase to lowercase
 #define INPUTTYPE_FIRSTPOSMINUS 0x0002 //allows '-' at beginning of field only
-#define INPUTTYPE_NUMERIC				(INPUTTYPE_NUMERIC | INPUTTYPE_FIRSTPOSMINUS ) 
+#define INPUTTYPE_NUMERIC				(INPUTTYPE_NUMERIC | INPUTTYPE_FIRSTPOSMINUS )
 #define INPUTTYPE_SPECIALCHARS	(INPUTTYPE_SPECIAL | INPUTTYPE_SPACES)
 #define INPUTTYPE_ALPHANUMERIC	(INPUTTYPE_ALPHA | INPUTTYPE_NUMERICSTRICT)
 #define INPUTTYPE_ASCII					(INPUTTYPE_ALPHANUMERIC | INPUTTYPE_SPECIALCHARS)
@@ -44,7 +44,7 @@
 //Exclusive handlers
 //The dosfilename inputtype is a perfect example of what is a exclusive handler.
 //In this method, the input accepts only alphas and an underscore as the first character,
-//then alphanumerics afterwards.	For further support, chances are you'll want to treat it 
+//then alphanumerics afterwards.	For further support, chances are you'll want to treat it
 //as an exclusive handler, and you'll have to process it in the filter input function.
 enum
 {
@@ -58,8 +58,8 @@ enum
 //initializations that contain fields that edit text.	It also verifies and clears any existing
 //fields.	Your input loop must contain the function HandleTextInput and processed if the gfTextInputMode
 //flag is set else process your regular input handler.	Note that this doesn't mean you are necessarily typing,
-//just that there are text fields in your screen and may be inactive.	The TAB key cycles through your text fields, 
-//and special fields can be defined which will call a void functionName( UINT16 usFieldNum ) 
+//just that there are text fields in your screen and may be inactive.	The TAB key cycles through your text fields,
+//and special fields can be defined which will call a void functionName( UINT16 usFieldNum )
 void InitTextInputMode();
 
 //A hybrid version of InitTextInput() which uses a specific scheme.	JA2's editor uses scheme 1, so
@@ -89,14 +89,14 @@ UINT16 GetTextInputCursor();
 //After calling InitTextInputMode, you want to define one or more text input fields.	The order
 //of calls to this function dictate the TAB order from traversing from one field to the next.	This
 //function adds mouse regions and processes them for you, as well as deleting them when you are done.
-void AddTextInputField( INT16 sLeft, INT16 sTop, INT16 sWidth, INT16 sHeight, INT8 bPriority, 
+void AddTextInputField( INT16 sLeft, INT16 sTop, INT16 sWidth, INT16 sHeight, INT8 bPriority,
 											STR16 szInitText, UINT8 ubMaxChars, UINT16 usInputType );
 
-//This allows you to insert special processing functions and modes that can't be determined here.	An example 
-//would be a file dialog where there would be a file list.	This file list would be accessed using the Win95 
+//This allows you to insert special processing functions and modes that can't be determined here.	An example
+//would be a file dialog where there would be a file list.	This file list would be accessed using the Win95
 //convention by pressing TAB.	In there, your key presses would be handled differently and by adding a userinput
-//field, you can make this hook into your function to accomplish this.	In a filedialog, alpha characters 
-//would be used to jump to the file starting with that letter, and setting the field in the text input 
+//field, you can make this hook into your function to accomplish this.	In a filedialog, alpha characters
+//would be used to jump to the file starting with that letter, and setting the field in the text input
 //field.	Pressing TAB again would place you back in the text input field.	All of that stuff would be handled
 //externally, except for the TAB keys.
 typedef void (*INPUT_CALLBACK)(UINT8,BOOLEAN);
@@ -106,7 +106,7 @@ void AddUserInputField( INPUT_CALLBACK userFunction );
 //ubFieldID contains the fieldID of that field
 //fEntering is true if you are entering the user field, false if exiting.
 
-//Removes the specified field from the existing fields.	If it doesn't exist, then there will be an 
+//Removes the specified field from the existing fields.	If it doesn't exist, then there will be an
 //assertion failure.
 void RemoveTextInputField( UINT8 ubField );
 
@@ -129,7 +129,7 @@ void SetExclusive24HourTimeValue( UINT8 ubField, UINT16 usTime );
 //returns -1 if blank or invalid.	Only works for positive numbers.
 INT32 GetNumericStrictValueFromField( UINT8 ubField );
 
-//Converts a number to a numeric strict value.	If the number is negative, the 
+//Converts a number to a numeric strict value.	If the number is negative, the
 //field will be blank.
 void SetInputFieldStringWithNumericStrictValue( UINT8 ubField, INT32 iNumber );
 
@@ -154,7 +154,7 @@ void SetDisabledTextFieldColors( UINT8 ubForeColor, UINT8 ubShadowColor, UINT16 
 void SetBevelColors( UINT16 usBrighterColor, UINT16 usDarkerColor );
 void SetCursorColor( UINT16 usCursorColor );
 
-//All CTRL and ALT keys combinations, F1-F12 keys, ENTER and ESC are ignored allowing 
+//All CTRL and ALT keys combinations, F1-F12 keys, ENTER and ESC are ignored allowing
 //processing to be done with your own input handler.	Otherwise, the keyboard event
 //is absorbed by this input handler, if used in the appropriate manner.
 //This call must be added at the beginning of your input handler in this format:

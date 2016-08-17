@@ -15,12 +15,12 @@
 	#include "sgp.h"
 	#include "Debug Control.h"
 	#include "expat.h"
-	#include "gamesettings.h"
+	#include "GameSettings.h"
 	#include "XML.h"
 	#include "FileMan.h"
-	#include "campaign types.h"
-	#include "militiasquads.h"
-	#include "mapscreen.h" 
+	#include "Campaign Types.h"
+	#include "MilitiaSquads.h"
+	#include "MapScreen.h"
 #endif
 
 // HEADROCK HAM 3.4: Stores restriction data from XML, including required cities for each sector to be allowed.

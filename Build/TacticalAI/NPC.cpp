@@ -1,33 +1,33 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "AI All.h"
-	#include "interface items.h"
+	#include "Interface Items.h"
 
 #else
-	#include "types.h"
-	#include "wcheck.h"
-	#include "overhead.h"
-	#include "ai.h"
+	#include "Types.h"
+	#include "WCheck.h"
+	#include "Overhead.h"
+	#include "AI.h"
 	#include "Soldier Profile.h"
 
 	#include "NPC.h"
 	#include "Isometric Utils.h"
 	#include "Quests.h"
-	#include "interface dialogue.h"
+	#include "Interface Dialogue.h"
 	#include "Game Clock.h"
 	#include "FileMan.h"
 	#include "Random.h"
-	#include "items.h"
-	#include "interface.h"
+	#include "Items.h"
+	#include "Interface.h"
 	#include "Assignments.h"
-	#include "soldier macros.h"
-	#include "dialogue control.h"
+	#include "Soldier Macros.h"
+	#include "Dialogue Control.h"
 	#include "Strategic Town Loyalty.h"
-	#include "message.h"
+	#include "Message.h"
 	#include "Timer Control.h"
 	#include "Soldier Add.h"
 	#include "Soldier Tile.h"
 	#include "Weapons.h"
-	#include "meanwhile.h"
+	#include "Meanwhile.h"
 
 	#ifdef JA2TESTVERSION
 		#include	"Quest Debug System.h"
@@ -37,10 +37,10 @@
 	#include "SkillCheck.h"
 	#include "Render Fun.h"
 	#include "Text.h"
-	#include "finances.h"
+	#include "Finances.h"
 	#include "Arms Dealer Init.h"
 	#include "Interface Items.h"
-	#include "opplist.h"
+	#include "Opplist.h"
 	#include "Animation Control.h"
 	#include "Scheduling.h"
 	#include "Tactical Save.h"
@@ -50,20 +50,20 @@
 	#include "GameVersion.h"
 #endif
 	#include "Soldier Profile.h"
-	
+
 	#include "BriefingRoom_Data.h"
 
 	#include "Map Screen Helicopter.h"
 	#include "Drugs And Alcohol.h"	// added by Flugente for DoesMercHavePersonality( ... )
 	#include "SaveLoadGame.h"
-	
+
 #ifdef JA2UB
 #include "Ja25_Tactical.h"
 #include "Ja25_Tactical.h"
 #include "ub_config.h"
 #endif
 
-	
+
 //forward declarations of common classes to eliminate includes
 class OBJECTTYPE;
 class SOLDIERTYPE;
@@ -159,7 +159,7 @@ NPCQuoteInfo * LoadQuoteFile( UINT8 ubNPC )
 
 	if ( ubNPC == PETER || ubNPC == ALBERTO || ubNPC == CARLO )
 	{
-	
+
 		if ( ubNPC == PETER )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", PETER );
@@ -168,7 +168,7 @@ NPCQuoteInfo * LoadQuoteFile( UINT8 ubNPC )
 				// use a copy of Herve's data file instead!
 				sprintf( zFileName, "NPCData\\%03d.npc", HERVE );
 			}
-		}		
+		}
 		else if ( ubNPC == ALBERTO )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", ALBERTO );
@@ -177,7 +177,7 @@ NPCQuoteInfo * LoadQuoteFile( UINT8 ubNPC )
 				// use a copy of Herve's data file instead!
 				sprintf( zFileName, "NPCData\\%03d.npc", HERVE );
 			}
-		}	
+		}
 		else if ( ubNPC == CARLO )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", CARLO );
@@ -186,77 +186,77 @@ NPCQuoteInfo * LoadQuoteFile( UINT8 ubNPC )
 				// use a copy of Herve's data file instead!
 				sprintf( zFileName, "NPCData\\%03d.npc", HERVE );
 			}
-		}	
+		}
 
 	}
-	
+
 		#ifdef JA2UB
 		if ( ubNPC == MANUEL_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", MANUEL_UB );
 		}
-		
+
 		if ( ubNPC == BIGGENS_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", BIGGENS_UB );
 		}
-		
+
 		if ( ubNPC == JOHN_K_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", JOHN_K_UB );
 		}
-		
+
 		if ( ubNPC == TEX_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", TEX_UB );
 		}
-		
+
 		if ( ubNPC == GASTON_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", GASTON_UB );
 		}
-		
+
 		if ( ubNPC == STOGIE_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", STOGIE_UB );
 		}
-		
+
 		if ( ubNPC == JERRY_MILO_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", JERRY_MILO_UB );
 		}
-		
+
 		if ( ubNPC == PGMALE4_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", PGMALE4_UB );
 		}
-		
+
 		if ( ubNPC == BETTY_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", BETTY_UB );
 		}
-		
+
 		if ( ubNPC == RAUL_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", RAUL_UB );
 		}
-		
+
 		if ( ubNPC == MORRIS_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", MORRIS_UB );
 		}
-		
+
 		if ( ubNPC == RUDY_UB )
 		{
 			sprintf( zFileName, "NPCData\\%03d.npc", RUDY_UB );
 		}
-		
+
 		#endif
-	
-	
+
+
 	//else if ( ubNPC < FIRST_RPC || ubNPC >= GASTON || (ubNPC < FIRST_NPC && gMercProfiles[ ubNPC ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED ) )
 	//new profiles by Jazz
-	else if ( gProfilesIMP[ubNPC].ProfilId == ubNPC || gProfilesAIM[ubNPC].ProfilId == ubNPC || gProfilesMERC[ubNPC].ProfilId == ubNPC || ( gProfilesRPC[ubNPC].ProfilId == ubNPC && gMercProfiles[ ubNPC ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED ) )	
+	else if ( gProfilesIMP[ubNPC].ProfilId == ubNPC || gProfilesAIM[ubNPC].ProfilId == ubNPC || gProfilesMERC[ubNPC].ProfilId == ubNPC || ( gProfilesRPC[ubNPC].ProfilId == ubNPC && gMercProfiles[ ubNPC ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED ) )
 	{
 		sprintf( zFileName, "NPCData\\000.npc", ubNPC ); // FIXME: extra/unused argument
 	}
@@ -326,7 +326,7 @@ NPCQuoteInfo * LoadQuoteFile( UINT8 ubNPC )
 				pFileData_old_ = NULL;
 			}
 		}
-		
+
 		FileClose( hFile );
 		//check for Russian script & make a runtime conversion of it to International
 		if( *(DWORD*)pFileData_old_ == 0x00350039 )
@@ -346,7 +346,7 @@ NPCQuoteInfo * LoadQuoteFile( UINT8 ubNPC )
 		MemFree(pFileData_old_);
 	}
 
-	// 
+	//
 	//</SB> new script format
 	return( pFileData );
 }
@@ -449,8 +449,8 @@ BOOLEAN EnsureQuoteFileLoaded( UINT8 ubNPC )
 
 
 //	if ( ubNPC >= FIRST_RPC && ubNPC < FIRST_NPC )
-	//new profiles by Jazz		
-	if ( ( gProfilesRPC[ubNPC].ProfilId == ubNPC ) )			
+	//new profiles by Jazz
+	if ( ( gProfilesRPC[ubNPC].ProfilId == ubNPC ) )
 	{
 		if (gMercProfiles[ ubNPC ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED)
 		{
@@ -562,25 +562,25 @@ BOOLEAN RefreshNPCScriptRecord( UINT8 ubNPC, UINT8 ubRecord )
 		// loop through all PCs, and refresh their copy of this record
 		//for ( ubLoop = 0; ubLoop < FIRST_RPC; ubLoop++ ) // need more finesse here
 		//new profiles by Jazz
-		for ( ubLoop = 0; ubLoop < NUM_PROFILES; ubLoop++ ) // need more finesse here		
+		for ( ubLoop = 0; ubLoop < NUM_PROFILES; ubLoop++ ) // need more finesse here
 		{
-			//new profiles by Jazz		
-			if ( gProfilesIMP[ubLoop].ProfilId == ubLoop || gProfilesAIM[ubLoop].ProfilId == ubLoop || gProfilesMERC[ubLoop].ProfilId == ubLoop )	
+			//new profiles by Jazz
+			if ( gProfilesIMP[ubLoop].ProfilId == ubLoop || gProfilesAIM[ubLoop].ProfilId == ubLoop || gProfilesMERC[ubLoop].ProfilId == ubLoop )
 			RefreshNPCScriptRecord( ubLoop, ubRecord );
 		}
 #ifdef JA2UB
 //no UB
-#else		
+#else
 		//for ( ubLoop = GASTON; ubLoop < NUM_PROFILES; ubLoop++ ) // need more finesse here
 		//{
 		//	RefreshNPCScriptRecord( ubLoop, ubRecord );
 		//}
-#endif		
-		//new profiles by Jazz	
+#endif
+		//new profiles by Jazz
 		//for ( ubLoop = FIRST_RPC; ubLoop < FIRST_NPC; ubLoop++ )
 		for ( ubLoop = 0; ubLoop < NUM_PROFILES; ubLoop++ )
 		{
-			if ( gProfilesRPC[ubLoop].ProfilId == ubLoop )	
+			if ( gProfilesRPC[ubLoop].ProfilId == ubLoop )
 			{
 			if ( gMercProfiles[ ubNPC ].ubMiscFlags & PROFILE_MISC_FLAG_RECRUITED && gpBackupNPCQuoteInfoArray[ ubNPC ] != NULL )
 			{
@@ -672,7 +672,7 @@ NPCQuoteInfo * LoadCivQuoteFile( UINT8 ubIndex )
 				pFileData_old_ = NULL;
 			}
 		}
-		
+
 		FileClose( hFile );
 		//check for Russian script & make a runtime conversion of it to International
 		if( *(DWORD*)pFileData_old_ == 0x00350039 )
@@ -694,7 +694,7 @@ NPCQuoteInfo * LoadCivQuoteFile( UINT8 ubIndex )
 
 	// -----------------------------------------------------------
 
-	// 
+	//
 	//</SB> new script format
 	return( pFileData );
 
@@ -805,10 +805,10 @@ BOOLEAN ReloadAllQuoteFiles( void )
 	UINT8		ubProfile, ubLoop;
 
 	//for ( ubProfile = FIRST_RPC; ubProfile < GASTON; ubProfile++ )
-	//new profiles by Jazz	
+	//new profiles by Jazz
 	for ( ubProfile = 0; ubProfile < NUM_PROFILES; ubProfile++ )
 	{
-		if ( gProfilesRPC[ubProfile].ProfilId == ubProfile || gProfilesNPC[ubProfile].ProfilId == ubProfile )	
+		if ( gProfilesRPC[ubProfile].ProfilId == ubProfile || gProfilesNPC[ubProfile].ProfilId == ubProfile )
 		{
 		// zap backup if any
 		if ( gpBackupNPCQuoteInfoArray[ ubProfile ] != NULL )
@@ -938,7 +938,7 @@ UINT8 CalcDesireToTalk( UINT8 ubNPC, UINT8 ubMerc, INT8 bApproach )
 	else
 	{
 		iEffectiveLeadership = ((INT32) pMercProfile->bLeadership) * pMercProfile->usApproachFactor[bApproach - 1] / 100;
-		
+
 		// Flugente: backgrounds
 		SOLDIERTYPE* pSoldier = FindSoldierByProfileID( ubMerc, TRUE );
 
@@ -951,7 +951,7 @@ UINT8 CalcDesireToTalk( UINT8 ubNPC, UINT8 ubMerc, INT8 bApproach )
 			else if ( bApproach == APPROACH_RECRUIT )
 				iEffectiveLeadership = (iEffectiveLeadership * (100 + pSoldier->GetBackgroundValue(BG_PERC_APPROACH_RECRUIT))) / 100;
 		}
-				
+
 		iApproachVal = pNPCProfile->ubApproachVal[bApproach - 1] * iEffectiveLeadership / 50;
 	}
 
@@ -1074,7 +1074,7 @@ UINT8 NPCConsiderTalking( UINT8 ubNPC, UINT8 ubMerc, INT8 bApproach, UINT8 ubRec
 			{
 				continue;
 			}
-		}		
+		}
 		else if(!TileIsOutOfBounds(pNPCQuoteInfo->sRequiredGridNo))//dnl ch46 031009
 		{
 			if(pSoldier->sGridNo != pNPCQuoteInfo->sRequiredGridNo)
@@ -1889,18 +1889,18 @@ void ResetOncePerConvoRecordsForNPC( UINT8 ubNPC )
 }
 
 void ResetOncePerConvoRecordsForAllNPCsInLoadedSector( void )
-{	
+{
 	if ( gWorldSectorX == 0 || gWorldSectorY == 0 )
 	{
 		return;
 	}
 
 	//for ( ubLoop = FIRST_RPC; ubLoop < GASTON; ubLoop++ )
-	//new profiles by Jazz	
+	//new profiles by Jazz
 	for ( UINT8 IDnpc = 0; IDnpc < NUM_PROFILES; IDnpc++ )
-	{	
+	{
 		if ( gProfilesRPC[IDnpc].ProfilId == IDnpc || gProfilesNPC[IDnpc].ProfilId == IDnpc)
-		{	
+		{
 			if ( gMercProfiles[IDnpc].sSectorX == gWorldSectorX &&
 				 gMercProfiles[IDnpc].sSectorY == gWorldSectorY &&
 				 gMercProfiles[IDnpc].bSectorZ == gbWorldSectorZ &&
@@ -1908,7 +1908,7 @@ void ResetOncePerConvoRecordsForAllNPCsInLoadedSector( void )
 			{
 				ResetOncePerConvoRecordsForNPC( IDnpc );
 			}
-		}	
+		}
 	}
 }
 
@@ -1988,9 +1988,9 @@ void Converse( UINT8 ubNPC, UINT8 ubMerc, INT8 bApproach, UINT32 uiApproachData 
 	}
 
 	pNPCQuoteInfoArray = gpNPCQuoteInfoArray[ubNPC];
-	
+
 	//Legion jazz
-	if (zHiddenNames[ubNPC].Hidden == TRUE) 
+	if (zHiddenNames[ubNPC].Hidden == TRUE)
 	{
 		zHiddenNames[ubNPC].Hidden = FALSE;
 		ShowNPCEncyclopediaEntry(ubNPC, TRUE);
@@ -2460,7 +2460,7 @@ void Converse( UINT8 ubNPC, UINT8 ubMerc, INT8 bApproach, UINT32 uiApproachData 
 				{
 					pSoldier = FindSoldierByProfileID( ubNPC, FALSE );
 
-					
+
                     if (pSoldier)
                     {
                         // stupid hack CC
@@ -3467,7 +3467,7 @@ BOOLEAN LoadNPCInfoFromSavedGameFile( HWFILE hFile, UINT32 uiSaveGameVersion )
 		RefreshNPCScriptRecord( SKYRIDER, 22 );
 	}
 
-	// anv: 
+	// anv:
 	if ( uiSaveGameVersion < WALDO_CAN_REPAIR_HELICOPTER )
 	{
 		RefreshNPCScriptRecord( WALDO, 5 );
@@ -3480,7 +3480,7 @@ BOOLEAN LoadNPCInfoFromSavedGameFile( HWFILE hFile, UINT32 uiSaveGameVersion )
 		RefreshNPCScriptRecord( WALDO, 17 );
 		RefreshNPCScriptRecord( WALDO, 18 );
 	}
-	
+
 	return( TRUE );
 }
 
@@ -3892,11 +3892,11 @@ void UpdateDarrelScriptToGoTo( SOLDIERTYPE * pSoldier )
 	}
 
 	// find a spot to an alternate location nearby
-	sAdjustedGridNo = FindGridNoFromSweetSpotExcludingSweetSpot( pDarrel, pSoldier->sGridNo, 5, &ubDummyDirection );	
+	sAdjustedGridNo = FindGridNoFromSweetSpotExcludingSweetSpot( pDarrel, pSoldier->sGridNo, 5, &ubDummyDirection );
 	if (TileIsOutOfBounds(sAdjustedGridNo))
 	{
 		// yikes! try again with a bigger radius!
-		sAdjustedGridNo = FindGridNoFromSweetSpotExcludingSweetSpot( pDarrel, pSoldier->sGridNo, 10, &ubDummyDirection );		
+		sAdjustedGridNo = FindGridNoFromSweetSpotExcludingSweetSpot( pDarrel, pSoldier->sGridNo, 10, &ubDummyDirection );
 		if (TileIsOutOfBounds(sAdjustedGridNo))
 		{
 			// ok, now we're completely foobar

@@ -285,12 +285,12 @@ private:
 	DataStructures::RangeList<MessageNumberType> acknowlegements;
 	int splitMessageProgressInterval;
 	RakNetTimeNS unreliableTimeout;
-	
+
 	// Resend list is a tree of packets we need to resend
 	DataStructures::BPlusTree<MessageNumberType, InternalPacket*, RESEND_TREE_ORDER> resendList;
 	// resend Queue holds the same pointers, but in order of when to send them.  nextActionTime is set to 0 when the packet is no longer needed.
 	DataStructures::Queue<InternalPacket*> resendQueue;
-	
+
 	DataStructures::Queue<InternalPacket*> sendPacketSet[ NUMBER_OF_PRIORITIES ];
     DataStructures::OrderedList<SplitPacketIdType, SplitPacketChannel*, SplitPacketChannelComp> splitPacketChannelList;
 	MessageNumberType sendMessageNumberIndex, internalOrderIndex;
@@ -298,7 +298,7 @@ private:
 	RakNetTimeNS lastAckTime;
 	RakNet::BitStream updateBitStream;
 	OrderingIndexType waitingForOrderedPacketWriteIndex[ NUMBER_OF_ORDERED_STREAMS ], waitingForSequencedPacketWriteIndex[ NUMBER_OF_ORDERED_STREAMS ];
-	
+
 	// STUFF TO NOT MUTEX HERE (called from non-conflicting threads, or value is not important)
 	OrderingIndexType waitingForOrderedPacketReadIndex[ NUMBER_OF_ORDERED_STREAMS ], waitingForSequencedPacketReadIndex[ NUMBER_OF_ORDERED_STREAMS ];
 	bool deadConnection, cheater;

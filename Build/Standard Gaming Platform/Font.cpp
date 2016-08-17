@@ -4,7 +4,7 @@
 #elif defined( WIZ8_PRECOMPILED_HEADERS )
 	#include "WIZ8 SGP ALL.H"
 #else
-	#include "types.h"
+	#include "Types.h"
 	#include <stdio.h>
 	#include <stdarg.h>
 	#include <malloc.h>
@@ -13,20 +13,20 @@
 	#include <wchar.h>
 	#include "sgp.h"
 	#include "pcx.h"
-	#include "memman.h"
-	#include "fileman.h"
+	#include "MemMan.h"
+	#include "FileMan.h"
 	#include "Font.h"
 	#include "Debug.h"
 
 	#if defined( JA2 ) || defined( UTIL )
-	#include "video.h"
+	#include "Video.h"
 	#else
 	#include "video2.h"
 	#endif
 
 	#include "himage.h"
-	#include "vobject.h"
-	#include "vobject_blitters.h"
+	#include "VObject.h"
+	#include "VObject_blitters.h"
 
 	#include <sstream>
 #endif
@@ -705,7 +705,7 @@ UINT16 GetFontHeight(INT32 FontNum)
 	    if (FontNum != -1)
   	    {
   		    return (GetWinFontHeight(L"A", MapFont));
-  	    } 
+  	    }
     }
 	return((UINT16)GetHeight(FontObjs[FontNum], 0));
 }
@@ -853,7 +853,7 @@ CHAR16 GetUnicodeChar(CHAR16 siChar)
 			case 252:          siChar = 1100;  break;
 			case 253:          siChar = 1101;  break;
 			case 254:          siChar = 1102;  break;
-			case 255:          siChar = 1103;  break; //U+044F           d1 8f     CYRILLIC SMALL LETTER YA                
+			case 255:          siChar = 1103;  break; //U+044F           d1 8f     CYRILLIC SMALL LETTER YA
 		}
 	#endif
 
@@ -1878,7 +1878,7 @@ FontTranslationTable *CreateEnglishTransTable(	)
 	*temp = 1070; //?
 	temp++;
 	*temp = 1071; //?
-	temp++;	
+	temp++;
 	*temp = 1072; // ?
 	temp++;
 	*temp = 1073; // ?
@@ -2099,7 +2099,7 @@ FontTranslationTable *CreateEnglishTransTable(	)
 	//*temp = FONT_GLYPH_TARGET_NONE;
 
 	// 200
-	
+
 	return pTable;
 }
 

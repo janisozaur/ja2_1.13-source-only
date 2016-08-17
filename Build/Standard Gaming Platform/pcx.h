@@ -1,12 +1,12 @@
 #ifndef __PCX_
 #define __PCX_
 
-#include "types.h"
+#include "Types.h"
 #include "himage.h"
 
 
 typedef struct
-{ 
+{
 	UINT8	ubManufacturer;
 	UINT8	ubVersion;
 	UINT8	ubEncoding;
@@ -24,7 +24,7 @@ typedef struct
 } PcxHeader;
 
 typedef struct
-{ 
+{
 	UINT8	*pPcxBuffer;
 	UINT8	ubPalette[768];
 	UINT16 usWidth, usHeight;

@@ -1,7 +1,7 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Editor All.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 #endif
 
 #ifdef JA2EDITOR
@@ -9,10 +9,10 @@
 #ifndef PRECOMPILEDHEADERS
 	#include "tiledef.h"
 	#include "edit_sys.h"
-	#include "sysutil.h"
+	#include "SysUtil.h"
 	#include "Font Control.h"
-	#include "renderworld.h"	//ClearRenderFlags();
-	#include "worldman.h"			//HideStructOfGivenType()
+	#include "RenderWorld.h"	//ClearRenderFlags();
+	#include "WorldMan.h"			//HideStructOfGivenType()
 	#include "EditorDefines.h"
 	#include "EditorBuildings.h"
 	#include "EditorTerrain.h" //for access to TerrainTileDrawMode
@@ -23,15 +23,15 @@
 	#include "Editor Modes.h"
 	#include "Smoothing Utils.h"
 	#include "Text Input.h"
-	#include "keys.h"
-	#include "environment.h"
+	#include "Keys.h"
+	#include "Environment.h"
 	#include "selectwin.h"
 	#include "Simple Render Utils.h"
 	#include "Text.h"
 	//dnl ch86 100214
-	#include "lighting.h"
+	#include "Lighting.h"
 	#include "Exit Grids.h"
-	#include "editscreen.h"
+	#include "EditScreen.h"
 	#include "EditorItems.h"
 	#include "EditorMapInfo.h"
 #endif
@@ -68,7 +68,7 @@ void UpdateRoofsView()//dnl ch80 011213
 			HideStructOfGivenType(cnt, usType[x], !fBuildingShowRoofs);
 	}
 	*/
-	
+
 	// Buggler: hide all tiles on roof
 	x = FIRSTSWITCHES + 1;
 	for(cnt=0; cnt<WORLD_MAX; cnt++)

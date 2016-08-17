@@ -1,10 +1,10 @@
-/* 
+/*
  * bfVFS : vfs/Core/Location/vfs_uncompressed_lib_base.cpp
  *  - partially implements library interface for uncompressed archive files
  *  - initialization is done in format-specific sub-classes
  *
  * Copyright (C) 2008 - 2010 (BF) john.bf.smith@googlemail.com
- * 
+ *
  * This file is part of the bfVFS library
  *
  * This library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -87,12 +87,12 @@ void vfs::CUncompressedLibraryBase::IterImpl::next()
 /************************************************************************/
 /************************************************************************/
 
-vfs::CUncompressedLibraryBase::CUncompressedLibraryBase(vfs::tReadableFile *libraryFile, vfs::Path const& mountPoint, bool ownFile) 
+vfs::CUncompressedLibraryBase::CUncompressedLibraryBase(vfs::tReadableFile *libraryFile, vfs::Path const& mountPoint, bool ownFile)
 : vfs::ILibrary(libraryFile,mountPoint,ownFile), m_numberOfOpenedFiles(0)
 {
 }
 
-vfs::CUncompressedLibraryBase::~CUncompressedLibraryBase() 
+vfs::CUncompressedLibraryBase::~CUncompressedLibraryBase()
 {
 	this->closeLibrary();
 	// delete sub dirs from catalogue
@@ -101,9 +101,9 @@ vfs::CUncompressedLibraryBase::~CUncompressedLibraryBase()
 	{
 		delete it->second;
 	}
-	// LibData is invalid 
+	// LibData is invalid
 	// just clear it, since the file handles were deleted before
-	m_fileData.clear(); 
+	m_fileData.clear();
 	m_dirs.clear();
 }
 
@@ -153,8 +153,8 @@ void vfs::CUncompressedLibraryBase::close(tFileType *fileHandle)
 	{
 		SFileData& file = _fileDataFromHandle(fileHandle);
 
-		// reset read position 
-		// can't do this when opening file, 
+		// reset read position
+		// can't do this when opening file,
 		// because you could try to open a file when it is already open and would so reset the read position
 		file._currentReadPosition = 0;
 		if(m_numberOfOpenedFiles > 0)

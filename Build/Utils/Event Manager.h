@@ -1,7 +1,7 @@
 #ifndef __EVENT_MANAGER_H
 #define __EVENT_MANAGER_H
 
-typedef struct 
+typedef struct
 {
 	TIMER		TimeStamp;
 	UINT32	uiFlags;

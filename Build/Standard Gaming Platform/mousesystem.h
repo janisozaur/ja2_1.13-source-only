@@ -31,7 +31,7 @@
 #define _JA2_RENDER_DIRTY		// Undef this if not using the JA2 Dirty Rectangle System.
 #endif
 
-typedef void (*MOUSE_CALLBACK)(struct _MOUSE_REGION *,INT32);	// Define MOUSE_CALLBACK type as pointer to void 
+typedef void (*MOUSE_CALLBACK)(struct _MOUSE_REGION *,INT32);	// Define MOUSE_CALLBACK type as pointer to void
 typedef void (*MOUSE_HELPTEXT_DONE_CALLBACK)( ); // the help is done callback
 
 typedef struct _MOUSE_REGION {
@@ -52,7 +52,7 @@ typedef struct _MOUSE_REGION {
 	MOUSE_CALLBACK				MovementCallback;		// Pointer to callback function if movement occured in this region
 	MOUSE_CALLBACK				ButtonCallback;			// Pointer to callback function if button action occured in this region
 	INT32									UserData[4];	// User Data, can be set to anything!
-	
+
 	//Fast help vars.
 	INT16					FastHelpTimer;		// Countdown timer for FastHelp text
 	CHAR16				*FastHelpText;		// Text string for the FastHelp (describes buttons if left there a while)
@@ -218,7 +218,7 @@ void MSYS_DeleteRegionFromList(MOUSE_REGION *region);
 void MSYS_UpdateMouseRegion(void);
 void MSYS_SetCurrentCursor(UINT16 Cursor);
 
-// External 
+// External
 INT32 MSYS_Init(void);
 void MSYS_Shutdown(void);
 void MSYS_DefineRegion(MOUSE_REGION *region,UINT16 tlx,UINT16 tly,UINT16 brx,UINT16 bry,INT8 priority,

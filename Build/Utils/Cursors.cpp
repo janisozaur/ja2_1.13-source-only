@@ -1,19 +1,19 @@
 #ifdef PRECOMPILEDHEADERS
 	#include "Utils All.h"
-	#include "interface items.h"
+	#include "Interface Items.h"
 #else
-	#include "builddefines.h"
+	#include "BuildDefines.h"
 	#include <wchar.h>
 	#include "sgp.h"
-	#include "cursors.h"
+	#include "Cursors.h"
 	#include "Timer Control.h"
 	#include "jascreens.h"
-	#include "font.h"
+	#include "Font.h"
 	#include "Font Control.h"
 	#include "Sys Globals.h"
 	#include "Handle UI.h"
-	#include "interface.h"
-	#include "overhead.h"
+	#include "Interface.h"
+	#include "Overhead.h"
 	#include "Cursor Control.h"
 	#include "Sound Control.h"
 	// HEADROCK HAM B2.6: included this here to allow toggling the CTH bars.
@@ -1304,7 +1304,7 @@ CursorData CursorDatabase[] =
 		0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0,
 		2, CENTER_CURSOR, CENTER_CURSOR, 0, 0, 0, 0},
-		
+
 	{ C_TRINGS,				6, 0, HIDE_SUBCURSOR, HIDE_SUBCURSOR,
 		C_FUEL				,	0, 0, CENTER_SUBCURSOR, CENTER_SUBCURSOR,
 		0,							0, 0, 0, 0,
@@ -1386,7 +1386,7 @@ void DrawMouseGraphicsNCTH( )
 	//////////////////////////////////////////////////////////////////////////////////////
 	// HEADROCK HAM 4: This entire cursor drawing function is now OBSOLETE in NCTH.
 	// Instead of drawing the targeting cursor on limited cursor space (in the MOUSEBUFFER),
-	// I draw the new indicator directly on the FRAMEBUFFER through a function in 
+	// I draw the new indicator directly on the FRAMEBUFFER through a function in
 	// Tactical\Interface.CPP. It bypasses the cursor system entirely in order to create
 	// a pseudo-cursor that can potentially be as large as the viewport (or larger). That
 	// is unfortunately not doable with the cursor system, so this code is now commented out.
@@ -1415,7 +1415,7 @@ void DrawMouseGraphicsNCTH( )
 			gbCtHBurstCount = 2;
 		else if	( gbCtHAutoFire )
 			gbCtHBurstCount = 0;
-		
+
 
 		// Sets the initial offsets of the bars. Burst and Autofire will display them higher above the
 		// cursor, to avoid obscuring the target or other data.
@@ -1425,7 +1425,7 @@ void DrawMouseGraphicsNCTH( )
 			barY = gsCurMouseOffsetY-__min(55,gsCurMouseHeight)/2;
 		else
 			barY = gsCurMouseOffsetY-__min(35,gsCurMouseHeight)/2;
-		
+
 		for (i=0; i<gbCtHBurstCount; i++)
 		{
 			actualPct		= __min(gbCtH[ i ],99);
@@ -1461,7 +1461,7 @@ void DrawMouseGraphicsNCTH( )
 
 			UnlockMouseBuffer();
 			if (gbCtHBurstCount>1)
-			barY = barY+5;	
+			barY = barY+5;
 		}
 		barY = gsCurMouseOffsetY-__min(35,gsCurMouseHeight)/2;
 	}
@@ -1498,7 +1498,7 @@ void DrawMouseGraphics( )
 			gbCtHBurstCount = 2;
 		else if	( gbCtHAutoFire )
 			gbCtHBurstCount = 0;
-		
+
 
 		// Sets the initial offsets of the bars. Burst and Autofire will display them higher above the
 		// cursor, to avoid obscuring the target or other data.
@@ -1508,7 +1508,7 @@ void DrawMouseGraphics( )
 			barY = gsCurMouseOffsetY-__min(55,gsCurMouseHeight)/2;
 		else
 			barY = gsCurMouseOffsetY-__min(35,gsCurMouseHeight)/2;
-		
+
 		for (i=0; i<gbCtHBurstCount; i++)
 		{
 			actualPct		= __min(gbCtH[ i ],99);
@@ -1544,7 +1544,7 @@ void DrawMouseGraphics( )
 
 			UnlockMouseBuffer();
 			if (gbCtHBurstCount>1)
-			barY = barY+5;	
+			barY = barY+5;
 		}
 		barY = gsCurMouseOffsetY-__min(35,gsCurMouseHeight)/2;
 	}
@@ -1838,7 +1838,7 @@ void UpdateAnimatedCursorFrames( UINT32 uiCursorIndex )
 					case C_YELLOWRINGS:
 						pCurImage->uiFileIndex = C_YELLOWRINGS_NCTH; break;
 				}
-			} 
+			}
 			else
 			{
 				switch(pCurImage->uiFileIndex)

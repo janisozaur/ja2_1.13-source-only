@@ -91,13 +91,13 @@ public:
 	/// \param[in] bitsUsed How many bits long \a data is
 	/// \param[in] remoteSystemAddress Which system this message is being sent to
 	virtual void OnDirectSocketSend(const char *data, const BitSize_t bitsUsed, SystemAddress remoteSystemAddress);
-	
+
 	/// Called on a receive from the socket, per datagram, that does not go through the reliability layer
 	/// \param[in] data The data being sent
 	/// \param[in] bitsUsed How many bits long \a data is
 	/// \param[in] remoteSystemAddress Which system this message is being sent to
 	virtual void OnDirectSocketReceive(const char *data, const BitSize_t bitsUsed, SystemAddress remoteSystemAddress);
-	
+
 	/// Called on a send or recieve within the reliability layer
 	/// \param[in] internalPacket The user message, along with all send data.
 	/// \param[in] frameNumber The number of frames sent or received so far for this player depending on \a isSend .  Indicates the frame of this user message.
