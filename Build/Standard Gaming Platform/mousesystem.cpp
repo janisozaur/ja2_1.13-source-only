@@ -117,7 +117,7 @@ void ExecuteMouseHelpEndCallBack( MOUSE_REGION *region );
 //values there as well.	That's the only reason why I left this here.
 MOUSE_REGION MSYS_SystemBaseRegion = {
 								MSYS_ID_SYSTEM, MSYS_PRIORITY_SYSTEM, BASE_REGION_FLAGS,
-								-32767, -32767, 32767, 32767, 0, 0, 0, 0, 0, 0, 0,
+								-32767, -32767, 32767, 32767, 0, 0, 0, 0, 0, 0, CURSOR_NORMAL,
 								MSYS_NO_CALLBACK, MSYS_NO_CALLBACK, { 0,0,0,0 },
 								0, 0, -1, MSYS_NO_CALLBACK, NULL, NULL };
 
@@ -184,7 +184,7 @@ INT32 MSYS_Init(void)
 	MSYS_SystemBaseRegion.RelativeXPos			= 0;
 	MSYS_SystemBaseRegion.RelativeYPos			= 0;
 	MSYS_SystemBaseRegion.ButtonState			= 0;
-	MSYS_SystemBaseRegion.Cursor				= 0;
+	MSYS_SystemBaseRegion.Cursor				= CURSOR_NORMAL;
 	MSYS_SystemBaseRegion.WheelState			= 0;
 	MSYS_SystemBaseRegion.UserData[0]			= 0;
 	MSYS_SystemBaseRegion.UserData[1]			= 0;
@@ -983,7 +983,7 @@ void MSYS_UpdateMouseRegion(void)
 //	Inits a MOUSE_REGION structure for use with the mouse system
 //
 void MSYS_DefineRegion(MOUSE_REGION *region,UINT16 tlx,UINT16 tly,UINT16 brx,UINT16 bry,INT8 priority,
-					UINT16 crsr,MOUSE_CALLBACK movecallback,MOUSE_CALLBACK buttoncallback)
+					CursorTypeDefines crsr,MOUSE_CALLBACK movecallback,MOUSE_CALLBACK buttoncallback)
 {
 	#ifdef MOUSESYSTEM_DEBUGGING
 		if( region->uiFlags & MSYS_REGION_EXISTS )
@@ -1048,7 +1048,7 @@ void MSYS_DefineRegion(MOUSE_REGION *region,UINT16 tlx,UINT16 tly,UINT16 brx,UIN
 //=================================================================================================
 //	MSYS_ChangeRegionCursor
 //
-void MSYS_ChangeRegionCursor(MOUSE_REGION *region,UINT16 crsr)
+void MSYS_ChangeRegionCursor(MOUSE_REGION *region, CursorTypeDefines crsr)
 {
 	region->uiFlags &= (~MSYS_SET_CURSOR);
 	region->Cursor = crsr;
@@ -1186,7 +1186,7 @@ void MSYS_DisableRegion(MOUSE_REGION *region)
 //
 //	Sets the mouse cursor to the regions defined value.
 //
-void MSYS_SetCurrentCursor(UINT16 Cursor)
+void MSYS_SetCurrentCursor(CursorTypeDefines Cursor)
 {
 	SGP_TRYCATCH_RETHROW(SetCurrentCursorFromDatabase( Cursor ), "Could not set Cursor");
 }
@@ -1601,7 +1601,7 @@ void RenderFastHelp()
 				if ( MSYS_CurrRegion->uiFlags & MSYS_MOUSE_IN_AREA &&
 						!MSYS_CurrRegion->ButtonState)// & (MSYS_LEFT_BUTTON|MSYS_RIGHT_BUTTON)) )
 				{
-					MSYS_CurrRegion->FastHelpTimer -= (INT16)max( iTimeDifferential, 0 );
+					MSYS_CurrRegion->FastHelpTimer -= (INT16)(std::max)( iTimeDifferential, 0 );
 
 					if( MSYS_CurrRegion->FastHelpTimer < 0 )
 					{

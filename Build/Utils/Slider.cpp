@@ -150,7 +150,7 @@ void ShutDownSlider()
 }
 
 
-INT32	AddSlider( UINT8 ubStyle, UINT16 usCursor, UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT16 usNumberOfIncrements, INT8 sPriority, SLIDER_CHANGE_CALLBACK SliderChangeCallback, UINT32 uiFlags )
+INT32	AddSlider( UINT8 ubStyle, CursorTypeDefines usCursor, UINT16 usPosX, UINT16 usPosY, UINT16 usWidth, UINT16 usNumberOfIncrements, INT8 sPriority, SLIDER_CHANGE_CALLBACK SliderChangeCallback, UINT32 uiFlags )
 {
 	SLIDER *pTemp = NULL;
 	SLIDER *pNewSlider = NULL;

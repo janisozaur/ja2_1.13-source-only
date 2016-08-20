@@ -1160,7 +1160,7 @@ void CreateDestroyScreenMaskForPauseGame( void )
 	{
 		// create a mouse region for pausing of game clock
 		MSYS_DefineRegion( &gClockScreenMaskMouseRegion, 0, 0 ,SCREEN_WIDTH, SCREEN_HEIGHT , MSYS_PRIORITY_HIGHEST,
-							0, MSYS_NO_CALLBACK, ScreenMaskForGamePauseBtnCallBack );
+							CURSOR_NORMAL, MSYS_NO_CALLBACK, ScreenMaskForGamePauseBtnCallBack );
 		fCreated = TRUE;
 
 		// get region x and y values

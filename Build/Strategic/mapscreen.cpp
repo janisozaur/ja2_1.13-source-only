@@ -974,7 +974,7 @@ void CheckForAndRenderNewMailOverlay();
 BOOLEAN MapCharacterHasAccessibleInventory( INT8 bCharNumber );
 void CheckForInventoryModeCancellation();
 
-void ChangeMapScreenMaskCursor( UINT16 usCursor );
+void ChangeMapScreenMaskCursor( CursorTypeDefines usCursor );
 void CancelOrShortenPlottedPath( void );
 
 // HEADROCK HAM B2.8: Added argument to enable multi-selecting entire squads
@@ -14751,7 +14751,7 @@ BOOLEAN CanChangeSleepStatusForSoldier( SOLDIERTYPE *pSoldier )
 }
 
 
-void ChangeMapScreenMaskCursor( UINT16 usCursor )
+void ChangeMapScreenMaskCursor( CursorTypeDefines usCursor )
 {
 	MSYS_SetCurrentCursor( usCursor );
 	MSYS_ChangeRegionCursor( &gMapScreenMaskRegion, usCursor );

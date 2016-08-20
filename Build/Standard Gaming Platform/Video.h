@@ -19,7 +19,6 @@
 
 #define MAX_CURSOR_WIDTH		64
 #define MAX_CURSOR_HEIGHT	 64
-#define VIDEO_NO_CURSOR				0xFFFF
 
 
 extern HWND										ghWindow;

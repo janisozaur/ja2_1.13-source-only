@@ -103,7 +103,7 @@ TEXTINPUTNODE *gpTextInputHead = NULL, *gpTextInputTail = NULL, *gpActive = NULL
 //Saving current mode
 TEXTINPUTNODE *pSavedHead = NULL;
 TextInputColors *pSavedColors = NULL;
-UINT16 gusTextInputCursor = CURSOR_IBEAM;
+CursorTypeDefines gusTextInputCursor = CURSOR_IBEAM;
 
 
 //Saves the current text input mode by pushing it onto our stack, then starts a new
@@ -1767,12 +1767,12 @@ void RestoreSavedTextInputMode()
 	pSavedColors = NULL;
 }
 
-UINT16 GetTextInputCursor()
+CursorTypeDefines GetTextInputCursor()
 {
 	return gusTextInputCursor;
 }
 
-void SetTextInputCursor( UINT16 usNewCursor )
+void SetTextInputCursor( CursorTypeDefines usNewCursor )
 {
 	STACKTEXTINPUTNODE *stackCurr;
 	TEXTINPUTNODE *curr;

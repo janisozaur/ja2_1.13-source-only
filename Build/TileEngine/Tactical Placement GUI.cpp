@@ -483,7 +483,7 @@ void InitTacticalPlacementGUI()
 		}
 
 		//yp = (i % 2) ? 412 : 361;
-		MSYS_DefineRegion( &gMercPlacement[ i ].region, (UINT16)xp, (UINT16)yp, (UINT16)(xp + 54), (UINT16)(yp + 62), MSYS_PRIORITY_HIGH, 0, MercMoveCallback, MercClickCallback );
+		MSYS_DefineRegion( &gMercPlacement[ i ].region, (UINT16)xp, (UINT16)yp, (UINT16)(xp + 54), (UINT16)(yp + 62), MSYS_PRIORITY_HIGH, CURSOR_NORMAL, MercMoveCallback, MercClickCallback );
 	}
 
 	if(!is_client)

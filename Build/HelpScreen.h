@@ -46,7 +46,7 @@ typedef struct
 	INT8		bDelayEnteringHelpScreenBy1FrameCount;
 	UINT16	usLeftMarginPosX;
 
-	UINT16	usCursor;
+	CursorTypeDefines	usCursor;
 
 	BOOLEAN	fWasTheGamePausedPriorToEnteringHelpScreen;
 

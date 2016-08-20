@@ -131,7 +131,7 @@ void			ConfirmToDeductMoneyFromPlayersAccountMessageBoxCallBack( UINT8 bExitValu
 void			ConfirmDontHaveEnoughForTheDealerMessageBoxCallBack( UINT8 bExitValue );
 
 void			SkiHelpTextDoneCallBack( void );
-void			SetSkiCursor( UINT16	usCursor );
+void			SetSkiCursor( CursorTypeDefines	usCursor );
 
 void			InitShopKeeperSubTitledText( STR16 pString );
 

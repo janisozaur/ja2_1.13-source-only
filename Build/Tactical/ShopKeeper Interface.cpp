@@ -4705,7 +4705,7 @@ void RestrictSkiMouseCursor()
 }
 
 
-void SetSkiCursor( UINT16	usCursor )
+void SetSkiCursor( CursorTypeDefines	usCursor )
 {
 	UINT8	ubCnt;
 

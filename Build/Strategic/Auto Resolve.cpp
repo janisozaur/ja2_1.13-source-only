@@ -1060,7 +1060,7 @@ void CalculateSoldierCells( BOOLEAN fReset )
 			Assert( gpMercs[ index ].pRegion );
 			memset( gpMercs[ index ].pRegion, 0, sizeof( MOUSE_REGION ) );
 			MSYS_DefineRegion( gpMercs[ index ].pRegion, gpMercs[ index ].xp, gpMercs[ index ].yp,
-				(UINT16)(gpMercs[ index ].xp + 50), (UINT16)(gpMercs[ index ].yp + 44), MSYS_PRIORITY_HIGH, 0,
+				(UINT16)(gpMercs[ index ].xp + 50), (UINT16)(gpMercs[ index ].yp + 44), MSYS_PRIORITY_HIGH, CURSOR_NORMAL,
 				MercCellMouseMoveCallback, MercCellMouseClickCallback );
 			if( fReset )
 				RefreshMerc( gpMercs[ index ].pSoldier );
@@ -1996,7 +1996,7 @@ void CreateAutoResolveInterface()
 	UINT8 cnt;
 
 	//Setup new autoresolve blanket interface.
-	MSYS_DefineRegion( &gpAR->AutoResolveRegion, 0 + xResOffset, 0, SCREEN_WIDTH, SCREEN_HEIGHT, MSYS_PRIORITY_HIGH-1, 0,
+	MSYS_DefineRegion( &gpAR->AutoResolveRegion, 0 + xResOffset, 0, SCREEN_WIDTH, SCREEN_HEIGHT, MSYS_PRIORITY_HIGH-1, CURSOR_NORMAL,
 		MSYS_NO_CALLBACK, MSYS_NO_CALLBACK );
 	gpAR->fRenderAutoResolve = TRUE;
 	gpAR->fExitAutoResolve = FALSE;

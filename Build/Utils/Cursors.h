@@ -5,6 +5,8 @@
 
 typedef enum
 {
+	VIDEO_NO_CURSOR = -1,
+	MSYS_NO_CURSOR = -1,
 	CURSOR_NORMAL,
 	CURSOR_TARGET,
 	CURSOR_TARGETON1,
@@ -176,6 +178,9 @@ typedef enum
 
 	CURSOR_FUEL,
 	CURSOR_FUEL_RED,
+
+	EXTERN_CURSOR,
+	EXTERN2_CURSOR,
 
 } CursorTypeDefines;
 

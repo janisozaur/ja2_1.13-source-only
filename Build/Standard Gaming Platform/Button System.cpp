@@ -41,7 +41,7 @@
 
 //ATE: Added to let Wiz default creating mouse regions with no cursor, JA2 default to a cursor ( first one )
 #ifdef JA2
-	#define		MSYS_STARTING_CURSORVAL		0
+	#define		MSYS_STARTING_CURSORVAL		CURSOR_NORMAL
 #else
 	#define		MSYS_STARTING_CURSORVAL		MSYS_NO_CURSOR
 	// The following should be moved from here
@@ -1911,7 +1911,7 @@ INT32 CreateHotSpot(INT16 xloc, INT16 yloc, INT16 Width, INT16 Height,INT16 Prio
 // Addition Oct15/97, Carter
 // SetButtonCursor
 // will simply set the cursor for the mouse region the button occupies
-BOOLEAN SetButtonCursor(INT32 iBtnId, UINT16 crsr)
+BOOLEAN SetButtonCursor(INT32 iBtnId, CursorTypeDefines crsr)
 {
 	GUI_BUTTON *b;
 	b = ButtonList[iBtnId];

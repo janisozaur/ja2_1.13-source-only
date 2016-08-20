@@ -215,7 +215,7 @@ typedef struct
 {
 	UINT32 uiCursorID;
 	UINT32 uiFlags;
-	UINT16 usFreeCursorName;
+	CursorTypeDefines usFreeCursorName;
 	UINT16 usAdditionalData;
 
 } UICursor;

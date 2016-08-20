@@ -497,7 +497,7 @@ void CreateDestroyScreenMaskForMilitiaControlMenus( void )
 
 		if ( !(guiTacticalInterfaceFlags & INTERFACE_MAPSCREEN ) )
 		{
-			MSYS_ChangeRegionCursor(  &gMilitiaControlScreenMaskRegion, 0 );
+			MSYS_ChangeRegionCursor(  &gMilitiaControlScreenMaskRegion, CURSOR_NORMAL );
 		}
 	}
 	else if( ( fCreated == TRUE ) && ( fShowMilitiaControlMenu == FALSE ) )

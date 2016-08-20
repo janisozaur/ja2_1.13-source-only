@@ -1180,7 +1180,7 @@ void POPUP::CreateScreenMask( void )
 
 	// if in tactical...
 	if ( !(guiTacticalInterfaceFlags & INTERFACE_MAPSCREEN) )
-		MSYS_ChangeRegionCursor(  &this->ScreenMaskRegion, 0 );
+		MSYS_ChangeRegionCursor(  &this->ScreenMaskRegion, CURSOR_NORMAL );
 
 	if (!registerPopupRegion( this->ScreenMaskRegion.IDNumber, this->id)){
 		#ifdef JA2TESTVERSION

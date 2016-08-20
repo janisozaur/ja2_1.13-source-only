@@ -8627,7 +8627,7 @@ void DrawItemTileCursor( )
 	BOOLEAN						fRecalc;
 	UINT32						uiCursorFlags;
 	INT32 sFinalGridNo;
-	UINT32						uiCursorId = CURSOR_ITEM_GOOD_THROW;
+	CursorTypeDefines						uiCursorId = CURSOR_ITEM_GOOD_THROW;
 	SOLDIERTYPE				*pSoldier;
 	BOOLEAN						fGiveItem = FALSE;
 	INT32 sActionGridNo;
@@ -8919,7 +8919,7 @@ void DrawItemTileCursor( )
 		}
 
 
-		MSYS_ChangeRegionCursor( &gViewportRegion , (UINT16)uiCursorId );
+		MSYS_ChangeRegionCursor( &gViewportRegion , uiCursorId );
 
 	}
 }

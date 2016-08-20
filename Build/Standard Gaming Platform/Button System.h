@@ -331,7 +331,7 @@ void ResizeButton(INT32 iButtonID,INT16 w, INT16 h);
 void QuickButtonCallbackMMove(MOUSE_REGION *reg,INT32 reason);
 void QuickButtonCallbackMButn(MOUSE_REGION *reg,INT32 reason);
 
-BOOLEAN SetButtonCursor(INT32 iBtnId, UINT16 crsr);
+BOOLEAN SetButtonCursor(INT32 iBtnId, CursorTypeDefines crsr);
 void MSYS_SetBtnUserData(INT32 iButtonNum,INT32 index,INT32 userdata);
 INT32 MSYS_GetBtnUserData(GUI_BUTTON *b,INT32 index);
 void MarkAButtonDirty( INT32 iButtonNum ); // will mark only selected button dirty

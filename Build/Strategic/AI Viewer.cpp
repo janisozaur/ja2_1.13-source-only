@@ -383,7 +383,7 @@ BOOLEAN CreateAIViewer()
 	else
 		ButtonList[ iViewerButton[ VIEW_CREATURES ] ]->uiFlags |= BUTTON_CLICKED_ON;
 
-	MSYS_DefineRegion( &ViewerRegion, VIEWER_LEFT, VIEWER_TOP, VIEWER_RIGHT, VIEWER_BOTTOM, MSYS_PRIORITY_HIGH, 0,
+	MSYS_DefineRegion( &ViewerRegion, VIEWER_LEFT, VIEWER_TOP, VIEWER_RIGHT, VIEWER_BOTTOM, MSYS_PRIORITY_HIGH, CURSOR_NORMAL,
 		ViewerMapMoveCallback, ViewerMapClickCallback );
 
 	//Add the enemy population override fields

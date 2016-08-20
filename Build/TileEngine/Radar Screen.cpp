@@ -112,7 +112,7 @@ BOOLEAN InitRadarScreen( )
 		MSYS_DefineRegion( &gRadarRegion, RADAR_WINDOW_TM_X, RADAR_WINDOW_TM_Y,
 											RADAR_WINDOW_TM_X + RADAR_WINDOW_WIDTH,
 											RADAR_WINDOW_TM_Y + RADAR_WINDOW_HEIGHT,
-											MSYS_PRIORITY_HIGHEST, 0,
+											MSYS_PRIORITY_HIGHEST, CURSOR_NORMAL,
 											RadarRegionMoveCallback,
 											RadarRegionButtonCallback );
 
@@ -230,7 +230,7 @@ void MoveRadarScreen()
 	MSYS_DefineRegion( &gRadarRegion, (UINT16) (gsRadarX), (UINT16)(gsRadarY),
 										 (UINT16) (gsRadarX + RADAR_WINDOW_WIDTH),
 										 (UINT16)(gsRadarY + RADAR_WINDOW_HEIGHT),
-										 MSYS_PRIORITY_HIGHEST, 0,
+										 MSYS_PRIORITY_HIGHEST, CURSOR_NORMAL,
 										 RadarRegionMoveCallback,
 										 RadarRegionButtonCallback );
 
@@ -781,7 +781,7 @@ BOOLEAN CreateDestroyMouseRegionsForSquadList( void )
 				// left half of list
 				// CHRISL:
 				MSYS_DefineRegion( &gRadarRegionSquadList[ sCounter ], RADAR_WINDOW_TM_X , ( INT16 )( SQUAD_WINDOW_TM_Y + ( sCounter * (  ( SQUAD_REGION_HEIGHT - SUBTRACTOR_FOR_SQUAD_LIST ) / ( NUMBER_OF_SQUADS / 2 ) ) ) ), RADAR_WINDOW_TM_X + RADAR_WINDOW_WIDTH / 2 - 1, ( INT16 )( SQUAD_WINDOW_TM_Y + ( ( sCounter + 1 ) * ( ( SQUAD_REGION_HEIGHT - SUBTRACTOR_FOR_SQUAD_LIST ) / ( NUMBER_OF_SQUADS / 2 ) ) ) ) ,MSYS_PRIORITY_HIGHEST,
-							0, TacticalSquadListMvtCallback, TacticalSquadListBtnCallBack );
+							CURSOR_NORMAL, TacticalSquadListMvtCallback, TacticalSquadListBtnCallBack );
 			}
 			else
 			{
@@ -789,7 +789,7 @@ BOOLEAN CreateDestroyMouseRegionsForSquadList( void )
 				// right half of list
 				// CHRISL:
 				MSYS_DefineRegion( &gRadarRegionSquadList[ sCounter ], RADAR_WINDOW_TM_X + RADAR_WINDOW_WIDTH / 2, ( INT16 )( SQUAD_WINDOW_TM_Y + ( ( sCounter - ( NUMBER_OF_SQUADS / 2) ) * ( 2 * ( SQUAD_REGION_HEIGHT - SUBTRACTOR_FOR_SQUAD_LIST ) / NUMBER_OF_SQUADS ) ) ), RADAR_WINDOW_TM_X + RADAR_WINDOW_WIDTH  - 1, ( INT16 )( SQUAD_WINDOW_TM_Y + ( ( ( sCounter + 1 ) - ( NUMBER_OF_SQUADS / 2) )* ( 2 * ( SQUAD_REGION_HEIGHT - SUBTRACTOR_FOR_SQUAD_LIST ) / NUMBER_OF_SQUADS ) ) ), MSYS_PRIORITY_HIGHEST,
-						0, TacticalSquadListMvtCallback, TacticalSquadListBtnCallBack );
+						CURSOR_NORMAL, TacticalSquadListMvtCallback, TacticalSquadListBtnCallBack );
 			}
 
 			// set user data

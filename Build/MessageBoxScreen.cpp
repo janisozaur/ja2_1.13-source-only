@@ -95,7 +95,7 @@ INT32 DoMessageBox( UINT8 ubStyle, const STR16 zString, UINT32 uiExitScreen, UIN
 	INT16	sButtonX, sButtonY, sBlankSpace;
 	UINT8	ubMercBoxBackground = BASIC_MERC_POPUP_BACKGROUND, ubMercBoxBorder = BASIC_MERC_POPUP_BORDER;
 	UINT8	ubFontColor, ubFontShadowColor;
-	UINT16	usCursor;
+	CursorTypeDefines	usCursor;
 	INT32 iId = -1;
 
 	GetMousePos( &pOldMousePosition );

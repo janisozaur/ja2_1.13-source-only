@@ -471,7 +471,7 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 	}
 
 	//Define the blanket region to cover all of the other regions used underneath the panel.
-	MSYS_DefineRegion( &PBInterfaceBlanket, 0 + xResOffset, 0 + yResOffset, 261 + xResOffset, 359 + yResOffset, MSYS_PRIORITY_HIGHEST - 5, 0, 0, 0 );
+	MSYS_DefineRegion( &PBInterfaceBlanket, 0 + xResOffset, 0 + yResOffset, 261 + xResOffset, 359 + yResOffset, MSYS_PRIORITY_HIGHEST - 5, CURSOR_NORMAL, 0, 0 );
 
 	//Create the panel
 	VObjectDesc.fCreateFlags = VOBJECT_CREATE_FROMFILE;

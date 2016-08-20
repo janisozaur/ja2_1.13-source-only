@@ -31,6 +31,8 @@
 #define _JA2_RENDER_DIRTY		// Undef this if not using the JA2 Dirty Rectangle System.
 #endif
 
+#include "Utils/Cursors.h"
+
 typedef void (*MOUSE_CALLBACK)(struct _MOUSE_REGION *,INT32);	// Define MOUSE_CALLBACK type as pointer to void
 typedef void (*MOUSE_HELPTEXT_DONE_CALLBACK)( ); // the help is done callback
 
@@ -48,7 +50,7 @@ typedef struct _MOUSE_REGION {
 	INT16						RelativeYPos;
 	UINT16						ButtonState;			// Current state of the mouse buttons
 	INT16						WheelState;				// Wheel state +/-number of wheel units
-	UINT16						Cursor;					// Cursor to use when mouse in this region (see flags)
+	CursorTypeDefines			Cursor;					// Cursor to use when mouse in this region (see flags)
 	MOUSE_CALLBACK				MovementCallback;		// Pointer to callback function if movement occured in this region
 	MOUSE_CALLBACK				ButtonCallback;			// Pointer to callback function if button action occured in this region
 	INT32									UserData[4];	// User Data, can be set to anything!
@@ -141,7 +143,6 @@ typedef struct _MOUSE_REGION {
 
 // Mouse system special values
 #define MSYS_NO_CALLBACK				NULL
-#define MSYS_NO_CURSOR					65534
 
 // Mouse system callback reasons
 #define MSYS_CALLBACK_REASON_NONE									0
@@ -216,14 +217,14 @@ void MSYS_AddRegionToList(MOUSE_REGION *region);
 INT32 MSYS_RegionInList(MOUSE_REGION *region);
 void MSYS_DeleteRegionFromList(MOUSE_REGION *region);
 void MSYS_UpdateMouseRegion(void);
-void MSYS_SetCurrentCursor(UINT16 Cursor);
+void MSYS_SetCurrentCursor(CursorTypeDefines Cursor);
 
 // External
 INT32 MSYS_Init(void);
 void MSYS_Shutdown(void);
 void MSYS_DefineRegion(MOUSE_REGION *region,UINT16 tlx,UINT16 tly,UINT16 brx,UINT16 bry,INT8 priority,
-					UINT16 crsr,MOUSE_CALLBACK movecallback,MOUSE_CALLBACK buttoncallback);
-void MSYS_ChangeRegionCursor(MOUSE_REGION *region,UINT16 crsr);
+					CursorTypeDefines crsr,MOUSE_CALLBACK movecallback,MOUSE_CALLBACK buttoncallback);
+void MSYS_ChangeRegionCursor(MOUSE_REGION *region, CursorTypeDefines crsr);
 INT32 MSYS_AddRegion(MOUSE_REGION *region);
 void MSYS_RemoveRegion(MOUSE_REGION *region);
 void MSYS_EnableRegion(MOUSE_REGION *region);

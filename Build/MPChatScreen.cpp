@@ -196,7 +196,7 @@ INT32 DoChatBox( bool bIncludeChatLog, const STR16 zString, UINT32 uiExitScreen,
 	INT16	sButtonX, sButtonY;
 	UINT8	ubMercBoxBackground = BASIC_MERC_POPUP_BACKGROUND, ubMercBoxBorder = BASIC_MERC_POPUP_BORDER;
 	UINT8	ubFontColor, ubFontShadowColor;
-	UINT16	usCursor;
+	CursorTypeDefines	usCursor;
 	INT32 iId = -1;
 
 	// clear the ouput string

@@ -83,8 +83,8 @@ void KillAllTextInputModes();
 void SaveAndRemoveCurrentTextInputMode();
 void RestoreSavedTextInputMode();
 
-void SetTextInputCursor( UINT16 usNewCursor );
-UINT16 GetTextInputCursor();
+void SetTextInputCursor( CursorTypeDefines usNewCursor );
+CursorTypeDefines GetTextInputCursor();
 
 //After calling InitTextInputMode, you want to define one or more text input fields.	The order
 //of calls to this function dictate the TAB order from traversing from one field to the next.	This
