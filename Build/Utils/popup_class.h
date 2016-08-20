@@ -66,7 +66,7 @@
 	class POPUP_OPTION
 	{
 	public:
-		POPUP_OPTION::POPUP_OPTION(void); // default constructor
+		POPUP_OPTION(void); // default constructor
 		POPUP_OPTION(std::wstring* name, popupCallback* newFunction); // constructor
 		~POPUP_OPTION();			// destructor
 		// setup
