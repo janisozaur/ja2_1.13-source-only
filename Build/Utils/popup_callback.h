@@ -306,10 +306,12 @@
 			this->fun = 0;
 		};
 		popupCallbackFunction(void * newFun){
-			this->fun = static_cast< void*>(newFun);
+			//this->fun = static_cast<void(*)()>(newFun);
+			this->fun = (void(*)())newFun;
 		};
 		virtual void bind(void * newFun){
-			this->fun = static_cast< void*>(newFun);
+			//this->fun = static_cast<void(*)(void)>(newFun);
+			this->fun = (void(*)())newFun;
 		};
 		virtual bool call(void){
 			try {
