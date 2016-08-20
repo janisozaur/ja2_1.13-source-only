@@ -538,11 +538,11 @@ void OBJECTTYPE::SpliceData(OBJECTTYPE& sourceObject, unsigned int numToSplice, 
 int OBJECTTYPE::AddObjectsToStack(int howMany, int objectStatus)
 {
 	//This function is never called from a soldier, so get the max size
-	int numToAdd = max(0, ItemSlotLimit( this, STACK_SIZE_LIMIT ) - ubNumberOfObjects);
+	int numToAdd = (std::max)(0, ItemSlotLimit( this, STACK_SIZE_LIMIT ) - ubNumberOfObjects);
 
 	//if howMany is ALL_OBJECTS the stack will become full
 	if (howMany != ALL_OBJECTS) {
-		numToAdd = min(numToAdd, howMany);
+		numToAdd = (std::min)(numToAdd, howMany);
 	}
 
 	if (numToAdd) {
@@ -627,7 +627,7 @@ int OBJECTTYPE::ForceAddObjectsToStack(OBJECTTYPE& sourceObject, int howMany)
 	int numToAdd = sourceObject.ubNumberOfObjects;
 	//if howMany is ALL_OBJECTS the stack will become full if sourceObject has enough
 	if (howMany != ALL_OBJECTS) {
-		numToAdd = min(numToAdd, howMany);
+		numToAdd = (std::min)(numToAdd, howMany);
 	}
 
 	//this recalcs weight too!
@@ -649,16 +649,16 @@ int OBJECTTYPE::AddObjectsToStack(OBJECTTYPE& sourceObject, int howMany, SOLDIER
 
 	//can't add too much, can't take too many
 	if(cap > 0){
-		freeObjectsInStack = max(0, (cap - ubNumberOfObjects));
+		freeObjectsInStack = (std::max)(0, (cap - ubNumberOfObjects));
 	}
 	else{
-		//freeObjectsInStack = max(0, (ItemSlotLimit( this, slot, pSoldier ) - ubNumberOfObjects));
-		freeObjectsInStack = max(0, (ItemSlotLimit( &sourceObject, slot, pSoldier ) - ubNumberOfObjects));
+		//freeObjectsInStack = (std::max)(0, (ItemSlotLimit( this, slot, pSoldier ) - ubNumberOfObjects));
+		freeObjectsInStack = (std::max)(0, (ItemSlotLimit( &sourceObject, slot, pSoldier ) - ubNumberOfObjects));
 	}
-	int numToAdd = min (freeObjectsInStack, sourceObject.ubNumberOfObjects);
+	int numToAdd = (std::min)(int(freeObjectsInStack), int(sourceObject.ubNumberOfObjects));
 	//if howMany is ALL_OBJECTS the stack will become full if sourceObject has enough
 	if (howMany != ALL_OBJECTS) {
-		numToAdd = min(numToAdd, howMany);
+		numToAdd = (std::min)(numToAdd, howMany);
 	}
 
 	if(numToAdd == 0){
@@ -724,7 +724,7 @@ int OBJECTTYPE::PrivateRemoveObjectsFromStack(int howMany, OBJECTTYPE* destObjec
 		howMany = ubNumberOfObjects;
 	}
 
-	int numToRemove = min(ubNumberOfObjects, howMany);
+	int numToRemove = (std::min)(int(ubNumberOfObjects), howMany);
 
 	bool allowLBETransfer = false;
 	if (numToRemove && UsingNewInventorySystem() == true && pSoldier != NULL) {
@@ -1436,7 +1436,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 
 		//in some cases we need to reference the objectStatus or something, even though the item is totally empty
 		//therefore, keep ubNumberOfObjects at 0 but resize objectStack to at least 1
-		this->objectStack.resize(max(ubNumberOfObjects, 1));
+		this->objectStack.resize((std::max)(ubNumberOfObjects, UINT8(1)));
 		if (ubNumberOfObjects == 0) {
 			this->usItem = NONE;
 		}
@@ -1661,7 +1661,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 			Version101::OLD_OBJECTTYPE_101_UNION ugYucky;
 			memcpy(&ugYucky, &src.ugYucky, __min(SIZEOF_OLD_OBJECTTYPE_101_UNION,sizeof(ObjectData)));
 
-			for (int x = 0; x < max(ubNumberOfObjects, 1); ++x) {
+			for (int x = 0; x < (std::max)(ubNumberOfObjects, UINT8(1)); ++x) {
 				(*this)[x]->data.objectStatus = ugYucky.bStatus[x];
 				(*this)[x]->data.bTrap = src.bTrap;		// 1-10 exp_lvl to detect
 				(*this)[x]->data.ubImprintID = src.ubImprintID;	// ID of merc that item is imprinted on
@@ -1682,7 +1682,7 @@ OBJECTTYPE& OBJECTTYPE::operator=(const OLD_OBJECTTYPE_101& src)
 
 		//CHRISL: Deal with NAS
 /*		if(UsingNewAttachmentSystem()==true){
-			for(int x = 0; x < max(ubNumberOfObjects, 1); ++x) {
+			for(int x = 0; x < (std::max)(ubNumberOfObjects, 1); ++x) {
 				std::vector<UINT16>	usAttachmentSlotIndexVector = GetItemSlots(this, x);
 				if((*this)[x]->attachments.size() != usAttachmentSlotIndexVector.size())
 					(*this)[x]->attachments.resize(usAttachmentSlotIndexVector.size());

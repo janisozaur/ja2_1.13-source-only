@@ -1885,23 +1885,23 @@ void ExtractAndUpdateMercAttributes()
 	//-1 values in the detailed placement work nicely, because that signifies that specific
 	//field isn't static.	Any other value becomes static, and static values override any
 	//generated values.
-	gpSelected->pDetailedPlacement->bExpLevel			= (INT8)min( GetNumericStrictValueFromField( 0 ), 100 );
-	gpSelected->pDetailedPlacement->bLife					= (INT8)min( GetNumericStrictValueFromField( 1 ), 100 );
-	gpSelected->pDetailedPlacement->bLifeMax			= (INT8)min( GetNumericStrictValueFromField( 2 ), 100 );
-	gpSelected->pDetailedPlacement->bMarksmanship	= (INT8)min( GetNumericStrictValueFromField( 3 ), 100 );
-	gpSelected->pDetailedPlacement->bStrength			= (INT8)min( GetNumericStrictValueFromField( 4 ), 100 );
-	gpSelected->pDetailedPlacement->bAgility			= (INT8)min( GetNumericStrictValueFromField( 5 ), 100 );
-	gpSelected->pDetailedPlacement->bDexterity		= (INT8)min( GetNumericStrictValueFromField( 6 ), 100 );
-	gpSelected->pDetailedPlacement->bWisdom				= (INT8)min( GetNumericStrictValueFromField( 7 ), 100 );
-	gpSelected->pDetailedPlacement->bLeadership		= (INT8)min( GetNumericStrictValueFromField( 8 ), 100 );
-	gpSelected->pDetailedPlacement->bExplosive		= (INT8)min( GetNumericStrictValueFromField( 9 ), 100 );
-	gpSelected->pDetailedPlacement->bMedical			= (INT8)min( GetNumericStrictValueFromField( 10 ), 100 );
-	gpSelected->pDetailedPlacement->bMechanical		= (INT8)min( GetNumericStrictValueFromField( 11 ), 100 );
-	gpSelected->pDetailedPlacement->bMorale				= (INT8)min( GetNumericStrictValueFromField( 11 ), 100 );
+	gpSelected->pDetailedPlacement->bExpLevel			= (INT8)(std::min)( GetNumericStrictValueFromField( 0 ), 100 );
+	gpSelected->pDetailedPlacement->bLife					= (INT8)(std::min)( GetNumericStrictValueFromField( 1 ), 100 );
+	gpSelected->pDetailedPlacement->bLifeMax			= (INT8)(std::min)( GetNumericStrictValueFromField( 2 ), 100 );
+	gpSelected->pDetailedPlacement->bMarksmanship	= (INT8)(std::min)( GetNumericStrictValueFromField( 3 ), 100 );
+	gpSelected->pDetailedPlacement->bStrength			= (INT8)(std::min)( GetNumericStrictValueFromField( 4 ), 100 );
+	gpSelected->pDetailedPlacement->bAgility			= (INT8)(std::min)( GetNumericStrictValueFromField( 5 ), 100 );
+	gpSelected->pDetailedPlacement->bDexterity		= (INT8)(std::min)( GetNumericStrictValueFromField( 6 ), 100 );
+	gpSelected->pDetailedPlacement->bWisdom				= (INT8)(std::min)( GetNumericStrictValueFromField( 7 ), 100 );
+	gpSelected->pDetailedPlacement->bLeadership		= (INT8)(std::min)( GetNumericStrictValueFromField( 8 ), 100 );
+	gpSelected->pDetailedPlacement->bExplosive		= (INT8)(std::min)( GetNumericStrictValueFromField( 9 ), 100 );
+	gpSelected->pDetailedPlacement->bMedical			= (INT8)(std::min)( GetNumericStrictValueFromField( 10 ), 100 );
+	gpSelected->pDetailedPlacement->bMechanical		= (INT8)(std::min)( GetNumericStrictValueFromField( 11 ), 100 );
+	gpSelected->pDetailedPlacement->bMorale				= (INT8)(std::min)( GetNumericStrictValueFromField( 11 ), 100 );
 
 	//make sure that experience level ranges between 1 and 10
 	if( gpSelected->pDetailedPlacement->bExpLevel != -1 )
-		gpSelected->pDetailedPlacement->bExpLevel = max( min( gpSelected->pDetailedPlacement->bExpLevel , 10 ), 1 );
+		gpSelected->pDetailedPlacement->bExpLevel = (std::max)( (std::min)( gpSelected->pDetailedPlacement->bExpLevel , 10 ), 1 );
 
 	//no such thing as a life max of 0
 	if( !gpSelected->pDetailedPlacement->bLifeMax )
@@ -1928,7 +1928,7 @@ void ExtractAndUpdateMercProfile()
 
 	//if the string is blank, returning -1, then set the value to NO_PROFILE
 	//because ubProfile is unsigned.
-	sNum = (INT16)min(GetNumericStrictValueFromField(1), NUM_PROFILES-1);//dnl ch54 101009 //dnl ch78 271113
+	sNum = (INT16)(std::min)(GetNumericStrictValueFromField(1), NUM_PROFILES-1);//dnl ch54 101009 //dnl ch78 271113
 	if( sNum == -1 )
 	{
 		gpSelected->pDetailedPlacement->ubProfile = NO_PROFILE;
@@ -2858,7 +2858,7 @@ void AddNewItemToSelectedMercsInventory( BOOLEAN fCreate )
 		if( !(Item[ gpSelected->pDetailedPlacement->Inv[ gbMercSlotTypes[ gbCurrSelect ] ].usItem ].usItemClass & IC_AMMO) )
 		{
 			gpSelected->pDetailedPlacement->Inv[ gbMercSlotTypes[ gbCurrSelect ] ][0]->data.objectStatus = (INT8)(80 + Random( 21 ));
-			gpSelected->pDetailedPlacement->Inv[ gbMercSlotTypes[ gbCurrSelect ] ][0]->data.sRepairThreshold = max(1, min(100, (100 + gpSelected->pDetailedPlacement->Inv[ gbMercSlotTypes[ gbCurrSelect ] ][0]->data.objectStatus)/2 ));
+			gpSelected->pDetailedPlacement->Inv[ gbMercSlotTypes[ gbCurrSelect ] ][0]->data.sRepairThreshold = (std::max)(1, (std::min)(100, (100 + gpSelected->pDetailedPlacement->Inv[ gbMercSlotTypes[ gbCurrSelect ] ][0]->data.objectStatus)/2 ));
 		}
 
 		if( gusMercsNewItemIndex )
@@ -2945,7 +2945,7 @@ void AddNewItemToSelectedMercsInventory( BOOLEAN fCreate )
 	else if( rHeightScalar == 1.0 )
 		rScalar = rWidthScalar ;
 	else
-		rScalar = max( rWidthScalar, rHeightScalar );
+		rScalar = (std::max)( rWidthScalar, rHeightScalar );
 
 	//apply the scalar to the destination width and height
 	iDstWidth = (INT32)( iSrcWidth * rScalar );

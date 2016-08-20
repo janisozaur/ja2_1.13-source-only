@@ -41,6 +41,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <iostream>
+#include <algorithm>
 
 #include "Resource.h"
 #include "FileStream.h"
@@ -645,7 +646,7 @@ void Console::OnVScroll(WPARAM wParam) {
 		return;
 	}
 
-	if ((nDelta = max(-nCurrentPos, min(nDelta, (int)(m_dwBufferRows-m_dwRows) - nCurrentPos))) != 0) {
+	if ((nDelta = (std::max)(-nCurrentPos, (std::min)(nDelta, (int)(m_dwBufferRows-m_dwRows) - nCurrentPos))) != 0) {
 
 		nCurrentPos += nDelta;
 
@@ -712,8 +713,8 @@ void Console::OnLButtonDown(UINT uiFlags, POINTS points) {
 
 			m_nTextSelection = TEXT_SELECTION_SELECTING;
 
-			m_coordSelOrigin.X = min(max(points.x - m_nInsideBorder, 0) / m_nCharWidth, m_dwColumns-1);
-			m_coordSelOrigin.Y = min(max(points.y - m_nInsideBorder, 0) / m_nCharHeight, m_dwRows-1);
+			m_coordSelOrigin.X = (std::min)(max(points.x - m_nInsideBorder, 0) / m_nCharWidth, m_dwColumns-1);
+			m_coordSelOrigin.Y = (std::min)(max(points.y - m_nInsideBorder, 0) / m_nCharHeight, m_dwRows-1);
 
 			m_rectSelection.left = m_rectSelection.right = m_coordSelOrigin.X * m_nCharWidth + m_nInsideBorder;
 			m_rectSelection.top = m_rectSelection.bottom = m_coordSelOrigin.Y * m_nCharHeight + m_nInsideBorder;
@@ -857,8 +858,8 @@ void Console::OnMouseMove(UINT uiFlags, POINTS points) {
 
 					::InvalidateRect(m_hWnd, &m_rectSelection, FALSE);
 
-					coordSel.X = min(max(points.x - m_nInsideBorder, 0) / m_nCharWidth, m_dwColumns-1);
-					coordSel.Y = min(max(points.y - m_nInsideBorder, 0) / m_nCharHeight, m_dwRows-1);
+					coordSel.X = (std::min)(max(points.x - m_nInsideBorder, 0) / m_nCharWidth, m_dwColumns-1);
+					coordSel.Y = (std::min)(max(points.y - m_nInsideBorder, 0) / m_nCharHeight, m_dwRows-1);
 
 //					TRACE(_T("End point: %ix%i\n"), coordSel.X, coordSel.Y);
 

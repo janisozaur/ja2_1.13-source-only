@@ -2127,7 +2127,7 @@ void HandleKeyboardShortcuts( )
 					if( iCurrentTaskbar == TASK_ITEMS || gubCurrMercMode == MERC_GETITEMMODE )
 					{
 #if 0//dnl ch80 011213
-						if( eInfo.sScrollIndex < max( ((eInfo.sNumItems+1)/2)-6, 0) )
+						if( eInfo.sScrollIndex < (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 						{
 							if( EditorInputEvent.usKeyState & CTRL_DOWN )
 								eInfo.sScrollIndex = __min(eInfo.sScrollIndex + 60, (eInfo.sNumItems+1)/2-6);
@@ -2135,7 +2135,7 @@ void HandleKeyboardShortcuts( )
 								eInfo.sScrollIndex++;
 
 							EnableButton( iEditorButton[ITEMS_LEFTSCROLL] );
-							if( eInfo.sScrollIndex == max( ((eInfo.sNumItems+1)/2)-6, 0) )
+							if( eInfo.sScrollIndex == (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 								DisableButton( iEditorButton[ITEMS_RIGHTSCROLL] );
 						}
 #else
@@ -2179,15 +2179,15 @@ void HandleKeyboardShortcuts( )
 					if( iCurrentTaskbar == TASK_ITEMS || gubCurrMercMode == MERC_GETITEMMODE )
 					{
 #if 0//dnl ch80 011213
-						if( eInfo.sScrollIndex < max( ((eInfo.sNumItems+1)/2)-6, 0) )
+						if( eInfo.sScrollIndex < (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 						{
 							if( EditorInputEvent.usKeyState & CTRL_DOWN )
-								eInfo.sScrollIndex = max( ((eInfo.sNumItems+1)/2)-6, 0);
+								eInfo.sScrollIndex = (std::max)( ((eInfo.sNumItems+1)/2)-6, 0);
 							else
 								eInfo.sScrollIndex = __min(eInfo.sScrollIndex + 6, (eInfo.sNumItems+1)/2-6);
 
 							EnableButton( iEditorButton[ITEMS_LEFTSCROLL] );
-							if( eInfo.sScrollIndex == max( ((eInfo.sNumItems+1)/2)-6, 0) )
+							if( eInfo.sScrollIndex == (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 								DisableButton( iEditorButton[ITEMS_RIGHTSCROLL] );
 						}
 #else
@@ -2257,7 +2257,7 @@ void HandleKeyboardShortcuts( )
 					// item right scroll
 					if( iCurrentTaskbar == TASK_ITEMS || gubCurrMercMode == MERC_GETITEMMODE )
 					{
-						if( eInfo.sScrollIndex < max( ((eInfo.sNumItems+1)/2)-6, 0) )
+						if( eInfo.sScrollIndex < (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 						{
 							if( EditorInputEvent.usKeyState & CTRL_DOWN )
 								eInfo.sScrollIndex = __min(eInfo.sScrollIndex + 60, (eInfo.sNumItems+1)/2-6);
@@ -2265,7 +2265,7 @@ void HandleKeyboardShortcuts( )
 								eInfo.sScrollIndex++;
 
 							EnableButton( iEditorButton[ITEMS_LEFTSCROLL] );
-							if( eInfo.sScrollIndex == max( ((eInfo.sNumItems+1)/2)-6, 0) )
+							if( eInfo.sScrollIndex == (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 								DisableButton( iEditorButton[ITEMS_RIGHTSCROLL] );
 						}
 					}
@@ -2291,12 +2291,12 @@ void HandleKeyboardShortcuts( )
 					// item right scroll by page
 					if( iCurrentTaskbar == TASK_ITEMS || gubCurrMercMode == MERC_GETITEMMODE )
 					{
-						if( eInfo.sScrollIndex < max( ((eInfo.sNumItems+1)/2)-6, 0) )
+						if( eInfo.sScrollIndex < (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 						{
 							eInfo.sScrollIndex = __min(eInfo.sScrollIndex + 6, (eInfo.sNumItems+1)/2-6);
 
 							EnableButton( iEditorButton[ITEMS_LEFTSCROLL] );
-							if( eInfo.sScrollIndex == max( ((eInfo.sNumItems+1)/2)-6, 0) )
+							if( eInfo.sScrollIndex == (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 								DisableButton( iEditorButton[ITEMS_RIGHTSCROLL] );
 						}
 					}

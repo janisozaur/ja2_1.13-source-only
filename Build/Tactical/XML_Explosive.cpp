@@ -138,7 +138,7 @@ explosiveEndElementHandle(void *userData, const XML_Char *name)
 			pData->curExplosive.ubRadius	= (UINT8) atol(pData->szCharData);
 
 			// Flugente: variable is UINT16, but is always used as UINT8, so better keep it in line
-			pData->curExplosive.ubRadius	= max( 0, min(255, pData->curExplosive.ubRadius));
+			pData->curExplosive.ubRadius	= (std::max)( UINT16(0), (std::min)(UINT16(255), pData->curExplosive.ubRadius));
 		}
 		else if(strcmp(name, "ubVolume") == 0)
 		{

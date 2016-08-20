@@ -577,9 +577,9 @@ INT32 GarrisonReinforcementsRequested( INT32 iGarrisonID, UINT8 *pubExtraReinfor
 	//*pubExtraReinforcements = (UINT8)(gubGarrisonReinforcementsDenied[ iGarrisonID ] / (6 - gGameOptions.ubDifficultyLevel));
 
 	//Make sure the number of extra reinforcements don't bump the force size past the max of MAX_STRATEGIC_TEAM_SIZE.
-	*pubExtraReinforcements = (UINT16)min( (INT32)*pubExtraReinforcements, min( (INT32)(*pubExtraReinforcements), iMaxEnemyGroupSize - iReinforcementsRequested ) );
+	*pubExtraReinforcements = (UINT16)(std::min)( (INT32)*pubExtraReinforcements, (std::min)( (INT32)(*pubExtraReinforcements), iMaxEnemyGroupSize - iReinforcementsRequested ) );
 
-	iReinforcementsRequested = min( iMaxEnemyGroupSize, iReinforcementsRequested );
+	iReinforcementsRequested = (std::min)( iMaxEnemyGroupSize, iReinforcementsRequested );
 
 	return iReinforcementsRequested;
 }
@@ -1173,7 +1173,7 @@ void InitStrategicAI()
 	FLOAT dEnemyGeneralsSpeedupFactor = 1.0f;
 	if ( gGameExternalOptions.fEnemyRoles && gGameExternalOptions.fEnemyGenerals )
 	{
-		dEnemyGeneralsSpeedupFactor = max( 0.5f, dEnemyGeneralsSpeedupFactor - gStrategicStatus.usVIPsLeft * gGameExternalOptions.fEnemyGeneralStrategicDecisionSpeedBonus );
+		dEnemyGeneralsSpeedupFactor = (std::max)( 0.5f, dEnemyGeneralsSpeedupFactor - gStrategicStatus.usVIPsLeft * gGameExternalOptions.fEnemyGeneralStrategicDecisionSpeedBonus );
 	}
 
 	giReinforcementPool		= zDiffSetting[gGameOptions.ubDifficultyLevel].iQueensInitialPoolOfTroops;
@@ -1219,8 +1219,8 @@ void InitStrategicAI()
 			if ( i != OMERTA_WELCOME_WAGON )
 			{
 				iPercentElitesBonus = zDiffSetting[gGameOptions.ubDifficultyLevel].iPercentElitesBonus;
-				gArmyComp[ i ].bElitePercentage = min(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
-				gArmyComp[ i ].bTroopPercentage = max(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
+				gArmyComp[ i ].bElitePercentage = (std::min)(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
+				gArmyComp[ i ].bTroopPercentage = (std::max)(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
 				gArmyComp[ i ].bAdminPercentage = 0;
 			}
 		}
@@ -1256,8 +1256,8 @@ void InitStrategicAI()
 					if ( i != OMERTA_WELCOME_WAGON )
 					{
 						iPercentElitesBonus = gGameExternalOptions.iPercentElitesBonusExperienced;
-						gArmyComp[ i ].bElitePercentage = min(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
-						gArmyComp[ i ].bTroopPercentage = max(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
+						gArmyComp[ i ].bElitePercentage = (std::min)(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
+						gArmyComp[ i ].bTroopPercentage = (std::max)(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
 						gArmyComp[ i ].bAdminPercentage = 0;
 					}
 				}
@@ -1269,8 +1269,8 @@ void InitStrategicAI()
 				if ( i != OMERTA_WELCOME_WAGON )
 				{
 					iPercentElitesBonus = gGameExternalOptions.iPercentElitesBonusExpert;
-					gArmyComp[ i ].bElitePercentage = min(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
-					gArmyComp[ i ].bTroopPercentage = max(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
+					gArmyComp[ i ].bElitePercentage = (std::min)(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
+					gArmyComp[ i ].bTroopPercentage = (std::max)(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
 					gArmyComp[ i ].bAdminPercentage = 0;
 				}
 			}
@@ -1281,8 +1281,8 @@ void InitStrategicAI()
 				if ( i != OMERTA_WELCOME_WAGON )
 				{
 					iPercentElitesBonus = gGameExternalOptions.iPercentElitesBonusInsane;
-					gArmyComp[ i ].bElitePercentage = min(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
-					gArmyComp[ i ].bTroopPercentage = max(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
+					gArmyComp[ i ].bElitePercentage = (std::min)(100,gArmyComp[ i ].bElitePercentage + iPercentElitesBonus);
+					gArmyComp[ i ].bTroopPercentage = (std::max)(0,gArmyComp[ i ].bTroopPercentage - iPercentElitesBonus);
 					gArmyComp[ i ].bAdminPercentage = 0;
 				}
 			}
@@ -1332,22 +1332,22 @@ void InitStrategicAI()
 		{
 			if( i != QUEEN_DEFENCE )
 			{
-				gArmyComp[ i ].bDesiredPopulation = (INT8)min( iMaxEnemyGroupSize, (gArmyComp[ i ].bDesiredPopulation * giForcePercentage / 100) );
+				gArmyComp[ i ].bDesiredPopulation = (INT8)(std::min)( iMaxEnemyGroupSize, (gArmyComp[ i ].bDesiredPopulation * giForcePercentage / 100) );
 				if( gArmyComp[ i ].bStartPopulation != iMaxEnemyGroupSize )
 				{ //if the value is MAX_STRATEGIC_TEAM_SIZE, then that means the particular sector is a spawning location.
 					//Don't modify the value if it is MAX_STRATEGIC_TEAM_SIZE.	Everything else is game.
-					gArmyComp[ i ].bStartPopulation = (INT8)min( iMaxEnemyGroupSize, (gArmyComp[ i ].bStartPopulation * giForcePercentage / 100) );
+					gArmyComp[ i ].bStartPopulation = (INT8)(std::min)( iMaxEnemyGroupSize, (gArmyComp[ i ].bStartPopulation * giForcePercentage / 100) );
 				}
 			}
 			else
 			{
-				gArmyComp[ i ].bDesiredPopulation = (INT8)min( 32, (gArmyComp[ i ].bDesiredPopulation * giForcePercentage / 100) );
+				gArmyComp[ i ].bDesiredPopulation = (INT8)(std::min)( 32, (gArmyComp[ i ].bDesiredPopulation * giForcePercentage / 100) );
 				gArmyComp[ i ].bStartPopulation = gArmyComp[ i ].bDesiredPopulation;
 			}
 		}
 		for( i = 0; i < giPatrolArraySize; i++ )
 		{ //force modified range within 1-MAX_STRATEGIC_TEAM_SIZE.
-			gPatrolGroup[ i ].bSize = (INT8)max( gubMinEnemyGroupSize, min( iMaxEnemyGroupSize, (gPatrolGroup[ i ].bSize * giForcePercentage / 100 ) ) );
+			gPatrolGroup[ i ].bSize = (std::max)( INT8(gubMinEnemyGroupSize), (std::min)( INT8(iMaxEnemyGroupSize), INT8(gPatrolGroup[ i ].bSize * giForcePercentage / 100 ) ) );
 		}
 	}
 
@@ -1389,7 +1389,7 @@ void InitStrategicAI()
 					iStartPop = iStartPop * ( 100 + ( Random ( 51 ) - 25 ) ) / 100;
 				}
 
-				iStartPop = max( gubMinEnemyGroupSize, min( iMaxEnemyGroupSize, iStartPop ) );
+				iStartPop = (std::max)( INT32(gubMinEnemyGroupSize), (std::min)( iMaxEnemyGroupSize, iStartPop ) );
 			}
 			cnt = iStartPop;
 
@@ -1426,10 +1426,10 @@ void InitStrategicAI()
 				case DRASSEN_AIRPORT:
 				case DRASSEN_DEFENCE:
 				case DRASSEN_MINE:
-					pSector->ubNumAdmins = (UINT8)max( 5, pSector->ubNumAdmins );
+					pSector->ubNumAdmins = (std::max)( UINT8(5), pSector->ubNumAdmins );
 					break;
 				case TIXA_PRISON:
-					pSector->ubNumAdmins = (UINT8)max( 8, pSector->ubNumAdmins );
+					pSector->ubNumAdmins = (std::max)( UINT8(8), pSector->ubNumAdmins );
 					break;
 
 			}
@@ -1450,14 +1450,14 @@ void InitStrategicAI()
 		{ //modify it by it's priority.
 			//generates a value between 2 and 100
 			iWeight = iWeight * iPriority / 96;
-			iWeight = max( iWeight, 2 );
+			iWeight = (std::max)( iWeight, 2 );
 			giRequestPoints += iWeight;
 		}
 		else if( iWeight < 0 )
 		{ //modify it by it's reverse priority
 			//generates a value between -2 and -100
 			iWeight = iWeight * (100-iPriority) / 96;
-			iWeight = min( iWeight, -2 );
+			iWeight = (std::min)( iWeight, -2 );
 			giReinforcementPoints -= iWeight;
 		}
 		gGarrisonGroup[ i ].bWeight = (INT8)iWeight;
@@ -1493,7 +1493,7 @@ void InitStrategicAI()
 		{
 			//Add this patrol group now.
 			ubNumTroops = (UINT8)(gPatrolGroup[ i ].bSize + Random( 3 ) - 1);
-			ubNumTroops = (UINT8)max( gubMinEnemyGroupSize, min( iMaxEnemyGroupSize, ubNumTroops ) );
+			ubNumTroops = (std::max)( gubMinEnemyGroupSize, (std::min)( UINT8(iMaxEnemyGroupSize), ubNumTroops ) );
 			ubNumTanks = 0;
 			ubNumJeeps = 0;
 
@@ -1529,7 +1529,7 @@ void InitStrategicAI()
 				}
 			}
 
-			//ubNumTroops = (UINT8)max( gubMinEnemyGroupSize, min( MAX_STRATEGIC_TEAM_SIZE, gPatrolGroup[ i ].bSize + Random( 3 ) - 1 ) );
+			//ubNumTroops = (UINT8)(std::max)( gubMinEnemyGroupSize, (std::min)( MAX_STRATEGIC_TEAM_SIZE, gPatrolGroup[ i ].bSize + Random( 3 ) - 1 ) );
 			//Note on adding patrol groups...
 			//The patrol group can't actually start on the first waypoint, so we set it to the second way
 			//point for initialization, and then add the waypoints from 0 up
@@ -2010,7 +2010,7 @@ BOOLEAN AttemptToNoticeEmptySectorSucceeds()
 		{
 			giArmyAlertness -= giArmyAlertnessDecay;
 			//Minimum alertness should always be at least 0.
-			giArmyAlertness = max( 0, giArmyAlertness );
+			giArmyAlertness = (std::max)( 0, giArmyAlertness );
 			return TRUE;
 		}
 		giArmyAlertness++;
@@ -2021,7 +2021,7 @@ BOOLEAN AttemptToNoticeEmptySectorSucceeds()
 	{
 		giArmyAlertness -= giArmyAlertnessDecay;
 		//Minimum alertness should always be at least 0.
-		giArmyAlertness = max( 0, giArmyAlertness );
+		giArmyAlertness = (std::max)( 0, giArmyAlertness );
 		return TRUE;
 	}
 	if( Chance( 33 ) )
@@ -2047,7 +2047,7 @@ BOOLEAN AttemptToNoticeAdjacentGroupSucceeds()
 		{
 			giArmyAlertness -= giArmyAlertnessDecay;
 			//Minimum alertness should always be at least 0.
-			giArmyAlertness = max( 0, giArmyAlertness );
+			giArmyAlertness = (std::max)( 0, giArmyAlertness );
 			return TRUE;
 		}
 		giArmyAlertness++;
@@ -2058,7 +2058,7 @@ BOOLEAN AttemptToNoticeAdjacentGroupSucceeds()
 	{
 		giArmyAlertness -= giArmyAlertnessDecay;
 		//Minimum alertness should always be at least 0.
-		giArmyAlertness = max( 0, giArmyAlertness );
+		giArmyAlertness = (std::max)( 0, giArmyAlertness );
 		return TRUE;
 	}
 	if( Chance( 33 ) )
@@ -2824,7 +2824,7 @@ void RecalculatePatrolWeight( INT32 iPatrolID )
 		iNeedPopulation = gPatrolGroup[ iPatrolID ].bSize;
 	}
 	iWeight = iNeedPopulation * 3 * gPatrolGroup[ iPatrolID ].bPriority / 96;
-	iWeight = min( 2, iWeight );
+	iWeight = (std::min)( 2, iWeight );
 	gPatrolGroup[ iPatrolID ].bWeight = (INT8)iWeight;
 	giRequestPoints += iWeight;
 
@@ -2861,14 +2861,14 @@ void RecalculateGarrisonWeight( INT32 iGarrisonID )
 	{ //modify it by it's priority.
 		//generates a value between 2 and 100
 		iWeight = iWeight * iPriority / 96;
-		iWeight = max( iWeight, 2 );
+		iWeight = (std::max)( iWeight, 2 );
 		giRequestPoints += iWeight;
 	}
 	else if( iWeight < 0 )
 	{ //modify it by it's reverse priority
 		//generates a value between -2 and -100
 		iWeight = iWeight * (100-iPriority) / 96;
-		iWeight = min( iWeight, -2 );
+		iWeight = (std::min)( iWeight, -2 );
 		giReinforcementPoints -= (INT8)iWeight;
 	}
 
@@ -3055,12 +3055,12 @@ BOOLEAN SendReinforcementsForGarrison( INT32 iDstGarrisonID, UINT16 usDefencePoi
 	{
 		//adjust the extra reinforcements so that it doesn't exceed the maximum allowed.
 		fLimitMaxTroopsAllowable = TRUE;
-		ubNumExtraReinforcements = (UINT16)(max(0, iMaxReinforcementsAllowed - iReinforcementsRequested));
+		ubNumExtraReinforcements = (UINT16)((std::max)(0, iMaxReinforcementsAllowed - iReinforcementsRequested));
 	}
 
 	// Flugente: this is stupid. why would we limit the groupsize by the desired population? If that is smaller than the minimum group size, then we'll create a group smaller than that
 	// this would forbid us from properly moving it. Why does gGameExternalOptions.iMaxEnemyGroupSize exist if it isn't properly used?
-	ubNumExtraReinforcements = (UINT16)(max(0, gubMinEnemyGroupSize - iReinforcementsRequested));
+	ubNumExtraReinforcements = (UINT16)((std::max)(0, gubMinEnemyGroupSize - iReinforcementsRequested));
 
 	iReinforcementsRequested += ubNumExtraReinforcements;
 
@@ -3113,7 +3113,7 @@ BOOLEAN SendReinforcementsForGarrison( INT32 iDstGarrisonID, UINT16 usDefencePoi
 			return FALSE;
 		}
 
-		iReinforcementsApproved = min( iReinforcementsRequested, giReinforcementPool );
+		iReinforcementsApproved = (std::min)( iReinforcementsRequested, giReinforcementPool );
 
 		if( iReinforcementsApproved * 3 < usDefencePoints )
 		{
@@ -3132,7 +3132,7 @@ BOOLEAN SendReinforcementsForGarrison( INT32 iDstGarrisonID, UINT16 usDefencePoi
 		//player's force and the queen's.
 		if( ubNumExtraReinforcements && fLimitMaxTroopsAllowable && iReinforcementsApproved == iMaxReinforcementsAllowed )
 		{
-			iChance = (iReinforcementsApproved + ubNumExtraReinforcements) * 100 / max(usDefencePoints, 1); // lal bugfix: max 1 added to prevent division by 0
+			iChance = (iReinforcementsApproved + ubNumExtraReinforcements) * 100 / (std::max)(usDefencePoints, UINT16(1)); // lal bugfix: max 1 added to prevent division by 0
 			if( !Chance( iChance ) )
 			{
 				ValidateWeights( 13 );
@@ -3199,7 +3199,7 @@ BOOLEAN SendReinforcementsForGarrison( INT32 iDstGarrisonID, UINT16 usDefencePoi
 			}
 			//Send the lowest of the two:	number requested or number available
 
-			iReinforcementsApproved = min( iReinforcementsRequested, iReinforcementsAvailable );
+			iReinforcementsApproved = (std::min)( iReinforcementsRequested, iReinforcementsAvailable );
 			if( iReinforcementsApproved > iMaxReinforcementsAllowed - ubNumExtraReinforcements )
 			{
 				//The force isn't strong enough, but the queen isn't willing to apply extra resources
@@ -3222,7 +3222,7 @@ BOOLEAN SendReinforcementsForGarrison( INT32 iDstGarrisonID, UINT16 usDefencePoi
 			//player's force and the queen's.
 			if( iReinforcementsApproved + ubNumExtraReinforcements == iMaxReinforcementsAllowed && usDefencePoints )
 			{
-				iChance = (iReinforcementsApproved + ubNumExtraReinforcements) * 100 / max(usDefencePoints, 1); // lal bugfix: max 1 added to prevent division by 0
+				iChance = (iReinforcementsApproved + ubNumExtraReinforcements) * 100 / (std::max)(usDefencePoints, UINT16(1)); // lal bugfix: max 1 added to prevent division by 0
 				if( !Chance( iChance ) )
 				{
 					ValidateWeights( 18 );
@@ -3319,7 +3319,7 @@ BOOLEAN SendReinforcementsForPatrol( INT32 iPatrolID, GROUP **pOptionalGroup )
 	if( iRandom < giReinforcementPool )
 	{
 		//use the pool and send the requested amount from SECTOR P3 (queen's palace)
-		iReinforcementsApproved = min( iReinforcementsRequested, giReinforcementPool );
+		iReinforcementsApproved = (std::min)( iReinforcementsRequested, giReinforcementPool );
 		pGroup = CreateNewEnemyGroupDepartingFromSector( SECTOR( gModSettings.ubSAISpawnSectorX, gModSettings.ubSAISpawnSectorY ), 0, (UINT8)iReinforcementsApproved, 0, 0, 0 );
 		pGroup->ubOriginalSector = (UINT8)SECTOR( ubDstSectorX, ubDstSectorY );
 
@@ -3365,7 +3365,7 @@ BOOLEAN SendReinforcementsForPatrol( INT32 iPatrolID, GROUP **pOptionalGroup )
 						iReinforcementsAvailable = ReinforcementsAvailable( iSrcGarrisonID );
 
 						//Send the lowest of the two:	number requested or number available
-						iReinforcementsApproved = min( iReinforcementsRequested, iReinforcementsAvailable );
+						iReinforcementsApproved = (std::min)( iReinforcementsRequested, iReinforcementsAvailable );
 
 						// if there are no reinforcements, then there is no reason to send an empty group
 						if ( !iReinforcementsApproved )
@@ -3425,14 +3425,14 @@ void EvaluateQueenSituation()
 
 	// The more work to do there is (request points the queen's army is asking for), the more often she will make decisions
 	// This can increase the decision intervals by up to 500 extra minutes (> 8 hrs)
-	uiOffset = max( 100 - giRequestPoints, 0);
+	uiOffset = (std::max)( 100 - giRequestPoints, 0);
 	uiOffset = uiOffset + Random( uiOffset * 4 );
 
 	// Flugente: enemy generals can speed up the AI decision process (justification: the generals are the ones planning the military operations, so if theay are around, the army is more efficient)
 	FLOAT dEnemyGeneralsSpeedupFactor = 1.0f;
 	if ( gGameExternalOptions.fEnemyRoles && gGameExternalOptions.fEnemyGenerals )
 	{
-		dEnemyGeneralsSpeedupFactor = max( 0.5f, dEnemyGeneralsSpeedupFactor - gStrategicStatus.usVIPsLeft * gGameExternalOptions.fEnemyGeneralStrategicDecisionSpeedBonus );
+		dEnemyGeneralsSpeedupFactor = (std::max)( 0.5f, dEnemyGeneralsSpeedupFactor - gStrategicStatus.usVIPsLeft * gGameExternalOptions.fEnemyGeneralStrategicDecisionSpeedBonus );
 	}
 
 	uiOffset += dEnemyGeneralsSpeedupFactor * (zDiffSetting[gGameOptions.ubDifficultyLevel].iBaseDelayInMinutesBetweenEvaluations + Random( zDiffSetting[gGameOptions.ubDifficultyLevel].iEvaluationDelayVariance ));
@@ -4139,7 +4139,7 @@ BOOLEAN LoadStrategicAI( HWFILE hFile )
 						iStartPop = iStartPop * ( 100 + ( Random ( 51 ) - 25 ) ) / 100;
 					}
 
-					iStartPop = max( gubMinEnemyGroupSize, min( iMaxEnemyGroupSize, iStartPop ) );
+					iStartPop = (std::max)( INT32(gubMinEnemyGroupSize), (std::min)( iMaxEnemyGroupSize, iStartPop ) );
 					cnt = iStartPop;
 
 					if( iAdminChance )
@@ -4344,13 +4344,13 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Strategic7");
 		if( gArmyComp[ i ].bPriority )
 		{
 			num = gOrigArmyComp[ i ].bPriority + iFactor / 2;
-			num = min( max( 0, num ), 100 );
+			num = (std::min)( (std::max)( 0, num ), 100 );
 			gArmyComp[ i ].bPriority = (INT8)num;
 		}
 
 		//modify desired population by + or - 50% of original population
 		num = gOrigArmyComp[ i ].bDesiredPopulation * (100 + iFactor) / 100;
-		num = min( max( 6, num ), iMaxEnemyGroupSize );
+		num = (std::min)( (std::max)( 6, num ), iMaxEnemyGroupSize );
 		gArmyComp[ i ].bDesiredPopulation = (INT8)num;
 
 		//if gfExtraElites is set, then augment the composition sizes
@@ -4377,12 +4377,12 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Strategic7");
 
 			//increase elite % (max 100)
 			iNew = gArmyComp[ i ].bElitePercentage + iChange;
-			iNew = (INT8)min( 100, iNew );
+			iNew = (INT8)(std::min)( 100, iNew );
 			gArmyComp[ i ].bElitePercentage = (INT8)iNew;
 
 			//decrease troop % (min 0)
 			iNew = gArmyComp[ i ].bTroopPercentage - iChange;
-			iNew = (INT8)max( 0, iNew );
+			iNew = (INT8)(std::max)( 0, iNew );
 			gArmyComp[ i ].bTroopPercentage = (INT8)iNew;
 		}
 	}
@@ -4542,7 +4542,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 			//if ( !gfUnlimitedTroops )
 			//	giReinforcementPool -= ubNumSoldiers;
 
-			//giReinforcementPool = max( giReinforcementPool, 0 );
+			//giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 
 			//MoveSAIGroupToSector( &pGroup, ubSectorID, EVASIVE, pGroup->pEnemyGroup->ubIntention );
 
@@ -4632,7 +4632,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 			{
 				giReinforcementPool -= totalusedsoldiers;
 
-				giReinforcementPool = max( giReinforcementPool, 0 );
+				giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 			}
 
 			MoveSAIGroupToSector( &pGroup0, SEC_D14, EVASIVE, pGroup0->pEnemyGroup->ubIntention );
@@ -4859,7 +4859,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 				{
 					giReinforcementPool -= totalusedsoldiers;
 
-					giReinforcementPool = max( giReinforcementPool, 0 );
+					giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 				}
 			}
 			break;
@@ -5252,7 +5252,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 				{
 					giReinforcementPool -= totalusedsoldiers;
 
-					giReinforcementPool = max( giReinforcementPool, 0 );
+					giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 				}
 
 				if ( usActionCode == NPC_ACTION_GLOBAL_OFFENSIVE_1 )
@@ -5322,7 +5322,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 			{
 				giReinforcementPool -= totalusedsoldiers;
 
-				giReinforcementPool = max( giReinforcementPool, 0 );
+				giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 			}
 
 			//Determine if the battle location actually has a garrison assignment.	If so, and the following
@@ -5395,7 +5395,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 				if ( !gfUnlimitedTroops )
 					giReinforcementPool -= ubNumSoldiers;
 
-				giReinforcementPool = max( giReinforcementPool, 0 );
+				giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 
 				ubSourceSectorID = SEC_H13;
 				ubTargetSectorID = (UINT8)SECTOR( sSectorX, sSectorY );
@@ -5498,7 +5498,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 
 				if ( !gfUnlimitedTroops )
 					giReinforcementPool -= ubNumSoldiers;
-				giReinforcementPool = max( giReinforcementPool, 0 );
+				giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 
 				ubSourceSectorID = SEC_H13;
 				ubTargetSectorID = (UINT8)SECTOR( sSectorX, sSectorY );
@@ -5561,7 +5561,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 			if ( !gfUnlimitedTroops )
 				giReinforcementPool -= ubNumSoldiers;
 
-			giReinforcementPool = max( giReinforcementPool, 0 );
+			giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 			if( PlayerMercsInSector( 9, 1, 1 ) && !PlayerMercsInSector( 10, 1, 1 ) && !PlayerMercsInSector( 10, 1, 2 ) )
 			{ //send to A9 (if mercs in A9, but not in A10 or A10 basement)
 				ubSectorID = SEC_A9;
@@ -5616,7 +5616,7 @@ void ExecuteStrategicAIAction( UINT16 usActionCode, INT16 sSectorX, INT16 sSecto
 				}
 			}
 
-			giReinforcementPool = max( giReinforcementPool, 0 );
+			giReinforcementPool = (std::max)( giReinforcementPool, 0 );
 			pGroup = CreateNewEnemyGroupDepartingFromSector( SECTOR( gModSettings.ubSAISpawnSectorX, gModSettings.ubSAISpawnSectorY ), 0, 0, ubNumSoldiers, ubNumTanks, ubNumJeeps );
 			MoveSAIGroupToSector( &pGroup, ubSectorID, STAGE, REINFORCEMENTS );
 
@@ -6177,7 +6177,7 @@ void RequestHighPriorityGarrisonReinforcements( INT32 iGarrisonID, UINT8 ubSoldi
 		if ( giReinforcementPool > 0 )
 		{
 			pGroup = CreateNewEnemyGroupDepartingFromSector( SECTOR( gModSettings.ubSAISpawnSectorX, gModSettings.ubSAISpawnSectorY ),
-				0, min( ubSoldiersRequested, giReinforcementPool ), 0, 0, 0 );
+				0, (std::min)( ubSoldiersRequested, UINT8(giReinforcementPool) ), 0, 0, 0 );
 			pGroup->ubMoveType = ONE_WAY;
 			pGroup->pEnemyGroup->ubIntention = REINFORCEMENTS;
 			gGarrisonGroup[ iGarrisonID ].ubPendingGroupID = pGroup->ubGroupID;
@@ -6185,7 +6185,7 @@ void RequestHighPriorityGarrisonReinforcements( INT32 iGarrisonID, UINT8 ubSoldi
 
 			//Madd: unlimited reinforcements?
 			if ( !gfUnlimitedTroops )
-				giReinforcementPool -= (INT32)min( ubSoldiersRequested, giReinforcementPool );
+				giReinforcementPool -= (std::min)( INT32(ubSoldiersRequested), giReinforcementPool );
 
 			MoveSAIGroupToSector( &pGroup, gGarrisonGroup[ iGarrisonID ].ubSectorID, EVASIVE, REINFORCEMENTS );
 			ValidateGroup( pGroup );
@@ -7223,7 +7223,7 @@ void ReinitializeUnvisitedGarrisons()
 				if( pGroup )
 				{
 					cnt -= pGroup->ubGroupSize;
-					cnt = max( cnt, 0 );
+					cnt = (std::max)( cnt, 0 );
 				}
 			}
 

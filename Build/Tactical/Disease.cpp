@@ -144,7 +144,7 @@ void HandleDisease()
 							FLOAT dChance = Disease[0].dInfectionChance[INFECTION_TYPE_CONTACT_HUMAN];
 
 							// if disease is known, mercs will avoid the infected, lowering the chance of them being infected
-							UINT16 max = min(20, pSectorInfo->usInfected);
+							UINT16 max = (std::min)(UINT16(20), pSectorInfo->usInfected);
 							if ( (pSectorInfo->usInfectionFlag & SECTORDISEASE_DIAGNOSED_PLAYER) || (gubFact[FACT_DISEASE_WHODATA_ACCESS] && pSectorInfo->usInfectionFlag & SECTORDISEASE_DIAGNOSED_WHO) )
 								max /= 4;
 
@@ -236,7 +236,7 @@ void HandleDisease()
 			// first, existing infections get worse
 			if ( pSectorInfo->fInfectionSeverity > 0 )
 			{
-				pSectorInfo->fInfectionSeverity = min( 1.0f, pSectorInfo->fInfectionSeverity + ( FLOAT )(Disease[0].sInfectionPtsGainPerHour) / (FLOAT)(Disease[0].sInfectionPtsFull) );
+				pSectorInfo->fInfectionSeverity = (std::min)( 1.0f, pSectorInfo->fInfectionSeverity + ( FLOAT )(Disease[0].sInfectionPtsGainPerHour) / (FLOAT)(Disease[0].sInfectionPtsFull) );
 			}
 
 			UINT16 population = GetSectorPopulation( sX, sY );
@@ -285,7 +285,7 @@ void HandleDisease()
 					{
 						// infection is also possible by human contact
 						FLOAT dChance = Disease[0].dInfectionChance[INFECTION_TYPE_CONTACT_HUMAN];
-						UINT16 max = sqrt( (FLOAT) min( lefttoinfect - newinfected, pSectorInfo->usInfected ) );
+						UINT16 max = sqrt( (FLOAT) (std::min)( UINT16(lefttoinfect - newinfected), pSectorInfo->usInfected ) );
 						for ( UINT16 i = 0; i < max; ++i )
 						{
 							// chances can be smaller than 1%, so we use a trick here by altering our 'chance function'. This allows to have much smaller chances, as for diseases, 1% can be way too high.
@@ -299,7 +299,7 @@ void HandleDisease()
 						// there is also the chance to be infected by bad food, sex, contact with animals etc.
 						// For now, we assume this to be very rare events, so just add a small chance to be infected this way
 						FLOAT populationpercentage = (FLOAT)(lefttoinfect - newinfected) / (FLOAT)(population);
-						FLOAT basechance = sqrt( (FLOAT) min( lefttoinfect, pSectorInfo->usInfected + newinfected ) ) * 0.5f;
+						FLOAT basechance = sqrt( (FLOAT) (std::min)( lefttoinfect, UINT16(pSectorInfo->usInfected + newinfected) ) ) * 0.5f;
 
 						FLOAT chance_sex = Disease[0].dInfectionChance[INFECTION_TYPE_SEX] * basechance * populationpercentage;
 						FLOAT chance_corpse = 0;
@@ -352,7 +352,7 @@ void HandleDisease()
 						pSectorInfo->fInfectionSeverity = (pSectorInfo->fInfectionSeverity * pSectorInfo->usInfected + infectedseverity * newinfected) / (pSectorInfo->usInfected + newinfected);
 						pSectorInfo->usInfected += newinfected;
 
-						pSectorInfo->usInfected = min( pSectorInfo->usInfected , population);
+						pSectorInfo->usInfected = (std::min)( pSectorInfo->usInfected , population);
 					}
 				}
 
@@ -399,7 +399,7 @@ void HandleDisease()
 			}
 
 			// in any case, one hour has passed, update possible doctor replacements
-			pSectorInfo->usDiseaseDoctoringDelay = max( 0, pSectorInfo->usDiseaseDoctoringDelay - 1);
+			pSectorInfo->usDiseaseDoctoringDelay = (std::max)( 0, pSectorInfo->usDiseaseDoctoringDelay - 1);
 		}
 	}
 }
@@ -656,13 +656,13 @@ void HandleDeathDiseaseImplications( SOLDIERTYPE *pSoldier )
 		// if the deceased was infected and not a merc, reduce sector number of infected
 		if ( pSoldier->sDiseasePoints[0] && pSoldier->bTeam != OUR_TEAM )
 		{
-			pSectorInfo->usInfected = max( 0, pSectorInfo->usInfected - 1 );
+			pSectorInfo->usInfected = (std::max)( 0, pSectorInfo->usInfected - 1 );
 		}
 
 		// if this guy was a medic, then medical personnel was killed - it will take a while before he will be replaced
 		if ( HAS_SKILL_TRAIT( pSoldier, DOCTOR_NT ) )
 		{
-			pSectorInfo->usDiseaseDoctoringDelay = min( 255, pSectorInfo->usDiseaseDoctoringDelay + 12 );
+			pSectorInfo->usDiseaseDoctoringDelay = (std::min)( 255, pSectorInfo->usDiseaseDoctoringDelay + 12 );
 		}
 	}
 }
@@ -708,7 +708,7 @@ UINT32 HealSectorPopulation( INT16 sX, INT16 sY, UINT32 uHealpts )
 	if ( pSectorInfo->usInfected && uHealpts > 0 && Disease[0].sInfectionPtsFull )
 	{
 		UINT32 totaldiseasepoints = pSectorInfo->usInfected * ptsneededforcure;
-		totaldiseasepoints = max( 0, totaldiseasepoints - uHealpts );
+		totaldiseasepoints = (std::max)( UINT32(0), totaldiseasepoints - uHealpts );
 
 		pSectorInfo->fInfectionSeverity = (FLOAT)totaldiseasepoints / (FLOAT)(pSectorInfo->usInfected * Disease[0].sInfectionPtsFull);
 	}
@@ -761,7 +761,7 @@ FLOAT GetWorkforceEffectivenessWithDisease( INT8 bTownId, UINT8 usTeam )
 				if ( population )
 				{
 					// workforce effectivity in a sector is population minus cumulated effectivity loss of all infected, divided by entire population
-					val += (population - min( pSectorInfo->usInfected, population ) * pSectorInfo->fInfectionSeverity ) / population;
+					val += (population - (std::min)( pSectorInfo->usInfected, population ) * pSectorInfo->fInfectionSeverity ) / population;
 				}
 				// if no population is here, then there is no part of te population that is not working, so retrun 1.0 here :-)
 				// this is basically a fix for players using this feature who have faulty xmls with population 0

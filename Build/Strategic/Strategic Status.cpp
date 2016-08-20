@@ -189,11 +189,11 @@ BOOLEAN MercThinksPlayerIsInactiveTooLong( UINT8 ubProfileID )
 	UINT8 ubTolerance = gMoraleSettings.bValues[MORALE_PLAYER_INACTIVE_DAYS];
 	if( gMercProfiles[ubProfileID].bCharacterTrait == CHAR_TRAIT_PACIFIST )
 	{
-		ubTolerance = max(0, ubTolerance + gMoraleSettings.bValues[MORALE_PLAYER_INACTIVE_DAYS_PACIFIST_BONUS]);
+		ubTolerance = (std::max)(0, ubTolerance + gMoraleSettings.bValues[MORALE_PLAYER_INACTIVE_DAYS_PACIFIST_BONUS]);
 	}
 	else if( gMercProfiles[ubProfileID].bCharacterTrait == CHAR_TRAIT_AGGRESSIVE )
 	{
-		ubTolerance = max(0, ubTolerance + gMoraleSettings.bValues[MORALE_PLAYER_INACTIVE_DAYS_AGGRESSIVE_BONUS]);
+		ubTolerance = (std::max)(0, ubTolerance + gMoraleSettings.bValues[MORALE_PLAYER_INACTIVE_DAYS_AGGRESSIVE_BONUS]);
 	}
 	if( ubTolerance == 0)
 	{

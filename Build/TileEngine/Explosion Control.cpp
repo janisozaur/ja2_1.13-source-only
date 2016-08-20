@@ -1640,7 +1640,7 @@ BOOLEAN DamageSoldierFromBlast( UINT8 ubPerson, UINT8 ubOwner, INT32 sBombGridNo
 		// Flugente: moved the damage calculation into a separate function
 		INT32 sDamageResistance = pSoldier->GetDamageResistance( FALSE, FALSE );
 
-		sNewWoundAmt = max( 0, (INT16)(sNewWoundAmt * (100 - sDamageResistance) / 100) );
+		sNewWoundAmt = (std::max)( (INT16)0, (INT16)(sNewWoundAmt * (100 - sDamageResistance) / 100) );
 
 		// Flugente: this seems a bit weird, but is consistent with the previous code - we do not receive stat damage if we have positive damage resistance
 		if ( sDamageResistance > 0 )
@@ -1839,7 +1839,7 @@ BOOLEAN DamageSoldierFromBlast( UINT8 ubPerson, UINT8 ubOwner, INT32 sBombGridNo
 			}
 		}
 
-		sNewWoundAmt = max(0, sNewWoundAmt);
+		sNewWoundAmt = (std::max)((INT16)0, sNewWoundAmt);
 	}
 	//////////////////////////////////////////////////////////////////////////////////////
 
@@ -3996,7 +3996,7 @@ void HandleExplosionQueue( void )
 						HandlePossibleInfection( pSoldier, NULL, INFECTION_TYPE_WOUND_AGI, 1.5f );
 						HandlePossibleInfection( pSoldier, NULL, INFECTION_TYPE_WOUND_AGI, 1.5f );
 
-						INT8 bStatLoss = min( 3 + Random( 5 ) + Random( 8 ), pSoldier->stats.bAgility - 1 );
+						INT8 bStatLoss = (std::min)( INT8(3 + Random( 5 ) + Random( 8 )), INT8(pSoldier->stats.bAgility - 1) );
 
 						if ( bStatLoss > 0 )
 						{
@@ -5920,8 +5920,8 @@ gridnoarmourvector GetArmourSharedRoofNetwork( gridnoarmourvector& arNetwork )
 					UINT8 armour1 = pair1.second;
 					UINT8 armour2 = pair2.second;
 
-					UINT8 sharedarmour1 = max( armour1, armour2 * WALLSTRENGTH_NEIGHBOURING_PER_TILE );
-					UINT8 sharedarmour2 = max( armour1 * WALLSTRENGTH_NEIGHBOURING_PER_TILE, armour2 );
+					UINT8 sharedarmour1 = (std::max)( armour1, UINT8(armour2 * WALLSTRENGTH_NEIGHBOURING_PER_TILE));
+					UINT8 sharedarmour2 = (std::max)( UINT8(armour1 * WALLSTRENGTH_NEIGHBOURING_PER_TILE), armour2 );
 
 					if ( armour1 < sharedarmour1 )
 					{
@@ -6095,7 +6095,7 @@ BOOLEAN DamageRoof( INT32 sGridNo, INT16 sDamage )
 		// otherwise just damage it
 		else
 		{
-			pStruct->pDBStructureRef->pDBStructure->ubHitPoints = (UINT8)max( 1, pStruct->ubHitPoints - sDamage );
+			pStruct->pDBStructureRef->pDBStructure->ubHitPoints = (UINT8)(std::max)( 1, pStruct->ubHitPoints - sDamage );
 		}
 	}
 
@@ -6120,7 +6120,7 @@ void HandleRoofDestruction( INT32 sGridNo, INT16 sDamage )
 	INT16 bestarmour = 0;
 	gridnoarmourvector::iterator itend = floorarmourvector.end( );
 	for ( gridnoarmourvector::iterator it = floorarmourvector.begin( ); it != itend; ++it )
-		bestarmour = max( bestarmour, (INT16)(*it).second );
+		bestarmour = (std::max)( bestarmour, (INT16)(*it).second );
 
 	for ( gridnoarmourvector::iterator it = floorarmourvector.begin( ); it != itend; ++it )
 	{
@@ -6129,7 +6129,7 @@ void HandleRoofDestruction( INT32 sGridNo, INT16 sDamage )
 		INT16 distance = PythSpacesAway( sGridNo, sNewGridno );
 
 		// for formula reasons, distance is at least 1
-		distance = max( distance, 1);
+		distance = (std::max)( distance, INT16(1));
 
 		// only remove tile if enough damage has been done
 		// it might be necessary to tweak the damage formula here
@@ -6180,7 +6180,7 @@ void HandleRoofDestruction( INT32 sGridNo, INT16 sDamage )
 
 		UINT8 bestarmour = 0;
 		for ( gridnoarmourvector::iterator it = roofnetwork.begin( ); it != roofnetwork.end( ); ++it )
-			bestarmour = max( bestarmour, (*it).second );
+			bestarmour = (std::max)( bestarmour, (*it).second );
 
 		// if a network has no wall connection at all, collapse the entire thing
 		if ( bestarmour < 1 )

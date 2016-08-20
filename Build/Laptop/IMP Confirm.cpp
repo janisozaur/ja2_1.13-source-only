@@ -1195,8 +1195,8 @@ INT32 FirstFreeBigEnoughPocket(MERCPROFILESTRUCT *pProfile, INVNODE *tInv)
 	//Lastly search active small pockets
 	lPocket=PickPocket(pProfile, BIGPOCKSTART, BIGPOCKFINAL, tInv->inv, tInv->iNumber, &lCapacity);
 	//Finally, compare the three pockets we've found and return the pocket that is most logical to use
-	capacity = min(sCapacity, mCapacity);
-	capacity = min(lCapacity, capacity);
+	capacity = (std::min)(sCapacity, mCapacity);
+	capacity = (std::min)(lCapacity, capacity);
 	if(capacity == 254) {	//no pocket found
 		return -1;
 	}
@@ -1311,7 +1311,7 @@ INT32 AnyFreeBigEnoughPocket(MERCPROFILESTRUCT *pProfile, INVNODE *tInv)
 		put it in any pocket using old inventory method.  Player can then manually resort items later. */
 		usItem = tInv->inv;
 		iSize = Item[usItem].ubPerPocket;
-		lbeCap = max(1, (iSize/2));
+		lbeCap = (std::max)(1, (iSize/2));
 		for(iPos = BIGPOCKSTART; iPos < NUM_INV_SLOTS; iPos ++)
 		{
 			if(iPos >= MEDPOCKFINAL && iSize > 0)

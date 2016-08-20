@@ -321,7 +321,7 @@ DWORD WINAPI JA2NotifyThread( LPVOID lpParam )
 		if (dwResult == WAIT_OBJECT_0 || dwResult == WAIT_ABANDONED)
 			break;
 
-		DWORD waitTime = (!IsFastForwardMode()) ? max(TIME_US_TO_MS(MIN_NOTIFY_TIME), TIME_US_TO_MS( GetNextCounterDoneTime() ) ) : 0;
+		DWORD waitTime = (!IsFastForwardMode()) ? (std::max)(TIME_US_TO_MS(MIN_NOTIFY_TIME), TIME_US_TO_MS( GetNextCounterDoneTime() ) ) : 0;
 		dwResult = WaitForMultipleObjectsEx(_countof(waitHandles), waitHandles, FALSE, waitTime, FALSE);
 		if (dwResult == WAIT_OBJECT_0)
 			break;
@@ -784,7 +784,7 @@ void UpdateTimer()
 	// Set timer at lowest resolution. Could use middle of lowest/highest, we'll see how this performs first
 	if (!IsHiSpeedClockMode())
 	{
-		UINT uiTimeSlice = giFastForwardMode ? gtc.wPeriodMin : max(gtc.wPeriodMin, TIME_US_TO_MS(UPDATETIMESLICE));
+		UINT uiTimeSlice = giFastForwardMode ? gtc.wPeriodMin : (std::max)(gtc.wPeriodMin, TIME_US_TO_MS(UPDATETIMESLICE));
 		if (uiTimeSlice != guiTimeSlice)
 		{
 			guiTimeSlice = uiTimeSlice;

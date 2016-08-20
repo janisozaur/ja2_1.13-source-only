@@ -1020,9 +1020,9 @@ BOOLEAN TurnSoldierIntoCorpse( SOLDIERTYPE *pSoldier, BOOLEAN fRemoveMerc, BOOLE
 								// silversurfer: externalized this
 								//(*pObj)[0]->data.objectStatus -= (gGameOptions.ubDifficultyLevel - 1) * Random(20);
 								(*pObj)[0]->data.objectStatus -= Random( zDiffSetting[gGameOptions.ubDifficultyLevel].usLootStatusModifier );
-								(*pObj)[0]->data.objectStatus = min(max((*pObj)[0]->data.objectStatus,1),100); // never below 1% or above 100%
+								(*pObj)[0]->data.objectStatus = (std::min)((std::max)((*pObj)[0]->data.objectStatus, INT16(1)), INT16(100)); // never below 1% or above 100%
 
-								(*pObj)[0]->data.sRepairThreshold = max(1, min(100, ((*pObj)[0]->data.objectStatus + 200)/3 ));
+								(*pObj)[0]->data.sRepairThreshold = (std::max)(1, (std::min)(100, ((*pObj)[0]->data.objectStatus + 200)/3 ));
 							}
 						}
 

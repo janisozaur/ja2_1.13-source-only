@@ -2350,7 +2350,7 @@ UINT32 LaptopScreenHandle()
 
 				uiCurrTime = GetJA2Clock();
 				iPercentage = (uiCurrTime-uiStartTime) * 100 / uiTimeRange;
-				iPercentage = min( iPercentage, 100 );
+				iPercentage = (std::min)( iPercentage, 100 );
 
 				iRealPercentage = iPercentage;
 
@@ -3108,7 +3108,7 @@ BOOLEAN LeaveLapTopScreen( void )
 
 					uiCurrTime = GetJA2Clock();
 					iPercentage = (uiCurrTime-uiStartTime) * 100 / uiTimeRange;
-					iPercentage = min( iPercentage, 100 );
+					iPercentage = (std::min)( iPercentage, 100 );
 					iPercentage = 100 - iPercentage;
 
 					iRealPercentage = iPercentage;

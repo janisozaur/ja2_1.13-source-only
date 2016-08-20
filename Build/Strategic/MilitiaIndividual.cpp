@@ -148,11 +148,11 @@ void	MILITIA::AddKills( UINT16 aKills, UINT16 aAssists )
 
 	if ( soldierclass == SOLDIER_CLASS_REG_MILITIA )
 	{
-		promotionpoints = max( promotionpoints, gGameExternalOptions.usIndividualMilitia_PromotionPoints_To_Regular );
+		promotionpoints = (std::max)( promotionpoints, gGameExternalOptions.usIndividualMilitia_PromotionPoints_To_Regular );
 	}
 	else if ( soldierclass == SOLDIER_CLASS_ELITE_MILITIA )
 	{
-		promotionpoints = max( promotionpoints, gGameExternalOptions.usIndividualMilitia_PromotionPoints_To_Regular + gGameExternalOptions.usIndividualMilitia_PromotionPoints_To_Elite );
+		promotionpoints = (std::max)( promotionpoints, UINT16(gGameExternalOptions.usIndividualMilitia_PromotionPoints_To_Regular + gGameExternalOptions.usIndividualMilitia_PromotionPoints_To_Elite) );
 	}
 }
 
@@ -315,7 +315,7 @@ void HandleHourlyMilitiaHealing( )
 	{
 		if ( !((*it).flagmask & MILITIAFLAG_DEAD) )
 		{
-			(*it).healthratio = min( 100.0f, (*it).healthratio + gGameExternalOptions.dIndividualMilitiaHourlyHealthPercentageGain );
+			(*it).healthratio = (std::min)( 100.0f, (*it).healthratio + gGameExternalOptions.dIndividualMilitiaHourlyHealthPercentageGain );
 
 			// if this guy is in the currently loaded sector, heal the soldier instead (and update health ratio while you're there)
 			if ( !gbWorldSectorZ && (*it).sector == SECTOR( gWorldSectorX, gWorldSectorY ) )
@@ -330,9 +330,9 @@ void HandleHourlyMilitiaHealing( )
 
 						FLOAT currenthealthratio = 100.0f * oldlife / pSoldier->stats.bLifeMax;
 
-						currenthealthratio = min( 100.0f, currenthealthratio + gGameExternalOptions.dIndividualMilitiaHourlyHealthPercentageGain );
+						currenthealthratio = (std::min)( 100.0f, currenthealthratio + gGameExternalOptions.dIndividualMilitiaHourlyHealthPercentageGain );
 
-						pSoldier->stats.bLife = min( pSoldier->stats.bLifeMax, (currenthealthratio / 100.0f) * pSoldier->stats.bLifeMax );
+						pSoldier->stats.bLife = (std::min)( pSoldier->stats.bLifeMax, INT8((currenthealthratio / 100.0f) * pSoldier->stats.bLifeMax) );
 
 						// healing done will be displayed the next time the player sees this soldier
 						pSoldier->flags.fDisplayDamage = TRUE;
@@ -373,7 +373,7 @@ UINT32 CreateRandomIndividualMilitia( UINT8 aSoldierClass, UINT8 aOrigin, UINT8 
 			case 0:
 			case 1:
 				report.flagmask |= MILITIA_BATTLEREPORT_FLAG_PROMOTED;
-				mineventtime = max( mineventtime + 6, report.id );
+				mineventtime = (std::max)( UINT32(mineventtime + 6), report.id );
 				report.id = mineventtime;
 				break;
 
@@ -623,7 +623,7 @@ void HandlePossibleMilitiaPromotion( SOLDIERTYPE* pSoldier, BOOLEAN aAutoResolve
 
 			// if we are in autoresolve, then the report has already been created at this point
 			if ( aAutoResolve )
-				report.id = max( 0, report.id - 1 );
+				report.id = (std::max)( UINT32(0), report.id - 1 );
 
 			if ( pSoldier->stats.bLife < OKLIFE )
 				report.flagmask |= MILITIA_BATTLEREPORT_FLAG_WOUNDED_COMA;

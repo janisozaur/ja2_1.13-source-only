@@ -770,7 +770,7 @@ UINT8 LightTrueLevel( INT32 sGridNo, INT16 bLevel )
 				else
 					pShadowNode = gpWorldLevelData[ sNewGridNo ].pShadowHead;
 				if(pShadowNode != NULL)				{
-					iSum += max( 0, (StructureHeight(pStructure) - 1 ) );
+					iSum += (std::max)( 0, (StructureHeight(pStructure) - 1 ) );
 				}
 			}
 		}
@@ -2501,10 +2501,10 @@ BOOLEAN CalcTranslucentWalls(INT16 iX, INT16 iY)
 
 			//Kris:	added map boundary checking!!!
 			if(LightRevealWall(
-				(INT16)min(max((iX+pLight->iDX),0),WORLD_COLS-1),
-				(INT16)min(max((iY+pLight->iDY),0),WORLD_ROWS-1),
-				(INT16)min(max(iX,0),WORLD_COLS-1),
-				(INT16)min(max(iY,0),WORLD_ROWS-1)
+				(INT16)(std::min)(max((iX+pLight->iDX),0),WORLD_COLS-1),
+				(INT16)(std::min)(max((iY+pLight->iDY),0),WORLD_ROWS-1),
+				(INT16)(std::min)(max(iX,0),WORLD_COLS-1),
+				(INT16)(std::min)(max(iY,0),WORLD_ROWS-1)
 				))
 			{
 				uiCount=LightFindNextRay(0, uiCount);
@@ -2742,10 +2742,10 @@ UINT16 usNodeIndex;
 			pLight=pLightList[0]+(usNodeIndex&(~LIGHT_BACKLIGHT));
 			//Kris:	added map boundary checking!!!
 			if(LightHideWall(
-				(INT16)min(max((iX+pLight->iDX),0),WORLD_COLS-1),
-				(INT16)min(max((iY+pLight->iDY),0),WORLD_ROWS-1),
-				(INT16)min(max(iX,0),WORLD_COLS-1),
-				(INT16)min(max(iY,0),WORLD_ROWS-1)
+				(INT16)(std::min)(max((iX+pLight->iDX),0),WORLD_COLS-1),
+				(INT16)(std::min)(max((iY+pLight->iDY),0),WORLD_ROWS-1),
+				(INT16)(std::min)(max(iX,0),WORLD_COLS-1),
+				(INT16)(std::min)(max(iY,0),WORLD_ROWS-1)
 				))
 			{
 				uiCount=LightFindNextRay(0, uiCount);

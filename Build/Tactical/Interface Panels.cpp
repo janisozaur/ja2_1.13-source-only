@@ -2851,7 +2851,7 @@ void RenderSMPanel( BOOLEAN *pfDirty )
 			ApplyEquipmentBonuses(gpSMCurrentMerc);
 
 			// Display cammo value!
-			swprintf( sString, L"%3d", max(0, min(max((gpSMCurrentMerc->bCamo + gpSMCurrentMerc->wornCamo), max((gpSMCurrentMerc->urbanCamo+gpSMCurrentMerc->wornUrbanCamo), max((gpSMCurrentMerc->desertCamo+gpSMCurrentMerc->wornDesertCamo), (gpSMCurrentMerc->snowCamo+gpSMCurrentMerc->wornSnowCamo)))),100)) );
+			swprintf( sString, L"%3d", (std::max)(0, (std::min)((std::max)((gpSMCurrentMerc->bCamo + gpSMCurrentMerc->wornCamo), (std::max)((gpSMCurrentMerc->urbanCamo+gpSMCurrentMerc->wornUrbanCamo), (std::max)((gpSMCurrentMerc->desertCamo+gpSMCurrentMerc->wornDesertCamo), (gpSMCurrentMerc->snowCamo+gpSMCurrentMerc->wornSnowCamo)))),100)) );
 			FindFontRightCoordinates(SM_CAMMO_X, SM_CAMMO_Y ,SM_PERCENT_WIDTH ,SM_PERCENT_HEIGHT ,sString, BLOCKFONT2, &usX, &usY);
 			mprintf( usX, usY , sString );
 
@@ -7828,7 +7828,7 @@ BOOLEAN HandleKlerykPistolet( SOLDIERTYPE *pSoldier, UINT32 uiHandPos, UINT16 us
 			else
 			{	//legion
 				// Do we have nothing or the leather vest or kevlar leather vest?
-				if ( usReplaceItem == 4520 ) //z≥oty pistolet items.xml
+				if ( usReplaceItem == 4520 ) //z≈Çoty pistolet items.xml
 				{
 					// This is good....
 					fRefuse = FALSE;

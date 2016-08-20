@@ -1007,7 +1007,7 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Map Screen1");
 			if( gTownLoyalty[ bTown ].fStarted && gfTownUsesLoyalty[ bTown ])
 			{
 				#ifdef CHINESE
-					swprintf( sStringA, L"%d%��%% %s", gTownLoyalty[ bTown ].ubRating, gsLoyalString[ 0 ]);
+					swprintf( sStringA, L"%d%ďż˝ďż˝%% %s", gTownLoyalty[ bTown ].ubRating, gsLoyalString[ 0 ]);
 				#else
 					swprintf( sStringA, L"%d%%%% %s", gTownLoyalty[ bTown ].ubRating, gsLoyalString[ 0 ]);
 				#endif
@@ -1303,7 +1303,7 @@ void ShowEnemiesInSector( INT16 sSectorX, INT16 sSectorY, INT16 sNumberOfEnemies
 			// for now display only one tank icon
 			usNumEnemyArmedVehicles = 0;
 			ubIconPosition += 4;
-			sEnemy = max( 0, sEnemy - 1 );
+			sEnemy = (std::max)( 0, sEnemy - 1 );
 		}
 		else if ( s10xEnemy > 0 )
 		{
@@ -4558,7 +4558,7 @@ void BlitMineText( INT16 sMapX, INT16 sMapY )
 		if (GetMaxPeriodicRemovalFromMine(ubMineIndex) > 0)
 		{
 			#ifdef CHINESE
-				swprintf( wSubString, L" (%d%��%%)", (PredictDailyIncomeFromAMine(ubMineIndex, TRUE) * 100 ) / GetMaxDailyRemovalFromMine(ubMineIndex) );
+				swprintf( wSubString, L" (%d%ďż˝ďż˝%%)", (PredictDailyIncomeFromAMine(ubMineIndex, TRUE) * 100 ) / GetMaxDailyRemovalFromMine(ubMineIndex) );
 			#else
 				swprintf( wSubString, L" (%d%%%%)", (PredictDailyIncomeFromAMine(ubMineIndex, TRUE) * 100 ) / GetMaxDailyRemovalFromMine(ubMineIndex) );
 			#endif
@@ -4807,7 +4807,7 @@ BOOLEAN PickUpATownPersonFromSector( UINT8 ubType, INT16 sX, INT16 sY )
 		countMovedCivs = SectorInfo[ SECTOR( sX, sY )].ubNumberOfCivsAtLevel[ ubType ];
 	// 5 units in sector
 	else if (_KeyDown(CTRL))
-		countMovedCivs = min(5, SectorInfo[ SECTOR( sX, sY )].ubNumberOfCivsAtLevel[ ubType ]);
+		countMovedCivs = (std::min)(UINT8(5), SectorInfo[ SECTOR( sX, sY )].ubNumberOfCivsAtLevel[ ubType ]);
 
 	// otherwise pick this guy up
 	switch( ubType )
@@ -4888,9 +4888,9 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Map Screen2");
 			else if (_KeyDown(CTRL))
 			{
 				if (countFreeCivPlace <= 5)
-					countMovedCivs = min(countFreeCivPlace, sGreensOnCursor);
+					countMovedCivs = (std::min)(INT16(countFreeCivPlace), sGreensOnCursor);
 				else
-					countMovedCivs = min(5, sGreensOnCursor);
+					countMovedCivs = (std::min)(INT16(5), sGreensOnCursor);
 			}
 			sGreensOnCursor -= countMovedCivs;
 		break;
@@ -4912,9 +4912,9 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Map Screen2");
 			else if (_KeyDown(CTRL))
 			{
 				if (countFreeCivPlace <= 5)
-					countMovedCivs = min(countFreeCivPlace, sRegularsOnCursor);
+					countMovedCivs = (std::min)(INT16(countFreeCivPlace), sRegularsOnCursor);
 				else
-					countMovedCivs = min(5, sRegularsOnCursor);
+					countMovedCivs = (std::min)(INT16(5), sRegularsOnCursor);
 			}
 
 			sRegularsOnCursor -= countMovedCivs;
@@ -4937,9 +4937,9 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"Map Screen2");
 			else if (_KeyDown(CTRL))
 			{
 				if (countFreeCivPlace <= 5)
-					countMovedCivs = min(countFreeCivPlace, sElitesOnCursor);
+					countMovedCivs = (std::min)(INT16(countFreeCivPlace), sElitesOnCursor);
 				else
-					countMovedCivs = min(5, sElitesOnCursor);
+					countMovedCivs = (std::min)(INT16(5), sElitesOnCursor);
 			}
 
 			sElitesOnCursor -= countMovedCivs;
@@ -7946,7 +7946,7 @@ void DisplayMilitiaGroupBox()
 	}
 
 	// not more groups than allowed though
-	linecnt = min( linecnt, 2 + MILITIAGROUPBOX_REGION_MAX );
+	linecnt = (std::min)( linecnt, 2 + MILITIAGROUPBOX_REGION_MAX );
 
 	UINT16 MILITIAGROUPBOX_HEIGHT = linecnt * MILITIAGROUPBOX_HEIGHT_LINE;
 

@@ -287,7 +287,7 @@ UINT32 MapUtilScreenHandle(void)
 	iOffsetVertical = SCREEN_HEIGHT - 480;
 	BltVideoSurface(FRAME_BUFFER, guiMiniMap, 0, iOffsetHorizontal+10, iOffsetVertical+360, VS_BLT_FAST|VS_BLT_USECOLORKEY, NULL);
 	pDestBuf = (UINT16*)LockVideoSurface(FRAME_BUFFER, &uiDestPitchBYTES);
-	Blt16BPPTo16BPP((UINT16 *)pDestBuf, uiDestPitchBYTES, (UINT16 *)pSrcBuf, uiSrcPitchBYTES, 0, 0, 0, 0, min((640 * WORLD_COLS / OLD_WORLD_COLS), SCREEN_WIDTH), min((320 * WORLD_ROWS / OLD_WORLD_ROWS), SCREEN_HEIGHT - 160));
+	Blt16BPPTo16BPP((UINT16 *)pDestBuf, uiDestPitchBYTES, (UINT16 *)pSrcBuf, uiSrcPitchBYTES, 0, 0, 0, 0, (std::min)((640 * WORLD_COLS / OLD_WORLD_COLS), SCREEN_WIDTH), (std::min)((320 * WORLD_ROWS / OLD_WORLD_ROWS), SCREEN_HEIGHT - 160));
 	UnLockVideoSurface(guiBigMap);
 	//QUantize!
 	pDataPtr = (UINT8*)LockVideoSurface(gui8BitMiniMap, &uiSrcPitchBYTES);

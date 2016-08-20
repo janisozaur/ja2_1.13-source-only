@@ -510,13 +510,13 @@ void PMCButtonCallback( GUI_BUTTON *btn, INT32 reason )
 			btn->uiFlags &= ~(BUTTON_CLICKED_ON);
 
 			if ( btn->IDNum == gPMCButton[0] )
-				pmcdata[0].usToHire = min( pmcdata[0].usToHire + 1, gPMCData.usRegularsAvailable );
+				pmcdata[0].usToHire = (std::min)( UINT8(pmcdata[0].usToHire + 1), gPMCData.usRegularsAvailable );
 			else if ( btn->IDNum == gPMCButton[1] )
-				pmcdata[0].usToHire = max( pmcdata[0].usToHire - 1, 0 );
+				pmcdata[0].usToHire = (std::max)( UINT8(pmcdata[0].usToHire - 1), UINT8(0) );
 			else if ( btn->IDNum == gPMCButton[2] )
-				pmcdata[1].usToHire = min( pmcdata[1].usToHire + 1, gPMCData.usVeteransAvailable );
+				pmcdata[1].usToHire = (std::min)( UINT8(pmcdata[1].usToHire + 1), gPMCData.usVeteransAvailable );
 			else if ( btn->IDNum == gPMCButton[3] )
-				pmcdata[1].usToHire = max( pmcdata[1].usToHire - 1, 0 );
+				pmcdata[1].usToHire = (std::max)( UINT8(pmcdata[1].usToHire - 1), UINT8(0) );
 
 			RenderPMCContract();
 		}
@@ -742,10 +742,10 @@ void GameInitPMC()
 void HourlyUpdatePMC( )
 {
 	if ( Chance( 50 ) )
-		gPMCData.usRegularsAvailable = min( gPMCData.usRegularsAvailable + 1, gGameExternalOptions.usPMCMaxRegulars );
+		gPMCData.usRegularsAvailable = (std::min)( UINT8(gPMCData.usRegularsAvailable + 1), gGameExternalOptions.usPMCMaxRegulars );
 
 	if ( Chance( 30 ) )
-		gPMCData.usVeteransAvailable = min( gPMCData.usVeteransAvailable + 1, gGameExternalOptions.usPMCMaxVeterans );
+		gPMCData.usVeteransAvailable = (std::min)( UINT8(gPMCData.usVeteransAvailable + 1), gGameExternalOptions.usPMCMaxVeterans );
 }
 
 void HandlePMCArrival( UINT8 usId )

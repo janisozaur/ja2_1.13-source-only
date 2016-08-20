@@ -979,11 +979,11 @@ INT32	DoesPlayerHaveExtraAttibutePointsToDistributeBasedOnSkillSelection()
 		// add selected minor traits
 		bNumSkills += CountNumMinorTraitsSelected( FALSE );
 
-		iExtraPoints = (max( 0, 3 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken);
+		iExtraPoints = ((std::max)( 0, 3 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken);
 	}
 	else
 	{
-		iExtraPoints = (max( 0, 2 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken);
+		iExtraPoints = ((std::max)( 0, 2 - bNumSkills)) * (gGameExternalOptions.iBonusPointsPerSkillNotTaken);
 	}
 
 	return( iExtraPoints );
@@ -1316,25 +1316,25 @@ INT32 StrengthRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 		else
-			minreq = max( minreq, 40 );
+			minreq = (std::max)( minreq, 40 );
 	}
 
 	return minreq;
@@ -1354,25 +1354,25 @@ INT32 AgilityRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_GUNSLINGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_GUNSLINGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_GUNSLINGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_GUNSLINGER] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1392,57 +1392,57 @@ INT32 DexterityRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_GUNSLINGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_GUNSLINGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_GUNSLINGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_GUNSLINGER] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_DOCTOR] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_DOCTOR] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_DOCTOR] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_DOCTOR] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1462,25 +1462,25 @@ INT32 HealthRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_MARTIAL_ARTS] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1500,25 +1500,25 @@ INT32 LeadershipRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_SQUADLEADER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_SQUADLEADER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_SQUADLEADER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_SQUADLEADER] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 		else
-			minreq = max( minreq, 35 );
+			minreq = (std::max)( minreq, 35 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_COVERT] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_COVERT] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_COVERT] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_COVERT] )
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 		else
-			minreq = max( minreq, 30 );
+			minreq = (std::max)( minreq, 30 );
 	}
 
 	return minreq;
@@ -1538,49 +1538,49 @@ INT32 WisdomRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_SQUADLEADER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_SQUADLEADER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_SQUADLEADER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_SQUADLEADER] )
-			minreq = max( minreq, 75 );
+			minreq = (std::max)( minreq, 75 );
 		else
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_COVERT] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_COVERT] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_COVERT] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_COVERT] )
-			minreq = max( minreq, 75 );
+			minreq = (std::max)( minreq, 75 );
 		else
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_DOCTOR] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_DOCTOR] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_DOCTOR] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_DOCTOR] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] )
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 		else
-			minreq = max( minreq, 50 );
+			minreq = (std::max)( minreq, 50 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1600,33 +1600,33 @@ INT32 MarksmanshipRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_PROF_SNIPER] )
-			minreq = max( minreq, 80 );
+			minreq = (std::max)( minreq, 80 );
 		else
-			minreq = max( minreq, 65 );
+			minreq = (std::max)( minreq, 65 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_RANGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_RANGER] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_GUNSLINGER] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_GUNSLINGER] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_GUNSLINGER] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_GUNSLINGER] )
-			minreq = max( minreq, 70 );
+			minreq = (std::max)( minreq, 70 );
 		else
-			minreq = max( minreq, 55 );
+			minreq = (std::max)( minreq, 55 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_AUTO_WEAPONS] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1646,9 +1646,9 @@ INT32 MechanicalRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1668,9 +1668,9 @@ INT32 MedicalRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_DOCTOR] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_DOCTOR] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_DOCTOR] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_DOCTOR] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;
@@ -1690,17 +1690,17 @@ INT32 ExplosivesRequiredDueToMajorSkills( void )
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_HEAVY_WEAPONS] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] || gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
 	{
 		if ( gfSkillTraitQuestions[IMP_SKILL_TRAITS_NEW_TECHNICIAN] && gfSkillTraitQuestions2[IMP_SKILL_TRAITS_NEW_TECHNICIAN] )
-			minreq = max( minreq, 60 );
+			minreq = (std::max)( minreq, 60 );
 		else
-			minreq = max( minreq, 45 );
+			minreq = (std::max)( minreq, 45 );
 	}
 
 	return minreq;

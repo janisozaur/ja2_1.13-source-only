@@ -1920,7 +1920,7 @@ BOOLEAN Stop = FALSE;
 				if (_KeyDown( 17 ) ) // CTRL
 					gbCurrentIndex = 0;
 				else if (_KeyDown( 16 ) ) // SHIFT
-					gbCurrentIndex = __max(gbCurrentIndex - 10, 0);
+					gbCurrentIndex = (std::max)(gbCurrentIndex - 10, 0);
 				else
 					gbCurrentIndex--;
 			}
@@ -2001,7 +2001,7 @@ BOOLEAN Stop = FALSE;
 				if (_KeyDown( 17 ) ) // CTRL
 					gbCurrentIndex = MAX_NUMBER_MERCS - 1;
 				else if (_KeyDown( 16 ) ) // SHIFT
-					gbCurrentIndex = __min(MAX_NUMBER_MERCS - 1, gbCurrentIndex + 10);
+					gbCurrentIndex = (std::min)(MAX_NUMBER_MERCS - 1, gbCurrentIndex + 10);
 				else
 					gbCurrentIndex++;
 			}
@@ -5163,7 +5163,7 @@ void HandleAimMemberKeyBoardInput()
 						if (_KeyDown( 17 ) ) // CTRL
 							gbCurrentIndex = 0;
 						else
-							gbCurrentIndex = __max(gbCurrentIndex - 10, 0);
+							gbCurrentIndex = (std::max)(gbCurrentIndex - 10, 0);
 					}
 					else
 						gbCurrentIndex = MAX_NUMBER_MERCS - 1;
@@ -5185,7 +5185,7 @@ void HandleAimMemberKeyBoardInput()
 						if (_KeyDown( 17 ) ) // CTRL
 							gbCurrentIndex = MAX_NUMBER_MERCS - 1;
 						else
-							gbCurrentIndex = __min(MAX_NUMBER_MERCS - 1, gbCurrentIndex + 10);
+							gbCurrentIndex = (std::min)(MAX_NUMBER_MERCS - 1, gbCurrentIndex + 10);
 					}
 					else
 						gbCurrentIndex = 0;
@@ -5404,7 +5404,7 @@ void HandleAimMemberKeyBoardInput()
 					InitCreateDeleteAimPopUpBox(AIM_POPUP_DELETE, NULL, NULL, 0, 0, 0);
 
 					if( gbCurrentIndex > 0)
-						gbCurrentIndex = __max(gbCurrentIndex - 10, 0);
+						gbCurrentIndex = (std::max)(gbCurrentIndex - 10, 0);
 					else
 						gbCurrentIndex = MAX_NUMBER_MERCS - 1;
 
@@ -5421,7 +5421,7 @@ void HandleAimMemberKeyBoardInput()
 					InitCreateDeleteAimPopUpBox(AIM_POPUP_DELETE, NULL, NULL, 0, 0, 0);
 
 					if( gbCurrentIndex < MAX_NUMBER_MERCS - 1 )
-						gbCurrentIndex = __min(MAX_NUMBER_MERCS - 1, gbCurrentIndex + 10);
+						gbCurrentIndex = (std::min)(MAX_NUMBER_MERCS - 1, gbCurrentIndex + 10);
 					else
 						gbCurrentIndex = 0;
 
@@ -5950,7 +5950,7 @@ void WeaponKitSelectionUpdate(UINT8 selectedInventory = 0)
 			// If it's armour
 			if ( Item[ usItem ].usItemClass & IC_ARMOUR )
 			{
-				gMercProfiles[gbCurrentSoldier].bArmourAttractiveness = min(128,Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
+				gMercProfiles[gbCurrentSoldier].bArmourAttractiveness = (std::min)(UINT16(128), Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
 			}
 		}
 	}

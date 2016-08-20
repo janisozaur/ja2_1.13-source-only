@@ -2417,13 +2417,13 @@ UINT32 CalculateMinutesClosedBetween( UINT8 ubArmsDealer, UINT32 uiStartTime, UI
 		if ( uiStartTime < uiOpeningTime )
 		{
 			// add how many minutes in the time range BEFORE the store opened that day
-			uiMinutesClosed += ( min( uiOpeningTime, uiEndTime ) - uiStartTime );
+			uiMinutesClosed += ( (std::min)( uiOpeningTime, uiEndTime ) - uiStartTime );
 		}
 
 		if ( uiEndTime > uiClosingTime )
 		{
 			// add how many minutes in the time range AFTER the store closed that day
-			uiMinutesClosed += ( uiEndTime - max( uiClosingTime, uiStartTime ) );
+			uiMinutesClosed += ( uiEndTime - (std::max)( uiClosingTime, uiStartTime ) );
 		}
 	}
 	else

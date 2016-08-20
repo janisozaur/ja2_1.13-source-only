@@ -345,7 +345,7 @@ INT16 AdjustMaxSightRangeForEnvEffects( SOLDIERTYPE *pSoldier, INT8 bLightLevel,
 
 		FLOAT appliedpenalty = 1.0f;
 		if ( HAS_SKILL_TRAIT( pSoldier, SURVIVAL_NT ) && (gGameOptions.fNewTraitSystem) )
-			appliedpenalty = min( 1.0f, max( 0.0f, appliedpenalty - gSkillTraitValues.dSVWeatherPenaltiesReduction * NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT ) ) );
+			appliedpenalty = (std::min)( 1.0f, (std::max)( 0.0f, appliedpenalty - gSkillTraitValues.dSVWeatherPenaltiesReduction * NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT ) ) );
 
 		sNewDist -= (INT16)(sNewDist * weatherpenalty * appliedpenalty);
 
@@ -1628,7 +1628,7 @@ INT8 DecideHearing( SOLDIERTYPE * pSoldier )
 		// Added a feature to reduce rain effect on regaining breath with Ranger trait - SANDRO
 		FLOAT appliedpenalty = 1.0f;
 		if ( HAS_SKILL_TRAIT( pSoldier, SURVIVAL_NT ) && gGameOptions.fNewTraitSystem )
-			appliedpenalty = min( 1.0f, max( 0.0f, appliedpenalty - gSkillTraitValues.dSVWeatherPenaltiesReduction * NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT ) ) );
+			appliedpenalty = (std::min)( 1.0f, (std::max)( 0.0f, appliedpenalty - gSkillTraitValues.dSVWeatherPenaltiesReduction * NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT ) ) );
 
 		bHearing -= (INT16)(bHearing * weatherpenalty * appliedpenalty);
 	}

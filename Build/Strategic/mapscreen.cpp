@@ -4642,7 +4642,7 @@ UINT32 MapScreenHandle(void)
 				MAP_VIEW_START_X = (MAP_BORDER_X + MAP_BORDER_X_OFFSET + 9);	// 9: Constant, do not change it.
 				MAP_VIEW_START_Y = (MAP_BORDER_Y + MAP_BORDER_Y_OFFSET + 10);	// 10: Constant, do not change it.
 
-				// Maus Area (Ist die reine Größe der Karte/2 (ohne dem schwarzen Rand (links und oben))
+				// Maus Area (Ist die reine GrÃ¶ÃŸe der Karte/2 (ohne dem schwarzen Rand (links und oben))
 				MAP_VIEW_WIDTH = 336;			// Width of the map (without the black area on the left)
 				MAP_VIEW_HEIGHT	= 288 + 10;		// Height of the map (without the black area on the top) + constant value of 10
 
@@ -9440,7 +9440,7 @@ void BltCharInvPanel()
 		ApplyEquipmentBonuses(pSoldier);
 
 		// Display camo value
-		swprintf( sString, L"%3d", max(0, min(max((pSoldier->bCamo + pSoldier->wornCamo), max((pSoldier->urbanCamo+pSoldier->wornUrbanCamo), max((pSoldier->desertCamo+pSoldier->wornDesertCamo), (pSoldier->snowCamo+pSoldier->wornSnowCamo)))),100)) );
+		swprintf( sString, L"%3d", (std::max)(0, (std::min)((std::max)((pSoldier->bCamo + pSoldier->wornCamo), max((pSoldier->urbanCamo+pSoldier->wornUrbanCamo), max((pSoldier->desertCamo+pSoldier->wornDesertCamo), (pSoldier->snowCamo+pSoldier->wornSnowCamo)))),100)) );
 		FindFontRightCoordinates(MAP_CAMMO_X, MAP_CAMMO_Y, MAP_PERCENT_WIDTH, MAP_PERCENT_HEIGHT, sString, BLOCKFONT2, &usX, &usY);
 		mprintf( usX, usY, sString );
 
@@ -16951,20 +16951,20 @@ BOOLEAN CanGiveStrategicMilitiaMoveOrder( INT16 sMapX, INT16 sMapY )
 			if ( fRadioOperator && soldiertownid == BLANK_SECTOR && townid != BLANK_SECTOR )
 			{
 				// check whether adjacent sectors belong to the town we search for
-				if ( GetTownIdForSector( min( pSoldier->sSectorX + 1, MAP_WORLD_X - 2), pSoldier->sSectorY ) == townid )	return TRUE;
-				if ( GetTownIdForSector( max( pSoldier->sSectorX - 1, 1 ),				pSoldier->sSectorY ) == townid )	return TRUE;
-				if ( GetTownIdForSector( pSoldier->sSectorX, min( pSoldier->sSectorY + 1, MAP_WORLD_Y - 2 ) ) == townid )	return TRUE;
-				if ( GetTownIdForSector( pSoldier->sSectorX, max( pSoldier->sSectorY - 1, 1 ) ) == townid )					return TRUE;
+				if ( GetTownIdForSector( (std::min)( pSoldier->sSectorX + 1, MAP_WORLD_X - 2), pSoldier->sSectorY ) == townid )	return TRUE;
+				if ( GetTownIdForSector( (std::max)( pSoldier->sSectorX - 1, 1 ),				pSoldier->sSectorY ) == townid )	return TRUE;
+				if ( GetTownIdForSector( pSoldier->sSectorX, (std::min)( pSoldier->sSectorY + 1, MAP_WORLD_Y - 2 ) ) == townid )	return TRUE;
+				if ( GetTownIdForSector( pSoldier->sSectorX, (std::max)( pSoldier->sSectorY - 1, 1 ) ) == townid )					return TRUE;
 			}
 
 			// 5.
 			if ( fRadioOperator && townid == BLANK_SECTOR && soldiertownid != BLANK_SECTOR )
 			{
 				// check whether adjacent sectors belong to the town we search for
-				if ( GetTownIdForSector( min( sMapX + 1, MAP_WORLD_X - 2 ), sMapY ) == townid )								return TRUE;
-				if ( GetTownIdForSector( max( sMapX - 1, 1 ),				sMapY ) == townid )								return TRUE;
-				if ( GetTownIdForSector( sMapX,								min( sMapY + 1, MAP_WORLD_Y - 2 ) ) == townid )	return TRUE;
-				if ( GetTownIdForSector( sMapX,								max( sMapY - 1, 1 ) ) == townid )				return TRUE;
+				if ( GetTownIdForSector( (std::min)( sMapX + 1, MAP_WORLD_X - 2 ), sMapY ) == townid )								return TRUE;
+				if ( GetTownIdForSector( (std::max)( sMapX - 1, 1 ),				sMapY ) == townid )								return TRUE;
+				if ( GetTownIdForSector( sMapX,								(std::min)( sMapY + 1, MAP_WORLD_Y - 2 ) ) == townid )	return TRUE;
+				if ( GetTownIdForSector( sMapX,								(std::max)( sMapY - 1, 1 ) ) == townid )				return TRUE;
 			}
 		}
 	}

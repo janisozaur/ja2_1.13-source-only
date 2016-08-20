@@ -300,7 +300,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curAmmoType.dDamageModifierLife = (FLOAT)atof( pData->szCharData );
 
 			// reasonable values only
-			pData->curAmmoType.dDamageModifierLife = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierLife ) );
+			pData->curAmmoType.dDamageModifierLife = (std::min)( 100.0f, (std::max)( 0.0f, pData->curAmmoType.dDamageModifierLife ) );
 		}
 		else if ( strcmp( name, "dDamageModifierBreath" ) == 0 )
 		{
@@ -308,7 +308,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curAmmoType.dDamageModifierBreath = (FLOAT)atof( pData->szCharData );
 
 			// reasonable values only
-			pData->curAmmoType.dDamageModifierBreath = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierBreath ) );
+			pData->curAmmoType.dDamageModifierBreath = (std::min)( 100.0f, (std::max)( 0.0f, pData->curAmmoType.dDamageModifierBreath ) );
 		}
 		else if ( strcmp( name, "dDamageModifierTank" ) == 0 )
 		{
@@ -316,7 +316,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curAmmoType.dDamageModifierTank = (FLOAT)atof( pData->szCharData );
 
 			// reasonable values only
-			pData->curAmmoType.dDamageModifierTank = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierTank ) );
+			pData->curAmmoType.dDamageModifierTank = (std::min)( 100.0f, (std::max)( 0.0f, pData->curAmmoType.dDamageModifierTank ) );
 		}
 		else if ( strcmp( name, "dDamageModifierArmouredVehicle" ) == 0 )
 		{
@@ -324,7 +324,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curAmmoType.dDamageModifierArmouredVehicle = (FLOAT)atof( pData->szCharData );
 
 			// reasonable values only
-			pData->curAmmoType.dDamageModifierArmouredVehicle = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierArmouredVehicle ) );
+			pData->curAmmoType.dDamageModifierArmouredVehicle = (std::min)( 100.0f, (std::max)( 0.0f, pData->curAmmoType.dDamageModifierArmouredVehicle ) );
 		}
 		else if ( strcmp( name, "dDamageModifierCivilianVehicle" ) == 0 )
 		{
@@ -332,7 +332,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curAmmoType.dDamageModifierCivilianVehicle = (FLOAT)atof( pData->szCharData );
 
 			// reasonable values only
-			pData->curAmmoType.dDamageModifierCivilianVehicle = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierCivilianVehicle ) );
+			pData->curAmmoType.dDamageModifierCivilianVehicle = (std::min)( 100.0f, (std::max)( 0.0f, pData->curAmmoType.dDamageModifierCivilianVehicle ) );
 		}
 		else if ( strcmp( name, "dDamageModifierZombie" ) == 0 )
 		{
@@ -340,7 +340,7 @@ ammotypeEndElementHandle(void *userData, const XML_Char *name)
 			pData->curAmmoType.dDamageModifierZombie = (FLOAT)atof( pData->szCharData );
 
 			// reasonable values only
-			pData->curAmmoType.dDamageModifierZombie = min( 100.0f, max( 0.0f, pData->curAmmoType.dDamageModifierZombie ) );
+			pData->curAmmoType.dDamageModifierZombie = (std::min)( 100.0f, (std::max)( 0.0f, pData->curAmmoType.dDamageModifierZombie ) );
 		}
 
 		pData->maxReadDepth--;

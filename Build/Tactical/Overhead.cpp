@@ -2531,7 +2531,7 @@ BOOLEAN HandleGotoNewGridNo( SOLDIERTYPE *pSoldier, BOOLEAN *pfKeepMoving, BOOLE
 						SOLDIERTYPE *pPassenger = pVehicleList[ iId ].pPassengers[ iCounter ];
 						if( pPassenger != NULL )
 						{
-							//INT16 sPassengerAPCost = pPassenger->bInitialActionPoints * sAPCost / max(1, pSoldier->bInitialActionPoints) * gGameExternalOptions.ubAPSharedAmongPassengersAndVehicleScale / 100;
+							//INT16 sPassengerAPCost = pPassenger->bInitialActionPoints * sAPCost / (std::max)(1, pSoldier->bInitialActionPoints) * gGameExternalOptions.ubAPSharedAmongPassengersAndVehicleScale / 100;
 							INT16 sPassengerAPCost = 0;
 							switch( gGameExternalOptions.ubAPSharedAmongPassengersAndVehicleMode )
 							{
@@ -2539,13 +2539,13 @@ BOOLEAN HandleGotoNewGridNo( SOLDIERTYPE *pSoldier, BOOLEAN *pfKeepMoving, BOOLE
 									sPassengerAPCost = sAPCost;
 									break;
 								case 2:
-									sPassengerAPCost = pPassenger->bInitialActionPoints * sAPCost / max(1, pSoldier->bInitialActionPoints);
+									sPassengerAPCost = pPassenger->bInitialActionPoints * sAPCost / (std::max)(INT16(1), pSoldier->bInitialActionPoints);
 									break;
 								case 3:
-									INT16 sPassengerAPTreshold = pPassenger->bInitialActionPoints * ( pSoldier->bActionPoints - sAPCost ) / max(1, pSoldier->bInitialActionPoints);
-									sPassengerAPCost = pPassenger->bInitialActionPoints * sAPCost / max(1, pSoldier->bInitialActionPoints) ;
+									INT16 sPassengerAPTreshold = pPassenger->bInitialActionPoints * ( pSoldier->bActionPoints - sAPCost ) / (std::max)(INT16(1), pSoldier->bInitialActionPoints);
+									sPassengerAPCost = pPassenger->bInitialActionPoints * sAPCost / (std::max)(INT16(1), pSoldier->bInitialActionPoints) ;
 									if( pPassenger->bActionPoints - sPassengerAPCost > sPassengerAPTreshold )
-										sPassengerAPCost = max( sPassengerAPCost, ( pPassenger->bActionPoints - sPassengerAPCost ) - sPassengerAPTreshold );
+										sPassengerAPCost = (std::max)( sPassengerAPCost, INT16(( pPassenger->bActionPoints - sPassengerAPCost ) - sPassengerAPTreshold) );
 									else
 										sPassengerAPCost = 0;
 									break;
@@ -6890,9 +6890,9 @@ void RemoveCapturedEnemiesFromSectorInfo( INT16 sMapX, INT16 sMapY, INT8 bMapZ )
 										if ( Item[pObj->usItem].damageable && Item[pObj->usItem].usItemClass != IC_THROWING_KNIFE ) // Madd: drop crappier items from enemies on higher difficulty levels - note the quick fix for throwing knives
 										{
 											(*pObj)[0]->data.objectStatus -= (gGameOptions.ubDifficultyLevel - 1) * Random( 20 );
-											(*pObj)[0]->data.objectStatus = min( max( (*pObj)[0]->data.objectStatus, 1 ), 100 ); // never below 1% or above 100%
+											(*pObj)[0]->data.objectStatus = (std::min)( (std::max)( (*pObj)[0]->data.objectStatus, INT16(1) ), INT16(100) ); // never below 1% or above 100%
 
-											(*pObj)[0]->data.sRepairThreshold = max( 1, min( 100, ((*pObj)[0]->data.objectStatus + 200) / 3 ) );
+											(*pObj)[0]->data.sRepairThreshold = (std::max)( 1, (std::min)( 100, ((*pObj)[0]->data.objectStatus + 200) / 3 ) );
 										}
 									}
 
@@ -8282,8 +8282,8 @@ INT8 CalcSuppressionTolerance( SOLDIERTYPE * pSoldier )
         if ((ubNumberOfSL < gSkillTraitValues.ubSLMaxBonuses) && HAS_SKILL_TRAIT( pSoldier, SQUADLEADER_NT ))
         {
             // Flugente: This seems wrong. gSkillTraitValues.ubSLMaxBonuses should be the upper, not lower bound of squadleasders...
-            //ubNumberOfSL = max( gSkillTraitValues.ubSLMaxBonuses, (ubNumberOfSL + NUM_SKILL_TRAITS( pSoldier, SQUADLEADER_NT )) );
-            ubNumberOfSL = min( gSkillTraitValues.ubSLMaxBonuses, (ubNumberOfSL + NUM_SKILL_TRAITS( pSoldier, SQUADLEADER_NT )) );
+            //ubNumberOfSL = (std::max)( gSkillTraitValues.ubSLMaxBonuses, (ubNumberOfSL + NUM_SKILL_TRAITS( pSoldier, SQUADLEADER_NT )) );
+			ubNumberOfSL = (std::min)( gSkillTraitValues.ubSLMaxBonuses, UINT8(ubNumberOfSL + NUM_SKILL_TRAITS( pSoldier, SQUADLEADER_NT )) );
         }
         bTolerance += (bTolerance * gSkillTraitValues.ubSLOverallSuppresionBonusPercent * ubNumberOfSL / 100);
     }
@@ -10823,7 +10823,7 @@ void ChangeNumberOfPrisoners( SECTORINFO *pSectorInfo, INT16 aPrisoners[] )
 		return;
 
 	for ( int i = PRISONER_ADMIN; i < PRISONER_MAX; ++i )
-		pSectorInfo->uiNumberOfPrisonersOfWar[i] = max( 0, min( 255, pSectorInfo->uiNumberOfPrisonersOfWar[i] + aPrisoners[i] ) );
+		pSectorInfo->uiNumberOfPrisonersOfWar[i] = (std::max)( 0, (std::min)( 255, pSectorInfo->uiNumberOfPrisonersOfWar[i] + aPrisoners[i] ) );
 }
 
 void ChangeNumberOfPrisoners( UNDERGROUND_SECTORINFO *pSectorInfo, INT16 aPrisoners[] )
@@ -10832,7 +10832,7 @@ void ChangeNumberOfPrisoners( UNDERGROUND_SECTORINFO *pSectorInfo, INT16 aPrison
 		return;
 
 	for ( int i = PRISONER_ADMIN; i < PRISONER_MAX; ++i )
-		pSectorInfo->uiNumberOfPrisonersOfWar[i] = max( 0, min( 255, pSectorInfo->uiNumberOfPrisonersOfWar[i] + aPrisoners[i] ) );
+		pSectorInfo->uiNumberOfPrisonersOfWar[i] = (std::max)( 0, (std::min)( 255, pSectorInfo->uiNumberOfPrisonersOfWar[i] + aPrisoners[i] ) );
 }
 
 void DeleteAllPrisoners( SECTORINFO *pSectorInfo )
@@ -10913,7 +10913,7 @@ UINT8 HighestEnemyOfficersInSector( UINT8& aType )
 			if ( (pSoldier->usSoldierFlagMask & SOLDIER_ENEMY_OFFICER) && !(pSoldier->usSoldierFlagMask & SOLDIER_POW) )
             {
 				// officers with double squadleader trait are captains, otherwise lieutnant
-                aType = max( aType, NUM_SKILL_TRAITS( pSoldier, SQUADLEADER_NT) );
+				aType = (std::max)( aType, UINT8(NUM_SKILL_TRAITS( pSoldier, SQUADLEADER_NT)) );
 
 				++num;
 			}
@@ -11147,7 +11147,7 @@ void DeleteVIP( INT16 sMapX, INT16 sMapY )
 		StrategicMap[SECTOR( sMapX, sMapY )].usFlags &= ~(ENEMY_VIP_PRESENT | ENEMY_VIP_PRESENT_KNOWN);
 	}
 
-	gStrategicStatus.usVIPsLeft = max( 0, gStrategicStatus.usVIPsLeft - 1 );
+	gStrategicStatus.usVIPsLeft = (std::max)( 0, gStrategicStatus.usVIPsLeft - 1 );
 }
 
 void VIPFleesToMeduna()

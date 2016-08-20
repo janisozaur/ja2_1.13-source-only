@@ -55,7 +55,7 @@ void MultiplayerTeams::HandleServerStarted()
 
 void MultiplayerTeams::UseFallbackDataIfNecessary()
 {
-	for (size_t team = 0; team < max(NUM_RANDOM_MERC_TEAMS, teams.size()); team++)
+	for (size_t team = 0; team < (std::max)(size_t(NUM_RANDOM_MERC_TEAMS), teams.size()); team++)
 	{
 		if (teams.size() <= team)
 		{

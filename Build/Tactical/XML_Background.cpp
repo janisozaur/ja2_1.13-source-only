@@ -228,337 +228,337 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		else if(strcmp(name, "ap_polar") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_POLAR] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_POLAR] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_desert") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_DESERT] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_DESERT] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_swamp") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_SWAMP] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_SWAMP] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_urban") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_URBAN] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_URBAN] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_river") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_RIVER] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_RIVER] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_coastal") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_COASTAL] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_COASTAL] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_tropical") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_TROPICAL] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_TROPICAL] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_mountain") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_MOUNTAIN] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_MOUNTAIN] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_height") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_HEIGHT] = min(XML_BACKGROUND_AP_MAX, max(-XML_BACKGROUND_AP_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_HEIGHT] = (std::min)(INT8(XML_BACKGROUND_AP_MAX), (std::max)(INT8(-XML_BACKGROUND_AP_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_swimming") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_SWIMMING] = min(40, max(-40, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_SWIMMING] = (std::min)(INT8(40), (std::max)(INT8(-40), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_fortify") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_FORTIFY] = min(40, max(-40, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_FORTIFY] = (std::min)(INT8(40), (std::max)(INT8(-40), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_artillery") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_ARTILLERY] = min(40, max(-40, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_ARTILLERY] = (std::min)(INT8(40), (std::max)(INT8(-40), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_inventory") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_INVENTORY] = min(40, max(-40, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_INVENTORY] = (std::min)(INT8(40), (std::max)(INT8(-40), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_airdrop") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_AIRDROP] = min(40, max(-40, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_AIRDROP] = (std::min)(INT8(40), (std::max)(INT8(-40), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "ap_assault") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_ASSAULT] = min(10, max(-10, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_ASSAULT] = (std::min)(INT8(10), (std::max)(INT8(-10), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "agility") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_AGILITY] = min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_AGILITY] = (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "strength") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_STRENGTH]	= min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_STRENGTH]	= (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "dexterity") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_DEXTERITY] = min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_DEXTERITY] = (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "mechanical") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_MECHANICAL] = min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_MECHANICAL] = (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "medical") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_MEDICAL] = min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_MEDICAL] = (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "wisdom") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_WISDOM] = min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_WISDOM] = (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "explosives") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_EXPLOSIVE_ASSIGN]	= min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_EXPLOSIVE_ASSIGN]	= (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "leadership") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_LEADERSHIP]	= min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_LEADERSHIP]	= (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "marksmanship") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_MARKSMANSHIP]	= min(XML_BACKGROUND_STAT_MAX, max(-XML_BACKGROUND_STAT_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_MARKSMANSHIP]	= (std::min)(INT8(XML_BACKGROUND_STAT_MAX), (std::max)(INT8(-XML_BACKGROUND_STAT_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "travel_foot") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_TRAVEL_FOOT] = min(XML_BACKGROUND_TRAVEL_MAX, max(-XML_BACKGROUND_TRAVEL_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_TRAVEL_FOOT] = (std::min)(INT8(XML_BACKGROUND_TRAVEL_MAX), (std::max)(INT8(-XML_BACKGROUND_TRAVEL_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "travel_car") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_TRAVEL_CAR] = min(XML_BACKGROUND_TRAVEL_MAX, max(-XML_BACKGROUND_TRAVEL_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_TRAVEL_CAR] = (std::min)(INT8(XML_BACKGROUND_TRAVEL_MAX), (std::max)(INT8(-XML_BACKGROUND_TRAVEL_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "travel_air") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_TRAVEL_AIR] = min(XML_BACKGROUND_TRAVEL_MAX, max(-XML_BACKGROUND_TRAVEL_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_TRAVEL_AIR] = (std::min)(INT8(XML_BACKGROUND_TRAVEL_MAX), (std::max)(INT8(-XML_BACKGROUND_TRAVEL_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "travel_boat") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_TRAVEL_BOAT] = min(XML_BACKGROUND_TRAVEL_MAX, max(-XML_BACKGROUND_TRAVEL_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_TRAVEL_BOAT] = (std::min)(INT8(XML_BACKGROUND_TRAVEL_MAX), (std::max)(INT8(-XML_BACKGROUND_TRAVEL_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "resistance_fear") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_RESI_FEAR] = min(XML_BACKGROUND_RESI_MAX, max(-XML_BACKGROUND_RESI_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_RESI_FEAR] = (std::min)(INT8(XML_BACKGROUND_RESI_MAX), (std::max)(INT8(-XML_BACKGROUND_RESI_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "resistance_suppression") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_RESI_SUPPRESSION] = min(XML_BACKGROUND_RESI_MAX, max(-XML_BACKGROUND_RESI_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_RESI_SUPPRESSION] = (std::min)(INT8(XML_BACKGROUND_RESI_MAX), (std::max)(INT8(-XML_BACKGROUND_RESI_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "resistance_physical") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_RESI_PHYSICAL] = min(10, max(-10, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_RESI_PHYSICAL] = (std::min)(INT8(10), (std::max)(INT8(-10), (INT8) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "resistance_alcohol") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_RESI_ALCOHOL] = min(XML_BACKGROUND_RESI_MAX, max(-XML_BACKGROUND_RESI_MAX, (INT8) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_RESI_ALCOHOL] = (std::min)(INT8(XML_BACKGROUND_RESI_MAX), (std::max)(INT8(-XML_BACKGROUND_RESI_MAX), (INT8) atol(pData->szCharData) ));
 		}
 		else if ( strcmp( name, "resistance_disease" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_RESI_DISEASE] = min( XML_BACKGROUND_RESI_MAX, max( -XML_BACKGROUND_RESI_MAX, (INT8)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_RESI_DISEASE] = (std::min)( INT16(XML_BACKGROUND_RESI_MAX), INT16((std::max)( INT8(-XML_BACKGROUND_RESI_MAX), (INT8)atol( pData->szCharData ) )));
 		}
 		else if(strcmp(name, "interrogation") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_INTERROGATION] = min(XML_VARIOUS_MAX, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_INTERROGATION] = (std::min)(INT16(XML_VARIOUS_MAX), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "prisonguard") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_GUARD] = min(XML_VARIOUS_MAX, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_GUARD] = (std::min)(INT16(XML_VARIOUS_MAX), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "betterprices_guns") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_PRICES_GUNS] = min(10, max(-10, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_PRICES_GUNS] = (std::min)(INT16(10), (std::max)(INT16(-10), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "betterprices") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_PRICES] = min(10, max(-10, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_PRICES] = (std::min)(INT16(10), (std::max)(INT16(-10), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "capitulation") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_CAPITULATION] = min(100, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_CAPITULATION] = (std::min)(INT16(100), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "speed_run") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_SPEED_RUNNING] = min(30, max(-30, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_SPEED_RUNNING] = (std::min)(INT16(30), (std::max)(INT16(-30), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "speed_bandaging") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_BANDAGING] = min(50, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_BANDAGING] = (std::min)(INT16(50), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "drink_energyregen") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_REGEN_ENERGY] = min(XML_VARIOUS_MAX, max(-80, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_REGEN_ENERGY] = (std::min)(INT16(XML_VARIOUS_MAX), (std::max)(INT16(-80), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "carrystrength") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_CARRYSTRENGTH] = min(20, max(-20, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_CARRYSTRENGTH] = (std::min)(INT16(20), (std::max)(INT16(-20), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "food") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_FOOD] = min(100, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_FOOD] = (std::min)(INT16(100), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "water") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_WATER] = min(100, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_WATER] = (std::min)(INT16(100), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "sleep") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_SLEEP] = min(1, max(-1, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_SLEEP] = (std::min)(INT16(1), (std::max)(INT16(-1), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "meleedamage") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_DAMAGE_MELEE] = min(10, max(-10, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_DAMAGE_MELEE] = (std::min)(INT16(10), (std::max)(INT16(-10), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "cth_blades") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_CTH_BLADE] = min(10, max(-10, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_CTH_BLADE] = (std::min)(INT16(10), (std::max)(INT16(-10), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "camo") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_CAMO] = min(10, max(-20, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_CAMO] = (std::min)(INT16(10), (std::max)(INT16(-20), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "stealth") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_STEALTH] = min(10, max(-20, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_STEALTH] = (std::min)(INT16(10), (std::max)(INT16(-20), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "increased_maxcth") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_CTH_MAX] = min(5, max(-5, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_CTH_MAX] = (std::min)(INT16(5), (std::max)(INT16(-5), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "hearing_night") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_HEARING_NIGHT] = min(2, max(-5, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_HEARING_NIGHT] = (std::min)(INT16(2), (std::max)(INT16(-5), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "hearing_day") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_HEARING_DAY] = min(2, max(-5, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_HEARING_DAY] = (std::min)(INT16(2), (std::max)(INT16(-5), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "disarm_trap") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_DISARM] = min( 50, max( -50, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_PERC_DISARM] = (std::min)( INT16(50), (std::max)( INT16(-50), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "SAM_cth" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_SAM_CTH] = min( 100, max( -50, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_PERC_SAM_CTH] = (std::min)( INT16(100), (std::max)( INT16(-50), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if(strcmp(name, "approach_friendly") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_APPROACH_FRIENDLY] = min(20, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_APPROACH_FRIENDLY] = (std::min)(INT16(20), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "approach_direct") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_APPROACH_DIRECT] = min(20, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_APPROACH_DIRECT] = (std::min)(INT16(20), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "approach_threaten") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_APPROACH_THREATEN] = min(20, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_APPROACH_THREATEN] = (std::min)(INT16(20), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "approach_recruit") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_APPROACH_RECRUIT] = min(20, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_APPROACH_RECRUIT] = (std::min)(INT16(20), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "breachingcharge") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_BONUS_BREACHINGCHARGE] = min(100, max(-100, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_BONUS_BREACHINGCHARGE] = (std::min)(INT16(100), (std::max)(INT16(-100), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "cth_vs_creatures") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_CTH_CREATURE] = min(10, max(-10, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_CTH_CREATURE] = (std::min)(INT16(10), (std::max)(INT16(-10), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "insurance") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_INSURANCE] = min(200, max(-50, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_INSURANCE] = (std::min)(INT16(200), (std::max)(INT16(-50), (INT16) atol(pData->szCharData) ));
 		}
 		else if(strcmp(name, "spotter") == 0)
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_SPOTTER] = min(30, max(-30, (INT16) atol(pData->szCharData) ));
+			pData->curBackground.value[BG_PERC_SPOTTER] = (std::min)(INT16(30), (std::max)(INT16(-30), (INT16) atol(pData->szCharData) ));
 		}
 		else if ( strcmp( name, "disease_diagnose" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_DISEASE_DIAGNOSE] = min( 50, max( -50, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_PERC_DISEASE_DIAGNOSE] = (std::min)( INT16(50), (std::max)( INT16(-50), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "disease_treatment" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_PERC_DISEASE_TREAT] = min( 50, max( -50, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_PERC_DISEASE_TREAT] = (std::min)( INT16(50), (std::max)( INT16(-50), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "tracker_ability" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_TRACKER_ABILITY] = min( 40, max( 0, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_TRACKER_ABILITY] = (std::min)( INT16(40), (std::max)( INT16(0), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "ambush_radius" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_AMBUSH_RADIUS] = min( 50, max( 0, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_AMBUSH_RADIUS] = (std::min)( INT16(50), (std::max)( INT16(0), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "snake_defense" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_SNAKEDEFENSE] = min( 100, max( -100, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_SNAKEDEFENSE] = (std::min)( INT16(100), (std::max)( INT16(-100), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "dislikebackground" ) == 0 )
 		{
@@ -568,22 +568,22 @@ backgroundEndElementHandle(void *userData, const XML_Char *name)
 		else if ( strcmp( name, "smoker" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_SMOKERTYPE] = min( 2, max( 0, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_SMOKERTYPE] = (std::min)( INT16(2), (std::max)( INT16(0), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "croucheddefense" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_CROUCHEDDEFENSE] = min( 30, max( -30, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_CROUCHEDDEFENSE] = (std::min)( INT16(30), (std::max)( INT16(-30), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "fortify_assignment" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_FORTIFY_ASSIGNMENT] = min( 200, max( -50, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_FORTIFY_ASSIGNMENT] = (std::min)( INT16(200), (std::max)( INT16(-50), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "hackerskill" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.value[BG_HACKERSKILL] = min( 100, max( 0, (INT16)atol( pData->szCharData ) ) );
+			pData->curBackground.value[BG_HACKERSKILL] = (std::min)( INT16(100), (std::max)( INT16(0), (INT16)atol( pData->szCharData ) ) );
 		}
 		else if(strcmp(name, "druguse") == 0)
 		{

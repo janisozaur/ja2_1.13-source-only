@@ -4376,7 +4376,7 @@ INT8 DrawUIMovementPath( SOLDIERTYPE *pSoldier, INT32 usMapPos, UINT32 uiFlags )
 			}
 			else if ((HAS_SKILL_TRAIT( pSoldier, MARTIAL_ARTS_NT )) && ( gGameOptions.fNewTraitSystem ))
 			{
-				sAPCost += max( 1, (INT16)((APBPConstants[AP_STEAL_ITEM] *  (100 - gSkillTraitValues.ubMAReducedAPsToSteal * NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ))/ 100) + 0.5));
+				sAPCost += (std::max)( INT16(1), (INT16)((APBPConstants[AP_STEAL_ITEM] *  (100 - gSkillTraitValues.ubMAReducedAPsToSteal * NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ))/ 100) + 0.5));
 			}
 			else
 			{
@@ -5699,10 +5699,10 @@ BOOLEAN HandleMultiSelectionMove( INT32 sDestGridNo )
 			if ( pSoldier->flags.uiStatusFlags & SOLDIER_MULTI_SELECTED )
 			{
 				// update lowest and highest x and y values
-				lowestX  = min(lowestX,  pSoldier->sGridNo % MAXCOL );
-				highestX = max(highestX, pSoldier->sGridNo % MAXCOL );
-				lowestY  = min(lowestY,  pSoldier->sGridNo / MAXCOL );
-				highestY = max(highestY, pSoldier->sGridNo / MAXCOL );
+				lowestX  = (std::min)(lowestX,  pSoldier->sGridNo % MAXCOL );
+				highestX = (std::max)(highestX, pSoldier->sGridNo % MAXCOL );
+				lowestY  = (std::min)(lowestY,  pSoldier->sGridNo / MAXCOL );
+				highestY = (std::max)(highestY, pSoldier->sGridNo / MAXCOL );
 			}
 		}
 	}

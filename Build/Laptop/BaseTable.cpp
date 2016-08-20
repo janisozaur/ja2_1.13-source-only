@@ -124,7 +124,7 @@ ColumnDataProvider::CalcRequiredLength( )
 	{
 		for ( UINT32 i = 0; i < mNumberOfEntries; ++i )
 		{
-			mRequiredLength = max( mRequiredLength, 7 * wcslen( GetString( i ) ) );
+			mRequiredLength = (std::max)( mRequiredLength, 7 * wcslen( GetString( i ) ) );
 		}
 	}
 	else if ( CDP_IMAGE == GetProviderType() )
@@ -132,7 +132,7 @@ ColumnDataProvider::CalcRequiredLength( )
 		for ( UINT32 i = 0; i < mNumberOfEntries; ++i )
 		{
 			// TODO...
-			mRequiredLength = max( mRequiredLength, 40 );
+			mRequiredLength = (std::max)( mRequiredLength, UINT32(40) );
 		}
 	}
 	else if ( CDP_STATUSBAR == GetProviderType( ) )
@@ -723,7 +723,7 @@ TestTable::RegionMoveCallBack( MOUSE_REGION * pRegion, INT32 iReason )
 			// if mouse is outside of the bar, simply move bar up or down
 			if ( pRegion->MouseYPos < mScrollRegion.RegionTopLeftY )
 			{
-				mLastEntryShown = max( 0, mLastEntryShown - 1 );
+				mLastEntryShown = (std::max)( UINT32(0), mLastEntryShown - 1 );
 			}
 			else if ( pRegion->MouseYPos > mScrollRegion.RegionBottomRightY )
 			{
@@ -796,7 +796,7 @@ TestTable::ButtonClickCallBack( GUI_BUTTON *btn, INT32 reason )
 		else if ( btn->IDNum == this->mScrollArrow[1] )
 		{
 			// do slightly different things!
-			mLastEntryShown = min( mLastEntryShown + 1, GetNumberOfDataRows( ) );
+			mLastEntryShown = (std::min)( mLastEntryShown + 1, GetNumberOfDataRows( ) );
 
 			mFirstEntryShown = mLastEntryShown - GetNumberOfDataRowsShown( );
 		}
@@ -821,8 +821,8 @@ TestTable::CalcRows()
 	UINT32 numrows	 = GetNumberOfDataRows( );
 	UINT32 rowsshown = GetNumberOfDataRowsShown( );
 
-	mLastEntryShown = max( mLastEntryShown, rowsshown );
-	mLastEntryShown = min( mLastEntryShown, numrows );
+	mLastEntryShown = (std::max)( mLastEntryShown, rowsshown );
+	mLastEntryShown = (std::min)( mLastEntryShown, numrows );
 
 	if ( mLastEntryShown > rowsshown )
 		mFirstEntryShown = mLastEntryShown - rowsshown;
@@ -899,7 +899,7 @@ TestTable::GetNumberOfDataRows( )
 	std::vector<ColumnDataProvider>::iterator itend = mColumnDataProviderVector.end( );
 	for ( std::vector<ColumnDataProvider>::iterator it = mColumnDataProviderVector.begin( ); it != itend; ++it )
 	{
-		minrowsinproviders = min( minrowsinproviders, (*it).GetNumberOfEntries( ) );
+		minrowsinproviders = (std::min)( minrowsinproviders, (*it).GetNumberOfEntries( ) );
 
 		fFound = TRUE;
 	}
@@ -932,7 +932,7 @@ TestTable::GetNumberOfDataRowsShown( )
 		return 0;
 
 	// we need TESTTABLE_OFFSET_ROW space for each row. We cannot display more than we have
-	return min( totalheighttodistribute / heightperrow, rows );
+	return (std::min)( totalheighttodistribute / heightperrow, rows );
 }
 
 UINT32
@@ -942,7 +942,7 @@ TestTable::GetRequiredHeigthPerRow( )
 	std::vector<ColumnDataProvider>::iterator itend = mColumnDataProviderVector.end( );
 	for ( std::vector<ColumnDataProvider>::iterator it = mColumnDataProviderVector.begin( ); it != itend; ++it )
 	{
-		heigth = max( heigth, (*it).GetRequiredHeigth( ) );
+		heigth = (std::max)( heigth, (*it).GetRequiredHeigth( ) );
 	}
 
 	return heigth;

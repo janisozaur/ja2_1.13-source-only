@@ -559,7 +559,7 @@ UINT8 NumFreeSlots( UINT8 ubTeam )
 	// the militia team size can be restricted by the ini
 	if ( ubTeam == MILITIA_TEAM )
 	{
-		ubNumFreeSlots = (UINT8)max( 0, (INT8)ubNumFreeSlots - (INT8)(gGameExternalOptions.ubGameMaximumNumberOfRebels - gGameExternalOptions.iMaxMilitiaPerSector) );
+		ubNumFreeSlots = (UINT8)(std::max)( 0, (INT8)ubNumFreeSlots - (INT8)(gGameExternalOptions.ubGameMaximumNumberOfRebels - gGameExternalOptions.iMaxMilitiaPerSector) );
 	}
 
 	return ubNumFreeSlots;
@@ -752,11 +752,11 @@ BOOLEAN PrepareEnemyForSectorBattle()
 		#endif
 		*/
 
-		ubTotalAdmins = min( mapMaximumNumberOfEnemies, ubTotalAdmins );
-		ubTotalTroops = min( mapMaximumNumberOfEnemies-ubTotalAdmins, ubTotalTroops );
-		ubTotalElites = min( mapMaximumNumberOfEnemies-ubTotalAdmins-ubTotalTroops, ubTotalElites );
-		ubTotalTanks = min( mapMaximumNumberOfEnemies-ubTotalAdmins-ubTotalTroops-ubTotalElites, ubTotalTanks );
-		ubTotalJeeps = min( mapMaximumNumberOfEnemies - ubTotalAdmins - ubTotalTroops - ubTotalElites - ubTotalTanks, ubTotalJeeps );
+		ubTotalAdmins = (std::min)( mapMaximumNumberOfEnemies, ubTotalAdmins );
+		ubTotalTroops = (std::min)( mapMaximumNumberOfEnemies-ubTotalAdmins, ubTotalTroops );
+		ubTotalElites = (std::min)( mapMaximumNumberOfEnemies-ubTotalAdmins-ubTotalTroops, ubTotalElites );
+		ubTotalTanks = (std::min)( mapMaximumNumberOfEnemies-ubTotalAdmins-ubTotalTroops-ubTotalElites, ubTotalTanks );
+		ubTotalJeeps = (std::min)( mapMaximumNumberOfEnemies - ubTotalAdmins - ubTotalTroops - ubTotalElites - ubTotalTanks, ubTotalJeeps );
 	}
 
 	pSector->ubAdminsInBattle += ubTotalAdmins;
@@ -914,7 +914,7 @@ BOOLEAN PrepareEnemyForSectorBattle()
 	//sNumSlots = mapMaximumNumberOfEnemies - totalCountOfStationaryEnemies;
 
 	// Flugente: at this point, soldiers have already been placed, thus enough slots for them exist
-	sNumSlots = min( mapMaximumNumberOfEnemies, NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, ENEMY_TEAM ) );
+	sNumSlots = (std::min)( int(mapMaximumNumberOfEnemies), int(NumNonPlayerTeamMembersInSector( gWorldSectorX, gWorldSectorY, ENEMY_TEAM )) );
 
 	pGroup = gpGroupList;
 	while( pGroup && sNumSlots > 0 )

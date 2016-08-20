@@ -396,7 +396,7 @@ void DrawItemUIBarEx( OBJECTTYPE *pObject, UINT8 ubStatus, INT16 sXPos, INT16 sY
 			if( Item[ pAttachment->usItem ].usItemClass & IC_AMMO )
 			{
 				sValue = sValue * 100 / Magazine[ Item[ pObject->usItem ].ubClassIndex ].ubMagSize;
-				sValue = max(0, min(100, sValue));
+				sValue = (std::max)(INT16(0), (std::min)(INT16(100), sValue));
 			}
 		}
 	}
@@ -443,7 +443,7 @@ void DrawItemUIBarEx( OBJECTTYPE *pObject, UINT8 ubStatus, INT16 sXPos, INT16 sY
 				return;
 
 			// cut off temperature at 100%, otherwise the bar will be out of its box
-			sValue = min(sValue, 100);
+			sValue = (std::min)(sValue, INT16(100));
 		}
 	}
 

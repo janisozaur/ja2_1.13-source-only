@@ -4922,7 +4922,7 @@ INT16 ubMinAPCost;
 				}
 			}
 			// frequencies are clear, order a strike
-			else if ( GetBestAoEGridNo(pSoldier, &skilltargetgridno, max(1, gSkillTraitValues.usVOMortarRadius - 2), 1, 2, SoldierCondTrue, SoldierCondFalse) )
+			else if ( GetBestAoEGridNo(pSoldier, &skilltargetgridno, (std::max)(1, gSkillTraitValues.usVOMortarRadius - 2), 1, 2, SoldierCondTrue, SoldierCondFalse) )
 			{
 				pSoldier->usAISkillUse = SKILLS_RADIO_ARTILLERY;
 				pSoldier->aiData.usActionData = skilltargetgridno;
@@ -5754,7 +5754,7 @@ INT16 ubMinAPCost;
 					}
 					else
 					{
-						iChance = (25 / max((BestAttack.ubAimTime + 1),1));
+						iChance = (25 / (std::max)((BestAttack.ubAimTime + 1),1));
 						switch (pSoldier->aiData.bAttitude)
 						{
 							case DEFENSIVE:		iChance += -5; break;
@@ -5856,7 +5856,7 @@ L_NEWAIM:
 						}
 						else
 						{
-							iChance = (100 / max((BestAttack.ubAimTime + 1),1));
+							iChance = (100 / (std::max)((BestAttack.ubAimTime + 1),1));
 							switch (pSoldier->aiData.bAttitude)
 							{
 							case DEFENSIVE:		iChance += -5; break;

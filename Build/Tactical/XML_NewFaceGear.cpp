@@ -126,7 +126,7 @@ faceGearEndElementHandle(void *userData, const XML_Char *name)
 				pData->curFaceGear.szFile[MAX_FACE_GERA_CHARS-1] = '\0';
 			}
 
-			for(int i=0;i<min((int)strlen(pData->szCharData),MAX_FACE_GERA_CHARS);i++)
+			for(int i=0;i<(std::min)((int)strlen(pData->szCharData),MAX_FACE_GERA_CHARS);i++)
 			{
 				temp = pData->szCharData[i];
 				pData->curFaceGear.szFile[i] = temp;

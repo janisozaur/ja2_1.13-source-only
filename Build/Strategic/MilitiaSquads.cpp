@@ -197,16 +197,16 @@ void GenerateMilitiaSquad(INT16 sMapX, INT16 sMapY, INT16 sTMapX, INT16 sTMapY, 
 	// Flugente: our pool of volunteers limits how many militia can be created
 	// if we can't train as many militia as we should due to lack of volunteers, the excess training goes into promoting militia
 	UINT8 promotionsfromvolunteers = ubMilitiaToTrain;
-	ubMilitiaToTrain = min( ubMilitiaToTrain, GetVolunteerPool( ) );
+	ubMilitiaToTrain = (std::min)( ubMilitiaToTrain, UINT8(GetVolunteerPool( )) );
 
 	if ( gGameExternalOptions.fMilitiaResources && !gGameExternalOptions.fMilitiaUseSectorInventory )
 	{
 		FLOAT val_gun, val_armour, val_misc;
 		GetResources( val_gun, val_armour, val_misc );
 
-		ubMilitiaToTrain = min( ubMilitiaToTrain, (INT32)val_gun );
-		ubMilitiaToTrain = min( ubMilitiaToTrain, (INT32)val_armour );
-		ubMilitiaToTrain = min( ubMilitiaToTrain, (INT32)val_misc );
+		ubMilitiaToTrain = (std::min)( ubMilitiaToTrain, (UINT8)val_gun );
+		ubMilitiaToTrain = (std::min)( ubMilitiaToTrain, (UINT8)val_armour );
+		ubMilitiaToTrain = (std::min)( ubMilitiaToTrain, (UINT8)val_misc );
 	}
 
 	promotionsfromvolunteers -= ubMilitiaToTrain;
@@ -601,9 +601,9 @@ void MoveMilitiaSquad(INT16 sMapX, INT16 sMapY, INT16 sTMapX, INT16 sTMapY, BOOL
 
 			// Flugente: mobiles take along their gear
 			// move only gear for those who come new into a sector
-			UINT8 elites   = max(0, bElitesDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ ELITE_MILITIA ]);
-			UINT8 regulars = max(0, bRegularsDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ REGULAR_MILITIA ]);
-			UINT8 greens   = max(0, bGreensDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ GREEN_MILITIA ]);
+			UINT8 elites   = (std::max)(0, bElitesDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ ELITE_MILITIA ]);
+			UINT8 regulars = (std::max)(0, bRegularsDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ REGULAR_MILITIA ]);
+			UINT8 greens   = (std::max)(0, bGreensDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ GREEN_MILITIA ]);
 
 			MoveMilitiaEquipment(sMapX, sMapY, sTMapX, sTMapY, elites, regulars, greens);
 
@@ -646,9 +646,9 @@ void MoveMilitiaSquad(INT16 sMapX, INT16 sMapY, INT16 sTMapX, INT16 sTMapY, BOOL
 
 			// Flugente: mobiles take along their gear
 			// move only gear for those who come new into a sector
-			UINT8 elites   = max(0, bElitesDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ ELITE_MILITIA ]);
-			UINT8 regulars = max(0, bRegularsDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ REGULAR_MILITIA ]);
-			UINT8 greens   = max(0, bGreensDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ GREEN_MILITIA ]);
+			UINT8 elites   = (std::max)(0, bElitesDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ ELITE_MILITIA ]);
+			UINT8 regulars = (std::max)(0, bRegularsDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ REGULAR_MILITIA ]);
+			UINT8 greens   = (std::max)(0, bGreensDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ GREEN_MILITIA ]);
 
 			MoveMilitiaEquipment(sMapX, sMapY, sTMapX, sTMapY, elites, regulars, greens);
 
@@ -739,9 +739,9 @@ void MoveMilitiaSquad(INT16 sMapX, INT16 sMapY, INT16 sTMapX, INT16 sTMapY, BOOL
 
 			// Flugente: mobiles take along their gear
 			// move only gear for those who come new into a sector
-			UINT8 elites   = max(0, bElitesDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ ELITE_MILITIA ]);
-			UINT8 regulars = max(0, bRegularsDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ REGULAR_MILITIA ]);
-			UINT8 greens   = max(0, bGreensDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ GREEN_MILITIA ]);
+			UINT8 elites   = (std::max)(0, bElitesDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ ELITE_MILITIA ]);
+			UINT8 regulars = (std::max)(0, bRegularsDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ REGULAR_MILITIA ]);
+			UINT8 greens   = (std::max)(0, bGreensDestTeam - pTSectorInfo->ubNumberOfCivsAtLevel[ GREEN_MILITIA ]);
 
 			MoveMilitiaEquipment(sMapX, sMapY, sTMapX, sTMapY, elites, regulars, greens);
 
@@ -1984,7 +1984,7 @@ BOOLEAN CallMilitiaReinforcements( INT16 sTargetMapX, INT16 sTargetMapY, INT16 s
 	guiDirNumber = insertioncode + 1;
 
 	// we can't move more than we are told, and can't add more than would fit into the sector
-	UINT16 possibletomove = min( sNumber, gGameExternalOptions.iMaxMilitiaPerSector - NumNonPlayerTeamMembersInSector( sTargetMapX, sTargetMapY, MILITIA_TEAM ) );
+	UINT16 possibletomove = (std::min)( sNumber, UINT16(gGameExternalOptions.iMaxMilitiaPerSector - NumNonPlayerTeamMembersInSector( sTargetMapX, sTargetMapY, MILITIA_TEAM )) );
 
 	UINT16 sMilitiaMoved = 0;
 	while ( sMilitiaMoved < possibletomove && MoveOneBestMilitiaMan( sSrcMapX, sSrcMapY, sTargetMapX, sTargetMapY ) )
@@ -2767,7 +2767,7 @@ UINT8 GetMobileMilitiaQuota( BOOLEAN printMessage )
 			}
 		}
 		return ( iCurrentMax == 0 ? 255 : (iActiveMobiles * 100 / iCurrentMax) );
-		//return ( iCurrentMax == 0 ? 255 : max( 255, (iActiveMobiles * 100 / iCurrentMax) ) );
+		//return ( iCurrentMax == 0 ? 255 : (std::max)( 255, (iActiveMobiles * 100 / iCurrentMax) ) );
 
 	}//end check for maximum mobile militia allowed
 
@@ -2845,10 +2845,10 @@ void MobileMilitiaDeserters(INT16 sMapX, INT16 sMapY, BOOLEAN fDeleteEquip, BOOL
 			UINT8 militiaRegular = MilitiaInSectorOfRank( sMapX, sMapY, REGULAR_MILITIA );
 
 			desertersGreen = (quota - 100) * militiaGreen / 100;
-			desertersGreen = Random( min( militiaGreen, desertersGreen ) );//cant remove more then actually exist in that group
+			desertersGreen = Random( (std::min)( militiaGreen, desertersGreen ) );//cant remove more then actually exist in that group
 
 			desertersRegular = (quota - 100) * militiaRegular / 200;
-			desertersRegular = Random( min ( militiaRegular, desertersRegular ) );
+			desertersRegular = Random( (std::min)( militiaRegular, desertersRegular ) );
 		}
 	}
 

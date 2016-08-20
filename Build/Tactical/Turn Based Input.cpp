@@ -2628,7 +2628,7 @@ void GetKeyboardInput( UINT32 *puiNewEvent )
 					else if( fCtrl )
 					{
 #ifdef JA2TESTVERSION
-						gTacticalStatus.bRealtimeSpeed = max( 1, gTacticalStatus.bRealtimeSpeed - 1 );
+						gTacticalStatus.bRealtimeSpeed = (std::max)( 1, gTacticalStatus.bRealtimeSpeed - 1 );
 						ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Decreasing Realtime speed to %d", gTacticalStatus.bRealtimeSpeed );
 #endif
 					}
@@ -2653,7 +2653,7 @@ void GetKeyboardInput( UINT32 *puiNewEvent )
 				}
 				else if( fCtrl )
 				{
-					gTacticalStatus.bRealtimeSpeed = min( MAX_REALTIME_SPEED_VAL, gTacticalStatus.bRealtimeSpeed+1 );
+					gTacticalStatus.bRealtimeSpeed = (std::min)( MAX_REALTIME_SPEED_VAL, gTacticalStatus.bRealtimeSpeed+1 );
 					ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"Increasing Realtime speed to %d", gTacticalStatus.bRealtimeSpeed );
 				}
 				else

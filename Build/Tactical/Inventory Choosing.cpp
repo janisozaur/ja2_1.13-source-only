@@ -341,7 +341,7 @@ void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8
 			if ( gGameExternalOptions.sEnemyAdminEquipmentQualityModifier != 0 )
 				bRating += gGameExternalOptions.sEnemyAdminEquipmentQualityModifier;
 
-			bRating = (INT8)max( MIN_EQUIPMENT_CLASS, min( MAX_EQUIPMENT_CLASS, bRating ) );
+			bRating = (std::max)( INT8(MIN_EQUIPMENT_CLASS), (std::min)( INT8(MAX_EQUIPMENT_CLASS), bRating ) );
 
 			bWeaponClass = bRating;
 			//Headrocktest, remove for release
@@ -392,7 +392,7 @@ void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8
 				bRating += gGameExternalOptions.bGreenMilitiaEquipmentQualityModifier;
 			///////////////////////////////////////////////////////////////////////////////////////////
 
-			bRating = (INT8)max( MIN_EQUIPMENT_CLASS, min( MAX_EQUIPMENT_CLASS, bRating ) );
+			bRating = (std::max)( INT8(MIN_EQUIPMENT_CLASS), (std::min)( INT8(MAX_EQUIPMENT_CLASS), bRating ) );
 
 			bWeaponClass = bRating;
 			//Headrocktest, remove for release
@@ -441,7 +441,7 @@ void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8
 			if ( gGameExternalOptions.sEnemyRegularEquipmentQualityModifier != 0 )
 				bRating += gGameExternalOptions.sEnemyRegularEquipmentQualityModifier;
 
-			bRating = (INT8)max( MIN_EQUIPMENT_CLASS, min( MAX_EQUIPMENT_CLASS, bRating ) );
+			bRating = (std::max)( INT8(MIN_EQUIPMENT_CLASS), (std::min)( INT8(MAX_EQUIPMENT_CLASS), bRating ) );
 
 			bWeaponClass = bRating;
 			bVestClass = bRating;
@@ -565,7 +565,7 @@ void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8
 				bRating += gGameExternalOptions.bRegularMilitiaEquipmentQualityModifier;
 			///////////////////////////////////////////////////////////////////////////////////////////
 
-			bRating = (INT8)max( MIN_EQUIPMENT_CLASS, min( MAX_EQUIPMENT_CLASS, bRating ) );
+			bRating = (INT8)(std::max)( INT8(MIN_EQUIPMENT_CLASS), (std::min)( INT8(MAX_EQUIPMENT_CLASS), bRating ) );
 
 			bWeaponClass = bRating;
 			bVestClass = bRating;
@@ -670,7 +670,7 @@ void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8
 			if ( gGameExternalOptions.sEnemyEliteEquipmentQualityModifier != 0 )
 				bRating += gGameExternalOptions.sEnemyEliteEquipmentQualityModifier;
 
-			bRating = (INT8)max( MIN_EQUIPMENT_CLASS, min( MAX_EQUIPMENT_CLASS, bRating ) );
+			bRating = (std::max)( INT8(MIN_EQUIPMENT_CLASS), (std::min)( INT8(MAX_EQUIPMENT_CLASS), bRating ) );
 
 			bWeaponClass = bRating;
 			bHelmetClass = bRating;
@@ -768,7 +768,7 @@ void GenerateRandomEquipment( SOLDIERCREATE_STRUCT *pp, INT8 bSoldierClass, INT8
 				bRating += gGameExternalOptions.bVeteranMilitiaEquipmentQualityModifier;
 			///////////////////////////////////////////////////////////////////////////////////////////
 
-			bRating = (INT8)max( MIN_EQUIPMENT_CLASS, min( MAX_EQUIPMENT_CLASS, bRating ) );
+			bRating = (std::max)( INT8(MIN_EQUIPMENT_CLASS), (std::min)( INT8(MAX_EQUIPMENT_CLASS), bRating ) );
 
 			bWeaponClass = bRating;
 			bHelmetClass = bRating;
@@ -1012,7 +1012,7 @@ void ChooseWeaponForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bWeaponC
 			{
 				usGunIndex = pp->Inv[ i ].usItem;
 				ubChanceStandardAmmo = 100 - (bWeaponClass * -9);		// weapon class is negative!
-				usAmmoIndex = RandomMagazine( usGunIndex, ubChanceStandardAmmo, max(Item[usGunIndex].ubCoolness, HighestPlayerProgressPercentage() / 10 + 3), pp->ubSoldierClass);
+				usAmmoIndex = RandomMagazine( usGunIndex, ubChanceStandardAmmo, (std::max)(Item[usGunIndex].ubCoolness, UINT8(HighestPlayerProgressPercentage() / 10 + 3)), pp->ubSoldierClass);
 
 				if ( usAmmoIndex <= 0 )
 					usAmmoIndex = DefaultMagazine(usGunIndex);
@@ -1072,14 +1072,14 @@ void ChooseWeaponForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bWeaponC
 			//Admins/Troops: 60-75% + 1% every 4% progress
 			bStatus = (INT8)(60 + Random( 16 ));
 			bStatus += (INT8)(HighestPlayerProgressPercentage() / 4);
-			bStatus = (INT8)min( 100, bStatus );
+			bStatus = (std::min)( INT8(100), bStatus );
 			break;
 		case SOLDIER_CLASS_ELITE:
 		case SOLDIER_CLASS_ELITE_MILITIA:
 			//85-90% +  1% every 10% progress
 			bStatus = (INT8)(85 + Random( 6 ));
 			bStatus += (INT8)(HighestPlayerProgressPercentage() / 10);
-			bStatus = (INT8)min( 100, bStatus );
+			bStatus = (std::min)( INT8(100), bStatus );
 			break;
 		case SOLDIER_CLASS_ZOMBIE:
 			bStatus = 1;	// if a zombie gets anything, it'll be broken
@@ -1088,7 +1088,7 @@ void ChooseWeaponForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bWeaponC
 			break;
 	}
 	// don't allow it to be lower than marksmanship, we don't want it to affect their chances of hitting
-	bStatus = (INT8)max( pp->bMarksmanship, bStatus );
+	bStatus = (INT8)(std::max)( pp->bMarksmanship, bStatus );
 
 
 	CreateItem( usGunIndex, bStatus, &(pp->Inv[ HANDPOS ]) );
@@ -1257,7 +1257,7 @@ void ChooseWeaponForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bWeaponC
 		//		break;
 		//}
 
-		usAmmoIndex = RandomMagazine( &pp->Inv[HANDPOS], ubChanceStandardAmmo, max(Item[usGunIndex].ubCoolness, HighestPlayerProgressPercentage() / 10 + 3 ), pp->ubSoldierClass);
+		usAmmoIndex = RandomMagazine( &pp->Inv[HANDPOS], ubChanceStandardAmmo, (std::max)(Item[usGunIndex].ubCoolness, UINT8(HighestPlayerProgressPercentage() / 10 + 3) ), pp->ubSoldierClass);
 
 		if ( usAmmoIndex <= 0 )
 			usAmmoIndex = DefaultMagazine(usGunIndex);
@@ -1353,7 +1353,7 @@ void ChooseGrenadesForSoldierCreateStruct( SOLDIERCREATE_STRUCT *pp, INT8 bGrena
 
 	//determine the quality of grenades.  The elite guys get the best quality, while the others
 	//get progressively worse.
-	ubBaseQuality = (UINT8)min( 45 + bGrenadeClass * 5, 90 );
+	ubBaseQuality = (UINT8)(std::min)( 45 + bGrenadeClass * 5, 90 );
 	ubQualityVariation = 101 - ubBaseQuality;
 
 	// Madd: GL guys don't get hand grenades anymore
@@ -3642,7 +3642,7 @@ UINT32 ItemFitness( OBJECTTYPE* pObj, UINT8 idx )
 		}
 		else
 		{
-			value = (*pObj)[idx]->data.objectStatus * max(0, max( Item[ pObj->usItem ].nightvisionrangebonus, Item[ pObj->usItem ].dayvisionrangebonus ) );
+			value = (*pObj)[idx]->data.objectStatus * (std::max)(INT16(0), (std::max)( Item[ pObj->usItem ].nightvisionrangebonus, Item[ pObj->usItem ].dayvisionrangebonus ) );
 		}
 	}
 	else if ( Item[ pObj->usItem ].usItemClass & (IC_BLADE|IC_PUNCH) )
@@ -3654,7 +3654,7 @@ UINT32 ItemFitness( OBJECTTYPE* pObj, UINT8 idx )
 	else if ( Item[ pObj->usItem ].usItemClass & (IC_GUN|IC_LAUNCHER) )
 	{
 		// value is damage * range * firing rate, modified by number of attachments and accuracy
-		value = GetDamage(pObj) * GunRange(pObj, NULL) * max(1, GetAutofireShotsPerFiveAPs(pObj));
+		value = GetDamage(pObj) * GunRange(pObj, NULL) * (std::max)(UINT8(1), GetAutofireShotsPerFiveAPs(pObj));
 
 		value = value * (10 + (UINT32)GetGunAccuracy(pObj)) / 10;
 
@@ -3675,14 +3675,14 @@ UINT32 ItemFitness( OBJECTTYPE* pObj, UINT8 idx )
 UINT32 GetNeededTotalAmmo( UINT16 usItem )
 {
 	// determine what amount of ammo is deemed 'enough' for this gun
-	return max(gGameExternalOptions.usMilitiaAmmo_Min, min(gGameExternalOptions.usMilitiaAmmo_Max, gGameExternalOptions.usMilitiaAmmo_OptimalMagCount * Weapon[ usItem ].ubMagSize));
+	return (std::max)(gGameExternalOptions.usMilitiaAmmo_Min, (std::min)(gGameExternalOptions.usMilitiaAmmo_Max, UINT16(gGameExternalOptions.usMilitiaAmmo_OptimalMagCount * Weapon[ usItem ].ubMagSize)));
 }
 
 // special version of ItemFitness() that takes ammo count into consideration
 UINT32 ItemFitness_WithAmmo( OBJECTTYPE* pObj, UINT8 idx, UINT32 uiBullets )
 {
 	UINT32 optimalammo = GetNeededTotalAmmo(pObj->usItem);
-	return (ItemFitness(pObj, idx) * min(uiBullets, optimalammo) ) / max(1, optimalammo);
+	return (ItemFitness(pObj, idx) * (std::min)(uiBullets, optimalammo) ) / (std::max)(UINT32(1), optimalammo);
 }
 
 // retreives the next free slot in pWorldItem (we want to keep it short and not add too many items)
@@ -3716,7 +3716,7 @@ enum {
 
 // this struct is used to store the location of the best item of a category, we use it to later easily retrieve it from the sector inventory
 struct ItemSearchStruct {
-	ItemSearchStruct::ItemSearchStruct() : found(FALSE), done(FALSE), pos(0), slot(0), soldierslot(0), val(0) {}
+	ItemSearchStruct() : found(FALSE), done(FALSE), pos(0), slot(0), soldierslot(0), val(0) {}
 	BOOLEAN found;			// has any item been found for this?
 	BOOLEAN done;			// are we done evaluating this item?
 	UINT32 pos;				// position in pWorldItem of this object
@@ -3815,7 +3815,7 @@ void SearchItemRetrieval( std::vector<WORLDITEM>& pWorldItem, ItemSearchStruct* 
 	if ( pSi->found && !pSi->done )
 	{
 		//never take more than there actually is on the given stack (atm. we try to take 2 grenades, but there might be only 1)
-		UINT8 usRealTake = min(usTake, pWorldItem[ pSi->pos ].object.ubNumberOfObjects);
+		UINT8 usRealTake = (std::min)(usTake, pWorldItem[ pSi->pos ].object.ubNumberOfObjects);
 		//move objects (like weapon) to soldiers slot, position of object in the world and target slot are determined by values in pSi
 		pWorldItem[ pSi->pos ].object.MoveThisObjectTo(pp->Inv[ pSi->soldierslot ], usRealTake );
 
@@ -3833,7 +3833,7 @@ typedef std::map<UINT8, UINT32>	AmmoType_BulletCountMap;					// used to count ho
 typedef std::map<UINT8, AmmoType_BulletCountMap> Calibre_BulletCountMap;	// this map stores a map containing all the different ammotypes and how many bulltes we have for them
 
 struct LauncherHelpStruct {
-	LauncherHelpStruct::LauncherHelpStruct() : fNeedsAmmo(TRUE), ammocount(0) {}
+	LauncherHelpStruct() : fNeedsAmmo(TRUE), ammocount(0) {}
 	BOOLEAN fNeedsAmmo;		// the launcher isn't singleshot (LAW), it needs ammo
 	UINT16	ammocount;		// so much ammo found for this
 };
@@ -3885,7 +3885,7 @@ void SpawnFittingAmmo(SOLDIERCREATE_STRUCT *pp, OBJECTTYPE* pObj, UINT8 ammotype
 		(*pObj)[0]->data.gun.ubGunAmmoType = ammotype;
 		(*pObj)[0]->data.gun.usGunAmmoItem = magitem;
 
-		deductedbullets = min(magsize, numberofbullets);
+		deductedbullets = (std::min)(magsize, UINT16(numberofbullets));
 		numberofbullets	-= deductedbullets;
 
 		(*pObj)[0]->data.gun.ubGunShotsLeft = deductedbullets;
@@ -3893,7 +3893,7 @@ void SpawnFittingAmmo(SOLDIERCREATE_STRUCT *pp, OBJECTTYPE* pObj, UINT8 ammotype
 
 	while ( numberofbullets > 0 )
 	{
-		deductedbullets = min(magsize, numberofbullets);
+		deductedbullets = (std::min)(magsize, UINT16(numberofbullets));
 		numberofbullets	-= deductedbullets;
 
 		// create ammo in inventory
@@ -3979,7 +3979,7 @@ void MoveOneMilitiaEquipmentSet(INT16 sSourceX, INT16 sSourceY, INT16 sTargetX, 
 	}
 
 	// new total size needed is number of existing items found + number of needed ammo crate objects, but at least uiTotalNumberOfRealItems:
-	UINT32 uiNewInvSize = max(uiTotalNumberOfRealItems, existingitemsfound + numnewitems);
+	UINT32 uiNewInvSize = (std::max)(uiTotalNumberOfRealItems, existingitemsfound + numnewitems);
 
 	// create a bigger inventory wit big enough size
 	std::vector<WORLDITEM> pWorldItem_tmp(uiNewInvSize);//dnl ch75 271013
@@ -4618,7 +4618,7 @@ void TakeMilitiaEquipmentfromSector( INT16 sMapX, INT16 sMapY, INT8 sMapZ, SOLDI
 			else
 				ubChanceStandardAmmo = 100 - (Random(9) * 9);
 
-			usAmmoIndex = RandomMagazine( &pp->Inv[HANDPOS], ubChanceStandardAmmo, max(Item[usGunIndex].ubCoolness, HighestPlayerProgressPercentage() / 10 + 3 ), pp->ubSoldierClass);
+			usAmmoIndex = RandomMagazine( &pp->Inv[HANDPOS], ubChanceStandardAmmo, (std::max)(Item[usGunIndex].ubCoolness, UINT8(HighestPlayerProgressPercentage() / 10 + 3) ), pp->ubSoldierClass);
 
 			if ( usAmmoIndex <= 0 )
 				usAmmoIndex = DefaultMagazine(usGunIndex);
@@ -4664,7 +4664,7 @@ void TakeMilitiaEquipmentfromSector( INT16 sMapX, INT16 sMapY, INT8 sMapZ, SOLDI
 							{
 								UINT8 ammotype = (*pObj)[i]->data.gun.ubGunAmmoType;
 
-								UINT32 addammo = min(usSelectedGunBulletsNeeded - usSelectedGunBulletCount, (*pObj)[i]->data.gun.ubGunShotsLeft);
+								UINT32 addammo = (std::min)(UINT16(usSelectedGunBulletsNeeded - usSelectedGunBulletCount), (*pObj)[i]->data.gun.ubGunShotsLeft);
 
 								SpawnFittingAmmo( pp, &(pp->Inv[ HANDPOS ]), ammotype, addammo );
 
@@ -4688,7 +4688,7 @@ void TakeMilitiaEquipmentfromSector( INT16 sMapX, INT16 sMapY, INT8 sMapZ, SOLDI
 							for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)
 								newammo += (*pObj)[i]->data.ubShotsLeft;
 
-							UINT32 addammo = min((UINT32)(usSelectedGunBulletsNeeded - usSelectedGunBulletCount), newammo);//dnl ch75 271013
+							UINT32 addammo = (std::min)((UINT32)(usSelectedGunBulletsNeeded - usSelectedGunBulletCount), newammo);//dnl ch75 271013
 
 							SpawnFittingAmmo( pp, &(pp->Inv[ HANDPOS ]), ammotype, addammo );
 
@@ -4700,7 +4700,7 @@ void TakeMilitiaEquipmentfromSector( INT16 sMapX, INT16 sMapY, INT8 sMapZ, SOLDI
 								if ( !addammo )
 									break;
 
-								UINT32 takeammo = min(addammo, (*pObj)[i]->data.ubShotsLeft);
+								UINT32 takeammo = (std::min)(addammo, UINT32((*pObj)[i]->data.ubShotsLeft));
 								addammo -= takeammo;
 								(*pObj)[i]->data.ubShotsLeft -= takeammo;
 
@@ -4736,8 +4736,8 @@ void TakeMilitiaEquipmentfromSector( INT16 sMapX, INT16 sMapY, INT8 sMapZ, SOLDI
 						if ( ValidLaunchable(pWorldItem[ uiCount ].object.usItem, usLauncherItem) )
 						{
 							// take item and reduce amount left to take
-							UINT8 totake = min(usLauncherAmmoLeftToTake, pWorldItem[ uiCount ].object.ubNumberOfObjects);
-							usLauncherAmmoLeftToTake = max(0, usLauncherAmmoLeftToTake - totake);
+							UINT8 totake = (std::min)(usLauncherAmmoLeftToTake, pWorldItem[ uiCount ].object.ubNumberOfObjects);
+							usLauncherAmmoLeftToTake = (std::max)(0, usLauncherAmmoLeftToTake - totake);
 
 							pWorldItem[ uiCount ].object.MoveThisObjectTo(gTempObject, totake);
 

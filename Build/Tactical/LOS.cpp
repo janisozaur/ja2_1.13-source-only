@@ -399,9 +399,9 @@ inline UINT8 GetCurrentHeightOfSoldier( SOLDIERTYPE* pSoldier )
 }
 
 // why not functions? because these are typeless
-#define MINMAX(iMin, iMax, iVal) min(iMax, max(iMin, iVal))
+#define MINMAX(iMin, iMax, iVal) (std::min)(iMax, (std::max)(iMin, iVal))
 #define MINMAX100(iVal) MINMAX(0, 100, iVal)
-#define MINMAX100N(iVal) MINMAX(-100, 100, iVal)
+#define MINMAX100N(iVal) MINMAX(decltype(iVal)(-100), decltype(iVal)(100), iVal)
 
 /*
 * Calculates the total camouflage for the corresponding type.
@@ -597,10 +597,10 @@ ADDITIONAL_TILE_PROPERTIES_VALUES GetAllAdditonalTilePropertiesForGrid( const IN
 
 	}
 
-	ubAllTileProperties.bWoodCamoAffinity = (INT8)max(0, min(100, iWoodCamoAffinity));
-	ubAllTileProperties.bDesertCamoAffinity = (INT8)max(0, min(100, iDesertCamoAffinity));
-	ubAllTileProperties.bUrbanCamoAffinity = (INT8)max(0, min(100, iUrbanCamoAffinity));
-	ubAllTileProperties.bSnowCamoAffinity = (INT8)max(0, min(100, iSnowCamoAffinity));
+	ubAllTileProperties.bWoodCamoAffinity = (std::max)(INT8(0), (std::min)(INT8(100), INT8(iWoodCamoAffinity)));
+	ubAllTileProperties.bDesertCamoAffinity = (std::max)(INT8(0), (std::min)(INT8(100), INT8(iDesertCamoAffinity)));
+	ubAllTileProperties.bUrbanCamoAffinity = (std::max)(INT8(0), (std::min)(INT8(100), INT8(iUrbanCamoAffinity)));
+	ubAllTileProperties.bSnowCamoAffinity = (std::max)(INT8(0), (std::min)(INT8(100), INT8(iSnowCamoAffinity)));
 
 	ubAllTileProperties.bCamoStanceModifer = (INT8)iCamoStanceModifer;
 	ubAllTileProperties.bSoundModifier = (INT8)iSoundModifier;
@@ -652,7 +652,7 @@ INT8 GetSightAdjustmentCamouflageOnTerrain( SOLDIERTYPE* pSoldier, const UINT8& 
 			// here it would be best if we could have a terrain texture -> camo association instead of terrain type -> camo
 			//  but we need to allow modders to specify that information in an xml file
 			// this is because flat ground is used by both (it's irritating to see wood camo work perfectly on brown ground, at least ingame)
-			return max( GetDesertCamouflage(pSoldier), GetJungleCamouflage(pSoldier) ) * scaler/100;
+			return (std::max)( GetDesertCamouflage(pSoldier), GetJungleCamouflage(pSoldier) ) * scaler/100;
 		default:
 			return 0;
 	}
@@ -668,7 +668,7 @@ INT8 GetDetailedSightAdjustmentCamouflageOnTerrain( SOLDIERTYPE* pSoldier, const
 
 	INT8 bStanceModifier = zGivenTileProperties.bCamoStanceModifer;
 
-	INT8 scaler = -(ANIM_STAND+1 - max(ANIM_PRONE, ubStance - bStanceModifier)); // stand = 7-6 => 10%, crouch = 7-3 => 66%, prone = 7-1 => 100%;
+	INT8 scaler = -(ANIM_STAND+1 - (std::max)(ANIM_PRONE, ubStance - bStanceModifier)); // stand = 7-6 => 10%, crouch = 7-3 => 66%, prone = 7-1 => 100%;
 
 	UINT8 effectiveness = gGameExternalOptions.ubCamouflageEffectiveness;
 
@@ -677,11 +677,11 @@ INT8 GetDetailedSightAdjustmentCamouflageOnTerrain( SOLDIERTYPE* pSoldier, const
 	scaler = effectiveness * scaler / 6;
 	if(gGameExternalOptions.fAlternateMultiTerrainCamoCalculation)
 	{
-		iResult += min( -GetJungleCamouflage(pSoldier) * scaler / 100, zGivenTileProperties.bWoodCamoAffinity);
-		iResult += min( -GetDesertCamouflage(pSoldier) * scaler / 100, zGivenTileProperties.bDesertCamoAffinity);
-		iResult += min( -GetUrbanCamouflage(pSoldier) * scaler / 100, zGivenTileProperties.bUrbanCamoAffinity);
-		iResult += min( -GetSnowCamouflage(pSoldier) * scaler / 100, zGivenTileProperties.bSnowCamoAffinity);
-		iResult = min( iResult, 100);
+		iResult += (std::min)( INT8(-GetJungleCamouflage(pSoldier) * scaler / 100), zGivenTileProperties.bWoodCamoAffinity);
+		iResult += (std::min)( INT8(-GetDesertCamouflage(pSoldier) * scaler / 100), zGivenTileProperties.bDesertCamoAffinity);
+		iResult += (std::min)( INT8(-GetUrbanCamouflage(pSoldier) * scaler / 100), zGivenTileProperties.bUrbanCamoAffinity);
+		iResult += (std::min)( INT8(-GetSnowCamouflage(pSoldier) * scaler / 100), zGivenTileProperties.bSnowCamoAffinity);
+		iResult = (std::min)( iResult, INT16(100));
 		iResult = -iResult;
 	}
 	else
@@ -692,7 +692,7 @@ INT8 GetDetailedSightAdjustmentCamouflageOnTerrain( SOLDIERTYPE* pSoldier, const
 		iResult += GetSnowCamouflage(pSoldier) * scaler / 100 * zGivenTileProperties.bSnowCamoAffinity / 100;
 	}
 
-	return (INT8)max(-100, min(0, iResult));
+	return (std::max)(INT8(-100), (std::min)(INT8(0), INT8(iResult)));
 }
 
 /**
@@ -715,7 +715,7 @@ INT8 GetSightAdjustmentThroughMovement( SOLDIERTYPE* pSoldier, const INT8& bTile
 
 	// SANDRO - added reduction of penalty for moving for Stealthy trait with new traits
 	if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSoldier, STEALTHY_NT ))
-		bMovementAdjustment = max(0, (bMovementAdjustment * (100 - gSkillTraitValues.ubSTStealthPenaltyForMovingReduction) / 100) );
+		bMovementAdjustment = (std::max)(0, (bMovementAdjustment * (100 - gSkillTraitValues.ubSTStealthPenaltyForMovingReduction) / 100) );
 
 	UINT8 ubBrightness = (100 - GetBrightness( ubLightLevel ));
 
@@ -754,12 +754,12 @@ INT8 GetSightAdjustmentBasedOnLBE( SOLDIERTYPE* pSoldier )
 	{
 		if (pSoldier->inv[HANDPOS].exists())
 		{
-			ubScale += min( 10, CalculateItemSize( &pSoldier->inv[HANDPOS] ) );
+			ubScale += (std::min)( UINT8(10), UINT8(CalculateItemSize( &pSoldier->inv[HANDPOS] )) );
 		}
 
 		if (pSoldier->inv[SECONDHANDPOS].exists())
 		{
-			ubScale += max( 0, min( 10, CalculateItemSize( &pSoldier->inv[SECONDHANDPOS] ) ) - 5 );
+			ubScale += (std::max)( UINT8(0), UINT8((std::min)( UINT8(10), UINT8(CalculateItemSize( &pSoldier->inv[SECONDHANDPOS] ) )) - 5));
 		}
 
 		if (pSoldier->inv[CPACKPOCKPOS].exists())
@@ -774,7 +774,7 @@ INT8 GetSightAdjustmentBasedOnLBE( SOLDIERTYPE* pSoldier )
 
 		if (pSoldier->inv[GUNSLINGPOCKPOS].exists())
 		{
-			ubScale += max( 0, min( 10, CalculateItemSize( &pSoldier->inv[GUNSLINGPOCKPOS] ) ) - 5 );
+			ubScale += (std::max)( UINT8(0), UINT8((std::min)( UINT16(10), CalculateItemSize( &pSoldier->inv[GUNSLINGPOCKPOS] ) ) - 5 ));
 		}
 	}
 
@@ -3044,7 +3044,7 @@ BOOLEAN BulletHitMerc( BULLET * pBullet, STRUCTURE * pStructure, BOOLEAN fIntend
 			}
 
 			// Flugente: also lower the repair threshold
-			pTarget->inv[ bHeadSlot ][0]->data.sRepairThreshold = max(pTarget->inv[ bHeadSlot ][0]->data.objectStatus, pTarget->inv[ bHeadSlot ][0]->data.sRepairThreshold - iImpact / 6);
+			pTarget->inv[ bHeadSlot ][0]->data.sRepairThreshold = (std::max)(pTarget->inv[ bHeadSlot ][0]->data.objectStatus, INT16(pTarget->inv[ bHeadSlot ][0]->data.sRepairThreshold - iImpact / 6));
 		}
 	}
 
@@ -3404,7 +3404,7 @@ INT32 HandleBulletStructureInteraction( BULLET * pBullet, STRUCTURE * pStructure
 					sLockDamage += (INT16) PreRandom( sLockDamage );
 					sLockDamage += lockBustingPower;
 
-					sLockDamage = min(sLockDamage,127);
+					sLockDamage = (std::min)(sLockDamage, INT16(127));
 
 					ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, TacticalStr[ LOCK_HAS_BEEN_HIT ] );
 
@@ -3459,7 +3459,7 @@ INT32 HandleBulletStructureInteraction( BULLET * pBullet, STRUCTURE * pStructure
 		iImpactReduction = gubMaterialArmour[ pStructure->pDBStructureRef->pDBStructure->ubArmour ];
 		iImpactReduction = StructureResistanceIncreasedByRange( iImpactReduction, pBullet->iRange, pBullet->iLoop );
 
-		iImpactReduction = (INT32) (iImpactReduction * AmmoTypes[ubAmmoType].structureImpactReductionMultiplier / max(1,AmmoTypes[ubAmmoType].structureImpactReductionDivisor));
+		iImpactReduction = (INT32) (iImpactReduction * AmmoTypes[ubAmmoType].structureImpactReductionMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].structureImpactReductionDivisor));
 
 		//switch (pBullet->pFirer->inv[ pBullet->pFirer->ubAttackingHand ][0]->data.gun.ubGunAmmoType)
 		//{
@@ -3540,7 +3540,7 @@ INT32 CTGTHandleBulletStructureInteraction( BULLET * pBullet, STRUCTURE * pStruc
 	iImpactReduction = gubMaterialArmour[ pStructure->pDBStructureRef->pDBStructure->ubArmour ] * pStructure->pDBStructureRef->pDBStructure->ubDensity / 100;
 	iImpactReduction = StructureResistanceIncreasedByRange( iImpactReduction, pBullet->iRange, pBullet->iLoop );
 
-	iImpactReduction = (INT32)(iImpactReduction * AmmoTypes[pBullet->pFirer->inv[ pBullet->pFirer->ubAttackingHand ][0]->data.gun.ubGunAmmoType].structureImpactReductionMultiplier / max(1,AmmoTypes[pBullet->pFirer->inv[ pBullet->pFirer->ubAttackingHand ][0]->data.gun.ubGunAmmoType].structureImpactReductionDivisor));
+	iImpactReduction = (INT32)(iImpactReduction * AmmoTypes[pBullet->pFirer->inv[ pBullet->pFirer->ubAttackingHand ][0]->data.gun.ubGunAmmoType].structureImpactReductionMultiplier / (std::max)(1,AmmoTypes[pBullet->pFirer->inv[ pBullet->pFirer->ubAttackingHand ][0]->data.gun.ubGunAmmoType].structureImpactReductionDivisor));
 
 	//switch (pBullet->pFirer->inv[ pBullet->pFirer->ubAttackingHand ][0]->data.gun.ubGunAmmoType)
 	//{
@@ -4625,7 +4625,7 @@ INT8 FireBulletGivenTargetNCTH( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, 
 		{
 			fBuckshot = true;
 			usBulletFlags |= BULLET_FLAG_BUCKSHOT;
-			ubImpact = (UINT8) (ubImpact * AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageMultiplier / max(1,AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageDivisor) );
+			ubImpact = (UINT8) (ubImpact * AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageMultiplier / (std::max)(1,AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageDivisor) );
 			if (pFirer->ubTargetID != NOBODY)
 			{
 				MercPtrs[ pFirer->ubTargetID ]->bNumPelletsHitBy = 0;
@@ -5139,7 +5139,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 
 			}
 			//			ubImpact = AMMO_DAMAGE_ADJUSTMENT_BUCKSHOT( ubImpact );
-			ubImpact = (UINT8) (ubImpact * AmmoTypes[pFirer->inv[pFirer->ubAttackingHand][0]->data.gun.ubGunAmmoType].multipleBulletDamageMultiplier / max(1,AmmoTypes[pFirer->inv[pFirer->ubAttackingHand][0]->data.gun.ubGunAmmoType].multipleBulletDamageDivisor) );
+			ubImpact = (UINT8) (ubImpact * AmmoTypes[pFirer->inv[pFirer->ubAttackingHand][0]->data.gun.ubGunAmmoType].multipleBulletDamageMultiplier / (std::max)(1,AmmoTypes[pFirer->inv[pFirer->ubAttackingHand][0]->data.gun.ubGunAmmoType].multipleBulletDamageDivisor) );
 		}
 	}
 	*/
@@ -5152,7 +5152,7 @@ INT8 FireBulletGivenTarget( SOLDIERTYPE * pFirer, FLOAT dEndX, FLOAT dEndY, FLOA
 		{
 			fBuckshot = true;
 			usBulletFlags |= BULLET_FLAG_BUCKSHOT;
-			ubImpact = (UINT8) (ubImpact * AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageMultiplier / max(1,AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageDivisor) );
+			ubImpact = (UINT8) (ubImpact * AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageMultiplier / (std::max)(1,AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageDivisor) );
 			if (pFirer->ubTargetID != NOBODY)
 			{
 				MercPtrs[ pFirer->ubTargetID ]->bNumPelletsHitBy = 0;
@@ -5792,7 +5792,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 	ubImpact =(UINT8) GetDamage( pObj );
 
 	// we have to adjust the damage...
-	//ubImpact = min(255, 4 * ubImpact );
+	//ubImpact = (std::min)(255, 4 * ubImpact );
 
 	//zilpin: Begin new code block for spread patterns, number of projectiles, impact adjustment, etc.
 	{
@@ -5803,7 +5803,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 		{
 			fBuckshot = true;
 			usBulletFlags |= BULLET_FLAG_BUCKSHOT;
-			ubImpact = (UINT8) (ubImpact * AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageMultiplier / max(1,AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageDivisor) );
+			ubImpact = (UINT8) (ubImpact * AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageMultiplier / (std::max)(1,AmmoTypes[weapon->gun.ubGunAmmoType].multipleBulletDamageDivisor) );
 		}
 		weapon=NULL;
 	}
@@ -6138,7 +6138,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 	///////////////////////// SOUND ////////////////////////////
 
 	// deduct ammo
-	(*pObj)[0]->data.gun.ubGunShotsLeft = max(0, (*pObj)[0]->data.gun.ubGunShotsLeft - 1);
+	(*pObj)[0]->data.gun.ubGunShotsLeft = (std::max)(0, (*pObj)[0]->data.gun.ubGunShotsLeft - 1);
 
 	//gTacticalStatus.ubAttackBusyCount++;
 
@@ -6183,11 +6183,10 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 		UINT16 usBaseChance = gGameCTHConstants.BASIC_RELIABILITY_ODDS;
 		FLOAT dReliabilityRatio = 3.0f * ((FLOAT)usBaseChance / (FLOAT)gItemSettings.usBasicDeprecateChance); // Compare original odds to new odds.
 		uiDepreciateTest = usBaseChance + (INT16)( dReliabilityRatio * GetReliability( pObj ) - iOverheatReliabilityMalus);
-		uiDepreciateTest = max(0, uiDepreciateTest);
 	}
 	else
 	{
-		uiDepreciateTest = max( gItemSettings.usBasicDeprecateChance + 3 * GetReliability( pObj ) - iOverheatReliabilityMalus, 0 );
+		uiDepreciateTest = (std::max)( gItemSettings.usBasicDeprecateChance + 3 * GetReliability( pObj ) - iOverheatReliabilityMalus, 0 );
 	}
 	if ( !PreRandom( uiDepreciateTest ) && ( (*pObj)[0]->data.objectStatus > 1) )
 	{
@@ -6219,7 +6218,7 @@ INT8 FireBulletGivenTargetTrapOnly( SOLDIERTYPE* pThrower, OBJECTTYPE* pObj, INT
 
 		int overheatjamfactor = (int)(100* overheatjampercentage);			// We need an integer value and rough percentages
 
-		overheatjamfactor = max(0, overheatjamfactor - 100);				// If we haven't reached the OverheatJamThreshold, no increased chance of jamming because of overheating
+		overheatjamfactor = (std::max)(0, overheatjamfactor - 100);				// If we haven't reached the OverheatJamThreshold, no increased chance of jamming because of overheating
 
 		invertedBaseJamChance -= overheatjamfactor;							// lower invertedBaseJamChance	(thereby increasing jamChance later on)
 	}

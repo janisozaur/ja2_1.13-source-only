@@ -426,7 +426,7 @@ void HourlyLarryUpdate()
 										bPreventChance -= 25 * NUM_SKILL_TRAITS( pSoldier, STEALTHY_OT );
 									}
 									// keep 1% chance no matter what
-									bPreventChance = max( 0, min( 99, bPreventChance ) );
+									bPreventChance = (std::max)( UINT16(0), (std::min)( UINT16(99), bPreventChance ) );
 									if( bPreventChance > PreRandom( 100 ) )
 									{
 										// merc is not amused by being prevented
@@ -605,7 +605,7 @@ void HourlyStealUpdate()
 										bPreventChance -= 25 * NUM_SKILL_TRAITS( pSoldier, STEALTHY_OT );
 									}
 									// keep 1% chance no matter what
-									bPreventChance = max( 0, min( 99, bPreventChance ) );
+									bPreventChance = (std::max)( UINT16(0), (std::min)( UINT16(99), bPreventChance ) );
 									if( bPreventChance > PreRandom( 100 ) )
 									{
 										// merc is not amused by being prevented

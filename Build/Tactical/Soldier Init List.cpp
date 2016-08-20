@@ -1848,8 +1848,8 @@ void AddSoldierInitListMilitia( UINT8 ubNumGreen, UINT8 ubNumRegs, UINT8 ubNumEl
 		}
 
 		// is there still room tom add more?
-		UINT16 militiamax = min( gGameExternalOptions.iMaxMilitiaPerSector, gGameExternalOptions.ubGameMaximumNumberOfRebels);
-		militiamax = min( militiamax, gGameExternalOptions.iMaxEnemyGroupSize );
+		UINT16 militiamax = (std::min)( UINT32(gGameExternalOptions.iMaxMilitiaPerSector), gGameExternalOptions.ubGameMaximumNumberOfRebels);
+		militiamax = (std::min)( militiamax, UINT16(gGameExternalOptions.iMaxEnemyGroupSize) );
 
 		while ( tacticalmilitia < militiamax )
 		{
@@ -3119,7 +3119,7 @@ void SectorAddPrisonersofWar( INT16 sMapX, INT16 sMapY, INT16 sMapZ )
 	}
 
 	// we can't spawn if all civilian slots are already taken (we leave a bit of reserve for more important civs)
-	UINT8 maxcivs = max(0, gGameExternalOptions.ubGameMaximumNumberOfCivilians - 3);
+	UINT8 maxcivs = (std::max)(UINT32(0), gGameExternalOptions.ubGameMaximumNumberOfCivilians - 3);
 
 	for (UINT16 i = numberofpows; i < numprisoners; ++i)
 	{

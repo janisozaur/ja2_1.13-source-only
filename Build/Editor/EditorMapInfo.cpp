@@ -104,11 +104,11 @@ void UpdateOptions()
 
 void ExtractAndUpdateOptions(void)//dnl ch52 091009
 {
-	iNewMapWorldRows = max(min(GetNumericStrictValueFromField(1), WORLD_ROWS_MAX), OLD_WORLD_ROWS);
+	iNewMapWorldRows = (std::max)(min(GetNumericStrictValueFromField(1), WORLD_ROWS_MAX), OLD_WORLD_ROWS);
 	iNewMapWorldRows /= 4;
 	iNewMapWorldRows *= 4;
 	iNewMapWorldCols = iNewMapWorldRows;
-	//iNewMapWorldCols = max(min(GetNumericStrictValueFromField(2), WORLD_COLS_MAX), OLD_WORLD_COLS);
+	//iNewMapWorldCols = (std::max)(min(GetNumericStrictValueFromField(2), WORLD_COLS_MAX), OLD_WORLD_COLS);
 	//iNewMapWorldCols /= 4;
 	//iNewMapWorldCols *= 4;
 }
@@ -226,19 +226,19 @@ void ExtractAndUpdateMapInfo()
 	INT32 temp;
 	BOOLEAN fUpdateLight1 = FALSE;
 	//extract light1 colors
-	temp = min( GetNumericStrictValueFromField( 1 ), 255 );
+	temp = (std::min)( GetNumericStrictValueFromField( 1 ), 255 );
 	if( temp != -1 && temp != gEditorLightColor.peRed )
 	{
 		fUpdateLight1 = TRUE;
 		gEditorLightColor.peRed = (UINT8)temp;
 	}
-	temp = min( GetNumericStrictValueFromField( 2 ), 255 );
+	temp = (std::min)( GetNumericStrictValueFromField( 2 ), 255 );
 	if( temp != -1 && temp != gEditorLightColor.peGreen )
 	{
 		fUpdateLight1 = TRUE;
 		gEditorLightColor.peGreen = (UINT8)temp;
 	}
-	temp = min( GetNumericStrictValueFromField( 3 ), 255 );
+	temp = (std::min)( GetNumericStrictValueFromField( 3 ), 255 );
 	if( temp != -1 && temp != gEditorLightColor.peBlue )
 	{
 		fUpdateLight1 = TRUE;
@@ -252,10 +252,10 @@ void ExtractAndUpdateMapInfo()
 	}
 
 	//dnl ch80 011213 extract radius
-	temp = max(min(GetNumericStrictValueFromField(4), 8), 1);
+	temp = (std::max)(min(GetNumericStrictValueFromField(4), 8), 1);
 	if(temp != -1)
 		gsLightRadius = (INT16)temp;
-	temp = max(min(GetNumericStrictValueFromField(5), 15), 1);
+	temp = (std::max)(min(GetNumericStrictValueFromField(5), 15), 1);
 	if(temp != -1 && temp != gusLightLevel)
 	{
 		gusLightLevel = (UINT16)temp;
@@ -285,11 +285,11 @@ void ExtractAndUpdateMapInfo()
 		gExitGrid.ubGotoSectorX = (UINT8)(str[1] - '0');
 		if( str[2] >= '0' && str[2] <= '9' )
 			gExitGrid.ubGotoSectorX = (UINT8)(gExitGrid.ubGotoSectorX * 10 + str[2] - '0' );
-		gExitGrid.ubGotoSectorX = (UINT8)max( min( gExitGrid.ubGotoSectorX, 16 ), 1 );
-		gExitGrid.ubGotoSectorY = (UINT8)max( min( gExitGrid.ubGotoSectorY, 16 ), 1 );
+		gExitGrid.ubGotoSectorX = (UINT8)(std::max)( (std::min)( gExitGrid.ubGotoSectorX, 16 ), 1 );
+		gExitGrid.ubGotoSectorY = (UINT8)(std::max)( (std::min)( gExitGrid.ubGotoSectorY, 16 ), 1 );
 	}
-	gExitGrid.ubGotoSectorZ	= (UINT8)max( min( GetNumericStrictValueFromField( 8 ), 3 ), 0 );
-	gExitGrid.usGridNo					 = max( min( GetNumericStrictValueFromField( 9 ), (WORLD_COLS_MAX * WORLD_ROWS_MAX) ), 0 );
+	gExitGrid.ubGotoSectorZ	= (UINT8)(std::max)( (std::min)( GetNumericStrictValueFromField( 8 ), 3 ), 0 );
+	gExitGrid.usGridNo					 = (std::max)( (std::min)( GetNumericStrictValueFromField( 9 ), (WORLD_COLS_MAX * WORLD_ROWS_MAX) ), 0 );
 
 	UpdateMapInfoFields();
 }

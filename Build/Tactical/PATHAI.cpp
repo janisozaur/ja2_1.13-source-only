@@ -1397,7 +1397,7 @@ INT16 AStarPathfinder::CalcAP(int const terrainCost, UINT8 const direction)
 	// SANDRO - STOMP traits - Athletics trait decreases movement cost
 	if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSoldier, ATHLETICS_NT ))
 	{
-		movementAPCost = max(1, (INT16)((movementAPCost * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+		movementAPCost = (std::max)(1, (INT16)((movementAPCost * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2096,7 +2096,7 @@ int AStarPathfinder::CalcCoverValue(INT32 sMyGridNo, INT32 iMyThreat, INT32 iMyA
 
 	int iCoverValue = (int) (((HisPosValue - MyPosValue) / HisPosValue) * ReductionFactor);
 
-	return( max(iCoverValue, 0) );
+	return( (std::max)(iCoverValue, 0) );
 }
 #endif //#ifdef ASTAR_USING_EXTRACOVER
 
@@ -3600,7 +3600,7 @@ if(!GridNoOnVisibleWorldTile(iDestination))
 				// SANDRO - STOMP traits - Athletics trait decreases movement cost
 				if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( s, ATHLETICS_NT ))
 				{
-					ubAPCost = max(1, (INT16)((ubAPCost * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+					ubAPCost = (std::max)(INT16(1), (INT16)((ubAPCost * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
 				}
 
 				// Moa: scuba fins and swimming background
@@ -3644,7 +3644,7 @@ if(!GridNoOnVisibleWorldTile(iDestination))
 								pObj = &( s->inv[ vbLBESlots[ i ] ] );
 								usBackPackWeight += CalculateObjectWeight( pObj );
 							}
-							usBPPenalty = min( ( usBackPackWeight / 50 ), usBPPenalty ); //1 AP penalty for each 5kg of weight up to the penalty defined by AP_MODIFIER_PACK (default = 4)
+							usBPPenalty = (std::min)( UINT16( usBackPackWeight / 50 ), usBPPenalty ); //1 AP penalty for each 5kg of weight up to the penalty defined by AP_MODIFIER_PACK (default = 4)
 						}
 						else //Backpack caried not on back (maybe somewhere inside another LBE or in Hand?)
 						{
@@ -4656,7 +4656,7 @@ INT32 PlotPath( SOLDIERTYPE *pSold, INT32 sDestGridNo, INT8 bCopyRoute, INT8 bPl
 				// STOMP traits - Athletics trait decreases movement cost
 				if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSold, ATHLETICS_NT ))
 				{
-					sMovementAPsCost = max(1, (INT16)((sMovementAPsCost * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+					sMovementAPsCost = (std::max)(INT16(1), (INT16)((sMovementAPsCost * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
 				}
 
 				// Moa: scuba fins and swimming background
@@ -4681,7 +4681,7 @@ INT32 PlotPath( SOLDIERTYPE *pSold, INT32 sDestGridNo, INT8 bCopyRoute, INT8 bPl
 					 // STOMP traits - Stealthy trait decreases stealth AP modifier
 					if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSold, STEALTHY_NT ))
 					{
-						 sMovementAPsCost += (max(0, (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
+						 sMovementAPsCost += ((std::max)(INT16(0), (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
 					}
 					else
 					{
@@ -4711,7 +4711,7 @@ INT32 PlotPath( SOLDIERTYPE *pSold, INT32 sDestGridNo, INT8 bCopyRoute, INT8 bPl
 								pObj = &( pSold->inv[ vbLBESlots[ i ] ] );
 								usBackPackWeight += CalculateObjectWeight( pObj );
 							}
-							usBPPenalty = min( ( usBackPackWeight / 50 ), usBPPenalty ); //1 AP penalty for each 5kg of weight up to the penalty defined by AP_MODIFIER_PACK (default = 4)
+							usBPPenalty = (std::min)( UINT16( usBackPackWeight / 50 ), usBPPenalty ); //1 AP penalty for each 5kg of weight up to the penalty defined by AP_MODIFIER_PACK (default = 4)
 						}
 						else //Backpack caried not on back (maybe somewhere inside another LBE or in Hand?)
 						{
@@ -4744,10 +4744,10 @@ INT32 PlotPath( SOLDIERTYPE *pSold, INT32 sDestGridNo, INT8 bCopyRoute, INT8 bPl
 				// STOMP traits - Athletics trait decreases movement cost
 				if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSold, ATHLETICS_NT ))
 				{
-					sPointsWalk += max(1, (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_WALK]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
-					sPointsCrawl += max(1, (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_CRAWL]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
-					sPointsSwat += max(1, (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_SWAT]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
-					sPointsRun += max(1, (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_RUN]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+					sPointsWalk += (std::max)(INT16(1), (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_WALK]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+					sPointsCrawl += (std::max)(INT16(1), (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_CRAWL]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+					sPointsSwat += (std::max)(INT16(1), (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_SWAT]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
+					sPointsRun += (std::max)(INT16(1), (INT16)(((sMovementAPsCost + APBPConstants[AP_MODIFIER_RUN]) * (100 - gSkillTraitValues.ubATAPsMovementReduction) / 100) + 0.5));
 				}
 				// Specify movement modes
 				else
@@ -4794,10 +4794,10 @@ INT32 PlotPath( SOLDIERTYPE *pSold, INT32 sDestGridNo, INT8 bCopyRoute, INT8 bPl
 					 // STOMP traits - Stealthy trait decreases stealth AP modifier
 					if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSold, STEALTHY_NT ))
 					{
-						 sPointsWalk += (max(0, (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
-						 sPointsCrawl += (max(0, (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
-						 sPointsSwat += (max(0, (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
-						 sPointsRun += (max(0, (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
+						 sPointsWalk += ((std::max)(INT16(0), (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
+						 sPointsCrawl += ((std::max)(INT16(0), (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
+						 sPointsSwat += ((std::max)(INT16(0), (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
+						 sPointsRun += ((std::max)(INT16(0), (INT16)((APBPConstants[AP_STEALTH_MODIFIER] * (100 - gSkillTraitValues.ubSTStealthModeSpeedBonus) / 100) + 0.5)));
 					}
 					else
 					{
@@ -4836,7 +4836,7 @@ INT32 PlotPath( SOLDIERTYPE *pSold, INT32 sDestGridNo, INT8 bCopyRoute, INT8 bPl
 								pObj = &( pSold->inv[ vbLBESlots[ i ] ] );
 								usBackPackWeight += CalculateObjectWeight( pObj );
 							}
-							usBPPenalty = min( ( usBackPackWeight / 50 ), usBPPenalty ); //1 AP penalty for each 5kg of weight up to the penalty defined by AP_MODIFIER_PACK (default = 4)
+							usBPPenalty = (std::min)( UINT16( usBackPackWeight / 50 ), usBPPenalty ); //1 AP penalty for each 5kg of weight up to the penalty defined by AP_MODIFIER_PACK (default = 4)
 						}
 						else //Backpack caried not on back (maybe somewhere inside another LBE or in Hand?)
 						{

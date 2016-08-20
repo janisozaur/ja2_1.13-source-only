@@ -1146,10 +1146,10 @@ void CalcBestThrow(SOLDIERTYPE *pSoldier, ATTACKTYPE *pBestThrow)
 		ubSearchRange = MAX_TOSS_SEARCH_DIST;
 
 		// determine maximum horizontal limits
-		//bMaxLeft	= min(ubSearchRange,(sOpponentTile[ubLoop] % MAXCOL));
+		//bMaxLeft	= (std::min)(ubSearchRange,(sOpponentTile[ubLoop] % MAXCOL));
 		bMaxLeft = ubSearchRange;
 		//NumMessage("bMaxLeft = ",bMaxLeft);
-		//bMaxRight = min(ubSearchRange,MAXCOL - ((sOpponentTile[ubLoop] % MAXCOL) + 1));
+		//bMaxRight = (std::min)(ubSearchRange,MAXCOL - ((sOpponentTile[ubLoop] % MAXCOL) + 1));
 		bMaxRight = ubSearchRange;
 		//NumMessage("bMaxRight = ",bMaxRight);
 
@@ -1636,7 +1636,7 @@ void CalcBestStab(SOLDIERTYPE *pSoldier, ATTACKTYPE *pBestStab, BOOLEAN fBladeAt
 
 		// calculate the maximum possible aiming time
 		// HEADROCK HAM 4: Required for new Aiming Level Limits function
-		ubMaxPossibleAimTime = min(AllowedAimingLevels(pSoldier, pOpponent->sGridNo),pSoldier->bActionPoints - ubMinAPCost);
+		ubMaxPossibleAimTime = (std::min)(AllowedAimingLevels(pSoldier, pOpponent->sGridNo), UINT8(pSoldier->bActionPoints - ubMinAPCost));
 		//NumMessage("Max Possible Aim Time = ",ubMaxPossibleAimTime);
 
 		// consider the various aiming times
@@ -1824,7 +1824,7 @@ void CalcTentacleAttack(SOLDIERTYPE *pSoldier, ATTACKTYPE *pBestStab )
 
 		// calculate the maximum possible aiming time
 
-		//ubMaxPossibleAimTime = min(AllowedAimingLevels(pSoldier),pSoldier->bActionPoints - ubMinAPCost);
+		//ubMaxPossibleAimTime = (std::min)(AllowedAimingLevels(pSoldier),pSoldier->bActionPoints - ubMinAPCost);
 		ubMaxPossibleAimTime = 0;
 		//NumMessage("Max Possible Aim Time = ",ubMaxPossibleAimTime);
 
@@ -2027,7 +2027,7 @@ INT32 EstimateShotDamage(SOLDIERTYPE *pSoldier, SOLDIERTYPE *pOpponent, INT16 ub
 	// NB: make AI guys shoot at head 15% of time, 5% of time at legs
 
 	iTotalProt = ((15 * iHeadProt) + (75 * iTorsoProt) + 5 * iLegProt) / 100;
-	iTotalProt = (INT32) (iTotalProt * AmmoTypes[ubAmmoType].armourImpactReductionMultiplier / max(1,AmmoTypes[ubAmmoType].armourImpactReductionDivisor) );
+	iTotalProt = (INT32) (iTotalProt * AmmoTypes[ubAmmoType].armourImpactReductionMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].armourImpactReductionDivisor) );
 	//switch (ubAmmoType)
 	//{
 	//	case AMMO_HP:
@@ -2051,7 +2051,7 @@ INT32 EstimateShotDamage(SOLDIERTYPE *pSoldier, SOLDIERTYPE *pOpponent, INT16 ub
 	//	// increase after-armour damage
 	//	iDamage = AMMO_DAMAGE_ADJUSTMENT_HP( iDamage );
 	//}
-	iDamage = (INT32)(iDamage * AmmoTypes[ubAmmoType].afterArmourDamageMultiplier / max(1,AmmoTypes[ubAmmoType].afterArmourDamageDivisor) ) ;
+	iDamage = (INT32)(iDamage * AmmoTypes[ubAmmoType].afterArmourDamageMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].afterArmourDamageDivisor) ) ;
 
 	if (AmmoTypes[ubAmmoType].monsterSpit )
 	{
@@ -3337,10 +3337,10 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 			ubOpponentID[ubOpponentCnt] = pFriend->ubID;
 
 			// update lowest and highest x and y values
-			lowestX  = min(lowestX,  sOpponentTile[ubOpponentCnt] % MAXCOL );
-			highestX = max(highestX, sOpponentTile[ubOpponentCnt] % MAXCOL );
-			lowestY  = min(lowestY,  sOpponentTile[ubOpponentCnt] / MAXCOL );
-			highestY = max(highestY, sOpponentTile[ubOpponentCnt] / MAXCOL );
+			lowestX  = (std::min)(lowestX,  sOpponentTile[ubOpponentCnt] % MAXCOL );
+			highestX = (std::max)(highestX, sOpponentTile[ubOpponentCnt] % MAXCOL );
+			lowestY  = (std::min)(lowestY,  sOpponentTile[ubOpponentCnt] / MAXCOL );
+			highestY = (std::max)(highestY, sOpponentTile[ubOpponentCnt] / MAXCOL );
 
 			ubOpponentCnt++;
 		}
@@ -3367,12 +3367,12 @@ BOOLEAN GetBestAoEGridNo(SOLDIERTYPE *pSoldier, INT32* pGridNo, INT16 aRadius, U
 		currentSoldierGridNo = sOpponentTile[ubLoop];
 
 		// determine maximum horizontal limits
-		bMaxLeft  = max(currentSoldierGridNo % MAXCOL - aRadius, lowestX);
-		bMaxRight = min(currentSoldierGridNo % MAXCOL + aRadius, highestX);
+		bMaxLeft  = (std::max)(currentSoldierGridNo % MAXCOL - aRadius, lowestX);
+		bMaxRight = (std::min)(currentSoldierGridNo % MAXCOL + aRadius, highestX);
 
 		// determine maximum vertical limits
-		bMaxDown  = max(currentSoldierGridNo / MAXCOL - aRadius, lowestY);
-		bMaxUp	  = min(currentSoldierGridNo / MAXCOL + aRadius, highestY);
+		bMaxDown  = (std::max)(currentSoldierGridNo / MAXCOL - aRadius, lowestY);
+		bMaxUp	  = (std::min)(currentSoldierGridNo / MAXCOL + aRadius, highestY);
 
 		// evaluate every tile for its opponent-damaging potential
 		for (i = bMaxLeft; i <= bMaxRight; ++i)

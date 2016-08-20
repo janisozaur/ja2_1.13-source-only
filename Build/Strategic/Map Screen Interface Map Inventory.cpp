@@ -1078,7 +1078,7 @@ void SaveSeenAndUnseenItems( void )
 	WORLDITEM *pipl;
 
 	// Idea of this change is avoiding resize and clear of pInventoryPool and pUnSeenItems and twice loading tempfile to increase inventory closing time
-	uiNumOfSlots = min(MAP_INVENTORY_POOL_SLOT_COUNT * ((UINT32)iLastInventoryPoolPage + 1), pInventoryPoolList.size());// Best guess without going into loop
+	uiNumOfSlots = (std::min)(MAP_INVENTORY_POOL_SLOT_COUNT * ((UINT32)iLastInventoryPoolPage + 1), pInventoryPoolList.size());// Best guess without going into loop
 	uiNumberOfSeenItems = 0;
 	uiTotalNumberOfVisibleItems = 0;
 	for(i=0; i<uiNumOfSlots; i++)// Calculate total number of objects and throw out empty item slots
@@ -3267,12 +3267,12 @@ void ResizeInventoryList( void )
 	if(iNumEmptySlotsAtEnd >= 3)
 	{
 		// Lots of empty slots at the end, so we don't need to increase the number of pages.
-		giDesiredNumMapInventorySlots = max(iOptimalSizeWithExtraEmptySlots, giDesiredNumMapInventorySlots);
+		giDesiredNumMapInventorySlots = (std::max)(iOptimalSizeWithExtraEmptySlots, giDesiredNumMapInventorySlots);
 	}
 	else
 	{
 		// We want 1 extra blank page at the end, so we add the number of slots required to make that page.
-		giDesiredNumMapInventorySlots = max(iOptimalSizeWithExtraEmptySlots + MAP_INVENTORY_POOL_SLOT_COUNT, giDesiredNumMapInventorySlots);
+		giDesiredNumMapInventorySlots = (std::max)(iOptimalSizeWithExtraEmptySlots + MAP_INVENTORY_POOL_SLOT_COUNT, giDesiredNumMapInventorySlots);
 		fExtraPage = TRUE;
 	}
 	// Only resize if need to extend slot number, also never clear pInventoryPoolList and pUnSeenItems to avoid performance decrease, and both of them must be same size
@@ -4768,7 +4768,7 @@ void AnimateZoomInventory ( UINT16 iLocationInPool, UINT16 iCounter, INT32 iStar
 		// done.
 		iPercentage = (uiCurrTime-uiStartTime) * 100 / uiTimeRange;
 		// Can't be more than 100%, duh.
-		iPercentage = min( iPercentage, 100 );
+		iPercentage = (std::min)( iPercentage, 100 );
 
 		// To make a "falling" effect, we bias the percentage. I'm not sure how the maths work, but they do.
 		INT32 iScalePercentage = iPercentage;
@@ -5839,7 +5839,7 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 			if ( Item[itemStack->usItem].barrel == TRUE )	// ... a barrel lying around cools down a bit faster ...
 				cooldownfactor *= gGameExternalOptions.iCooldownModificatorLonelyBarrel;
 
-			FLOAT newguntemperature = max(0.0f, guntemperature - tickspassed * cooldownfactor );	// ... calculate new temperature ...
+			FLOAT newguntemperature = (std::max)(0.0f, guntemperature - tickspassed * cooldownfactor );	// ... calculate new temperature ...
 
 #if 0//def JA2TESTVERSION
 			ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"World: Item temperature lowered from %4.2f to %4.2f", guntemperature, newguntemperature );
@@ -5857,7 +5857,7 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 
 					FLOAT cooldownfactor = GetItemCooldownFactor( &(*iter) );	// ... get cooldown factor ...
 
-					FLOAT newtemperature = max(0.0f, temperature - tickspassed * cooldownfactor );	// ... calculate new temperature ...
+					FLOAT newtemperature = (std::max)(0.0f, temperature - tickspassed * cooldownfactor );	// ... calculate new temperature ...
 
 					(*iter)[i]->data.bTemperature = newtemperature;				// ... set new temperature
 
@@ -5886,7 +5886,7 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 		{
 			for( INT16 i = 0; i < itemStack->ubNumberOfObjects; ++i )				// ... there might be multiple items here (item stack), so for each one ...
 			{
-				(*itemStack)[i]->data.bDirtLevel = max(0.0f, (*itemStack)[i]->data.bDirtLevel + tickspassed * dirtincreasefactor );	// set new dirt value
+				(*itemStack)[i]->data.bDirtLevel = (std::max)(0.0f, (*itemStack)[i]->data.bDirtLevel + tickspassed * dirtincreasefactor );	// set new dirt value
 			}
 		}
 	}//end dirt stuff
@@ -5901,7 +5901,7 @@ void HandleItemCooldownFunctions( OBJECTTYPE* itemStack, INT32 deltaSeconds,  UI
 
 			for( INT16 i = 0; i < itemStack->ubNumberOfObjects; ++i )			// ... there might be multiple items here (item stack), so for each one ...
 			{
-				(*itemStack)[i]->data.bTemperature = max( 0.0f, (*itemStack)[i]->data.bTemperature - tickspassed * sectorModifier * Food[ Item[ itemStack->usItem ].foodtype ].usDecayRate );	// set new temperature
+				(*itemStack)[i]->data.bTemperature = (std::max)( 0.0f, (*itemStack)[i]->data.bTemperature - tickspassed * sectorModifier * Food[ Item[ itemStack->usItem ].foodtype ].usDecayRate );	// set new temperature
 			}
 		}
 	}//end food
@@ -5976,7 +5976,7 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 						if ( Item[pWorldItem[ uiCount ].object.usItem].barrel == TRUE )	// ... a barrel lying around cools down a bit faster ...
 							cooldownfactor *= gGameExternalOptions.iCooldownModificatorLonelyBarrel;
 
-						FLOAT newguntemperature = max(0.0f, guntemperature - tickspassed * cooldownfactor);	// ... calculate new temperature ...
+						FLOAT newguntemperature = (std::max)(0.0f, guntemperature - tickspassed * cooldownfactor);	// ... calculate new temperature ...
 
 #if 0//def JA2TESTVERSION
 						ScreenMsg( FONT_MCOLOR_LTYELLOW, MSG_INTERFACE, L"World: Item temperature lowered from %4.2f to %4.2f", guntemperature, newguntemperature );
@@ -5994,7 +5994,7 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 
 								FLOAT cooldownfactor = GetItemCooldownFactor( &(*iter) );	// ... get cooldown factor ...
 
-								FLOAT newtemperature = max(0.0f, temperature - tickspassed * cooldownfactor);	// ... calculate new temperature ...
+								FLOAT newtemperature = (std::max)(0.0f, temperature - tickspassed * cooldownfactor);	// ... calculate new temperature ...
 
 								(*iter)[i]->data.bTemperature = newtemperature;				// ... set new temperature
 
@@ -6022,7 +6022,7 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 					{
 						for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)				// ... there might be multiple items here (item stack), so for each one ...
 						{
-							(*pObj)[i]->data.bDirtLevel = max(0.0f, min( OVERHEATING_MAX_TEMPERATURE, (*pObj)[i]->data.bDirtLevel + tickspassed * dirtincreasefactor) );	// set new dirt value
+							(*pObj)[i]->data.bDirtLevel = (std::max)(0.0f, (std::min)( OVERHEATING_MAX_TEMPERATURE, (*pObj)[i]->data.bDirtLevel + tickspassed * dirtincreasefactor) );	// set new dirt value
 						}
 					}
 				}
@@ -6033,7 +6033,7 @@ void HandleSectorCooldownFunctions( INT16 sMapX, INT16 sMapY, INT8 sMapZ, std::v
 					{
 						for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)			// ... there might be multiple items here (item stack), so for each one ...
 						{
-							(*pObj)[i]->data.bTemperature = max(0.0f, (*pObj)[i]->data.bTemperature - foofdecaymod * Food[Item[pObj->usItem].foodtype].usDecayRate);	// set new temperature
+							(*pObj)[i]->data.bTemperature = (std::max)(0.0f, (*pObj)[i]->data.bTemperature - foofdecaymod * Food[Item[pObj->usItem].foodtype].usDecayRate);	// set new temperature
 						}
 					}
 				}

@@ -1901,7 +1901,7 @@ void StartEnemyTaunt( SOLDIERTYPE *pCiv, TAUNTTYPE iTauntType, SOLDIERTYPE *pTar
 		swprintf( gzTauntQuote, L"\"%s\"", sTauntText );
 
 		// block this enemy from taunting for a time being
-		uiTauntFinishTimes[pCiv->ubID] = GetJA2Clock() + min( gTauntsSettings.sMaxDelay , max( gTauntsSettings.sMinDelay, FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) );
+		uiTauntFinishTimes[pCiv->ubID] = GetJA2Clock() + (std::min)(UINT32(gTauntsSettings.sMaxDelay), (std::max)( UINT32(gTauntsSettings.sMinDelay), FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) );
 
 		if( gTauntsSettings.fTauntMakeNoise == TRUE )
 			MakeNoise( pCiv->ubID, pCiv->sGridNo, pCiv->pathing.bLevel, pCiv->bOverTerrainType, gTauntsSettings.sVolume, NOISE_VOICE, gzTauntQuote );
@@ -2005,7 +2005,7 @@ void ShowTauntPopupBox( SOLDIERTYPE *pCiv, STR16 gzTauntQuote )
 
 	gCivQuoteData.uiTimeOfCreation = GetJA2Clock( );
 
-	gCivQuoteData.uiDelayTime = min( gTauntsSettings.sMaxDelay , max( gTauntsSettings.sMinDelay, FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) );
+	gCivQuoteData.uiDelayTime = (std::min)( UINT32(gTauntsSettings.sMaxDelay), (std::max)( UINT32(gTauntsSettings.sMinDelay), FindDelayForString( gzTauntQuote ) + gTauntsSettings.sModDelay ) );
 
 	gCivQuoteData.pCiv = pCiv;
 }

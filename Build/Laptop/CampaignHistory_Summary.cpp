@@ -775,8 +775,8 @@ void RenderCampaignHistory_MostImportant()
 					UINT16 armypows    = incident.usPrisoners[CAMPAIGNHISTORY_SD_ENEMY_ADMIN] + incident.usPrisoners[CAMPAIGNHISTORY_SD_ENEMY_ARMY] + incident.usPrisoners[CAMPAIGNHISTORY_SD_ENEMY_ELITE] + incident.usPrisoners[CAMPAIGNHISTORY_SD_ENEMY_TANK];
 
 					// team sizes
-					UINT16 rebelsize   = max(1, incident.usParticipants[CAMPAIGNHISTORY_SD_MERC] + incident.usParticipants[CAMPAIGNHISTORY_SD_MILITIA_GREEN] + incident.usParticipants[CAMPAIGNHISTORY_SD_MILITIA_REGULAR] + incident.usParticipants[CAMPAIGNHISTORY_SD_MILITIA_ELITE]);
-					UINT16 armysize    = max(1, incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_ADMIN] + incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_ARMY] + incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_ELITE] + incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_TANK]);
+					UINT16 rebelsize   = (std::max)(1, incident.usParticipants[CAMPAIGNHISTORY_SD_MERC] + incident.usParticipants[CAMPAIGNHISTORY_SD_MILITIA_GREEN] + incident.usParticipants[CAMPAIGNHISTORY_SD_MILITIA_REGULAR] + incident.usParticipants[CAMPAIGNHISTORY_SD_MILITIA_ELITE]);
+					UINT16 armysize    = (std::max)(1, incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_ADMIN] + incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_ARMY] + incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_ELITE] + incident.usParticipants[CAMPAIGNHISTORY_SD_ENEMY_TANK]);
 
 					// if rebels won...
 					if ( incident.usIncidentFlags & INCIDENT_WIN && rebelsize )

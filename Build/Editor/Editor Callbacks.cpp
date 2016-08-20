@@ -830,7 +830,7 @@ void ItemsRightScrollCallback(GUI_BUTTON *btn, INT32 reason)
 		if (_KeyDown( 17 ) ) // CTRL
 		{
 			if (_KeyDown( 16 ) ) // SHIFT
-				eInfo.sScrollIndex = max( ((eInfo.sNumItems+1)/2)-6, 0);
+				eInfo.sScrollIndex = (std::max)( ((eInfo.sNumItems+1)/2)-6, 0);
 			else
 				eInfo.sScrollIndex = __min(eInfo.sScrollIndex + 60, (eInfo.sNumItems+1)/2-6);
 		}
@@ -840,7 +840,7 @@ void ItemsRightScrollCallback(GUI_BUTTON *btn, INT32 reason)
 			eInfo.sScrollIndex++;
 
 		EnableButton( iEditorButton[ITEMS_LEFTSCROLL] );
-		if( eInfo.sScrollIndex == max( ((eInfo.sNumItems+1)/2)-6, 0) )
+		if( eInfo.sScrollIndex == (std::max)( ((eInfo.sNumItems+1)/2)-6, 0) )
 			DisableButton( iEditorButton[ITEMS_RIGHTSCROLL] );
 #else
 		ScrollEditorItemsInfo(TRUE);

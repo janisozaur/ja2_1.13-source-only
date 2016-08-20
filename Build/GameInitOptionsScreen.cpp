@@ -633,7 +633,7 @@ UINT32	GameInitOptionsScreenInit( void )
 
 	// Max. IMP Characters
 	UINT8 maxIMPCharacterCount = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_MAX_IMP_CHARACTERS, 1);
-	gGameOptions.ubMaxIMPCharacters = min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( max( 1, maxIMPCharacterCount) ));
+	gGameOptions.ubMaxIMPCharacters = (std::min)( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( (std::max)( 1, maxIMPCharacterCount) ));
 
 	// Progress Speed of Item Choices (Default: Normal)
 	gGameOptions.ubProgressSpeedOfItemsChoices =  (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_PROGRESS_SPEED_OF_ITEM_CHOICES, ITEM_PROGRESS_NORMAL);
@@ -840,7 +840,7 @@ BOOLEAN		EnterGIOScreen()
 	MSYS_SetBtnUserData(giGIODifficultyButton[0],0, 0 );
 	MSYS_SetBtnUserData(giGIODifficultyButton[1],0, 1 );
 
-	iCurrentDifficulty = max( 0, gGameOptions.ubDifficultyLevel - 1);
+	iCurrentDifficulty = (std::max)( 0, gGameOptions.ubDifficultyLevel - 1);
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// MAX IMP NUMBER SETTING
@@ -3043,7 +3043,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	gGameOptions.ubGameStyle = FALSE;
 	gGameUBOptions.fRandomManuelText = GetCurrentTextStyleButtonSetting();
 
-	gGameOptions.ubDifficultyLevel = min( MaxDifficultySettingsValues-1, ( max( 1, (iCurrentDifficulty + 1)) ));
+	gGameOptions.ubDifficultyLevel = (std::min)( MaxDifficultySettingsValues-1, ( (std::max)( 1, (iCurrentDifficulty + 1)) ));
 
 	gGameOptions.fTurnTimeLimit = FALSE;
 
@@ -3093,13 +3093,13 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 		gGameExternalOptions.ubGameMaximumNumberOfPlayerMercs = gGameOptions.ubSquadSize;*/
 
 	// SANDRO - added following:
-	gGameOptions.ubMaxIMPCharacters = min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( max( 1, iCurrentIMPNumberSetting) ));
+	gGameOptions.ubMaxIMPCharacters = (std::min)( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( (std::max)( 1, iCurrentIMPNumberSetting) ));
 	gGameOptions.fNewTraitSystem = GetCurrentTraitsOptionButtonSetting();
 
 	gGameUBOptions.fTexAndJohn = GetCurrentTexAndJohnButtonSetting();
 
 	gGameOptions.fEnemiesDropAllItems = GetCurrentDropAllButtonSetting();
-	gGameOptions.ubProgressSpeedOfItemsChoices = min( GIO_PROGRESS_VERY_FAST, iCurrentProgressSetting );
+	gGameOptions.ubProgressSpeedOfItemsChoices = (std::min)( GIO_PROGRESS_VERY_FAST, iCurrentProgressSetting );
 
 	gGameOptions.fInventoryCostsAP = GetCurrentInventoryAPButtonSetting();
 	gGameOptions.fUseNCTH = GetCurrentNCTHButtonSetting();
@@ -3706,7 +3706,7 @@ UINT32	GameInitOptionsScreenInit( void )
 
 	// Max. IMP Characters
 	UINT8 maxIMPCharacterCount = (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_MAX_IMP_CHARACTERS, 1);
-	gGameOptions.ubMaxIMPCharacters = min( (gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( max( 1, maxIMPCharacterCount) ));
+	gGameOptions.ubMaxIMPCharacters = (std::min)( UINT8(gGameExternalOptions.iIMPMaleCharacterCount + gGameExternalOptions.iIMPFemaleCharacterCount), ( (std::max)( UINT8(1), maxIMPCharacterCount) ));
 
 	// Progress Speed of Item Choices (Default: Normal)
 	gGameOptions.ubProgressSpeedOfItemsChoices =  (UINT8)props.getIntProperty(JA2SP_INI_INITIAL_SECTION, JA2SP_PROGRESS_SPEED_OF_ITEM_CHOICES, ITEM_PROGRESS_NORMAL);
@@ -3911,7 +3911,7 @@ BOOLEAN		EnterGIOScreen()
 	MSYS_SetBtnUserData(giGIODifficultyButton[0],0, 0 );
 	MSYS_SetBtnUserData(giGIODifficultyButton[1],0, 1 );
 
-	iCurrentDifficulty = max( 0, gGameOptions.ubDifficultyLevel - 1);
+	iCurrentDifficulty = (std::max)( 0, gGameOptions.ubDifficultyLevel - 1);
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// MAX IMP NUMBER SETTING
@@ -6061,7 +6061,7 @@ void DoneFadeOutForExitGameInitOptionScreen( void )
 	gGameOptions.fGunNut = GetCurrentGunButtonSetting();
 	gGameOptions.ubGameStyle = GetCurrentGameStyleButtonSetting();
 
-	gGameOptions.ubDifficultyLevel = (std::min)( MaxDifficultySettingsValues, (UINT8)( (std::max)( 1, (iCurrentDifficulty + 1)) ));
+	gGameOptions.ubDifficultyLevel = (std::min)( MaxDifficultySettingsValues, (UINT8)( (std::max)( (UINT8)1, (UINT8)(iCurrentDifficulty + 1)) ));
 
 	gGameOptions.fTurnTimeLimit = FALSE;
 

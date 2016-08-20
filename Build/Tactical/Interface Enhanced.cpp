@@ -8028,19 +8028,19 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				// pistols and revolvers
 				if( Weapon[ gpItemDescObject->usItem ].ubWeaponType == GUN_PISTOL || Weapon[ gpItemDescObject->usItem ].ubWeaponType == GUN_M_PISTOL )
 					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
-										* max(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
+										* (std::max)(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0f + 0.5f );
 				// shotguns
 				else if( Weapon[ gpItemDescObject->usItem ].ubWeaponType == GUN_SHOTGUN && Weapon[gpItemDescObject->usItem].swapClips != 1 )
 					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
-										* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
+										* (std::max)(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0 + 0.5f );
 				// ambidextrous reload bullets
 				else if( Weapon[gpItemDescObject->usItem].swapClips != 1 )
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * max( 0,(100 - gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * (std::max)( 0,(100 - gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
 				// ambidextrous reload magazines
 				else
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * max( 0,(100 - gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * (std::max)( 0,(100 - gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
 			}
 
 			// Get base Reload Cost
@@ -8073,19 +8073,19 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 					// pistols and revolvers
 					if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_PISTOL || Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_M_PISTOL )
 						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost
-											* max(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
+											* (std::max)(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
 											- gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0f + 0.5f );
 					// shotguns
 					else if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_SHOTGUN && Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
 						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost
-											* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
+											* (std::max)(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
 											- gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0 + 0.5f );
 					// ambidextrous reload bullets
 					else if( Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
-						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost * max( 0,(100 - gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
+						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost * (std::max)( 0,(100 - gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
 					// ambidextrous reload magazines
 					else
-						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost * max( 0,(100 - gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
+						iComparedFinalReloadAPCost = (INT16)( (FLOAT)iComparedFinalReloadAPCost * (std::max)( 0,(100 - gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
 				}
 
 				// Get base Reload Cost
@@ -8122,19 +8122,19 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				// pistols and revolvers
 				if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_PISTOL || Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_M_PISTOL )
 					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
-										* max(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
+										* (std::max)(0,( 100 - gSkillTraitValues.ubGSRealoadSpeedHandgunsBonus * NUM_SKILL_TRAITS( gpItemDescSoldier, GUNSLINGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0f + 0.5f );
 				// shotguns
 				else if( Weapon[ gpComparedItemDescObject->usItem ].ubWeaponType == GUN_SHOTGUN && Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
 					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost
-										* max(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
+										* (std::max)(0,(100 - gSkillTraitValues.ubRAReloadSpeedShotgunsManual * NUM_SKILL_TRAITS( gpItemDescSoldier, RANGER_NT )
 										- gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT ) ) ) / 100.0 + 0.5f );
 				// ambidextrous reload bullets
 				else if( Weapon[gpComparedItemDescObject->usItem].swapClips != 1 )
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * max( 0,(100 - gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * (std::max)( 0,(100 - gSkillTraitValues.ubAMReloadSpeedLoose * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
 				// ambidextrous reload magazines
 				else
-					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * max( 0,(100 - gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
+					iFinalReloadAPCost = (INT16)( (FLOAT)iFinalReloadAPCost * (std::max)( 0,(100 - gSkillTraitValues.ubAMReloadSpeedMagazines * NUM_SKILL_TRAITS( gpItemDescSoldier, AMBIDEXTROUS_NT )) )/100 + 0.5);
 			}
 
 				// Get base Reload Cost
@@ -8467,7 +8467,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				if(gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier)
 				{
 					iFinalBurstValue = GetBurstToHitBonus(gpItemDescObject) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
-					iFinalBurstValue = max(0, (iBurstValue * (100 - iFinalBurstValue))/100 );
+					iFinalBurstValue = (std::max)(0, (iBurstValue * (100 - iFinalBurstValue))/100 );
 				}
 				else
 				{
@@ -8497,7 +8497,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 					if(gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier)
 					{
 						iComparedFinalBurstValue = GetBurstToHitBonus(gpComparedItemDescObject) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
-						iComparedFinalBurstValue = max(0, (iComparedBurstValue * (100 - iComparedFinalBurstValue))/100 );
+						iComparedFinalBurstValue = (std::max)(0, (iComparedBurstValue * (100 - iComparedFinalBurstValue))/100 );
 					}
 					else
 					{
@@ -8525,7 +8525,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				if(gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier)
 				{
 					iFinalBurstValue = GetBurstToHitBonus(gpComparedItemDescObject) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
-					iFinalBurstValue = max(0, (iBurstValue * (100 - iFinalBurstValue))/100 );
+					iFinalBurstValue = (std::max)(0, (iBurstValue * (100 - iFinalBurstValue))/100 );
 				}
 				else
 				{
@@ -8673,7 +8673,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			if(gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier)
 			{
 				iFinalAutoValue = GetAutoToHitBonus(gpItemDescObject) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
-				iFinalAutoValue = max(0, (iAutoValue * (100 - iFinalAutoValue))/100 );
+				iFinalAutoValue = (std::max)(0, (iAutoValue * (100 - iFinalAutoValue))/100 );
 			}
 			else
 			{
@@ -8704,7 +8704,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 				if(gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier)
 				{
 					iComparedFinalAutoValue = GetAutoToHitBonus(gpComparedItemDescObject) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
-					iComparedFinalAutoValue = max(0, (iComparedAutoValue * (100 - iComparedFinalAutoValue))/100 );
+					iComparedFinalAutoValue = (std::max)(0, (iComparedAutoValue * (100 - iComparedFinalAutoValue))/100 );
 				}
 				else
 				{
@@ -8739,7 +8739,7 @@ void DrawWeaponValues( OBJECTTYPE * gpItemDescObject )
 			if(gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier)
 			{
 				iFinalAutoValue = GetAutoToHitBonus(gpComparedItemDescObject) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
-				iFinalAutoValue = max(0, (iAutoValue * (100 - iFinalAutoValue))/100 );
+				iFinalAutoValue = (std::max)(0, (iAutoValue * (100 - iFinalAutoValue))/100 );
 			}
 			else
 			{
@@ -13868,26 +13868,26 @@ void DrawAdvancedValues( OBJECTTYPE *gpItemDescObject )
 			{
 				if (cnt >= sFirstLine && cnt < sLastLine)
 				{
-					iFloatModifier[0] = min( 1.0f, iFloatModifier[0] / OVERHEATING_MAX_TEMPERATURE );//FoodCondition: fresh=1.0 poisoned=0.0
+					iFloatModifier[0] = (std::min)( 1.0f, iFloatModifier[0] / OVERHEATING_MAX_TEMPERATURE );//FoodCondition: fresh=1.0 poisoned=0.0
 					sTop = gItemDescAdvRegions[cnt-sFirstLine][1].sTop;
 					sHeight = gItemDescAdvRegions[cnt-sFirstLine][1].sBottom - sTop;
 					iModifier[0] = 0;
 					//FOOD_BAD_THRESHOLD
 					if ( iFloatModifier[0] < 0.5f )
 					{
-						iModifier[1] = (INT16)( max( Food[fFoodtype].bFoodPoints, Food[fFoodtype].bDrinkPoints ) * (1.0 - iFloatModifier[0]) * 0.025 );//Poison formula coppied from food.cpp
+						iModifier[1] = (INT16)( (std::max)( Food[fFoodtype].bFoodPoints, Food[fFoodtype].bDrinkPoints ) * (1.0 - iFloatModifier[0]) * 0.025 );//Poison formula coppied from food.cpp
 					}
 					else
 						iModifier[1] = 0;
 					iModifier[2] = iModifier[1];
 					if( fComparisonMode )
 					{
-						iComparedFloatModifier[0] = min( 1.0f, iComparedFloatModifier[0] / OVERHEATING_MAX_TEMPERATURE );
+						iComparedFloatModifier[0] = (std::min)( 1.0f, iComparedFloatModifier[0] / OVERHEATING_MAX_TEMPERATURE );
 						iComparedModifier[0] = 0;
 						//FOOD_BAD_THRESHOLD
 						if ( iComparedFloatModifier[0] < 0.5f )
 						{
-							iComparedModifier[1] = (INT16)( max( Food[fComparedFoodtype].bFoodPoints, Food[fComparedFoodtype].bDrinkPoints ) * (1.0 - iComparedFloatModifier[0]) * 0.025 );//Poison formula coppied from food.cpp
+							iComparedModifier[1] = (INT16)( (std::max)( Food[fComparedFoodtype].bFoodPoints, Food[fComparedFoodtype].bDrinkPoints ) * (1.0 - iComparedFloatModifier[0]) * 0.025 );//Poison formula coppied from food.cpp
 						}
 						else
 							iComparedModifier[1] = 0;

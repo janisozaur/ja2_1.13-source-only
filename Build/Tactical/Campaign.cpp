@@ -323,18 +323,18 @@ void ProcessStatChange(MERCPROFILESTRUCT *pProfile, UINT8 ubStat, UINT16 usNumCh
 					case EXPLODEAMT:
 					case MECHANAMT:
 					case LDRAMT:
-						usChance = max(1, (usChance - 10)); // -10% chance to gain the point
+						usChance = (std::max)(1, (usChance - 10)); // -10% chance to gain the point
 						break;
 				}
 			}
 
 			// Buggler: more evolution rate choices
 			if (pProfile->bEvolution == THREEQUARTER_EVOLUTION)
-				usChance = max(1, usChance * 0.75);
+				usChance = (std::max)(UINT16(1), UINT16(usChance * 0.75));
 			else if (pProfile->bEvolution == HALF_EVOLUTION)
-				usChance =  max(1, usChance * 0.5);
+				usChance =  (std::max)(UINT16(1), UINT16(usChance * 0.5));
 			else if (pProfile->bEvolution == ONEQUARTER_EVOLUTION)
-				usChance =  max(1, usChance * 0.25);
+				usChance =  (std::max)(UINT16(1), UINT16(usChance * 0.25));
 
 
 			// maximum possible usChance is 99%
@@ -688,15 +688,15 @@ void ChangeStat( MERCPROFILESTRUCT *pProfile, SOLDIERTYPE *pSoldier, UINT8 ubSta
 
 				if (pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ] > 0)
 				{
-					pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ] = max( 0, (pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ] - ptstolower));
+					pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ] = (std::max)( 0, (pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ] - ptstolower));
 
 					ptstolower -= oldctrpts - pSoldier->ubCriticalStatDamage[ bDamagedStatToRaise ];
 				}
 
 				if ( bDamagedStatToRaise == DAMAGED_STAT_STRENGTH && pSoldier->usStarveDamageStrength > 0 )
-					pSoldier->usStarveDamageStrength = max(0, pSoldier->usStarveDamageStrength - ptstolower);
+					pSoldier->usStarveDamageStrength = (std::max)(0, pSoldier->usStarveDamageStrength - ptstolower);
 				else if ( bDamagedStatToRaise == DAMAGED_STAT_HEALTH && pSoldier->usStarveDamageHealth > 0 )
-					pSoldier->usStarveDamageHealth = max(0, pSoldier->usStarveDamageHealth - ptstolower);
+					pSoldier->usStarveDamageHealth = (std::max)(0, pSoldier->usStarveDamageHealth - ptstolower);
 			}
 
 			// if it's a level gain, or sometimes for other stats

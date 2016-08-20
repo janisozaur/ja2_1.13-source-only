@@ -1565,7 +1565,7 @@ void BeginLoadScreen( void )
 			{
 				uiCurrTime = GetJA2Clock( );
 				iPercentage = (uiCurrTime - uiStartTime) * 100 / uiTimeRange;
-				iPercentage = min( iPercentage, 100 );
+				iPercentage = (std::min)( iPercentage, 100 );
 
 				//Factor the percentage so that it is modified by a gravity falling acceleration effect.
 				iFactor = (iPercentage - 50) * 2;
@@ -1942,14 +1942,14 @@ void AddTownWorkers( INT8 bTownId, INT16 asAdd )
 
 				if ( asAdd > 0 )
 				{
-					UINT16 add = min( asAdd, SectorExternalData[sector][0].maxworkers - pSectorInfo->usWorkers );
+					UINT16 add = (std::min)( UINT16(asAdd), UINT16(SectorExternalData[sector][0].maxworkers - pSectorInfo->usWorkers ));
 
 					asAdd -= add;
 					pSectorInfo->usWorkers += add;
 				}
 				else if ( asAdd < 0 )
 				{
-					UINT16 remove = min( -asAdd, pSectorInfo->usWorkers );
+					UINT16 remove = (std::min)( UINT16(-asAdd), UINT16(pSectorInfo->usWorkers) );
 
 					asAdd += remove;
 					pSectorInfo->usWorkers -= remove;

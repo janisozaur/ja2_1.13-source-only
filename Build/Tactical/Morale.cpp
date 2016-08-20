@@ -199,7 +199,7 @@ INT8 GetMoraleModifier( SOLDIERTYPE * pSoldier )
 	}
 
 	// Flugente: morale modifiers
-	morale = max( morale, morale * pSoldier->GetMoraleModifier( ) );
+	morale = (std::max)( morale, INT8(morale * pSoldier->GetMoraleModifier( )) );
 
 	return morale;
 }
@@ -422,7 +422,7 @@ void RefreshSoldierMorale( SOLDIERTYPE * pSoldier )
 		FoodMaxMoraleModifiy(pSoldier, &ubMaxMorale);
 
 	// Flugente: max morale can be lowered
-	iActualMorale = min(iActualMorale, pSoldier->GetMoraleThreshold() );
+	iActualMorale = (std::min)(iActualMorale, INT32(pSoldier->GetMoraleThreshold()) );
 
 	if (ubMaxMorale > 0 && iActualMorale > ubMaxMorale)
 	{
@@ -1588,7 +1588,7 @@ void RememberSnitchableEvent( UINT8 ubTargetProfile, UINT8 ubSecondaryTargetProf
 			{
 				sSnitchingChance /= 2;
 			}
-			sSnitchingChance = max( 0, sSnitchingChance );
+			sSnitchingChance = (std::max)( INT16(0), sSnitchingChance );
 			if ( Random( 100 ) < (UINT8)sSnitchingChance )
 			{
 				//information gathered succesfully, remember event to report it later

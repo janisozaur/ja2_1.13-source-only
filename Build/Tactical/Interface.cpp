@@ -2890,7 +2890,7 @@ BOOLEAN DrawCTHIndicator()
 			UINT32 uiBulletsLeft = pSoldier->inv[ pSoldier->ubAttackingHand ][0]->data.gun.ubGunShotsLeft;
 			if (pSoldier->IsValidSecondHandBurst())
 			{
-				uiBulletsLeft = min( (pSoldier->inv[ SECONDHANDPOS ][0]->data.gun.ubGunShotsLeft), uiBulletsLeft );
+				uiBulletsLeft = (std::min)( UINT32(pSoldier->inv[ SECONDHANDPOS ][0]->data.gun.ubGunShotsLeft), uiBulletsLeft );
 			}
 
 			UINT32 uiCurBullet = uiBulletsLeft;

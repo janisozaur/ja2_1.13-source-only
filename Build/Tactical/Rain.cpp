@@ -397,8 +397,8 @@ UINT16 GetDropColor()
 {
 	UINT32 uiRGBPart = 32 + ( 15 - GetTimeOfDayAmbientLightLevel() ) * 8;
 
-	uiRGBPart = max( 0, uiRGBPart );
-	uiRGBPart = min( 255, uiRGBPart );
+	uiRGBPart = (std::max)( UINT32(0), uiRGBPart );
+	uiRGBPart = (std::min)( UINT32(255), uiRGBPart );
 
 	UINT32 red	 = uiRGBPart;
 	UINT32 green = uiRGBPart;
@@ -552,18 +552,18 @@ void UpdateRainDropsProperities()
 		break;
 	}
 
-	fpCurrDropAngleOfFalling = max( fpMinDropAngleOfFalling, fpCurrDropAngleOfFalling );
-	fpCurrDropAngleOfFalling = min( fpMaxDropAngleOfFalling, fpCurrDropAngleOfFalling );
+	fpCurrDropAngleOfFalling = (std::max)( fpMinDropAngleOfFalling, fpCurrDropAngleOfFalling );
+	fpCurrDropAngleOfFalling = (std::min)( fpMaxDropAngleOfFalling, fpCurrDropAngleOfFalling );
 
 	fpCurrDropLength += Random( (UINT32)(1000 * DROP_LENGTH_CHANGE_RATE * 2 )) / 1000.0f - DROP_LENGTH_CHANGE_RATE;
 
-	fpCurrDropLength = max( fpMinDropLength, fpCurrDropLength );
-	fpCurrDropLength = min( fpMaxDropLength, fpCurrDropLength );
+	fpCurrDropLength = (std::max)( fpMinDropLength, fpCurrDropLength );
+	fpCurrDropLength = (std::min)( fpMaxDropLength, fpCurrDropLength );
 
 	fpCurrDropSpeed += Random( (UINT32)(1000 * DROP_SPEED_CHANGE_RATE * 2 )) / 1000.0f - DROP_SPEED_CHANGE_RATE;
 
-	fpCurrDropSpeed = max( fpMinDropSpeed, fpCurrDropSpeed );
-	fpCurrDropSpeed = min( fpMaxDropSpeed, fpCurrDropSpeed );
+	fpCurrDropSpeed = (std::max)( fpMinDropSpeed, fpCurrDropSpeed );
+	fpCurrDropSpeed = (std::min)( fpMaxDropSpeed, fpCurrDropSpeed );
 }
 
 void RandomizeRainDropsPosition()

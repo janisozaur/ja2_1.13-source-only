@@ -1027,10 +1027,10 @@ UINT8 GetCurrentSuitabilityForItem( INT8 bArmsDealer, UINT16 usItemIndex, BOOLEA
 	if (bArmsDealer >= 0) {
 		ubMinCoolness += armsDealerInfo[bArmsDealer].addToCoolness;
 		ubMaxCoolness += armsDealerInfo[bArmsDealer].addToCoolness;
-		ubMinCoolness = max( armsDealerInfo[bArmsDealer].minCoolness, min( 9, ubMinCoolness ) );
+		ubMinCoolness = (std::max)( armsDealerInfo[bArmsDealer].minCoolness, (std::min)( unsigned int(9), ubMinCoolness ) );
 		// silversurfer: max coolness should never be lower than min coolness!
-		//ubMaxCoolness = max( 2, min( armsDealerInfo[bArmsDealer].maxCoolness, ubMaxCoolness ) );
-		ubMaxCoolness = max( (ubMinCoolness + 1), min( armsDealerInfo[bArmsDealer].maxCoolness, ubMaxCoolness ) );
+		//ubMaxCoolness = (std::max)( 2, (std::min)( armsDealerInfo[bArmsDealer].maxCoolness, ubMaxCoolness ) );
+		ubMaxCoolness = (std::max)( (ubMinCoolness + 1), (std::min)( armsDealerInfo[bArmsDealer].maxCoolness, ubMaxCoolness ) );
 	}
 	/*
 	if (bArmsDealer == ARMS_DEALER_TONY)
@@ -1059,8 +1059,8 @@ UINT8 GetCurrentSuitabilityForItem( INT8 bArmsDealer, UINT16 usItemIndex, BOOLEA
 	}
     */
 
-	ubMinCoolness = max( 1, min( 9, ubMinCoolness ) );
-	ubMaxCoolness = max( 2, min( 10, ubMaxCoolness ) );
+	ubMinCoolness = (std::max)( unsigned int(1), (std::min)( unsigned int(9), ubMinCoolness ) );
+	ubMaxCoolness = (std::max)( unsigned int(2), (std::min)( unsigned int(10), ubMaxCoolness ) );
 
 	if ( bArmsDealer == bobbyRaysID )
 	{
@@ -1162,7 +1162,7 @@ UINT8 ChanceOfItemTransaction( INT8 bArmsDealer, UINT16 usItemIndex, BOOLEAN fDe
 
 	// Madd
 	if ( !fDealerIsSelling && fBobbyRay )
-	    ubChance = min(100,gGameOptions.ubBobbyRayQuality * ubChance);
+	    ubChance = (std::min)(100,gGameOptions.ubBobbyRayQuality * ubChance);
 
 	// if there's any uncertainty
 	if ((ubChance > 0) && (ubChance < 100))

@@ -189,8 +189,8 @@ SectorNameEndElementHandle(void *userData, const XML_Char *name)
 					SectorExternalData[ubSectorId][2].usCurfewValue = pData->sectordata.usCurfewValue;
 					SectorExternalData[ubSectorId][3].usCurfewValue = pData->sectordata.usCurfewValue;
 
-					INT8 radioscanmod = max( -3, pData->sectordata.sRadioScanModifier );
-					radioscanmod = min( 3, pData->sectordata.sRadioScanModifier );
+					INT8 radioscanmod = (std::max)( INT8(-3), pData->sectordata.sRadioScanModifier );
+					radioscanmod = (std::min)( INT8(3), pData->sectordata.sRadioScanModifier );
 					SectorExternalData[ubSectorId][0].sRadioScanModifier = radioscanmod;
 					SectorExternalData[ubSectorId][1].sRadioScanModifier = radioscanmod;
 					SectorExternalData[ubSectorId][2].sRadioScanModifier = radioscanmod;
@@ -351,27 +351,27 @@ SectorNameEndElementHandle(void *userData, const XML_Char *name)
 		else if ( strcmp( name, "rainchance" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->sectordata.rainchance = min( 100, (UINT8)atoi( pData->szCharData ) );
+			pData->sectordata.rainchance = (std::min)( UINT8(100), (UINT8)atoi( pData->szCharData ) );
 		}
 		else if ( strcmp( name, "sandstormchance" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->sectordata.sandstormchance = min( 100, (UINT8)atoi( pData->szCharData ) );
+			pData->sectordata.sandstormchance = (std::min)( UINT8(100), (UINT8)atoi( pData->szCharData ) );
 		}
 		else if ( strcmp( name, "snowchance" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->sectordata.snowchance = min( 100, (UINT8)atoi( pData->szCharData ) );
+			pData->sectordata.snowchance = (std::min)( UINT8(100), (UINT8)atoi( pData->szCharData ) );
 		}
 		else if ( strcmp( name, "snakechance" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->sectordata.snakechance = min( 100, (UINT8)atoi( pData->szCharData ) );
+			pData->sectordata.snakechance = (std::min)( UINT8(100), (UINT8)atoi( pData->szCharData ) );
 		}
 		else if ( strcmp( name, "numsnakes" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->sectordata.numsnakes = min( 20, (UINT8)atoi( pData->szCharData ) );
+			pData->sectordata.numsnakes = (std::min)( UINT8(20), (UINT8)atoi( pData->szCharData ) );
 		}
 		else if ( strcmp( name, "maxworkers" ) == 0 )
 		{

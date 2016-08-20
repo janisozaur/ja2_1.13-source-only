@@ -1044,13 +1044,13 @@ UINT16 CalculateHelicopterRepairCost( BOOLEAN fSeriousRepair )
 	{
 		if( fSeriousRepair )
 		{
-			return min( gHelicopterSettings.usHelicopterSeriousRepairCost + gHelicopterSettings.usHelicopterSeriousCostIncreaseAfterBasicRepair * gubHelicopterBasicRepairsSoFar +
-			+ gHelicopterSettings.usHelicopterSeriousCostIncreaseAfterSeriousRepair * gubHelicopterSeriousRepairsSoFar, gHelicopterSettings.usHelicopterSeriousRepairCostMax );
+			return (std::min)( UINT16(gHelicopterSettings.usHelicopterSeriousRepairCost + gHelicopterSettings.usHelicopterSeriousCostIncreaseAfterBasicRepair * gubHelicopterBasicRepairsSoFar +
+			+ gHelicopterSettings.usHelicopterSeriousCostIncreaseAfterSeriousRepair * gubHelicopterSeriousRepairsSoFar), gHelicopterSettings.usHelicopterSeriousRepairCostMax );
 		}
 		else
 		{
-			return min( gHelicopterSettings.usHelicopterBasicRepairCost + gHelicopterSettings.usHelicopterBasicCostIncreaseAfterBasicRepair * gubHelicopterBasicRepairsSoFar +
-			+ gHelicopterSettings.usHelicopterBasicCostIncreaseAfterSeriousRepair * gubHelicopterSeriousRepairsSoFar, gHelicopterSettings.usHelicopterBasicRepairCostMax );
+			return (std::min)( UINT16(gHelicopterSettings.usHelicopterBasicRepairCost + gHelicopterSettings.usHelicopterBasicCostIncreaseAfterBasicRepair * gubHelicopterBasicRepairsSoFar +
+			+ gHelicopterSettings.usHelicopterBasicCostIncreaseAfterSeriousRepair * gubHelicopterSeriousRepairsSoFar), gHelicopterSettings.usHelicopterBasicRepairCostMax );
 		}
 
 	}
@@ -1058,11 +1058,11 @@ UINT16 CalculateHelicopterRepairCost( BOOLEAN fSeriousRepair )
 	{
 		if( fSeriousRepair )
 		{
-			return min( gHelicopterSettings.usHelicopterSeriousRepairCost, gHelicopterSettings.usHelicopterSeriousRepairCostMax );
+			return (std::min)( gHelicopterSettings.usHelicopterSeriousRepairCost, gHelicopterSettings.usHelicopterSeriousRepairCostMax );
 		}
 		else
 		{
-			return min( gHelicopterSettings.usHelicopterBasicRepairCost, gHelicopterSettings.usHelicopterBasicRepairCostMax );
+			return (std::min)( gHelicopterSettings.usHelicopterBasicRepairCost, gHelicopterSettings.usHelicopterBasicRepairCostMax );
 		}
 
 	}
@@ -1073,14 +1073,14 @@ void StartHelicopterRepair( BOOLEAN fInStrategic, BOOLEAN fCalledByGivingMoney )
 	MoveAllInHelicopterToFootMovementGroup( );
 	if( CheckFact( FACT_HELI_DAMAGED_CAN_START_REPAIR, 0 ) == TRUE )
 	{
-		gubHelicopterHoursToRepair = min( max( 1, ( gHelicopterSettings.ubHelicopterBasicRepairTime - gHelicopterSettings.ubHelicopterBasicRepairTimeVariation + 2*Random(gHelicopterSettings.ubHelicopterBasicRepairTimeVariation) ) ), 255 );
+		gubHelicopterHoursToRepair = (std::min)( (std::max)( UINT32(1), ( gHelicopterSettings.ubHelicopterBasicRepairTime - gHelicopterSettings.ubHelicopterBasicRepairTimeVariation + 2*Random(gHelicopterSettings.ubHelicopterBasicRepairTimeVariation) ) ), UINT32(255) );
 		AddTransactionToPlayersBook( PAYMENT_TO_NPC, WALDO, GetWorldTotalMin(), -CalculateHelicopterRepairCost(FALSE) );
 		AddHistoryToPlayersLog( HISTORY_HELICOPTER_REPAIR_STARTED, gHelicopterSettings.ubHelicopterBasicRepairTime, GetWorldTotalMin(), pVehicleList[ iHelicopterVehicleId ].sSectorX, pVehicleList[ iHelicopterVehicleId ].sSectorY );
 		gubHelicopterBasicRepairsSoFar++;
 	}
 	else if( CheckFact( FACT_HELI_SERIOUSLY_DAMAGED_CAN_START_REPAIR, 0 ) == TRUE )
 	{
-		gubHelicopterHoursToRepair = min( max( 1, ( gHelicopterSettings.ubHelicopterSeriousRepairTime - gHelicopterSettings.ubHelicopterSeriousRepairTimeVariation + 2*Random(gHelicopterSettings.ubHelicopterSeriousRepairTimeVariation) ) ), 255 );
+		gubHelicopterHoursToRepair = (std::min)( (std::max)( UINT32(1), ( gHelicopterSettings.ubHelicopterSeriousRepairTime - gHelicopterSettings.ubHelicopterSeriousRepairTimeVariation + 2*Random(gHelicopterSettings.ubHelicopterSeriousRepairTimeVariation) ) ), UINT32(255) );
 		AddTransactionToPlayersBook( PAYMENT_TO_NPC, WALDO, GetWorldTotalMin(), -CalculateHelicopterRepairCost(TRUE) );
 		AddHistoryToPlayersLog( HISTORY_HELICOPTER_REPAIR_STARTED, gHelicopterSettings.ubHelicopterSeriousRepairTime, GetWorldTotalMin(), pVehicleList[ iHelicopterVehicleId ].sSectorX, pVehicleList[ iHelicopterVehicleId ].sSectorY );
 		gubHelicopterSeriousRepairsSoFar++;
@@ -3010,7 +3010,7 @@ void PayOffSkyriderDebtIfAny( )
 	// if we owe him anything, and have any money
 	if ( ( iAmountOwed > 0 ) && ( LaptopSaveInfo.iCurrentBalance > 0 ) )
 	{
-		iPayAmount = min( iAmountOwed, LaptopSaveInfo.iCurrentBalance );
+		iPayAmount = (std::min)( iAmountOwed, LaptopSaveInfo.iCurrentBalance );
 
 		// pay the man what we can
 		gMercProfiles[ SKYRIDER ].iBalance += iPayAmount;

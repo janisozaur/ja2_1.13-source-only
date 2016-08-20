@@ -1006,7 +1006,7 @@ INT32 EffectiveArmour( OBJECTTYPE * pObj )
 			iValue += iValue2;
 		}
 	}
-	return( max(iValue,0) );
+	return( (std::max)(iValue,0) );
 }
 
 //zwwooooo - IoV: Lbe can be bulletproof after adding bulletproof plate into it.(Like CRIAS, MBSS, HSGI WASATCH...)
@@ -1032,7 +1032,7 @@ INT32 EffectiveArmourLBE( OBJECTTYPE * pObj )
 			iValue += iValue2;
 		}
 	}
-	return( max(iValue,0) );
+	return( (std::max)(iValue,0) );
 }
 
 //zwwooooo - IoV: Lbe can be bulletproof after adding bulletproof plate into it.(Like CRIAS, MBSS, HSGI WASATCH...)
@@ -1058,7 +1058,7 @@ INT32 ExplosiveEffectiveArmourLBE( OBJECTTYPE * pObj )
 			iValue += iValue2;
 		}
 	}
-	return( max(iValue,0) );
+	return( (std::max)(iValue,0) );
 }
 
 INT32 ArmourPercent( SOLDIERTYPE * pSoldier )
@@ -1184,7 +1184,7 @@ INT32 ExplosiveEffectiveArmour( OBJECTTYPE * pObj )
 			iValue += iValue2;
 		}
 	}
-	return( max(iValue,1) );
+	return( (std::max)(iValue,1) );
 }
 
 INT8 ArmourVersusExplosivesPercent( SOLDIERTYPE * pSoldier )
@@ -1301,7 +1301,7 @@ BOOLEAN CheckForGunJam( SOLDIERTYPE * pSoldier )
 
 					int overheatjamfactor = (int)(100* overheatjampercentage);			// We need an integer value and rough percentages
 
-					overheatjamfactor = max(0, overheatjamfactor - 100);				// If we haven't reached the OverheatJamThreshold, no increased chance of jamming because of overheating
+					overheatjamfactor = (std::max)(0, overheatjamfactor - 100);				// If we haven't reached the OverheatJamThreshold, no increased chance of jamming because of overheating
 
 					invertedBaseJamChance -= overheatjamfactor;							// lower invertedBaseJamChance	(thereby increasing jamChance later on)
 				}
@@ -1953,11 +1953,11 @@ BOOLEAN UseGunNCTH( SOLDIERTYPE *pSoldier , INT32 sTargetGridNo )
 							UINT16 usBaseChance = gGameCTHConstants.BASIC_RELIABILITY_ODDS;
 							FLOAT dReliabilityRatio = 3.0f * ((FLOAT)usBaseChance / (FLOAT)gItemSettings.usBasicDeprecateChance); // Compare original odds to new odds.
 							uiDepreciateTest = usBaseChance + (INT16)( dReliabilityRatio * (Item[ iter->usItem ].bReliability + ammoReliability) );
-							uiDepreciateTest = max(0, uiDepreciateTest);
+							uiDepreciateTest = (std::max)(UINT32(0), uiDepreciateTest);
 						}
 						else
 						{
-							uiDepreciateTest = max( 0, gItemSettings.usBasicDeprecateChance + 3 * (Item[iter->usItem].bReliability + ammoReliability) );
+							uiDepreciateTest = (std::max)( 0, gItemSettings.usBasicDeprecateChance + 3 * (Item[iter->usItem].bReliability + ammoReliability) );
 						}
 						if ( !PreRandom( uiDepreciateTest ) && ( (*pObjAttHand)[0]->data.objectStatus > 1) )
 						{
@@ -2372,11 +2372,11 @@ BOOLEAN UseGunNCTH( SOLDIERTYPE *pSoldier , INT32 sTargetGridNo )
 		UINT16 usBaseChance = gGameCTHConstants.BASIC_RELIABILITY_ODDS;
 		FLOAT dReliabilityRatio = 3.0f * ((FLOAT)usBaseChance / (FLOAT)gItemSettings.usBasicDeprecateChance); // Compare original odds to new odds.
 		uiDepreciateTest = usBaseChance + (INT16)( dReliabilityRatio * GetReliability( &(pSoldier->inv[pSoldier->ubAttackingHand]) ) - iOverheatReliabilityMalus);
-		uiDepreciateTest = max(0, uiDepreciateTest);
+		uiDepreciateTest = (std::max)(UINT32(0), uiDepreciateTest);
 	}
 	else
 	{
-		uiDepreciateTest = max( gItemSettings.usBasicDeprecateChance + 3 * GetReliability( pObjAttHand ) - iOverheatReliabilityMalus, 0 );
+		uiDepreciateTest = (std::max)( gItemSettings.usBasicDeprecateChance + 3 * GetReliability( pObjAttHand ) - iOverheatReliabilityMalus, 0 );
 	}
 	if ( !PreRandom( uiDepreciateTest ) && ( (*pObjAttHand)[0]->data.objectStatus > 1) )
 	{
@@ -3033,11 +3033,11 @@ BOOLEAN UseGun( SOLDIERTYPE *pSoldier , INT32 sTargetGridNo )
 		UINT16 usBaseChance = gGameCTHConstants.BASIC_RELIABILITY_ODDS;
 		FLOAT dReliabilityRatio = 3.0f * ((FLOAT)usBaseChance / (FLOAT)gItemSettings.usBasicDeprecateChance); // Compare original odds to new odds.
 		uiDepreciateTest = usBaseChance + (INT16)( dReliabilityRatio * GetReliability( &(pSoldier->inv[ pSoldier->ubAttackingHand ])) - iOverheatReliabilityMalus);
-		uiDepreciateTest = max(0, uiDepreciateTest);
+		uiDepreciateTest = (std::max)(UINT32(0), uiDepreciateTest);
 	}
 	else
 	{
-		uiDepreciateTest = max( gItemSettings.usBasicDeprecateChance + 3 * (GetReliability( pObjUsed )) - iOverheatReliabilityMalus, 0 );
+		uiDepreciateTest = (std::max)( gItemSettings.usBasicDeprecateChance + 3 * (GetReliability( pObjUsed )) - iOverheatReliabilityMalus, 0 );
 	}
 
 	if ( !PreRandom( uiDepreciateTest ) && ( (*pObjUsed)[0]->data.objectStatus > 1) )
@@ -3177,7 +3177,7 @@ BOOLEAN UseBlade( SOLDIERTYPE *pSoldier , INT32 sTargetGridNo )
 				// Flugente: reduce repair threshold
 				if ( bMaxDrop > 0 && Random(100) < Item[pObj->usItem].usDamageChance )
 				{
-					(*pObj)[0]->data.sRepairThreshold = max((*pObj)[0]->data.objectStatus, (*pObj)[0]->data.sRepairThreshold - 1);
+					(*pObj)[0]->data.sRepairThreshold = (std::max)((*pObj)[0]->data.objectStatus, INT16((*pObj)[0]->data.sRepairThreshold - 1));
 				}
 			}
 
@@ -3610,7 +3610,7 @@ BOOLEAN UseHandToHand( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo, BOOLEAN fStea
 				{
 					if (HAS_SKILL_TRAIT( pSoldier, MARTIAL_ARTS_NT ) && ( gGameOptions.fNewTraitSystem ))
 					{
-						DeductPoints( pSoldier, max( 1, (INT16)((APBPConstants[AP_STEAL_ITEM] *  (100 - gSkillTraitValues.ubMAReducedAPsToSteal * NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ))/ 100) + 0.5)), 200, AFTERACTION_INTERRUPT );
+						DeductPoints( pSoldier, (std::max)( INT16(1), (INT16)((APBPConstants[AP_STEAL_ITEM] *  (100 - gSkillTraitValues.ubMAReducedAPsToSteal * NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ))/ 100) + 0.5)), 200, AFTERACTION_INTERRUPT );
 					}
 					else
 					{
@@ -3627,7 +3627,7 @@ BOOLEAN UseHandToHand( SOLDIERTYPE *pSoldier, INT32 sTargetGridNo, BOOLEAN fStea
 			{
 				if (HAS_SKILL_TRAIT( pSoldier, MARTIAL_ARTS_NT ) && ( gGameOptions.fNewTraitSystem ))
 				{
-					DeductPoints( pSoldier, max( 1, (INT16)((APBPConstants[AP_STEAL_ITEM] *  (100 - gSkillTraitValues.ubMAReducedAPsToSteal * NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ))/ 100) + 0.5)), 0, AFTERACTION_INTERRUPT );
+					DeductPoints( pSoldier, (std::max)( INT16(1), (INT16)((APBPConstants[AP_STEAL_ITEM] *  (100 - gSkillTraitValues.ubMAReducedAPsToSteal * NUM_SKILL_TRAITS( pSoldier, MARTIAL_ARTS_NT ))/ 100) + 0.5)), 0, AFTERACTION_INTERRUPT );
 				}
 				else
 				{
@@ -5576,7 +5576,7 @@ UINT32 CalcNewChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTi
 
 	// Impose global limits.
 	// Flugente: backgrounds
-	fFinalChance = __min(fFinalChance, min(100, gGameExternalOptions.ubMaximumCTH + (UINT8)(pSoldier->GetBackgroundValue(BG_PERC_CTH_MAX))) );
+	fFinalChance = __min(fFinalChance, (std::min)(100, gGameExternalOptions.ubMaximumCTH + (UINT8)(pSoldier->GetBackgroundValue(BG_PERC_CTH_MAX))) );
 	fFinalChance = __max(fFinalChance, gGameExternalOptions.ubMinimumCTH);
 
 
@@ -5691,8 +5691,8 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 	if ( gGameExternalOptions.fWeaponOverheating )
 	{
 		FLOAT overheatjampercentage = GetGunOverheatJamPercentage( pInHand );
-		FLOAT accuracymalus = (FLOAT)((max(1.0, overheatjampercentage) - 1.0) * 0.1);
-		accuracyheatmultiplicator = (FLOAT)max(0.0, 1.0 - accuracymalus);
+		FLOAT accuracymalus = (FLOAT)(((std::max)(1.0f, overheatjampercentage) - 1.0) * 0.1);
+		accuracyheatmultiplicator = (FLOAT)(std::max)(0.0, 1.0 - accuracymalus);
 	}
 
 	iAccRangeMod = (INT32)(iRange * accuracyheatmultiplicator * Weapon[usItemUsed].bAccuracy / 100);
@@ -5793,7 +5793,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		//	iRange instead of iSightRange, then include the unseen penalty.
 		if(iSightRange == 0)
 			iPenalty = (3 * ( NORMAL_RANGE - iRange ) / CELL_X_SIZE) - gGameExternalOptions.iPenaltyShootUnSeen;
-		iPenalty = min(iPenalty, -gGameExternalOptions.iPenaltyShootUnSeen);
+		iPenalty = (std::min)(iPenalty, -gGameExternalOptions.iPenaltyShootUnSeen);
 	}
 	iChance += iPenalty;
 	//CHRISL: Applying the Gear AimBonus (penalty) here, and directly to iChance as a flat penalty, instead of altering iSightRange above.
@@ -6027,7 +6027,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		if(iter->exists() && !IsAttachmentClass(iter->usItem, AC_SCOPE|AC_SIGHT|AC_IRONSIGHT ) && Item[iter->usItem].aimbonus >= gGameExternalOptions.sHighPowerScope && iRange > Item[iter->usItem].minrangeforaimbonus)
 		{
 			iPenalty = (Item[iter->usItem].aimbonus * (iRange - Item[iter->usItem].minrangeforaimbonus)) / 1000;
-			iPenalty = min(AIM_BONUS_PRONE, iPenalty);
+			iPenalty = (std::min)(AIM_BONUS_PRONE, iPenalty);
 			iChance -= iPenalty;
 		}
 	}
@@ -6050,7 +6050,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		if ( ObjList[pSoldier->bScopeMode] != NULL )
 		{
 			iPenalty = (Item[ObjList[pSoldier->bScopeMode]->usItem].aimbonus * (iRange - Item[ObjList[pSoldier->bScopeMode]->usItem].minrangeforaimbonus)) / 1000;
-			iPenalty = min(AIM_BONUS_PRONE, iPenalty);
+			iPenalty = (std::min)(AIM_BONUS_PRONE, iPenalty);
 			iChance -= iPenalty;
 		}
 	}
@@ -6199,7 +6199,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 			iBonus = (INT32)((gGameExternalOptions.ubProneModifierPercentage * moda + (100 - gGameExternalOptions.ubProneModifierPercentage) * modb)/100);
 
 			iPenalty = Weapon[pInHand->usItem].ubBurstPenalty * (pSoldier->bDoBurst - 1) * (gGameExternalOptions.bAimedBurstEnabled?gGameExternalOptions.uAimedBurstPenalty:1);
-			iPenalty = max(0, (iPenalty * (100 - iBonus))/100 );
+			iPenalty = (std::max)(0, (iPenalty * (100 - iBonus))/100 );
 		}
 		else
 		{
@@ -6223,7 +6223,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		{
 			if ( HAS_SKILL_TRAIT( pSoldier, AUTO_WEAPONS_NT ) )
 			{
-				iPenalty = max(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
+				iPenalty = (std::max)(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
 			}
 		}
 		else
@@ -6247,7 +6247,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 			iBonus = (INT32)((gGameExternalOptions.ubProneModifierPercentage * moda + (100 - gGameExternalOptions.ubProneModifierPercentage) * modb)/100);
 
 			iPenalty = Weapon[pInHand->usItem].AutoPenalty * (pSoldier->bDoBurst - 1) * (gGameExternalOptions.bAimedBurstEnabled?gGameExternalOptions.uAimedBurstPenalty:1);
-			iPenalty = max(0, (iPenalty * (100 - iBonus))/100 );
+			iPenalty = (std::max)(0, (iPenalty * (100 - iBonus))/100 );
 		}
 		else
 		{
@@ -6271,7 +6271,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		{
 			if ( HAS_SKILL_TRAIT( pSoldier, AUTO_WEAPONS_NT ) )
 			{
-				iPenalty = max(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
+				iPenalty = (std::max)(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
 			}
 		}
 		else
@@ -6301,10 +6301,10 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		}
 		if ( iTracersFired > 0 ) {
 			if(sTotalAutofirePenalty > 0){
-				INT16 sChanceLimit = min(gGameExternalOptions.ubCTHBumpPerTracer, ((iRange-(gGameExternalOptions.ubMinRangeTracerEffect*CELL_X_SIZE)) / CELL_X_SIZE) * gGameExternalOptions.ubRangeDifficultyAimingWithTracers);
-				sChanceLimit = max(0, sChanceLimit);
+				INT16 sChanceLimit = (std::min)(INT32(gGameExternalOptions.ubCTHBumpPerTracer), ((iRange-(gGameExternalOptions.ubMinRangeTracerEffect*CELL_X_SIZE)) / CELL_X_SIZE) * gGameExternalOptions.ubRangeDifficultyAimingWithTracers);
+				sChanceLimit = (std::max)(INT16(0), sChanceLimit);
 				iBonus = sChanceLimit * iTracersFired;
-				iBonus = min(iBonus, sTotalAutofirePenalty);
+				iBonus = (std::min)(iBonus, INT32(sTotalAutofirePenalty));
 			}
 
 			iChance += iBonus;
@@ -6326,8 +6326,8 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		if ( gGameExternalOptions.fWeaponOverheating )
 		{
 			FLOAT overheatdamagepercentage = GetGunOverheatDamagePercentage( pInHand );
-			FLOAT accuracymalus = (FLOAT)((max(1.0, overheatdamagepercentage) - 1.0) * 0.1);
-			accuracyheatmultiplicator = (FLOAT)max(0.0, 1.0 - accuracymalus);
+			FLOAT accuracymalus = (FLOAT)(((std::max)(1.0f, overheatdamagepercentage) - 1.0) * 0.1);
+			accuracyheatmultiplicator = (FLOAT)(std::max)(0.0, 1.0 - accuracymalus);
 		}
 
 		if ( gGameOptions.fNewTraitSystem )
@@ -6606,7 +6606,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		// iChance = MAXCHANCETOHIT;
 
 		// Flugente: backgrounds
-		iChance =  min(iChance, min(100, gGameExternalOptions.ubMaximumCTH + (UINT8)(pSoldier->GetBackgroundValue(BG_PERC_CTH_MAX))) );
+		iChance =  (std::min)(iChance, (std::min)(100, gGameExternalOptions.ubMaximumCTH + (UINT8)(pSoldier->GetBackgroundValue(BG_PERC_CTH_MAX))) );
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
 
@@ -6991,7 +6991,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		{
 			iBonus = GetBurstToHitBonus(pInHand, gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_PRONE) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
 			iPenalty = Weapon[pInHand->usItem].ubBurstPenalty * (pSoldier->bDoBurst - 1) * (gGameExternalOptions.bAimedBurstEnabled?gGameExternalOptions.uAimedBurstPenalty:1);
-			iPenalty = max(0, (iPenalty * (100 - iBonus))/100 );
+			iPenalty = (std::max)(0, (iPenalty * (100 - iBonus))/100 );
 		}
 		else
 		{
@@ -7007,7 +7007,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		{
 			if ( HAS_SKILL_TRAIT( pSoldier, AUTO_WEAPONS_NT ) )
 			{
-				iPenalty = max(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
+				iPenalty = (std::max)(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
 			}
 		}
 		else
@@ -7029,7 +7029,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		{
 			iBonus = GetAutoToHitBonus(pInHand, gAnimControl[ pSoldier->usAnimState ].ubEndHeight == ANIM_PRONE) * gGameExternalOptions.ubFlatAFTHBtoPrecentMultiplier;
 			iPenalty = Weapon[pInHand->usItem].AutoPenalty * (pSoldier->bDoBurst - 1) * (gGameExternalOptions.bAimedBurstEnabled?gGameExternalOptions.uAimedBurstPenalty:1);
-			iPenalty = max(0, (iPenalty * (100 - iBonus))/100 );
+			iPenalty = (std::max)(0, (iPenalty * (100 - iBonus))/100 );
 		}
 		else
 		{
@@ -7045,7 +7045,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 		{
 			if ( HAS_SKILL_TRAIT( pSoldier, AUTO_WEAPONS_NT ) )
 			{
-				iPenalty = max(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
+				iPenalty = (std::max)(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
 			}
 		}
 		else
@@ -7537,7 +7537,7 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 //			{
 //				if ( HAS_SKILL_TRAIT( pSoldier, AUTO_WEAPONS_NT ) )
 //				{
-//					ubAutoPenaltySinceLastTracer = max(0, ((ubAutoPenaltySinceLastTracer * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
+//					ubAutoPenaltySinceLastTracer = (std::max)(0, ((ubAutoPenaltySinceLastTracer * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
 //				}
 //			}
 //			else
@@ -7558,10 +7558,10 @@ UINT32 CalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTime,
 //				sTotalAutofirePenalty.
 
 			if(sTotalAutofirePenalty > 0){
-				INT16 sChanceLimit = min(gGameExternalOptions.ubCTHBumpPerTracer, ((iRange-(gGameExternalOptions.ubMinRangeTracerEffect*CELL_X_SIZE)) / CELL_X_SIZE) * gGameExternalOptions.ubRangeDifficultyAimingWithTracers);
-				sChanceLimit = max(0, sChanceLimit);
+				INT16 sChanceLimit = (std::min)(gGameExternalOptions.ubCTHBumpPerTracer, ((iRange-(gGameExternalOptions.ubMinRangeTracerEffect*CELL_X_SIZE)) / CELL_X_SIZE) * gGameExternalOptions.ubRangeDifficultyAimingWithTracers);
+				sChanceLimit = (std::max)(0, sChanceLimit);
 				iBonus = sChanceLimit * iTracersFired;
-				iBonus = min(iBonus, sTotalAutofirePenalty);
+				iBonus = (std::min)(iBonus, sTotalAutofirePenalty);
 			}
 
 			//INT16 sChanceLimit = __min(0, sTotalAutofirePenalty+(((iRange-100) / CELL_X_SIZE) * gGameExternalOptions.ubRangeDifficultyAimingWithTracers));
@@ -8039,7 +8039,7 @@ UINT32 AICalcChanceToHitGun(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTim
 			if (gGameCTHConstants.MAX_EFFECTIVE_USE_GRADIENT)
 			{
 				// Just outside range. Reduce considerably!
-				return min(uiChance, (UINT)(dChance - (dMaxChanceReduction * ((d2DDistance - dGunRange) / (dMaxGunRange - dGunRange)))));
+				return (std::min)(uiChance, (UINT)(dChance - (dMaxChanceReduction * ((d2DDistance - dGunRange) / (dMaxGunRange - dGunRange)))));
 			}
 			else
 			{
@@ -8055,7 +8055,7 @@ INT32 CalcBodyImpactReduction( UINT8 ubAmmoType, UINT8 ubHitLocation )
 	// calculate how much bullets are slowed by passing through someone
 	INT32 iReduction = BodyImpactReduction[ubHitLocation];
 
-	iReduction = (INT32)(iReduction * AmmoTypes[ubAmmoType].armourImpactReductionMultiplier / max(1,AmmoTypes[ubAmmoType].armourImpactReductionDivisor));
+	iReduction = (INT32)(iReduction * AmmoTypes[ubAmmoType].armourImpactReductionMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].armourImpactReductionDivisor));
 	//switch (ubAmmoType)
 	//{
 	//	case AMMO_HP:
@@ -8108,7 +8108,7 @@ INT32 ArmourProtection( SOLDIERTYPE * pTarget, UINT16 ubArmourType, INT16 * pbSt
 	}
 
 	// adjust protection of armour due to different ammo types
-	iProtection = (INT32)(iProtection * AmmoTypes[ubAmmoType].armourImpactReductionMultiplier / max(1,AmmoTypes[ubAmmoType].armourImpactReductionDivisor) );
+	iProtection = (INT32)(iProtection * AmmoTypes[ubAmmoType].armourImpactReductionMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].armourImpactReductionDivisor) );
 
 	//switch (ubAmmoType)
 	//{
@@ -8416,7 +8416,7 @@ INT32 BulletImpact( SOLDIERTYPE *pFirer, BULLET *pBullet, SOLDIERTYPE * pTarget,
 	if ( AmmoTypes[ubAmmoType].highExplosive )
 	{
 //		iOrigImpact = AMMO_DAMAGE_ADJUSTMENT_HE( iOrigImpact );
-		iOrigImpact = (INT32)(iOrigImpact * AmmoTypes[ubAmmoType].beforeArmourDamageMultiplier / max(1,AmmoTypes[ubAmmoType].beforeArmourDamageDivisor) );
+		iOrigImpact = (INT32)(iOrigImpact * AmmoTypes[ubAmmoType].beforeArmourDamageMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].beforeArmourDamageDivisor) );
 
 		if ( TANK( pTarget ) )
 		{
@@ -8495,7 +8495,7 @@ INT32 BulletImpact( SOLDIERTYPE *pFirer, BULLET *pBullet, SOLDIERTYPE * pTarget,
 			return( iImpact );
 		}
 
-		iImpact = (INT32)(iImpact * AmmoTypes[ubAmmoType].afterArmourDamageMultiplier / max(1,AmmoTypes[ubAmmoType].afterArmourDamageDivisor) ) ;
+		iImpact = (INT32)(iImpact * AmmoTypes[ubAmmoType].afterArmourDamageMultiplier / (std::max)(1,AmmoTypes[ubAmmoType].afterArmourDamageDivisor) ) ;
 		//if (ubAmmoType == AMMO_HP)
 		//{ // good solid hit with a hollow-point bullet, which got through armour!
 		//	iImpact = AMMO_DAMAGE_ADJUSTMENT_HP( iImpact );
@@ -8720,7 +8720,7 @@ INT32 BulletImpact( SOLDIERTYPE *pFirer, BULLET *pBullet, SOLDIERTYPE * pTarget,
 			{
 				bStatLoss = (INT8) PreRandom( iImpactForCrits / 2 ) + 1;
 				// SANDRO - malicious hit
-				if ( fMaliciousHit && Chance( max( 15, uiCritChance )) && ( ubHitLocation == AIM_SHOT_TORSO || ubHitLocation == AIM_SHOT_LEGS ) &&
+				if ( fMaliciousHit && Chance( (std::max)( UINT32(15), uiCritChance )) && ( ubHitLocation == AIM_SHOT_TORSO || ubHitLocation == AIM_SHOT_LEGS ) &&
 					( sHitBy >= 20 ) && ( pTarget->ubBodyType <= STOCKYMALE ) && ( gAnimControl[ pTarget->usAnimState ].ubHeight != ANIM_PRONE ) )
 				{
 					// no stats to lose, but drain breath a lot
@@ -9258,7 +9258,7 @@ INT32 HTHImpact( SOLDIERTYPE * pSoldier, SOLDIERTYPE * pTarget, INT32 iHitBy, BO
 
 	// Flugente: moved the damage calculation into a separate function
 	BOOLEAN autoresolve = IsAutoResolveActive();
-	iImpact = max( 1, (INT32)(iImpact * (100 - pTarget->GetDamageResistance(autoresolve, FALSE)) / 100 ) );
+	iImpact = (std::max)( 1, (INT32)(iImpact * (100 - pTarget->GetDamageResistance(autoresolve, FALSE)) / 100 ) );
 
 	// Flugente: if the target is a zombie, any melee attack, regardless of hit location, will set the headshot flag. Thus any zombie killed in melee will stay dead (if you play with that option)
 	if ( pTarget->IsZombie() )
@@ -10445,7 +10445,7 @@ UINT32 CalcThrownChanceToHit(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTi
 			if ( Item[ usHandItem ].mortar )
 			{
 				if (HAS_SKILL_TRAIT( pSoldier, HEAVY_WEAPONS_NT ))
-					iChance += (gSkillTraitValues.sCtHModifierMortar * max( 0, ((100 - gSkillTraitValues.ubHWMortarCtHPenaltyReduction * NUM_SKILL_TRAITS( pSoldier, HEAVY_WEAPONS_NT ))/100)));
+					iChance += (gSkillTraitValues.sCtHModifierMortar * (std::max)( 0, ((100 - gSkillTraitValues.ubHWMortarCtHPenaltyReduction * NUM_SKILL_TRAITS( pSoldier, HEAVY_WEAPONS_NT ))/100)));
 				else
 					iChance += gSkillTraitValues.sCtHModifierMortar; // -60% for untrained mercs
 			}
@@ -10494,7 +10494,7 @@ UINT32 CalcThrownChanceToHit(SOLDIERTYPE *pSoldier, INT32 sGridNo, INT16 ubAimTi
 		{
 			if ( HAS_SKILL_TRAIT( pSoldier, AUTO_WEAPONS_NT ) )
 			{
-				iPenalty = max(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
+				iPenalty = (std::max)(0, ((iPenalty * (100 - gSkillTraitValues.ubAWAutoFirePenaltyReduction * NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/100));
 			}
 		}
 		else
@@ -10871,7 +10871,7 @@ BOOLEAN WillExplosiveWeaponFail( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObj )
 		if ( overheatjampercentage > 1.0 )
 			iOverheatMalus = (INT16)floor(5*overheatjampercentage*overheatjampercentage);
 
-		iOverheatMalus = max(0, iOverheatMalus - 1);
+		iOverheatMalus = (std::max)(0, iOverheatMalus - 1);
 	}
 
     if ( (INT8)(PreRandom( 40 ) + PreRandom( 40 ) + iOverheatMalus) > (*pObj)[0]->data.objectStatus )
@@ -10931,8 +10931,8 @@ UINT8 GetDamage ( OBJECTTYPE *pObj )
 
 			ubDamage += GetMeleeDamageBonus(pObj);
 		}
-		//return min(255, (UINT8)( (ubDamage) + ( (double)ubDamage / 100) * gGameExternalOptions.iMeleeDamageModifier ) );
-		return min(255, (UINT8)ubDamage);
+		//return (std::min)(255, (UINT8)( (ubDamage) + ( (double)ubDamage / 100) * gGameExternalOptions.iMeleeDamageModifier ) );
+		return (std::min)(UINT8(255), ubDamage);
 	}
 	else
 	{
@@ -10964,7 +10964,7 @@ UINT8 GetDamage ( OBJECTTYPE *pObj )
 				ubDamage += GetDamageBonus(pObj);
 			}
 		}
-		return min(255, (UINT8)ubDamage );
+		return (std::min)(UINT8(255), ubDamage );
 	}
 }
 
@@ -11339,7 +11339,7 @@ void GunIncreaseHeat( OBJECTTYPE *pObj, SOLDIERTYPE* pSoldier )
 
 		  FLOAT singleshottemperature = GetSingleShotTemperature( pObj );						// ... get temperature rise ...
 
-		  FLOAT newguntemperature = min(guntemperature + singleshottemperature, OVERHEATING_MAX_TEMPERATURE );					// ... calculate new temperature ...
+		  FLOAT newguntemperature = (std::min)(guntemperature + singleshottemperature, OVERHEATING_MAX_TEMPERATURE );					// ... calculate new temperature ...
 
 		  (*pObj)[0]->data.bTemperature = newguntemperature;									// ... apply new temperature
 		}
@@ -11365,7 +11365,7 @@ void GunIncreaseHeat( OBJECTTYPE *pObj, SOLDIERTYPE* pSoldier )
 
 		if ( dirtincreasefactor > 0.0f )									// ... item can get dirtier ...
 		{
-			(*pObj)[0]->data.bDirtLevel = min((*pObj)[0]->data.bDirtLevel + dirtincreasefactor, OVERHEATING_MAX_TEMPERATURE );	// dirt and overheating use the same threshold
+			(*pObj)[0]->data.bDirtLevel = (std::min)((*pObj)[0]->data.bDirtLevel + dirtincreasefactor, OVERHEATING_MAX_TEMPERATURE );	// dirt and overheating use the same threshold
 		}
 	}
 }
@@ -11421,7 +11421,7 @@ FLOAT   GetGunOverheatDamagePercentage( OBJECTTYPE * pObj )
 	FLOAT temperature = (*pObj)[0]->data.bTemperature;
 
 	// to avert nonsense...
-	damagethreshold = max( (FLOAT)(1.0), damagethreshold);
+	damagethreshold = (std::max)( (FLOAT)(1.0), damagethreshold);
 
 	return temperature/ damagethreshold ;
 }
@@ -11434,7 +11434,7 @@ FLOAT   GetGunOverheatJamPercentage( OBJECTTYPE * pObj )
 	FLOAT temperature = (*pObj)[0]->data.bTemperature;
 
 	// to avert nonsense...
-	jamthreshold = max( (FLOAT)(1.0), jamthreshold);
+	jamthreshold = (std::max)( (FLOAT)(1.0), jamthreshold);
 
 	return temperature/ jamthreshold ;
 }

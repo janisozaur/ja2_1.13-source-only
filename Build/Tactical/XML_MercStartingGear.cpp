@@ -195,7 +195,7 @@ MercStartingGearEndElementHandle(void *userData, const XML_Char *name)
 				strncpy(pData->curMercStartingGear.mName,pData->szCharData,MAX_CHAR_DATA_LENGTH);
 				pData->curMercStartingGear.mName[MAX_CHAR_DATA_LENGTH] = '\0';
 			}
-			for(int i=0;i<min((int)strlen(pData->szCharData),MAX_CHAR_DATA_LENGTH);i++)
+			for(int i=0;i<(std::min)((int)strlen(pData->szCharData),MAX_CHAR_DATA_LENGTH);i++)
 			{
 				temp = pData->szCharData[i];
 				pData->curMercStartingGear.mName[i] = temp;

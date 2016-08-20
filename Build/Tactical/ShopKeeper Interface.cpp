@@ -7353,7 +7353,7 @@ BOOLEAN ShopkeeperAutoPlaceObject( SOLDIERTYPE * pSoldier, OBJECTTYPE * pObject,
 	while ( pObject->exists() == true )
 	{
 		// figure out how many to place during this loop iteration.  Can't do more than MAX_OBJECTS_PER_SLOT at a time
-		int numToMove = min( MAX_OBJECTS_PER_SLOT, pObject->ubNumberOfObjects);
+		int numToMove = (std::min)( MAX_OBJECTS_PER_SLOT, int(pObject->ubNumberOfObjects));
 
 		pObject->MoveThisObjectTo(movingObject, numToMove);
 		if (!AutoPlaceObject( pSoldier, &movingObject, fNewItem ))
@@ -7381,7 +7381,7 @@ void ShopkeeperAddItemToPool( INT32 sGridNo, OBJECTTYPE *pObject, INT8 bVisible,
 	while ( pObject->exists() == true )
 	{
 		// figure out how many to place during this loop iteration.  Can't do more than MAX_OBJECTS_PER_SLOT at a time
-		int numToMove = min( MAX_OBJECTS_PER_SLOT, pObject->ubNumberOfObjects);
+		int numToMove = (std::min)( MAX_OBJECTS_PER_SLOT, int(pObject->ubNumberOfObjects));
 
 		pObject->MoveThisObjectTo(movingObject, numToMove);
 		AddItemToPool( sGridNo, &movingObject, bVisible, ubLevel, usFlags, bRenderZHeightAboveLevel );

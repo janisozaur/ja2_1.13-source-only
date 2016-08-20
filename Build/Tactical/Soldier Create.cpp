@@ -844,14 +844,14 @@ SOLDIERTYPE* TacticalCreateSoldier( SOLDIERCREATE_STRUCT *pCreateStruct, UINT8 *
 
 							UINT16 diseasemaxbreathreduction = Disease[0].usMaxBreath * magnitude;
 
-							Soldier.bBreathMax = min( Soldier.bBreathMax, 100 - diseasemaxbreathreduction );
-							Soldier.bBreath = min( Soldier.bBreath, Soldier.bBreathMax );
+							Soldier.bBreathMax = (std::min)( Soldier.bBreathMax, INT8(100 - diseasemaxbreathreduction) );
+							Soldier.bBreath = (std::min)( Soldier.bBreath, Soldier.bBreathMax );
 
 							INT8 lifereduction = (6 * Disease[0].sLifeRegenHundreds) * (magnitude / 100);
 
-							Soldier.stats.bLifeMax = max( OKLIFE, Soldier.stats.bLifeMax + lifereduction );
-							Soldier.stats.bLifeMax = min( 100, Soldier.stats.bLifeMax );
-							Soldier.stats.bLife = min( Soldier.stats.bLife, Soldier.stats.bLifeMax );
+							Soldier.stats.bLifeMax = (std::max)( OKLIFE, Soldier.stats.bLifeMax + lifereduction );
+							Soldier.stats.bLifeMax = (std::min)( INT8(100), Soldier.stats.bLifeMax );
+							Soldier.stats.bLife = (std::min)( Soldier.stats.bLife, Soldier.stats.bLifeMax );
 						}
 					}
 				}
@@ -1758,7 +1758,7 @@ BOOLEAN TacticalCopySoldierFromCreateStruct( SOLDIERTYPE *pSoldier, SOLDIERCREAT
 			if ( gGameExternalOptions.fIndividualMilitia_ManageHealth )
 			{
 				// make sure militia has at least OKLIFE
-				pSoldier->stats.bLife = max( OKLIFE, (militia.healthratio / 100.0f) * pSoldier->stats.bLifeMax );
+				pSoldier->stats.bLife = (std::max)( INT8(OKLIFE), INT8((militia.healthratio / 100.0f) * pSoldier->stats.bLifeMax));
 			}
 		}
 		else
@@ -2545,12 +2545,12 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 	}
 
 	DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("CreateDetailedPlacementGivenBasicPlacementInfo: set exp. level"));
-	pp->bExpLevel = max( gGameOptions.ubDifficultyLevel, pp->bExpLevel ); //minimum exp. level of 1 -- madd->= dif level
+	pp->bExpLevel = (std::max)( INT8(gGameOptions.ubDifficultyLevel), pp->bExpLevel ); //minimum exp. level of 1 -- madd->= dif level
 
 	if ( gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE )
-		pp->bExpLevel = max( 6, pp->bExpLevel ); //minimum exp. level of 6 in insane - madd
+		pp->bExpLevel = (std::max)( INT8(6), pp->bExpLevel ); //minimum exp. level of 6 in insane - madd
 
-	pp->bExpLevel = min( 10, pp->bExpLevel ); //maximum exp. level of 9 // 10 - Madd
+	pp->bExpLevel = (std::min)( INT8(10), pp->bExpLevel ); //maximum exp. level of 9 // 10 - Madd
 
 	ubStatsLevel = pp->bExpLevel + bStatsModifier;
 
@@ -2568,13 +2568,13 @@ void CreateDetailedPlacementGivenBasicPlacementInfo( SOLDIERCREATE_STRUCT *pp, B
 			DiffLevel = Random (4);
 			if (DiffLevel == 0) DiffLevel = 1;
 		}
-	ubStatsLevel = max( DiffLevel, ubStatsLevel );	//minimum stats level of 0 -- madd->= dif level
-	//ubStatsLevel = max( gGameOptions.ubDifficultyLevel, ubStatsLevel );	//minimum stats level of 0 -- madd->= dif level
+	ubStatsLevel = (std::max)( DiffLevel, ubStatsLevel );	//minimum stats level of 0 -- madd->= dif level
+	//ubStatsLevel = (std::max)( gGameOptions.ubDifficultyLevel, ubStatsLevel );	//minimum stats level of 0 -- madd->= dif level
 
 	if ( gGameOptions.ubDifficultyLevel == DIF_LEVEL_INSANE )
-		ubStatsLevel = max( 6, ubStatsLevel );	//minimum stats level of 6 in insane
+		ubStatsLevel = (std::max)( UINT8(6), ubStatsLevel );	//minimum stats level of 6 in insane
 
-	ubStatsLevel = min( 10, ubStatsLevel );	//maximum stats level of 9 // 10 - Madd - this will probably apply to all dif levels though
+	ubStatsLevel = (std::min)( UINT8(10), ubStatsLevel );	//maximum stats level of 9 // 10 - Madd - this will probably apply to all dif levels though
 
 	//Set the minimum base attribute
 	bBaseAttribute = 45 + ( 4 * ubStatsLevel );
@@ -2945,8 +2945,8 @@ void ModifySoldierAttributesWithNewRelativeLevel( SOLDIERTYPE *s, INT8 bRelative
 	// Rel level 0: Lvl 1-2, 1: Lvl 2-4, 2: Lvl 4-6, 3: Lvl 6-8, 4: Lvl 8-10
 	s->stats.bExpLevel = (INT8)(2 * bRelativeAttributeLevel + Random(3));
 
-	s->stats.bExpLevel = max( 1, s->stats.bExpLevel ); //minimum level of 1
-	s->stats.bExpLevel = min( 10, s->stats.bExpLevel ); //maximum level of 9 // 10
+	s->stats.bExpLevel = (std::max)( INT8(1), s->stats.bExpLevel ); //minimum level of 1
+	s->stats.bExpLevel = (std::min)( INT8(10), s->stats.bExpLevel ); //maximum level of 9 // 10
 
 	//Set the minimum base attribute
 	bBaseAttribute = 45 + ( 4 * s->stats.bExpLevel );
@@ -3805,7 +3805,7 @@ void CreateDownedPilot( )
 	if ( pSoldier )
 	{
 		// a downed pilot might be wounded
-		pSoldier->stats.bLife = min( pSoldier->stats.bLifeMax, max( OKLIFE + 20, pSoldier->stats.bLife - 20 ) );
+		pSoldier->stats.bLife = (std::min)( pSoldier->stats.bLifeMax, (std::max)( INT8(OKLIFE + 20), INT8(pSoldier->stats.bLife - 20) ) );
 		pSoldier->bBleeding = pSoldier->stats.bLifeMax - pSoldier->stats.bLife;
 
 		AddSoldierToSector( pSoldier->ubID );
@@ -4625,8 +4625,8 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 			{
 				pSoldier->stats.ubSkillTraits[0] = SQUADLEADER_NT;
 				// raise level and leadership for this guy
-				pSoldier->stats.bExpLevel = min( 10, (pSoldier->stats.bExpLevel + 1) );
-				pSoldier->stats.bLeadership = min( 100, (pSoldier->stats.bLeadership + 20) );
+				pSoldier->stats.bExpLevel = (std::min)( 10, (pSoldier->stats.bExpLevel + 1) );
+				pSoldier->stats.bLeadership = (std::min)( 100, (pSoldier->stats.bLeadership + 20) );
 				ATraitAssigned = TRUE;
 
 				bNumSquadleadersInArmy++;
@@ -4657,8 +4657,8 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 			{
 				pSoldier->stats.ubSkillTraits[0] = SQUADLEADER_NT;
 				// raise level and leadership for this guy
-				pSoldier->stats.bExpLevel = min( 10, (pSoldier->stats.bExpLevel + 1) );
-				pSoldier->stats.bLeadership = min( 100, (pSoldier->stats.bLeadership + 20) );
+				pSoldier->stats.bExpLevel = (std::min)( 10, (pSoldier->stats.bExpLevel + 1) );
+				pSoldier->stats.bLeadership = (std::min)( 100, (pSoldier->stats.bLeadership + 20) );
 				ATraitAssigned = TRUE;
 
 				bNumSquadleadersInArmy++;
@@ -4667,8 +4667,8 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 			{
 				pSoldier->stats.ubSkillTraits[1] = SQUADLEADER_NT;
 				// raise level and leadership for this guy
-				pSoldier->stats.bExpLevel = min( 10, (pSoldier->stats.bExpLevel + 1) );
-				pSoldier->stats.bLeadership = min( 100, (pSoldier->stats.bLeadership + 20) );
+				pSoldier->stats.bExpLevel = (std::min)( 10, (pSoldier->stats.bExpLevel + 1) );
+				pSoldier->stats.bLeadership = (std::min)( 100, (pSoldier->stats.bLeadership + 20) );
 				BTraitAssigned = TRUE;
 
 				bNumSquadleadersInArmy++;
@@ -5717,7 +5717,7 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 					}
 
 					// make sure we ar reasonably skilled
-					pSoldier->stats.bMedical = max( pSoldier->stats.bMedical, 50 );
+					pSoldier->stats.bMedical = (std::max)( pSoldier->stats.bMedical, INT8(50) );
 				}
 				else if ( !BTraitAssigned )
 				{
@@ -5725,7 +5725,7 @@ BOOLEAN AssignTraitsToSoldier( SOLDIERTYPE *pSoldier, SOLDIERCREATE_STRUCT *pCre
 					BTraitAssigned = TRUE;
 
 					// make sure we ar reasonably skilled
-					pSoldier->stats.bMedical = max( pSoldier->stats.bMedical, 50 );
+					pSoldier->stats.bMedical = (std::max)( pSoldier->stats.bMedical, INT8(500));
 				}
 			}
 		}

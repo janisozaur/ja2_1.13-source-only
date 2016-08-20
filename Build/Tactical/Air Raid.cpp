@@ -1574,7 +1574,7 @@ void CheckForAndSetupAirRaid ()
 	//	AirRaidDef.sSectorX		= sSectorX;
 	//	AirRaidDef.sSectorY		= sSectorY;
 	//	AirRaidDef.sSectorZ		= 0;
-	//	AirRaidDef.bIntensity	= max(1,gGameOptions.ubDifficultyLevel-1) ;
+	//	AirRaidDef.bIntensity	= (std::max)(1,gGameOptions.ubDifficultyLevel-1) ;
 	//	AirRaidDef.uiFlags		=	AIR_RAID_CAN_RANDOMIZE_TEASE_DIVES;
 	//	AirRaidDef.ubNumMinsFromCurrentTime	= Random(840) + 1;
 
@@ -1591,7 +1591,7 @@ void EnemyCallInAirStrike (INT16 sSectorX, INT16 sSectorY)
 	//AirRaidDef.sSectorX		= sSectorX;
 	//AirRaidDef.sSectorY		= sSectorY;
 	//AirRaidDef.sSectorZ		= 0;
-	//AirRaidDef.bIntensity	= max(1,gGameOptions.ubDifficultyLevel-1);
+	//AirRaidDef.bIntensity	= (std::max)(1,gGameOptions.ubDifficultyLevel-1);
 	//AirRaidDef.uiFlags		=	AIR_RAID_BOMBS_ONLY;
 	//AirRaidDef.ubNumMinsFromCurrentTime	= Random(2);
 

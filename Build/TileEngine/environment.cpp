@@ -559,7 +559,7 @@ void ForecastDayEvents( )
 					{
 						uiStartTime = GetWorldTotalMin( ) + 9 * 60 ;//(UINT32)(Random( 1440 - 1 - gGameExternalOptions.gusRainMaxLength ));
 
-						UINT32 length = max( gGameExternalOptions.gusRainMinLength, Random( gGameExternalOptions.gusRainMaxLength ) );
+						UINT32 length = (std::max)( gGameExternalOptions.gusRainMinLength, Random( gGameExternalOptions.gusRainMaxLength ) );
 
 						// Between 5 - 15 miniutes
 						uiEndTime = uiStartTime + length;
@@ -596,7 +596,7 @@ void ForecastDayEvents( )
 					{
 						uiStartTime = GetWorldTotalMin( ) + 9 * 60; //(UINT32)(Random( 1440 - 1 - gGameExternalOptions.gusSandStormsMaxLength ));
 
-						UINT32 length = max( gGameExternalOptions.gusSandStormsMinLength, Random( gGameExternalOptions.gusSandStormsMaxLength ) );
+						UINT32 length = (std::max)( gGameExternalOptions.gusSandStormsMinLength, Random( gGameExternalOptions.gusSandStormsMaxLength ) );
 
 						// Between 5 - 15 miniutes
 						uiEndTime = uiStartTime + length;
@@ -630,7 +630,7 @@ void ForecastDayEvents( )
 					{
 						uiStartTime = GetWorldTotalMin( ) + 9 * 60; //(UINT32)(Random( 1440 - 1 - gGameExternalOptions.gusSnowMaxLength ));
 
-						UINT32 length = max( gGameExternalOptions.gusSnowMinLength, Random( gGameExternalOptions.gusSnowMaxLength ) );
+						UINT32 length = (std::max)( gGameExternalOptions.gusSnowMinLength, Random( gGameExternalOptions.gusSnowMaxLength ) );
 
 						// Between 5 - 15 miniutes
 						uiEndTime = uiStartTime + length;

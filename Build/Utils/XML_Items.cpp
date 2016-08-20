@@ -950,7 +950,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 			pData->curElement = ELEMENT;
 			pData->curItem.alcohol  = (FLOAT) atof(pData->szCharData);
 
-			pData->curItem.alcohol = max( 0.0f, pData->curItem.alcohol );
+			pData->curItem.alcohol = (std::max)( 0.0f, pData->curItem.alcohol );
 		}
 		else if(strcmp(name, "Hardware")	 == 0)
 		{
@@ -1400,7 +1400,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 		else if ( strcmp( name, "usHackingModifier" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.usHackingModifier = min(100, (UINT8)atol( pData->szCharData ) );
+			pData->curItem.usHackingModifier = (std::min)(UINT8(100), (UINT8)atol( pData->szCharData ) );
 		}
 		else if(strcmp(name, "DamageChance") == 0)
 		{
@@ -1433,7 +1433,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 			pData->curItem.randomitemcoolnessmodificator = (INT8) atol(pData->szCharData);
 
 			// no nonsense, only values between -20 and + 20
-			pData->curItem.randomitemcoolnessmodificator = min(20, max(-20, pData->curItem.randomitemcoolnessmodificator) );
+			pData->curItem.randomitemcoolnessmodificator = (std::min)(INT8(20), (std::max)(INT8(20), pData->curItem.randomitemcoolnessmodificator) );
 		}
 		else if(strcmp(name, "FlashLightRange") == 0)
 		{
@@ -1444,7 +1444,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			// no nonsense, only values between 0 and + 2
-			pData->curItem.usItemChoiceTimeSetting = min(2, max(0, (UINT8) atol(pData->szCharData) ) );
+			pData->curItem.usItemChoiceTimeSetting = (std::min)(UINT8(2), (std::max)(UINT8(0), (UINT8) atol(pData->szCharData) ) );
 		}
 		else if(strcmp(name, "buddyitem") == 0)
 		{
@@ -1460,7 +1460,7 @@ itemEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			// values between 0 and 100 only
-			pData->curItem.usSpotting = min(100, max(0, (INT16) atol(pData->szCharData) ) );
+			pData->curItem.usSpotting = (std::min)(INT16(100), (std::max)(INT16(0), (INT16) atol(pData->szCharData) ) );
 		}
 		else if (strcmp(name, "sBackpackWeightModifier") == 0)
 		{

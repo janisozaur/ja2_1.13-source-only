@@ -165,42 +165,42 @@ militiaindividualEndElementHandle( void *userData, const XML_Char *name )
 		else if ( strcmp( name, "chance_bodytype_REGMALE" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_bodytype[REGMALE] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_bodytype[REGMALE] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_bodytype_BIGMALE" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_bodytype[BIGMALE] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_bodytype[BIGMALE] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_bodytype_STOCKYMALE" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_bodytype[STOCKYMALE] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_bodytype[STOCKYMALE] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_bodytype_REGFEMALE" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_bodytype[REGFEMALE] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_bodytype[REGFEMALE] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_skin_PINKSKIN" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_skin[PINKSKIN] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_skin[PINKSKIN] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_skin_TANSKIN" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_skin[TANSKIN] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_skin[TANSKIN] = (std::min)( (UINT8)100, (std::max)((UINT8) 0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_skin_DARKSKIN" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_skin[DARKSKIN] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_skin[DARKSKIN] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "chance_skin_BLACKSKIN" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curBackground.chance_skin[BLACKSKIN] = min( 100, max( 0, (UINT8)atol( pData->szCharData ) ) );
+			pData->curBackground.chance_skin[BLACKSKIN] = (std::min)( (UINT8)100, (std::max)( (UINT8)0, (UINT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "dailycost_green" ) == 0 )
 		{

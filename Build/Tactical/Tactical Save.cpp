@@ -2891,7 +2891,7 @@ BOOLEAN AddDeadSoldierToUnLoadedSector( INT16 sMapX, INT16 sMapY, UINT8 bMapZ, S
 					if ( Item[pSoldier->inv[i].usItem].damageable ) // Madd: drop crappier items on higher difficulty levels
 					{
 						pSoldier->inv[i][0]->data.objectStatus -= (gGameOptions.ubDifficultyLevel - 1) * Random(20);
-						pSoldier->inv[i][0]->data.objectStatus = max(pSoldier->inv[i][0]->data.objectStatus,1); // never below 1%
+						pSoldier->inv[i][0]->data.objectStatus = (std::max)(pSoldier->inv[i][0]->data.objectStatus, INT16(1)); // never below 1%
 					}
 					pWorldItems[ bCount ].object = pSoldier->inv[i];
 					++bCount;

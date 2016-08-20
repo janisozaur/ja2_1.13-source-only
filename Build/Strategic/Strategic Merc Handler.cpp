@@ -838,7 +838,7 @@ BOOLEAN SoldierHasWorseEquipmentThanUsedTo( SOLDIERTYPE *pSoldier )
 				if ( Armour[ Item[ usItem ].ubClassIndex ].ubProtection > bBestArmour )
 				{
 					bBestArmourIndex = (INT8)cnt;
-					bBestArmour = min(128,Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
+					bBestArmour = (std::min)(UINT16(128), Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
 				}
 			}
 		}

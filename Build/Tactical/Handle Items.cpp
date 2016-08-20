@@ -613,23 +613,23 @@ INT32 HandleItem( SOLDIERTYPE *pSoldier, INT32 sGridNo, INT8 bLevel, UINT16 usHa
 				DebugMsg(TOPIC_JA2,DBG_LEVEL_3,String("HandleItem: auto fire - setting dice sides, marksmanship = %d",pSoldier->stats.bMarksmanship));
 				//UINT32 diceSides = RAND_MAX;
 				//Madd: tried to make this more marksmanship dependent than agility, a level 10 auto-weapons specialist with 100 in all stats was wasting wayyy too many APs on this fucker
-				//UINT32 diceSides = RAND_MAX / ( max(1,pSoldier->stats.bMarksmanship) / 10) ;
+				//UINT32 diceSides = RAND_MAX / ( (std::max)(1,pSoldier->stats.bMarksmanship) / 10) ;
 
 				//Kaiden: Had to change the minimum value to 10 instead of 1,
 				//Rounding down resulted in division by zero and caused a crash.
-				UINT32 diceSides = RAND_MAX / ( max(10,pSoldier->stats.bMarksmanship) / 10) ;
+				UINT32 diceSides = RAND_MAX / ( (std::max)(INT8(10),pSoldier->stats.bMarksmanship) / 10) ;
 
 				DOUBLE avgAPadded;
 				// SANDRO - Slightly changed this formula to make the auto weapons trait little more needed if new traits activated -
 				if( gGameOptions.fNewTraitSystem )
 				{
 					// also include possible squadleader bonus
-					UINT8 uiEffExpLev = min( 10, (pSoldier->stats.bExpLevel + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, FALSE ))));
-					avgAPadded = max(((400.0f-2.0f*pSoldier->stats.bDexterity))*(90.0f-5.0f*(uiEffExpLev+gSkillTraitValues.ubAWUnwantedBulletsReduction*NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/2700.0f,1); //Important! don't make this zero, the formulae don't like it.
+					UINT8 uiEffExpLev = (std::min)( 10, (pSoldier->stats.bExpLevel + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, FALSE ))));
+					avgAPadded = (std::max)(((400.0f-2.0f*pSoldier->stats.bDexterity))*(90.0f-5.0f*(uiEffExpLev+gSkillTraitValues.ubAWUnwantedBulletsReduction*NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPONS_NT )))/2700.0f,1.0f); //Important! don't make this zero, the formulae don't like it.
 				}
 				else
 				{
-					avgAPadded = max(((400.0f-2.0f*pSoldier->stats.bAgility))*(63.0f-5.0f*(pSoldier->stats.bExpLevel+2.0f*NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPS_OT )))/2700.0f,1); //Important! don't make this zero, the formulae don't like it.
+					avgAPadded = (std::max)(((400.0f-2.0f*pSoldier->stats.bAgility))*(63.0f-5.0f*(pSoldier->stats.bExpLevel+2.0f*NUM_SKILL_TRAITS( pSoldier, AUTO_WEAPS_OT )))/2700.0f,1.0f); //Important! don't make this zero, the formulae don't like it.
 				}
 
 				UINT32 chanceToMisfire = (UINT32)(((DOUBLE)diceSides*(2.0f*avgAPadded+1.0f-sqrt(4.0f*avgAPadded+1.0f)))/(2.0f*avgAPadded)); //derive the chace to misfire from the desired average AP overspent, derived suing
@@ -1902,7 +1902,7 @@ void HandleSoldierDropBomb( SOLDIERTYPE *pSoldier, INT32 sGridNo )
 				if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSoldier, DEMOLITIONS_NT ))
 				{
 					// +5 trap level for Demolitions trait
-					pSoldier->inv[ HANDPOS ][0]->data.bTrap = __min( max( 10, (8 + gSkillTraitValues.ubDEPlacedBombLevelBonus)), (( EffectiveExplosive( pSoldier ) / 20) + (EffectiveExpLevel( pSoldier ) / 3) + gSkillTraitValues.ubDEPlacedBombLevelBonus) );
+					pSoldier->inv[ HANDPOS ][0]->data.bTrap = __min( (std::max)( 10, (8 + gSkillTraitValues.ubDEPlacedBombLevelBonus)), (( EffectiveExplosive( pSoldier ) / 20) + (EffectiveExpLevel( pSoldier ) / 3) + gSkillTraitValues.ubDEPlacedBombLevelBonus) );
 				}
 				else
 				{
@@ -5454,7 +5454,7 @@ void BombMessageBoxCallBack( UINT8 ubExitValue )
 				if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( gpTempSoldier, DEMOLITIONS_NT ))
 				{
 					// increase trap level for Demolitions trait
-					(*pObj)[0]->data.bTrap = __min( max( 10, (8 + gSkillTraitValues.ubDEPlacedBombLevelBonus)), (( EffectiveExplosive( gpTempSoldier ) / 20) + (EffectiveExpLevel( gpTempSoldier ) / 3) + gSkillTraitValues.ubDEPlacedBombLevelBonus) );
+					(*pObj)[0]->data.bTrap = __min( (std::max)( 10, (8 + gSkillTraitValues.ubDEPlacedBombLevelBonus)), (( EffectiveExplosive( gpTempSoldier ) / 20) + (EffectiveExpLevel( gpTempSoldier ) / 3) + gSkillTraitValues.ubDEPlacedBombLevelBonus) );
 				}
 				else
 				{
@@ -5629,7 +5629,7 @@ BOOLEAN HandItemWorks( SOLDIERTYPE *pSoldier, INT8 bSlot )
 				// to somewhere between 1 and the 1 less than USABLE
 				(*pObj)[0]->data.objectStatus = (INT8) ( 1 + Random( USABLE - 1 ) );
 
-				(*pObj)[0]->data.sRepairThreshold = min( (*pObj)[0]->data.objectStatus, (*pObj)[0]->data.sRepairThreshold - 2*Random(10) );
+				(*pObj)[0]->data.sRepairThreshold = (std::min)( (*pObj)[0]->data.objectStatus, INT16((*pObj)[0]->data.sRepairThreshold - 2*Random(10)) );
 			}
 		}
 		else	// it's already unusable
@@ -7415,7 +7415,7 @@ BOOLEAN RemoveFortification( INT32 sGridNo, SOLDIERTYPE *pSoldier, OBJECTTYPE *p
 									if ( gStructureDeconstruct[i].usItemToCreate && gStructureDeconstruct[i].usCreatedItemStatus )
 									{
 										// when creating the object, make it have at least 1% status
-										CreateItem( gStructureDeconstruct[i].usItemToCreate, max(1, gStructureDeconstruct[i].usCreatedItemStatus), &gTempObject );
+										CreateItem( gStructureDeconstruct[i].usItemToCreate, (std::max)(UINT8(1), gStructureDeconstruct[i].usCreatedItemStatus), &gTempObject );
 
 										AddItemToPool( sGridNo, &gTempObject, 1, 0, 0, -1 );
 									}
@@ -8356,7 +8356,7 @@ void UpdateFortificationPossibleAmount()
 				pSector->dFortification_MaxPossible = maxpossible;
 
 				// make sure the current progress isn't too high
-				pSector->dFortification_UnappliedProgress = min( pSector->dFortification_UnappliedProgress, pSector->dFortification_MaxPossible );
+				pSector->dFortification_UnappliedProgress = (std::min)( pSector->dFortification_UnappliedProgress, pSector->dFortification_MaxPossible );
 			}
 		}
 		else
@@ -8368,7 +8368,7 @@ void UpdateFortificationPossibleAmount()
 				pSector->dFortification_MaxPossible = maxpossible;
 
 				// make sure the current progress isn't too high
-				pSector->dFortification_UnappliedProgress = min( pSector->dFortification_UnappliedProgress, pSector->dFortification_MaxPossible );
+				pSector->dFortification_UnappliedProgress = (std::min)( pSector->dFortification_UnappliedProgress, pSector->dFortification_MaxPossible );
 			}
 		}
 	}
@@ -8475,7 +8475,7 @@ void HandleFortificationUpdate()
 							{
 								for ( INT16 i = 0; i < gWorldItems[slot].object.ubNumberOfObjects; ++i )
 								{
-									UINT8 reduce = min( (gWorldItems[slot].object)[i]->data.objectStatus, itemreduction );
+									UINT8 reduce = (std::min)( UINT8((gWorldItems[slot].object)[i]->data.objectStatus), itemreduction );
 
 									(gWorldItems[slot].object)[i]->data.objectStatus -= reduce;
 									itemreduction -= reduce;
@@ -8633,7 +8633,7 @@ void HandleFortificationUpdate()
 				{
 					while ( it->second > 0 )
 					{
-						UINT8 tmpstat = min( 100, it->second );
+						UINT8 tmpstat = (std::min)( unsigned int(100), it->second );
 						it->second -= tmpstat;
 
 						OBJECTTYPE tmpobject;

@@ -550,7 +550,7 @@ void DoTransitionFromPreBattleInterfaceToAutoResolve()
 	{
 		uiCurrTime = GetJA2Clock();
 		iPercentage = (uiCurrTime-uiStartTime) * 100 / uiTimeRange;
-		iPercentage = min( iPercentage, 100 );
+		iPercentage = (std::min)( iPercentage, 100 );
 
 		//Factor the percentage so that it is modified by a gravity falling acceleration effect.
 		iFactor = (iPercentage - 50) * 2;
@@ -564,9 +564,9 @@ void DoTransitionFromPreBattleInterfaceToAutoResolve()
 		iTop = sStartTop + (sEndTop-sStartTop+1) * iPercentage / 100;
 
 		DstRect.iLeft = iLeft - iWidth * iPercentage / 200;
-		DstRect.iRight = DstRect.iLeft + max( iWidth * iPercentage / 100, 1 );
+		DstRect.iRight = DstRect.iLeft + (std::max)( iWidth * iPercentage / 100, 1 );
 		DstRect.iTop = iTop - iHeight * iPercentage / 200;
-		DstRect.iBottom = DstRect.iTop + max( iHeight * iPercentage / 100, 1 );
+		DstRect.iBottom = DstRect.iTop + (std::max)( iHeight * iPercentage / 100, 1 );
 
 		BltStretchVideoSurface( FRAME_BUFFER, guiSAVEBUFFER, 0, 0, 0, &SrcRect, &DstRect );
 		InvalidateScreen();
@@ -1009,8 +1009,8 @@ void CalculateSoldierCells( BOOLEAN fReset )
 
     // WDS - make number of mercenaries, etc. be configurable
 	// WDS TO BE FIXED -- Why is this 40 here? (18 April 2008)
-	//iMaxTeamSize = max( gpAR->ubMercs + gpAR->ubCivs, gpAR->ubEnemies );
-	iMaxTeamSize = max( min( 40,	gpAR->ubMercs + gpAR->ubCivs ), min( 40,	gpAR->ubEnemies ) );
+	//iMaxTeamSize = (std::max)( gpAR->ubMercs + gpAR->ubCivs, gpAR->ubEnemies );
+	iMaxTeamSize = (std::max)( (std::min)( UINT32(40),	UINT32(gpAR->ubMercs + gpAR->ubCivs) ), (std::min)( UINT32(40),	UINT32(gpAR->ubEnemies) ) );
 
 
 	if( iMaxTeamSize > 12 )
@@ -2924,7 +2924,7 @@ void CalculateAutoResolveInfo()
 //		GetNumberOfEnemiesInSector( gpAR->ubSectorX, gpAR->ubSectorY,
 		GetNumberOfEnemiesInFiveSectors( gpAR->ubSectorX, gpAR->ubSectorY,
 										 &gpAR->ubAdmins, &gpAR->ubTroops, &gpAR->ubElites, &gpAR->ubTanks, &gpAR->ubJeeps );
-		gpAR->ubEnemies = (UINT8)min( gpAR->ubAdmins + gpAR->ubTroops + gpAR->ubElites + gpAR->ubTanks + gpAR->ubJeeps, MAX_AR_TEAM_SIZE );
+		gpAR->ubEnemies = (UINT8)(std::min)( gpAR->ubAdmins + gpAR->ubTroops + gpAR->ubElites + gpAR->ubTanks + gpAR->ubJeeps, MAX_AR_TEAM_SIZE );
 	}
 	else
 	{
@@ -2950,7 +2950,7 @@ void CalculateAutoResolveInfo()
 																				&gpAR->ubAMCreatures, &gpAR->ubAFCreatures );
 		}
 
-		gpAR->ubEnemies = (UINT8)min( gpAR->ubYMCreatures + gpAR->ubYFCreatures + gpAR->ubAMCreatures + gpAR->ubAFCreatures, MAX_AR_TEAM_SIZE );
+		gpAR->ubEnemies = (UINT8)(std::min)( gpAR->ubYMCreatures + gpAR->ubYFCreatures + gpAR->ubAMCreatures + gpAR->ubAFCreatures, MAX_AR_TEAM_SIZE );
 	}
 	gfTransferTacticalOppositionToAutoResolve = FALSE;
 //	gpAR->ubCivs = CountAllMilitiaInSector( gpAR->ubSectorX, gpAR->ubSectorY );
@@ -3191,15 +3191,15 @@ void CalculateRowsAndColumns()
 	if( gpAR->ubMercCols + gpAR->ubEnemyCols == 9 )
 		gpAR->sWidth = SCREEN_WIDTH;
 	else
-		gpAR->sWidth = 146 + 55 * (max( max( gpAR->ubMercCols, gpAR->ubCivCols ), 2 ) + max( gpAR->ubEnemyCols, 2 ));
+		gpAR->sWidth = 146 + 55 * ((std::max)( (std::max)( gpAR->ubMercCols, gpAR->ubCivCols ), UINT8(2) ) + (std::max)( gpAR->ubEnemyCols, UINT8(2) ));
 
-	//gpAR->sCenterStartX = 323 - gpAR->sWidth/2 + max( max( gpAR->ubMercCols, 2), max( gpAR->ubCivCols, 2 ) ) *55;
-	gpAR->sCenterStartX = iScreenWidthOffset + (323 - gpAR->sWidth/2 + max( max( gpAR->ubMercCols, 2), max( gpAR->ubCivCols, 2 ) ) *55);
+	//gpAR->sCenterStartX = 323 - gpAR->sWidth/2 + (std::max)( (std::max)( gpAR->ubMercCols, 2), (std::max)( gpAR->ubCivCols, 2 ) ) *55;
+	gpAR->sCenterStartX = iScreenWidthOffset + (323 - gpAR->sWidth/2 + (std::max)( (std::max)( gpAR->ubMercCols, UINT8(2)), (std::max)( gpAR->ubCivCols, UINT8(2) ) ) *55);
 
 
 	//Anywhere from 48*3 to 48*10
-	//gpAR->sHeight = 48 * max( 3, max( gpAR->ubMercRows + gpAR->ubCivRows, gpAR->ubEnemyRows ) );
-	gpAR->sHeight = 48 * max( 3, max( min( 10, gpAR->ubMercRows + gpAR->ubCivRows ), min( 10, gpAR->ubEnemyRows ) ) );
+	//gpAR->sHeight = 48 * (std::max)( 3, (std::max)( gpAR->ubMercRows + gpAR->ubCivRows, gpAR->ubEnemyRows ) );
+	gpAR->sHeight = 48 * (std::max)( UINT8(3), (std::max)( (std::min)( UINT8(10), UINT8(gpAR->ubMercRows + gpAR->ubCivRows) ), (std::min)( UINT8(10), gpAR->ubEnemyRows ) ) );
 	//Make it an even multiple of 40 (rounding up).
 	gpAR->sHeight += 39;
 	gpAR->sHeight /= 40;
@@ -3677,7 +3677,7 @@ void DetermineTeamLeader( BOOLEAN fFriendlyTeam )
 
 void ResetNextAttackCounter( SOLDIERCELL *pCell )
 {
-	pCell->usNextAttack = min( 1000 - pCell->usAttack, 800 );
+	pCell->usNextAttack = (std::min)( 1000 - pCell->usAttack, 800 );
 	pCell->usNextAttack = (UINT16)(1000 + pCell->usNextAttack * 5 + PreRandom( 2000 - pCell->usAttack ) );
 	if( pCell->uiFlags & CELL_CREATURE )
 	{
@@ -3723,7 +3723,7 @@ void CalculateAttackValues()
 	//	//bonus equals 20 if good guys outnumber bad guys 2 to 1.
 	//	sMaxBonus = 20;
 	//	sOutnumberBonus = (INT16)(gpAR->ubMercs + gpAR->ubCivs) * sMaxBonus / gpAR->ubEnemies - sMaxBonus;
-	//	sOutnumberBonus = (INT16)min( sOutnumberBonus, max( sMaxBonus, 0 ) );
+	//	sOutnumberBonus = (INT16)(std::min)( sOutnumberBonus, (std::max)( sMaxBonus, 0 ) );
 	//}
 
 	for( i = 0; i < gpAR->ubMercs; i++ )
@@ -3759,7 +3759,7 @@ void CalculateAttackValues()
 		// SANDRO - STOMP traits - Squadleaders bonus to effective level
 		uiEffectiveLevelExp = pSoldier->stats.bExpLevel;
 		if ( gGameOptions.fNewTraitSystem )
-			uiEffectiveLevelExp = min(10,(uiEffectiveLevelExp + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, TRUE ))));
+			uiEffectiveLevelExp = (std::min)(10,(uiEffectiveLevelExp + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, TRUE ))));
 		usBonus += EXP_BONUS * (uiEffectiveLevelExp-5);
 
 		usBonus += gpAR->ubPlayerDefenceAdvantage;
@@ -3772,8 +3772,8 @@ void CalculateAttackValues()
 			pCell->usDefence = 1000;
 		}
 
-		pCell->usAttack = min( pCell->usAttack, 1000 );
-		pCell->usDefence = min( pCell->usDefence, 1000 );
+		pCell->usAttack = (std::min)( pCell->usAttack, UINT16(1000) );
+		pCell->usDefence = (std::min)( pCell->usDefence, UINT16(1000) );
 
 		gpAR->usPlayerAttack += pCell->usAttack;
 		gpAR->usPlayerDefence += pCell->usDefence;
@@ -3808,7 +3808,7 @@ void CalculateAttackValues()
 		// SANDRO - STOMP traits - Squadleaders bonus to effective level
 		uiEffectiveLevelExp = pSoldier->stats.bExpLevel;
 		if ( gGameOptions.fNewTraitSystem )
-			uiEffectiveLevelExp = min(10,(uiEffectiveLevelExp + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, TRUE ))));
+			uiEffectiveLevelExp = (std::min)(10,(uiEffectiveLevelExp + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, TRUE ))));
 		usBonus += EXP_BONUS * (uiEffectiveLevelExp-5);
 
 		usBonus += gpAR->ubPlayerDefenceAdvantage;
@@ -3818,8 +3818,8 @@ void CalculateAttackValues()
 		pCell->usAttack = (UINT16)( pCell->usAttack * CalcClassBonusOrPenalty( pCell->pSoldier ) );
 		pCell->usDefence =(UINT16)( pCell->usDefence * CalcClassBonusOrPenalty( pCell->pSoldier ) );
 
-		pCell->usAttack = min( pCell->usAttack, 1000 );
-		pCell->usDefence = min( pCell->usDefence, 1000 );
+		pCell->usAttack = (std::min)( pCell->usAttack, UINT16(1000) );
+		pCell->usDefence = (std::min)( pCell->usDefence, UINT16(1000) );
 
 		gpAR->usPlayerAttack += pCell->usAttack;
 		gpAR->usPlayerDefence += pCell->usDefence;
@@ -3848,7 +3848,7 @@ void CalculateAttackValues()
 	//	//bonus equals 20 if good guys outnumber bad guys 2 to 1.
 	//	sMaxBonus = 20;
 	//	sOutnumberBonus = (INT16)gpAR->ubEnemies * sMaxBonus / (gpAR->ubMercs + gpAR->ubCivs) - sMaxBonus;
-	//	sOutnumberBonus = (INT16)min( sOutnumberBonus, max( sMaxBonus, 0 ) );
+	//	sOutnumberBonus = (INT16)(std::min)( sOutnumberBonus, (std::max)( sMaxBonus, 0 ) );
 	//}
 
 	for( i = 0; i < gpAR->ubEnemies; i++ )
@@ -3873,7 +3873,7 @@ void CalculateAttackValues()
 		// SANDRO - STOMP traits - Squadleaders bonus to effective level
 		uiEffectiveLevelExp = pSoldier->stats.bExpLevel;
 		if ( gGameOptions.fNewTraitSystem )
-			uiEffectiveLevelExp = min(10,(uiEffectiveLevelExp + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, TRUE ))));
+			uiEffectiveLevelExp = (std::min)(10,(uiEffectiveLevelExp + (gSkillTraitValues.ubSLEffectiveLevelInRadius * GetSquadleadersCountInVicinity( pSoldier, TRUE, TRUE ))));
 		usBonus += EXP_BONUS * (uiEffectiveLevelExp-5);
 
 		usBonus += gpAR->ubEnemyDefenceAdvantage;
@@ -3882,8 +3882,8 @@ void CalculateAttackValues()
 		pCell->usAttack	= (UINT16)( pCell->usAttack * CalcClassBonusOrPenalty( pCell->pSoldier ) );
 		pCell->usDefence = (UINT16)( pCell->usDefence * CalcClassBonusOrPenalty( pCell->pSoldier ) );
 
-		pCell->usAttack = min( pCell->usAttack, 1000 );
-		pCell->usDefence = min( pCell->usDefence, 1000 );
+		pCell->usAttack = (std::min)( pCell->usAttack, UINT16(1000) );
+		pCell->usDefence = (std::min)( pCell->usDefence, UINT16(1000) );
 
 		gpAR->usEnemyAttack += pCell->usAttack;
 		gpAR->usEnemyDefence += pCell->usDefence;
@@ -4302,8 +4302,8 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 	}
 
 	// reapair values
-	usAttack = max(0, min(1000, usAttack ));
-	usDefence = max(0, min(1000, usDefence ));
+	usAttack = (std::max)(UINT16(0), (std::min)(UINT16(1000), usAttack ));
+	usDefence = (std::max)(UINT16(0), (std::min)(UINT16(1000), usDefence ));
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	if( pAttacker->uiFlags & CELL_FEMALECREATURE )
@@ -4425,7 +4425,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		}
 		else if ( pTarget->uiFlags & CELL_MERC && gGameExternalOptions.sMercsAutoresolveDeffenseBonus != 0 && (ubImpact > 3) )
 		{
-			ubImpact = max( 3, ((ubImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) / 100) );
+			ubImpact = (std::max)( 3, ((ubImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) / 100) );
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4440,7 +4440,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		}
 
 		// tanks might do splash damage to other troops as well...
-		UINT8 numtries = min(4, Random( gpAR->ubMercs + gpAR->ubCivs ) );
+		UINT8 numtries = (std::min)(UINT32(4), Random( gpAR->ubMercs + gpAR->ubCivs ) );
 		for ( int tries = 0; tries < numtries; ++tries )
 		{
 			SOLDIERCELL* pAnotherTarget = ChooseTarget( pAttacker );
@@ -4499,7 +4499,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		}
 		else if ( pTarget->uiFlags & CELL_MERC && gGameExternalOptions.sMercsAutoresolveDeffenseBonus != 0 && (ubImpact > 3) )
 		{
-			ubImpact = max( 3, ((ubImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) / 100) );
+			ubImpact = (std::max)( 3, ((ubImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) / 100) );
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4538,7 +4538,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		}
 		else if (pTarget->uiFlags & CELL_MERC && gGameExternalOptions.sMercsAutoresolveDeffenseBonus != 0 && (iImpact > 3))
 		{
-			iImpact = max( 3, ((iImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) /100));
+			iImpact = (std::max)( 3, ((iImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) /100));
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4597,7 +4597,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		}
 		else if (pTarget->uiFlags & CELL_MERC && gGameExternalOptions.sMercsAutoresolveDeffenseBonus != 0 && (iImpact > 3))
 		{
-			iImpact = max( 3, ((iImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) /100));
+			iImpact = (std::max)( 3, ((iImpact * (100 - (gGameExternalOptions.sMercsAutoresolveDeffenseBonus / 2))) /100));
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4729,7 +4729,7 @@ void AttackTarget( SOLDIERCELL *pAttacker, SOLDIERCELL *pTarget )
 		}
 		///////////////////////////////////////////////////////////////
 		//Adjust the soldiers stats based on the damage.
-		pTarget->pSoldier->stats.bLife = (INT8)max( iNewLife, 0 );
+		pTarget->pSoldier->stats.bLife = (INT8)(std::max)( iNewLife, 0 );
 		if( pTarget->uiFlags & CELL_MERC && gpAR->pRobotCell)
 		{
 			gpAR->pRobotCell->pSoldier->UpdateRobotControllerGivenRobot( );
@@ -5032,7 +5032,7 @@ void TargetHitCallback( SOLDIERCELL *pTarget, INT32 index )
 	}
 	///////////////////////////////////////////////////////////////
 	//Adjust the soldiers stats based on the damage.
-	pTarget->pSoldier->stats.bLife = (INT8)max( iNewLife, 0 );
+	pTarget->pSoldier->stats.bLife = (INT8)(std::max)( iNewLife, 0 );
 	if( pTarget->uiFlags & CELL_MERC && gpAR->pRobotCell)
 	{
 		gpAR->pRobotCell->pSoldier->UpdateRobotControllerGivenRobot( );
@@ -5448,7 +5448,7 @@ void ProcessBattleFrame()
 
 	while( iTimeSlice > 0 )
 	{
-		uiSlice = min( iTimeSlice, 1000 );
+		uiSlice = (std::min)( iTimeSlice, 1000 );
 		if( gpAR->ubBattleStatus == BATTLE_IN_PROGRESS )
 			gpAR->uiTotalElapsedBattleTimeInMilliseconds += uiSlice;
 

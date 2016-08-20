@@ -343,10 +343,10 @@ BOOLEAN HandleAreaSelection()
 //dnl ch43 280909
 void ValidateSelectionRegionBoundaries()
 {
-	gSelectRegion.iLeft = max(min(WORLD_COLS-1, gSelectRegion.iLeft), 0);
-	gSelectRegion.iRight = max(min(WORLD_COLS-1, gSelectRegion.iRight), 0);
-	gSelectRegion.iTop = max(min(WORLD_ROWS-1, gSelectRegion.iTop), 0);
-	gSelectRegion.iBottom = max(min(WORLD_ROWS-1, gSelectRegion.iBottom), 0);
+	gSelectRegion.iLeft = (std::max)(min(WORLD_COLS-1, gSelectRegion.iLeft), 0);
+	gSelectRegion.iRight = (std::max)(min(WORLD_COLS-1, gSelectRegion.iRight), 0);
+	gSelectRegion.iTop = (std::max)(min(WORLD_ROWS-1, gSelectRegion.iTop), 0);
+	gSelectRegion.iBottom = (std::max)(min(WORLD_ROWS-1, gSelectRegion.iBottom), 0);
 }
 
 void EnsureSelectionType()

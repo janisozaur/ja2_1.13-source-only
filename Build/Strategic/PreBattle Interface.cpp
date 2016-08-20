@@ -592,9 +592,9 @@ void InitPreBattleInterface( GROUP *pBattleGroup, BOOLEAN fPersistantPBI )
 					deploymentleadership += 30;
 				}
 
-				usDeploymentLeadership = max( usDeploymentLeadership, deploymentleadership );
+				usDeploymentLeadership = (std::max)( usDeploymentLeadership, deploymentleadership );
 
-				gAmbushRadiusModifier = max( gAmbushRadiusModifier, ambushradiusmodifier / 100 );
+				gAmbushRadiusModifier = (std::max)( gAmbushRadiusModifier, ambushradiusmodifier / 100 );
 			}
 			else
 			{
@@ -1014,7 +1014,7 @@ void DoTransitionFromMapscreenToPreBattleInterface()
 	{
 		uiCurrTime = GetJA2Clock();
 		iPercentage = (uiCurrTime-uiStartTime) * 100 / uiTimeRange;
-		iPercentage = min( iPercentage, 100 );
+		iPercentage = (std::min)( iPercentage, 100 );
 
 		//Factor the percentage so that it is modified by a gravity falling acceleration effect.
 		iFactor = (iPercentage - 50) * 2;
@@ -1031,9 +1031,9 @@ void DoTransitionFromMapscreenToPreBattleInterface()
 			iTop = sStartTop + (sEndTop-sStartTop+1) * iPercentage / 100;
 
 		DstRect.iLeft = iLeft - iWidth * iPercentage / 200;
-		DstRect.iRight = DstRect.iLeft + max( iWidth * iPercentage / 100, 1 );
+		DstRect.iRight = DstRect.iLeft + (std::max)( iWidth * iPercentage / 100, 1 );
 		DstRect.iTop = iTop - iHeight * iPercentage / 200;
-		DstRect.iBottom = DstRect.iTop + max( iHeight * iPercentage / 100, 1 );
+		DstRect.iBottom = DstRect.iTop + (std::max)( iHeight * iPercentage / 100, 1 );
 
 		BltStretchVideoSurface( FRAME_BUFFER, guiSAVEBUFFER, 0, 0, 0, &PBIRect, &DstRect );
 
@@ -1236,7 +1236,7 @@ void RenderPreBattleInterface()
 			BltVideoObject( guiSAVEBUFFER, hVObject, TITLE_BAR_PIECE, i + xResOffset, 6 + yResOffset, VO_BLT_SRCTRANSPARENCY, NULL );
 		}
 
-		y = BOTTOM_Y - ACTUAL_HEIGHT - ROW_HEIGHT * max( guiNumUninvolved, 1 );
+		y = BOTTOM_Y - ACTUAL_HEIGHT - ROW_HEIGHT * (std::max)( guiNumUninvolved, UINT32(1) );
 		BltVideoObject( guiSAVEBUFFER, hVObject, UNINVOLVED_HEADER, 8 + xResOffset, y + yResOffset, VO_BLT_SRCTRANSPARENCY, NULL );
 
 		SetFont( BLOCKFONT );
@@ -1292,14 +1292,14 @@ void RenderPreBattleInterface()
 		mprintf( 224 + xResOffset - width , 38 + yResOffset, str );
 
 		//Draw the bottom columns
-		for( i = 0; i < (INT32)max( guiNumUninvolved, 1 ); i++ )
+		for( i = 0; i < (INT32)(std::max)( guiNumUninvolved, UINT32(1) ); i++ )
 		{
 			y = BOTTOM_Y - ROW_HEIGHT * (i+1) + 1;
 			BltVideoObject( guiSAVEBUFFER, hVObject, BOTTOM_COLUMN, 161 + xResOffset, y + yResOffset, VO_BLT_SRCTRANSPARENCY, NULL );
 		}
 
         // WDS - make number of mercenaries, etc. be configurable
-		for( i = 0; i < (INT32)(/*21*/3+ OUR_TEAM_SIZE_NO_VEHICLE - max( guiNumUninvolved, 1 )); i++ )
+		for( i = 0; i < (INT32)(/*21*/3+ OUR_TEAM_SIZE_NO_VEHICLE - (std::max)( guiNumUninvolved, UINT32(1) )); i++ )
 		{
 			y = TOP_Y + ROW_HEIGHT * i;
 			BltVideoObject( guiSAVEBUFFER, hVObject, TOP_COLUMN, 186 + xResOffset, y + yResOffset, VO_BLT_SRCTRANSPARENCY, NULL );

@@ -1830,7 +1830,7 @@ void MercWeaponKitSelectionUpdate(UINT8 selectedInventory)
 				// If it's armour
 				if ( Item[ usItem ].usItemClass & IC_ARMOUR )
 				{
-					gMercProfiles[ubMercID].bArmourAttractiveness = min(128,Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
+					gMercProfiles[ubMercID].bArmourAttractiveness = (std::min)(UINT16(128), Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
 				}
 			}
 		}

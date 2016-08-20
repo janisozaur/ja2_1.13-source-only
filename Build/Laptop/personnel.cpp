@@ -825,7 +825,7 @@ void RenderPersonnelStats( INT32 iId, INT32 iSlot )
 
 // ID -> fortlaufende ID, und nicht die mercID
 // -> bei aktuellen Merc passt es
-// -> bei departed Merc wird die MercId anstatt der fortlaufenden ID übergeben!!
+// -> bei departed Merc wird die MercId anstatt der fortlaufenden ID Ã¼bergeben!!
 void RenderPersonnelFace(INT32 iId, INT32 iSlot, BOOLEAN fDead, BOOLEAN fFired, BOOLEAN fOther )
 {
 	// Get the profile id (from profileId or slotId)
@@ -1926,7 +1926,7 @@ void DisplayCharStats(INT32 iId, INT32 iSlot)
 										if( sX <= iMinimumX )
 										{
 											FindFontRightCoordinates((INT16)(pPersonnelScreenPoints[19].x+(iSlot*TEXT_BOX_WIDTH) + TEXT_BOX_WIDTH-20 +TEXT_DELTA_OFFSET),0,30,0,sString, FONT10ARIALBOLD,	&sX, &sY);
-											sX = (INT16)max( sX, iMinimumX );
+											sX = (INT16)(std::max)( sX, INT16(iMinimumX) );
 										}
 										sY = (INT16)(pPersonnelScreenPoints[19].y + (ubCnt * 12));
 
@@ -1940,7 +1940,7 @@ void DisplayCharStats(INT32 iId, INT32 iSlot)
 										if( sX <= iMinimumX )
 										{
 											FindFontRightCoordinates((INT16)(pPersonnelScreenPoints[19].x+(iSlot*TEXT_BOX_WIDTH) + TEXT_BOX_WIDTH-20 +TEXT_DELTA_OFFSET),0,30,0,sString, PERS_FONT,	&sX, &sY);
-											sX = (INT16)max( sX, iMinimumX );
+											sX = (INT16)(std::max)( sX, INT16(iMinimumX) );
 										}
 										sY = (INT16)(pPersonnelScreenPoints[19].y + (ubCnt * 12));
 
@@ -1984,7 +1984,7 @@ void DisplayCharStats(INT32 iId, INT32 iSlot)
 								if( sX <= iMinimumX )
 								{
 									FindFontRightCoordinates((INT16)(pPersonnelScreenPoints[19].x+(iSlot*TEXT_BOX_WIDTH) + TEXT_BOX_WIDTH-20 +TEXT_DELTA_OFFSET),0,30,0,sString, PERS_FONT,	&sX, &sY);
-									sX = (INT16)max( sX, iMinimumX );
+									sX = (INT16)(std::max)( sX, INT16(iMinimumX) );
 								}
 								sY = (INT16)(pPersonnelScreenPoints[19].y + 36);
 
@@ -2024,7 +2024,7 @@ void DisplayCharStats(INT32 iId, INT32 iSlot)
 							if( sX <= iMinimumX )
 							{
 								FindFontRightCoordinates((INT16)(pPersonnelScreenPoints[iCounter].x+(iSlot*TEXT_BOX_WIDTH) + TEXT_BOX_WIDTH-20 +TEXT_DELTA_OFFSET),0,30,0,sString, PERS_FONT,	&sX, &sY);
-								sX = (INT16)max( sX, iMinimumX );
+								sX = (INT16)(std::max)( sX, INT16(iMinimumX) );
 							}
 
 							mprintf(sX,pPersonnelScreenPoints[bScreenLocIndex].y,sString);
@@ -2060,7 +2060,7 @@ void DisplayCharStats(INT32 iId, INT32 iSlot)
 
 								//KM: April 16, 1999
 								//Perform the potential overrun check
-								sX = (INT16)max( sX, iMinimumX );
+								sX = (INT16)(std::max)( sX, INT16(iMinimumX) );
 								mprintf(sX,pPersonnelScreenPoints[bScreenLocIndex].y,sString);
 
 								// Add specific region for fast help window
@@ -2095,7 +2095,7 @@ void DisplayCharStats(INT32 iId, INT32 iSlot)
 
 								//KM: April 16, 1999
 								//Perform the potential overrun check
-								sX = (INT16)max( sX, iMinimumX );
+								sX = (INT16)(std::max)( sX, INT16(iMinimumX) );
 								mprintf(sX,pPersonnelScreenPoints[bScreenLocIndex].y,sString);
 
 								// Add specific region for fast help window
@@ -2503,7 +2503,7 @@ void DisplayFaceOfDisplayedMerc( )
 
 		DisplayHighLightBox();
 
-		// Hier dürfte der Aufruf falsch sein
+		// Hier dÃ¼rfte der Aufruf falsch sein
 
 		RenderPersonnelFace(	GetIdOfPastMercInSlot( iCurrentPersonSelectedId ), 0, IsPastMercDead( iCurrentPersonSelectedId ), IsPastMercFired( iCurrentPersonSelectedId ), IsPastMercOther( iCurrentPersonSelectedId ) );
 		DisplayDepartedCharName(	GetIdOfPastMercInSlot( iCurrentPersonSelectedId ), 0, GetTheStateOfDepartedMerc( GetIdOfPastMercInSlot( iCurrentPersonSelectedId	) ) );
@@ -8997,7 +8997,7 @@ INT8 CalculateMercsAchievementPercentage( INT32 ubProfile )
 	{
 		uiMercPercentage = (UINT32)(((100 * uiMercPoints)/ulTotalMercPoints)+ 0.5);
 
-		uiMercPercentage = min( 100, uiMercPercentage );
+		uiMercPercentage = (std::min)( UINT32(100), uiMercPercentage );
 
 		return( (UINT8)(uiMercPercentage) );
 	}

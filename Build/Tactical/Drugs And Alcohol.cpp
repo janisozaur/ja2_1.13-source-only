@@ -220,7 +220,7 @@ void HandleEndTurnDrugAdjustments_New( SOLDIERTYPE *pSoldier )
 		//SANDRO - Insta-healable injury reduction
 		if ( pSoldier->newdrugs.size[DRUG_EFFECT_HP] > 0 )
 		{
-			pSoldier->iHealableInjury = max( 0, (pSoldier->iHealableInjury - (100 * pSoldier->newdrugs.size[DRUG_EFFECT_HP])) );
+			pSoldier->iHealableInjury = (std::max)( 0, (pSoldier->iHealableInjury - (100 * pSoldier->newdrugs.size[DRUG_EFFECT_HP])) );
 		}
 
 		if ( pSoldier->stats.bLife == pSoldier->stats.bLifeMax )
@@ -249,7 +249,7 @@ void HandleEndTurnDrugAdjustments_New( SOLDIERTYPE *pSoldier )
 	// as time progresses, effects wear off
 	for ( UINT8 i = 0; i < DRUG_EFFECT_MAX; ++i )
 	{
-		pSoldier->newdrugs.duration[i] = max( 0, pSoldier->newdrugs.duration[i] - 1 );
+		pSoldier->newdrugs.duration[i] = (std::max)( 0, pSoldier->newdrugs.duration[i] - 1 );
 
 		if ( !pSoldier->newdrugs.duration[i] )
 			pSoldier->newdrugs.size[i] = 0;
@@ -257,14 +257,14 @@ void HandleEndTurnDrugAdjustments_New( SOLDIERTYPE *pSoldier )
 			fStillDrugged = TRUE;
 	}
 
-	pSoldier->newdrugs.drugpersonality_duration = max( 0, pSoldier->newdrugs.drugpersonality_duration - 1 );
+	pSoldier->newdrugs.drugpersonality_duration = (std::max)( 0, pSoldier->newdrugs.drugpersonality_duration - 1 );
 
 	if ( !pSoldier->newdrugs.drugpersonality_duration )
 		pSoldier->newdrugs.drugpersonality = 0;
 	else
 		fStillDrugged = TRUE;
 
-	pSoldier->newdrugs.drugdisability_duration = max( 0, pSoldier->newdrugs.drugdisability_duration - 1 );
+	pSoldier->newdrugs.drugdisability_duration = (std::max)( 0, pSoldier->newdrugs.drugdisability_duration - 1 );
 
 	if ( !pSoldier->newdrugs.drugdisability_duration )
 		pSoldier->newdrugs.drugdisability = 0;
@@ -390,7 +390,7 @@ void HourlyDrugUpdate( )
 		// every hour, we lower our alcohol counter
 		if ( MercPtrs[ubID]->newdrugs.drinkstaken > 0.0f )
 		{
-			MercPtrs[ubID]->newdrugs.drinkstaken = max( 0.0, MercPtrs[ubID]->newdrugs.drinkstaken - 0.15f );
+			MercPtrs[ubID]->newdrugs.drinkstaken = (std::max)( 0.0f, MercPtrs[ubID]->newdrugs.drinkstaken - 0.15f );
 
 			if ( MercPtrs[ubID]->newdrugs.drinkstaken <= 0.0f )
 			{

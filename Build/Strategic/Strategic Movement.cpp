@@ -2496,7 +2496,7 @@ void PrepareGroupsForSimultaneousArrival()
 				&& pGroup->ubNextY == gpPendingSimultaneousGroup->ubSectorY &&
 				!IsGroupTheHelicopterGroup( pGroup ) )
 		{
-			uiLatestArrivalTime = max( pGroup->uiArrivalTime, uiLatestArrivalTime );
+			uiLatestArrivalTime = (std::max)( pGroup->uiArrivalTime, uiLatestArrivalTime );
 			pGroup->uiFlags |= GROUPFLAG_SIMULTANEOUSARRIVAL_APPROVED | GROUPFLAG_MARKER;
 		}
 		pGroup = pGroup->next;
@@ -3518,9 +3518,9 @@ INT32 GetSectorMvtTimeForGroup( UINT8 ubSector, UINT8 ubDirection, GROUP *pGroup
 			ubSurvivalistHere += NUM_SKILL_TRAITS( pSoldier, SURVIVAL_NT );
 
 			// Flugente: backgrounds
-			ustravelbackground_foot = max(ustravelbackground_foot, pSoldier->GetBackgroundValue(BG_TRAVEL_FOOT));
-			ustravelbackground_car  = max(ustravelbackground_car,  pSoldier->GetBackgroundValue(BG_TRAVEL_CAR));
-			ustravelbackground_air  = max(ustravelbackground_air,  pSoldier->GetBackgroundValue(BG_TRAVEL_AIR));
+			ustravelbackground_foot = (std::max)(ustravelbackground_foot, UINT8(pSoldier->GetBackgroundValue(BG_TRAVEL_FOOT)));
+			ustravelbackground_car  = (std::max)(ustravelbackground_car,  UINT8(pSoldier->GetBackgroundValue(BG_TRAVEL_CAR)));
+			ustravelbackground_air  = (std::max)(ustravelbackground_air,  UINT8(pSoldier->GetBackgroundValue(BG_TRAVEL_AIR)));
 
 			curr = curr->next;
 		}
@@ -3528,31 +3528,31 @@ INT32 GetSectorMvtTimeForGroup( UINT8 ubSector, UINT8 ubDirection, GROUP *pGroup
 		if ( ubSurvivalistHere || ustravelbackground_foot || ustravelbackground_car || ustravelbackground_air )
 		{
 			// no more than certain number of simultaneous bonuses
-			ubSurvivalistHere = min( gSkillTraitValues.ubSVMaxBonusesToTravelSpeed, ubSurvivalistHere );
+			ubSurvivalistHere = (std::min)( gSkillTraitValues.ubSVMaxBonusesToTravelSpeed, ubSurvivalistHere );
 
 			// on foot, the bonus should be higher
 			if( fFoot )
 			{
 				// however, we cannot be quicker than the helicopter
-				iBestTraverseTime = max( 10, (iBestTraverseTime * (100 - (ubSurvivalistHere * gSkillTraitValues.ubSVGroupTimeSpentForTravellingFoot)) / 100) );
+				iBestTraverseTime = (std::max)( 10, (iBestTraverseTime * (100 - (ubSurvivalistHere * gSkillTraitValues.ubSVGroupTimeSpentForTravellingFoot)) / 100) );
 
-				iBestTraverseTime = max( 10, (iBestTraverseTime * (100 - ustravelbackground_foot) / 100));
+				iBestTraverseTime = (std::max)( 10, (iBestTraverseTime * (100 - ustravelbackground_foot) / 100));
 			}
 			// all other types (except air)
 			else if ( fAir )
 			{
 				// however, we cannot be quicker than the helicopter
-				iBestTraverseTime = max( 10, (iBestTraverseTime * (100 - (ubSurvivalistHere * gSkillTraitValues.ubSVGroupTimeSpentForTravellingVehicle)) / 100) );
+				iBestTraverseTime = (std::max)( 10, (iBestTraverseTime * (100 - (ubSurvivalistHere * gSkillTraitValues.ubSVGroupTimeSpentForTravellingVehicle)) / 100) );
 
 				// yes, this background allows us to fly faster :-)
-				iBestTraverseTime = max( 9,  (iBestTraverseTime * (100 - ustravelbackground_air) / 100));
+				iBestTraverseTime = (std::max)( 9,  (iBestTraverseTime * (100 - ustravelbackground_air) / 100));
 			}
 			else
 			{
 				// however, we cannot be quicker than the helicopter
-				iBestTraverseTime = max( 10, (iBestTraverseTime * (100 - (ubSurvivalistHere * gSkillTraitValues.ubSVGroupTimeSpentForTravellingVehicle)) / 100) );
+				iBestTraverseTime = (std::max)( 10, (iBestTraverseTime * (100 - (ubSurvivalistHere * gSkillTraitValues.ubSVGroupTimeSpentForTravellingVehicle)) / 100) );
 
-				iBestTraverseTime = max( 10, (iBestTraverseTime * (100 - ustravelbackground_car) / 100));
+				iBestTraverseTime = (std::max)( 10, (iBestTraverseTime * (100 - ustravelbackground_car) / 100));
 			}
 		}
 	}
@@ -3562,7 +3562,7 @@ INT32 GetSectorMvtTimeForGroup( UINT8 ubSector, UINT8 ubDirection, GROUP *pGroup
 		FLOAT dEnemyGeneralsSpeedupFactor = 1.0f;
 		if ( gGameExternalOptions.fEnemyRoles && gGameExternalOptions.fEnemyGenerals )
 		{
-			dEnemyGeneralsSpeedupFactor = max( 0.75f, dEnemyGeneralsSpeedupFactor - gStrategicStatus.usVIPsLeft * gGameExternalOptions.fEnemyGeneralStrategicMovementSpeedBonus );
+			dEnemyGeneralsSpeedupFactor = (std::max)( 0.75f, dEnemyGeneralsSpeedupFactor - gStrategicStatus.usVIPsLeft * gGameExternalOptions.fEnemyGeneralStrategicMovementSpeedBonus );
 		}
 
 		iBestTraverseTime = dEnemyGeneralsSpeedupFactor * iBestTraverseTime;
@@ -4789,7 +4789,7 @@ void ResetMovementForNonPlayerGroup( GROUP *pGroup )
 						MoveSAIGroupToSector( &pGroup, (UINT8)SECTOR( pOtherGroup->ubNextX, pOtherGroup->ubNextY ), DIRECT, PURSUIT );
 
 						// the group has to be delayed - otherwise they could arrive at the same time as the player, resulting in odd behaviour during insertion
-						if (pGroup != NULL && pGroup->uiArrivalTime < min( pGroup->uiArrivalTime, pOtherGroup->uiArrivalTime ) + 5 )
+						if (pGroup != NULL && pGroup->uiArrivalTime < (std::min)( pGroup->uiArrivalTime, pOtherGroup->uiArrivalTime ) + 5 )
 						{
 							DeleteStrategicEvent( EVENT_GROUP_ARRIVAL, pGroup->ubGroupID );
 
@@ -5038,7 +5038,7 @@ BOOLEAN SpendVehicleFuel( SOLDIERTYPE* pSoldier, INT16 sFuelSpent )
 {
 	Assert( pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE );
 	pSoldier->sBreathRed -= sFuelSpent;
-	pSoldier->sBreathRed = (INT16)max( 0, pSoldier->sBreathRed );
+	pSoldier->sBreathRed = (std::max)( INT16(0), pSoldier->sBreathRed );
 	pSoldier->bBreath = (INT8)((pSoldier->sBreathRed+99) / 100);
 	return( FALSE );
 }
@@ -5067,7 +5067,7 @@ void AddFuelToVehicle( SOLDIERTYPE *pSoldier, SOLDIERTYPE *pVehicle )
 	{ //Fill 'er up.
 		sFuelNeeded = 10000 - pVehicle->sBreathRed;
 		sFuelAvailable = (*pItem)[0]->data.objectStatus * 50;
-		sFuelAdded = min( sFuelNeeded, sFuelAvailable );
+		sFuelAdded = (std::min)( sFuelNeeded, sFuelAvailable );
 		//Add to vehicle
 		pVehicle->sBreathRed += sFuelAdded;
 		pVehicle->bBreath = (INT8)(pVehicle->sBreathRed / 100);
@@ -5277,7 +5277,7 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 			//come back up to the maximum if left long enough.
 			INT32 iBloodCatDiff;
 			iBloodCatDiff = pSector->bBloodCatPlacements - pSector->bBloodCats;
-			pSector->bBloodCats += (INT8)min( iHoursElapsed / 18, iBloodCatDiff );
+			pSector->bBloodCats += (INT8)(std::min)( iHoursElapsed / 18, iBloodCatDiff );
 		}
 		//Once 0, the bloodcats will never recupe.
 	}
@@ -5291,9 +5291,9 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 			//randomly choose from 5-8, 7-10, 9-12 bloodcats based on easy, normal, and hard, respectively
 			//bDifficultyMaxCats = (INT8)( Random( 4 ) + gGameOptions.ubDifficultyLevel*2 + 3 );
 			//maximum of 3 bloodcats or 1 for every 6%, 5%, 4% progress based on easy, normal, and hard, respectively
-			//bProgressMaxCats = (INT8)max( CurrentPlayerProgressPercentage() / (7 - gGameOptions.ubDifficultyLevel), 3 );
+			//bProgressMaxCats = (INT8)(std::max)( CurrentPlayerProgressPercentage() / (7 - gGameOptions.ubDifficultyLevel), 3 );
 			//choose the lowest number of cats calculated by difficulty and progress.
-			//pSector->bBloodCats = (INT8)min( bDifficultyMaxCats, bProgressMaxCats );
+			//pSector->bBloodCats = (INT8)(std::min)( bDifficultyMaxCats, bProgressMaxCats );
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////
 			// HEADROCK HAM 3.6: Minimum and Maximum are now modder-defined, so pick a random number between them.
@@ -5317,16 +5317,16 @@ BOOLEAN TestForBloodcatAmbush( GROUP *pGroup )
 			{
 				//At NOVICE/EXPERIENCED difficulty, ensure cats never outnumber mercs by a factor of more than 2.
 				bNumMercMaxCats = (INT8)(PlayerMercsInSector( pGroup->ubSectorX, pGroup->ubSectorY, pGroup->ubSectorZ ) * 2);
-				pSector->bBloodCats = (INT8)min( pSector->bBloodCats, bNumMercMaxCats );
-				//pSector->bBloodCats = (INT8)max( pSector->bBloodCats, 3 );
+				pSector->bBloodCats = (std::min)( pSector->bBloodCats, bNumMercMaxCats );
+				//pSector->bBloodCats = (INT8)(std::max)( pSector->bBloodCats, 3 );
 			}
 
 			//ensure that there aren't more bloodcats than placements
-			pSector->bBloodCats = (INT8)min( pSector->bBloodCats, pSector->bBloodCatPlacements );
+			pSector->bBloodCats = (INT8)(std::min)( pSector->bBloodCats, pSector->bBloodCatPlacements );
 
 			// Once again, make absolutely sure we're still within XML-set limits
-			pSector->bBloodCats = (INT8)min( pSector->bBloodCats, ubMaxBloodcats);
-			pSector->bBloodCats = (INT8)max( pSector->bBloodCats, ubMinBloodcats);
+			pSector->bBloodCats = (std::min)( pSector->bBloodCats, INT8(ubMaxBloodcats));
+			pSector->bBloodCats = (std::max)( pSector->bBloodCats, INT8(ubMinBloodcats));
 		}
 		else
 		{

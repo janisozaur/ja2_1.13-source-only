@@ -599,7 +599,7 @@ void DetermineItemsScrolling()
 	//Right most scroll position.	Calculated by taking every pair of numItems rounded up,
 	//and subtracting 7 (because a scroll index 0 is disabled if there are <=12 items,
 	//index 1 for <=14 items, index 2 for <=16 items...
-	if( eInfo.sScrollIndex == max( ((eInfo.sNumItems+1)/2)-6, 0 ) )
+	if( eInfo.sScrollIndex == (std::max)( ((eInfo.sNumItems+1)/2)-6, 0 ) )
 		DisableEditorButton( ITEMS_RIGHTSCROLL );
 	else
 		EnableEditorButton( ITEMS_RIGHTSCROLL );
@@ -686,7 +686,7 @@ void RenderEditorItemsInfo()
 		}
 	}
 	//draw item index no & the numbers of each visible item that currently resides in the world.
-	maxIndex = min( maxIndex, eInfo.sNumItems-1 );
+	maxIndex = (std::min)( maxIndex, eInfo.sNumItems-1 );
 	for( i = minIndex; i <= maxIndex; i++ )
 	{
 		x = iScreenWidthOffset + (i/2 - eInfo.sScrollIndex)*60 + 110;
@@ -1019,7 +1019,7 @@ void AddSelectedItemToWorld( INT32 sGridNo )
 		if(gTempObject.usItem != OWNERSHIP)//dnl ch35 110909
 		{
 			(*pObject)[0]->data.objectStatus = (INT8)(70 + Random( 26 ));
-			(*pObject)[0]->data.sRepairThreshold = max(1, min(100, (100 + (*pObject)[0]->data.objectStatus)/2 ));
+			(*pObject)[0]->data.sRepairThreshold = (std::max)(1, (std::min)(100, (100 + (*pObject)[0]->data.objectStatus)/2 ));
 		}
 	}
 	if( pItem->usItemClass & IC_GUN )
@@ -1756,17 +1756,17 @@ void ScrollEditorItemsInfo(BOOLEAN fForward)//dnl ch80 011213
 {
 	if(fForward)
 	{
-		if(eInfo.sScrollIndex < max(0, (eInfo.sNumItems+1)/2-6))
+		if(eInfo.sScrollIndex < (std::max)(0, (eInfo.sNumItems+1)/2-6))
 		{
 			if(_KeyDown(17))// CTRL
 			{
 				if(_KeyDown(16))// SHIFT
-					eInfo.sScrollIndex = max(0, (eInfo.sNumItems+1)/2-6);
+					eInfo.sScrollIndex = (std::max)(0, (eInfo.sNumItems+1)/2-6);
 				else
-					eInfo.sScrollIndex = min(eInfo.sScrollIndex+60, (eInfo.sNumItems+1)/2-6);
+					eInfo.sScrollIndex = (std::min)(eInfo.sScrollIndex+60, (eInfo.sNumItems+1)/2-6);
 			}
 			else if(_KeyDown(16))
-				eInfo.sScrollIndex = min(eInfo.sScrollIndex+6, (eInfo.sNumItems+1)/2-6);
+				eInfo.sScrollIndex = (std::min)(eInfo.sScrollIndex+6, (eInfo.sNumItems+1)/2-6);
 			else
 				eInfo.sScrollIndex++;
 		}
@@ -1780,10 +1780,10 @@ void ScrollEditorItemsInfo(BOOLEAN fForward)//dnl ch80 011213
 				if(_KeyDown(16))// SHIFT
 					eInfo.sScrollIndex = 0;
 				else
-					eInfo.sScrollIndex = max(eInfo.sScrollIndex-60, 0);
+					eInfo.sScrollIndex = (std::max)(eInfo.sScrollIndex-60, 0);
 			}
 			else if(_KeyDown(16))
-				eInfo.sScrollIndex = max(eInfo.sScrollIndex-6, 0);
+				eInfo.sScrollIndex = (std::max)(eInfo.sScrollIndex-6, 0);
 			else
 				eInfo.sScrollIndex--;
 		}

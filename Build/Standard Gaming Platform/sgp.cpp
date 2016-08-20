@@ -1617,8 +1617,8 @@ void GetRuntimeSettings( )
 			iResY = 1600;
 			break;
 		case _CustomRes:
-			iResX = max( (int)oProps.getIntProperty(L"Ja2 Settings", L"CUSTOM_SCREEN_RESOLUTION_X", -1), 640 );
-			iResY = max( (int)oProps.getIntProperty(L"Ja2 Settings", L"CUSTOM_SCREEN_RESOLUTION_Y", -1), 480 );
+			iResX = (std::max)( (int)oProps.getIntProperty(L"Ja2 Settings", L"CUSTOM_SCREEN_RESOLUTION_X", -1), 640 );
+			iResY = (std::max)( (int)oProps.getIntProperty(L"Ja2 Settings", L"CUSTOM_SCREEN_RESOLUTION_Y", -1), 480 );
 
 			if (iResX < 800 || iResY < 600)
 				iResolution = _640x480;

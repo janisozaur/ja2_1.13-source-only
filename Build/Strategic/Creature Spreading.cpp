@@ -420,7 +420,7 @@ void InitCreatureQuest()
 	//iNumMinesInfectible = fMineInfectible[0] + fMineInfectible[1] + fMineInfectible[2] + fMineInfectible[3];
 
 	//count actual infectible sites, use min of infectible sites defined in xml and initmines.lua script in case they do not tally
-	for (x = 0; x < min( NUMBER_OF_INFECTIBLE_SITES, iNumMinesInfectibleLUA ); ++x)
+	for (x = 0; x < (std::min)( INT32(NUMBER_OF_INFECTIBLE_SITES), iNumMinesInfectibleLUA ); ++x)
 	{
 		iNumMinesInfectible += fMineInfectible[x];
 	}
@@ -439,7 +439,7 @@ void InitCreatureQuest()
 
 	iChosenMine = 0;
 
-	for( x = 0; x < min( NUMBER_OF_INFECTIBLE_SITES, iNumMinesInfectibleLUA ); ++x )
+	for( x = 0; x < (std::min)( INT32(NUMBER_OF_INFECTIBLE_SITES), iNumMinesInfectibleLUA ); ++x )
 	{
 		if( iRandom )
 		{
@@ -618,10 +618,10 @@ DebugMsg (TOPIC_JA2,DBG_LEVEL_3,"CreatureSpreading1");
 			//Calculate the desired max population percentage based purely on current distant to creature range.
 			//The closer we are to the lair, the closer this value will be to 100.
 			iMaxPopulation = 100 - iDistance * 100 / giHabitatedDistance;
-			iMaxPopulation = max( iMaxPopulation, 25 );
+			iMaxPopulation = (std::max)( iMaxPopulation, 25 );
 			//Now, convert the previous value into a numeric population.
 			iMaxPopulation = iAbsoluteMaxPopulation * iMaxPopulation / 100;
-			iMaxPopulation = max( iMaxPopulation, 4 );
+			iMaxPopulation = (std::max)( iMaxPopulation, 4 );
 
 
 			//The chance to populate a sector is higher for lower populations.	This is calculated on
@@ -1852,7 +1852,7 @@ BOOLEAN LoadCreatureDirectives( HWFILE hFile, UINT32 uiSavedGameVersion )
 	{
 		//quest finished/lair doesn't exist yet -- it's okay
 	}
-	else if( giLairID <= min( NUMBER_OF_INFECTIBLE_SITES, iNumMinesInfectibleLUA ) )
+	else if( giLairID <= (std::min)( INT32(NUMBER_OF_INFECTIBLE_SITES), iNumMinesInfectibleLUA ) )
 	{
 		InitLair( giLairID );
 	}

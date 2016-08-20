@@ -1683,7 +1683,7 @@ void RenderEncyclopediaData_NEW(  )
 		CHECKV( hVObject ); CHECKV( hVObject->pETRLEObject);
 		// 'min( xDest/xSrc, yDest/ySrc )'
 		scaleRatio = hVObject->pETRLEObject->usWidth? (FLOAT)(shadowWidth - 2*ENC_DATA_GAP)/hVObject->pETRLEObject->usWidth: 0.0f;
-		scaleRatio = min( scaleRatio, hVObject->pETRLEObject->usHeight? (FLOAT)(ENC_DATA_IMAGE_HEIGHT - 2*ENC_DATA_GAP)/hVObject->pETRLEObject->usHeight: 0.0f );
+		scaleRatio = (std::min)( scaleRatio, hVObject->pETRLEObject->usHeight? (FLOAT)(ENC_DATA_IMAGE_HEIGHT - 2*ENC_DATA_GAP)/hVObject->pETRLEObject->usHeight: 0.0f );
 		// blt original image into extraBuffer, as there might be negative offsets it gets rendered 100 pix shifted
 		ColorFillVideoSurfaceArea( guiEXTRABUFFER, 0, 0, 100 + shadowWidth, 100 + ENC_DATA_IMAGE_HEIGHT, 0 );
 		BltVideoObjectFromIndex( guiEXTRABUFFER, gstEncyclopediaDataEntry.uiImageID, 0, 100, 100, VO_BLT_SRCTRANSPARENCY, NULL );

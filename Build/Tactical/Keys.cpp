@@ -622,7 +622,7 @@ BOOLEAN ExamineDoorForTraps( SOLDIERTYPE * pSoldier, DOOR * pDoor )
 			{
 				pDoor->bPerceivedTrapped = DOOR_PERCEIVED_TRAPPED;
 				// SANDRO - add some exp for trap exposion
-				StatChange( pSoldier, WISDOMAMT, ( UINT16 ) ( max(1,(pDoor->ubTrapLevel - 1)) ), FALSE );
+				StatChange( pSoldier, WISDOMAMT, ( UINT16 ) ( (std::max)(1,(pDoor->ubTrapLevel - 1)) ), FALSE );
 				return( TRUE );
 			}
 		}

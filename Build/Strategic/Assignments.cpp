@@ -2996,7 +2996,7 @@ UINT32 CalculateInterrogationValue(SOLDIERTYPE *pSoldier, UINT16 *pusMaxPts )
 				{
 					FLOAT penalty = (FLOAT)((*pusMaxPts - gFacilityTypes[cnt].AssignmentData[FAC_INTERROGATE_PRISONERS].usPrisonBaseLimit)) / (FLOAT)(gFacilityTypes[cnt].AssignmentData[FAC_INTERROGATE_PRISONERS].usPrisonBaseLimit);
 
-					performancemodifier *= max( 0.67f, 1.0f - penalty );
+					performancemodifier *= (std::max)( 0.67f, 1.0f - penalty );
 				}
 
 				break;
@@ -3004,7 +3004,7 @@ UINT32 CalculateInterrogationValue(SOLDIERTYPE *pSoldier, UINT16 *pusMaxPts )
 		}
 	}
 
-	performancemodifier = min(1000,  max(10, performancemodifier) );
+	performancemodifier = (std::min)(UINT16(1000),  (std::max)(UINT16(10), performancemodifier) );
 
 	usInterrogationPoints = (usInterrogationPoints * performancemodifier) / (700000);
 
@@ -3039,7 +3039,7 @@ UINT32 CalculatePrisonGuardValue(SOLDIERTYPE *pSoldier )
 		usValue += 25 * NUM_SKILL_TRAITS( pSoldier, MARTIALARTS_OT ) + 25 * NUM_SKILL_TRAITS( pSoldier, HANDTOHAND_OT ) + 10 * HAS_SKILL_TRAIT( pSoldier, KNIFING_OT );
 	}
 
-	usValue = (usValue * (100 + max(0, pSoldier->GetBackgroundValue(BG_PERC_GUARD)))) / 100;
+	usValue = (usValue * (100 + (std::max)(INT16(0), pSoldier->GetBackgroundValue(BG_PERC_GUARD)))) / 100;
 
 	// adjust for fatigue
 	ReducePointsForFatigue( pSoldier, &usValue );
@@ -3215,7 +3215,7 @@ UINT32 CalculateSnitchInterrogationValue(SOLDIERTYPE *pSoldier, UINT16 *pusMaxPt
 		}
 	}
 
-	performancemodifier = min(1000,  max(10, (UINT32)(gSkillTraitValues.fSNTPrisonSnitchInterrogationMultiplier * performancemodifier) ) );
+	performancemodifier = (std::min)(UINT16(1000),  (std::max)(UINT16(10), (UINT16)(gSkillTraitValues.fSNTPrisonSnitchInterrogationMultiplier * performancemodifier) ) );
 
 	usInterrogationPoints = (usInterrogationPoints * performancemodifier) / (650000);
 
@@ -3356,7 +3356,7 @@ BOOL HandleSnitchExposition(SOLDIERTYPE *pSoldier)
 		else // no, he didn't
 		{
 			// calculate how long it will take guards to react
-			UINT8 ubReactionTime = numprisoners / max(1, CalculateAllGuardsValueInPrison( pSoldier->sSectorX, pSoldier->sSectorY, pSoldier->bSectorZ ) );
+			UINT8 ubReactionTime = numprisoners / (std::max)(UINT32(1), CalculateAllGuardsValueInPrison( pSoldier->sSectorX, pSoldier->sSectorY, pSoldier->bSectorZ ) );
 			UINT16 usDamageTaken = 0;
 
 			// decide prisoners' action
@@ -3380,7 +3380,7 @@ BOOL HandleSnitchExposition(SOLDIERTYPE *pSoldier)
 					}
 					// instead of normal damage take breath damage
 					//pSoldier->SoldierTakeDamage( 0, 0, usDamageTaken, TAKE_DAMAGE_HANDTOHAND, NOBODY, NOWHERE, 0, TRUE );
-					pSoldier->bBreath = max( 0, pSoldier->bBreath - usDamageTaken );
+					pSoldier->bBreath = (std::max)( 0, pSoldier->bBreath - usDamageTaken );
 					// he drowned?
 					if( pSoldier->bBreath == 0 )
 					{
@@ -3465,7 +3465,7 @@ BOOL HandleSnitchExposition(SOLDIERTYPE *pSoldier)
 					}
 					// instead of normal damage take breath damage
 					//pSoldier->SoldierTakeDamage( 0, 0, usDamageTaken, TAKE_DAMAGE_HANDTOHAND, NOBODY, NOWHERE, 0, TRUE );
-					pSoldier->bBreath = max( 0, pSoldier->bBreath - usDamageTaken );
+					pSoldier->bBreath = (std::max)( 0, pSoldier->bBreath - usDamageTaken );
 					// he's strangled?
 					if( pSoldier->bBreath == 0 )
 					{
@@ -3660,7 +3660,7 @@ void HealCharacters( SOLDIERTYPE *pDoctor, INT16 sX, INT16 sY, INT8 bZ )
 					// can heal and is patient, heal them
 					UINT16 healingdone = HealPatient( pTeamSoldier, pDoctor, usEvenHealingAmount );
 
-					usRemainingHealingPts = max( 0, usRemainingHealingPts - healingdone );
+					usRemainingHealingPts = (std::max)( 0, usRemainingHealingPts - healingdone );
 				}
 			}
 		}
@@ -3704,7 +3704,7 @@ void HealCharacters( SOLDIERTYPE *pDoctor, INT16 sX, INT16 sY, INT8 bZ )
 					usOldLeftOvers = usRemainingHealingPts;
 					UINT16 healingdone = HealPatient( pWorstHurtSoldier, pDoctor, usRemainingHealingPts );
 
-					usRemainingHealingPts = max( 0, usRemainingHealingPts - healingdone );
+					usRemainingHealingPts = (std::max)( 0, usRemainingHealingPts - healingdone );
 
 					// couldn't expend any pts, leave
 					if( usRemainingHealingPts == usOldLeftOvers )
@@ -3936,7 +3936,7 @@ UINT16 HealPatient( SOLDIERTYPE *pPatient, SOLDIERTYPE * pDoctor, UINT16 usHealA
 	UINT16 usTotalMedPoints = TotalMedicalKitPoints( pDoctor );
 
 	// we are limited by our supplies
-	UINT16 ptsleft = min( usHealAmount, (usTotalMedPoints * 100) / bMedFactor );
+	UINT16 ptsleft = (std::min)( usHealAmount, UINT16((usTotalMedPoints * 100) / bMedFactor) );
 
 	//////// DETERMINE LIFE HEAL ////////////////////
 	// Look how much life do we need to heal
@@ -4012,14 +4012,14 @@ UINT16 HealPatient( SOLDIERTYPE *pPatient, SOLDIERTYPE * pDoctor, UINT16 usHealA
 			bPointsHealed = (pPatient->sFractLife / 100);
 			pPatient->sFractLife %= 100;
 
-			pPatient->stats.bLife = min( pPatient->stats.bLifeMax, (pPatient->stats.bLife + bPointsHealed) );
+			pPatient->stats.bLife = (std::min)( pPatient->stats.bLifeMax, INT8(pPatient->stats.bLife + bPointsHealed) );
 		}
 		else if ( pPatient->stats.bLife < OKLIFE && ((pPatient->sFractLife / gGameExternalOptions.ubPointCostPerHealthBelowOkLife) >= 100) )
 		{
 			bPointsHealed = ((pPatient->sFractLife / gGameExternalOptions.ubPointCostPerHealthBelowOkLife) / 100);
 			pPatient->sFractLife %= 100;
 
-			pPatient->stats.bLife = min( pPatient->stats.bLifeMax, (pPatient->stats.bLife + bPointsHealed) );
+			pPatient->stats.bLife = (std::min)( pPatient->stats.bLifeMax, INT8(pPatient->stats.bLife + bPointsHealed) );
 		}
 
 		// when being healed normally, reduce insta-healable HPs value
@@ -4084,7 +4084,7 @@ UINT16 HealPatient( SOLDIERTYPE *pPatient, SOLDIERTYPE * pDoctor, UINT16 usHealA
 	}
 
 	// Finally use all kit points (we are sure, we have that much)
-	if ( UseTotalMedicalKitPoints( pDoctor, max(1, ((sHundredsToHeal_Used + sHundredsToRepair_Used + sHundredsToDiseaseCure_Used) * bMedFactor) / 100) ) == FALSE )
+	if ( UseTotalMedicalKitPoints( pDoctor, (std::max)(1, ((sHundredsToHeal_Used + sHundredsToRepair_Used + sHundredsToDiseaseCure_Used) * bMedFactor) / 100) ) == FALSE )
 	{
 		// throw message if this went wrong for feedback on debugging
 #ifdef JA2TESTVERSION
@@ -4546,7 +4546,7 @@ void DoActualRepair( SOLDIERTYPE * pSoldier, UINT16 usItem, INT16 * pbStatus, IN
 		if (gGameOptions.fNewTraitSystem)
 		{
 			if (HAS_SKILL_TRAIT( pSoldier, TECHNICIAN_NT ))
-				sRepairCostAdj += (150 * max( 0, ((100 - gSkillTraitValues.ubTERepairElectronicsPenaltyReduction * NUM_SKILL_TRAITS( pSoldier, TECHNICIAN_NT ))/100)));
+				sRepairCostAdj += (150 * (std::max)( 0, ((100 - gSkillTraitValues.ubTERepairElectronicsPenaltyReduction * NUM_SKILL_TRAITS( pSoldier, TECHNICIAN_NT ))/100)));
 			else
 				sRepairCostAdj += 150;
 		}
@@ -4622,7 +4622,7 @@ BOOLEAN RepairObject( SOLDIERTYPE * pSoldier, SOLDIERTYPE * pOwner, OBJECTTYPE *
 			DoActualRepair( pSoldier, pObj->usItem, &((*pObj)[ubLoop]->data.objectStatus), threshold, pubRepairPtsLeft );
 
 			if ( gGameExternalOptions.fAdvRepairSystem && gSkillTraitValues.fTETraitsCanRestoreItemThreshold && (HAS_SKILL_TRAIT( pSoldier, TECHNICIAN_NT )) && ((Item[pObj->usItem].usItemClass & (IC_WEAPON | IC_ARMOUR))) )
-				(*pObj)[ubLoop]->data.sRepairThreshold = max((*pObj)[ubLoop]->data.sRepairThreshold, (*pObj)[ubLoop]->data.objectStatus);
+				(*pObj)[ubLoop]->data.sRepairThreshold = (std::max)((*pObj)[ubLoop]->data.sRepairThreshold, (*pObj)[ubLoop]->data.objectStatus);
 
 			// if the item was repaired to full status and the repair wa at least 5%, add a point
 			if ( (*pObj)[ubLoop]->data.objectStatus == threshold && (((*pObj)[ubLoop]->data.objectStatus - ubBeforeRepair) > 4 ))
@@ -5074,7 +5074,7 @@ void RestCharacter( SOLDIERTYPE *pSoldier )
 	for ( int i = 0; i < NUM_DISEASES; ++i )
 		diseasemaxbreathreduction += Disease[i].usMaxBreath * pSoldier->GetDiseaseMagnitude( i );
 
-	pSoldier->bBreathMax = min( pSoldier->bBreathMax, 100 - diseasemaxbreathreduction );
+	pSoldier->bBreathMax = (std::min)( pSoldier->bBreathMax, INT8(100 - diseasemaxbreathreduction) );
 
 	if( pSoldier->bBreathMax > 100 )
 	{
@@ -5169,7 +5169,7 @@ void FatigueCharacter( SOLDIERTYPE *pSoldier )
 		if( iPercentEncumbrance > 100 )
 		{
 			iBreathLoss = (INT32)(bMaxBreathLoss * iPercentEncumbrance / 100);
-			bMaxBreathLoss = (float)min( 127, iBreathLoss );
+			bMaxBreathLoss = (float)(std::min)( 127, iBreathLoss );
 
 			// Flugente: dynamic opinions: other mercs might get annoyed, because we are slowing down the team
 			HandleDynamicOpinionChange( pSoldier, OPINIONEVENT_SLOWSUSDOWN, TRUE, TRUE );
@@ -5701,7 +5701,7 @@ void HandleDiseaseSectorTreatment()
 			UINT16 usTotalMedPoints = TotalMedicalKitPoints( pSoldier );
 
 			// doctoring points are limited by medical supplies
-			ptsavailable = min( ptsavailable, usTotalMedPoints * 100 );
+			ptsavailable = (std::min)( ptsavailable, UINT16(usTotalMedPoints * 100) );
 
 			// if we are doctoring in a sector, then we know for sure that there is disease here
 			SECTORINFO *pSectorInfo = &(SectorInfo[ SECTOR( pSoldier->sSectorX, pSoldier->sSectorY ) ]);
@@ -6108,9 +6108,9 @@ INT16 GetBonusTrainingPtsDueToInstructor( SOLDIERTYPE *pInstructor, SOLDIERTYPE 
 	{
 		// SANDRO - make difference between stats min 10, so if teaching trait is in place and instructor has lesser stat than trainee, the value doesn't go negative
 		// calculate effective training pts
-		sTrainingPts = max( 10, ( bTrainerEffSkill - bTraineeSkill )) * ( bTraineeEffWisdom + ( EffectiveWisdom( pInstructor ) + EffectiveLeadership( pInstructor ) ) / 2 ) / gGameExternalOptions.ubInstructedTrainingDivisor;
+		sTrainingPts = (std::max)( 10, ( bTrainerEffSkill - bTraineeSkill )) * ( bTraineeEffWisdom + ( EffectiveWisdom( pInstructor ) + EffectiveLeadership( pInstructor ) ) / 2 ) / gGameExternalOptions.ubInstructedTrainingDivisor;
 		// calculate normal training pts - what it would be if his stats were "normal" (ignoring drugs, fatigue)
-		*pusMaxPts	= max( 10, ( bTrainerNatSkill - bTraineeSkill )) * ( bTraineeNatWisdom + ( pInstructor->stats.bWisdom + pInstructor->stats.bLeadership ) / 2 ) / gGameExternalOptions.ubInstructedTrainingDivisor;
+		*pusMaxPts	= (std::max)( 10, ( bTrainerNatSkill - bTraineeSkill )) * ( bTraineeNatWisdom + ( pInstructor->stats.bWisdom + pInstructor->stats.bLeadership ) / 2 ) / gGameExternalOptions.ubInstructedTrainingDivisor;
 
 		// penalty for non-specialized mercs
 		bTrainingBonus = bTrainingBonus * (100 + gSkillTraitValues.bSpeedModifierTeachingOthers) / 100;
@@ -6785,7 +6785,7 @@ void HandlePrisonerProcessingInSector( INT16 sMapX, INT16 sMapY, INT8 bZ )
 	for ( int i = PRISONER_ADMIN; i < PRISONER_MAX; ++i )
 	{
 		prisonersinterrogated += interrogatedprisoners[i];
-		pSectorInfo->uiInterrogationHundredsLeft[i] = min(255, interrogationpoints[i]);
+		pSectorInfo->uiInterrogationHundredsLeft[i] = (std::min)(UINT32(255), interrogationpoints[i]);
 	}
 
 	if ( !prisonersinterrogated )
@@ -6998,8 +6998,8 @@ void HandlePrisonerProcessingInSector( INT16 sMapX, INT16 sMapY, INT8 bZ )
 					UINT16 exppoints = (UINT16)(expratio * CalculateSnitchInterrogationValue( pSoldier, &tmp ));
 
 					// no leaership gain, but higher wisdom and experience gain
-					StatChange( pSoldier, WISDOMAMT, max( 0, exppoints ), TRUE );
-					StatChange( pSoldier, EXPERAMT, max( 0, exppoints - 1 ), TRUE );
+					StatChange( pSoldier, WISDOMAMT, (std::max)( UINT16(0), exppoints ), TRUE );
+					StatChange( pSoldier, EXPERAMT, (std::max)( 0, exppoints - 1 ), TRUE );
 				}
 			}
 		}
@@ -7150,9 +7150,9 @@ void HandlePrison( INT16 sMapX, INT16 sMapY, INT8 bZ )
 	if( StrategicMap[ sMapX + sMapY * MAP_WORLD_X ].fEnemyControlled == TRUE )
 	{
 		// add enemies
-		pSectorInfo->ubNumTroops = min( 255, pSectorInfo->ubNumTroops + aPrisoners[PRISONER_REGULAR] );
-		pSectorInfo->ubNumElites = min( 255, pSectorInfo->ubNumElites + aPrisoners[PRISONER_ELITE] + aPrisoners[PRISONER_OFFICER] );
-		pSectorInfo->ubNumAdmins = min( 255, pSectorInfo->ubNumAdmins + aPrisoners[PRISONER_ADMIN] );
+		pSectorInfo->ubNumTroops = (std::min)( 255, pSectorInfo->ubNumTroops + aPrisoners[PRISONER_REGULAR] );
+		pSectorInfo->ubNumElites = (std::min)( 255, pSectorInfo->ubNumElites + aPrisoners[PRISONER_ELITE] + aPrisoners[PRISONER_OFFICER] );
+		pSectorInfo->ubNumAdmins = (std::min)( 255, pSectorInfo->ubNumAdmins + aPrisoners[PRISONER_ADMIN] );
 
 		// all prisoners are free, reduce count!
 		DeleteAllPrisoners(pSectorInfo);
@@ -7204,12 +7204,12 @@ void HandlePrison( INT16 sMapX, INT16 sMapY, INT8 bZ )
 		// in a riot, prisoners escape and are added to the sector as enemies. Not all might escape - the worse the prisoner/guard ratio, the more escape
 		INT16 escapedprisoners[PRISONER_MAX] = {0};
 		for (int i = PRISONER_ADMIN; i < PRISONER_MAX; ++i )
-			escapedprisoners[i] = min( Random( aPrisoners[i] * prisonertoguardratio ), aPrisoners[i] );
+			escapedprisoners[i] = (std::min)( INT16(Random( aPrisoners[i] * prisonertoguardratio )), aPrisoners[i] );
 
 		// add enemies (PRISONER_CIVILIAN just flee)
-		pSectorInfo->ubNumTroops = min( 512, pSectorInfo->ubNumTroops + escapedprisoners[PRISONER_REGULAR] );
-		pSectorInfo->ubNumElites = min( 512, pSectorInfo->ubNumElites + escapedprisoners[PRISONER_ELITE] + escapedprisoners[PRISONER_OFFICER] + escapedprisoners[PRISONER_GENERAL] );
-		pSectorInfo->ubNumAdmins = min( 512, pSectorInfo->ubNumAdmins + escapedprisoners[PRISONER_ADMIN] );
+		pSectorInfo->ubNumTroops = (std::min)( 512, pSectorInfo->ubNumTroops + escapedprisoners[PRISONER_REGULAR] );
+		pSectorInfo->ubNumElites = (std::min)( 512, pSectorInfo->ubNumElites + escapedprisoners[PRISONER_ELITE] + escapedprisoners[PRISONER_OFFICER] + escapedprisoners[PRISONER_GENERAL] );
+		pSectorInfo->ubNumAdmins = (std::min)( 512, pSectorInfo->ubNumAdmins + escapedprisoners[PRISONER_ADMIN] );
 
 		// reduce prisoner count!
 		// we have to change the sign
@@ -7581,7 +7581,7 @@ void HandleFortification()
 
 					if ( pSectorInfo )
 					{
-						pSectorInfo->dFortification_UnappliedProgress = min( pSectorInfo->dFortification_UnappliedProgress + pSoldier->GetConstructionPoints( ), pSectorInfo->dFortification_MaxPossible );
+						pSectorInfo->dFortification_UnappliedProgress = (std::min)( pSectorInfo->dFortification_UnappliedProgress + pSoldier->GetConstructionPoints( ), pSectorInfo->dFortification_MaxPossible );
 					}
 				}
 				else
@@ -7591,7 +7591,7 @@ void HandleFortification()
 
 					if ( pSectorInfo )
 					{
-						pSectorInfo->dFortification_UnappliedProgress = min( pSectorInfo->dFortification_UnappliedProgress + pSoldier->GetConstructionPoints( ), pSectorInfo->dFortification_MaxPossible );
+						pSectorInfo->dFortification_UnappliedProgress = (std::min)( pSectorInfo->dFortification_UnappliedProgress + pSoldier->GetConstructionPoints( ), pSectorInfo->dFortification_MaxPossible );
 					}
 				}
 
@@ -21387,10 +21387,10 @@ BOOLEAN DisplayMoveItemsMenu( SOLDIERTYPE *pSoldier )
 			else if ( townid == BLANK_SECTOR )
 			{
 				// check whether adjacent sectors belong to the town we search for
-				if ( GetTownIdForSector( min( sectorX + 1, MAP_WORLD_X - 2 ), sectorY ) == bTownId )	goodsector = TRUE;
-				if ( GetTownIdForSector( max( sectorX - 1, 1 ), sectorY ) == bTownId )					goodsector = TRUE;
-				if ( GetTownIdForSector( sectorX, min( sectorY + 1, MAP_WORLD_Y - 2 ) ) == bTownId )	goodsector = TRUE;
-				if ( GetTownIdForSector( sectorX, max( sectorY - 1, 1 ) ) == bTownId )					goodsector = TRUE;
+				if ( GetTownIdForSector( (std::min)( sectorX + 1, MAP_WORLD_X - 2 ), sectorY ) == bTownId )	goodsector = TRUE;
+				if ( GetTownIdForSector( (std::max)( sectorX - 1, 1 ), sectorY ) == bTownId )					goodsector = TRUE;
+				if ( GetTownIdForSector( sectorX, (std::min)( sectorY + 1, MAP_WORLD_Y - 2 ) ) == bTownId )	goodsector = TRUE;
+				if ( GetTownIdForSector( sectorX, (std::max)( sectorY - 1, 1 ) ) == bTownId )					goodsector = TRUE;
 			}
 
 			if ( goodsector )
@@ -21439,10 +21439,10 @@ BOOLEAN DisplayMoveItemsMenu( SOLDIERTYPE *pSoldier )
 				else if ( townid == BLANK_SECTOR )
 				{
 					// check whether adjacent sectors belong to the town we search for
-					if ( GetTownIdForSector( min( sectorX + 1, MAP_WORLD_X - 2 ), sectorY ) == bTownId )	goodsector = TRUE;
-					if ( GetTownIdForSector( max( sectorX - 1, 1 ), sectorY ) == bTownId )					goodsector = TRUE;
-					if ( GetTownIdForSector( sectorX, min( sectorY + 1, MAP_WORLD_Y - 2 ) ) == bTownId )	goodsector = TRUE;
-					if ( GetTownIdForSector( sectorX, max( sectorY - 1, 1 ) ) == bTownId )					goodsector = TRUE;
+					if ( GetTownIdForSector( (std::min)( sectorX + 1, MAP_WORLD_X - 2 ), sectorY ) == bTownId )	goodsector = TRUE;
+					if ( GetTownIdForSector( (std::max)( sectorX - 1, 1 ), sectorY ) == bTownId )					goodsector = TRUE;
+					if ( GetTownIdForSector( sectorX, (std::min)( sectorY + 1, MAP_WORLD_Y - 2 ) ) == bTownId )	goodsector = TRUE;
+					if ( GetTownIdForSector( sectorX, (std::max)( sectorY - 1, 1 ) ) == bTownId )					goodsector = TRUE;
 				}
 
 				if ( goodsector )

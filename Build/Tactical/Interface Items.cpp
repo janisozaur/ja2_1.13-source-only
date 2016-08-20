@@ -770,8 +770,8 @@ void GenerateProsString( STR16 zItemPros, OBJECTTYPE * pObject, UINT32 uiPixLimi
 	if ( gGameExternalOptions.fWeaponOverheating )
 	{
 		FLOAT overheatdamagepercentage = GetGunOverheatDamagePercentage( pObject );
-		FLOAT accuracymalus = (FLOAT)((max(1.0, overheatdamagepercentage) - 1.0) * 0.1);
-		accuracyheatmultiplicator = (FLOAT)max(0.0, 1.0 - accuracymalus);
+		FLOAT accuracymalus = ((std::max)(1.0f, overheatdamagepercentage) - 1.0) * 0.1;
+		accuracyheatmultiplicator = (std::max)(0.0f, 1.0f - accuracymalus);
 	}
 
 	//CHRISL: TODO - This needs to be updated for NCTH
@@ -915,8 +915,8 @@ void GenerateConsString( STR16 zItemCons, OBJECTTYPE * pObject, UINT32 uiPixLimi
 	if ( gGameExternalOptions.fWeaponOverheating )
 	{
 		FLOAT overheatdamagepercentage = GetGunOverheatDamagePercentage( pObject );
-		FLOAT accuracymalus = (FLOAT)((max(1.0, overheatdamagepercentage) - 1.0) * 0.1);
-		accuracyheatmultiplicator = (FLOAT)max(0.0, 1.0 - accuracymalus);
+		FLOAT accuracymalus = ((std::max)(1.0f, overheatdamagepercentage) - 1.0) * 0.1;
+		accuracyheatmultiplicator = (std::max)(0.0f, 1.0f - accuracymalus);
 	}
 
 	//CHRISL: TODO - This needs to be updated for NCTH
@@ -1937,7 +1937,7 @@ void popupCallbackPlaceLeastDamagedFromStack(OBJECTTYPE * pObj, UINT16 pocket, S
 				INT16 pocketType = pocketTypeInSlot( pSoldier, pocket );
 
 				if( pocketType != -1 ){
-					numObjectsToPlace =  min( pObj->objectStack.size(), LBEPocketType[ pocketType ].ItemCapacityPerSize[ Item[pObj->usItem].ItemSize ] );
+					numObjectsToPlace =  (std::min)( UINT8(pObj->objectStack.size()), LBEPocketType[ pocketType ].ItemCapacityPerSize[ Item[pObj->usItem].ItemSize ] );
 				} else {
 					numObjectsToPlace = 1;
 				}
@@ -2090,7 +2090,7 @@ void addItemsToPocketPopup( SOLDIERTYPE *pSoldier, INT16 sPocket, POPUP* popup, 
 		}
 
 		if( pocketType != -1 ){
-			numObjectsToPlace =   min( itr->second->objectStack.size(), LBEPocketType[ pocketType ].ItemCapacityPerSize[ Item[itr->second->usItem].ItemSize ] );
+			numObjectsToPlace =   (std::min)( UINT8(itr->second->objectStack.size()), LBEPocketType[ pocketType ].ItemCapacityPerSize[ Item[itr->second->usItem].ItemSize ] );
 		} else {
 			numObjectsToPlace = 1;
 		}
@@ -2283,7 +2283,7 @@ void addAmmoToPocketPopup( SOLDIERTYPE *pSoldier, INT16 sPocket, POPUP* popup )
 
 									UINT8 maxPerPocket = LBEPocketType[pocketTypeInSlot(pSoldier, sPocket)].ItemCapacityPerSize[ Item[loop].ItemSize ];
 
-									capacity = min( maxPerPocket, UINT8(ammoLeft/magSize) );
+									capacity = (std::min)( maxPerPocket, UINT8(ammoLeft/magSize) );
 								}
 								else if( CanItemFitInPosition(pSoldier, &pInventoryPoolList[i].object, sPocket, FALSE) )
 								{
@@ -3666,7 +3666,7 @@ void INVRenderSilhouette( UINT32 uiBuffer, INT16 PocketIndex, INT16 SilIndex, IN
 // Flugente: Function to get the number of the item condition string
 UINT8 GetTemperatureString( FLOAT overheatpercentage, UINT32* apRed, UINT32* apGreen, UINT32* abBlue )
 {
-	*apRed   = (UINT32) ( gGameExternalOptions.ubOverheatThermometerRedOffset + (255 - gGameExternalOptions.ubOverheatThermometerRedOffset) * ( (max(1.0, overheatpercentage) - 1.0)/(max(1.0, overheatpercentage)) ) );
+	*apRed   = (UINT32) ( gGameExternalOptions.ubOverheatThermometerRedOffset + (255 - gGameExternalOptions.ubOverheatThermometerRedOffset) * ( ((std::max)(1.0f, overheatpercentage) - 1.0)/((std::max)(1.0f, overheatpercentage)) ) );
 	*apGreen = 0;
 	*abBlue  = 0;
 
@@ -3975,8 +3975,8 @@ void INVRenderItem( UINT32 uiBuffer, SOLDIERTYPE * pSoldier, OBJECTTYPE  *pObjec
 				{
 					FLOAT condition = (*pObject)[0]->data.bTemperature / OVERHEATING_MAX_TEMPERATURE;
 
-					UINT32 red   = (UINT32) ( 126 + 127 * ( 1.0f - min(1.0f, condition) ) );	//127
-					UINT32 green = (UINT32) ( 54 + 200 * min(1.0f, condition ) );	//54 + 201 * ( min(1.0f, condition ) )
+					UINT32 red   = (UINT32) ( 126 + 127 * ( 1.0f - (std::min)(1.0f, condition) ) );	//127
+					UINT32 green = (UINT32) ( 54 + 200 * (std::min)(1.0f, condition ) );	//54 + 201 * ( (std::min)(1.0f, condition ) )
 					UINT32 blue  = 0;
 
 					UINT16 colour = Get16BPPColor( FROMRGB( red, green, blue ) );
@@ -7208,7 +7208,7 @@ void RenderItemDescriptionBox( )
 							FLOAT condition = (*gpItemDescObject)[0]->data.bTemperature / OVERHEATING_MAX_TEMPERATURE;
 
 							UINT32 red   = (UINT32) ( 127 );
-							UINT32 green = (UINT32) ( 54 + 201 * ( min(1.0f, condition ) ) );
+							UINT32 green = (UINT32) ( 54 + 201 * ( (std::min)(1.0f, condition ) ) );
 							UINT32 blue  = 0;
 
 							UINT8 FoodStringNum = 6;
@@ -7358,7 +7358,7 @@ void RenderItemDescriptionBox( )
 				// PROs
 				mprintf( gItemDescTextRegions[3].sLeft, gItemDescTextRegions[3].sTop, gzProsLabel );
 
-				sProsConsIndent = __max( StringPixLength( gzProsLabel, ITEMDESC_FONT ), StringPixLength( gzConsLabel, ITEMDESC_FONT ) ) + 10;
+				sProsConsIndent = (std::max)( StringPixLength( gzProsLabel, ITEMDESC_FONT ), StringPixLength( gzConsLabel, ITEMDESC_FONT ) ) + 10;
 				gzItemPros[0] = 0;
 				GenerateProsString( gzItemPros, gpItemDescObject, (gItemDescTextRegions[4].sRight - gItemDescTextRegions[4].sLeft) - StringPixLength( DOTDOTDOT, ITEMDESC_FONT ) );
 				if (gzItemPros[0] != 0)
@@ -9717,7 +9717,7 @@ BOOLEAN InitItemStackPopup( SOLDIERTYPE *pSoldier, UINT8 ubPosition, INT16 sInvX
 	//Restrict mouse cursor to panel
 	aRect.iLeft = sInvX + sOffSetX;
 	aRect.iTop = sInvY + sOffSetY;
-	aRect.iRight = aRect.iLeft + min(cnt,sItemWidth) * usPopupWidth;
+	aRect.iRight = aRect.iLeft + (std::min)(cnt,INT32(sItemWidth)) * usPopupWidth;
 	aRect.iBottom = aRect.iTop + (INT32)(ceil((float)cnt/(float)sItemWidth)+1) * usPopupHeight;
 	//aRect.iTop = sInvY;
 	//aRect.iLeft = sInvX;
@@ -12119,8 +12119,8 @@ void GetHelpTextForItem( STR16 pzStr, OBJECTTYPE *pObject, SOLDIERTYPE *pSoldier
 				if ( gGameExternalOptions.fWeaponOverheating )
 				{
 					FLOAT overheatdamagepercentage = GetGunOverheatDamagePercentage( pObject );
-					FLOAT accuracymalus = (FLOAT)((max(1.0, overheatdamagepercentage) - 1.0) * 0.1);
-					accuracyheatmultiplicator = (FLOAT)max(0.0, 1.0 - accuracymalus);
+					FLOAT accuracymalus = ((std::max)(1.0f, overheatdamagepercentage) - 1.0) * 0.1;
+					accuracyheatmultiplicator = (std::max)(0.0f, 1.0f - accuracymalus);
 				}
 
 				INT8 accuracy = (UsingNewCTHSystem()==true?Weapon[ usItem ].nAccuracy:Weapon[ usItem ].bAccuracy);
@@ -12274,8 +12274,8 @@ void GetHelpTextForItem( STR16 pzStr, OBJECTTYPE *pObject, SOLDIERTYPE *pSoldier
 				if ( gGameExternalOptions.fWeaponOverheating )
 				{
 					FLOAT overheatdamagepercentage = GetGunOverheatDamagePercentage( pObject );
-					FLOAT accuracymalus = (FLOAT)((max(1.0, overheatdamagepercentage) - 1.0) * 0.1);
-					accuracyheatmultiplicator = (FLOAT)max(0.0, 1.0 - accuracymalus);
+					FLOAT accuracymalus = ((std::max)(1.0f, overheatdamagepercentage) - 1.0) * 0.1;
+					accuracyheatmultiplicator = (FLOAT)(std::max)(0.0, 1.0 - accuracymalus);
 				}
 
 				//Info for weapons
@@ -12285,7 +12285,7 @@ void GetHelpTextForItem( STR16 pzStr, OBJECTTYPE *pObject, SOLDIERTYPE *pSoldier
 				if ( gGameExternalOptions.fAdvRepairSystem && gGameExternalOptions.fDirtSystem && ( sThreshold < 100 || bDirt > 0 ) )
 				{
 					#ifdef CHINESE
-						swprintf( pStr, L"%s [%d%£•(%d%£•)]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s\n %s %.2f%%",
+						swprintf( pStr, L"%s [%d%≈ÅƒΩ(%d%≈ÅƒΩ)]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s\n %s %.2f%%",
 					#else
 						swprintf( pStr, L"%s [%d%%(%d%%)]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s\n%s %.2f%%",
 					#endif
@@ -12313,7 +12313,7 @@ void GetHelpTextForItem( STR16 pzStr, OBJECTTYPE *pObject, SOLDIERTYPE *pSoldier
 				else if ( gGameExternalOptions.fAdvRepairSystem && sThreshold < 100 )
 				{
 					#ifdef CHINESE
-						swprintf( pStr, L"%s [%d%£•(%d%£•)]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s",
+						swprintf( pStr, L"%s [%d%≈ÅƒΩ(%d%≈ÅƒΩ)]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s",
 					#else
 						swprintf( pStr, L"%s [%d%%(%d%%)]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s",
 					#endif
@@ -12339,7 +12339,7 @@ void GetHelpTextForItem( STR16 pzStr, OBJECTTYPE *pObject, SOLDIERTYPE *pSoldier
 				else if ( gGameExternalOptions.fDirtSystem && bDirt > 0 )
 				{
 					#ifdef CHINESE
-						swprintf( pStr, L"%s [%d%£•]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s\n %s %.2f%%",
+						swprintf( pStr, L"%s [%d%≈ÅƒΩ]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s\n %s %.2f%%",
 					#else
 						swprintf( pStr, L"%s [%d%%]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s\n%s %.2f%%",
 					#endif
@@ -12366,7 +12366,7 @@ void GetHelpTextForItem( STR16 pzStr, OBJECTTYPE *pObject, SOLDIERTYPE *pSoldier
 				else
 				{
 					#ifdef CHINESE
-						swprintf( pStr, L"%s [%d%£•]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s",
+						swprintf( pStr, L"%s [%d%≈ÅƒΩ]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s",
 					#else
 						swprintf( pStr, L"%s [%d%%]\n%s %d\n%s %d\n%s %d (%d)\n%s (%d) %s\n%s %1.1f %s",
 					#endif
@@ -13618,7 +13618,7 @@ void TransformationMenuPopup_Arm( OBJECTTYPE* pObj )
 
 					// in realtime mode, remember the second when this event happened. Once suspicion is checked, we are either uncovered or, if enough time has passed, no longer suspicious
 					// in turnbase mode, remember our current APs. If a new turn has started or enough APs have been used, remove the flag
-					gpItemDescSoldier->usSkillCooldown[SOLDIER_COOLDOWN_COVERTOPS_TEMPORARYOVERT_SECONDS] = GetWorldTotalSeconds( ) + max( 1, appenalty / 25 );
+					gpItemDescSoldier->usSkillCooldown[SOLDIER_COOLDOWN_COVERTOPS_TEMPORARYOVERT_SECONDS] = GetWorldTotalSeconds( ) + (std::max)( 1, appenalty / 25 );
 					gpItemDescSoldier->usSkillCooldown[SOLDIER_COOLDOWN_COVERTOPS_TEMPORARYOVERT_APS] = appenalty;
 				}
 			}
@@ -13789,7 +13789,7 @@ void BombInventoryMessageBoxCallBack( UINT8 ubExitValue )
 			if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( gpItemDescSoldier, DEMOLITIONS_NT ))
 			{
 				// increase trap level for Demolitions trait
-				(*gpItemDescObject)[0]->data.bTrap = __min( max( 10, (8 + gSkillTraitValues.ubDEPlacedBombLevelBonus)), (( EffectiveExplosive( gpItemDescSoldier ) / 20) + (EffectiveExpLevel( gpItemDescSoldier ) / 3) + gSkillTraitValues.ubDEPlacedBombLevelBonus) );
+				(*gpItemDescObject)[0]->data.bTrap = __min( (std::max)( 10, (8 + gSkillTraitValues.ubDEPlacedBombLevelBonus)), (( EffectiveExplosive( gpItemDescSoldier ) / 20) + (EffectiveExpLevel( gpItemDescSoldier ) / 3) + gSkillTraitValues.ubDEPlacedBombLevelBonus) );
 			}
 			else
 			{

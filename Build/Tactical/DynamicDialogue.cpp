@@ -223,8 +223,8 @@ INT8	SoldierRelation( SOLDIERTYPE* pSoldierA, SOLDIERTYPE* pSoldierB )
 	bOpinion += gMercProfiles[pSoldierA->ubProfile].sDynamicOpinionLongTerm[pSoldierB->ubProfile];
 
 	// reasonable values
-	bOpinion = min( BUDDY_OPINION, bOpinion );
-	bOpinion = max( HATED_OPINION, bOpinion );
+	bOpinion = (std::min)( INT8(BUDDY_OPINION), bOpinion );
+	bOpinion = (std::max)( INT8(HATED_OPINION), bOpinion );
 
 	return bOpinion;
 }
@@ -438,7 +438,7 @@ void CreateSpeechEventsFromDynamicOpinionEvent( DynamicOpinionSpeechEvent aEvent
 		if ( gDynamicOpinionEvent[aEvent.data.event.ubEventId].sOpinionModifier > 0 )
 			agreemodifier_personal += 50;
 
-		chancetoagree = max( 0, 25 + agreemodifier_personal );
+		chancetoagree = (std::max)( 0, 25 + agreemodifier_personal );
 
 		// if he agrees, then this dialogue will soon be over - interjector won't have to play his part
 		if ( Chance( chancetoagree ) )
@@ -1080,7 +1080,7 @@ INT8 GetSidePosition( UINT8 aDostPosition )
 	{
 		if ( gDynamicOpinionSpeechInCurrentDialogue[i].usSide == aDostPosition )
 		{
-			bestpos = max( bestpos, gDynamicOpinionSpeechInCurrentDialogue[i].usNumonside );
+			bestpos = (std::max)( bestpos, INT8(gDynamicOpinionSpeechInCurrentDialogue[i].usNumonside) );
 		}
 	}
 
@@ -2074,7 +2074,7 @@ UINT8 HighestInventoryCoolness( SOLDIERTYPE* pSoldier )
 		// ... if Item exists
 		if ( pSoldier->inv[bLoop].exists( ) )
 		{
-			coolness = max( coolness, Item[pSoldier->inv[bLoop].usItem].ubCoolness );
+			coolness = (std::max)( coolness, Item[pSoldier->inv[bLoop].usItem].ubCoolness );
 		}
 	}
 

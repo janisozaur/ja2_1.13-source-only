@@ -52,8 +52,6 @@ const int	DL_Debug		= 4;
 void DisplayWeaponInfo( SOLDIERTYPE*, CHAR16*, UINT8, UINT8 );
 void DrawMouseTooltip(void);
 
-#define MAX(a, b) (a > b ? a : b)
-
 void SoldierTooltip( SOLDIERTYPE* pSoldier )
 {
 	if(!pSoldier)
@@ -134,7 +132,7 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 			if ( fMercIsUsingScope )
 			{
 				// set detail level to (at least) Full
-				ubTooltipDetailLevel = MAX(DL_Full,ubTooltipDetailLevel);
+				ubTooltipDetailLevel = (std::max)(UINT8(DL_Full), ubTooltipDetailLevel);
 			}
 		}
 		//SCORE: removed to enable scopes to affect range of tooltips.
@@ -187,12 +185,12 @@ void SoldierTooltip( SOLDIERTYPE* pSoldier )
 				if ( iRangeToTarget <= (INT32)(uiMaxTooltipDistance / 2) )
 				{
 					// at under half the maximum view distance set tooltip detail to (at least) Basic
-					ubTooltipDetailLevel = MAX(DL_Basic,ubTooltipDetailLevel);
+					ubTooltipDetailLevel = (std::max)(UINT8(DL_Basic), ubTooltipDetailLevel);
 				}
 				else if ( iRangeToTarget <= (INT32)uiMaxTooltipDistance )
 				{
 					// at under the maximum view distance set tooltip detail to (at least) Limited
-					ubTooltipDetailLevel = MAX(DL_Limited,ubTooltipDetailLevel);
+					ubTooltipDetailLevel = (std::max)(UINT8(DL_Limited), ubTooltipDetailLevel);
 				}
 				else
 				{

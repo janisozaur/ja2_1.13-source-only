@@ -262,16 +262,16 @@ void TownMilitiaTrainingCompleted( SOLDIERTYPE *pTrainer, INT16 sMapX, INT16 sMa
 	// Flugente: our pool of volunteers limits how many militia can be created
 	// if we can't train as many militia as we should due to lack of volunteers, the excess training goes into promoting militia
 	UINT8 promotionsfromvolunteers = iTrainingSquadSize;
-	iTrainingSquadSize = min( iTrainingSquadSize, GetVolunteerPool( ) );
+	iTrainingSquadSize = (std::min)( iTrainingSquadSize, (UINT8)GetVolunteerPool( ) );
 
 	if ( gGameExternalOptions.fMilitiaResources && !gGameExternalOptions.fMilitiaUseSectorInventory )
 	{
 		FLOAT val_gun, val_armour, val_misc;
 		GetResources( val_gun, val_armour, val_misc );
 
-		iTrainingSquadSize = min( iTrainingSquadSize, (INT32)val_gun );
-		iTrainingSquadSize = min( iTrainingSquadSize, (INT32)val_armour );
-		iTrainingSquadSize = min( iTrainingSquadSize, (INT32)val_misc );
+		iTrainingSquadSize = (std::min)( iTrainingSquadSize, (UINT8)val_gun );
+		iTrainingSquadSize = (std::min)( iTrainingSquadSize, (UINT8)val_armour );
+		iTrainingSquadSize = (std::min)( iTrainingSquadSize, (UINT8)val_misc );
 	}
 
 	promotionsfromvolunteers -= iTrainingSquadSize;
@@ -518,8 +518,8 @@ void StrategicPromoteMilitiaInSector(INT16 sMapX, INT16 sMapY, UINT8 ubCurrentRa
 	}
 
 	// determine how many static and  - if necessary - group-based militia we have to remove
-	UINT8 reducestatic = min( stationary, ubHowMany );
-	UINT8 reducegroups = min( ingroups, ubHowMany - reducestatic );
+	UINT8 reducestatic = (std::min)( stationary, ubHowMany );
+	UINT8 reducegroups = (std::min)( ingroups, UINT8(ubHowMany - reducestatic) );
 
 	pSectorInfo->ubNumberOfCivsAtLevel[ubCurrentRank] -= reducestatic;
 	pSectorInfo->ubNumberOfCivsAtLevel[ubCurrentRank + 1] += reducestatic;
@@ -531,14 +531,14 @@ void StrategicPromoteMilitiaInSector(INT16 sMapX, INT16 sMapY, UINT8 ubCurrentRa
 		{
 			if ( ubCurrentRank == GREEN_MILITIA )
 			{
-				UINT8 reduced = min( reducegroups, pGroup->pEnemyGroup->ubNumAdmins );
+				UINT8 reduced = (std::min)( reducegroups, pGroup->pEnemyGroup->ubNumAdmins );
 				pGroup->pEnemyGroup->ubNumAdmins -= reduced;
 				pGroup->pEnemyGroup->ubNumTroops += reduced;
 				reducegroups -= reduced;
 			}
 			else if ( ubCurrentRank == REGULAR_MILITIA )
 			{
-				UINT8 reduced = min( reducegroups, pGroup->pEnemyGroup->ubNumTroops );
+				UINT8 reduced = (std::min)( reducegroups, pGroup->pEnemyGroup->ubNumTroops );
 				pGroup->pEnemyGroup->ubNumTroops -= reduced;
 				pGroup->pEnemyGroup->ubNumElites += reduced;
 				reducegroups -= reduced;
@@ -575,8 +575,8 @@ void StrategicRemoveMilitiaFromSector(INT16 sMapX, INT16 sMapY, UINT8 ubRank, UI
 	}
 
 	// determine how many static and  - if necessary - group-based militia we have to remove
-	UINT8 reducestatic = min( stationary, ubHowMany );
-	UINT8 reducegroups = min( ingroups, ubHowMany - reducestatic );
+	UINT8 reducestatic = (std::min)( stationary, ubHowMany );
+	UINT8 reducegroups = (std::min)( ingroups, UINT8(ubHowMany - reducestatic) );
 
 	pSectorInfo->ubNumberOfCivsAtLevel[ubRank] -= reducestatic;
 
@@ -587,21 +587,21 @@ void StrategicRemoveMilitiaFromSector(INT16 sMapX, INT16 sMapY, UINT8 ubRank, UI
 		{
 			if ( ubRank == GREEN_MILITIA )
 			{
-				UINT8 reduced = min( reducegroups, pGroup->pEnemyGroup->ubNumAdmins );
+				UINT8 reduced = (std::min)( reducegroups, pGroup->pEnemyGroup->ubNumAdmins );
 				pGroup->pEnemyGroup->ubNumAdmins -= reduced;
 				pGroup->ubGroupSize -= reduced;
 				reducegroups -= reduced;
 			}
 			else if ( ubRank == REGULAR_MILITIA )
 			{
-				UINT8 reduced = min( reducegroups, pGroup->pEnemyGroup->ubNumTroops );
+				UINT8 reduced = (std::min)( reducegroups, pGroup->pEnemyGroup->ubNumTroops );
 				pGroup->pEnemyGroup->ubNumTroops -= reduced;
 				pGroup->ubGroupSize -= reduced;
 				reducegroups -= reduced;
 			}
 			else if ( ubRank == ELITE_MILITIA )
 			{
-				UINT8 reduced = min( reducegroups, pGroup->pEnemyGroup->ubNumElites );
+				UINT8 reduced = (std::min)( reducegroups, pGroup->pEnemyGroup->ubNumElites );
 				pGroup->pEnemyGroup->ubNumElites -= reduced;
 				pGroup->ubGroupSize -= reduced;
 				reducegroups -= reduced;
@@ -2537,7 +2537,7 @@ UINT32 CalcMilitiaUpkeep( void )
 		}
 	}
 
-	// Flugente: if indivídual militia is on, calculate costs there and use the above as a fallback option
+	// Flugente: if individual militia is on, calculate costs there and use the above as a fallback option
 	if ( gGameExternalOptions.fIndividualMilitia )
 	{
 		uiTotalPayment = GetDailyUpkeep_IndividualMilitia( militia_individual[GREEN_MILITIA], militia_individual[REGULAR_MILITIA], militia_individual[ELITE_MILITIA] );
@@ -2548,7 +2548,7 @@ UINT32 CalcMilitiaUpkeep( void )
 		if ( militia_static[i] + militia_mobile[i] > militia_individual[i] )
 		{
 			UINT32 exceed = militia_static[i] + militia_mobile[i] - militia_individual[i];
-			UINT32 exceed_mobile = min( exceed, militia_mobile[i] );
+			UINT32 exceed_mobile = (std::min)( exceed, militia_mobile[i] );
 			UINT32 exced_static = exceed - exceed_mobile;
 
 			uiTotalPayment += exced_static * gGameExternalOptions.usDailyCostTown[i];
@@ -2573,7 +2573,7 @@ INT32 GetVolunteerPool()
 // add/remove volunteers from pool
 void AddVolunteers( FLOAT asNum )
 {
-	LaptopSaveInfo.dMilitiaVolunteerPool = max( 0, LaptopSaveInfo.dMilitiaVolunteerPool + asNum );
+	LaptopSaveInfo.dMilitiaVolunteerPool = (std::max)( 0.f, LaptopSaveInfo.dMilitiaVolunteerPool + asNum );
 }
 
 FLOAT CalcHourlyVolunteerGain()
@@ -2768,9 +2768,9 @@ BOOLEAN ConvertItemToResources( OBJECTTYPE& object, BOOLEAN fAll, FLOAT& arValue
 
 void AddResources( FLOAT aValue_Gun, FLOAT aValue_Armour, FLOAT aValue_Misc )
 {
-	LaptopSaveInfo.dMilitiaGunPool		= max( 0, LaptopSaveInfo.dMilitiaGunPool + aValue_Gun );
-	LaptopSaveInfo.dMilitiaArmourPool	= max( 0, LaptopSaveInfo.dMilitiaArmourPool + aValue_Armour );
-	LaptopSaveInfo.dMilitiaMiscPool		= max( 0, LaptopSaveInfo.dMilitiaMiscPool + aValue_Misc );
+	LaptopSaveInfo.dMilitiaGunPool		= (std::max)( 0.f, LaptopSaveInfo.dMilitiaGunPool + aValue_Gun );
+	LaptopSaveInfo.dMilitiaArmourPool	= (std::max)( 0.f, LaptopSaveInfo.dMilitiaArmourPool + aValue_Armour );
+	LaptopSaveInfo.dMilitiaMiscPool		= (std::max)( 0.f, LaptopSaveInfo.dMilitiaMiscPool + aValue_Misc );
 }
 
 void GetResources( FLOAT& arValue_Gun, FLOAT& arValue_Armour, FLOAT& arValue_Misc )
@@ -2783,7 +2783,7 @@ void GetResources( FLOAT& arValue_Gun, FLOAT& arValue_Armour, FLOAT& arValue_Mis
 FLOAT ResourceProgressModifier( UINT8 aProgress )
 {
 	// value need to be between 1 and 100
-	aProgress = max( 1, min( 100, aProgress ) );
+	aProgress = (std::max)( UINT8(1), (std::min)( UINT8(100), aProgress ) );
 
 	return (FLOAT)(gGameExternalOptions.fMilitiaResources_ProgressFactor / aProgress);
 }
@@ -2791,8 +2791,8 @@ FLOAT ResourceProgressModifier( UINT8 aProgress )
 void DevalueResources( UINT8 aOldProgress, UINT8 aNewProgress )
 {
 	// both progress values need to be between 1 and 100
-	aOldProgress = max( 1, min( 100, aOldProgress ) );
-	aNewProgress = max( 1, min( 100, aNewProgress ) );
+	aOldProgress = (std::max)( UINT8(1), (std::min)( UINT8(100), aOldProgress ) );
+	aNewProgress = (std::max)( UINT8(1), (std::min)( UINT8(100), aNewProgress ) );
 
 	// modifier is new progress value / old value
 	FLOAT modifier = ResourceProgressModifier( aNewProgress ) / ResourceProgressModifier( aOldProgress );

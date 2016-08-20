@@ -880,7 +880,7 @@ void ExtractAndUpdateGunGUI()
 	if( i == -1 )
 		i = 20 + Random( 81 );
 	else
-		i = min( i, 100 );
+		i = (std::min)( i, 100 );
 	(*gpItem)[0]->data.gun.bGunStatus = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	//Update the ammo
@@ -888,18 +888,18 @@ void ExtractAndUpdateGunGUI()
 	if( i == -1 )
 		i = Random( 1 + Weapon[ gpItem->usItem ].ubMagSize );
 	else
-		i = min( i, Weapon[ gpItem->usItem ].ubMagSize );
+		i = (std::min)( i, Weapon[ gpItem->usItem ].ubMagSize );
 	(*gpItem)[0]->data.gun.ubGunShotsLeft = (UINT8)i;
 	SetInputFieldStringWithNumericStrictValue( 2, i );
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 3 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 3, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 4 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 4, giDefaultExistChance );
 	}
@@ -932,18 +932,18 @@ void ExtractAndUpdateAmmoGUI()
 	if( i == -1 )
 		i = 1 + Random( ItemSlotLimit(gpItem, STACK_SIZE_LIMIT) );
 	else
-		i = max( 1, min( i, ItemSlotLimit(gpItem, STACK_SIZE_LIMIT) ) );
+		i = (std::max)( 1, (std::min)( i, ItemSlotLimit(gpItem, STACK_SIZE_LIMIT) ) );
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	CreateItems( gpItem->usItem, 100, i, gpItem );
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 2 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 2, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 3 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 3, giDefaultExistChance );
 	}
@@ -993,18 +993,18 @@ void ExtractAndUpdateArmourGUI()
 	if( i == -1 )
 		i = 20 + Random( 81 );
 	else
-		i = min( i, 100 );
+		i = (std::min)( i, 100 );
 	(*gpItem)[0]->data.objectStatus = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 2 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 2, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 3 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 3, giDefaultExistChance );
 	}
@@ -1037,18 +1037,18 @@ void ExtractAndUpdateLBEGUI()
 	if( i == -1 )
 		i = 20 + Random( 81 );
 	else
-		i = min( i, 100 );
+		i = (std::min)( i, 100 );
 	(*gpItem)[0]->data.objectStatus = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 2 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 2, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 3 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 3, giDefaultExistChance );
 	}
@@ -1081,18 +1081,18 @@ void ExtractAndUpdateEquipGUI()
 	if( i == -1 )
 		i = 20 + Random( 81 );
 	else
-		i = min( i, 100 );
+		i = (std::min)( i, 100 );
 	(*gpItem)[0]->data.objectStatus = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 2 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 2, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 3 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 3, giDefaultExistChance );
 	}
@@ -1151,7 +1151,7 @@ void ExtractAndUpdateExplosivesGUI()
 	if( i == -1 )
 		i = 20 + Random( 81 );
 	else
-		i = min( i, 100 );
+		i = (std::min)( i, 100 );
 	(*gpItem)[0]->data.objectStatus = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	//Update the quantity
@@ -1161,19 +1161,19 @@ void ExtractAndUpdateExplosivesGUI()
 		if( i == -1 )
 			i = 1 + Random( ItemSlotLimit(gpItem, STACK_SIZE_LIMIT) );
 		else
-			i = max( 1, min( i, ItemSlotLimit(gpItem, STACK_SIZE_LIMIT) ) );
+			i = (std::max)( 1, (std::min)( i, ItemSlotLimit(gpItem, STACK_SIZE_LIMIT) ) );
 		SetInputFieldStringWithNumericStrictValue( 2, i );
 		CreateItems( gpItem->usItem, (INT8)(*gpItem)[0]->data.objectStatus, i, gpItem );
 	}
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 3 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 3, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 4 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 4, giDefaultExistChance );
 	}
@@ -1199,14 +1199,14 @@ void ExtractAndUpdateMoneyGUI()
 	if( i == -1 )
 		i = Random( 20000 );
 	else
-		i = max( 1, min( i, 20000 ) );
+		i = (std::max)( 1, (std::min)( i, 20000 ) );
 	(*gpItem)[0]->data.money.uiMoneyAmount = i;
 	(*gpItem)[0]->data.objectStatus = 100;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 2 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 2, giDefaultExistChance );
 	}
@@ -1259,7 +1259,7 @@ void ExtractAndUpdateOwnershipGUI()
 	if( i == -1 )
 		i = Random( 0 );
 	else
-		i = max( 0, min( i, 255 ) );
+		i = (std::max)( 0, (std::min)( i, 255 ) );
 	(*gpItem)[0]->data.owner.ubOwnerProfile = (UINT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 }
@@ -1288,7 +1288,7 @@ void ExtractAndUpdateKeysGUI()
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 1 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 1, giDefaultExistChance );
 	}
@@ -1326,12 +1326,12 @@ void ExtractAndUpdateActionItemsGUI()
 	if( i == -1 )
 		i = 20 + Random( 81 );
 	else
-		i = min( i, 100 );
+		i = (std::min)( i, 100 );
 	(*gpItem)[0]->data.objectStatus = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 2 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	if( i != (*gpItem)[0]->data.bTrap )
 		gbDefaultBombTrapLevel = (INT8)i;
 	(*gpItem)[0]->data.bTrap = (INT8)i;
@@ -1340,7 +1340,7 @@ void ExtractAndUpdateActionItemsGUI()
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 3 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 3, giDefaultExistChance );
 	}
@@ -1393,19 +1393,19 @@ void ExtractAndUpdateTriggersGUI()
 	INT32 i;
 	//Update the trap level
 	i = GetNumericStrictValueFromField( 1 );
-	i = ( i == -1 ) ? 0 : min( i, 20 );
+	i = ( i == -1 ) ? 0 : (std::min)( i, 20 );
 	(*gpItem)[0]->data.bTrap = (INT8)i;
 	SetInputFieldStringWithNumericStrictValue( 1, i );
 
 	i = GetNumericStrictValueFromField( 2 );
-	i = ( i == -1 ) ? 0 : max( 0, min( i, 99 ) );
+	i = ( i == -1 ) ? 0 : (std::max)( 0, (std::min)( i, 99 ) );
 	(*gpItem)[0]->data.misc.ubTolerance = (UINT8)i;
 	SetInputFieldStringWithNumericStrictValue( 2, i );
 
 	if( gpEditingItemPool )
 	{
 		giDefaultExistChance = GetNumericStrictValueFromField( 3 );
-		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : max( 1, min( giDefaultExistChance, 100 ) );
+		giDefaultExistChance = ( giDefaultExistChance == -1 ) ? 100 : (std::max)( 1, (std::min)( giDefaultExistChance, 100 ) );
 		gWorldItems[ gpEditingItemPool->iItemIndex ].ubNonExistChance = (UINT8)(100 - giDefaultExistChance );
 		SetInputFieldStringWithNumericStrictValue( 3, giDefaultExistChance );
 	}

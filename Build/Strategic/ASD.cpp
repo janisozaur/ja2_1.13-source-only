@@ -252,7 +252,7 @@ void ASDDecideOnPurchases()
 	if ( gASD_Flags & ASDFACT_JEEP_UNLOCKED )
 	{
 		// how many would we like to have? Note that this refers to the ones in our pool, the vehicles awarded to enemy groups are no longer accounted for
-		needed_jeep = min( 10, 2 + highestplayerprogress / 10 );
+		needed_jeep = (std::min)( 10, 2 + highestplayerprogress / 10 );
 
 		// if we already unlocked tanks, we no longer want jeeps - they are replaced by tanks
 		if ( gASD_Flags & ASDFACT_TANK_UNLOCKED )
@@ -261,7 +261,7 @@ void ASDDecideOnPurchases()
 		}
 
 		// how many are needed?
-		needed_jeep = max( 0, needed_jeep - gASDResource[ASD_JEEP] );
+		needed_jeep = (std::max)( 0, needed_jeep - gASDResource[ASD_JEEP] );
 
 		needed_fuel += needed_jeep * ASDResourceCostFuel( ASD_JEEP );
 	}
@@ -270,22 +270,22 @@ void ASDDecideOnPurchases()
 	if ( gASD_Flags & ASDFACT_TANK_UNLOCKED )
 	{
 		// how many would we like to have? Note that this refers to the ones in our pool, the vehicles awarded to enemy groups are no longer accounted for
-		needed_tank = min( 5, highestplayerprogress / 20 );
+		needed_tank = (std::min)( 5, highestplayerprogress / 20 );
 
 		// how many are needed?
-		needed_tank = max( 0, needed_tank - gASDResource[ASD_TANK] );
+		needed_tank = (std::max)( 0, needed_tank - gASDResource[ASD_TANK] );
 
 		needed_fuel += needed_tank * ASDResourceCostFuel( ASD_TANK );
 	}
 
 	// how much new fuel do we need?
-	needed_fuel = max( 0, needed_fuel - gASDResource[ASD_FUEL] );
+	needed_fuel = (std::max)( 0, needed_fuel - gASDResource[ASD_FUEL] );
 
 	// reduce order by what we'e alreay ordered
-	needed_fuel = max( 0, needed_fuel - gASDResource_Ordered[ASD_FUEL] );
-	needed_jeep = max( 0, needed_jeep - gASDResource_Ordered[ASD_JEEP] );
-	needed_tank = max( 0, needed_tank - gASDResource_Ordered[ASD_TANK] );
-	needed_heli = max( 0, needed_heli - gASDResource_Ordered[ASD_HELI] );
+	needed_fuel = (std::max)( 0, needed_fuel - gASDResource_Ordered[ASD_FUEL] );
+	needed_jeep = (std::max)( 0, needed_jeep - gASDResource_Ordered[ASD_JEEP] );
+	needed_tank = (std::max)( 0, needed_tank - gASDResource_Ordered[ASD_TANK] );
+	needed_heli = (std::max)( 0, needed_heli - gASDResource_Ordered[ASD_HELI] );
 
 	// check whether we can afford all new purchases. If we can't, lower your expectations
 	while ( needed_fuel * ASDResourceCostMoney( ASD_FUEL ) +
@@ -296,7 +296,7 @@ void ASDDecideOnPurchases()
 		if ( needed_tank ) --needed_tank;
 		else if ( needed_heli ) --needed_heli;
 		else if ( needed_jeep ) --needed_jeep;
-		else needed_fuel = max( 0, needed_fuel - 10 );
+		else needed_fuel = (std::max)( 0, needed_fuel - 10 );
 	}
 
 	// purchase things
@@ -522,7 +522,7 @@ UINT32 ASDResourceCostMoney( UINT8 aType )
 // add resources to the AIs resource pool
 void AddStrategicAIResources( UINT8 aType, INT32 aAmount )
 {
-	gASDResource[aType] = max( 0, gASDResource[aType] + aAmount );
+	gASDResource[aType] = (std::max)( 0, gASDResource[aType] + aAmount );
 
 	if ( aType == ASD_HELI )
 		AddNewHeli( );
@@ -530,7 +530,7 @@ void AddStrategicAIResources( UINT8 aType, INT32 aAmount )
 
 void ASDReduceOrderedStrategicResources( UINT8 aType, INT32 aAmount )
 {
-	gASDResource_Ordered[aType] = max( 0, gASDResource_Ordered[aType] - aAmount );
+	gASDResource_Ordered[aType] = (std::max)( 0, gASDResource_Ordered[aType] - aAmount );
 }
 
 //////////////////////////////////////////// enemy helis /////////////////////////////////////////////////////////
@@ -618,7 +618,7 @@ void ENEMY_HELI::Destroy( )
 				if ( Chance( 75 ) )
 				{
 					// not all might have made it
-					SectorInfo[sector_current].ubNumElites = min( 255, SectorInfo[sector_current].ubNumElites + 1 + Random(troopcount) );
+					SectorInfo[sector_current].ubNumElites = (std::min)( UINT32(255), SectorInfo[sector_current].ubNumElites + 1 + Random(troopcount) );
 
 					// if no militia or mercs are here, enemy takes this sector
 					if ( PlayerMercsInSector( SECTORX( sector_current ), SECTORY( sector_current ), 0 ) + NumNonPlayerTeamMembersInSector( SECTORX( sector_current ), SECTORY( sector_current ), MILITIA_TEAM ) <= 0 )
@@ -720,7 +720,7 @@ void EnemyHeliTroopDrop( UINT8 aSector )
 		if ( !(*it).troopcount )
 			continue;
 
-		SectorInfo[aSector].ubNumElites = min( 255, SectorInfo[aSector].ubNumElites + (*it).troopcount );
+		SectorInfo[aSector].ubNumElites = (std::min)( 255, SectorInfo[aSector].ubNumElites + (*it).troopcount );
 
 		(*it).troopcount = 0;
 
@@ -796,7 +796,7 @@ void UpdateEnemyHeliRefuel( INT16 id )
 
 			if ( heli.sector_current == heli.sector_home )
 			{
-				UINT8 addedfuel = min( gASDResource[ASD_FUEL], gGameExternalOptions.gEnemyHeliMaxFuel - heli.fuel );
+				UINT8 addedfuel = (std::min)( gASDResource[ASD_FUEL], gGameExternalOptions.gEnemyHeliMaxFuel - heli.fuel );
 
 				AddStrategicAIResources( ASD_FUEL, -addedfuel );
 
@@ -949,7 +949,7 @@ void UpdateEnemyHeli( INT16 id )
 				return;
 			}
 
-			SectorInfo[heli.sector_current].ubNumElites = min( 255, SectorInfo[heli.sector_current].ubNumElites + heli.troopcount );
+			SectorInfo[heli.sector_current].ubNumElites = (std::min)( 255, SectorInfo[heli.sector_current].ubNumElites + heli.troopcount );
 
 			heli.troopcount = 0;
 
@@ -977,7 +977,7 @@ void UpdateEnemyHeli( INT16 id )
 				{
 					UINT16 possibletroops = SectorInfo[heli.sector_current].ubNumElites;
 
-					UINT8 picked_up = min( possibletroops, gEnemyHeliMaxTroops - heli.troopcount );
+					UINT8 picked_up = (std::min)( possibletroops, UINT16(gEnemyHeliMaxTroops - heli.troopcount) );
 
 					heli.troopcount += picked_up;
 
@@ -1050,7 +1050,7 @@ void EnemyHeliSAMCheck( INT16 id )
 
 						MapScreenMessage( FONT_MCOLOR_LTRED, MSG_INTERFACE, szEnemyHeliText[6], pStrSectorName );
 
-						heli.hp = max( 0, heli.hp - damage );
+						heli.hp = (std::max)( 0, heli.hp - damage );
 
 						if ( !heli.hp )
 						{
@@ -1172,7 +1172,7 @@ void EnemyHeliMANPADSCheck( INT16 id )
 
 						MapScreenMessage( FONT_MCOLOR_LTRED, MSG_INTERFACE, szEnemyHeliText[6], pStrSectorName );
 
-						heli.hp = max( 0, heli.hp - damage );
+						heli.hp = (std::max)( 0, heli.hp - damage );
 
 						if ( !heli.hp )
 						{
@@ -1407,7 +1407,7 @@ void UpdateAndDamageEnemyHeliIfFound( INT16 sSectorX, INT16 sSectorY, INT16 sSec
 				// if the structure is not destroyed, the heli stays
 				else
 				{
-					(*it).hp = max( 1, (*it).hp - ubDamage );
+					(*it).hp = (std::max)( 1, (*it).hp - ubDamage );
 				}
 			}
 		}
@@ -1440,14 +1440,14 @@ BOOLEAN ASDSoldierUpgradeToTank( )
 		{
 			if ( gASDResource[ASD_TANK] )
 			{
-				gASDResource[ASD_TANK] = max( 0, gASDResource[ASD_TANK] - 1 );
+				gASDResource[ASD_TANK] = (std::max)( 0, gASDResource[ASD_TANK] - 1 );
 				return TRUE;
 			}
 		}
 	}
 	else
 	{
-		gASDResource[ASD_TANK] = max( 0, gASDResource[ASD_TANK] - 1 );
+		gASDResource[ASD_TANK] = (std::max)( 0, gASDResource[ASD_TANK] - 1 );
 		return TRUE;
 	}
 
@@ -1462,14 +1462,14 @@ BOOLEAN ASDSoldierUpgradeToJeep( )
 		{
 			if ( gASDResource[ASD_JEEP] )
 			{
-				gASDResource[ASD_JEEP] = max( 0, gASDResource[ASD_JEEP] - 1 );
+				gASDResource[ASD_JEEP] = (std::max)( 0, gASDResource[ASD_JEEP] - 1 );
 				return TRUE;
 			}
 		}
 	}
 	else
 	{
-		gASDResource[ASD_JEEP] = max( 0, gASDResource[ASD_JEEP] - 1 );
+		gASDResource[ASD_JEEP] = (std::max)( 0, gASDResource[ASD_JEEP] - 1 );
 		return TRUE;
 	}
 

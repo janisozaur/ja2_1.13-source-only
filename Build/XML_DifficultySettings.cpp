@@ -498,19 +498,19 @@ difficultySettingsEndElementHandle(void *userData, const XML_Char *name)
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.usAlwaysUpGradeAdminsToTroopsProgress = (UINT8)atol( pData->szCharData );
-			pData->curDifficultySettings.usAlwaysUpGradeAdminsToTroopsProgress = min( pData->curDifficultySettings.usAlwaysUpGradeAdminsToTroopsProgress, 100 );
+			pData->curDifficultySettings.usAlwaysUpGradeAdminsToTroopsProgress = (std::min)( pData->curDifficultySettings.usAlwaysUpGradeAdminsToTroopsProgress, (UINT8)100 );
 		}
 		else if ( strcmp( name, "LevelModifierLowLimit" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.usLevelModifierLowLimit = (UINT8)atol( pData->szCharData );
-			pData->curDifficultySettings.usLevelModifierLowLimit = min( pData->curDifficultySettings.usLevelModifierLowLimit, 5 );
+			pData->curDifficultySettings.usLevelModifierLowLimit = (std::min)( pData->curDifficultySettings.usLevelModifierLowLimit, (UINT8)5 );
 		}
 		else if ( strcmp( name, "LevelModifierHighLimit" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
 			pData->curDifficultySettings.usLevelModifierHighLimit = (UINT8)atol( pData->szCharData );
-			pData->curDifficultySettings.usLevelModifierHighLimit = min( pData->curDifficultySettings.usLevelModifierHighLimit, 5 );
+			pData->curDifficultySettings.usLevelModifierHighLimit = (std::min)( pData->curDifficultySettings.usLevelModifierHighLimit, (UINT8)5 );
 		}
 		else if(strcmp(name, "AllowUnrestrictedXPLevels") == 0)
 		{

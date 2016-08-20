@@ -59,7 +59,7 @@ DDBox::Init( UINT16 sX, UINT16 sY )
 	SetX_Text( GetX( ) + MYBOX_FACE_OFFSET );
 	SetY_Text( WidgetBase::GetY( ) );
 
-	musWidth = min( MYBOX_TEXT_MAXWIDTH, StringPixLength( mText, MYBOX_FONT_DEF ) );
+	musWidth = (std::min)( INT16(MYBOX_TEXT_MAXWIDTH), StringPixLength( mText, MYBOX_FONT_DEF ) );
 
 	musHeight = IanWrappedStringHeight( GetX_Text( ), GetY_Text( ) + 7, musWidth, 2, MYBOX_FONT_DEF, FONT_BLACK, mText, FONT_MCOLOR_BLACK, FALSE, 0 );
 
@@ -351,7 +351,7 @@ void RefreshBoxes( )
 	{
 		// Our dynamic dialogue boxes are destroyed as time progresses. As we do not display them at the moment, we have to update their creation and end time.
 		// As a result, no time will be lost for our dialogues if we are in a different screen
-		UINT32 timepassednotdisplaying = max( 0, GetJA2Clock( ) - lasttimenhere );
+		UINT32 timepassednotdisplaying = (std::max)( UINT32(0), GetJA2Clock( ) - lasttimenhere );
 
 		if ( timepassednotdisplaying )
 			DelayBoxDestructionBy( timepassednotdisplaying );
@@ -429,7 +429,7 @@ IMPDialogueChooseBox::Init( UINT16 sX, UINT16 sY )
 	UINT16 size = mEntryVector.size( );
 	for ( UINT16 i = 0; i < size; ++i )
 	{
-		musWidth = max( musWidth, StringPixLength( mEntryVector[i].second, MYBOX_FONT_DEF ) );
+		musWidth = (std::max)( musWidth, UINT16(StringPixLength( mEntryVector[i].second, UINT16(MYBOX_FONT_DEF) )) );
 	}
 
 	musFontHeight = GetFontHeight( MYBOX_FONT_DEF );	// does not work on init of static objects, as the fonts do not yet exist!
@@ -499,14 +499,14 @@ IMPDialogueChooseBox::Display( )
 		return;
 
 	//  we draw a line that shows us how much time we have for the decision
-	UINT32 totaltime = max( 0, musEndTime - musCreationTime );
+	UINT32 totaltime = (std::max)( UINT32(0), musEndTime - musCreationTime );
 
 	if ( totaltime )
 	{
 		UINT32 timeleft = musEndTime - GetJA2Clock( );
 		FLOAT factor = (FLOAT)timeleft / (FLOAT)totaltime;
 
-		UINT32 maxwidth = min( IMPDIALOGUECHOOSEBOX_BAR_MAXLENGTH, SCREEN_WIDTH / 2 );
+		UINT32 maxwidth = (std::min)( IMPDIALOGUECHOOSEBOX_BAR_MAXLENGTH, SCREEN_WIDTH / 2 );
 
 		UINT16 colour = Get16BPPColor( FROMRGB( 255 * (1 - factor), 255 * factor, 0 ) );
 		UINT16 colourshadow = Get16BPPColor( FROMRGB( 127 * (1 - factor), 127 * factor, 0 ) );
@@ -556,7 +556,7 @@ void
 IMPDialogueChooseBox::DrawTopEntry( )
 {
 	// make sure we don't get bogus values
-	mSelectedEntry = min( mSelectedEntry, mEntryVector.size( ) - 1 );
+	mSelectedEntry = (std::min)( size_t(mSelectedEntry), mEntryVector.size( ) - 1 );
 
 	UINT16 sY = GetY( ) + IMPDIALOGUECHOOSEBOX_BAR_Y_OFFSET;
 

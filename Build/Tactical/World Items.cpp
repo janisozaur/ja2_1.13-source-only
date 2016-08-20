@@ -447,7 +447,7 @@ void ResizeWorldItems(void)//dnl ch75 271013
 {
 #ifdef INVFIX_Moa
 	// grow by 3/2 as a better strategy, minimum 10
-	guiNumWorldItems = max(10, guiNumWorldItems * 3 / 2);
+	guiNumWorldItems = (std::max)(10, guiNumWorldItems * 3 / 2);
 	//Allocate new table with max+10 items.
 	gWorldItems.resize(guiNumWorldItems);
 #else

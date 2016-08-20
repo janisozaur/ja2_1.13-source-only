@@ -1887,7 +1887,7 @@ BOOLEAN DamageStructure( STRUCTURE * pStructure, UINT8 ubDamage, UINT8 ubReason,
 			INT16 damage = ubBaseArmour / 2;
 
 			// this is the damage we will cause. The higher our damage, the faster can we destroy a structure
-			damage += max(1, 2 * sAntiMaterialImpact / ubBaseArmour);
+			damage += (std::max)(1, 2 * sAntiMaterialImpact / ubBaseArmour);
 
 			BOOLEAN recompile = FALSE;
 			ExplosiveDamageGridNo( sGridNo, damage, 10, &recompile, FALSE, -1, FALSE, ubOwner, 0 );

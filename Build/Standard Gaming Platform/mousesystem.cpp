@@ -1746,7 +1746,7 @@ void RenderFastHelp()
 				if ( MSYS_CurrRegion->uiFlags & MSYS_MOUSE_IN_AREA &&
 						!MSYS_CurrRegion->ButtonState)// & (MSYS_LEFT_BUTTON|MSYS_RIGHT_BUTTON)) )
 				{
-					MSYS_CurrRegion->FastHelpTimer -= (INT16)max( iTimeDifferential, 0 );
+					MSYS_CurrRegion->FastHelpTimer -= (INT16)(std::max)( iTimeDifferential, 0 );
 
 					if( MSYS_CurrRegion->FastHelpTimer < 0 )
 					{

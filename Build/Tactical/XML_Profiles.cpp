@@ -882,7 +882,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bRace = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bRace = max(0, min(NUM_RACES-1, pData->curProfile.bRace));
+			pData->curProfile.bRace = (std::max)(INT8(0), (std::min)(INT8(NUM_RACES-1), pData->curProfile.bRace));
 		}
 		else if(strcmp(name, "bNationality") == 0)
 		{
@@ -890,7 +890,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bNationality = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bNationality = max(0, min(NUM_NATIONALITIES-1, pData->curProfile.bNationality));
+			pData->curProfile.bNationality = (std::max)(INT8(0), (std::min)(INT8(NUM_NATIONALITIES-1), pData->curProfile.bNationality));
 		}
 		else if(strcmp(name, "bAppearance") == 0)
 		{
@@ -898,7 +898,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bAppearance = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bAppearance = max(0, min(NUM_APPEARANCES-1, pData->curProfile.bAppearance));
+			pData->curProfile.bAppearance = (std::max)(INT8(0), (std::min)(INT8(NUM_APPEARANCES-1), pData->curProfile.bAppearance));
 		}
 		else if(strcmp(name, "bAppearanceCareLevel") == 0)
 		{
@@ -906,7 +906,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bAppearanceCareLevel = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bAppearanceCareLevel = max(0, min(NUM_CARELEVELS-1, pData->curProfile.bAppearanceCareLevel));
+			pData->curProfile.bAppearanceCareLevel = (std::max)(INT8(0), (std::min)(INT8(NUM_CARELEVELS-1), pData->curProfile.bAppearanceCareLevel));
 		}
 		else if(strcmp(name, "bRefinement") == 0)
 		{
@@ -914,7 +914,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bRefinement = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bRefinement = max(0, min(NUM_REFINEMENT-1, pData->curProfile.bRefinement));
+			pData->curProfile.bRefinement = (std::max)(INT8(0), (std::min)(INT8(NUM_REFINEMENT-1), pData->curProfile.bRefinement));
 		}
 		else if(strcmp(name, "bRefinementCareLevel") == 0)
 		{
@@ -922,7 +922,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bRefinementCareLevel = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bRefinementCareLevel = max(0, min(NUM_CARELEVELS-1, pData->curProfile.bRefinementCareLevel));
+			pData->curProfile.bRefinementCareLevel = (std::max)(INT8(0), (std::min)(INT8(NUM_CARELEVELS-1), pData->curProfile.bRefinementCareLevel));
 		}
 		else if(strcmp(name, "bHatedNationality") == 0)
 		{
@@ -930,7 +930,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bHatedNationality = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bHatedNationality = max(-1, min(NUM_NATIONALITIES-1, pData->curProfile.bHatedNationality));
+			pData->curProfile.bHatedNationality = (std::max)(INT8(-1), (std::min)(INT8(NUM_NATIONALITIES-1), pData->curProfile.bHatedNationality));
 		}
 		else if(strcmp(name, "bHatedNationalityCareLevel") == 0)
 		{
@@ -938,7 +938,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bHatedNationalityCareLevel = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bHatedNationalityCareLevel = max(0, min(NUM_CARELEVELS-1, pData->curProfile.bHatedNationalityCareLevel));
+			pData->curProfile.bHatedNationalityCareLevel = (std::max)(INT8(0), (std::min)(INT8(NUM_CARELEVELS-1), pData->curProfile.bHatedNationalityCareLevel));
 		}
 		else if(strcmp(name, "bRacist") == 0)
 		{
@@ -946,7 +946,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bRacist = (INT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bRacist = max(0, min(NUM_RACIST-1, pData->curProfile.bRacist));
+			pData->curProfile.bRacist = (std::max)(INT8(0), (std::min)(INT8(NUM_RACIST-1), pData->curProfile.bRacist));
 		}
 		else if(strcmp(name, "bSexist") == 0)
 		{
@@ -954,7 +954,7 @@ profileEndElementHandle(void *userData, const XML_Char *name)
 			pData->curProfile.bSexist = (UINT8) strtoul(pData->szCharData, NULL, 0);
 
 			// no nonsense values
-			pData->curProfile.bSexist = max(0, min(NUM_SEXIST-1, pData->curProfile.bSexist));
+			pData->curProfile.bSexist = (std::max)(UINT8(0), (std::min)(UINT8(NUM_SEXIST-1), pData->curProfile.bSexist));
 		}
 
 		else if(strcmp(name, "sSalary") == 0)

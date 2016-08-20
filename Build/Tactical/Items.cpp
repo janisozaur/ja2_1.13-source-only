@@ -1469,11 +1469,11 @@ UINT8 ItemSlotLimit( OBJECTTYPE * pObject, INT16 bSlot, SOLDIERTYPE *pSoldier, B
 	if (bSlot == STACK_SIZE_LIMIT) {
 		//if it is stack size limit we want it to be a big slot or a vehicle slot
 		if (UsingNewInventorySystem() == false)
-			return (max(1, ubSlotLimit));
+			return ((std::max)(UINT8(1), ubSlotLimit));
 		else if(pSoldier != NULL && (pSoldier->flags.uiStatusFlags & SOLDIER_VEHICLE))
-			return (max(1, LBEPocketType[VEHICLE_POCKET_TYPE].ItemCapacityPerSize[__min(gGameExternalOptions.guiMaxItemSize,Item[pObject->usItem].ItemSize)])); //JMich
+			return ((std::max)(UINT8(1), LBEPocketType[VEHICLE_POCKET_TYPE].ItemCapacityPerSize[__min(gGameExternalOptions.guiMaxItemSize,Item[pObject->usItem].ItemSize)])); //JMich
 		else
-			return (max(1, min(255,LBEPocketType[VEHICLE_POCKET_TYPE].ItemCapacityPerSize[__min(gGameExternalOptions.guiMaxItemSize,Item[pObject->usItem].ItemSize)]*4)));
+			return ((std::max)(1, (std::min)(255,LBEPocketType[VEHICLE_POCKET_TYPE].ItemCapacityPerSize[__min(gGameExternalOptions.guiMaxItemSize,Item[pObject->usItem].ItemSize)]*4)));
 	}
 
 	if (UsingNewInventorySystem() == false) {
@@ -2362,7 +2362,7 @@ BOOLEAN ValidItemAttachmentSlot( OBJECTTYPE * pObj, UINT16 usAttachment, BOOLEAN
 	//Do we want to check all attachment slots or just the one in slotcount?
 	if(slotCount == -1){
 		//Loop through slots
-		UINT32 uiSlots = min((*pObj)[subObject]->attachments.size(), usAttachmentSlotIndexVector.size());//dnl ch76 091113 ugly fix as AK74 after attach/remove GL will have more attachments then usAttachmentSlotIndexVector which lead to CTD
+		UINT32 uiSlots = (std::min)((*pObj)[subObject]->attachments.size(), usAttachmentSlotIndexVector.size());//dnl ch76 091113 ugly fix as AK74 after attach/remove GL will have more attachments then usAttachmentSlotIndexVector which lead to CTD
 		for(UINT8 curSlot = 0; curSlot < uiSlots && !foundValidAttachment; curSlot++){
 			//Any attachment that is already in this slot will go here.
 			OBJECTTYPE * pAttachment;
@@ -2973,7 +2973,7 @@ UINT16 CalculateItemSize( OBJECTTYPE *pObject )
 						percentOfItemUsed += currentPocketPartOfTotal * currentPocketPercent;
 					}
 				}
-				maxSize = max(iSize, LoadBearingEquipment[Item[pObject->usItem].ubClassIndex].lbeFilledSize);
+				maxSize = (std::max)(iSize, UINT16(LoadBearingEquipment[Item[pObject->usItem].ubClassIndex].lbeFilledSize));
 				//Now, determine the increments between initial ItemSize and Filled Size, and adjust iSize by percentOfItemUsed
 				if(percentOfItemUsed != 0)
 				{
@@ -2987,7 +2987,7 @@ UINT16 CalculateItemSize( OBJECTTYPE *pObject )
 				UINT16	newSize, testSize, maxSize;
 				UINT8	cnt=0;
 				newSize = 0;
-				maxSize = max(iSize, LoadBearingEquipment[Item[pObject->usItem].ubClassIndex].lbeFilledSize);
+				maxSize = (std::max)(iSize, LoadBearingEquipment[Item[pObject->usItem].ubClassIndex].lbeFilledSize);
 				// Look for the ItemSize of the largest item in this LBENODE
 				for(UINT16 x = 0; x < invsize; ++x)
 				{
@@ -2997,7 +2997,7 @@ UINT16 CalculateItemSize( OBJECTTYPE *pObject )
 						//Now that we have the size of one item, we want to factor in the number of items since two
 						//	items take up more space then one.
 						testSize = testSize + pLBE->inv[x].ubNumberOfObjects - 1;
-						testSize = min(testSize,34);
+						testSize = (std::min)(testSize,34);
 						//We also need to increase the size of guns so they'll fit with the rest of our calculations.
 						if(testSize < 5)
 							testSize += 10;
@@ -3006,12 +3006,12 @@ UINT16 CalculateItemSize( OBJECTTYPE *pObject )
 						//Finally, we want to factor in multiple pockets.  We'll do this by counting the number of filled
 						//	pockets, then add this count total to our newSize when everything is finished.
 						cnt++;
-						newSize = max(testSize, newSize);
+						newSize = (std::max)(testSize, newSize);
 					}
 				}
 				//Add the total number of filled pockets to our NewSize to account for multiple pockets being used
 				newSize += cnt;
-				newSize = min(newSize,34);
+				newSize = (std::min)(newSize,34);
 				// If largest item is smaller then LBE, don't change ItemSize
 				if(newSize > 0 && newSize < iSize) {
 					iSize = iSize;
@@ -3253,7 +3253,7 @@ void SwapObjs(SOLDIERTYPE* pSoldier, int slot, OBJECTTYPE* pObject, BOOLEAN fPer
 void DamageObj( OBJECTTYPE * pObj, INT8 bAmount, UINT8 subObject )
 {
 	// Flugente: lower repair threshold
-	(*pObj)[subObject]->data.sRepairThreshold = max(1, (*pObj)[subObject]->data.sRepairThreshold - bAmount/3);
+	(*pObj)[subObject]->data.sRepairThreshold = (std::max)(1, (*pObj)[subObject]->data.sRepairThreshold - bAmount/3);
 
 	//usually called from AttachObject, where the attachment is known to be a single item,
 	//and the attachment is only being attached to the top of the stack
@@ -6885,8 +6885,8 @@ bool PlaceInAnySlot(SOLDIERTYPE* pSoldier, OBJECTTYPE* pObj, bool fNewItem, int 
 				//Lastly search active big pockets
 				lPocket=PickPocket(pSoldier, BIGPOCKSTART, BIGPOCKFINAL, pObj->usItem, ubCurrentObjects, &lCapacity, bExcludeSlot);
 				//Finally, compare the three pockets we've found and return the pocket that is most logical to use
-				capacity = min(sCapacity, mCapacity);
-				capacity = min(lCapacity, capacity);
+				capacity = (std::min)(sCapacity, mCapacity);
+				capacity = (std::min)(lCapacity, capacity);
 
 				// pocket can fit slot
 				if(capacity != 254)
@@ -7540,9 +7540,9 @@ UINT16 UseKitPoints( OBJECTTYPE * pObj, UINT16 usPoints, SOLDIERTYPE *pSoldier )
 	for (bLoop = pObj->ubNumberOfObjects - 1; bLoop >= 0; bLoop--)
 	{
 		// SANDRO - revisited this code, make the percentstatusdrainreduction count always
-		if( (usPoints * (max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction)))/100) < (*pObj)[bLoop]->data.objectStatus )
+		if( (usPoints * ((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction)))/100) < (*pObj)[bLoop]->data.objectStatus )
 		{
-			(*pObj)[bLoop]->data.objectStatus -= (INT8)(usPoints * (max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction) ) )/100);
+			(*pObj)[bLoop]->data.objectStatus -= (INT8)(usPoints * ((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction) ) )/100);
 
 			// Flugente: campaign stats
 			if ( Item[pObj->usItem].foodtype || Item[pObj->usItem].canteen)
@@ -7558,13 +7558,13 @@ UINT16 UseKitPoints( OBJECTTYPE * pObj, UINT16 usPoints, SOLDIERTYPE *pSoldier )
 		else if ( Item[pObj->usItem].canteen == TRUE )
 		{
 			// consume this kit totally
-			usPoints -= (((*pObj)[bLoop]->data.objectStatus - 1) / ((max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction))) /100));
+			usPoints -= (((*pObj)[bLoop]->data.objectStatus - 1) / (((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction))) /100));
 			(*pObj)[bLoop]->data.objectStatus = 1;
 		}
 		else
 		{
 			// consume this kit totally
-			usPoints -= (((*pObj)[bLoop]->data.objectStatus) / ((max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction))) /100));
+			usPoints -= (((*pObj)[bLoop]->data.objectStatus) / (((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction))) /100));
 			(*pObj)[bLoop]->data.objectStatus = 0;
 
 			pObj->ubNumberOfObjects--;
@@ -8883,7 +8883,7 @@ BOOLEAN DamageItem( OBJECTTYPE * pObject, INT32 iDamage, BOOLEAN fOnGround, INT3
 				}
 				else
 				{
-					(*pObject)[bLoop]->data.sRepairThreshold = max(1, (*pObject)[bLoop]->data.sRepairThreshold - bDamage/3);
+					(*pObject)[bLoop]->data.sRepairThreshold = (std::max)(1, (*pObject)[bLoop]->data.sRepairThreshold - bDamage/3);
 
 					(*pObject)[bLoop]->data.objectStatus -= bDamage;
 					if ((*pObject)[bLoop]->data.objectStatus < 1)
@@ -9182,7 +9182,7 @@ void WaterDamage( SOLDIERTYPE *pSoldier )
 
 					if ( Random(100) < Item[pSoldier->inv[ bLoop ].usItem].usDamageChance )
 					{
-						pSoldier->inv[bLoop][0]->data.sRepairThreshold = max(1, pSoldier->inv[bLoop][0]->data.sRepairThreshold - 1);
+						pSoldier->inv[bLoop][0]->data.sRepairThreshold = (std::max)(1, pSoldier->inv[bLoop][0]->data.sRepairThreshold - 1);
 					}
 				}
 			}
@@ -9376,7 +9376,7 @@ BOOLEAN ApplyCamo( SOLDIERTYPE * pSoldier, UINT16 usItem, UINT16& usrPointsToUse
 		ReduceCamoFromSoldier( pSoldier, 100, 0 );
 
 		// damage the rag :) - actually you would need to flag it damagable in the items.XML
-		usrPointsToUse = min( 22, usrPointsToUse );
+		usrPointsToUse = (std::min)( UINT16(22), usrPointsToUse );
 
 		// Reload palettes....
 		if ( pSoldier->bInSector )
@@ -9436,7 +9436,7 @@ BOOLEAN ApplyCamo( SOLDIERTYPE * pSoldier, UINT16 usItem, UINT16& usrPointsToUse
 
 				// if some camo haven't been reduced from us, the camo to add will be lessened by that value
 				if (iRemainingCamoAfterRemoving > 0)
-					iJungleCamoAdded = max(0, (iJungleCamoAdded - iRemainingCamoAfterRemoving));
+					iJungleCamoAdded = (std::max)(0, (iJungleCamoAdded - iRemainingCamoAfterRemoving));
 
 				if (iJungleCamoAdded <= 0) // if we have nothing to add now, return
 					return( FALSE );
@@ -9482,7 +9482,7 @@ BOOLEAN ApplyCamo( SOLDIERTYPE * pSoldier, UINT16 usItem, UINT16& usrPointsToUse
 
 				// if some camo haven't been reduced from us, the camo to add will be lessened by that value
 				if (iRemainingCamoAfterRemoving > 0)
-					iUrbanCamoAdded = max(0, (iUrbanCamoAdded - iRemainingCamoAfterRemoving));
+					iUrbanCamoAdded = (std::max)(0, (iUrbanCamoAdded - iRemainingCamoAfterRemoving));
 
 				if (iUrbanCamoAdded <= 0) // if we have nothing to add now, return
 					return( FALSE );
@@ -9527,7 +9527,7 @@ BOOLEAN ApplyCamo( SOLDIERTYPE * pSoldier, UINT16 usItem, UINT16& usrPointsToUse
 
 				// if some camo haven't been reduced from us, the camo to add will be lessened by that value
 				if (iRemainingCamoAfterRemoving > 0)
-					iDesertCamoAdded = max(0, (iDesertCamoAdded - iRemainingCamoAfterRemoving));
+					iDesertCamoAdded = (std::max)(0, (iDesertCamoAdded - iRemainingCamoAfterRemoving));
 
 				if (iDesertCamoAdded <= 0) // if we have nothing to add now, return
 					return( FALSE );
@@ -9572,7 +9572,7 @@ BOOLEAN ApplyCamo( SOLDIERTYPE * pSoldier, UINT16 usItem, UINT16& usrPointsToUse
 
 				// if some camo haven't been reduced from us, the camo to add will be lessened by that value
 				if (iRemainingCamoAfterRemoving > 0)
-					iSnowCamoAdded = max(0, (iSnowCamoAdded - iRemainingCamoAfterRemoving));
+					iSnowCamoAdded = (std::max)(0, (iSnowCamoAdded - iRemainingCamoAfterRemoving));
 
 				if (iSnowCamoAdded <= 0) // if we have nothing to add now, return
 					return( FALSE );
@@ -11582,7 +11582,7 @@ UINT8 GetPercentTunnelVision( SOLDIERTYPE * pSoldier )
 	}
 
 	// Flugente: it would be unreasonable to apply helmet penalties if we already look through a scope, so have those separated
-	bonus = max( bonus_body, bonus_gun );
+	bonus = (std::max)( bonus_body, bonus_gun );
 
 	// SANDRO - STOMP traits - Scouting tunnel vision reduction with binoculars and similar
 	if ( gGameOptions.fNewTraitSystem && HAS_SKILL_TRAIT( pSoldier, SCOUTING_NT ) && pSoldier->pathing.bLevel == 0 )
@@ -11594,7 +11594,7 @@ UINT8 GetPercentTunnelVision( SOLDIERTYPE * pSoldier )
 			if ( Item[pObj->usItem].usItemClass & IC_MISC && (Item[pObj->usItem].brightlightvisionrangebonus > 0 ||
 				Item[pObj->usItem].dayvisionrangebonus > 0 || Item[pObj->usItem].nightvisionrangebonus > 0 || Item[pObj->usItem].visionrangebonus > 0 ))
 			{
-				bonus = max( 0, (bonus - gSkillTraitValues.ubSCTunnelVisionReducedWithBinoculars));
+				bonus = (std::max)( 0, (bonus - gSkillTraitValues.ubSCTunnelVisionReducedWithBinoculars));
 			}
 		}
 	}
@@ -12258,7 +12258,7 @@ UINT16 PickARandomLaunchable(UINT16 itemIndex)
 			if ( Item[i].usItemClass  == 0 )
 				break;
 			//Madd: quickfix: make it not choose best grenades right away.
-			if( ValidLaunchable( i, itemIndex ) && ItemIsLegal(i) && Item[i].ubCoolness <= max(HighestPlayerProgressPercentage()/10,lowestCoolness) )
+			if( ValidLaunchable( i, itemIndex ) && ItemIsLegal(i) && Item[i].ubCoolness <= (std::max)(HighestPlayerProgressPercentage()/10,lowestCoolness) )
 				usNumMatches++;
 		}
 	}
@@ -12271,7 +12271,7 @@ UINT16 PickARandomLaunchable(UINT16 itemIndex)
 			if ( Item[i].usItemClass  == 0 )
 				break;
 
-			if( ValidLaunchable( i, itemIndex ) && ItemIsLegal(i) && Item[i].ubCoolness <= max(HighestPlayerProgressPercentage()/10,lowestCoolness) )
+			if( ValidLaunchable( i, itemIndex ) && ItemIsLegal(i) && Item[i].ubCoolness <= (std::max)(HighestPlayerProgressPercentage()/10,lowestCoolness) )
 			{
 				if( usRandom )
 					usRandom--;
@@ -12286,7 +12286,7 @@ UINT16 PickARandomLaunchable(UINT16 itemIndex)
 
 	// Flugente: the above code is highly dubious.. why do we loop over all items 2 times, and why that obscure usRandom--; business? This can cause an underflow!
 	BOOLEAN isnight = NightTime();
-	UINT16 maxcoolness = max( HighestPlayerProgressPercentage() / 10, lowestCoolness );
+	UINT16 maxcoolness = (std::max)( UINT16(HighestPlayerProgressPercentage() / 10), lowestCoolness );
 
 	std::vector<UINT16> legalvec;
 	for ( UINT16 i = 0; i < gMAXITEMS_READ; ++i )
@@ -12864,7 +12864,7 @@ FLOAT GetBestScopeMagnificationFactor( SOLDIERTYPE *pSoldier, OBJECTTYPE * pObj,
 		// only use scope mode if gun is in hand, otherwise an error might occur!
 		if ( (&pSoldier->inv[HANDPOS]) == pObjUsed  && ObjList[pSoldier->bScopeMode] != NULL && pSoldier->bScopeMode != USE_ALT_WEAPON_HOLD )
 			// now apply the bonus from the scope we use
-			CurrentFactor =  max(1.0f, Item[ObjList[pSoldier->bScopeMode]->usItem].scopemagfactor);
+			CurrentFactor =  (std::max)(1.0f, Item[ObjList[pSoldier->bScopeMode]->usItem].scopemagfactor);
 		else
 			CurrentFactor = 1.0f;
 
@@ -13175,7 +13175,7 @@ UINT8 AllowedAimingLevels(SOLDIERTYPE * pSoldier, INT32 sGridNo)
 					{
 						aimLevels += gSkillTraitValues.ubTHBladesAimClicksAdded;
 					}
-					return ( min(6, aimLevels) );
+					return ( (std::min)(UINT8(6), aimLevels) );
 				}
 				else
 				{
@@ -13449,7 +13449,7 @@ UINT8 AllowedAimingLevels(SOLDIERTYPE * pSoldier, INT32 sGridNo)
 			}
 
 			//CHRISL: The system can't currently support more then 8 aim levels so make sure we can never have more then 8
-			aimLevels = min(8, aimLevels);
+			aimLevels = (std::min)(UINT8(8), aimLevels);
 		}
 	}
 
@@ -13883,8 +13883,8 @@ INT32 GetGunAccuracy( OBJECTTYPE *pObj )
 	if ( gGameExternalOptions.fWeaponOverheating )
 	{
 		FLOAT overheatdamagepercentage = GetGunOverheatDamagePercentage( pObj );
-		FLOAT accuracymalus = (max(1.0f, overheatdamagepercentage) - 1.0f) * 0.1f;
-		accuracyheatmultiplicator = max(0.0f, 1.0f - accuracymalus);
+		FLOAT accuracymalus = ((std::max)(1.0f, overheatdamagepercentage) - 1.0f) * 0.1f;
+		accuracyheatmultiplicator = (std::max)(0.0f, 1.0f - accuracymalus);
 	}
 
 	if ( !UsingNewCTHSystem() )
@@ -14066,9 +14066,9 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 		if ( ((iCamoToRemove / (1 + iCamoToRemovePart)) <= pSoldier->bCamo) && (pSoldier->bCamo > 0) && (iCamoToSkip != 1) )
 		{
 			// jungle camo enough to reduce
-			pSoldier->bCamo -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemove -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			pSoldier->bCamo -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemove -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14077,7 +14077,7 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 			// jungle camo not enough to reduce by intended value, reduce only by what we have
 			iCamoToRemove -= pSoldier->bCamo;
 			pSoldier->bCamo = 0;
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14085,9 +14085,9 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 		if ( ((iCamoToRemove / (1 + iCamoToRemovePart)) <= pSoldier->urbanCamo) && (pSoldier->urbanCamo > 0) && (iCamoToSkip != 2) )
 		{
 			// urban camo enough to reduce
-			pSoldier->urbanCamo -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemove -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			pSoldier->urbanCamo -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemove -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14096,7 +14096,7 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 			// urban camo not enough to reduce by intended value, reduce only by what we have
 			iCamoToRemove -= pSoldier->urbanCamo;
 			pSoldier->urbanCamo = 0;
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14104,9 +14104,9 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 		if ( ((iCamoToRemove / (1 + iCamoToRemovePart)) <= pSoldier->desertCamo) && (pSoldier->desertCamo > 0) && (iCamoToSkip != 3) )
 		{
 			// desert camo enough to reduce
-			pSoldier->desertCamo -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemove -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			pSoldier->desertCamo -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemove -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14115,7 +14115,7 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 			// desert camo not enough to reduce by intended value, reduce only by what we have
 			iCamoToRemove -= pSoldier->desertCamo;
 			pSoldier->desertCamo = 0;
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14123,9 +14123,9 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 		if ( ((iCamoToRemove / (1 + iCamoToRemovePart)) <= pSoldier->snowCamo) && (pSoldier->snowCamo > 0) && (iCamoToSkip != 4) )
 		{
 			// snow camo enough to reduce
-			pSoldier->snowCamo -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemove -= max(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
-			iCamoToRemovePart = max( 0,(iCamoToRemovePart - 1));
+			pSoldier->snowCamo -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemove -= (std::max)(1,(iCamoToRemove / (1 + iCamoToRemovePart)));
+			iCamoToRemovePart = (std::max)( 0,(iCamoToRemovePart - 1));
 			if( iCamoToRemove <= 0 )
 				break;
 		}
@@ -14140,7 +14140,7 @@ INT16 ReduceCamoFromSoldier( SOLDIERTYPE * pSoldier, INT16 iCamoToRemove, INT16 
 	}
 
 	// return remaining value or zero
-	return( max( 0, iCamoToRemove));
+	return( (std::max)( INT16(0), iCamoToRemove));
 }
 
 // SANDRO - added function to determine if we have Extended Ear on
@@ -14178,16 +14178,16 @@ BOOLEAN UseTotalMedicalKitPoints( SOLDIERTYPE * pSoldier, UINT16 usPointsToConsu
 			// lots of half-empty ones.
 			for (bLoop = pObj->ubNumberOfObjects - 1; bLoop >= 0; bLoop--)
 			{
-				if( (usPointsToConsume * (max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction)))/100) < (*pObj)[bLoop]->data.objectStatus )
+				if( (usPointsToConsume * ((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction)))/100) < (*pObj)[bLoop]->data.objectStatus )
 				{
-					(*pObj)[bLoop]->data.objectStatus -= (INT8)(usPointsToConsume * (max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction) ) )/100);
+					(*pObj)[bLoop]->data.objectStatus -= (INT8)(usPointsToConsume * ((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction) ) )/100);
 					usPointsToConsume = 0;
 					break;
 				}
 				else
 				{
 					// consume this kit totally
-					usPointsToConsume -= (((*pObj)[bLoop]->data.objectStatus) / (max( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction))) /100);
+					usPointsToConsume -= (((*pObj)[bLoop]->data.objectStatus) / ((std::max)( 0, (100 - Item[pObj->usItem].percentstatusdrainreduction))) /100);
 					(*pObj)[bLoop]->data.objectStatus = 0;
 
 					pObj->ubNumberOfObjects--;
@@ -14219,7 +14219,7 @@ static UINT16 OldWayOfCalculatingScopeBonus(SOLDIERTYPE *pSoldier)
 	// Yes, this may look stupid, maybe it IS stupid, but this is purely an option
 	// to use code that was checked in before.
 	// Please, do not trash it again.
-	return max(0, GetMinRangeForAimBonus( pSoldier, &pSoldier->inv[pSoldier->ubAttackingHand])
+	return (std::max)(UINT32(0), GetMinRangeForAimBonus( pSoldier, &pSoldier->inv[pSoldier->ubAttackingHand])
 		* gGameExternalOptions.iAimLevelsCompatibilityOption / gGameExternalOptions.ubStraightSightRange);
 }
 
@@ -15135,7 +15135,7 @@ FLOAT GetItemDirtIncreaseFactor( OBJECTTYPE * pObj, BOOLEAN fConsiderAmmo )
 	dirtincreasefactor *= gGameExternalOptions.iDirtGlobalModifier;
 
 	// dirt factor has to be >= 0 (items don't clean themselves)
-	dirtincreasefactor = max(0.0f, dirtincreasefactor);
+	dirtincreasefactor = (std::max)(0.0f, dirtincreasefactor);
 
 	return dirtincreasefactor;
 }

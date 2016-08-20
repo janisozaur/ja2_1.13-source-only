@@ -200,77 +200,77 @@ diseaseEndElementHandle( void *userData, const XML_Char *name )
 		else if ( strcmp( name, "InfectionChance_SWAMP" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_SWAMP] = max(0.0f, min(100.0f, atof( pData->szCharData )));
+			pData->curItem.dInfectionChance[INFECTION_TYPE_SWAMP] = (std::max)(0.0f, (std::min)(100.0f, (float)atof( pData->szCharData )));
 		}
 		else if ( strcmp( name, "InfectionChance_TROPICS" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_TROPICS] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_TROPICS] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_SEX" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_SEX] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_SEX] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_CONTACT_HUMAN" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_CONTACT_HUMAN] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_CONTACT_HUMAN] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_CONTACT_CORPSE" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_CONTACT_CORPSE] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_CONTACT_CORPSE] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_ANIMAL" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_ANIMAL] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_ANIMAL] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_OPEN" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_OPEN] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_OPEN] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_GUNSHOT" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_GUNSHOT] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_GUNSHOT] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_AGI" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_AGI] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_AGI] = (std::max)( 0.0f, (std::min)( 100.0f,(float) atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_DEX" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_DEX] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_DEX] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_STR" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_STR] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_STR] = (std::max)( 0.0f, (std::min)( 100.0f,(float) atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_WIS" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_WIS] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_WOUND_WIS] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_WOUND_TRAUMATIC" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_TRAUMATIC] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_TRAUMATIC] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_BADFOOD" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_BADFOOD] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_BADFOOD] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "InfectionChance_BADWATER" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curItem.dInfectionChance[INFECTION_TYPE_BADWATER] = max( 0.0f, min( 100.0f, atof( pData->szCharData ) ) );
+			pData->curItem.dInfectionChance[INFECTION_TYPE_BADWATER] = (std::max)( 0.0f, (std::min)( 100.0f, (float)atof( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "fCanBeCured" ) == 0 )
 		{

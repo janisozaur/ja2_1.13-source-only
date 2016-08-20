@@ -144,7 +144,7 @@ interactiveactionsEndElementHandle( void *userData, const XML_Char *name )
 		else if ( strcmp( name, "sectorlevel" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curArray[pData->curIndex].sectorlevel = min( 3, max( -1, (INT8)atol( pData->szCharData ) ) );
+			pData->curArray[pData->curIndex].sectorlevel = (std::min)( INT8(3), (std::max)( INT8(-1), (INT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "szTileSetName" ) == 0 )
 		{
@@ -165,7 +165,7 @@ interactiveactionsEndElementHandle( void *userData, const XML_Char *name )
 		else if ( strcmp( name, "sLevel" ) == 0 )
 		{
 			pData->curElement = ELEMENT;
-			pData->curArray[pData->curIndex].sLevel = min( 1, max( 0, (INT8)atol( pData->szCharData ) ) );
+			pData->curArray[pData->curIndex].sLevel = (std::min)( INT8(1), (std::max)( INT8(0), (INT8)atol( pData->szCharData ) ) );
 		}
 		else if ( strcmp( name, "sActionType" ) == 0 )
 		{

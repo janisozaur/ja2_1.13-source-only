@@ -905,7 +905,7 @@ BOOLEAN LoadMercProfiles(void)
 				// If it's armour
 				if ( Item[ usItem ].usItemClass & IC_ARMOUR )
 				{
-					gMercProfiles[uiLoop].bArmourAttractiveness = min(128,Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
+					gMercProfiles[uiLoop].bArmourAttractiveness = (std::min)(UINT16(128), Armour[ Item[ usItem ].ubClassIndex ].ubProtection);
 				}
 			}
 		}
@@ -2958,9 +2958,9 @@ INT8 ProfileHasSkillTrait( INT32 ubProfileID, INT8 bSkillTrait )
 		}
 
 		if ( TwoStagedTrait( bSkillTrait ) )
-			return (min( 2, bNumTraits ));
+			return ((std::min)( INT8(2), bNumTraits ));
 
-		return (min( 1, bNumTraits ));
+		return ((std::min)( INT8(1), bNumTraits ));
 	}
 	else
 	{
@@ -2974,7 +2974,7 @@ INT8 ProfileHasSkillTrait( INT32 ubProfileID, INT8 bSkillTrait )
 		if( bSkillTrait == ELECTRONICS_OT ||
 			 bSkillTrait == AMBIDEXT_OT ||
 			  bSkillTrait == CAMOUFLAGED_OT )
-			return ( min(1, bNumTraits) );
+			return ( (std::min)(INT8(1), bNumTraits) );
 
 		return ( bNumTraits );
 	}

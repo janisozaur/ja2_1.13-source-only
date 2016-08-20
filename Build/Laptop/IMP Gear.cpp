@@ -254,7 +254,7 @@ void EnterIMPGear( void )
 	int placement = 0;
 	for ( int i = 0; i < IMPGEAR_DROPDOWN_MAX; ++i )
 	{
-		gIMPGearCount[i] = min( 1, gIMPGearMaximum[i]);
+		gIMPGearCount[i] = (std::min)(gIMPGearMaximum[i], UINT8(1));
 
 		if ( i == IMPGEAR_DROPDOWN_LBE1 )
 		{
@@ -477,7 +477,7 @@ void IMPGearDisplay( )
 		if ( pIMPGEARDropDown[i] && pIMPGEARDropDown[i]->IsDisplayed( ) && pIMPGEARDropDown[i]->HasEntries( ) )
 		{
 			// if something is shown, it has to appear at least once...
-			gIMPGearCount[i] = max( 1, gIMPGearCount[i] );
+			gIMPGearCount[i] = (std::max)( UINT8(1), gIMPGearCount[i] );
 
 			INT16 sItem = (UINT16)pIMPGEARDropDown[i]->GetSelectedEntryKey( );
 
@@ -568,7 +568,7 @@ void BtnIMPGearFinishCallback( GUI_BUTTON *btn, INT32 reason )
 INT32	GetIMPGearCost( )
 {
 	if ( IsIMPGearUsed( ) )
-		return max( 0, gIMPGearCost - 3000 );
+		return (std::max)( 0, gIMPGearCost - 3000 );
 
 	return 0;
 }
@@ -738,7 +738,7 @@ void StoreSelectedIMPGear()
 			if ( usItem )
 			{
 				// add item (make sure it is at least 1)
-				gIMPGearSelectedItems[usItem] = max(1, gIMPGearCount[i]);
+				gIMPGearSelectedItems[usItem] = (std::max)(UINT8(1), gIMPGearCount[i]);
 			}
 		}
 	}
@@ -908,12 +908,12 @@ void GearAddButtonCallback( GUI_BUTTON *btn, INT32 reason )
 				if ( id < IMPGEAR_DROPDOWN_MAX )
 				{
 					// increase
-					gIMPGearCount[id] = min( gIMPGearCount[id] + 1, gIMPGearMaximum[id] );
+					gIMPGearCount[id] = (std::min)( UINT8(gIMPGearCount[id] + 1), gIMPGearMaximum[id] );
 				}
 				else if ( id < 2 * IMPGEAR_DROPDOWN_MAX )
 				{
 					// decrease
-					gIMPGearCount[id - IMPGEAR_DROPDOWN_MAX] = max( gIMPGearCount[id - IMPGEAR_DROPDOWN_MAX] - 1, 1 );
+					gIMPGearCount[id - IMPGEAR_DROPDOWN_MAX] = (std::max)( gIMPGearCount[id - IMPGEAR_DROPDOWN_MAX] - 1, 1 );
 				}
 			}
 

@@ -130,7 +130,7 @@ merchantEndElementHandle(void *userData, const XML_Char *name)
 			pData->curMerchant.dBuyModifier	= (FLOAT) atof(pData->szCharData);
 
 			// fit for reasonable values
-			pData->curMerchant.dBuyModifier = min(5.0f, max(0.1f, pData->curMerchant.dBuyModifier) );
+			pData->curMerchant.dBuyModifier = (std::min)(5.0f, (std::max)(0.1f, pData->curMerchant.dBuyModifier) );
 		}
 		else if(strcmp(name, "dSellModifier") == 0)
 		{
@@ -138,7 +138,7 @@ merchantEndElementHandle(void *userData, const XML_Char *name)
 			pData->curMerchant.dSellModifier = (FLOAT) atof(pData->szCharData);
 
 			// fit for reasonable values
-			pData->curMerchant.dSellModifier = min(5.0f, max(0.1f, pData->curMerchant.dSellModifier) );
+			pData->curMerchant.dSellModifier = (std::min)(5.0f, (std::max)(0.1f, pData->curMerchant.dSellModifier) );
 		}
 		else if(strcmp(name, "ubShopKeeperID") == 0)
 		{
@@ -151,7 +151,7 @@ merchantEndElementHandle(void *userData, const XML_Char *name)
 			pData->curMerchant.ubTypeOfArmsDealer	= (UINT8) atol(pData->szCharData);
 
 			// fit for reasonable values
-			pData->curMerchant.ubTypeOfArmsDealer = min(ARMS_DEALER_REPAIRS, pData->curMerchant.ubTypeOfArmsDealer);
+			pData->curMerchant.ubTypeOfArmsDealer = (std::min)(UINT8(ARMS_DEALER_REPAIRS), pData->curMerchant.ubTypeOfArmsDealer);
 		}
 		else if(strcmp(name, "iInitialCash") == 0)
 		{
@@ -184,7 +184,7 @@ merchantEndElementHandle(void *userData, const XML_Char *name)
 			pData->curMerchant.minCoolness	= (UINT32) strtoul(pData->szCharData, NULL, 0);
 
 			// fit for reasonable values
-			pData->curMerchant.minCoolness = min(10, max(1, pData->curMerchant.minCoolness) );
+			pData->curMerchant.minCoolness = (std::min)(UINT32(10), (std::max)(UINT32(1), pData->curMerchant.minCoolness) );
 		}
 		else if(strcmp(name, "maxCoolness") == 0)
 		{
@@ -192,7 +192,7 @@ merchantEndElementHandle(void *userData, const XML_Char *name)
 			pData->curMerchant.maxCoolness	= (UINT32) strtoul(pData->szCharData, NULL, 0);
 
 			// fit for reasonable values
-			pData->curMerchant.maxCoolness = min(10, max(1, pData->curMerchant.maxCoolness) );
+			pData->curMerchant.maxCoolness = (std::min)(UINT32(10), (std::max)(UINT32(1), pData->curMerchant.maxCoolness) );
 		}
 		else if(strcmp(name, "addToCoolness") == 0)
 		{

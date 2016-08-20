@@ -294,7 +294,7 @@ void RenderMercCompareCustomers( )
 	// choose 3 random customer quotes out of the pool of all quotes
 	std::set<UINT8> quoteset;
 	UINT8 safetycounter = 0;
-	while ( quoteset.size( ) < min( 3, TEXT_MERCCOMPARE_CUSTOMERSTATEMENTS ) && safetycounter < 30 )
+	while ( quoteset.size( ) < (std::min)( 3, TEXT_MERCCOMPARE_CUSTOMERSTATEMENTS ) && safetycounter < 30 )
 	{
 		quoteset.insert( Random( TEXT_MERCCOMPARE_CUSTOMERSTATEMENTS ) );
 		++safetycounter;
@@ -1088,7 +1088,7 @@ void RenderMercCompareMatrix( )
 		}
 
 		UINT16 spacepermerc = (LAPTOP_SCREEN_LR_X - LAPTOP_SCREEN_UL_X) / (squadvector.size() + 1);
-		spacepermerc = min( spacepermerc , 65);
+		spacepermerc = (std::min)( spacepermerc , UINT16(65));
 
 		// now loop over the squadmembers and fill out the table
 		std::vector<UINT8>::iterator itend = squadvector.end( );

@@ -96,8 +96,8 @@ void AddFoodpoints( INT32& arCurrentFood, INT32 aVal )
 	// the amount of points we get depends on our current food situation and the amount of food points
 	INT32 intake = FoodIntegral( arCurrentFood, arCurrentFood + aVal );
 
-	arCurrentFood = min(arCurrentFood + intake, FOOD_MAX);
-	arCurrentFood = max(arCurrentFood, FOOD_MIN);
+	arCurrentFood = (std::min)(arCurrentFood + intake, FOOD_MAX);
+	arCurrentFood = (std::max)(arCurrentFood, FOOD_MIN);
 }
 
 BOOLEAN DoesSoldierRefuseToEat( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObj )
@@ -193,7 +193,7 @@ BOOLEAN ApplyFood( SOLDIERTYPE *pSoldier, OBJECTTYPE *pObject, UINT16 usPointsTo
 	if ( foodcondition < FOOD_BAD_THRESHOLD )
 	{
 		// determine the max nutritional value
-		INT32 maxpts = max(Food[foodtype].bFoodPoints, Food[foodtype].bDrinkPoints);
+		INT32 maxpts = (std::max)(Food[foodtype].bFoodPoints, Food[foodtype].bDrinkPoints);
 
 		// we might get a disease from this...
 		FLOAT modifier = 1.0f - 2 * foodcondition;
@@ -327,7 +327,7 @@ void FoodMaxMoraleModifiy( SOLDIERTYPE *pSoldier, UINT8* pubMaxMorale )
 	INT8 foodmod  = FoodMoraleMods[foodsituation].bMoraleModifier;
 	INT8 watermod = FoodMoraleMods[watersituation].bMoraleModifier;
 
-	(*pubMaxMorale) = max(1, (*pubMaxMorale) + foodmod + watermod);
+	(*pubMaxMorale) = (std::max)(1, (*pubMaxMorale) + foodmod + watermod);
 }
 
 void FoodNeedForSleepModifiy( SOLDIERTYPE *pSoldier, UINT8* pubNeedForSleep )
@@ -339,7 +339,7 @@ void FoodNeedForSleepModifiy( SOLDIERTYPE *pSoldier, UINT8* pubNeedForSleep )
 	UINT8 watersituation;
 	GetFoodSituation( pSoldier, &foodsituation, &watersituation );
 
-	(*pubNeedForSleep) = max(1, (INT16)((*pubNeedForSleep) + FoodMoraleMods[foodsituation].bSleepModifier + FoodMoraleMods[watersituation].bSleepModifier ));
+	(*pubNeedForSleep) = (std::max)(INT16(1), (INT16)((*pubNeedForSleep) + FoodMoraleMods[foodsituation].bSleepModifier + FoodMoraleMods[watersituation].bSleepModifier ));
 }
 
 void ReducePointsForHunger( SOLDIERTYPE *pSoldier, UINT32 *pusPoints )
@@ -415,8 +415,8 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 	specialdrinkmodifier /= 100.0;
 
 	// due to digestion, reduce our food and drink levels
-	pSoldier->bFoodLevel  = max(pSoldier->bFoodLevel  - (INT32) (specialfoodmodifier  * activitymodifier * gGameExternalOptions.usFoodDigestionHourlyBaseFood), FOOD_MIN);
-	pSoldier->bDrinkLevel = max(pSoldier->bDrinkLevel - (INT32) (specialdrinkmodifier * activitymodifier * temperaturemodifier * gGameExternalOptions.usFoodDigestionHourlyBaseDrink), FOOD_MIN);
+	pSoldier->bFoodLevel  = (std::max)(pSoldier->bFoodLevel  - (INT32) (specialfoodmodifier  * activitymodifier * gGameExternalOptions.usFoodDigestionHourlyBaseFood), FOOD_MIN);
+	pSoldier->bDrinkLevel = (std::max)(pSoldier->bDrinkLevel - (INT32) (specialdrinkmodifier * activitymodifier * temperaturemodifier * gGameExternalOptions.usFoodDigestionHourlyBaseDrink), FOOD_MIN);
 
 	// there is a chance that we take damage to our health and strength stats if we are starving (or insanely obese :-) )
 	UINT8 foodsituation;
@@ -438,7 +438,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 				numberofreduces += Random(2);
 
 			INT8 oldval = pSoldier->stats.bStrength;
-			pSoldier->stats.bStrength = max(1, pSoldier->stats.bStrength - numberofreduces);
+			pSoldier->stats.bStrength = (std::max)(1, pSoldier->stats.bStrength - numberofreduces);
 			pSoldier->usStarveDamageStrength += oldval - pSoldier->stats.bStrength;
 
 			// Update Profile
@@ -465,9 +465,9 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 
 			INT8 oldlife = pSoldier->stats.bLife;
 
-			pSoldier->stats.bLifeMax = max(2, pSoldier->stats.bLifeMax - numberofreduces);
-			pSoldier->stats.bLife = min(pSoldier->stats.bLife, pSoldier->stats.bLifeMax);
-			pSoldier->bBleeding = min(pSoldier->bBleeding, pSoldier->stats.bLifeMax);
+			pSoldier->stats.bLifeMax = (std::max)(2, pSoldier->stats.bLifeMax - numberofreduces);
+			pSoldier->stats.bLife = (std::min)(pSoldier->stats.bLife, pSoldier->stats.bLifeMax);
+			pSoldier->bBleeding = (std::min)(pSoldier->bBleeding, pSoldier->stats.bLifeMax);
 
 			pSoldier->usStarveDamageHealth += oldlife - pSoldier->stats.bLifeMax;
 
@@ -484,7 +484,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 			// Reason for this is that
 			if ( pSoldier->stats.bLife < OKLIFE )
 			{
-				pSoldier->bBleeding = max(1, pSoldier->stats.bLife - 1);
+				pSoldier->bBleeding = (std::max)(1, pSoldier->stats.bLife - 1);
 				pSoldier->stats.bLife = 1;
 
 				// Update Profile
@@ -517,7 +517,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 				numberofreduces += Random(2);
 
 			INT8 oldval = pSoldier->stats.bStrength;
-			pSoldier->stats.bStrength = max(1, pSoldier->stats.bStrength - numberofreduces);
+			pSoldier->stats.bStrength = (std::max)(1, pSoldier->stats.bStrength - numberofreduces);
 			pSoldier->usStarveDamageStrength += oldval - pSoldier->stats.bStrength;
 
 			// Update Profile
@@ -546,9 +546,9 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 
 			INT8 oldlife = pSoldier->stats.bLife;
 
-			pSoldier->stats.bLifeMax = max(2, pSoldier->stats.bLifeMax - numberofreduces);
-			pSoldier->stats.bLife = min(pSoldier->stats.bLife, pSoldier->stats.bLifeMax);
-			pSoldier->bBleeding = min(pSoldier->bBleeding, pSoldier->stats.bLifeMax);
+			pSoldier->stats.bLifeMax = (std::max)(2, pSoldier->stats.bLifeMax - numberofreduces);
+			pSoldier->stats.bLife = (std::min)(pSoldier->stats.bLife, pSoldier->stats.bLifeMax);
+			pSoldier->bBleeding = (std::min)(pSoldier->bBleeding, pSoldier->stats.bLifeMax);
 
 			pSoldier->usStarveDamageHealth += oldlife - pSoldier->stats.bLifeMax;
 
@@ -565,7 +565,7 @@ void HourlyFoodSituationUpdate( SOLDIERTYPE *pSoldier )
 			// Reason for this is that
 			if ( pSoldier->stats.bLife < OKLIFE )
 			{
-				pSoldier->bBleeding = max(1, pSoldier->stats.bLife - 1);
+				pSoldier->bBleeding = (std::max)(1, pSoldier->stats.bLife - 1);
 				pSoldier->stats.bLife = 1;
 
 				// Update Profile
@@ -596,7 +596,7 @@ void HourlyFoodAutoDigestion( SOLDIERTYPE *pSoldier )
 	if (pSoldier->bAssignment == ASSIGNMENT_POW)
 	{
 		INT16 powwater   = gGameExternalOptions.usFoodDigestionHourlyBaseDrink * gGameExternalOptions.sFoodDigestionAssignment * FOOD_POW_MULTIPLICATOR;
-		INT16 powfoodadd = powwater * gGameExternalOptions.usFoodDigestionHourlyBaseFood / max(1, gGameExternalOptions.usFoodDigestionHourlyBaseDrink);
+		INT16 powfoodadd = powwater * gGameExternalOptions.usFoodDigestionHourlyBaseFood / (std::max)(UINT16(1), gGameExternalOptions.usFoodDigestionHourlyBaseDrink);
 
 		// if we're thirsty or hungry, and this is nutritious, consume it
 		if ( pSoldier->bDrinkLevel < FoodMoraleMods[FOOD_VERY_LOW].bThreshold  )
@@ -842,7 +842,7 @@ void SectorFillCanteens( void )
 							for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)				// ... there might be multiple items here (item stack), so for each one ...
 							{
 								UINT16 status = (*pObj)[i]->data.objectStatus;
-								UINT16 statusmmissing = max(0, 100 - status);
+								UINT16 statusmmissing = (std::max)(0, 100 - status);
 								FLOAT temperature = (*pObj)[i]->data.bTemperature;
 
 								(*pObj)[i]->data.objectStatus = 100;						// refill canteen
@@ -874,7 +874,7 @@ void SectorFillCanteens( void )
 						for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)				// ... there might be multiple items here (item stack), so for each one ...
 						{
 							UINT16 status = (*pObj)[i]->data.objectStatus;
-							UINT16 statusmmissing = max(0, 100 - status);
+							UINT16 statusmmissing = (std::max)(0, 100 - status);
 							FLOAT temperature = (*pObj)[i]->data.bTemperature;
 
 							(*pObj)[i]->data.objectStatus = 100;						// refill canteen
@@ -926,7 +926,7 @@ void SectorFillCanteens( void )
 									{
 										(*pObj)[i]->data.objectStatus = 100;
 
-										(*pWaterDrum)[i]->data.objectStatus = max(1, (INT16)((100 * ( ptsinwaterdrum - ptsneeded )) / drumsize) );
+										(*pWaterDrum)[i]->data.objectStatus = (std::max)(INT16(1), (INT16)((100 * ( ptsinwaterdrum - ptsneeded )) / drumsize) );
 									}
 									else
 									{
@@ -981,7 +981,7 @@ void SectorFillCanteens( void )
 									{
 										(*pObj)[i]->data.objectStatus = 100;
 
-										(*pWaterDrum)[i]->data.objectStatus = max(1, (INT16)((100 * ( ptsinwaterdrum - ptsneeded )) / drumsize) );
+										(*pWaterDrum)[i]->data.objectStatus = (std::max)(INT16(1), (INT16)((100 * ( ptsinwaterdrum - ptsneeded )) / drumsize) );
 									}
 									else
 									{
@@ -1073,7 +1073,7 @@ void SoldierAutoFillCanteens(SOLDIERTYPE *pSoldier)
 					for(INT16 i = 0; i < pObj->ubNumberOfObjects; ++i)				// ... there might be multiple items here (item stack), so for each one ...
 					{
 						UINT16 status = (*pObj)[i]->data.objectStatus;
-						UINT16 statusmmissing = max(0, 100 - status);
+						UINT16 statusmmissing = (std::max)(0, 100 - status);
 						FLOAT temperature = (*pObj)[i]->data.bTemperature;
 
 						(*pObj)[i]->data.objectStatus = 100;						// refill canteen
@@ -1131,7 +1131,7 @@ void DrinkFromWaterTap( SOLDIERTYPE* pSoldier )
 
 	if ( gGameOptions.fFoodSystem )
 	{
-		INT32 watertoadd = max( 0, FoodMoraleMods[FOOD_NORMAL].bThreshold - pSoldier->bDrinkLevel );
+		INT32 watertoadd = (std::max)( 0, FoodMoraleMods[FOOD_NORMAL].bThreshold - pSoldier->bDrinkLevel );
 
 		if ( watertoadd > 0 )
 		{
@@ -1142,7 +1142,7 @@ void DrinkFromWaterTap( SOLDIERTYPE* pSoldier )
 	if ( GetWaterQuality( gWorldSectorX, gWorldSectorY, gbWorldSectorZ ) == WATER_POISONOUS )
 		HandlePossibleInfection( pSoldier, NULL, INFECTION_TYPE_BADWATER );
 
-	INT32 bpadded = 100 * min( 20, 100 - pSoldier->bBreath );
+	INT32 bpadded = 100 * (std::min)( 20, 100 - pSoldier->bBreath );
 
 	DeductPoints( pSoldier, 20, -bpadded );
 
