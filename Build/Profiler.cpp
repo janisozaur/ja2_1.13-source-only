@@ -12,8 +12,8 @@ PerfManager* PerfManager::_instance(NULL);
 PerfDatum::PerfDatum(	const char* const fileName,
 						const char* const functionName,
 						const int lineNumber,
-						__int64 cycles,
-						__int64 calls)
+						int64_t cycles,
+						int64_t calls)
 	:
 	_fileName(fileName),
 	_functionName(functionName),
@@ -57,12 +57,12 @@ void PerfManager::enterFunction(const char* const fileName,
 								const int lineNumber)
 {
 	//Mark the time when we end processing the previous function
-	__int64 endTime = getCPUCount();
+	int64_t endTime = getCPUCount();
 	//assuming we haven't corrupted the stack and reduced it to zero elements
 	if(_perfStack.size())
 	{	PERF_STACK_T::reverse_iterator lastMarker = _perfStack.rbegin();
 		//Update the total time spent processing the previous function
-		__int64 runTime = (endTime - _lastTime) - _callTime;
+		int64_t runTime = (endTime - _lastTime) - _callTime;
 		(**lastMarker)._cycles += runTime;
 		_totalTime += runTime;
 	}
@@ -85,10 +85,10 @@ void PerfManager::enterFunction(const char* const fileName,
 void PerfManager::exitFunction()
 {
 	//Mark the time when we exited the function
-	__int64 endTime = getCPUCount();
+	int64_t endTime = getCPUCount();
 	//Update the function in our log with its new runtime
 	PERF_STACK_T::reverse_iterator lastMarker = _perfStack.rbegin();
-	__int64 runTime = endTime - _lastTime;
+	int64_t runTime = endTime - _lastTime;
 	(**lastMarker)._cycles += runTime;
 	_totalTime += runTime;
 	_perfStack.pop_back();
@@ -97,7 +97,7 @@ void PerfManager::exitFunction()
 	_lastTime = getCPUCount();
 }
 
-__int64 PerfManager::getCPUCount () const
+int64_t PerfManager::getCPUCount () const
 {
 	_asm rdtsc
 }
@@ -170,7 +170,7 @@ void PerfManager::log(std::ostream &os)
 			cyclesString >> tempString;
 			os.width(cyclesWidth);
 			os << tempString.c_str() << ", ";
-			__int64 cyclesPerCall = i->_cycles / i->_calls;
+			int64_t cyclesPerCall = i->_cycles / i->_calls;
 			cyclesString.clear();
 			tempString.clear();
 			cyclesString << cyclesPerCall;
@@ -231,8 +231,8 @@ PerfManager* PerfManager::_instance(NULL);
 PerfDatum::PerfDatum(	const char* const fileName,
 						const char* const functionName,
 						const int lineNumber,
-						__int64 cycles,
-						__int64 calls)
+						int64_t cycles,
+						int64_t calls)
 	:
 	_fileName(fileName),
 	_functionName(functionName),
@@ -276,12 +276,12 @@ void PerfManager::enterFunction(const char* const fileName,
 								const int lineNumber)
 {
 	//Mark the time when we end processing the previous function
-	__int64 endTime = getCPUCount();
+	int64_t endTime = getCPUCount();
 	//assuming we haven't corrupted the stack and reduced it to zero elements
 	if(_perfStack.size())
 	{	PERF_STACK_T::reverse_iterator lastMarker = _perfStack.rbegin();
 		//Update the total time spent processing the previous function
-		__int64 runTime = (endTime - _lastTime) - _callTime;
+		int64_t runTime = (endTime - _lastTime) - _callTime;
 		(**lastMarker)._cycles += runTime;
 		_totalTime += runTime;
 	}
@@ -304,10 +304,10 @@ void PerfManager::enterFunction(const char* const fileName,
 void PerfManager::exitFunction()
 {
 	//Mark the time when we exited the function
-	__int64 endTime = getCPUCount();
+	int64_t endTime = getCPUCount();
 	//Update the function in our log with its new runtime
 	PERF_STACK_T::reverse_iterator lastMarker = _perfStack.rbegin();
-	__int64 runTime = endTime - _lastTime;
+	int64_t runTime = endTime - _lastTime;
 	(**lastMarker)._cycles += runTime;
 	_totalTime += runTime;
 	_perfStack.pop_back();
@@ -316,7 +316,7 @@ void PerfManager::exitFunction()
 	_lastTime = getCPUCount();
 }
 
-__int64 PerfManager::getCPUCount () const
+int64_t PerfManager::getCPUCount () const
 {
 	_asm rdtsc
 }
@@ -389,7 +389,7 @@ void PerfManager::log(std::ostream &os)
 			cyclesString >> tempString;
 			os.width(cyclesWidth);
 			os << tempString.c_str() << ", ";
-			__int64 cyclesPerCall = i->_cycles / i->_calls;
+			int64_t cyclesPerCall = i->_cycles / i->_calls;
 			cyclesString.clear();
 			tempString.clear();
 			cyclesString << cyclesPerCall;

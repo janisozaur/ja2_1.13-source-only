@@ -3,6 +3,7 @@
 #include <vector>
 #include <set>
 #include <ostream>
+#include <cstdint>
 
 //#ifndef PROFILER_ENABLED
 //#define PROFILER_ENABLED
@@ -24,13 +25,13 @@ struct PerfDatum
 	PerfDatum(	const char* const fileName,
 				const char* const functionName,
 				const int lineNumber,
-				__int64 cycles = 0,
-				__int64 calls = 0);
+				int64_t cycles = 0,
+				int64_t calls = 0);
 	const char* const	_fileName;
 	const char* const	_functionName;
 	const int			_lineNumber;
-	__int64			 _cycles;		//Number of CPU cycles used
-	__int64			 _calls;		 //Number of calls to this function
+	int64_t			 _cycles;		//Number of CPU cycles used
+	int64_t			 _calls;		 //Number of calls to this function
 };
 #pragma warning (default : 4512)//disables assignment operator could not be generated
 
@@ -62,15 +63,15 @@ public:
 	void log(std::ostream &os);
 private:
 	PerfManager(void);
-	__int64 getCPUCount(void) const;
+	int64_t getCPUCount(void) const;
 	void calibrate(void);
 	int getPercision(const double value) const; //used for formatting percentages
 	static PerfManager* _instance;
 	PERF_LOG_T		_perfLog;
 	PERF_STACK_T	_perfStack;
-	__int64		 _callTime;	//Time it takes to call the getCPUCount function
-	__int64		 _totalTime;
-	__int64		 _lastTime;	//The last time we got hte CPU count.
+	int64_t		 _callTime;	//Time it takes to call the getCPUCount function
+	int64_t		 _totalTime;
+	int64_t		 _lastTime;	//The last time we got hte CPU count.
 };
 
 class PerfMarker
